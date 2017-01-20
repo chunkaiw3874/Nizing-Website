@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu>
+  <mainmenuitem url="~/en/product.aspx" enTitle="Products" cnTitle="產品資訊">
+    <menuitem url="~/en/pvc-series.aspx" enTitle="PVC Series" cnTitle="一般電線電纜-PVC">
+      <submenuitem url="~/en/ul1007.aspx" enTitle="UL1007 PVC Wire" cnTitle="UL1007 家用電線" />
+      <submenuitem url="~/en/ul1015.aspx" enTitle="UL1015 PVC Wire" cnTitle="UL1015 家用電線" />
+      <submenuitem url="~/en/ul2464.aspx" enTitle="UL2464 Computer Cable" cnTitle="UL2464 電腦傳輸線" />
+      <submenuitem url="~/en/iv-wire.aspx" enTitle="IV Control Wire" cnTitle="IV 粗蕊控制線-建築用" />
+      <submenuitem url="~/en/kiv-wire.aspx" enTitle="KIV Control Wire" cnTitle="KIV 細蕊控制線-機器用" />
+    </menuitem>
+    <menuitem url="~/en/silicone-fiberglass-series.aspx" enTitle="Silicone Fiberglass" cnTitle="矽膠編織耐熱線系列">
+      <submenuitem url="~/en/rsge.aspx" enTitle="RS-GE Silicone Fiberglass Wire" cnTitle="RS-GE" />
+      <submenuitem url="~/en/ul3071.aspx" enTitle="UL3071 Silicone Fiberglass Wire" cnTitle="UL3071" />
+      <submenuitem url="~/en/ul3074.aspx" enTitle="UL3074 Silicone Fiberglass Wire" cnTitle="UL3074" />
+      <submenuitem url="~/en/ul3075.aspx" enTitle="UL3075 Silicone Fiberglass Wire" cnTitle="UL3075" />
+      <submenuitem url="~/en/ul3122.aspx" enTitle="UL3122 Silicone Fiberglass Wire" cnTitle="UL3122" />
+      <submenuitem url="~/en/ul3172.aspx" enTitle="UL3172 Silicone Fiberglass Wire" cnTitle="UL3172" />
+      <submenuitem url="~/en/ul3304.aspx" enTitle="UL3304 High Voltage Silicone Fiberglass Wire" cnTitle="UL3304 高壓線" />
+      <submenuitem url="~/en/ul3512.aspx" enTitle="UL3512 Silicone Fiberglass Wire" cnTitle="UL3512" />
+      <submenuitem url="~/en/vde-h05sj-k.aspx" enTitle="VDE-H05SJ-K Silicone Fiberglass Wire" cnTitle="VDE-H05SJ-K" />
+    </menuitem>
+    <menuitem url="~/en/high-temperature-resistance-series.aspx" enTitle="High Temp-Resistance" cnTitle="高溫線系列">
+      <submenuitem url="~/en/tggt-5256.aspx" enTitle="TGGT-5256 250°C High Temperature-Resistance Wire" cnTitle="TGGT-5256 250°C" />
+      <submenuitem url="~/en/tggt-400.aspx" enTitle="TGGT-400 400°C High Temperature-Resistance Wire" cnTitle="TGGT-400 400°C" />
+      <submenuitem url="~/en/mg-5107.aspx" enTitle="MG-5107 550°C High Temperature-Resistance Wire" cnTitle="MG-5107 550°C" />
+      <submenuitem url="~/en/cf-750.aspx" enTitle="CF-750 750°C High Temperature-Resistance Wire" cnTitle="CF-750 750°C" />
+    </menuitem>
+    <menuitem url="~/en/silicone-series.aspx" enTitle="Silicone Series" cnTitle="矽膠耐熱線系列">
+      <submenuitem url="~/en/ul3123.aspx" enTitle="UL3123 Silicone Wire" cnTitle="UL3123" />
+      <submenuitem url="~/en/ul3132.aspx" enTitle="UL3132 Silicone Wire" cnTitle="UL3132" />
+      <submenuitem url="~/en/ul3135.aspx" enTitle="UL3135 Silicone Wire" cnTitle="UL3135" />
+      <submenuitem url="~/en/ul3136.aspx" enTitle="UL3136 Silicone Wire" cnTitle="UL3136" />
+      <submenuitem url="~/en/ul3239.aspx" enTitle="UL3239 High Voltage Silicone Wire" cnTitle="UL3239 高壓線" />
+      <submenuitem url="~/en/vde-h05s-k.aspx" enTitle="VDE-H05S-K Silicone Wire" cnTitle="VDE-H05S-K" />
+      <submenuitem url="~/en/vde-reg-nr103874.aspx" enTitle="VDE-REG-NR103874 Parallel Silicone Medical Wire" cnTitle="VDE-REG-NR103874 醫療線" />
+      <submenuitem url="~/en/vde-h05ss-f.aspx" enTitle="VDE-H05SS-F Silicone Multi-Core Wire" cnTitle="VDE-H05SS-F 多芯線" />
+      <submenuitem url="~/en/vde-fg4g4.aspx" enTitle="VDE-FG4G4 Double Layer Silicone Wire" cnTitle="VDE FG4G4 雙層絕緣線" />
+      <submenuitem url="~/en/pse-3323.aspx" enTitle="PSE-3323 Silicone Wire" cnTitle="PSE-3323" />
+    </menuitem>
+    <menuitem url="~/en/teflon-series.aspx" enTitle="Teflon Series" cnTitle="鐵氟龍線系列">
+      <submenuitem url="~/en/ul1199.aspx" enTitle="UL1199 PTFE Teflon Wire" cnTitle="UL1199 PTFE" />
+      <submenuitem url="~/en/ul1330.aspx" enTitle="UL1330 FEP Teflon Wire" cnTitle="UL1330 FEP" />
+      <submenuitem url="~/en/ul1331.aspx" enTitle="UL1331 FEP Teflon Wire" cnTitle="UL1331 FEP" />
+      <submenuitem url="~/en/ul1332.aspx" enTitle="UL1332 FEP Teflon Wire" cnTitle="UL1332 FEP" />
+      <submenuitem url="~/en/ul1709.aspx" enTitle="UL1709 PFA Teflon Wire" cnTitle="UL1709 PFA" />
+      <submenuitem url="~/en/ul1710.aspx" enTitle="UL1710 PFA Teflon Wire" cnTitle="UL1710 PFA" />
+      <submenuitem url="~/en/ul1726.aspx" enTitle="UL1726 PFA Teflon Wire" cnTitle="UL1726 PFA" />
+      <submenuitem url="~/en/ul1727.aspx" enTitle="UL1727 PFA Teflon Wire" cnTitle="UL1727 PFA" />
+      <submenuitem url="~/en/ul1887.aspx" enTitle="UL1887 FEP Teflon Wire" cnTitle="UL1887 FEP" />
+      <submenuitem url="~/en/ul1901.aspx" enTitle="UL1901 FEP Teflon Wire" cnTitle="UL1901 FEP" />
+      <submenuitem url="~/en/ul10109.aspx" enTitle="UL10109 ETFE Teflon Wire" cnTitle="UL10109 ETFE" />
+      <submenuitem url="~/en/ul10344.aspx" enTitle="UL10344 PTFE Teflon Wire" cnTitle="UL10344 PTFE" />
+      <submenuitem url="~/en/ul10362.aspx" enTitle="UL10362 PFA Teflon Wire" cnTitle="UL10362 PFA" />
+      <submenuitem url="~/en/ul10393.aspx" enTitle="UL10393 PTFE Teflon Wire" cnTitle="UL10393 PTFE" />
+      <submenuitem url="~/en/vde-8219.aspx" enTitle="VDE-8219 FEP Teflon Wire" cnTitle="VDE-8219 FEP" />
+      <submenuitem url="~/en/vde-8220.aspx" enTitle="VDE-8220 FEP Teflon Wire" cnTitle="VDE-8220 FEP" />
+      <submenuitem url="~/en/vde-reg-nr8295.aspx" enTitle="VDE-REG-NR8295 Double Layer FEP Teflon Wire" cnTitle="VDE-REG-NR8295 雙層絕緣線" />
+      <submenuitem url="~/en/teflon-silicone-medical-wire.aspx" enTitle="FEP Silicone Medical Wire" cnTitle="鐵氟龍矽膠醫療線" />
+      <submenuitem url="~/en/rg178bu-rg179-rg316.aspx" enTitle="RG178B/U RG179 RG316" cnTitle="RG 高頻同軸線" />
+    </menuitem>
+    <menuitem url="~/en/xlpe-series.aspx" enTitle="XLPE Series" cnTitle="交連照射線系列">
+      <submenuitem url="~/en/ul1430.aspx" enTitle="UL1430 XLPE Wire" cnTitle="UL1430" />
+      <submenuitem url="~/en/ul3173.aspx" enTitle="UL3173 XLPE Wire" cnTitle="UL3173" />
+      <submenuitem url="~/en/ul3266.aspx" enTitle="UL3266 XLPE Wire" cnTitle="UL3266" />
+      <submenuitem url="~/en/ul3272.aspx" enTitle="UL3272 XLPE Wire" cnTitle="UL3272" />
+      <submenuitem url="~/en/ul3290.aspx" enTitle="UL3290 XLPE Wire" cnTitle="UL3290" />
+      <submenuitem url="~/en/ul3320.aspx" enTitle="UL3320 XLPE Wire" cnTitle="UL3320" />
+      <submenuitem url="~/en/ul3321.aspx" enTitle="UL3321 XLPE Wire" cnTitle="UL3321" />
+      <submenuitem url="~/en/ul3613.aspx" enTitle="UL3613 XLPE Wire" cnTitle="UL3613" />
+      <submenuitem url="~/en/ul3688.aspx" enTitle="UL3688 Double Layer XLPE Wire" cnTitle="UL3688 雙層XLPE交連照射線" />
+      <submenuitem url="~/en/ul10368.aspx" enTitle="UL10368 XLPE Wire" cnTitle="UL10368" />
+    </menuitem>
+    <menuitem url="~/en/sleeve-and-tube-series.aspx" enTitle="Sleeve and Tube Series" cnTitle="套管系列">
+      <submenuitem url="~/en/ulhst.aspx" enTitle="UL HST Silicone Fiberglass Sleeve" cnTitle="UL HST內膠外纖耐熱套管" />
+      <submenuitem url="~/en/ulfrs.aspx" enTitle="UL FRS Fiberglass Silicone Sleeve" cnTitle="UL FRS內纖外膠耐熱套管" />
+      <submenuitem url="~/en/ulsrg.aspx" enTitle="UL SRG Fiberglass Tube" cnTitle="UL SRG玻璃纖維套管" />
+      <submenuitem url="~/en/silicone-tube.aspx" enTitle="Silicone Tube" cnTitle="矽膠套管" />
+      <submenuitem url="~/en/pfa-fep-tube.aspx" enTitle="PFA/FEP Teflon Tube" cnTitle="PFA/FEP鐵氟龍套管" />
+      <submenuitem url="~/en/ptfe-tube.aspx" enTitle="PTFE Teflon Tube" cnTitle="PTFE鐵氟龍套管" />
+    </menuitem>
+    <menuitem url="~/en/thermocouple-series.aspx" enTitle="Thermocouple Series" cnTitle="補償導線系列">
+      <submenuitem url="~/en/tp.aspx" enTitle="Temperature Probe" cnTitle="手持式熱電偶" />
+      <submenuitem url="~/en/rtd.aspx" enTitle="Resistance Temperature Detector" cnTitle="鉑電阻" />
+      <submenuitem url="~/en/k-type.aspx" enTitle="Thermocouple K-Type" cnTitle="補償導線 K-Type" />
+      <submenuitem url="~/en/j-type.aspx" enTitle="Thermocouple J-Type" cnTitle="補償導線 J-Type" />
+      <submenuitem url="~/en/t-type.aspx" enTitle="Thermocouple T-Type" cnTitle="補償導線 T-Type" />
+      <submenuitem url="~/en/rs-type.aspx" enTitle="Thermocouple R/S-Type" cnTitle="補償導線 R/S-Type" />
+      <submenuitem url="~/en/e-type.aspx" enTitle="Thermocouple E-Type" cnTitle="補償導線 E-Type" />
+    </menuitem>
+    <menuitem url="~/en/heating-wire-series.aspx" enTitle="Heating Wire Series" cnTitle="發熱線系列">
+      <submenuitem url="~/en/ul3589.aspx" enTitle="UL3589 Heating Wire" cnTitle="UL3589發熱線" />
+      <submenuitem url="~/en/phc.aspx" enTitle="Parallel Heating Cable" cnTitle="並聯式電熱帶" />
+    </menuitem>
+    <menuitem url="~/en/automotive-wire-series.aspx" enTitle="Automobile Wire Series" cnTitle="汽車花線系列">
+      <submenuitem url="~/en/automotive-wire-standard-jaso.aspx" enTitle="JASO Standard" cnTitle="日規汽車花線">
+        <!--<submenuitem url="~/en/av.aspx" enTitle="AV-JIS General Purpose-Basic" cnTitle="AV-日規一般汽車花線" />
+        <submenuitem url="~/en/avs.aspx" enTitle="AVS-JASO General Purpose-Thin Wall" cnTitle="AVS-日規薄肉汽車花線" />
+        <submenuitem url="~/en/avss.aspx" enTitle="AVSS-JASO General Purpose-Extra Thin Wall" cnTitle="AVSS-日規極薄肉汽車花線" />
+        <submenuitem url="~/en/avssh.aspx" enTitle="AVSSH-JASO Heat Resistant-Extra Thin Wall" cnTitle="AVSSH-日規耐熱超薄肉汽車花線" />
+        <submenuitem url="~/en/aex.aspx" enTitle="AEX-JASO Heat Resistant-XLPE" cnTitle="AEX-日規耐熱XLPE汽車花線" />
+        <submenuitem url="~/en/avx.aspx" enTitle="AVX-JASO Heat Resistant-XLPVC" cnTitle="AVX-日規耐熱XLPVC汽車花線" />
+        <submenuitem url="~/en/aessx.aspx" enTitle="AESSX-JASO Heat Resisant-Super Thin XLPE" cnTitle="AESSX-日規極薄耐熱汽車花線" />
+        <submenuitem url="~/en/cavs.aspx" enTitle="CAVS-JASO Thin Wall w/ Compressed Conductor" cnTitle="CAVS-日規壓縮導體薄肉汽車花線" />
+        <submenuitem url="~/en/cavus.aspx" enTitle="CAVUS-JASO Ultra Thin Wall w/ Compressed Conductor" cnTitle="CAVUS-日規壓縮導體超薄肉汽車花線" />
+        <submenuitem url="~/en/chfus.aspx" enTitle="CHFUS-Halogen Free Ultra Thin Wall w/ Compressed Conductor" cnTitle="CHFUS-日規壓縮導體超薄肉無鹵汽車花線" />
+        <submenuitem url="~/en/hfss.aspx" enTitle="HFSS-Halogen Free w/ Extremely Thin Wall" cnTitle="HFSS-日規極薄肉無鹵汽車花線" />
+        <submenuitem url="~/en/civus.aspx" enTitle="CIVUS-Ultra Thin Wall w/ Compressed Conductor" cnTitle="CIVUS-日規壓縮導體超薄肉汽車花線" />
+        <submenuitem url="~/en/ivssh.aspx" enTitle="IVSSH-Heat Resistant-Extra Thin Wall" cnTitle="IVSSH-日規耐熱極薄肉汽車花線" />
+        <submenuitem url="~/en/asssh-shsx-shsh.aspx" enTitle="ASSSH/SH-SX/SH-SH-JASO Sprial Shielding Cable" cnTitle="ASSSH/SH-SX/SH-SH-日規橫捲隔離線" />
+        <submenuitem url="~/en/less-lesx-lesh.aspx" enTitle="LE-SS/LE-SX/LE-SH-JASO Aluminum Shielding Cable" cnTitle="LE-SS/LE-SX/LE-SH-日規金屬鉑隔離線" />-->
+      </submenuitem>
+      <submenuitem url="~/en/automotive-wire-standard-sae.aspx" enTitle="SAE Standard" cnTitle="美規汽車花線">
+        <!--<submenuitem url="~/en/gpt.aspx" enTitle="GPT-SAE General Purpose-Thermoplastic" cnTitle="GPT-美規一般汽車花線" />
+        <submenuitem url="~/en/twp.aspx" enTitle="TWP-SAE Thermoplastic w/ Thin Wall" cnTitle="TWP-美規薄肉汽車花線" />
+        <submenuitem url="~/en/hdt.aspx" enTitle="HDT-SAE Heavy Duty Thermoplastic" cnTitle="HDT-美規厚肉汽車花線" />
+        <submenuitem url="~/en/gxl.aspx" enTitle="GXL-SAE General Purpose-XLPE" cnTitle="GXL-美規一般XLPE汽車花線" />
+        <submenuitem url="~/en/sxl.aspx" enTitle="SXL-SAE Special Purpose-XLPE" cnTitle="SXL-美規厚肉XLPE照射汽車花線" />
+        <submenuitem url="~/en/txl.aspx" enTitle="TXL-SAE XLPE w/ Thin Wall" cnTitle="TXL-美規薄肉XLPE照射汽車花線" />-->
+      </submenuitem>
+      <submenuitem url="~/en/automotive-wire-standard-iso.aspx" enTitle="ISO Standard" cnTitle="歐規汽車花線">
+        <!--<submenuitem url="~/en/flrya.aspx" enTitle="FLRY-A-ISO Thin Wall w/ Symmetric Conductor (Type A)" cnTitle="FLRY-A-歐規薄肉汽車花線" />
+        <submenuitem url="~/en/flryb.aspx" enTitle="FLRY-B-ISO Thin Wall w/ Asymmetric Conductor (Type B)" cnTitle="FLRY-B-歐規薄肉汽車花線" />
+        <submenuitem url="~/en/flrynx.aspx" enTitle="FLRYnx-ISO Thin Wall w/ Twisted Multi-Core PVC Wire w/o Jacket" cnTitle="FLRYnx-歐規薄肉多芯絞線" />
+        <submenuitem url="~/en/flryy.aspx" enTitle="FLRYY-ISO Thin Wall Multi-Core with PVC Jacket" cnTitle="FLRYY-歐規薄肉多芯雙層絕緣汽車花線" />
+        <submenuitem url="~/en/flrywa.aspx" enTitle="FLRYW-A-ISO Heat Resistant-Thin Wall w/ Symmetric Conductor (Type A)" cnTitle="FLRYW-A-歐規薄肉耐熱汽車花線" />
+        <submenuitem url="~/en/flrywb.aspx" enTitle="FLRY-A-ISO Heat Resistant-Thin Wall w/ Asymmetric Conductor (Type B)" cnTitle="FLRYW-B-歐規薄肉耐熱汽車花線" />
+        <submenuitem url="~/en/fly.aspx" enTitle="FLY-ISO Thick Wall PVC Wire" cnTitle="FLY-歐規厚肉汽車花線" />
+        <submenuitem url="~/en/flyw.aspx" enTitle="FLYW-ISO Heat Resistant-Thick Wall" cnTitle="FLYW-歐規厚肉耐熱汽車花線" />
+        <submenuitem url="~/en/flyy-single.aspx" enTitle="FLYY Single-ISO Thick Wall Double Layer PVC Wire" cnTitle="FLYY Single-歐規厚肉單芯雙層絕緣汽車花線" />
+        <submenuitem url="~/en/flyy-multi.aspx" enTitle="FLYY Multi-ISO Thick Wall Multi-Core PVC Wire" cnTitle="FLYY Multi-歐規厚肉多芯雙層絕緣汽車花線" />
+        <submenuitem url="~/en/fl2xa.aspx" enTitle="FL2X-A-ISO Thick Wall XLPE Wire (Type A)" cnTitle="FL2X-A-歐規厚肉XLPE照射汽車花線" />
+        <submenuitem url="~/en/fl2xb.aspx" enTitle="FL2X-B-ISO Thick Wall XLPE Wire (Type B)" cnTitle="FL2X-B-歐規厚肉XLPE照射汽車花線" />
+        <submenuitem url="~/en/flr2xa.aspx" enTitle="FLR2X-A-ISO Thin Wall XLPE Wire (Type A)" cnTitle="FLR2X-A-歐規厚肉XLPE照射汽車花線" />
+        <submenuitem url="~/en/flr2xb.aspx" enTitle="FLR2X-B-ISO Thin Wall XLPE Wire (Type B)" cnTitle="FLR2X-B-歐規厚肉XLPE照射汽車花線" />
+        <submenuitem url="~/en/flr13ya.aspx" enTitle="FLR13Y-A-ISO Thin Wall TPE-E Wire (Type A)" cnTitle="FLR13Y-A-歐規厚肉耐熱汽車花線" />-->
+      </submenuitem>
+    </menuitem>
+    <menuitem url="~/en/special-cable.aspx" enTitle="Special Cable Series" cnTitle="特殊訂製線材">
+      <submenuitem url="~/en/ul5048.aspx" enTitle="UL5048 Anti-Refrigerant PETP Insulation Wire" cnTitle="UL5048 冷媒線" />
+    </menuitem>
+    <menuitem url="~/en/military-grade-series.aspx" enTitle="Military Grade Series" cnTitle="軍規線系列">
+      <submenuitem url="~/en/mil-c-24643-23-08.aspx" enTitle="MIL-C-24643/23-08 Low Smoke Shipboard Cable" cnTitle="MIL-C-24643/23-08 軍規船用電纜" />
+    </menuitem>
+  </mainmenuitem>  
+</menu>

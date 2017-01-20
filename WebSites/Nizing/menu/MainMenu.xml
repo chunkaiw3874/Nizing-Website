@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu>
+  <menuitem url="~/company.aspx" enTitle="Company"  cnTitle="日進電線">
+    <submenuitem url="~/company-intro.aspx" enTitle="Introduction" cnTitle="公司簡介" />
+    <submenuitem url="~/company-culture.aspx" enTitle="Culture" cnTitle="核心文化" />
+    <submenuitem url="~/company-history.aspx" enTitle="History" cnTitle="歷史紀錄" />
+    <submenuitem url="~/company-capability.aspx" enTitle="Capability" cnTitle="設備技術" />
+    <submenuitem url="~/conflict-free-mineral-declaration.aspx" enTitle="Declaration" cnTitle="無衝突金屬聲明" />
+  </menuitem>
+  <menuitem url="~/product.aspx" enTitle="Products" cnTitle="產品資訊">
+    <submenuitem url="~/pvc-series.aspx" enTitle="PVC" cnTitle="一般電線電纜-PVC" />
+    <submenuitem url="~/silicone-fiberglass-series.aspx" enTitle="Silicone Fiberglass" cnTitle="矽膠編織耐熱線系列" />
+    <submenuitem url="~/high-temperature-resistance-series.aspx" enTitle="High Temperature" cnTitle="高溫線系列" />
+    <submenuitem url="~/silicone-series.aspx" enTitle="Silicone" cnTitle="矽膠耐熱線系列" />
+    <submenuitem url="~/teflon-series.aspx" enTitle="Teflon" cnTitle="鐵氟龍線系列" />
+    <submenuitem url="~/xlpe-series.aspx" enTitle="XLPE" cnTitle="交連照射線系列" />
+    <submenuitem url="~/sleeve-and-tube-series.aspx" enTitle="Sleeve and Tube" cnTitle="套管系列" />
+    <submenuitem url="~/thermocouple-series.aspx" enTitle="Thermocouple" cnTitle="補償導線系列" />
+    <submenuitem url="~/heating-wire-series.aspx" enTitle="Heating Wire" cnTitle="發熱線系列" />
+    <submenuitem url="~/automotive-wire-series.aspx" enTitle="Automotive Wire" cnTitle="汽車花線系列" />
+    <submenuitem url="~/special-cable.aspx" enTitle="Special Cable" cnTitle="特殊訂製線材" />
+    <submenuitem url="~/military-grade-series.aspx" enTitle="Military Grade Series" cnTitle="軍規線系列" />
+  </menuitem>
+  <menuitem url="~/application.aspx" enTitle="Application" cnTitle="應用產業">
+    <submenuitem url="~/car.aspx" enTitle="Car" cnTitle="車用元件" />
+    <submenuitem url="~/cloud.aspx" enTitle="Cloud System" cnTitle="雲端系統" />
+    <submenuitem url="~/roboarm.aspx" enTitle="Robotic Arm" cnTitle="機器手臂" />
+    <submenuitem url="~/heating.aspx" enTitle="Heating System" cnTitle="加熱系統" />
+    <submenuitem url="~/medical.aspx" enTitle="Medical" cnTitle="醫療科技" />
+    <submenuitem url="~/led.aspx" enTitle="LED" cnTitle="LED" />
+    <submenuitem url="~/temperature-control.aspx" enTitle="Temperature Control" cnTitle="溫控系統" />
+    <submenuitem url="~/construction.aspx" enTitle="Contruction" cnTitle="建築材料" />
+    <submenuitem url="~/solar.aspx" enTitle="Solar" cnTitle="太陽能" />
+    <submenuitem url="~/steel.aspx" enTitle="Steel Industry" cnTitle="鋼鐵工業" />
+    <submenuitem url="~/misc-app.aspx" enTitle="Other Application" cnTitle="其他應用" />
+  </menuitem>
+  <menuitem url="~/material.aspx" enTitle="Material" cnTitle="材料特性">
+    <submenuitem url="~/plastic.aspx" enTitle="Plastic Material" cnTitle="塑料特性" />
+    <submenuitem url="~/silicone.aspx" enTitle="Silicone Material" cnTitle="矽膠特性" />
+    <submenuitem url="~/teflon.aspx" enTitle="Teflon Material" cnTitle="鐵氟龍特性" />
+    <submenuitem url="~/twinning.aspx" enTitle="Twinning Material" cnTitle="纏繞編織材料特性" />
+    <submenuitem url="~/conductor.aspx" enTitle="Conductor" cnTitle="導體特性" />
+  </menuitem>
+  <menuitem url="~/alloy.aspx" enTitle="Alloy" cnTitle="合金導體">
+    <submenuitem url="~/copper.aspx" enTitle="Pure Copper" cnTitle="純銅類" />
+    <submenuitem url="~/agcu.aspx" enTitle="Silver-Copper" cnTitle="銀銅合金類" />
+    <submenuitem url="~/sncu.aspx" enTitle="Tin-Copper" cnTitle="錫銅合金類" />
+    <submenuitem url="~/nicu.aspx" enTitle="Nickel-Copper" cnTitle="鎳銅合金類" />
+    <submenuitem url="~/ag.aspx" enTitle="Silver" cnTitle="純銀及銀合金" />
+    <submenuitem url="~/ccs.aspx" enTitle="Copper Clad Steel" cnTitle="銅包鋼類" />
+  </menuitem>
+  <menuitem url="~/certificate.aspx" enTitle="Certificate" cnTitle="安規認證">
+    <submenuitem url="~/spec-certificate.aspx" enTitle="Specification" cnTitle="規格認證" />
+    <submenuitem url="~/quality-certificate.aspx" enTitle="Management" cnTitle="管理認證" />
+    <submenuitem url="~/environment-certificate.aspx" enTitle="Environment" cnTitle="綠色認證" />
+  </menuitem>
+  <menuitem url="~/ulnumber.aspx" enTitle="UL Number" cnTitle="UL編號" />
+  <menuitem url="~/employee_section/calculator.aspx" enTitle="Eng Calculator" cnTitle="工程計算機" />
+  <menuitem url="~/contact_us.aspx" enTitle="Contact Us" cnTitle="聯絡我們" />
+</menu>

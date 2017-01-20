@@ -1,0 +1,44 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterPage/HR360_Master.master" AutoEventWireup="true" CodeFile="HR360_Child_user.master.cs" Inherits="masterPage_HR360_Child_user" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <link href="../css/tabcontainer.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="javascript_section" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <div id="main" class="notprintable">
+        <div id="banner">
+            <div class="float-right" style="">
+                <asp:ImageButton ID="btnHome" runat="server" ImageUrl="~/hr360/image/icon/top_menu/home1.png" Height="80" ToolTip="首頁" OnClick="btnHome_Click" onmouseover="this.src='image/icon/top_menu/home2.png'" onmouseout="this.src='image/icon/top_menu/home1.png'" />
+                <asp:ImageButton ID="btnAdminPage" runat="server" ImageUrl="~/hr360/image/icon/top_menu/management_page1.png" Height="80" ToolTip="首頁" OnClick="btnAdminPage_Click" onmouseover="this.src='image/icon/top_menu/management_page2.png'" onmouseout="this.src='image/icon/top_menu/management_page1.png'" />
+                <asp:ImageButton ID="btnLogout" runat="server" ImageUrl="~/hr360/image/icon/top_menu/logout1.png" Height="80" ToolTip="登出" OnClick="btnLogout_Click" onmouseover="this.src='image/icon/top_menu/logout2.png'" onmouseout="this.src='image/icon/top_menu/logout1.png'" />
+            </div>
+        </div>
+        <div id="user_menu">
+            <div class="left">
+                <div class="title">
+                </div>
+                <div class="menu">
+                    <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/hr360/image/icon/button_menu/my_training.png" />
+                    <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/hr360/image/icon/button_menu/work_overtime.png" />
+                    <asp:ImageButton ID="ImageButton3" runat="server" ImageUrl="~/hr360/image/icon/button_menu/vacation.png" />
+                    <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/hr360/image/icon/button_menu/hr360.png" />
+                    <asp:ImageButton ID="ImageButton5" runat="server" ImageUrl="~/hr360/image/icon/button_menu/my_info.png" />
+                </div>
+            </div>
+            <div class="right">
+                <div class="fixed-top">
+                    <asp:ContentPlaceHolder ID="page_title" runat="server"></asp:ContentPlaceHolder>                    
+                    <asp:ContentPlaceHolder ID="top_menu" runat="server"></asp:ContentPlaceHolder>
+                </div>
+                <div id="page-content">
+                    <asp:ContentPlaceHolder ID="page_content" runat="server"></asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="PrintView" class="printable">
+        <asp:ContentPlaceHolder ID="PrintArea" runat="server"></asp:ContentPlaceHolder>
+    </div>
+</asp:Content>
+

@@ -1,0 +1,143 @@
+﻿/*pop up window for search*/
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+#search_window .popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 400px;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: orange;
+}
+.popup .content {
+
+}
+.popup .content .search-condition-button{
+    margin-right:10px;
+}
+.popup .content .search-condition-window{    
+    margin-top:20px;
+}
+.popup .content .search-condition-window textarea{    
+    width:100%;
+    max-width:100%;
+    height:150px;
+    max-height:150px;
+    resize:none;
+}
+.popup .content .search-condition-window input{    
+    position:relative;
+    left:358px;
+
+}
+
+body {
+}
+.read-only{
+    background-color:#cccccc;
+}
+.required-field{
+    background-color:#A9CAFF;
+}
+.disabled{
+    filter: alpha(opacity=50);
+    -moz-opacity:0.50;
+    opacity:0.5;
+}
+#content{
+    margin-top:-20px;
+    /*width:200px;*/
+}
+#main{
+    /*width:950px;*/    
+}
+#leftmenu .left{
+    position:absolute;
+    padding-top:20px;
+    left:0;
+    width:10%;
+    height:100%;
+    display:inline-block;
+    border-right:solid 1px #cccccc;
+    /*border:solid 1px #cccccc;*/
+}
+#rightcontent{
+    position:absolute;
+    left:10%;
+    padding-top:35px;
+    width:90%;
+    padding-left:10px;
+}
+
+#page-menu{
+    width:1000px;
+    padding: 12px 10px 10px 10px;
+    border:solid 1px #92b3c4;
+    border-radius:3px;
+    margin-bottom:20px;
+}
+#page-menu input{
+    padding:0px 0px 0px 20px;
+}
+#page-menu input:first-child{
+    padding:0px;
+}
+#pagecontent{
+    /*width:1100px;*/
+    /*padding: 12px 10px 10px 10px;
+    border:solid 1px #92b3c4;
+    border-radius:3px;
+    margin-bottom:20px;*/
+}
+#message{
+    padding:10px;
+}
+.content{
+    padding:10px;
+}
+.content .content-table tr{
+    display:block;
+}
+.content .content-table tr td{
+    padding:5px;    
+    /*border:solid 1px #cccccc;*/
+}
+.content .content-table tr td:first-child div{
+    width:70px;
+}
+.content .content-table tr td div{
+    width:500px;
+}

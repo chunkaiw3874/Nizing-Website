@@ -1,0 +1,43 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/en/master/product.master" AutoEventWireup="true" CodeFile="product-detail.master.cs" Inherits="master_product_detail" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
+    <asp:ContentPlaceHolder ID="DocTitleKeywords" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
+    <asp:ContentPlaceHolder ID="JavaScriptCode" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <div class="left">
+        <div class="large-pic">
+            <%-- image control x 1 --%>
+            <asp:ContentPlaceHolder ID="largePicArea1" runat="server"></asp:ContentPlaceHolder>
+        </div>        
+        <div class="small-pic">
+            <%-- div class="content-row" wrapping 2 images--%>
+            <asp:ContentPlaceHolder ID="smallPicArea" runat="server"></asp:ContentPlaceHolder>
+        </div>
+        <div class="large-pic">
+            <%-- image control x 1 --%>
+            <asp:ContentPlaceHolder ID="largePicArea2" runat="server"></asp:ContentPlaceHolder>
+        </div>
+        <div class="large-pic">
+            <%-- image control x 1 --%>
+            <asp:ContentPlaceHolder ID="largePicArea3" runat="server"></asp:ContentPlaceHolder>
+        </div>
+    </div>
+    <div class="right">
+        <div class="title">
+            <asp:ContentPlaceHolder ID="prdTitle" runat="server"></asp:ContentPlaceHolder>
+        </div>
+        <div class="link">
+            <asp:ContentPlaceHolder ID="titleRowLink" runat="server"></asp:ContentPlaceHolder>
+        </div>
+        <div class="content">
+            <asp:ContentPlaceHolder ID="briefDescription" runat="server"></asp:ContentPlaceHolder>
+        </div>
+    </div>
+    <div class="detail">
+        <asp:ContentPlaceHolder ID="detailDescription" runat="server"></asp:ContentPlaceHolder>
+    </div>
+</asp:Content>
+

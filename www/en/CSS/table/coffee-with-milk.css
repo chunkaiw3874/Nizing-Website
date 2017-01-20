@@ -1,0 +1,35 @@
+@charset "utf-8";
+/*
+Coffee with milk
+Table design by Roger Johansson, 456 Berea Street
+www.456bereastreet.com
+================================================*/
+
+table {
+	border-collapse:separate;
+	border-spacing:0;
+	color:#000;
+	}
+table a {
+	color:#F09000;
+	text-decoration:none;
+	}
+tbody th,
+td {
+	padding:0.25em 0.5em;
+	text-align:left;
+	vertical-align:top;
+	}
+tbody tr:nth-child(even)
+   {
+	background-color: #FFE1C4;
+	}
+caption {
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-weight:normal;
+	font-size:1.4em;
+	text-align:left;
+	margin:0;
+	padding:0.5em 0.25em;
+	}
+/* CSS Document */

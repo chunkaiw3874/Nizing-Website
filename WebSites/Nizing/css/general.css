@@ -1,0 +1,548 @@
+﻿.main-content{
+    font-size:12px;
+    width:100%;
+    margin-left:30px;
+}
+/*default.aspx*/
+.product{
+    width:100%;
+    margin-top:20px;
+}
+.product .title-no-border{
+    display:block;
+}
+.product .main-page-menu-product{
+    display:block;
+}
+.product .main-page-menu-product .button{
+    border:solid 1px #CCCCCC;
+    margin-left:34px;
+    margin-bottom:34px;
+}
+.product .main-page-menu-product .button:first-child{
+    margin-left:0px;
+}
+.product .main-page-menu-product .button img{
+    display:block;
+}
+.product .main-page-menu-product .button:hover{
+    border:solid 1px #ff9933;
+}
+.product .main-page-menu-product a{
+    color:#FFFFFF;
+}
+
+#news-default{
+    width:730px;
+    margin-right:20px;
+}
+#news-default .title-no-border{
+    display:block;
+}
+#news-default .img img{
+    max-width:215px;
+    max-height:180px;
+}
+#news-default .default-content{    
+    width:497px;
+    margin: 0px 0px 0px 5px;
+}
+#news-default .default-content li{
+    margin-bottom:10px;
+    border-bottom:solid 1px #CCCCCC;
+}
+
+#link-default{
+    width:220px;
+}
+#link-default .title-no-border{
+    display:block;
+}
+#link-default .default-content{
+    display:block;
+}
+#link-default .default-content .button img{
+    display:block;
+}
+
+#clientlogo-default{
+    width:100%;
+    margin-top:20px;
+}
+#clientlogo-default .title-no-border{
+    display:block;
+}
+#clientlogo-default .default-content{
+    display:block;
+    margin-bottom:5px;
+}
+#clientlogo-default .default-content .button{
+    margin-left:7px;
+}
+#clientlogo-default .default-content .button:first-child{
+    margin-left:0px;
+}
+#clientlogo-default .default-content .button img{
+    display:block;
+}
+
+/*ulnumber*/
+#ulnumber{
+    width:100%;
+}
+#ulnumber .inner-content{
+    width:100%;
+}
+#ulnumber .inner-content .content-row{
+    width:100%;
+}
+#ulnumber .inner-content .content-row table{
+    width:100%;
+}
+#ulnumber .inner-content .content-row table tr:nth-child(2n){
+    background-color:#AAD9F5;
+}
+#ulnumber .inner-content .content-row table tr td {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #CCC;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: #CCC;
+}
+
+/*contact-us.aspx*/
+#contact-us .inner-content .left{
+}
+#contact-us .inner-content .right{
+    margin-left:100px;
+}
+#contact-us th{
+    text-align:left;
+    font:14px;
+    padding: 0px 5px 15px 5px;
+}
+#contact-us td{
+    padding: 3px 5px 13px 5px;
+}
+/*news.aspx*/
+#news{
+    width:100%;
+    font-size:14px;
+}
+#news li{
+    padding:5px 0px 5px 0px;
+    border-bottom:solid 1px #CCCCCC;
+}
+
+/*company.aspx, certificate.aspx, spec-certificate.aspx, quality-certificate,
+  environment-certificate.aspx, material.aspx, alloy.aspx*/
+#child-menu .inner-content .content-row{
+    width:100%;
+}
+#child-menu .inner-content .content-row .button{
+    margin-left:3px;
+}
+#child-menu .inner-content .content-row .button:first-child{
+    margin-left:0px;
+}
+#child-menu .inner-content .content-row .button img{
+    display:block;
+}
+
+/*company-intro.aspx*/
+#company-intro .inner-content .content-row{
+    width:100%;
+}
+#company-intro .inner-content .content-row .text{    
+    width:660px;
+    margin-right:6px;
+}
+#company-intro .inner-content .content-row .img{
+    width:300px;
+}
+/*company-culture.aspx*/
+#company-culture .inner-content .content-row{
+    width:100%;
+}
+#company-culture .inner-content .content-row .text{    
+    width:660px;
+    margin-right:6px;
+}
+#company-culture .inner-content .content-row .img{
+    width:300px;
+}
+/*company-capability.aspx*/
+#company-capability .inner-content{
+    width:970px;
+}
+#company-capability #ContentPlaceHolder1_ContentPlaceHolder1_capabilityDetail_TabPanel1 .img{
+    margin:0px 40px 0px 40px;
+}
+#company-capability #ContentPlaceHolder1_ContentPlaceHolder1_capabilityDetail_TabPanel1 .img img{
+    display:block;
+}
+#company-capability #ContentPlaceHolder1_ContentPlaceHolder1_capabilityDetail_TabPanel2 .img{
+    margin:20px 100px 0px 10px;
+    text-align:center;
+}
+#company-capability #ContentPlaceHolder1_ContentPlaceHolder1_capabilityDetail_TabPanel2 .img img{
+    border:solid 1px #CCCCCC;
+    display:block;
+}
+#company-capability #ContentPlaceHolder1_ContentPlaceHolder1_capabilityDetail_TabPanel3 .img{
+    margin:20px 100px 0px 10px;
+    text-align:center;
+}
+#company-capability #ContentPlaceHolder1_ContentPlaceHolder1_capabilityDetail_TabPanel3 .img img{
+    border:solid 1px #CCCCCC;
+    display:block;
+}
+
+/*ul.aspx pse.aspx vde.aspx iso9001.aspx ccc.aspx rohs.aspx reach.aspx*/
+#certificate-document .inner-content .content-row{
+    margin-bottom:30px;
+}
+#certificate-document .inner-content .content-row .icon{
+    border:solid 1px #666666;
+    margin-right:8px;
+}
+#certificate-document .inner-content .content-row .icon img{
+    display:block;
+}
+
+/*plastic.aspx silicone.aspx teflon.aspx twinning.aspx conductor.aspx*/
+#material-content .inner-content .content-row{
+    width:100%;
+}
+#material-content table{
+    border:solid 1px #333333;
+}
+#material-content th{
+    font-size:16px;
+    border:solid 1px #333333;
+}
+#material-content th:first-child{
+    width:10%;
+}
+#material-content td{
+    border:solid 1px #333333;
+    font-size:14px;
+}
+#material-content td:first-child{
+    text-align:center;
+    font-size:16px;
+}
+#material-content tr:nth-child(2n)
+{
+    background-color:#AAD9F5;
+}
+#material-content table table{
+    border:none;
+}
+#material-content table table td:first-child{
+    text-align:left;
+    font-size:14px;
+    width:6em;
+    vertical-align:top;
+}
+#material-content table table td{
+    border:none;
+}
+
+/*copper.aspx, agcu.aspx, sncu.aspx, nicu.aspx, ag.aspx, ccs.aspx*/
+#alloy-content .inner-content .large-pic{
+    width:200px;
+    height:200px;
+    margin-right:28px;
+    border:solid 1px #000000;
+}
+#alloy-content .inner-content .brief{
+    width:735px;
+    float:right;
+}
+#alloy-content .inner-content .brief .no-grid-table td{
+    vertical-align:top;
+}
+#alloy-content .inner-content .brief .no-grid-table td:first-child{
+    width:10%;
+    vertical-align:top;
+    text-align:right;
+    font-weight:bold;
+    height:20px;
+}
+#alloy-content .inner-content .brief .grid-table{
+    width:100%;
+    border:solid 1px #000000;
+    margin-top:20px;
+}
+#alloy-content .inner-content .brief .grid-table th{
+    border:solid 1px #000000;
+    height:30px;
+}
+#alloy-content .inner-content .brief .grid-table td{
+    text-align:center;
+    border:solid 1px #000000;
+}
+#alloy-content .inner-content .brief .grid-table td:first-child{
+    font-weight:bold;
+    height:30px;
+}
+#alloy-content .inner-content .small-pic{
+    width:202px;
+    padding-top:11px;
+}
+#alloy-content .inner-content .small-pic img{
+    margin:0px 20px 11px 0px;
+    border:solid 1px #000000;
+}
+#alloy-content .inner-content .small-pic img:nth-child(3n){
+    margin-right:0px;
+}
+#alloy-content .inner-content .detail{
+    width:965px;
+    border:solid 1px #CCCCCC;
+}
+
+/*navigation.aspx*/
+#navigation{
+    width:100%;
+}
+#navigation .inner-content{
+    width:100%;
+}
+#navigation .inner-content .content-row{
+    width:100%;
+    margin-bottom:10px;
+}
+#navigation .inner-content .content-row .content-column{
+    width:15%;
+    text-align:left;
+    margin-right:5px;
+}
+#navigation .inner-content .content-row .content-column .header{
+    width:100%;
+    height:30px;
+    font-size:16px;
+    border-bottom:solid 1px #4eb6f5;
+    margin-bottom:6%;
+}
+#navigation .inner-content .content-row .content-column .header a {    
+    color:#4eb6f5;
+}
+#navigation .inner-content .content-row .content-column .header a:hover {    
+    color:#ff9933;
+}
+#navigation .inner-content .content-row .content-column .parent{
+    width:100%;
+    margin-bottom:4%;
+    background:url(../images/icon/double-arrow.png) no-repeat;
+    padding-left:9%;
+}
+#navigation .inner-content .content-row .content-column .sub{
+    width:100%;
+    padding-left:17%;
+    margin-bottom:4%;
+}
+
+/*product.aspx*/
+#product-menu{    
+    font-size:12px;
+}
+#product-menu .content-row{
+    width:100%;
+    margin-bottom:7px;
+}
+#product-menu .content-row .button{
+    border:solid 1px #CCCCCC;
+    margin-left:42px;
+}
+#product-menu .content-row .button:hover{
+    border:solid 1px #FF9933;
+}
+#product-menu .content-row .button img{
+    display:block;
+}
+
+/*pvc-series, silicone-fiberglass-series, high-temperature-resistance-series
+silicone-series, teflon-series, xlpe-series, sleeve-and-tube-series
+*/
+#product-submenu .link{
+    font-size:12px;
+    margin-left:42px;
+}
+#product-submenu .content-row{
+    width:100%;
+    font-size:12px;
+    margin-bottom:42px;
+}
+#product-submenu .content-row .content-column{
+    width:215px;   
+    margin-left:42px;
+}
+#product-submenu .content-row .content-column .button{
+    border:solid 1px #CCCCCC;   
+}
+#product-submenu .content-row .content-column .button:hover{
+    border:solid 1px #FF9933;
+}
+#product-submenu .content-row .content-column .button img{
+    display:block;
+}
+#product-submenu .content-row .content-column .title{
+    display:block;
+    font-size:14px;
+    color:#4eb6f5;
+}
+#product-submenu .content-row .content-column .data{
+    width:100%;
+}
+#product-submenu .content-row .content-column table{
+    width:100%;
+}
+#product-submenu .content-row .content-column table tr td{
+    vertical-align:top;
+    width:70%;
+}
+#product-submenu .content-row .content-column table tr td:first-child{
+    width:30%;
+}
+
+/*thermocouple-series*/
+#thermocouple-submenu .link{
+    width:100%;    
+}
+#thermocouple-submenu .link .button{
+    margin-left:12.1px;
+}
+#thermocouple-submenu .link .button:first-child{
+    margin-left:0px;
+}
+#thermocouple-submenu .content{
+    width:100%;
+    font-size:12px;
+}
+#thermocouple-submenu .content .div-top-50{    
+    margin-top:10px;
+    width:49.8%;
+}
+#thermocouple-submenu .content .div-top-50 .title{
+    width:100%;
+    font-size:16px;
+    background-color:#FF9933;
+    color:#ffffff;
+    margin-bottom:5px;
+    border-top:solid 3px #FF9933;
+    border-bottom:solid 5px #FF9933;
+}
+#thermocouple-submenu .content .div-bottom-100{
+    margin-top:10px;
+    width:100%;
+    margin-bottom: 10px;
+}
+#thermocouple-submenu .content .div-bottom-100 .title{
+    width:100%;
+    font-size:16px;
+    background-color:#FF9933;
+    color:#ffffff;
+    margin-bottom:5px;
+    border-top:solid 3px #FF9933;
+    border-bottom:solid 5px #FF9933;
+}
+#thermocouple-submenu .content .div-bottom-100 table{
+    border:solid 1px #CCCCCC;
+}
+#thermocouple-submenu .content .div-bottom-100 table th{
+    border:solid 1px #CCCCCC;
+    text-align:center;
+}
+#thermocouple-submenu .content .div-bottom-100 table tr td{
+    border:solid 1px #CCCCCC;
+    text-align:center;
+}
+
+/*product pages*/
+#product-content{
+    /*border:solid 1px #cccccc;*/
+    /*width:78%;*/
+}
+#product-content .right .content .subtitle{
+    width:100%;
+    background-color:#77c5f5;
+    border-radius:3px 0px 0px 3px;
+    color:#ffffff;
+    font-size:14px;
+    font-weight:bold;
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-left:2px;
+    margin:10px 0px 10px 0px;
+}
+#product-content .right .content table{
+    width:100%;
+}
+#product-content .right .content table tr td{
+    padding-bottom:10px;
+}
+#product-content .right .content table tr td:first-child{
+    width:20%;
+}
+#product-content .detail .subtitle{
+    width:100%;
+    background-color:#77c5f5;
+    border-radius:3px 0px 0px 3px;
+    color:#ffffff;
+    font-size:14px;
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-left:2px;
+    font-weight:bold;
+}
+#product-content .detail .content{
+    width:100.5%;
+    margin-bottom:20px;
+}
+#product-content .detail table{
+    width:100%;
+    text-align:center;
+}
+#product-content .detail table tr td{
+    border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCC;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #CCC;
+}
+
+/*detail*/
+.detail table tr td{
+    padding:2px;
+}
+/*calculator*/
+#calculator div{
+    display:block;
+    margin-bottom:10px;
+}
+#calculator table tr td{
+    padding:5px;
+}
+#calculator{
+    min-width:100%;
+}
+#calculator .calc_title{
+    width:100%;
+    border-bottom:solid 1px #cccccc;
+    padding:5px 0 5px 0;    
+}
+#calculator #OD{
+    border:solid 1px #cccccc;
+    padding:5px;
+    border-radius:5px;
+}
+#calculator #copperConverter{
+    border:solid 1px #cccccc;
+    padding:5px;
+    border-radius:5px;
+    display:block;
+}

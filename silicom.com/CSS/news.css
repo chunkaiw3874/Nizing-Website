@@ -1,0 +1,241 @@
+@charset "utf-8";
+
+#all {
+	text-align: left;
+	font-size:12px;
+	color:#000;
+	width:1000px;
+	height: auto;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;	
+
+}
+
+#language {
+	font-size: 12px;
+	color:#666;
+	text-align: right;
+	letter-spacing: 2px;
+	font-family: "新細明體", "標楷體";
+}
+
+#top1 {
+	float:right;
+	width: 700px;
+	height: 55px;
+	text-align: right;
+	}
+
+a:link {
+	text-decoration: none;
+	color: #06F;
+}
+a:visited {
+	color: #06F;
+	text-decoration: none;
+}
+a:hover {
+	color: #999;
+	top: 5px;
+}
+a:active {
+	color: #666;
+	font-size: bold;
+	}
+
+
+#footer1 {
+	text-align: center;
+	font-family: "新細明體", "標楷體";
+	font-size: 13px;
+	color: #666;
+	line-height: 30px;
+	height: 40px;
+	clear: both;
+	padding-top: 10px;
+	letter-spacing: 1px;
+	}
+#footer2 {
+	text-align: center;
+	font-size: 12px;
+	color: #666;
+	background-color: #EBEBEB;
+	line-height: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	}
+	.bold{
+		font-weight: bold;}
+	.english{
+	font-family:"Arial Unicode MS";
+	}
+#middle2 {
+	text-align: center;
+	float: right;
+	width: 1000px;
+	}
+	#news1 {
+	float: left;
+	height: 150px;
+	width: 490px;
+	text-decoration: none;
+	margin-right: 5px;
+	border: 1px solid #CCC;
+		}
+#news_title {
+	text-align: left;
+	font-size: 14px;
+	font-family: "新細明體", "標楷體";
+	}
+#all #news1 ul li {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCC;
+	list-style-type: none;
+	display: block;
+	height: auto;
+	vertical-align: middle;
+	font-size: 14px;
+	padding-top: 5px;
+	width: 400px;
+	color: #666;
+	margin-bottom: 5px;
+}
+
+	#news2 {
+	float: right;
+	height: 150px;
+	width: 490px;
+	margin-right: 5px;
+	border: 1px solid #CCC;
+	}
+#all #news2 ul li {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCC;
+	list-style-type: none;
+	display: block;
+	height: auto;
+	vertical-align: middle;
+	font-size: 14px;
+	padding-top: 5px;
+	width: 400px;
+	color: #666;
+	margin-bottom: 5px;
+}
+#news_title {
+	font-size: 12px;
+	padding-bottom: 10px;
+	top: 10px;
+	float: left;
+	width: 950px;
+	padding-top: 20px;
+	}
+#all #news_menu ul li {
+	list-style-type: none;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #28A9FF;
+	margin-right: 10px;
+	font-family: "新細明體", "標楷體";
+	font-size: 14px;
+	margin-bottom: 20px;
+	padding-bottom: 5px;
+	display: block;
+	line-height: 18px;
+}
+
+#news_menu {
+	width: 250px;
+	height: 500px;
+	float: left;
+	border: 1px solid #CCC;
+	}
+#product_menu {
+	width: 252px;
+	height: 500px;
+	float: left;
+	}
+#pm1 {
+	margin-bottom: 10px;
+	display: block;
+	border: 1px solid #CCC;
+	}
+
+#news_content {
+	float:left;
+	text-align:left;
+	height: auto;
+	width: 680px;
+	margin-left: 20px;
+	}
+#news_content {
+	float: left;
+	width: 678px;
+	}
+#news_topic {
+	float: left;
+	width: 500px;
+	height: 40px;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #999;
+	border-left-color: #999;
+	text-align: center;
+	font-family: "新細明體", "標楷體";
+	font-size: 20px;
+	font-weight: bold;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-left: 20px;
+	text-decoration: underline;
+	}
+#news_date {
+	float: left;
+	width: 175px;
+	height: 40px;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #999;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #999;
+	font-size: 14px;
+	font-weight: bold;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-decoration: underline;
+	}
+#news_content1 {
+	float: left;
+	height: auto;
+	width: 708px;
+	}
+#news_content2 {
+	float: left;
+	width: 635px;
+	height: auto;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-right-color: #999;
+	border-bottom-color: #999;
+	border-left-color: #999;
+	margin-left: 20px;
+	padding-right: 20px;
+	padding-left: 20px;
+	color: #333;
+	letter-spacing: 2px;
+	}
+#middle1 {	
+	float: left;
+	width: 678px;
+	height: auto;
+	}	

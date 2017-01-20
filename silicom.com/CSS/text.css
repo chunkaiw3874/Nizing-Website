@@ -1,0 +1,91 @@
+@charset "utf-8";
+
+.pm_header {
+	font-size: 24px;
+	font-family: "新細明體", "標楷體";
+	font-weight: bolder;
+	color: #06C;
+	letter-spacing: 2px;
+	text-align: center;
+	width: 900px;
+	
+	}
+.indent1 {
+	margin-left: 50px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	
+	}
+.textcolor0 {
+	color: #FFF
+}
+.pm_content {
+	font-size: 14px;
+	font-weight: bold;
+	color: #FFF;
+	padding-left: 30px;
+	font-family: "新細明體", "標楷體";
+	background-color: #333;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	
+	}
+.pm_content1 {
+	font-size: 14px;
+	color: #333;
+	padding-left: 20px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	font-family: "新細明體", "標楷體";
+	}
+.greenbg1 {
+	background-color: #333;
+	
+	}
+.greybg1 {
+	background-color: #EEE;}
+.newstext {
+	margin-left: 30px;
+	}
+
+.textspace {
+	margin-left: 20px;
+	}
+.textspace2 {
+	margin-left: 10px;
+	}
+.picspace {
+	margin-left: 30px;
+	margin-right: 30px;}
+.text2 {
+	letter-spacing: 2px;	
+	}
+.text3 {
+	text-align: left;
+	color: #333;
+	
+	}
+.pm_header1 {
+	color: #CCC;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #333;
+	text-align: center;
+}
+#contact_top1 {
+	float: left;
+	width: 400px;
+	height: 200px;
+	margin-left: 50px;
+	font-size: 14px;
+	padding-bottom: 10px;
+	color: #666;
+	
+	}
+#contact_top2 {
+	margin-left: 100px;
+	color: #666;
+	float: left;
+	height: auto;
+	width: 300px;
+	}

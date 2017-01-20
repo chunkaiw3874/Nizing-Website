@@ -1,0 +1,183 @@
+@charset "utf-8";
+#company_title {
+	float: left;
+	width: 350px;
+	height: 55px;
+	}
+.company_menu {
+	float: left;
+	width: 90px;
+	height: 25px;
+	margin-left: 600px;
+	padding-top: 20px;
+	list-style-position: inside;
+	display: block;
+	list-style-type: none;
+	font-size: 14px;
+	text-align: center;
+	color: #4C4C4C;
+	font-weight: bold;
+	}
+.company_menu0 {
+	float: left;
+	width: 80px;
+	height: 25px;
+	margin-left: 300px;
+	margin-top: 30px;
+	list-style-position: inside;
+	display: block;
+	list-style-type: none;
+	font-size: 14px;
+	text-align: center;
+	color: #4C4C4C;
+	}
+
+.company_menu1 {
+	float: left;
+	width: 80px;
+	height: 25px;
+	margin-top: 30px;
+	list-style-position: inside;
+	display: block;
+	list-style-type: none;
+	font-size: 14px;
+	text-align: center;
+	color: #4C4C4C;
+	
+	}
+.company_menu2 {
+	float: left;
+	width: 80px;
+	height: 25px;
+	margin-top: 30px;
+	list-style-position: inside;
+	display: block;
+	list-style-type: none;
+	font-size: 14px;
+	text-align: center;
+	color: #4C4C4C;
+	font-weight: bold;
+	}
+#comp1 {
+	float: left;
+	width: 950px;
+	height: auto;
+	padding-left: 50px;
+	font-size: 18px;
+	font-family: "新細明體", "標楷體";
+	color: #333;
+	font-weight: bold;
+	border: 1px solid #CCC;
+	padding-top: 10px;
+	
+	}
+	
+#comp5 {
+		float: left;
+	width: 900px;
+	height: auto;
+	
+	font-size: 18px;
+	font-family: "新細明體", "標楷體";
+	color: #333;
+	font-weight: bold;
+	padding-top: 10px;
+	}
+	
+#comp2 {
+	float: left;
+	width: 300px;
+	height: 400px;
+	display: block;
+	border: 1px solid #999;
+	}
+
+#comp3 {
+	float: left;
+	width: 300px;
+	height: 30px;
+	margin-right: 500px;
+	display: block;
+	margin_bottom: 10px;
+	text-align: center;
+	padding-top: 5px;
+	color:#06F;
+	font-size: 12px;
+	
+	}
+#comp4 {
+	float: left;
+	width: 500px;
+	height: 400px;
+	display: block;
+	border: 1px solid #999;
+	margin-left: 30px;
+	}
+	
+.patent1 {
+	float: left;
+	list-style-type: none;
+	height: auto;
+	width: 400px;
+	font-size: 14px;
+	text-align: center;
+	color: #900;
+	font-weight: bold;
+	display: block;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	}
+.patent3 {
+	float: left;
+	list-style-type: none;
+	height: auto;
+	width: 400px;
+	font-size: 14px;
+	text-align: center;
+	color: #900;
+	font-weight: bold;
+	display: block;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	margin-left: 50px;
+	}
+.patent2 {
+	float: left;
+	list-style-type: none;
+	height: auto;
+	width: 400px;
+	height: 580px;
+	display: block;
+	border: 1px solid #CCC;
+	margin-bottom: 10px;
+	}
+.patent4 {
+	float: left;
+	list-style-type: none;
+	height: auto;
+	width: 400px;
+	height: 580px;
+	display: block;
+	border: 1px solid #CCC;
+	margin-left: 50px;
+	margin-bottom: 10px;
+	}
+.certificate1 {
+	float: left;
+	margin-bottom: 10px;
+	width: 900px;
+	}
+#comp4-1 {
+	text-align: center;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	text-decoration: underline;
+}
+#comp4-2 {
+	font-size: 12px;
+	font-weight: normal;
+	letter-spacing: 2px;
+	padding-left: 20px;
+	padding-right: 10px;
+	line-height: 16px;
+	}

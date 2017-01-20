@@ -1,0 +1,45 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/master/HR360_Master.master" AutoEventWireup="true" CodeFile="HR360_Child.master.cs" Inherits="masterPage_HR360_Child" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <link href="../css/hr360/tabcontainer.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="javascript_section" runat="server">
+        <script type="text/javascript">
+            function tvNo_Permission(){
+                alert('No Permission');
+            }
+        </script>
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <div id="main">
+        <div id="banner">
+            <div class="float-right">
+                <asp:ImageButton ID="btnHome" runat="server" ImageUrl="~/hr360/image/icon/top_menu/home1.png" Height="80" ToolTip="首頁" OnClick="btnHome_Click" onmouseover="this.src='/hr360/image/icon/top_menu/home2.png'" onmouseout="this.src='/hr360/image/icon/top_menu/home1.png'" />
+                <%--<asp:ImageButton ID="btnReport" runat="server" ImageUrl="~/hr360/image/icon/top_menu/report1.png" Height="80" OnClick="btnReport_Click" onmouseover="this.src='image/icon/top_menu/report2.png'" onmouseout="this.src='image/icon/top_menu/report1.png'" />--%>
+                <asp:ImageButton ID="btnAdminPage" runat="server" ImageUrl="~/hr360/image/icon/top_menu/management_page1.png" Height="80" ToolTip="首頁" OnClick="btnAdminPage_Click" onmouseover="this.src='/hr360/image/icon/top_menu/management_page2.png'" onmouseout="this.src='/hr360/image/icon/top_menu/management_page1.png'" />
+                <asp:ImageButton ID="btnLogout" runat="server" ImageUrl="~/hr360/image/icon/top_menu/logout1.png" Height="80" ToolTip="登出" OnClick="btnLogout_Click" onmouseover="this.src='/hr360/image/icon/top_menu/logout2.png'" onmouseout="this.src='/hr360/image/icon/top_menu/logout1.png'" />
+            </div>
+        </div>
+        <div id="admin_menu">
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                    <div class="left">
+                        <asp:TreeView ID="TreeView1" runat="server" ShowExpandCollapse="false" ExpandDepth="0" OnTreeNodeExpanded="TreeView1_TreeNodeExpanded" OnTreeNodeCollapsed="TreeView1_TreeNodeCollapsed" OnLoad="TreeView1_Load" OnUnload="TreeView1_Unload" SkipLinkText="" CssClass="treeview" OnSelectedNodeChanged="TreeView1_SelectedNodeChanged">
+                        </asp:TreeView>
+                    </div>            
+                </ContentTemplate>
+            </asp:UpdatePanel>            
+            <div class="right">
+                <div class="fixed-top">
+                    <asp:ContentPlaceHolder ID="page_title" runat="server"></asp:ContentPlaceHolder>                    
+                    <asp:ContentPlaceHolder ID="top_menu" runat="server"></asp:ContentPlaceHolder>
+                </div>
+                <div id="page-content">
+                    <asp:ContentPlaceHolder ID="page_content" runat="server"></asp:ContentPlaceHolder>
+                </div>
+            </div>            
+        </div>
+    </div>
+</asp:Content>
+

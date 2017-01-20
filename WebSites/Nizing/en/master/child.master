@@ -1,0 +1,24 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/en/master/index.master" AutoEventWireup="true" CodeFile="child.master.cs" Inherits="master_contact_us" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
+    <asp:ContentPlaceHolder ID="DocTitleKeywords" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
+    <asp:ContentPlaceHolder ID="JavaScriptCode" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <div class="main-content">
+        <div class="title">
+            <div class="textbase">
+                <asp:ContentPlaceHolder ID="TitleRow" runat="server"></asp:ContentPlaceHolder>
+            </div>
+            <div class="link">
+                <asp:ContentPlaceHolder ID="TitleLink" runat="server"></asp:ContentPlaceHolder>
+            </div>
+        </div>
+        <div class="content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+        </div>
+    </div>
+</asp:Content>
+

@@ -1,0 +1,42 @@
+﻿a{
+    color:#000000;
+    text-decoration:none;
+}
+a:hover{
+    color:#ff9933;
+}
+img{
+    border:none;
+    vertical-align:central;
+}
+
+div{
+    display:inline-block;
+    vertical-align:top;
+}
+ul{
+    margin:0px;
+    padding:0px;
+    list-style:none;
+}
+
+body {
+    width:1000px;
+    margin:auto;
+    font-family:Arial;
+    font-size:0px;
+}
+
+.button{
+    border:solid 1px #FFFFFF;
+}
+.button:hover{
+    border:solid 1px #ff9933;
+}
+
+.inline-div{
+    display:inline-block;
+}
+.error-message{
+    color:red;
+}

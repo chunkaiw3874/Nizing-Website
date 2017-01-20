@@ -1,0 +1,31 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterPage/MasterPage.master" AutoEventWireup="true" CodeFile="Scrap_Master.master.cs" Inherits="masterPage_Scrap_Master" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <link href="css/scrap.css" rel="stylesheet" type="text/css" />
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <div id="main">
+        <div id="leftmenu">
+            <div class="left">
+                <ul>
+                    <li><asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/QC/scrap/SP01.aspx">廢線項目設定</asp:HyperLink></li>
+                    <li><asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/QC/scrap/SP02.aspx">廢線資料輸入</asp:HyperLink></li>
+                    <li><asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/QC/scrap/SP_R01.aspx">廢線月平均報表</asp:HyperLink></li>
+                </ul>
+            </div>
+        </div>
+        <div id="rightcontent">
+            <div id="top">
+                <asp:ContentPlaceHolder ID="title" runat="server"></asp:ContentPlaceHolder>
+                <asp:ContentPlaceHolder ID="menu" runat="server"></asp:ContentPlaceHolder>
+            </div>
+            <div id="pagecontent">
+                <asp:ContentPlaceHolder ID="content" runat="server"></asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </div>
+    <div id="PrintView" class="printable">
+        <asp:ContentPlaceHolder ID="PrintArea" runat="server"></asp:ContentPlaceHolder>
+    </div>
+</asp:Content>
+

@@ -1,0 +1,34 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <link href="/css/normalize.css" rel="stylesheet" type="text/css" />    
+    <link href="/css/report/general.css" rel="stylesheet" type="text/css" />
+    <link href="/css/report/gridview.css" rel="stylesheet" type="text/css" />
+    <link href="/css/report/message.css" rel="stylesheet" type="text/css" />
+    <link href="/css/tabcontainer.css" rel="stylesheet" type="text/css" />
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <%--<link href="~/QC/scrap/css/scrap.css" rel="stylesheet" type="text/css" />--%>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <div id="banner">
+            <div class="banner-button">
+                <asp:ImageButton ID="btnHome" runat="server" ImageUrl="~/employee_section/report/image/button/home1.png" Height="80" ToolTip="首頁" PostBackUrl="~/employee_section/Default.aspx" onmouseover="this.src='/employee_section/report/image/button/home2.png'" onmouseout="this.src='/employee_section/report/image/button/home1.png'" />
+            </div>        
+        </div>
+        <div id="content">
+            <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+            </asp:ContentPlaceHolder>
+        </div>
+    </div>
+    </form>
+</body>
+</html>
