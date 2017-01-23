@@ -31,6 +31,7 @@
         </tr>
     </table>
     <div class="subtitle">
+        <!--lalala-->
         技術資料
     </div>
     <table>
