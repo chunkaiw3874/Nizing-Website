@@ -16,7 +16,6 @@ using System.Web.UI.WebControls;
 public partial class nizing_intranet_HR04 : System.Web.UI.Page
 {
     string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
-    //test for change
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
