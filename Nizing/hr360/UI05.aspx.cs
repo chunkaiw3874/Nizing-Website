@@ -272,7 +272,7 @@ public partial class hr360_UI05 : System.Web.UI.Page
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
-                string query = "SELECT DISTINCT B.MV002,A.ASSESSED_ID"
+                string query = "SELECT DISTINCT A.ASSESSED_ID + ' ' + B.MV002,A.ASSESSED_ID"
                             + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
                             + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
                             + " WHERE A.ASSESS_TYPE='1'"

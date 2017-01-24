@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Nizing", "http://localhost:50429", "{BD3539B3-52E8-4C7A-9A0C-A85788E6F9FD}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_50429"
+		Debug.AspNetCompiler.PhysicalPath = "..\Nizing\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50429\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_50429"
+		Release.AspNetCompiler.PhysicalPath = "..\Nizing\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50429\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "..\Nizing\"
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Intranet", "http://localhost:51075", "{BCF0C055-450E-4A4D-A643-DBB58B4DD45F}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_51075"
+		Debug.AspNetCompiler.PhysicalPath = "..\Intranet\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51075\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_51075"
+		Release.AspNetCompiler.PhysicalPath = "..\Intranet\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51075\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "..\Intranet\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD3539B3-52E8-4C7A-9A0C-A85788E6F9FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD3539B3-52E8-4C7A-9A0C-A85788E6F9FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCF0C055-450E-4A4D-A643-DBB58B4DD45F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCF0C055-450E-4A4D-A643-DBB58B4DD45F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
