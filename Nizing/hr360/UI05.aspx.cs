@@ -21,73 +21,78 @@ public partial class hr360_UI05 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        
-        //Create table for all three assessment type (自評、主管評、特評)
-        DataTable dtEvalSelf = new DataTable();  //自評 table
-        DataTable dtEvalBoss = new DataTable();  //主管評 table
-        DataTable dtEvalSpecial = new DataTable();  //特評 table
-        //Fill tables (未評核人員)
-        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        DateTime start = new DateTime(2017, 1, 13, 19, 0, 0);
+        DateTime end = new DateTime(2017, 1, 19, 17, 30, 0);
+        if (DateTime.Now >= start && DateTime.Now < end)
         {
-            conn.Open();
-            //fill 自評 list
-            SqlCommand cmd = new SqlCommand("SELECT ASSESSED_ID,B.MV002 'ASSESSED_NAME'"
-                                        + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
-                                        + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
-                                        + " WHERE ASSESSOR_ID=@ID AND [YEAR]=@YEAR AND ASSESS_TYPE=@TYPE"
-                                        + " AND ASSESSMENT_DONE<>N'1'"
-                                        + " AND ACTIVE='1'"
-                                        + " AND B.MV022=''"
-                                        + " ORDER BY ASSESSED_ID", conn);
-            cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
-            cmd.Parameters.AddWithValue("@YEAR", year);
-            cmd.Parameters.AddWithValue("@TYPE", 1);
-            using (SqlDataReader dr = cmd.ExecuteReader())            
+            divAssessmentList.Visible = true;
+            divAssessmentBonus.Visible = false;
+            //Create table for all three assessment type (自評、主管評、特評)
+            DataTable dtEvalSelf = new DataTable();  //自評 table
+            DataTable dtEvalBoss = new DataTable();  //主管評 table
+            DataTable dtEvalSpecial = new DataTable();  //特評 table
+            //Fill tables (未評核人員)
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
-                dtEvalSelf.Load(dr);                
+                conn.Open();
+                //fill 自評 list
+                SqlCommand cmd = new SqlCommand("SELECT ASSESSED_ID,B.MV002 'ASSESSED_NAME'"
+                                            + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
+                                            + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
+                                            + " WHERE ASSESSOR_ID=@ID AND [YEAR]=@YEAR AND ASSESS_TYPE=@TYPE"
+                                            + " AND ASSESSMENT_DONE<>N'1'"
+                                            + " AND ACTIVE='1'"
+                                            + " AND B.MV022=''"
+                                            + " ORDER BY ASSESSED_ID", conn);
+                cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                cmd.Parameters.AddWithValue("@YEAR", year);
+                cmd.Parameters.AddWithValue("@TYPE", 1);
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    dtEvalSelf.Load(dr);
+                }
+                //fill 主管評 list
+                cmd = new SqlCommand("SELECT ASSESSED_ID,B.MV002 'ASSESSED_NAME'"
+                                    + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
+                                    + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
+                                    + " WHERE ASSESSOR_ID=@ID AND [YEAR]=@YEAR AND ASSESS_TYPE=@TYPE"
+                                    + " AND ASSESSMENT_DONE<>N'1'"
+                                    + " AND ACTIVE='1'"
+                                    + " AND B.MV022=''"
+                                    + " ORDER BY ASSESSED_ID", conn);
+                cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                cmd.Parameters.AddWithValue("@YEAR", year);
+                cmd.Parameters.AddWithValue("@TYPE", 2);
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    dtEvalBoss.Load(dr);
+                }
+                //fill 特評 list
+                cmd = new SqlCommand("SELECT ASSESSED_ID,B.MV002 'ASSESSED_NAME'"
+                                    + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
+                                    + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
+                                    + " WHERE ASSESSOR_ID=@ID AND [YEAR]=@YEAR AND ASSESS_TYPE=@TYPE"
+                                    + " AND ASSESSMENT_DONE<>N'1'"
+                                    + " AND ACTIVE='1'"
+                                    + " AND B.MV022=''"
+                                    + " ORDER BY ASSESSED_ID", conn);
+                cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                cmd.Parameters.AddWithValue("@YEAR", year);
+                cmd.Parameters.AddWithValue("@TYPE", 9);
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    dtEvalSpecial.Load(dr);
+                }
             }
-            //fill 主管評 list
-            cmd = new SqlCommand("SELECT ASSESSED_ID,B.MV002 'ASSESSED_NAME'"
-                                + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
-                                + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
-                                + " WHERE ASSESSOR_ID=@ID AND [YEAR]=@YEAR AND ASSESS_TYPE=@TYPE"
-                                + " AND ASSESSMENT_DONE<>N'1'"
-                                + " AND ACTIVE='1'"
-                                + " AND B.MV022=''"
-                                + " ORDER BY ASSESSED_ID", conn);
-            cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
-            cmd.Parameters.AddWithValue("@YEAR", year);
-            cmd.Parameters.AddWithValue("@TYPE", 2);
-            using (SqlDataReader dr = cmd.ExecuteReader())
+            int rowNumber = Math.Max(dtEvalBoss.Rows.Count, Math.Max(dtEvalSelf.Rows.Count, dtEvalSpecial.Rows.Count)); //number of rows for the table display
+            for (int i = 0; i < rowNumber; i++)
             {
-                dtEvalBoss.Load(dr);
-            }
-            //fill 特評 list
-            cmd = new SqlCommand("SELECT ASSESSED_ID,B.MV002 'ASSESSED_NAME'"
-                                + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
-                                + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
-                                + " WHERE ASSESSOR_ID=@ID AND [YEAR]=@YEAR AND ASSESS_TYPE=@TYPE"
-                                + " AND ASSESSMENT_DONE<>N'1'"
-                                + " AND ACTIVE='1'"
-                                + " AND B.MV022=''"
-                                + " ORDER BY ASSESSED_ID", conn);
-            cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
-            cmd.Parameters.AddWithValue("@YEAR", year);
-            cmd.Parameters.AddWithValue("@TYPE", 9);
-            using (SqlDataReader dr = cmd.ExecuteReader())
-            {
-                dtEvalSpecial.Load(dr);
-            }
-        }
-        int rowNumber = Math.Max(dtEvalBoss.Rows.Count, Math.Max(dtEvalSelf.Rows.Count, dtEvalSpecial.Rows.Count)); //number of rows for the table display
-        for (int i = 0; i < rowNumber; i++)
-        {
-            //寫入動態table
-            //insert row into table
-            HtmlGenericControl tr = new HtmlGenericControl();
-            tr.TagName = "tr";
-            tr.ID = "tr1_" + (i + 1).ToString();
-            tbFirstAssessmentBody.Controls.Add(tr);
+                //寫入動態table
+                //insert row into table
+                HtmlGenericControl tr = new HtmlGenericControl();
+                tr.TagName = "tr";
+                tr.ID = "tr1_" + (i + 1).ToString();
+                tbFirstAssessmentBody.Controls.Add(tr);
                 //insert first column into row (自評)
                 HtmlGenericControl td = new HtmlGenericControl();
                 td.TagName = "td";
@@ -132,117 +137,167 @@ public partial class hr360_UI05 : System.Web.UI.Page
                     lb.Text = dtEvalSpecial.Rows[i][1].ToString();
                     lb.Click += new EventHandler(lb_Click);
                     td.Controls.Add(lb);
-                }   
+                }
+            }
+            //Fill tables (已評核人員)
+            dtEvalSelf = new DataTable();  //new 自評 table 
+            dtEvalBoss = new DataTable();  //new 主管評 table
+            dtEvalSpecial = new DataTable();  //new 特評 table
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                //fill 自評 list
+                SqlCommand cmd = new SqlCommand("SELECT ASSESSED_ID,B.MV002 'ASSESSED_NAME'"
+                                            + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
+                                            + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
+                                            + " WHERE ASSESSOR_ID=@ID AND [YEAR]=@YEAR AND ASSESS_TYPE=@TYPE"
+                                            + " AND ASSESSMENT_DONE=N'1'"
+                                            + " AND ACTIVE='1'"
+                                            + " AND B.MV022=''"
+                                            + " ORDER BY ASSESSED_ID", conn);
+                cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                cmd.Parameters.AddWithValue("@YEAR", year);
+                cmd.Parameters.AddWithValue("@TYPE", 1);
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    dtEvalSelf.Load(dr);
+                }
+                //fill 主管評 list
+                cmd = new SqlCommand("SELECT ASSESSED_ID,B.MV002 'ASSESSED_NAME'"
+                                    + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
+                                    + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
+                                    + " WHERE ASSESSOR_ID=@ID AND [YEAR]=@YEAR AND ASSESS_TYPE=@TYPE"
+                                    + " AND ASSESSMENT_DONE=N'1'"
+                                    + " AND ACTIVE='1'"
+                                    + " AND B.MV022=''"
+                                    + " ORDER BY ASSESSED_ID", conn);
+                cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                cmd.Parameters.AddWithValue("@YEAR", year);
+                cmd.Parameters.AddWithValue("@TYPE", 2);
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    dtEvalBoss.Load(dr);
+                }
+                //fill 特評 list
+                cmd = new SqlCommand("SELECT ASSESSED_ID,B.MV002 'ASSESSED_NAME'"
+                                    + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
+                                    + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
+                                    + " WHERE ASSESSOR_ID=@ID AND [YEAR]=@YEAR AND ASSESS_TYPE=@TYPE"
+                                    + " AND ASSESSMENT_DONE=N'1'"
+                                    + " AND ACTIVE='1'"
+                                    + " AND B.MV022=''"
+                                    + " ORDER BY ASSESSED_ID", conn);
+                cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                cmd.Parameters.AddWithValue("@YEAR", year);
+                cmd.Parameters.AddWithValue("@TYPE", 9);
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    dtEvalSpecial.Load(dr);
+                }
+            }
+            rowNumber = Math.Max(dtEvalBoss.Rows.Count, Math.Max(dtEvalSelf.Rows.Count, dtEvalSpecial.Rows.Count)); //number of rows for the table display
+            for (int i = 0; i < rowNumber; i++)
+            {
+                //寫入動態table
+                //insert row into table
+                HtmlGenericControl tr = new HtmlGenericControl();
+                tr.TagName = "tr";
+                tr.ID = "tr2_" + (i + 1).ToString();
+                tbAssessmentEditBody.Controls.Add(tr);
+                //insert first column (自評)
+                HtmlGenericControl td = new HtmlGenericControl();
+                td.TagName = "td";
+                td.ID = tr.ID.ToString() + "_1";
+                tr.Controls.Add(td);
+                //判斷dtEvalSelf裡面有沒有東西
+                if (dtEvalSelf != null && dtEvalSelf.Rows.Count > i)
+                {
+                    //insert control into 自評 column
+                    LinkButton lb = new LinkButton();
+                    lb.ID = dtEvalSelf.Rows[i][0].ToString().Trim();
+                    lb.Text = dtEvalSelf.Rows[i][1].ToString().Trim();
+                    lb.Click += new EventHandler(lb_Click);
+                    td.Controls.Add(lb);
+                }
+                //insert second column (主管評)
+                td = new HtmlGenericControl();
+                td.TagName = "td";
+                td.ID = tr.ID.ToString() + "_2";
+                tr.Controls.Add(td);
+                //判斷dtEvalBoss裡面有沒有東西
+                if (dtEvalBoss != null && dtEvalBoss.Rows.Count > i)
+                {
+                    //insert control into 主管評 column
+                    LinkButton lb = new LinkButton();
+                    lb.ID = dtEvalBoss.Rows[i][0].ToString().Trim();
+                    lb.Text = dtEvalBoss.Rows[i][1].ToString().Trim();
+                    lb.Click += new EventHandler(lb_Click);
+                    td.Controls.Add(lb);
+                }
+                //insert third column (特評)
+                td = new HtmlGenericControl();
+                td.TagName = "td";
+                td.ID = tr.ID.ToString() + "_3";
+                tr.Controls.Add(td);
+                //判斷dtEvalSpecial裡面有沒有東西
+                if (dtEvalSpecial != null && dtEvalSpecial.Rows.Count > i)
+                {
+                    //insert control into 特評 column
+                    LinkButton lb = new LinkButton();
+                    lb.ID = dtEvalSpecial.Rows[i][0].ToString().Trim();
+                    lb.Text = dtEvalSpecial.Rows[i][1].ToString().Trim();
+                    lb.Click += new EventHandler(lb_Click);
+                    td.Controls.Add(lb);
+                }
+            }
         }
-        //Fill tables (已評核人員)
-        dtEvalSelf = new DataTable();  //new 自評 table 
-        dtEvalBoss = new DataTable();  //new 主管評 table
-        dtEvalSpecial = new DataTable();  //new 特評 table
-        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        else
         {
-            conn.Open();
-            //fill 自評 list
-            SqlCommand cmd = new SqlCommand("SELECT ASSESSED_ID,B.MV002 'ASSESSED_NAME'"
-                                        + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
-                                        + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
-                                        + " WHERE ASSESSOR_ID=@ID AND [YEAR]=@YEAR AND ASSESS_TYPE=@TYPE"
-                                        + " AND ASSESSMENT_DONE=N'1'"
-                                        + " AND ACTIVE='1'"
-                                        + " AND B.MV022=''"
-                                        + " ORDER BY ASSESSED_ID", conn);
-            cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
-            cmd.Parameters.AddWithValue("@YEAR", year);
-            cmd.Parameters.AddWithValue("@TYPE", 1);
-            using (SqlDataReader dr = cmd.ExecuteReader())
+            divAssessmentList.Visible = false;
+            divAssessmentBonus.Visible = true;
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
-                dtEvalSelf.Load(dr);
+                conn.Open();
+                string query = "SELECT *"
+                + " FROM HR360_ASSESSMENTBONUS_BONUS_A"
+                + " WHERE ASSESSED_ID=@ASSESSED_ID"
+                + " AND ASSESS_YEAR=@YEAR";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ASSESSED_ID", Session["erp_id"].ToString());
+                cmd.Parameters.AddWithValue("@YEAR", year);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
             }
-            //fill 主管評 list
-            cmd = new SqlCommand("SELECT ASSESSED_ID,B.MV002 'ASSESSED_NAME'"
-                                + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
-                                + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
-                                + " WHERE ASSESSOR_ID=@ID AND [YEAR]=@YEAR AND ASSESS_TYPE=@TYPE"
-                                + " AND ASSESSMENT_DONE=N'1'"
-                                + " AND ACTIVE='1'"
-                                + " AND B.MV022=''"
-                                + " ORDER BY ASSESSED_ID", conn);
-            cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
-            cmd.Parameters.AddWithValue("@YEAR", year);
-            cmd.Parameters.AddWithValue("@TYPE", 2);
-            using (SqlDataReader dr = cmd.ExecuteReader())
+            if (dt.Rows.Count > 0)
             {
-                dtEvalBoss.Load(dr);
+                lblAssessmentBonus.Text = dt.Rows[0][2].ToString().Trim();
+                lblUnusedDayOffBonus.Text = dt.Rows[0][3].ToString().Trim();
+                lblUnusedDayOffMemo.Text = dt.Rows[0][4].ToString().Trim();
+                lblAttendanceBonus.Text = dt.Rows[0][5].ToString().Trim();
+                lblOtherBonus.Text = dt.Rows[0][6].ToString().Trim();
+                lblOtherDeduction.Text = dt.Rows[0][7].ToString().Trim();
+                double assessmentBonus;
+                double unusedDayOffBonus;
+                double attendanceBonus;
+                double otherBonus;
+                double otherDeduction;
+
+                if (double.TryParse(lblAssessmentBonus.Text, out assessmentBonus) && double.TryParse(lblUnusedDayOffBonus.Text, out unusedDayOffBonus) && double.TryParse(lblAttendanceBonus.Text, out attendanceBonus)
+                    && double.TryParse(lblOtherBonus.Text, out otherBonus) && double.TryParse(lblOtherDeduction.Text, out otherDeduction))
+                {
+                    lblFinalBonus.Text = (assessmentBonus + unusedDayOffBonus + attendanceBonus + otherBonus - otherDeduction).ToString();
+                }
             }
-            //fill 特評 list
-            cmd = new SqlCommand("SELECT ASSESSED_ID,B.MV002 'ASSESSED_NAME'"
-                                + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
-                                + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
-                                + " WHERE ASSESSOR_ID=@ID AND [YEAR]=@YEAR AND ASSESS_TYPE=@TYPE"
-                                + " AND ASSESSMENT_DONE=N'1'"
-                                + " AND ACTIVE='1'"
-                                + " AND B.MV022=''"
-                                + " ORDER BY ASSESSED_ID", conn);
-            cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
-            cmd.Parameters.AddWithValue("@YEAR", year);
-            cmd.Parameters.AddWithValue("@TYPE", 9);
-            using (SqlDataReader dr = cmd.ExecuteReader())
+            else
             {
-                dtEvalSpecial.Load(dr);
-            }
-        }
-        rowNumber = Math.Max(dtEvalBoss.Rows.Count, Math.Max(dtEvalSelf.Rows.Count, dtEvalSpecial.Rows.Count)); //number of rows for the table display
-        for (int i = 0; i < rowNumber; i++)
-        {
-            //寫入動態table
-            //insert row into table
-            HtmlGenericControl tr = new HtmlGenericControl();
-            tr.TagName = "tr";
-            tr.ID = "tr2_" + (i + 1).ToString();
-            tbAssessmentEditBody.Controls.Add(tr);
-            //insert first column (自評)
-            HtmlGenericControl td = new HtmlGenericControl();
-            td.TagName = "td";
-            td.ID = tr.ID.ToString() + "_1";
-            tr.Controls.Add(td);
-            //判斷dtEvalSelf裡面有沒有東西
-            if (dtEvalSelf != null && dtEvalSelf.Rows.Count > i)
-            {
-                //insert control into 自評 column
-                LinkButton lb = new LinkButton();
-                lb.ID = dtEvalSelf.Rows[i][0].ToString().Trim();
-                lb.Text = dtEvalSelf.Rows[i][1].ToString().Trim();
-                lb.Click += new EventHandler(lb_Click);
-                td.Controls.Add(lb);
-            }
-            //insert second column (主管評)
-            td = new HtmlGenericControl();
-            td.TagName = "td";
-            td.ID = tr.ID.ToString() + "_2";
-            tr.Controls.Add(td);
-            //判斷dtEvalBoss裡面有沒有東西
-            if (dtEvalBoss != null && dtEvalBoss.Rows.Count > i)
-            {
-                //insert control into 主管評 column
-                LinkButton lb = new LinkButton();
-                lb.ID = dtEvalBoss.Rows[i][0].ToString().Trim();
-                lb.Text = dtEvalBoss.Rows[i][1].ToString().Trim();
-                lb.Click += new EventHandler(lb_Click);
-                td.Controls.Add(lb);
-            }
-            //insert third column (特評)
-            td = new HtmlGenericControl();
-            td.TagName = "td";
-            td.ID = tr.ID.ToString() + "_3";
-            tr.Controls.Add(td);
-            //判斷dtEvalSpecial裡面有沒有東西
-            if (dtEvalSpecial != null && dtEvalSpecial.Rows.Count > i)
-            {
-                //insert control into 特評 column
-                LinkButton lb = new LinkButton();
-                lb.ID = dtEvalSpecial.Rows[i][0].ToString().Trim();
-                lb.Text = dtEvalSpecial.Rows[i][1].ToString().Trim();
-                lb.Click += new EventHandler(lb_Click);
-                td.Controls.Add(lb);
+                lblAssessmentBonus.Text = "尚未評核完成";
+                lblUnusedDayOffBonus.Text = "尚未評核完成";
+                lblUnusedDayOffMemo.Text = "尚未評核完成";
+                lblAttendanceBonus.Text = "尚未評核完成";
+                lblOtherBonus.Text = "尚未評核完成";
+                lblOtherDeduction.Text = "尚未評核完成";
+                lblFinalBonus.Text = "尚未評核完成";
             }
         }
         if (!IsPostBack)
@@ -286,10 +341,12 @@ public partial class hr360_UI05 : System.Web.UI.Page
             for (int i = 2016; i <= DateTime.Today.Year; i++)
             {
                 ddlViewYear.Items.Add(i.ToString());
+                ddlViewYear2.Items.Add(i.ToString());
             }
             for (int i = 0; i < dtViewList.Rows.Count; i++)
             {
                 ddlAdminViewList.Items.Add(new ListItem(dtViewList.Rows[i][0].ToString(), dtViewList.Rows[i][1].ToString()));
+                ddlAdminViewList2.Items.Add(new ListItem(dtViewList.Rows[i][0].ToString(), dtViewList.Rows[i][1].ToString()));
             }
         }
         catch
@@ -308,5 +365,11 @@ public partial class hr360_UI05 : System.Web.UI.Page
         Session["view_year"] = ddlViewYear.SelectedValue.ToString().Trim();
         Session["view_id"] = ddlAdminViewList.SelectedValue.ToString().Trim();
         ScriptManager.RegisterStartupScript(this, GetType(), "open_form", "window.open('/hr360/evaluationFormView.aspx');", true);
+    }
+    protected void btnSearch2_Click(object sender, EventArgs e)
+    {
+        Session["view_year"] = ddlViewYear2.SelectedValue.ToString().Trim();
+        Session["view_id"] = ddlAdminViewList2.SelectedValue.ToString().Trim();
+        ScriptManager.RegisterStartupScript(this, GetType(), "open_form", "window.open('/hr360/evaluationBonus.aspx');", true);
     }
 }

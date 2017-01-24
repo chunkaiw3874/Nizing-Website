@@ -17,39 +17,39 @@ public partial class masterPage_HR360_Child_user : System.Web.UI.MasterPage
     {
         try
         {
-            string userId = (string)Session["user_id"];
-            bool validation = (bool)(Session["validated"]);
-            DateTime start = new DateTime(2017, 1, 13, 19, 0, 0);
-            DateTime end = new DateTime(2017, 1, 19, 17, 30, 0);
-            if (IsPostBack)
-            {
-                if (userId != "CHRISSY" && userId != "KELVEN" && userId != "0067" && userId != "0080")  //此ID任何時候皆可看評核表
-                {
-                    if (DateTime.Now >= start && DateTime.Now < end) //set access window - this page has 2 places need to change for access windows
-                    {
-                        //imgbtnUI05.PostBackUrl = "~/hr360/UI05.aspx";
-                    }
-                    else
-                    {
-                        imgbtnUI05.PostBackUrl = "";
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('開放評核時間為" + start.ToString() + "至" + end.ToString() + "');", true);
-                    }
-                }
-            }
-            else
-            {
-                if (userId != "CHRISSY" && userId != "KELVEN" && userId != "0067" && userId != "0080")  //此ID任何時候皆可看評核表
-                {
-                    if (DateTime.Now >= start && DateTime.Now < end) //set access window - this page has 2 places need to change for access windows
-                    {
-                        imgbtnUI05.PostBackUrl = "~/hr360/UI05.aspx";
-                    }
-                    else
-                    {
-                        imgbtnUI05.PostBackUrl = "";                        
-                    }
-                }
-            }
+            //string userId = (string)Session["user_id"];
+            //bool validation = (bool)(Session["validated"]);
+            //DateTime start = new DateTime(2017, 1, 13, 19, 0, 0);
+            //DateTime end = new DateTime(2017, 1, 19, 17, 30, 0);
+            //if (IsPostBack)
+            //{
+            //    if (userId != "CHRISSY" && userId != "KELVEN" && userId != "0067" && userId != "0080")  //此ID任何時候皆可看評核表
+            //    {
+            //        if (DateTime.Now >= start && DateTime.Now < end) //set access window - this page has 2 places need to change for access windows
+            //        {
+            //            //imgbtnUI05.PostBackUrl = "~/hr360/UI05.aspx";
+            //        }
+            //        else
+            //        {
+            //            imgbtnUI05.PostBackUrl = "";
+            //            ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('開放評核時間為" + start.ToString() + "至" + end.ToString() + "');", true);
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    if (userId != "CHRISSY" && userId != "KELVEN" && userId != "0067" && userId != "0080")  //此ID任何時候皆可看評核表
+            //    {
+            //        if (DateTime.Now >= start && DateTime.Now < end) //set access window - this page has 2 places need to change for access windows
+            //        {
+            //            imgbtnUI05.PostBackUrl = "~/hr360/UI05.aspx";
+            //        }
+            //        else
+            //        {
+            //            imgbtnUI05.PostBackUrl = "";                        
+            //        }
+            //    }
+            //}
         }
         catch
         {

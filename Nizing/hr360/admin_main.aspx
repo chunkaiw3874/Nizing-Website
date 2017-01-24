@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebSites/Nizing/master/HR360_Child.master" AutoEventWireup="true" CodeFile="admin_main.aspx.cs" Inherits="hr360_admin_main" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/HR360_Child.master" AutoEventWireup="true" CodeFile="admin_main.aspx.cs" Inherits="hr360_admin_main" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="javascript_section" Runat="Server">
 </asp:Content>
