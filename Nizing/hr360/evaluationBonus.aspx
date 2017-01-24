@@ -63,7 +63,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container">
-        <div id="info" style="margin-bottom:10px;">
+        <div id="info" style="margin-bottom: 10px;">
             <div class="row">
                 <div class="col-xs-1">
                     員工編號:
@@ -91,54 +91,80 @@
         </div>
         <div id="content">
             <div class="row">
-                <div class="col-xs-1">
+                <div class="col-xs-3 border" style="border-top: solid 1px #337ab7;">
                     考績金額:
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-3 border" style="border-top: solid 1px #337ab7;">
                     <asp:TextBox ID="txtAssessmentBonus" runat="server" CssClass="form-control" placeholder="金額"></asp:TextBox>
+                </div>
+                <div class="col-xs-3 border" style="border-top: solid 1px #337ab7;">
+                    <asp:TextBox ID="txtAssessmentMemo" runat="server" CssClass="form-control" placeholder="備註"></asp:TextBox>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-1">
+                <div class="col-xs-3 border">
                     休假未修:
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-3 border">
                     <asp:TextBox ID="txtUnusedDayOffBonus" runat="server" CssClass="form-control" placeholder="金額"></asp:TextBox>
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-3 border">
                     <asp:TextBox ID="txtUnusedDayOffMemo" runat="server" CssClass="form-control" placeholder="備註"></asp:TextBox>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-1">
+                <div class="col-xs-3 border">
                     年度全勤:
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-3 border">
                     <asp:TextBox ID="txtAttendanceBonus" runat="server" CssClass="form-control" placeholder="金額"></asp:TextBox>
                 </div>
+                <div class="col-xs-3 border">
+                    <asp:TextBox ID="txtAttendanceMemo" runat="server" CssClass="form-control" placeholder="備註"></asp:TextBox>
+                </div>
             </div>
             <div class="row">
-                <div class="col-xs-1">
+                <div class="col-xs-3 border">
+                    年度獎懲::
+                </div>
+                <div class="col-xs-3 border">
+                    <asp:TextBox ID="txtRnPBonus" runat="server" CssClass="form-control" placeholder="金額"></asp:TextBox>
+                </div>
+                <div class="col-xs-3 border">
+                    <asp:TextBox ID="txtRnPMemo" runat="server" CssClass="form-control" placeholder="備註"></asp:TextBox>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 border">
                     其他加項:
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-3 border">
                     <asp:TextBox ID="txtOtherBonus" runat="server" CssClass="form-control" placeholder="金額"></asp:TextBox>
                 </div>
+                <div class="col-xs-3 border">
+                    <asp:TextBox ID="txtOtherBonusMemo" runat="server" CssClass="form-control" placeholder="備註"></asp:TextBox>
+                </div>
             </div>
             <div class="row">
-                <div class="col-xs-1">
+                <div class="col-xs-3 border">
                     其他減項:
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-3 border">
                     <asp:TextBox ID="txtOtherDeduction" runat="server" CssClass="form-control" placeholder="金額"></asp:TextBox>
+                </div>
+                <div class="col-xs-3 border">
+                    <asp:TextBox ID="txtOtherDeductionMemo" runat="server" CssClass="form-control" placeholder="備註"></asp:TextBox>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-1">
+                <div class="col-xs-3 border">
                     總金額:
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-3 border">
                     <asp:Label ID="lblFinalBonus" runat="server" Text="0" CssClass="form-control"></asp:Label>
+                </div>
+                <div class="col-xs-3 border">
+                    &nbsp;
                 </div>
             </div>
         </div>
@@ -148,15 +174,15 @@
                     <asp:Label ID="lblError" runat="server" Text="" CssClass="error-message"></asp:Label>
                 </div>
             </div>--%>
-            <div class="row">
-                <div class="col-xs-1"></div>
-                <div class="col-xs-2">
-                <asp:Button ID="btnCalculate" runat="server" Text="計算總金額" CssClass="btn btn-lg btn-success" OnClick="btnCalculate_Click" />            
-                    </div>
-                <div class="col-xs-1">
-            <asp:Button ID="btnSubmit" runat="server" Text="送出" CssClass="btn btn-lg btn-success" OnClick="btnSubmit_Click" />
-                    </div>
-            </div>            
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-3">
+                    <asp:Button ID="btnCalculate" runat="server" Text="計算總金額" CssClass="btn btn-lg btn-success" OnClick="btnCalculate_Click" />
+                </div>
+                <div class="col-xs-3">
+                    <asp:Button ID="btnSubmit" runat="server" Text="送出" CssClass="btn btn-lg btn-success" OnClick="btnSubmit_Click" />
+                </div>
+            </div>
         </div>
     </div>
 </asp:Content>

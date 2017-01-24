@@ -76,11 +76,17 @@ public partial class hr360_evaluationBonus : System.Web.UI.Page
         if (dt.Rows.Count > 0) //has record
         {
             txtAssessmentBonus.Text = dt.Rows[0][2].ToString().Trim();
-            txtUnusedDayOffBonus.Text = dt.Rows[0][3].ToString().Trim();
-            txtUnusedDayOffMemo.Text = dt.Rows[0][4].ToString().Trim();
-            txtAttendanceBonus.Text = dt.Rows[0][5].ToString().Trim();
-            txtOtherBonus.Text = dt.Rows[0][6].ToString().Trim();
-            txtOtherDeduction.Text = dt.Rows[0][7].ToString().Trim();
+            txtAssessmentMemo.Text = dt.Rows[0][3].ToString().Trim();
+            txtUnusedDayOffBonus.Text = dt.Rows[0][4].ToString().Trim();
+            txtUnusedDayOffMemo.Text = dt.Rows[0][5].ToString().Trim();
+            txtAttendanceBonus.Text = dt.Rows[0][6].ToString().Trim();
+            txtAttendanceMemo.Text = dt.Rows[0][7].ToString().Trim();
+            txtRnPBonus.Text = dt.Rows[0][8].ToString().Trim();
+            txtRnPMemo.Text = dt.Rows[0][9].ToString().Trim();
+            txtOtherBonus.Text = dt.Rows[0][10].ToString().Trim();
+            txtOtherBonusMemo.Text = dt.Rows[0][11].ToString().Trim();
+            txtOtherDeduction.Text = dt.Rows[0][12].ToString().Trim();
+            txtOtherDeductionMemo.Text = dt.Rows[0][13].ToString().Trim();
             calculateTotal();
         }
     }
@@ -125,11 +131,17 @@ public partial class hr360_evaluationBonus : System.Web.UI.Page
                     {
                         query = "UPDATE HR360_ASSESSMENTBONUS_BONUS_A"
                             + " SET ASSESSMENT_BONUS=@ASSESSMENT_BONUS"
+                            + " ,ASSESSMENT_MEMO=@ASSESSMENT_MEMO"
                             + " ,UNUSEDDAYOFF_BONUS=@UNUSEDDAYOFF_BONUS"
                             + " ,UNUSEDDAYOFF_MEMO=@UNUSEDDAYOFF_MEMO"
                             + " ,ATTENDANCE_BONUS=@ATTENDANCE_BONUS"
+                            + " ,ATTENDANCE_MEMO=@ATTENDANCE_MEMO"
+                            + " ,RNP_BONUS=@RNP_BONUS"
+                            + " ,RNP_MEMO=@RNP_MEMO"
                             + " ,OTHER_BONUS=@OTHER_BONUS"
+                            + " ,OTHER_BONUS_MEMO=@OTHER_BONUS_MEMO" //
                             + " ,OTHER_DEDUCTION=@OTHER_DEDUCTION"
+                            + " ,OTHER_DEDUCTION_MEMO=@OTHER_DEDUCTION_MEMO"//
                             + " WHERE ASSESSED_ID=@ID"
                             + " AND ASSESS_YEAR=@YEAR";
                     }
@@ -137,17 +149,24 @@ public partial class hr360_evaluationBonus : System.Web.UI.Page
                     {
                         query = "INSERT INTO HR360_ASSESSMENTBONUS_BONUS_A"
                             + " VALUES"
-                            + " (@ID,@YEAR,@ASSESSMENT_BONUS,@UNUSEDDAYOFF_BONUS,@UNUSEDDAYOFF_MEMO,@ATTENDANCE_BONUS,@OTHER_BONUS,@OTHER_DEDUCTION)";
+                            + " (@ID,@YEAR,@ASSESSMENT_BONUS,@ASSESSMENT_MEMO,@UNUSEDDAYOFF_BONUS,@UNUSEDDAYOFF_MEMO,@ATTENDANCE_BONUS,@ATTENDANCE_MEMO,@RNP_BONUS,@RNP_MEMO"
+                            + " ,@OTHER_BONUS,@OTHER_BONUS_MEMO,@OTHER_DEDUCTION,@OTHER_DEDUCTION_MEMO)";
                     }
                     cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@ID", lblEmpID.Text);
                     cmd.Parameters.AddWithValue("@YEAR", lblEvalYear.Text);
                     cmd.Parameters.AddWithValue("@ASSESSMENT_BONUS", txtAssessmentBonus.Text.Trim());
+                    cmd.Parameters.AddWithValue("@ASSESSMENT_MEMO", txtAssessmentMemo.Text.Trim());
                     cmd.Parameters.AddWithValue("@UNUSEDDAYOFF_BONUS", txtUnusedDayOffBonus.Text.Trim());
                     cmd.Parameters.AddWithValue("@UNUSEDDAYOFF_MEMO", txtUnusedDayOffMemo.Text.Trim());
                     cmd.Parameters.AddWithValue("@ATTENDANCE_BONUS", txtAttendanceBonus.Text.Trim());
+                    cmd.Parameters.AddWithValue("@ATTENDANCE_MEMO", txtAttendanceMemo.Text.Trim());
+                    cmd.Parameters.AddWithValue("@RNP_BONUS", txtRnPBonus.Text.Trim());
+                    cmd.Parameters.AddWithValue("@RNP_MEMO", txtRnPMemo.Text.Trim());
                     cmd.Parameters.AddWithValue("@OTHER_BONUS", txtOtherBonus.Text.Trim());
+                    cmd.Parameters.AddWithValue("@OTHER_BONUS_MEMO", txtOtherBonusMemo.Text.Trim());
                     cmd.Parameters.AddWithValue("@OTHER_DEDUCTION", txtOtherDeduction.Text.Trim());
+                    cmd.Parameters.AddWithValue("@OTHER_DEDUCTION_MEMO", txtOtherDeductionMemo.Text.Trim());
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -162,13 +181,14 @@ public partial class hr360_evaluationBonus : System.Web.UI.Page
         double assessmentBonus;
         double unusedDayOffBonus;
         double attendanceBonus;
+        double rnpBonus;
         double otherBonus;
         double otherDeduction;
 
         if (double.TryParse(txtAssessmentBonus.Text, out assessmentBonus) && double.TryParse(txtUnusedDayOffBonus.Text, out unusedDayOffBonus) && double.TryParse(txtAttendanceBonus.Text, out attendanceBonus)
-            && double.TryParse(txtOtherBonus.Text, out otherBonus) && double.TryParse(txtOtherDeduction.Text, out otherDeduction))
+            &&double.TryParse(txtRnPBonus.Text, out rnpBonus) && double.TryParse(txtOtherBonus.Text, out otherBonus) && double.TryParse(txtOtherDeduction.Text, out otherDeduction))
         {
-            lblFinalBonus.Text = (assessmentBonus + unusedDayOffBonus + attendanceBonus + otherBonus - otherDeduction).ToString();
+            lblFinalBonus.Text = (assessmentBonus + unusedDayOffBonus + attendanceBonus + rnpBonus + otherBonus - otherDeduction).ToString();
         }
         else
         {

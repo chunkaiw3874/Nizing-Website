@@ -26,7 +26,7 @@ public partial class hr360_UI05 : System.Web.UI.Page
         if (DateTime.Now >= start && DateTime.Now < end)
         {
             divAssessmentList.Visible = true;
-            divAssessmentBonus.Visible = false;
+            divAssessmentLookup.Visible = false;
             //Create table for all three assessment type (自評、主管評、特評)
             DataTable dtEvalSelf = new DataTable();  //自評 table
             DataTable dtEvalBoss = new DataTable();  //主管評 table
@@ -254,51 +254,13 @@ public partial class hr360_UI05 : System.Web.UI.Page
         else
         {
             divAssessmentList.Visible = false;
-            divAssessmentBonus.Visible = true;
-            DataTable dt = new DataTable();
-            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-            {
-                conn.Open();
-                string query = "SELECT *"
-                + " FROM HR360_ASSESSMENTBONUS_BONUS_A"
-                + " WHERE ASSESSED_ID=@ASSESSED_ID"
-                + " AND ASSESS_YEAR=@YEAR";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@ASSESSED_ID", Session["erp_id"].ToString());
-                cmd.Parameters.AddWithValue("@YEAR", year);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-            }
-            if (dt.Rows.Count > 0)
-            {
-                lblAssessmentBonus.Text = dt.Rows[0][2].ToString().Trim();
-                lblUnusedDayOffBonus.Text = dt.Rows[0][3].ToString().Trim();
-                lblUnusedDayOffMemo.Text = dt.Rows[0][4].ToString().Trim();
-                lblAttendanceBonus.Text = dt.Rows[0][5].ToString().Trim();
-                lblOtherBonus.Text = dt.Rows[0][6].ToString().Trim();
-                lblOtherDeduction.Text = dt.Rows[0][7].ToString().Trim();
-                double assessmentBonus;
-                double unusedDayOffBonus;
-                double attendanceBonus;
-                double otherBonus;
-                double otherDeduction;
+            divAssessmentLookup.Visible = true;
 
-                if (double.TryParse(lblAssessmentBonus.Text, out assessmentBonus) && double.TryParse(lblUnusedDayOffBonus.Text, out unusedDayOffBonus) && double.TryParse(lblAttendanceBonus.Text, out attendanceBonus)
-                    && double.TryParse(lblOtherBonus.Text, out otherBonus) && double.TryParse(lblOtherDeduction.Text, out otherDeduction))
-                {
-                    lblFinalBonus.Text = (assessmentBonus + unusedDayOffBonus + attendanceBonus + otherBonus - otherDeduction).ToString();
-                }
-            }
-            else
+            for (int i = 2016; i <= DateTime.Today.Year; i++)
             {
-                lblAssessmentBonus.Text = "尚未評核完成";
-                lblUnusedDayOffBonus.Text = "尚未評核完成";
-                lblUnusedDayOffMemo.Text = "尚未評核完成";
-                lblAttendanceBonus.Text = "尚未評核完成";
-                lblOtherBonus.Text = "尚未評核完成";
-                lblOtherDeduction.Text = "尚未評核完成";
-                lblFinalBonus.Text = "尚未評核完成";
-            }
+                ddlAssessmentYear.Items.Add(i.ToString());
+                ddlBonusYear.Items.Add(i.ToString());
+            }            
         }
         if (!IsPostBack)
         {
@@ -371,5 +333,15 @@ public partial class hr360_UI05 : System.Web.UI.Page
         Session["view_year"] = ddlViewYear2.SelectedValue.ToString().Trim();
         Session["view_id"] = ddlAdminViewList2.SelectedValue.ToString().Trim();
         ScriptManager.RegisterStartupScript(this, GetType(), "open_form", "window.open('/hr360/evaluationBonus.aspx');", true);
+    }
+    protected void btnAssessmentSearch_Click(object sender, EventArgs e)
+    {
+        Session["view_year"] = ddlAssessmentYear.SelectedValue.ToString().Trim();
+        ScriptManager.RegisterStartupScript(this, GetType(), "open_form", "window.open('/hr360/evaluationFormViewUser.aspx');", true);
+    }
+    protected void btnBonusSearch_Click(object sender, EventArgs e)
+    {
+        Session["view_year"] = ddlBonusYear.SelectedValue.ToString().Trim();
+        ScriptManager.RegisterStartupScript(this, GetType(), "open_form", "window.open('/hr360/evaluationBonusView.aspx');", true);
     }
 }

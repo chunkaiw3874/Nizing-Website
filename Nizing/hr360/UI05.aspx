@@ -10,15 +10,28 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-9">
-                2017年年終獎金計算方式:<br />
-                年度平均底薪x考績等級之月份<br />
-                <br />
-                甲等: 3個月 x個人考績分數<br />
-                乙等: 2.5個月 x個人考績分數<br />
-                丙等: 視狀況而定<br />
-                <br />
-                年資未滿一年之計算方式:<br />
-                年度平均底薪x 1個月 /12個月 x 到職月份<br />
+                <%--<h3>公告</h3>--%>
+                <img src="image/banner/公告.png" height="30" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-9" style="border: solid 1px #cccccc; border-radius: 5px; margin-top: 5px;">
+                <div style="margin-bottom: 10px;">
+                    2017年年終獎金參考計算方式:評核時間為2016/01/01~2016/12/31之綜合表現<br />
+                    <br />
+                    1.年資滿一年:<br />
+                    年度平均底薪x考績等級之月份<br />
+                    <br />
+                    甲等: 3個月 x個人考績分數<br />
+                    乙等: 2.5個月 x個人考績分數<br />
+                    丙等: 視狀況而定<br />
+                    <br />
+                    2.年資未滿一年:<br />
+                    年度平均底薪x 1個月 /12個月 x 到職月份<br />
+                </div>
+                <div>
+                    <img src="image/image/考核公告1.jpg" />
+                </div>
             </div>
         </div>
         <br />
@@ -64,61 +77,35 @@
                 </div>
             </div>
         </div>
-        <div id="divAssessmentBonus" runat="server">
+        <div id="divAssessmentLookup" runat="server">
             <div class="row">
-                <div class="col-xs-9">
-                    <h3>評核獎金</h3>
+                <div class="col-xs-9" style="margin-bottom: 10px; margin-top: 10px;">
+                    <%--<h3>我的年度考績表</h3>--%>
+                    <img src="image/banner/我的年度考績表.png" height="30" />
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-1">
-                    考績金額:
-                </div>
                 <div class="col-xs-2">
-                    <asp:Label ID="lblAssessmentBonus" runat="server" CssClass="form-control"></asp:Label>
+                    <asp:DropDownList ID="ddlAssessmentYear" runat="server" CssClass="form-control"></asp:DropDownList>
+                </div>
+                <div class="col-xs-1">
+                    <asp:Button ID="btnAssessmentSearch" runat="server" Text="查詢" CssClass="btn btn-success form-control" OnClick="btnAssessmentSearch_Click" />
+                </div>
+            </div>
+        </div>
+        <div id="divBonusLookup" runat="server">
+            <div class="row">
+                <div class="col-xs-9" style="margin-bottom: 10px; margin-top: 10px;">
+                    <%--<h3>我的年終獎金</h3>--%>
+                    <img src="image/banner/我的年終獎金.png" height="30" />
                 </div>
             </div>
             <div class="row">
+                <div class="col-xs-2">
+                    <asp:DropDownList ID="ddlBonusYear" runat="server" CssClass="form-control"></asp:DropDownList>
+                </div>
                 <div class="col-xs-1">
-                    休假未修:
-                </div>
-                <div class="col-xs-2">
-                    <asp:Label ID="lblUnusedDayOffBonus" runat="server" CssClass="form-control" placeholder="金額"></asp:Label>
-                </div>
-                <div class="col-xs-2">
-                    <asp:Label ID="lblUnusedDayOffMemo" runat="server" CssClass="form-control" placeholder="備註"></asp:Label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-1">
-                    年度全勤:
-                </div>
-                <div class="col-xs-2">
-                    <asp:Label ID="lblAttendanceBonus" runat="server" CssClass="form-control" placeholder="金額"></asp:Label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-1">
-                    其他加項:
-                </div>
-                <div class="col-xs-2">
-                    <asp:Label ID="lblOtherBonus" runat="server" CssClass="form-control" placeholder="金額"></asp:Label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-1">
-                    其他減項:
-                </div>
-                <div class="col-xs-2">
-                    <asp:Label ID="lblOtherDeduction" runat="server" CssClass="form-control" placeholder="金額"></asp:Label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-1">
-                    總金額:
-                </div>
-                <div class="col-xs-2">
-                    <asp:Label ID="lblFinalBonus" runat="server" Text="0" CssClass="form-control"></asp:Label>
+                    <asp:Button ID="btnBonusSearch" runat="server" Text="查詢" CssClass="btn btn-success form-control" OnClick="btnBonusSearch_Click" />
                 </div>
             </div>
         </div>
