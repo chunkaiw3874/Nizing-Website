@@ -90,7 +90,6 @@ public partial class nizing_intranet_HR06 : System.Web.UI.Page
                         + " ORDER BY " + order;
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@YEAR", ddlYear.SelectedItem.ToString());
-            //cmd.Parameters.AddWithValue("@ORDER", order);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable ds = new DataTable();
             da.Fill(ds);

@@ -393,11 +393,13 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
-                query = "SELECT SUM(CONVERT(DECIMAL(16,2),SCORE))"
-                    + " FROM HR360_ASSESSMENTSCORE_SCORE_A"
-                    + " WHERE ASSESS_YEAR=@ASSESS_YEAR"
-                    + " AND ASSESSED_ID=@ASSESSED_ID"
-                    + " AND ASSESSOR_ID<>@ASSESSED_ID"
+                query = "SELECT SUM(CONVERT(DECIMAL(16,2),A.SCORE))"
+                    + " FROM HR360_ASSESSMENTSCORE_SCORE_A A"
+                    + " LEFT JOIN HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A B ON A.ASSESS_YEAR=B.[YEAR] AND A.ASSESSED_ID=B.ASSESSED_ID AND A.ASSESSOR_ID=B.ASSESSOR_ID"
+                    + " WHERE A.ASSESS_YEAR=@ASSESS_YEAR"
+                    + " AND A.ASSESSED_ID=@ASSESSED_ID"
+                    + " AND A.ASSESSOR_ID<>@ASSESSED_ID"
+                    + " AND B.ACTIVE='1'"
                     + " GROUP BY [INDEX]"
                     + " ORDER BY [INDEX]";
                 SqlCommand cmd = new SqlCommand(query, conn);
@@ -436,11 +438,13 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             conn.Open();
-            query = "SELECT SUM(CONVERT(DECIMAL(16,2),WEIGHTED_SCORE))"
-                + " FROM HR360_ASSESSMENTSCORE_ASSESSED_A"
-                + " WHERE ASSESS_YEAR=@ASSESS_YEAR"
-                + " AND ASSESSED_ID=@ASSESSED_ID"
-                + " AND ASSESSOR_ID<>@ASSESSED_ID";
+            query = "SELECT SUM(CONVERT(DECIMAL(16,2),A.WEIGHTED_SCORE))"
+                + " FROM HR360_ASSESSMENTSCORE_ASSESSED_A A"
+                + " LEFT JOIN HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A B ON A.ASSESS_YEAR=B.[YEAR] AND A.ASSESSED_ID=B.ASSESSED_ID AND A.ASSESSOR_ID=B.ASSESSOR_ID"
+                + " WHERE A.ASSESS_YEAR=@ASSESS_YEAR"
+                + " AND A.ASSESSED_ID=@ASSESSED_ID"
+                + " AND A.ASSESSOR_ID<>@ASSESSED_ID"
+                + " AND B.ACTIVE='1'";
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@ASSESS_YEAR", year);
             cmd.Parameters.AddWithValue("@ASSESSED_ID", assessed);
