@@ -580,15 +580,15 @@
         <div id="image">
             <div class="row">
                 <div class="col-xs-8 border" style="border-right:none;">
-                    <img src="image/assessment/2016_production_efficiency.jpg" style="max-width:100%;" />
+                    <img src="image/assessment/2016/2016_production_efficiency.jpg" style="max-width:100%;" />
                 </div>
                 <div class="col-xs-4 border" style="border-left:none;">
-                    <img src="image/assessment/2016_scrap_amount.jpg" style="max-width:100%;" />
+                    <img src="image/assessment/2016/2016_scrap_amount.jpg" style="max-width:100%;" />
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 border">
-                    <img src="image/assessment/2016_production_amount.jpg" style="max-width:100%" />
+                    <img src="image/assessment/2016/2016_production_amount.jpg" style="max-width:100%" />
                 </div>
             </div> 
         </div>

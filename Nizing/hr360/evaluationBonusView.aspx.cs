@@ -59,6 +59,9 @@ public partial class hr360_evaluationBonusView : System.Web.UI.Page
             lblOtherDeductionMemo.Text = dt.Rows[0][13].ToString().Trim();
             calculateTotal();
         }
+
+        imgBonusAttachment.ImageUrl = "~/hr360/image/assessment/" + year + "/" + year + "-" + assessed + ".jpg";
+        imgBonusAttachment.Attributes["onerror"] = "this.style.visibility='hidden'";
     }
     protected void calculateTotal()
     {

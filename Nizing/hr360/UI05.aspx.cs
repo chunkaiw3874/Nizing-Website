@@ -255,12 +255,14 @@ public partial class hr360_UI05 : System.Web.UI.Page
         {
             divAssessmentList.Visible = false;
             divAssessmentLookup.Visible = true;
-
-            for (int i = 2016; i <= DateTime.Today.Year; i++)
+            if (!IsPostBack)
             {
-                ddlAssessmentYear.Items.Add(i.ToString());
-                ddlBonusYear.Items.Add(i.ToString());
-            }            
+                for (int i = 2016; i <= DateTime.Today.Year; i++)
+                {
+                    ddlAssessmentYear.Items.Add(i.ToString());
+                    ddlBonusYear.Items.Add(i.ToString());
+                }
+            }
         }
         if (!IsPostBack)
         {

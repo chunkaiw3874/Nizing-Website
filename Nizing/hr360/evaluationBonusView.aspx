@@ -104,6 +104,11 @@
                  </table>
              </div>
          </div>
+         <div class="row">
+             <div class="col-xs-9">
+                 <asp:Image ID="imgBonusAttachment" runat="server" />
+             </div>
+         </div>
      </div>
 </asp:Content>
 
