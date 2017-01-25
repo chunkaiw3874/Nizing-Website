@@ -540,9 +540,9 @@
                     <div>
                         <asp:TextBox ID="txt0067Comment" TextMode="MultiLine" CssClass="form-control no-resize autosize" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
-                    <div style="float:right;">
+                    <%--<div style="float:right;">
                         <asp:Button ID="btnSave0067Comment" runat="server" Text="儲存評語" CssClass="btn btn-success" OnClick="btnSaveComment_Click" Visible="false"/>
-                    </div>
+                    </div>--%>
                 </div>
             </div>
             <div class="row">
@@ -555,9 +555,9 @@
                     <div>
                         <asp:TextBox ID="txt0007Comment" TextMode="MultiLine" CssClass="form-control no-resize autosize" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
-                    <div style="float:right;">
+                    <%--<div style="float:right;">
                         <asp:Button ID="btnSave0007Comment" runat="server" Text="儲存評語" CssClass="btn btn-success" OnClick="btnSaveComment_Click" Visible="false"/>
-                    </div>
+                    </div>--%>
                 </div>
             </div>
             <div class="row">
@@ -570,9 +570,9 @@
                     <div>
                         <asp:TextBox ID="txt0006Comment" TextMode="MultiLine" CssClass="form-control no-resize autosize" runat="server" ReadOnly="true"></asp:TextBox>
                     </div>
-                    <div style="float:right;">
+                    <%--<div style="float:right;">
                         <asp:Button ID="btnSave0006Comment" runat="server" Text="儲存評語" CssClass="btn btn-success" OnClick="btnSaveComment_Click"  Visible="false"/>
-                    </div>
+                    </div>--%>
                 </div>
             </div>
         </div>
