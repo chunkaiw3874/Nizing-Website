@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-9" style="border: solid 1px #cccccc; border-radius: 5px; margin-top: 5px;">
+            <div class="col-xs-9" style="border: solid 1px #006837; border-radius: 5px; margin-top: 5px;">
                 <div style="margin-bottom: 10px;">
                     2017年年終獎金參考計算方式:評核時間為2016/01/01~2016/12/31之綜合表現<br />
                     <br />
@@ -30,7 +30,7 @@
                     年度平均底薪x 1個月 /12個月 x 到職月份<br />
                 </div>
                 <div>
-                    <img src="image/image/考核公告1.jpg" />
+                    <img src="image/assessment/考核公告1.jpg" />
                 </div>
             </div>
         </div>
