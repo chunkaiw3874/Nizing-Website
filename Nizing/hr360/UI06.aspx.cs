@@ -42,8 +42,8 @@ public partial class hr360_UI06 : System.Web.UI.Page
         try
         {
             lblErrorMessage.Text = "";
-            if (checkSlipAvailability())
-            {
+            //if (checkSlipAvailability())
+            //{
                 DataTable main_table = new DataTable();
                 DataTable bonus_table = new DataTable();
                 DataTable deduction_table = new DataTable();
@@ -201,12 +201,12 @@ public partial class hr360_UI06 : System.Web.UI.Page
                 {
                     salary_slip.Visible = false;
                 }
-            }
-            else
-            {
-                salary_slip.Visible = false;
-                lblErrorMessage.Text = "請於次月五號下午五點以後再查詢";                
-            }
+            //}
+            //else
+            //{
+            //    salary_slip.Visible = false;
+            //    lblErrorMessage.Text = "請於次月五號下午五點以後再查詢";                
+            //}
         }
         catch (Exception ex)
         {
