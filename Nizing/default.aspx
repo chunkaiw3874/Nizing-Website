@@ -151,7 +151,7 @@
             </div>
             <div class="default-content">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink16" runat="server" ImageUrl="~/images/button/stock_icon2.jpg" NavigateUrl="http://quote.eastmoney.com/center/list.html#gjqh_5" Target="_blank" BorderStyle="None" />
+                    <asp:HyperLink ID="HyperLink16" runat="server" ImageUrl="~/images/button/stock_icon2.jpg" NavigateUrl="http://quote.eastmoney.com/globalfuture/LCPS.html" Target="_blank" BorderStyle="None" />
                 </div>
                 <div class="button">
                     <asp:HyperLink ID="HyperLink17" runat="server" ImageUrl="~/images/button/red_ul_icon2.jpg" NavigateUrl="http://taiwan.ul.com/" Target="_blank" />
