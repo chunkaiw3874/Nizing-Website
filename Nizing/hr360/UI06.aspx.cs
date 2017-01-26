@@ -200,6 +200,7 @@ public partial class hr360_UI06 : System.Web.UI.Page
                 else
                 {
                     salary_slip.Visible = false;
+                    lblErrorMessage.Text = "資料尚未進入系統，請稍後查詢"
                 }
             //}
             //else
