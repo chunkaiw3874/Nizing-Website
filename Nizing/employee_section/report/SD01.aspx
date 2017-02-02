@@ -6,7 +6,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <div id="NetSale">
+    <div id="NetSale" class="container">
         <div>
             <h2>銷售淨額報表</h2>
         </div>
@@ -152,70 +152,7 @@
                 </div>
             </div>
         </div>
+
     </div>
-<%--    <script type="text/javascript">
-        function onCalendarShown() {
-            var calStart = $find("calendarStart");
-            var calEnd = $find("calendarEnd");
-
-            calStart._switchMode("months", true);
-            calEnd._switchMode("months", true);
-
-            if (calStart._monthsBody) {
-                for (var i = 0; i < calStart._monthsBody.rows.length; i++) {
-                    var row = calStart._monthsBody.rows[i];
-                    for (var j = 0; j < row.cells.length; j++) {
-                        Sys.UI.DomEvent.addHandler(row.cells[j].firstChild, "click", call);
-                    }
-                }
-            }
-
-            if (calEnd._monthsBody) {
-                for (var i = 0; i < calEnd._monthsBody.rows.length; i++) {
-                    var row = calEnd._monthsBody.rows[i];
-                    for (var j = 0; j < row.cells.length; j++) {
-                        Sys.UI.DomEvent.addHandler(row.cells[j].firstChild, "click", call);
-                    }
-                }
-            }
-        }
-
-        function onCalendarHidden() {
-            var calStart = $find("calendarStart");
-            var calEnd = $find("calendarEnd");
-
-            if (calStart._monthsBody) {
-                for (var i = 0; i < calStart._monthsBody.rows.length; i++) {
-                    var row = calStart._monthsBody.rows[i];
-                    for (var j = 0; j < row.cells.length; j++) {
-                        Sys.UI.DomEvent.removeHandler(row.cells[j].firstChild, "click", call);
-                    }
-                }
-            }
-
-            if (calEnd._monthsBody) {
-                for (var i = 0; i < calEnd._monthsBody.rows.length; i++) {
-                    var row = calEnd._monthsBody.rows[i];
-                    for (var j = 0; j < row.cells.length; j++) {
-                        Sys.UI.DomEvent.removeHandler(row.cells[j].firstChild, "click", call);
-                    }
-                }
-            }
-        }
-
-        function call(eventElement) {
-            var target = eventElement.target;
-            switch (target.mode) {
-                case "month":
-                    var cal = $find("calendarStart");
-                    cal._visibleDate = target.date;
-                    cal.set_selectedDate(target.date);
-                    cal._switchMonth(target.date);
-                    cal._blur.post(true);
-                    cal.raiseDateSelectionChanged();
-                    break;
-            }
-        }
-    </script>--%>
 </asp:Content>
 
