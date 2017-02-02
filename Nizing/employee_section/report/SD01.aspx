@@ -65,7 +65,7 @@
                             <asp:Button ID="btnTargetSubmit" runat="server" Text="儲存" CssClass="btn btn-success" />
                         </div>
                         <div class="col-xs-1">
-                            <asp:Button ID="btnTargetDelete" runat="server" Text="刪除" CssClass="btn btn-danger" />
+                            <asp:Button ID="btnTargetDelete" runat="server" Text="刪除" CssClass="btn btn-danger" /> 
                         </div>
                     </div>
                 </div>
