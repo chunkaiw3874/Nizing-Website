@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.DataVisualization.Charting;
@@ -31,7 +32,30 @@ public partial class SD01 : System.Web.UI.Page
             ddlMonth.SelectedValue = DateTime.Today.Month.ToString("D2");
             txtStart.Enabled = false;
             txtEnd.Enabled = false;
+
+            List<string> roleList = getRoles();
+
+            foreach (string s in roleList)
+            {
+                if (s == "NIZING\\管理部")
+                {
+                    Admin.Visible = true;
+                }
+            }
         }
+    }
+    protected List<string> getRoles()
+    {
+        List<string> role = new List<string>();
+        WindowsPrincipal principal = (WindowsPrincipal)User;
+        WindowsIdentity identity = (WindowsIdentity)User.Identity;
+        foreach (IdentityReference SIDRef in identity.Groups)
+        {
+            SecurityIdentifier sid = (SecurityIdentifier)SIDRef.Translate(typeof(SecurityIdentifier));
+            NTAccount account = (NTAccount)SIDRef.Translate(typeof(NTAccount));
+            role.Add(account.Value);
+        }
+        return role;
     }
     protected void R1_CheckedChanged(object sender, EventArgs e)
     {
@@ -521,6 +545,62 @@ public partial class SD01 : System.Web.UI.Page
             }
         }
     }
+    protected void btnTargetTrigger_Click(object sender, EventArgs e)
+    {
+        DataSet ds = new DataSet();
+        SetTargetContent.Visible = true;
+        for (int i = 2017; i <= DateTime.Now.Year + 1; i++)
+        {
+            ddlTargetYear.Items.Add(i.ToString());
+        }
+        for (int i = 1; i <= 12; i++)
+        {
+            ddlTargetMonth.Items.Add(i.ToString("D2"));
+        }
 
-
+        using (SqlConnection conn = new SqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = "SELECT CMSMV.MV001 EMP_ID, CMSMV.MV002 EMP_NAME"
+                        + " FROM CMSMV"
+                        + " WHERE MV004='A-SD'"
+                        + " AND MV022=''"
+                        + " AND MV001<>'0098'" //黃耀南不顯示
+                        + " ORDER BY CMSMV.MV001";
+            SqlCommand cmd = new SqlCommand(query, conn);            
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(ds);
+        }
+        for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+        {
+            ddlTargetEmp.Items.Add(ds.Tables[0].Rows[i][0].ToString() + " " + ds.Tables[0].Rows[i][1].ToString());
+        }
+    }
+    protected void ddlTargetChanged(object sender, EventArgs e)
+    {
+        string query = "";
+        DataSet ds = new DataSet();
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            query = "SELECT TARGET"
+                + " FROM SD_SD01_A"
+                + " WHERE [YEAR]=@YEAR"
+                + " AND [MONTH]=@MONTH"
+                + " AND [EMP_ID]=@ID";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@YEAR", ddlTargetYear.SelectedValue.ToString());
+            cmd.Parameters.AddWithValue("@MONTH", ddlTargetMonth.SelectedValue.ToString());
+            cmd.Parameters.AddWithValue("@ID", ddlTargetEmp.SelectedValue.ToString().Substring(0, 4));
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(ds);
+        }
+        if (ds.Tables[0].Rows.Count > 0)
+        {
+            txtTarget.Text = ds.Tables[0].Rows[0][0].ToString().Trim();
+        }
+        else
+        {
+            txtTarget.Text = "";
+        }
+    }
 }

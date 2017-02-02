@@ -2,19 +2,83 @@
 
 <%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style>
+        .error-class {
+            color: #FF0000; /* red */
+        }
+
+        .valid-class {
+            /*color:#00CC00;*/ /* green */
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            jQuery.validator.addMethod('decimal', function (value, element) {
+                return !(value % 1);
+            }, "不可有小數"); //validate no decimal places
+            //jQuery.validator.addMethod('sRequired', $.validator.methods.required, "此為必填欄位"); //custom message for validating required field
+            jQuery.validator.addMethod('sNumber', $.validator.methods.number, "請輸入正確的數字格式"); //custom message for validating number-only input
+            //jQuery.validator.addMethod('sRange', $.validator.methods.range, $.validator.format("數值必須在{0}與{1}之間")); //custom message for validating range
+            jQuery.validator.addClassRules('numbers-only', {
+                //sRequired: true,
+                sNumber: true,
+                decimal: true
+            }); //intialize validation
+            $('#form1').validate({
+                errorClass: "error-class",
+                validClass: "valid-class",
+                //submitHandler: function (form) {
+                //    form.submit();
+                //}
+            });
+        });
+    </script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div id="NetSale" class="container">
+        <div id="Admin" runat="server" visible="false">
+            <div id="SetTarget" runat="server">
+                <div id="SetTargetTrigger" runat="server">
+                    <div class="row form-group">
+                        <div class="col-xs-12">
+                            <asp:Button ID="btnTargetTrigger" runat="server" Text="設定業務目標" CssClass="btn btn-info" OnClick="btnTargetTrigger_Click" />
+                        </div>
+                    </div>
+                </div>
+                <div id="SetTargetContent" runat="server" visible="false">
+                    <div class="row form-group">
+                        <div class="col-xs-2">
+                            <asp:DropDownList ID="ddlTargetYear" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlTargetChanged"></asp:DropDownList>
+                        </div>
+                        <div class="col-xs-1">
+                            <asp:DropDownList ID="ddlTargetMonth" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlTargetChanged"></asp:DropDownList>
+                        </div>
+                        <div class="col-xs-2">
+                            <asp:DropDownList ID="ddlTargetEmp" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlTargetChanged"></asp:DropDownList>
+                        </div>
+                        <div class="col-xs-2">
+                            <asp:TextBox ID="txtTarget" runat="server" CssClass="form-control numbers-only" placeholder="目標金額"></asp:TextBox>
+                        </div>
+                        <div class="col-xs-1">
+                            <asp:Button ID="btnTargetSubmit" runat="server" Text="儲存" CssClass="btn btn-success" />
+                        </div>
+                        <div class="col-xs-1">
+                            <asp:Button ID="btnTargetDelete" runat="server" Text="刪除" CssClass="btn btn-danger" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div>
             <h2>銷售淨額報表</h2>
         </div>
-        <div>
+        <div id="SearchCondition">
             <div>
                 <div>
                     <table id="parameterSelection">
-                        <tr>                        
+                        <tr>
                             <td>
                                 <div>
                                     <asp:RadioButton ID="rdoDDL" runat="server" Text="快速選單" GroupName="R2" Checked="true" AutoPostBack="true" OnCheckedChanged="R2_CheckedChanged" />
@@ -24,13 +88,13 @@
                                 <div>
                                     <asp:RadioButton ID="rdoText" runat="server" Text="選擇日期(yyyyMMdd)" GroupName="R2" AutoPostBack="true" OnCheckedChanged="R2_CheckedChanged" />
                                 </div>
-                            </td>                            
+                            </td>
                         </tr>
                         <tr>
                             <td>
                                 <div>
                                     <asp:RadioButton ID="rdoYear" runat="server" Text="年報表" GroupName="R1" AutoPostBack="true" OnCheckedChanged="R1_CheckedChanged" />
-                                   <asp:RadioButton ID="rdoMonth" runat="server" Text="月報表" Checked="true" GroupName="R1" AutoPostBack="true" OnCheckedChanged="R1_CheckedChanged" />
+                                    <asp:RadioButton ID="rdoMonth" runat="server" Text="月報表" Checked="true" GroupName="R1" AutoPostBack="true" OnCheckedChanged="R1_CheckedChanged" />
                                 </div>
                             </td>
                         </tr>
@@ -44,7 +108,7 @@
                                         <asp:ListItem>02</asp:ListItem>
                                         <asp:ListItem>03</asp:ListItem>
                                         <asp:ListItem>04</asp:ListItem>
-                                        <asp:ListItem>05</asp:ListItem>            
+                                        <asp:ListItem>05</asp:ListItem>
                                         <asp:ListItem>06</asp:ListItem>
                                         <asp:ListItem>07</asp:ListItem>
                                         <asp:ListItem>08</asp:ListItem>
@@ -52,19 +116,21 @@
                                         <asp:ListItem>10</asp:ListItem>
                                         <asp:ListItem>11</asp:ListItem>
                                         <asp:ListItem>12</asp:ListItem>
-                                    </asp:DropDownList>                    
+                                    </asp:DropDownList>
                                 </div>
                             </td>
                             <td>
                                 <div>
                                     開始查詢日期
+                                   
                                     <asp:TextBox ID="txtStart" runat="server"></asp:TextBox>
                                     <br />
                                     結束查詢日期
+                                   
                                     <asp:TextBox ID="txtEnd" runat="server"></asp:TextBox>
                                 </div>
                             </td>
-                        </tr>                        
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -77,15 +143,16 @@
     FROM COPTG
 	    LEFT JOIN CMSMV MV ON TG006 = MV001
     WHERE TG006 &lt;&gt; ''
-    ORDER BY TG006"></asp:SqlDataSource>            
+    ORDER BY TG006"></asp:SqlDataSource>
             </div>
             <br />
             <div>
                 <asp:Button ID="btnReport" runat="server" Text="產生報表" OnClick="btnReport_Click" />
                 <asp:Button ID="btnExport" runat="server" Text="匯出至Excel" OnClick="btnExport_Click" />
             </div>
-            <br />
-            <div id="search-result">                
+        </div>
+        <div id="OutputField">
+            <div id="search-result">
                 <asp:Label ID="lblError" runat="server" CssClass="error-message"></asp:Label>
                 <br />
                 <asp:Label ID="lblRange" runat="server"></asp:Label>
@@ -127,7 +194,7 @@
                                     <asp:Label ID="Label6" runat="server" Text='<%#Eval("退貨金額") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-<%--                            <asp:TemplateField HeaderText="退貨單數">
+                            <%--                            <asp:TemplateField HeaderText="退貨單數">
                                 <ItemTemplate>
                                     <asp:Label ID="Label7" runat="server" Text='<%#Eval("退貨單數") %>'></asp:Label>
                                 </ItemTemplate>
@@ -152,7 +219,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </asp:Content>
 
