@@ -14,7 +14,7 @@ using System.Web.UI;
 using System.Web.UI.DataVisualization.Charting;
 using System.Web.UI.WebControls;
 
-public partial class NetSale : System.Web.UI.Page
+public partial class SD01 : System.Web.UI.Page
 {
     string connectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
 
