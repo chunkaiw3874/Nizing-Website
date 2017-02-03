@@ -33,15 +33,15 @@ public partial class SD01 : System.Web.UI.Page
             txtStart.Enabled = false;
             txtEnd.Enabled = false;
 
-            //List<string> roleList = getRoles();
+            List<string> roleList = getRoles();
 
-            //foreach (string s in roleList)
-            //{
-            //    if (s == "NIZING\\管理部")
-            //    {
-            //        Admin.Visible = true;
-            //    }
-            //}
+            foreach (string s in roleList)
+            {
+                if (s == "NIZING\\管理部")
+                {
+                    Admin.Visible = true;
+                }
+            }
         }
     }
     protected List<string> getRoles()
