@@ -12,6 +12,7 @@
     <link href="../css/tabcontainer.css" rel="stylesheet" type="text/css" />
     <link href="../css/general.css" rel="stylesheet" type="text/css" />
     <link href="../css/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="../css/bootstrap/bootstrap-mod.css" rel="stylesheet" />
     <script src="../Scripts/bootstrap.js"></script>
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">

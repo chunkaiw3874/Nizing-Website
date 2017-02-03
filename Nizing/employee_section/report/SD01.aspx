@@ -37,7 +37,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <div id="NetSale" class="container">
+    <div id="NetSale" class="container-fluid">
         <div id="Admin" runat="server" visible="false">
             <div id="SetTarget" runat="server">
                 <div id="SetTargetTrigger" runat="server">
@@ -62,10 +62,10 @@
                             <asp:TextBox ID="txtTarget" runat="server" CssClass="form-control numbers-only" placeholder="目標金額"></asp:TextBox>
                         </div>
                         <div class="col-xs-1">
-                            <asp:Button ID="btnTargetSubmit" runat="server" Text="儲存" CssClass="btn btn-success" />
+                            <asp:Button ID="btnTargetSubmit" runat="server" Text="儲存" CssClass="btn btn-success" OnClick="btnTargetSubmit_Click" />
                         </div>
                         <div class="col-xs-1">
-                            <asp:Button ID="btnTargetDelete" runat="server" Text="刪除" CssClass="btn btn-danger" /> 
+                            <asp:Button ID="btnTargetDelete" runat="server" Text="刪除" CssClass="btn btn-danger" Enabled="false" OnClick="btnTargetDelete_Click" />
                         </div>
                     </div>
                 </div>
@@ -153,69 +153,79 @@
         </div>
         <div id="OutputField">
             <div id="search-result">
-                <asp:Label ID="lblError" runat="server" CssClass="error-message"></asp:Label>
-                <br />
-                <asp:Label ID="lblRange" runat="server"></asp:Label>
-                <br />
-                <div class="inline-top">
-                    <asp:GridView ID="grdReport" runat="server" OnDataBound="grdReport_DataBound" OnRowCreated="grdReport_RowCreated" ShowFooter="True" CssClass="grdResultWithFooter" Caption="銷售淨額排名">
-                    </asp:GridView>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <asp:Label ID="lblError" runat="server" CssClass="error-message"></asp:Label>
+                    </div>
                 </div>
-                <div class="inline-top">
-                    <asp:Chart ID="Chart1" runat="server" Width="500px">
-                        <Series>
-                            <asp:Series Name="Series1" IsValueShownAsLabel="True"></asp:Series>
-                        </Series>
-                        <ChartAreas>
-                            <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
-                        </ChartAreas>
-                    </asp:Chart>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <asp:Label ID="lblRange" runat="server"></asp:Label>
+                    </div>
                 </div>
-                <div class="inline-top">
-                    <asp:GridView ID="grdReport2" runat="server" AutoGenerateColumns="false" OnDataBound="grdReport2_DataBound" OnRowCreated="grdReport2_RowCreated" ShowFooter="True" CssClass="grdResultWithFooter" Caption="銷退金額排名">
-                        <Columns>
-                            <asp:TemplateField HeaderText="排名">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label3" runat="server" Text='<%#Eval("排名") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="業務名稱">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label4" runat="server" Text='<%#Eval("業務名稱") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="業務代號">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label5" runat="server" Text='<%#Eval("業務代號") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="退貨金額">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label6" runat="server" Text='<%#Eval("退貨金額") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <%--                            <asp:TemplateField HeaderText="退貨單數">
+                <div class="row">
+                    <div class="col-md-7">
+                        <asp:GridView ID="grdReport" runat="server" OnDataBound="grdReport_DataBound" OnRowCreated="grdReport_RowCreated" ShowFooter="True" CssClass="grdResultWithFooter" Caption="銷售淨額排名" HorizontalAlign="Center">
+                        </asp:GridView>
+                    </div>
+                    <div class="col-md-5">
+                        <asp:Chart ID="Chart1" runat="server" Width="500px">
+                            <Series>
+                                <asp:Series Name="Series1" IsValueShownAsLabel="True"></asp:Series>
+                            </Series>
+                            <ChartAreas>
+                                <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
+                            </ChartAreas>
+                        </asp:Chart>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <asp:GridView ID="grdReport2" runat="server" AutoGenerateColumns="false" OnDataBound="grdReport2_DataBound" OnRowCreated="grdReport2_RowCreated" ShowFooter="True" CssClass="grdResultWithFooter" Caption="銷退金額排名">
+                            <Columns>
+                                <asp:TemplateField HeaderText="排名">
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label3" runat="server" Text='<%#Eval("排名") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="業務名稱">
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label4" runat="server" Text='<%#Eval("業務名稱") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="業務代號">
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label5" runat="server" Text='<%#Eval("業務代號") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="退貨金額">
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label6" runat="server" Text='<%#Eval("退貨金額") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <%--                            <asp:TemplateField HeaderText="退貨單數">
                                 <ItemTemplate>
                                     <asp:Label ID="Label7" runat="server" Text='<%#Eval("退貨單數") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>--%>
-                            <asp:TemplateField HeaderText="退貨件數">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label7" runat="server" Text='<%#Eval("退貨件數") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        </Columns>
-                    </asp:GridView>
-                </div>
-                <div class="inline-top">
-                    <asp:Chart ID="Chart2" runat="server" Width="500px">
-                        <Series>
-                            <asp:Series Name="Series2" IsValueShownAsLabel="True"></asp:Series>
-                        </Series>
-                        <ChartAreas>
-                            <asp:ChartArea Name="ChartArea2"></asp:ChartArea>
-                        </ChartAreas>
-                    </asp:Chart>
+                                <asp:TemplateField HeaderText="退貨件數">
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label7" runat="server" Text='<%#Eval("退貨件數") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
+                    </div>
+                    <div class="col-md-5">
+                        <asp:Chart ID="Chart2" runat="server" Width="500px">
+                            <Series>
+                                <asp:Series Name="Series2" IsValueShownAsLabel="True"></asp:Series>
+                            </Series>
+                            <ChartAreas>
+                                <asp:ChartArea Name="ChartArea2"></asp:ChartArea>
+                            </ChartAreas>
+                        </asp:Chart>
+                    </div>
                 </div>
             </div>
         </div>

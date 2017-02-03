@@ -43,6 +43,7 @@ ul{
     background-color:#29ABE2;
     color:#FFFFFF;
     border:solid 1px #ffffff;
+    text-align:center;
 }
 .grdResult tr td{
     padding:4px;
@@ -66,6 +67,7 @@ ul{
     background-color:#29ABE2;
     color:#FFFFFF;
     border:solid 1px #ffffff;
+    text-align:center;
 }
 .grdResultWithFooter tr td{
     padding:4px;

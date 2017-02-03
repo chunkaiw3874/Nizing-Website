@@ -95,10 +95,11 @@ public partial class SD01 : System.Web.UI.Page
     {
         string[] query = new string[2];
 
-
         if (ddlPersonnel.SelectedValue.ToString() == "全部人員")
         {
-            query[0] = "WITH TEMP"
+            if (rdoText.Checked)
+            {
+                query[0] = "WITH TEMP"
                     + " AS"
                     + " ("
                     + " SELECT TI.TI006, SUM(TI.TI037) R"
@@ -113,6 +114,70 @@ public partial class SD01 : System.Web.UI.Page
                     + " LEFT JOIN TEMP TI ON TG.TG006 = TI.TI006"
                     + " WHERE TG.TG023=N'Y' AND TG.TG042 BETWEEN @StartDate AND @EndDate"
                     + " GROUP BY MV.MV002, TG.TG006, TI.R";
+            }
+            else
+            {
+                if (rdoMonth.Checked)
+                {
+                    query[0] = "WITH TEMP"
+                            + " AS"
+                            + " ("
+                            + " SELECT TI.TI006, SUM(TI.TI037) R"
+                            + " FROM COPTI TI"
+                            + " LEFT JOIN CMSMV MV ON TI.TI006 = MV.MV001"
+                            + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate"
+                            + " GROUP BY MV.MV002, TI.TI006"
+                            + " )"
+                            + " SELECT ROW_NUMBER() OVER (ORDER BY SUM(TG045)-COALESCE(TI.R,0) DESC) 排名, MV002 業務名稱, TG006 業務代號"
+                            + " , CONVERT(DECIMAL(20,2), SUM(TG045)) 銷貨金額"
+                            + " , CONVERT(DECIMAL(20,2), COALESCE(TI.R,0)) 退貨金額"
+                            + " , CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0)) 銷貨淨額"
+                            + " , CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) 目標金額"
+                            + " , CASE "
+                            + " 	WHEN CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0))-CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) >= 0 THEN 0"
+                            + " 	ELSE CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0))-CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) "
+                            + " 	END AS 未達成金額"
+                            + " FROM COPTG TG"
+                            + " LEFT JOIN CMSMV MV ON TG.TG006 = MV.MV001"
+                            + " LEFT JOIN TEMP TI ON TG.TG006 = TI.TI006"
+                            + " LEFT JOIN NZ_ERP2.dbo.SD_SD01_A SD ON TG.TG006=SD.EMP_ID AND SD.[YEAR]=@YEAR AND SD.[MONTH]=@MONTH"
+                            + " WHERE TG.TG023=N'Y' AND TG.TG042 BETWEEN @StartDate AND @EndDate"
+                            + " GROUP BY MV.MV002, TG.TG006, TI.R, SD.[TARGET];";
+                }
+                else
+                {
+                    query[0] = "WITH TEMP"
+                            + " AS"
+                            + " ("
+                            + " SELECT TI.TI006, SUM(TI.TI037) R"
+                            + " FROM COPTI TI"
+                            + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate"
+                            + " GROUP BY TI.TI006"
+                            + " )"
+                            + " , TEMP2"
+                            + " AS"
+                            + " ("
+                            + " SELECT TG.TG006, SUM(TG.TG045) SALE"
+                            + " FROM COPTG TG"
+                            + " WHERE TG.TG023=N'Y' AND TG.TG042 BETWEEN @StartDate AND @EndDate"
+                            + " GROUP BY TG.TG006"
+                            + " )"
+                            + " SELECT ROW_NUMBER() OVER (ORDER BY TG.SALE-COALESCE(TI.R,0) DESC) 排名, MV002 業務名稱, TG006 業務代號"
+                            + " , CONVERT(DECIMAL(20,2), TG.SALE) 銷貨金額"
+                            + " , CONVERT(DECIMAL(20,2), COALESCE(TI.R,0)) 退貨金額"
+                            + " , CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0)) 銷貨淨額"
+                            + " , SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0))) 目標金額"
+                            + " , CASE "
+                            + " 	WHEN CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0))-SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0))) >= 0 THEN 0"
+                            + " 	ELSE CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0))-SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)))"
+                            + " 	END AS 未達成金額"
+                            + " FROM TEMP2 TG"
+                            + " LEFT JOIN CMSMV MV ON TG.TG006 = MV.MV001"
+                            + " LEFT JOIN TEMP TI ON TG.TG006 = TI.TI006"
+                            + " LEFT JOIN NZ_ERP2.dbo.SD_SD01_A SD ON TG.TG006=SD.EMP_ID AND SD.[YEAR]=@YEAR"
+                            + " GROUP BY MV.MV002, TG.TG006, TI.R, TG.SALE";
+                }
+            }
             query[1] = "WITH CTE_RETURN(SALES, NUMBER)"
                     + " AS"
                     + " ("
@@ -131,21 +196,87 @@ public partial class SD01 : System.Web.UI.Page
         }
         else
         {
-            query[0] = "WITH TEMP"
-                    + " AS"
-                    + " ("
-                    + " SELECT TI.TI006, SUM(TI.TI037) R"
-                    + " FROM COPTI TI"
-                    + " LEFT JOIN CMSMV MV ON TI.TI006 = MV.MV001"
-                    + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate AND TI.TI006 = N'" + ddlPersonnel.SelectedValue.ToString() + "'"
-                    + " GROUP BY MV.MV002, TI.TI006"
-                    + " )"
-                    + " SELECT ROW_NUMBER() OVER (ORDER BY SUM(TG045)-COALESCE(TI.R,0) DESC) 排名, MV002 業務名稱, TG006 業務代號, CONVERT(DECIMAL(20,2), SUM(TG045)) 銷貨金額, CONVERT(DECIMAL(20,2), COALESCE(TI.R,0)) 退貨金額, CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0)) 銷貨淨額"
-                    + " FROM COPTG TG"
-                    + " LEFT JOIN CMSMV MV ON TG.TG006 = MV.MV001"
-                    + " LEFT JOIN TEMP TI ON TG.TG006 = TI.TI006"
-                    + " WHERE TG.TG023=N'Y' AND TG.TG042 BETWEEN @StartDate AND @EndDate AND TG.TG006 = N'" + ddlPersonnel.SelectedValue.ToString() + "'"
-                    + " GROUP BY MV.MV002, TG.TG006, TI.R";
+            if (rdoText.Checked)
+            {
+                query[0] = "WITH TEMP"
+                       + " AS"
+                       + " ("
+                       + " SELECT TI.TI006, SUM(TI.TI037) R"
+                       + " FROM COPTI TI"
+                       + " LEFT JOIN CMSMV MV ON TI.TI006 = MV.MV001"
+                       + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate AND TI.TI006 = N'" + ddlPersonnel.SelectedValue.ToString() + "'"
+                       + " GROUP BY MV.MV002, TI.TI006"
+                       + " )"
+                       + " SELECT ROW_NUMBER() OVER (ORDER BY SUM(TG045)-COALESCE(TI.R,0) DESC) 排名, MV002 業務名稱, TG006 業務代號, CONVERT(DECIMAL(20,2), SUM(TG045)) 銷貨金額, CONVERT(DECIMAL(20,2), COALESCE(TI.R,0)) 退貨金額, CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0)) 銷貨淨額"
+                       + " FROM COPTG TG"
+                       + " LEFT JOIN CMSMV MV ON TG.TG006 = MV.MV001"
+                       + " LEFT JOIN TEMP TI ON TG.TG006 = TI.TI006"
+                       + " WHERE TG.TG023=N'Y' AND TG.TG042 BETWEEN @StartDate AND @EndDate AND TG.TG006 = N'" + ddlPersonnel.SelectedValue.ToString() + "'"
+                       + " GROUP BY MV.MV002, TG.TG006, TI.R";
+            }
+            else
+            {
+                if (rdoMonth.Checked)
+                {
+                    query[0] = "WITH TEMP"
+                            + " AS"
+                            + " ("
+                            + " SELECT TI.TI006, SUM(TI.TI037) R"
+                            + " FROM COPTI TI"
+                            + " LEFT JOIN CMSMV MV ON TI.TI006 = MV.MV001"
+                            + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate"
+                            + " GROUP BY MV.MV002, TI.TI006"
+                            + " )"
+                            + " SELECT ROW_NUMBER() OVER (ORDER BY SUM(TG045)-COALESCE(TI.R,0) DESC) 排名, MV002 業務名稱, TG006 業務代號"
+                            + " , CONVERT(DECIMAL(20,2), SUM(TG045)) 銷貨金額"
+                            + " , CONVERT(DECIMAL(20,2), COALESCE(TI.R,0)) 退貨金額"
+                            + " , CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0)) 銷貨淨額"
+                            + " , CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) 目標金額"
+                            + " , CASE "
+                            + " 	WHEN CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0))-CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) >= 0 THEN 0"
+                            + " 	ELSE CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0))-CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) "
+                            + " 	END AS 未達成金額"
+                            + " FROM COPTG TG"
+                            + " LEFT JOIN CMSMV MV ON TG.TG006 = MV.MV001"
+                            + " LEFT JOIN TEMP TI ON TG.TG006 = TI.TI006"
+                            + " LEFT JOIN NZ_ERP2.dbo.SD_SD01_A SD ON TG.TG006=SD.EMP_ID AND SD.[YEAR]=@YEAR AND SD.[MONTH]=@MONTH"
+                            + " WHERE TG.TG023=N'Y' AND TG.TG042 BETWEEN @StartDate AND @EndDate AND TG.TG006=@ID"
+                            + " GROUP BY MV.MV002, TG.TG006, TI.R, SD.[TARGET];";
+                }
+                else
+                {
+                    query[0] = "WITH TEMP"
+                            + " AS"
+                            + " ("
+                            + " SELECT TI.TI006, SUM(TI.TI037) R"
+                            + " FROM COPTI TI"
+                            + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate"
+                            + " GROUP BY TI.TI006"
+                            + " )"
+                            + " , TEMP2"
+                            + " AS"
+                            + " ("
+                            + " SELECT TG.TG006, SUM(TG.TG045) SALE"
+                            + " FROM COPTG TG"
+                            + " WHERE TG.TG023=N'Y' AND TG.TG042 BETWEEN @StartDate AND @EndDate AND TG.TG006=@ID"
+                            + " GROUP BY TG.TG006"
+                            + " )"
+                            + " SELECT ROW_NUMBER() OVER (ORDER BY TG.SALE-COALESCE(TI.R,0) DESC) 排名, MV002 業務名稱, TG006 業務代號"
+                            + " , CONVERT(DECIMAL(20,2), TG.SALE) 銷貨金額"
+                            + " , CONVERT(DECIMAL(20,2), COALESCE(TI.R,0)) 退貨金額"
+                            + " , CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0)) 銷貨淨額"
+                            + " , SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0))) 目標金額"
+                            + " , CASE "
+                            + " 	WHEN CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0))-SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0))) >= 0 THEN 0"
+                            + " 	ELSE CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0))-SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)))"
+                            + " 	END AS 未達成金額"
+                            + " FROM TEMP2 TG"
+                            + " LEFT JOIN CMSMV MV ON TG.TG006 = MV.MV001"
+                            + " LEFT JOIN TEMP TI ON TG.TG006 = TI.TI006"
+                            + " LEFT JOIN NZ_ERP2.dbo.SD_SD01_A SD ON TG.TG006=SD.EMP_ID AND SD.[YEAR]=@YEAR"
+                            + " GROUP BY MV.MV002, TG.TG006, TI.R, TG.SALE";
+                }
+            }
             query[1] = "WITH CTE_RETURN(SALES, NUMBER)"
                     + " AS"
                     + " ("
@@ -159,7 +290,7 @@ public partial class SD01 : System.Web.UI.Page
                     + " LEFT JOIN COPTJ TJ ON TI.TI001 = TJ.TJ001 AND TI.TI002 = TJ.TJ002"
                     + " LEFT JOIN CMSMV MV ON TI.TI006 = MV.MV001"
                     + " LEFT JOIN CTE_RETURN ON TI.TI006 = CTE_RETURN.SALES"
-                    + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate AND TI.TI006= N'" + ddlPersonnel.SelectedValue.ToString() + "'"
+                    + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate AND TI.TI006= @ID"
                     + " GROUP BY MV.MV002, TI.TI006, CTE_RETURN.NUMBER";
         }
         return query;
@@ -226,6 +357,9 @@ public partial class SD01 : System.Web.UI.Page
                 //銷售淨額
                 //get data from database
                 SqlCommand cmd = new SqlCommand(query[0], conn);
+                cmd.Parameters.AddWithValue("@YEAR", ddlYear.SelectedValue.ToString());
+                cmd.Parameters.AddWithValue("@MONTH", ddlMonth.SelectedValue.ToString());
+                cmd.Parameters.AddWithValue("@ID", ddlPersonnel.SelectedValue.ToString());
                 cmd.Parameters.AddWithValue("@StartDate", startYear + startMonth);
                 cmd.Parameters.AddWithValue("@EndDate", endYear + endMonth);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -244,6 +378,7 @@ public partial class SD01 : System.Web.UI.Page
 
                 //退貨金額
                 cmd = new SqlCommand(query[1], conn);
+                cmd.Parameters.AddWithValue("@ID", ddlPersonnel.SelectedValue.ToString());
                 cmd.Parameters.AddWithValue("@StartDate", startYear + startMonth);
                 cmd.Parameters.AddWithValue("@EndDate", endYear + endMonth);
                 da = new SqlDataAdapter(cmd);
@@ -596,11 +731,103 @@ public partial class SD01 : System.Web.UI.Page
         }
         if (ds.Tables[0].Rows.Count > 0)
         {
+            btnTargetDelete.Enabled = true;
             txtTarget.Text = ds.Tables[0].Rows[0][0].ToString().Trim();
         }
         else
         {
+            btnTargetDelete.Enabled = false;
             txtTarget.Text = "";
         }
+    }
+    protected void btnTargetSubmit_Click(object sender, EventArgs e)
+    {
+        bool exist = targetExist();
+        string query = "";
+        if (exist)
+        {
+            query = "UPDATE SD_SD01_A"
+                + " SET TARGET=@TARGET"
+                + " WHERE [YEAR]=@YEAR"
+                + " AND [MONTH]=@MONTH"
+                + " AND [EMP_ID]=@ID";
+        }
+        else
+        {
+            query = "INSERT INTO SD_SD01_A"
+                + " VALUES"
+                + " (@YEAR,@MONTH,@ID,@TARGET)";
+        }
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@YEAR", ddlTargetYear.SelectedValue.ToString());
+            cmd.Parameters.AddWithValue("@MONTH", ddlTargetMonth.SelectedValue.ToString());
+            cmd.Parameters.AddWithValue("@ID", ddlTargetEmp.SelectedValue.ToString().Substring(0, 4));
+            cmd.Parameters.AddWithValue("@TARGET", txtTarget.Text.Trim());
+            cmd.ExecuteNonQuery();
+        }
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('目標金額儲存成功');", true);
+        btnTargetDelete.Enabled = true;
+    }
+
+    /// <summary>
+    /// check if a target amount is set for this employee at this month of this year
+    /// </summary>
+    /// <returns></returns>
+    protected bool targetExist()
+    {
+        string query = "";
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            query = "SELECT TARGET"
+                + " FROM SD_SD01_A"
+                + " WHERE [YEAR]=@YEAR"
+                + " AND [MONTH]=@MONTH"
+                + " AND [EMP_ID]=@ID";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@YEAR", ddlTargetYear.SelectedValue.ToString());
+            cmd.Parameters.AddWithValue("@MONTH", ddlTargetMonth.SelectedValue.ToString());
+            cmd.Parameters.AddWithValue("@ID", ddlTargetEmp.SelectedValue.ToString().Substring(0, 4));
+            using (SqlDataReader dr = cmd.ExecuteReader())
+            {
+                if (dr.HasRows)
+                {
+                    btnTargetDelete.Enabled = true;
+                    return true;
+                }
+                else
+                {
+                    btnTargetDelete.Enabled = false;
+                    return false;
+                }
+            }
+        }
+    }
+    protected void btnTargetDelete_Click(object sender, EventArgs e)
+    {
+        bool exist = targetExist();
+        string query = "";
+        if (exist)
+        {
+            query = "DELETE FROM SD_SD01_A"
+                + " WHERE [YEAR]=@YEAR"
+                + " AND [MONTH]=@MONTH"
+                + " AND [EMP_ID]=@ID";
+        }
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@YEAR", ddlTargetYear.SelectedValue.ToString());
+            cmd.Parameters.AddWithValue("@MONTH", ddlTargetMonth.SelectedValue.ToString());
+            cmd.Parameters.AddWithValue("@ID", ddlTargetEmp.SelectedValue.ToString().Substring(0, 4));
+            cmd.ExecuteNonQuery();
+        }
+        txtTarget.Text = "";
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('目標金額已刪除');", true);
+        btnTargetDelete.Enabled = false;
     }
 }
