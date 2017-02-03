@@ -204,14 +204,14 @@ public partial class SD01 : System.Web.UI.Page
                        + " SELECT TI.TI006, SUM(TI.TI037) R"
                        + " FROM COPTI TI"
                        + " LEFT JOIN CMSMV MV ON TI.TI006 = MV.MV001"
-                       + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate AND TI.TI006 = N'" + ddlPersonnel.SelectedValue.ToString() + "'"
+                       + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate AND TI.TI006 = @ID"
                        + " GROUP BY MV.MV002, TI.TI006"
                        + " )"
                        + " SELECT ROW_NUMBER() OVER (ORDER BY SUM(TG045)-COALESCE(TI.R,0) DESC) 排名, MV002 業務名稱, TG006 業務代號, CONVERT(DECIMAL(20,2), SUM(TG045)) 銷貨金額, CONVERT(DECIMAL(20,2), COALESCE(TI.R,0)) 退貨金額, CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0)) 銷貨淨額"
                        + " FROM COPTG TG"
                        + " LEFT JOIN CMSMV MV ON TG.TG006 = MV.MV001"
                        + " LEFT JOIN TEMP TI ON TG.TG006 = TI.TI006"
-                       + " WHERE TG.TG023=N'Y' AND TG.TG042 BETWEEN @StartDate AND @EndDate AND TG.TG006 = N'" + ddlPersonnel.SelectedValue.ToString() + "'"
+                       + " WHERE TG.TG023=N'Y' AND TG.TG042 BETWEEN @StartDate AND @EndDate AND TG.TG006 = @ID"
                        + " GROUP BY MV.MV002, TG.TG006, TI.R";
             }
             else

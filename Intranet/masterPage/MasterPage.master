@@ -13,6 +13,8 @@
     <link href="../css/general.css" rel="stylesheet" type="text/css" />
     <link href="../css/bootstrap/bootstrap.css" rel="stylesheet" />
     <link href="../css/bootstrap/bootstrap-mod.css" rel="stylesheet" />
+    <script src="../Scripts/jquery-2.1.4.js"></script>
+    <script src="../Scripts/jquery.validate.js"></script>
     <script src="../Scripts/bootstrap.js"></script>
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
