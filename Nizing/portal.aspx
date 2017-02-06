@@ -10,9 +10,9 @@
             <li>
                 <asp:ImageButton ID="ImageButton1" runat="server" PostBackUrl="~/hr360/login.aspx" ImageUrl="~/images/employee_section/portal/employee_section.png" />
             </li>
-            <li>
-                
-                <asp:ImageButton ID="ImageButton2" runat="server" PostBackUrl="~/employee_section/Default.aspx" ImageUrl="~/images/employee_section/portal/add_credit.png" />
+            <li> 
+                <a href="employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/add_credit.png" /></a>
+                <%--<asp:ImageButton ID="ImageButton2" runat="server" PostBackUrl="~/employee_section/Default.aspx" ImageUrl="~/images/employee_section/portal/add_credit.png" />--%>
             </li>
         </ul>
     </div>    
