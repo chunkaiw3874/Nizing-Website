@@ -59,6 +59,7 @@
                     <asp:DropDownList ID="ddlDayOffEndMin" runat="server" CssClass="form-control"></asp:DropDownList>
                 </div>
             </div>
+        </div>
     </div>
 </asp:Content>
 
