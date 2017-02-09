@@ -9,7 +9,8 @@
             $('.datepicker').datepicker({
                 format: 'yyyymmdd',
                 autoclose: true
-            });
+            }),
+            $('#DayOffApp').hide();
         });
         $(document).on('click', '#btnDayOffAppVisibility', function () {
             $('#DayOffApp').toggle();
