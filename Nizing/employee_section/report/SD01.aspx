@@ -78,27 +78,27 @@
         </div>
         <div id="SearchCondition" class="form-group">
             <div class="row">
-                <div class="col-xs-3">
+                <div class="col-xs-7">
                     <asp:RadioButton ID="rdoDDL" runat="server" Text="快速選單" GroupName="R2" Checked="true" AutoPostBack="true" OnCheckedChanged="R2_CheckedChanged" CssClass="radio-inline" />
                 </div>
-                <div class="col-xs-3">
+                <div class="col-xs-5">
                     <asp:RadioButton ID="rdoText" runat="server" Text="選擇日期(yyyyMMdd)" GroupName="R2" AutoPostBack="true" OnCheckedChanged="R2_CheckedChanged" CssClass="radio-inline" />
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-1">
+                <div class="col-xs-4">
                     <asp:RadioButton ID="rdoYear" runat="server" Text="年報表" GroupName="R1" AutoPostBack="true" OnCheckedChanged="R1_CheckedChanged" CssClass="radio-inline" />
                 </div>
-                <div class="col-xs-1">
+                <div class="col-xs-3">
                     <asp:RadioButton ID="rdoMonth" runat="server" Text="月報表" Checked="true" GroupName="R1" AutoPostBack="true" OnCheckedChanged="R1_CheckedChanged" CssClass="radio-inline" />
                 </div>
             </div>
             <div class="row form-group">
-                <div class="col-xs-2">
+                <div class="col-xs-4">
                     <asp:DropDownList ID="ddlYear" runat="server" CssClass="form-control">
                     </asp:DropDownList>
                 </div>
-                <div class="col-xs-1">
+                <div class="col-xs-3">
                     <asp:DropDownList ID="ddlMonth" runat="server" CssClass="form-control">
                         <asp:ListItem>01</asp:ListItem>
                         <asp:ListItem>02</asp:ListItem>
@@ -120,14 +120,14 @@
                 </div>
             </div>
             <div class="row">
-                <label class="control-label col-xs-2 col-xs-offset-3">結束查詢日期</label>
+                <label class="control-label col-xs-2 col-xs-offset-7">結束查詢日期</label>
                 <div class="col-xs-3">
                     <asp:TextBox ID="txtEnd" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
             </div>
         <br />
             <div class="row">
-                <div class="col-xs-3">
+                <div class="col-xs-6">
                     <asp:DropDownList ID="ddlPersonnel" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource1" DataTextField="MV002" DataValueField="TG006" CssClass="form-control">
                         <asp:ListItem Selected="True">全部人員</asp:ListItem>
                     </asp:DropDownList>
