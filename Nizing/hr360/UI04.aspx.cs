@@ -19,6 +19,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            hdnIsPostBack.Value = "0";
+            hdnIsDayOffAppVisible.Value = "0";
             DataTable dt = new DataTable();
             string query = "";
             using (SqlConnection conn = new SqlConnection(NZconnectionString))
@@ -37,6 +39,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
             {
                 ddlDayOffType.Items.Add(new ListItem(dt.Rows[i][0].ToString().Trim(), dt.Rows[i][1].ToString().Trim()));
             }
+        }
+        else
+        {
+            hdnIsPostBack.Value = "1";
         }
     }
     protected void btnDayOffAdd_Click(object sender, ImageClickEventArgs e)
@@ -119,5 +125,15 @@ public partial class hr360_UI04 : System.Web.UI.Page
             }
         }
         
+    }
+
+    /// <summary>
+    /// test only for different IDs
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void btnTestName_Click(object sender, EventArgs e)
+    {
+        Session["erp_id"] = txtTestName.Text.Trim();
     }
 }

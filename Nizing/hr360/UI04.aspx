@@ -9,11 +9,31 @@
             $('.datepicker').datepicker({
                 format: 'yyyymmdd',
                 autoclose: true
-            }),
-            $('#DayOffApp').hide();
-        });
-        $(document).on('click', '#btnDayOffAppVisibility', function () {
-            $('#DayOffApp').toggle();
+            });            
+            var isPostBack = $('#<%=hdnIsDayOffAppVisible.ClientID%>').val();
+            if (isPostBack == '0') {
+                $('#DayOffApp').hide();
+            }
+            else {
+                if ($('#<%=hdnIsDayOffAppVisible.ClientID%>').val()=='1') {
+                    $('#DayOffApp').show();
+                }
+                else {
+                    $('#DayOffApp').hide();
+                }
+            };
+
+            $(document).on('click', '#btnDayOffAppVisibility', function () {
+                $('#DayOffApp').toggle();
+                if ($('#DayOffApp').is(":visible") == true) {
+                    $('#DayOffApp').show();
+                    $('#<%=hdnIsDayOffAppVisible.ClientID%>').val('1');
+                }
+                else {
+                    $('#DayOffApp').hide();
+                    $('#<%=hdnIsDayOffAppVisible.ClientID%>').val('0');
+                }
+            });
         });
     </script>
 </asp:Content>
@@ -25,10 +45,14 @@
     <div class="container">
         <div class="row form-group">
             <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>
+            <asp:TextBox ID="txtTestName" runat="server"></asp:TextBox>
+            <asp:Button ID="btnTestName" runat="server" Text="測試ERP ID" OnClick="btnTestName_Click" />
         </div>
         <div class="row form-group" style="margin-top: 10px;">
             <div class="col-xs-12">
                 <span class="label label-info" id="btnDayOffAppVisibility" style="cursor: pointer; font-size: 20px;">我要請假</span>
+                <asp:HiddenField ID="hdnIsPostBack" runat="server" />
+                <asp:HiddenField ID="hdnIsDayOffAppVisible" runat="server" />
             </div>
         </div>
         <div id="DayOffApp">
