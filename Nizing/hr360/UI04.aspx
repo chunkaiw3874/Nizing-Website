@@ -4,11 +4,24 @@
     <link href="../Content/bootstrap-datepicker.css" rel="stylesheet" />
     <link href="../Content/bootstrap-datepicker3.css" rel="stylesheet" />
     <script src="../Scripts/bootstrap-datepicker.js"></script>
+    <script src="../Scripts/locales/bootstrap-datepicker.zh-TW.min.js"></script>
+    <script src="../Scripts/text.area.auto.adjust.js"></script>
+    <style>
+        .no-resize {
+            resize: none;
+        }
+    </style>
     <script type="text/javascript">
+        $(function () {
+            $('.autosize').autosize();
+        });
         $(document).ready(function () {
             $('.datepicker').datepicker({
-                format: 'yyyymmdd',
-                autoclose: true
+                language: 'zh-TW',
+                format: 'yyyy/mm/dd',
+                autoclose: true,
+                todayBtn: true,
+                todayHighlight: true
             });            
             var isPostBack = $('#<%=hdnIsDayOffAppVisible.ClientID%>').val();
             if (isPostBack == '0') {
@@ -44,10 +57,11 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="page_content" runat="Server">
     <div class="container">
         <div class="row form-group">
-            <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>
             <asp:TextBox ID="txtTestName" runat="server"></asp:TextBox>
             <asp:Button ID="btnTestName" runat="server" Text="測試ERP ID" OnClick="btnTestName_Click" />
+            <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>
         </div>
+        <hr />
         <div class="row form-group" style="margin-top: 10px;">
             <div class="col-xs-12">
                 <span class="label label-info" id="btnDayOffAppVisibility" style="cursor: pointer; font-size: 20px;">我要請假</span>
@@ -103,8 +117,11 @@
                     <asp:Label ID="lblDayOffRemainAmount" runat="server" Text=""></asp:Label>
                     <asp:Label ID="lblDayOffRemainUnit" runat="server" Text=""></asp:Label>
                 </div>
-                <div class="col-xs-7 col-xs-offset-3">
+                <div class="col-xs-1 col-xs-offset-3">
                     <asp:ImageButton ID="btnDayOffAdd" runat="server" ImageUrl="~/hr360/image/icon/green-arrow-down.png" Width="40" OnClick="btnDayOffAdd_Click" />
+                </div>
+                <div class="col-xs-6">
+                    <asp:TextBox ID="txtErrorMessage" runat="server" TextMode="MultiLine" CssClass="autosize no-resize error-message" Width="300" BorderStyle="none" Wrap="false" ReadOnly="true"></asp:TextBox>
                 </div>
             </div>
             <div class="row">

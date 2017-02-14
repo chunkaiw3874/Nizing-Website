@@ -19,25 +19,58 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            hdnIsPostBack.Value = "0";
-            hdnIsDayOffAppVisible.Value = "0";
+            Session["erp_id"] = "0010"; //test only to avoid error on loading, delete after trial
+
+
+            hdnIsPostBack.Value = "0";  //variable for determining whether this page is a postback for jquery
+            hdnIsDayOffAppVisible.Value = "0";  //variable for determining whether the div DayOffApp is visible
             DataTable dt = new DataTable();
+            DataTable userInfo = new DataTable();
             string query = "";
             using (SqlConnection conn = new SqlConnection(NZconnectionString))
             {
                 conn.Open();
-                query = "SELECT PALMC.MC001+' '+PALMC.MC002,PALMC.MC001"
-                    + " FROM PALMC"
-                    + " ORDER BY PALMC.MC001";
+                query = "SELECT MV.MV007"  //獲取登入者性別
+                    + " FROM CMSMV MV"
+                    + " WHERE MV001=@ID";
                 SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString().Trim());
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
+                da.Fill(userInfo);
+                if (userInfo.Rows[0][0].ToString() == "1")  //性別為男性，不可用產檢假
+                {
+                    query = "SELECT PALMC.MC001+' '+PALMC.MC002,PALMC.MC001"
+                        + " FROM PALMC"
+                        + " WHERE PALMC.MC001<>'15'"
+                        + " ORDER BY PALMC.MC001";
+                }
+                else
+                {
+                    query = "SELECT PALMC.MC001+' '+PALMC.MC002,PALMC.MC001"
+                        + " FROM PALMC"
+                        + " ORDER BY PALMC.MC001";
+                }
+                cmd = new SqlCommand(query, conn);
+                da = new SqlDataAdapter(cmd);
+                da.Fill(dt);                
             }
             ddlDayOffType.Items.Add(new ListItem("請選擇假別", "0"));
             ddlDayOffType.SelectedIndex = 0;
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 ddlDayOffType.Items.Add(new ListItem(dt.Rows[i][0].ToString().Trim(), dt.Rows[i][1].ToString().Trim()));
+            }
+            for (int i = 0; i < 24; i++)
+            {
+                ddlDayOffStartHour.Items.Add(i.ToString("D2"));
+                ddlDayOffStartHour.SelectedIndex = 8;
+                ddlDayOffEndHour.Items.Add(i.ToString("D2"));
+                ddlDayOffEndHour.SelectedIndex = 8;
+            }
+            for (int i = 0; i < 60; i += 30)
+            {
+                ddlDayOffStartMin.Items.Add(i.ToString("D2"));
+                ddlDayOffEndMin.Items.Add(i.ToString("D2"));
             }
         }
         else
@@ -47,10 +80,68 @@ public partial class hr360_UI04 : System.Web.UI.Page
     }
     protected void btnDayOffAdd_Click(object sender, ImageClickEventArgs e)
     {
-        lblTest.Text = ((ImageButton)sender).ID + " clicked";
+        //lblTest.Text = ((ImageButton)sender).ID + " clicked";
+        List<string> errorList = new List<string>();
+        DateTime result = new DateTime();
+        DateTime dayOffStartTime = new DateTime();
+        DateTime dayOffEndTime = new DateTime();
+        txtErrorMessage.Text = ""; //reset 錯誤訊息
+
+        if (ddlDayOffType.SelectedValue == "0")  //測試錯誤 1.未選擇假別
+        {
+            errorList.Add(errorCode(1));
+        }
+        if (DateTime.TryParse(txtDatePickerStart.Text.Trim(), out result))  //測試錯誤 2.起始日期輸入錯誤
+        {
+            dayOffStartTime = result.Date.AddHours(Convert.ToInt16(ddlDayOffStartHour.SelectedValue)).AddMinutes(Convert.ToInt16(ddlDayOffStartMin.SelectedValue));
+        }
+        else
+        {
+            errorList.Add(errorCode(2));
+        }
+        if (DateTime.TryParse(txtDatePickerEnd.Text.Trim(), out result))  //測試錯誤 3.結束日期輸入錯誤
+        {
+            dayOffEndTime = result.Date.AddHours(Convert.ToInt16(ddlDayOffEndHour.SelectedValue)).AddMinutes(Convert.ToInt16(ddlDayOffEndMin.SelectedValue));
+        }
+        else
+        {
+            errorList.Add(errorCode(3));
+        }
+        if (dayOffEndTime < dayOffStartTime)  //測試錯誤 4.結束日期小於開始日期
+        {
+            errorList.Add(errorCode(4));
+        }
+        if (lblDayOffRemainAmount.Text.Trim() != "")  //測試錯誤 5.剩餘假期不足
+        {
+            if (DateTime.TryParse(txtDatePickerStart.Text.Trim(), out result) && DateTime.TryParse(txtDatePickerEnd.Text.Trim(), out result))
+            {
+
+            }
+
+        }
+        //lblTest.Text = dayOffStartTime.ToString("yyyyMMdd");
+
+        //錯誤訊息集合顯示
+        for (int i = 0; i < errorList.Count; i++)
+        {
+            if (i == 0)
+            {
+                txtErrorMessage.Text = errorList[i];
+            }
+            else
+            {
+                txtErrorMessage.Text += Environment.NewLine + errorList[i];
+            }
+        }
     }
+    /// <summary>
+    /// 選擇假別改變
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void ddlDayOffType_SelectedIndexChanged(object sender, EventArgs e)
     {
+        ///顯示選擇假別剩餘時數
         if (ddlDayOffType.SelectedValue.ToString() == "0")
         {
             lblDayOffRemainType.Text = "";
@@ -127,6 +218,42 @@ public partial class hr360_UI04 : System.Web.UI.Page
         
     }
 
+    protected string errorCode(int errorID)
+    {
+        string error = "";
+        if (errorID == 1)
+        {
+            error = "未選擇假別";
+        }
+        else if (errorID == 2)
+        {
+            error = "起始日期輸入錯誤(格式範例 2017/03/04)";
+        }
+        else if (errorID == 3)
+        {
+            error = "結束日期輸入錯誤(格式範例 2017/04/27)";
+        }
+        else if (errorID == 4)
+        {
+            error = "結束日期不可小於起始日期";
+        }
+        return error;
+    }
+
+    /// <summary>
+    /// Parse a range of date into individual dates
+    /// </summary>
+    /// <param name="startDate"></param>
+    /// <param name="endDate"></param>
+    /// <returns></returns>
+    protected DateTime[] GetDatesBetween(DateTime startDate, DateTime endDate)
+    {
+        List<DateTime> allDates = new List<DateTime>();
+        for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+            allDates.Add(date);
+        return allDates.ToArray();
+    }
+
     /// <summary>
     /// test only for different IDs
     /// </summary>
@@ -135,5 +262,6 @@ public partial class hr360_UI04 : System.Web.UI.Page
     protected void btnTestName_Click(object sender, EventArgs e)
     {
         Session["erp_id"] = txtTestName.Text.Trim();
+        lblTest.Text = "測試帳號" + txtTestName.Text.Trim();
     }
 }
