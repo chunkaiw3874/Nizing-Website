@@ -78,6 +78,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             hdnIsPostBack.Value = "1";
         }
     }
+    
     protected void btnDayOffAdd_Click(object sender, ImageClickEventArgs e)
     {
         //lblTest.Text = ((ImageButton)sender).ID + " clicked";
@@ -85,6 +86,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
         DateTime result = new DateTime();
         DateTime dayOffStartTime = new DateTime();
         DateTime dayOffEndTime = new DateTime();
+        Boolean dayOffStartTimeValid = false;
+        Boolean dayOffEndTimeValid = false;
         txtErrorMessage.Text = ""; //reset 錯誤訊息
 
         if (ddlDayOffType.SelectedValue == "0")  //測試錯誤 1.未選擇假別
@@ -94,30 +97,33 @@ public partial class hr360_UI04 : System.Web.UI.Page
         if (DateTime.TryParse(txtDatePickerStart.Text.Trim(), out result))  //測試錯誤 2.起始日期輸入錯誤
         {
             dayOffStartTime = result.Date.AddHours(Convert.ToInt16(ddlDayOffStartHour.SelectedValue)).AddMinutes(Convert.ToInt16(ddlDayOffStartMin.SelectedValue));
+            dayOffStartTimeValid = true;
         }
         else
         {
             errorList.Add(errorCode(2));
+            dayOffStartTimeValid = false;
         }
         if (DateTime.TryParse(txtDatePickerEnd.Text.Trim(), out result))  //測試錯誤 3.結束日期輸入錯誤
         {
             dayOffEndTime = result.Date.AddHours(Convert.ToInt16(ddlDayOffEndHour.SelectedValue)).AddMinutes(Convert.ToInt16(ddlDayOffEndMin.SelectedValue));
+            dayOffEndTimeValid = true;
         }
         else
         {
             errorList.Add(errorCode(3));
+            dayOffEndTimeValid = false;
         }
         if (dayOffEndTime < dayOffStartTime)  //測試錯誤 4.結束日期小於開始日期
         {
             errorList.Add(errorCode(4));
         }
-        if (lblDayOffRemainAmount.Text.Trim() != "")  //測試錯誤 5.剩餘假期不足
+        if (lblDayOffRemainAmount.Text.Trim() != "")  //測試錯誤 5.剩餘假期不足  --如假別無量的限制，則無需執行此測試
         {
-            if (DateTime.TryParse(txtDatePickerStart.Text.Trim(), out result) && DateTime.TryParse(txtDatePickerEnd.Text.Trim(), out result))
+            if (dayOffStartTimeValid && dayOffEndTimeValid)
             {
-
+                DateTime[] days = GetDatesBetween(dayOffStartTime, dayOffEndTime);
             }
-
         }
         //lblTest.Text = dayOffStartTime.ToString("yyyyMMdd");
 

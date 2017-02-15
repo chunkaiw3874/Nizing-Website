@@ -28,7 +28,7 @@
                 $('#DayOffApp').hide();
             }
             else {
-                if ($('#<%=hdnIsDayOffAppVisible.ClientID%>').val()=='1') {
+                if ($('#<%=hdnIsDayOffAppVisible.ClientID%>').val() == '1') {
                     $('#DayOffApp').show();
                 }
                 else {
