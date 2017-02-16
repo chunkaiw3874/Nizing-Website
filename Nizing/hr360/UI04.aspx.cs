@@ -52,7 +52,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 }
                 cmd = new SqlCommand(query, conn);
                 da = new SqlDataAdapter(cmd);
-                da.Fill(dt);                
+                da.Fill(dt);
             }
             ddlDayOffType.Items.Add(new ListItem("請選擇假別", "0"));
             ddlDayOffType.SelectedIndex = 0;
@@ -65,7 +65,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 ddlDayOffStartHour.Items.Add(i.ToString("D2"));
                 ddlDayOffStartHour.SelectedIndex = 8;
                 ddlDayOffEndHour.Items.Add(i.ToString("D2"));
-                ddlDayOffEndHour.SelectedIndex = 8;
+                ddlDayOffEndHour.SelectedIndex = 17;
             }
             for (int i = 0; i < 60; i += 30)
             {
@@ -78,7 +78,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             hdnIsPostBack.Value = "1";
         }
     }
-    
+
     protected void btnDayOffAdd_Click(object sender, ImageClickEventArgs e)
     {
         //lblTest.Text = ((ImageButton)sender).ID + " clicked";
@@ -86,46 +86,107 @@ public partial class hr360_UI04 : System.Web.UI.Page
         DateTime result = new DateTime();
         DateTime dayOffStartTime = new DateTime();
         DateTime dayOffEndTime = new DateTime();
-        Boolean dayOffStartTimeValid = false;
-        Boolean dayOffEndTimeValid = false;
+        Boolean test1 = false;
+        Boolean test2 = false;
+        Boolean test3 = false;
+        Boolean test4 = false;        
+        DataTable dtDayOffDaysInfo = new DataTable();
+        decimal totalDayOffAmount = 0;
+
         txtErrorMessage.Text = ""; //reset 錯誤訊息
 
         if (ddlDayOffType.SelectedValue == "0")  //測試錯誤 1.未選擇假別
         {
             errorList.Add(errorCode(1));
+            test1 = false;
+        }
+        else
+        {
+            test1 = true;
         }
         if (DateTime.TryParse(txtDatePickerStart.Text.Trim(), out result))  //測試錯誤 2.起始日期輸入錯誤
         {
             dayOffStartTime = result.Date.AddHours(Convert.ToInt16(ddlDayOffStartHour.SelectedValue)).AddMinutes(Convert.ToInt16(ddlDayOffStartMin.SelectedValue));
-            dayOffStartTimeValid = true;
+            test2 = true;
         }
         else
         {
             errorList.Add(errorCode(2));
-            dayOffStartTimeValid = false;
+            test2 = false;
         }
         if (DateTime.TryParse(txtDatePickerEnd.Text.Trim(), out result))  //測試錯誤 3.結束日期輸入錯誤
         {
             dayOffEndTime = result.Date.AddHours(Convert.ToInt16(ddlDayOffEndHour.SelectedValue)).AddMinutes(Convert.ToInt16(ddlDayOffEndMin.SelectedValue));
-            dayOffEndTimeValid = true;
+            test3 = true;
         }
         else
         {
             errorList.Add(errorCode(3));
-            dayOffEndTimeValid = false;
+            test3 = false;
         }
         if (dayOffEndTime < dayOffStartTime)  //測試錯誤 4.結束日期小於開始日期
         {
             errorList.Add(errorCode(4));
+            test4 = false;
         }
-        if (lblDayOffRemainAmount.Text.Trim() != "")  //測試錯誤 5.剩餘假期不足  --如假別無量的限制，則無需執行此測試
+        else
         {
-            if (dayOffStartTimeValid && dayOffEndTimeValid)
+            test4 = true;
+        }
+        if (test1 && test2 && test3 && test4)  //PASS ALL INPUT TESTS, NEED TO START CALCULATING FOR OTHER ERRORS
+        {
+            DateTime[] days = GetDatesBetween(dayOffStartTime, dayOffEndTime);
+            for (int i = 0; i < days.Length; i++)
             {
-                DateTime[] days = GetDatesBetween(dayOffStartTime, dayOffEndTime);
+                using (SqlConnection conn = new SqlConnection(NZconnectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT MP.MP004 '日期',MP.MP005 '放假'," + "MB.MB0" + (Convert.ToInt16(days[i].Day.ToString()) + 2).ToString("D2") + " '班別',CONVERT(TIME,STUFF(MK.MK003,3,0,':')) '上班時間',CONVERT(TIME,STUFF(MK.MK004,3,0,':'))  '下班時間'"
+                            + " ,CASE"
+                            + " WHEN MK.MK003>MK.MK004 THEN 24.0-CONVERT(DECIMAL(5,2),DATEDIFF(MINUTE,CONVERT(TIME,'00:00'),CONVERT(TIME,STUFF('1700', 3, 0, ':')))/60.0)+CONVERT(DECIMAL(5,2),DATEDIFF(MINUTE,CONVERT(TIME,'00:00'),CONVERT(TIME,STUFF('0100',3,0,':')))/60.0)-CONVERT(DECIMAL(5,2),DATEDIFF(MINUTE,CONVERT(TIME,STUFF(MK.MK009, 3, 0, ':')),CONVERT(TIME,STUFF(MK.MK010, 3, 0, ':')))/60.0)"
+                            + " ELSE CONVERT(DECIMAL(5,2),DATEDIFF(MINUTE,CONVERT(TIME,STUFF(MK.MK003, 3, 0, ':')),CONVERT(TIME,STUFF(MK.MK004, 3, 0, ':')))/60.0)-CONVERT(DECIMAL(5,2),DATEDIFF(MINUTE,CONVERT(TIME,STUFF(MK.MK009, 3, 0, ':')),CONVERT(TIME,STUFF(MK.MK010, 3, 0, ':')))/60.0)"
+                            + " END '工作時數'"
+                            + " FROM AMSMB MB"
+                            + " LEFT JOIN CMSMP MP ON MP.MP001='3' AND MP.MP004=@YYYYMMDD AND MP.MP003=" + "MB.MB0" + (Convert.ToInt16(days[i].Day.ToString()) + 2).ToString("D2")
+                            + " LEFT JOIN PALMK MK ON MB.MB007=MK.MK001"
+                            + " WHERE MB.MB001=@ID"
+                            + " AND MB.MB002=@YYYYMM";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    //cmd.Parameters.AddWithValue("@SHIFT", "MB.MB0" + (Convert.ToInt16(days[i].Day.ToString()) + 2).ToString("D2"));
+                    cmd.Parameters.AddWithValue("@YYYYMMDD", days[i].ToString("yyyyMMdd"));
+                    cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                    cmd.Parameters.AddWithValue("@YYYYMM", days[i].ToString("yyyyMM"));
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        dtDayOffDaysInfo.Load(dr);
+                    }
+                    if (dtDayOffDaysInfo.Rows[dtDayOffDaysInfo.Rows.Count - 1][0].ToString() == "")
+                    {
+                        dtDayOffDaysInfo.Rows[dtDayOffDaysInfo.Rows.Count - 1][0] = days[i].ToString("yyyyMMdd");
+                    }
+                    if (dtDayOffDaysInfo.Rows[dtDayOffDaysInfo.Rows.Count - 1][1].ToString() == "")
+                    {
+                        dtDayOffDaysInfo.Rows[dtDayOffDaysInfo.Rows.Count - 1][1] = "3";
+                    }
+                }
+            }
+            for (int i = 0; i < dtDayOffDaysInfo.Rows.Count; i++)
+            {
+                if (dtDayOffDaysInfo.Rows[i][1].ToString() == "3")
+                {
+                    totalDayOffAmount += Convert.ToDecimal(dtDayOffDaysInfo.Rows[i][5]);
+                }
+            }
+            if (totalDayOffAmount <= 0)
+            {
+                errorList.Add(errorCode(5));
+            }
+            if (lblDayOffRemainAmount.Text.Trim() != "")  //測試錯誤 6.剩餘假期不足  --如假別無量的限制，則無需執行此測試
+            {
             }
         }
-        //lblTest.Text = dayOffStartTime.ToString("yyyyMMdd");
+
+        lblTest.Text = totalDayOffAmount.ToString();
 
         //錯誤訊息集合顯示
         for (int i = 0; i < errorList.Count; i++)
@@ -147,8 +208,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// <param name="e"></param>
     protected void ddlDayOffType_SelectedIndexChanged(object sender, EventArgs e)
     {
-        ///顯示選擇假別剩餘時數
-        if (ddlDayOffType.SelectedValue.ToString() == "0")
+        //顯示選擇假別剩餘時數
+            //未選擇、婚假、陪產假、產檢假 並非每年都有的假，所以忽略假期天數的限制，由人事檢查
+        if (ddlDayOffType.SelectedValue.ToString() == "0" || ddlDayOffType.SelectedValue.ToString() == "06" || ddlDayOffType.SelectedValue.ToString() == "09" || ddlDayOffType.SelectedValue.ToString() == "15")
         {
             lblDayOffRemainType.Text = "";
             lblDayOffRemainAmount.Text = "";
@@ -159,7 +221,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             DataTable dt = new DataTable();
             string query = "";
             string dayOffHourById = "";
-            lblDayOffRemainType.Text = "本年度" + ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3) + "剩餘";
+            lblDayOffRemainType.Text = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3) + "剩餘";
             using (SqlConnection conn = new SqlConnection(NZconnectionString))
             {
                 conn.Open();
@@ -221,7 +283,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 }
             }
         }
-        
+
     }
 
     protected string errorCode(int errorID)
@@ -256,7 +318,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         List<DateTime> allDates = new List<DateTime>();
         for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+        {
             allDates.Add(date);
+        }
         return allDates.ToArray();
     }
 
