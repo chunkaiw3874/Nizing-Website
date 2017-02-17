@@ -142,6 +142,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 {
                     conn.Open();
                     string query = "SELECT MP.MP004 '日期',MP.MP005 '放假'," + "MB.MB0" + (Convert.ToInt16(days[i].Day.ToString()) + 2).ToString("D2") + " '班別',CONVERT(TIME,STUFF(MK.MK003,3,0,':')) '上班時間',CONVERT(TIME,STUFF(MK.MK004,3,0,':'))  '下班時間'"
+                            + " ,CONVERT(TIME,STUFF(MK.MK009,3,0,':')) '休息開始時間',CONVERT(TIME,STUFF(MK.MK010,3,0,':')) '休息結束時間'"
                             + " ,CASE"
                             + " WHEN MK.MK003>MK.MK004 THEN 24.0-CONVERT(DECIMAL(5,2),DATEDIFF(MINUTE,CONVERT(TIME,'00:00'),CONVERT(TIME,STUFF('1700', 3, 0, ':')))/60.0)+CONVERT(DECIMAL(5,2),DATEDIFF(MINUTE,CONVERT(TIME,'00:00'),CONVERT(TIME,STUFF('0100',3,0,':')))/60.0)-CONVERT(DECIMAL(5,2),DATEDIFF(MINUTE,CONVERT(TIME,STUFF(MK.MK009, 3, 0, ':')),CONVERT(TIME,STUFF(MK.MK010, 3, 0, ':')))/60.0)"
                             + " ELSE CONVERT(DECIMAL(5,2),DATEDIFF(MINUTE,CONVERT(TIME,STUFF(MK.MK003, 3, 0, ':')),CONVERT(TIME,STUFF(MK.MK004, 3, 0, ':')))/60.0)-CONVERT(DECIMAL(5,2),DATEDIFF(MINUTE,CONVERT(TIME,STUFF(MK.MK009, 3, 0, ':')),CONVERT(TIME,STUFF(MK.MK010, 3, 0, ':')))/60.0)"
@@ -160,6 +161,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     {
                         dtDayOffDaysInfo.Load(dr);
                     }
+                    //fill in null cells with desired data
                     if (dtDayOffDaysInfo.Rows[dtDayOffDaysInfo.Rows.Count - 1][0].ToString() == "")
                     {
                         dtDayOffDaysInfo.Rows[dtDayOffDaysInfo.Rows.Count - 1][0] = days[i].ToString("yyyyMMdd");
@@ -170,12 +172,69 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     }
                 }
             }
-            for (int i = 0; i < dtDayOffDaysInfo.Rows.Count; i++)
+            for (int i = 0; i < dtDayOffDaysInfo.Rows.Count; i++)  //calculating total hours of dayoff
             {
-                if (dtDayOffDaysInfo.Rows[i][1].ToString() == "3")
+                if (dtDayOffDaysInfo.Rows[i][1].ToString() == "3")  //3 is working day
                 {
-                    totalDayOffAmount += Convert.ToDecimal(dtDayOffDaysInfo.Rows[i][5]);
+                    TimeSpan timeDifference = new TimeSpan();
+                    DateTime workEndTime = new DateTime();
+                    DateTime workStartTime = new DateTime();
+                    DateTime breakStartTime = new DateTime();
+                    DateTime breakEndTime = new DateTime();
+                    workStartTime = new DateTime(Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(0, 4)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(4, 2)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(6, 2)));
+                    workStartTime = workStartTime.AddHours(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][3].ToString().Substring(0, 2))).AddMinutes(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][3].ToString().Substring(3, 2)));
+                    breakStartTime = new DateTime(Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(0, 4)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(4, 2)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(6, 2)));
+                    breakStartTime = workStartTime.AddHours(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][5].ToString().Substring(0, 2))).AddMinutes(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][5].ToString().Substring(3, 2)));
+                    breakEndTime = new DateTime(Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(0, 4)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(4, 2)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(6, 2)));
+                    breakEndTime = workStartTime.AddHours(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][6].ToString().Substring(0, 2))).AddMinutes(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][6].ToString().Substring(3, 2)));
+
+                    if (Convert.ToDateTime(dtDayOffDaysInfo.Rows[i][4].ToString()) < Convert.ToDateTime(dtDayOffDaysInfo.Rows[i][3].ToString()))  //班別持續至次日
+                    {
+                        workEndTime = new DateTime(Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(0, 4)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(4, 2)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(6, 2)));
+                        workEndTime = workEndTime.AddDays(1).AddHours(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][4].ToString().Substring(0, 2))).AddMinutes(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][4].ToString().Substring(3, 2)));
+                    }
+                    else
+                    {
+                        workEndTime = new DateTime(Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(0, 4)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(4, 2)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(6, 2)));
+                        workEndTime = workEndTime.AddHours(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][4].ToString().Substring(0, 2))).AddMinutes(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][4].ToString().Substring(3, 2)));
+                    }
+
+                    if (i == 0)  //first day and last day require special calculation for partial days
+                    {
+                        if (dayOffStartTime > workStartTime)
+                        {
+                            workStartTime = dayOffStartTime;
+                        }
+                        if (dayOffStartTime < breakStartTime)
+                        {
+                            TimeSpan temp = breakStartTime - dayOffStartTime;
+                            if (temp.Hours > 0)
+                            {
+                                timeDifference = (workEndTime - workStartTime).Subtract(TimeSpan.FromHours((breakEndTime-breakStartTime).Hours));
+                            }
+                            else
+                            {
+                                timeDifference = (workEndTime - workStartTime).Subtract(TimeSpan.FromMinutes(temp.Minutes));
+                            }
+                        }
+                        totalDayOffAmount += (timeDifference.Hours + Convert.ToDecimal(timeDifference.Minutes / 60.0));
+                    }
+                    else if (i == dtDayOffDaysInfo.Rows.Count - 1 && i != 0)  //last day, and last day and first day are not the same day (ie day off time span is within 1 day)
+                    {
+                        if (dayOffEndTime < workEndTime)
+                        {
+                            workEndTime = dayOffEndTime;
+                        }
+                        timeDifference = workEndTime - workStartTime;
+                        totalDayOffAmount += (timeDifference.Hours + Convert.ToDecimal(timeDifference.Minutes / 60.0));
+                        lblTest.Text = workEndTime.ToString();
+                    }
+                    else
+                    {
+                        totalDayOffAmount += Convert.ToDecimal(dtDayOffDaysInfo.Rows[i][7]);
+                    }                    
                 }
+                lblTest.Text = totalDayOffAmount.ToString();
             }
             if (totalDayOffAmount <= 0)
             {
@@ -186,7 +245,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             }
         }
 
-        lblTest.Text = totalDayOffAmount.ToString();
+        //lblTest.Text = totalDayOffAmount.ToString();
 
         //錯誤訊息集合顯示
         for (int i = 0; i < errorList.Count; i++)
@@ -202,7 +261,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
     }
     /// <summary>
-    /// 選擇假別改變
+    /// 選擇假別改變，如有設定，會讀取該假別剩餘時數
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
