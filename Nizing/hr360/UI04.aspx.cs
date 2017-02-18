@@ -14,23 +14,33 @@ public partial class hr360_UI04 : System.Web.UI.Page
 {
     string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
     string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
+    List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
 
+    public class dayOffInfo
+    {
+        public string typeName { set; get; }
+        public DateTime startTime { set; get; }
+        public DateTime endTime { set; get; }
+        public string unit { set; get; }
+        public string amountUsing { set; get; }
+        public string amountRemain { set; get; }
+        public string funcSub { set; get; }
+    }
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-            Session["erp_id"] = "0010"; //test only to avoid error on loading, delete after trial
-
+            Session["erp_id"] = "0011"; //test only to avoid error on loading, delete after trial
 
             hdnIsPostBack.Value = "0";  //variable for determining whether this page is a postback for jquery
             hdnIsDayOffAppVisible.Value = "0";  //variable for determining whether the div DayOffApp is visible
-            DataTable dt = new DataTable();
+            DataSet ds = new DataSet();
             DataTable userInfo = new DataTable();
             string query = "";
             using (SqlConnection conn = new SqlConnection(NZconnectionString))
             {
                 conn.Open();
-                query = "SELECT MV.MV007"  //獲取登入者性別
+                query = "SELECT MV.MV007,MV004"  //獲取登入者資料
                     + " FROM CMSMV MV"
                     + " WHERE MV001=@ID";
                 SqlCommand cmd = new SqlCommand(query, conn);
@@ -42,6 +52,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     query = "SELECT PALMC.MC001+' '+PALMC.MC002,PALMC.MC001"
                         + " FROM PALMC"
                         + " WHERE PALMC.MC001<>'15'"
+                        + " AND PALMC.MC001<>'08'"
                         + " ORDER BY PALMC.MC001";
                 }
                 else
@@ -52,13 +63,25 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 }
                 cmd = new SqlCommand(query, conn);
                 da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
+                da.Fill(ds, "Day Off Type");
+                //抓取跟登入者同部門的人
+                query = "SELECT MV.MV001+' '+MV002,MV001"
+                    + " FROM CMSMV MV"
+                    + " WHERE MV.MV004=@DEPT"
+                    + " AND MV.MV001<>@ID"
+                    + " AND MV.MV022=''"
+                    + " ORDER BY MV.MV001";
+                cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@DEPT", userInfo.Rows[0][1].ToString().Trim());
+                cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString().Trim());
+                da = new SqlDataAdapter(cmd);
+                da.Fill(ds, "Functional Substitute");
             }
             ddlDayOffType.Items.Add(new ListItem("請選擇假別", "0"));
             ddlDayOffType.SelectedIndex = 0;
-            for (int i = 0; i < dt.Rows.Count; i++)
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
-                ddlDayOffType.Items.Add(new ListItem(dt.Rows[i][0].ToString().Trim(), dt.Rows[i][1].ToString().Trim()));
+                ddlDayOffType.Items.Add(new ListItem(ds.Tables[0].Rows[i][0].ToString().Trim(), ds.Tables[0].Rows[i][1].ToString().Trim()));
             }
             for (int i = 0; i < 24; i++)
             {
@@ -72,10 +95,26 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 ddlDayOffStartMin.Items.Add(i.ToString("D2"));
                 ddlDayOffEndMin.Items.Add(i.ToString("D2"));
             }
+            //還需要代理人是否eligible for代理的篩選條件
+            ddlDayOffFuncSub.Items.Add(new ListItem("請選擇代理人", "0"));
+            ddlDayOffFuncSub.SelectedIndex = 0;
+            for (int i = 0; i < ds.Tables[1].Rows.Count; i++)
+            {
+                ddlDayOffFuncSub.Items.Add(new ListItem(ds.Tables[1].Rows[i][0].ToString().Trim(), ds.Tables[1].Rows[i][1].ToString().Trim()));
+            }
         }
         else
         {
             hdnIsPostBack.Value = "1";
+        }
+
+        if (Session["erp_id"] == "0010")  //hidden field that contains normal work hour per day for current user
+        {
+            hdnNormalWorkHour.Value = "8.5";
+        }
+        else
+        {
+            hdnNormalWorkHour.Value = "8";
         }
     }
 
@@ -89,7 +128,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
         Boolean test1 = false;
         Boolean test2 = false;
         Boolean test3 = false;
-        Boolean test4 = false;        
+        Boolean test4 = false;
+        Boolean test8 = false;
         DataTable dtDayOffDaysInfo = new DataTable();
         decimal totalDayOffAmount = 0;
 
@@ -133,7 +173,16 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             test4 = true;
         }
-        if (test1 && test2 && test3 && test4)  //PASS ALL INPUT TESTS, NEED TO START CALCULATING FOR OTHER ERRORS
+        if (ddlDayOffFuncSub.SelectedValue == "0")  //測試錯誤 8.未選擇代理人
+        {
+            errorList.Add(errorCode(8));
+            test8 = false;
+        }
+        else
+        {
+            test8 = true;
+        }
+        if (test1 && test2 && test3 && test4 && test8)  //PASS ALL INPUT TESTS, NEED TO START CALCULATING FOR OTHER ERRORS
         {
             DateTime[] days = GetDatesBetween(dayOffStartTime, dayOffEndTime);
             for (int i = 0; i < days.Length; i++)
@@ -184,9 +233,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     workStartTime = new DateTime(Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(0, 4)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(4, 2)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(6, 2)));
                     workStartTime = workStartTime.AddHours(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][3].ToString().Substring(0, 2))).AddMinutes(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][3].ToString().Substring(3, 2)));
                     breakStartTime = new DateTime(Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(0, 4)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(4, 2)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(6, 2)));
-                    breakStartTime = workStartTime.AddHours(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][5].ToString().Substring(0, 2))).AddMinutes(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][5].ToString().Substring(3, 2)));
+                    breakStartTime = breakStartTime.AddHours(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][5].ToString().Substring(0, 2))).AddMinutes(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][5].ToString().Substring(3, 2)));
                     breakEndTime = new DateTime(Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(0, 4)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(4, 2)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(6, 2)));
-                    breakEndTime = workStartTime.AddHours(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][6].ToString().Substring(0, 2))).AddMinutes(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][6].ToString().Substring(3, 2)));
+                    breakEndTime = breakEndTime.AddHours(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][6].ToString().Substring(0, 2))).AddMinutes(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][6].ToString().Substring(3, 2)));
 
                     if (Convert.ToDateTime(dtDayOffDaysInfo.Rows[i][4].ToString()) < Convert.ToDateTime(dtDayOffDaysInfo.Rows[i][3].ToString()))  //班別持續至次日
                     {
@@ -201,21 +250,32 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
                     if (i == 0)  //first day and last day require special calculation for partial days
                     {
+                        if (dtDayOffDaysInfo.Rows.Count == 1)
+                        {
+                            if (dayOffEndTime < workEndTime)
+                            {
+                                workEndTime = dayOffEndTime;
+                            }
+                        }
                         if (dayOffStartTime > workStartTime)
                         {
                             workStartTime = dayOffStartTime;
                         }
-                        if (dayOffStartTime < breakStartTime)
+                        if (dayOffStartTime < breakEndTime)
                         {
-                            TimeSpan temp = breakStartTime - dayOffStartTime;
+                            TimeSpan temp = breakEndTime - dayOffStartTime;
                             if (temp.Hours > 0)
                             {
-                                timeDifference = (workEndTime - workStartTime).Subtract(TimeSpan.FromHours((breakEndTime-breakStartTime).Hours));
+                                timeDifference = (workEndTime - workStartTime).Subtract(TimeSpan.FromHours((breakEndTime - breakStartTime).Hours));
                             }
                             else
                             {
                                 timeDifference = (workEndTime - workStartTime).Subtract(TimeSpan.FromMinutes(temp.Minutes));
                             }
+                        }
+                        else
+                        {
+                            timeDifference = workEndTime - workStartTime;
                         }
                         totalDayOffAmount += (timeDifference.Hours + Convert.ToDecimal(timeDifference.Minutes / 60.0));
                     }
@@ -225,27 +285,55 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         {
                             workEndTime = dayOffEndTime;
                         }
-                        timeDifference = workEndTime - workStartTime;
+                        if (dayOffEndTime > breakStartTime)
+                        {
+                            TimeSpan temp = dayOffEndTime - breakStartTime;
+                            if (temp.Hours > 0)
+                            {
+                                timeDifference = (workEndTime - workStartTime).Subtract(TimeSpan.FromHours((breakEndTime - breakStartTime).Hours));
+                            }
+                            else
+                            {
+                                timeDifference = (workEndTime - workStartTime).Subtract(TimeSpan.FromMinutes(temp.Minutes));
+                            }
+                        }
+                        else
+                        {
+                            timeDifference = workEndTime - workStartTime;
+                        }
                         totalDayOffAmount += (timeDifference.Hours + Convert.ToDecimal(timeDifference.Minutes / 60.0));
-                        lblTest.Text = workEndTime.ToString();
                     }
                     else
                     {
                         totalDayOffAmount += Convert.ToDecimal(dtDayOffDaysInfo.Rows[i][7]);
-                    }                    
+                    }
                 }
-                lblTest.Text = totalDayOffAmount.ToString();
             }
-            if (totalDayOffAmount <= 0)
+            if (hdnDayOffTypeUnit.Value == "天")
+            {
+                hdnTotalDayOffTime.Value = (totalDayOffAmount / Convert.ToDecimal(hdnNormalWorkHour.Value)).ToString();
+            }
+            else
+            {
+                hdnTotalDayOffTime.Value = totalDayOffAmount.ToString();
+            }
+            lblTest.Text = hdnTotalDayOffTime.Value + hdnDayOffTypeUnit.Value;
+            if (totalDayOffAmount <= 0)  //測試錯誤 5.請假週期的須請假總時數為0，無須請假
             {
                 errorList.Add(errorCode(5));
             }
             if (lblDayOffRemainAmount.Text.Trim() != "")  //測試錯誤 6.剩餘假期不足  --如假別無量的限制，則無需執行此測試
             {
+                if (totalDayOffAmount > Convert.ToDecimal(lblDayOffRemainAmount.Text))
+                {
+                    errorList.Add(errorCode(6));
+                }
+            }
+            if (Convert.ToDecimal(hdnTotalDayOffTime.Value) * 10 % 5 != 0)  //測試錯誤 7.請假單位為0.5
+            {
+                errorList.Add(errorCode(7));
             }
         }
-
-        //lblTest.Text = totalDayOffAmount.ToString();
 
         //錯誤訊息集合顯示
         for (int i = 0; i < errorList.Count; i++)
@@ -259,6 +347,48 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 txtErrorMessage.Text += Environment.NewLine + errorList[i];
             }
         }
+
+        if (errorList.Count == 0) //都沒有錯誤，可執行之後的步驟
+        {
+            if (lblDayOffRemainAmount.Text == "")
+            {
+                lstDayOffAppSummary.Add(new dayOffInfo
+                {
+                    typeName = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3).Trim()
+                    ,
+                    startTime = dayOffStartTime
+                    ,
+                    endTime = dayOffEndTime
+                    ,
+                    unit = hdnDayOffTypeUnit.Value
+                    ,
+                    amountUsing = hdnTotalDayOffTime.Value + hdnDayOffTypeUnit.Value
+                    ,
+                    amountRemain = "N/A"
+                    ,
+                    funcSub = ddlDayOffFuncSub.SelectedItem.ToString().Trim()
+                });
+
+
+            }
+            lstDayOffAppSummary.Add(new dayOffInfo
+            {
+                typeName = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3).Trim()
+                ,
+                startTime = dayOffStartTime
+                ,
+                endTime = dayOffEndTime
+                ,
+                unit = hdnDayOffTypeUnit.Value
+                ,
+                amountUsing = hdnTotalDayOffTime.Value + hdnDayOffTypeUnit.Value
+                ,
+                amountRemain = (Convert.ToDecimal(lblDayOffRemainAmount.Text) - Convert.ToDecimal(hdnTotalDayOffTime.Value)).ToString() + hdnDayOffTypeUnit.Value
+                ,
+                funcSub = ddlDayOffFuncSub.SelectedItem.ToString().Trim()
+            });
+            lblTest.Text = "no errors! v^.^v";
+        }
     }
     /// <summary>
     /// 選擇假別改變，如有設定，會讀取該假別剩餘時數
@@ -267,9 +397,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// <param name="e"></param>
     protected void ddlDayOffType_SelectedIndexChanged(object sender, EventArgs e)
     {
-        //顯示選擇假別剩餘時數
-            //未選擇、婚假、陪產假、產檢假 並非每年都有的假，所以忽略假期天數的限制，由人事檢查
-        if (ddlDayOffType.SelectedValue.ToString() == "0" || ddlDayOffType.SelectedValue.ToString() == "06" || ddlDayOffType.SelectedValue.ToString() == "09" || ddlDayOffType.SelectedValue.ToString() == "15")
+        //顯示選擇假別剩餘時數            
+        if (ddlDayOffType.SelectedValue.ToString() == "0")
         {
             lblDayOffRemainType.Text = "";
             lblDayOffRemainAmount.Text = "";
@@ -279,26 +408,17 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             DataTable dt = new DataTable();
             string query = "";
-            string dayOffHourById = "";
-            lblDayOffRemainType.Text = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3) + "剩餘";
+            lblDayOffRemainType.Text = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3).Trim() + "剩餘";
             using (SqlConnection conn = new SqlConnection(NZconnectionString))
             {
                 conn.Open();
-                if (Session["erp_id"].ToString().Trim() == "0010")
-                {
-                    dayOffHourById = "8.5";
-                }
-                else
-                {
-                    dayOffHourById = "8";
-                }
                 query = "SELECT '02' 'ID',CONVERT(DECIMAL(5,2),TK.TK005),CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0)),'小時'"
                     + " FROM PALTK TK"
                     + " LEFT JOIN PALTL TL ON TK.TK001=TL.TL001 AND TK.TK002=TL.TL002 AND TL.TL004='02'"
                     + " WHERE TK.TK001=@ID AND TK.TK002=@YEAR"
                     + " GROUP BY TK.TK005"
                     + " UNION"
-                    + " SELECT '03' 'ID',CONVERT(DECIMAL(5,2),TK.TK003*" + dayOffHourById + "),CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0)),'小時'"
+                    + " SELECT '03' 'ID',CONVERT(DECIMAL(5,2),TK.TK003*" + hdnNormalWorkHour.Value + "),CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0)),'小時'"
                     + " FROM PALTK TK"
                     + " LEFT JOIN PALTL TL ON TK.TK001=TL.TL001 AND TK.TK002=TL.TL002 AND TL.TL004='03'"
                     + " WHERE TK.TK001=@ID AND TK.TK002=@YEAR"
@@ -329,16 +449,32 @@ public partial class hr360_UI04 : System.Web.UI.Page
             {
                 row = dt.Select("ID=" + ddlDayOffType.SelectedValue.ToString());
 
-                if (Convert.ToDouble(row[0][1]) > 0)
-                {
-                    lblDayOffRemainAmount.Text = (Convert.ToDouble(row[0][1]) - Convert.ToDouble(row[0][2])).ToString();
-                    lblDayOffRemainUnit.Text = row[0][3].ToString();
-                }
-                else
+                //未選擇、婚假、陪產假、產檢假、產假 並非每年都有的假，所以忽略假期天數的限制，由人事檢查
+                if (ddlDayOffType.SelectedValue.ToString() == "06" || ddlDayOffType.SelectedValue.ToString() == "09"
+                    || ddlDayOffType.SelectedValue.ToString() == "15" || ddlDayOffType.SelectedValue.ToString() == "08")
                 {
                     lblDayOffRemainType.Text = "";
                     lblDayOffRemainAmount.Text = "";
                     lblDayOffRemainUnit.Text = "";
+                    if (Convert.ToDouble(row[0][1]) > 0)
+                    {
+                        hdnDayOffTypeUnit.Value = row[0][3].ToString();
+                    }
+                }
+                else
+                {
+                    if (Convert.ToDouble(row[0][1]) > 0)
+                    {
+                        lblDayOffRemainAmount.Text = (Convert.ToDouble(row[0][1]) - Convert.ToDouble(row[0][2])).ToString();
+                        lblDayOffRemainUnit.Text = row[0][3].ToString();
+                        hdnDayOffTypeUnit.Value = row[0][3].ToString();
+                    }
+                    else
+                    {
+                        lblDayOffRemainType.Text = "";
+                        lblDayOffRemainAmount.Text = "";
+                        lblDayOffRemainUnit.Text = "";
+                    }
                 }
             }
         }
@@ -363,6 +499,22 @@ public partial class hr360_UI04 : System.Web.UI.Page
         else if (errorID == 4)
         {
             error = "結束日期不可小於起始日期";
+        }
+        else if (errorID == 5)
+        {
+            error = "此請假週期非上班時間，無須請假";
+        }
+        else if (errorID == 6)
+        {
+            error = "剩餘假期不足";
+        }
+        else if (errorID == 7)
+        {
+            error = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3).Trim() + "請假單位為0.5" + hdnDayOffTypeUnit.Value;
+        }
+        else if (errorID == 8)
+        {
+            error = "未選擇代理人";
         }
         return error;
     }

@@ -70,6 +70,9 @@
             </div>
         </div>
         <div id="DayOffApp">
+            <asp:HiddenField ID="hdnNormalWorkHour" runat="server" />
+            <asp:HiddenField ID="hdnTotalDayOffTime" runat="server" />
+            <asp:HiddenField ID="hdnDayOffTypeUnit" runat="server" />
             <div class="row">
                 <div class="col-xs-2">
                     <span class="label label-default" style="font-size: 16px;">假別</span>
@@ -131,7 +134,7 @@
                             本次請假內容                       
                         </div>
                         <div class="panel-body">
-                            <table class="table col-xs-12">
+                            <table id="tbAppSummary" class="table col-xs-12" runat="server">
                                 <thead>
                                     <tr>
                                         <th>假別</th>
