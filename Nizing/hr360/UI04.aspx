@@ -71,6 +71,7 @@
         </div>
         <div id="DayOffApp">
             <asp:HiddenField ID="hdnNormalWorkHour" runat="server" />
+            <asp:HiddenField ID="hdnDayOffTimeRemainBeforeSubmit" runat="server" />
             <asp:HiddenField ID="hdnTotalDayOffTime" runat="server" />
             <asp:HiddenField ID="hdnDayOffTypeUnit" runat="server" />
             <div class="row">

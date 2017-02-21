@@ -14,6 +14,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
 {
     string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
     string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
+    List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
 
     public class dayOffInfo
     {
@@ -23,7 +24,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         public DateTime endTime { set; get; }
         public string unit { set; get; }
         public string amountUsing { set; get; }
-        public string amountRemain { set; get; }
+        public string restrictedAmountSet { set; get; }
         public string funcSub { set; get; }
     }
     protected void Page_Load(object sender, EventArgs e)
@@ -32,7 +33,6 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             Session["erp_id"] = "0011"; //test only to avoid error on loading, delete after trial
 
-            List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
             Session["lstDayOffAppSummary"] = lstDayOffAppSummary;
             hdnIsPostBack.Value = "0";  //variable for determining whether this page is a postback for jquery
             hdnIsDayOffAppVisible.Value = "0";  //variable for determining whether the div DayOffApp is visible
@@ -117,10 +117,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
             newHeaderCell.InnerText = "請假總量";
             newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
             newHeaderRow.Controls.Add(newHeaderCell);
-            newHeaderCell = new HtmlTableCell("th");
-            newHeaderCell.InnerText = "假別剩餘";
-            newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
-            newHeaderRow.Controls.Add(newHeaderCell);
+            //newHeaderCell = new HtmlTableCell("th");
+            //newHeaderCell.InnerText = "假別剩餘";
+            //newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+            //newHeaderRow.Controls.Add(newHeaderCell);
             newHeaderCell = new HtmlTableCell("th");
             newHeaderCell.InnerText = "代理人";
             newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
@@ -130,6 +130,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
             newHeaderRow.Controls.Add(newHeaderCell);
             tbAppSummary.Controls.Add(newHeaderRow);
+            //WIP
             //還需要代理人是否eligible for代理的篩選條件
             ddlDayOffFuncSub.Items.Add(new ListItem("請選擇代理人", "0"));
             ddlDayOffFuncSub.SelectedIndex = 0;
@@ -143,7 +144,6 @@ public partial class hr360_UI04 : System.Web.UI.Page
             hdnIsPostBack.Value = "1";
             if (getPostBackControlName() != "btnDayOffAdd")
             {
-                List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
                 if (((List<dayOffInfo>)Session["lstDayOffAppSummary"]).Count != 0)
                 {
                     lstDayOffAppSummary = (List<dayOffInfo>)Session["lstDayOffAppSummary"];
@@ -178,7 +178,6 @@ public partial class hr360_UI04 : System.Web.UI.Page
         decimal totalDayOffAmount = 0;
 
         txtErrorMessage.Text = ""; //reset 錯誤訊息
-        List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
         if (((List<dayOffInfo>)Session["lstDayOffAppSummary"]).Count != 0)
         {
             lstDayOffAppSummary = (List<dayOffInfo>)Session["lstDayOffAppSummary"];
@@ -407,8 +406,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     startTime = dayOffStartTime,
                     endTime = dayOffEndTime,
                     unit = hdnDayOffTypeUnit.Value,
-                    amountUsing = hdnTotalDayOffTime.Value + hdnDayOffTypeUnit.Value,
-                    amountRemain = "N/A",
+                    amountUsing = hdnTotalDayOffTime.Value,
+                    restrictedAmountSet = "N",
                     funcSub = ddlDayOffFuncSub.SelectedItem.ToString().Trim()
                 });
             }
@@ -421,13 +420,20 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     startTime = dayOffStartTime,
                     endTime = dayOffEndTime,
                     unit = hdnDayOffTypeUnit.Value,
-                    amountUsing = hdnTotalDayOffTime.Value + hdnDayOffTypeUnit.Value,
-                    amountRemain = (Convert.ToDecimal(lblDayOffRemainAmount.Text) - Convert.ToDecimal(hdnTotalDayOffTime.Value)).ToString() + hdnDayOffTypeUnit.Value,
+                    amountUsing = hdnTotalDayOffTime.Value,
+                    restrictedAmountSet = "Y",
                     funcSub = ddlDayOffFuncSub.SelectedItem.ToString().Trim()
                 });
             }
             fillDayOffApplicationTable(lstDayOffAppSummary);
             Session["lstDayOffAppSummary"] = lstDayOffAppSummary;
+            //re-calculate day off remain display
+            if (lblDayOffRemainAmount.Text != "")
+            {
+                double sumFromList = lstDayOffAppSummary.Where(x => x.typeID == ddlDayOffType.SelectedValue).Sum(x => double.Parse(x.amountUsing));
+                lblDayOffRemainAmount.Text = (Convert.ToDouble(hdnDayOffTimeRemainBeforeSubmit.Value) - sumFromList).ToString();
+            }
+
             lblTest.Text = "no errors! v^.^v";
         }
     }
@@ -485,9 +491,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     }
                 }
             }
-            DataRow[] row;
-            if (dt.Rows.Count > 0)
+            
+            if (dt.Rows.Count > 0)            
             {
+                DataRow[] row;
                 row = dt.Select("ID=" + ddlDayOffType.SelectedValue.ToString());
 
                 //未選擇、婚假、陪產假、產檢假、產假 並非每年都有的假，所以忽略假期天數的限制，由人事檢查
@@ -503,9 +510,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 {
                     if (Convert.ToDouble(row[0][1]) > 0)
                     {
-                        lblDayOffRemainAmount.Text = (Convert.ToDouble(row[0][1]) - Convert.ToDouble(row[0][2])).ToString();
+                        double sumFromList = lstDayOffAppSummary.Where(x=> x.typeID == ddlDayOffType.SelectedValue).Sum(x => double.Parse(x.amountUsing));
+                        hdnDayOffTimeRemainBeforeSubmit.Value = (Convert.ToDouble(row[0][1]) - Convert.ToDouble(row[0][2])).ToString();
+                        lblDayOffRemainAmount.Text = (Convert.ToDouble(hdnDayOffTimeRemainBeforeSubmit.Value) - sumFromList).ToString();
                         lblDayOffRemainUnit.Text = row[0][3].ToString();
-
                     }
                     else
                     {
@@ -610,10 +618,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
         newHeaderCell.InnerText = "請假總量";
         newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
         newHeaderRow.Controls.Add(newHeaderCell);
-        newHeaderCell = new HtmlTableCell("th");
-        newHeaderCell.InnerText = "假別剩餘";
-        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
-        newHeaderRow.Controls.Add(newHeaderCell);
+        //newHeaderCell = new HtmlTableCell("th");
+        //newHeaderCell.InnerText = "假別剩餘";
+        //newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        //newHeaderRow.Controls.Add(newHeaderCell);
         newHeaderCell = new HtmlTableCell("th");
         newHeaderCell.InnerText = "代理人";
         newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
@@ -641,13 +649,13 @@ public partial class hr360_UI04 : System.Web.UI.Page
             cell.Attributes.Add("style", "text-align:center;");
             newRow.Controls.Add(cell);
             cell = new HtmlTableCell();
-            cell.InnerText = info.amountUsing.ToString();
+            cell.InnerText = info.amountUsing.ToString() + info.unit;
             cell.Attributes.Add("style", "text-align:center;");
             newRow.Controls.Add(cell);
-            cell = new HtmlTableCell();
-            cell.InnerText = info.amountRemain.ToString();
-            cell.Attributes.Add("style", "text-align:center;");
-            newRow.Controls.Add(cell);
+            //cell = new HtmlTableCell();
+            //cell.InnerText = info.amountRemain.ToString() + info.unit;
+            //cell.Attributes.Add("style", "text-align:center;");
+            //newRow.Controls.Add(cell);
             cell = new HtmlTableCell();
             cell.InnerText = info.funcSub;
             cell.Attributes.Add("style", "text-align:center;");
@@ -720,7 +728,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     }
 
     /// <summary>
-    /// Remove selection
+    /// Remove selected day off application from list
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -728,17 +736,20 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         Button btn = (Button)sender;
         string btnID = btn.ID;
-        List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
-        if (((List<dayOffInfo>)Session["lstDayOffAppSummary"]).Count != 0)
+        //re-calculate day off remain display        
+        if (ddlDayOffType.SelectedValue == lstDayOffAppSummary[Convert.ToInt16(btnID.Substring(12, btnID.Length - 12)) - 1].typeID
+            && lstDayOffAppSummary[Convert.ToInt16(btnID.Substring(12, btnID.Length - 12)) - 1].restrictedAmountSet == "Y") /*ONLY do the recalculation if the removed dayoff type 
+                                                                                                                             matches the one currently selected AND has restricted
+                                                                                                                             amount set up*/
         {
-            lstDayOffAppSummary = (List<dayOffInfo>)Session["lstDayOffAppSummary"];
+            lstDayOffAppSummary.RemoveAt(Convert.ToInt16(btnID.Substring(12, btnID.Length - 12)) - 1);
+            double sumFromList = lstDayOffAppSummary.Where(x => x.typeID == ddlDayOffType.SelectedValue).Sum(x => double.Parse(x.amountUsing));
+            lblDayOffRemainAmount.Text = (Convert.ToDouble(hdnDayOffTimeRemainBeforeSubmit.Value) - sumFromList).ToString();
         }
-
-        lstDayOffAppSummary.RemoveAt(Convert.ToInt16(btnID.Substring(12, btnID.Length - 12)) - 1);
-        fillDayOffApplicationTable(lstDayOffAppSummary);                
-
-        //lblTest.Text = btnID.Substring(12, btnID.Length - 12);
-        
-        //tbAppSummary.Rows.RemoveAt(Convert.ToInt16(btnID.Substring(12, btnID.Length - 12)));
+        else
+        {
+            lstDayOffAppSummary.RemoveAt(Convert.ToInt16(btnID.Substring(12, btnID.Length - 12)) - 1);
+        }
+        fillDayOffApplicationTable(lstDayOffAppSummary);
     }
 }
