@@ -135,7 +135,7 @@
                         </div>
                         <div class="panel-body">
                             <table id="tbAppSummary" class="table col-xs-12" runat="server">
-                                <thead>
+                                <%--<thead>
                                     <tr>
                                         <th>假別</th>
                                         <th>開始時間</th>
@@ -145,25 +145,7 @@
                                         <th>代理人</th>
                                         <th>移除</th>
                                     </tr>
-                                    <tr>
-                                        <td style="text-align: center;">特休</td>
-                                        <td style="text-align: center;">2017/01/31 08:00 AM</td>
-                                        <td style="text-align: center;">2017/01/31 05:30 PM</td>
-                                        <td style="text-align: center;">8.5 時</td>
-                                        <td style="text-align: center;">300 時</td>
-                                        <td style="text-align: center;">0010 陳淑倩</td>
-                                        <td style="text-align: center;">移除</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: center;">補休</td>
-                                        <td style="text-align: center;">2017/02/01 08:00 AM</td>
-                                        <td style="text-align: center;">2017/02/01 13:00 PM</td>
-                                        <td style="text-align: center;">5 時</td>
-                                        <td style="text-align: center;">300 時</td>
-                                        <td style="text-align: center;">0010 陳淑倩</td>
-                                        <td style="text-align: center;">移除</td>
-                                    </tr>
-                                </thead>
+                                </thead>--%>
                             </table>
                         </div>
                         <div class="panel-footer" style="text-align: right;">

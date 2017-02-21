@@ -14,10 +14,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
 {
     string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
     string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
-    List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
 
     public class dayOffInfo
     {
+        public string typeID { set; get; }
         public string typeName { set; get; }
         public DateTime startTime { set; get; }
         public DateTime endTime { set; get; }
@@ -32,6 +32,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             Session["erp_id"] = "0011"; //test only to avoid error on loading, delete after trial
 
+            List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
+            Session["lstDayOffAppSummary"] = lstDayOffAppSummary;
             hdnIsPostBack.Value = "0";  //variable for determining whether this page is a postback for jquery
             hdnIsDayOffAppVisible.Value = "0";  //variable for determining whether the div DayOffApp is visible
             DataSet ds = new DataSet();
@@ -47,25 +49,27 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString().Trim());
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(userInfo);
-                if (userInfo.Rows[0][0].ToString() == "1")  //性別為男性，不可用產檢假
+                if (userInfo.Rows[0][0].ToString() == "1")  //性別為男性，不可用產檢假及產假
                 {
                     query = "SELECT PALMC.MC001+' '+PALMC.MC002,PALMC.MC001"
                         + " FROM PALMC"
-                        + " WHERE PALMC.MC001<>'15'"
-                        + " AND PALMC.MC001<>'08'"
+                        + " WHERE PALMC.MC001<>'15'" //產檢假
+                        + " AND PALMC.MC001<>'08'" //產假
+                        + " AND PALMC.MC001<>'10'" //曠職
                         + " ORDER BY PALMC.MC001";
                 }
                 else
                 {
                     query = "SELECT PALMC.MC001+' '+PALMC.MC002,PALMC.MC001"
                         + " FROM PALMC"
+                        + " AND PALMC.MC001<>'10'" //曠職
                         + " ORDER BY PALMC.MC001";
                 }
                 cmd = new SqlCommand(query, conn);
                 da = new SqlDataAdapter(cmd);
                 da.Fill(ds, "Day Off Type");
                 //抓取跟登入者同部門的人
-                query = "SELECT MV.MV001+' '+MV002,MV001"
+                query = "SELECT LTRIM(RTRIM(MV.MV001))+' '+MV002,MV001"
                     + " FROM CMSMV MV"
                     + " WHERE MV.MV004=@DEPT"
                     + " AND MV.MV001<>@ID"
@@ -95,6 +99,37 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 ddlDayOffStartMin.Items.Add(i.ToString("D2"));
                 ddlDayOffEndMin.Items.Add(i.ToString("D2"));
             }
+            //請假內容header
+            HtmlTableRow newHeaderRow = new HtmlTableRow();
+            HtmlTableCell newHeaderCell = new HtmlTableCell("th");
+            newHeaderCell.InnerText = "假別";
+            newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+            newHeaderRow.Controls.Add(newHeaderCell);
+            newHeaderCell = new HtmlTableCell("th");
+            newHeaderCell.InnerText = "開始時間";
+            newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+            newHeaderRow.Controls.Add(newHeaderCell);
+            newHeaderCell = new HtmlTableCell("th");
+            newHeaderCell.InnerText = "結束時間";
+            newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+            newHeaderRow.Controls.Add(newHeaderCell);
+            newHeaderCell = new HtmlTableCell("th");
+            newHeaderCell.InnerText = "請假總量";
+            newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+            newHeaderRow.Controls.Add(newHeaderCell);
+            newHeaderCell = new HtmlTableCell("th");
+            newHeaderCell.InnerText = "假別剩餘";
+            newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+            newHeaderRow.Controls.Add(newHeaderCell);
+            newHeaderCell = new HtmlTableCell("th");
+            newHeaderCell.InnerText = "代理人";
+            newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+            newHeaderRow.Controls.Add(newHeaderCell);
+            newHeaderCell = new HtmlTableCell("th");
+            newHeaderCell.InnerText = "移除";
+            newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+            newHeaderRow.Controls.Add(newHeaderCell);
+            tbAppSummary.Controls.Add(newHeaderRow);
             //還需要代理人是否eligible for代理的篩選條件
             ddlDayOffFuncSub.Items.Add(new ListItem("請選擇代理人", "0"));
             ddlDayOffFuncSub.SelectedIndex = 0;
@@ -106,9 +141,18 @@ public partial class hr360_UI04 : System.Web.UI.Page
         else
         {
             hdnIsPostBack.Value = "1";
+            if (getPostBackControlName() != "btnDayOffAdd")
+            {
+                List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
+                if (((List<dayOffInfo>)Session["lstDayOffAppSummary"]).Count != 0)
+                {
+                    lstDayOffAppSummary = (List<dayOffInfo>)Session["lstDayOffAppSummary"];
+                }
+                fillDayOffApplicationTable(lstDayOffAppSummary);                
+            }
         }
 
-        if (Session["erp_id"] == "0010")  //hidden field that contains normal work hour per day for current user
+        if (Session["erp_id"].ToString() == "0010")  //hidden field that contains normal work hour per day for current user
         {
             hdnNormalWorkHour.Value = "8.5";
         }
@@ -134,7 +178,12 @@ public partial class hr360_UI04 : System.Web.UI.Page
         decimal totalDayOffAmount = 0;
 
         txtErrorMessage.Text = ""; //reset 錯誤訊息
-
+        List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
+        if (((List<dayOffInfo>)Session["lstDayOffAppSummary"]).Count != 0)
+        {
+            lstDayOffAppSummary = (List<dayOffInfo>)Session["lstDayOffAppSummary"];
+        }
+        fillDayOffApplicationTable(lstDayOffAppSummary);
         if (ddlDayOffType.SelectedValue == "0")  //測試錯誤 1.未選擇假別
         {
             errorList.Add(errorCode(1));
@@ -301,7 +350,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         {
                             timeDifference = workEndTime - workStartTime;
                         }
-                        totalDayOffAmount += (timeDifference.Hours + Convert.ToDecimal(timeDifference.Minutes / 60.0));
+                        totalDayOffAmount += (Convert.ToDecimal(timeDifference.Hours) + Convert.ToDecimal(timeDifference.Minutes / 60.0));
                     }
                     else
                     {
@@ -317,7 +366,6 @@ public partial class hr360_UI04 : System.Web.UI.Page
             {
                 hdnTotalDayOffTime.Value = totalDayOffAmount.ToString();
             }
-            lblTest.Text = hdnTotalDayOffTime.Value + hdnDayOffTypeUnit.Value;
             if (totalDayOffAmount <= 0)  //測試錯誤 5.請假週期的須請假總時數為0，無須請假
             {
                 errorList.Add(errorCode(5));
@@ -354,39 +402,32 @@ public partial class hr360_UI04 : System.Web.UI.Page
             {
                 lstDayOffAppSummary.Add(new dayOffInfo
                 {
-                    typeName = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3).Trim()
-                    ,
-                    startTime = dayOffStartTime
-                    ,
-                    endTime = dayOffEndTime
-                    ,
-                    unit = hdnDayOffTypeUnit.Value
-                    ,
-                    amountUsing = hdnTotalDayOffTime.Value + hdnDayOffTypeUnit.Value
-                    ,
-                    amountRemain = "N/A"
-                    ,
+                    typeID = ddlDayOffType.SelectedValue.Trim(),
+                    typeName = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3).Trim(),
+                    startTime = dayOffStartTime,
+                    endTime = dayOffEndTime,
+                    unit = hdnDayOffTypeUnit.Value,
+                    amountUsing = hdnTotalDayOffTime.Value + hdnDayOffTypeUnit.Value,
+                    amountRemain = "N/A",
                     funcSub = ddlDayOffFuncSub.SelectedItem.ToString().Trim()
                 });
-
-
             }
-            lstDayOffAppSummary.Add(new dayOffInfo
+            else
             {
-                typeName = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3).Trim()
-                ,
-                startTime = dayOffStartTime
-                ,
-                endTime = dayOffEndTime
-                ,
-                unit = hdnDayOffTypeUnit.Value
-                ,
-                amountUsing = hdnTotalDayOffTime.Value + hdnDayOffTypeUnit.Value
-                ,
-                amountRemain = (Convert.ToDecimal(lblDayOffRemainAmount.Text) - Convert.ToDecimal(hdnTotalDayOffTime.Value)).ToString() + hdnDayOffTypeUnit.Value
-                ,
-                funcSub = ddlDayOffFuncSub.SelectedItem.ToString().Trim()
-            });
+                lstDayOffAppSummary.Add(new dayOffInfo
+                {
+                    typeID = ddlDayOffType.SelectedValue.Trim(),
+                    typeName = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3).Trim(),
+                    startTime = dayOffStartTime,
+                    endTime = dayOffEndTime,
+                    unit = hdnDayOffTypeUnit.Value,
+                    amountUsing = hdnTotalDayOffTime.Value + hdnDayOffTypeUnit.Value,
+                    amountRemain = (Convert.ToDecimal(lblDayOffRemainAmount.Text) - Convert.ToDecimal(hdnTotalDayOffTime.Value)).ToString() + hdnDayOffTypeUnit.Value,
+                    funcSub = ddlDayOffFuncSub.SelectedItem.ToString().Trim()
+                });
+            }
+            fillDayOffApplicationTable(lstDayOffAppSummary);
+            Session["lstDayOffAppSummary"] = lstDayOffAppSummary;
             lblTest.Text = "no errors! v^.^v";
         }
     }
@@ -456,10 +497,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     lblDayOffRemainType.Text = "";
                     lblDayOffRemainAmount.Text = "";
                     lblDayOffRemainUnit.Text = "";
-                    if (Convert.ToDouble(row[0][1]) > 0)
-                    {
-                        hdnDayOffTypeUnit.Value = row[0][3].ToString();
-                    }
+                    hdnDayOffTypeUnit.Value = row[0][3].ToString();
                 }
                 else
                 {
@@ -467,7 +505,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     {
                         lblDayOffRemainAmount.Text = (Convert.ToDouble(row[0][1]) - Convert.ToDouble(row[0][2])).ToString();
                         lblDayOffRemainUnit.Text = row[0][3].ToString();
-                        hdnDayOffTypeUnit.Value = row[0][3].ToString();
+
                     }
                     else
                     {
@@ -475,6 +513,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         lblDayOffRemainAmount.Text = "";
                         lblDayOffRemainUnit.Text = "";
                     }
+                    hdnDayOffTypeUnit.Value = row[0][3].ToString();
                 }
             }
         }
@@ -544,5 +583,162 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         Session["erp_id"] = txtTestName.Text.Trim();
         lblTest.Text = "測試帳號" + txtTestName.Text.Trim();
+    }
+
+    /// <summary>
+    /// fill day off application table
+    /// </summary>
+    /// <param name="lstDayOffAppSummary"></param>
+    protected void fillDayOffApplicationTable(List<dayOffInfo> lstDayOffAppSummary)
+    {   
+        tbAppSummary.Rows.Clear();
+
+        HtmlTableRow newHeaderRow = new HtmlTableRow();
+        HtmlTableCell newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "假別";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "開始時間";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "結束時間";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "請假總量";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "假別剩餘";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "代理人";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "移除";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        tbAppSummary.Controls.Add(newHeaderRow);
+        int listCounter = 0;
+        foreach (dayOffInfo info in lstDayOffAppSummary)
+        {
+            listCounter += 1;
+            HtmlTableRow newRow = new HtmlTableRow();
+            HtmlTableCell cell = new HtmlTableCell();
+            cell.InnerText = info.typeName;
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            cell.InnerText = info.startTime.ToString();
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            cell.InnerText = info.endTime.ToString();
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            cell.InnerText = info.amountUsing.ToString();
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            cell.InnerText = info.amountRemain.ToString();
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            cell.InnerText = info.funcSub;
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            Button btn = new Button();
+            btn.ID = "btnRemoveApp" + listCounter;
+            btn.Text = "移除";
+            btn.CssClass = "btn btn-danger";
+            btn.Click += new EventHandler(btnRemoveApp_Click);
+            cell.Controls.Add(btn);
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            tbAppSummary.Rows.Add(newRow);
+        }
+    }
+    /// <summary>
+    /// Gets the ID of the post back control.
+    /// 
+    /// See: http://geekswithblogs.net/mahesh/archive/2006/06/27/83264.aspx
+    /// </summary>
+    /// <param name = "page">The page.</param>
+    /// <returns></returns>
+    private string getPostBackControlName()
+    {
+        Control control = null;
+        //first we will check the "__EVENTTARGET" because if post back made by       the controls
+        //which used "_doPostBack" function also available in Request.Form collection.
+        string ctrlname = Page.Request.Params["__EVENTTARGET"];
+        if (ctrlname != null && ctrlname != String.Empty)
+        {
+            control = Page.FindControl(ctrlname);
+        }
+        // if __EVENTTARGET is null, the control is a button type and we need to
+        // iterate over the form collection to find it
+        else
+        {
+            string ctrlStr = String.Empty;
+            Control c = null;
+            foreach (string ctl in Page.Request.Form)
+            {
+                //handle ImageButton they having an additional "quasi-property" in their Id which identifies
+                //mouse x and y coordinates
+                if (ctl.EndsWith(".x") || ctl.EndsWith(".y"))
+                {
+                    ctrlStr = ctl.Substring(0, ctl.Length - 2);
+                    c = Page.FindControl(ctrlStr);
+                }
+                else
+                {
+                    c = Page.FindControl(ctl);
+                }
+                if (c is System.Web.UI.WebControls.Button ||
+                         c is System.Web.UI.WebControls.ImageButton)
+                {
+                    control = c;
+                    break;
+                }
+            }
+        }
+        if (control == null)
+        {
+            return null;
+        }
+        else
+        {
+            return control.ID;
+        }
+
+    }
+
+    /// <summary>
+    /// Remove selection
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void btnRemoveApp_Click(object sender, EventArgs e)
+    {
+        Button btn = (Button)sender;
+        string btnID = btn.ID;
+        List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
+        if (((List<dayOffInfo>)Session["lstDayOffAppSummary"]).Count != 0)
+        {
+            lstDayOffAppSummary = (List<dayOffInfo>)Session["lstDayOffAppSummary"];
+        }
+
+        lstDayOffAppSummary.RemoveAt(Convert.ToInt16(btnID.Substring(12, btnID.Length - 12)) - 1);
+        fillDayOffApplicationTable(lstDayOffAppSummary);                
+
+        //lblTest.Text = btnID.Substring(12, btnID.Length - 12);
+        
+        //tbAppSummary.Rows.RemoveAt(Convert.ToInt16(btnID.Substring(12, btnID.Length - 12)));
     }
 }
