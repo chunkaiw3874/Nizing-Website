@@ -777,56 +777,68 @@ public partial class hr360_UI04 : System.Web.UI.Page
         //assign unique ID (yyyymmdd+流水號) to each application
         string uid = "";
         string query = "";
+        int count = 0;
         foreach (dayOffInfo dayoff in lstDayOffAppSummary)
         {
+            Boolean hasError = false;
+            count += 1;
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
-                //gerneral unique id
-                query = "SELECT MAX(CONVERT(INT,(SUBSTRING(APPLICATION_ID,LEN(APPLICATION_ID)-2,3))))"
+                //check for error
+                query = "SELECT APPLICATION_ID"
                     + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
-                    + " WHERE APPLICATION_ID LIKE @ID";
+                    + " WHERE (DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
+                    + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)";
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@ID", DateTime.Now.ToString("yyyyMMdd") + "%");
-                if (cmd.ExecuteScalar() == DBNull.Value)
+                cmd.Parameters.AddWithValue("@STARTTIME", dayoff.startTime);
+                cmd.Parameters.AddWithValue("@ENDTIME", dayoff.endTime);
+                using (SqlDataReader dr = cmd.ExecuteReader())
                 {
-                    uid = DateTime.Now.ToString("yyyyMMdd") + "001";
+                    if (dr.HasRows)
+                    {
+                        hasError = true;
+                        while (dr.Read())
+                        {
+                            lblTest.Text = "item " + count + " conflicts with ID#" + dr.GetString(0);
+                        }
+                    }
                 }
-                else
+                //DataTable dt = new DataTable();
+                //SqlDataAdapter da = new SqlDataAdapter(cmd);
+                //da.Fill(dt);
+                //if (dt.Rows.Count > 0)
+                //{
+                //    hasError = true;
+                //    lblTest.Text = "item " + count + " conflicts with ID#" + dt.Rows[0][0].ToString();
+                //}
+                
+                if (hasError == false)
                 {
-                    uid = DateTime.Now.ToString("yyyyMMdd") + (Convert.ToInt16(cmd.ExecuteScalar()) + 1).ToString("D3");
-                }            
-
-                //insert record with unique id
-                try
-                {
-                    query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION"
-                        + " VALUES ("
-                        + " @APPLICATION_ID,@APPLICATION_DATE,@APPLICANT_ID,@DAYOFF_ID,@DAYOFF_NAME,@DAYOFF_START_TIME,@DAYOFF_END_TIME,@DAYOFF_TOTAL_TIME,@DAYOFF_TIME_UNIT,@FUNC_SUB_ID,'01'"
-                        + " )";
+                    //gerneral unique id
+                    query = "SELECT MAX(CONVERT(INT,(SUBSTRING(APPLICATION_ID,LEN(APPLICATION_ID)-2,3))))"
+                        + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
+                        + " WHERE APPLICATION_ID LIKE @ID";
                     cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@APPLICATION_ID", uid);
-                    cmd.Parameters.AddWithValue("@APPLICATION_DATE", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@APPLICANT_ID", Session["erp_id"].ToString().Trim());
-                    cmd.Parameters.AddWithValue("@DAYOFF_ID", dayoff.typeID);
-                    cmd.Parameters.AddWithValue("@DAYOFF_NAME", dayoff.typeName);
-                    cmd.Parameters.AddWithValue("@DAYOFF_START_TIME", dayoff.startTime);
-                    cmd.Parameters.AddWithValue("@DAYOFF_END_TIME", dayoff.endTime);
-                    cmd.Parameters.AddWithValue("@DAYOFF_TOTAL_TIME", dayoff.amountUsing);
-                    cmd.Parameters.AddWithValue("@DAYOFF_TIME_UNIT", dayoff.unit);
-                    cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub);
-                    cmd.ExecuteNonQuery();
-                }
-                catch (SqlException ex)
-                {
-                    if (ex.Number == 2627)
+                    cmd.Parameters.AddWithValue("@ID", DateTime.Now.ToString("yyyyMMdd") + "%");
+                    if (cmd.ExecuteScalar() == DBNull.Value)
+                    {
+                        uid = DateTime.Now.ToString("yyyyMMdd") + "001";
+                    }
+                    else
+                    {
+                        uid = DateTime.Now.ToString("yyyyMMdd") + (Convert.ToInt16(cmd.ExecuteScalar()) + 1).ToString("D3");
+                    }
+
+                    //insert record with unique id
+                    try
                     {
                         query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION"
-                        + " VALUES ("
-                        + " @APPLICATION_ID,@APPLICATION_DATE,@APPLICANT_ID,@DAYOFF_ID,@DAYOFF_NAME,@DAYOFF_START_TIME,@DAYOFF_END_TIME,@DAYOFF_TOTAL_TIME,@DAYOFF_TIME_UNIT,@FUNC_SUB_ID,'01'"
-                        + " )";
+                            + " VALUES ("
+                            + " @APPLICATION_ID,@APPLICATION_DATE,@APPLICANT_ID,@DAYOFF_ID,@DAYOFF_NAME,@DAYOFF_START_TIME,@DAYOFF_END_TIME,@DAYOFF_TOTAL_TIME,@DAYOFF_TIME_UNIT,@FUNC_SUB_ID,'01'"
+                            + " )";
                         cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@APPLICATION_ID", (Convert.ToInt64(uid)+1).ToString());
+                        cmd.Parameters.AddWithValue("@APPLICATION_ID", uid);
                         cmd.Parameters.AddWithValue("@APPLICATION_DATE", DateTime.Now);
                         cmd.Parameters.AddWithValue("@APPLICANT_ID", Session["erp_id"].ToString().Trim());
                         cmd.Parameters.AddWithValue("@DAYOFF_ID", dayoff.typeID);
@@ -838,9 +850,31 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub);
                         cmd.ExecuteNonQuery();
                     }
-                    else
+                    catch (SqlException ex)
                     {
-                        lblTest.Text = ex.ToString();
+                        if (ex.Number == 2627)
+                        {
+                            query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION"
+                            + " VALUES ("
+                            + " @APPLICATION_ID,@APPLICATION_DATE,@APPLICANT_ID,@DAYOFF_ID,@DAYOFF_NAME,@DAYOFF_START_TIME,@DAYOFF_END_TIME,@DAYOFF_TOTAL_TIME,@DAYOFF_TIME_UNIT,@FUNC_SUB_ID,'01'"
+                            + " )";
+                            cmd = new SqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@APPLICATION_ID", (Convert.ToInt64(uid) + 1).ToString());
+                            cmd.Parameters.AddWithValue("@APPLICATION_DATE", DateTime.Now);
+                            cmd.Parameters.AddWithValue("@APPLICANT_ID", Session["erp_id"].ToString().Trim());
+                            cmd.Parameters.AddWithValue("@DAYOFF_ID", dayoff.typeID);
+                            cmd.Parameters.AddWithValue("@DAYOFF_NAME", dayoff.typeName);
+                            cmd.Parameters.AddWithValue("@DAYOFF_START_TIME", dayoff.startTime);
+                            cmd.Parameters.AddWithValue("@DAYOFF_END_TIME", dayoff.endTime);
+                            cmd.Parameters.AddWithValue("@DAYOFF_TOTAL_TIME", dayoff.amountUsing);
+                            cmd.Parameters.AddWithValue("@DAYOFF_TIME_UNIT", dayoff.unit);
+                            cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub);
+                            cmd.ExecuteNonQuery();
+                        }
+                        else
+                        {
+                            lblTest.Text = ex.ToString();
+                        }
                     }
                 }
             }
