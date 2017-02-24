@@ -136,21 +136,10 @@
                         </div>
                         <div class="panel-body">
                             <table id="tbAppSummary" class="table col-xs-12" runat="server">
-                                <%--<thead>
-                                    <tr>
-                                        <th>假別</th>
-                                        <th>開始時間</th>
-                                        <th>結束時間</th>
-                                        <th>請假總量</th>
-                                        <th>假別剩餘</th>
-                                        <th>代理人</th>
-                                        <th>移除</th>
-                                    </tr>
-                                </thead>--%>
                             </table>
                         </div>
                         <div class="panel-footer" style="text-align: right;">
-                            <asp:Button ID="Button1" runat="server" Text="送出" CssClass="btn btn-primary" />
+                            <asp:Button ID="btnAppSubmit" runat="server" Text="送出" CssClass="btn btn-primary" OnClick="btnAppSubmit_Click" />
                         </div>
                     </div>
                 </div>

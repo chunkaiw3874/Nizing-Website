@@ -174,6 +174,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         Boolean test3 = false;
         Boolean test4 = false;
         Boolean test8 = false;
+        Boolean test9 = false;
         DataTable dtDayOffDaysInfo = new DataTable();
         decimal totalDayOffAmount = 0;
 
@@ -269,11 +270,12 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     }
                 }
             }
+            
             for (int i = 0; i < dtDayOffDaysInfo.Rows.Count; i++)  //calculating total hours of dayoff
             {
                 if (dtDayOffDaysInfo.Rows[i][1].ToString() == "3")  //3 is working day
                 {
-                    TimeSpan timeDifference = new TimeSpan();
+                    TimeSpan timeDifference = new TimeSpan();                    
                     DateTime workEndTime = new DateTime();
                     DateTime workStartTime = new DateTime();
                     DateTime breakStartTime = new DateTime();
@@ -309,7 +311,12 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         {
                             workStartTime = dayOffStartTime;
                         }
-                        if (dayOffStartTime < breakEndTime)
+                        if ((dtDayOffDaysInfo.Rows.Count == 1 && dayOffStartTime <= breakStartTime && dayOffEndTime <= breakStartTime)  
+                            || (dtDayOffDaysInfo.Rows.Count == 1 && dayOffStartTime >= breakEndTime && dayOffEndTime >= breakEndTime))  //請假週期只有一天，並且不與休息時間重疊
+                        {
+                            timeDifference = workEndTime - workStartTime;
+                        }
+                        else if (dayOffStartTime < breakEndTime)
                         {
                             TimeSpan temp = breakEndTime - dayOffStartTime;
                             if (temp.Hours > 0)
@@ -355,7 +362,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     {
                         totalDayOffAmount += Convert.ToDecimal(dtDayOffDaysInfo.Rows[i][7]);
                     }
-                }
+                }                
             }
             if (hdnDayOffTypeUnit.Value == "天")
             {
@@ -365,7 +372,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             {
                 hdnTotalDayOffTime.Value = totalDayOffAmount.ToString();
             }
-            if (totalDayOffAmount <= 0)  //測試錯誤 5.請假週期的須請假總時數為0，無須請假
+            if (totalDayOffAmount <= 0)  //測試錯誤 5.此請假週期非上班時間，無須請假
             {
                 errorList.Add(errorCode(5));
             }
@@ -379,6 +386,15 @@ public partial class hr360_UI04 : System.Web.UI.Page
             if (Convert.ToDecimal(hdnTotalDayOffTime.Value) * 10 % 5 != 0)  //測試錯誤 7.請假單位為0.5
             {
                 errorList.Add(errorCode(7));
+            }
+            for (int i = 0; i < lstDayOffAppSummary.Count && test9 == false; i++) //測試錯誤 9.請假週期已在此次請假清單內
+            {
+                if((dayOffStartTime >= lstDayOffAppSummary[i].startTime && dayOffStartTime < lstDayOffAppSummary[i].endTime)
+                    || (dayOffEndTime > lstDayOffAppSummary[i].startTime && dayOffEndTime <= lstDayOffAppSummary[i].endTime))
+                {
+                    errorList.Add(errorCode(9));
+                    test9 = true;
+                }
             }
         }
 
@@ -562,6 +578,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
         else if (errorID == 8)
         {
             error = "未選擇代理人";
+        }
+        else if (errorID == 9)
+        {
+            error = "此請假期間與清單內重複";
         }
         return error;
     }
@@ -751,5 +771,79 @@ public partial class hr360_UI04 : System.Web.UI.Page
             lstDayOffAppSummary.RemoveAt(Convert.ToInt16(btnID.Substring(12, btnID.Length - 12)) - 1);
         }
         fillDayOffApplicationTable(lstDayOffAppSummary);
+    }
+    protected void btnAppSubmit_Click(object sender, EventArgs e)
+    {
+        //assign unique ID (yyyymmdd+流水號) to each application
+        string uid = "";
+        string query = "";
+        foreach (dayOffInfo dayoff in lstDayOffAppSummary)
+        {
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                //gerneral unique id
+                query = "SELECT MAX(CONVERT(INT,(SUBSTRING(APPLICATION_ID,LEN(APPLICATION_ID)-2,3))))"
+                    + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
+                    + " WHERE APPLICATION_ID LIKE @ID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ID", DateTime.Now.ToString("yyyyMMdd") + "%");
+                if (cmd.ExecuteScalar() == DBNull.Value)
+                {
+                    uid = DateTime.Now.ToString("yyyyMMdd") + "001";
+                }
+                else
+                {
+                    uid = DateTime.Now.ToString("yyyyMMdd") + (Convert.ToInt16(cmd.ExecuteScalar()) + 1).ToString("D3");
+                }            
+
+                //insert record with unique id
+                try
+                {
+                    query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION"
+                        + " VALUES ("
+                        + " @APPLICATION_ID,@APPLICATION_DATE,@APPLICANT_ID,@DAYOFF_ID,@DAYOFF_NAME,@DAYOFF_START_TIME,@DAYOFF_END_TIME,@DAYOFF_TOTAL_TIME,@DAYOFF_TIME_UNIT,@FUNC_SUB_ID,'01'"
+                        + " )";
+                    cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@APPLICATION_ID", uid);
+                    cmd.Parameters.AddWithValue("@APPLICATION_DATE", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@APPLICANT_ID", Session["erp_id"].ToString().Trim());
+                    cmd.Parameters.AddWithValue("@DAYOFF_ID", dayoff.typeID);
+                    cmd.Parameters.AddWithValue("@DAYOFF_NAME", dayoff.typeName);
+                    cmd.Parameters.AddWithValue("@DAYOFF_START_TIME", dayoff.startTime);
+                    cmd.Parameters.AddWithValue("@DAYOFF_END_TIME", dayoff.endTime);
+                    cmd.Parameters.AddWithValue("@DAYOFF_TOTAL_TIME", dayoff.amountUsing);
+                    cmd.Parameters.AddWithValue("@DAYOFF_TIME_UNIT", dayoff.unit);
+                    cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub);
+                    cmd.ExecuteNonQuery();
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 2627)
+                    {
+                        query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION"
+                        + " VALUES ("
+                        + " @APPLICATION_ID,@APPLICATION_DATE,@APPLICANT_ID,@DAYOFF_ID,@DAYOFF_NAME,@DAYOFF_START_TIME,@DAYOFF_END_TIME,@DAYOFF_TOTAL_TIME,@DAYOFF_TIME_UNIT,@FUNC_SUB_ID,'01'"
+                        + " )";
+                        cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@APPLICATION_ID", (Convert.ToInt64(uid)+1).ToString());
+                        cmd.Parameters.AddWithValue("@APPLICATION_DATE", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@APPLICANT_ID", Session["erp_id"].ToString().Trim());
+                        cmd.Parameters.AddWithValue("@DAYOFF_ID", dayoff.typeID);
+                        cmd.Parameters.AddWithValue("@DAYOFF_NAME", dayoff.typeName);
+                        cmd.Parameters.AddWithValue("@DAYOFF_START_TIME", dayoff.startTime);
+                        cmd.Parameters.AddWithValue("@DAYOFF_END_TIME", dayoff.endTime);
+                        cmd.Parameters.AddWithValue("@DAYOFF_TOTAL_TIME", dayoff.amountUsing);
+                        cmd.Parameters.AddWithValue("@DAYOFF_TIME_UNIT", dayoff.unit);
+                        cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub);
+                        cmd.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        lblTest.Text = ex.ToString();
+                    }
+                }
+            }
+        }
     }
 }
