@@ -11,7 +11,7 @@
             resize: none;
         }
     </style>
-    <script type="text/javascript">
+    <%--<script type="text/javascript">
         $(function () {
             $('.autosize').autosize();
         });
@@ -48,14 +48,15 @@
                 }
             });
         });
-    </script>
+    </script>--%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="page_title" runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="top_menu" runat="Server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="page_content" runat="Server">
-    <div class="container">
+    under construction
+    <%--<div class="container">
         <div class="row form-group">
             <asp:TextBox ID="txtTestName" runat="server"></asp:TextBox>
             <asp:Button ID="btnTestName" runat="server" Text="測試ERP ID" OnClick="btnTestName_Click" />
@@ -145,6 +146,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--%>
 </asp:Content>
 
