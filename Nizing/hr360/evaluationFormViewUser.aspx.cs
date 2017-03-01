@@ -178,7 +178,7 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
                 div.TagName = "div";
                 div.ID = outerDiv.ID + "_1";
                 div.Attributes["class"] = "col-xs-12 subtitle border";
-                div.InnerText = dtAssessorList.Rows[i][1].ToString() + "評語";
+                div.InnerText = /*dtAssessorList.Rows[i][1].ToString() +*/ "評語"; //2017.03.01 將第二層評語改為匿名制
                 outerDiv.Controls.Add(div);
                 //評語 textbox
                 outerDiv = new HtmlGenericControl();
