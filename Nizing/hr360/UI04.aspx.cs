@@ -31,7 +31,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            Session["erp_id"] = "0011"; //test only to avoid error on loading, delete after trial
+            Session["erp_id"] = "0080"; //test only to avoid error on loading, delete after trial
 
             Session["lstDayOffAppSummary"] = lstDayOffAppSummary;
             hdnIsPostBack.Value = "0";  //variable for determining whether this page is a postback for jquery
@@ -397,6 +397,28 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     test9 = true;
                 }
             }
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString)) //測試錯誤 10.請假週期已在DB內
+            {
+                conn.Open();
+                //check for error
+                string query = "SELECT APPLICATION_ID"
+                    + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
+                    + " WHERE APPLICANT_ID = @ID"
+                    + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
+                    + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
+                    + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                cmd.Parameters.AddWithValue("@STARTTIME", dayOffStartTime.Date);
+                cmd.Parameters.AddWithValue("@ENDTIME", dayOffEndTime.Date);
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    if (dr.HasRows)
+                    {
+                        errorList.Add(errorCode(10));
+                    }
+                }
+            }
         }
 
         //錯誤訊息集合顯示
@@ -582,7 +604,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
         else if (errorID == 9)
         {
-            error = "此請假期間已重複";
+            error = "此請假期間已與清單內重複，請確認";
+        }
+        else if (errorID == 10)
+        {
+            error = "此請假期間已申請，請與人事部確認";
         }
         return error;
     }
@@ -781,41 +807,41 @@ public partial class hr360_UI04 : System.Web.UI.Page
         int count = 0;
         foreach (dayOffInfo dayoff in lstDayOffAppSummary)
         {
-            Boolean hasError = false;
-            count += 1;
+            //Boolean hasError = false;
+            //count += 1;
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
-                //check for error
-                query = "SELECT APPLICATION_ID"
-                    + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
-                    + " WHERE APPLICANT_ID = @ID"
-                    + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
-                    + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
-                    + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
-                cmd.Parameters.AddWithValue("@STARTTIME", dayoff.startTime);
-                cmd.Parameters.AddWithValue("@ENDTIME", dayoff.endTime);
-                using (SqlDataReader dr = cmd.ExecuteReader())
-                {
-                    if (dr.HasRows)
-                    {
-                        hasError = true;
-                        while (dr.Read())
-                        {
-                            txtErrorMessage.Text = "清單第" + count + "項與假單ID#" + dr.GetString(0) + "請假期間重疊";
-                        }
-                    }
-                }
+                ////check for error
+                //query = "SELECT APPLICATION_ID"
+                //    + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
+                //    + " WHERE APPLICANT_ID = @ID"
+                //    + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
+                //    + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
+                //    + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
+                //SqlCommand cmd = new SqlCommand(query, conn);
+                //cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                //cmd.Parameters.AddWithValue("@STARTTIME", dayoff.startTime);
+                //cmd.Parameters.AddWithValue("@ENDTIME", dayoff.endTime);
+                //using (SqlDataReader dr = cmd.ExecuteReader())
+                //{
+                //    if (dr.HasRows)
+                //    {
+                //        hasError = true;
+                //        while (dr.Read())
+                //        {
+                //            txtErrorMessage.Text = "清單第" + count + "項與假單ID#" + dr.GetString(0) + "請假期間重疊";
+                //        }
+                //    }
+                //}
 
-                if (hasError == false)
-                {
+                //if (hasError == false)
+                //{
                     //gerneral unique id
                     query = "SELECT MAX(CONVERT(INT,(SUBSTRING(APPLICATION_ID,LEN(APPLICATION_ID)-2,3))))"
                         + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
                         + " WHERE APPLICATION_ID LIKE @ID";
-                    cmd = new SqlCommand(query, conn);
+                    SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@ID", DateTime.Now.ToString("yyyyMMdd") + "%");
                     if (cmd.ExecuteScalar() == DBNull.Value)
                     {
@@ -872,7 +898,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                             
                         }
                     }
-                }
+                //}
             }
         }
     }
