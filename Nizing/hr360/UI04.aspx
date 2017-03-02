@@ -57,9 +57,10 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="page_content" runat="Server">
     <div class="container">
         <div class="row form-group">
-            <asp:TextBox ID="txtTestName" runat="server"></asp:TextBox>
+            <%--<asp:TextBox ID="txtTestName" runat="server"></asp:TextBox>
             <asp:Button ID="btnTestName" runat="server" Text="測試ERP ID" OnClick="btnTestName_Click" />
-            <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>
+            <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>--%>
+            測試中，請勿使用
         </div>
         <hr />
         <div class="row form-group" style="margin-top: 10px;">
