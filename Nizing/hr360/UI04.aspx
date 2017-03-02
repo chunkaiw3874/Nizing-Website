@@ -11,7 +11,7 @@
             resize: none;
         }
     </style>
-    <%--<script type="text/javascript">
+    <script type="text/javascript">
         $(function () {
             $('.autosize').autosize();
         });
@@ -48,19 +48,19 @@
                 }
             });
         });
-    </script>--%>
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="page_title" runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="top_menu" runat="Server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="page_content" runat="Server">
-    under construction
-    <%--<div class="container">
+    <div class="container">
         <div class="row form-group">
-            <asp:TextBox ID="txtTestName" runat="server"></asp:TextBox>
+            <%--<asp:TextBox ID="txtTestName" runat="server"></asp:TextBox>
             <asp:Button ID="btnTestName" runat="server" Text="測試ERP ID" OnClick="btnTestName_Click" />
-            <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>
+            <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>--%>
+            測試中，請勿使用
         </div>
         <hr />
         <div class="row form-group" style="margin-top: 10px;">
@@ -126,7 +126,7 @@
                     <asp:ImageButton ID="btnDayOffAdd" runat="server" ImageUrl="~/hr360/image/icon/green-arrow-down.png" Width="40" OnClick="btnDayOffAdd_Click" />
                 </div>
                 <div class="col-xs-6">
-                    <asp:TextBox ID="txtErrorMessage" runat="server" TextMode="MultiLine" CssClass="autosize no-resize error-message" Width="300" BorderStyle="none" Wrap="false" ReadOnly="true"></asp:TextBox>
+                    <asp:TextBox ID="txtErrorMessage" runat="server" TextMode="MultiLine" CssClass="autosize no-resize error-message" Width="400" BorderStyle="none" Wrap="false" ReadOnly="true"></asp:TextBox>
                 </div>
             </div>
             <div class="row">
@@ -146,6 +146,6 @@
                 </div>
             </div>
         </div>
-    </div>--%>
+    </div>
 </asp:Content>
 
