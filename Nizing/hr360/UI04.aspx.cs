@@ -31,7 +31,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            Session["erp_id"] = "0066"; //test only to avoid error on loading, delete after trial
+            Session["erp_id"] = "0074"; //test only to avoid error on loading, delete after trial
 
             Session["lstDayOffAppSummary"] = lstDayOffAppSummary;
             hdnIsPostBack.Value = "0";  //variable for determining whether this page is a postback for jquery
@@ -58,11 +58,12 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         + " AND PALMC.MC001<>'10'" //曠職
                         + " ORDER BY PALMC.MC001";
                 }
-                else
+                else //女性無陪產假
                 {
                     query = "SELECT PALMC.MC001+' '+PALMC.MC002,PALMC.MC001"
                         + " FROM PALMC"
                         + " WHERE PALMC.MC001<>'10'" //曠職
+                        + " AND PALMC.MC001<>'09'" //陪產假
                         + " ORDER BY PALMC.MC001";
                 }
                 cmd = new SqlCommand(query, conn);
@@ -74,6 +75,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     + " WHERE MV.MV004=@DEPT"
                     + " AND MV.MV001<>@ID"
                     + " AND MV.MV022=''"
+                    + " AND MV.MV001<>'0000'" //李小姐
+                    + " AND MV.MV001<>'0006'" //KELVEN
+                    + " AND MV.MV001<>'0007'" //CHRISSY
+                    + " AND MV.MV001<>'0098'" //黃耀南
                     + " ORDER BY MV.MV001";
                 cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@DEPT", userInfo.Rows[0][1].ToString().Trim());
@@ -162,8 +167,12 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         List<string> errorList = new List<string>();
         DateTime result = new DateTime();
-        DateTime dayOffStartTime = new DateTime();
-        DateTime dayOffEndTime = new DateTime();
+        DateTime dayOffStartTime = new DateTime();  //申請開始請假時間
+        DateTime dayOffEndTime = new DateTime();  //申請結束請假時間
+        DateTime workEndTime = new DateTime();  //請假週期內，每日工作開始時間
+        DateTime workStartTime = new DateTime();  //請假週期內，每日工作結束時間
+        DateTime breakStartTime = new DateTime();  //請假週期內，每日休息開始時間
+        DateTime breakEndTime = new DateTime();  //請假週期內，每日休息結束時間
         Boolean test101 = false;
         Boolean test102 = false;
         Boolean test103 = false;
@@ -297,10 +306,6 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 if (dtDayOffDaysInfo.Rows[i][1].ToString() == "3")  //3 is working day
                 {
                     TimeSpan timeDifference = new TimeSpan();
-                    DateTime workEndTime = new DateTime();
-                    DateTime workStartTime = new DateTime();
-                    DateTime breakStartTime = new DateTime();
-                    DateTime breakEndTime = new DateTime();
                     workStartTime = new DateTime(Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(0, 4)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(4, 2)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(6, 2)));
                     workStartTime = workStartTime.AddHours(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][3].ToString().Substring(0, 2))).AddMinutes(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][3].ToString().Substring(3, 2)));
                     breakStartTime = new DateTime(Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(0, 4)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(4, 2)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(6, 2)));
@@ -659,11 +664,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    //protected void btnTestName_Click(object sender, EventArgs e)
-    //{
-    //    Session["erp_id"] = txtTestName.Text.Trim();
-    //    lblTest.Text = "測試帳號" + txtTestName.Text.Trim();
-    //}
+    protected void btnTestName_Click(object sender, EventArgs e)
+    {
+        Session["erp_id"] = txtTestName.Text.Trim();
+        lblTest.Text = "測試帳號" + txtTestName.Text.Trim();
+    }
 
     /// <summary>
     /// fill day off application table
