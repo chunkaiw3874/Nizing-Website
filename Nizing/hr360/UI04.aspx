@@ -69,6 +69,8 @@
                 <span class="label label-info" id="btnDayOffAppVisibility" style="cursor: pointer; font-size: 20px;">我要請假</span>
                 <asp:HiddenField ID="hdnIsPostBack" runat="server" />
                 <asp:HiddenField ID="hdnIsDayOffAppVisible" runat="server" />
+                <asp:HiddenField ID="hdnDayOffTimeRestraint" runat="server" />
+                <asp:HiddenField ID="hdnOfficeOrProduction" runat="server" />
             </div>
         </div>
         <div id="DayOffApp">

@@ -15,6 +15,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
     string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
     List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
+    DataTable userInfo = new DataTable(); 
 
     public class dayOffInfo
     {
@@ -37,12 +38,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
             hdnIsPostBack.Value = "0";  //variable for determining whether this page is a postback for jquery
             hdnIsDayOffAppVisible.Value = "0";  //variable for determining whether the div DayOffApp is visible
             DataSet ds = new DataSet();
-            DataTable userInfo = new DataTable();
             string query = "";
             using (SqlConnection conn = new SqlConnection(NZconnectionString))
             {
                 conn.Open();
-                query = "SELECT MV.MV007,MV004"  //獲取登入者資料
+                query = "SELECT MV.MV007,MV004"  //獲取登入者資料 性別、部門別
                     + " FROM CMSMV MV"
                     + " WHERE MV001=@ID";
                 SqlCommand cmd = new SqlCommand(query, conn);
@@ -104,6 +104,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 ddlDayOffStartMin.Items.Add(i.ToString("D2"));
                 ddlDayOffEndMin.Items.Add(i.ToString("D2"));
             }
+            
             //請假內容header
             HtmlTableRow newHeaderRow = new HtmlTableRow();
             HtmlTableCell newHeaderCell = new HtmlTableCell("th");
@@ -130,14 +131,33 @@ public partial class hr360_UI04 : System.Web.UI.Page
             newHeaderCell.InnerText = "移除";
             newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
             newHeaderRow.Controls.Add(newHeaderCell);
-            tbAppSummary.Controls.Add(newHeaderRow);
-            //WIP
+            tbAppSummary.Controls.Add(newHeaderRow);            
             //還需要代理人是否eligible for代理的篩選條件
             ddlDayOffFuncSub.Items.Add(new ListItem("請選擇代理人", "0"));
             ddlDayOffFuncSub.SelectedIndex = 0;
             for (int i = 0; i < ds.Tables[1].Rows.Count; i++)
             {
                 ddlDayOffFuncSub.Items.Add(new ListItem(ds.Tables[1].Rows[i][0].ToString().Trim(), ds.Tables[1].Rows[i][1].ToString().Trim()));
+            }
+            //hidden field insertion
+            //determine if applicant is within 0.5hr restraint or 4hr restraint (by dept)
+            if (userInfo.Rows[0][2].ToString() == "B-C"     //使用者部門為上膠部
+                || userInfo.Rows[0][2].ToString() == "B-E"  //絞線包帶部
+                || userInfo.Rows[0][2].ToString() == "B-G"  //編織部
+                || userInfo.Rows[0][2].ToString() == "B-IC" //倉儲管理科
+                || userInfo.Rows[0][2].ToString() == "B-K"  //捲線部
+                || userInfo.Rows[0][2].ToString() == "B-P"  //PVC押出部
+                || userInfo.Rows[0][2].ToString() == "B-S"  //矽膠部
+                || userInfo.Rows[0][2].ToString() == "B-T"  //鐵氟龍部
+                ) 
+            {
+                hdnDayOffTimeRestraint.Value = "4";
+                hdnOfficeOrProduction.Value = "production";
+            }
+            else
+            {
+                hdnOfficeOrProduction.Value = "office";
+                hdnDayOffTimeRestraint.Value = "0.5";
             }
         }
         else
@@ -172,7 +192,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         DateTime workEndTime = new DateTime();  //請假週期內，每日工作開始時間
         DateTime workStartTime = new DateTime();  //請假週期內，每日工作結束時間
         DateTime breakStartTime = new DateTime();  //請假週期內，每日休息開始時間
-        DateTime breakEndTime = new DateTime();  //請假週期內，每日休息結束時間
+        DateTime breakEndTime = new DateTime();  //請假週期內，每日休息結束時間        
         Boolean test101 = false;
         Boolean test102 = false;
         Boolean test103 = false;
@@ -181,8 +201,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
         Boolean test106 = false;
         Boolean test204 = false;
         DataTable dtDayOffDaysInfo = new DataTable();
-        decimal totalDayOffAmount = 0;
-
+        decimal totalDayOffAmount = 0;     
+        
         txtErrorMessage.Text = ""; //reset 錯誤訊息
         if (((List<dayOffInfo>)Session["lstDayOffAppSummary"]).Count != 0)
         {
@@ -358,6 +378,21 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         {
                             timeDifference = workEndTime - workStartTime;
                         }
+
+                        if (timeDifference != 0)
+                        {
+                            //判斷假期開始時間是否合理(線廠人員請假開始時間必須為1.當天上班時間 or 2.休息開始時間 or 3.休息結束時間)
+                            if (hdnOfficeOrProduction.Value == "production")
+                            {
+                                if (!(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(3, 2))         //開始放假時間(hhmm)!=開始放假時間
+                                    || !(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(3, 2))   //開始放假時間(hhmm)!=休息開始時間
+                                    || !(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][6].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][6].ToString().Substring(3, 2))   //開始放假時間(hhmm)!=休息結束時間
+                                    )
+                                {
+                                    errorCode(206);
+                                }
+                            }
+                        }
                         totalDayOffAmount += (timeDifference.Hours + Convert.ToDecimal(timeDifference.Minutes / 60.0));
                     }
                     else if (i == dtDayOffDaysInfo.Rows.Count - 1 && i != 0)  //last day, and last day and first day are not the same day (ie day off time span is within 1 day)
@@ -409,7 +444,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     errorList.Add(errorCode(202));
                 }
             }
-            if (Convert.ToDecimal(hdnTotalDayOffTime.Value) * 10 % 5 != 0)  //測試錯誤 203.請假單位為0.5
+            if (Convert.ToDecimal(hdnTotalDayOffTime.Value) * 10 % Convert.ToInt16((Convert.ToDecimal(hdnDayOffTimeRestraint.Value) * 10)) != 0)  //測試錯誤 203.請假單位與限制不符
             {
                 errorList.Add(errorCode(203));
             }
@@ -630,7 +665,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
         else if (errorID == 203)
         {
-            error = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3).Trim() + "請假單位為0.5" + hdnDayOffTypeUnit.Value;
+            //error = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3).Trim() + "請假單位為0.5" + hdnDayOffTypeUnit.Value;
+            error = "請假總量不符合單位數量";
         }
         else if (errorID == 204)
         {
@@ -639,6 +675,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
         else if (errorID == 205)
         {
             error = "此請假期間已申請，請與人事部確認";
+        }
+        else if (errorID == 206)
+        {
+            error = "請假開始時間不符規定";
         }
         return error;
     }
