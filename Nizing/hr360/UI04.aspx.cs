@@ -32,7 +32,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            Session["erp_id"] = "0011"; //test only to avoid error on loading, delete after trial
+            //Session["erp_id"] = "0011"; //test only to avoid error on loading, delete after trial
 
             Session["lstDayOffAppSummary"] = lstDayOffAppSummary;
             hdnIsPostBack.Value = "0";  //variable for determining whether this page is a postback for jquery
@@ -492,6 +492,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
 
         //錯誤訊息集合顯示
+        errorList = errorList.OrderBy(d => d).ToList();
         for (int i = 0; i < errorList.Count; i++)
         {
             if (i == 0)
@@ -499,7 +500,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 txtErrorMessage.Text = errorList[i];
             }
             else
-            {
+            {                
                 txtErrorMessage.Text += Environment.NewLine + errorList[i];
             }
         }
@@ -639,51 +640,51 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected string errorCode(int errorID)
     {
-        string error = "";
+        string error = errorID.ToString() + ".";
         if (errorID == 101)
         {
-            error = "101 未選擇假別";
+            error +=  "未選擇假別";
         }
         else if (errorID == 102)
         {
-            error = "102 起始日期輸入錯誤(格式範例 2017/03/04)";
+            error += "起始日期輸入錯誤(格式範例 2017/03/04)";
         }
         else if (errorID == 103)
         {
-            error = "103 結束日期輸入錯誤(格式範例 2017/04/27)";
+            error += "結束日期輸入錯誤(格式範例 2017/04/27)";
         }
         else if (errorID == 104)
         {
-            error = "104 結束日期不可小於起始日期";
+            error += "結束日期不可小於起始日期";
         }
         else if (errorID == 105)
         {
-            error = "105 未選擇代理人";
+            error += "未選擇代理人";
         }
         else if (errorID == 106)
         {
-            error = "106 代理人已經自行請假或代理他人，請另選代理人";
+            error += "代理人已經自行請假或代理他人，請另選代理人";
         }
         else if (errorID == 201)
         {
-            error = "201 此請假週期非上班時間，無須請假";
+            error += "此請假週期非上班時間，無須請假";
         }
         else if (errorID == 202)
         {
-            error = "202 剩餘假期不足";
+            error += "剩餘假期不足";
         }
         else if (errorID == 203)
         {
             //error = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3).Trim() + "請假單位為0.5" + hdnDayOffTypeUnit.Value;
-            error = "203 請假總量不符合單位數量";
+            error += "請假總量不符合單位數量";
         }
         else if (errorID == 204)
         {
-            error = "204 此請假期間已與清單內重複，請確認";
+            error += "此請假期間已與清單內重複，請確認";
         }
         else if (errorID == 205)
         {
-            error = "205 此請假期間已申請，請與人事部確認";
+            error += "此請假期間已申請，請與人事部確認";
         }
         else if (errorID == 206)
         {
