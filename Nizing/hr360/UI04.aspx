@@ -57,10 +57,11 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="page_content" runat="Server">
     <div class="container">
         <div class="row form-group">
-            <%--<asp:TextBox ID="txtTestName" runat="server"></asp:TextBox>
-            <asp:Button ID="btnTestName" runat="server" Text="測試ERP ID" OnClick="btnTestName_Click" />
-            <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>--%>
             測試中，請勿使用
+            <br />
+            <asp:TextBox ID="txtTestName" runat="server"></asp:TextBox>
+            <asp:Button ID="btnTestName" runat="server" Text="測試ERP ID" OnClick="btnTestName_Click" />
+            <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>
         </div>
         <hr />
         <div class="row form-group" style="margin-top: 10px;">
@@ -68,6 +69,8 @@
                 <span class="label label-info" id="btnDayOffAppVisibility" style="cursor: pointer; font-size: 20px;">我要請假</span>
                 <asp:HiddenField ID="hdnIsPostBack" runat="server" />
                 <asp:HiddenField ID="hdnIsDayOffAppVisible" runat="server" />
+                <asp:HiddenField ID="hdnDayOffTimeRestraint" runat="server" />
+                <asp:HiddenField ID="hdnOfficeOrProduction" runat="server" />
             </div>
         </div>
         <div id="DayOffApp">

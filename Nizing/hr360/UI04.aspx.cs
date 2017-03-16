@@ -15,6 +15,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
     string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
     List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
+    DataTable userInfo = new DataTable(); 
 
     public class dayOffInfo
     {
@@ -31,18 +32,17 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            Session["erp_id"] = "0066"; //test only to avoid error on loading, delete after trial
+            Session["erp_id"] = "0011"; //test only to avoid error on loading, delete after trial
 
             Session["lstDayOffAppSummary"] = lstDayOffAppSummary;
             hdnIsPostBack.Value = "0";  //variable for determining whether this page is a postback for jquery
             hdnIsDayOffAppVisible.Value = "0";  //variable for determining whether the div DayOffApp is visible
             DataSet ds = new DataSet();
-            DataTable userInfo = new DataTable();
             string query = "";
             using (SqlConnection conn = new SqlConnection(NZconnectionString))
             {
                 conn.Open();
-                query = "SELECT MV.MV007,MV004"  //獲取登入者資料
+                query = "SELECT MV.MV007,MV004"  //獲取登入者資料 性別、部門別
                     + " FROM CMSMV MV"
                     + " WHERE MV001=@ID";
                 SqlCommand cmd = new SqlCommand(query, conn);
@@ -58,11 +58,12 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         + " AND PALMC.MC001<>'10'" //曠職
                         + " ORDER BY PALMC.MC001";
                 }
-                else
+                else //女性無陪產假
                 {
                     query = "SELECT PALMC.MC001+' '+PALMC.MC002,PALMC.MC001"
                         + " FROM PALMC"
                         + " WHERE PALMC.MC001<>'10'" //曠職
+                        + " AND PALMC.MC001<>'09'" //陪產假
                         + " ORDER BY PALMC.MC001";
                 }
                 cmd = new SqlCommand(query, conn);
@@ -74,6 +75,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     + " WHERE MV.MV004=@DEPT"
                     + " AND MV.MV001<>@ID"
                     + " AND MV.MV022=''"
+                    + " AND MV.MV001<>'0000'" //李小姐
+                    + " AND MV.MV001<>'0006'" //KELVEN
+                    + " AND MV.MV001<>'0007'" //CHRISSY
+                    + " AND MV.MV001<>'0098'" //黃耀南
                     + " ORDER BY MV.MV001";
                 cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@DEPT", userInfo.Rows[0][1].ToString().Trim());
@@ -99,6 +104,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 ddlDayOffStartMin.Items.Add(i.ToString("D2"));
                 ddlDayOffEndMin.Items.Add(i.ToString("D2"));
             }
+            
             //請假內容header
             HtmlTableRow newHeaderRow = new HtmlTableRow();
             HtmlTableCell newHeaderCell = new HtmlTableCell("th");
@@ -125,14 +131,33 @@ public partial class hr360_UI04 : System.Web.UI.Page
             newHeaderCell.InnerText = "移除";
             newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
             newHeaderRow.Controls.Add(newHeaderCell);
-            tbAppSummary.Controls.Add(newHeaderRow);
-            //WIP
+            tbAppSummary.Controls.Add(newHeaderRow);            
             //還需要代理人是否eligible for代理的篩選條件
             ddlDayOffFuncSub.Items.Add(new ListItem("請選擇代理人", "0"));
             ddlDayOffFuncSub.SelectedIndex = 0;
             for (int i = 0; i < ds.Tables[1].Rows.Count; i++)
             {
                 ddlDayOffFuncSub.Items.Add(new ListItem(ds.Tables[1].Rows[i][0].ToString().Trim(), ds.Tables[1].Rows[i][1].ToString().Trim()));
+            }
+            //hidden field insertion
+            //determine if applicant is within 0.5hr restraint or 4hr restraint (by dept)
+            if (userInfo.Rows[0][1].ToString() == "B-C"     //使用者部門為上膠部
+                || userInfo.Rows[0][1].ToString() == "B-E"  //絞線包帶部
+                || userInfo.Rows[0][1].ToString() == "B-G"  //編織部
+                || userInfo.Rows[0][1].ToString() == "B-IC" //倉儲管理科
+                || userInfo.Rows[0][1].ToString() == "B-K"  //捲線部
+                || userInfo.Rows[0][1].ToString() == "B-P"  //PVC押出部
+                || userInfo.Rows[0][1].ToString() == "B-S"  //矽膠部
+                || userInfo.Rows[0][1].ToString() == "B-T"  //鐵氟龍部
+                ) 
+            {
+                hdnDayOffTimeRestraint.Value = "4";
+                hdnOfficeOrProduction.Value = "production";
+            }
+            else
+            {
+                hdnOfficeOrProduction.Value = "office";
+                hdnDayOffTimeRestraint.Value = "0.5";
             }
         }
         else
@@ -162,8 +187,12 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         List<string> errorList = new List<string>();
         DateTime result = new DateTime();
-        DateTime dayOffStartTime = new DateTime();
-        DateTime dayOffEndTime = new DateTime();
+        DateTime dayOffStartTime = new DateTime();  //申請開始請假時間
+        DateTime dayOffEndTime = new DateTime();  //申請結束請假時間
+        DateTime workEndTime = new DateTime();  //請假週期內，每日工作開始時間
+        DateTime workStartTime = new DateTime();  //請假週期內，每日工作結束時間
+        DateTime breakStartTime = new DateTime();  //請假週期內，每日休息開始時間
+        DateTime breakEndTime = new DateTime();  //請假週期內，每日休息結束時間        
         Boolean test101 = false;
         Boolean test102 = false;
         Boolean test103 = false;
@@ -172,8 +201,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
         Boolean test106 = false;
         Boolean test204 = false;
         DataTable dtDayOffDaysInfo = new DataTable();
-        decimal totalDayOffAmount = 0;
-
+        decimal totalDayOffAmount = 0;     
+        
         txtErrorMessage.Text = ""; //reset 錯誤訊息
         if (((List<dayOffInfo>)Session["lstDayOffAppSummary"]).Count != 0)
         {
@@ -227,29 +256,32 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             test105 = true;
         }
-        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))  //測試錯誤 106.代理人有事，不能代理
+        if (test102 && test103 && test104)
         {
-            conn.Open();
-            string query = "SELECT APPLICATION_ID"
-                        + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
-                        + " WHERE (APPLICANT_ID=@ID OR FUNCTIONAL_SUBSTITUTE_ID LIKE @ID+'%')"
-                        + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
-                        + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
-                        + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
-            SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@ID", ddlDayOffFuncSub.SelectedValue);
-            cmd.Parameters.AddWithValue("@STARTTIME", dayOffStartTime);
-            cmd.Parameters.AddWithValue("@ENDTIME", dayOffEndTime);
-            using (SqlDataReader dr = cmd.ExecuteReader())
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))  //測試錯誤 106.代理人有事，不能代理
             {
-                if (dr.HasRows)
+                conn.Open();
+                string query = "SELECT APPLICATION_ID"
+                            + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
+                            + " WHERE (APPLICANT_ID=@ID OR FUNCTIONAL_SUBSTITUTE_ID LIKE @ID+'%')"
+                            + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
+                            + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
+                            + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ID", ddlDayOffFuncSub.SelectedValue);
+                cmd.Parameters.AddWithValue("@STARTTIME", dayOffStartTime);
+                cmd.Parameters.AddWithValue("@ENDTIME", dayOffEndTime);
+                using (SqlDataReader dr = cmd.ExecuteReader())
                 {
-                    errorList.Add(errorCode(106));
-                    test106 = false;
-                }
-                else
-                {
-                    test106 = true;
+                    if (dr.HasRows)
+                    {
+                        errorList.Add(errorCode(106));
+                        test106 = false;
+                    }
+                    else
+                    {
+                        test106 = true;
+                    }
                 }
             }
         }
@@ -297,10 +329,6 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 if (dtDayOffDaysInfo.Rows[i][1].ToString() == "3")  //3 is working day
                 {
                     TimeSpan timeDifference = new TimeSpan();
-                    DateTime workEndTime = new DateTime();
-                    DateTime workStartTime = new DateTime();
-                    DateTime breakStartTime = new DateTime();
-                    DateTime breakEndTime = new DateTime();
                     workStartTime = new DateTime(Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(0, 4)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(4, 2)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(6, 2)));
                     workStartTime = workStartTime.AddHours(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][3].ToString().Substring(0, 2))).AddMinutes(Convert.ToDouble(dtDayOffDaysInfo.Rows[i][3].ToString().Substring(3, 2)));
                     breakStartTime = new DateTime(Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(0, 4)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(4, 2)), Convert.ToInt16(dtDayOffDaysInfo.Rows[i][0].ToString().Substring(6, 2)));
@@ -353,6 +381,21 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         {
                             timeDifference = workEndTime - workStartTime;
                         }
+
+                        if (timeDifference.Hours != 0 || timeDifference.Minutes != 0)
+                        {
+                            //判斷假期開始時間是否合理(線廠人員請假開始時間必須為1.當天上班時間 or 2.休息開始時間 or 3.休息結束時間)
+                            if (hdnOfficeOrProduction.Value == "production")
+                            {
+                                if (!(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(3, 2))     //開始放假時間(hhmm)!=開始放假時間
+                                    && !(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(3, 2))  //開始放假時間(hhmm)!=休息開始時間
+                                    && !(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][6].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][6].ToString().Substring(3, 2))  //開始放假時間(hhmm)!=休息結束時間
+                                    )
+                                {
+                                    errorList.Add(errorCode(206));
+                                }
+                            }
+                        }
                         totalDayOffAmount += (timeDifference.Hours + Convert.ToDecimal(timeDifference.Minutes / 60.0));
                     }
                     else if (i == dtDayOffDaysInfo.Rows.Count - 1 && i != 0)  //last day, and last day and first day are not the same day (ie day off time span is within 1 day)
@@ -388,10 +431,18 @@ public partial class hr360_UI04 : System.Web.UI.Page
             if (hdnDayOffTypeUnit.Value == "天")
             {
                 hdnTotalDayOffTime.Value = (totalDayOffAmount / Convert.ToDecimal(hdnNormalWorkHour.Value)).ToString();
+                if (Convert.ToDecimal(hdnTotalDayOffTime.Value) * 10 % 5 != 0)  //測試錯誤 203.請假單位與限制不符
+                {
+                    errorList.Add(errorCode(203));
+                }
             }
             else
             {
                 hdnTotalDayOffTime.Value = Convert.ToDecimal(totalDayOffAmount).ToString();
+                if (Convert.ToDecimal(hdnTotalDayOffTime.Value) * 10 % Convert.ToInt16((Convert.ToDecimal(hdnDayOffTimeRestraint.Value) * 10)) != 0)  //測試錯誤 203.請假單位與限制不符
+                {
+                    errorList.Add(errorCode(203));
+                }
             }
             if (totalDayOffAmount <= 0)  //測試錯誤 201.此請假週期非上班時間，無須請假
             {
@@ -404,10 +455,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     errorList.Add(errorCode(202));
                 }
             }
-            if (Convert.ToDecimal(hdnTotalDayOffTime.Value) * 10 % 5 != 0)  //測試錯誤 203.請假單位為0.5
-            {
-                errorList.Add(errorCode(203));
-            }
+            //需先辨別假別是以天計算還是時計算
+            
             for (int i = 0; i < lstDayOffAppSummary.Count && test204 == false; i++) //測試錯誤 204.請假週期已在此次請假清單內
             {
                 if ((dayOffStartTime >= lstDayOffAppSummary[i].startTime && dayOffStartTime < lstDayOffAppSummary[i].endTime)
@@ -593,47 +642,52 @@ public partial class hr360_UI04 : System.Web.UI.Page
         string error = "";
         if (errorID == 101)
         {
-            error = "未選擇假別";
+            error = "101 未選擇假別";
         }
         else if (errorID == 102)
         {
-            error = "起始日期輸入錯誤(格式範例 2017/03/04)";
+            error = "102 起始日期輸入錯誤(格式範例 2017/03/04)";
         }
         else if (errorID == 103)
         {
-            error = "結束日期輸入錯誤(格式範例 2017/04/27)";
+            error = "103 結束日期輸入錯誤(格式範例 2017/04/27)";
         }
         else if (errorID == 104)
         {
-            error = "結束日期不可小於起始日期";
+            error = "104 結束日期不可小於起始日期";
         }
         else if (errorID == 105)
         {
-            error = "未選擇代理人";
+            error = "105 未選擇代理人";
         }
         else if (errorID == 106)
         {
-            error = "代理人已經自行請假或代理他人，請另選代理人";
+            error = "106 代理人已經自行請假或代理他人，請另選代理人";
         }
         else if (errorID == 201)
         {
-            error = "此請假週期非上班時間，無須請假";
+            error = "201 此請假週期非上班時間，無須請假";
         }
         else if (errorID == 202)
         {
-            error = "剩餘假期不足";
+            error = "202 剩餘假期不足";
         }
         else if (errorID == 203)
         {
-            error = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3).Trim() + "請假單位為0.5" + hdnDayOffTypeUnit.Value;
+            //error = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3).Trim() + "請假單位為0.5" + hdnDayOffTypeUnit.Value;
+            error = "203 請假總量不符合單位數量";
         }
         else if (errorID == 204)
         {
-            error = "此請假期間已與清單內重複，請確認";
+            error = "204 此請假期間已與清單內重複，請確認";
         }
         else if (errorID == 205)
         {
-            error = "此請假期間已申請，請與人事部確認";
+            error = "205 此請假期間已申請，請與人事部確認";
+        }
+        else if (errorID == 206)
+        {
+            error = "206 請假時間不符規定";
         }
         return error;
     }
@@ -659,11 +713,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    //protected void btnTestName_Click(object sender, EventArgs e)
-    //{
-    //    Session["erp_id"] = txtTestName.Text.Trim();
-    //    lblTest.Text = "測試帳號" + txtTestName.Text.Trim();
-    //}
+    protected void btnTestName_Click(object sender, EventArgs e)
+    {
+        Session["erp_id"] = txtTestName.Text.Trim();
+        lblTest.Text = "測試帳號" + txtTestName.Text.Trim();
+    }
 
     /// <summary>
     /// fill day off application table
