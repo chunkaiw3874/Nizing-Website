@@ -408,7 +408,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                                     && !(workEndTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][6].ToString().Substring(0, 2) && workEndTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][6].ToString().Substring(3, 2)))  //結束放假時間(hhmm)!=休息結束時間
                                     )
                                 {
-                                    errorList.Add(errorCode(207));
+                                    errorList.Add(errorCode(206));
                                 }
                             }
                         }
@@ -704,7 +704,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
         else if (errorID == 206)
         {
-            error += "請假時間不符規定";
+            error += "請假時間不符規定，請與人事部確認";
         }
         return error;
     }
