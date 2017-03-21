@@ -77,6 +77,40 @@
                     </table>
                 </div>
             </div>
+            <div class="content-column">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/en/images/service_pic/medical-respiration-pipe-heating-wire-menu.jpg" alt="Respiration Pipe Heating Wire" NavigateUrl="respiration-pipe-heating-wire.aspx"></asp:HyperLink>
+                </div>
+                <div class="title">
+                    Respiration Pipe Heating Wire<br />
+                    Medical Wiring<br />
+                    Respiration Pipe
+                </div>
+                <div class="data">
+                    <table>
+                        <tr>
+                            <td>Conductor Resistance:</td>
+                            <td>3 ohm/M</td>
+                        </tr>
+                        <tr>
+                            <td>Nominal Temperature:</td>
+                            <td>80°C</td>
+                        </tr>
+                        <tr>
+                            <td>Conductor:</td>
+                            <td>CN10、20、30、49 Alloy</td>
+                        </tr>
+                        <tr>
+                            <td>Insulation:</td>
+                            <td>Medical Grade Low Friction Polypropylene</td>
+                        </tr>
+                        <tr>
+                            <td>Filler:</td>
+                            <td>Polyester</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </asp:Content>
