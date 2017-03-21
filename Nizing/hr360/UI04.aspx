@@ -48,6 +48,14 @@
                 }
             });
         });
+        function confirmWithdrawal(){
+            if(confirm('確定要撤銷此張假單嗎?')){
+                return true;
+            }
+            else{
+            return false;
+            }
+        }        
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="page_title" runat="Server">
@@ -170,7 +178,19 @@
         </div>
         <hr />
         <div id="approval_section">
-
+            <div class="row">
+                <div class="col-xs-10">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            待簽核假單
+                        </div>
+                        <div class="panel-body">
+                            <table id="tbApprovalPending" class="table col-xs-12" runat="server">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>  
         </div>
     </div>
 </asp:Content>

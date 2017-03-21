@@ -522,7 +522,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
 
     }
-
+    /// <summary>
+    /// 錯誤訊息
+    /// </summary>
+    /// <param name="errorID"></param>
+    /// <returns></returns>
     protected string errorCode(int errorID)
     {
         string error = errorID.ToString() + " ";
@@ -660,10 +664,6 @@ public partial class hr360_UI04 : System.Web.UI.Page
             cell.InnerText = info.amountUsing.ToString() + info.unit;
             cell.Attributes.Add("style", "text-align:center;");
             newRow.Controls.Add(cell);
-            //cell = new HtmlTableCell();
-            //cell.InnerText = info.amountRemain.ToString() + info.unit;
-            //cell.Attributes.Add("style", "text-align:center;");
-            //newRow.Controls.Add(cell);
             cell = new HtmlTableCell();
             cell.InnerText = info.funcSub;
             cell.Attributes.Add("style", "text-align:center;");
@@ -694,10 +694,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         + " FROM HR360_DAYOFFAPPLICATION_APPLICATION A"
                         + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPLICATION_STATUS B ON A.APPLICATION_STATUS_ID=B.ID"
                         + " WHERE A.APPLICANT_ID=@APPLICANT"
-                        + " AND A.APPLICATION_STATUS_ID<>'03'"    //主管退回
-                        + " AND A.APPLICATION_STATUS_ID<>'05'"    //生管退回
-                        + " AND A.APPLICATION_STATUS_ID<>'07'"    //人事退回
-                        + " AND A.APPLICATION_STATUS_ID<>'08'";   //撤銷申請
+                        + " AND A.APPLICATION_STATUS_ID<>'03'"  //代理人退回
+                        + " AND A.APPLICATION_STATUS_ID<>'05'"  //主管退回
+                        + " AND A.APPLICATION_STATUS_ID<>'07'"  //生管退回
+                        + " AND A.APPLICATION_STATUS_ID<>'09'"  //人事退回
+                        + " AND A.APPLICATION_STATUS_ID<>'10'"; //撤銷申請
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@APPLICANT", Session["erp_id"].ToString());
             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -775,6 +776,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             btn.ID = "btnWithdrawApp" + i;
             btn.Text = "撤銷";
             btn.CssClass = "btn btn-danger";
+            btn.OnClientClick = "javascript:return confirmWithdrawal();";
             btn.Click += new EventHandler(btnWithdrawApp_Click);
             cell.Controls.Add(btn);
             cell.Attributes.Add("style", "text-align:center;");
@@ -869,7 +871,33 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// <param name="e"></param>
     protected void btnWithdrawApp_Click(object sender, EventArgs e)
     {
-
+        Button btn = (Button)sender;
+        string btnID = btn.ID;
+        int rowNumber = Convert.ToInt16(btn.ID.Substring(14, btn.ID.Length - 14));
+        string withdrawID = tbInProgressSummary.Rows[rowNumber + 1].Cells[0].InnerText;
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            string query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B"
+                        + " VALUES ("
+                        + " @APPLICATION_ID, @ACTION_TIME, @EXECUTOR_ID, @ACTION_ID"
+                        + " )";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@APPLICATION_ID", withdrawID);
+            cmd.Parameters.AddWithValue("@ACTION_TIME", DateTime.Now);
+            cmd.Parameters.AddWithValue("@EXECUTOR_ID", Session["erp_id"].ToString());
+            cmd.Parameters.AddWithValue("@ACTION_ID", "04");
+            cmd.ExecuteNonQuery();
+            query = "UPDATE HR360_DAYOFFAPPLICATION_APPLICATION"
+                + " SET APPLICATION_STATUS_ID=@STATUS"
+                + " WHERE APPLICATION_ID=@APPLICATION";
+            cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@STATUS", "10");
+            cmd.Parameters.AddWithValue("@APPLICATION", withdrawID);
+            cmd.ExecuteNonQuery();
+        }
+        fillInProgressApplicationTable();
+        lblTest.Text = "confirmed";
     }
     protected void btnAppSubmit_Click(object sender, EventArgs e)
     {
@@ -1127,5 +1155,19 @@ public partial class hr360_UI04 : System.Web.UI.Page
     protected void InProgressSection_PostBack_Load()
     {
         fillInProgressApplicationTable();
+    }
+    /// <summary>
+    /// Initial loading for div approval section
+    /// </summary>
+    protected void ApprovalSection_Init_Load()
+    {
+
+    }
+    /// <summary>
+    /// Postback loading for div approval section
+    /// </summary>
+    protected void ApprovalSection_PostBack_Load()
+    {
+
     }
 }
