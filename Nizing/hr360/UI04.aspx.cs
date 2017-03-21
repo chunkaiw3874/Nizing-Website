@@ -735,7 +735,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
         newHeaderRow.Controls.Add(newHeaderCell);
         newHeaderCell = new HtmlTableCell("th");
-        newHeaderCell.InnerText = "取消";
+        newHeaderCell.InnerText = "撤銷申請";
         newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
         newHeaderRow.Controls.Add(newHeaderCell);
         tbInProgressSummary.Controls.Add(newHeaderRow);
@@ -773,7 +773,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             cell = new HtmlTableCell();
             Button btn = new Button();
             btn.ID = "btnWithdrawApp" + i;
-            btn.Text = "取消";
+            btn.Text = "撤銷";
             btn.CssClass = "btn btn-danger";
             btn.Click += new EventHandler(btnWithdrawApp_Click);
             cell.Controls.Add(btn);
