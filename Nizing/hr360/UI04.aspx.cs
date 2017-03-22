@@ -32,7 +32,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            Session["erp_id"] = "0010"; //test only to avoid error on loading, delete after trial
+            Session["erp_id"] = "0080"; //test only to avoid error on loading, delete after trial
             ApplicationSection_Init_Load();
             InProgressSection_Init_Load();
         }
@@ -1037,9 +1037,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
             da = new SqlDataAdapter(cmd);
             da.Fill(ds, "Day Off Type");
             //抓取跟登入者同部門的人
-            query = "SELECT LTRIM(RTRIM(MV.MV001))+' '+MV002,MV001"
+            query = "SELECT LTRIM(RTRIM(MV.MV001))+' '+MV.MV002,MV.MV001"
                 + " FROM CMSMV MV"
-                + " WHERE MV.MV004=@DEPT"
+                + " WHERE (MV.MV004=@DEPT"
+                + " OR MV.MV004 IN (SELECT DEPT_REF FROM NZ_ERP2.dbo.HR360_DAYOFFAPPLICATION_DEPT_INTERCHANGE WHERE DEPT_MAIN=@DEPT))"
                 + " AND MV.MV001<>@ID"
                 + " AND MV.MV022=''"
                 + " AND MV.MV001<>'0000'" //李小姐
