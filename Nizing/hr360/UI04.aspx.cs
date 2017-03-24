@@ -32,7 +32,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            Session["erp_id"] = "0080"; //test only to avoid error on loading, delete after trial
+            Session["erp_id"] = "0012"; //test only to avoid error on loading, delete after trial
             ApplicationSection_Init_Load();
             InProgressSection_Init_Load();
         }
@@ -69,6 +69,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         bool test104 = false;
         bool test105 = false;
         bool test106 = false;
+        bool test107 = false;
         bool test204 = false;
         DataTable dtDayOffDaysInfo = new DataTable();
         decimal totalDayOffAmount = 0;     
@@ -133,7 +134,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 conn.Open();
                 string query = "SELECT APPLICATION_ID"
                             + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
-                            + " WHERE (APPLICANT_ID=@ID OR FUNCTIONAL_SUBSTITUTE_ID LIKE @ID+'%')"
+                            //+ " WHERE (APPLICANT_ID=@ID OR FUNCTIONAL_SUBSTITUTE_ID LIKE @ID+'%')"  //2017.03.24 移除代理人只能代理一個人的限制
+                            + " WHERE (APPLICANT_ID=@ID)"  //代理人已請假
                             + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
                             + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
                             + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
@@ -155,7 +157,36 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 }
             }
         }
-        if (test101 && test102 && test103 && test104 && test105 && test106)  //PASS ALL INPUT TESTS, NEED TO START CALCULATING FOR OTHER ERRORS
+        if (test102 && test103 && test104)
+        {
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))  //測試錯誤 107.申請人於此時段已代理他人，不可請假
+            {
+                conn.Open();
+                string query = "SELECT APPLICATION_ID"
+                            + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
+                            + " WHERE (FUNCTIONAL_SUBSTITUTE_ID LIKE @ID+'%')"  //自己已經是其他人的代理人
+                            + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
+                            + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
+                            + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                cmd.Parameters.AddWithValue("@STARTTIME", dayOffStartTime);
+                cmd.Parameters.AddWithValue("@ENDTIME", dayOffEndTime);
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    if (dr.HasRows)
+                    {
+                        errorList.Add(errorCode(107));
+                        test107 = false;
+                    }
+                    else
+                    {
+                        test107 = true;
+                    }
+                }
+            }
+        }
+        if (test101 && test102 && test103 && test104 && test105 && test106 && test107)  //PASS ALL INPUT TESTS, NEED TO START CALCULATING FOR OTHER ERRORS
         {
             DateTime[] days = GetDatesBetween(dayOffStartTime.Date, dayOffEndTime.Date);
             for (int i = 0; i < days.Length; i++)
@@ -552,7 +583,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
         else if (errorID == 106)
         {
-            error += "代理人已經自行請假或代理他人，請另選代理人";
+            error += "代理人已經自行請假，請另選代理人";
+        }
+        else if (errorID == 107)
+        {
+            error += "已於此時段代理他人，不可請假";
         }
         else if (errorID == 201)
         {
@@ -897,7 +932,6 @@ public partial class hr360_UI04 : System.Web.UI.Page
             cmd.ExecuteNonQuery();
         }
         fillInProgressApplicationTable();
-        lblTest.Text = "confirmed";
     }
     protected void btnAppSubmit_Click(object sender, EventArgs e)
     {
@@ -995,6 +1029,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('申請已送出');", true);
         lstDayOffAppSummary.Clear();
         fillDayOffApplicationTable(lstDayOffAppSummary);
+        fillInProgressApplicationTable();
     }
     /// <summary>
     /// Initial loading for div application section
@@ -1040,7 +1075,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             query = "SELECT LTRIM(RTRIM(MV.MV001))+' '+MV.MV002,MV.MV001"
                 + " FROM CMSMV MV"
                 + " WHERE (MV.MV004=@DEPT"
-                + " OR MV.MV004 IN (SELECT DEPT_REF FROM NZ_ERP2.dbo.HR360_DAYOFFAPPLICATION_DEPT_INTERCHANGE WHERE DEPT_MAIN=@DEPT))"
+                + " OR MV.MV004 IN (SELECT DEPT_REF FROM NZ_ERP2.dbo.HR360_DAYOFFAPPLICATION_DEPT_REFERENCE WHERE DEPT_MAIN=@DEPT))"
                 + " AND MV.MV001<>@ID"
                 + " AND MV.MV022=''"
                 + " AND MV.MV001<>'0000'" //李小姐
