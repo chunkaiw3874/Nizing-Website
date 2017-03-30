@@ -17,6 +17,10 @@ public partial class ProductionControlReport : System.Web.UI.Page
                 ddlBeginYear.Items.Add(DateTime.Today.AddYears(i).Year.ToString());
                 ddlEndYear.Items.Add(DateTime.Today.AddYears(i).Year.ToString());
             }
+            ddlBeginYear.SelectedIndex = 0;
+            ddlEndMonth.SelectedIndex = 0;
+            ddlBeginMonth.SelectedIndex = Convert.ToInt16(DateTime.Today.Month) - 1;
+            ddlEndMonth.SelectedIndex = Convert.ToInt16(DateTime.Today.Month) - 1;
         }
     }
 
