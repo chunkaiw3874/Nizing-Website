@@ -40,7 +40,7 @@ public partial class nizing_intranet_ProductionProgress_Dept : System.Web.UI.Pag
                 + " FROM MOCTA"
                 + " LEFT JOIN COPTC ON MOCTA.TA026 = COPTC.TC001 AND MOCTA.TA027 = COPTC.TC002"
                 + " LEFT JOIN COPMA ON COPTC.TC004 = COPMA.MA001"
-                + " WHERE LTRIM(RTRIM(MOCTA.TA001)) = N'W' AND MOCTA.TA011 <> N'Y' AND MOCTA.TA011 <> N'y'"
+                + " WHERE LTRIM(RTRIM(MOCTA.TA001)) = N'W' AND MOCTA.TA011 <> N'Y' AND MOCTA.TA011 <> N'y' AND MOCTA.TA013=N'Y'"
                 + str
                 + " ORDER BY CASE WHEN MOCTA.TA202 = N'' THEN 1 ELSE 0 END, MOCTA.TA202 ASC, MOCTA.TA002 ASC";
 

@@ -43,7 +43,7 @@ public partial class ProductionProgress : System.Web.UI.Page
                 + " FROM MOCTA"
                 + " LEFT JOIN COPTC ON MOCTA.TA026 = COPTC.TC001 AND MOCTA.TA027 = COPTC.TC002"
                 + " LEFT JOIN COPMA ON COPTC.TC004 = COPMA.MA001"
-                + " WHERE LTRIM(RTRIM(MOCTA.TA001)) = N'W' AND MOCTA.TA011 <> N'Y' AND MOCTA.TA011 <> N'y' AND MOCTA.TA203=1"
+                + " WHERE LTRIM(RTRIM(MOCTA.TA001)) = N'W' AND MOCTA.TA011 <> N'Y' AND MOCTA.TA011 <> N'y' AND MOCTA.TA013=N'Y' AND MOCTA.TA203=1"
                 + str
                 + " ORDER BY CASE WHEN MOCTA.TA202 = N'' THEN 1 ELSE 0 END, MOCTA.TA202 ASC, MOCTA.TA002 ASC";
 
@@ -72,7 +72,7 @@ public partial class ProductionProgress : System.Web.UI.Page
                 + " , MOCTA.TA006 品號, MOCTA.TA034 品名, MOCTA.TA035 規格, MOCTA.TA015 預計產量"
                 + " , MOCTA.TA007 單位, MOCTA.TA016 已領料量, MOCTA.TA017 已生產量, MOCTA.TA015-MOCTA.TA017 未生產量"
                 + " FROM MOCTA"
-                + " WHERE LTRIM(RTRIM(MOCTA.TA001)) = N'W' AND MOCTA.TA203=2 AND LTRIM(RTRIM(MOCTA.TA025))=" + s
+                + " WHERE LTRIM(RTRIM(MOCTA.TA001)) = N'W' AND MOCTA.TA013=N'Y' AND MOCTA.TA203=2 AND LTRIM(RTRIM(MOCTA.TA025))=" + s
                 + " ORDER BY MOCTA.TA010 DESC";
         return query;
     }
