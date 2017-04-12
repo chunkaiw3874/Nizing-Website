@@ -48,14 +48,30 @@
                 }
             });
         });
-        function confirmWithdrawal(){
-            if(confirm('確定要撤銷此張假單嗎?')){
+        function confirmWithdrawal() {
+            if (confirm('確定要撤銷此張假單嗎?')) {
                 return true;
             }
-            else{
-            return false;
+            else {
+                return false;
             }
-        }        
+        };
+        function confirmApprove() {
+            if (confirm('確定要簽核此張假單嗎?')) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        };
+        function confirmDeny() {
+            if (confirm('確定要退回此張假單嗎?')) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="page_title" runat="Server">
@@ -81,6 +97,8 @@
                     <asp:HiddenField ID="hdnIsDayOffAppVisible" runat="server" />
                     <asp:HiddenField ID="hdnDayOffTimeRestraint" runat="server" />
                     <asp:HiddenField ID="hdnOfficeOrProduction" runat="server" />
+                    <asp:HiddenField ID="hdnEmployeeRank" runat="server" />
+                    <asp:HiddenField ID="hdnImmediateReviewerID" runat="server" />
                 </div>
             </div>
             <div id="DayOffApp">

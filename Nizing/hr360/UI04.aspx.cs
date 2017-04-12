@@ -32,14 +32,18 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            Session["erp_id"] = "0010"; //test only to avoid error on loading, delete after trial
+            Session["erp_id"] = "0007"; //test only to avoid error on loading, delete after trial
             ApplicationSection_Init_Load();
             InProgressSection_Init_Load();
+            ApprovalSection_Init_Load();
+            lblTest.Text = hdnEmployeeRank.Value;
         }
         else
         {
             ApplicationSection_PostBack_Load();
             InProgressSection_PostBack_Load();
+            ApprovalSection_PostBack_Load();
+            lblTest.Text = hdnEmployeeRank.Value;
         }
 
         //hidden field that contains normal work hour per day for current user
@@ -253,17 +257,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         }
 
                         if (timeDifference.Hours != 0 || timeDifference.Minutes != 0)
-                        {                            
-                            //if (hdnOfficeOrProduction.Value == "production")
-                            //{
-                            //    if (!(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(3, 2))     //開始放假時間(hhmm)!=開始放假時間
-                            //        && !(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(3, 2))  //開始放假時間(hhmm)!=休息開始時間
-                            //        && !(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][6].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][6].ToString().Substring(3, 2))  //開始放假時間(hhmm)!=休息結束時間
-                            //        )
-                            //    {
-                            //        errorList.Add(errorCode(206));
-                            //    }
-                            //}
+                        {   
                             //判斷假期開始時間是否合理
                             if (hdnOfficeOrProduction.Value == "production"  //線廠人員僅能以上、下午為單位請假
                                 || ddlDayOffType.SelectedValue == "06" || ddlDayOffType.SelectedValue=="07" || ddlDayOffType.SelectedValue=="08" || ddlDayOffType.SelectedValue=="09"
@@ -283,7 +277,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         }
                         totalDayOffAmount += (timeDifference.Hours + Convert.ToDecimal(timeDifference.Minutes / 60.0));
                     }
-                    else if (i == dtDayOffDaysInfo.Rows.Count - 1 && i != 0)  //last day, and last day and first day are not the same day (ie day off time span is within 1 day)
+                    else if (i == dtDayOffDaysInfo.Rows.Count - 1 && i != 0)  //last day, and last day and first day are not the same day (dayoff time span is more than 1 day date-wise)
                     {
                         if (dayOffEndTime < workEndTime)
                         {
@@ -428,8 +422,6 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 double sumFromList = lstDayOffAppSummary.Where(x => x.typeID == ddlDayOffType.SelectedValue).Sum(x => double.Parse(x.amountUsing));
                 lblDayOffRemainAmount.Text = (Convert.ToDouble(hdnDayOffTimeRemainBeforeSubmit.Value) - sumFromList).ToString();
             }
-
-            //lblTest.Text = "no errors! v^.^v";
         }
     }
     /// <summary>
@@ -653,11 +645,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
             cell.Attributes.Add("style", "text-align:center;");
             newRow.Controls.Add(cell);
             cell = new HtmlTableCell();
-            cell.InnerText = info.startTime.ToString();
+            cell.InnerText = info.startTime.ToString("yyyy/MM/dd tt hh:mm");
             cell.Attributes.Add("style", "text-align:center;");
             newRow.Controls.Add(cell);
             cell = new HtmlTableCell();
-            cell.InnerText = info.endTime.ToString();
+            cell.InnerText = info.endTime.ToString("yyyy/MM/dd tt hh:mm");
             cell.Attributes.Add("style", "text-align:center;");
             newRow.Controls.Add(cell);
             cell = new HtmlTableCell();
@@ -752,11 +744,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
             cell.Attributes.Add("style", "text-align:center;");
             newRow.Controls.Add(cell);
             cell = new HtmlTableCell();
-            cell.InnerText = dt.Rows[i][2].ToString();
+            cell.InnerText = Convert.ToDateTime(dt.Rows[i][2]).ToString("yyyy/MM/dd tt hh:mm");
             cell.Attributes.Add("style", "text-align:center;");
             newRow.Controls.Add(cell);
             cell = new HtmlTableCell();
-            cell.InnerText = dt.Rows[i][3].ToString();
+            cell.InnerText = Convert.ToDateTime(dt.Rows[i][3]).ToString("yyyy/MM/dd tt hh:mm");
             cell.Attributes.Add("style", "text-align:center;");
             newRow.Controls.Add(cell);
             cell = new HtmlTableCell();
@@ -782,6 +774,139 @@ public partial class hr360_UI04 : System.Web.UI.Page
             cell.Attributes.Add("style", "text-align:center;");
             newRow.Controls.Add(cell);
             tbInProgressSummary.Rows.Add(newRow);
+        }
+    }
+    /// <summary>
+    /// fill approval table
+    /// </summary>
+    protected void fillApprovalTable()
+    {
+        DataTable dt = new DataTable();
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            string query = "SELECT APP.APPLICATION_ID,APP.APPLICATION_DATE,MV.MV002,APP.DAYOFF_NAME"
+                        + " ,APP.DAYOFF_START_TIME,APP.DAYOFF_END_TIME,CONVERT(NVARCHAR(20),APP.DAYOFF_TOTAL_TIME)+APP.DAYOFF_TIME_UNIT"
+                        + " ,SUBSTRING(APP.FUNCTIONAL_SUBSTITUTE_ID,6,LEN(APP.FUNCTIONAL_SUBSTITUTE_ID)-5),SUBSTRING(ST.NAME,1,5)"
+                        + " FROM HR360_DAYOFFAPPLICATION_APPLICATION APP"
+                        + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPLICATION_STATUS ST ON '0'+CONVERT(NVARCHAR(20),CONVERT(INT,APP.APPLICATION_STATUS_ID)+1)=ST.ID"
+                        + " LEFT JOIN NZ.dbo.CMSMV MV ON APP.APPLICANT_ID=MV.MV001"
+                        + " WHERE CONVERT(INT,APP.APPLICATION_STATUS_ID)<7"
+                        + " AND APP.NEXT_REVIEWER=@ID"
+                        + " ORDER BY APP.APPLICATION_STATUS_ID,APP.APPLICATION_ID";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+        }
+        tbApprovalPending.Rows.Clear();
+
+        HtmlTableRow newHeaderRow = new HtmlTableRow();
+        HtmlTableCell newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "假單ID";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        //newHeaderCell = new HtmlTableCell("th");
+        //newHeaderCell.InnerText = "申請時間";
+        //newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        //newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "申請人";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "假別";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "開始時間";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "結束時間";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "請假總量";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "代理人";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "簽核階段";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        tbApprovalPending.Controls.Add(newHeaderRow);
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            HtmlTableRow newRow = new HtmlTableRow();
+            HtmlTableCell cell = new HtmlTableCell();
+            cell.InnerText = dt.Rows[i][0].ToString();
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            //cell = new HtmlTableCell();
+            //cell.InnerText = dt.Rows[i][1].ToString();
+            //cell.Attributes.Add("style", "text-align:center;");
+            //newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            cell.InnerText = dt.Rows[i][2].ToString();
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            cell.InnerText = dt.Rows[i][3].ToString();
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            cell.InnerText = Convert.ToDateTime(dt.Rows[i][4]).ToString("yyyy/MM/dd tt hh:mm");
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            cell.InnerText = Convert.ToDateTime(dt.Rows[i][5]).ToString("yyyy/MM/dd tt hh:mm");
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            cell.InnerText = dt.Rows[i][6].ToString();
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            cell.InnerText = dt.Rows[i][7].ToString();
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            cell.InnerText = dt.Rows[i][8].ToString();
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            Button btn = new Button();
+            btn.ID = "btnApprove" + i;
+            btn.Text = "簽核";
+            btn.CssClass = "btn btn-success";
+            btn.OnClientClick = "javascript:return confirmApprove();";
+            btn.Click += new EventHandler(btnApprove_Click);
+            cell.Controls.Add(btn);
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            btn = new Button();
+            btn.ID = "btnDeny" + i;
+            btn.Text = "退回";
+            btn.CssClass = "btn btn-danger";
+            btn.OnClientClick = "javascript:return confirmDeny();";
+            btn.Click += new EventHandler(btnApprove_Click);
+            cell.Controls.Add(btn);
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            tbApprovalPending.Rows.Add(newRow);
         }
     }
     /// <summary>
@@ -889,7 +1014,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@ACTION_ID", "04");
             cmd.ExecuteNonQuery();
             query = "UPDATE HR360_DAYOFFAPPLICATION_APPLICATION"
-                + " SET APPLICATION_STATUS_ID=@STATUS"
+                + " SET APPLICATION_STATUS_ID=@STATUS,NEXT_REVIEWER=''"
                 + " WHERE APPLICATION_ID=@APPLICATION";
             cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@STATUS", "10");
@@ -897,8 +1022,30 @@ public partial class hr360_UI04 : System.Web.UI.Page
             cmd.ExecuteNonQuery();
         }
         fillInProgressApplicationTable();
-        lblTest.Text = "confirmed";
     }
+    /// <summary>
+    /// Approve application
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void btnApprove_Click(object sender, EventArgs e)
+    {
+
+    }
+    /// <summary>
+    /// Deny application
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void btnDeny_Click(object sender, EventArgs e)
+    {
+
+    }
+    /// <summary>
+    /// Submit application
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void btnAppSubmit_Click(object sender, EventArgs e)
     {
         //assign unique ID (yyyymmdd+流水號) to each application
@@ -929,7 +1076,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 {                    
                     query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION"
                         + " VALUES ("
-                        + " @APPLICATION_ID,@APPLICATION_DATE,@APPLICANT_ID,@DAYOFF_ID,@DAYOFF_NAME,@DAYOFF_START_TIME,@DAYOFF_END_TIME,@DAYOFF_TOTAL_TIME,@DAYOFF_TIME_UNIT,@FUNC_SUB_ID,'01'"
+                        + " @APPLICATION_ID,@APPLICATION_DATE,@APPLICANT_ID,@DAYOFF_ID,@DAYOFF_NAME,@DAYOFF_START_TIME,@DAYOFF_END_TIME,@DAYOFF_TOTAL_TIME,@DAYOFF_TIME_UNIT,@FUNC_SUB_ID,'01',@NEXT_REVIEWER"
                         + " )";
                     cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@APPLICATION_ID", uid);
@@ -942,6 +1089,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("@DAYOFF_TOTAL_TIME", dayoff.amountUsing);
                     cmd.Parameters.AddWithValue("@DAYOFF_TIME_UNIT", dayoff.unit);
                     cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub);
+                    cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.funcSub.Substring(0, 4));
                     cmd.ExecuteNonQuery();
                     query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B"
                         + " VALUES ("
@@ -960,7 +1108,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     {
                         query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION"
                         + " VALUES ("
-                        + " @APPLICATION_ID,@APPLICATION_DATE,@APPLICANT_ID,@DAYOFF_ID,@DAYOFF_NAME,@DAYOFF_START_TIME,@DAYOFF_END_TIME,@DAYOFF_TOTAL_TIME,@DAYOFF_TIME_UNIT,@FUNC_SUB_ID,'01'"
+                        + " @APPLICATION_ID,@APPLICATION_DATE,@APPLICANT_ID,@DAYOFF_ID,@DAYOFF_NAME,@DAYOFF_START_TIME,@DAYOFF_END_TIME,@DAYOFF_TOTAL_TIME,@DAYOFF_TIME_UNIT,@FUNC_SUB_ID,'01',@NEXT_REVIEWER"
                         + " )";
                         cmd = new SqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@APPLICATION_ID", (Convert.ToInt64(uid) + 1).ToString());
@@ -973,6 +1121,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         cmd.Parameters.AddWithValue("@DAYOFF_TOTAL_TIME", dayoff.amountUsing);
                         cmd.Parameters.AddWithValue("@DAYOFF_TIME_UNIT", dayoff.unit);
                         cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub);
+                        cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.funcSub.Substring(0, 4));
                         cmd.ExecuteNonQuery();
                         query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B"
                         + " VALUES ("
@@ -991,10 +1140,13 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     }
                 }
             }
+
+            //
         }
         ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('申請已送出');", true);
         lstDayOffAppSummary.Clear();
         fillDayOffApplicationTable(lstDayOffAppSummary);
+        fillInProgressApplicationTable();
     }
     /// <summary>
     /// Initial loading for div application section
@@ -1009,9 +1161,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(NZconnectionString))
         {
             conn.Open();
-            query = "SELECT MV.MV007,MV004"  //獲取登入者資料 性別、部門別
+            query = "SELECT MV.MV007,MV.MV004,HIER.[RANK]"  //獲取登入者資料 性別、部門別
                 + " FROM CMSMV MV"
-                + " WHERE MV001=@ID";
+                + " LEFT JOIN NZ_ERP2.dbo.HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MV.MV006=HIER.JOB_ID"
+                + " WHERE MV.MV001=@ID";
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString().Trim());
             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -1036,16 +1189,24 @@ public partial class hr360_UI04 : System.Web.UI.Page
             cmd = new SqlCommand(query, conn);
             da = new SqlDataAdapter(cmd);
             da.Fill(ds, "Day Off Type");
-            //抓取跟登入者同部門的人
-            query = "SELECT LTRIM(RTRIM(MV.MV001))+' '+MV002,MV001"
+            //抓取跟登入者同部門及可替代部門的人 (according to DB HR360_DAYOFFAPPLICATION_DEPT_REFERENCE)            
+            query = ";WITH REF_DEPT"
+                + " AS"
+                + " ("
+                + " SELECT REF.DEPT_MAIN MAIN,REF.DEPT_REF REF"
                 + " FROM CMSMV MV"
-                + " WHERE MV.MV004=@DEPT"
-                + " AND MV.MV001<>@ID"
-                + " AND MV.MV022=''"
+                + " LEFT JOIN NZ_ERP2.dbo.HR360_DAYOFFAPPLICATION_DEPT_REFERENCE REF ON MV.MV004=REF.DEPT_MAIN AND REF.ACTIVE=1"
+                + " WHERE MV.MV001=@ID"
+                + " )"
+                + " SELECT DISTINCT LTRIM(RTRIM(MV.MV001))+' '+MV.MV002,MV.MV001"
+                + " FROM CMSMV MV"
+                + " LEFT JOIN CMSMK MK ON MV.MV001=MK.MK002"
+                + " LEFT JOIN REF_DEPT REF ON MV.MV004=REF.MAIN OR MV.MV004=REF.REF"
+                + " WHERE MV.MV022=''"
                 + " AND MV.MV001<>'0000'" //李小姐
-                + " AND MV.MV001<>'0006'" //KELVEN
-                + " AND MV.MV001<>'0007'" //CHRISSY
                 + " AND MV.MV001<>'0098'" //黃耀南
+                + " AND MV.MV001<>@ID"
+                + " AND (MV.MV004=@DEPT OR MV.MV004=REF.REF)"
                 + " ORDER BY MV.MV001";
             cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@DEPT", userInfo.Rows[0][1].ToString().Trim());
@@ -1126,6 +1287,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             hdnOfficeOrProduction.Value = "office";
             hdnDayOffTimeRestraint.Value = "0.5";
         }
+        hdnEmployeeRank.Value = userInfo.Rows[0][2].ToString();
     }
     /// <summary>
     /// Postback loading for div application section
@@ -1161,13 +1323,13 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// </summary>
     protected void ApprovalSection_Init_Load()
     {
-
+        fillApprovalTable();
     }
     /// <summary>
     /// Postback loading for div approval section
     /// </summary>
     protected void ApprovalSection_PostBack_Load()
     {
-
+        fillApprovalTable();
     }
 }
