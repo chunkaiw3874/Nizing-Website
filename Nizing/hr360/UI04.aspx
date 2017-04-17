@@ -99,13 +99,13 @@
                     <asp:HiddenField ID="hdnOfficeOrProduction" runat="server" />
                     <asp:HiddenField ID="hdnEmployeeRank" runat="server" />
                     <asp:HiddenField ID="hdnImmediateReviewerID" runat="server" />
+                    <asp:HiddenField ID="hdnNormalWorkHour" runat="server" />
+                    <asp:HiddenField ID="hdnDayOffTimeRemainBeforeSubmit" runat="server" />
+                    <asp:HiddenField ID="hdnTotalDayOffTime" runat="server" />
+                    <asp:HiddenField ID="hdnDayOffTypeUnit" runat="server" />
                 </div>
             </div>
             <div id="DayOffApp">
-                <asp:HiddenField ID="hdnNormalWorkHour" runat="server" />
-                <asp:HiddenField ID="hdnDayOffTimeRemainBeforeSubmit" runat="server" />
-                <asp:HiddenField ID="hdnTotalDayOffTime" runat="server" />
-                <asp:HiddenField ID="hdnDayOffTypeUnit" runat="server" />
                 <div class="row">
                     <div class="col-xs-2">
                         <span class="label label-default" style="font-size: 16px;">假別</span>
@@ -147,13 +147,23 @@
                         <asp:DropDownList ID="ddlDayOffFuncSub" runat="server" CssClass="form-control"></asp:DropDownList>
                     </div>
                 </div>
-                <div class="row form-group">
+                <div class="row">
                     <div class="col-xs-2">
                         <asp:Label ID="lblDayOffRemainType" runat="server" Text=""></asp:Label>
                         <asp:Label ID="lblDayOffRemainAmount" runat="server" Text=""></asp:Label>
                         <asp:Label ID="lblDayOffRemainUnit" runat="server" Text=""></asp:Label>
                     </div>
-                    <div class="col-xs-1 col-xs-offset-3">
+                    <div class="col-xs-10">
+                        <span class="label label-default" style="font-size: 16px;">請假原因</span>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-10 col-xs-offset-2" style="display: inline;">
+                        <asp:TextBox ID="txtReason" runat="server" CssClass="form-control" placeholder="事假必填"></asp:TextBox>
+                    </div>
+                </div>                
+                <div class="row form-group">
+                    <div class="col-xs-1 col-xs-offset-5">
                         <asp:ImageButton ID="btnDayOffAdd" runat="server" ImageUrl="~/hr360/image/icon/green-arrow-down.png" Width="40" OnClick="btnDayOffAdd_Click" />
                     </div>
                     <div class="col-xs-6">
