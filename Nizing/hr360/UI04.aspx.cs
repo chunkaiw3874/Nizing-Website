@@ -27,12 +27,13 @@ public partial class hr360_UI04 : System.Web.UI.Page
         public string amountUsing { set; get; }
         public string restrictedAmountSet { set; get; }
         public string funcSub { set; get; }
+        public string reason { set; get; }
     }
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-            Session["erp_id"] = "0080"; //test only to avoid error on loading, delete after trial
+            Session["erp_id"] = "0085"; //test only to avoid error on loading, delete after trial
             ApplicationSection_Init_Load();
             InProgressSection_Init_Load();
             ApprovalSection_Init_Load();
@@ -405,7 +406,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     unit = hdnDayOffTypeUnit.Value,
                     amountUsing = hdnTotalDayOffTime.Value,
                     restrictedAmountSet = "N",
-                    funcSub = ddlDayOffFuncSub.SelectedItem.ToString().Trim()
+                    funcSub = ddlDayOffFuncSub.SelectedItem.ToString().Trim(),
+                    reason = txtReason.Text.Trim()
                 });
             }
             else
@@ -419,7 +421,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     unit = hdnDayOffTypeUnit.Value,
                     amountUsing = hdnTotalDayOffTime.Value,
                     restrictedAmountSet = "Y",
-                    funcSub = ddlDayOffFuncSub.SelectedItem.ToString().Trim()
+                    funcSub = ddlDayOffFuncSub.SelectedItem.ToString().Trim(),
+                    reason = txtReason.Text.Trim()
                 });
             }
             fillDayOffApplicationTable(lstDayOffAppSummary);
@@ -643,6 +646,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
         newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
         newHeaderRow.Controls.Add(newHeaderCell);
         newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "請假原因";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
         newHeaderCell.InnerText = "移除";
         newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
         newHeaderRow.Controls.Add(newHeaderCell);
@@ -670,6 +677,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
             newRow.Controls.Add(cell);
             cell = new HtmlTableCell();
             cell.InnerText = info.funcSub;
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            cell.InnerText = info.reason;
             cell.Attributes.Add("style", "text-align:center;");
             newRow.Controls.Add(cell);
             cell = new HtmlTableCell();
@@ -1505,6 +1516,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
         newHeaderRow.Controls.Add(newHeaderCell);
         newHeaderCell = new HtmlTableCell("th");
         newHeaderCell.InnerText = "代理人";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "請假原因";
         newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
         newHeaderRow.Controls.Add(newHeaderCell);
         newHeaderCell = new HtmlTableCell("th");

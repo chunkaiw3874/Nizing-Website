@@ -158,8 +158,8 @@
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-xs-10 col-xs-offset-2" style="display: inline;">
-                        <asp:TextBox ID="txtReason" runat="server" CssClass="form-control" placeholder="事假必填"></asp:TextBox>
+                    <div class="col-xs-4 col-xs-offset-2" style="display: inline;">
+                        <asp:TextBox ID="txtReason" runat="server" CssClass="form-control" MaxLength="20" placeholder="事假必填(20字內)"></asp:TextBox>
                     </div>
                 </div>                
                 <div class="row form-group">
