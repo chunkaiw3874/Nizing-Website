@@ -138,7 +138,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 conn.Open();
                 string query = "SELECT APPLICATION_ID"
                             + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
-                            + " WHERE (APPLICANT_ID=@ID OR FUNCTIONAL_SUBSTITUTE_ID=@ID)"
+                            //+ " WHERE (APPLICANT_ID=@ID OR FUNCTIONAL_SUBSTITUTE_ID LIKE @ID+'%')"  //2017.03.24 移除代理人只能代理一個人的限制
+                            + " WHERE (APPLICANT_ID=@ID)"  //代理人已請假
                             + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
                             + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
                             + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
