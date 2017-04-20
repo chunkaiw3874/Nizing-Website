@@ -33,7 +33,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            Session["erp_id"] = "0094"; //test only to avoid error on loading, delete after trial
+            Session["erp_id"] = "0063"; //test only to avoid error on loading, delete after trial
             ApplicationSection_Init_Load();
             InProgressSection_Init_Load();
             ApprovalSection_Init_Load();
@@ -138,7 +138,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 conn.Open();
                 string query = "SELECT APPLICATION_ID"
                             + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
-                            //+ " WHERE (APPLICANT_ID=@ID OR FUNCTIONAL_SUBSTITUTE_ID LIKE @ID+'%')"  //2017.03.24 移除代理人只能代理一個人的限制
+                            //+ " WHERE (APPLICANT_ID=@ID OR FUNCTIONAL_SUBSTITUTE_ID=@ID)"  //2017.03.24 移除代理人只能代理一個人的限制
                             + " WHERE (APPLICANT_ID=@ID)"  //代理人已請假
                             + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
                             + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
@@ -161,7 +161,36 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 }
             }
         }
-        if (ddlDayOffType.SelectedValue == "05" && txtReason.Text.Trim() == "") //測試錯誤 107.請事假未填寫請假原因
+        if (test102 && test103 && test104)
+        {
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))  //測試錯誤 107.申請人於此時段已代理他人，不可請假
+            {
+                conn.Open();
+                string query = "SELECT APPLICATION_ID"
+                            + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
+                            + " WHERE (FUNCTIONAL_SUBSTITUTE_ID=@ID)"  //自己已經是其他人的代理人
+                            + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
+                            + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
+                            + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                cmd.Parameters.AddWithValue("@STARTTIME", dayOffStartTime);
+                cmd.Parameters.AddWithValue("@ENDTIME", dayOffEndTime);
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    if (dr.HasRows)
+                    {
+                        errorList.Add(errorCode(107));
+                        test107 = false;
+                    }
+                    else
+                    {
+                        test107 = true;
+                    }
+                }
+            }
+        }
+        if (ddlDayOffType.SelectedValue == "05" && txtReason.Text.Trim() == "") //測試錯誤 108.請事假未填寫請假原因
         {
             errorList.Add(errorCode(108));
             test108 = false;
