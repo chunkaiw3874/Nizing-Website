@@ -73,6 +73,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         bool test105 = false;
         bool test106 = false;
         bool test107 = false;
+        bool test108 = false;
         bool test204 = false;
         DataTable dtDayOffDaysInfo = new DataTable();
         decimal totalDayOffAmount = 0;     
@@ -161,14 +162,14 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
         if (ddlDayOffType.SelectedValue == "05" && txtReason.Text.Trim() == "") //測試錯誤 107.請事假未填寫請假原因
         {
-            errorList.Add(errorCode(107));
-            test107 = false;
+            errorList.Add(errorCode(108));
+            test108 = false;
         }
         else
         {
-            test107 = true;
+            test108 = true;
         }
-        if (test101 && test102 && test103 && test104 && test105 && test106 && test107)  //PASS ALL INPUT TESTS, NEED TO START CALCULATING FOR OTHER ERRORS
+        if (test101 && test102 && test103 && test104 && test105 && test106 && test107 && test108)  //PASS ALL INPUT TESTS, NEED TO START CALCULATING FOR OTHER ERRORS
         {
             DateTime[] days = GetDatesBetween(dayOffStartTime.Date, dayOffEndTime.Date);
             for (int i = 0; i < days.Length; i++)
@@ -574,9 +575,13 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
         else if (errorID == 106)
         {
-            error += "代理人已經自行請假或代理他人，請另選代理人";
+            error += "代理人已經自行請假，請另選代理人";
         }
         else if (errorID == 107)
+        {
+            error += "已於此時段代理他人，不可請假";
+        }
+        else if (errorID == 108)
         {
             error += "請事假未填寫請假原因";
         }
