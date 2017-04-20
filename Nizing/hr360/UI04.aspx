@@ -6,6 +6,7 @@
     <script src="../Scripts/bootstrap-datepicker.js"></script>
     <script src="../Scripts/locales/bootstrap-datepicker.zh-TW.min.js"></script>
     <script src="../Scripts/text.area.auto.adjust.js"></script>
+    <script src="../Scripts/bootstrap.js"></script>
     <style>
         .no-resize {
             resize: none;
@@ -47,6 +48,10 @@
                     $('#<%=hdnIsDayOffAppVisible.ClientID%>').val('0');
                 }
             });
+
+            $("[data-toggle='popover']").popover({
+                trigger: 'click'
+            })
         });
         function confirmWithdrawal() {
             if (confirm('確定要撤銷此張假單嗎?')) {
@@ -171,7 +176,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-10">
+                    <div class="col-xs-12">
                         <div class="panel panel-info">
                             <div class="panel-heading">
                                 本次請假內容                       
@@ -191,7 +196,7 @@
         <hr />
         <div id="in-progress_section">
             <div class="row">
-                <div class="col-xs-10">
+                <div class="col-xs-12">
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             申請中假單
@@ -207,7 +212,7 @@
         <hr />
         <div id="approval_section">
             <div class="row">
-                <div class="col-xs-10">
+                <div class="col-xs-12">
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             待簽核假單

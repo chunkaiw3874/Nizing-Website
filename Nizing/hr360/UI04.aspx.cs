@@ -33,7 +33,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            Session["erp_id"] = "0085"; //test only to avoid error on loading, delete after trial
+            Session["erp_id"] = "0094"; //test only to avoid error on loading, delete after trial
             ApplicationSection_Init_Load();
             InProgressSection_Init_Load();
             ApprovalSection_Init_Load();
@@ -307,6 +307,25 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         else
                         {
                             timeDifference = workEndTime - workStartTime;
+                        }
+                        if (timeDifference.Hours != 0 || timeDifference.Minutes != 0)
+                        {
+                            //判斷假期開始時間是否合理
+                            if (hdnOfficeOrProduction.Value == "production"  //線廠人員僅能以上、下午為單位請假
+                                || ddlDayOffType.SelectedValue == "06" || ddlDayOffType.SelectedValue == "07" || ddlDayOffType.SelectedValue == "08" || ddlDayOffType.SelectedValue == "09"
+                                || ddlDayOffType.SelectedValue == "11")  //婚、喪、陪產、颱風假，無論人員身分，僅能以上、下午為單位請假
+                            {
+                                if ((!(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(3, 2))     //開始放假時間(hhmm)!=開始上班時間
+                                    && !(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(3, 2))  //開始放假時間(hhmm)!=休息開始時間
+                                    && !(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][6].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][6].ToString().Substring(3, 2)))  //開始放假時間(hhmm)!=休息結束時間
+                                    || (!(workEndTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][4].ToString().Substring(0, 2) && workEndTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][4].ToString().Substring(3, 2))  //結束放假時間(hhmm)!=結束上班時間
+                                    && !(workEndTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(0, 2) && workEndTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(3, 2))  //結束放假時間(hhmm)!=休息開始時間
+                                    && !(workEndTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][6].ToString().Substring(0, 2) && workEndTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][6].ToString().Substring(3, 2)))  //結束放假時間(hhmm)!=休息結束時間
+                                    )
+                                {
+                                    errorList.Add(errorCode(206));
+                                }
+                            }
                         }
                         totalDayOffAmount += (Convert.ToDecimal(timeDifference.Hours) + Convert.ToDecimal(timeDifference.Minutes / 60.0));
                     }
@@ -809,7 +828,13 @@ public partial class hr360_UI04 : System.Web.UI.Page
             conn.Open();
             string query = "SELECT APP.APPLICATION_ID,APP.APPLICATION_DATE,MV.MV002,APP.DAYOFF_NAME"
                         + " ,APP.DAYOFF_START_TIME,APP.DAYOFF_END_TIME,CONVERT(NVARCHAR(20),APP.DAYOFF_TOTAL_TIME)+APP.DAYOFF_TIME_UNIT"
-                        + " ,MV2.MV002,SUBSTRING(ST.NAME,1,5)"
+                        + " ,MV2.MV002"
+                        + " ,CASE"
+                        + " WHEN APP.REASON='' THEN '無'"
+                        + " ELSE '點選查看'"
+                        + " END AS REASON"
+                        + " ,APP.REASON"
+                        + " ,SUBSTRING(ST.NAME,1,5)"
                         + " FROM HR360_DAYOFFAPPLICATION_APPLICATION APP"
                         + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPLICATION_STATUS ST ON '0'+CONVERT(NVARCHAR(20),CONVERT(INT,APP.APPLICATION_STATUS_ID)+1)=ST.ID"
                         + " LEFT JOIN NZ.dbo.CMSMV MV ON APP.APPLICANT_ID=MV.MV001"
@@ -829,10 +854,6 @@ public partial class hr360_UI04 : System.Web.UI.Page
         newHeaderCell.InnerText = "假單ID";
         newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
         newHeaderRow.Controls.Add(newHeaderCell);
-        //newHeaderCell = new HtmlTableCell("th");
-        //newHeaderCell.InnerText = "申請時間";
-        //newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
-        //newHeaderRow.Controls.Add(newHeaderCell);
         newHeaderCell = new HtmlTableCell("th");
         newHeaderCell.InnerText = "申請人";
         newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
@@ -855,6 +876,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
         newHeaderRow.Controls.Add(newHeaderCell);
         newHeaderCell = new HtmlTableCell("th");
         newHeaderCell.InnerText = "代理人";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "請假原因";
         newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
         newHeaderRow.Controls.Add(newHeaderCell);
         newHeaderCell = new HtmlTableCell("th");
@@ -907,6 +932,21 @@ public partial class hr360_UI04 : System.Web.UI.Page
             newRow.Controls.Add(cell);
             cell = new HtmlTableCell();
             cell.InnerText = dt.Rows[i][8].ToString();
+            if (cell.InnerText == "無")
+            {
+                cell.Attributes.Add("style", "text-align:center;");
+            }
+            else
+            {
+                cell.Attributes.Add("style", "text-align:center;color:aqua;");
+            }            
+            cell.Attributes.Add("data-toggle", "popover");
+            cell.Attributes.Add("data-placement", "top");
+            cell.Attributes.Add("data-content", dt.Rows[i][9].ToString());
+            cell.Attributes.Add("data-container", "body");
+            newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            cell.InnerText = dt.Rows[i][10].ToString();
             cell.Attributes.Add("style", "text-align:center;");
             newRow.Controls.Add(cell);
             cell = new HtmlTableCell();
