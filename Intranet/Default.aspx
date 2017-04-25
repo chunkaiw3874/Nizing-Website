@@ -99,6 +99,13 @@
                 <li><a href="nizing_intranet/HR07.aspx">Annual Report</a></li>
             </ul>
         </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <asp:Image ID="Image10" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/ACC.png" />
+            <ul>
+                <li>
+                    <asp:ImageButton ID="ImageButton15" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/ACC-1.png" PostBackUrl="~/nizing_intranet/ACC01.aspx" /></li>                
+            </ul>
+        </div>
     </div>
 </asp:Content>
 
