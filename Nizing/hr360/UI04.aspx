@@ -70,10 +70,23 @@
             }
         };
         function confirmDeny() {
-            if (confirm('確定要退回此張假單嗎?')) {
+            //document.getElementById('<%= hdnDenyReason.ClientID %>').value = '';
+            var reason = prompt("請輸入退回原因(必填、50字內):");
+            var trimmedReason = '';
+            if (reason != null) {
+                trimmedReason = reason.trim();
+            }
+            if (trimmedReason != '' && reason !== null) {
+                document.getElementById('<%= hdnDenyReason.ClientID %>').value = trimmedReason;
+                alert('returned true');
+                console.log(reason);
                 return true;
             }
             else {
+                if (reason !== null) {
+                    alert('請填入退件原因');
+                }
+                console.log(reason);                
                 return false;
             }
         }
@@ -85,16 +98,29 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="page_content" runat="Server">
     <div class="container">
-        <div id="application_section">
+        <div id="test_section">
             <div class="row form-group">
-                測試中，請勿使用
-           
+                測試中，請勿使用           
                 <br />
                 <asp:TextBox ID="txtTestName" runat="server"></asp:TextBox>
                 <asp:Button ID="btnTestName" runat="server" Text="測試ERP ID" OnClick="btnTestName_Click" />
                 <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>
             </div>
             <hr />
+        </div>
+        <div id="search_section">
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <h2>查詢歷史假單</h2>
+                </div>
+            </div>
+        </div>
+        <div id="application_section">            
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <h2>新申請</h2>
+                </div>
+            </div>
             <div class="row form-group" style="margin-top: 10px;">
                 <div class="col-xs-12">
                     <span class="label label-info" id="btnDayOffAppVisibility" style="cursor: pointer; font-size: 20px;">我要請假</span>
@@ -108,6 +134,7 @@
                     <asp:HiddenField ID="hdnDayOffTimeRemainBeforeSubmit" runat="server" />
                     <asp:HiddenField ID="hdnTotalDayOffTime" runat="server" />
                     <asp:HiddenField ID="hdnDayOffTypeUnit" runat="server" />
+                    <asp:HiddenField ID="hdnDenyReason" runat="server" />
                 </div>
             </div>
             <div id="DayOffApp">
@@ -195,6 +222,11 @@
         </div>
         <hr />
         <div id="in-progress_section">
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <h2>申請中</h2>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-xs-12">
                     <div class="panel panel-info">
@@ -211,6 +243,11 @@
         </div>
         <hr />
         <div id="approval_section">
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <h2>待簽核</h2>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-xs-12">
                     <div class="panel panel-info">

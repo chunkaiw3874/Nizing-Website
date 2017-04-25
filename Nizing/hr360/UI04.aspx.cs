@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -37,6 +38,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             ApplicationSection_Init_Load();
             InProgressSection_Init_Load();
             ApprovalSection_Init_Load();
+            //SendEmailNotification();
         }
         else
         {
@@ -1352,19 +1354,21 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// <param name="e"></param>
     protected void btnDeny_Click(object sender, EventArgs e)
     {
+        
         Button btn = (Button)sender;
         string btnID = btn.ID;
         int rowNumber = Convert.ToInt16(btn.ID.Substring(7, btn.ID.Length - 7));
-        string denyID = tbApprovalPending.Rows[rowNumber + 1].Cells[0].InnerText;        
+        string denyID = tbApprovalPending.Rows[rowNumber + 1].Cells[0].InnerText;
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
-            conn.Open();            
+            conn.Open();
             //insert deny trail to DB
             string query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B"
-                        + " VALUES(@APP_ID,GETDATE(),@EXE_ID,'03')";
+                        + " VALUES(@APP_ID,GETDATE(),@EXE_ID,'03',@MEMO)";
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@APP_ID", denyID);
             cmd.Parameters.AddWithValue("@EXE_ID", Session["erp_id"].ToString());
+            cmd.Parameters.AddWithValue("@MEMO", hdnDenyReason.Value);
             cmd.ExecuteNonQuery();
             query = "UPDATE HR360_DAYOFFAPPLICATION_APPLICATION"
                         + " SET APPLICATION_STATUS_ID=@STATUS,NEXT_REVIEWER=@REVIEWER"
@@ -1673,5 +1677,32 @@ public partial class hr360_UI04 : System.Web.UI.Page
     protected void ApprovalSection_PostBack_Load()
     {
         fillApprovalTable();
+    }
+
+    protected void SendEmailNotification()
+    {
+        string To = "kevin@nizing.com.tw,aris@nizing.com.tw";
+        string From = "Administrator@nizing.com.tw";
+        string Subject = "The Email Attachment Extract Process is Complete.";
+        string Body = "The Email Attachment Extract Process is Complete. Please finish the Import process.";
+
+        // create the email message
+        MailMessage completeMessage = new MailMessage(From, To, Subject, Body);
+
+        // create smtp client at mail server location
+        SmtpClient client = new SmtpClient("mail.nizing.com.tw");
+
+        // add credentials
+        client.UseDefaultCredentials = true;
+
+        try
+        {
+            // send message
+            client.Send(completeMessage);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 }
