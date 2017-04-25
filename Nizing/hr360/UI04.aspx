@@ -70,7 +70,6 @@
             }
         };
         function confirmDeny() {
-            //document.getElementById('<%= hdnDenyReason.ClientID %>').value = '';
             var reason = prompt("請輸入退回原因(必填、50字內):");
             var trimmedReason = '';
             if (reason != null) {
