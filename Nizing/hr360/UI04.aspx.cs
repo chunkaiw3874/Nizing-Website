@@ -38,7 +38,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             ApplicationSection_Init_Load();
             InProgressSection_Init_Load();
             ApprovalSection_Init_Load();
-            //SendEmailNotification();
+            //SendEmailNotification("123", "456", "1", "2", "3");
         }
         else
         {
@@ -508,6 +508,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             lblDayOffRemainType.Text = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3).Trim() + "剩餘";
             using (SqlConnection conn = new SqlConnection(NZconnectionString))
             {
+                /*JOIN APPLICATION DB, AND SUBTRACT OFF THE AMOUNT PRESENT IN ALL ACTIVE APPLICATIONS*/
                 conn.Open();
                 query = "SELECT '02' 'ID',CONVERT(DECIMAL(5,2),TK.TK005),CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0)),'小時'"
                     + " FROM PALTK TK"
@@ -1440,7 +1441,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("@DAYOFF_TIME_UNIT", dayoff.unit);
                     cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub.Substring(0, 4));
                     cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.funcSub.Substring(0, 4));
-                    cmd.Parameters.AddWithValue("@REASON", txtReason.Text.Trim());
+                    cmd.Parameters.AddWithValue("@REASON", dayoff.reason);
                     cmd.ExecuteNonQuery();
                     query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B"
                         + " VALUES ("
@@ -1473,7 +1474,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         cmd.Parameters.AddWithValue("@DAYOFF_TIME_UNIT", dayoff.unit);
                         cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub);
                         cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.funcSub.Substring(0, 4));
-                        cmd.Parameters.AddWithValue("@REASON", txtReason.Text.Trim());
+                        cmd.Parameters.AddWithValue("@REASON", dayoff.reason);
                         cmd.ExecuteNonQuery();
                         query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B"
                         + " VALUES ("
@@ -1688,12 +1689,56 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         fillApprovalTable();
     }
-
-    protected void SendEmailNotification()
+    /// <summary>
+    /// Send out email to people who need to be notified after certain action
+    /// </summary>
+    /// <param name="appId"></param>
+    /// <param name="appStatus"></param>
+    /// <param name="recipientId"></param>
+    protected void SendEmailNotification(string appId, int appStatus, params string[] recipientId)
     {
-        string To = "kevin@nizing.com.tw,aris@nizing.com.tw";
+        //Get Email address of all recipients
+        List<string> recipientEmailList = new List<string>();
+        for (int i = 0; i < recipientId.Length; i++)
+        {
+            using (SqlConnection conn = new SqlConnection(NZconnectionString))
+            {
+                conn.Open();
+                string query = "SELECT MV.MV020"
+                            + " FROM CMSMV MV"
+                            + " WHERE MV.MV001=@RECIPIENT_ID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@RECIPIENT_ID", recipientId[i]);
+                recipientEmailList.Add(cmd.ExecuteScalar().ToString());
+            }
+        }
+        //拼湊收件人郵箱
+        string To = "";
+        for (int i = 0; i < recipientEmailList.Count; i++)
+        {
+            To += recipientEmailList[i];
+            if (i != recipientEmailList.Count - 1)
+            {
+                To += ",";
+            }
+        }
         string From = "Administrator@nizing.com.tw";
-        string Subject = "The Email Attachment Extract Process is Complete.";
+        //主旨depends on appStatus
+        //status 1:新申請 2:一般簽核通過 3:最後一層簽核通過(副總) 4:申請退回(BY簽核者) 5:申請撤銷(BY申請者)
+        DataTable dt = new DataTable();
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+
+        }
+        string Subject = "";
+        switch (appStatus)
+        {
+            case 1:
+                Subject = "";
+                break;
+        }
+        
         string Body = "The Email Attachment Extract Process is Complete. Please finish the Import process.";
 
         // create the email message
