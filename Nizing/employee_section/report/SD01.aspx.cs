@@ -692,7 +692,7 @@ public partial class SD01 : System.Web.UI.Page
         {
             ddlTargetMonth.Items.Add(i.ToString("D2"));
         }
-
+        ddlTargetEmp.Items.Clear();
         using (SqlConnection conn = new SqlConnection(connectionString))
         {
             conn.Open();
