@@ -510,27 +510,75 @@ public partial class hr360_UI04 : System.Web.UI.Page
             {
                 /*JOIN APPLICATION DB, AND SUBTRACT OFF THE AMOUNT PRESENT IN ALL ACTIVE APPLICATIONS*/
                 conn.Open();
-                query = "SELECT '02' 'ID',CONVERT(DECIMAL(5,2),TK.TK005),CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0)),'小時'"
-                    + " FROM PALTK TK"
-                    + " LEFT JOIN PALTL TL ON TK.TK001=TL.TL001 AND TK.TK002=TL.TL002 AND TL.TL004='02'"
-                    + " WHERE TK.TK001=@ID AND TK.TK002=@YEAR"
-                    + " GROUP BY TK.TK005"
-                    + " UNION"
-                    + " SELECT '03' 'ID',CONVERT(DECIMAL(5,2),TK.TK003*" + hdnNormalWorkHour.Value + "),CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0)),'小時'"
-                    + " FROM PALTK TK"
-                    + " LEFT JOIN PALTL TL ON TK.TK001=TL.TL001 AND TK.TK002=TL.TL002 AND TL.TL004='03'"
-                    + " WHERE TK.TK001=@ID AND TK.TK002=@YEAR"
-                    + " GROUP BY TK.TK003"
-                    + " UNION"
-                    + " SELECT MC.MC001 'ID',CONVERT(DECIMAL(5,2),MC.MC007),CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0))"
-                    + " ,CASE MC.MC004"
-                    + " WHEN '1' THEN '天'"
-                    + " WHEN '2' THEN '小時'"
-                    + " END"
-                    + " FROM PALMC MC"
-                    + " LEFT JOIN PALTL TL ON TL.TL001=@ID AND TL.TL002=@YEAR AND TL.TL004=MC.MC001"
-                    + " WHERE MC.MC001<>'02' AND MC.MC001<>'03'"
-                    + " GROUP BY MC.MC001,MC.MC007,MC.MC004";
+                query = ";WITH INPROGRESS_APP"
++ " AS"
++ " ("
++ " SELECT APP.APPLICANT_ID 'APPLICANT_ID',YEAR(APP.DAYOFF_START_TIME) 'YEAR',APP.DAYOFF_ID 'DAYOFF_ID',CONVERT(DECIMAL(5,2),COALESCE(SUM(APP.DAYOFF_TOTAL_TIME),0)) 'TOTAL_DAYOFF_TIME'"
++ " ,CASE APP.DAYOFF_ID"
++ " WHEN '02' THEN '小時'"
++ " WHEN '03' THEN '小時'"
++ " ELSE CASE MC.MC004"
++ " 	WHEN '1' THEN '天'"
++ " 	WHEN '2' THEN '小時'"
++ " 	END"
++ " END 'UNIT'"
++ " FROM NZ_ERP2.dbo.HR360_DAYOFFAPPLICATION_APPLICATION APP"
++ " LEFT JOIN PALMC MC ON APP.DAYOFF_ID=MC.MC001"
++ " WHERE APP.APPLICANT_ID=@ID"
++ " AND YEAR(APP.DAYOFF_START_TIME)=@YEAR"
++ " AND APP.APPLICATION_STATUS_ID<>'06'"
++ " AND APP.APPLICATION_STATUS_ID<>'07'"
++ " AND APP.APPLICATION_STATUS_ID<>'08'"
++ " GROUP BY APP.APPLICANT_ID,YEAR(APP.DAYOFF_START_TIME),APP.DAYOFF_ID,MC.MC004"
++ " )"
++ " SELECT '02' 'ID',CONVERT(DECIMAL(5,2),TK.TK005),CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0))"
++ " ,COALESCE(APP.TOTAL_DAYOFF_TIME,0),'小時'"
++ " FROM PALTK TK"
++ " LEFT JOIN PALTL TL ON TK.TK001=TL.TL001 AND TK.TK002=TL.TL002 AND TL.TL004='02'"
++ " LEFT JOIN INPROGRESS_APP APP ON APP.DAYOFF_ID='02'"
++ " WHERE TK.TK001=@ID AND TK.TK002=@YEAR"
++ " GROUP BY TK.TK005,APP.TOTAL_DAYOFF_TIME"
++ " UNION"
++ " SELECT '03' 'ID',CONVERT(DECIMAL(5,2),TK.TK003*8),CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0))"
++ " ,COALESCE(APP.TOTAL_DAYOFF_TIME,0),'小時'"
++ " FROM PALTK TK"
++ " LEFT JOIN PALTL TL ON TK.TK001=TL.TL001 AND TK.TK002=TL.TL002 AND TL.TL004='03'"
++ " LEFT JOIN INPROGRESS_APP APP ON APP.DAYOFF_ID='03'"
++ " WHERE TK.TK001=@ID AND TK.TK002=@YEAR"
++ " GROUP BY TK.TK003,APP.TOTAL_DAYOFF_TIME"
++ " UNION"
++ " SELECT MC.MC001 'ID',CONVERT(DECIMAL(5,2),MC.MC007),CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0))"
++ " ,COALESCE(APP.TOTAL_DAYOFF_TIME,0)"
++ " ,CASE MC.MC004"
++ " WHEN '1' THEN '天'"
++ " WHEN '2' THEN '小時'"
++ " END"
++ " FROM PALMC MC"
++ " LEFT JOIN PALTL TL ON TL.TL001=@ID AND TL.TL002=@YEAR AND TL.TL004=MC.MC001"
++ " LEFT JOIN INPROGRESS_APP APP ON MC.MC001=APP.DAYOFF_ID"
++ " WHERE MC.MC001<>'02' AND MC.MC001<>'03'"
++ " GROUP BY MC.MC001,MC.MC007,MC.MC004,APP.TOTAL_DAYOFF_TIME";
+                //query = "SELECT '02' 'ID',CONVERT(DECIMAL(5,2),TK.TK005),CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0)),'小時'"
+                //    + " FROM PALTK TK"
+                //    + " LEFT JOIN PALTL TL ON TK.TK001=TL.TL001 AND TK.TK002=TL.TL002 AND TL.TL004='02'"
+                //    + " WHERE TK.TK001=@ID AND TK.TK002=@YEAR"
+                //    + " GROUP BY TK.TK005"
+                //    + " UNION"
+                //    + " SELECT '03' 'ID',CONVERT(DECIMAL(5,2),TK.TK003*" + hdnNormalWorkHour.Value + "),CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0)),'小時'"
+                //    + " FROM PALTK TK"
+                //    + " LEFT JOIN PALTL TL ON TK.TK001=TL.TL001 AND TK.TK002=TL.TL002 AND TL.TL004='03'"
+                //    + " WHERE TK.TK001=@ID AND TK.TK002=@YEAR"
+                //    + " GROUP BY TK.TK003"
+                //    + " UNION"
+                //    + " SELECT MC.MC001 'ID',CONVERT(DECIMAL(5,2),MC.MC007),CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0))"
+                //    + " ,CASE MC.MC004"
+                //    + " WHEN '1' THEN '天'"
+                //    + " WHEN '2' THEN '小時'"
+                //    + " END"
+                //    + " FROM PALMC MC"
+                //    + " LEFT JOIN PALTL TL ON TL.TL001=@ID AND TL.TL002=@YEAR AND TL.TL004=MC.MC001"
+                //    + " WHERE MC.MC001<>'02' AND MC.MC001<>'03'"
+                //    + " GROUP BY MC.MC001,MC.MC007,MC.MC004";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString().Trim());
                 cmd.Parameters.AddWithValue("@YEAR", DateTime.Now.Year.ToString().Trim());
@@ -555,16 +603,16 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     lblDayOffRemainType.Text = "";
                     lblDayOffRemainAmount.Text = "";
                     lblDayOffRemainUnit.Text = "";
-                    hdnDayOffTypeUnit.Value = row[0][3].ToString();
+                    hdnDayOffTypeUnit.Value = row[0][4].ToString();
                 }
                 else
                 {
                     if (Convert.ToDouble(row[0][1]) > 0)
                     {
                         double sumFromList = lstDayOffAppSummary.Where(x => x.typeID == ddlDayOffType.SelectedValue).Sum(x => double.Parse(x.amountUsing));
-                        hdnDayOffTimeRemainBeforeSubmit.Value = (Convert.ToDouble(row[0][1]) - Convert.ToDouble(row[0][2])).ToString();
+                        hdnDayOffTimeRemainBeforeSubmit.Value = (Convert.ToDouble(row[0][1]) - Convert.ToDouble(row[0][2]) - Convert.ToDouble(row[0][3])).ToString();
                         lblDayOffRemainAmount.Text = (Convert.ToDouble(hdnDayOffTimeRemainBeforeSubmit.Value) - sumFromList).ToString();
-                        lblDayOffRemainUnit.Text = row[0][3].ToString();
+                        lblDayOffRemainUnit.Text = row[0][4].ToString();
                     }
                     else
                     {
@@ -572,7 +620,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         lblDayOffRemainAmount.Text = "";
                         lblDayOffRemainUnit.Text = "";
                     }
-                    hdnDayOffTypeUnit.Value = row[0][3].ToString();
+                    hdnDayOffTypeUnit.Value = row[0][4].ToString();
                 }
             }
         }
@@ -1116,7 +1164,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             conn.Open();
             string query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B"
                         + " VALUES ("
-                        + " @APPLICATION_ID, @ACTION_TIME, @EXECUTOR_ID, @ACTION_ID"
+                        + " @APPLICATION_ID, @ACTION_TIME, @EXECUTOR_ID, @ACTION_ID, ''"
                         + " )";
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@APPLICATION_ID", withdrawID);
@@ -1128,7 +1176,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 + " SET APPLICATION_STATUS_ID=@STATUS,NEXT_REVIEWER=''"
                 + " WHERE APPLICATION_ID=@APPLICATION";
             cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@STATUS", "10");
+            cmd.Parameters.AddWithValue("@STATUS", "07");
             cmd.Parameters.AddWithValue("@APPLICATION", withdrawID);
             cmd.ExecuteNonQuery();
         }

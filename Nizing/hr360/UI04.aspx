@@ -77,15 +77,12 @@
             }
             if (trimmedReason != '' && reason !== null) {
                 document.getElementById('<%= hdnDenyReason.ClientID %>').value = trimmedReason;
-                alert('returned true');
-                console.log(reason);
                 return true;
             }
             else {
                 if (reason !== null) {
                     alert('請填入退件原因');
                 }
-                console.log(reason);                
                 return false;
             }
         }
