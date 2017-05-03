@@ -36,23 +36,6 @@ public partial class nizing_intranet_ACC01 : System.Web.UI.Page
             using (SqlConnection conn = new SqlConnection(NZconnectionString))
             {
                 conn.Open();
-                string query = "SELECT LTRIM(RTRIM(MA.MA001))+' '+MA.MA002 'display',LTRIM(RTRIM(MA001)) 'value'"
-                            + " FROM COPMA MA"
-                            + " WHERE MA001<>'0000' AND MA001<>'0001'"
-                            + " ORDER BY MA001";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-                ddlClientID.DataTextField = "display";
-                ddlClientID.DataValueField = "value";
-                ddlClientID.DataSource = dt;
-                ddlClientID.DataBind();
-            }
-            ddlClientID.Items.Insert(0, new ListItem("全部", "ALL"));
-            using (SqlConnection conn = new SqlConnection(NZconnectionString))
-            {
-                conn.Open();
                 string query = "SELECT LTRIM(RTRIM(MA001)) 'display'"
                             + " FROM TAXMA";
                 SqlCommand cmd = new SqlCommand(query, conn);
@@ -65,28 +48,8 @@ public partial class nizing_intranet_ACC01 : System.Web.UI.Page
                 ddlCompanyID.DataBind();
             }
             ddlCompanyID.Items.Insert(0, new ListItem("全部", "ALL"));
-            hdnClientID.Value = ddlClientID.SelectedValue;
             divAnnualReport.Visible = false;
             divDetailReport.Visible = true;
-            //using (SqlConnection conn = new SqlConnection(NZconnectionString))
-            //{
-            //    conn.Open();
-            //    string query = "SELECT LTRIM(RTRIM(MA.MA001))+' '+MA.MA002 'display',LTRIM(RTRIM(MA001)) 'value'"
-            //                + " FROM COPMA MA"
-            //                + " WHERE MA001<>'0000' AND MA001<>'0001'"
-            //                + " ORDER BY MA001";
-            //    SqlCommand cmd = new SqlCommand(query, conn);
-            //    DataTable dt = new DataTable();
-            //    SqlDataAdapter da = new SqlDataAdapter(cmd);
-            //    da.Fill(dt);
-            //    cboClientID.DataTextField = "display";
-            //    cboClientID.DataValueField = "value";
-            //    cboClientID.DataSource = dt;
-            //    cboClientID.DataBind();
-            //}
-            //cboClientID.DropDownStyle = AjaxControlToolkit.ComboBoxStyle.DropDownList;
-            //cboClientID.AutoCompleteMode = AjaxControlToolkit.ComboBoxAutoCompleteMode.SuggestAppend;            
-            //cboClientID.AutoPostBack = true;
         }
     }
     protected void rdoDetailReport_CheckedChanged(object sender, EventArgs e)
@@ -98,7 +61,7 @@ public partial class nizing_intranet_ACC01 : System.Web.UI.Page
             ddlStartMonth.Enabled = true;
             ddlEndYear.Enabled = true;
             ddlEndMonth.Enabled = true;
-            ddlClientID.Enabled = true;
+            txtClientID.Enabled = true;
             ddlCompanyID.Enabled = true;
             divAnnualReport.Visible = false;
             divDetailReport.Visible = true;
@@ -109,46 +72,40 @@ public partial class nizing_intranet_ACC01 : System.Web.UI.Page
             ddlStartMonth.Enabled = false;
             ddlEndYear.Enabled = false;
             ddlEndMonth.Enabled = false;
-            ddlClientID.Enabled = false;
+            txtClientID.Enabled = false;
             ddlCompanyID.Enabled = false;
             divAnnualReport.Visible = true;
             divDetailReport.Visible = false;
         }
     }
-    //protected void cboClientID_SelectedIndexChanged(object sender, EventArgs e)
-    //{
-    //    txtTest.Text = cboClientID.SelectedValue;
-    //}
-    //[WebMethod]
-    //public static string[] GetClientList(string containedString)
-    //{
-    //    List<string> lstData = new List<string>();
-    //    DataTable dt = new DataTable();
-    //    string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
-    //    using (SqlConnection conn = new SqlConnection(NZconnectionString))
-    //    {
-    //        string query = "SELECT LTRIM(RTRIM(MA.MA001))+' '+MA.MA002 'display',LTRIM(RTRIM(MA001)) 'value'"
-    //                     + " FROM COPMA MA"
-    //                     + " WHERE MA001<>'0000' AND MA001<>'0001'"
-    //                     + " AND LTRIM(RTRIM(MA.MA001))+' '+MA.MA002 LIKE '%'+@containedString+'%'"
-    //                     + " ORDER BY MA001";
-    //        SqlCommand cmd = new SqlCommand(query, conn);
-    //        cmd.Parameters.AddWithValue("@containedString", containedString);
-    //        SqlDataAdapter da = new SqlDataAdapter(cmd);
-    //        da.Fill(dt);
-    //    }
-    //    foreach (DataRow row in dt.Rows)
-    //    {
-    //        string name = dt.Rows[0].ToString();
-    //        lstData.Add(name);
-    //    }
+    [WebMethod]
+    public static string[] GetClientList(string keyword)
+    {
+        List<string> lstData = new List<string>();
+        DataTable dt = new DataTable();
+        string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
+        using (SqlConnection conn = new SqlConnection(NZconnectionString))
+        {
+            string query = "SELECT LTRIM(RTRIM(MA.MA001))+' '+LTRIM(RTRIM(MA.MA002)) 'display',LTRIM(RTRIM(MA001)) 'value'"
+                         + " FROM COPMA MA"
+                         + " WHERE MA001<>'0000' AND MA001<>'0001'"
+                         + " AND LTRIM(RTRIM(MA.MA001))+' '+MA.MA002 LIKE '%'+@containedString+'%'"
+                         + " ORDER BY MA001";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@containedString", keyword);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+        }
+        foreach (DataRow row in dt.Rows)
+        {
+            string name = row[0].ToString();
+            lstData.Add(name);
+        }
 
-    //    return lstData.ToArray<string>();
-    //}
+        return lstData.ToArray<string>();
+    }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-        //use hiddenfield control to hold client ID parameter, for future combobox control testing purpose
-        hdnClientID.Value = ddlClientID.SelectedValue;
         gvAnnualReport.DataSource = null;
         gvAnnualReport.DataBind();
         chartAnnualReport.DataSource = null;
@@ -160,9 +117,18 @@ public partial class nizing_intranet_ACC01 : System.Web.UI.Page
             string query = "";
             string clientCondition = "";
             string companyCondition = "";
-            if (hdnClientID.Value != "ALL")
+            string clientID = "";
+            if (txtClientID.Text.Trim() != "")
             {
-                clientCondition = " AND TA.TA004=@CUSTID";
+                if (txtClientID.Text.Trim().Count() < 6)
+                {
+
+                }
+                else
+                {
+                    clientID = txtClientID.Text.Trim().Substring(0, 6);
+                    clientCondition = " AND TA.TA004=@CUSTID";
+                }
             }
             if (ddlCompanyID.SelectedValue != "ALL")
             {
@@ -193,7 +159,7 @@ public partial class nizing_intranet_ACC01 : System.Web.UI.Page
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@STARTDATE", ddlStartYear.SelectedValue + ddlStartMonth.SelectedValue + "01");
                 cmd.Parameters.AddWithValue("@ENDDATE", ddlEndYear.SelectedValue + ddlEndMonth.SelectedValue + "31");
-                cmd.Parameters.AddWithValue("@CUSTID", hdnClientID.Value);
+                cmd.Parameters.AddWithValue("@CUSTID", clientID);
                 cmd.Parameters.AddWithValue("@COMPID", ddlCompanyID.SelectedValue);
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);

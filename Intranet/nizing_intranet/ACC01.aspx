@@ -7,39 +7,56 @@
         .right-align{
             text-align:right !important;
         }
-        /*.grdResultWithFooter tr td{
-            text-align:right;
-        }*/
+        .ui-autocomplete {
+            padding:0px;
+            background-color: inherit;
+            border:solid 1px #cccccc;
+            border-radius:4px;
+            max-height: 200px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+            /* add padding to account for vertical scrollbar */
+            padding-right: 20px;
+            cursor: pointer;
+        }
+        .ui-autocomplete .ui-menu-item:hover{
+            background-color:lightblue;
+        }
     </style>
-    <%--<script type="text/javascript">
-        $(document).ready(function(){
-            $("#txtClientID").autocomplete({
+    <script type="text/javascript">
+        jQuery.ui.autocomplete.prototype._resizeMenu = function () {
+            var ul = this.menu.element;
+            ul.outerWidth(this.element.outerWidth());
+        }
+        $(document).ready(function () {
+            $("#ContentPlaceHolder1_txtClientID").autocomplete({
                 source: function (request, response) {
+                    var param = { keyword: $('#<%= txtClientID.ClientID %>').val() };
                     $.ajax({
-                        url: '<%=ResolveUrl("~/ACC01.aspx/GetClientList") %>',
-                        data: "{ 'prefix': '" + request.term + "'}",
+                        url: "/nizing_intranet/ACC01.aspx/GetClientList",
+                        data: JSON.stringify(param),
                         dataType: "json",
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
+                        dataFilter: function (data) { return data; },
                         success: function (data) {
                             response($.map(data.d, function (item) {
                                 return {
-                                    label: item.split('-')[0],
-                                    val: item.split('-')[1]
+                                    value: item
                                 }
                             }))
                         },
-                        error: function (response) {
-                            alert(response.responseText);
-                        },
-                        failure: function (response) {
-                            alert(response.responseText);
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert(textStatus);
                         }
-                    })
-                }
-            })
+                    });
+                },
+                minLength: 1,
+                autoFocus: true
+            });
         });
-    </script>--%>
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -81,12 +98,7 @@
     <div class="row">
         <label class="control-label col-xs-1">客戶代號:</label>
         <div class="col-xs-2" style="padding-right: 0px;">
-            <asp:DropDownList ID="ddlClientID" runat="server" CssClass="form-control">
-                <asp:ListItem Value="ALL">全部</asp:ListItem>
-            </asp:DropDownList>
-            <asp:HiddenField ID="hdnClientID" runat="server" />
-            <%--<ajaxToolkit:ComboBox ID="cboClientID" runat="server" OnSelectedIndexChanged="cboClientID_SelectedIndexChanged"></ajaxToolkit:ComboBox>--%>
-            <%--<asp:TextBox ID="txtClientID" runat="server"></asp:TextBox>--%>
+            <asp:TextBox ID="txtClientID" runat="server" CssClass="form-control"></asp:TextBox>
         </div>
     </div>
     <div class="row form-group">
