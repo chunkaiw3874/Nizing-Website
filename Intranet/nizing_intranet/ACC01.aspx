@@ -86,8 +86,7 @@
             </asp:DropDownList>
             <asp:HiddenField ID="hdnClientID" runat="server" />
             <%--<ajaxToolkit:ComboBox ID="cboClientID" runat="server" OnSelectedIndexChanged="cboClientID_SelectedIndexChanged"></ajaxToolkit:ComboBox>--%>
-            <%--<asp:TextBox ID="txtClientID" runat="server"></asp:TextBox>
-            <asp:HiddenField ID="hdnClientID" runat="server" />--%>
+            <%--<asp:TextBox ID="txtClientID" runat="server"></asp:TextBox>--%>
         </div>
     </div>
     <div class="row form-group">
@@ -103,7 +102,6 @@
             <asp:Button ID="btnSubmit" runat="server" Text="查詢" CssClass="btn btn-success form-control" OnClick="btnSubmit_Click" />
         </div>
     </div>
-    <%--<asp:TextBox ID="txtTest" runat="server"></asp:TextBox>--%>
     <div id="ReportSection">
         <div id="divDetailReport" class="row" runat="server">
             <div class="col-xs-12">
