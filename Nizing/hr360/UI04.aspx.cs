@@ -37,8 +37,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             Session["erp_id"] = "0085"; //test only to avoid error on loading, delete after trial
             ApplicationSection_Init_Load();
             InProgressSection_Init_Load();
-            ApprovalSection_Init_Load();
-            //SendEmailNotification("123", "456", "1", "2", "3");
+            ApprovalSection_Init_Load();;
         }
         else
         {
@@ -1159,6 +1158,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@APPLICATION", withdrawID);
             cmd.ExecuteNonQuery();
         }
+        SendEmailNotification(withdrawID, 2);
         fillInProgressApplicationTable();
     }
     /// <summary>
@@ -1245,7 +1245,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         + " AND (MV.MV004=@DEPT OR MV.MV004=REF.REF)"
                         + " AND HIER.[RANK] > @RANK"
                         + " AND HIER.[RANK] BETWEEN 2 AND 7"
-                        + " AND MV.MV004<>'B-C'"  //SPECIAL RULE FOR 上膠部，因為沒人會電腦，固上膠部請假直接到第二層，由生管口頭詢問上膠主管 (DELETE WHEN SITUATION CHANGES)
+                        + " AND MV.MV004<>'B-C'"  //SPECIAL RULE FOR 上膠部，因為沒人會電腦，故上膠部請假直接到第二層，由生管口頭詢問上膠主管 (DELETE WHEN SITUATION CHANGES)
                         + " ORDER BY HIER.[RANK] DESC,MV.MV001";
                     cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@ID", applicantID);
@@ -1377,12 +1377,19 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@APPLICATION", approveID);
                 cmd.ExecuteNonQuery();
             }
-            lblTest.Text = approveID_status + " " + nextReviewer;
             System.Threading.Thread.Sleep(1000);    //sleeps for 1 second before continuing so trail records can be ordered by time
         } while (nextReviewer == "SYSTEM" && approveID_status != "06"); //stops when somebody is required to review the application,
                                                                         //or when approval status reached 6, which means the application is approved by everyone necessary
                                                                         //automatic approval should only happen on 1st and 2nd level,
                                                                         //3rd and 4th level should always have reviewer (人事主管/副總)
+        if (approveID_status != "06")
+        {
+            SendEmailNotification(approveID, 1);
+        }
+        else
+        {
+            SendEmailNotification(approveID, 4);
+        }
         fillApprovalTable();
     }
     /// <summary>
@@ -1417,6 +1424,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@APPLICATION", denyID);
             cmd.ExecuteNonQuery();
         }
+        SendEmailNotification(denyID, 3);
         fillApprovalTable();
     }
     /// <summary>
@@ -1466,7 +1474,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("@DAYOFF_END_TIME", dayoff.endTime);
                     cmd.Parameters.AddWithValue("@DAYOFF_TOTAL_TIME", dayoff.amountUsing);
                     cmd.Parameters.AddWithValue("@DAYOFF_TIME_UNIT", dayoff.unit);
-                    cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub.Substring(0, 4));
+                    cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub.Substring(0,4));
                     cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.funcSub.Substring(0, 4));
                     cmd.Parameters.AddWithValue("@REASON", dayoff.reason);
                     cmd.ExecuteNonQuery();
@@ -1499,7 +1507,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         cmd.Parameters.AddWithValue("@DAYOFF_END_TIME", dayoff.endTime);
                         cmd.Parameters.AddWithValue("@DAYOFF_TOTAL_TIME", dayoff.amountUsing);
                         cmd.Parameters.AddWithValue("@DAYOFF_TIME_UNIT", dayoff.unit);
-                        cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub);
+                        cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub.Substring(0, 4));
                         cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.funcSub.Substring(0, 4));
                         cmd.Parameters.AddWithValue("@REASON", dayoff.reason);
                         cmd.ExecuteNonQuery();
@@ -1519,9 +1527,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                        
                     }
                 }
+                SendEmailNotification(uid, 1);
             }
-
-            //
         }
         ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('申請已送出');", true);
         lstDayOffAppSummary.Clear();
@@ -1722,11 +1729,74 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// <param name="appId"></param>
     /// <param name="appStatus"></param>
     /// <param name="recipientId"></param>
-    protected void SendEmailNotification(string appId, int appStatus, params string[] recipientId)
+    protected void SendEmailNotification(string appId, int appStatus)
     {
+        //Get recipient ID depending on status
+        List<string> recipientId = new List<string>();
+        DataTable dt = new DataTable();
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            string query = ";WITH TRAIL"
+                        +" AS"
+                        +" ("
+                        +" SELECT B.APPLICATION_ID 'APPLICATION_ID',B.EXECUTOR_ID 'EXECUTOR_ID',B.ACTION_ID 'ACTION_ID',B.MEMO 'ACTION_MEMO'"
+                        +" FROM HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B B"
+                        +" INNER JOIN (SELECT APPLICATION_ID,MAX(ACTION_TIME) ACTION_TIME FROM HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B GROUP BY APPLICATION_ID) C ON B.APPLICATION_ID=C.APPLICATION_ID AND B.ACTION_TIME=C.ACTION_TIME"
+                        +" )"
+                        +" SELECT APP.APPLICATION_ID"
+                        +" ,APP.DAYOFF_NAME"
+                        +" ,APP.APPLICANT_ID"
+                        +" ,MV.MV002 'APPLICANT_NAME'"
+                        +" ,APP.DAYOFF_START_TIME"
+                        +" ,APP.DAYOFF_END_TIME"
+                        +" ,COALESCE(APP.NEXT_REVIEWER,'') 'NEXT_REVIEWER'"
+                        +" ,COALESCE(MV2.MV002,'') 'REVIEWER_NAME'"
+                        +" ,APP.FUNCTIONAL_SUBSTITUTE_ID"
+                        +" ,MV3.MV002 'FUNC_SUB_NAME'"
+                        +" ,APP.APPLICATION_STATUS_ID"
+                        +" ,[STATUS].NAME 'STATUS_NAME'"
+                        +" ,TRAIL.EXECUTOR_ID"
+                        +" ,COALESCE(MV4.MV002,'SYSTEM') 'EXECUTOR_NAME'"
+                        +" ,TRAIL.ACTION_ID"
+                        +" ,TRAIL_A.NAME 'ACTION_NAME'"
+                        +" ,COALESCE(TRAIL.ACTION_MEMO,'') 'ACTION_MEMO'"
+                        +" FROM HR360_DAYOFFAPPLICATION_APPLICATION APP"
+                        +" LEFT JOIN NZ.dbo.CMSMV MV ON APP.APPLICANT_ID=MV.MV001"
+                        +" LEFT JOIN NZ.dbo.CMSMV MV2 ON APP.NEXT_REVIEWER=MV2.MV001"
+                        +" LEFT JOIN NZ.dbo.CMSMV MV3 ON APP.FUNCTIONAL_SUBSTITUTE_ID=MV3.MV001"
+                        +" LEFT JOIN HR360_DAYOFFAPPLICATION_APPLICATION_STATUS [STATUS] ON APP.APPLICATION_STATUS_ID=[STATUS].ID"
+                        +" LEFT JOIN TRAIL ON APP.APPLICATION_ID=TRAIL.APPLICATION_ID"
+                        +" LEFT JOIN HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_A TRAIL_A ON TRAIL.ACTION_ID=TRAIL_A.ID"
+                        +" LEFT JOIN NZ.dbo.CMSMV MV4 ON TRAIL.EXECUTOR_ID=MV4.MV001"
+                        + " WHERE APP.APPLICATION_ID=@APP_ID";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@APP_ID", appId);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+        }
+        recipientId.Add("0085");    //Current HR, change when HR personnel changes
+        //status 1:新申請/一般簽核通過(HR&下個簽核者) 2:申請撤銷(HR&代理人) 3:申請退回(HR&申請人&代理人) 4:最後一層簽核通過(HR&申請人&代理人)
+        switch (appStatus)
+        {
+            case 1:
+                recipientId.Add(dt.Rows[0]["NEXT_REVIEWER"].ToString());
+                break;
+            case 2:
+                //recipientId.Add(dt.Rows[0]["NEXT_REVIEWER"].ToString());
+                recipientId.Add(dt.Rows[0]["FUNCTIONAL_SUBSTITUTE_ID"].ToString());
+                break;
+            case 3:
+            case 4:
+                recipientId.Add(dt.Rows[0]["APPLICANT_ID"].ToString());
+                recipientId.Add(dt.Rows[0]["FUNCTIONAL_SUBSTITUTE_ID"].ToString());
+                break;
+            default:
+                break;
+        }
         //Get Email address of all recipients
         List<string> recipientEmailList = new List<string>();
-        for (int i = 0; i < recipientId.Length; i++)
+        foreach(string recipient in recipientId)
         {
             using (SqlConnection conn = new SqlConnection(NZconnectionString))
             {
@@ -1735,42 +1805,54 @@ public partial class hr360_UI04 : System.Web.UI.Page
                             + " FROM CMSMV MV"
                             + " WHERE MV.MV001=@RECIPIENT_ID";
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@RECIPIENT_ID", recipientId[i]);
+                cmd.Parameters.AddWithValue("@RECIPIENT_ID", recipient);
                 recipientEmailList.Add(cmd.ExecuteScalar().ToString());
             }
         }
         //拼湊收件人郵箱
-        string To = "";
+        string to = "";
         for (int i = 0; i < recipientEmailList.Count; i++)
         {
-            To += recipientEmailList[i];
+            to += recipientEmailList[i];
             if (i != recipientEmailList.Count - 1)
             {
-                To += ",";
+                to += ",";
             }
         }
-        string From = "Administrator@nizing.com.tw";
+        string from = "Administrator@nizing.com.tw";
         //主旨depends on appStatus
-        //status 1:新申請 2:一般簽核通過 3:最後一層簽核通過(副總) 4:申請退回(BY簽核者) 5:申請撤銷(BY申請者)
-        DataTable dt = new DataTable();
-        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-        {
-            conn.Open();
-            string query = "SELECT ";
-
-        }
-        string Subject = "";
+        //status 1:新申請/一般簽核通過 2:申請撤銷(BY申請者) 3:申請退回(BY簽核者) 4:最後一層簽核通過(副總)        
+        string subject = "假單" + dt.Rows[0]["APPLICATION_ID"].ToString() + ":";
         switch (appStatus)
         {
             case 1:
-                Subject = "";
+                subject += dt.Rows[0]["APPLICANT_NAME"].ToString() + "請" + dt.Rows[0]["DAYOFF_NAME"].ToString() + "，待" + dt.Rows[0]["REVIEWER_NAME"].ToString() + "簽核";
+                break;
+            case 2:
+                subject += dt.Rows[0]["APPLICANT_NAME"].ToString() + "撤銷申請";
+                break;
+            case 3:
+                subject += dt.Rows[0]["EXECUTOR_NAME"].ToString() + "退回申請";
+                break;
+            case 4:
+                subject += dt.Rows[0]["APPLICANT_NAME"].ToString() + "請" + dt.Rows[0]["DAYOFF_NAME"].ToString() + "，由" + dt.Rows[0]["FUNC_SUB_NAME"].ToString() + "代理，簽核通過";
+                break;
+            default:
                 break;
         }
         
-        string Body = "The Email Attachment Extract Process is Complete. Please finish the Import process.";
+        //內文
+        string body = "請假單號: " + dt.Rows[0]["APPLICATION_ID"].ToString() + "\n";
+        body += "開始時間: " + dt.Rows[0]["DAYOFF_START_TIME"].ToString() + "\n";
+        body += "結束時間: " + dt.Rows[0]["DAYOFF_END_TIME"].ToString() + "\n";
+        body += "簽核狀態: " + dt.Rows[0]["STATUS_NAME"].ToString() + "\n";
+        body += "最後動作執行者: " + dt.Rows[0]["EXECUTOR_NAME"].ToString() + "\n";
+        body += "最後動作備註: " + dt.Rows[0]["ACTION_MEMO"].ToString() + "\n\n";
+        body += "請登入 http://www.nizing.com.tw/hr360/login.aspx > \"我要請假\" 確認細節";
+
 
         // create the email message
-        MailMessage completeMessage = new MailMessage(From, To, Subject, Body);
+        MailMessage completeMessage = new MailMessage(from, to, subject, body);
 
         // create smtp client at mail server location
         SmtpClient client = new SmtpClient("mail.nizing.com.tw");
