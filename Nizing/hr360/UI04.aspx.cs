@@ -34,11 +34,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            Session["erp_id"] = "0085"; //test only to avoid error on loading, delete after trial
-            SearchSection_Init_Load();
+            Session["erp_id"] = "0080"; //test only to avoid error on loading, delete after trial            
             ApplicationSection_Init_Load();
             InProgressSection_Init_Load();
-            ApprovalSection_Init_Load();;
+            ApprovalSection_Init_Load();
+            SearchSection_Init_Load();
         }
         else
         {
@@ -1548,7 +1548,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     + " AND MV.MV001<>'0000'"
                     + " AND MV.MV001<>'0006'"
                     + " AND MV.MV001<>'0007'"
-                    + " AND MV.MV001<>'0098'";
+                    + " AND MV.MV001<>'0098'";  //這些人不會請假
         if (Session["erp_id"].ToString() != "0085"
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
@@ -1556,18 +1556,33 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             query += " AND MV.MV001=@ID";
         }
-        else
-        {
-            ddlSearch_Parameter_ApplicantID.Items.Add()
-        }
         using (SqlConnection conn = new SqlConnection(NZconnectionString))
         {
             conn.Open();
-            query += "ORDER BY MV.MV001";
+            query += " ORDER BY MV.MV001";
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand(query, conn);
-
+            cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            ddlSearch_Parameter_ApplicantID.DataTextField = "display";
+            ddlSearch_Parameter_ApplicantID.DataValueField = "value";
+            ddlSearch_Parameter_ApplicantID.DataSource = dt;
+            ddlSearch_Parameter_ApplicantID.DataBind();
         }
+        if (!(Session["erp_id"].ToString() != "0085"
+            && Session["erp_id"].ToString() != "0080"
+            && Session["erp_id"].ToString() != "0006"
+            && Session["erp_id"].ToString() != "0007")) //管理部跟HR可以查詢全部人的歷史資料
+        {
+            ddlSearch_Parameter_ApplicantID.Items.Insert(0, new ListItem("全部人員", "ALL"));
+            ddlSearch_Parameter_ApplicantID.Enabled = true;
+        }
+        else
+        {
+            ddlSearch_Parameter_ApplicantID.Enabled = false;
+        }
+        ddlSearch_Parameter_ApplicantID.SelectedIndex = 0;
     }
     /// <summary>
     /// Initial loading for div application section
@@ -1903,5 +1918,59 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             throw;
         }
+    }
+    protected void btnSearchSubmit_Click(object sender, EventArgs e)
+    {
+        DateTime startTime = new DateTime();
+        DateTime endTime = new DateTime();
+        DataTable dt = new DataTable();
+        string query = "";
+        string condition = "";
+        string order = "";
+
+        if (!DateTime.TryParse(txtSearch_Parameter_StartDate.Text, out startTime))
+        {
+            startTime = new DateTime(2010,1,1);
+        }
+        if (!DateTime.TryParse(txtSearch_Parameter_EndDate.Text, out endTime))
+        {
+            endTime = new DateTime(9000, 12, 31);
+        }
+        else
+        {
+            endTime = endTime.AddDays(1);
+        }
+        query = "SELECT APP.APPLICATION_ID"
+            + " ,APP.APPLICATION_DATE"
+            + " ,MV.MV002 'APPLICANT_NAME'"
+            + " ,APP.DAYOFF_NAME"
+            + " ,APP.DAYOFF_START_TIME"
+            + " ,APP.DAYOFF_END_TIME"
+            + " ,CONVERT(NVARCHAR(20),APP.DAYOFF_TOTAL_TIME)+DAYOFF_TIME_UNIT 'DAYOFF_TOTAL_TIME'"
+            + " ,MV2.MV002 'FUNC_SUB_NAME'"
+            + " ,APP.REASON"
+            + " ,[STATUS].NAME 'STATUS'"
+            + " FROM HR360_DAYOFFAPPLICATION_APPLICATION APP"
+            + " LEFT JOIN NZ.dbo.CMSMV MV ON APP.APPLICANT_ID=MV.MV001"
+            + " LEFT JOIN NZ.dbo.CMSMV MV2 ON APP.FUNCTIONAL_SUBSTITUTE_ID=MV2.MV001"
+            + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPLICATION_STATUS [STATUS] ON APP.APPLICATION_STATUS_ID=[STATUS].ID";
+        condition = " WHERE APP.DAYOFF_START_TIME BETWEEN @STARTTIME AND @ENDTIME";
+        if (ddlSearch_Parameter_ApplicantID.SelectedValue != "ALL")
+        {
+            condition += " AND APP.APPLICANT_ID=@ID";
+        }
+        order = " ORDER BY APP.APPLICATION_ID";
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(query + condition + order, conn);
+            cmd.Parameters.AddWithValue("@STARTTIME", startTime);
+            cmd.Parameters.AddWithValue("@ENDTIME", endTime);
+            cmd.Parameters.AddWithValue("@ID", ddlSearch_Parameter_ApplicantID.SelectedValue);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+        }
+        gvSearchResult.DataSource = dt;
+        gvSearchResult.DataBind();
     }
 }
