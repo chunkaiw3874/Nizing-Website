@@ -35,6 +35,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         if (!IsPostBack)
         {
             Session["erp_id"] = "0085"; //test only to avoid error on loading, delete after trial
+            SearchSection_Init_Load();
             ApplicationSection_Init_Load();
             InProgressSection_Init_Load();
             ApprovalSection_Init_Load();;
@@ -1534,6 +1535,39 @@ public partial class hr360_UI04 : System.Web.UI.Page
         lstDayOffAppSummary.Clear();
         fillDayOffApplicationTable(lstDayOffAppSummary);
         fillInProgressApplicationTable();
+    }
+    /// <summary>
+    /// Initial loading for div search section
+    /// </summary>
+    protected void SearchSection_Init_Load()
+    {
+        hdnIsSearchFieldVisible.Value = "0";
+        string query = "SELECT MV.MV001+' '+MV.MV002 'display',MV.MV001 'value'"
+                    + " FROM CMSMV MV"
+                    + " WHERE MV.MV022=''"
+                    + " AND MV.MV001<>'0000'"
+                    + " AND MV.MV001<>'0006'"
+                    + " AND MV.MV001<>'0007'"
+                    + " AND MV.MV001<>'0098'";
+        if (Session["erp_id"].ToString() != "0085"
+            && Session["erp_id"].ToString() != "0080"
+            && Session["erp_id"].ToString() != "0006"
+            && Session["erp_id"].ToString() != "0007") //管理部跟HR可以查詢全部人的歷史資料
+        {
+            query += " AND MV.MV001=@ID";
+        }
+        else
+        {
+            ddlSearch_Parameter_ApplicantID.Items.Add()
+        }
+        using (SqlConnection conn = new SqlConnection(NZconnectionString))
+        {
+            conn.Open();
+            query += "ORDER BY MV.MV001";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(query, conn);
+
+        }
     }
     /// <summary>
     /// Initial loading for div application section

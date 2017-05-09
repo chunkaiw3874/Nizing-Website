@@ -104,19 +104,32 @@
             </div>
             <hr />
         </div>
+        <div class="row form-group">
+            <div class="col-xs-12">
+                <span class="label label-info" id="btnSearchVisibility" style="cursor: pointer; font-size: 20px;">查詢歷史假單</span>
+                <asp:HiddenField ID="hdnIsSearchFieldVisible" runat="server" />
+            </div>
+        </div>
         <div id="search_section">
             <div class="row form-group">
-                <div class="col-xs-12">
-                    <h2>查詢歷史假單</h2>
+                <div class="col-xs-3">
+                    <asp:DropDownList ID="ddlSearch_Parameter_ApplicantID" runat="server"></asp:DropDownList>
+                </div>
+                <div class="col-xs-2" style="display: inline; padding-right: 0px;">
+                    <asp:TextBox ID="txtSearch_Parameter_StartDate" runat="server" CssClass="form-control datepicker" placeholder="查詢起始日期"></asp:TextBox>
+                </div>
+                <div class="col-xs-2" style="display: inline; padding-right: 0px;">
+                    <asp:TextBox ID="txtSearch_Parameter_EndDate" runat="server" CssClass="form-control datepicker" placeholder="查詢結束日期"></asp:TextBox>
                 </div>
             </div>
         </div>
+        <hr />
         <div id="application_section">            
-            <div class="row form-group">
+            <%--<div class="row form-group">
                 <div class="col-xs-12">
                     <h2>新申請</h2>
                 </div>
-            </div>
+            </div>--%>
             <div class="row form-group" style="margin-top: 10px;">
                 <div class="col-xs-12">
                     <span class="label label-info" id="btnDayOffAppVisibility" style="cursor: pointer; font-size: 20px;">我要請假</span>
