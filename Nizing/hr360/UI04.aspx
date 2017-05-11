@@ -7,6 +7,7 @@
     <script src="../Scripts/locales/bootstrap-datepicker.zh-TW.min.js"></script>
     <script src="../Scripts/text.area.auto.adjust.js"></script>
     <script src="../Scripts/bootstrap.js"></script>
+    <%--<script type="text/javascript" src="http://github.com/malsup/blockui/raw/master/jquery.blockUI.js?v2.34"></script>--%>
     <style>
         .no-resize {
             resize: none;
@@ -24,24 +25,24 @@
                 todayBtn: true,
                 todayHighlight: true
             });
-            var isPostBack = $('#<%=hdnIsDayOffAppVisible.ClientID%>').val();
+            var isPostBack = $('#<%=hdnIsPostBack.ClientID%>').val();
             if (isPostBack == '0') {
                 $('#DayOffApp').hide();
                 $('#search_section').hide();
             }
             else {
-                if ($('#<%=hdnIsDayOffAppVisible.ClientID%>').val() == '1') {
-                    $('#DayOffApp').show();
-                }
-                else {
-                    $('#DayOffApp').hide();
-                }
-                if ($('#<%=hdnIsSearchFieldVisible.ClientID%>').val() == '1') {
-                    $('#search_section').show();
-                }
-                else {
-                    $('#search_section').hide();
-                }
+                    if ($('#<%=hdnIsDayOffAppVisible.ClientID%>').val() == '1') {
+                        $('#DayOffApp').show();
+                    }
+                    else {
+                        $('#DayOffApp').hide();
+                    }
+                    if ($('#<%=hdnIsSearchFieldVisible.ClientID%>').val() == '1') {
+                        $('#search_section').show();
+                    }
+                    else {
+                        $('#search_section').hide();
+                    }
             };
             $(document).on('click', '#btnSearchVisibility', function () {
                 $('#search_section').toggle();
@@ -68,7 +69,12 @@
 
             $("[data-toggle='popover']").popover({
                 trigger: 'click'
-            })
+            });            
+
+            //$(document).on('click', '#btnAppSubmit', function () {
+            //    alert('blockUI activated');
+            //    $.blockUI({ message: '<h1>處理中...</h1>' });
+            //})
         });
         function confirmWithdrawal() {
             if (confirm('確定要撤銷此張假單嗎?')) {
@@ -113,8 +119,7 @@
     <div class="container">
         <div id="test_section">
             <div class="row form-group">
-                測試中，請勿使用           
-               
+                測試中，請勿使用    
                 <br />
                 <asp:TextBox ID="txtTestName" runat="server"></asp:TextBox>
                 <asp:Button ID="btnTestName" runat="server" Text="測試ERP ID" OnClick="btnTestName_Click" />
@@ -145,11 +150,11 @@
             </div>
             <div class="row form-group">
                 <div class="col-xs-12">
-                    <asp:GridView ID="gvSearchResult" runat="server" AutoGenerateColumns="false" CssClass="table table-striped">
+                    <asp:GridView ID="gvSearchResult" runat="server" AutoGenerateColumns="false" CssClass="table table-striped" OnRowDataBound="gvSearchResult_RowDataBound">
                         <Columns>
                             <asp:TemplateField HeaderText="假單單號" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:Label ID="Label0" runat="server" Text='<%#Eval("APPLICATION_ID") %>'></asp:Label>
+                                    <asp:Label ID="lblAppId" runat="server" Text='<%#Eval("APPLICATION_ID") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="申請時間" ItemStyle-HorizontalAlign="Center">
@@ -194,12 +199,12 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="假單狀態" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:Label ID="Label9" runat="server" Text='<%#Eval("STATUS") %>'></asp:Label>
+                                    <asp:Label ID="lblAppStatus" runat="server" Text='<%#Eval("STATUS") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="人事退回" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:Button ID="btnSearch_Deny" runat="server" Text="退回" CssClass="btn btn-danger" />
+                                    <asp:Button ID="btnSearch_Deny" runat="server" Text="退回" CssClass="btn btn-danger" OnClientClick="javascript:return confirmDeny();" OnClick="btnDeny_Click" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>

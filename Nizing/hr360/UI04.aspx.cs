@@ -1403,8 +1403,18 @@ public partial class hr360_UI04 : System.Web.UI.Page
         
         Button btn = (Button)sender;
         string btnID = btn.ID;
-        int rowNumber = Convert.ToInt16(btn.ID.Substring(7, btn.ID.Length - 7));
-        string denyID = tbApprovalPending.Rows[rowNumber + 1].Cells[0].InnerText;
+        string denyID = "";
+        //退回可以在簽核過程產生，或於簽核結束後，由ADM或HR因特殊原因產生-兩者得到denyID的過程不同
+        if (btnID == "btnSearch_Deny")  //簽核結束後，經由查詢功能產生的退回
+        {
+            GridViewRow row = (GridViewRow)btn.NamingContainer;
+            denyID = ((Label)row.Cells[0].FindControl("lblAppId")).Text;
+        }
+        else
+        {
+            int rowNumber = Convert.ToInt16(btn.ID.Substring(7, btn.ID.Length - 7));
+            denyID = tbApprovalPending.Rows[rowNumber + 1].Cells[0].InnerText;
+        }        
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             conn.Open();
@@ -1570,7 +1580,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             ddlSearch_Parameter_ApplicantID.DataSource = dt;
             ddlSearch_Parameter_ApplicantID.DataBind();
         }
-        if (!(Session["erp_id"].ToString() != "0085"
+        if (!(Session["erp_id"].ToString() != "0085"    //Doris(HR) change when HR personnel changes
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
             && Session["erp_id"].ToString() != "0007")) //管理部跟HR可以查詢全部人的歷史資料
@@ -1779,7 +1789,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// <param name="appStatus"></param>
     /// <param name="recipientId"></param>
     protected void SendEmailNotification(string appId, int appStatus)
-    {
+    {        
         //Get recipient ID depending on status
         List<string> recipientId = new List<string>();
         DataTable dt = new DataTable();
@@ -1919,6 +1929,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
             throw;
         }
     }
+    /// <summary>
+    /// Perform application search
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void btnSearchSubmit_Click(object sender, EventArgs e)
     {
         DateTime startTime = new DateTime();
@@ -1972,5 +1987,31 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
         gvSearchResult.DataSource = dt;
         gvSearchResult.DataBind();
+
+        if (Session["erp_id"].ToString() != "0007"      //Chrissy
+            //&& Session["erp_id"].ToString() != "0080"   //Kevin
+            && Session["erp_id"].ToString() != "0085")  //Doris (HR) change when HR personnel changes
+        {
+            gvSearchResult.Columns[10].Visible = false;
+        }
+    }
+    /// <summary>
+    /// Disable "退回" button for rows whose status is "退回"
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void gvSearchResult_RowDataBound(object sender, GridViewRowEventArgs e)
+    {        
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            if (((Label)e.Row.Cells[9].FindControl("lblAppStatus")).Text == "退回")
+            {
+                ((Button)e.Row.Cells[10].FindControl("btnSearch_Deny")).Enabled = false;
+            }
+            else
+            {
+                ((Button)e.Row.Cells[10].FindControl("btnSearch_Deny")).Enabled = true;
+            }
+        }
     }
 }
