@@ -7,9 +7,17 @@
     <script src="../Scripts/locales/bootstrap-datepicker.zh-TW.min.js"></script>
     <script src="../Scripts/text.area.auto.adjust.js"></script>
     <script src="../Scripts/bootstrap.js"></script>
+    <%--<script type="text/javascript" src="http://github.com/malsup/blockui/raw/master/jquery.blockUI.js?v2.34"></script>--%>
     <style>
         .no-resize {
             resize: none;
+        }
+        #loading-screen{
+            display:none;
+            position:fixed;
+            top:50%;
+            left:50%;
+            text-align:center;
         }
     </style>
     <script type="text/javascript">
@@ -24,19 +32,36 @@
                 todayBtn: true,
                 todayHighlight: true
             });
-            var isPostBack = $('#<%=hdnIsDayOffAppVisible.ClientID%>').val();
+            var isPostBack = $('#<%=hdnIsPostBack.ClientID%>').val();
             if (isPostBack == '0') {
                 $('#DayOffApp').hide();
+                $('#search_section').hide();
             }
             else {
-                if ($('#<%=hdnIsDayOffAppVisible.ClientID%>').val() == '1') {
-                    $('#DayOffApp').show();
+                    if ($('#<%=hdnIsDayOffAppVisible.ClientID%>').val() == '1') {
+                        $('#DayOffApp').show();
+                    }
+                    else {
+                        $('#DayOffApp').hide();
+                    }
+                    if ($('#<%=hdnIsSearchFieldVisible.ClientID%>').val() == '1') {
+                        $('#search_section').show();
+                    }
+                    else {
+                        $('#search_section').hide();
+                    }
+            };
+            $(document).on('click', '#btnSearchVisibility', function () {
+                $('#search_section').toggle();
+                if ($('#search_section').is(":visible") == true) {
+                    $('#search_section').show();
+                    $('#<%=hdnIsSearchFieldVisible.ClientID%>').val('1');
                 }
                 else {
-                    $('#DayOffApp').hide();
+                    $('#search_section').hide();
+                    $('#<%=hdnIsSearchFieldVisible.ClientID%>').val('0');
                 }
-            };
-
+            });
             $(document).on('click', '#btnDayOffAppVisibility', function () {
                 $('#DayOffApp').toggle();
                 if ($('#DayOffApp').is(":visible") == true) {
@@ -48,10 +73,9 @@
                     $('#<%=hdnIsDayOffAppVisible.ClientID%>').val('0');
                 }
             });
-
             $("[data-toggle='popover']").popover({
                 trigger: 'click'
-            })
+            });
         });
         function confirmWithdrawal() {
             if (confirm('確定要撤銷此張假單嗎?')) {
@@ -62,7 +86,7 @@
             }
         };
         function confirmApprove() {
-            if (confirm('確定要簽核此張假單嗎?')) {
+            if (confirm('確定要簽核此張假單嗎?')) {                
                 return true;
             }
             else {
@@ -70,10 +94,19 @@
             }
         };
         function confirmDeny() {
-            if (confirm('確定要退回此張假單嗎?')) {
+            var reason = prompt("請輸入退回原因(必填、50字內):");
+            var trimmedReason = '';
+            if (reason != null) {
+                trimmedReason = reason.trim();
+            }
+            if (trimmedReason != '' && reason !== null) {
+                document.getElementById('<%= hdnDenyReason.ClientID %>').value = trimmedReason;
                 return true;
             }
             else {
+                if (reason !== null) {
+                    alert('請填入退件原因');
+                }
                 return false;
             }
         }
@@ -85,16 +118,108 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="page_content" runat="Server">
     <div class="container">
-        <div id="application_section">
+        <div id="test_section">
             <div class="row form-group">
-                測試中，請勿使用
-           
+                測試中，請勿使用    
                 <br />
                 <asp:TextBox ID="txtTestName" runat="server"></asp:TextBox>
                 <asp:Button ID="btnTestName" runat="server" Text="測試ERP ID" OnClick="btnTestName_Click" />
                 <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>
             </div>
             <hr />
+        </div>
+        <div class="row form-group">
+            <div class="col-xs-12">
+                <span class="label label-info" id="btnSearchVisibility" style="cursor: pointer; font-size: 20px;">查詢歷史假單</span>
+                <asp:HiddenField ID="hdnIsSearchFieldVisible" runat="server" />
+            </div>
+        </div>
+        <div id="search_section">
+            <div class="row form-group">
+                <div class="col-xs-3">
+                    <asp:DropDownList ID="ddlSearch_Parameter_ApplicantID" runat="server" CssClass="form-control"></asp:DropDownList>
+                </div>
+                <div class="col-xs-2">
+                    <asp:TextBox ID="txtSearch_Parameter_StartDate" runat="server" CssClass="form-control datepicker" placeholder="查詢起始日期"></asp:TextBox>
+                </div>
+                <div class="col-xs-2">
+                    <asp:TextBox ID="txtSearch_Parameter_EndDate" runat="server" CssClass="form-control datepicker" placeholder="查詢結束日期"></asp:TextBox>
+                </div>
+                <div class="col-xs-2">
+                    <asp:Button ID="btnSearchSubmit" runat="server" Text="查詢" CssClass="btn btn-success" OnClick="btnSearchSubmit_Click" />
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <asp:GridView ID="gvSearchResult" runat="server" AutoGenerateColumns="false" CssClass="table table-striped" OnRowDataBound="gvSearchResult_RowDataBound">
+                        <Columns>
+                            <asp:TemplateField HeaderText="假單單號" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblAppId" runat="server" Text='<%#Eval("APPLICATION_ID") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="申請時間" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text='<%#Eval("APPLICATION_DATE") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="申請者" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label2" runat="server" Text='<%#Eval("APPLICANT_NAME") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="假別" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label3" runat="server" Text='<%#Eval("DAYOFF_NAME") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="請假開始時間" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label4" runat="server" Text='<%#Eval("DAYOFF_START_TIME") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="請假結束時間" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label5" runat="server" Text='<%#Eval("DAYOFF_END_TIME") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="請假總量" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label6" runat="server" Text='<%#Eval("DAYOFF_TOTAL_TIME") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="代理人" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label7" runat="server" Text='<%#Eval("FUNC_SUB_NAME") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="請假原因" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label8" runat="server" Text='<%#Eval("REASON") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="假單狀態" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblAppStatus" runat="server" Text='<%#Eval("STATUS") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="人事退回" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Button ID="btnSearch_Deny" runat="server" Text="退回" CssClass="btn btn-danger" OnClientClick="javascript:return confirmDeny();" OnClick="btnDeny_Click" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div id="application_section">
+            <%--<div class="row form-group">
+                <div class="col-xs-12">
+                    <h2>新申請</h2>
+                </div>
+            </div>--%>
             <div class="row form-group" style="margin-top: 10px;">
                 <div class="col-xs-12">
                     <span class="label label-info" id="btnDayOffAppVisibility" style="cursor: pointer; font-size: 20px;">我要請假</span>
@@ -108,6 +233,7 @@
                     <asp:HiddenField ID="hdnDayOffTimeRemainBeforeSubmit" runat="server" />
                     <asp:HiddenField ID="hdnTotalDayOffTime" runat="server" />
                     <asp:HiddenField ID="hdnDayOffTypeUnit" runat="server" />
+                    <asp:HiddenField ID="hdnDenyReason" runat="server" />
                 </div>
             </div>
             <div id="DayOffApp">
@@ -166,7 +292,7 @@
                     <div class="col-xs-4 col-xs-offset-2" style="display: inline;">
                         <asp:TextBox ID="txtReason" runat="server" CssClass="form-control" MaxLength="20" placeholder="事假必填(20字內)"></asp:TextBox>
                     </div>
-                </div>                
+                </div>
                 <div class="row form-group">
                     <div class="col-xs-1 col-xs-offset-5">
                         <asp:ImageButton ID="btnDayOffAdd" runat="server" ImageUrl="~/hr360/image/icon/green-arrow-down.png" Width="40" OnClick="btnDayOffAdd_Click" />
@@ -180,6 +306,7 @@
                         <div class="panel panel-info">
                             <div class="panel-heading">
                                 本次請假內容                       
+                           
                             </div>
                             <div class="panel-body">
                                 <table id="tbAppSummary" class="table col-xs-12" runat="server">
@@ -195,11 +322,17 @@
         </div>
         <hr />
         <div id="in-progress_section">
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <h2>申請中</h2>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-xs-12">
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             申請中假單
+                       
                         </div>
                         <div class="panel-body">
                             <table id="tbInProgressSummary" class="table col-xs-12" runat="server">
@@ -207,15 +340,21 @@
                         </div>
                     </div>
                 </div>
-            </div>            
+            </div>
         </div>
         <hr />
         <div id="approval_section">
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <h2>待簽核</h2>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-xs-12">
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             待簽核假單
+                       
                         </div>
                         <div class="panel-body">
                             <table id="tbApprovalPending" class="table col-xs-12" runat="server">
@@ -223,7 +362,7 @@
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div>
         </div>
     </div>
 </asp:Content>
