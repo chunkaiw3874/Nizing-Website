@@ -12,6 +12,13 @@
         .no-resize {
             resize: none;
         }
+        #loading-screen{
+            display:none;
+            position:fixed;
+            top:50%;
+            left:50%;
+            text-align:center;
+        }
     </style>
     <script type="text/javascript">
         $(function () {
@@ -66,15 +73,9 @@
                     $('#<%=hdnIsDayOffAppVisible.ClientID%>').val('0');
                 }
             });
-
             $("[data-toggle='popover']").popover({
                 trigger: 'click'
-            });            
-
-            //$(document).on('click', '#btnAppSubmit', function () {
-            //    alert('blockUI activated');
-            //    $.blockUI({ message: '<h1>處理中...</h1>' });
-            //})
+            });
         });
         function confirmWithdrawal() {
             if (confirm('確定要撤銷此張假單嗎?')) {
@@ -85,7 +86,7 @@
             }
         };
         function confirmApprove() {
-            if (confirm('確定要簽核此張假單嗎?')) {
+            if (confirm('確定要簽核此張假單嗎?')) {                
                 return true;
             }
             else {
