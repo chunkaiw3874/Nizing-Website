@@ -7,7 +7,6 @@
     <script src="../Scripts/locales/bootstrap-datepicker.zh-TW.min.js"></script>
     <script src="../Scripts/text.area.auto.adjust.js"></script>
     <script src="../Scripts/bootstrap.js"></script>
-    <%--<script type="text/javascript" src="http://github.com/malsup/blockui/raw/master/jquery.blockUI.js?v2.34"></script>--%>
     <style>
         .no-resize {
             resize: none;
@@ -118,7 +117,7 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="page_content" runat="Server">
     <div class="container">
-        <div id="test_section">
+        <%--<div id="test_section">
             <div class="row form-group">
                 測試中，請勿使用    
                 <br />
@@ -127,7 +126,7 @@
                 <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>
             </div>
             <hr />
-        </div>
+        </div>--%>
         <div class="row form-group">
             <div class="col-xs-12">
                 <span class="label label-info" id="btnSearchVisibility" style="cursor: pointer; font-size: 20px;">查詢歷史假單</span>

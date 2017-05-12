@@ -694,11 +694,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    protected void btnTestName_Click(object sender, EventArgs e)
-    {
-        Session["erp_id"] = txtTestName.Text.Trim();
-        lblTest.Text = "測試帳號" + txtTestName.Text.Trim();
-    }
+    //protected void btnTestName_Click(object sender, EventArgs e)
+    //{
+    //    Session["erp_id"] = txtTestName.Text.Trim();
+    //    lblTest.Text = "測試帳號" + txtTestName.Text.Trim();
+    //}
 
     /// <summary>
     /// fill day off application table
