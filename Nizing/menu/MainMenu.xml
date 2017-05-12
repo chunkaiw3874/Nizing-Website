@@ -55,6 +55,6 @@
     <submenuitem url="~/environment-certificate.aspx" enTitle="Environment" cnTitle="綠色認證" />
   </menuitem>
   <menuitem url="~/ulnumber.aspx" enTitle="UL Number" cnTitle="UL編號" />
-  <menuitem url="~/employee_section/calculator.aspx" enTitle="Eng Calculator" cnTitle="工程計算機" />
+  <!--<menuitem url="~/employee_section/calculator.aspx" enTitle="Eng Calculator" cnTitle="工程計算機" />-->
   <menuitem url="~/contact_us.aspx" enTitle="Contact Us" cnTitle="聯絡我們" />
 </menu>

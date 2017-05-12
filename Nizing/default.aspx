@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
     <title>電線、電纜-日進電線</title>
     <meta name="keywords" content="矽膠電線,鐵氟龍電線,照射電線,發熱電線,PVC電線,PE電線,PU電線,補償導線,耐高溫電線,耐高溫電纜,耐高壓電線,耐高壓電纜,UL電線,矽膠編織電線,軍規線,汽車花線" />
-    <meta name="description" content="日進電線為國內一流電線及電纜製造商，專門製造特殊材質及用途電線及電纜，如耐高溫的矽膠電線、矽膠編織電線，抗酸鹼的聚合氟化線電線，抗UV的照射電線，旗下電線電纜產品眾多，歡迎聯繫洽詢" />
+    <meta name="description" content="日進電線為國內一流電線及電纜製造商，專門製造特殊材質及用途電線及電纜，如耐高溫的矽膠電線、矽膠編織電線，抗酸鹼的聚合氟化線電線，抗UV的照射電線等，旗下電線電纜產品眾多，歡迎聯繫洽詢" />
 </asp:Content>
 <asp:Content ID="Java" ContentPlaceHolderID="JavaScriptCode" runat="server">
     <script type="text/javascript">
@@ -28,41 +28,41 @@
                     <asp:HyperLink ID="HyperLink19" runat="server" ImageUrl="~/images/product/pro_01.jpg" NavigateUrl="~/pvc-series.aspx" Text="PVC電線" />
                 </div>
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink20" runat="server" ImageUrl="~/images/product/pro_02.jpg" NavigateUrl="~/silicone-fiberglass-series.aspx" alt="矽膠編織電線" />
+                    <asp:HyperLink ID="HyperLink20" runat="server" ImageUrl="~/images/product/pro_02.jpg" NavigateUrl="~/silicone-fiberglass-series.aspx" Text="矽膠編織電線" />
                 </div>
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink21" runat="server" ImageUrl="~/images/product/pro_03.jpg" NavigateUrl="~/high-temperature-resistance-series.aspx" />
+                    <asp:HyperLink ID="HyperLink21" runat="server" ImageUrl="~/images/product/pro_03.jpg" NavigateUrl="~/high-temperature-resistance-series.aspx" Text="耐溫電線" />
                 </div>
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink22" runat="server" ImageUrl="~/images/product/pro_04.jpg" NavigateUrl="~/silicone-series.aspx" />
+                    <asp:HyperLink ID="HyperLink22" runat="server" ImageUrl="~/images/product/pro_04.jpg" NavigateUrl="~/silicone-series.aspx" Text="矽膠電線" />
                 </div>
             </div>
             <div class="main-page-menu-product">
                 <div class="button">                                
-                    <asp:HyperLink ID="HyperLink23" runat="server" ImageUrl="~/images/product/pro_05.jpg" NavigateUrl="~/teflon-series.aspx" />
+                    <asp:HyperLink ID="HyperLink23" runat="server" ImageUrl="~/images/product/pro_05.jpg" NavigateUrl="~/teflon-series.aspx" Text="鐵氟龍電線" />
                 </div>
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink24" runat="server" ImageUrl="~/images/product/pro_06.jpg" NavigateUrl="~/xlpe-series.aspx" />
+                    <asp:HyperLink ID="HyperLink24" runat="server" ImageUrl="~/images/product/pro_06.jpg" NavigateUrl="~/xlpe-series.aspx" Text="照射電線" />
                 </div>
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink25" runat="server" ImageUrl="~/images/product/pro_07.jpg" NavigateUrl="~/sleeve-and-tube-series.aspx" />
+                    <asp:HyperLink ID="HyperLink25" runat="server" ImageUrl="~/images/product/pro_07.jpg" NavigateUrl="~/sleeve-and-tube-series.aspx" Text="套管" />
                 </div>
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink26" runat="server" ImageUrl="~/images/product/pro_08.jpg" NavigateUrl="~/thermocouple-series.aspx" />
+                    <asp:HyperLink ID="HyperLink26" runat="server" ImageUrl="~/images/product/pro_08.jpg" NavigateUrl="~/thermocouple-series.aspx" Text="補償導線" />
                 </div>
             </div>
             <div class="main-page-menu-product">                                
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink27" runat="server" ImageUrl="~/images/product/pro_09.jpg" NavigateUrl="~/heating-wire-series.aspx" />
+                    <asp:HyperLink ID="HyperLink27" runat="server" ImageUrl="~/images/product/pro_09.jpg" NavigateUrl="~/heating-wire-series.aspx" Text="發熱線" />
                 </div>
                 <div class="button">                                
-                    <asp:HyperLink ID="HyperLink28" runat="server" ImageUrl="~/images/product/pro_10.jpg" NavigateUrl="~/special-cable.aspx" />
+                    <asp:HyperLink ID="HyperLink28" runat="server" ImageUrl="~/images/product/pro_10.jpg" NavigateUrl="~/special-cable.aspx" Text="特殊規格電線" />
                 </div>
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink29" runat="server" ImageUrl="~/images/product/pro_11.jpg" NavigateUrl="~/automotive-wire-series.aspx" />
+                    <asp:HyperLink ID="HyperLink29" runat="server" ImageUrl="~/images/product/pro_11.jpg" NavigateUrl="~/automotive-wire-series.aspx" Text="汽車花線" />
                 </div>
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink41" runat="server" ImageUrl="~/images/product/pro_12.jpg" NavigateUrl="~/military-grade-series.aspx" />
+                    <asp:HyperLink ID="HyperLink41" runat="server" ImageUrl="~/images/product/pro_12.jpg" NavigateUrl="~/military-grade-series.aspx" Text="軍規線" />
                 </div>
             </div>
         </div>
