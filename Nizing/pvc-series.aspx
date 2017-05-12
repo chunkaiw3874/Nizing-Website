@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/product.master" AutoEventWireup="true" CodeFile="pvc-series.aspx.cs" Inherits="pvc_series" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
-    <title>日進電線-PVC系列</title>
+    <title>PVC電線、控制線、家用電器配線-日進電線</title>
+    <meta name="keywords" content="PVC電線,PVC電纜,PVC IV 粗芯控制線,KIV細芯控制線,家用電器配線" />
     <meta name="description" content="各式PVC線材，有一般家用的UL1007、UL1015、電腦傳輸訊號用的UL2464、UL2517、建築用的IV控制線、機械設備使用的KIV控制線、及其他各類常規及訂製線材">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
@@ -11,7 +12,7 @@
         <div class="content-row">
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/images/product_pic/ul1007-menu.jpg" alt="UL1007 PVC 電子線" NavigateUrl="ul1007.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/images/product_pic/ul1007-menu.jpg" Text="UL1007 PVC 電子線" NavigateUrl="ul1007.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     UL1007<br />
@@ -41,7 +42,7 @@
             </div>
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/images/product_pic/ul1015-menu.jpg" alt="UL1015 PVC 電子線" NavigateUrl="ul1015.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/images/product_pic/ul1015-menu.jpg" Text="UL1015 PVC 電子線" NavigateUrl="ul1015.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     UL1015<br />
@@ -71,7 +72,7 @@
             </div>
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/images/product_pic/ul2464-menu.jpg" alt="UL2464/UL2517傳輸隔離電腦線" NavigateUrl="ul2464.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/images/product_pic/ul2464-menu.jpg" Text="UL2464/UL2517傳輸隔離電腦線" NavigateUrl="ul2464.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     UL2464/UL2517<br />
@@ -107,7 +108,7 @@
         <div class="content-row">
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/images/product_pic/iv_wire-menu.jpg" alt="IV粗芯控制線" NavigateUrl="iv-wire.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/images/product_pic/iv_wire-menu.jpg" Text="IV粗芯控制線" NavigateUrl="iv-wire.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     IV<br />
@@ -137,7 +138,7 @@
             </div>
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink5" runat="server" ImageUrl="~/images/product_pic/kiv_wire-menu.jpg" alt="KIV細芯控制線" NavigateUrl="kiv-wire.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink5" runat="server" ImageUrl="~/images/product_pic/kiv_wire-menu.jpg" Text="KIV細芯控制線" NavigateUrl="kiv-wire.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     KIV<br />

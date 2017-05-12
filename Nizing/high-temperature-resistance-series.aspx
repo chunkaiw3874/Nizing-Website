@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/product.master" AutoEventWireup="true" CodeFile="high-temperature-resistance-series.aspx.cs" Inherits="high_temperature_resistance_series" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
-    <title>高溫線系列-日進電線</title>
-    <meta name="description" content="各式高溫線材，常於特殊高溫場所及機台使用的TGGT-5256、TGGT-400、MG5107、CF-750及其他各類常規及訂製線材">
+    <title>耐熱電線、高溫電線-日進電線</title>
+    <meta name="keywords" content="耐熱電線、高溫電線、機台用電線" />
+    <meta name="description" content="各式耐熱線材，常於特殊高溫場所及機台使用的TGGT-5256、TGGT-400、MG5107、CF-750及其他各類常規及訂製線材">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
@@ -11,11 +12,11 @@
         <div class="content-row">
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/images/product_pic/tggt5256-menu.jpg" alt="TGGT-5256 250°C高溫線" NavigateUrl="~/tggt-5256.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/images/product_pic/tggt5256-menu.jpg" Text="TGGT-5256 250°C耐熱電線" NavigateUrl="~/tggt-5256.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     TGGT-5256<br />
-                    250°C高溫線<br />
+                    250°C耐熱電線<br />
                     電熱馬達、高溫家用電器配線
                 </div>
                 <div class="data">
@@ -45,11 +46,11 @@
             </div>
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/images/product_pic/tggt400-menu.jpg" alt="TGGT-400 400°C高溫線" NavigateUrl="~/tggt-400.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/images/product_pic/tggt400-menu.jpg" Text="TGGT-400 400°C耐熱電線" NavigateUrl="~/tggt-400.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     TGGT-400<br />
-                    400°C高溫線<br />
+                    400°C耐熱電線<br />
                     電熱馬達、高溫家用電器配線
                 </div>
                 <div class="data">
@@ -75,11 +76,11 @@
             </div>
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/images/product_pic/mg5107-menu.jpg" alt="MG-5107 550°C高溫線" NavigateUrl="~/mg-5107.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/images/product_pic/mg5107-menu.jpg" Text="MG-5107 550°C耐熱電線" NavigateUrl="~/mg-5107.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     MG-5107<br />
-                    550°C高溫雲母編織線<br />
+                    550°C高溫雲母編織耐熱電線<br />
                     電熱馬達、高溫家用電器配線
                 </div>
                 <div class="data">
@@ -107,11 +108,11 @@
         <div class="content-row">
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/images/product_pic/cf750-menu.jpg" alt="CF-750 750°C高溫線" NavigateUrl="~/cf-750.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/images/product_pic/cf750-menu.jpg" Text="CF-750 750°C耐熱電線" NavigateUrl="~/cf-750.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     CF-750<br />
-                    750°C高溫線<br />
+                    750°C耐熱電線<br />
                     電熱馬達、高溫家用電器配線
                 </div>
                 <div class="data">
