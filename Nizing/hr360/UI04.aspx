@@ -153,7 +153,10 @@
             </div>
             <div class="row form-group">
                 <div class="col-xs-12">
-                    <asp:GridView ID="gvSearchResult" runat="server" AutoGenerateColumns="false" CssClass="table table-striped" OnRowDataBound="gvSearchResult_RowDataBound" OnPageIndexChanging="gvSearchResult_PageIndexChanging" AllowPaging="True" PageSize="10">
+                    <asp:GridView ID="gvSearchResult" runat="server" AutoGenerateColumns="false" CssClass="table table-striped" 
+                        OnRowDataBound="gvSearchResult_RowDataBound" OnPageIndexChanging="gvSearchResult_PageIndexChanging" 
+                        AllowPaging="True" PageSize="5" PagerSettings-Position="Top" PagerSettings-Mode="NumericFirstLast" PagerSettings-PageButtonCount="4"
+                        PagerSettings-FirstPageText="首頁" PagerSettings-LastPageText="尾頁">
                         <Columns>
                             <asp:TemplateField HeaderText="假單單號" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>

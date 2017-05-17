@@ -414,6 +414,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 string query = "SELECT APPLICATION_ID"
                     + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
                     + " WHERE APPLICANT_ID = @ID"
+                    + " AND APPLICATION_STATUS_ID<>'07'"
+                    + " AND APPLICATION_STATUS_ID<>'08'"
                     + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
                     + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
                     + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
@@ -1436,6 +1438,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
             cmd.ExecuteNonQuery();
         }
         SendEmailNotification(denyID, 3);
+        if (btnID == "btnSearch_Deny")
+        {
+            btnSearchSubmit_Click(sender, e);
+        }
+        fillInProgressApplicationTable();
         fillApprovalTable();
     }
     /// <summary>
