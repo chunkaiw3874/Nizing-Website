@@ -144,13 +144,16 @@
                 <div class="col-xs-2">
                     <asp:TextBox ID="txtSearch_Parameter_EndDate" runat="server" CssClass="form-control datepicker" placeholder="查詢結束日期"></asp:TextBox>
                 </div>
+                <div class="col-xs-3">
+                    <asp:DropDownList ID="ddlSearch_Parameter_ApplicationStatus" runat="server" CssClass="form-control"></asp:DropDownList>
+                </div>
                 <div class="col-xs-2">
                     <asp:Button ID="btnSearchSubmit" runat="server" Text="查詢" CssClass="btn btn-success" OnClick="btnSearchSubmit_Click" />
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col-xs-12">
-                    <asp:GridView ID="gvSearchResult" runat="server" AutoGenerateColumns="false" CssClass="table table-striped" OnRowDataBound="gvSearchResult_RowDataBound">
+                    <asp:GridView ID="gvSearchResult" runat="server" AutoGenerateColumns="false" CssClass="table table-striped" OnRowDataBound="gvSearchResult_RowDataBound" OnPageIndexChanging="gvSearchResult_PageIndexChanging" AllowPaging="True" PageSize="10">
                         <Columns>
                             <asp:TemplateField HeaderText="假單單號" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>

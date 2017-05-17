@@ -34,7 +34,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            //Session["erp_id"] = "0080"; //test only to avoid error on loading, delete after trial            
+            Session["erp_id"] = "0080"; //test only to avoid error on loading, delete after trial            
             ApplicationSection_Init_Load();
             InProgressSection_Init_Load();
             ApprovalSection_Init_Load();
@@ -1566,7 +1566,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             query += " AND MV.MV001=@ID";
         }
-        using (SqlConnection conn = new SqlConnection(NZconnectionString))
+        using (SqlConnection conn = new SqlConnection(NZconnectionString))  //FILL ddlSearch_Parameter_ApplicantID
         {
             conn.Open();
             query += " ORDER BY MV.MV001";
@@ -1593,6 +1593,23 @@ public partial class hr360_UI04 : System.Web.UI.Page
             ddlSearch_Parameter_ApplicantID.Enabled = false;
         }
         ddlSearch_Parameter_ApplicantID.SelectedIndex = 0;
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            query = "SELECT ID 'value', NAME 'display'"
+                +" FROM HR360_DAYOFFAPPLICATION_APPLICATION_STATUS"
+                +" ORDER BY ID";
+            DataTable dt = new DataTable();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            ddlSearch_Parameter_ApplicationStatus.DataTextField = "display";
+            ddlSearch_Parameter_ApplicationStatus.DataValueField = "value";
+            ddlSearch_Parameter_ApplicationStatus.DataSource = dt;
+            ddlSearch_Parameter_ApplicationStatus.DataBind();
+        }
+        ddlSearch_Parameter_ApplicationStatus.Items.Insert(0, new ListItem("全部", "ALL"));
+        ddlSearch_Parameter_ApplicationStatus.SelectedIndex = 0;        
     }
     /// <summary>
     /// Initial loading for div application section
@@ -1972,7 +1989,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
         condition = " WHERE APP.DAYOFF_START_TIME BETWEEN @STARTTIME AND @ENDTIME";
         if (ddlSearch_Parameter_ApplicantID.SelectedValue != "ALL")
         {
-            condition += " AND APP.APPLICANT_ID=@ID";
+            condition += " AND APP.APPLICANT_ID=@APPLICANT_ID";
+        }
+        if (ddlSearch_Parameter_ApplicationStatus.SelectedValue != "ALL")
+        {
+            condition += " AND APP.APPLICATION_STATUS_ID=@STATUS_ID";
         }
         order = " ORDER BY APP.APPLICATION_ID";
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
@@ -1981,7 +2002,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
             SqlCommand cmd = new SqlCommand(query + condition + order, conn);
             cmd.Parameters.AddWithValue("@STARTTIME", startTime);
             cmd.Parameters.AddWithValue("@ENDTIME", endTime);
-            cmd.Parameters.AddWithValue("@ID", ddlSearch_Parameter_ApplicantID.SelectedValue);
+            cmd.Parameters.AddWithValue("@APPLICANT_ID", ddlSearch_Parameter_ApplicantID.SelectedValue);
+            cmd.Parameters.AddWithValue("@STATUS_ID", ddlSearch_Parameter_ApplicationStatus.SelectedValue);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
         }
@@ -1989,7 +2011,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         gvSearchResult.DataBind();
 
         if (Session["erp_id"].ToString() != "0007"      //Chrissy
-            //&& Session["erp_id"].ToString() != "0080"   //Kevin
+            && Session["erp_id"].ToString() != "0080"   //Kevin
             && Session["erp_id"].ToString() != "0085")  //Doris (HR) change when HR personnel changes
         {
             gvSearchResult.Columns[10].Visible = false;
@@ -2013,5 +2035,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 ((Button)e.Row.Cells[10].FindControl("btnSearch_Deny")).Enabled = true;
             }
         }
+    }
+    protected void gvSearchResult_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        gvSearchResult.PageIndex = e.NewPageIndex;
+        btnSearchSubmit_Click(sender, e);
     }
 }
