@@ -34,7 +34,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            Session["erp_id"] = "0080"; //test only to avoid error on loading, delete after trial            
+            //Session["erp_id"] = "0080"; //test only to avoid error on loading, delete after trial            
             ApplicationSection_Init_Load();
             InProgressSection_Init_Load();
             ApprovalSection_Init_Load();
