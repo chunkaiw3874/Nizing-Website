@@ -75,22 +75,32 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
         lblScope.Text = ddlYear.SelectedValue.ToString() + "年度員工請假紀錄";
         using (SqlConnection conn = new SqlConnection(connectionString))
         {
-            SqlCommand cmdSelect = new SqlCommand("SELECT * FROM ("
+            SqlCommand cmdSelect = new SqlCommand("SELECT *"
++ " FROM"
++ " ("
 + " SELECT CMSMV.MV001 [EMPLOYEE_ID]"
 + " , CMSMV.MV002 [EMPLOYEE_NAME]"
 + " , PALTK.TK002"
 + " , CONVERT(NVARCHAR,CONVERT(DECIMAL(4,0),PALTK.TK003))+N' / '+CONVERT(NVARCHAR,PALTK.TK003*8) [DAYOFF_TOTAL]"
 + " , PALMC.MC001 [DAYOFF_ID]"
-+ " , (PALTL.TL006+PALTL.TL007) [DAYOFF_DAYS] "
++ " , CASE"
++ " WHEN PALMC.MC004='1' THEN (PALTL.TL006+PALTL.TL007)*8"
++ " ELSE (PALTL.TL006+PALTL.TL007)"
++ " END [DAYOFF_DAYS]"
 + " FROM CMSMV"
 + " LEFT JOIN PALTK ON CMSMV.MV001 = PALTK.TK001 AND PALTK.TK002 = @YEAR"
 + " LEFT JOIN PALTL ON PALTK.TK001 = PALTL.TL001 AND PALTL.TL002 = @YEAR"
-+ " LEFT JOIN PALMC ON PALTL.TL004 = PALMC.MC001 "
++ " LEFT JOIN PALMC ON PALTL.TL004 = PALMC.MC001"
 + " WHERE"
-+ " (CMSMV.MV022 = 0 AND (CAST(SUBSTRING(CMSMV.MV021,1,4) AS INT) <= @YEAR)) "
-+ " OR "
-+ " (CAST(SUBSTRING(CMSMV.MV022,1,4) AS INT) >= @YEAR "
-+ " AND CAST(SUBSTRING(CMSMV.MV021,1,4) AS INT) <= @YEAR) ) AS S PIVOT ( SUM([DAYOFF_DAYS]) FOR [DAYOFF_ID] IN ([03], [04], [05], [06], [07], [08], [09], [10], [11], [12], [13], [14], [15]) ) AS PIVOTTABLE", conn);
++ " (CMSMV.MV022 = 0 AND (CAST(SUBSTRING(CMSMV.MV021,1,4) AS INT) <= @YEAR))"
++ " OR"
++ " (CAST(SUBSTRING(CMSMV.MV022,1,4) AS INT) >= @YEAR"
++ " AND CAST(SUBSTRING(CMSMV.MV021,1,4) AS INT) <= @YEAR) )"
++ " AS"
++ " S"
++ " PIVOT"
++ " ( SUM([DAYOFF_DAYS]) FOR [DAYOFF_ID] IN ([03], [04], [05], [06], [07], [08], [09], [10], [11], [12], [13], [14], [15]) )"
++ " AS PIVOTTABLE", conn);
             cmdSelect.Parameters.AddWithValue("@YEAR", ddlYear.SelectedValue);
             SqlDataAdapter da = new SqlDataAdapter(cmdSelect);
             DataTable dt = new DataTable();
