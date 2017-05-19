@@ -79,6 +79,7 @@
                     <asp:ImageButton ID="ImageButton13" runat="server" ImageUrl="~/employee_section/report/image/button/dept/HR-4.png" PostBackUrl="~/employee_section/report/WorkDuration.aspx" /></li>
                 <li>
                     <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/employee_section/report/image/button/dept/HR-5.png" PostBackUrl="~/employee_section/report/HR05.aspx" /></li>
+                <li><a href="/employee_section/report/HR08.aspx">部門請假表</a></li>
                 <li><a href="/employee_section/report/HR04.aspx">面試表</a></li>
                 <li><a href="/employee_section/report/HR06.aspx">Chrissy's Stuff</a></li>
                 <li><a href="/employee_section/report/HR07.aspx">Annual Report</a></li>

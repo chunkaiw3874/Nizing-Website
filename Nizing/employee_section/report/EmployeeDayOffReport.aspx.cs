@@ -26,6 +26,12 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
                 ddlYear.Items.Add(DateTime.Today.AddYears(i).Year.ToString());
             }
             ddlYear.SelectedValue = DateTime.Today.Year.ToString();
+            for (int i = 1; i < 13; i++)
+            {
+                ddlMonth.Items.Add(i.ToString("D2"));
+            }
+            ddlMonth.Items.Insert(0, new ListItem("整年", "ALL"));
+            ddlMonth.SelectedIndex = 0;
             btnReport_Click(sender, e);
         }
     }
@@ -71,8 +77,27 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
     //    return query;
     //}
     protected void btnReport_Click(object sender, EventArgs e)
-    {
-        lblScope.Text = ddlYear.SelectedValue.ToString() + "年度員工請假紀錄";
+    {       
+        string condition = "";
+        string leftJoinCondition = "";
+        if (ddlMonth.SelectedValue == "ALL")
+        {
+            lblScope.Text = ddlYear.SelectedValue.ToString() + "年度員工請假紀錄";
+            condition = " WHERE CAST(SUBSTRING(CMSMV.MV021,1,4) AS INT) <= @YEAR"
+                    + " AND"
+                    + " (CMSMV.MV022 = ''"
+                    + " OR (CAST(SUBSTRING(CMSMV.MV022,1,4) AS INT) >= @YEAR))";
+            leftJoinCondition = "";
+        }
+        else
+        {
+            lblScope.Text = ddlYear.SelectedValue.ToString() + "年度" + ddlMonth.SelectedValue + "月員工請假紀錄";
+            condition = " WHERE CAST(SUBSTRING(CMSMV.MV021,1,6) AS INT) <= @YEARPLUSMONTH"
+                    + " AND"
+                    + " (CMSMV.MV022 = ''"
+                    + " OR (CAST(SUBSTRING(CMSMV.MV022,1,6) AS INT) >= @YEARPLUSMONTH))";
+            leftJoinCondition = " AND PALTL.TL003=@MONTH";
+        }
         using (SqlConnection conn = new SqlConnection(connectionString))
         {
             SqlCommand cmdSelect = new SqlCommand("SELECT *"
@@ -90,18 +115,18 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
 + " FROM CMSMV"
 + " LEFT JOIN PALTK ON CMSMV.MV001 = PALTK.TK001 AND PALTK.TK002 = @YEAR"
 + " LEFT JOIN PALTL ON PALTK.TK001 = PALTL.TL001 AND PALTL.TL002 = @YEAR"
++ leftJoinCondition
 + " LEFT JOIN PALMC ON PALTL.TL004 = PALMC.MC001"
-+ " WHERE"
-+ " (CMSMV.MV022 = 0 AND (CAST(SUBSTRING(CMSMV.MV021,1,4) AS INT) <= @YEAR))"
-+ " OR"
-+ " (CAST(SUBSTRING(CMSMV.MV022,1,4) AS INT) >= @YEAR"
-+ " AND CAST(SUBSTRING(CMSMV.MV021,1,4) AS INT) <= @YEAR) )"
++ condition
++ " )"
 + " AS"
 + " S"
 + " PIVOT"
 + " ( SUM([DAYOFF_DAYS]) FOR [DAYOFF_ID] IN ([03], [04], [05], [06], [07], [08], [09], [10], [11], [12], [13], [14], [15]) )"
 + " AS PIVOTTABLE", conn);
             cmdSelect.Parameters.AddWithValue("@YEAR", ddlYear.SelectedValue);
+            cmdSelect.Parameters.AddWithValue("@YEARPLUSMONTH", ddlYear.SelectedValue + ddlMonth.SelectedValue);
+            cmdSelect.Parameters.AddWithValue("@MONTH", ddlMonth.SelectedValue);
             SqlDataAdapter da = new SqlDataAdapter(cmdSelect);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -383,7 +408,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
             HeaderRow.Cells.Add(HeaderCell);
 
             HeaderCell = new TableCell();
-            HeaderCell.Text = "特休天數";
+            HeaderCell.Text = ddlYear.SelectedValue + "年度特休彙總";
             HeaderCell.Font.Size = 14;
             HeaderCell.Font.Bold = true;
             HeaderCell.HorizontalAlign = HorizontalAlign.Center;
@@ -391,7 +416,14 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
             HeaderRow.Cells.Add(HeaderCell);
 
             HeaderCell = new TableCell();
-            HeaderCell.Text = "非特休已休時數";
+            if (ddlMonth.SelectedValue == "ALL")
+            {
+                HeaderCell.Text = ddlYear.SelectedValue + "年度非特休已休時數";
+            }
+            else
+            {
+                HeaderCell.Text = ddlYear.SelectedValue.ToString() + "年度" + ddlMonth.SelectedValue + "月非特休已休時數";
+            }
             HeaderCell.Font.Size = 14;
             HeaderCell.Font.Bold = true;
             HeaderCell.HorizontalAlign = HorizontalAlign.Center;
