@@ -27,6 +27,7 @@ public partial class nizing_intranet_HR08 : System.Web.UI.Page
             {
                 ddlMonth.Items.Add(new ListItem(i.ToString("D2"), i.ToString("D2")));
             }
+            ddlMonth.SelectedIndex = DateTime.Today.Month - 1;
         }
     }
     protected void btnReport_Click(object sender, EventArgs e)
@@ -117,6 +118,10 @@ public partial class nizing_intranet_HR08 : System.Web.UI.Page
                     bodyCell.InnerText = dtDayOffInfo.Rows[k]["EMPLOYEE_NAME"].ToString();
                     bodyCell.Attributes.Add("style", "text-align:center;");
                     bodyRow.Controls.Add(bodyCell);
+                    if (dtDayOffInfo.Rows[k]["DAYOFF_DATE"].ToString() == DateTime.Today.ToString("yyyyMMdd"))
+                    {
+                        bodyRow.Style.Add("color", "red");
+                    }
                     tb.Controls.Add(bodyRow);
                 }
             }
