@@ -8,7 +8,7 @@
             <h2>部門請假表</h2>
         </div>
     </div>
-    <div class="row">
+    <div class="row form-group">
         <div class="col-xs-2">
             <asp:DropDownList ID="ddlYear" runat="server" CssClass="form-control"></asp:DropDownList>
         </div>
@@ -18,6 +18,9 @@
         <div class="col-xs-2">
             <asp:Button ID="btnReport" runat="server" Text="產生報表" OnClick="btnReport_Click" CssClass="btn btn-success" />
         </div>
+    </div>
+    <div class="row">
+        <span class="col-xs-12" style="color:red;">紅色代表今日請假</span>
     </div>
     <div id="divReport_Section" runat="server">
     </div>
