@@ -9,13 +9,13 @@
         </div>
     </div>
     <div class="row form-group">
-        <div class="col-xs-2">
+        <div class="col-sm-2 col-xs-4">
             <asp:DropDownList ID="ddlYear" runat="server" CssClass="form-control"></asp:DropDownList>
         </div>
-        <div class="col-xs-2">
+        <div class="col-sm-2 col-xs-4">
             <asp:DropDownList ID="ddlMonth" runat="server" CssClass="form-control"></asp:DropDownList>
         </div>
-        <div class="col-xs-2">
+        <div class="col-sm-2 col-xs-4">
             <asp:Button ID="btnReport" runat="server" Text="產生報表" OnClick="btnReport_Click" CssClass="btn btn-success" />
         </div>
     </div>

@@ -39,9 +39,19 @@ public partial class nizing_intranet_HR08 : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(NZconnectionString))
         {
             conn.Open();
-            string query = "SELECT ME001 'DEPT_ID',ME002 'DEPT_NAME'"
-                        + " FROM CMSME";
+            string query = "SELECT DISTINCT ME.ME001 'DEPT_ID',ME.ME002 'DEPT_NAME'"
+                        + " FROM CMSME ME"
+                        + " LEFT JOIN CMSMV MV ON ME.ME001=MV.MV004"
+                        + " WHERE SUBSTRING(MV.MV021,1,6)<=@YRMN"
+                        + " AND"
+                        + " ("
+                        + " SUBSTRING(MV.MV022,1,6)>=@YRMN"
+                        + " OR"
+                        + " MV.MV022=''"
+                        + " )"
+                        + " ORDER BY ME.ME001";
             SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@YRMN", ddlYear.SelectedValue + ddlMonth.SelectedValue);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dtDept);
         }
@@ -58,11 +68,11 @@ public partial class nizing_intranet_HR08 : System.Web.UI.Page
         //create table
         for (int i = 0; i < rowCount; i++)
         {
-            HtmlGenericControl divRow = new HtmlGenericControl();
+            HtmlGenericControl divRow = new HtmlGenericControl("div");
             divRow.ID = "row" + i;
             divRow.Attributes.Add("class", "row");
             divReport_Section.Controls.Add(divRow);
-            for (int j = 0; j < colCount; j++)
+            for (int j = 0; j < colCount && i * 4 + j < dtDept.Rows.Count; j++)
             {
                 int currentDeptNumber = i * 4 + j;
                 using (SqlConnection conn = new SqlConnection(NZconnectionString))
@@ -88,9 +98,9 @@ public partial class nizing_intranet_HR08 : System.Web.UI.Page
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     da.Fill(dtDayOffInfo);
                 }
-                HtmlGenericControl divCol = new HtmlGenericControl();
+                HtmlGenericControl divCol = new HtmlGenericControl("div");
                 divCol.ID = divRow.ID + "col" + j;
-                divCol.Attributes.Add("class", "col-xs-3");
+                divCol.Attributes.Add("class", "col-sm-3");
                 divRow.Controls.Add(divCol);
                 HtmlTable tb = new HtmlTable();
                 tb.ID = "tb" + divCol.ID;
