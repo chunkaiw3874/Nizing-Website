@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/product.master" AutoEventWireup="true" CodeFile="silicone-series.aspx.cs" Inherits="silicone_series" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
-    <title>矽膠電線、矽膠醫療線-日進電線</title>
-    <meta name="keywords" content="矽膠耐熱電線,矽膠高壓線,醫療線,矽膠多芯線,矽膠絕緣線" />
-    <meta name="description" content="各式矽膠線材，包含家電及需耐溫的機台常用的UL3123、UL3132、UL3135、UL3136、VDE H05S-K、VDE H05SS-F、VDE FG4G4、PSE3323矽膠耐熱線、耐高壓的UL3239矽膠高壓線、醫療業界使用的VDE REG-NR:103874矽膠醫療線、及其他各類常規及訂製線材">
+    <title>矽膠電線、醫療器材配線-日進電線</title>
+    <meta name="keywords" content="矽膠電線,矽膠高壓線,醫療器材配線,矽膠多芯線,矽膠絕緣線" />
+    <meta name="description" content="各式矽膠電線，包含家電及需耐溫的機台常用的UL3123、UL3132、UL3135、UL3136、VDE H05S-K、VDE H05SS-F、VDE FG4G4、PSE3323矽膠耐熱電線、耐高壓的UL3239矽膠高壓電線、醫療業界使用的VDE REG-NR:103874醫療線、及其他各類常規及訂製電線">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>

@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
     <title>耐熱電線、高溫電線-日進電線</title>
     <meta name="keywords" content="耐熱電線、高溫電線、機台用電線" />
-    <meta name="description" content="各式耐熱線材，常於特殊高溫場所及機台使用的TGGT-5256、TGGT-400、MG5107、CF-750及其他各類常規及訂製線材">
+    <meta name="description" content="各式耐熱電線，常於特殊高溫場所及機台使用的TGGT-5256、TGGT-400、MG5107、CF-750及其他各類常規及訂製電線">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
