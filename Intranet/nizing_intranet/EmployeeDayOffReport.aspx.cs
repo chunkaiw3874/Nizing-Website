@@ -83,7 +83,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
         if (ddlMonth.SelectedValue == "ALL")
         {
             lblScope.Text = ddlYear.SelectedValue.ToString() + "年度員工請假紀錄";
-            condition = " WHERE CAST(SUBSTRING(CMSMV.MV021,1,4) AS INT) <= @YEAR"
+            condition = " AND CAST(SUBSTRING(CMSMV.MV021,1,4) AS INT) <= @YEAR"
                     + " AND"
                     + " (CMSMV.MV022 = ''"
                     + " OR (CAST(SUBSTRING(CMSMV.MV022,1,4) AS INT) >= @YEAR))";
@@ -92,7 +92,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
         else
         {
             lblScope.Text = ddlYear.SelectedValue.ToString() + "年度" + ddlMonth.SelectedValue + "月員工請假紀錄";
-            condition = " WHERE CAST(SUBSTRING(CMSMV.MV021,1,6) AS INT) <= @YEARPLUSMONTH"
+            condition = " AND CAST(SUBSTRING(CMSMV.MV021,1,6) AS INT) <= @YEARPLUSMONTH"
                     + " AND"
                     + " (CMSMV.MV022 = ''"
                     + " OR (CAST(SUBSTRING(CMSMV.MV022,1,6) AS INT) >= @YEARPLUSMONTH))";
@@ -117,6 +117,11 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
 + " LEFT JOIN PALTL ON PALTK.TK001 = PALTL.TL001 AND PALTL.TL002 = @YEAR"
 + leftJoinCondition
 + " LEFT JOIN PALMC ON PALTL.TL004 = PALMC.MC001"
++ " WHERE CMSMV.MV001<>'0000'"
++ " AND CMSMV.MV001<>'0006'"
++ " AND CMSMV.MV001<>'0007'"
++ " AND CMSMV.MV001<>'0098'"
++ " AND CMSMV.MV001 NOT LIKE 'PT%'"
 + condition
 + " )"
 + " AS"
