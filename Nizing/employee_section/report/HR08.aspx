@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="row">
         <div class="col-xs-12">
-            <h2>部門請假表</h2>
+            <h2>人員請假一欄表</h2>
         </div>
     </div>
     <div class="row form-group">

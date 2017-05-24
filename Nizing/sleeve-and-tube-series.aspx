@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/product.master" AutoEventWireup="true" CodeFile="sleeve-and-tube-series.aspx.cs" Inherits="sleeve_and_tube_series" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
-    <title>套管系列-日進電線</title>
-    <meta name="description" content="各式套管、包含UL HST、UL FRS、UL SRG、及各式鐵氟龍套管">
+    <title>套管、絕緣-日進電線</title>
+    <meta name="keywords" content="矽膠套管,玻璃纖維套管,鐵氟龍套管" />
+    <meta name="description" content="各式套管、包含UL HST、UL FRS、UL SRG、各式鐵氟龍套管、矽膠套管、玻璃纖維套管">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
@@ -11,7 +12,7 @@
         <div class="content-row">
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/images/product_pic/ulhst-menu.jpg" alt="UL HST 內膠外纖套管" NavigateUrl="~/ulhst.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/images/product_pic/ulhst-menu.jpg" Text="UL HST 內膠外纖套管" NavigateUrl="~/ulhst.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     UL HST<br />
@@ -41,7 +42,7 @@
             </div>
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/images/product_pic/ulfrs-menu.jpg" alt="UL FRS 內纖外膠套管" NavigateUrl="~/ulfrs.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/images/product_pic/ulfrs-menu.jpg" Text="UL FRS 內纖外膠套管" NavigateUrl="~/ulfrs.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     UL FRS<br />
@@ -71,7 +72,7 @@
             </div>
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/images/product_pic/ulsrg-menu.jpg" alt="UL SRG 單層玻纖套管" NavigateUrl="~/ulsrg.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/images/product_pic/ulsrg-menu.jpg" Text="UL SRG 單層玻纖套管" NavigateUrl="~/ulsrg.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     UL SRG<br />
@@ -103,7 +104,7 @@
         <div class="content-row">
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/images/product_pic/silicone_tube-menu.jpg" alt="單層矽膠套管" NavigateUrl="~/silione-tube.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/images/product_pic/silicone_tube-menu.jpg" Text="單層矽膠套管" NavigateUrl="~/silione-tube.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     單層矽膠套管<br />
@@ -133,7 +134,7 @@
             </div>
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink5" runat="server" ImageUrl="~/images/product_pic/pfa_fep_tube-menu.jpg" alt="PFA/FEP鐵氟龍絕緣套管" NavigateUrl="~/pfa-fep-tube.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink5" runat="server" ImageUrl="~/images/product_pic/pfa_fep_tube-menu.jpg" Text="PFA/FEP鐵氟龍絕緣套管" NavigateUrl="~/pfa-fep-tube.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     PFA/FEP絕緣套管<br />
@@ -163,7 +164,7 @@
             </div>            
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink6" runat="server" ImageUrl="~/images/product_pic/ptfe_tube-menu.jpg" alt="PTFE鐵氟龍絕緣套管" NavigateUrl="~/ptfe-tube.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink6" runat="server" ImageUrl="~/images/product_pic/ptfe_tube-menu.jpg" Text="PTFE鐵氟龍絕緣套管" NavigateUrl="~/ptfe-tube.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     PTFE絕緣套管<br />

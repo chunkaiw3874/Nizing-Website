@@ -9,6 +9,7 @@
             <ul>
                 <li>
                     <asp:ImageButton ID="btnUnfinishedWorkOrder" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/CHIEF-1.png" PostBackUrl="~/nizing_intranet/ProductionProgress.aspx" /></li>
+                <li><asp:ImageButton ID="ImageButton16" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/CHIEF-2.png" PostBackUrl="~/nizing_intranet/HR08.aspx" /></li>
             </ul>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
@@ -94,7 +95,6 @@
                     <asp:ImageButton ID="ImageButton13" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/HR-4.png" PostBackUrl="~/nizing_intranet/WorkDuration.aspx" /></li>
                 <li>
                     <asp:ImageButton ID="ImageButton7" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/HR-5.png" PostBackUrl="~/nizing_intranet/HR05.aspx" /></li>            
-                <li><a href="nizing_intranet/HR08.aspx">部門請假表</a></li>
                 <li><a href="nizing_intranet/HR04.aspx">面試表</a></li>    
                 <li><a href="nizing_intranet/HR06.aspx">Chrissy's Stuff</a></li>
                 <li><a href="nizing_intranet/HR07.aspx">Annual Report</a></li>

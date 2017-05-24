@@ -7,7 +7,8 @@
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
             <asp:Image ID="Image1" runat="server" ImageUrl="~/employee_section/report/image/button/dept/CHIEF.png" />
             <ul>
-                <li><%--<asp:ImageButton ID="btnUnfinishedWorkOrder" runat="server" ImageUrl="~/employee_section/report/image/button/dept/CHIEF-1.png" PostBackUrl="~/employee_section/report/ProductionProgress.aspx" />--%></li>
+                <li><%--<asp:ImageButton ID="btnUnfinishedWorkOrder" runat="server" ImageUrl="~/employee_section/report/image/button/dept/CHIEF-1.png" PostBackUrl="~/employee_section/report/ProductionProgress.aspx" />--%></li>                
+                <li><asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/employee_section/report/image/button/dept/CHIEF-2.png" PostBackUrl="~/employee_section/report/HR08.aspx" /></li>
             </ul>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
@@ -79,7 +80,6 @@
                     <asp:ImageButton ID="ImageButton13" runat="server" ImageUrl="~/employee_section/report/image/button/dept/HR-4.png" PostBackUrl="~/employee_section/report/WorkDuration.aspx" /></li>
                 <li>
                     <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/employee_section/report/image/button/dept/HR-5.png" PostBackUrl="~/employee_section/report/HR05.aspx" /></li>
-                <li><a href="/employee_section/report/HR08.aspx">部門請假表</a></li>
                 <li><a href="/employee_section/report/HR04.aspx">面試表</a></li>
                 <li><a href="/employee_section/report/HR06.aspx">Chrissy's Stuff</a></li>
                 <li><a href="/employee_section/report/HR07.aspx">Annual Report</a></li>
