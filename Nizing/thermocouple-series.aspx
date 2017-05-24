@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/product.master" AutoEventWireup="true" CodeFile="thermocouple-series.aspx.cs" Inherits="thermocouple_series" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
-    <title>補償導線系列-日進電線</title>
-    <meta name="description" content="各式補償導線材，為溫度測量及感應線材，包含RTD、K-Type、J-Type、T-Type、R-Type、S-Type、E-Type">
+    <title>補償導線、熱電偶-日進電線</title>
+    <meta name="keywords" content="補償導線,熱電偶" />
+    <meta name="description" content="各式補償導線線材，包含RTD、K-Type 補償導線、J-Type 補償導線、T-Type 補償導線、R-Type 補償導線、S-Type 補償導線、E-Type 補償導線、手持式熱電偶，為溫度測量及感應線材">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
@@ -10,25 +11,25 @@
     <div id="thermocouple-submenu">
         <div class="link">
             <div class="button">
-                <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/images/button/tp_button.jpg" NavigateUrl="~/tp.aspx"></asp:HyperLink>
+                <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/images/button/tp_button.jpg" NavigateUrl="~/tp.aspx" Text="手持式熱電偶"></asp:HyperLink>
             </div>
             <div class="button">
-                <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/images/button/rtd_button.jpg" NavigateUrl="~/rtd.aspx"></asp:HyperLink>
+                <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/images/button/rtd_button.jpg" NavigateUrl="~/rtd.aspx" Text="RTD 補償導線"></asp:HyperLink>
             </div>
             <div class="button">
-                <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/images/button/k_type_button.jpg" NavigateUrl="~/k-type.aspx"></asp:HyperLink>
+                <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/images/button/k_type_button.jpg" NavigateUrl="~/k-type.aspx" Text="K-Type 補償導線"></asp:HyperLink>
             </div>
             <div class="button">
-                <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/images/button/j_type_button.jpg" NavigateUrl="~/j-type.aspx"></asp:HyperLink>
+                <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/images/button/j_type_button.jpg" NavigateUrl="~/j-type.aspx" Text="J-Type 補償導線"></asp:HyperLink>
             </div>
             <div class="button">
-                <asp:HyperLink ID="HyperLink5" runat="server" ImageUrl="~/images/button/t_type_button.jpg" NavigateUrl="~/t-type.aspx"></asp:HyperLink>
+                <asp:HyperLink ID="HyperLink5" runat="server" ImageUrl="~/images/button/t_type_button.jpg" NavigateUrl="~/t-type.aspx" Text="T-Type 補償導線"></asp:HyperLink>
             </div>
             <div class="button">
-                <asp:HyperLink ID="HyperLink6" runat="server" ImageUrl="~/images/button/r_s_type_button.jpg" NavigateUrl="~/rs-type.aspx"></asp:HyperLink>
+                <asp:HyperLink ID="HyperLink6" runat="server" ImageUrl="~/images/button/r_s_type_button.jpg" NavigateUrl="~/rs-type.aspx" Text="R-Type S-Type 補償導線"></asp:HyperLink>
             </div>
             <div class="button">
-                <asp:HyperLink ID="HyperLink7" runat="server" ImageUrl="~/images/button/e_type_button.jpg" NavigateUrl="~/e-type.aspx"></asp:HyperLink>
+                <asp:HyperLink ID="HyperLink7" runat="server" ImageUrl="~/images/button/e_type_button.jpg" NavigateUrl="~/e-type.aspx" Text="E-Type 補償導線"></asp:HyperLink>
             </div>
         </div>
         <div class="content">
@@ -39,7 +40,7 @@
                 把兩種不同材質之金屬導體以電器連接(焊接)，使其產生一密閉迴路，在焊接點(即溫接點)加熱產生溫差，迴路中就會有電流流動，此現象稱為席貝克效應。如果將另一端(基準接點或稱冷接點)的溫度保持恆溫(一般設定為0°C)，則可依熱電動勢值(EMF)之大小換算出溫接點端的溫度。此兩種成對的金屬導體即稱為"熱電偶"。
                 <br />
                 <br />
-                <asp:Image ID="Image1" runat="server" ImageUrl="~/images/product_pic/thermocouple_principle.jpg" />
+                <asp:Image ID="Image1" runat="server" ImageUrl="~/images/product_pic/thermocouple_principle.jpg" AlternateText="熱電偶 原理" />
             </div>
             <div class="div-top-50">
                 <div class="title">

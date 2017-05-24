@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/product.master" AutoEventWireup="true" CodeFile="heating-wire-series.aspx.cs" Inherits="heating_wire_series" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
-    <title>發熱線系列-日進電線</title>
+    <title>發熱線、醫療器材配線-日進電線</title>
+    <meta name="keywords" content="發熱線,醫療呼吸管" />
     <meta name="description" content="各式發熱線材，包含醫療呼吸管使用的UL3589，以及為表層加溫的PHC並聯式電熱帶、及其他各類常規及訂製線材">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
@@ -11,7 +12,7 @@
         <div class="content-row">
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/images/product_pic/ul3589-menu.jpg" alt="UL3589發熱線" NavigateUrl="~/ul3589.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/images/product_pic/ul3589-menu.jpg" Text="UL3589發熱線" NavigateUrl="~/ul3589.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     UL3589<br />
@@ -45,7 +46,7 @@
             </div>
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/images/product_pic/phc-menu.jpg" alt="PHC並熱式電熱帶" NavigateUrl="~/phc.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/images/product_pic/phc-menu.jpg" Text="PHC並熱式電熱帶" NavigateUrl="~/phc.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     PHC<br />
@@ -79,7 +80,7 @@
             </div>
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/images/service_pic/medical-respiration-pipe-heating-wire-menu.jpg" alt="醫療用呼吸管加熱線" NavigateUrl="~/respiration-pipe-heating-wire.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/images/service_pic/medical-respiration-pipe-heating-wire-menu.jpg" Text="醫療用呼吸管加熱線" NavigateUrl="~/respiration-pipe-heating-wire.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     醫療用呼吸管加熱線<br />

@@ -2,8 +2,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
     <title>套管、絕緣-日進電線</title>
-    <meta name="keywords" content="矽膠套管,玻璃纖維套管,鐵氟龍套管" />
-    <meta name="description" content="各式套管、包含UL HST、UL FRS、UL SRG、各式鐵氟龍套管、矽膠套管、玻璃纖維套管">
+    <meta name="keywords" content="矽膠套管,玻璃纖維套管,鐵氟龍套管,絕緣保護" />
+    <meta name="description" content="各式套管、包含UL HST、UL FRS、UL SRG、各式鐵氟龍套管、矽膠套管、玻璃纖維套管，提供最適當的絕緣保護">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
