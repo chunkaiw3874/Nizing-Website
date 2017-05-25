@@ -4,29 +4,38 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div id="HR04">
-        <div>
-            <h2>員工年度平均底薪</h2>
+        <div class="row form-group">
+            <div class="col-xs-12">
+                <h2>員工年薪/平均底薪</h2>
+            </div>
         </div>
-        <div>
-            <asp:DropDownList ID="ddlYear" runat="server" Width="70"></asp:DropDownList>
+        <div class="row form-group">
+            <div class="col-sm-2">
+                <asp:DropDownList ID="ddlYear" runat="server" CssClass="form-control"></asp:DropDownList>
+            </div>
         </div>
-        <div>
-            <asp:DropDownList ID="ddlType" runat="server" Width="70">
-                <asp:ListItem Value="實領">實領</asp:ListItem>
-                <asp:ListItem Value="底薪">底薪</asp:ListItem>
-            </asp:DropDownList>
+        <div class="row form-group">
+            <div class="col-sm-2">
+                <asp:DropDownList ID="ddlType" runat="server" CssClass="form-control">
+                    <asp:ListItem Value="年薪">年薪</asp:ListItem>
+                    <asp:ListItem Value="底薪">底薪</asp:ListItem>
+                </asp:DropDownList>
+            </div>
         </div>
-        <div style="margin-top: 10px; margin-bottom: 10px;">
-            <asp:ImageButton ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" ImageUrl="~/employee_section/report/image/button/Search_Button.png" />
+        <div class="row form-group">
+            <div class="col-sm-2">
+                <asp:Button ID="btnSubmit" runat="server" Text="查詢" CssClass="btn btn-success" OnClick="btnSubmit_Click" />
+                <%--<asp:ImageButton ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" ImageUrl="~/nizing_intranet/image/button/Search_Button.png" />--%>
+            </div>
         </div>
-        <div>
-            <asp:Label ID="lblErrorMessage" runat="server" CssClass="error-message"></asp:Label>
+        <div class="row">
+            <asp:Label ID="lblErrorMessage" runat="server" CssClass="error-message col-xs-12"></asp:Label>
         </div>
-        <div>
-            <asp:Label ID="lblScope" runat="server"></asp:Label>
+        <div class="row">
+            <asp:Label ID="lblScope" runat="server" CssClass="col-xs-12"></asp:Label>
         </div>
-        <div id="search-result">
-            <div class="inline-top">
+        <div id="search-result" class="row">
+            <div class="inline-top col-xs-12">
                 <asp:GridView ID="grdReport" runat="server" GridLines="None" AutoGenerateColumns="false" OnRowDataBound="grdReport_RowDataBound" OnDataBound="grdReport_DataBound" OnRowCreated="grdReport_RowCreated" ShowFooter="True" CssClass="grdResultWithFooter">
                     <Columns>
                         <asp:TemplateField HeaderText="員工代號">
@@ -99,7 +108,7 @@
                                 <asp:Label ID="lbl14" runat="server" Text='<%#Eval("12") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="總額">
+                        <asp:TemplateField HeaderText="年薪">
                             <ItemTemplate>
                                 <asp:Label ID="lbl15" runat="server"></asp:Label>
                             </ItemTemplate>

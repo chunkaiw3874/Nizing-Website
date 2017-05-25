@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/product.master" AutoEventWireup="true" CodeFile="military-grade-series.aspx.cs" Inherits="military_grade_series" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
-    <title>日進電線-軍規線系列</title>
+    <title>軍規電線、軍規電纜-日進電線</title>
+    <meta name="keywords" content="船用軍規電纜,軍規電子線" />
     <meta name="description" content="各式軍規線材，MIL-C-24643/23-08軍規船用電纜、MIL-W-22759鐵氟龍軍規電子線等軍規線材">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
@@ -11,7 +12,7 @@
         <div class="content-row">
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/images/product_pic/mil-c-24643-23-08-menu.jpg" alt="MIL-C-24643/23-08軍規低煙無毒電纜" NavigateUrl="~/mil-c-24643-23-08.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/images/product_pic/mil-c-24643-23-08-menu.jpg" Text="MIL-C-24643/23-08軍規低煙無毒電纜" NavigateUrl="~/mil-c-24643-23-08.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     MIL-C-24643/23-08<br />
@@ -53,7 +54,7 @@
             </div>
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/images/product_pic/mil-w-22759-7-menu.jpg" alt="MIL-W-22575/7 軍規鐵氟龍電子線" NavigateUrl="~/mil-w-22759-7.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/images/product_pic/mil-w-22759-7-menu.jpg" Text="MIL-W-22575/7 軍規鐵氟龍電子線" NavigateUrl="~/mil-w-22759-7.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     MIL-W-22759/7<br />

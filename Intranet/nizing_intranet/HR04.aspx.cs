@@ -28,7 +28,7 @@ public partial class nizing_intranet_HR04 : System.Web.UI.Page
             ddlType.SelectedIndex = 0;
         }
     }
-    protected void btnSubmit_Click(object sender, ImageClickEventArgs e)
+    protected void btnSubmit_Click(object sender, EventArgs e)
     {
         string cmdText = "";
         if (ddlType.SelectedValue == "底薪")

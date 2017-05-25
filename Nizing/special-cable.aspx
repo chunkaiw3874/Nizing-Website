@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/product.master" AutoEventWireup="true" CodeFile="special-cable.aspx.cs" Inherits="special_cable" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
-    <title>特殊線系列-日進電線</title>
-    <meta name="description" content="各式特殊線材，有一般冷凍壓縮馬達使用的UL5048冷媒線、及其他各類常規及訂製線材">
+    <title>客製線、冷媒線-日進電線</title>
+    <meta name="keywords" content="客製電線,冷媒線" />
+    <meta name="description" content="各式客製特殊線材，有一般冷凍壓縮馬達使用的UL5048冷媒線、及其他各類客製電線">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
@@ -11,7 +12,7 @@
         <div class="content-row">
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/images/product_pic/ul5048-menu.jpg" alt="UL5048冷媒線" NavigateUrl="~/ul5048.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/images/product_pic/ul5048-menu.jpg" Text="UL5048冷媒線" NavigateUrl="~/ul5048.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     UL5048冷媒線<br />

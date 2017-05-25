@@ -18,7 +18,10 @@ public partial class SaleRecord : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        lblMax.Text = "";
+        lblMin.Text = "";
+        lblMode.Text = "";
+        lblAvg.Text = "";
     }
     private string GetQuery()
     {
@@ -27,7 +30,14 @@ public partial class SaleRecord : System.Web.UI.Page
 
         if (txtPrdNo.Text.Trim() != "" && txtCustName.Text.Trim() == "")
         {
-            condition = " AND COPTH.TH004 LIKE N'%" + txtPrdNo.Text.Trim() + "%'";
+            if (ckbExactProdId.Checked)
+            {
+                condition = " AND COPTH.TH004 = '" + txtPrdNo.Text.Trim() + "'";
+            }
+            else
+            {
+                condition = " AND COPTH.TH004 LIKE N'%" + txtPrdNo.Text.Trim() + "%'";
+            }
         }
         else if (txtPrdNo.Text.Trim() == "" && txtCustName.Text.Trim() != "")
         {
@@ -39,7 +49,7 @@ public partial class SaleRecord : System.Web.UI.Page
         }
 
         query = "SELECT COPTG.TG042 AS 銷貨日期, COPTG.TG004 AS 客戶代號, COPMA.MA002 AS 客戶簡稱, COPTH.TH004 AS 品號, COPTH.TH005 AS 品名"
-            + " , CAST(CAST(COPTH.TH008 AS NUMERIC(10,2)) AS VARCHAR)+COPTH.TH009 AS 數量, CAST(COPTH.TH012 AS NUMERIC(10,4)) AS 單價"
+            + " , CAST(CAST(COPTH.TH008 AS NUMERIC(10,2)) AS VARCHAR) AS 數量,COPTH.TH009 AS '單位', CAST(COPTH.TH012*COPTG.TG012 AS NUMERIC(10,4)) AS 單價"
             + " FROM COPTG"
             + " LEFT JOIN COPMA ON COPTG.TG004 = COPMA.MA001"
             + " LEFT JOIN COPTH ON COPTG.TG002 = COPTH.TH002 AND COPTG.TG001 = COPTH.TH001"
@@ -93,6 +103,29 @@ public partial class SaleRecord : System.Web.UI.Page
             lblError.Text = "";
             lblRange.Text = "查詢期間: " + txtStartDate.Text + " ~ " + txtEndDate.Text;
             SqlSearch(GetQuery());
+            calculate();
+        }
+        
+    }
+
+    private void calculate()
+    {
+        List<decimal> price = new List<decimal>();
+        
+        
+        for (int i = 0; i < grdReport.Rows.Count; i++)
+        {
+            if (Convert.ToDecimal(grdReport.Rows[i].Cells[7].Text) > 0)
+            {
+                price.Add(Convert.ToDecimal(grdReport.Rows[i].Cells[7].Text));
+            }
+        }
+        if (price.Count > 0)
+        {
+            lblMax.Text = price.Max().ToString();
+            lblMin.Text = price.Min().ToString();
+            lblMode.Text = (price.GroupBy(x => x).OrderByDescending(x => x.Count()).ThenBy(x => x.Key).Select(x => (decimal?)x.Key).FirstOrDefault()).ToString();
+            lblAvg.Text = Math.Round(price.Average(), 4).ToString();
         }
     }
 

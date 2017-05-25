@@ -1227,7 +1227,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("@ID", applicantID);
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     da.Fill(dt);
-                    //第一層簽核 限制:RANK 2-7、RANK高於申請者RANK、同部門或可替換部門、
+                    //第一層簽核 限制:RANK 2-7、RANK高於申請者RANK、同部門或可替換部門
                     query = ";WITH REF_DEPT"
                         + " AS"
                         + " ("
@@ -1249,6 +1249,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         + " AND HIER.[RANK] > @RANK"
                         + " AND HIER.[RANK] BETWEEN 2 AND 7"
                         + " AND MV.MV004<>'B-C'"  //SPECIAL RULE FOR 上膠部，因為沒人會電腦，故上膠部請假直接到第二層，由生管口頭詢問上膠主管 (DELETE WHEN SITUATION CHANGES)
+                        + " AND MV.MV004<>'A-SD'"   //KELVEN不需要簽核，業務部主管簽核由SYSTEM直接過 (DELETE WHEN SITUATION CHANGES)
                         + " ORDER BY HIER.[RANK] DESC,MV.MV001";
                     cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@ID", applicantID);
@@ -2027,7 +2028,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
     }
     /// <summary>
-    /// Disable "退回" button for rows whose status is "退回"
+    /// Disable "退回" button for rows whose status is "退回" or "撤銷"
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -2035,7 +2036,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {        
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            if (((Label)e.Row.Cells[9].FindControl("lblAppStatus")).Text == "退回")
+            if (((Label)e.Row.Cells[9].FindControl("lblAppStatus")).Text == "退回" || ((Label)e.Row.Cells[9].FindControl("lblAppStatus")).Text == "撤銷")
             {
                 ((Button)e.Row.Cells[10].FindControl("btnSearch_Deny")).Enabled = false;
             }
