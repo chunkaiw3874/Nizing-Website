@@ -36,6 +36,8 @@ public partial class hr360_BI01 : System.Web.UI.Page
             txtUserId.CssClass = "read-only";
             txtPassword.ReadOnly = true;
             txtPassword.CssClass = "read-only";
+            txtReenterPassword.ReadOnly = true;
+            txtReenterPassword.CssClass = "read-only";
             txtEmail.Text = "";
             txtEmail.ReadOnly = true;
             txtEmail.CssClass = "read-only";
@@ -44,6 +46,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
             txtLineId.CssClass = "read-only";
             txtUserId.Text = "";
             txtPassword.Text = "";
+            txtReenterPassword.Text = "";
             chkDisabled.Enabled = false;
             txtDisabledDate.ReadOnly = true;
             txtDisabledDate.CssClass = "read-only";
@@ -66,6 +69,8 @@ public partial class hr360_BI01 : System.Web.UI.Page
         txtUserId.CssClass = "required-field";
         txtPassword.ReadOnly = false;
         txtPassword.CssClass = "required-field";
+        txtReenterPassword.ReadOnly = false;
+        txtReenterPassword.CssClass = "required-field";
         txtEmail.Text = "";
         txtEmail.ReadOnly = false;
         txtEmail.CssClass = "";
@@ -74,6 +79,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
         txtLineId.CssClass = "";
         txtUserId.Text = "";
         txtPassword.Text = "";
+        txtReenterPassword.Text = "";
         chkDisabled.Enabled = true;
         btnErpId_Search.Enabled = true;
         txtErpUserId.Text = "";
@@ -186,6 +192,8 @@ public partial class hr360_BI01 : System.Web.UI.Page
         txtUserId.CssClass = "read-only";
         txtPassword.ReadOnly = true;
         txtPassword.CssClass = "read-only";
+        txtReenterPassword.ReadOnly = true;
+        txtReenterPassword.CssClass = "read-only";
         txtEmail.ReadOnly = true;
         txtEmail.CssClass = "read-only";
         txtLineId.ReadOnly = true;
@@ -228,6 +236,8 @@ public partial class hr360_BI01 : System.Web.UI.Page
             txtPassword.ReadOnly = false;
             txtPassword.CssClass = "required-field";
             txtPassword.Focus();
+            txtReenterPassword.ReadOnly = false;
+            txtReenterPassword.CssClass = "required-field";
             txtEmail.ReadOnly = false;
             txtEmail.CssClass = "";
             txtLineId.ReadOnly = false;
@@ -310,8 +320,19 @@ public partial class hr360_BI01 : System.Web.UI.Page
                 else if (txtPassword.Text.Trim() == "") //沒有密碼
                 {
                     lblErrorMessage.Text = "密碼為必填欄位";
+                    txtPassword.ReadOnly = false;                    
+                    txtPassword.CssClass = "required-field";
+                    txtReenterPassword.ReadOnly = false;
+                    txtReenterPassword.CssClass = "required-field";
+                    txtPassword.Focus();
+                }
+                else if (txtPassword.Text.Trim() != txtReenterPassword.Text.Trim()) //密碼與確認密碼不相符
+                {
+                    lblErrorMessage.Text = "密碼與確認密碼不相符";
                     txtPassword.ReadOnly = false;
                     txtPassword.CssClass = "required-field";
+                    txtReenterPassword.ReadOnly = false;
+                    txtReenterPassword.CssClass = "required-field";
                     txtPassword.Focus();
                 }
                 else if (txtName.Text.Trim() == "") //沒有使用者名稱
@@ -348,6 +369,8 @@ public partial class hr360_BI01 : System.Web.UI.Page
                             txtUserId.Focus();
                             txtPassword.ReadOnly = false;
                             txtPassword.CssClass = "required-field";
+                            txtReenterPassword.ReadOnly = false;
+                            txtReenterPassword.CssClass = "required-field";
                             txtEmail.ReadOnly = false;
                             txtEmail.CssClass = "";
                             txtLineId.ReadOnly = false;
@@ -392,6 +415,8 @@ public partial class hr360_BI01 : System.Web.UI.Page
                             txtUserId.CssClass = "read-only";
                             txtPassword.ReadOnly = true;
                             txtPassword.CssClass = "read-only";
+                            txtReenterPassword.ReadOnly = true;
+                            txtReenterPassword.CssClass = "read-only";
                             txtEmail.ReadOnly = true;
                             txtEmail.CssClass = "read-only";
                             txtLineId.ReadOnly = true;
@@ -423,6 +448,19 @@ public partial class hr360_BI01 : System.Web.UI.Page
                     txtUserId.CssClass = "read-only";
                     txtPassword.ReadOnly = false;
                     txtPassword.CssClass = "required-field";
+                    txtReenterPassword.ReadOnly = false;
+                    txtReenterPassword.CssClass = "required-field";
+                    txtPassword.Focus();
+                }
+                else if (txtPassword.Text.Trim() != txtReenterPassword.Text.Trim()) //密碼與確認密碼不相符
+                {
+                    lblErrorMessage.Text = "密碼與確認密碼不相符";
+                    txtUserId.ReadOnly = true;
+                    txtUserId.CssClass = "read-only";
+                    txtPassword.ReadOnly = false;
+                    txtPassword.CssClass = "required-field";
+                    txtReenterPassword.ReadOnly = false;
+                    txtReenterPassword.CssClass = "required-field";
                     txtPassword.Focus();
                 }
                 else if (txtName.Text.Trim() == "") //沒有使用者名稱
@@ -469,6 +507,8 @@ public partial class hr360_BI01 : System.Web.UI.Page
                     txtUserId.CssClass = "read-only";
                     txtPassword.ReadOnly = true;
                     txtPassword.CssClass = "read-only";
+                    txtReenterPassword.ReadOnly = true;
+                    txtReenterPassword.CssClass = "read-only";
                     txtEmail.ReadOnly = true;
                     txtEmail.CssClass = "read-only";
                     txtLineId.ReadOnly = true;
@@ -501,6 +541,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
         //txtName.Text = ViewState["txtName"].ToString();
         txtUserId.Text = "";
         txtPassword.Text = "";
+        txtReenterPassword.Text = "";
         txtEmail.Text = "";
         txtLineId.Text = "";
         txtDisabledDate.Text = "";
@@ -510,6 +551,8 @@ public partial class hr360_BI01 : System.Web.UI.Page
         txtUserId.CssClass = "read-only";
         txtPassword.ReadOnly = true;
         txtPassword.CssClass = "read-only";
+        txtReenterPassword.ReadOnly = true;
+        txtReenterPassword.CssClass = "read-only";
         txtEmail.ReadOnly = true;
         txtEmail.CssClass = "read-only";
         txtLineId.ReadOnly = true;
@@ -576,6 +619,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
                                 lblErrorMessage.Text = "";
                                 txtUserId.Text = "";
                                 txtPassword.Text = "";
+                                txtReenterPassword.Text = "";
                                 txtEmail.Text = "";
                                 txtLineId.Text = "";
                                 chkDisabled.Checked = false;
@@ -593,6 +637,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
                     lblErrorMessage.Text = "此使用者代號不存在";
                     txtUserId.Text = "";
                     txtPassword.Text = "";
+                    txtReenterPassword.Text = "";
                 }
                 reader.Close();
             }
@@ -600,6 +645,8 @@ public partial class hr360_BI01 : System.Web.UI.Page
             txtUserId.CssClass = "read-only";
             txtPassword.ReadOnly = true;
             txtPassword.CssClass = "read-only";
+            txtReenterPassword.ReadOnly = true;
+            txtReenterPassword.CssClass = "read-only";
             txtEmail.ReadOnly = true;
             txtEmail.CssClass = "read-only";
             txtLineId.ReadOnly = true;
@@ -641,6 +688,9 @@ public partial class hr360_BI01 : System.Web.UI.Page
         txtPassword.Text = "";
         txtPassword.ReadOnly = false;
         txtPassword.CssClass = "required-field";
+        txtReenterPassword.Text = "";
+        txtReenterPassword.ReadOnly = false;
+        txtReenterPassword.CssClass = "required-field";
         txtEmail.Text = ViewState["txtEmail"].ToString();
         txtEmail.ReadOnly = true;
         txtEmail.CssClass = "read-only";

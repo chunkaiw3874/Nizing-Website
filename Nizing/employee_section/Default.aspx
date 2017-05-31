@@ -86,5 +86,8 @@
             </ul>
         </div>
     </div>
+    <div class="row">
+        <%--<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/downloadInstaller/test01/setup.exe">download test01</asp:HyperLink>--%>
+    </div>
 </asp:Content>
 

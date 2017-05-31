@@ -74,6 +74,14 @@
                                     </tr>
                                     <tr>
                                         <td>
+                                            確認密碼
+                                        </td>
+                                        <td>
+                                            <asp:TextBox ID="txtReenterPassword" runat="server" MaxLength="20" placeholder="確認密碼" BorderColor="#a9caff" Font-Size="12" TextMode="Password"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
                                             ERP員工代號
                                         </td>
                                         <td>
