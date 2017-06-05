@@ -14,6 +14,9 @@
                 <a href="employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/add_credit.png" /></a>
                 <%--<asp:ImageButton ID="ImageButton2" runat="server" PostBackUrl="~/employee_section/Default.aspx" ImageUrl="~/images/employee_section/portal/add_credit.png" />--%>
             </li>
+            <li>
+                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/oqs.aspx">Test Link</asp:HyperLink>
+            </li>
         </ul>
     </div>    
 </asp:Content>

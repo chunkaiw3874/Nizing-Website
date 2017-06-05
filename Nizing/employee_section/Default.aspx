@@ -7,8 +7,9 @@
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
             <asp:Image ID="Image1" runat="server" ImageUrl="~/employee_section/report/image/button/dept/CHIEF.png" />
             <ul>
-                <li><%--<asp:ImageButton ID="btnUnfinishedWorkOrder" runat="server" ImageUrl="~/employee_section/report/image/button/dept/CHIEF-1.png" PostBackUrl="~/employee_section/report/ProductionProgress.aspx" />--%></li>                
-                <li><asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/employee_section/report/image/button/dept/CHIEF-2.png" PostBackUrl="~/employee_section/report/HR08.aspx" /></li>
+                <li><%--<asp:ImageButton ID="btnUnfinishedWorkOrder" runat="server" ImageUrl="~/employee_section/report/image/button/dept/CHIEF-1.png" PostBackUrl="~/employee_section/report/ProductionProgress.aspx" />--%></li>
+                <li>
+                    <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/employee_section/report/image/button/dept/CHIEF-2.png" PostBackUrl="~/employee_section/report/HR08.aspx" /></li>
             </ul>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
@@ -86,8 +87,4 @@
             </ul>
         </div>
     </div>
-    <div class="row">
-        <%--<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/downloadInstaller/test01/setup.exe">download test01</asp:HyperLink>--%>
-    </div>
 </asp:Content>
-
