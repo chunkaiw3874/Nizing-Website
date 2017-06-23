@@ -1,13 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/application.master" AutoEventWireup="true" CodeFile="cloud.aspx.cs" Inherits="cloud" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" runat="Server">
     <title>雲端系統元件-日進電線</title>
-    <meta name="description" content="雲端系統元件研發製造，日進電線持續與最頂尖的新科技接軌，歡迎各種客製需求">	
+    <meta name="description" content="雲端系統元件研發製造，日進電線持續與最頂尖的新科技接軌，歡迎各種客製需求">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" runat="Server">
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-<div id="product-submenu">
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div id="product-submenu">
         <div class="content-row">
             <div class="content-column">
                 <div class="button">

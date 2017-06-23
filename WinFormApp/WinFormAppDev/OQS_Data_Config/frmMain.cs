@@ -479,7 +479,7 @@ namespace OQS_Data_Config
                 for (int i = 0; i < dtErpInterim.Rows.Count; i++)
                 {
                     oqsAdapter.InsertQuery(dtErpInterim.Rows[i]["ID"].ToString().Trim(), dtErpInterim.Rows[i]["NAME"].ToString().Trim(), null, null, "0", null);
-                    bgwProductSyncLoader.ReportProgress((int)(100 * (i + 1) / dtOqsInterim.Rows.Count));
+                    bgwProductSyncLoader.ReportProgress((int)(100 * (i + 1) / dtErpInterim.Rows.Count));
                 }
             }
                 //END ADD
