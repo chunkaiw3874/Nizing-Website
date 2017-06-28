@@ -1344,8 +1344,8 @@ namespace OQS_Data_Config.dsProductInfoTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_NAME", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [INVMB] ([MB001], [MB002]) VALUES (@ID, @NAME);\r\nSELECT TOP (10) MB00" +
-                "1 AS \'ID\', MB002 AS \'NAME\' FROM INVMB WHERE (MB001 = @MB001)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [INVMB] ([MB001], [MB002]) VALUES (@ID, @NAME);\r\nSELECT MB001 AS \'ID\'" +
+                ", MB002 AS \'NAME\' FROM INVMB WHERE (MB001 = @MB001)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NAME", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -1354,7 +1354,7 @@ namespace OQS_Data_Config.dsProductInfoTableAdapters {
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = "UPDATE [INVMB] SET [MB001] = @ID, [MB002] = @NAME WHERE (([MB001] = @Original_ID)" +
                 " AND ((@IsNull_NAME = 1 AND [MB002] IS NULL) OR ([MB002] = @Original_NAME)));\r\nS" +
-                "ELECT TOP (10) MB001 AS \'ID\', MB002 AS \'NAME\' FROM INVMB WHERE (MB001 = @MB001)";
+                "ELECT MB001 AS \'ID\', MB002 AS \'NAME\' FROM INVMB WHERE (MB001 = @MB001)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NAME", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -1377,7 +1377,7 @@ namespace OQS_Data_Config.dsProductInfoTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT TOP 10 MB001 \'ID\',MB002 \'NAME\'\r\nFROM INVMB\r\nWHERE MB005=\'01\'";
+            this._commandCollection[0].CommandText = "SELECT MB001 \'ID\',MB002 \'NAME\'\r\nFROM INVMB\r\nWHERE MB005=\'01\'";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

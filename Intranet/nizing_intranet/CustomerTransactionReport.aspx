@@ -59,14 +59,14 @@
     </div>
     <br />
     <div id="report">
-        <asp:GridView ID="grdReport" runat="server" CellPadding="4" ForeColor="#333333" AutoGenerateColumns="false" CssClass="grdResult" OnDataBound="grdReport_DataBound">
+        <asp:GridView ID="grdReport" runat="server" CellPadding="4" ForeColor="#333333" AutoGenerateColumns="false" CssClass="grdResult" OnDataBound="grdReport_DataBound" AllowSorting="true" OnSorting="grdReport_Sorting">
             <Columns>
                 <asp:TemplateField HeaderText="年度">
                     <ItemTemplate>
                         <asp:Label ID="Label4" runat="server" Text='<%#Eval("YR") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="客戶代號">
+                <asp:TemplateField HeaderText="客戶代號" SortExpression="CLIENTNO">
                     <ItemTemplate>
                         <asp:Label ID="Label5" runat="server" Text='<%#Eval("CLIENTNO") %>'></asp:Label>
                     </ItemTemplate>
@@ -141,7 +141,7 @@
                         <asp:Label ID="Label19" runat="server" Text='<%#Eval("12") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="總金額">
+                <asp:TemplateField HeaderText="總金額" SortExpression="TOTAL">
                     <ItemTemplate>
                         <asp:Label ID="Label20" runat="server" Text='<%#Eval("TOTAL") %>'></asp:Label>
                     </ItemTemplate>

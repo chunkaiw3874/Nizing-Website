@@ -62,29 +62,34 @@
             this.tbpProductManagement = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnProductEdit = new System.Windows.Forms.Button();
             this.btnProductSync = new System.Windows.Forms.Button();
-            this.pgbProductSyncProgress = new System.Windows.Forms.ProgressBar();
             this.btnProductSearch = new System.Windows.Forms.Button();
+            this.gvProductSearch_Result = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtProductId = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.btnProductConfirm = new System.Windows.Forms.Button();
+            this.btnProductCancel = new System.Windows.Forms.Button();
             this.lblProductSubmitStatus = new System.Windows.Forms.Label();
-            this.gvProductSearch_Result = new System.Windows.Forms.DataGridView();
+            this.pgbProductSyncProgress = new System.Windows.Forms.ProgressBar();
+            this.lblProductSyncStatus = new System.Windows.Forms.Label();
             this.LOGIN_ACCOUNTTableAdapter = new OQS_Data_Config.dsLoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();
             this.ACCOUNT_VIPLEVELTableAdapter = new OQS_Data_Config.dsLoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter();
             this.bgwProductSyncLoader = new System.ComponentModel.BackgroundWorker();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblProductSyncStatus = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtProductPrice = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.ckbProductDisplay = new System.Windows.Forms.CheckBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtProductBuffer = new System.Windows.Forms.TextBox();
+            this.txtProductDiscount = new System.Windows.Forms.TextBox();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label12 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpAccountManagement.SuspendLayout();
@@ -99,10 +104,11 @@
             this.tbpProductManagement.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            this.flowLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvProductSearch_Result)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.flowLayoutPanel4.SuspendLayout();
+            this.flowLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -479,9 +485,7 @@
             // 
             // flowLayoutPanel3
             // 
-            this.flowLayoutPanel3.Controls.Add(this.button1);
-            this.flowLayoutPanel3.Controls.Add(this.button2);
-            this.flowLayoutPanel3.Controls.Add(this.button3);
+            this.flowLayoutPanel3.Controls.Add(this.btnProductEdit);
             this.flowLayoutPanel3.Controls.Add(this.btnProductSync);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel3.Location = new System.Drawing.Point(1, 1);
@@ -490,52 +494,24 @@
             this.flowLayoutPanel3.Size = new System.Drawing.Size(460, 56);
             this.flowLayoutPanel3.TabIndex = 0;
             // 
-            // button1
+            // btnProductEdit
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.button1.Location = new System.Drawing.Point(3, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "新增";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(84, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "修改";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(165, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "刪除";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnProductEdit.Location = new System.Drawing.Point(3, 3);
+            this.btnProductEdit.Name = "btnProductEdit";
+            this.btnProductEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnProductEdit.TabIndex = 1;
+            this.btnProductEdit.Text = "修改";
+            this.btnProductEdit.UseVisualStyleBackColor = true;
             // 
             // btnProductSync
             // 
-            this.btnProductSync.Location = new System.Drawing.Point(246, 3);
+            this.btnProductSync.Location = new System.Drawing.Point(84, 3);
             this.btnProductSync.Name = "btnProductSync";
             this.btnProductSync.Size = new System.Drawing.Size(75, 23);
             this.btnProductSync.TabIndex = 3;
             this.btnProductSync.Text = "同步";
             this.btnProductSync.UseVisualStyleBackColor = true;
             this.btnProductSync.Click += new System.EventHandler(this.btnProductSync_Click);
-            // 
-            // pgbProductSyncProgress
-            // 
-            this.pgbProductSyncProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pgbProductSyncProgress.Location = new System.Drawing.Point(3, 719);
-            this.pgbProductSyncProgress.Name = "pgbProductSyncProgress";
-            this.pgbProductSyncProgress.Size = new System.Drawing.Size(454, 23);
-            this.pgbProductSyncProgress.TabIndex = 4;
             // 
             // btnProductSearch
             // 
@@ -548,19 +524,61 @@
             this.btnProductSearch.UseVisualStyleBackColor = true;
             this.btnProductSearch.Click += new System.EventHandler(this.btnProductSearch_Click);
             // 
+            // gvProductSearch_Result
+            // 
+            this.gvProductSearch_Result.AllowUserToAddRows = false;
+            this.gvProductSearch_Result.AllowUserToDeleteRows = false;
+            this.gvProductSearch_Result.AllowUserToResizeRows = false;
+            this.gvProductSearch_Result.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvProductSearch_Result.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gvProductSearch_Result.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.gvProductSearch_Result.Location = new System.Drawing.Point(462, 58);
+            this.gvProductSearch_Result.Margin = new System.Windows.Forms.Padding(0);
+            this.gvProductSearch_Result.MultiSelect = false;
+            this.gvProductSearch_Result.Name = "gvProductSearch_Result";
+            this.gvProductSearch_Result.RowHeadersVisible = false;
+            this.gvProductSearch_Result.RowTemplate.Height = 24;
+            this.gvProductSearch_Result.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.gvProductSearch_Result.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gvProductSearch_Result.Size = new System.Drawing.Size(707, 745);
+            this.gvProductSearch_Result.TabIndex = 4;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 1;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel4, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.pgbProductSyncProgress, 0, 2);
+            this.tableLayoutPanel5.Controls.Add(this.lblProductSyncStatus, 0, 1);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(1, 58);
+            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 3;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 465F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(460, 745);
+            this.tableLayoutPanel5.TabIndex = 5;
+            // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 2;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 83.33334F));
             this.tableLayoutPanel4.Controls.Add(this.label6, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.textBox1, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.txtProductId, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.label7, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.label8, 1, 1);
-            this.tableLayoutPanel4.Controls.Add(this.comboBox1, 1, 2);
-            this.tableLayoutPanel4.Controls.Add(this.label11, 0, 2);
             this.tableLayoutPanel4.Controls.Add(this.flowLayoutPanel4, 1, 6);
-            this.tableLayoutPanel4.Controls.Add(this.lblProductSubmitStatus, 1, 7);
+            this.tableLayoutPanel4.Controls.Add(this.label9, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.txtProductPrice, 1, 2);
+            this.tableLayoutPanel4.Controls.Add(this.label10, 0, 3);
+            this.tableLayoutPanel4.Controls.Add(this.ckbProductDisplay, 1, 4);
+            this.tableLayoutPanel4.Controls.Add(this.label11, 0, 5);
+            this.tableLayoutPanel4.Controls.Add(this.txtProductBuffer, 1, 5);
+            this.tableLayoutPanel4.Controls.Add(this.lblProductSubmitStatus, 0, 7);
+            this.tableLayoutPanel4.Controls.Add(this.flowLayoutPanel5, 1, 3);
             this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -586,23 +604,23 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "品號:";
             // 
-            // textBox1
+            // txtProductId
             // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox1.Location = new System.Drawing.Point(79, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(150, 22);
-            this.textBox1.TabIndex = 4;
+            this.txtProductId.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtProductId.Location = new System.Drawing.Point(79, 12);
+            this.txtProductId.Name = "txtProductId";
+            this.txtProductId.Size = new System.Drawing.Size(150, 22);
+            this.txtProductId.TabIndex = 4;
             // 
             // label7
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(44, 63);
+            this.label7.Location = new System.Drawing.Point(41, 63);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(29, 12);
+            this.label7.Size = new System.Drawing.Size(32, 12);
             this.label7.TabIndex = 7;
-            this.label7.Text = "品名";
+            this.label7.Text = "品名:";
             // 
             // label8
             // 
@@ -613,32 +631,10 @@
             this.label8.Size = new System.Drawing.Size(0, 12);
             this.label8.TabIndex = 8;
             // 
-            // comboBox1
-            // 
-            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.comboBox1.DataSource = this.ACCOUNTVIPLEVELBindingSource;
-            this.comboBox1.DisplayMember = "LEVEL";
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(79, 105);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(150, 20);
-            this.comboBox1.TabIndex = 10;
-            this.comboBox1.ValueMember = "LEVEL";
-            // 
-            // label11
-            // 
-            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(23, 109);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(50, 12);
-            this.label11.TabIndex = 9;
-            this.label11.Text = "VIP等級:";
-            // 
             // flowLayoutPanel4
             // 
-            this.flowLayoutPanel4.Controls.Add(this.button5);
-            this.flowLayoutPanel4.Controls.Add(this.button6);
+            this.flowLayoutPanel4.Controls.Add(this.btnProductConfirm);
+            this.flowLayoutPanel4.Controls.Add(this.btnProductCancel);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel4.Location = new System.Drawing.Point(76, 276);
             this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
@@ -646,51 +642,51 @@
             this.flowLayoutPanel4.Size = new System.Drawing.Size(384, 27);
             this.flowLayoutPanel4.TabIndex = 11;
             // 
-            // button5
+            // btnProductConfirm
             // 
-            this.button5.Location = new System.Drawing.Point(0, 3);
-            this.button5.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 3;
-            this.button5.Text = "確認";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnProductConfirm.Location = new System.Drawing.Point(0, 3);
+            this.btnProductConfirm.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.btnProductConfirm.Name = "btnProductConfirm";
+            this.btnProductConfirm.Size = new System.Drawing.Size(75, 23);
+            this.btnProductConfirm.TabIndex = 3;
+            this.btnProductConfirm.Text = "確認";
+            this.btnProductConfirm.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // btnProductCancel
             // 
-            this.button6.Location = new System.Drawing.Point(81, 3);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 4;
-            this.button6.Text = "取消";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btnProductCancel.Location = new System.Drawing.Point(81, 3);
+            this.btnProductCancel.Name = "btnProductCancel";
+            this.btnProductCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnProductCancel.TabIndex = 4;
+            this.btnProductCancel.Text = "取消";
+            this.btnProductCancel.UseVisualStyleBackColor = true;
             // 
             // lblProductSubmitStatus
             // 
             this.lblProductSubmitStatus.AutoSize = true;
-            this.lblProductSubmitStatus.Location = new System.Drawing.Point(79, 303);
+            this.lblProductSubmitStatus.Location = new System.Drawing.Point(3, 303);
             this.lblProductSubmitStatus.Name = "lblProductSubmitStatus";
             this.lblProductSubmitStatus.Size = new System.Drawing.Size(0, 12);
             this.lblProductSubmitStatus.TabIndex = 12;
             // 
-            // gvProductSearch_Result
+            // pgbProductSyncProgress
             // 
-            this.gvProductSearch_Result.AllowUserToAddRows = false;
-            this.gvProductSearch_Result.AllowUserToDeleteRows = false;
-            this.gvProductSearch_Result.AllowUserToResizeRows = false;
-            this.gvProductSearch_Result.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvProductSearch_Result.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gvProductSearch_Result.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.gvProductSearch_Result.Location = new System.Drawing.Point(462, 58);
-            this.gvProductSearch_Result.Margin = new System.Windows.Forms.Padding(0);
-            this.gvProductSearch_Result.MultiSelect = false;
-            this.gvProductSearch_Result.Name = "gvProductSearch_Result";
-            this.gvProductSearch_Result.RowHeadersVisible = false;
-            this.gvProductSearch_Result.RowTemplate.Height = 24;
-            this.gvProductSearch_Result.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.gvProductSearch_Result.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvProductSearch_Result.Size = new System.Drawing.Size(707, 745);
-            this.gvProductSearch_Result.TabIndex = 4;
+            this.pgbProductSyncProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pgbProductSyncProgress.Location = new System.Drawing.Point(3, 719);
+            this.pgbProductSyncProgress.Name = "pgbProductSyncProgress";
+            this.pgbProductSyncProgress.Size = new System.Drawing.Size(454, 23);
+            this.pgbProductSyncProgress.TabIndex = 4;
+            // 
+            // lblProductSyncStatus
+            // 
+            this.lblProductSyncStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblProductSyncStatus.AutoSize = true;
+            this.lblProductSyncStatus.ForeColor = System.Drawing.Color.Green;
+            this.lblProductSyncStatus.Location = new System.Drawing.Point(3, 704);
+            this.lblProductSyncStatus.Name = "lblProductSyncStatus";
+            this.lblProductSyncStatus.Size = new System.Drawing.Size(0, 12);
+            this.lblProductSyncStatus.TabIndex = 5;
             // 
             // LOGIN_ACCOUNTTableAdapter
             // 
@@ -707,34 +703,91 @@
             this.bgwProductSyncLoader.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwProductSyncLoader_ProgressChanged);
             this.bgwProductSyncLoader.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwProductSyncLoader_RunWorkerCompleted);
             // 
-            // tableLayoutPanel5
+            // label9
             // 
-            this.tableLayoutPanel5.ColumnCount = 1;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel4, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.pgbProductSyncProgress, 0, 2);
-            this.tableLayoutPanel5.Controls.Add(this.lblProductSyncStatus, 0, 1);
-            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(1, 58);
-            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 3;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 465F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(460, 745);
-            this.tableLayoutPanel5.TabIndex = 5;
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(41, 109);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(32, 12);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "價格:";
             // 
-            // lblProductSyncStatus
+            // txtProductPrice
             // 
-            this.lblProductSyncStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblProductSyncStatus.AutoSize = true;
-            this.lblProductSyncStatus.ForeColor = System.Drawing.Color.Green;
-            this.lblProductSyncStatus.Location = new System.Drawing.Point(3, 704);
-            this.lblProductSyncStatus.Name = "lblProductSyncStatus";
-            this.lblProductSyncStatus.Size = new System.Drawing.Size(33, 12);
-            this.lblProductSyncStatus.TabIndex = 5;
-            this.lblProductSyncStatus.Text = "label9";
+            this.txtProductPrice.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtProductPrice.Location = new System.Drawing.Point(79, 104);
+            this.txtProductPrice.Name = "txtProductPrice";
+            this.txtProductPrice.Size = new System.Drawing.Size(150, 22);
+            this.txtProductPrice.TabIndex = 14;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(41, 155);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(32, 12);
+            this.label10.TabIndex = 16;
+            this.label10.Text = "折扣:";
+            // 
+            // ckbProductDisplay
+            // 
+            this.ckbProductDisplay.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ckbProductDisplay.AutoSize = true;
+            this.ckbProductDisplay.Location = new System.Drawing.Point(79, 199);
+            this.ckbProductDisplay.Name = "ckbProductDisplay";
+            this.ckbProductDisplay.Size = new System.Drawing.Size(96, 16);
+            this.ckbProductDisplay.TabIndex = 17;
+            this.ckbProductDisplay.Text = "為可訂購產品";
+            this.ckbProductDisplay.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(5, 247);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(68, 12);
+            this.label11.TabIndex = 18;
+            this.label11.Text = "庫存緩衝量:";
+            // 
+            // txtProductBuffer
+            // 
+            this.txtProductBuffer.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtProductBuffer.Location = new System.Drawing.Point(79, 242);
+            this.txtProductBuffer.Name = "txtProductBuffer";
+            this.txtProductBuffer.Size = new System.Drawing.Size(150, 22);
+            this.txtProductBuffer.TabIndex = 19;
+            // 
+            // txtProductDiscount
+            // 
+            this.txtProductDiscount.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtProductDiscount.Location = new System.Drawing.Point(3, 3);
+            this.txtProductDiscount.Name = "txtProductDiscount";
+            this.txtProductDiscount.Size = new System.Drawing.Size(150, 22);
+            this.txtProductDiscount.TabIndex = 15;
+            // 
+            // flowLayoutPanel5
+            // 
+            this.flowLayoutPanel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanel5.Controls.Add(this.txtProductDiscount);
+            this.flowLayoutPanel5.Controls.Add(this.label12);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(76, 147);
+            this.flowLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(384, 28);
+            this.flowLayoutPanel5.TabIndex = 20;
+            // 
+            // label12
+            // 
+            this.label12.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(159, 8);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(14, 12);
+            this.label12.TabIndex = 16;
+            this.label12.Text = "%";
             // 
             // frmMain
             // 
@@ -761,12 +814,14 @@
             this.tbpProductManagement.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
-            this.flowLayoutPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvProductSearch_Result)).EndInit();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel5.ResumeLayout(false);
+            this.flowLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -808,20 +863,16 @@
         private System.Windows.Forms.Label lblAccountSubmitStatus;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnProductEdit;
         private System.Windows.Forms.Button btnProductSearch;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtProductId;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button btnProductConfirm;
+        private System.Windows.Forms.Button btnProductCancel;
         private System.Windows.Forms.Label lblProductSubmitStatus;
         private System.Windows.Forms.DataGridView gvProductSearch_Result;
         private System.Windows.Forms.Button btnProductSync;
@@ -829,5 +880,14 @@
         private System.Windows.Forms.ProgressBar pgbProductSyncProgress;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Label lblProductSyncStatus;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtProductPrice;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox ckbProductDisplay;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtProductBuffer;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
+        private System.Windows.Forms.TextBox txtProductDiscount;
+        private System.Windows.Forms.Label label12;
     }
 }

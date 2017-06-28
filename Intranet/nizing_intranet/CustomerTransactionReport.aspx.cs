@@ -34,7 +34,9 @@ public partial class CustomerTransactionReport : System.Web.UI.Page
     }
     protected void btnReport_Click(object sender, EventArgs e)
     {
-        SqlSearch(GetQuery());
+        DataTable dt = getDataTable();
+        grdReport.DataSource = dt;
+        grdReport.DataBind();
         for (int i = 0; i < grdReport.Columns.Count; i++)
         {
             if (i > 0)
@@ -44,7 +46,7 @@ public partial class CustomerTransactionReport : System.Web.UI.Page
         }
     }
 
-    private string GetQuery()
+    private DataTable getDataTable()
     {
         string query = "";
         string startYear = "";
@@ -61,22 +63,6 @@ public partial class CustomerTransactionReport : System.Web.UI.Page
         {
             condition = " WHERE SALENAME = N'" + ddlPersonnel.SelectedItem.Text + "'";
         }
-        //query = "SELECT YR, CLIENTNO, CLIENTNAME, SALENAME, (ISNULL([01],0)+ISNULL([02],0)+ISNULL([03],0)+ISNULL([04],0)+ISNULL([05],0)+ISNULL([06],0)+ISNULL([07],0)+ISNULL([08],0)+ISNULL([09],0)+ISNULL([10],0)+ISNULL([11],0)+ISNULL([12],0)) TOTAL"
-        //        + " FROM"
-        //        + " ("
-        //        + " SELECT SUBSTRING(COPTG.TG042, 1, 4) YR, SUBSTRING(COPTG.TG042,5,2) MN, COPMA.MA001 CLIENTNO, COPMA.MA002 CLIENTNAME, CONVERT(DECIMAL(10,2),COALESCE(COPTG.TG045,0)) AMT, CMSMV.MV002 SALENAME"
-        //        + " FROM COPMA"
-        //        + " LEFT JOIN COPTG ON COPMA.MA001 = COPTG.TG004 AND COPTG.TG042 BETWEEN N'"+startYear+ddlStartMonth.SelectedValue+"' AND N'"+ddlEndYear.SelectedItem.Text + ddlEndMonth.SelectedValue+"'"
-        //        + " LEFT JOIN CMSMV ON COPMA.MA016 = CMSMV.MV001"
-        //        //" WHERE COPMA.MA001 = N'AA0001'" +
-        //        + " ) AS S"
-        //        + " PIVOT"
-        //        + " ("
-        //        + " SUM(AMT)"
-        //        + " FOR MN IN ([01], [02], [03], [04], [05], [06], [07], [08], [09], [10], [11], [12])"
-        //        + " ) AS PIVOTTABLE"
-        //        + condition
-        //        + " ORDER BY CLIENTNO";
         query = "SELECT *,(ISNULL([01],0)+ISNULL([02],0)+ISNULL([03],0)+ISNULL([04],0)+ISNULL([05],0)+ISNULL([06],0)+ISNULL([07],0)+ISNULL([08],0)+ISNULL([09],0)+ISNULL([10],0)+ISNULL([11],0)+ISNULL([12],0)) TOTAL"
 + " FROM"
 + " ("
@@ -124,10 +110,11 @@ public partial class CustomerTransactionReport : System.Web.UI.Page
 + " ) AS PIVOTTABLE"
 + condition
 + " ORDER BY CLIENTNO";
-        return query;
+        DataSet ds = SqlSearch(query);
+        return ds.Tables[0];
     }
 
-    private void SqlSearch(string query)
+    private DataSet SqlSearch(string query)
     {
         using (SqlConnection conn = new SqlConnection(connectionString))
         {
@@ -137,11 +124,15 @@ public partial class CustomerTransactionReport : System.Web.UI.Page
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
-            grdReport.DataSource = ds;
-            grdReport.DataBind();
+            return ds;
         }
     }
 
+    //protected DataTable getDataTable(string query, string condition)
+    //{
+        
+    //    SqlSearch(GetQuery());
+    //}
     protected void btnExport_Click(object sender, EventArgs e)
     {
         try
@@ -276,6 +267,42 @@ public partial class CustomerTransactionReport : System.Web.UI.Page
                     ((Label)row.Cells[i].FindControl("Label" + (i + 4).ToString())).Text = "-";
                 }
             }
+        }
+    }
+    protected void grdReport_Sorting(object sender, GridViewSortEventArgs e)
+    {
+        string sortExpression = e.SortExpression;
+        string direction = string.Empty;
+
+        if (SortDirection == SortDirection.Ascending)
+        {
+            SortDirection = SortDirection.Descending;
+            direction = " DESC";
+        }
+        else
+        {
+            SortDirection = SortDirection.Ascending;
+            direction = " ASC";
+        }
+        DataTable table = getDataTable();
+        table.DefaultView.Sort = sortExpression + direction;
+        grdReport.DataSource = table;
+        grdReport.DataBind();
+
+    }
+    public SortDirection SortDirection
+    {
+        get
+        {
+            if (ViewState["SortDirection"] == null)
+            {
+                ViewState["SortDirection"] = SortDirection.Ascending;
+            }
+            return (SortDirection)ViewState["SortDirection"];
+        }
+        set
+        {
+            ViewState["SortDirection"] = value;
         }
     }
 }

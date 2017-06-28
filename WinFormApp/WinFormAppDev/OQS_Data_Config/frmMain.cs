@@ -31,6 +31,14 @@ namespace OQS_Data_Config
             txtAccountConfirmPassword.Text = "";
             ckbAccountAdminRight.Checked = false;
             #endregion
+            #region 產品管理
+            btnProductEdit.Enabled = false;
+            btnProductSearch.Enabled = true;
+            btnProductSync.Enabled = true;
+            btnProductConfirm.Enabled = false;
+            btnProductCancel.Enabled = false;
+            
+            #endregion
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -366,6 +374,7 @@ namespace OQS_Data_Config
         }
         #endregion
 
+        #region 背景執行緒
         private void bgwProductSyncLoader_DoWork(object sender, DoWorkEventArgs e)
         {
             
@@ -439,6 +448,10 @@ namespace OQS_Data_Config
                 lblProductSyncStatus.Text = "同步資料庫...";
             })); 
                 //MODIFY
+            this.Invoke(new MethodInvoker(delegate
+            {
+                lblProductSyncStatus.Text = "更新已有資料...";
+            })); 
             var tempRow = dtErp.AsEnumerable().Where(x => (string)x["ACTION"] == postSyncAction.MODIFY.ToString()).OrderBy(y => y["ID"]);
             dtErpInterim = tempRow.Any() ? tempRow.CopyToDataTable() : dtErp.Clone();
             tempRow = dtOqs.AsEnumerable().Where(x => (string)x["ACTION"] == postSyncAction.MODIFY.ToString()).OrderBy(y => y["ID"]);
@@ -460,6 +473,10 @@ namespace OQS_Data_Config
             }
                 //END MODIFY
                 //DELETE
+            this.Invoke(new MethodInvoker(delegate
+            {
+                lblProductSyncStatus.Text = "刪除舊資料...";
+            })); 
             tempRow = dtOqs.AsEnumerable().Where(x => (string)x["ACTION"] == postSyncAction.DELETE.ToString()).OrderBy(y => y["ID"]);
             dtOqsInterim = tempRow.Any() ? tempRow.CopyToDataTable() : dtOqs.Clone();
             if (dtOqsInterim.Rows.Count > 0)
@@ -472,13 +489,17 @@ namespace OQS_Data_Config
             }
                 //END DELETE
                 //ADD
+            this.Invoke(new MethodInvoker(delegate
+            {
+                lblProductSyncStatus.Text = "新增新資料...";
+            })); 
             tempRow = dtErp.AsEnumerable().Where(x => (string)x["ACTION"] == postSyncAction.ADD.ToString()).OrderBy(y => y["ID"]);
             dtErpInterim = tempRow.Any() ? tempRow.CopyToDataTable() : dtErp.Clone();
             if (dtErpInterim.Rows.Count > 0)
             {
                 for (int i = 0; i < dtErpInterim.Rows.Count; i++)
                 {
-                    oqsAdapter.InsertQuery(dtErpInterim.Rows[i]["ID"].ToString().Trim(), dtErpInterim.Rows[i]["NAME"].ToString().Trim(), null, null, "0", null);
+                    oqsAdapter.InsertQuery(dtErpInterim.Rows[i]["ID"].ToString().Trim(), dtErpInterim.Rows[i]["NAME"].ToString().Trim(), null, null, null, null);
                     bgwProductSyncLoader.ReportProgress((int)(100 * (i + 1) / dtErpInterim.Rows.Count));
                 }
             }
@@ -496,6 +517,7 @@ namespace OQS_Data_Config
                 gvProductSearch_Result.DataSource = dtOqsInterim;
             }));            
         }
+        #endregion
 
         private void bgwProductSyncLoader_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {            
