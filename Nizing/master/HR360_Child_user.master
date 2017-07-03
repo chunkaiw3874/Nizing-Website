@@ -12,7 +12,6 @@
         <div id="banner">
             <div class="float-right" style="">
                 <asp:ImageButton ID="btnHome" runat="server" ImageUrl="~/hr360/image/icon/top_menu/home1.png" Height="80" ToolTip="首頁" OnClick="btnHome_Click" onmouseover="this.src='/hr360/image/icon/top_menu/home2.png'" onmouseout="this.src='/hr360/image/icon/top_menu/home1.png'" />
-                <%--<asp:ImageButton ID="btnReport" runat="server" ImageUrl="~/hr360/image/icon/top_menu/report1.png" Height="80" OnClick="btnReport_Click" onmouseover="this.src='/hr360/image/icon/top_menu/report2.png'" onmouseout="this.src='/hr360/image/icon/top_menu/report1.png'" />--%>
                 <asp:ImageButton ID="btnAdminPage" runat="server" ImageUrl="~/hr360/image/icon/top_menu/management_page1.png" Height="80" ToolTip="首頁" OnClick="btnAdminPage_Click" onmouseover="this.src='/hr360/image/icon/top_menu/management_page2.png'" onmouseout="this.src='/hr360/image/icon/top_menu/management_page1.png'" />
                 <asp:ImageButton ID="btnLogout" runat="server" ImageUrl="~/hr360/image/icon/top_menu/logout1.png" Height="80" ToolTip="登出" OnClick="btnLogout_Click" onmouseover="this.src='/hr360/image/icon/top_menu/logout2.png'" onmouseout="this.src='/hr360/image/icon/top_menu/logout1.png'" />
             </div>

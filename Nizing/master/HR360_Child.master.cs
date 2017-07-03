@@ -37,6 +37,7 @@ public partial class masterPage_HR360_Child : System.Web.UI.MasterPage
         DataTable dtleftmenu = new DataTable();
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
+            //string query = "";
             SqlCommand sqlSearch = new SqlCommand("SELECT [HR360_BI03_A].[ID] CATEGORY_ID, [HR360_BI03_A].[IMAGE_URL] CATEGORY_IMGURL, [HR360_BI03_B].[ID] MODULE_ID, [HR360_BI03_B].[IMAGE_URL] MODULE_IMGURL, [HR360_BI03_B].[URL] MODULE_URL"
                                                     + " FROM [HR360_BI03_B]"
                                                     + " LEFT JOIN [HR360_BI03_A] ON [HR360_BI03_B].[CATEGORY_ID] = [HR360_BI03_A].[ID]"
@@ -59,16 +60,16 @@ public partial class masterPage_HR360_Child : System.Web.UI.MasterPage
                     TreeView1.Nodes.Add(node);
                     childnode.Value = dtleftmenu.Rows[i][2].ToString();
                     childnode.ImageUrl = dtleftmenu.Rows[i][3].ToString();
-                    if ((Session["permission"] as DataTable).Rows.Count != 0 &&
-                        ((Session["permission"] as DataTable).Rows[0][5].ToString().ToUpper().Equals("TRUE")
-                        || ((Session["permission"] as DataTable).Select("MODULE_ID = '"+dtleftmenu.Rows[i][2].ToString()+"'"))[0][6].ToString().ToUpper().Equals("TRUE")))
-                    {
+                    //if ((Session["permission"] as DataTable).Rows.Count != 0 &&
+                    //    ((Session["permission"] as DataTable).Rows[0][5].ToString().ToUpper().Equals("TRUE")
+                    //    || ((Session["permission"] as DataTable).Select("MODULE_ID = '"+dtleftmenu.Rows[i][2].ToString()+"'"))[0][6].ToString().ToUpper().Equals("TRUE")))
+                    //{
                         childnode.NavigateUrl = dtleftmenu.Rows[i][4].ToString();
-                    }
-                    else
-                    {
-                        childnode.NavigateUrl = "javascript:alert('無此權限')";
-                    }
+                    //}
+                    //else
+                    //{
+                    //    childnode.NavigateUrl = "javascript:alert('無此權限')";
+                    //}
                         
                     node.ChildNodes.Add(childnode);
                 }
@@ -79,16 +80,16 @@ public partial class masterPage_HR360_Child : System.Web.UI.MasterPage
                         node = TreeView1.FindNode(dtleftmenu.Rows[i][0].ToString());
                         childnode.Value = dtleftmenu.Rows[i][2].ToString();
                         childnode.ImageUrl = dtleftmenu.Rows[i][3].ToString();
-                        if ((Session["permission"] as DataTable).Rows.Count != 0 &&
-                           ((Session["permission"] as DataTable).Rows[0][5].ToString().ToUpper().Equals("TRUE")
-                        || ((Session["permission"] as DataTable).Select("MODULE_ID = '" + dtleftmenu.Rows[i][2].ToString() + "'"))[0][6].ToString().ToUpper().Equals("TRUE")))
-                        {
+                        //if ((Session["permission"] as DataTable).Rows.Count != 0 &&
+                        //   ((Session["permission"] as DataTable).Rows[0][5].ToString().ToUpper().Equals("TRUE")
+                        //|| ((Session["permission"] as DataTable).Select("MODULE_ID = '" + dtleftmenu.Rows[i][2].ToString() + "'"))[0][6].ToString().ToUpper().Equals("TRUE")))
+                        //{
                             childnode.NavigateUrl = dtleftmenu.Rows[i][4].ToString();
-                        }
-                        else
-                        {
-                            childnode.NavigateUrl = "javascript:alert('無此權限');";
-                        }
+                        //}
+                        //else
+                        //{
+                        //    childnode.NavigateUrl = "javascript:alert('無此權限');";
+                        //}
                         node.ChildNodes.Add(childnode);
                     }
                     else
@@ -101,17 +102,17 @@ public partial class masterPage_HR360_Child : System.Web.UI.MasterPage
                         childnode.ImageUrl = dtleftmenu.Rows[i][3].ToString();
                         try
                         {
-                            if ((Session["permission"] as DataTable).Rows.Count != 0 &&
-                               ((Session["permission"] as DataTable).Rows[0][5].ToString().ToUpper().Equals("TRUE")
-                            || ((Session["permission"] as DataTable).Select("MODULE_ID = '" + dtleftmenu.Rows[i][2].ToString() + "'"))[0][6].ToString().ToUpper().Equals("TRUE")))
-                            {
+                            //if ((Session["permission"] as DataTable).Rows.Count != 0 &&
+                            //   ((Session["permission"] as DataTable).Rows[0][5].ToString().ToUpper().Equals("TRUE")
+                            //|| ((Session["permission"] as DataTable).Select("MODULE_ID = '" + dtleftmenu.Rows[i][2].ToString() + "'"))[0][6].ToString().ToUpper().Equals("TRUE")))
+                            //{
                                 childnode.NavigateUrl = dtleftmenu.Rows[i][4].ToString();
-                            }
-                            else
-                            {
-                                childnode.NavigateUrl = "javascript:alert('無此權限');";
+                            //}
+                            //else
+                            //{
+                            //    childnode.NavigateUrl = "javascript:alert('無此權限');";
 
-                            }
+                            //}
                         }
                         catch
                         {
@@ -123,7 +124,8 @@ public partial class masterPage_HR360_Child : System.Web.UI.MasterPage
             }
         }
         //add boss section
-        if (Session["user_id"].ToString().ToUpper() == "CHRISSY" || Session["user_id"].ToString().ToUpper() == "KELVEN")
+        if (Session["user_id"].ToString().ToUpper() == "CHRISSY" || Session["user_id"].ToString().ToUpper() == "KELVEN"
+            || Session["user_id"].ToString().ToUpper() == "0006" || Session["user_id"].ToString().ToUpper() == "0007")
         {
             TreeNode node = new TreeNode();
             TreeNode childnode = new TreeNode();
@@ -180,7 +182,14 @@ public partial class masterPage_HR360_Child : System.Web.UI.MasterPage
     }    
     protected void btnAdminPage_Click(object sender, ImageClickEventArgs e)
     {
-        Response.Redirect("~/hr360/admin_main.aspx");
+        if (((DataTable)Session["permission"]).Rows[0]["SUPER_USER"].ToString().Trim() == "1")
+        {
+            Response.Redirect("~/hr360/admin_main.aspx");
+        }
+        else
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('無此權限');", true);
+        }
     }
     protected void TreeView1_Load(object sender, EventArgs e)
     {

@@ -98,18 +98,22 @@ public partial class login : System.Web.UI.Page
         DataTable dt = new DataTable();
         using (SqlConnection conn = new SqlConnection(connectionString))
         {
-            SqlCommand cmdSearch = new SqlCommand(
-"SELECT [HR360_BI03_A].[ID] CATEGORY_ID, [HR360_BI03_A].[IMAGE_URL] CATEGORY_IMGURL, [HR360_BI03_B].[ID] MODULE_ID, [HR360_BI03_B].[IMAGE_URL] MODULE_IMGURL, [HR360_BI03_B].[URL] MODULE_URL, [HR360_BI01_A].[SUPER_USER], [HR360_BI02_A].[EXECUTE], [HR360_BI02_A].[ADD], [HR360_BI02_A].[SEARCH], [HR360_BI02_A].[EDIT], [HR360_BI02_A].[OUTPUT], [HR360_BI02_A].[DELETE]"
-+ " ,[HR360_BI02_A].[USER_ID]"
-+ " FROM [HR360_BI02_A]"
-+ " LEFT JOIN [HR360_BI01_A] ON [HR360_BI02_A].[USER_ID] = [HR360_BI01_A].[ID]"
-+ " LEFT JOIN [HR360_BI03_B] ON [HR360_BI02_A].[MODULE_ID] = [HR360_BI03_B].[ID]"
-+ " LEFT JOIN [HR360_BI03_A] ON [HR360_BI03_B].[CATEGORY_ID] = [HR360_BI03_A].[ID]"
-+ " WHERE [HR360_BI02_A].[USER_ID] = @USER_ID"
-+ " ORDER BY [HR360_BI03_A].[SEQ_NO], [HR360_BI03_B].[ID]", conn);
-            cmdSearch.Parameters.AddWithValue("@USER_ID", userId.ToUpper());
+            string query = "SELECT [SUPER_USER]"
+                        + " FROM [HR360_BI01_A]"
+                        + " WHERE [ID]=@USER_ID";
+            SqlCommand cmd = new SqlCommand(query, conn);
+//            SqlCommand cmdSearch = new SqlCommand(
+//"SELECT [HR360_BI03_A].[ID] CATEGORY_ID, [HR360_BI03_A].[IMAGE_URL] CATEGORY_IMGURL, [HR360_BI03_B].[ID] MODULE_ID, [HR360_BI03_B].[IMAGE_URL] MODULE_IMGURL, [HR360_BI03_B].[URL] MODULE_URL, [HR360_BI01_A].[SUPER_USER], [HR360_BI02_A].[EXECUTE], [HR360_BI02_A].[ADD], [HR360_BI02_A].[SEARCH], [HR360_BI02_A].[EDIT], [HR360_BI02_A].[OUTPUT], [HR360_BI02_A].[DELETE]"
+//+ " ,[HR360_BI02_A].[USER_ID]"
+//+ " FROM [HR360_BI02_A]"
+//+ " LEFT JOIN [HR360_BI01_A] ON [HR360_BI02_A].[USER_ID] = [HR360_BI01_A].[ID]"
+//+ " LEFT JOIN [HR360_BI03_B] ON [HR360_BI02_A].[MODULE_ID] = [HR360_BI03_B].[ID]"
+//+ " LEFT JOIN [HR360_BI03_A] ON [HR360_BI03_B].[CATEGORY_ID] = [HR360_BI03_A].[ID]"
+//+ " WHERE [HR360_BI02_A].[USER_ID] = @USER_ID"
+//+ " ORDER BY [HR360_BI03_A].[SEQ_NO], [HR360_BI03_B].[ID]", conn);
+            cmd.Parameters.AddWithValue("@USER_ID", userId.ToUpper());
             conn.Open();
-            SqlDataAdapter da = new SqlDataAdapter(cmdSearch);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
         }
 

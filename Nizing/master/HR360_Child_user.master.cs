@@ -100,10 +100,13 @@ public partial class masterPage_HR360_Child_user : System.Web.UI.MasterPage
 
     protected void btnAdminPage_Click(object sender, ImageClickEventArgs e)
     {
-        Response.Redirect("~/hr360/admin_main.aspx");
-    }
-    protected void btnReport_Click(object sender, ImageClickEventArgs e)
-    {
-
+        if (((DataTable)Session["permission"]).Rows[0]["SUPER_USER"].ToString().Trim() == "1")
+        {
+            Response.Redirect("~/hr360/admin_main.aspx");
+        }
+        else
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('無此權限');", true);
+        }
     }
 }
