@@ -8,7 +8,10 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="top_menu" Runat="Server">
-    <div id="top-menu">
+    <div>
+        暫時關閉，目前權限僅有admin與非admin，在帳號建立作業設定
+    </div>
+<%--    <div id="top-menu">
         <div class="first">
             <asp:ImageButton ID="toplink_add" runat="server" ImageUrl="~/hr360/image/icon/top_menu/add-1.png" OnClick="toplink_add_Click" onmouseover="this.src='image/icon/top_menu/add-2.png'" onmouseout="this.src='image/icon/top_menu/add-1.png'" />
             <asp:ImageButton ID="toplink_search" runat="server" ImageUrl="~/hr360/image/icon/top_menu/search-1.png" PostBackUrl="#search_window" OnClick="toplink_search_Click" onmouseover="this.src='image/icon/top_menu/search-2.png'" onmouseout="this.src='image/icon/top_menu/search-1.png'" />
@@ -28,10 +31,10 @@
             <asp:ImageButton ID="toplink_refresh" runat="server" ImageUrl="~/hr360/image/icon/top_menu/refresh-1.png" PostBackUrl="BI02.aspx" OnClick="toplink_refresh_Click" onmouseover="this.src='image/icon/top_menu/refresh-2.png'" onmouseout="this.src='image/icon/top_menu/refresh-1.png'" />
             <asp:ImageButton ID="toplink_copy" runat="server" ImageUrl="~/hr360/image/icon/top_menu/copy-1.png" OnClick="toplink_copy_Click" onmouseover="this.src='image/icon/top_menu/copy-2.png'" onmouseout="this.src='image/icon/top_menu/copy-1.png'" />
         </div>
-    </div>
+    </div>--%>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="page_content" Runat="Server">
-    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+<%--    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
         <ContentTemplate>
             <div id="Authorization_Setup">
                 <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" CssClass="MyTabStyle">
@@ -255,5 +258,5 @@ LEFT JOIN [USER_PERMISSION] ON [HR360_BI03_B].[ID] = [USER_PERMISSION].[MODULE_I
                 <asp:PostBackTrigger ControlID="grdUser_Id" />
             </Triggers>
         </asp:UpdatePanel>
-    </div>
+    </div>--%>
 </asp:Content>

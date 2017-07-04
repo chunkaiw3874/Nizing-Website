@@ -47,6 +47,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
             txtUserId.Text = "";
             txtPassword.Text = "";
             txtReenterPassword.Text = "";
+            chkSuperUser.Enabled = false;
             chkDisabled.Enabled = false;
             txtDisabledDate.ReadOnly = true;
             txtDisabledDate.CssClass = "read-only";
@@ -80,6 +81,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
         txtUserId.Text = "";
         txtPassword.Text = "";
         txtReenterPassword.Text = "";
+        chkSuperUser.Enabled = true;
         chkDisabled.Enabled = true;
         btnErpId_Search.Enabled = true;
         txtErpUserId.Text = "";
@@ -150,7 +152,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
     }
     protected void btnSearch_Search_Click(object sender, EventArgs e)
     {
-        string query = "SELECT [ERP_ID] N'ERP員工代號', [NAME] N'姓名', [ID] N'使用者代號', [PASSWORD] N'密碼', [EMAIL] N'EMAIL', [LINE_ID] N'LINE ID', [DISABLED] N'帳號失效', [DISABLEDDATE] N'失效日期', [CREATEDATE] N'建立日期', [CREATOR] N'建立者', [MODIFIEDDATE] N'修改日期', [MODIFIER] N'修改者' FROM [HR360_BI01_A]";
+        string query = "SELECT [ERP_ID] N'ERP員工代號', [NAME] N'姓名', [ID] N'使用者代號', [PASSWORD] N'密碼', [EMAIL] N'EMAIL', [LINE_ID] N'LINE ID', [DISABLED] N'帳號失效', [DISABLEDDATE] N'失效日期', [SUPER_USER] N'超級使用者', [CREATEDATE] N'建立日期', [CREATOR] N'建立者', [MODIFIEDDATE] N'修改日期', [MODIFIER] N'修改者' FROM [HR360_BI01_A]";
         string query_condition = "";
         try
         {
@@ -198,6 +200,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
         txtEmail.CssClass = "read-only";
         txtLineId.ReadOnly = true;
         txtLineId.CssClass = "read-only";
+        chkSuperUser.Enabled = false;
         chkDisabled.Enabled = false;
         btnErpId_Search.Enabled = false;
         txtName.ReadOnly = true;
@@ -217,6 +220,14 @@ public partial class hr360_BI01 : System.Web.UI.Page
             chkDisabled.Checked = false;
         }        
         txtDisabledDate.Text = Server.HtmlDecode(grdResult.SelectedRow.Cells[7].Text);
+        if ((grdResult.SelectedRow.Cells[8].Controls[0] as CheckBox).Checked == true)
+        {
+            chkSuperUser.Checked = true;
+        }
+        else
+        {
+            chkSuperUser.Checked = false;
+        } 
         
     }
         //
@@ -242,6 +253,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
             txtEmail.CssClass = "";
             txtLineId.ReadOnly = false;
             txtLineId.CssClass = "";
+            chkSuperUser.Enabled = true;
             chkDisabled.Enabled = true;
             btnErpId_Search.Enabled = true;
             if (txtName.Text.Trim() == "")
@@ -375,6 +387,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
                             txtEmail.CssClass = "";
                             txtLineId.ReadOnly = false;
                             txtLineId.CssClass = "";
+                            chkSuperUser.Enabled = true;
                             chkDisabled.Enabled = true;
                             btnErpId_Search.Enabled = true;
                             if (txtName.Text.Trim() == "")
@@ -391,7 +404,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
                         else
                         {
                             reader.Close();
-                            SqlCommand cmd = new SqlCommand("INSERT INTO [HR360_BI01_A] VALUES (GETDATE(),@CREATOR,GETDATE(),@MODIFIER,@USERID,@ERPID,@NAME,@PASSWORD,@EMAIL,@LINEID,N'0',@DISABLED,@DISABLEDDATE,N'0')", conn);
+                            SqlCommand cmd = new SqlCommand("INSERT INTO [HR360_BI01_A] VALUES (GETDATE(),@CREATOR,GETDATE(),@MODIFIER,@USERID,@ERPID,@NAME,@PASSWORD,@EMAIL,@LINEID,N'0',@DISABLED,@DISABLEDDATE,@SUPERUSER)", conn);
                             cmd.Parameters.AddWithValue("@CREATOR", Session["user_id"]);
                             cmd.Parameters.AddWithValue("@MODIFIER", Session["user_id"]);
                             cmd.Parameters.AddWithValue("@USERID", txtUserId.Text.ToUpper().Trim());
@@ -408,6 +421,14 @@ public partial class hr360_BI01 : System.Web.UI.Page
                             {
                                 cmd.Parameters.AddWithValue("@DISABLED", 0);
                             }
+                            if (chkSuperUser.Checked == true)
+                            {
+                                cmd.Parameters.AddWithValue("@SUPERUSER", 1);
+                            }
+                            else
+                            {
+                                cmd.Parameters.AddWithValue("@SUPERUSER", 0);
+                            }
                             cmd.Parameters.AddWithValue("@DISABLEDDATE", txtDisabledDate.Text.Trim());
                             cmd.ExecuteNonQuery();
                             lblErrorMessage.Text = "";
@@ -421,6 +442,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
                             txtEmail.CssClass = "read-only";
                             txtLineId.ReadOnly = true;
                             txtLineId.CssClass = "read-only";
+                            chkSuperUser.Enabled = false;
                             chkDisabled.Enabled = false;
                             btnErpId_Search.Enabled = false;
                             txtName.ReadOnly = true;
@@ -483,7 +505,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
                     using (SqlConnection conn = new SqlConnection(connectionString))
                     {
                         conn.Open();
-                        SqlCommand cmd = new SqlCommand("UPDATE [HR360_BI01_A] SET [MODIFIEDDATE]=GETDATE(),[MODIFIER]=@MODIFIER,[ERP_ID]=@ERPID,[NAME]=@NAME,[PASSWORD]=@PASSWORD,[EMAIL]=@EMAIL,[LINE_ID]=@LINEID,[DISABLED]=@DISABLED,[DISABLEDDATE]=@DISABLEDDATE WHERE ID=@USERID", conn);
+                        SqlCommand cmd = new SqlCommand("UPDATE [HR360_BI01_A] SET [MODIFIEDDATE]=GETDATE(),[MODIFIER]=@MODIFIER,[ERP_ID]=@ERPID,[NAME]=@NAME,[PASSWORD]=@PASSWORD,[EMAIL]=@EMAIL,[LINE_ID]=@LINEID,[DISABLED]=@DISABLED,[DISABLEDDATE]=@DISABLEDDATE, [SUPER_USER]=@SUPERUSER WHERE ID=@USERID", conn);
                         cmd.Parameters.AddWithValue("@MODIFIER", Session["user_id"]);
                         cmd.Parameters.AddWithValue("@USERID", txtUserId.Text.ToUpper().Trim());
                         cmd.Parameters.AddWithValue("@ERPID", txtErpUserId.Text.Trim());
@@ -500,6 +522,14 @@ public partial class hr360_BI01 : System.Web.UI.Page
                             cmd.Parameters.AddWithValue("@DISABLED", 0);
                         }
                         cmd.Parameters.AddWithValue("@DISABLEDDATE", txtDisabledDate.Text.Trim());
+                        if (chkSuperUser.Checked == true)
+                        {
+                            cmd.Parameters.AddWithValue("@SUPERUSER", 1);
+                        }
+                        else
+                        {
+                            cmd.Parameters.AddWithValue("@SUPERUSER", 0);
+                        }
                         cmd.ExecuteNonQuery();
                         lblErrorMessage.Text = "";
                     }
@@ -513,6 +543,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
                     txtEmail.CssClass = "read-only";
                     txtLineId.ReadOnly = true;
                     txtLineId.CssClass = "read-only";
+                    chkSuperUser.Enabled = false;
                     chkDisabled.Enabled = false;
                     btnErpId_Search.Enabled = false;
                     txtName.ReadOnly = true;
@@ -557,6 +588,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
         txtEmail.CssClass = "read-only";
         txtLineId.ReadOnly = true;
         txtLineId.CssClass = "read-only";
+        chkSuperUser.Enabled = false;
         chkDisabled.Enabled = false;
         btnErpId_Search.Enabled = false;
         txtName.ReadOnly = true;
@@ -622,6 +654,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
                                 txtReenterPassword.Text = "";
                                 txtEmail.Text = "";
                                 txtLineId.Text = "";
+                                chkSuperUser.Enabled = false;
                                 chkDisabled.Checked = false;
                                 txtDisabledDate.Text = "";
                                 txtErpUserId.Text = "";
@@ -651,6 +684,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
             txtEmail.CssClass = "read-only";
             txtLineId.ReadOnly = true;
             txtLineId.CssClass = "read-only";
+            chkSuperUser.Enabled = false;
             chkDisabled.Enabled = false;
             btnErpId_Search.Enabled = false;
             txtName.ReadOnly = true;
@@ -697,6 +731,8 @@ public partial class hr360_BI01 : System.Web.UI.Page
         txtLineId.Text = ViewState["txtLineId"].ToString();
         txtLineId.ReadOnly = true;
         txtLineId.CssClass = "read-only";
+        chkSuperUser.Checked = false;
+        chkSuperUser.Enabled = false;
         chkDisabled.Checked = false;
         chkDisabled.Enabled = false;
         txtDisabledDate.Text = "";

@@ -50,6 +50,22 @@
                                             <asp:TextBox ID="txtUserId" runat="server" MaxLength="20" placeholder="最大字元數量20" BorderColor="#a9caff" Font-Size="12"></asp:TextBox>
                                         </td>
                                         <td>
+                                            超級使用者
+                                        </td>
+                                        <td>
+                                            <asp:CheckBox ID="chkSuperUser" runat="server" Checked="false" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            密碼
+                                        </td>
+                                        <td>
+                                            <%--<asp:TextBox ID="txtPassword" runat="server" MaxLength="20" placeholder="最大字元數量20" BorderColor="#a9caff" Font-Size="12" TextMode="Password"></asp:TextBox>--%>
+                                            <!--可看到密碼-->
+                                            <asp:TextBox ID="txtPassword" runat="server" MaxLength="20" placeholder="最大字元數量20" BorderColor="#a9caff" Font-Size="12"></asp:TextBox>
+                                        </td>
+                                        <td>
                                             失效帳號
                                         </td>
                                         <td>
@@ -58,26 +74,18 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            密碼
+                                            確認密碼
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtPassword" runat="server" MaxLength="20" placeholder="最大字元數量20" BorderColor="#a9caff" Font-Size="12" TextMode="Password"></asp:TextBox>
+                                            <%--<asp:TextBox ID="txtReenterPassword" runat="server" MaxLength="20" placeholder="確認密碼" BorderColor="#a9caff" Font-Size="12" TextMode="Password"></asp:TextBox>--%>
                                             <!--可看到密碼-->
-                                            <%--<asp:TextBox ID="txtPassword" runat="server" MaxLength="20" placeholder="最大字元數量20" BorderColor="#a9caff" Font-Size="12"></asp:TextBox>--%>
+                                            <asp:TextBox ID="txtReenterPassword" runat="server" MaxLength="20" placeholder="確認密碼" BorderColor="#a9caff" Font-Size="12"></asp:TextBox>
                                         </td>
                                         <td>
                                             失效日期
                                         </td>
                                         <td>
                                             <asp:TextBox ID="txtDisabledDate" runat="server"  BorderColor="#a9caff" Font-Size="12"></asp:TextBox>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            確認密碼
-                                        </td>
-                                        <td>
-                                            <asp:TextBox ID="txtReenterPassword" runat="server" MaxLength="20" placeholder="確認密碼" BorderColor="#a9caff" Font-Size="12" TextMode="Password"></asp:TextBox>
                                         </td>
                                     </tr>
                                     <tr>
