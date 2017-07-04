@@ -583,7 +583,7 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
         //計算出勤率
         //每年須手動修改需出勤時數 edit annually
         double onJobHour = 0;
-        if (lblEmpID.Text.Trim() == "0010")
+        if (lblEmpID.Text.Trim() == "0010") //小倩
         {
             onJobHour = 2099.5;
             lblOnJobPercent.Text = (Math.Round(100 * (1 - (dayOffSum / onJobHour)), 2, MidpointRounding.AwayFromZero)).ToString();
@@ -594,19 +594,19 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
             lblEmpID.Text.Trim() == "0039" || lblEmpID.Text.Trim() == "0049" || lblEmpID.Text.Trim() == "0057" ||
             lblEmpID.Text.Trim() == "0062" || lblEmpID.Text.Trim() == "0066" || lblEmpID.Text.Trim() == "0067" ||
             lblEmpID.Text.Trim() == "0079" || lblEmpID.Text.Trim() == "0093" || lblEmpID.Text.Trim() == "0094" ||
-            lblEmpID.Text.Trim() == "0096")
+            lblEmpID.Text.Trim() == "0096") //廠內人員
         {
             onJobHour = 1984;
             lblOnJobPercent.Text = (Math.Round(100 * (1 - (dayOffSum / onJobHour)), 2, MidpointRounding.AwayFromZero)).ToString();
         }
         else if (lblEmpID.Text.Trim() == "0005" || lblEmpID.Text.Trim() == "0015" || lblEmpID.Text.Trim() == "0031" ||
             lblEmpID.Text.Trim() == "0047" || lblEmpID.Text.Trim() == "0063" || lblEmpID.Text.Trim() == "0074" ||
-            lblEmpID.Text.Trim() == "0080" || lblEmpID.Text.Trim() == "0085" || lblEmpID.Text.Trim() == "0023")
+            lblEmpID.Text.Trim() == "0080" || lblEmpID.Text.Trim() == "0085" || lblEmpID.Text.Trim() == "0023") //辦公室人員
         {
             onJobHour = 1976;
             lblOnJobPercent.Text = (Math.Round(100 * (1 - (dayOffSum / onJobHour)), 2, MidpointRounding.AwayFromZero)).ToString();
         }
-        else if (lblEmpID.Text.Trim() == "0103")
+        else if (lblEmpID.Text.Trim() == "0103")    //以下皆為未滿一年人員
         {
             onJobHour = 1616;
             lblOnJobPercent.Text = (Math.Round(100 * (1 - (dayOffSum / onJobHour)), 2, MidpointRounding.AwayFromZero)).ToString();
