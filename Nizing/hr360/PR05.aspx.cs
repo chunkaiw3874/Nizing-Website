@@ -487,25 +487,25 @@ public partial class hr360_PR05 : System.Web.UI.Page
         lblCategory_Name.Text = Server.HtmlDecode(grdCategory_Id.SelectedRow.Cells[1].Text);
         lblCategory_Memo.Text = Server.HtmlDecode(grdCategory_Id.SelectedRow.Cells[2].Text);
     }
-    protected DataTable getPagePermission(string pageName)
-    {
-        try
-        {
-            DataRow[] dr = ((Session["permission"]) as DataTable).Select("MODULE_ID = '" + pageName + "'");
-            DataTable dt = ((Session["permission"]) as DataTable).Clone();
-            foreach (DataRow row in dr)
-            {
-                dt.ImportRow(row);
-            }
-            return dt;
-        }
-        catch
-        {
-            DataTable dtnothing = new DataTable();
-            Response.Redirect("~/hr360/no_permission.aspx");
-            return dtnothing;
-        }
-    }
+    //protected DataTable getPagePermission(string pageName)
+    //{
+    //    try
+    //    {
+    //        DataRow[] dr = ((Session["permission"]) as DataTable).Select("MODULE_ID = '" + pageName + "'");
+    //        DataTable dt = ((Session["permission"]) as DataTable).Clone();
+    //        foreach (DataRow row in dr)
+    //        {
+    //            dt.ImportRow(row);
+    //        }
+    //        return dt;
+    //    }
+    //    catch
+    //    {
+    //        DataTable dtnothing = new DataTable();
+    //        Response.Redirect("~/hr360/no_permission.aspx");
+    //        return dtnothing;
+    //    }
+    //}
     protected override void Render(System.Web.UI.HtmlTextWriter writer)
     {
 
@@ -530,35 +530,35 @@ public partial class hr360_PR05 : System.Web.UI.Page
     }
     private void Load_toplink(string eventName)
     {
-        DataTable dt = getPagePermission(System.IO.Path.GetFileName(Request.PhysicalPath).Remove(System.IO.Path.GetFileName(Request.PhysicalPath).Length - 5));
+        //DataTable dt = getPagePermission(System.IO.Path.GetFileName(Request.PhysicalPath).Remove(System.IO.Path.GetFileName(Request.PhysicalPath).Length - 5));
 
         try
         {
-            if (dt.Rows.Count != 0)
-            {
+            //if (dt.Rows.Count != 0)
+            //{
                 if (eventName == null)
                 {
                     //enable and disable toplink base on user permission
-                    if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][7].ToString().ToUpper().Equals("TRUE"))
-                    {
+                    //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][7].ToString().ToUpper().Equals("TRUE"))
+                    //{
                         toplink_add.Enabled = true;
                         toplink_add.CssClass = "";
-                    }
-                    else
-                    {
-                        toplink_add.Enabled = false;
-                        toplink_add.CssClass = "disabled";
-                    }
-                    if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][8].ToString().ToUpper().Equals("TRUE"))
-                    {
+                    //}
+                    //else
+                    //{
+                    //    toplink_add.Enabled = false;
+                    //    toplink_add.CssClass = "disabled";
+                    //}
+                    //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][8].ToString().ToUpper().Equals("TRUE"))
+                    //{
                         toplink_search.Enabled = true;
                         toplink_search.CssClass = "";
-                    }
-                    else
-                    {
-                        toplink_search.Enabled = false;
-                        toplink_search.CssClass = "disabled";
-                    }
+                    //}
+                    //else
+                    //{
+                    //    toplink_search.Enabled = false;
+                    //    toplink_search.CssClass = "disabled";
+                    //}
                     toplink_edit.Enabled = false;
                     toplink_edit.CssClass = "disabled";
                     toplink_delete.Enabled = false;
@@ -614,26 +614,26 @@ public partial class hr360_PR05 : System.Web.UI.Page
                 }
                 else if (eventName == "btnSearch_Search")
                 {
-                    if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][7].ToString().ToUpper().Equals("TRUE"))
-                    {
+                    //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][7].ToString().ToUpper().Equals("TRUE"))
+                    //{
                         toplink_add.Enabled = true;
                         toplink_add.CssClass = "";
-                    }
-                    else
-                    {
-                        toplink_add.Enabled = false;
-                        toplink_add.CssClass = "disabled";
-                    }
-                    if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][8].ToString().ToUpper().Equals("TRUE"))
-                    {
+                    //}
+                    //else
+                    //{
+                    //    toplink_add.Enabled = false;
+                    //    toplink_add.CssClass = "disabled";
+                    //}
+                    //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][8].ToString().ToUpper().Equals("TRUE"))
+                    //{
                         toplink_search.Enabled = true;
                         toplink_search.CssClass = "";
-                    }
-                    else
-                    {
-                        toplink_search.Enabled = false;
-                        toplink_search.CssClass = "disabled";
-                    }
+                    //}
+                    //else
+                    //{
+                    //    toplink_search.Enabled = false;
+                    //    toplink_search.CssClass = "disabled";
+                    //}
                     toplink_save.Enabled = false;
                     toplink_save.CssClass = "disabled";
                     toplink_cancel.Enabled = false;
@@ -662,36 +662,36 @@ public partial class hr360_PR05 : System.Web.UI.Page
                     }
                     else
                     {
-                        if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][9].ToString().ToUpper().Equals("TRUE"))
-                        {
+                        //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][9].ToString().ToUpper().Equals("TRUE"))
+                        //{
                             toplink_edit.Enabled = true;
                             toplink_edit.CssClass = "";
-                        }
-                        else
-                        {
-                            toplink_edit.Enabled = false;
-                            toplink_edit.CssClass = "disabled";
-                        }
-                        if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][10].ToString().ToUpper().Equals("TRUE"))
-                        {
+                        //}
+                        //else
+                        //{
+                        //    toplink_edit.Enabled = false;
+                        //    toplink_edit.CssClass = "disabled";
+                        //}
+                        //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][10].ToString().ToUpper().Equals("TRUE"))
+                        //{
                             toplink_print.Enabled = true;
                             toplink_print.CssClass = "";
-                        }
-                        else
-                        {
-                            toplink_print.Enabled = false;
-                            toplink_print.CssClass = "disabled";
-                        }
-                        if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][11].ToString().ToUpper().Equals("TRUE"))
-                        {
+                        //}
+                        //else
+                        //{
+                        //    toplink_print.Enabled = false;
+                        //    toplink_print.CssClass = "disabled";
+                        //}
+                        //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][11].ToString().ToUpper().Equals("TRUE"))
+                        //{
                             toplink_delete.Enabled = true;
                             toplink_delete.CssClass = "";
-                        }
-                        else
-                        {
-                            toplink_delete.Enabled = false;
-                            toplink_delete.CssClass = "disabled";
-                        }
+                        //}
+                        //else
+                        //{
+                        //    toplink_delete.Enabled = false;
+                        //    toplink_delete.CssClass = "disabled";
+                        //}
                         toplink_first_record.Enabled = true;
                         toplink_first_record.CssClass = "";
                         toplink_previous.Enabled = true;
@@ -702,16 +702,16 @@ public partial class hr360_PR05 : System.Web.UI.Page
                         toplink_last_record.CssClass = "";
                         toplink_refresh.Enabled = true;
                         toplink_refresh.CssClass = "";
-                        if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][7].ToString().ToUpper().Equals("TRUE"))
-                        {
+                        //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][7].ToString().ToUpper().Equals("TRUE"))
+                        //{
                             toplink_copy.Enabled = true;
                             toplink_copy.CssClass = "";
-                        }
-                        else
-                        {
-                            toplink_copy.Enabled = false;
-                            toplink_copy.CssClass = "disabled";
-                        }
+                        //}
+                        //else
+                        //{
+                        //    toplink_copy.Enabled = false;
+                        //    toplink_copy.CssClass = "disabled";
+                        //}
                     }
                 }
                 else if (eventName == "toplink_edit")
@@ -745,26 +745,26 @@ public partial class hr360_PR05 : System.Web.UI.Page
                 }
                 else if (eventName == "toplink_save")
                 {
-                    if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][7].ToString().ToUpper().Equals("TRUE"))
-                    {
+                    //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][7].ToString().ToUpper().Equals("TRUE"))
+                    //{
                         toplink_add.Enabled = true;
                         toplink_add.CssClass = "";
-                    }
-                    else
-                    {
-                        toplink_add.Enabled = false;
-                        toplink_add.CssClass = "disabled";
-                    }
-                    if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][8].ToString().ToUpper().Equals("TRUE"))
-                    {
+                    //}
+                    //else
+                    //{
+                    //    toplink_add.Enabled = false;
+                    //    toplink_add.CssClass = "disabled";
+                    //}
+                    //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][8].ToString().ToUpper().Equals("TRUE"))
+                    //{
                         toplink_search.Enabled = true;
                         toplink_search.CssClass = "";
-                    }
-                    else
-                    {
-                        toplink_search.Enabled = false;
-                        toplink_search.CssClass = "disabled";
-                    }
+                    //}
+                    //else
+                    //{
+                    //    toplink_search.Enabled = false;
+                    //    toplink_search.CssClass = "disabled";
+                    //}
                     toplink_save.Enabled = false;
                     toplink_save.CssClass = "disabled";
                     toplink_cancel.Enabled = false;
@@ -793,36 +793,36 @@ public partial class hr360_PR05 : System.Web.UI.Page
                     }
                     else
                     {
-                        if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][9].ToString().ToUpper().Equals("TRUE"))
-                        {
+                        //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][9].ToString().ToUpper().Equals("TRUE"))
+                        //{
                             toplink_edit.Enabled = true;
                             toplink_edit.CssClass = "";
-                        }
-                        else
-                        {
-                            toplink_edit.Enabled = false;
-                            toplink_edit.CssClass = "disabled";
-                        }
-                        if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][10].ToString().ToUpper().Equals("TRUE"))
-                        {
+                        //}
+                        //else
+                        //{
+                        //    toplink_edit.Enabled = false;
+                        //    toplink_edit.CssClass = "disabled";
+                        //}
+                        //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][10].ToString().ToUpper().Equals("TRUE"))
+                        //{
                             toplink_print.Enabled = true;
                             toplink_print.CssClass = "";
-                        }
-                        else
-                        {
-                            toplink_print.Enabled = false;
-                            toplink_print.CssClass = "disabled";
-                        }
-                        if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][11].ToString().ToUpper().Equals("TRUE"))
-                        {
+                        //}
+                        //else
+                        //{
+                        //    toplink_print.Enabled = false;
+                        //    toplink_print.CssClass = "disabled";
+                        //}
+                        //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][11].ToString().ToUpper().Equals("TRUE"))
+                        //{
                             toplink_delete.Enabled = true;
                             toplink_delete.CssClass = "";
-                        }
-                        else
-                        {
-                            toplink_delete.Enabled = false;
-                            toplink_delete.CssClass = "disabled";
-                        }
+                        //}
+                        //else
+                        //{
+                        //    toplink_delete.Enabled = false;
+                        //    toplink_delete.CssClass = "disabled";
+                        //}
                         toplink_first_record.Enabled = true;
                         toplink_first_record.CssClass = "";
                         toplink_previous.Enabled = true;
@@ -833,40 +833,40 @@ public partial class hr360_PR05 : System.Web.UI.Page
                         toplink_last_record.CssClass = "";
                         toplink_refresh.Enabled = true;
                         toplink_refresh.CssClass = "";
-                        if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][7].ToString().ToUpper().Equals("TRUE"))
-                        {
+                        //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][7].ToString().ToUpper().Equals("TRUE"))
+                        //{
                             toplink_copy.Enabled = true;
                             toplink_copy.CssClass = "";
-                        }
-                        else
-                        {
-                            toplink_copy.Enabled = false;
-                            toplink_copy.CssClass = "disabled";
-                        }
+                        //}
+                        //else
+                        //{
+                        //    toplink_copy.Enabled = false;
+                        //    toplink_copy.CssClass = "disabled";
+                        //}
                     }
                 }
                 else if (eventName == "toplink_cancel")
                 {
-                    if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][7].ToString().ToUpper().Equals("TRUE"))
-                    {
+                    //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][7].ToString().ToUpper().Equals("TRUE"))
+                    //{
                         toplink_add.Enabled = true;
                         toplink_add.CssClass = "";
-                    }
-                    else
-                    {
-                        toplink_add.Enabled = false;
-                        toplink_add.CssClass = "disabled";
-                    }
-                    if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][8].ToString().ToUpper().Equals("TRUE"))
-                    {
+                    //}
+                    //else
+                    //{
+                    //    toplink_add.Enabled = false;
+                    //    toplink_add.CssClass = "disabled";
+                    //}
+                    //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][8].ToString().ToUpper().Equals("TRUE"))
+                    //{
                         toplink_search.Enabled = true;
                         toplink_search.CssClass = "";
-                    }
-                    else
-                    {
-                        toplink_search.Enabled = false;
-                        toplink_search.CssClass = "disabled";
-                    }
+                    //}
+                    //else
+                    //{
+                    //    toplink_search.Enabled = false;
+                    //    toplink_search.CssClass = "disabled";
+                    //}
                     toplink_save.Enabled = false;
                     toplink_save.CssClass = "disabled";
                     toplink_cancel.Enabled = false;
@@ -895,36 +895,36 @@ public partial class hr360_PR05 : System.Web.UI.Page
                     }
                     else
                     {
-                        if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][9].ToString().ToUpper().Equals("TRUE"))
-                        {
+                        //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][9].ToString().ToUpper().Equals("TRUE"))
+                        //{
                             toplink_edit.Enabled = true;
                             toplink_edit.CssClass = "";
-                        }
-                        else
-                        {
-                            toplink_edit.Enabled = false;
-                            toplink_edit.CssClass = "disabled";
-                        }
-                        if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][10].ToString().ToUpper().Equals("TRUE"))
-                        {
+                        //}
+                        //else
+                        //{
+                        //    toplink_edit.Enabled = false;
+                        //    toplink_edit.CssClass = "disabled";
+                        //}
+                        //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][10].ToString().ToUpper().Equals("TRUE"))
+                        //{
                             toplink_print.Enabled = true;
                             toplink_print.CssClass = "";
-                        }
-                        else
-                        {
-                            toplink_print.Enabled = false;
-                            toplink_print.CssClass = "disabled";
-                        }
-                        if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][11].ToString().ToUpper().Equals("TRUE"))
-                        {
+                        //}
+                        //else
+                        //{
+                        //    toplink_print.Enabled = false;
+                        //    toplink_print.CssClass = "disabled";
+                        //}
+                        //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][11].ToString().ToUpper().Equals("TRUE"))
+                        //{
                             toplink_delete.Enabled = true;
                             toplink_delete.CssClass = "";
-                        }
-                        else
-                        {
-                            toplink_delete.Enabled = false;
-                            toplink_delete.CssClass = "disabled";
-                        }
+                        //}
+                        //else
+                        //{
+                        //    toplink_delete.Enabled = false;
+                        //    toplink_delete.CssClass = "disabled";
+                        //}
                         toplink_first_record.Enabled = true;
                         toplink_first_record.CssClass = "";
                         toplink_previous.Enabled = true;
@@ -935,40 +935,40 @@ public partial class hr360_PR05 : System.Web.UI.Page
                         toplink_last_record.CssClass = "";
                         toplink_refresh.Enabled = true;
                         toplink_refresh.CssClass = "";
-                        if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][7].ToString().ToUpper().Equals("TRUE"))
-                        {
+                        //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][7].ToString().ToUpper().Equals("TRUE"))
+                        //{
                             toplink_copy.Enabled = true;
                             toplink_copy.CssClass = "";
-                        }
-                        else
-                        {
-                            toplink_copy.Enabled = false;
-                            toplink_copy.CssClass = "disabled";
-                        }
+                        //}
+                        //else
+                        //{
+                        //    toplink_copy.Enabled = false;
+                        //    toplink_copy.CssClass = "disabled";
+                        //}
                     }
                 }
                 else if (eventName == "toplink_delete")
                 {
-                    if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][7].ToString().ToUpper().Equals("TRUE"))
-                    {
+                    //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][7].ToString().ToUpper().Equals("TRUE"))
+                    //{
                         toplink_add.Enabled = true;
                         toplink_add.CssClass = "";
-                    }
-                    else
-                    {
-                        toplink_add.Enabled = false;
-                        toplink_add.CssClass = "disabled";
-                    }
-                    if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][8].ToString().ToUpper().Equals("TRUE"))
-                    {
+                    //}
+                    //else
+                    //{
+                    //    toplink_add.Enabled = false;
+                    //    toplink_add.CssClass = "disabled";
+                    //}
+                    //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][8].ToString().ToUpper().Equals("TRUE"))
+                    //{
                         toplink_search.Enabled = true;
                         toplink_search.CssClass = "";
-                    }
-                    else
-                    {
-                        toplink_search.Enabled = false;
-                        toplink_search.CssClass = "disabled";
-                    }
+                    //}
+                    //else
+                    //{
+                    //    toplink_search.Enabled = false;
+                    //    toplink_search.CssClass = "disabled";
+                    //}
                     toplink_save.Enabled = false;
                     toplink_save.CssClass = "disabled";
                     toplink_cancel.Enabled = false;
@@ -997,36 +997,36 @@ public partial class hr360_PR05 : System.Web.UI.Page
                     }
                     else
                     {
-                        if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][9].ToString().ToUpper().Equals("TRUE"))
-                        {
+                        //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][9].ToString().ToUpper().Equals("TRUE"))
+                        //{
                             toplink_edit.Enabled = true;
                             toplink_edit.CssClass = "";
-                        }
-                        else
-                        {
-                            toplink_edit.Enabled = false;
-                            toplink_edit.CssClass = "disabled";
-                        }
-                        if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][10].ToString().ToUpper().Equals("TRUE"))
-                        {
+                        //}
+                        //else
+                        //{
+                        //    toplink_edit.Enabled = false;
+                        //    toplink_edit.CssClass = "disabled";
+                        //}
+                        //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][10].ToString().ToUpper().Equals("TRUE"))
+                        //{
                             toplink_print.Enabled = true;
                             toplink_print.CssClass = "";
-                        }
-                        else
-                        {
-                            toplink_print.Enabled = false;
-                            toplink_print.CssClass = "disabled";
-                        }
-                        if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][11].ToString().ToUpper().Equals("TRUE"))
-                        {
+                        //}
+                        //else
+                        //{
+                        //    toplink_print.Enabled = false;
+                        //    toplink_print.CssClass = "disabled";
+                        //}
+                        //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][11].ToString().ToUpper().Equals("TRUE"))
+                        //{
                             toplink_delete.Enabled = true;
                             toplink_delete.CssClass = "";
-                        }
-                        else
-                        {
-                            toplink_delete.Enabled = false;
-                            toplink_delete.CssClass = "disabled";
-                        }
+                        //}
+                        //else
+                        //{
+                        //    toplink_delete.Enabled = false;
+                        //    toplink_delete.CssClass = "disabled";
+                        //}
                         toplink_first_record.Enabled = true;
                         toplink_first_record.CssClass = "";
                         toplink_previous.Enabled = true;
@@ -1037,16 +1037,16 @@ public partial class hr360_PR05 : System.Web.UI.Page
                         toplink_last_record.CssClass = "";
                         toplink_refresh.Enabled = true;
                         toplink_refresh.CssClass = "";
-                        if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][7].ToString().ToUpper().Equals("TRUE"))
-                        {
+                        //if (dt.Rows[0][5].ToString().ToUpper().Equals("TRUE") || dt.Rows[0][7].ToString().ToUpper().Equals("TRUE"))
+                        //{
                             toplink_copy.Enabled = true;
                             toplink_copy.CssClass = "";
-                        }
-                        else
-                        {
-                            toplink_copy.Enabled = false;
-                            toplink_copy.CssClass = "disabled";
-                        }
+                        //}
+                        //else
+                        //{
+                        //    toplink_copy.Enabled = false;
+                        //    toplink_copy.CssClass = "disabled";
+                        //}
                     }
                 }
                 else if (eventName == "toplink_copy")
@@ -1078,7 +1078,7 @@ public partial class hr360_PR05 : System.Web.UI.Page
                     toplink_copy.Enabled = false;
                     toplink_copy.CssClass = "disabled";
                 }
-            }
+            //}
         }
         catch
         {

@@ -100,7 +100,7 @@ public partial class masterPage_HR360_Child_user : System.Web.UI.MasterPage
 
     protected void btnAdminPage_Click(object sender, ImageClickEventArgs e)
     {
-        if (((DataTable)Session["permission"]).Rows[0]["SUPER_USER"].ToString().Trim() == "1")
+        if (((DataTable)Session["permission"]).Rows[0]["SUPER_USER"].ToString().ToUpper().Equals("TRUE"))
         {
             Response.Redirect("~/hr360/admin_main.aspx");
         }
