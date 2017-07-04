@@ -5,12 +5,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="menu" Runat="Server">
     <div id="page-menu">
-        <asp:ImageButton ID="toplink_add" runat="server" ImageUrl="~/hr360/image/icon/top_menu/add-1.png" OnClick="toplink_add_Click" onmouseover="this.src='/hr360/image/icon/top_menu/add-2.png'" onmouseout="this.src='/hr360/image/icon/top_menu/add-1.png'" />
-        <asp:ImageButton ID="toplink_search" runat="server" ImageUrl="~/hr360/image/icon/top_menu/search-1.png" PostBackUrl="#search_window" OnClick="toplink_search_Click" onmouseover="this.src='/hr360/image/icon/top_menu/search-2.png'" onmouseout="this.src='/hr360/image/icon/top_menu/search-1.png'" />
-        <asp:ImageButton ID="toplink_edit" runat="server" ImageUrl="~/hr360/image/icon/top_menu/edit-1.png" OnClick="toplink_edit_Click" onmouseover="this.src='/hr360/image/icon/top_menu/edit-2.png'" onmouseout="this.src='/hr360/image/icon/top_menu/edit-1.png'" />
-        <asp:ImageButton ID="toplink_save" runat="server" ImageUrl="~/hr360/image/icon/top_menu/save-1.png" OnClick="toplink_save_Click" onmouseover="this.src='/hr360/image/icon/top_menu/save-2.png'" onmouseout="this.src='/hr360/image/icon/top_menu/save-1.png'" />
-        <asp:ImageButton ID="toplink_cancel" runat="server" ImageUrl="~/hr360/image/icon/top_menu/cancel-1.png" OnClick="toplink_cancel_Click" onmouseover="this.src='/hr360/image/icon/top_menu/cancel-2.png'" onmouseout="this.src='/hr360/image/icon/top_menu/cancel-1.png'" />
-        <asp:ImageButton ID="toplink_delete" runat="server" ImageUrl="~/hr360/image/icon/top_menu/delete-1.png" OnClick="toplink_delete_Click" OnClientClick ="return confirm('確定要刪除嗎?');" onmouseover="this.src='/hr360/image/icon/top_menu/delete-2.png'" onmouseout="this.src='/hr360/image/icon/top_menu/delete-1.png'" />
+        <asp:ImageButton ID="toplink_add" runat="server" ImageUrl="~/image/top_menu/add-1.png" OnClick="toplink_add_Click" onmouseover="this.src='/image/top_menu/add-2.png'" onmouseout="this.src='/image/top_menu/add-1.png'" />
+        <asp:ImageButton ID="toplink_search" runat="server" ImageUrl="~/image/top_menu/search-1.png" PostBackUrl="#search_window" OnClick="toplink_search_Click" onmouseover="this.src='/image/top_menu/search-2.png'" onmouseout="this.src='/image/top_menu/search-1.png'" />
+        <asp:ImageButton ID="toplink_edit" runat="server" ImageUrl="~/image/top_menu/edit-1.png" OnClick="toplink_edit_Click" onmouseover="this.src='/image/top_menu/edit-2.png'" onmouseout="this.src='/image/top_menu/edit-1.png'" />
+        <asp:ImageButton ID="toplink_save" runat="server" ImageUrl="~/image/top_menu/save-1.png" OnClick="toplink_save_Click" onmouseover="this.src='/image/top_menu/save-2.png'" onmouseout="this.src='/image/top_menu/save-1.png'" />
+        <asp:ImageButton ID="toplink_cancel" runat="server" ImageUrl="~/image/top_menu/cancel-1.png" OnClick="toplink_cancel_Click" onmouseover="this.src='/image/top_menu/cancel-2.png'" onmouseout="this.src='/image/top_menu/cancel-1.png'" />
+        <asp:ImageButton ID="toplink_delete" runat="server" ImageUrl="~/image/top_menu/delete-1.png" OnClick="toplink_delete_Click" OnClientClick ="return confirm('確定要刪除嗎?');" onmouseover="this.src='/image/top_menu/delete-2.png'" onmouseout="this.src='/image/top_menu/delete-1.png'" />
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="content" Runat="Server">
