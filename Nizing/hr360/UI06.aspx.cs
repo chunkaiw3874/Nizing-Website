@@ -42,8 +42,10 @@ public partial class hr360_UI06 : System.Web.UI.Page
         try
         {
             lblErrorMessage.Text = "";
-            //if (checkSlipAvailability())
-            //{
+            //DateTime showSlipTime = DateTime(DateTime.Today.Year,DateTime.today)
+            if (checkSlipAvailability())
+            {
+
                 DataTable main_table = new DataTable();
                 DataTable bonus_table = new DataTable();
                 DataTable deduction_table = new DataTable();
@@ -202,12 +204,12 @@ public partial class hr360_UI06 : System.Web.UI.Page
                     salary_slip.Visible = false;
                     lblErrorMessage.Text = "資料尚未進入系統，請稍後查詢";
                 }
-            //}
-            //else
-            //{
-            //    salary_slip.Visible = false;
-            //    lblErrorMessage.Text = "請於次月五號下午五點以後再查詢";                
-            //}
+            }
+            else
+            {
+                salary_slip.Visible = false;
+                lblErrorMessage.Text = "請於次月五號下午五點以後再查詢";
+            }
         }
         catch (Exception ex)
         {
