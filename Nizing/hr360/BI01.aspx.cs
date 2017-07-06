@@ -15,7 +15,8 @@ public partial class hr360_BI01 : System.Web.UI.Page
     //universal functions
     string connectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
     string nzconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
-    
+
+    private enum currentFunctionMode { ADD, EDIT, NONE };
     //    //save view-state
     //void Page_PreRender(object sender, EventArgs e)
     //{
@@ -32,6 +33,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
     {
         if(!IsPostBack)
         {
+            ViewState["Mode"] = currentFunctionMode.NONE;
             txtUserId.ReadOnly = true;
             txtUserId.CssClass = "read-only";
             txtPassword.ReadOnly = true;
@@ -66,6 +68,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
     }
     protected void toplink_add_Click(object sender, EventArgs e)
     {
+        ViewState["Mode"] = currentFunctionMode.ADD;
         txtUserId.ReadOnly = false;
         txtUserId.CssClass = "required-field";
         txtPassword.ReadOnly = false;
@@ -98,7 +101,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
         //search-related functions
     protected void toplink_search_Click(object sender, EventArgs e)
     {
-
+        
     }
     protected void ddlSearch_Item_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -233,6 +236,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
         //
     protected void toplink_edit_Click(object sender, EventArgs e)
     {
+        ViewState["Mode"] = currentFunctionMode.EDIT;
         if (txtUserId.Text.Trim() == "")
         {
             lblErrorMessage.Text = "需先輸入使用者代號後才能進行修改，修改時不得更改使用者代號";
@@ -276,7 +280,6 @@ public partial class hr360_BI01 : System.Web.UI.Page
     }
     protected void toplink_print_Click(object sender, ImageClickEventArgs e)
     {
-
     }
     protected void toplink_first_record_Click(object sender, ImageClickEventArgs e)
     {
@@ -320,7 +323,8 @@ public partial class hr360_BI01 : System.Web.UI.Page
     {
         try
         {
-            if (txtUserId.ReadOnly == false) //判斷是要新增還是修改資料，新增資料txtUserId唯讀屬性為false
+            //if (txtUserId.ReadOnly == false) //判斷是要新增還是修改資料，新增資料txtUserId唯讀屬性為false
+            if((currentFunctionMode)ViewState["Mode"] == currentFunctionMode.ADD)
             {
                 if (txtUserId.Text.Trim() == "") //沒有輸入要使用的User ID
                 {
@@ -463,17 +467,17 @@ public partial class hr360_BI01 : System.Web.UI.Page
                     txtUserId.CssClass = "required-field";
                     txtUserId.Focus();
                 }
-                else if (txtPassword.Text.Trim() == "") //沒有密碼
-                {
-                    lblErrorMessage.Text = "密碼為必填欄位";
-                    txtUserId.ReadOnly = true;
-                    txtUserId.CssClass = "read-only";
-                    txtPassword.ReadOnly = false;
-                    txtPassword.CssClass = "required-field";
-                    txtReenterPassword.ReadOnly = false;
-                    txtReenterPassword.CssClass = "required-field";
-                    txtPassword.Focus();
-                }
+                //else if (txtPassword.Text.Trim() == "") //沒有密碼
+                //{
+                //    lblErrorMessage.Text = "密碼為必填欄位";
+                //    txtUserId.ReadOnly = true;
+                //    txtUserId.CssClass = "read-only";
+                //    txtPassword.ReadOnly = false;
+                //    txtPassword.CssClass = "required-field";
+                //    txtReenterPassword.ReadOnly = false;
+                //    txtReenterPassword.CssClass = "required-field";
+                //    txtPassword.Focus();
+                //}
                 else if (txtPassword.Text.Trim() != txtReenterPassword.Text.Trim()) //密碼與確認密碼不相符
                 {
                     lblErrorMessage.Text = "密碼與確認密碼不相符";
@@ -505,7 +509,16 @@ public partial class hr360_BI01 : System.Web.UI.Page
                     using (SqlConnection conn = new SqlConnection(connectionString))
                     {
                         conn.Open();
-                        SqlCommand cmd = new SqlCommand("UPDATE [HR360_BI01_A] SET [MODIFIEDDATE]=GETDATE(),[MODIFIER]=@MODIFIER,[ERP_ID]=@ERPID,[NAME]=@NAME,[PASSWORD]=@PASSWORD,[EMAIL]=@EMAIL,[LINE_ID]=@LINEID,[DISABLED]=@DISABLED,[DISABLEDDATE]=@DISABLEDDATE, [SUPER_USER]=@SUPERUSER WHERE ID=@USERID", conn);
+                        string query = "";
+                        if (String.IsNullOrEmpty(txtPassword.Text.Trim()))
+                        {
+                            query = "UPDATE [HR360_BI01_A] SET [MODIFIEDDATE]=GETDATE(),[MODIFIER]=@MODIFIER,[ERP_ID]=@ERPID,[NAME]=@NAME,[EMAIL]=@EMAIL,[LINE_ID]=@LINEID,[DISABLED]=@DISABLED,[DISABLEDDATE]=@DISABLEDDATE, [SUPER_USER]=@SUPERUSER WHERE ID=@USERID";
+                        }
+                        else
+                        {
+                            query = "UPDATE [HR360_BI01_A] SET [MODIFIEDDATE]=GETDATE(),[MODIFIER]=@MODIFIER,[ERP_ID]=@ERPID,[NAME]=@NAME,[PASSWORD]=@PASSWORD,[EMAIL]=@EMAIL,[LINE_ID]=@LINEID,[DISABLED]=@DISABLED,[DISABLEDDATE]=@DISABLEDDATE, [SUPER_USER]=@SUPERUSER WHERE ID=@USERID";
+                        }
+                        SqlCommand cmd = new SqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@MODIFIER", Session["user_id"]);
                         cmd.Parameters.AddWithValue("@USERID", txtUserId.Text.ToUpper().Trim());
                         cmd.Parameters.AddWithValue("@ERPID", txtErpUserId.Text.Trim());
@@ -553,6 +566,7 @@ public partial class hr360_BI01 : System.Web.UI.Page
                     Load_toplink(getPostBackControlName());
                 }
             }
+            ViewState["Mode"] = currentFunctionMode.NONE;
         }
         catch (Exception ex)
         {
@@ -593,7 +607,8 @@ public partial class hr360_BI01 : System.Web.UI.Page
         btnErpId_Search.Enabled = false;
         txtName.ReadOnly = true;
         txtName.CssClass = "read-only";
-        
+
+        ViewState["Mode"] = currentFunctionMode.NONE;
         //enable grdResult after click
         grdResult.Enabled = true;
         Load_toplink(getPostBackControlName());
