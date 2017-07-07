@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="dsProductInfo" targetNamespace="http://tempuri.org/dsProductInfo.xsd" xmlns:mstns="http://tempuri.org/dsProductInfo.xsd" xmlns="http://tempuri.org/dsProductInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+<xs:schema id="dsOQS_ProductInfo" targetNamespace="http://tempuri.org/dsProductInfo.xsd" xmlns:mstns="http://tempuri.org/dsProductInfo.xsd" xmlns="http://tempuri.org/dsProductInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
@@ -107,10 +107,10 @@ WHERE [ID]=@ID</CommandText>
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="dsProductInfo" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsProductInfo" msprop:Generator_UserDSName="dsProductInfo">
+  <xs:element name="dsOQS_ProductInfo" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsOQS_ProductInfo" msprop:Generator_UserDSName="dsOQS_ProductInfo">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="INVMB" msdata:CaseSensitive="True" msprop:Generator_TableClassName="INVMBDataTable" msprop:Generator_TableVarName="tableINVMB" msprop:Generator_TablePropName="INVMB" msprop:Generator_RowDeletingName="INVMBRowDeleting" msprop:Generator_RowChangingName="INVMBRowChanging" msprop:Generator_RowEvHandlerName="INVMBRowChangeEventHandler" msprop:Generator_RowDeletedName="INVMBRowDeleted" msprop:Generator_UserTableName="INVMB" msprop:Generator_RowChangedName="INVMBRowChanged" msprop:Generator_RowEvArgName="INVMBRowChangeEvent" msprop:Generator_RowClassName="INVMBRow">
+        <xs:element name="INVMB" msdata:CaseSensitive="True" msprop:Generator_TableClassName="INVMBDataTable" msprop:Generator_TableVarName="tableINVMB" msprop:Generator_RowChangedName="INVMBRowChanged" msprop:Generator_TablePropName="INVMB" msprop:Generator_RowDeletingName="INVMBRowDeleting" msprop:Generator_RowChangingName="INVMBRowChanging" msprop:Generator_RowEvHandlerName="INVMBRowChangeEventHandler" msprop:Generator_RowDeletedName="INVMBRowDeleted" msprop:Generator_RowClassName="INVMBRow" msprop:Generator_UserTableName="INVMB" msprop:Generator_RowEvArgName="INVMBRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID">
@@ -130,7 +130,7 @@ WHERE [ID]=@ID</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="PRODUCT_INFO" msdata:CaseSensitive="True" msprop:Generator_TableClassName="PRODUCT_INFODataTable" msprop:Generator_TableVarName="tablePRODUCT_INFO" msprop:Generator_TablePropName="PRODUCT_INFO" msprop:Generator_RowDeletingName="PRODUCT_INFORowDeleting" msprop:Generator_RowChangingName="PRODUCT_INFORowChanging" msprop:Generator_RowEvHandlerName="PRODUCT_INFORowChangeEventHandler" msprop:Generator_RowDeletedName="PRODUCT_INFORowDeleted" msprop:Generator_UserTableName="PRODUCT_INFO" msprop:Generator_RowChangedName="PRODUCT_INFORowChanged" msprop:Generator_RowEvArgName="PRODUCT_INFORowChangeEvent" msprop:Generator_RowClassName="PRODUCT_INFORow">
+        <xs:element name="PRODUCT_INFO" msdata:CaseSensitive="True" msprop:Generator_TableClassName="PRODUCT_INFODataTable" msprop:Generator_TableVarName="tablePRODUCT_INFO" msprop:Generator_RowChangedName="PRODUCT_INFORowChanged" msprop:Generator_TablePropName="PRODUCT_INFO" msprop:Generator_RowDeletingName="PRODUCT_INFORowDeleting" msprop:Generator_RowChangingName="PRODUCT_INFORowChanging" msprop:Generator_RowEvHandlerName="PRODUCT_INFORowChangeEventHandler" msprop:Generator_RowDeletedName="PRODUCT_INFORowDeleted" msprop:Generator_RowClassName="PRODUCT_INFORow" msprop:Generator_UserTableName="PRODUCT_INFO" msprop:Generator_RowEvArgName="PRODUCT_INFORowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" minOccurs="0">

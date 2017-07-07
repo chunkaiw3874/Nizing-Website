@@ -37,7 +37,7 @@ namespace NIZING_BACKEND_Data_Config
         private void btnAccountSearch_Search_Click(object sender, EventArgs e)
         {            
             DataTable dtLoginAccount = new DataTable();
-            dsLoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter accountAdapter = new dsLoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();
+            dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter accountAdapter = new dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();
             dtLoginAccount = accountAdapter.GetData();
             string startAccountIdFilter = txtAccountSearch_StartingId.Text.Trim();
             string endAccountIdFilter = txtAccountSearch_EndingId.Text.Trim();
@@ -135,19 +135,19 @@ namespace NIZING_BACKEND_Data_Config
         private void frmAccountSearch_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'dsLoginAccount.ACCOUNT_VIPLEVEL' table. You can move, or remove it, as needed.
-            this.aCCOUNT_VIPLEVELTableAdapter.Fill(this.dsLoginAccount.ACCOUNT_VIPLEVEL);
+            this.aCCOUNT_VIPLEVELTableAdapter.Fill(this.dsOQS_LoginAccount.ACCOUNT_VIPLEVEL);
 
             //insert empty row into datasource
-            DataRow emptyVipRow = dsLoginAccount.ACCOUNT_VIPLEVEL.NewRow();
+            DataRow emptyVipRow = dsOQS_LoginAccount.ACCOUNT_VIPLEVEL.NewRow();
             emptyVipRow["LEVEL"] = "";
-            dsLoginAccount.ACCOUNT_VIPLEVEL.Rows.InsertAt(emptyVipRow, 0);
+            dsOQS_LoginAccount.ACCOUNT_VIPLEVEL.Rows.InsertAt(emptyVipRow, 0);
             BindingSource bsStartingVipLevel = new BindingSource();
-            bsStartingVipLevel.DataSource = dsLoginAccount.ACCOUNT_VIPLEVEL;
+            bsStartingVipLevel.DataSource = dsOQS_LoginAccount.ACCOUNT_VIPLEVEL;
             cbxAccountSearch_StartingVipLevel.DataSource = bsStartingVipLevel;
             cbxAccountSearch_StartingVipLevel.DisplayMember = "LEVEL";
             cbxAccountSearch_StartingVipLevel.ValueMember = "LEVEL";
             BindingSource bsEndingVipLevel = new BindingSource();
-            bsEndingVipLevel.DataSource = dsLoginAccount.ACCOUNT_VIPLEVEL;
+            bsEndingVipLevel.DataSource = dsOQS_LoginAccount.ACCOUNT_VIPLEVEL;
             cbxAccountSearch_EndingVipLevel.DataSource = bsEndingVipLevel;
             cbxAccountSearch_EndingVipLevel.DisplayMember = "LEVEL";
             cbxAccountSearch_EndingVipLevel.ValueMember = "LEVEL";

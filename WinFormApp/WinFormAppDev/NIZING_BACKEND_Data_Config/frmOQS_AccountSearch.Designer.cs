@@ -46,14 +46,14 @@ namespace NIZING_BACKEND_Data_Config
             this.label6 = new System.Windows.Forms.Label();
             this.cbxAccountSearch_AdminRight = new System.Windows.Forms.ComboBox();
             this.aCCOUNTVIPLEVELBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dsLoginAccount = new NIZING_BACKEND_Data_Config.dsLoginAccount();
-            this.aCCOUNT_VIPLEVELTableAdapter = new NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter();
+            this.dsOQS_LoginAccount = new NIZING_BACKEND_Data_Config.dsOQS_LoginAccount();
+            this.aCCOUNT_VIPLEVELTableAdapter = new NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter();
             this.label7 = new System.Windows.Forms.Label();
             this.cbxAccountSearch_EndingVipLevel = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.aCCOUNTVIPLEVELBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsLoginAccount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsOQS_LoginAccount)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -232,12 +232,12 @@ namespace NIZING_BACKEND_Data_Config
             // aCCOUNTVIPLEVELBindingSource
             // 
             this.aCCOUNTVIPLEVELBindingSource.DataMember = "ACCOUNT_VIPLEVEL";
-            this.aCCOUNTVIPLEVELBindingSource.DataSource = this.dsLoginAccount;
+            this.aCCOUNTVIPLEVELBindingSource.DataSource = this.dsOQS_LoginAccount;
             // 
             // dsLoginAccount
             // 
-            this.dsLoginAccount.DataSetName = "dsLoginAccount";
-            this.dsLoginAccount.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.dsOQS_LoginAccount.DataSetName = "dsLoginAccount";
+            this.dsOQS_LoginAccount.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // aCCOUNT_VIPLEVELTableAdapter
             // 
@@ -277,7 +277,7 @@ namespace NIZING_BACKEND_Data_Config
             this.tableLayoutPanel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.aCCOUNTVIPLEVELBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsLoginAccount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsOQS_LoginAccount)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -297,9 +297,9 @@ namespace NIZING_BACKEND_Data_Config
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbxAccountSearch_StartingVipLevel;
-        private dsLoginAccount dsLoginAccount;
+        private dsOQS_LoginAccount dsOQS_LoginAccount;
         private System.Windows.Forms.BindingSource aCCOUNTVIPLEVELBindingSource;
-        private NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter aCCOUNT_VIPLEVELTableAdapter;
+        private NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter aCCOUNT_VIPLEVELTableAdapter;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbxAccountSearch_AdminRight;
         private System.Windows.Forms.Label label7;

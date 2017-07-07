@@ -52,7 +52,7 @@ namespace NIZING_BACKEND_Data_Config
             this.cbxAccountVipLevel = new System.Windows.Forms.ComboBox();
             this.ACCOUNTVIPLEVELBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dsLoginAccountBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dsLoginAccount = new NIZING_BACKEND_Data_Config.dsLoginAccount();
+            this.dsOQS_LoginAccount = new NIZING_BACKEND_Data_Config.dsOQS_LoginAccount();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -88,8 +88,8 @@ namespace NIZING_BACKEND_Data_Config
             this.label12 = new System.Windows.Forms.Label();
             this.pgbProductSyncProgress = new System.Windows.Forms.ProgressBar();
             this.lblProductSyncStatus = new System.Windows.Forms.Label();
-            this.LOGIN_ACCOUNTTableAdapter = new NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();
-            this.ACCOUNT_VIPLEVELTableAdapter = new NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter();
+            this.LOGIN_ACCOUNTTableAdapter = new NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();
+            this.ACCOUNT_VIPLEVELTableAdapter = new NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter();
             this.bgwProductSyncLoader = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
@@ -99,7 +99,7 @@ namespace NIZING_BACKEND_Data_Config
             this.tlpAccountInputField.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ACCOUNTVIPLEVELBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsLoginAccountBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsLoginAccount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsOQS_LoginAccount)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvAccountSearch_Result)).BeginInit();
             this.tbpProductManagement.SuspendLayout();
@@ -365,13 +365,13 @@ namespace NIZING_BACKEND_Data_Config
             // 
             // dsLoginAccountBindingSource
             // 
-            this.dsLoginAccountBindingSource.DataSource = this.dsLoginAccount;
+            this.dsLoginAccountBindingSource.DataSource = this.dsOQS_LoginAccount;
             this.dsLoginAccountBindingSource.Position = 0;
             // 
             // dsLoginAccount
             // 
-            this.dsLoginAccount.DataSetName = "dsLoginAccount";
-            this.dsLoginAccount.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.dsOQS_LoginAccount.DataSetName = "dsLoginAccount";
+            this.dsOQS_LoginAccount.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label2
             // 
@@ -809,7 +809,7 @@ namespace NIZING_BACKEND_Data_Config
             this.tlpAccountInputField.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ACCOUNTVIPLEVELBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsLoginAccountBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsLoginAccount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsOQS_LoginAccount)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvAccountSearch_Result)).EndInit();
             this.tbpProductManagement.ResumeLayout(false);
@@ -850,8 +850,8 @@ namespace NIZING_BACKEND_Data_Config
         private System.Windows.Forms.TextBox txtAccountPassword;
         private System.Windows.Forms.TextBox txtAccountConfirmPassword;
         private System.Windows.Forms.TextBox txtAccountId;
-        private dsLoginAccount dsLoginAccount;
-        private NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter LOGIN_ACCOUNTTableAdapter;
+        private dsOQS_LoginAccount dsOQS_LoginAccount;
+        private NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter LOGIN_ACCOUNTTableAdapter;
         private System.Windows.Forms.DataGridView gvAccountSearch_Result;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblAccountName;
@@ -859,7 +859,7 @@ namespace NIZING_BACKEND_Data_Config
         private System.Windows.Forms.ComboBox cbxAccountVipLevel;
         private System.Windows.Forms.BindingSource dsLoginAccountBindingSource;
         private System.Windows.Forms.BindingSource ACCOUNTVIPLEVELBindingSource;
-        private NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter ACCOUNT_VIPLEVELTableAdapter;
+        private NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter ACCOUNT_VIPLEVELTableAdapter;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Label lblAccountSubmitStatus;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;

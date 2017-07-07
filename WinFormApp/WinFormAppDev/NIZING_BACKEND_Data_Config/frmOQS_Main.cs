@@ -54,9 +54,9 @@ namespace NIZING_BACKEND_Data_Config
         {
             #region 帳號管理
             // TODO: This line of code loads data into the 'dsLoginAccount.ACCOUNT_VIPLEVEL' table. You can move, or remove it, as needed.
-            this.ACCOUNT_VIPLEVELTableAdapter.Fill(this.dsLoginAccount.ACCOUNT_VIPLEVEL);
+            this.ACCOUNT_VIPLEVELTableAdapter.Fill(this.dsOQS_LoginAccount.ACCOUNT_VIPLEVEL);
             // TODO: This line of code loads data into the 'dsLoginAccount.LOGIN_ACCOUNT' table. You can move, or remove it, as needed.
-            this.LOGIN_ACCOUNTTableAdapter.Fill(this.dsLoginAccount.LOGIN_ACCOUNT);
+            this.LOGIN_ACCOUNTTableAdapter.Fill(this.dsOQS_LoginAccount.LOGIN_ACCOUNT);
             #endregion
         }
         #region 帳號管理
@@ -102,7 +102,7 @@ namespace NIZING_BACKEND_Data_Config
                 var confirmResult = MessageBox.Show("確定要刪除" + txtAccountId.Text.Trim() + "的資料嗎?", "刪除確認", MessageBoxButtons.YesNo);
                 if (confirmResult == DialogResult.Yes)
                 {
-                    dsLoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter adapter = new dsLoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();
+                    dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter adapter = new dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();
                     adapter.DeleteQuery(txtAccountId.Text.Trim());
                     lblAccountSubmitStatus.Text = "帳號刪除完成";
                     lblAccountSubmitStatus.ForeColor = Color.Green;
@@ -161,7 +161,7 @@ namespace NIZING_BACKEND_Data_Config
             if (confirm == true)
             {
                 //確認OK後針對資料所做的處理
-                dsLoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter adapter = new dsLoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();    //load account table through an adapter
+                dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter adapter = new dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();    //load account table through an adapter
                 //turn admin right property into writable string
                 string adminRight = "0";
                 if (ckbAccountAdminRight.Checked)
@@ -326,7 +326,7 @@ namespace NIZING_BACKEND_Data_Config
         //When AccountId textbox is out of focus, program searches for client name that fits the ID from ERP client list
         private void txtAccountId_Leave(object sender, EventArgs e)
         {
-            dsLoginAccountTableAdapters.COPMATableAdapter adapter = new dsLoginAccountTableAdapters.COPMATableAdapter();
+            dsOQS_LoginAccountTableAdapters.COPMATableAdapter adapter = new dsOQS_LoginAccountTableAdapters.COPMATableAdapter();
             DataTable dt = adapter.GetData();
 
             if (string.IsNullOrEmpty(txtAccountId.Text.Trim()))
@@ -377,9 +377,9 @@ namespace NIZING_BACKEND_Data_Config
         #region 背景執行緒
         private void bgwProductSyncLoader_DoWork(object sender, DoWorkEventArgs e)
         {
-            
-            dsProductInfoTableAdapters.INVMBTableAdapter erpAdapter = new dsProductInfoTableAdapters.INVMBTableAdapter();
-            dsProductInfoTableAdapters.PRODUCT_INFOTableAdapter oqsAdapter = new dsProductInfoTableAdapters.PRODUCT_INFOTableAdapter();
+
+            dsOQS_ProductInfoTableAdapters.INVMBTableAdapter erpAdapter = new dsOQS_ProductInfoTableAdapters.INVMBTableAdapter();
+            dsOQS_ProductInfoTableAdapters.PRODUCT_INFOTableAdapter oqsAdapter = new dsOQS_ProductInfoTableAdapters.PRODUCT_INFOTableAdapter();
 
             DataTable dtOqs = oqsAdapter.GetData();
             DataTable dtErp = erpAdapter.GetData();
@@ -515,7 +515,7 @@ namespace NIZING_BACKEND_Data_Config
             //Display data in gridview (not necessary)
             this.Invoke(new MethodInvoker(delegate
             {
-                gvProductSearch_Result.DataSource = dtOqsInterim;
+                gvProductSearch_Result.DataSource = dtOqs;
             }));            
         }
         #endregion

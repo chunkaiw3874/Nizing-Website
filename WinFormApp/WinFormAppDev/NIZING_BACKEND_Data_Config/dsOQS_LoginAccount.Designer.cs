@@ -20,9 +20,9 @@ namespace NIZING_BACKEND_Data_Config {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("dsLoginAccount")]
+    [global::System.Xml.Serialization.XmlRootAttribute("dsOQS_LoginAccount")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class dsLoginAccount : global::System.Data.DataSet {
+    public partial class dsOQS_LoginAccount : global::System.Data.DataSet {
         
         private LOGIN_ACCOUNTDataTable tableLOGIN_ACCOUNT;
         
@@ -34,7 +34,7 @@ namespace NIZING_BACKEND_Data_Config {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public dsLoginAccount() {
+        public dsOQS_LoginAccount() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -45,7 +45,7 @@ namespace NIZING_BACKEND_Data_Config {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected dsLoginAccount(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected dsOQS_LoginAccount(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -157,7 +157,7 @@ namespace NIZING_BACKEND_Data_Config {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            dsLoginAccount cln = ((dsLoginAccount)(base.Clone()));
+            dsOQS_LoginAccount cln = ((dsOQS_LoginAccount)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -247,7 +247,7 @@ namespace NIZING_BACKEND_Data_Config {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "dsLoginAccount";
+            this.DataSetName = "dsOQS_LoginAccount";
             this.Prefix = "";
             this.Namespace = "http://tempuri.org/dsLoginAccount.xsd";
             this.EnforceConstraints = true;
@@ -289,7 +289,7 @@ namespace NIZING_BACKEND_Data_Config {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            dsLoginAccount ds = new dsLoginAccount();
+            dsOQS_LoginAccount ds = new dsOQS_LoginAccount();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -592,7 +592,7 @@ namespace NIZING_BACKEND_Data_Config {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsLoginAccount ds = new dsLoginAccount();
+                dsOQS_LoginAccount ds = new dsOQS_LoginAccount();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -840,7 +840,7 @@ namespace NIZING_BACKEND_Data_Config {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsLoginAccount ds = new dsLoginAccount();
+                dsOQS_LoginAccount ds = new dsOQS_LoginAccount();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1114,7 +1114,7 @@ namespace NIZING_BACKEND_Data_Config {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsLoginAccount ds = new dsLoginAccount();
+                dsOQS_LoginAccount ds = new dsOQS_LoginAccount();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1494,7 +1494,7 @@ namespace NIZING_BACKEND_Data_Config {
         }
     }
 }
-namespace NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters {
+namespace NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters {
     
     
     /// <summary>
@@ -1671,7 +1671,7 @@ namespace NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsLoginAccount.LOGIN_ACCOUNTDataTable dataTable) {
+        public virtual int Fill(dsOQS_LoginAccount.LOGIN_ACCOUNTDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1684,9 +1684,9 @@ namespace NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsLoginAccount.LOGIN_ACCOUNTDataTable GetData() {
+        public virtual dsOQS_LoginAccount.LOGIN_ACCOUNTDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsLoginAccount.LOGIN_ACCOUNTDataTable dataTable = new dsLoginAccount.LOGIN_ACCOUNTDataTable();
+            dsOQS_LoginAccount.LOGIN_ACCOUNTDataTable dataTable = new dsOQS_LoginAccount.LOGIN_ACCOUNTDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1966,7 +1966,7 @@ namespace NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsLoginAccount.ACCOUNT_VIPLEVELDataTable dataTable) {
+        public virtual int Fill(dsOQS_LoginAccount.ACCOUNT_VIPLEVELDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1979,9 +1979,9 @@ namespace NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsLoginAccount.ACCOUNT_VIPLEVELDataTable GetData() {
+        public virtual dsOQS_LoginAccount.ACCOUNT_VIPLEVELDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsLoginAccount.ACCOUNT_VIPLEVELDataTable dataTable = new dsLoginAccount.ACCOUNT_VIPLEVELDataTable();
+            dsOQS_LoginAccount.ACCOUNT_VIPLEVELDataTable dataTable = new dsOQS_LoginAccount.ACCOUNT_VIPLEVELDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1989,14 +1989,14 @@ namespace NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsLoginAccount.ACCOUNT_VIPLEVELDataTable dataTable) {
+        public virtual int Update(dsOQS_LoginAccount.ACCOUNT_VIPLEVELDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsLoginAccount dataSet) {
+        public virtual int Update(dsOQS_LoginAccount dataSet) {
             return this.Adapter.Update(dataSet, "ACCOUNT_VIPLEVEL");
         }
         
@@ -2214,7 +2214,7 @@ namespace NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsLoginAccount.COPMADataTable dataTable) {
+        public virtual int Fill(dsOQS_LoginAccount.COPMADataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -2227,9 +2227,9 @@ namespace NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsLoginAccount.COPMADataTable GetData() {
+        public virtual dsOQS_LoginAccount.COPMADataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsLoginAccount.COPMADataTable dataTable = new dsLoginAccount.COPMADataTable();
+            dsOQS_LoginAccount.COPMADataTable dataTable = new dsOQS_LoginAccount.COPMADataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -2237,14 +2237,14 @@ namespace NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsLoginAccount.COPMADataTable dataTable) {
+        public virtual int Update(dsOQS_LoginAccount.COPMADataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsLoginAccount dataSet) {
+        public virtual int Update(dsOQS_LoginAccount dataSet) {
             return this.Adapter.Update(dataSet, "COPMA");
         }
         
@@ -2378,7 +2378,7 @@ namespace NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateUpdatedRows(dsLoginAccount dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(dsOQS_LoginAccount dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._aCCOUNT_VIPLEVELTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.ACCOUNT_VIPLEVEL.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
@@ -2406,7 +2406,7 @@ namespace NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateInsertedRows(dsLoginAccount dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(dsOQS_LoginAccount dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._aCCOUNT_VIPLEVELTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.ACCOUNT_VIPLEVEL.Select(null, null, global::System.Data.DataViewRowState.Added);
@@ -2432,7 +2432,7 @@ namespace NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateDeletedRows(dsLoginAccount dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(dsOQS_LoginAccount dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             if ((this._cOPMATableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.COPMA.Select(null, null, global::System.Data.DataViewRowState.Deleted);
@@ -2482,7 +2482,7 @@ namespace NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public virtual int UpdateAll(dsLoginAccount dataSet) {
+        public virtual int UpdateAll(dsOQS_LoginAccount dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }

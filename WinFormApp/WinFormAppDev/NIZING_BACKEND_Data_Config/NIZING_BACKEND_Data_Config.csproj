@@ -83,14 +83,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsBackendLoginAccount.xsd</DependentUpon>
     </Compile>
-    <Compile Include="dsLoginAccount.cs">
-      <DependentUpon>dsLoginAccount.xsd</DependentUpon>
+    <Compile Include="dsOQS_LoginAccount.cs">
+      <DependentUpon>dsOQS_LoginAccount.xsd</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="dsLoginAccount.Designer.cs">
+    <Compile Include="dsOQS_LoginAccount.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dsLoginAccount.xsd</DependentUpon>
+      <DependentUpon>dsOQS_LoginAccount.xsd</DependentUpon>
     </Compile>
     <Compile Include="dsProductInfo.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -147,16 +147,16 @@
     <None Include="dsBackendLoginAccount.xss">
       <DependentUpon>dsBackendLoginAccount.xsd</DependentUpon>
     </None>
-    <None Include="dsLoginAccount.xsc">
-      <DependentUpon>dsLoginAccount.xsd</DependentUpon>
+    <None Include="dsOQS_LoginAccount.xsc">
+      <DependentUpon>dsOQS_LoginAccount.xsd</DependentUpon>
     </None>
-    <None Include="dsLoginAccount.xsd">
+    <None Include="dsOQS_LoginAccount.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsLoginAccount.Designer.cs</LastGenOutput>
+      <LastGenOutput>dsOQS_LoginAccount.Designer.cs</LastGenOutput>
     </None>
-    <None Include="dsLoginAccount.xss">
-      <DependentUpon>dsLoginAccount.xsd</DependentUpon>
+    <None Include="dsOQS_LoginAccount.xss">
+      <DependentUpon>dsOQS_LoginAccount.xsd</DependentUpon>
     </None>
     <None Include="dsProductInfo.xsc">
       <DependentUpon>dsProductInfo.xsd</DependentUpon>
