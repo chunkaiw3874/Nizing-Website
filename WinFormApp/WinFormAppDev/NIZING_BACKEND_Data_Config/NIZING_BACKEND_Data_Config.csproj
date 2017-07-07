@@ -78,6 +78,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dsBackendLoginAccount.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsBackendLoginAccount.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsLoginAccount.cs">
       <DependentUpon>dsLoginAccount.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -130,6 +135,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="dsBackendLoginAccount.xsc">
+      <DependentUpon>dsBackendLoginAccount.xsd</DependentUpon>
+    </None>
+    <None Include="dsBackendLoginAccount.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsBackendLoginAccount.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsBackendLoginAccount.xss">
+      <DependentUpon>dsBackendLoginAccount.xsd</DependentUpon>
+    </None>
     <None Include="dsLoginAccount.xsc">
       <DependentUpon>dsLoginAccount.xsd</DependentUpon>
     </None>

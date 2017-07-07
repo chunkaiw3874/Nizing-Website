@@ -26,28 +26,47 @@ namespace OQS_Data_Config
         private void btnLogin_Click(object sender, EventArgs e)
         {
             DataTable dtLoginAccount = new DataTable();
-            dsLoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter accountAdapter = new dsLoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();
+            dsBackendLoginAccountTableAdapters.BACKEND_LOGIN_ACCOUNTTableAdapter accountAdapter = new dsBackendLoginAccountTableAdapters.BACKEND_LOGIN_ACCOUNTTableAdapter();
+            //dsLoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter accountAdapter = new dsLoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();
             dtLoginAccount = accountAdapter.GetData();
 
-            DataRow[] drVerifyLogin = dtLoginAccount.Select("ID='" + txtUserName.Text.Trim().ToUpper() + "' AND ADMIN='1'");
+            var tempRow = dtLoginAccount.Select("LOGIN_ID='" + txtUserName.Text.Trim().ToUpper() + "'");
+            DataTable dtVerifyLogin = tempRow.Any()? tempRow.CopyToDataTable() : dtLoginAccount.Clone();
 
-            if (drVerifyLogin.Length == 0)
+            if (dtVerifyLogin.Rows.Count == 0)
             {
                 lblLoginStatus.Text = "使用者不存在";
             }
-            else if (drVerifyLogin[0]["PASSWORD"].ToString() != txtPassword.Text)
-            {
-                lblLoginStatus.Text = "密碼錯誤";
-            }
             else
             {
-                var frm = new frmMain();
-                frm.Location = this.Location;
-                frm.StartPosition = FormStartPosition.Manual;
-                frm.FormClosing += delegate { Application.Exit(); };
-                frm.Show();
-                this.Hide();
+                tempRow=dtVerifyLogin.Select("AUTH_ID='" + cbxFunctionList.SelectedValue + "'");
+                dtVerifyLogin = tempRow.Any() ? tempRow.CopyToDataTable() : dtVerifyLogin.Clone();
+                if (dtVerifyLogin.Rows.Count == 0)
+                {
+                    lblLoginStatus.Text = "使用者無權限使用此模組";
+                }
+                else if (dtVerifyLogin.Rows[0]["PASSWORD"].ToString() != txtPassword.Text)
+                {
+                    lblLoginStatus.Text = "密碼錯誤";
+                }
+                else
+                {
+                    var frm = new frmMain();
+                    frm.Location = this.Location;
+                    frm.StartPosition = FormStartPosition.Manual;
+                    frm.FormClosing += delegate { Application.Exit(); };
+                    frm.Show();
+                    this.Hide();
+                }
             }
+
+        }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'dsBackendLoginAccount.BACKEND_FUNCTION_LIST' table. You can move, or remove it, as needed.
+            this.bACKEND_FUNCTION_LISTTableAdapter.Fill(this.dsBackendLoginAccount.BACKEND_FUNCTION_LIST);
+
         }
     }
 }

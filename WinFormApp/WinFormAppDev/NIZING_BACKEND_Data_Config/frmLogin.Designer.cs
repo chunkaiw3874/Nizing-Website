@@ -28,19 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tbpnlLogin = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnLogin = new System.Windows.Forms.Button();
-            this.lblLoginStatus = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblLoginStatus = new System.Windows.Forms.Label();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.cbxFunctionList = new System.Windows.Forms.ComboBox();
+            this.dsBackendLoginAccount = new OQS_Data_Config.dsBackendLoginAccount();
+            this.dsBackendLoginAccountBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.bACKENDFUNCTIONLISTBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.bACKEND_FUNCTION_LISTTableAdapter = new OQS_Data_Config.dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbpnlLogin.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dsBackendLoginAccount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsBackendLoginAccountBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bACKENDFUNCTIONLISTBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -71,12 +80,14 @@
             this.tbpnlLogin.Controls.Add(this.txtUserName, 1, 1);
             this.tbpnlLogin.Controls.Add(this.txtPassword, 1, 2);
             this.tbpnlLogin.Controls.Add(this.label3, 0, 0);
-            this.tbpnlLogin.Controls.Add(this.tableLayoutPanel2, 1, 3);
+            this.tbpnlLogin.Controls.Add(this.flowLayoutPanel1, 1, 4);
+            this.tbpnlLogin.Controls.Add(this.cbxFunctionList, 1, 3);
             this.tbpnlLogin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbpnlLogin.Location = new System.Drawing.Point(159, 115);
             this.tbpnlLogin.Name = "tbpnlLogin";
-            this.tbpnlLogin.RowCount = 4;
-            this.tbpnlLogin.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.tbpnlLogin.RowCount = 5;
+            this.tbpnlLogin.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tbpnlLogin.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tbpnlLogin.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tbpnlLogin.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tbpnlLogin.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
@@ -87,41 +98,18 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(86, 133);
+            this.label1.Location = new System.Drawing.Point(86, 84);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(54, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "Username:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // btnLogin
-            // 
-            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLogin.Location = new System.Drawing.Point(3, 3);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(226, 23);
-            this.btnLogin.TabIndex = 0;
-            this.btnLogin.Text = "Login";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-            // 
-            // lblLoginStatus
-            // 
-            this.lblLoginStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblLoginStatus.AutoSize = true;
-            this.lblLoginStatus.ForeColor = System.Drawing.Color.Red;
-            this.lblLoginStatus.Location = new System.Drawing.Point(3, 35);
-            this.lblLoginStatus.Name = "lblLoginStatus";
-            this.lblLoginStatus.Size = new System.Drawing.Size(226, 12);
-            this.lblLoginStatus.TabIndex = 1;
-            // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(89, 182);
+            this.label2.Location = new System.Drawing.Point(89, 133);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 12);
             this.label2.TabIndex = 1;
@@ -131,7 +119,7 @@
             // txtUserName
             // 
             this.txtUserName.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtUserName.Location = new System.Drawing.Point(146, 128);
+            this.txtUserName.Location = new System.Drawing.Point(146, 79);
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(226, 22);
             this.txtUserName.TabIndex = 2;
@@ -139,7 +127,7 @@
             // txtPassword
             // 
             this.txtPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtPassword.Location = new System.Drawing.Point(146, 177);
+            this.txtPassword.Location = new System.Drawing.Point(146, 128);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(226, 22);
             this.txtPassword.TabIndex = 3;
@@ -151,28 +139,77 @@
             this.label3.AutoSize = true;
             this.tbpnlLogin.SetColumnSpan(this.label3, 3);
             this.label3.Font = new System.Drawing.Font("Calibri", 12F);
-            this.label3.Location = new System.Drawing.Point(3, 48);
+            this.label3.Location = new System.Drawing.Point(3, 23);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(458, 19);
             this.label3.TabIndex = 5;
             this.label3.Text = "Nizing Online Quotation System Configuration";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tableLayoutPanel2
+            // lblLoginStatus
             // 
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.lblLoginStatus, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.btnLogin, 0, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(143, 213);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(232, 118);
-            this.tableLayoutPanel2.TabIndex = 6;
+            this.lblLoginStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLoginStatus.AutoSize = true;
+            this.lblLoginStatus.ForeColor = System.Drawing.Color.Red;
+            this.lblLoginStatus.Location = new System.Drawing.Point(3, 29);
+            this.lblLoginStatus.Name = "lblLoginStatus";
+            this.lblLoginStatus.Size = new System.Drawing.Size(226, 12);
+            this.lblLoginStatus.TabIndex = 1;
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnLogin.Location = new System.Drawing.Point(3, 3);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(226, 23);
+            this.btnLogin.TabIndex = 0;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.btnLogin);
+            this.flowLayoutPanel1.Controls.Add(this.lblLoginStatus);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(143, 213);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(232, 118);
+            this.flowLayoutPanel1.TabIndex = 7;
+            // 
+            // cbxFunctionList
+            // 
+            this.cbxFunctionList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxFunctionList.DataSource = this.bACKENDFUNCTIONLISTBindingSource;
+            this.cbxFunctionList.DisplayMember = "NAME";
+            this.cbxFunctionList.FormattingEnabled = true;
+            this.cbxFunctionList.Location = new System.Drawing.Point(146, 167);
+            this.cbxFunctionList.Name = "cbxFunctionList";
+            this.cbxFunctionList.Size = new System.Drawing.Size(226, 20);
+            this.cbxFunctionList.TabIndex = 8;
+            this.cbxFunctionList.ValueMember = "ID";
+            // 
+            // dsBackendLoginAccount
+            // 
+            this.dsBackendLoginAccount.DataSetName = "dsBackendLoginAccount";
+            this.dsBackendLoginAccount.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // dsBackendLoginAccountBindingSource
+            // 
+            this.dsBackendLoginAccountBindingSource.DataSource = this.dsBackendLoginAccount;
+            this.dsBackendLoginAccountBindingSource.Position = 0;
+            // 
+            // bACKENDFUNCTIONLISTBindingSource
+            // 
+            this.bACKENDFUNCTIONLISTBindingSource.DataMember = "BACKEND_FUNCTION_LIST";
+            this.bACKENDFUNCTIONLISTBindingSource.DataSource = this.dsBackendLoginAccount;
+            // 
+            // bACKEND_FUNCTION_LISTTableAdapter
+            // 
+            this.bACKEND_FUNCTION_LISTTableAdapter.ClearBeforeFill = true;
             // 
             // frmLogin
             // 
@@ -184,11 +221,15 @@
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "frmLogin";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.frmLogin_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tbpnlLogin.ResumeLayout(false);
             this.tbpnlLogin.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dsBackendLoginAccount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsBackendLoginAccountBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bACKENDFUNCTIONLISTBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -204,7 +245,12 @@
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblLoginStatus;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.ComboBox cbxFunctionList;
+        private dsBackendLoginAccount dsBackendLoginAccount;
+        private System.Windows.Forms.BindingSource dsBackendLoginAccountBindingSource;
+        private System.Windows.Forms.BindingSource bACKENDFUNCTIONLISTBindingSource;
+        private dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter bACKEND_FUNCTION_LISTTableAdapter;
 
     }
 }
