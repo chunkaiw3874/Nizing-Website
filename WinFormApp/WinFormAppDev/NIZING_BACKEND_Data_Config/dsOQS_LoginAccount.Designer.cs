@@ -357,8 +357,6 @@ namespace NIZING_BACKEND_Data_Config {
             
             private global::System.Data.DataColumn columnVIPLEVEL;
             
-            private global::System.Data.DataColumn columnADMIN;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public LOGIN_ACCOUNTDataTable() {
@@ -426,14 +424,6 @@ namespace NIZING_BACKEND_Data_Config {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ADMINColumn {
-                get {
-                    return this.columnADMIN;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -469,14 +459,13 @@ namespace NIZING_BACKEND_Data_Config {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public LOGIN_ACCOUNTRow AddLOGIN_ACCOUNTRow(string ID, string NAME, string PASSWORD, string VIPLEVEL, string ADMIN) {
+            public LOGIN_ACCOUNTRow AddLOGIN_ACCOUNTRow(string ID, string NAME, string PASSWORD, string VIPLEVEL) {
                 LOGIN_ACCOUNTRow rowLOGIN_ACCOUNTRow = ((LOGIN_ACCOUNTRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ID,
                         NAME,
                         PASSWORD,
-                        VIPLEVEL,
-                        ADMIN};
+                        VIPLEVEL};
                 rowLOGIN_ACCOUNTRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowLOGIN_ACCOUNTRow);
                 return rowLOGIN_ACCOUNTRow;
@@ -503,7 +492,6 @@ namespace NIZING_BACKEND_Data_Config {
                 this.columnNAME = base.Columns["NAME"];
                 this.columnPASSWORD = base.Columns["PASSWORD"];
                 this.columnVIPLEVEL = base.Columns["VIPLEVEL"];
-                this.columnADMIN = base.Columns["ADMIN"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -517,14 +505,11 @@ namespace NIZING_BACKEND_Data_Config {
                 base.Columns.Add(this.columnPASSWORD);
                 this.columnVIPLEVEL = new global::System.Data.DataColumn("VIPLEVEL", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVIPLEVEL);
-                this.columnADMIN = new global::System.Data.DataColumn("ADMIN", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnADMIN);
                 this.columnID.AllowDBNull = false;
                 this.columnID.MaxLength = 10;
                 this.columnNAME.Caption = "Name";
                 this.columnNAME.MaxLength = 10;
                 this.columnPASSWORD.MaxLength = 255;
-                this.columnADMIN.MaxLength = 1;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1248,22 +1233,6 @@ namespace NIZING_BACKEND_Data_Config {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string ADMIN {
-                get {
-                    try {
-                        return ((string)(this[this.tableLOGIN_ACCOUNT.ADMINColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ADMIN\' in table \'LOGIN_ACCOUNT\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableLOGIN_ACCOUNT.ADMINColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNAMENull() {
                 return this.IsNull(this.tableLOGIN_ACCOUNT.NAMEColumn);
             }
@@ -1296,18 +1265,6 @@ namespace NIZING_BACKEND_Data_Config {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetVIPLEVELNull() {
                 this[this.tableLOGIN_ACCOUNT.VIPLEVELColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsADMINNull() {
-                return this.IsNull(this.tableLOGIN_ACCOUNT.ADMINColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetADMINNull() {
-                this[this.tableLOGIN_ACCOUNT.ADMINColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1620,7 +1577,6 @@ namespace NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters {
             tableMapping.DataSetTable = "LOGIN_ACCOUNT";
             tableMapping.ColumnMappings.Add("ID", "ID");
             tableMapping.ColumnMappings.Add("PASSWORD", "PASSWORD");
-            tableMapping.ColumnMappings.Add("ADMIN", "ADMIN");
             tableMapping.ColumnMappings.Add("NAME", "NAME");
             tableMapping.ColumnMappings.Add("VIPLEVEL", "VIPLEVEL");
             this._adapter.TableMappings.Add(tableMapping);
@@ -1639,8 +1595,8 @@ namespace NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT         A. ID,MA.MA002 \'NAME\', A.PASSWORD,A.VIPLEVEL,A.ADMIN\r\nFROM        " +
-                "      LOGIN_ACCOUNT A\r\nLEFT JOIN NZ.dbo.COPMA MA ON A.ID=MA.MA001";
+            this._commandCollection[0].CommandText = "SELECT         A. ID,MA.MA002 \'NAME\', A.PASSWORD,A.VIPLEVEL\r\nFROM              LO" +
+                "GIN_ACCOUNT A\r\nLEFT JOIN NZ.dbo.COPMA MA ON A.ID=MA.MA001";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
@@ -1649,21 +1605,19 @@ namespace NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters {
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.NVarChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "INSERT INTO LOGIN_ACCOUNT\r\n                            (ID, PASSWORD, VIPLEVEL, A" +
-                "DMIN)\r\nVALUES          (@ID,@PASSWORD,@VIPLEVEL,@ADMIN)";
+            this._commandCollection[2].CommandText = "INSERT INTO LOGIN_ACCOUNT\r\n                            (ID, PASSWORD, VIPLEVEL)\r\n" +
+                "VALUES          (@ID,@PASSWORD,@VIPLEVEL)";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.NVarChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PASSWORD", global::System.Data.SqlDbType.NVarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "PASSWORD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VIPLEVEL", global::System.Data.SqlDbType.NVarChar, 2, global::System.Data.ParameterDirection.Input, 0, 0, "VIPLEVEL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ADMIN", global::System.Data.SqlDbType.NVarChar, 1, global::System.Data.ParameterDirection.Input, 0, 0, "ADMIN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[3].Connection = this.Connection;
             this._commandCollection[3].CommandText = "UPDATE          LOGIN_ACCOUNT\r\nSET                   PASSWORD = @PASSWORD, VIPLEV" +
-                "EL = @VIPLEVEL, ADMIN = @ADMIN\r\nWHERE          (ID = @ID)";
+                "EL = @VIPLEVEL\r\nWHERE          (ID = @ID)";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PASSWORD", global::System.Data.SqlDbType.NVarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "PASSWORD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VIPLEVEL", global::System.Data.SqlDbType.NVarChar, 2, global::System.Data.ParameterDirection.Input, 0, 0, "VIPLEVEL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ADMIN", global::System.Data.SqlDbType.NVarChar, 1, global::System.Data.ParameterDirection.Input, 0, 0, "ADMIN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.NVarChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
@@ -1724,7 +1678,7 @@ namespace NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
-        public virtual int InsertQuery(string ID, string PASSWORD, string VIPLEVEL, string ADMIN) {
+        public virtual int InsertQuery(string ID, string PASSWORD, string VIPLEVEL) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
             if ((ID == null)) {
                 throw new global::System.ArgumentNullException("ID");
@@ -1743,12 +1697,6 @@ namespace NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters {
             }
             else {
                 command.Parameters[2].Value = ((string)(VIPLEVEL));
-            }
-            if ((ADMIN == null)) {
-                command.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                command.Parameters[3].Value = ((string)(ADMIN));
             }
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1771,7 +1719,7 @@ namespace NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
-        public virtual int UpdateQuery(string PASSWORD, string VIPLEVEL, string ADMIN, string ID) {
+        public virtual int UpdateQuery(string PASSWORD, string VIPLEVEL, string ID) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
             if ((PASSWORD == null)) {
                 command.Parameters[0].Value = global::System.DBNull.Value;
@@ -1785,17 +1733,11 @@ namespace NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters {
             else {
                 command.Parameters[1].Value = ((string)(VIPLEVEL));
             }
-            if ((ADMIN == null)) {
-                command.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                command.Parameters[2].Value = ((string)(ADMIN));
-            }
             if ((ID == null)) {
                 throw new global::System.ArgumentNullException("ID");
             }
             else {
-                command.Parameters[3].Value = ((string)(ID));
+                command.Parameters[2].Value = ((string)(ID));
             }
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 

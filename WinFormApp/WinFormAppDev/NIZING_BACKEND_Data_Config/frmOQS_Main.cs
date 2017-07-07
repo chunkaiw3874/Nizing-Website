@@ -29,7 +29,6 @@ namespace NIZING_BACKEND_Data_Config
             txtAccountId.Text = "";
             txtAccountPassword.Text = "";
             txtAccountConfirmPassword.Text = "";
-            ckbAccountAdminRight.Checked = false;
             #endregion
             #region 產品管理
             btnProductEdit.Enabled = false;
@@ -52,12 +51,9 @@ namespace NIZING_BACKEND_Data_Config
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            #region 帳號管理
-            // TODO: This line of code loads data into the 'dsLoginAccount.ACCOUNT_VIPLEVEL' table. You can move, or remove it, as needed.
-            this.ACCOUNT_VIPLEVELTableAdapter.Fill(this.dsOQS_LoginAccount.ACCOUNT_VIPLEVEL);
-            // TODO: This line of code loads data into the 'dsLoginAccount.LOGIN_ACCOUNT' table. You can move, or remove it, as needed.
-            this.LOGIN_ACCOUNTTableAdapter.Fill(this.dsOQS_LoginAccount.LOGIN_ACCOUNT);
-            #endregion
+            // TODO: This line of code loads data into the 'dsOQS_LoginAccount.ACCOUNT_VIPLEVEL' table. You can move, or remove it, as needed.
+            this.aCCOUNT_VIPLEVELTableAdapter.Fill(this.dsOQS_LoginAccount.ACCOUNT_VIPLEVEL);
+
         }
         #region 帳號管理
         #region button behavior
@@ -75,7 +71,6 @@ namespace NIZING_BACKEND_Data_Config
             txtAccountId.Text = "";
             txtAccountPassword.Text = "";
             txtAccountConfirmPassword.Text = "";
-            ckbAccountAdminRight.Checked = false;
         }
 
         private void btnAccountEdit_Click(object sender, EventArgs e)
@@ -161,27 +156,17 @@ namespace NIZING_BACKEND_Data_Config
             if (confirm == true)
             {
                 //確認OK後針對資料所做的處理
-                dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter adapter = new dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();    //load account table through an adapter
-                //turn admin right property into writable string
-                string adminRight = "0";
-                if (ckbAccountAdminRight.Checked)
-                {
-                    adminRight = "1";
-                }
-                else
-                {
-                    adminRight = "0";
-                }
+                dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter adapter = new dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();    //load account table through an adapter                
 
                 if (txtAccountId.Enabled == true) //新增的confirm
                 {
-                    adapter.InsertQuery(txtAccountId.Text.Trim(), txtAccountPassword.Text, cbxAccountVipLevel.SelectedValue.ToString(), adminRight);
+                    adapter.InsertQuery(txtAccountId.Text.Trim(), txtAccountPassword.Text, cbxAccountVipLevel.SelectedValue.ToString());
                     lblAccountSubmitStatus.Text = "新增帳號完成";
                     lblAccountSubmitStatus.ForeColor = Color.Green;
                 }
                 else
                 {
-                    adapter.UpdateQuery(txtAccountPassword.Text, cbxAccountVipLevel.SelectedValue.ToString(), adminRight, txtAccountId.Text.Trim());
+                    adapter.UpdateQuery(txtAccountPassword.Text, cbxAccountVipLevel.SelectedValue.ToString(), txtAccountId.Text.Trim());
                     lblAccountSubmitStatus.Text = "編輯帳號完成";
                     lblAccountSubmitStatus.ForeColor = Color.Green;
                 }
@@ -211,7 +196,6 @@ namespace NIZING_BACKEND_Data_Config
             txtAccountId.Text = "";
             txtAccountPassword.Text = "";
             txtAccountConfirmPassword.Text = "";
-            ckbAccountAdminRight.Checked = false;
         }        
         
         private void btnAccountSearch_Click(object sender, EventArgs e)
@@ -273,7 +257,6 @@ namespace NIZING_BACKEND_Data_Config
                 cbxAccountVipLevel.SelectedIndex = 0;
                 txtAccountPassword.Text = "";
                 txtAccountConfirmPassword.Text = "";
-                ckbAccountAdminRight.Checked = false;
             }
             foreach (DataGridViewColumn col in gvAccountSearch_Result.Columns)
             {
@@ -311,14 +294,6 @@ namespace NIZING_BACKEND_Data_Config
                 else
                 {
                     cbxAccountVipLevel.SelectedIndex = Convert.ToInt16(gvAccountSearch_Result.SelectedRows[0].Cells[3].Value);
-                }
-                if ((string)gvAccountSearch_Result.SelectedRows[0].Cells[4].Value == "0")
-                {
-                    ckbAccountAdminRight.Checked = false;
-                }
-                else
-                {
-                    ckbAccountAdminRight.Checked = true;
                 }
             }
         }

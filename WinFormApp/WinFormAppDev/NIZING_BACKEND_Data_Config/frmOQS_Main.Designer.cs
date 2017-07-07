@@ -45,14 +45,10 @@ namespace NIZING_BACKEND_Data_Config
             this.txtAccountId = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.lblAccountName = new System.Windows.Forms.Label();
-            this.ckbAccountAdminRight = new System.Windows.Forms.CheckBox();
             this.txtAccountConfirmPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtAccountPassword = new System.Windows.Forms.TextBox();
             this.cbxAccountVipLevel = new System.Windows.Forms.ComboBox();
-            this.ACCOUNTVIPLEVELBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dsLoginAccountBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dsOQS_LoginAccount = new NIZING_BACKEND_Data_Config.dsOQS_LoginAccount();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -88,18 +84,16 @@ namespace NIZING_BACKEND_Data_Config
             this.label12 = new System.Windows.Forms.Label();
             this.pgbProductSyncProgress = new System.Windows.Forms.ProgressBar();
             this.lblProductSyncStatus = new System.Windows.Forms.Label();
-            this.LOGIN_ACCOUNTTableAdapter = new NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();
-            this.ACCOUNT_VIPLEVELTableAdapter = new NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter();
             this.bgwProductSyncLoader = new System.ComponentModel.BackgroundWorker();
+            this.dsOQS_LoginAccount = new NIZING_BACKEND_Data_Config.dsOQS_LoginAccount();
+            this.aCCOUNTVIPLEVELBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.aCCOUNT_VIPLEVELTableAdapter = new NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpAccountManagement.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tlpAccountInputField.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ACCOUNTVIPLEVELBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsLoginAccountBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsOQS_LoginAccount)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvAccountSearch_Result)).BeginInit();
             this.tbpProductManagement.SuspendLayout();
@@ -110,6 +104,8 @@ namespace NIZING_BACKEND_Data_Config
             this.tableLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dsOQS_LoginAccount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aCCOUNTVIPLEVELBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -246,27 +242,26 @@ namespace NIZING_BACKEND_Data_Config
             this.tlpAccountInputField.Controls.Add(this.txtAccountId, 1, 0);
             this.tlpAccountInputField.Controls.Add(this.label4, 0, 1);
             this.tlpAccountInputField.Controls.Add(this.lblAccountName, 1, 1);
-            this.tlpAccountInputField.Controls.Add(this.ckbAccountAdminRight, 1, 5);
             this.tlpAccountInputField.Controls.Add(this.txtAccountConfirmPassword, 1, 4);
             this.tlpAccountInputField.Controls.Add(this.label3, 0, 4);
             this.tlpAccountInputField.Controls.Add(this.txtAccountPassword, 1, 3);
             this.tlpAccountInputField.Controls.Add(this.cbxAccountVipLevel, 1, 2);
             this.tlpAccountInputField.Controls.Add(this.label2, 0, 3);
             this.tlpAccountInputField.Controls.Add(this.label5, 0, 2);
-            this.tlpAccountInputField.Controls.Add(this.flowLayoutPanel2, 1, 6);
-            this.tlpAccountInputField.Controls.Add(this.lblAccountSubmitStatus, 1, 7);
+            this.tlpAccountInputField.Controls.Add(this.flowLayoutPanel2, 1, 5);
+            this.tlpAccountInputField.Controls.Add(this.lblAccountSubmitStatus, 1, 6);
             this.tlpAccountInputField.Location = new System.Drawing.Point(1, 58);
             this.tlpAccountInputField.Margin = new System.Windows.Forms.Padding(0);
             this.tlpAccountInputField.Name = "tlpAccountInputField";
-            this.tlpAccountInputField.RowCount = 8;
-            this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6F));
-            this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34F));
+            this.tlpAccountInputField.RowCount = 7;
+            this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.77778F));
+            this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpAccountInputField.Size = new System.Drawing.Size(460, 465);
             this.tlpAccountInputField.TabIndex = 3;
             // 
@@ -274,7 +269,7 @@ namespace NIZING_BACKEND_Data_Config
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 17);
+            this.label1.Location = new System.Drawing.Point(38, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 12);
             this.label1.TabIndex = 0;
@@ -283,7 +278,7 @@ namespace NIZING_BACKEND_Data_Config
             // txtAccountId
             // 
             this.txtAccountId.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtAccountId.Location = new System.Drawing.Point(76, 12);
+            this.txtAccountId.Location = new System.Drawing.Point(76, 14);
             this.txtAccountId.Name = "txtAccountId";
             this.txtAccountId.Size = new System.Drawing.Size(150, 22);
             this.txtAccountId.TabIndex = 4;
@@ -293,7 +288,7 @@ namespace NIZING_BACKEND_Data_Config
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(41, 63);
+            this.label4.Location = new System.Drawing.Point(41, 70);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 7;
@@ -303,25 +298,15 @@ namespace NIZING_BACKEND_Data_Config
             // 
             this.lblAccountName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblAccountName.AutoSize = true;
-            this.lblAccountName.Location = new System.Drawing.Point(76, 63);
+            this.lblAccountName.Location = new System.Drawing.Point(76, 70);
             this.lblAccountName.Name = "lblAccountName";
             this.lblAccountName.Size = new System.Drawing.Size(0, 12);
             this.lblAccountName.TabIndex = 8;
             // 
-            // ckbAccountAdminRight
-            // 
-            this.ckbAccountAdminRight.AutoSize = true;
-            this.ckbAccountAdminRight.Location = new System.Drawing.Point(76, 233);
-            this.ckbAccountAdminRight.Name = "ckbAccountAdminRight";
-            this.ckbAccountAdminRight.Size = new System.Drawing.Size(84, 16);
-            this.ckbAccountAdminRight.TabIndex = 3;
-            this.ckbAccountAdminRight.Text = "管理員權限";
-            this.ckbAccountAdminRight.UseVisualStyleBackColor = true;
-            // 
             // txtAccountConfirmPassword
             // 
             this.txtAccountConfirmPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtAccountConfirmPassword.Location = new System.Drawing.Point(76, 196);
+            this.txtAccountConfirmPassword.Location = new System.Drawing.Point(76, 218);
             this.txtAccountConfirmPassword.Name = "txtAccountConfirmPassword";
             this.txtAccountConfirmPassword.Size = new System.Drawing.Size(150, 22);
             this.txtAccountConfirmPassword.TabIndex = 6;
@@ -331,7 +316,7 @@ namespace NIZING_BACKEND_Data_Config
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 201);
+            this.label3.Location = new System.Drawing.Point(14, 223);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 12);
             this.label3.TabIndex = 2;
@@ -340,7 +325,7 @@ namespace NIZING_BACKEND_Data_Config
             // txtAccountPassword
             // 
             this.txtAccountPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtAccountPassword.Location = new System.Drawing.Point(76, 150);
+            this.txtAccountPassword.Location = new System.Drawing.Point(76, 167);
             this.txtAccountPassword.Name = "txtAccountPassword";
             this.txtAccountPassword.Size = new System.Drawing.Size(150, 22);
             this.txtAccountPassword.TabIndex = 5;
@@ -349,35 +334,20 @@ namespace NIZING_BACKEND_Data_Config
             // cbxAccountVipLevel
             // 
             this.cbxAccountVipLevel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.cbxAccountVipLevel.DataSource = this.ACCOUNTVIPLEVELBindingSource;
+            this.cbxAccountVipLevel.DataSource = this.aCCOUNTVIPLEVELBindingSource;
             this.cbxAccountVipLevel.DisplayMember = "LEVEL";
             this.cbxAccountVipLevel.FormattingEnabled = true;
-            this.cbxAccountVipLevel.Location = new System.Drawing.Point(76, 105);
+            this.cbxAccountVipLevel.Location = new System.Drawing.Point(76, 117);
             this.cbxAccountVipLevel.Name = "cbxAccountVipLevel";
             this.cbxAccountVipLevel.Size = new System.Drawing.Size(150, 20);
             this.cbxAccountVipLevel.TabIndex = 10;
             this.cbxAccountVipLevel.ValueMember = "LEVEL";
             // 
-            // ACCOUNTVIPLEVELBindingSource
-            // 
-            this.ACCOUNTVIPLEVELBindingSource.DataMember = "ACCOUNT_VIPLEVEL";
-            this.ACCOUNTVIPLEVELBindingSource.DataSource = this.dsLoginAccountBindingSource;
-            // 
-            // dsLoginAccountBindingSource
-            // 
-            this.dsLoginAccountBindingSource.DataSource = this.dsOQS_LoginAccount;
-            this.dsLoginAccountBindingSource.Position = 0;
-            // 
-            // dsLoginAccount
-            // 
-            this.dsOQS_LoginAccount.DataSetName = "dsLoginAccount";
-            this.dsOQS_LoginAccount.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(38, 155);
+            this.label2.Location = new System.Drawing.Point(38, 172);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 12);
             this.label2.TabIndex = 1;
@@ -387,7 +357,7 @@ namespace NIZING_BACKEND_Data_Config
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 109);
+            this.label5.Location = new System.Drawing.Point(20, 121);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(50, 12);
             this.label5.TabIndex = 9;
@@ -398,10 +368,10 @@ namespace NIZING_BACKEND_Data_Config
             this.flowLayoutPanel2.Controls.Add(this.btnAccountConfirm);
             this.flowLayoutPanel2.Controls.Add(this.btnAccountCancel);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(73, 276);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(73, 255);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(387, 27);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(387, 31);
             this.flowLayoutPanel2.TabIndex = 11;
             // 
             // btnAccountConfirm
@@ -428,7 +398,7 @@ namespace NIZING_BACKEND_Data_Config
             // lblAccountSubmitStatus
             // 
             this.lblAccountSubmitStatus.AutoSize = true;
-            this.lblAccountSubmitStatus.Location = new System.Drawing.Point(76, 303);
+            this.lblAccountSubmitStatus.Location = new System.Drawing.Point(76, 286);
             this.lblAccountSubmitStatus.Name = "lblAccountSubmitStatus";
             this.lblAccountSubmitStatus.Size = new System.Drawing.Size(0, 12);
             this.lblAccountSubmitStatus.TabIndex = 12;
@@ -775,20 +745,26 @@ namespace NIZING_BACKEND_Data_Config
             this.lblProductSyncStatus.Size = new System.Drawing.Size(0, 12);
             this.lblProductSyncStatus.TabIndex = 5;
             // 
-            // LOGIN_ACCOUNTTableAdapter
-            // 
-            this.LOGIN_ACCOUNTTableAdapter.ClearBeforeFill = true;
-            // 
-            // ACCOUNT_VIPLEVELTableAdapter
-            // 
-            this.ACCOUNT_VIPLEVELTableAdapter.ClearBeforeFill = true;
-            // 
             // bgwProductSyncLoader
             // 
             this.bgwProductSyncLoader.WorkerReportsProgress = true;
             this.bgwProductSyncLoader.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwProductSyncLoader_DoWork);
             this.bgwProductSyncLoader.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwProductSyncLoader_ProgressChanged);
             this.bgwProductSyncLoader.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwProductSyncLoader_RunWorkerCompleted);
+            // 
+            // dsOQS_LoginAccount
+            // 
+            this.dsOQS_LoginAccount.DataSetName = "dsOQS_LoginAccount";
+            this.dsOQS_LoginAccount.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // aCCOUNTVIPLEVELBindingSource
+            // 
+            this.aCCOUNTVIPLEVELBindingSource.DataMember = "ACCOUNT_VIPLEVEL";
+            this.aCCOUNTVIPLEVELBindingSource.DataSource = this.dsOQS_LoginAccount;
+            // 
+            // aCCOUNT_VIPLEVELTableAdapter
+            // 
+            this.aCCOUNT_VIPLEVELTableAdapter.ClearBeforeFill = true;
             // 
             // frmOQS_Main
             // 
@@ -807,9 +783,6 @@ namespace NIZING_BACKEND_Data_Config
             this.flowLayoutPanel1.ResumeLayout(false);
             this.tlpAccountInputField.ResumeLayout(false);
             this.tlpAccountInputField.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ACCOUNTVIPLEVELBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsLoginAccountBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsOQS_LoginAccount)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvAccountSearch_Result)).EndInit();
             this.tbpProductManagement.ResumeLayout(false);
@@ -823,6 +796,8 @@ namespace NIZING_BACKEND_Data_Config
             this.flowLayoutPanel4.ResumeLayout(false);
             this.flowLayoutPanel5.ResumeLayout(false);
             this.flowLayoutPanel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dsOQS_LoginAccount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aCCOUNTVIPLEVELBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -846,20 +821,14 @@ namespace NIZING_BACKEND_Data_Config
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.CheckBox ckbAccountAdminRight;
         private System.Windows.Forms.TextBox txtAccountPassword;
         private System.Windows.Forms.TextBox txtAccountConfirmPassword;
         private System.Windows.Forms.TextBox txtAccountId;
-        private dsOQS_LoginAccount dsOQS_LoginAccount;
-        private NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter LOGIN_ACCOUNTTableAdapter;
         private System.Windows.Forms.DataGridView gvAccountSearch_Result;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblAccountName;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbxAccountVipLevel;
-        private System.Windows.Forms.BindingSource dsLoginAccountBindingSource;
-        private System.Windows.Forms.BindingSource ACCOUNTVIPLEVELBindingSource;
-        private NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter ACCOUNT_VIPLEVELTableAdapter;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Label lblAccountSubmitStatus;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
@@ -890,5 +859,9 @@ namespace NIZING_BACKEND_Data_Config
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
         private System.Windows.Forms.TextBox txtProductDiscount;
         private System.Windows.Forms.Label label12;
+        private dsOQS_LoginAccount dsOQS_LoginAccount1;
+        private dsOQS_LoginAccount dsOQS_LoginAccount;
+        private System.Windows.Forms.BindingSource aCCOUNTVIPLEVELBindingSource;
+        private dsOQS_LoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter aCCOUNT_VIPLEVELTableAdapter;
     }
 }

@@ -1230,9 +1230,9 @@ namespace NIZING_BACKEND_Data_Config.dsBackendLoginAccountTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT [AUTH].[ID] AS \'AUTH_ID\',[LOGIN].[ID] AS \'LOGIN_ID\',[LOGIN].[PASSWORD]\r\nFR" +
-                "OM [BACKEND_LOGIN_ACCOUNT] [LOGIN]\r\nLEFT JOIN [BACKEND_LOGIN_AUTHORIZATION] AUTH" +
-                " ON [LOGIN].[ID]=AUTH.[ID]";
+            this._commandCollection[0].CommandText = "SELECT [AUTH].[ACCESS_FUNCTION_ID] AS \'AUTH_ID\',[LOGIN].[ID] AS \'LOGIN_ID\',[LOGIN" +
+                "].[PASSWORD]\r\nFROM [BACKEND_LOGIN_ACCOUNT] [LOGIN]\r\nLEFT JOIN [BACKEND_LOGIN_AUT" +
+                "HORIZATION] AUTH ON [LOGIN].[ID]=AUTH.[ID]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

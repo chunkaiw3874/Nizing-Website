@@ -12,7 +12,7 @@
               <DbSource ConnectionRef="NZ_ERP2ConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT [AUTH].[ID] AS 'AUTH_ID',[LOGIN].[ID] AS 'LOGIN_ID',[LOGIN].[PASSWORD]
+                    <CommandText>SELECT [AUTH].[ACCESS_FUNCTION_ID] AS 'AUTH_ID',[LOGIN].[ID] AS 'LOGIN_ID',[LOGIN].[PASSWORD]
 FROM [BACKEND_LOGIN_ACCOUNT] [LOGIN]
 LEFT JOIN [BACKEND_LOGIN_AUTHORIZATION] AUTH ON [LOGIN].[ID]=AUTH.[ID]</CommandText>
                     <Parameters />
@@ -63,7 +63,7 @@ ORDER BY [ID]</CommandText>
   <xs:element name="dsBackendLoginAccount" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsBackendLoginAccount" msprop:Generator_UserDSName="dsBackendLoginAccount">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="BACKEND_LOGIN_ACCOUNT" msprop:Generator_TableClassName="BACKEND_LOGIN_ACCOUNTDataTable" msprop:Generator_TableVarName="tableBACKEND_LOGIN_ACCOUNT" msprop:Generator_RowChangedName="BACKEND_LOGIN_ACCOUNTRowChanged" msprop:Generator_TablePropName="BACKEND_LOGIN_ACCOUNT" msprop:Generator_RowDeletingName="BACKEND_LOGIN_ACCOUNTRowDeleting" msprop:Generator_RowChangingName="BACKEND_LOGIN_ACCOUNTRowChanging" msprop:Generator_RowEvHandlerName="BACKEND_LOGIN_ACCOUNTRowChangeEventHandler" msprop:Generator_RowDeletedName="BACKEND_LOGIN_ACCOUNTRowDeleted" msprop:Generator_RowClassName="BACKEND_LOGIN_ACCOUNTRow" msprop:Generator_UserTableName="BACKEND_LOGIN_ACCOUNT" msprop:Generator_RowEvArgName="BACKEND_LOGIN_ACCOUNTRowChangeEvent">
+        <xs:element name="BACKEND_LOGIN_ACCOUNT" msprop:Generator_TableClassName="BACKEND_LOGIN_ACCOUNTDataTable" msprop:Generator_TableVarName="tableBACKEND_LOGIN_ACCOUNT" msprop:Generator_TablePropName="BACKEND_LOGIN_ACCOUNT" msprop:Generator_RowDeletingName="BACKEND_LOGIN_ACCOUNTRowDeleting" msprop:Generator_RowChangingName="BACKEND_LOGIN_ACCOUNTRowChanging" msprop:Generator_RowEvHandlerName="BACKEND_LOGIN_ACCOUNTRowChangeEventHandler" msprop:Generator_RowDeletedName="BACKEND_LOGIN_ACCOUNTRowDeleted" msprop:Generator_UserTableName="BACKEND_LOGIN_ACCOUNT" msprop:Generator_RowChangedName="BACKEND_LOGIN_ACCOUNTRowChanged" msprop:Generator_RowEvArgName="BACKEND_LOGIN_ACCOUNTRowChangeEvent" msprop:Generator_RowClassName="BACKEND_LOGIN_ACCOUNTRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="PASSWORD" msprop:Generator_ColumnVarNameInTable="columnPASSWORD" msprop:Generator_ColumnPropNameInRow="PASSWORD" msprop:Generator_ColumnPropNameInTable="PASSWORDColumn" msprop:Generator_UserColumnName="PASSWORD" minOccurs="0">
@@ -90,7 +90,7 @@ ORDER BY [ID]</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="BACKEND_FUNCTION_LIST" msprop:Generator_TableClassName="BACKEND_FUNCTION_LISTDataTable" msprop:Generator_TableVarName="tableBACKEND_FUNCTION_LIST" msprop:Generator_RowChangedName="BACKEND_FUNCTION_LISTRowChanged" msprop:Generator_TablePropName="BACKEND_FUNCTION_LIST" msprop:Generator_RowDeletingName="BACKEND_FUNCTION_LISTRowDeleting" msprop:Generator_RowChangingName="BACKEND_FUNCTION_LISTRowChanging" msprop:Generator_RowEvHandlerName="BACKEND_FUNCTION_LISTRowChangeEventHandler" msprop:Generator_RowDeletedName="BACKEND_FUNCTION_LISTRowDeleted" msprop:Generator_RowClassName="BACKEND_FUNCTION_LISTRow" msprop:Generator_UserTableName="BACKEND_FUNCTION_LIST" msprop:Generator_RowEvArgName="BACKEND_FUNCTION_LISTRowChangeEvent">
+        <xs:element name="BACKEND_FUNCTION_LIST" msprop:Generator_TableClassName="BACKEND_FUNCTION_LISTDataTable" msprop:Generator_TableVarName="tableBACKEND_FUNCTION_LIST" msprop:Generator_TablePropName="BACKEND_FUNCTION_LIST" msprop:Generator_RowDeletingName="BACKEND_FUNCTION_LISTRowDeleting" msprop:Generator_RowChangingName="BACKEND_FUNCTION_LISTRowChanging" msprop:Generator_RowEvHandlerName="BACKEND_FUNCTION_LISTRowChangeEventHandler" msprop:Generator_RowDeletedName="BACKEND_FUNCTION_LISTRowDeleted" msprop:Generator_UserTableName="BACKEND_FUNCTION_LIST" msprop:Generator_RowChangedName="BACKEND_FUNCTION_LISTRowChanged" msprop:Generator_RowEvArgName="BACKEND_FUNCTION_LISTRowChangeEvent" msprop:Generator_RowClassName="BACKEND_FUNCTION_LISTRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" minOccurs="0">

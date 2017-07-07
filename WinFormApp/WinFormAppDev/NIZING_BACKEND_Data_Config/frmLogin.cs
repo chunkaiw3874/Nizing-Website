@@ -27,7 +27,6 @@ namespace NIZING_BACKEND_Data_Config
         {
             DataTable dtLoginAccount = new DataTable();
             dsBackendLoginAccountTableAdapters.BACKEND_LOGIN_ACCOUNTTableAdapter accountAdapter = new dsBackendLoginAccountTableAdapters.BACKEND_LOGIN_ACCOUNTTableAdapter();
-            //dsLoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter accountAdapter = new dsLoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();
             dtLoginAccount = accountAdapter.GetData();
 
             var tempRow = dtLoginAccount.Select("LOGIN_ID='" + txtUserName.Text.Trim().ToUpper() + "'");
@@ -37,6 +36,10 @@ namespace NIZING_BACKEND_Data_Config
             {
                 lblLoginStatus.Text = "使用者不存在";
             }
+            else if (dtVerifyLogin.Rows[0]["PASSWORD"].ToString() != txtPassword.Text)
+            {
+                lblLoginStatus.Text = "密碼錯誤";
+            }
             else
             {
                 tempRow=dtVerifyLogin.Select("AUTH_ID='" + cbxFunctionList.SelectedValue + "'");
@@ -45,18 +48,27 @@ namespace NIZING_BACKEND_Data_Config
                 {
                     lblLoginStatus.Text = "使用者無權限使用此模組";
                 }
-                else if (dtVerifyLogin.Rows[0]["PASSWORD"].ToString() != txtPassword.Text)
-                {
-                    lblLoginStatus.Text = "密碼錯誤";
-                }
                 else
                 {
-                    var frm = new frmOQS_Main();
-                    frm.Location = this.Location;
-                    frm.StartPosition = FormStartPosition.Manual;
-                    frm.FormClosing += delegate { Application.Exit(); };
-                    frm.Show();
-                    this.Hide();
+                    switch (cbxFunctionList.SelectedValue.ToString())
+                    {
+                        case "ADMIN":
+                            lblLoginStatus.Text = cbxFunctionList.Text + "建置中";
+                            break;
+                        case "APA":
+                            lblLoginStatus.Text = cbxFunctionList.Text + "建置中";
+                            break;
+                        case "OQS":
+                            var frm = new frmOQS_Main();
+                            frm.Location = this.Location;
+                            frm.StartPosition = FormStartPosition.Manual;
+                            frm.FormClosing += delegate { Application.Exit(); };
+                            frm.Show();
+                            this.Hide();
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
 

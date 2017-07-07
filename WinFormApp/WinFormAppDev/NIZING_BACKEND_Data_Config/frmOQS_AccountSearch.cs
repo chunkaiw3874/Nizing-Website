@@ -22,7 +22,6 @@ namespace NIZING_BACKEND_Data_Config
         {
             InitializeComponent();
             this.ControlBox = false;
-            cbxAccountSearch_AdminRight.SelectedIndex = 0;
         }
 
         private void btnAccountSearch_Cancel_Click(object sender, EventArgs e)
@@ -44,7 +43,6 @@ namespace NIZING_BACKEND_Data_Config
             string accountNameFilter = txtAccountSearch_Name.Text.Trim();
             string startingVipLevelFilter = cbxAccountSearch_StartingVipLevel.SelectedValue.ToString();
             string endingVipLevelFilter = cbxAccountSearch_EndingVipLevel.SelectedValue.ToString();
-            string adminRightFilter = cbxAccountSearch_AdminRight.SelectedItem.ToString();
             DataTable dtLoginAccountFiltered = dtLoginAccount.AsEnumerable().CopyToDataTable();            
             if (!string.IsNullOrEmpty(startAccountIdFilter))
             {
@@ -106,18 +104,6 @@ namespace NIZING_BACKEND_Data_Config
                     dtLoginAccountFiltered.Clear();
                 }
             }
-            if (!string.IsNullOrEmpty(adminRightFilter))
-            {
-                var rows = dtLoginAccountFiltered.AsEnumerable().Where(x => ((string)x["ADMIN"]).CompareTo(adminRightFilter) == 0);
-                if (rows.Any())
-                {
-                    dtLoginAccountFiltered = rows.CopyToDataTable();
-                }
-                else
-                {
-                    dtLoginAccountFiltered.Clear();
-                }
-            }
 
             if (loadGridviewEvent != null)
             {
@@ -134,6 +120,8 @@ namespace NIZING_BACKEND_Data_Config
 
         private void frmAccountSearch_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'dsOQS_LoginAccount.ACCOUNT_VIPLEVEL' table. You can move, or remove it, as needed.
+            this.aCCOUNT_VIPLEVELTableAdapter.Fill(this.dsOQS_LoginAccount.ACCOUNT_VIPLEVEL);
             // TODO: This line of code loads data into the 'dsLoginAccount.ACCOUNT_VIPLEVEL' table. You can move, or remove it, as needed.
             this.aCCOUNT_VIPLEVELTableAdapter.Fill(this.dsOQS_LoginAccount.ACCOUNT_VIPLEVEL);
 
