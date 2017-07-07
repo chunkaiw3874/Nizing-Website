@@ -1,6 +1,7 @@
-﻿namespace OQS_Data_Config
+﻿using NIZING_BACKEND_Data_Config;
+namespace NIZING_BACKEND_Data_Config
 {
-    partial class frmMain
+    partial class frmOQS_Main
     {
         /// <summary>
         /// Required designer variable.
@@ -51,7 +52,7 @@
             this.cbxAccountVipLevel = new System.Windows.Forms.ComboBox();
             this.ACCOUNTVIPLEVELBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dsLoginAccountBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dsLoginAccount = new OQS_Data_Config.dsLoginAccount();
+            this.dsLoginAccount = new NIZING_BACKEND_Data_Config.dsLoginAccount();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -75,21 +76,21 @@
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnProductConfirm = new System.Windows.Forms.Button();
             this.btnProductCancel = new System.Windows.Forms.Button();
-            this.lblProductSubmitStatus = new System.Windows.Forms.Label();
-            this.pgbProductSyncProgress = new System.Windows.Forms.ProgressBar();
-            this.lblProductSyncStatus = new System.Windows.Forms.Label();
-            this.LOGIN_ACCOUNTTableAdapter = new OQS_Data_Config.dsLoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();
-            this.ACCOUNT_VIPLEVELTableAdapter = new OQS_Data_Config.dsLoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter();
-            this.bgwProductSyncLoader = new System.ComponentModel.BackgroundWorker();
             this.label9 = new System.Windows.Forms.Label();
             this.txtProductPrice = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.ckbProductDisplay = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txtProductBuffer = new System.Windows.Forms.TextBox();
-            this.txtProductDiscount = new System.Windows.Forms.TextBox();
+            this.lblProductSubmitStatus = new System.Windows.Forms.Label();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtProductDiscount = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.pgbProductSyncProgress = new System.Windows.Forms.ProgressBar();
+            this.lblProductSyncStatus = new System.Windows.Forms.Label();
+            this.LOGIN_ACCOUNTTableAdapter = new NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();
+            this.ACCOUNT_VIPLEVELTableAdapter = new NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter();
+            this.bgwProductSyncLoader = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpAccountManagement.SuspendLayout();
@@ -661,48 +662,6 @@
             this.btnProductCancel.Text = "取消";
             this.btnProductCancel.UseVisualStyleBackColor = true;
             // 
-            // lblProductSubmitStatus
-            // 
-            this.lblProductSubmitStatus.AutoSize = true;
-            this.lblProductSubmitStatus.Location = new System.Drawing.Point(3, 303);
-            this.lblProductSubmitStatus.Name = "lblProductSubmitStatus";
-            this.lblProductSubmitStatus.Size = new System.Drawing.Size(0, 12);
-            this.lblProductSubmitStatus.TabIndex = 12;
-            // 
-            // pgbProductSyncProgress
-            // 
-            this.pgbProductSyncProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pgbProductSyncProgress.Location = new System.Drawing.Point(3, 719);
-            this.pgbProductSyncProgress.Name = "pgbProductSyncProgress";
-            this.pgbProductSyncProgress.Size = new System.Drawing.Size(454, 23);
-            this.pgbProductSyncProgress.TabIndex = 4;
-            // 
-            // lblProductSyncStatus
-            // 
-            this.lblProductSyncStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblProductSyncStatus.AutoSize = true;
-            this.lblProductSyncStatus.ForeColor = System.Drawing.Color.Green;
-            this.lblProductSyncStatus.Location = new System.Drawing.Point(3, 704);
-            this.lblProductSyncStatus.Name = "lblProductSyncStatus";
-            this.lblProductSyncStatus.Size = new System.Drawing.Size(0, 12);
-            this.lblProductSyncStatus.TabIndex = 5;
-            // 
-            // LOGIN_ACCOUNTTableAdapter
-            // 
-            this.LOGIN_ACCOUNTTableAdapter.ClearBeforeFill = true;
-            // 
-            // ACCOUNT_VIPLEVELTableAdapter
-            // 
-            this.ACCOUNT_VIPLEVELTableAdapter.ClearBeforeFill = true;
-            // 
-            // bgwProductSyncLoader
-            // 
-            this.bgwProductSyncLoader.WorkerReportsProgress = true;
-            this.bgwProductSyncLoader.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwProductSyncLoader_DoWork);
-            this.bgwProductSyncLoader.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwProductSyncLoader_ProgressChanged);
-            this.bgwProductSyncLoader.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwProductSyncLoader_RunWorkerCompleted);
-            // 
             // label9
             // 
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -760,13 +719,13 @@
             this.txtProductBuffer.Size = new System.Drawing.Size(150, 22);
             this.txtProductBuffer.TabIndex = 19;
             // 
-            // txtProductDiscount
+            // lblProductSubmitStatus
             // 
-            this.txtProductDiscount.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtProductDiscount.Location = new System.Drawing.Point(3, 3);
-            this.txtProductDiscount.Name = "txtProductDiscount";
-            this.txtProductDiscount.Size = new System.Drawing.Size(150, 22);
-            this.txtProductDiscount.TabIndex = 15;
+            this.lblProductSubmitStatus.AutoSize = true;
+            this.lblProductSubmitStatus.Location = new System.Drawing.Point(3, 303);
+            this.lblProductSubmitStatus.Name = "lblProductSubmitStatus";
+            this.lblProductSubmitStatus.Size = new System.Drawing.Size(0, 12);
+            this.lblProductSubmitStatus.TabIndex = 12;
             // 
             // flowLayoutPanel5
             // 
@@ -779,6 +738,14 @@
             this.flowLayoutPanel5.Size = new System.Drawing.Size(384, 28);
             this.flowLayoutPanel5.TabIndex = 20;
             // 
+            // txtProductDiscount
+            // 
+            this.txtProductDiscount.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtProductDiscount.Location = new System.Drawing.Point(3, 3);
+            this.txtProductDiscount.Name = "txtProductDiscount";
+            this.txtProductDiscount.Size = new System.Drawing.Size(150, 22);
+            this.txtProductDiscount.TabIndex = 15;
+            // 
             // label12
             // 
             this.label12.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -789,14 +756,48 @@
             this.label12.TabIndex = 16;
             this.label12.Text = "%";
             // 
-            // frmMain
+            // pgbProductSyncProgress
+            // 
+            this.pgbProductSyncProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pgbProductSyncProgress.Location = new System.Drawing.Point(3, 719);
+            this.pgbProductSyncProgress.Name = "pgbProductSyncProgress";
+            this.pgbProductSyncProgress.Size = new System.Drawing.Size(454, 23);
+            this.pgbProductSyncProgress.TabIndex = 4;
+            // 
+            // lblProductSyncStatus
+            // 
+            this.lblProductSyncStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblProductSyncStatus.AutoSize = true;
+            this.lblProductSyncStatus.ForeColor = System.Drawing.Color.Green;
+            this.lblProductSyncStatus.Location = new System.Drawing.Point(3, 704);
+            this.lblProductSyncStatus.Name = "lblProductSyncStatus";
+            this.lblProductSyncStatus.Size = new System.Drawing.Size(0, 12);
+            this.lblProductSyncStatus.TabIndex = 5;
+            // 
+            // LOGIN_ACCOUNTTableAdapter
+            // 
+            this.LOGIN_ACCOUNTTableAdapter.ClearBeforeFill = true;
+            // 
+            // ACCOUNT_VIPLEVELTableAdapter
+            // 
+            this.ACCOUNT_VIPLEVELTableAdapter.ClearBeforeFill = true;
+            // 
+            // bgwProductSyncLoader
+            // 
+            this.bgwProductSyncLoader.WorkerReportsProgress = true;
+            this.bgwProductSyncLoader.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwProductSyncLoader_DoWork);
+            this.bgwProductSyncLoader.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwProductSyncLoader_ProgressChanged);
+            this.bgwProductSyncLoader.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwProductSyncLoader_RunWorkerCompleted);
+            // 
+            // frmOQS_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 862);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(800, 600);
-            this.Name = "frmMain";
+            this.Name = "frmOQS_Main";
             this.Text = "frmMain";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -850,7 +851,7 @@
         private System.Windows.Forms.TextBox txtAccountConfirmPassword;
         private System.Windows.Forms.TextBox txtAccountId;
         private dsLoginAccount dsLoginAccount;
-        private dsLoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter LOGIN_ACCOUNTTableAdapter;
+        private NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter LOGIN_ACCOUNTTableAdapter;
         private System.Windows.Forms.DataGridView gvAccountSearch_Result;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblAccountName;
@@ -858,7 +859,7 @@
         private System.Windows.Forms.ComboBox cbxAccountVipLevel;
         private System.Windows.Forms.BindingSource dsLoginAccountBindingSource;
         private System.Windows.Forms.BindingSource ACCOUNTVIPLEVELBindingSource;
-        private dsLoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter ACCOUNT_VIPLEVELTableAdapter;
+        private NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter ACCOUNT_VIPLEVELTableAdapter;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Label lblAccountSubmitStatus;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OQS_Data_Config.Properties {
+namespace NIZING_BACKEND_Data_Config.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

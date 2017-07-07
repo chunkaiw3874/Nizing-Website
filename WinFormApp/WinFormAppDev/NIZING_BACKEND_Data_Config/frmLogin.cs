@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
-namespace OQS_Data_Config
+namespace NIZING_BACKEND_Data_Config
 {
     public partial class frmLogin : Form
     {
@@ -51,7 +51,7 @@ namespace OQS_Data_Config
                 }
                 else
                 {
-                    var frm = new frmMain();
+                    var frm = new frmOQS_Main();
                     frm.Location = this.Location;
                     frm.StartPosition = FormStartPosition.Manual;
                     frm.FormClosing += delegate { Application.Exit(); };

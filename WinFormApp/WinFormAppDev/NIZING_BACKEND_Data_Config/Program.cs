@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace OQS_Data_Config
+namespace NIZING_BACKEND_Data_Config
 {
     static class Program
     {

@@ -9,16 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace OQS_Data_Config
+namespace NIZING_BACKEND_Data_Config
 {
     public delegate void searchForm_Close();
     public delegate void searchForm_Search(DataTable dt);
-    public partial class frmAccountSearch : Form
+    public partial class frmOQS_AccountSearch : Form
     {
         public event searchForm_Close loadButtonEvent;
         public event searchForm_Search loadGridviewEvent;
 
-        public frmAccountSearch()
+        public frmOQS_AccountSearch()
         {
             InitializeComponent();
             this.ControlBox = false;

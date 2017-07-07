@@ -1,6 +1,7 @@
-﻿namespace OQS_Data_Config
+﻿using NIZING_BACKEND_Data_Config;
+namespace NIZING_BACKEND_Data_Config
 {
-    partial class frmAccountSearch
+    partial class frmOQS_AccountSearch
     {
         /// <summary>
         /// Required designer variable.
@@ -45,8 +46,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.cbxAccountSearch_AdminRight = new System.Windows.Forms.ComboBox();
             this.aCCOUNTVIPLEVELBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dsLoginAccount = new OQS_Data_Config.dsLoginAccount();
-            this.aCCOUNT_VIPLEVELTableAdapter = new OQS_Data_Config.dsLoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter();
+            this.dsLoginAccount = new NIZING_BACKEND_Data_Config.dsLoginAccount();
+            this.aCCOUNT_VIPLEVELTableAdapter = new NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter();
             this.label7 = new System.Windows.Forms.Label();
             this.cbxAccountSearch_EndingVipLevel = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
@@ -298,7 +299,7 @@
         private System.Windows.Forms.ComboBox cbxAccountSearch_StartingVipLevel;
         private dsLoginAccount dsLoginAccount;
         private System.Windows.Forms.BindingSource aCCOUNTVIPLEVELBindingSource;
-        private dsLoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter aCCOUNT_VIPLEVELTableAdapter;
+        private NIZING_BACKEND_Data_Config.dsLoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter aCCOUNT_VIPLEVELTableAdapter;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbxAccountSearch_AdminRight;
         private System.Windows.Forms.Label label7;

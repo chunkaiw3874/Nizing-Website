@@ -8,13 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace OQS_Data_Config
+namespace NIZING_BACKEND_Data_Config
 {
-    public partial class frmMain : Form
+    public partial class frmOQS_Main : Form
     {
         private Boolean searchFormLoaded = false;        
 
-        public frmMain()
+        public frmOQS_Main()
         {
             InitializeComponent();
             #region 帳號管理
@@ -225,7 +225,7 @@ namespace OQS_Data_Config
             gvAccountSearch_Result.Enabled = true;
             tlpAccountInputField.Enabled = false;
 
-            var frm = new frmAccountSearch();
+            var frm = new frmOQS_AccountSearch();
             frm.Location = new Point(this.Location.X + this.Width, this.Location.Y);
             frm.StartPosition = FormStartPosition.Manual;
             frm.FormClosing += delegate { frm.Hide(); };
@@ -380,8 +380,9 @@ namespace OQS_Data_Config
             
             dsProductInfoTableAdapters.INVMBTableAdapter erpAdapter = new dsProductInfoTableAdapters.INVMBTableAdapter();
             dsProductInfoTableAdapters.PRODUCT_INFOTableAdapter oqsAdapter = new dsProductInfoTableAdapters.PRODUCT_INFOTableAdapter();
-            DataTable dtErp = erpAdapter.GetData();
+
             DataTable dtOqs = oqsAdapter.GetData();
+            DataTable dtErp = erpAdapter.GetData();
             dtErp.Columns.Add("ACTION");
             dtOqs.Columns.Add("ACTION");
 

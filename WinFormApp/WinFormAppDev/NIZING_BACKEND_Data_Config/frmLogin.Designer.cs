@@ -1,4 +1,5 @@
-﻿namespace OQS_Data_Config
+﻿using NIZING_BACKEND_Data_Config;
+namespace NIZING_BACKEND_Data_Config
 {
     partial class frmLogin
     {
@@ -40,10 +41,10 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.cbxFunctionList = new System.Windows.Forms.ComboBox();
-            this.dsBackendLoginAccount = new OQS_Data_Config.dsBackendLoginAccount();
+            this.dsBackendLoginAccount = new NIZING_BACKEND_Data_Config.dsBackendLoginAccount();
             this.dsBackendLoginAccountBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bACKENDFUNCTIONLISTBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.bACKEND_FUNCTION_LISTTableAdapter = new OQS_Data_Config.dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter();
+            this.bACKEND_FUNCTION_LISTTableAdapter = new NIZING_BACKEND_Data_Config.dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbpnlLogin.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -250,7 +251,7 @@
         private dsBackendLoginAccount dsBackendLoginAccount;
         private System.Windows.Forms.BindingSource dsBackendLoginAccountBindingSource;
         private System.Windows.Forms.BindingSource bACKENDFUNCTIONLISTBindingSource;
-        private dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter bACKEND_FUNCTION_LISTTableAdapter;
+        private NIZING_BACKEND_Data_Config.dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter bACKEND_FUNCTION_LISTTableAdapter;
 
     }
 }

@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace OQS_Data_Config {
+namespace NIZING_BACKEND_Data_Config {
     
     
     /// <summary>
@@ -1087,7 +1087,7 @@ namespace OQS_Data_Config {
         }
     }
 }
-namespace OQS_Data_Config.dsBackendLoginAccountTableAdapters {
+namespace NIZING_BACKEND_Data_Config.dsBackendLoginAccountTableAdapters {
     
     
     /// <summary>
@@ -1221,7 +1221,7 @@ namespace OQS_Data_Config.dsBackendLoginAccountTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::OQS_Data_Config.Properties.Settings.Default.NZ_ERP2ConnectionString;
+            this._connection.ConnectionString = global::NIZING_BACKEND_Data_Config.Properties.Settings.Default.NZ_ERP2ConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1397,7 +1397,7 @@ namespace OQS_Data_Config.dsBackendLoginAccountTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::OQS_Data_Config.Properties.Settings.Default.NZ_ERP2ConnectionString;
+            this._connection.ConnectionString = global::NIZING_BACKEND_Data_Config.Properties.Settings.Default.NZ_ERP2ConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

@@ -1,4 +1,5 @@
-﻿namespace OQS_Data_Config {
+﻿namespace NIZING_BACKEND_Data_Config
+{
     
     
     public partial class dsLoginAccount {
