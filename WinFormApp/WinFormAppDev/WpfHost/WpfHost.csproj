@@ -57,6 +57,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StyleCop">
+      <HintPath>..\..\..\packages\StyleCop.4.7.55\lib\net35\StyleCop.dll</HintPath>
+    </Reference>
+    <Reference Include="StyleCop.CSharp">
+      <HintPath>..\..\..\packages\StyleCop.4.7.55\lib\net35\StyleCop.CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
@@ -87,6 +93,7 @@
     </Compile>
     <Compile Include="LoginAccountDataSet.cs">
       <DependentUpon>LoginAccountDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="LoginAccountDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -128,6 +135,7 @@
     <None Include="LoginAccountDataSet.xss">
       <DependentUpon>LoginAccountDataSet.xsd</DependentUpon>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

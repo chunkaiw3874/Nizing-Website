@@ -37,6 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -66,6 +67,12 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StyleCop">
+      <HintPath>..\..\..\packages\StyleCop.4.7.55\lib\net35\StyleCop.dll</HintPath>
+    </Reference>
+    <Reference Include="StyleCop.CSharp">
+      <HintPath>..\..\..\packages\StyleCop.4.7.55\lib\net35\StyleCop.CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -97,6 +104,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsProductInfo.xsd</DependentUpon>
     </Compile>
+    <Compile Include="frmBackend_AccountSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBackend_AccountSearch.Designer.cs">
+      <DependentUpon>frmBackend_AccountSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBackend_Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBackend_Main.Designer.cs">
+      <DependentUpon>frmBackend_Main.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmOQS_AccountSearch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +136,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmBackend_AccountSearch.resx">
+      <DependentUpon>frmBackend_AccountSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBackend_Main.resx">
+      <DependentUpon>frmBackend_Main.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmOQS_AccountSearch.resx">
       <DependentUpon>frmOQS_AccountSearch.cs</DependentUpon>
     </EmbeddedResource>
@@ -169,6 +194,7 @@
     <None Include="dsProductInfo.xss">
       <DependentUpon>dsProductInfo.xsd</DependentUpon>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

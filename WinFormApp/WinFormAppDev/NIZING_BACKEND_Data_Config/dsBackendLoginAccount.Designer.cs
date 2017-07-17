@@ -320,6 +320,8 @@ namespace NIZING_BACKEND_Data_Config {
             
             private global::System.Data.DataColumn columnLOGIN_ID;
             
+            private global::System.Data.DataColumn columnACTIVE;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public BACKEND_LOGIN_ACCOUNTDataTable() {
@@ -379,6 +381,14 @@ namespace NIZING_BACKEND_Data_Config {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ACTIVEColumn {
+                get {
+                    return this.columnACTIVE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -414,12 +424,13 @@ namespace NIZING_BACKEND_Data_Config {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public BACKEND_LOGIN_ACCOUNTRow AddBACKEND_LOGIN_ACCOUNTRow(string PASSWORD, string AUTH_ID, string LOGIN_ID) {
+            public BACKEND_LOGIN_ACCOUNTRow AddBACKEND_LOGIN_ACCOUNTRow(string PASSWORD, string AUTH_ID, string LOGIN_ID, string ACTIVE) {
                 BACKEND_LOGIN_ACCOUNTRow rowBACKEND_LOGIN_ACCOUNTRow = ((BACKEND_LOGIN_ACCOUNTRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         PASSWORD,
                         AUTH_ID,
-                        LOGIN_ID};
+                        LOGIN_ID,
+                        ACTIVE};
                 rowBACKEND_LOGIN_ACCOUNTRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBACKEND_LOGIN_ACCOUNTRow);
                 return rowBACKEND_LOGIN_ACCOUNTRow;
@@ -445,6 +456,7 @@ namespace NIZING_BACKEND_Data_Config {
                 this.columnPASSWORD = base.Columns["PASSWORD"];
                 this.columnAUTH_ID = base.Columns["AUTH_ID"];
                 this.columnLOGIN_ID = base.Columns["LOGIN_ID"];
+                this.columnACTIVE = base.Columns["ACTIVE"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -456,9 +468,12 @@ namespace NIZING_BACKEND_Data_Config {
                 base.Columns.Add(this.columnAUTH_ID);
                 this.columnLOGIN_ID = new global::System.Data.DataColumn("LOGIN_ID", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLOGIN_ID);
+                this.columnACTIVE = new global::System.Data.DataColumn("ACTIVE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnACTIVE);
                 this.columnPASSWORD.MaxLength = 255;
                 this.columnAUTH_ID.MaxLength = 50;
                 this.columnLOGIN_ID.MaxLength = 50;
+                this.columnACTIVE.MaxLength = 1;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -912,6 +927,22 @@ namespace NIZING_BACKEND_Data_Config {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ACTIVE {
+                get {
+                    try {
+                        return ((string)(this[this.tableBACKEND_LOGIN_ACCOUNT.ACTIVEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ACTIVE\' in table \'BACKEND_LOGIN_ACCOUNT\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBACKEND_LOGIN_ACCOUNT.ACTIVEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsPASSWORDNull() {
                 return this.IsNull(this.tableBACKEND_LOGIN_ACCOUNT.PASSWORDColumn);
             }
@@ -944,6 +975,18 @@ namespace NIZING_BACKEND_Data_Config {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetLOGIN_IDNull() {
                 this[this.tableBACKEND_LOGIN_ACCOUNT.LOGIN_IDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsACTIVENull() {
+                return this.IsNull(this.tableBACKEND_LOGIN_ACCOUNT.ACTIVEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetACTIVENull() {
+                this[this.tableBACKEND_LOGIN_ACCOUNT.ACTIVEColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1214,6 +1257,7 @@ namespace NIZING_BACKEND_Data_Config.dsBackendLoginAccountTableAdapters {
             tableMapping.ColumnMappings.Add("PASSWORD", "PASSWORD");
             tableMapping.ColumnMappings.Add("AUTH_ID", "AUTH_ID");
             tableMapping.ColumnMappings.Add("LOGIN_ID", "LOGIN_ID");
+            tableMapping.ColumnMappings.Add("ACTIVE", "ACTIVE");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -1227,13 +1271,51 @@ namespace NIZING_BACKEND_Data_Config.dsBackendLoginAccountTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[7];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT [AUTH].[ACCESS_FUNCTION_ID] AS \'AUTH_ID\',[LOGIN].[ID] AS \'LOGIN_ID\',[LOGIN" +
-                "].[PASSWORD]\r\nFROM [BACKEND_LOGIN_ACCOUNT] [LOGIN]\r\nLEFT JOIN [BACKEND_LOGIN_AUT" +
-                "HORIZATION] AUTH ON [LOGIN].[ID]=AUTH.[ID]";
+                "].[PASSWORD],[AUTH].[ACTIVE]\r\nFROM [BACKEND_LOGIN_ACCOUNT] [LOGIN]\r\nLEFT JOIN [B" +
+                "ACKEND_LOGIN_AUTHORIZATION] AUTH ON [LOGIN].[ID]=AUTH.[ID]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "DELETE FROM BACKEND_LOGIN_AUTHORIZATION\r\nWHERE [ID]=@ID";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "DELETE FROM BACKEND_LOGIN_ACCOUNT\r\nWHERE [ID]=@ID";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "INSERT INTO [BACKEND_LOGIN_AUTHORIZATION]\r\nVALUES (@ID,@ACCESS_FUNCTION_ID,@ACTIV" +
+                "E)";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ACCESS_FUNCTION_ID", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "ACCESS_FUNCTION_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ACTIVE", global::System.Data.SqlDbType.NVarChar, 1, global::System.Data.ParameterDirection.Input, 0, 0, "ACTIVE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[4].Connection = this.Connection;
+            this._commandCollection[4].CommandText = "INSERT INTO [BACKEND_LOGIN_ACCOUNT]\r\nVALUES (@ID,@PASSWORD)";
+            this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PASSWORD", global::System.Data.SqlDbType.NVarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "PASSWORD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[5] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[5].Connection = this.Connection;
+            this._commandCollection[5].CommandText = "UPDATE [BACKEND_LOGIN_AUTHORIZATION]\r\nSET [ACTIVE]=@ACTIVE\r\nWHERE [ID]=@ID\r\nAND [" +
+                "ACCESS_FUNCTION_ID]=@ACCESS_FUNCTION_ID";
+            this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ACTIVE", global::System.Data.SqlDbType.NVarChar, 1, global::System.Data.ParameterDirection.Input, 0, 0, "ACTIVE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ACCESS_FUNCTION_ID", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "ACCESS_FUNCTION_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[6] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[6].Connection = this.Connection;
+            this._commandCollection[6].CommandText = "UPDATE BACKEND_LOGIN_ACCOUNT\r\nSET PASSWORD=@PASSWORD\r\nWHERE [ID]=@ID";
+            this._commandCollection[6].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PASSWORD", global::System.Data.SqlDbType.NVarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "PASSWORD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1258,6 +1340,216 @@ namespace NIZING_BACKEND_Data_Config.dsBackendLoginAccountTableAdapters {
             dsBackendLoginAccount.BACKEND_LOGIN_ACCOUNTDataTable dataTable = new dsBackendLoginAccount.BACKEND_LOGIN_ACCOUNTDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
+        public virtual int DeleteAuthRecordQuery(string ID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            if ((ID == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(ID));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
+        public virtual int DeleteLoginRecordQuery(string ID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            if ((ID == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(ID));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertAuthRecordQuery(string ID, string ACCESS_FUNCTION_ID, string ACTIVE) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
+            if ((ID == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(ID));
+            }
+            if ((ACCESS_FUNCTION_ID == null)) {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[1].Value = ((string)(ACCESS_FUNCTION_ID));
+            }
+            if ((ACTIVE == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(ACTIVE));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertLoginRecordQuery(string ID, string PASSWORD) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[4];
+            if ((ID == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(ID));
+            }
+            if ((PASSWORD == null)) {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[1].Value = ((string)(PASSWORD));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
+        public virtual int UpdateAuthRecordQuery(string ACTIVE, string ID, string ACCESS_FUNCTION_ID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[5];
+            if ((ACTIVE == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(ACTIVE));
+            }
+            if ((ID == null)) {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[1].Value = ((string)(ID));
+            }
+            if ((ACCESS_FUNCTION_ID == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(ACCESS_FUNCTION_ID));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
+        public virtual int UpdateLoginRecordQuery(string PASSWORD, string ID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[6];
+            if ((PASSWORD == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(PASSWORD));
+            }
+            if ((ID == null)) {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[1].Value = ((string)(ID));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     

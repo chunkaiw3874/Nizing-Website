@@ -601,7 +601,8 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
         }
         else if (lblEmpID.Text.Trim() == "0005" || lblEmpID.Text.Trim() == "0015" || lblEmpID.Text.Trim() == "0031" ||
             lblEmpID.Text.Trim() == "0047" || lblEmpID.Text.Trim() == "0063" || lblEmpID.Text.Trim() == "0074" ||
-            lblEmpID.Text.Trim() == "0080" || lblEmpID.Text.Trim() == "0085" || lblEmpID.Text.Trim() == "0023") //辦公室人員
+            lblEmpID.Text.Trim() == "0080" || lblEmpID.Text.Trim() == "0085" || lblEmpID.Text.Trim() == "0023" ||
+            lblEmpID.Text.Trim() == "0123") //辦公室人員
         {
             onJobHour = 1976;
             lblOnJobPercent.Text = (Math.Round(100 * (1 - (dayOffSum / onJobHour)), 2, MidpointRounding.AwayFromZero)).ToString();

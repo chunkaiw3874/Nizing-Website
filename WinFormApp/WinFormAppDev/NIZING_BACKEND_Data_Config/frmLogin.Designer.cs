@@ -37,20 +37,20 @@ namespace NIZING_BACKEND_Data_Config
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.lblLoginStatus = new System.Windows.Forms.Label();
-            this.btnLogin = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.lblLoginStatus = new System.Windows.Forms.Label();
             this.cbxFunctionList = new System.Windows.Forms.ComboBox();
+            this.bACKENDFUNCTIONLISTBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dsBackendLoginAccount = new NIZING_BACKEND_Data_Config.dsBackendLoginAccount();
             this.dsBackendLoginAccountBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.bACKENDFUNCTIONLISTBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bACKEND_FUNCTION_LISTTableAdapter = new NIZING_BACKEND_Data_Config.dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbpnlLogin.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bACKENDFUNCTIONLISTBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsBackendLoginAccount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsBackendLoginAccountBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bACKENDFUNCTIONLISTBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -133,6 +133,7 @@ namespace NIZING_BACKEND_Data_Config
             this.txtPassword.Size = new System.Drawing.Size(226, 22);
             this.txtPassword.TabIndex = 3;
             this.txtPassword.UseSystemPasswordChar = true;
+            this.txtPassword.Enter += new System.EventHandler(this.txtPassword_Enter);
             // 
             // label3
             // 
@@ -144,29 +145,8 @@ namespace NIZING_BACKEND_Data_Config
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(458, 19);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Nizing Online Quotation System Configuration";
+            this.label3.Text = "Nizing Backend Configuration System";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblLoginStatus
-            // 
-            this.lblLoginStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblLoginStatus.AutoSize = true;
-            this.lblLoginStatus.ForeColor = System.Drawing.Color.Red;
-            this.lblLoginStatus.Location = new System.Drawing.Point(3, 29);
-            this.lblLoginStatus.Name = "lblLoginStatus";
-            this.lblLoginStatus.Size = new System.Drawing.Size(226, 12);
-            this.lblLoginStatus.TabIndex = 1;
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnLogin.Location = new System.Drawing.Point(3, 3);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(226, 23);
-            this.btnLogin.TabIndex = 0;
-            this.btnLogin.Text = "Login";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -179,6 +159,27 @@ namespace NIZING_BACKEND_Data_Config
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(232, 118);
             this.flowLayoutPanel1.TabIndex = 7;
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnLogin.Location = new System.Drawing.Point(3, 3);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(226, 23);
+            this.btnLogin.TabIndex = 0;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // lblLoginStatus
+            // 
+            this.lblLoginStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLoginStatus.AutoSize = true;
+            this.lblLoginStatus.ForeColor = System.Drawing.Color.Red;
+            this.lblLoginStatus.Location = new System.Drawing.Point(3, 29);
+            this.lblLoginStatus.Name = "lblLoginStatus";
+            this.lblLoginStatus.Size = new System.Drawing.Size(226, 12);
+            this.lblLoginStatus.TabIndex = 1;
             // 
             // cbxFunctionList
             // 
@@ -193,6 +194,11 @@ namespace NIZING_BACKEND_Data_Config
             this.cbxFunctionList.TabIndex = 8;
             this.cbxFunctionList.ValueMember = "ID";
             // 
+            // bACKENDFUNCTIONLISTBindingSource
+            // 
+            this.bACKENDFUNCTIONLISTBindingSource.DataMember = "BACKEND_FUNCTION_LIST";
+            this.bACKENDFUNCTIONLISTBindingSource.DataSource = this.dsBackendLoginAccount;
+            // 
             // dsBackendLoginAccount
             // 
             this.dsBackendLoginAccount.DataSetName = "dsBackendLoginAccount";
@@ -202,11 +208,6 @@ namespace NIZING_BACKEND_Data_Config
             // 
             this.dsBackendLoginAccountBindingSource.DataSource = this.dsBackendLoginAccount;
             this.dsBackendLoginAccountBindingSource.Position = 0;
-            // 
-            // bACKENDFUNCTIONLISTBindingSource
-            // 
-            this.bACKENDFUNCTIONLISTBindingSource.DataMember = "BACKEND_FUNCTION_LIST";
-            this.bACKENDFUNCTIONLISTBindingSource.DataSource = this.dsBackendLoginAccount;
             // 
             // bACKEND_FUNCTION_LISTTableAdapter
             // 
@@ -228,9 +229,9 @@ namespace NIZING_BACKEND_Data_Config
             this.tbpnlLogin.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bACKENDFUNCTIONLISTBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsBackendLoginAccount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsBackendLoginAccountBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bACKENDFUNCTIONLISTBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

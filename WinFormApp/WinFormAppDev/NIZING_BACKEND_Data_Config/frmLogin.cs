@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 
 namespace NIZING_BACKEND_Data_Config
-{
+{    
     public partial class frmLogin : Form
     {
         public frmLogin()
@@ -42,7 +42,7 @@ namespace NIZING_BACKEND_Data_Config
             }
             else
             {
-                tempRow=dtVerifyLogin.Select("AUTH_ID='" + cbxFunctionList.SelectedValue + "'");
+                tempRow = dtVerifyLogin.Select("AUTH_ID='" + cbxFunctionList.SelectedValue + "' AND ACTIVE='1'");
                 dtVerifyLogin = tempRow.Any() ? tempRow.CopyToDataTable() : dtVerifyLogin.Clone();
                 if (dtVerifyLogin.Rows.Count == 0)
                 {
@@ -52,18 +52,23 @@ namespace NIZING_BACKEND_Data_Config
                 {
                     switch (cbxFunctionList.SelectedValue.ToString())
                     {
-                        case "ADMIN":
-                            lblLoginStatus.Text = cbxFunctionList.Text + "建置中";
+                        case "ADMIN":                            
+                            var frmBackend = new frmBackend_Main();
+                            frmBackend.Location = this.Location;
+                            frmBackend.StartPosition = FormStartPosition.Manual;
+                            frmBackend.FormClosing += delegate { Application.Exit(); };
+                            frmBackend.Show();
+                            this.Hide();
                             break;
                         case "APA":
                             lblLoginStatus.Text = cbxFunctionList.Text + "建置中";
                             break;
                         case "OQS":
-                            var frm = new frmOQS_Main();
-                            frm.Location = this.Location;
-                            frm.StartPosition = FormStartPosition.Manual;
-                            frm.FormClosing += delegate { Application.Exit(); };
-                            frm.Show();
+                            var frmOQS = new frmOQS_Main();
+                            frmOQS.Location = this.Location;
+                            frmOQS.StartPosition = FormStartPosition.Manual;
+                            frmOQS.FormClosing += delegate { Application.Exit(); };
+                            frmOQS.Show();
                             this.Hide();
                             break;
                         default:
@@ -79,6 +84,11 @@ namespace NIZING_BACKEND_Data_Config
             // TODO: This line of code loads data into the 'dsBackendLoginAccount.BACKEND_FUNCTION_LIST' table. You can move, or remove it, as needed.
             this.bACKEND_FUNCTION_LISTTableAdapter.Fill(this.dsBackendLoginAccount.BACKEND_FUNCTION_LIST);
 
+        }
+
+        private void txtPassword_Enter(object sender, EventArgs e)
+        {
+            txtPassword.Clear();
         }
     }
 }

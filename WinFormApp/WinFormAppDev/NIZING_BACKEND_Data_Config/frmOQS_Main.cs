@@ -88,43 +88,36 @@ namespace NIZING_BACKEND_Data_Config
 
         private void btnAccountDelete_Click(object sender, EventArgs e)
         {
-            if (txtAccountId.Text == "ADMIN")
+            var confirmResult = MessageBox.Show("確定要刪除" + txtAccountId.Text.Trim() + "的資料嗎?", "刪除確認", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
             {
-                var noDelete = MessageBox.Show("不得刪除ADMIN");
-            }
-            else
-            {
-                var confirmResult = MessageBox.Show("確定要刪除" + txtAccountId.Text.Trim() + "的資料嗎?", "刪除確認", MessageBoxButtons.YesNo);
-                if (confirmResult == DialogResult.Yes)
-                {
-                    dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter adapter = new dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();
-                    adapter.DeleteQuery(txtAccountId.Text.Trim());
-                    lblAccountSubmitStatus.Text = "帳號刪除完成";
-                    lblAccountSubmitStatus.ForeColor = Color.Green;
+                dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter adapter = new dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();
+                adapter.DeleteQuery(txtAccountId.Text.Trim());
+                lblAccountSubmitStatus.Text = "帳號刪除完成";
+                lblAccountSubmitStatus.ForeColor = Color.Green;
 
-                    btnAccountAdd.Enabled = true;
-                    searchFormLoaded = false;
-                    gvAccountSearch_Result.DataSource = adapter.GetData();
-                    searchFormLoaded = true;
-                    if (gvAccountSearch_Result.Rows.Count > 0)  //刪除後，搜尋結果裡還有資料可供編輯或刪除
-                    {
-                        btnAccountEdit.Enabled = true;
-                        btnAccountDelete.Enabled = true;
-                        gvAccountSearch_Result.Rows[0].Selected = true;
-                        displaygvAccountSearch_ResultInControls();
-                    }
-                    else
-                    {
-                        btnAccountEdit.Enabled = false;
-                        btnAccountDelete.Enabled = false;
-                    }
-                    btnAccountConfirm.Enabled = false;
-                    btnAccountCancel.Enabled = false;
-                    btnAccountSearch.Enabled = true;
-                    gvAccountSearch_Result.Enabled = true;
-                    tlpAccountInputField.Enabled = false;
+                btnAccountAdd.Enabled = true;
+                searchFormLoaded = false;
+                gvAccountSearch_Result.DataSource = adapter.GetData();
+                searchFormLoaded = true;
+                if (gvAccountSearch_Result.Rows.Count > 0)  //刪除後，搜尋結果裡還有資料可供編輯或刪除
+                {
+                    btnAccountEdit.Enabled = true;
+                    btnAccountDelete.Enabled = true;
+                    gvAccountSearch_Result.Rows[0].Selected = true;
+                    displaygvAccountSearch_ResultInControls();
                 }
-            }
+                else
+                {
+                    btnAccountEdit.Enabled = false;
+                    btnAccountDelete.Enabled = false;
+                }
+                btnAccountConfirm.Enabled = false;
+                btnAccountCancel.Enabled = false;
+                btnAccountSearch.Enabled = true;
+                gvAccountSearch_Result.Enabled = true;
+                tlpAccountInputField.Enabled = false;
+            }            
         }
 
         private void btnAccountConfirm_Click(object sender, EventArgs e)    //需要確認準備被確認的資料是用來新增或編輯的
@@ -206,7 +199,7 @@ namespace NIZING_BACKEND_Data_Config
             btnAccountConfirm.Enabled = false;
             btnAccountCancel.Enabled = false;
             btnAccountSearch.Enabled = false;
-            gvAccountSearch_Result.Enabled = true;
+            gvAccountSearch_Result.Enabled = false;
             tlpAccountInputField.Enabled = false;
 
             var frm = new frmOQS_AccountSearch();
