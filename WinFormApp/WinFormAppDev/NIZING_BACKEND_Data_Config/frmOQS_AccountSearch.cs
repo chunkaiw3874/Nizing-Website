@@ -38,8 +38,8 @@ namespace NIZING_BACKEND_Data_Config
             DataTable dtLoginAccount = new DataTable();
             dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter accountAdapter = new dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();
             dtLoginAccount = accountAdapter.GetData();
-            string startAccountIdFilter = txtAccountSearch_StartingId.Text.Trim();
-            string endAccountIdFilter = txtAccountSearch_EndingId.Text.Trim();
+            string startAccountIdFilter = txtAccountSearch_StartingId.Text.ToUpper().Trim();
+            string endAccountIdFilter = txtAccountSearch_EndingId.Text.ToUpper().Trim();
             string accountNameFilter = txtAccountSearch_Name.Text.Trim();
             string startingVipLevelFilter = cbxAccountSearch_StartingVipLevel.SelectedValue.ToString();
             string endingVipLevelFilter = cbxAccountSearch_EndingVipLevel.SelectedValue.ToString();
@@ -134,11 +134,13 @@ namespace NIZING_BACKEND_Data_Config
             cbxAccountSearch_StartingVipLevel.DataSource = bsStartingVipLevel;
             cbxAccountSearch_StartingVipLevel.DisplayMember = "LEVEL";
             cbxAccountSearch_StartingVipLevel.ValueMember = "LEVEL";
+            cbxAccountSearch_StartingVipLevel.SelectedIndex = 0;
             BindingSource bsEndingVipLevel = new BindingSource();
             bsEndingVipLevel.DataSource = dsOQS_LoginAccount.ACCOUNT_VIPLEVEL;
             cbxAccountSearch_EndingVipLevel.DataSource = bsEndingVipLevel;
             cbxAccountSearch_EndingVipLevel.DisplayMember = "LEVEL";
             cbxAccountSearch_EndingVipLevel.ValueMember = "LEVEL";
+            cbxAccountSearch_EndingVipLevel.SelectedIndex = 0;
         }
     }
 }

@@ -27,6 +27,7 @@ namespace NIZING_BACKEND_Data_Config
             gvAccountSearch_Result.Enabled = true;
             tlpAccountInputField.Enabled = false;
             txtAccountId.Text = "";
+            lblAccountName.Text = "";
             txtAccountPassword.Text = "";
             txtAccountConfirmPassword.Text = "";
             #endregion
@@ -69,6 +70,7 @@ namespace NIZING_BACKEND_Data_Config
             tlpAccountInputField.Enabled = true;
             txtAccountId.Enabled = true;
             txtAccountId.Text = "";
+            lblAccountName.Text = "";
             txtAccountPassword.Text = "";
             txtAccountConfirmPassword.Text = "";
         }
@@ -187,6 +189,7 @@ namespace NIZING_BACKEND_Data_Config
             gvAccountSearch_Result.Enabled = true;
             tlpAccountInputField.Enabled = false;
             txtAccountId.Text = "";
+            lblAccountName.Text = "";
             txtAccountPassword.Text = "";
             txtAccountConfirmPassword.Text = "";
         }        
