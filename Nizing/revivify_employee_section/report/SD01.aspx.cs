@@ -307,25 +307,18 @@ public partial class SD01 : System.Web.UI.Page
         {
             if (rdoYear.Checked)
             {
-                startYear = Convert.ToString(Convert.ToInt16(ddlYear.SelectedValue) - 1);
-                startMonth = "1226";
+                startYear = ddlYear.SelectedValue;
+                startMonth = "0101";
                 endYear = ddlYear.SelectedValue;
-                endMonth = "1225";
+                endMonth = "1231";
             }
             else
             {
-                if (ddlMonth.SelectedValue == "01")
-                {
-                    startYear = Convert.ToString(Convert.ToInt16(ddlYear.SelectedValue) - 1);
-                    startMonth = "1226";
-                }
-                else
-                {
-                    startYear = ddlYear.SelectedValue;
-                    startMonth = (Convert.ToInt16(ddlMonth.SelectedValue) - 1).ToString().PadLeft(2, '0') + "26";
-                }
+                startYear = ddlYear.SelectedValue;
+                startMonth = ddlMonth.SelectedValue + "01";
                 endYear = ddlYear.SelectedValue;
-                endMonth = ddlMonth.SelectedValue + "25";
+                DateTime eom = new DateTime(Convert.ToInt16(ddlYear.SelectedValue), Convert.ToInt16(ddlMonth.SelectedValue), 1).AddMonths(1).AddDays(-1);
+                endMonth = eom.Month.ToString("D2") + eom.Day.ToString("D2");
             }
             entryCorrect = true;
         }
