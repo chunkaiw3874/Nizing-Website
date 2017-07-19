@@ -8,14 +8,15 @@
     <div class="main-content">
         <ul>
             <li>
-                <asp:ImageButton ID="ImageButton1" runat="server" PostBackUrl="~/hr360/login.aspx" ImageUrl="~/images/employee_section/portal/employee_section.png" />
+                <a href="hr360/login.aspx" target="_blank"><img src="images/employee_section/portal/HR360.png" /></a>
+                <%--<asp:ImageButton ID="ImageButton1" runat="server" PostBackUrl="~/hr360/login.aspx" ImageUrl="~/images/employee_section/portal/HR360.png" />--%>
             </li>
             <li> 
-                <a href="employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/add_credit.png" /></a>
+                <a href="employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/nizing.png" /></a>
                 <%--<asp:ImageButton ID="ImageButton2" runat="server" PostBackUrl="~/employee_section/Default.aspx" ImageUrl="~/images/employee_section/portal/add_credit.png" />--%>
             </li>
             <li> 
-                <a href="revivify_employee_section/Default.aspx" target="_blank">日伸加值</a>
+                <a href="revivify_employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/RVI.png" /></a>
                 <%--<asp:ImageButton ID="ImageButton2" runat="server" PostBackUrl="~/employee_section/Default.aspx" ImageUrl="~/images/employee_section/portal/add_credit.png" />--%>
             </li>
             <li>

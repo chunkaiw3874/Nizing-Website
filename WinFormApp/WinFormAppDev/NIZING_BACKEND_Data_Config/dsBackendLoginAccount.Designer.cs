@@ -314,11 +314,11 @@ namespace NIZING_BACKEND_Data_Config {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class BACKEND_LOGIN_ACCOUNTDataTable : global::System.Data.TypedTableBase<BACKEND_LOGIN_ACCOUNTRow> {
             
+            private global::System.Data.DataColumn columnLOGIN_ID;
+            
             private global::System.Data.DataColumn columnPASSWORD;
             
             private global::System.Data.DataColumn columnAUTH_ID;
-            
-            private global::System.Data.DataColumn columnLOGIN_ID;
             
             private global::System.Data.DataColumn columnACTIVE;
             
@@ -357,6 +357,14 @@ namespace NIZING_BACKEND_Data_Config {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn LOGIN_IDColumn {
+                get {
+                    return this.columnLOGIN_ID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn PASSWORDColumn {
                 get {
                     return this.columnPASSWORD;
@@ -368,14 +376,6 @@ namespace NIZING_BACKEND_Data_Config {
             public global::System.Data.DataColumn AUTH_IDColumn {
                 get {
                     return this.columnAUTH_ID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn LOGIN_IDColumn {
-                get {
-                    return this.columnLOGIN_ID;
                 }
             }
             
@@ -424,12 +424,12 @@ namespace NIZING_BACKEND_Data_Config {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public BACKEND_LOGIN_ACCOUNTRow AddBACKEND_LOGIN_ACCOUNTRow(string PASSWORD, string AUTH_ID, string LOGIN_ID, string ACTIVE) {
+            public BACKEND_LOGIN_ACCOUNTRow AddBACKEND_LOGIN_ACCOUNTRow(string LOGIN_ID, string PASSWORD, string AUTH_ID, string ACTIVE) {
                 BACKEND_LOGIN_ACCOUNTRow rowBACKEND_LOGIN_ACCOUNTRow = ((BACKEND_LOGIN_ACCOUNTRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
+                        LOGIN_ID,
                         PASSWORD,
                         AUTH_ID,
-                        LOGIN_ID,
                         ACTIVE};
                 rowBACKEND_LOGIN_ACCOUNTRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBACKEND_LOGIN_ACCOUNTRow);
@@ -453,26 +453,26 @@ namespace NIZING_BACKEND_Data_Config {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
+                this.columnLOGIN_ID = base.Columns["LOGIN_ID"];
                 this.columnPASSWORD = base.Columns["PASSWORD"];
                 this.columnAUTH_ID = base.Columns["AUTH_ID"];
-                this.columnLOGIN_ID = base.Columns["LOGIN_ID"];
                 this.columnACTIVE = base.Columns["ACTIVE"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
+                this.columnLOGIN_ID = new global::System.Data.DataColumn("LOGIN_ID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLOGIN_ID);
                 this.columnPASSWORD = new global::System.Data.DataColumn("PASSWORD", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPASSWORD);
                 this.columnAUTH_ID = new global::System.Data.DataColumn("AUTH_ID", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAUTH_ID);
-                this.columnLOGIN_ID = new global::System.Data.DataColumn("LOGIN_ID", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnLOGIN_ID);
                 this.columnACTIVE = new global::System.Data.DataColumn("ACTIVE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnACTIVE);
+                this.columnLOGIN_ID.MaxLength = 50;
                 this.columnPASSWORD.MaxLength = 255;
                 this.columnAUTH_ID.MaxLength = 50;
-                this.columnLOGIN_ID.MaxLength = 50;
                 this.columnACTIVE.MaxLength = 1;
             }
             
@@ -879,6 +879,22 @@ namespace NIZING_BACKEND_Data_Config {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string LOGIN_ID {
+                get {
+                    try {
+                        return ((string)(this[this.tableBACKEND_LOGIN_ACCOUNT.LOGIN_IDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'LOGIN_ID\' in table \'BACKEND_LOGIN_ACCOUNT\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBACKEND_LOGIN_ACCOUNT.LOGIN_IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string PASSWORD {
                 get {
                     try {
@@ -911,22 +927,6 @@ namespace NIZING_BACKEND_Data_Config {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string LOGIN_ID {
-                get {
-                    try {
-                        return ((string)(this[this.tableBACKEND_LOGIN_ACCOUNT.LOGIN_IDColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'LOGIN_ID\' in table \'BACKEND_LOGIN_ACCOUNT\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableBACKEND_LOGIN_ACCOUNT.LOGIN_IDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string ACTIVE {
                 get {
                     try {
@@ -939,6 +939,18 @@ namespace NIZING_BACKEND_Data_Config {
                 set {
                     this[this.tableBACKEND_LOGIN_ACCOUNT.ACTIVEColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsLOGIN_IDNull() {
+                return this.IsNull(this.tableBACKEND_LOGIN_ACCOUNT.LOGIN_IDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetLOGIN_IDNull() {
+                this[this.tableBACKEND_LOGIN_ACCOUNT.LOGIN_IDColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -963,18 +975,6 @@ namespace NIZING_BACKEND_Data_Config {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetAUTH_IDNull() {
                 this[this.tableBACKEND_LOGIN_ACCOUNT.AUTH_IDColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsLOGIN_IDNull() {
-                return this.IsNull(this.tableBACKEND_LOGIN_ACCOUNT.LOGIN_IDColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetLOGIN_IDNull() {
-                this[this.tableBACKEND_LOGIN_ACCOUNT.LOGIN_IDColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1254,9 +1254,9 @@ namespace NIZING_BACKEND_Data_Config.dsBackendLoginAccountTableAdapters {
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "BACKEND_LOGIN_ACCOUNT";
+            tableMapping.ColumnMappings.Add("LOGIN_ID", "LOGIN_ID");
             tableMapping.ColumnMappings.Add("PASSWORD", "PASSWORD");
             tableMapping.ColumnMappings.Add("AUTH_ID", "AUTH_ID");
-            tableMapping.ColumnMappings.Add("LOGIN_ID", "LOGIN_ID");
             tableMapping.ColumnMappings.Add("ACTIVE", "ACTIVE");
             this._adapter.TableMappings.Add(tableMapping);
         }
@@ -1274,9 +1274,9 @@ namespace NIZING_BACKEND_Data_Config.dsBackendLoginAccountTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[7];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT [AUTH].[ACCESS_FUNCTION_ID] AS \'AUTH_ID\',[LOGIN].[ID] AS \'LOGIN_ID\',[LOGIN" +
-                "].[PASSWORD],[AUTH].[ACTIVE]\r\nFROM [BACKEND_LOGIN_ACCOUNT] [LOGIN]\r\nLEFT JOIN [B" +
-                "ACKEND_LOGIN_AUTHORIZATION] AUTH ON [LOGIN].[ID]=AUTH.[ID]";
+            this._commandCollection[0].CommandText = @"SELECT          LOGIN.ID AS 'LOGIN_ID', LOGIN.PASSWORD, AUTH.ACCESS_FUNCTION_ID AS 'AUTH_ID', AUTH.ACTIVE
+FROM              BACKEND_LOGIN_ACCOUNT AS LOGIN LEFT OUTER JOIN
+                            BACKEND_LOGIN_AUTHORIZATION AS AUTH ON LOGIN.ID = AUTH.ID";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;

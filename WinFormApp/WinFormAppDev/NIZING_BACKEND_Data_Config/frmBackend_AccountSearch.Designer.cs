@@ -29,40 +29,27 @@
         private void InitializeComponent()
         {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnAccountSearch_Cancel = new System.Windows.Forms.Button();
             this.btnAccountSearch_Search = new System.Windows.Forms.Button();
+            this.btnAccountSearch_Cancel = new System.Windows.Forms.Button();
             this.txtAccountSearch_EndingId = new System.Windows.Forms.TextBox();
             this.txtAccountSearch_StartingId = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.clbAdminRights = new System.Windows.Forms.CheckedListBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.btnAccountSearch_Search);
             this.flowLayoutPanel1.Controls.Add(this.btnAccountSearch_Cancel);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(85, 240);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(85, 120);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(199, 100);
             this.flowLayoutPanel1.TabIndex = 8;
-            // 
-            // btnAccountSearch_Cancel
-            // 
-            this.btnAccountSearch_Cancel.Location = new System.Drawing.Point(84, 3);
-            this.btnAccountSearch_Cancel.Name = "btnAccountSearch_Cancel";
-            this.btnAccountSearch_Cancel.Size = new System.Drawing.Size(75, 23);
-            this.btnAccountSearch_Cancel.TabIndex = 7;
-            this.btnAccountSearch_Cancel.Text = "取消";
-            this.btnAccountSearch_Cancel.UseVisualStyleBackColor = true;
-            this.btnAccountSearch_Cancel.Click += new System.EventHandler(this.btnAccountSearch_Cancel_Click);
             // 
             // btnAccountSearch_Search
             // 
@@ -73,6 +60,16 @@
             this.btnAccountSearch_Search.Text = "查詢";
             this.btnAccountSearch_Search.UseVisualStyleBackColor = true;
             this.btnAccountSearch_Search.Click += new System.EventHandler(this.btnAccountSearch_Search_Click);
+            // 
+            // btnAccountSearch_Cancel
+            // 
+            this.btnAccountSearch_Cancel.Location = new System.Drawing.Point(84, 3);
+            this.btnAccountSearch_Cancel.Name = "btnAccountSearch_Cancel";
+            this.btnAccountSearch_Cancel.Size = new System.Drawing.Size(75, 23);
+            this.btnAccountSearch_Cancel.TabIndex = 7;
+            this.btnAccountSearch_Cancel.Text = "取消";
+            this.btnAccountSearch_Cancel.UseVisualStyleBackColor = true;
+            this.btnAccountSearch_Cancel.Click += new System.EventHandler(this.btnAccountSearch_Cancel_Click);
             // 
             // txtAccountSearch_EndingId
             // 
@@ -131,41 +128,17 @@
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.txtAccountSearch_StartingId, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtAccountSearch_EndingId, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11148F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11148F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11148F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33112F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33444F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66.67F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(284, 362);
             this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.clbAdminRights);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(88, 123);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(193, 114);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "帳號擁有權限";
-            // 
-            // clbAdminRights
-            // 
-            this.clbAdminRights.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clbAdminRights.FormattingEnabled = true;
-            this.clbAdminRights.Location = new System.Drawing.Point(3, 18);
-            this.clbAdminRights.Name = "clbAdminRights";
-            this.clbAdminRights.Size = new System.Drawing.Size(187, 93);
-            this.clbAdminRights.TabIndex = 0;
             // 
             // frmBackend_AccountSearch
             // 
@@ -178,7 +151,6 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -194,8 +166,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckedListBox clbAdminRights;
 
     }
 }

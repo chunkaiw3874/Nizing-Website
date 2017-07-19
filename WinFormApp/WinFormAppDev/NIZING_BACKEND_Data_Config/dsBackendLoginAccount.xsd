@@ -12,22 +12,22 @@
               <DbSource ConnectionRef="NZ_ERP2ConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT [AUTH].[ACCESS_FUNCTION_ID] AS 'AUTH_ID',[LOGIN].[ID] AS 'LOGIN_ID',[LOGIN].[PASSWORD],[AUTH].[ACTIVE]
-FROM [BACKEND_LOGIN_ACCOUNT] [LOGIN]
-LEFT JOIN [BACKEND_LOGIN_AUTHORIZATION] AUTH ON [LOGIN].[ID]=AUTH.[ID]</CommandText>
+                    <CommandText>SELECT          LOGIN.ID AS 'LOGIN_ID', LOGIN.PASSWORD, AUTH.ACCESS_FUNCTION_ID AS 'AUTH_ID', AUTH.ACTIVE
+FROM              BACKEND_LOGIN_ACCOUNT AS LOGIN LEFT OUTER JOIN
+                            BACKEND_LOGIN_AUTHORIZATION AS AUTH ON LOGIN.ID = AUTH.ID</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
             </MainSource>
             <Mappings>
+              <Mapping SourceColumn="LOGIN_ID" DataSetColumn="LOGIN_ID" />
               <Mapping SourceColumn="PASSWORD" DataSetColumn="PASSWORD" />
               <Mapping SourceColumn="AUTH_ID" DataSetColumn="AUTH_ID" />
-              <Mapping SourceColumn="LOGIN_ID" DataSetColumn="LOGIN_ID" />
               <Mapping SourceColumn="ACTIVE" DataSetColumn="ACTIVE" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="NZ_ERP2ConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteAuthRecordQuery" Modifier="Public" Name="DeleteAuthRecordQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="DeleteAuthRecordQuery">
+              <DbSource ConnectionRef="NZ_ERP2ConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteAuthRecordQuery" Modifier="Public" Name="DeleteAuthRecordQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteAuthRecordQuery">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM BACKEND_LOGIN_AUTHORIZATION
@@ -38,7 +38,7 @@ WHERE [ID]=@ID</CommandText>
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="NZ_ERP2ConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteLoginRecordQuery" Modifier="Public" Name="DeleteLoginRecordQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="DeleteLoginRecordQuery">
+              <DbSource ConnectionRef="NZ_ERP2ConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteLoginRecordQuery" Modifier="Public" Name="DeleteLoginRecordQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="DeleteLoginRecordQuery">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM BACKEND_LOGIN_ACCOUNT
@@ -49,7 +49,7 @@ WHERE [ID]=@ID</CommandText>
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="NZ_ERP2ConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="InsertAuthRecordQuery" Modifier="Public" Name="InsertAuthRecordQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="InsertAuthRecordQuery">
+              <DbSource ConnectionRef="NZ_ERP2ConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="InsertAuthRecordQuery" Modifier="Public" Name="InsertAuthRecordQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="InsertAuthRecordQuery">
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>INSERT INTO [BACKEND_LOGIN_AUTHORIZATION]
@@ -62,7 +62,7 @@ VALUES (@ID,@ACCESS_FUNCTION_ID,@ACTIVE)</CommandText>
                   </DbCommand>
                 </InsertCommand>
               </DbSource>
-              <DbSource ConnectionRef="NZ_ERP2ConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="InsertLoginRecordQuery" Modifier="Public" Name="InsertLoginRecordQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="InsertLoginRecordQuery">
+              <DbSource ConnectionRef="NZ_ERP2ConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="InsertLoginRecordQuery" Modifier="Public" Name="InsertLoginRecordQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="InsertLoginRecordQuery">
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>INSERT INTO [BACKEND_LOGIN_ACCOUNT]
@@ -74,7 +74,7 @@ VALUES (@ID,@PASSWORD)</CommandText>
                   </DbCommand>
                 </InsertCommand>
               </DbSource>
-              <DbSource ConnectionRef="NZ_ERP2ConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateAuthRecordQuery" Modifier="Public" Name="UpdateAuthRecordQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="UpdateAuthRecordQuery">
+              <DbSource ConnectionRef="NZ_ERP2ConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateAuthRecordQuery" Modifier="Public" Name="UpdateAuthRecordQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="UpdateAuthRecordQuery">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE [BACKEND_LOGIN_AUTHORIZATION]
@@ -89,7 +89,7 @@ AND [ACCESS_FUNCTION_ID]=@ACCESS_FUNCTION_ID</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="NZ_ERP2ConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateLoginRecordQuery" Modifier="Public" Name="UpdateLoginRecordQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="UpdateLoginRecordQuery">
+              <DbSource ConnectionRef="NZ_ERP2ConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateLoginRecordQuery" Modifier="Public" Name="UpdateLoginRecordQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy5" UserSourceName="UpdateLoginRecordQuery">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE BACKEND_LOGIN_ACCOUNT
@@ -140,9 +140,16 @@ ORDER BY [ID]</CommandText>
   <xs:element name="dsBackendLoginAccount" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsBackendLoginAccount" msprop:Generator_UserDSName="dsBackendLoginAccount">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="BACKEND_LOGIN_ACCOUNT" msprop:Generator_TableClassName="BACKEND_LOGIN_ACCOUNTDataTable" msprop:Generator_TableVarName="tableBACKEND_LOGIN_ACCOUNT" msprop:Generator_TablePropName="BACKEND_LOGIN_ACCOUNT" msprop:Generator_RowDeletingName="BACKEND_LOGIN_ACCOUNTRowDeleting" msprop:Generator_RowChangingName="BACKEND_LOGIN_ACCOUNTRowChanging" msprop:Generator_RowEvHandlerName="BACKEND_LOGIN_ACCOUNTRowChangeEventHandler" msprop:Generator_RowDeletedName="BACKEND_LOGIN_ACCOUNTRowDeleted" msprop:Generator_UserTableName="BACKEND_LOGIN_ACCOUNT" msprop:Generator_RowChangedName="BACKEND_LOGIN_ACCOUNTRowChanged" msprop:Generator_RowEvArgName="BACKEND_LOGIN_ACCOUNTRowChangeEvent" msprop:Generator_RowClassName="BACKEND_LOGIN_ACCOUNTRow">
+        <xs:element name="BACKEND_LOGIN_ACCOUNT" msprop:Generator_TableClassName="BACKEND_LOGIN_ACCOUNTDataTable" msprop:Generator_TableVarName="tableBACKEND_LOGIN_ACCOUNT" msprop:Generator_RowChangedName="BACKEND_LOGIN_ACCOUNTRowChanged" msprop:Generator_TablePropName="BACKEND_LOGIN_ACCOUNT" msprop:Generator_RowDeletingName="BACKEND_LOGIN_ACCOUNTRowDeleting" msprop:Generator_RowChangingName="BACKEND_LOGIN_ACCOUNTRowChanging" msprop:Generator_RowEvHandlerName="BACKEND_LOGIN_ACCOUNTRowChangeEventHandler" msprop:Generator_RowDeletedName="BACKEND_LOGIN_ACCOUNTRowDeleted" msprop:Generator_RowClassName="BACKEND_LOGIN_ACCOUNTRow" msprop:Generator_UserTableName="BACKEND_LOGIN_ACCOUNT" msprop:Generator_RowEvArgName="BACKEND_LOGIN_ACCOUNTRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
+              <xs:element name="LOGIN_ID" msprop:Generator_ColumnVarNameInTable="columnLOGIN_ID" msprop:Generator_ColumnPropNameInRow="LOGIN_ID" msprop:Generator_ColumnPropNameInTable="LOGIN_IDColumn" msprop:Generator_UserColumnName="LOGIN_ID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
               <xs:element name="PASSWORD" msprop:Generator_ColumnVarNameInTable="columnPASSWORD" msprop:Generator_ColumnPropNameInRow="PASSWORD" msprop:Generator_ColumnPropNameInTable="PASSWORDColumn" msprop:Generator_UserColumnName="PASSWORD" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -151,13 +158,6 @@ ORDER BY [ID]</CommandText>
                 </xs:simpleType>
               </xs:element>
               <xs:element name="AUTH_ID" msprop:Generator_ColumnVarNameInTable="columnAUTH_ID" msprop:Generator_ColumnPropNameInRow="AUTH_ID" msprop:Generator_ColumnPropNameInTable="AUTH_IDColumn" msprop:Generator_UserColumnName="AUTH_ID" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="LOGIN_ID" msprop:Generator_ColumnVarNameInTable="columnLOGIN_ID" msprop:Generator_ColumnPropNameInRow="LOGIN_ID" msprop:Generator_ColumnPropNameInTable="LOGIN_IDColumn" msprop:Generator_UserColumnName="LOGIN_ID" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
@@ -174,7 +174,7 @@ ORDER BY [ID]</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="BACKEND_FUNCTION_LIST" msprop:Generator_TableClassName="BACKEND_FUNCTION_LISTDataTable" msprop:Generator_TableVarName="tableBACKEND_FUNCTION_LIST" msprop:Generator_TablePropName="BACKEND_FUNCTION_LIST" msprop:Generator_RowDeletingName="BACKEND_FUNCTION_LISTRowDeleting" msprop:Generator_RowChangingName="BACKEND_FUNCTION_LISTRowChanging" msprop:Generator_RowEvHandlerName="BACKEND_FUNCTION_LISTRowChangeEventHandler" msprop:Generator_RowDeletedName="BACKEND_FUNCTION_LISTRowDeleted" msprop:Generator_UserTableName="BACKEND_FUNCTION_LIST" msprop:Generator_RowChangedName="BACKEND_FUNCTION_LISTRowChanged" msprop:Generator_RowEvArgName="BACKEND_FUNCTION_LISTRowChangeEvent" msprop:Generator_RowClassName="BACKEND_FUNCTION_LISTRow">
+        <xs:element name="BACKEND_FUNCTION_LIST" msprop:Generator_TableClassName="BACKEND_FUNCTION_LISTDataTable" msprop:Generator_TableVarName="tableBACKEND_FUNCTION_LIST" msprop:Generator_RowChangedName="BACKEND_FUNCTION_LISTRowChanged" msprop:Generator_TablePropName="BACKEND_FUNCTION_LIST" msprop:Generator_RowDeletingName="BACKEND_FUNCTION_LISTRowDeleting" msprop:Generator_RowChangingName="BACKEND_FUNCTION_LISTRowChanging" msprop:Generator_RowEvHandlerName="BACKEND_FUNCTION_LISTRowChangeEventHandler" msprop:Generator_RowDeletedName="BACKEND_FUNCTION_LISTRowDeleted" msprop:Generator_RowClassName="BACKEND_FUNCTION_LISTRow" msprop:Generator_UserTableName="BACKEND_FUNCTION_LIST" msprop:Generator_RowEvArgName="BACKEND_FUNCTION_LISTRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" minOccurs="0">

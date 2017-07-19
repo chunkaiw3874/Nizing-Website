@@ -35,15 +35,13 @@ namespace NIZING_BACKEND_Data_Config
 
         private void btnAccountSearch_Search_Click(object sender, EventArgs e)
         {            
-            DataTable dtLoginAccount = new DataTable();
             dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter accountAdapter = new dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();
-            dtLoginAccount = accountAdapter.GetData();
+            DataTable dtLoginAccountFiltered = accountAdapter.GetData();  
             string startAccountIdFilter = txtAccountSearch_StartingId.Text.ToUpper().Trim();
             string endAccountIdFilter = txtAccountSearch_EndingId.Text.ToUpper().Trim();
             string accountNameFilter = txtAccountSearch_Name.Text.Trim();
             string startingVipLevelFilter = cbxAccountSearch_StartingVipLevel.SelectedValue.ToString();
-            string endingVipLevelFilter = cbxAccountSearch_EndingVipLevel.SelectedValue.ToString();
-            DataTable dtLoginAccountFiltered = dtLoginAccount.AsEnumerable().CopyToDataTable();            
+            string endingVipLevelFilter = cbxAccountSearch_EndingVipLevel.SelectedValue.ToString();         
             if (!string.IsNullOrEmpty(startAccountIdFilter))
             {
                 var rows = dtLoginAccountFiltered.AsEnumerable().Where(x => ((string)x["ID"]).CompareTo(startAccountIdFilter) >= 0);
