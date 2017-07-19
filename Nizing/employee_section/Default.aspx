@@ -5,7 +5,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-            <asp:Image ID="Image1" runat="server" ImageUrl="~/employee_section/report/image/button/dept/CHIEF.png" />
+            <ul>
+                <li>
+                    <asp:Image ID="Image1" runat="server" ImageUrl="~/employee_section/report/image/button/dept/CHIEF.png" /></li>
+            </ul>
             <ul>
                 <li><%--<asp:ImageButton ID="btnUnfinishedWorkOrder" runat="server" ImageUrl="~/employee_section/report/image/button/dept/CHIEF-1.png" PostBackUrl="~/employee_section/report/ProductionProgress.aspx" />--%></li>
                 <li>
@@ -13,21 +16,30 @@
             </ul>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-            <asp:Image ID="Image6" runat="server" ImageUrl="~/employee_section/report/image/button/dept/PC.png" />
+            <ul>
+                <li>
+                    <asp:Image ID="Image6" runat="server" ImageUrl="~/employee_section/report/image/button/dept/PC.png" /></li>
+            </ul>
             <ul>
                 <li><%--<asp:ImageButton ID="ImageButton8" runat="server" ImageUrl="~/employee_section/report/image/button/dept/PC-1.png" PostBackUrl="~/employee_section/report/ProductionProgress_Dept.aspx" />--%></li>
                 <li><%--<asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/employee_section/report/image/button/dept/PC-2.png" PostBackUrl="~/employee_section/report/ProductionControlReport.aspx" />--%></li>
             </ul>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-            <asp:Image ID="Image2" runat="server" ImageUrl="~/employee_section/report/image/button/dept/IC.png" />
+            <ul>
+                <li>
+                    <asp:Image ID="Image2" runat="server" ImageUrl="~/employee_section/report/image/button/dept/IC.png" /></li>
+            </ul>
             <ul>
                 <li>
                     <asp:ImageButton ID="btnInvCheck" runat="server" ImageUrl="~/employee_section/report/image/button/dept/inventory.png" PostBackUrl="~/employee_section/report/InventorySearch.aspx" /></li>
             </ul>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-            <asp:Image ID="Image7" runat="server" ImageUrl="~/employee_section/report/image/button/dept/M.png" />
+            <ul>
+                <li>
+                    <asp:Image ID="Image7" runat="server" ImageUrl="~/employee_section/report/image/button/dept/M.png" /></li>
+            </ul>
             <ul>
                 <li><%--<asp:ImageButton ID="ImageButton11" runat="server" ImageUrl="~/employee_section/report/image/button/dept/M-1.png" PostBackUrl="~/employee_section/report/M01.aspx" />--%></li>
                 <li><%--<asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/employee_section/report/image/button/dept/PC-3.png" PostBackUrl="~/employee_section/report/ProductionEfficiencyReport.aspx" />--%></li>
@@ -36,7 +48,10 @@
     </div>
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-            <asp:Image ID="Image3" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD.png" />
+            <ul>
+                <li>
+                    <asp:Image ID="Image3" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD.png" /></li>
+            </ul>
             <ul>
                 <li>
                     <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD-1.png" PostBackUrl="~/employee_section/report/SD01.aspx" /></li>
@@ -48,13 +63,19 @@
             </ul>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-            <asp:Image ID="Image4" runat="server" ImageUrl="~/employee_section/report/image/button/dept/PD.png" />
+            <ul>
+                <li>
+                    <asp:Image ID="Image4" runat="server" ImageUrl="~/employee_section/report/image/button/dept/PD.png" /></li>
+            </ul>
             <ul>
                 <li><%--<asp:ImageButton ID="ImageButton3" runat="server" ImageUrl="~/employee_section/report/image/button/dept/PD-1.png" PostBackUrl="~/employee_section/report/PurchaseReport.aspx" />--%></li>
             </ul>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-            <asp:Image ID="Image9" runat="server" ImageUrl="~/employee_section/report/image/button/dept/QC.png" />
+            <ul>
+                <li>
+                    <asp:Image ID="Image9" runat="server" ImageUrl="~/employee_section/report/image/button/dept/QC.png" /></li>
+            </ul>
             <ul>
                 <li>
                     <%--<asp:ImageButton ID="ImageButton14" runat="server" ImageUrl="~/employee_section/report/image/button/dept/QC-1.png" PostBackUrl="~/employee_section/report/QC/QC01.aspx" />--%>                    
@@ -65,12 +86,18 @@
             </ul>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-            <asp:Image ID="Image8" runat="server" ImageUrl="~/employee_section/report/image/button/dept/ED.png" />
+            <ul>
+                <li>
+                    <asp:Image ID="Image8" runat="server" ImageUrl="~/employee_section/report/image/button/dept/ED.png" /></li>
+            </ul>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-            <asp:Image ID="Image5" runat="server" ImageUrl="~/employee_section/report/image/button/dept/HR.png" />
+            <ul>
+                <li>
+                    <asp:Image ID="Image5" runat="server" ImageUrl="~/employee_section/report/image/button/dept/HR.png" /></li>
+            </ul>
             <ul>
                 <li><%--<asp:ImageButton ID="ImageButton7" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/HR-2.png" PostBackUrl="~/hr360/login.aspx" />--%></li>
                 <%--<li><a href="../nizing_intranet/SalaryChangeReport.aspx">薪資異動報表</a></li>--%>
