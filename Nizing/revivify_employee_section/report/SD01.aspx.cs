@@ -131,17 +131,17 @@ public partial class SD01 : System.Web.UI.Page
                             + " , CONVERT(DECIMAL(20,2), SUM(TG045)) 銷貨金額"
                             + " , CONVERT(DECIMAL(20,2), COALESCE(TI.R,0)) 退貨金額"
                             + " , CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0)) 銷貨淨額"
-                            + " , CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) 目標金額"
-                            + " , CASE "
-                            + " 	WHEN CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0))-CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) >= 0 THEN 0"
-                            + " 	ELSE CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0))-CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) "
-                            + " 	END AS 未達成金額"
+                            //+ " , CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) 目標金額"
+                            //+ " , CASE "
+                            //+ " 	WHEN CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0))-CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) >= 0 THEN 0"
+                            //+ " 	ELSE CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0))-CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) "
+                            //+ " 	END AS 未達成金額"
                             + " FROM COPTG TG"
                             + " LEFT JOIN CMSMV MV ON TG.TG006 = MV.MV001"
                             + " LEFT JOIN TEMP TI ON TG.TG006 = TI.TI006"
-                            + " LEFT JOIN NZ_ERP2.dbo.SD_SD01_A SD ON TG.TG006=SD.EMP_ID AND SD.[YEAR]=@YEAR AND SD.[MONTH]=@MONTH"
+                            //+ " LEFT JOIN NZ_ERP2.dbo.SD_SD01_A SD ON TG.TG006=SD.EMP_ID AND SD.[YEAR]=@YEAR AND SD.[MONTH]=@MONTH"
                             + " WHERE TG.TG023=N'Y' AND TG.TG042 BETWEEN @StartDate AND @EndDate"
-                            + " GROUP BY MV.MV002, TG.TG006, TI.R, SD.[TARGET];";
+                            + " GROUP BY MV.MV002, TG.TG006, TI.R";
                 }
                 else
                 {
@@ -165,15 +165,15 @@ public partial class SD01 : System.Web.UI.Page
                             + " , CONVERT(DECIMAL(20,2), TG.SALE) 銷貨金額"
                             + " , CONVERT(DECIMAL(20,2), COALESCE(TI.R,0)) 退貨金額"
                             + " , CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0)) 銷貨淨額"
-                            + " , SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0))) 目標金額"
-                            + " , CASE "
-                            + " 	WHEN CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0))-SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0))) >= 0 THEN 0"
-                            + " 	ELSE CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0))-SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)))"
-                            + " 	END AS 未達成金額"
+                            //+ " , SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0))) 目標金額"
+                            //+ " , CASE "
+                            //+ " 	WHEN CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0))-SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0))) >= 0 THEN 0"
+                            //+ " 	ELSE CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0))-SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)))"
+                            //+ " 	END AS 未達成金額"
                             + " FROM TEMP2 TG"
                             + " LEFT JOIN CMSMV MV ON TG.TG006 = MV.MV001"
                             + " LEFT JOIN TEMP TI ON TG.TG006 = TI.TI006"
-                            + " LEFT JOIN NZ_ERP2.dbo.SD_SD01_A SD ON TG.TG006=SD.EMP_ID AND SD.[YEAR]=@YEAR"
+                            //+ " LEFT JOIN NZ_ERP2.dbo.SD_SD01_A SD ON TG.TG006=SD.EMP_ID AND SD.[YEAR]=@YEAR"
                             + " GROUP BY MV.MV002, TG.TG006, TI.R, TG.SALE";
                 }
             }
@@ -230,17 +230,17 @@ public partial class SD01 : System.Web.UI.Page
                             + " , CONVERT(DECIMAL(20,2), SUM(TG045)) 銷貨金額"
                             + " , CONVERT(DECIMAL(20,2), COALESCE(TI.R,0)) 退貨金額"
                             + " , CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0)) 銷貨淨額"
-                            + " , CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) 目標金額"
-                            + " , CASE "
-                            + " 	WHEN CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0))-CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) >= 0 THEN 0"
-                            + " 	ELSE CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0))-CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) "
-                            + " 	END AS 未達成金額"
+                            //+ " , CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) 目標金額"
+                            //+ " , CASE "
+                            //+ " 	WHEN CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0))-CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) >= 0 THEN 0"
+                            //+ " 	ELSE CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0))-CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) "
+                            //+ " 	END AS 未達成金額"
                             + " FROM COPTG TG"
                             + " LEFT JOIN CMSMV MV ON TG.TG006 = MV.MV001"
                             + " LEFT JOIN TEMP TI ON TG.TG006 = TI.TI006"
-                            + " LEFT JOIN NZ_ERP2.dbo.SD_SD01_A SD ON TG.TG006=SD.EMP_ID AND SD.[YEAR]=@YEAR AND SD.[MONTH]=@MONTH"
+                            //+ " LEFT JOIN NZ_ERP2.dbo.SD_SD01_A SD ON TG.TG006=SD.EMP_ID AND SD.[YEAR]=@YEAR AND SD.[MONTH]=@MONTH"
                             + " WHERE TG.TG023=N'Y' AND TG.TG042 BETWEEN @StartDate AND @EndDate AND TG.TG006=@ID"
-                            + " GROUP BY MV.MV002, TG.TG006, TI.R, SD.[TARGET];";
+                            + " GROUP BY MV.MV002, TG.TG006, TI.R";
                 }
                 else
                 {
@@ -264,15 +264,15 @@ public partial class SD01 : System.Web.UI.Page
                             + " , CONVERT(DECIMAL(20,2), TG.SALE) 銷貨金額"
                             + " , CONVERT(DECIMAL(20,2), COALESCE(TI.R,0)) 退貨金額"
                             + " , CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0)) 銷貨淨額"
-                            + " , SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0))) 目標金額"
-                            + " , CASE "
-                            + " 	WHEN CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0))-SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0))) >= 0 THEN 0"
-                            + " 	ELSE CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0))-SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)))"
-                            + " 	END AS 未達成金額"
+                            //+ " , SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0))) 目標金額"
+                            //+ " , CASE "
+                            //+ " 	WHEN CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0))-SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0))) >= 0 THEN 0"
+                            //+ " 	ELSE CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0))-SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)))"
+                            //+ " 	END AS 未達成金額"
                             + " FROM TEMP2 TG"
                             + " LEFT JOIN CMSMV MV ON TG.TG006 = MV.MV001"
                             + " LEFT JOIN TEMP TI ON TG.TG006 = TI.TI006"
-                            + " LEFT JOIN NZ_ERP2.dbo.SD_SD01_A SD ON TG.TG006=SD.EMP_ID AND SD.[YEAR]=@YEAR"
+                            //+ " LEFT JOIN NZ_ERP2.dbo.SD_SD01_A SD ON TG.TG006=SD.EMP_ID AND SD.[YEAR]=@YEAR"
                             + " GROUP BY MV.MV002, TG.TG006, TI.R, TG.SALE";
                 }
             }
