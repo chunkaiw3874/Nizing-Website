@@ -6,23 +6,17 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class="main-content">
-        <ul>
-            <li>
+        <div class="inline-div">
+            <div style="margin-right:50px;">
                 <a href="hr360/login.aspx" target="_blank"><img src="images/employee_section/portal/HR360.png" /></a>
-                <%--<asp:ImageButton ID="ImageButton1" runat="server" PostBackUrl="~/hr360/login.aspx" ImageUrl="~/images/employee_section/portal/HR360.png" />--%>
-            </li>
-            <li> 
+            </div>
+            <div style="margin-right:50px;">
                 <a href="employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/nizing.png" /></a>
-                <%--<asp:ImageButton ID="ImageButton2" runat="server" PostBackUrl="~/employee_section/Default.aspx" ImageUrl="~/images/employee_section/portal/add_credit.png" />--%>
-            </li>
-            <li> 
+            </div>
+            <div>
                 <a href="revivify_employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/RVI.png" /></a>
-                <%--<asp:ImageButton ID="ImageButton2" runat="server" PostBackUrl="~/employee_section/Default.aspx" ImageUrl="~/images/employee_section/portal/add_credit.png" />--%>
-            </li>
-            <li>
-                <%--<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/oqs.aspx">Test Link</asp:HyperLink>--%>
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>    
 </asp:Content>
 
