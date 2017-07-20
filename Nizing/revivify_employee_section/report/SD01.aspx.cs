@@ -18,7 +18,6 @@ using System.Web.UI.WebControls;
 public partial class SD01 : System.Web.UI.Page
 {
     string connectionString = ConfigurationManager.ConnectionStrings["RVIConnectionString"].ConnectionString;
-    //string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -32,30 +31,21 @@ public partial class SD01 : System.Web.UI.Page
             ddlMonth.SelectedValue = DateTime.Today.Month.ToString("D2");
             txtStart.Enabled = false;
             txtEnd.Enabled = false;
-            //List<string> roleList = getRoles();
-
-            //foreach (string s in roleList)
-            //{
-            //    if (s == "NIZING\\管理部")
-            //    {
-            //        Admin.Visible = true;
-            //    }
-            //}
         }
     }
-    protected List<string> getRoles()
-    {
-        List<string> role = new List<string>();
-        WindowsPrincipal principal = (WindowsPrincipal)User;
-        WindowsIdentity identity = (WindowsIdentity)User.Identity;
-        foreach (IdentityReference SIDRef in identity.Groups)
-        {
-            SecurityIdentifier sid = (SecurityIdentifier)SIDRef.Translate(typeof(SecurityIdentifier));
-            NTAccount account = (NTAccount)SIDRef.Translate(typeof(NTAccount));
-            role.Add(account.Value);
-        }
-        return role;
-    }
+    //protected List<string> getRoles()
+    //{
+    //    List<string> role = new List<string>();
+    //    WindowsPrincipal principal = (WindowsPrincipal)User;
+    //    WindowsIdentity identity = (WindowsIdentity)User.Identity;
+    //    foreach (IdentityReference SIDRef in identity.Groups)
+    //    {
+    //        SecurityIdentifier sid = (SecurityIdentifier)SIDRef.Translate(typeof(SecurityIdentifier));
+    //        NTAccount account = (NTAccount)SIDRef.Translate(typeof(NTAccount));
+    //        role.Add(account.Value);
+    //    }
+    //    return role;
+    //}
     protected void R1_CheckedChanged(object sender, EventArgs e)
     {
         if (rdoYear.Checked == true)
@@ -92,7 +82,7 @@ public partial class SD01 : System.Web.UI.Page
     }
     private string[] GetQuery()
     {
-        string[] query = new string[2];
+        string[] query = new string[3];
 
         if (ddlPersonnel.SelectedValue.ToString() == "全部人員")
         {
@@ -192,6 +182,17 @@ public partial class SD01 : System.Web.UI.Page
                     + " LEFT JOIN CTE_RETURN ON TI.TI006 = CTE_RETURN.SALES"
                     + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate"
                     + " GROUP BY MV.MV002, TI.TI006, CTE_RETURN.NUMBER";
+
+            query[2] = "SELECT TG.TG042 '單據日期',TG.TG004 '客戶代號',MA.MA002 '客戶簡稱',MV.MV002 '業務員'"
+                    + " ,TH.TH004 '品號',TH.TH005 '品名',TH.TH008 '銷貨數量',TH.TH009 '單位',TH.TH011 '幣別'"
+                    + " ,TH.TH012 '單價',TH.TH035 '本幣銷貨金額',TH.TH036 '本幣銷貨稅額'"
+                    + " FROM COPTG TG"
+                    + " LEFT JOIN COPTH TH ON TG.TG001=TH.TH001 AND TG.TG002=TH.TH002"
+                    + " LEFT JOIN COPMA MA ON TG.TG004=MA.MA001"
+                    + " LEFT JOIN CMSMV MV ON TG.TG006=MV.MV001"
+                    + " WHERE TG.TG042 BETWEEN @StartDate AND @EndDate"
+                    + " AND TG.TG023=N'Y'"
+                    + " ORDER BY TG.TG042, TG.TG004,TH.TH035";
         }
         else
         {
@@ -291,6 +292,18 @@ public partial class SD01 : System.Web.UI.Page
                     + " LEFT JOIN CTE_RETURN ON TI.TI006 = CTE_RETURN.SALES"
                     + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate AND TI.TI006= @ID"
                     + " GROUP BY MV.MV002, TI.TI006, CTE_RETURN.NUMBER";
+
+            query[2] = "SELECT TG.TG042 '單據日期',TG.TG004 '客戶代號',MA.MA002 '客戶簡稱',MV.MV002 '業務員'"
+                    + " ,TH.TH004 '品號',TH.TH005 '品名',TH.TH008 '銷貨數量',TH.TH009 '單位',TH.TH011 '幣別'"
+                    + " ,TH.TH012 '單價',TH.TH035 '本幣銷貨金額',TH.TH036 '本幣銷貨稅額'"
+                    + " FROM COPTG TG"
+                    + " LEFT JOIN COPTH TH ON TG.TG001=TH.TH001 AND TG.TG002=TH.TH002"
+                    + " LEFT JOIN COPMA MA ON TG.TG004=MA.MA001"
+                    + " LEFT JOIN CMSMV MV ON TG.TG006=MV.MV001"
+                    + " WHERE TG.TG042 BETWEEN @StartDate AND @EndDate"
+                    + " AND TG.TG023=N'Y'"
+                    + " AND TG.TG006=@ID"
+                    + " ORDER BY TG.TG042, TG.TG004,TH.TH035";
         }
         return query;
     }
@@ -367,6 +380,36 @@ public partial class SD01 : System.Web.UI.Page
                 Chart1.Series[0].XValueMember = "業務名稱";
                 Chart1.Series[0].YValueMembers = "銷貨淨額";
                 Chart1.DataBind();
+                if (ds.Tables[0].Rows.Count == 0)
+                {
+                    grdReport.Visible = false;
+                    Chart1.Visible = false;
+                    lblRange.Text += " 無相關資料，請更新搜尋條件";
+                }
+                else
+                {
+                    grdReport.Visible = true;
+                    Chart1.Visible = true;
+                }
+
+                //銷售明細
+                cmd = new SqlCommand(query[2], conn);
+                cmd.Parameters.AddWithValue("@ID", ddlPersonnel.SelectedValue.ToString());
+                cmd.Parameters.AddWithValue("@StartDate", startYear + startMonth);
+                cmd.Parameters.AddWithValue("@EndDate", endYear + endMonth);
+                da = new SqlDataAdapter(cmd);
+                ds = new DataSet();
+                da.Fill(ds);
+                grdSalesRecord.DataSource = ds;
+                grdSalesRecord.DataBind();
+                if (ds.Tables[0].Rows.Count == 0)
+                {
+                    grdSalesRecord.Visible = false;
+                }
+                else
+                {
+                    grdSalesRecord.Visible = true;
+                }
 
                 //退貨金額
                 cmd = new SqlCommand(query[1], conn);
@@ -384,6 +427,16 @@ public partial class SD01 : System.Web.UI.Page
                 Chart2.Series[0].XValueMember = "業務名稱";
                 Chart2.Series[0].YValueMembers = "退貨金額";
                 Chart2.DataBind();
+                if (ds.Tables[0].Rows.Count == 0)
+                {
+                    grdReport2.Visible = false;
+                    Chart2.Visible = false;
+                }
+                else
+                {
+                    grdReport2.Visible = true;
+                    Chart2.Visible = true;
+                }
             }
         }
         else

@@ -38,39 +38,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div id="NetSale" class="container-fluid">
-        <%--<div id="Admin" runat="server" visible="false">
-            <div id="SetTarget" runat="server">
-                <div id="SetTargetTrigger" runat="server">
-                    <div class="row form-group">
-                        <div class="col-xs-12">
-                            <asp:Button ID="btnTargetTrigger" runat="server" Text="設定業務目標" CssClass="btn btn-info" OnClick="btnTargetTrigger_Click" />
-                        </div>
-                    </div>
-                </div>
-                <div id="SetTargetContent" runat="server" visible="false">
-                    <div class="row form-group">
-                        <div class="col-xs-2">
-                            <asp:DropDownList ID="ddlTargetYear" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlTargetChanged"></asp:DropDownList>
-                        </div>
-                        <div class="col-xs-1">
-                            <asp:DropDownList ID="ddlTargetMonth" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlTargetChanged"></asp:DropDownList>
-                        </div>
-                        <div class="col-xs-2">
-                            <asp:DropDownList ID="ddlTargetEmp" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlTargetChanged"></asp:DropDownList>
-                        </div>
-                        <div class="col-xs-2">
-                            <asp:TextBox ID="txtTarget" runat="server" CssClass="form-control numbers-only" placeholder="目標金額"></asp:TextBox>
-                        </div>
-                        <div class="col-xs-1">
-                            <asp:Button ID="btnTargetSubmit" runat="server" Text="儲存" CssClass="btn btn-success" OnClick="btnTargetSubmit_Click" />
-                        </div>
-                        <div class="col-xs-1">
-                            <asp:Button ID="btnTargetDelete" runat="server" Text="刪除" CssClass="btn btn-danger" Enabled="false" OnClick="btnTargetDelete_Click" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>--%>
         <div class="row">
             <div class="col-xs-12">
                 <h2>銷售淨額報表</h2>
@@ -125,7 +92,7 @@
                     <asp:TextBox ID="txtEnd" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
             </div>
-        <br />
+            <br />
             <div class="row">
                 <div class="col-xs-6">
                     <asp:DropDownList ID="ddlPersonnel" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource1" DataTextField="MV002" DataValueField="TG006" CssClass="form-control">
@@ -173,6 +140,74 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-xs-12">
+                    <asp:GridView ID="grdSalesRecord" runat="server" CssClass="grdResult" Caption="銷貨明細表" HorizontalAlign="Center" AutoGenerateColumns="false">
+                        <Columns>
+                            <asp:TemplateField HeaderText="單據日期">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text='<%#Eval("單據日期") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="客戶代號">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text='<%#Eval("客戶代號") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="客戶簡稱">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text='<%#Eval("客戶簡稱") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="業務員">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text='<%#Eval("業務員") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="品號">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text='<%#Eval("品號") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="品名">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text='<%#Eval("品名") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="銷貨數量">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text='<%#Eval("銷貨數量") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="單位">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text='<%#Eval("單位") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="幣別">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text='<%#Eval("幣別") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="單價">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text='<%#Eval("單價") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="本幣銷貨金額">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text='<%#Eval("本幣銷貨金額") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="本幣銷貨稅額">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text='<%#Eval("本幣銷貨稅額") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-7">
                     <asp:GridView ID="grdReport2" runat="server" AutoGenerateColumns="false" OnDataBound="grdReport2_DataBound" OnRowCreated="grdReport2_RowCreated" ShowFooter="True" CssClass="grdResultWithFooter" Caption="銷退金額排名">
                         <Columns>
@@ -196,11 +231,6 @@
                                     <asp:Label ID="Label6" runat="server" Text='<%#Eval("退貨金額") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <%--                            <asp:TemplateField HeaderText="退貨單數">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label7" runat="server" Text='<%#Eval("退貨單數") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>--%>
                             <asp:TemplateField HeaderText="退貨件數">
                                 <ItemTemplate>
                                     <asp:Label ID="Label7" runat="server" Text='<%#Eval("退貨件數") %>'></asp:Label>
@@ -221,7 +251,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </asp:Content>
 
