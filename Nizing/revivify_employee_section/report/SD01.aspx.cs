@@ -184,8 +184,9 @@ public partial class SD01 : System.Web.UI.Page
                     + " GROUP BY MV.MV002, TI.TI006, CTE_RETURN.NUMBER";
 
             query[2] = "SELECT TG.TG042 '單據日期',TG.TG004 '客戶代號',MA.MA002 '客戶簡稱',MV.MV002 '業務員'"
-                    + " ,TH.TH004 '品號',TH.TH005 '品名',TH.TH008 '銷貨數量',TH.TH009 '單位',TH.TH011 '幣別'"
-                    + " ,TH.TH012 '單價',TH.TH035 '本幣銷貨金額',TH.TH036 '本幣銷貨稅額'"
+                    + " ,TH.TH004 '品號',TH.TH005 '品名',TH.TH008 '銷貨數量',TH.TH009 '單位',TG.TG011 '幣別'"
+                    + " ,CONVERT(DECIMAL(20,2),TH.TH012) '單價',CONVERT(DECIMAL(20,2),TH.TH035) '本幣銷貨金額'"
+                    + " ,CONVERT(DECIMAL(20,2),TH.TH036) '本幣銷貨稅額'"
                     + " FROM COPTG TG"
                     + " LEFT JOIN COPTH TH ON TG.TG001=TH.TH001 AND TG.TG002=TH.TH002"
                     + " LEFT JOIN COPMA MA ON TG.TG004=MA.MA001"
@@ -294,8 +295,9 @@ public partial class SD01 : System.Web.UI.Page
                     + " GROUP BY MV.MV002, TI.TI006, CTE_RETURN.NUMBER";
 
             query[2] = "SELECT TG.TG042 '單據日期',TG.TG004 '客戶代號',MA.MA002 '客戶簡稱',MV.MV002 '業務員'"
-                    + " ,TH.TH004 '品號',TH.TH005 '品名',TH.TH008 '銷貨數量',TH.TH009 '單位',TH.TH011 '幣別'"
-                    + " ,TH.TH012 '單價',TH.TH035 '本幣銷貨金額',TH.TH036 '本幣銷貨稅額'"
+                    + " ,TH.TH004 '品號',TH.TH005 '品名',TH.TH008 '銷貨數量',TH.TH009 '單位',TG.TG011 '幣別'"
+                    + " ,CONVERT(DECIMAL(20,2),TH.TH012) '單價',CONVERT(DECIMAL(20,2),TH.TH035) '本幣銷貨金額'"
+                    + " ,CONVERT(DECIMAL(20,2),TH.TH036) '本幣銷貨稅額'"
                     + " FROM COPTG TG"
                     + " LEFT JOIN COPTH TH ON TG.TG001=TH.TH001 AND TG.TG002=TH.TH002"
                     + " LEFT JOIN COPMA MA ON TG.TG004=MA.MA001"
