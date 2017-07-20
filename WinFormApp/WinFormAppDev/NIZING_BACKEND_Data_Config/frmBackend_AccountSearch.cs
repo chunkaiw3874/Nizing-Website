@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NIZING_BACKEND_Data_Config
 {
-    //public delegate void searchForm_Close();
-    //public delegate void searchForm_Search(DataTable dt);
-
     public partial class frmBackend_AccountSearch : Form
     {
+        string erp2ConnectionString = ConfigurationManager.ConnectionStrings["OQS_Data_Config.Properties.Settings.NZ_ERP2ConnectionString"].ConnectionString;
         public event searchForm_Close loadButtonEvent;
         public event searchForm_Search loadGridviewEvent;
 
@@ -31,17 +31,49 @@ namespace NIZING_BACKEND_Data_Config
         private void btnAccountSearch_Search_Click(object sender, EventArgs e)
         {
             DataTable dtSearchResult = new DataTable();
-            dsBackendLoginAccountTableAdapters.BACKEND_LOGIN_ACCOUNTTableAdapter adapter = new dsBackendLoginAccountTableAdapters.BACKEND_LOGIN_ACCOUNTTableAdapter();
-            dtSearchResult = adapter.GetData();
-            var active = dtSearchResult.AsEnumerable().Where(x => ((string)x["ACTIVE"]).CompareTo("1") == 0);
-            if (active.Any())
+            using (SqlConnection conn = new SqlConnection(erp2ConnectionString))
             {
-                dtSearchResult = active.CopyToDataTable();
+                conn.Open();
+                string query = "DECLARE @cols NVARCHAR(MAX)"
+                        + " SELECT @cols = ISNULL(@cols+',','')+'['+ID+']'"
+                        + " FROM BACKEND_FUNCTION_LIST"
+                        + " ORDER BY [ID]"
+                        + " DECLARE @query NVARCHAR(MAX)"
+                        + " SET @query = N'SELECT [LOGIN_ID],[LOGIN_PASSWORD],' + @cols + ' FROM"
+                        + " ("
+                        + " SELECT"
+                        + " [FUNC].[ID] [FUNCTION_ID],"
+                        + " [LOGIN].[ID] [LOGIN_ID],"
+                        + " [LOGIN].[PASSWORD] [LOGIN_PASSWORD],"
+                        + " CONVERT(INT,[AUTH].[ACTIVE]) [ACTIVE]"
+                        + " FROM BACKEND_LOGIN_ACCOUNT [LOGIN]"
+                        + " LEFT JOIN BACKEND_LOGIN_AUTHORIZATION [AUTH] ON [LOGIN].[ID]=[AUTH].ID"
+                        + " LEFT JOIN BACKEND_FUNCTION_LIST [FUNC] ON [AUTH].ACCESS_FUNCTION_ID=[FUNC].[ID]"
+                        + " ) P"
+                        + " PIVOT"
+                        + " ("
+                        + " SUM([ACTIVE])"
+                        + " FOR [FUNCTION_ID] IN"
+                        + " (' + @cols + ')"
+                        + " ) AS PVT"
+                        + " ORDER BY [LOGIN_ID]"
+                        + " '"
+                        + " EXEC (@query)";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dtSearchResult);
             }
-            else
-            {
-                dtSearchResult.Clear();
-            }
+            //dsBackendLoginAccountTableAdapters.BACKEND_LOGIN_ACCOUNTTableAdapter adapter = new dsBackendLoginAccountTableAdapters.BACKEND_LOGIN_ACCOUNTTableAdapter();
+            //dtSearchResult = adapter.GetData();
+            //var active = dtSearchResult.AsEnumerable().Where(x => ((string)x["ACTIVE"]).CompareTo("1") == 0);
+            //if (active.Any())
+            //{
+            //    dtSearchResult = active.CopyToDataTable();
+            //}
+            //else
+            //{
+            //    dtSearchResult.Clear();
+            //}
             if (dtSearchResult.Rows.Count > 0)
             {
                 string startAccountIdFilter = txtAccountSearch_StartingId.Text.ToUpper().Trim();
@@ -65,7 +97,7 @@ namespace NIZING_BACKEND_Data_Config
                 }
                 if (!String.IsNullOrWhiteSpace(endAccountIdFilter))
                 {
-                    var rows = dtSearchResult.AsEnumerable().Where(x => ((string)x["LOGIN_ID"]).CompareTo(startAccountIdFilter) <= 0);
+                    var rows = dtSearchResult.AsEnumerable().Where(x => ((string)x["LOGIN_ID"]).CompareTo(endAccountIdFilter) <= 0);
                     if (rows.Any())
                     {
                         dtSearchResult = rows.CopyToDataTable();
