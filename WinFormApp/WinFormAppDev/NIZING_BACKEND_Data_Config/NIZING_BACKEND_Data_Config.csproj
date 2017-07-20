@@ -97,10 +97,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsOQS_LoginAccount.xsd</DependentUpon>
     </Compile>
-    <Compile Include="dsProductInfo.Designer.cs">
+    <Compile Include="dsOQS_ProductInfo.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dsProductInfo.xsd</DependentUpon>
+      <DependentUpon>dsOQS_ProductInfo.xsd</DependentUpon>
     </Compile>
     <Compile Include="frmBackend_AccountSearch.cs">
       <SubType>Form</SubType>
@@ -181,16 +181,16 @@
     <None Include="dsOQS_LoginAccount.xss">
       <DependentUpon>dsOQS_LoginAccount.xsd</DependentUpon>
     </None>
-    <None Include="dsProductInfo.xsc">
-      <DependentUpon>dsProductInfo.xsd</DependentUpon>
+    <None Include="dsOQS_ProductInfo.xsc">
+      <DependentUpon>dsOQS_ProductInfo.xsd</DependentUpon>
     </None>
-    <None Include="dsProductInfo.xsd">
-      <SubType>Designer</SubType>
+    <None Include="dsOQS_ProductInfo.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsProductInfo.Designer.cs</LastGenOutput>
+      <LastGenOutput>dsOQS_ProductInfo.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
-    <None Include="dsProductInfo.xss">
-      <DependentUpon>dsProductInfo.xsd</DependentUpon>
+    <None Include="dsOQS_ProductInfo.xss">
+      <DependentUpon>dsOQS_ProductInfo.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

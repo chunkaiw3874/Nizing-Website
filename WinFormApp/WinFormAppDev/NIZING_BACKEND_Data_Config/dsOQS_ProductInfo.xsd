@@ -110,7 +110,7 @@ WHERE [ID]=@ID</CommandText>
   <xs:element name="dsOQS_ProductInfo" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsOQS_ProductInfo" msprop:Generator_UserDSName="dsOQS_ProductInfo">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="INVMB" msdata:CaseSensitive="True" msprop:Generator_TableClassName="INVMBDataTable" msprop:Generator_TableVarName="tableINVMB" msprop:Generator_RowChangedName="INVMBRowChanged" msprop:Generator_TablePropName="INVMB" msprop:Generator_RowDeletingName="INVMBRowDeleting" msprop:Generator_RowChangingName="INVMBRowChanging" msprop:Generator_RowEvHandlerName="INVMBRowChangeEventHandler" msprop:Generator_RowDeletedName="INVMBRowDeleted" msprop:Generator_RowClassName="INVMBRow" msprop:Generator_UserTableName="INVMB" msprop:Generator_RowEvArgName="INVMBRowChangeEvent">
+        <xs:element name="INVMB" msdata:CaseSensitive="True" msprop:Generator_TableClassName="INVMBDataTable" msprop:Generator_TableVarName="tableINVMB" msprop:Generator_TablePropName="INVMB" msprop:Generator_RowDeletingName="INVMBRowDeleting" msprop:Generator_RowChangingName="INVMBRowChanging" msprop:Generator_RowEvHandlerName="INVMBRowChangeEventHandler" msprop:Generator_RowDeletedName="INVMBRowDeleted" msprop:Generator_UserTableName="INVMB" msprop:Generator_RowChangedName="INVMBRowChanged" msprop:Generator_RowEvArgName="INVMBRowChangeEvent" msprop:Generator_RowClassName="INVMBRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID">
@@ -130,7 +130,7 @@ WHERE [ID]=@ID</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="PRODUCT_INFO" msdata:CaseSensitive="True" msprop:Generator_TableClassName="PRODUCT_INFODataTable" msprop:Generator_TableVarName="tablePRODUCT_INFO" msprop:Generator_RowChangedName="PRODUCT_INFORowChanged" msprop:Generator_TablePropName="PRODUCT_INFO" msprop:Generator_RowDeletingName="PRODUCT_INFORowDeleting" msprop:Generator_RowChangingName="PRODUCT_INFORowChanging" msprop:Generator_RowEvHandlerName="PRODUCT_INFORowChangeEventHandler" msprop:Generator_RowDeletedName="PRODUCT_INFORowDeleted" msprop:Generator_RowClassName="PRODUCT_INFORow" msprop:Generator_UserTableName="PRODUCT_INFO" msprop:Generator_RowEvArgName="PRODUCT_INFORowChangeEvent">
+        <xs:element name="PRODUCT_INFO" msdata:CaseSensitive="True" msprop:Generator_TableClassName="PRODUCT_INFODataTable" msprop:Generator_TableVarName="tablePRODUCT_INFO" msprop:Generator_TablePropName="PRODUCT_INFO" msprop:Generator_RowDeletingName="PRODUCT_INFORowDeleting" msprop:Generator_RowChangingName="PRODUCT_INFORowChanging" msprop:Generator_RowEvHandlerName="PRODUCT_INFORowChangeEventHandler" msprop:Generator_RowDeletedName="PRODUCT_INFORowDeleted" msprop:Generator_UserTableName="PRODUCT_INFO" msprop:Generator_RowChangedName="PRODUCT_INFORowChanged" msprop:Generator_RowEvArgName="PRODUCT_INFORowChangeEvent" msprop:Generator_RowClassName="PRODUCT_INFORow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" minOccurs="0">
