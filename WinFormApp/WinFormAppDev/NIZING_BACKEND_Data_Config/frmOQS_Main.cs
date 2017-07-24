@@ -15,13 +15,14 @@ namespace NIZING_BACKEND_Data_Config
         private Boolean searchFormLoaded = false;
         private enum FunctionMode { ADD, EDIT, DELETE, SEARCH, HASRECORD, NORECORD };
         int currentTabPage = 0;
-        private FunctionMode mainFrameMode = FunctionMode.NORECORD;     
+        private FunctionMode accountTabMode = FunctionMode.NORECORD;
+        private FunctionMode productTabMode = FunctionMode.NORECORD;
 
         public frmOQS_Main()
         {
             InitializeComponent();
-            mainFrameMode = FunctionMode.NORECORD;
-            LoadControlStatus(mainFrameMode);
+            accountTabMode = FunctionMode.NORECORD;
+            LoadControlStatus(accountTabMode);
             currentTabPage = tbcManagement.SelectedIndex;
             #region 帳號管理
             btnAccountAdd.Enabled = true;
@@ -186,7 +187,7 @@ namespace NIZING_BACKEND_Data_Config
 
         private void tbcManagement_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (mainFrameMode == FunctionMode.ADD || mainFrameMode == FunctionMode.EDIT || mainFrameMode == FunctionMode.SEARCH)
+            if (accountTabMode == FunctionMode.ADD || accountTabMode == FunctionMode.EDIT || accountTabMode == FunctionMode.SEARCH)
             {
                 tbcManagement.SelectedIndex = currentTabPage;
             }
@@ -209,27 +210,56 @@ namespace NIZING_BACKEND_Data_Config
             }
             return isEmpty;
         }
+        private void displaygvAccountSearch_ResultInControls(DataGridView gv)
+        {
+            if (tbcManagement.SelectedTab == tbpAccountManagement)
+            {
+                if (gv.Rows.Count > 0)
+                {
+                    txtAccountId.Text = (string)gv.SelectedRows[0].Cells[0].Value;
+                    if (gv.SelectedRows[0].Cells[1].Value == DBNull.Value)
+                    {
+                        lblAccountName.Text = string.Empty;
+                    }
+                    else
+                    {
+                        lblAccountName.Text = (string)gv.SelectedRows[0].Cells[1].Value;
+                    }
+                    txtAccountPassword.Text = (string)gv.SelectedRows[0].Cells[2].Value;
+                    txtAccountConfirmPassword.Text = (string)gv.SelectedRows[0].Cells[2].Value;
+                    if (gv.SelectedRows[0].Cells[3].Value == DBNull.Value)
+                    {
+                        cbxAccountVipLevel.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        cbxAccountVipLevel.SelectedIndex = Convert.ToInt16(gv.SelectedRows[0].Cells[3].Value);
+                    }
+                }
+            }
+        }
+
         #endregion
 
 
         #region 帳號管理
-        #region button behavior
+        #region Methods and Events
         private void btnAccountAdd_Click(object sender, EventArgs e)
         {
-            mainFrameMode = FunctionMode.ADD;
-            LoadControlStatus(mainFrameMode);
+            accountTabMode = FunctionMode.ADD;
+            LoadControlStatus(accountTabMode);
         }
 
         private void btnAccountEdit_Click(object sender, EventArgs e)
         {
-            mainFrameMode = FunctionMode.EDIT;
-            LoadControlStatus(mainFrameMode);
+            accountTabMode = FunctionMode.EDIT;
+            LoadControlStatus(accountTabMode);
         }
 
         private void btnAccountDelete_Click(object sender, EventArgs e)
         {
-            mainFrameMode = FunctionMode.DELETE;
-            List<string> errorList = CheckConfirmError(mainFrameMode);
+            accountTabMode = FunctionMode.DELETE;
+            List<string> errorList = CheckConfirmError(accountTabMode);
             lblAccountSubmitStatus.Text = "";
             if (errorList.Count == 0)
             {
@@ -246,13 +276,13 @@ namespace NIZING_BACKEND_Data_Config
                     searchFormLoaded = true;
                     if (isGridViewEmpty(gvAccountSearch_Result))
                     {
-                        mainFrameMode = FunctionMode.NORECORD;
-                        LoadControlStatus(mainFrameMode);
+                        accountTabMode = FunctionMode.NORECORD;
+                        LoadControlStatus(accountTabMode);
                     }
                     else
                     {
-                        mainFrameMode = FunctionMode.HASRECORD;
-                        LoadControlStatus(mainFrameMode);
+                        accountTabMode = FunctionMode.HASRECORD;
+                        LoadControlStatus(accountTabMode);
                     }
                 }
             }
@@ -268,7 +298,7 @@ namespace NIZING_BACKEND_Data_Config
 
         private void btnAccountConfirm_Click(object sender, EventArgs e)
         {
-            List<string> errorList = CheckConfirmError(mainFrameMode);
+            List<string> errorList = CheckConfirmError(accountTabMode);
             lblAccountSubmitStatus.Text = "";
 
             if (errorList.Count == 0)
@@ -276,13 +306,13 @@ namespace NIZING_BACKEND_Data_Config
                 //確認OK後針對資料所做的處理
                 dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter adapter = new dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();    //load account table through an adapter                
 
-                if (mainFrameMode == FunctionMode.ADD) //新增的confirm
+                if (accountTabMode == FunctionMode.ADD) //新增的confirm
                 {
                     adapter.InsertQuery(txtAccountId.Text.Trim(), txtAccountPassword.Text, cbxAccountVipLevel.SelectedValue.ToString());
                     lblAccountSubmitStatus.Text = "新增帳號完成";
                     lblAccountSubmitStatus.ForeColor = Color.Green;
                 }
-                else if (mainFrameMode == FunctionMode.EDIT)
+                else if (accountTabMode == FunctionMode.EDIT)
                 {
                     adapter.UpdateQuery(txtAccountPassword.Text, cbxAccountVipLevel.SelectedValue.ToString(), txtAccountId.Text.Trim());
                     lblAccountSubmitStatus.Text = "編輯帳號完成";
@@ -292,13 +322,13 @@ namespace NIZING_BACKEND_Data_Config
                 //確認OK後針對控制項所做的處理
                 if (isGridViewEmpty(gvAccountSearch_Result))
                 {
-                    mainFrameMode = FunctionMode.NORECORD;
-                    LoadControlStatus(mainFrameMode);
+                    accountTabMode = FunctionMode.NORECORD;
+                    LoadControlStatus(accountTabMode);
                 }
                 else
                 {
-                    mainFrameMode = FunctionMode.HASRECORD;
-                    LoadControlStatus(mainFrameMode);
+                    accountTabMode = FunctionMode.HASRECORD;
+                    LoadControlStatus(accountTabMode);
                 }
             }
             else
@@ -315,20 +345,20 @@ namespace NIZING_BACKEND_Data_Config
         {
             if (isGridViewEmpty(gvAccountSearch_Result))
             {
-                mainFrameMode = FunctionMode.NORECORD;
-                LoadControlStatus(mainFrameMode);
+                accountTabMode = FunctionMode.NORECORD;
+                LoadControlStatus(accountTabMode);
             }
             else
             {
-                mainFrameMode = FunctionMode.HASRECORD;
-                LoadControlStatus(mainFrameMode);
+                accountTabMode = FunctionMode.HASRECORD;
+                LoadControlStatus(accountTabMode);
             }
         }        
         
         private void btnAccountSearch_Click(object sender, EventArgs e)
         {
-            mainFrameMode = FunctionMode.SEARCH;
-            LoadControlStatus(mainFrameMode);
+            accountTabMode = FunctionMode.SEARCH;
+            LoadControlStatus(accountTabMode);
 
             var frm = new frmOQS_AccountSearch();
             frm.Location = new Point(this.Location.X + this.Width, this.Location.Y);
@@ -339,6 +369,14 @@ namespace NIZING_BACKEND_Data_Config
             frm.Show();
         }
 
+        private void gvAccountSearch_Result_SelectionChanged(object sender, EventArgs e)
+        {
+            if (searchFormLoaded)
+            {
+                displaygvAccountSearch_ResultInControls(gvAccountSearch_Result);
+            }
+        }
+
         #endregion
 
         #region method for other forms
@@ -346,13 +384,13 @@ namespace NIZING_BACKEND_Data_Config
         {
             if (isGridViewEmpty(gvAccountSearch_Result))
             {
-                mainFrameMode = FunctionMode.NORECORD;
-                LoadControlStatus(mainFrameMode);
+                accountTabMode = FunctionMode.NORECORD;
+                LoadControlStatus(accountTabMode);
             }
             else
             {
-                mainFrameMode = FunctionMode.HASRECORD;
-                LoadControlStatus(mainFrameMode);
+                accountTabMode = FunctionMode.HASRECORD;
+                LoadControlStatus(accountTabMode);
             }
         }
         void accountSearchForm_loadGridview(DataTable dt)
@@ -363,7 +401,7 @@ namespace NIZING_BACKEND_Data_Config
             if (!isGridViewEmpty(gvAccountSearch_Result))
             {
                 gvAccountSearch_Result.Rows[0].Selected = true;
-                displaygvAccountSearch_ResultInControls();
+                displaygvAccountSearch_ResultInControls(gvAccountSearch_Result);
             }
             else
             {
@@ -378,40 +416,7 @@ namespace NIZING_BACKEND_Data_Config
                 col.SortMode = DataGridViewColumnSortMode.Automatic;
             }
         }
-        #endregion
-        private void gvAccountSearch_Result_SelectionChanged(object sender, EventArgs e)
-        {
-            if (searchFormLoaded)
-            {
-                displaygvAccountSearch_ResultInControls();
-            }
-        }
-
-        private void displaygvAccountSearch_ResultInControls()
-        {
-            if (gvAccountSearch_Result.Rows.Count > 0)
-            {
-                txtAccountId.Text = (string)gvAccountSearch_Result.SelectedRows[0].Cells[0].Value;
-                if (gvAccountSearch_Result.SelectedRows[0].Cells[1].Value == DBNull.Value)
-                {
-                    lblAccountName.Text = string.Empty;
-                }
-                else
-                {
-                    lblAccountName.Text = (string)gvAccountSearch_Result.SelectedRows[0].Cells[1].Value;
-                }
-                txtAccountPassword.Text = (string)gvAccountSearch_Result.SelectedRows[0].Cells[2].Value;
-                txtAccountConfirmPassword.Text = (string)gvAccountSearch_Result.SelectedRows[0].Cells[2].Value;
-                if (gvAccountSearch_Result.SelectedRows[0].Cells[3].Value == DBNull.Value)
-                {
-                    cbxAccountVipLevel.SelectedIndex = 0;
-                }
-                else
-                {
-                    cbxAccountVipLevel.SelectedIndex = Convert.ToInt16(gvAccountSearch_Result.SelectedRows[0].Cells[3].Value);
-                }
-            }
-        }
+        #endregion      
 
         //When AccountId textbox is out of focus, program searches for client name that fits the ID from ERP client list
         private void txtAccountId_Leave(object sender, EventArgs e)
