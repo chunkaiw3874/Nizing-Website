@@ -147,6 +147,7 @@ namespace NIZING_BACKEND_Data_Config
             this.tbcManagement.SelectedIndex = 0;
             this.tbcManagement.Size = new System.Drawing.Size(1184, 836);
             this.tbcManagement.TabIndex = 1;
+            this.tbcManagement.SelectedIndexChanged += new System.EventHandler(this.tbcManagement_SelectedIndexChanged);
             // 
             // tbpAccountManagement
             // 

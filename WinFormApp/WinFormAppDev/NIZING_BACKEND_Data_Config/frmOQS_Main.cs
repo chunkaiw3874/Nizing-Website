@@ -12,11 +12,17 @@ namespace NIZING_BACKEND_Data_Config
 {
     public partial class frmOQS_Main : Form
     {
-        private Boolean searchFormLoaded = false;        
+        private Boolean searchFormLoaded = false;
+        private enum FunctionMode { ADD, EDIT, DELETE, SEARCH, HASRECORD, NORECORD };
+        int currentTabPage = 0;
+        private FunctionMode mainFrameMode = FunctionMode.NORECORD;     
 
         public frmOQS_Main()
         {
             InitializeComponent();
+            mainFrameMode = FunctionMode.NORECORD;
+            LoadControlStatus(mainFrameMode);
+            currentTabPage = tbcManagement.SelectedIndex;
             #region 帳號管理
             btnAccountAdd.Enabled = true;
             btnAccountEdit.Enabled = false;
@@ -41,6 +47,7 @@ namespace NIZING_BACKEND_Data_Config
             #endregion
         }
 
+        #region Frame Method and Button Behavior
         private void btnLogout_Click(object sender, EventArgs e)
         {
             var frm = new frmLogin();
@@ -56,110 +63,226 @@ namespace NIZING_BACKEND_Data_Config
             this.aCCOUNT_VIPLEVELTableAdapter.Fill(this.dsOQS_LoginAccount.ACCOUNT_VIPLEVEL);
 
         }
+
+        private void LoadControlStatus(FunctionMode mode)
+        {
+            if (tbcManagement.SelectedTab == tbpAccountManagement)
+            {
+                if (mode == FunctionMode.ADD)
+                {
+                    btnAccountAdd.Enabled = false;
+                    btnAccountEdit.Enabled = false;
+                    btnAccountDelete.Enabled = false;
+                    btnAccountConfirm.Enabled = true;
+                    btnAccountCancel.Enabled = true;
+                    btnAccountSearch.Enabled = false;
+                    gvAccountSearch_Result.Enabled = false;
+                    tlpAccountInputField.Enabled = true;
+                    txtAccountId.Enabled = true;
+                    txtAccountId.Text = "";
+                    lblAccountName.Text = "";
+                    txtAccountPassword.Text = "";
+                    txtAccountConfirmPassword.Text = "";
+                }
+                else if (mode == FunctionMode.EDIT)
+                {
+                    btnAccountAdd.Enabled = false;
+                    btnAccountEdit.Enabled = false;
+                    btnAccountDelete.Enabled = false;
+                    btnAccountConfirm.Enabled = true;
+                    btnAccountCancel.Enabled = true;
+                    btnAccountSearch.Enabled = false;
+                    gvAccountSearch_Result.Enabled = false;
+                    tlpAccountInputField.Enabled = true;
+                    txtAccountId.Enabled = false;
+                }
+                else if (mode == FunctionMode.DELETE)
+                {
+
+                }
+                else if (mode == FunctionMode.SEARCH)
+                {
+                    btnAccountAdd.Enabled = false;
+                    btnAccountEdit.Enabled = false;
+                    btnAccountDelete.Enabled = false;
+                    btnAccountConfirm.Enabled = false;
+                    btnAccountCancel.Enabled = false;
+                    btnAccountSearch.Enabled = false;
+                    gvAccountSearch_Result.Enabled = false;
+                    tlpAccountInputField.Enabled = false;
+                }
+                else if (mode == FunctionMode.HASRECORD)
+                {
+                    btnAccountAdd.Enabled = true;
+                    btnAccountEdit.Enabled = true;
+                    btnAccountDelete.Enabled = true;
+                    btnAccountConfirm.Enabled = false;
+                    btnAccountCancel.Enabled = false;
+                    btnAccountSearch.Enabled = true;
+                    gvAccountSearch_Result.Enabled = true;
+                    tlpAccountInputField.Enabled = false;
+                }
+                else if (mode == FunctionMode.NORECORD)
+                {
+                    btnAccountAdd.Enabled = true;
+                    btnAccountEdit.Enabled = false;
+                    btnAccountDelete.Enabled = false;
+                    btnAccountConfirm.Enabled = false;
+                    btnAccountCancel.Enabled = false;
+                    btnAccountSearch.Enabled = true;
+                    gvAccountSearch_Result.Enabled = true;
+                    tlpAccountInputField.Enabled = false;
+                    txtAccountId.Text = "";
+                    lblAccountName.Text = "";
+                    txtAccountPassword.Text = "";
+                    txtAccountConfirmPassword.Text = "";
+                }
+            }
+        }
+
+        private List<string> CheckConfirmError(FunctionMode mode)
+        {
+            List<string> errorList = new List<string>();
+
+            if (tbcManagement.SelectedTab == tbpAccountManagement)
+            {
+                if (mode == FunctionMode.ADD)
+                {
+                    if (txtAccountId.Text.Trim() == "")
+                    {
+                        lblAccountSubmitStatus.Text += "未輸入帳號\n";
+                    }
+                    if (txtAccountPassword.Text.Trim() == "")
+                    {
+                        lblAccountSubmitStatus.Text += "未輸入密碼\n";
+                    }
+                    if (txtAccountConfirmPassword.Text.Trim() == "")
+                    {
+                        lblAccountSubmitStatus.Text += "請確認密碼\n";
+                    }
+                    if (txtAccountConfirmPassword.Text != txtAccountPassword.Text)
+                    {
+                        lblAccountSubmitStatus.Text += "密碼與確認密碼不符\n";
+                    }
+                }
+                else if (mode == FunctionMode.EDIT)
+                {
+                    if (txtAccountConfirmPassword.Text != txtAccountPassword.Text)
+                    {
+                        lblAccountSubmitStatus.Text += "密碼與確認密碼不符\n";
+                    }
+                }
+                else if (mode == FunctionMode.DELETE)
+                {
+                    if (String.IsNullOrWhiteSpace(txtAccountId.Text))
+                    {
+                        errorList.Add("未選擇刪除帳號");
+                    }
+                }
+            }
+
+            return errorList;
+        }
+
+        private void tbcManagement_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (mainFrameMode == FunctionMode.ADD || mainFrameMode == FunctionMode.EDIT || mainFrameMode == FunctionMode.SEARCH)
+            {
+                tbcManagement.SelectedIndex = currentTabPage;
+            }
+            else
+            {
+                currentTabPage = tbcManagement.SelectedIndex;
+            }
+        }
+
+        private bool isGridViewEmpty(DataGridView gv)
+        {
+            bool isEmpty = true;
+            if (gv.Rows.Count > 0)
+            {
+                isEmpty = false;
+            }
+            else
+            {
+                isEmpty = true;
+            }
+            return isEmpty;
+        }
+        #endregion
+
+
         #region 帳號管理
         #region button behavior
         private void btnAccountAdd_Click(object sender, EventArgs e)
         {
-            btnAccountAdd.Enabled = false;
-            btnAccountEdit.Enabled = false;
-            btnAccountDelete.Enabled = false;
-            btnAccountConfirm.Enabled = true;
-            btnAccountCancel.Enabled = true;
-            btnAccountSearch.Enabled = false;
-            gvAccountSearch_Result.Enabled = false;
-            tlpAccountInputField.Enabled = true;
-            txtAccountId.Enabled = true;
-            txtAccountId.Text = "";
-            lblAccountName.Text = "";
-            txtAccountPassword.Text = "";
-            txtAccountConfirmPassword.Text = "";
+            mainFrameMode = FunctionMode.ADD;
+            LoadControlStatus(mainFrameMode);
         }
 
         private void btnAccountEdit_Click(object sender, EventArgs e)
         {
-            btnAccountAdd.Enabled = false;
-            btnAccountEdit.Enabled = false;
-            btnAccountDelete.Enabled = false;
-            btnAccountConfirm.Enabled = true;
-            btnAccountCancel.Enabled = true;
-            btnAccountSearch.Enabled = false;
-            gvAccountSearch_Result.Enabled = false;
-            tlpAccountInputField.Enabled = true;
-            txtAccountId.Enabled = false;
+            mainFrameMode = FunctionMode.EDIT;
+            LoadControlStatus(mainFrameMode);
         }
 
         private void btnAccountDelete_Click(object sender, EventArgs e)
         {
-            var confirmResult = MessageBox.Show("確定要刪除" + txtAccountId.Text.Trim() + "的資料嗎?", "刪除確認", MessageBoxButtons.YesNo);
-            if (confirmResult == DialogResult.Yes)
+            mainFrameMode = FunctionMode.DELETE;
+            List<string> errorList = CheckConfirmError(mainFrameMode);
+            lblAccountSubmitStatus.Text = "";
+            if (errorList.Count == 0)
             {
-                dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter adapter = new dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();
-                adapter.DeleteQuery(txtAccountId.Text.Trim());
-                lblAccountSubmitStatus.Text = "帳號刪除完成";
-                lblAccountSubmitStatus.ForeColor = Color.Green;
+                var confirmResult = MessageBox.Show("確定要刪除" + txtAccountId.Text.Trim() + "的資料嗎?", "刪除確認", MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter adapter = new dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();
+                    adapter.DeleteQuery(txtAccountId.Text.Trim());
+                    lblAccountSubmitStatus.Text = "帳號刪除完成";
+                    lblAccountSubmitStatus.ForeColor = Color.Green;
 
-                btnAccountAdd.Enabled = true;
-                searchFormLoaded = false;
-                gvAccountSearch_Result.DataSource = adapter.GetData();
-                searchFormLoaded = true;
-                if (gvAccountSearch_Result.Rows.Count > 0)  //刪除後，搜尋結果裡還有資料可供編輯或刪除
-                {
-                    btnAccountEdit.Enabled = true;
-                    btnAccountDelete.Enabled = true;
-                    gvAccountSearch_Result.Rows[0].Selected = true;
-                    displaygvAccountSearch_ResultInControls();
+                    searchFormLoaded = false;
+                    gvAccountSearch_Result.DataSource = adapter.GetData();
+                    searchFormLoaded = true;
+                    if (isGridViewEmpty(gvAccountSearch_Result))
+                    {
+                        mainFrameMode = FunctionMode.NORECORD;
+                        LoadControlStatus(mainFrameMode);
+                    }
+                    else
+                    {
+                        mainFrameMode = FunctionMode.HASRECORD;
+                        LoadControlStatus(mainFrameMode);
+                    }
                 }
-                else
+            }
+            else
+            {
+                foreach (string s in errorList)
                 {
-                    btnAccountEdit.Enabled = false;
-                    btnAccountDelete.Enabled = false;
+                    lblAccountSubmitStatus.Text += s + "\n";
                 }
-                btnAccountConfirm.Enabled = false;
-                btnAccountCancel.Enabled = false;
-                btnAccountSearch.Enabled = true;
-                gvAccountSearch_Result.Enabled = true;
-                tlpAccountInputField.Enabled = false;
-            }            
+                lblAccountSubmitStatus.ForeColor = Color.Red;
+            }
         }
 
-        private void btnAccountConfirm_Click(object sender, EventArgs e)    //需要確認準備被確認的資料是用來新增或編輯的
-        {            
-            Boolean confirm = true;
+        private void btnAccountConfirm_Click(object sender, EventArgs e)
+        {
+            List<string> errorList = CheckConfirmError(mainFrameMode);
             lblAccountSubmitStatus.Text = "";
-            lblAccountSubmitStatus.ForeColor = Color.Red;
-            if (txtAccountId.Text.Trim() == "")
-            {
-                confirm = false;
-                lblAccountSubmitStatus.Text += "未輸入帳號\n";
-            }
-            if (txtAccountPassword.Text.Trim() == "")
-            {
-                confirm = false;
-                lblAccountSubmitStatus.Text += "未輸入密碼\n";
-            }
-            if (txtAccountConfirmPassword.Text.Trim() == "")
-            {
-                confirm = false;
-                lblAccountSubmitStatus.Text += "請確認密碼\n";
-            }
-            if (txtAccountConfirmPassword.Text != txtAccountPassword.Text)
-            {
-                confirm = false;
-                lblAccountSubmitStatus.Text += "密碼與確認密碼不符\n";
-            }
 
-            if (confirm == true)
+            if (errorList.Count == 0)
             {
                 //確認OK後針對資料所做的處理
                 dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter adapter = new dsOQS_LoginAccountTableAdapters.LOGIN_ACCOUNTTableAdapter();    //load account table through an adapter                
 
-                if (txtAccountId.Enabled == true) //新增的confirm
+                if (mainFrameMode == FunctionMode.ADD) //新增的confirm
                 {
                     adapter.InsertQuery(txtAccountId.Text.Trim(), txtAccountPassword.Text, cbxAccountVipLevel.SelectedValue.ToString());
                     lblAccountSubmitStatus.Text = "新增帳號完成";
                     lblAccountSubmitStatus.ForeColor = Color.Green;
                 }
-                else
+                else if (mainFrameMode == FunctionMode.EDIT)
                 {
                     adapter.UpdateQuery(txtAccountPassword.Text, cbxAccountVipLevel.SelectedValue.ToString(), txtAccountId.Text.Trim());
                     lblAccountSubmitStatus.Text = "編輯帳號完成";
@@ -167,43 +290,45 @@ namespace NIZING_BACKEND_Data_Config
                 }
 
                 //確認OK後針對控制項所做的處理
-                btnAccountAdd.Enabled = true;
-                btnAccountEdit.Enabled = true;
-                btnAccountDelete.Enabled = true;
-                btnAccountConfirm.Enabled = false;
-                btnAccountCancel.Enabled = false;
-                btnAccountSearch.Enabled = true;
-                gvAccountSearch_Result.Enabled = true;
-                tlpAccountInputField.Enabled = false;
+                if (isGridViewEmpty(gvAccountSearch_Result))
+                {
+                    mainFrameMode = FunctionMode.NORECORD;
+                    LoadControlStatus(mainFrameMode);
+                }
+                else
+                {
+                    mainFrameMode = FunctionMode.HASRECORD;
+                    LoadControlStatus(mainFrameMode);
+                }
+            }
+            else
+            {
+                foreach (string s in errorList)
+                {
+                    lblAccountSubmitStatus.Text += s + "\n";
+                }
+                lblAccountSubmitStatus.ForeColor = Color.Red;
             }
         }
 
         private void btnAccountCancel_Click(object sender, EventArgs e)
         {
-            btnAccountAdd.Enabled = true;
-            btnAccountEdit.Enabled = false;
-            btnAccountDelete.Enabled = false;
-            btnAccountConfirm.Enabled = false;
-            btnAccountCancel.Enabled = false;
-            btnAccountSearch.Enabled = true;
-            gvAccountSearch_Result.Enabled = true;
-            tlpAccountInputField.Enabled = false;
-            txtAccountId.Text = "";
-            lblAccountName.Text = "";
-            txtAccountPassword.Text = "";
-            txtAccountConfirmPassword.Text = "";
+            if (isGridViewEmpty(gvAccountSearch_Result))
+            {
+                mainFrameMode = FunctionMode.NORECORD;
+                LoadControlStatus(mainFrameMode);
+            }
+            else
+            {
+                mainFrameMode = FunctionMode.HASRECORD;
+                LoadControlStatus(mainFrameMode);
+            }
         }        
         
         private void btnAccountSearch_Click(object sender, EventArgs e)
         {
-            btnAccountAdd.Enabled = false;
-            btnAccountEdit.Enabled = false;
-            btnAccountDelete.Enabled = false;
-            btnAccountConfirm.Enabled = false;
-            btnAccountCancel.Enabled = false;
-            btnAccountSearch.Enabled = false;
-            gvAccountSearch_Result.Enabled = false;
-            tlpAccountInputField.Enabled = false;
+            mainFrameMode = FunctionMode.SEARCH;
+            LoadControlStatus(mainFrameMode);
 
             var frm = new frmOQS_AccountSearch();
             frm.Location = new Point(this.Location.X + this.Width, this.Location.Y);
@@ -219,29 +344,23 @@ namespace NIZING_BACKEND_Data_Config
         #region method for other forms
         void accountSearchForm_loadButton()
         {
-            btnAccountAdd.Enabled = true;
-            if (gvAccountSearch_Result.Rows.Count > 0)
+            if (isGridViewEmpty(gvAccountSearch_Result))
             {
-                btnAccountEdit.Enabled = true;
-                btnAccountDelete.Enabled = true;
+                mainFrameMode = FunctionMode.NORECORD;
+                LoadControlStatus(mainFrameMode);
             }
             else
             {
-                btnAccountEdit.Enabled = false;
-                btnAccountDelete.Enabled = false;
+                mainFrameMode = FunctionMode.HASRECORD;
+                LoadControlStatus(mainFrameMode);
             }
-            btnAccountConfirm.Enabled = false;
-            btnAccountCancel.Enabled = false;
-            btnAccountSearch.Enabled = true;
-            gvAccountSearch_Result.Enabled = true;
-            tlpAccountInputField.Enabled = false;
         }
         void accountSearchForm_loadGridview(DataTable dt)
         {
             searchFormLoaded = false;
             gvAccountSearch_Result.DataSource = dt;
             searchFormLoaded = true;
-            if (gvAccountSearch_Result.Rows.Count > 0)
+            if (!isGridViewEmpty(gvAccountSearch_Result))
             {
                 gvAccountSearch_Result.Rows[0].Selected = true;
                 displaygvAccountSearch_ResultInControls();
@@ -489,17 +608,17 @@ namespace NIZING_BACKEND_Data_Config
                 gvProductSearch_Result.DataSource = dtOqs;
             }));            
         }
-        #endregion
-
         private void bgwProductSyncLoader_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {            
             this.pgbProductSyncProgress.SetProgressNoAnimation(e.ProgressPercentage);
         }
-
         private void bgwProductSyncLoader_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.Enabled = true;
         }
+        #endregion
+
+
     }
 
     public static class ExtensionMethods

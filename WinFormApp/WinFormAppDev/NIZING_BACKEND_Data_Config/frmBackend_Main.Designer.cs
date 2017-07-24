@@ -142,6 +142,7 @@
             this.tbcManagement.SelectedIndex = 0;
             this.tbcManagement.Size = new System.Drawing.Size(1184, 836);
             this.tbcManagement.TabIndex = 1;
+            this.tbcManagement.SelectedIndexChanged += new System.EventHandler(this.tbcManagement_SelectedIndexChanged);
             // 
             // tbpAccountManagement
             // 
@@ -386,6 +387,7 @@
             this.btnAccountCancel.TabIndex = 4;
             this.btnAccountCancel.Text = "取消";
             this.btnAccountCancel.UseVisualStyleBackColor = true;
+            this.btnAccountCancel.Click += new System.EventHandler(this.btnAccountCancel_Click);
             // 
             // lblAccountSubmitStatus
             // 

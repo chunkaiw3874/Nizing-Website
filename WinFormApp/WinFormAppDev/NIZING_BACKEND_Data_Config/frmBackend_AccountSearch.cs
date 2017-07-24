@@ -23,9 +23,9 @@ namespace NIZING_BACKEND_Data_Config
             InitializeComponent();
             dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter adapter = new dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter();
             DataTable dtFunctionList = adapter.GetData();
-            //((ListBox)this.clbAdminRights).DataSource = dtFunctionList;
-            //((ListBox)this.clbAdminRights).DisplayMember = "NAME";
-            //((ListBox)this.clbAdminRights).ValueMember = "ID";
+            ((ListBox)this.clbAdminRights).DataSource = dtFunctionList;
+            ((ListBox)this.clbAdminRights).DisplayMember = "NAME";
+            ((ListBox)this.clbAdminRights).ValueMember = "ID";
         }
 
         private void btnAccountSearch_Search_Click(object sender, EventArgs e)
@@ -42,7 +42,7 @@ namespace NIZING_BACKEND_Data_Config
                         + " SET @query = N'SELECT [LOGIN_ID],[LOGIN_PASSWORD],' + @cols + ' FROM"
                         + " ("
                         + " SELECT"
-                        + " [FUNC].[ID] [FUNCTION_ID],"
+                        + " [FUNC].[ID] [AUTH_ID],"
                         + " [LOGIN].[ID] [LOGIN_ID],"
                         + " [LOGIN].[PASSWORD] [LOGIN_PASSWORD],"
                         + " CONVERT(INT,[AUTH].[ACTIVE]) [ACTIVE]"
@@ -53,7 +53,7 @@ namespace NIZING_BACKEND_Data_Config
                         + " PIVOT"
                         + " ("
                         + " SUM([ACTIVE])"
-                        + " FOR [FUNCTION_ID] IN"
+                        + " FOR [AUTH_ID] IN"
                         + " (' + @cols + ')"
                         + " ) AS PVT"
                         + " ORDER BY [LOGIN_ID]"
@@ -63,26 +63,15 @@ namespace NIZING_BACKEND_Data_Config
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(dtSearchResult);
             }
-            //dsBackendLoginAccountTableAdapters.BACKEND_LOGIN_ACCOUNTTableAdapter adapter = new dsBackendLoginAccountTableAdapters.BACKEND_LOGIN_ACCOUNTTableAdapter();
-            //dtSearchResult = adapter.GetData();
-            //var active = dtSearchResult.AsEnumerable().Where(x => ((string)x["ACTIVE"]).CompareTo("1") == 0);
-            //if (active.Any())
-            //{
-            //    dtSearchResult = active.CopyToDataTable();
-            //}
-            //else
-            //{
-            //    dtSearchResult.Clear();
-            //}
             if (dtSearchResult.Rows.Count > 0)
             {
                 string startAccountIdFilter = txtAccountSearch_StartingId.Text.ToUpper().Trim();
                 string endAccountIdFilter = txtAccountSearch_EndingId.Text.ToUpper().Trim();
-                //List<string> adminRightsFilter = new List<string>();
-                //foreach (DataRowView row in clbAdminRights.CheckedItems)
-                //{
-                //    adminRightsFilter.Add(row["ID"].ToString());
-                //}
+                List<string> adminRightsFilter = new List<string>();
+                foreach (DataRowView row in clbAdminRights.CheckedItems)
+                {
+                    adminRightsFilter.Add(row["ID"].ToString());
+                }
                 if (!String.IsNullOrWhiteSpace(startAccountIdFilter))
                 {
                     var rows = dtSearchResult.AsEnumerable().Where(x => ((string)x["LOGIN_ID"]).CompareTo(startAccountIdFilter) >= 0);
@@ -108,38 +97,21 @@ namespace NIZING_BACKEND_Data_Config
                     }
                 }
 
-                //if (adminRightsFilter.Count > 0)
-                //{
-                //    string condition = "";
-                //    int i = 0;
-                //    foreach (string s in adminRightsFilter)
-                //    {
-                //        if (i == 0)
-                //        {
-                //            condition += "[AUTH_ID]='" + s + "'";
-                //        }
-                //        else
-                //        {
-                //            condition += " AND [AUTH_ID]='" + s + "'";
-                //        }
-                //        i++;
-                //    }
-                //    DataRow[] result = dtSearchResult.Select(condition);
-                    
-                //    foreach (DataRow row in result)
-                //    {
-                //        dtSearchResult.ImportRow(row);
-                //    }
-                //    //var rows = dtSearchResult.AsEnumerable().Where(x => ((string)x["AUTH_ID"]).CompareTo(s) == 0);
-                //    //if (rows.Any())
-                //    //{
-                //    //    dtSearchResult = rows.CopyToDataTable();
-                //    //}
-                //    //else
-                //    //{
-                //    //    dtSearchResult.Clear();
-                //    //}
-                //}
+                if (adminRightsFilter.Count > 0)
+                {                    
+                    foreach (string s in adminRightsFilter)
+                    {
+                        var rows = dtSearchResult.AsEnumerable().Where(x => ((int)x[s]).CompareTo(1) == 0);
+                        if (rows.Any())
+                        {
+                            dtSearchResult = rows.CopyToDataTable();
+                        }
+                        else
+                        {
+                            dtSearchResult.Clear();
+                        }
+                    }
+                }
             }
             if (loadGridviewEvent != null)
             {
@@ -150,6 +122,8 @@ namespace NIZING_BACKEND_Data_Config
             {
                 loadButtonEvent();
             }
+
+            this.Close();
         }
 
         private void btnAccountSearch_Cancel_Click(object sender, EventArgs e)
