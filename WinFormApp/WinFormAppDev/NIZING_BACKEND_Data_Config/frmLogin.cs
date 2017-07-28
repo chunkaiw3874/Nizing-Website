@@ -61,7 +61,12 @@ namespace NIZING_BACKEND_Data_Config
                             this.Hide();
                             break;
                         case "APA":
-                            lblLoginStatus.Text = cbxFunctionList.Text + "建置中";
+                            var frmAPA = new frmAPA_Main();
+                            frmAPA.Location = this.Location;
+                            frmAPA.StartPosition = FormStartPosition.Manual;
+                            frmAPA.FormClosing += delegate { Application.Exit(); };
+                            frmAPA.Show();
+                            this.Hide();
                             break;
                         case "OQS":
                             var frmOQS = new frmOQS_Main();

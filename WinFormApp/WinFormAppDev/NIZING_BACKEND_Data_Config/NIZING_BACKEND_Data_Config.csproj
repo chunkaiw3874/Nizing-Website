@@ -80,6 +80,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dsAPA_Question.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsAPA_Question.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsBackendLoginAccount.cs">
       <DependentUpon>dsBackendLoginAccount.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -169,6 +174,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="dsAPA_Question.xsc">
+      <DependentUpon>dsAPA_Question.xsd</DependentUpon>
+    </None>
+    <None Include="dsAPA_Question.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsAPA_Question.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsAPA_Question.xss">
+      <DependentUpon>dsAPA_Question.xsd</DependentUpon>
+    </None>
     <None Include="dsBackendLoginAccount.xsc">
       <DependentUpon>dsBackendLoginAccount.xsd</DependentUpon>
     </None>

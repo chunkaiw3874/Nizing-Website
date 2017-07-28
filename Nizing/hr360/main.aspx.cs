@@ -45,7 +45,7 @@ public partial class main : System.Web.UI.Page
                                                         + " CONVERT(NVARCHAR,(SELECT PALTK.TK003*8.5 FROM PALTK WHERE PALTK.TK001=@ID AND PALTK.TK002=YEAR(GETDATE()))"
                                                         + " -COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0))"
                                                         + " FROM PALTL"
-                                                        + " WHERE PALTL.TL001=@ID AND PALTL.TL002=YEAR(GETDATE()) AND PALTL.TL004=3", conn);
+                                                        + " WHERE PALTL.TL001=@ID AND PALTL.TL002=YEAR(GETDATE()) AND PALTL.TL004='03'", conn);
                         cmdSelect.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
                         lblDayOff.Text = (string)cmdSelect.ExecuteScalar();
                     }
@@ -55,7 +55,7 @@ public partial class main : System.Web.UI.Page
                                                         + " COALESCE(CONVERT(NVARCHAR,(SELECT PALTK.TK003*8 FROM PALTK WHERE PALTK.TK001=@ID AND PALTK.TK002=YEAR(GETDATE()))"
                                                         + " -COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)), N'N/A')"
                                                         + " FROM PALTL"
-                                                        + " WHERE PALTL.TL001=@ID AND PALTL.TL002=YEAR(GETDATE()) AND PALTL.TL004=3", conn);
+                                                        + " WHERE PALTL.TL001=@ID AND PALTL.TL002=YEAR(GETDATE()) AND PALTL.TL004='03'", conn);
                         cmdSelect.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
                         lblDayOff.Text = (string)cmdSelect.ExecuteScalar();
                     }
@@ -65,7 +65,7 @@ public partial class main : System.Web.UI.Page
                                                         + " COALESCE(CONVERT(NVARCHAR,(SELECT PALTK.TK005 FROM PALTK WHERE PALTK.TK001=@ID AND PALTK.TK002=YEAR(GETDATE()))"
                                                         + " -COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)), N'N/A')"
                                                         + " FROM PALTL"
-                                                        + " WHERE PALTL.TL001=@ID AND PALTL.TL002=YEAR(GETDATE()) AND PALTL.TL004=2", conn);
+                                                        + " WHERE PALTL.TL001=@ID AND PALTL.TL002=YEAR(GETDATE()) AND PALTL.TL004='02'", conn);
                     cmdSelectMakeupDayOff.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
                     lblMakeupDayOff.Text = (string)cmdSelectMakeupDayOff.ExecuteScalar();
 
