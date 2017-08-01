@@ -187,6 +187,7 @@ namespace NIZING_BACKEND_Data_Config
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbxFunctionList.DataSource = this.bACKENDFUNCTIONLISTBindingSource;
             this.cbxFunctionList.DisplayMember = "NAME";
+            this.cbxFunctionList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxFunctionList.FormattingEnabled = true;
             this.cbxFunctionList.Location = new System.Drawing.Point(146, 167);
             this.cbxFunctionList.Name = "cbxFunctionList";

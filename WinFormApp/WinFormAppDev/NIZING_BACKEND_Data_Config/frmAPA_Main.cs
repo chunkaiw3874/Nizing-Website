@@ -13,6 +13,7 @@ namespace NIZING_BACKEND_Data_Config
     public partial class frmAPA_Main : Form
     {
         List<GridviewChange> changesInData = new List<GridviewChange>();
+        DataTable dtQuestionCategorySource;
 
         public frmAPA_Main()
         {
@@ -22,6 +23,12 @@ namespace NIZING_BACKEND_Data_Config
             {
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+            dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter adapter = new dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter();
+            dtQuestionCategorySource = adapter.GetData();
+            gvQuestionCategory.DataSource = dtQuestionCategorySource;
+            gvQuestionCategory.Enabled = false;
+            gvQuestionCategory.ForeColor = Color.Gray;
+            gvQuestionCategory.AllowUserToAddRows = false;
             changesInData = new List<GridviewChange>();
         }
 
@@ -66,15 +73,15 @@ namespace NIZING_BACKEND_Data_Config
             frm.StartPosition = FormStartPosition.Manual;
             frm.Show();
             this.Hide();
-        }
-        #endregion
-
+        }        
         private void frmAPA_Main_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'dsAPA_Question.HR360_ASSESSMENTQUESTION_CATEGORY_A' table. You can move, or remove it, as needed.
             this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter.Fill(this.dsAPA_Question.HR360_ASSESSMENTQUESTION_CATEGORY_A);
         }
+        #endregion
 
+                
         private void gvQuestionCategory_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             changesInData.Add(new GridviewChange(changesInData.Count + 1, GridviewAction.EDIT, e.RowIndex));
@@ -90,6 +97,7 @@ namespace NIZING_BACKEND_Data_Config
         private void gvQuestionCategory_UserAddedRow(object sender, DataGridViewRowEventArgs e)
         {
             changesInData.Add(new GridviewChange(changesInData.Count + 1, GridviewAction.ADD, e.Row.Index));
+            
             txtTest.Text += changesInData[changesInData.Count - 1].ToString() + '\n';
         }
 
@@ -98,6 +106,11 @@ namespace NIZING_BACKEND_Data_Config
             txtTest.Text = "";
         }
 
+        private void btnQuestionCategoryEdit_Click(object sender, EventArgs e)
+        {
+            gvQuestionCategory.Enabled = true;
+            gvQuestionCategory.ForeColor = Color.Black;
+        }
         private void gvQuestionCategory_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {            
             if (String.IsNullOrWhiteSpace(e.FormattedValue.ToString()))
@@ -149,5 +162,63 @@ namespace NIZING_BACKEND_Data_Config
                 }
             }
         }
+
+        private void gvQuestionCategory_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Down)
+            {
+                if (gvQuestionCategory.CurrentRow.Index == gvQuestionCategory.Rows.Count -1)
+                {
+                    //DataGridViewRow row = (DataGridViewRow)gvQuestionCategory.Rows[0].Clone();
+                    //row.Cells[0].Value = gvQuestionCategory.Rows.Count.ToString();
+                    //gvQuestionCategory.Rows.Add(row);
+                    //gvQuestionCategory.Rows.Add();
+
+                    gvQuestionCategory.DataSource = null;
+                    dtQuestionCategorySource.Rows.Add();
+                    dtQuestionCategorySource.Rows[dtQuestionCategorySource.Rows.Count - 1][0] = "99";
+                    //dtQuestionCategorySource.Rows[dtQuestionCategorySource.Rows.Count - 1][0] = (Convert.ToInt16(gvQuestionCategory.CurrentRow.Cells[0]) + 1).ToString("D2");
+                    gvQuestionCategory.DataSource = dtQuestionCategorySource;
+                    gvQuestionCategory.EndEdit();
+                }
+
+                if (gvQuestionCategory.Rows.Count > 1 && gvQuestionCategory.Enabled == true)
+                {
+                    gvQuestionCategory.CurrentCell = gvQuestionCategory.Rows[gvQuestionCategory.CurrentRow.Index + 1].Cells[gvQuestionCategory.CurrentCell.ColumnIndex];
+                }
+                txtTest.Text += "pressed down Current Row" + gvQuestionCategory.CurrentRow.Index.ToString() + "\r\n";
+            }
+        }
+        //protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        //{
+        //    if (keyData == Keys.Down)
+        //    {
+        //        if (this.gvQuestionCategory.Rows.Count > 0)
+        //        {
+        //            if (gvQuestionCategory.CurrentRow.Index == (gvQuestionCategory.Rows.Count - 1))
+        //            {
+        //                //gvQuestionCategory.Rows.Add();
+        //                gvQuestionCategory.DataSource = null;
+        //                dtQuestionCategorySource.Rows.Add();
+        //                dtQuestionCategorySource.Rows[dtQuestionCategorySource.Rows.Count - 1][0] = "99";
+        //                //dtQuestionCategorySource.Rows[dtQuestionCategorySource.Rows.Count - 1][0] = (Convert.ToInt16(gvQuestionCategory.CurrentRow.Cells[0]) + 1).ToString("D2");
+        //                gvQuestionCategory.DataSource = dtQuestionCategorySource;
+        //                gvQuestionCategory.EndEdit();
+        //            }
+        //        }
+        //        else
+        //        {
+        //            gvQuestionCategory.Rows.Add();
+        //        }
+
+        //        //selecting rows below current row
+        //        if (gvQuestionCategory.Rows.Count > 1 && gvQuestionCategory.Enabled == true)
+        //        {
+        //            gvQuestionCategory.CurrentCell = gvQuestionCategory.Rows[gvQuestionCategory.CurrentRow.Index + 1].Cells[gvQuestionCategory.CurrentCell.ColumnIndex];
+        //        }
+        //        return true;
+        //    }
+        //    return base.ProcessCmdKey(ref msg, keyData);
+        //}
     }
 }

@@ -38,13 +38,8 @@
             this.btnQuestionCategoryCancel = new System.Windows.Forms.Button();
             this.btnQuestionCategorySave = new System.Windows.Forms.Button();
             this.gvQuestionCategory = new System.Windows.Forms.DataGridView();
-            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nAMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.wEIGHTDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hR360ASSESSMENTQUESTIONCATEGORYABindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dsAPAQuestionBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dsAPA_Question = new NIZING_BACKEND_Data_Config.dsAPA_Question();
             this.txtTest = new System.Windows.Forms.TextBox();
+            this.btnQuestionCategoryEdit = new System.Windows.Forms.Button();
             this.tbpProductManagement = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
@@ -73,6 +68,9 @@
             this.label12 = new System.Windows.Forms.Label();
             this.pgbProductSyncProgress = new System.Windows.Forms.ProgressBar();
             this.lblProductSyncStatus = new System.Windows.Forms.Label();
+            this.hR360ASSESSMENTQUESTIONCATEGORYABindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dsAPAQuestionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dsAPA_Question = new NIZING_BACKEND_Data_Config.dsAPA_Question();
             this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter = new NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
@@ -80,9 +78,6 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvQuestionCategory)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hR360ASSESSMENTQUESTIONCATEGORYABindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsAPAQuestionBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).BeginInit();
             this.tbpProductManagement.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -91,6 +86,9 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hR360ASSESSMENTQUESTIONCATEGORYABindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsAPAQuestionBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -149,14 +147,16 @@
             this.tableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel1, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.gvQuestionCategory, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.txtTest, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel1, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.gvQuestionCategory, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.txtTest, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.btnQuestionCategoryEdit, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowCount = 4;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
@@ -196,21 +196,16 @@
             // 
             // gvQuestionCategory
             // 
+            this.gvQuestionCategory.AllowUserToDeleteRows = false;
             this.gvQuestionCategory.AllowUserToResizeRows = false;
-            this.gvQuestionCategory.AutoGenerateColumns = false;
             this.gvQuestionCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvQuestionCategory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iDDataGridViewTextBoxColumn,
-            this.nAMEDataGridViewTextBoxColumn,
-            this.wEIGHTDataGridViewTextBoxColumn});
-            this.gvQuestionCategory.DataSource = this.hR360ASSESSMENTQUESTIONCATEGORYABindingSource;
             this.gvQuestionCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gvQuestionCategory.Location = new System.Drawing.Point(4, 4);
+            this.gvQuestionCategory.Location = new System.Drawing.Point(4, 34);
             this.gvQuestionCategory.MultiSelect = false;
             this.gvQuestionCategory.Name = "gvQuestionCategory";
             this.gvQuestionCategory.RowTemplate.Height = 24;
             this.gvQuestionCategory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvQuestionCategory.Size = new System.Drawing.Size(1162, 665);
+            this.gvQuestionCategory.Size = new System.Drawing.Size(1162, 635);
             this.gvQuestionCategory.TabIndex = 1;
             this.gvQuestionCategory.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.gvQuestionCategory_CellValidating);
             this.gvQuestionCategory.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvQuestionCategory_CellValueChanged);
@@ -219,39 +214,7 @@
             this.gvQuestionCategory.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gvQuestionCategory_RowValidating);
             this.gvQuestionCategory.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gvQuestionCategory_UserAddedRow);
             this.gvQuestionCategory.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gvQuestionCategory_UserDeletingRow);
-            // 
-            // iDDataGridViewTextBoxColumn
-            // 
-            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
-            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
-            // 
-            // nAMEDataGridViewTextBoxColumn
-            // 
-            this.nAMEDataGridViewTextBoxColumn.DataPropertyName = "NAME";
-            this.nAMEDataGridViewTextBoxColumn.HeaderText = "NAME";
-            this.nAMEDataGridViewTextBoxColumn.Name = "nAMEDataGridViewTextBoxColumn";
-            // 
-            // wEIGHTDataGridViewTextBoxColumn
-            // 
-            this.wEIGHTDataGridViewTextBoxColumn.DataPropertyName = "WEIGHT";
-            this.wEIGHTDataGridViewTextBoxColumn.HeaderText = "WEIGHT";
-            this.wEIGHTDataGridViewTextBoxColumn.Name = "wEIGHTDataGridViewTextBoxColumn";
-            // 
-            // hR360ASSESSMENTQUESTIONCATEGORYABindingSource
-            // 
-            this.hR360ASSESSMENTQUESTIONCATEGORYABindingSource.DataMember = "HR360_ASSESSMENTQUESTION_CATEGORY_A";
-            this.hR360ASSESSMENTQUESTIONCATEGORYABindingSource.DataSource = this.dsAPAQuestionBindingSource;
-            // 
-            // dsAPAQuestionBindingSource
-            // 
-            this.dsAPAQuestionBindingSource.DataSource = this.dsAPA_Question;
-            this.dsAPAQuestionBindingSource.Position = 0;
-            // 
-            // dsAPA_Question
-            // 
-            this.dsAPA_Question.DataSetName = "dsAPA_Question";
-            this.dsAPA_Question.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.gvQuestionCategory.KeyUp += new System.Windows.Forms.KeyEventHandler(this.gvQuestionCategory_KeyUp);
             // 
             // txtTest
             // 
@@ -261,6 +224,16 @@
             this.txtTest.Name = "txtTest";
             this.txtTest.Size = new System.Drawing.Size(1162, 94);
             this.txtTest.TabIndex = 2;
+            // 
+            // btnQuestionCategoryEdit
+            // 
+            this.btnQuestionCategoryEdit.Location = new System.Drawing.Point(4, 4);
+            this.btnQuestionCategoryEdit.Name = "btnQuestionCategoryEdit";
+            this.btnQuestionCategoryEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnQuestionCategoryEdit.TabIndex = 3;
+            this.btnQuestionCategoryEdit.Text = "編輯";
+            this.btnQuestionCategoryEdit.UseVisualStyleBackColor = true;
+            this.btnQuestionCategoryEdit.Click += new System.EventHandler(this.btnQuestionCategoryEdit_Click);
             // 
             // tbpProductManagement
             // 
@@ -582,6 +555,21 @@
             this.lblProductSyncStatus.Size = new System.Drawing.Size(0, 12);
             this.lblProductSyncStatus.TabIndex = 5;
             // 
+            // hR360ASSESSMENTQUESTIONCATEGORYABindingSource
+            // 
+            this.hR360ASSESSMENTQUESTIONCATEGORYABindingSource.DataMember = "HR360_ASSESSMENTQUESTION_CATEGORY_A";
+            this.hR360ASSESSMENTQUESTIONCATEGORYABindingSource.DataSource = this.dsAPAQuestionBindingSource;
+            // 
+            // dsAPAQuestionBindingSource
+            // 
+            this.dsAPAQuestionBindingSource.DataSource = this.dsAPA_Question;
+            this.dsAPAQuestionBindingSource.Position = 0;
+            // 
+            // dsAPA_Question
+            // 
+            this.dsAPA_Question.DataSetName = "dsAPA_Question";
+            this.dsAPA_Question.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter
             // 
             this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter.ClearBeforeFill = true;
@@ -603,9 +591,6 @@
             this.tableLayoutPanel2.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvQuestionCategory)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hR360ASSESSMENTQUESTIONCATEGORYABindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsAPAQuestionBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).EndInit();
             this.tbpProductManagement.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.ResumeLayout(false);
@@ -617,6 +602,9 @@
             this.flowLayoutPanel4.ResumeLayout(false);
             this.flowLayoutPanel5.ResumeLayout(false);
             this.flowLayoutPanel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hR360ASSESSMENTQUESTIONCATEGORYABindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsAPAQuestionBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -664,9 +652,7 @@
         private dsAPA_Question dsAPA_Question;
         private System.Windows.Forms.BindingSource hR360ASSESSMENTQUESTIONCATEGORYABindingSource;
         private dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nAMEDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn wEIGHTDataGridViewTextBoxColumn;
         private System.Windows.Forms.TextBox txtTest;
+        private System.Windows.Forms.Button btnQuestionCategoryEdit;
     }
 }

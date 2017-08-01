@@ -16,7 +16,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
     string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
     List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
-    DataTable userInfo = new DataTable(); 
+    DataTable userInfo = new DataTable();
 
     public class dayOffInfo
     {
@@ -32,29 +32,32 @@ public partial class hr360_UI04 : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if (Session["user_id"].ToString().ToUpper().Trim() != "ADMIN")  //admin doesnt have the proper erp information and will crash the system
         {
-            //Session["erp_id"] = "0080"; //test only to avoid error on loading, delete after trial            
-            ApplicationSection_Init_Load();
-            InProgressSection_Init_Load();
-            ApprovalSection_Init_Load();
-            SearchSection_Init_Load();
-        }
-        else
-        {
-            ApplicationSection_PostBack_Load();
-            InProgressSection_PostBack_Load();
-            ApprovalSection_PostBack_Load();
-        }
+            if (!IsPostBack)
+            {
+                //Session["erp_id"] = "0080"; //test only to avoid error on loading, delete after trial            
+                ApplicationSection_Init_Load();
+                InProgressSection_Init_Load();
+                ApprovalSection_Init_Load();
+                SearchSection_Init_Load();
+            }
+            else
+            {
+                ApplicationSection_PostBack_Load();
+                InProgressSection_PostBack_Load();
+                ApprovalSection_PostBack_Load();
+            }
 
-        //hidden field that contains normal work hour per day for current user
-        if (Session["erp_id"].ToString() == "0010")  //小倩8.5hr/day
-        {
-            hdnNormalWorkHour.Value = "8.5";
-        }
-        else
-        {
-            hdnNormalWorkHour.Value = "8";
+            //hidden field that contains normal work hour per day for current user
+            if (Session["erp_id"].ToString() == "0010")  //小倩8.5hr/day
+            {
+                hdnNormalWorkHour.Value = "8.5";
+            }
+            else
+            {
+                hdnNormalWorkHour.Value = "8";
+            }
         }
     }
 
@@ -578,30 +581,39 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 row = dt.Select("ID=" + ddlDayOffType.SelectedValue.ToString());
 
                 //未選擇、婚假、陪產假、產檢假、產假 並非每年都有的假，所以忽略假期天數的限制，由人事檢查
-                if (ddlDayOffType.SelectedValue.ToString() == "06" || ddlDayOffType.SelectedValue.ToString() == "09"
-                    || ddlDayOffType.SelectedValue.ToString() == "15" || ddlDayOffType.SelectedValue.ToString() == "08")
+                if (row.Any())
                 {
-                    lblDayOffRemainType.Text = "";
-                    lblDayOffRemainAmount.Text = "";
-                    lblDayOffRemainUnit.Text = "";
-                    hdnDayOffTypeUnit.Value = row[0][4].ToString();
-                }
-                else
-                {
-                    if (Convert.ToDouble(row[0][1]) > 0)
-                    {
-                        double sumFromList = lstDayOffAppSummary.Where(x => x.typeID == ddlDayOffType.SelectedValue).Sum(x => double.Parse(x.amountUsing));
-                        hdnDayOffTimeRemainBeforeSubmit.Value = (Convert.ToDouble(row[0][1]) - Convert.ToDouble(row[0][2]) - Convert.ToDouble(row[0][3])).ToString();
-                        lblDayOffRemainAmount.Text = (Convert.ToDouble(hdnDayOffTimeRemainBeforeSubmit.Value) - sumFromList).ToString();
-                        lblDayOffRemainUnit.Text = row[0][4].ToString();
-                    }
-                    else
+                    if (ddlDayOffType.SelectedValue.ToString() == "06" || ddlDayOffType.SelectedValue.ToString() == "09"
+                        || ddlDayOffType.SelectedValue.ToString() == "15" || ddlDayOffType.SelectedValue.ToString() == "08")
                     {
                         lblDayOffRemainType.Text = "";
                         lblDayOffRemainAmount.Text = "";
                         lblDayOffRemainUnit.Text = "";
+                        hdnDayOffTypeUnit.Value = row[0][4].ToString();
                     }
-                    hdnDayOffTypeUnit.Value = row[0][4].ToString();
+                    else
+                    {
+                        if (Convert.ToDouble(row[0][1]) > 0)
+                        {
+                            double sumFromList = lstDayOffAppSummary.Where(x => x.typeID == ddlDayOffType.SelectedValue).Sum(x => double.Parse(x.amountUsing));
+                            hdnDayOffTimeRemainBeforeSubmit.Value = (Convert.ToDouble(row[0][1]) - Convert.ToDouble(row[0][2]) - Convert.ToDouble(row[0][3])).ToString();
+                            lblDayOffRemainAmount.Text = (Convert.ToDouble(hdnDayOffTimeRemainBeforeSubmit.Value) - sumFromList).ToString();
+                            lblDayOffRemainUnit.Text = row[0][4].ToString();
+                        }
+                        else
+                        {
+                            lblDayOffRemainType.Text = "";
+                            lblDayOffRemainAmount.Text = "";
+                            lblDayOffRemainUnit.Text = "";
+                        }
+                        hdnDayOffTypeUnit.Value = row[0][4].ToString();
+                    }
+                }
+                else
+                {
+                    lblDayOffRemainType.Text = "";
+                    lblDayOffRemainAmount.Text = "N/A";
+                    lblDayOffRemainUnit.Text = "";
                 }
             }
         }
