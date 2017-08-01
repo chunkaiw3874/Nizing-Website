@@ -198,9 +198,9 @@
                                     <asp:Label ID="Label1" runat="server" Text='<%#Eval("本幣銷貨金額") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="本幣銷貨稅額">
+                            <asp:TemplateField HeaderText="備註">
                                 <ItemTemplate>
-                                    <asp:Label ID="Label1" runat="server" Text='<%#Eval("本幣銷貨稅額") %>'></asp:Label>
+                                    <asp:Label ID="Label1" runat="server" Text='<%#Eval("備註") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>

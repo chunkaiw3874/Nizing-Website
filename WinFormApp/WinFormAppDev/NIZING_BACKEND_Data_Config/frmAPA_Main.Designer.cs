@@ -183,6 +183,7 @@
             this.btnQuestionCategoryCancel.TabIndex = 0;
             this.btnQuestionCategoryCancel.Text = "取消";
             this.btnQuestionCategoryCancel.UseVisualStyleBackColor = true;
+            this.btnQuestionCategoryCancel.Click += new System.EventHandler(this.btnQuestionCategoryCancel_Click);
             // 
             // btnQuestionCategorySave
             // 
@@ -196,6 +197,7 @@
             // 
             // gvQuestionCategory
             // 
+            this.gvQuestionCategory.AllowUserToAddRows = false;
             this.gvQuestionCategory.AllowUserToDeleteRows = false;
             this.gvQuestionCategory.AllowUserToResizeRows = false;
             this.gvQuestionCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -214,7 +216,7 @@
             this.gvQuestionCategory.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gvQuestionCategory_RowValidating);
             this.gvQuestionCategory.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.gvQuestionCategory_UserAddedRow);
             this.gvQuestionCategory.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.gvQuestionCategory_UserDeletingRow);
-            this.gvQuestionCategory.KeyUp += new System.Windows.Forms.KeyEventHandler(this.gvQuestionCategory_KeyUp);
+            this.gvQuestionCategory.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gvQuestionCategory_KeyDown);
             // 
             // txtTest
             // 

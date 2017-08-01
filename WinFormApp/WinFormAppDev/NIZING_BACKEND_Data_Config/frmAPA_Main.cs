@@ -14,6 +14,7 @@ namespace NIZING_BACKEND_Data_Config
     {
         List<GridviewChange> changesInData = new List<GridviewChange>();
         DataTable dtQuestionCategorySource;
+        DataTable dtInterimQuestionCategorySource;
 
         public frmAPA_Main()
         {
@@ -25,10 +26,10 @@ namespace NIZING_BACKEND_Data_Config
             }
             dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter adapter = new dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter();
             dtQuestionCategorySource = adapter.GetData();
-            gvQuestionCategory.DataSource = dtQuestionCategorySource;
+            dtInterimQuestionCategorySource = dtQuestionCategorySource;
+            gvQuestionCategory.DataSource = dtInterimQuestionCategorySource;
             gvQuestionCategory.Enabled = false;
             gvQuestionCategory.ForeColor = Color.Gray;
-            gvQuestionCategory.AllowUserToAddRows = false;
             changesInData = new List<GridviewChange>();
         }
 
@@ -163,62 +164,46 @@ namespace NIZING_BACKEND_Data_Config
             }
         }
 
-        private void gvQuestionCategory_KeyUp(object sender, KeyEventArgs e)
+        private void gvQuestionCategory_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Down)
             {
-                if (gvQuestionCategory.CurrentRow.Index == gvQuestionCategory.Rows.Count -1)
+                
+                if (gvQuestionCategory.CurrentRow.Index == gvQuestionCategory.Rows.Count - 1)
                 {
-                    //DataGridViewRow row = (DataGridViewRow)gvQuestionCategory.Rows[0].Clone();
-                    //row.Cells[0].Value = gvQuestionCategory.Rows.Count.ToString();
-                    //gvQuestionCategory.Rows.Add(row);
-                    //gvQuestionCategory.Rows.Add();
-
-                    gvQuestionCategory.DataSource = null;
-                    dtQuestionCategorySource.Rows.Add();
-                    dtQuestionCategorySource.Rows[dtQuestionCategorySource.Rows.Count - 1][0] = "99";
-                    //dtQuestionCategorySource.Rows[dtQuestionCategorySource.Rows.Count - 1][0] = (Convert.ToInt16(gvQuestionCategory.CurrentRow.Cells[0]) + 1).ToString("D2");
-                    gvQuestionCategory.DataSource = dtQuestionCategorySource;
-                    gvQuestionCategory.EndEdit();
-                }
-
-                if (gvQuestionCategory.Rows.Count > 1 && gvQuestionCategory.Enabled == true)
-                {
-                    gvQuestionCategory.CurrentCell = gvQuestionCategory.Rows[gvQuestionCategory.CurrentRow.Index + 1].Cells[gvQuestionCategory.CurrentCell.ColumnIndex];
+                    foreach (DataGridViewCell c in gvQuestionCategory.CurrentRow.Cells)
+                    {
+                        if (String.IsNullOrWhiteSpace(c.EditedFormattedValue.ToString()))
+                        {
+                            MessageBox.Show("Row cannot contain empty cell");
+                            e.Handled = true;
+                            break;
+                        }
+                    }
+                    if (!e.Handled)
+                    {                        
+                        dtInterimQuestionCategorySource.Rows.Add();
+                        dtInterimQuestionCategorySource.Rows[dtInterimQuestionCategorySource.Rows.Count - 1][0] = (Convert.ToInt16(gvQuestionCategory.CurrentRow.Cells[0].EditedFormattedValue) + 1).ToString();
+                        gvQuestionCategory.DataSource = dtInterimQuestionCategorySource;
+                        if (gvQuestionCategory.Rows.Count > 1 && gvQuestionCategory.Enabled == true)
+                        {
+                            gvQuestionCategory.CurrentCell = gvQuestionCategory.Rows[gvQuestionCategory.CurrentRow.Index + 1].Cells[0];
+                        }
+                    }
                 }
                 txtTest.Text += "pressed down Current Row" + gvQuestionCategory.CurrentRow.Index.ToString() + "\r\n";
             }
         }
-        //protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        //{
-        //    if (keyData == Keys.Down)
-        //    {
-        //        if (this.gvQuestionCategory.Rows.Count > 0)
-        //        {
-        //            if (gvQuestionCategory.CurrentRow.Index == (gvQuestionCategory.Rows.Count - 1))
-        //            {
-        //                //gvQuestionCategory.Rows.Add();
-        //                gvQuestionCategory.DataSource = null;
-        //                dtQuestionCategorySource.Rows.Add();
-        //                dtQuestionCategorySource.Rows[dtQuestionCategorySource.Rows.Count - 1][0] = "99";
-        //                //dtQuestionCategorySource.Rows[dtQuestionCategorySource.Rows.Count - 1][0] = (Convert.ToInt16(gvQuestionCategory.CurrentRow.Cells[0]) + 1).ToString("D2");
-        //                gvQuestionCategory.DataSource = dtQuestionCategorySource;
-        //                gvQuestionCategory.EndEdit();
-        //            }
-        //        }
-        //        else
-        //        {
-        //            gvQuestionCategory.Rows.Add();
-        //        }
 
-        //        //selecting rows below current row
-        //        if (gvQuestionCategory.Rows.Count > 1 && gvQuestionCategory.Enabled == true)
-        //        {
-        //            gvQuestionCategory.CurrentCell = gvQuestionCategory.Rows[gvQuestionCategory.CurrentRow.Index + 1].Cells[gvQuestionCategory.CurrentCell.ColumnIndex];
-        //        }
-        //        return true;
-        //    }
-        //    return base.ProcessCmdKey(ref msg, keyData);
-        //}
+        private void btnQuestionCategoryCancel_Click(object sender, EventArgs e)
+        {
+            gvQuestionCategory.CancelEdit();
+            dtInterimQuestionCategorySource = dtQuestionCategorySource;
+            gvQuestionCategory.DataSource = null;
+            gvQuestionCategory.DataSource = dtInterimQuestionCategorySource;
+            gvQuestionCategory.Enabled = false;
+            gvQuestionCategory.ForeColor = Color.Gray;
+        }
+
     }
 }
