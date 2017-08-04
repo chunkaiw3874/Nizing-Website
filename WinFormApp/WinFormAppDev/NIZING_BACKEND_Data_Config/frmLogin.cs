@@ -14,6 +14,8 @@ namespace NIZING_BACKEND_Data_Config
 {    
     public partial class frmLogin : Form
     {
+        public string UserName { get; private set; }
+
         public frmLogin()
         {
             InitializeComponent();
@@ -50,6 +52,7 @@ namespace NIZING_BACKEND_Data_Config
                 }
                 else
                 {
+                    UserName = txtUserName.Text.Trim().ToUpper();
                     switch (cbxFunctionList.SelectedValue.ToString())
                     {
                         case "ADMIN":                            
@@ -57,6 +60,7 @@ namespace NIZING_BACKEND_Data_Config
                             frmBackend.Location = this.Location;
                             frmBackend.StartPosition = FormStartPosition.Manual;
                             frmBackend.FormClosing += delegate { Application.Exit(); };
+                            frmBackend.UserName = this.UserName;
                             frmBackend.Show();
                             this.Hide();
                             break;
@@ -65,6 +69,7 @@ namespace NIZING_BACKEND_Data_Config
                             frmAPA.Location = this.Location;
                             frmAPA.StartPosition = FormStartPosition.Manual;
                             frmAPA.FormClosing += delegate { Application.Exit(); };
+                            frmAPA.UserName = this.UserName;
                             frmAPA.Show();
                             this.Hide();
                             break;
@@ -73,6 +78,7 @@ namespace NIZING_BACKEND_Data_Config
                             frmOQS.Location = this.Location;
                             frmOQS.StartPosition = FormStartPosition.Manual;
                             frmOQS.FormClosing += delegate { Application.Exit(); };
+                            frmOQS.UserName = this.UserName;
                             frmOQS.Show();
                             this.Hide();
                             break;

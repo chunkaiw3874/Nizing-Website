@@ -64,11 +64,11 @@
                     </tr>
                 </table>
             </div>            
-            <div class="right" style="display:block;">                
+            <%--<div class="right" style="display:block;">                
                 <a href="https://line.me/R/ti/p/%40nizing" target="_blank">
                     <img src="/en/images/icon/line_addfriends_en.png" />
                 </a>
-            </div>
+            </div>--%>
         </div>        
     </div>
 </asp:Content>

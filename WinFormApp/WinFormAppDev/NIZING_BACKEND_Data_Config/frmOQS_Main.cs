@@ -12,6 +12,7 @@ namespace NIZING_BACKEND_Data_Config
 {
     public partial class frmOQS_Main : Form
     {
+        public string UserName { get; set; }
         private Boolean searchFormLoaded = false;
         private enum FunctionMode { ADD, EDIT, DELETE, SEARCH, HASRECORD, NORECORD };
         int currentTabPage = 0;

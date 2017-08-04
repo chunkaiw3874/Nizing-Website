@@ -26,6 +26,10 @@ namespace NIZING_BACKEND_Data_Config {
         
         private HR360_ASSESSMENTQUESTION_CATEGORY_ADataTable tableHR360_ASSESSMENTQUESTION_CATEGORY_A;
         
+        private HR360_ASSESSMENTQUESTION_QUESTION_ADataTable tableHR360_ASSESSMENTQUESTION_QUESTION_A;
+        
+        private global::System.Data.DataRelation relationFK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -57,6 +61,9 @@ namespace NIZING_BACKEND_Data_Config {
                 if ((ds.Tables["HR360_ASSESSMENTQUESTION_CATEGORY_A"] != null)) {
                     base.Tables.Add(new HR360_ASSESSMENTQUESTION_CATEGORY_ADataTable(ds.Tables["HR360_ASSESSMENTQUESTION_CATEGORY_A"]));
                 }
+                if ((ds.Tables["HR360_ASSESSMENTQUESTION_QUESTION_A"] != null)) {
+                    base.Tables.Add(new HR360_ASSESSMENTQUESTION_QUESTION_ADataTable(ds.Tables["HR360_ASSESSMENTQUESTION_QUESTION_A"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -82,6 +89,16 @@ namespace NIZING_BACKEND_Data_Config {
         public HR360_ASSESSMENTQUESTION_CATEGORY_ADataTable HR360_ASSESSMENTQUESTION_CATEGORY_A {
             get {
                 return this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public HR360_ASSESSMENTQUESTION_QUESTION_ADataTable HR360_ASSESSMENTQUESTION_QUESTION_A {
+            get {
+                return this.tableHR360_ASSESSMENTQUESTION_QUESTION_A;
             }
         }
         
@@ -155,6 +172,9 @@ namespace NIZING_BACKEND_Data_Config {
                 if ((ds.Tables["HR360_ASSESSMENTQUESTION_CATEGORY_A"] != null)) {
                     base.Tables.Add(new HR360_ASSESSMENTQUESTION_CATEGORY_ADataTable(ds.Tables["HR360_ASSESSMENTQUESTION_CATEGORY_A"]));
                 }
+                if ((ds.Tables["HR360_ASSESSMENTQUESTION_QUESTION_A"] != null)) {
+                    base.Tables.Add(new HR360_ASSESSMENTQUESTION_QUESTION_ADataTable(ds.Tables["HR360_ASSESSMENTQUESTION_QUESTION_A"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -194,6 +214,13 @@ namespace NIZING_BACKEND_Data_Config {
                     this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.InitVars();
                 }
             }
+            this.tableHR360_ASSESSMENTQUESTION_QUESTION_A = ((HR360_ASSESSMENTQUESTION_QUESTION_ADataTable)(base.Tables["HR360_ASSESSMENTQUESTION_QUESTION_A"]));
+            if ((initTable == true)) {
+                if ((this.tableHR360_ASSESSMENTQUESTION_QUESTION_A != null)) {
+                    this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.InitVars();
+                }
+            }
+            this.relationFK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A = this.Relations["FK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -206,11 +233,23 @@ namespace NIZING_BACKEND_Data_Config {
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A = new HR360_ASSESSMENTQUESTION_CATEGORY_ADataTable();
             base.Tables.Add(this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A);
+            this.tableHR360_ASSESSMENTQUESTION_QUESTION_A = new HR360_ASSESSMENTQUESTION_QUESTION_ADataTable();
+            base.Tables.Add(this.tableHR360_ASSESSMENTQUESTION_QUESTION_A);
+            this.relationFK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A = new global::System.Data.DataRelation("FK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A", new global::System.Data.DataColumn[] {
+                        this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.IDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.CATEGORY_IDColumn}, false);
+            this.Relations.Add(this.relationFK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeHR360_ASSESSMENTQUESTION_CATEGORY_A() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeHR360_ASSESSMENTQUESTION_QUESTION_A() {
             return false;
         }
         
@@ -271,6 +310,9 @@ namespace NIZING_BACKEND_Data_Config {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void HR360_ASSESSMENTQUESTION_CATEGORY_ARowChangeEventHandler(object sender, HR360_ASSESSMENTQUESTION_CATEGORY_ARowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void HR360_ASSESSMENTQUESTION_QUESTION_ARowChangeEventHandler(object sender, HR360_ASSESSMENTQUESTION_QUESTION_ARowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -421,6 +463,7 @@ namespace NIZING_BACKEND_Data_Config {
                 base.Columns.Add(this.columnNAME);
                 this.columnWEIGHT = new global::System.Data.DataColumn("WEIGHT", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnWEIGHT);
+                this.columnID.AllowDBNull = false;
                 this.columnID.MaxLength = 20;
                 this.columnNAME.MaxLength = 255;
                 this.columnWEIGHT.MaxLength = 20;
@@ -551,6 +594,317 @@ namespace NIZING_BACKEND_Data_Config {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class HR360_ASSESSMENTQUESTION_QUESTION_ADataTable : global::System.Data.TypedTableBase<HR360_ASSESSMENTQUESTION_QUESTION_ARow> {
+            
+            private global::System.Data.DataColumn columnID;
+            
+            private global::System.Data.DataColumn columnQUESTION;
+            
+            private global::System.Data.DataColumn columnCATEGORY_ID;
+            
+            private global::System.Data.DataColumn columnIN_USE;
+            
+            private global::System.Data.DataColumn columnUSE_BY_ALL;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public HR360_ASSESSMENTQUESTION_QUESTION_ADataTable() {
+                this.TableName = "HR360_ASSESSMENTQUESTION_QUESTION_A";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal HR360_ASSESSMENTQUESTION_QUESTION_ADataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected HR360_ASSESSMENTQUESTION_QUESTION_ADataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IDColumn {
+                get {
+                    return this.columnID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn QUESTIONColumn {
+                get {
+                    return this.columnQUESTION;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CATEGORY_IDColumn {
+                get {
+                    return this.columnCATEGORY_ID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IN_USEColumn {
+                get {
+                    return this.columnIN_USE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn USE_BY_ALLColumn {
+                get {
+                    return this.columnUSE_BY_ALL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public HR360_ASSESSMENTQUESTION_QUESTION_ARow this[int index] {
+                get {
+                    return ((HR360_ASSESSMENTQUESTION_QUESTION_ARow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event HR360_ASSESSMENTQUESTION_QUESTION_ARowChangeEventHandler HR360_ASSESSMENTQUESTION_QUESTION_ARowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event HR360_ASSESSMENTQUESTION_QUESTION_ARowChangeEventHandler HR360_ASSESSMENTQUESTION_QUESTION_ARowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event HR360_ASSESSMENTQUESTION_QUESTION_ARowChangeEventHandler HR360_ASSESSMENTQUESTION_QUESTION_ARowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event HR360_ASSESSMENTQUESTION_QUESTION_ARowChangeEventHandler HR360_ASSESSMENTQUESTION_QUESTION_ARowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddHR360_ASSESSMENTQUESTION_QUESTION_ARow(HR360_ASSESSMENTQUESTION_QUESTION_ARow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public HR360_ASSESSMENTQUESTION_QUESTION_ARow AddHR360_ASSESSMENTQUESTION_QUESTION_ARow(int ID, string QUESTION, HR360_ASSESSMENTQUESTION_CATEGORY_ARow parentHR360_ASSESSMENTQUESTION_CATEGORY_ARowByFK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A, string IN_USE, string USE_BY_ALL) {
+                HR360_ASSESSMENTQUESTION_QUESTION_ARow rowHR360_ASSESSMENTQUESTION_QUESTION_ARow = ((HR360_ASSESSMENTQUESTION_QUESTION_ARow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        ID,
+                        QUESTION,
+                        null,
+                        IN_USE,
+                        USE_BY_ALL};
+                if ((parentHR360_ASSESSMENTQUESTION_CATEGORY_ARowByFK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A != null)) {
+                    columnValuesArray[2] = parentHR360_ASSESSMENTQUESTION_CATEGORY_ARowByFK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A[0];
+                }
+                rowHR360_ASSESSMENTQUESTION_QUESTION_ARow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowHR360_ASSESSMENTQUESTION_QUESTION_ARow);
+                return rowHR360_ASSESSMENTQUESTION_QUESTION_ARow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                HR360_ASSESSMENTQUESTION_QUESTION_ADataTable cln = ((HR360_ASSESSMENTQUESTION_QUESTION_ADataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new HR360_ASSESSMENTQUESTION_QUESTION_ADataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnID = base.Columns["ID"];
+                this.columnQUESTION = base.Columns["QUESTION"];
+                this.columnCATEGORY_ID = base.Columns["CATEGORY_ID"];
+                this.columnIN_USE = base.Columns["IN_USE"];
+                this.columnUSE_BY_ALL = base.Columns["USE_BY_ALL"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnID = new global::System.Data.DataColumn("ID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnID);
+                this.columnQUESTION = new global::System.Data.DataColumn("QUESTION", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnQUESTION);
+                this.columnCATEGORY_ID = new global::System.Data.DataColumn("CATEGORY_ID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCATEGORY_ID);
+                this.columnIN_USE = new global::System.Data.DataColumn("IN_USE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIN_USE);
+                this.columnUSE_BY_ALL = new global::System.Data.DataColumn("USE_BY_ALL", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUSE_BY_ALL);
+                this.columnID.AllowDBNull = false;
+                this.columnQUESTION.MaxLength = 2147483647;
+                this.columnCATEGORY_ID.MaxLength = 20;
+                this.columnIN_USE.MaxLength = 20;
+                this.columnUSE_BY_ALL.MaxLength = 20;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public HR360_ASSESSMENTQUESTION_QUESTION_ARow NewHR360_ASSESSMENTQUESTION_QUESTION_ARow() {
+                return ((HR360_ASSESSMENTQUESTION_QUESTION_ARow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new HR360_ASSESSMENTQUESTION_QUESTION_ARow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(HR360_ASSESSMENTQUESTION_QUESTION_ARow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.HR360_ASSESSMENTQUESTION_QUESTION_ARowChanged != null)) {
+                    this.HR360_ASSESSMENTQUESTION_QUESTION_ARowChanged(this, new HR360_ASSESSMENTQUESTION_QUESTION_ARowChangeEvent(((HR360_ASSESSMENTQUESTION_QUESTION_ARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.HR360_ASSESSMENTQUESTION_QUESTION_ARowChanging != null)) {
+                    this.HR360_ASSESSMENTQUESTION_QUESTION_ARowChanging(this, new HR360_ASSESSMENTQUESTION_QUESTION_ARowChangeEvent(((HR360_ASSESSMENTQUESTION_QUESTION_ARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.HR360_ASSESSMENTQUESTION_QUESTION_ARowDeleted != null)) {
+                    this.HR360_ASSESSMENTQUESTION_QUESTION_ARowDeleted(this, new HR360_ASSESSMENTQUESTION_QUESTION_ARowChangeEvent(((HR360_ASSESSMENTQUESTION_QUESTION_ARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.HR360_ASSESSMENTQUESTION_QUESTION_ARowDeleting != null)) {
+                    this.HR360_ASSESSMENTQUESTION_QUESTION_ARowDeleting(this, new HR360_ASSESSMENTQUESTION_QUESTION_ARowChangeEvent(((HR360_ASSESSMENTQUESTION_QUESTION_ARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveHR360_ASSESSMENTQUESTION_QUESTION_ARow(HR360_ASSESSMENTQUESTION_QUESTION_ARow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsAPA_Question ds = new dsAPA_Question();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "HR360_ASSESSMENTQUESTION_QUESTION_ADataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class HR360_ASSESSMENTQUESTION_CATEGORY_ARow : global::System.Data.DataRow {
@@ -568,13 +922,7 @@ namespace NIZING_BACKEND_Data_Config {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string ID {
                 get {
-                    try {
-                        return ((string)(this[this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.IDColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ID\' in table \'HR360_ASSESSMENTQUESTION_CATEGORY_A\' is DBNul" +
-                                "l.", e);
-                    }
+                    return ((string)(this[this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.IDColumn]));
                 }
                 set {
                     this[this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.IDColumn] = value;
@@ -617,18 +965,6 @@ namespace NIZING_BACKEND_Data_Config {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsIDNull() {
-                return this.IsNull(this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.IDColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetIDNull() {
-                this[this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.IDColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNAMENull() {
                 return this.IsNull(this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.NAMEColumn);
             }
@@ -649,6 +985,170 @@ namespace NIZING_BACKEND_Data_Config {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetWEIGHTNull() {
                 this[this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.WEIGHTColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public HR360_ASSESSMENTQUESTION_QUESTION_ARow[] GetHR360_ASSESSMENTQUESTION_QUESTION_ARows() {
+                if ((this.Table.ChildRelations["FK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A"] == null)) {
+                    return new HR360_ASSESSMENTQUESTION_QUESTION_ARow[0];
+                }
+                else {
+                    return ((HR360_ASSESSMENTQUESTION_QUESTION_ARow[])(base.GetChildRows(this.Table.ChildRelations["FK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class HR360_ASSESSMENTQUESTION_QUESTION_ARow : global::System.Data.DataRow {
+            
+            private HR360_ASSESSMENTQUESTION_QUESTION_ADataTable tableHR360_ASSESSMENTQUESTION_QUESTION_A;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal HR360_ASSESSMENTQUESTION_QUESTION_ARow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableHR360_ASSESSMENTQUESTION_QUESTION_A = ((HR360_ASSESSMENTQUESTION_QUESTION_ADataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int ID {
+                get {
+                    return ((int)(this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.IDColumn]));
+                }
+                set {
+                    this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string QUESTION {
+                get {
+                    try {
+                        return ((string)(this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.QUESTIONColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'QUESTION\' in table \'HR360_ASSESSMENTQUESTION_QUESTION_A\' is" +
+                                " DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.QUESTIONColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CATEGORY_ID {
+                get {
+                    try {
+                        return ((string)(this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.CATEGORY_IDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CATEGORY_ID\' in table \'HR360_ASSESSMENTQUESTION_QUESTION_A\'" +
+                                " is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.CATEGORY_IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string IN_USE {
+                get {
+                    try {
+                        return ((string)(this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.IN_USEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IN_USE\' in table \'HR360_ASSESSMENTQUESTION_QUESTION_A\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.IN_USEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string USE_BY_ALL {
+                get {
+                    try {
+                        return ((string)(this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.USE_BY_ALLColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'USE_BY_ALL\' in table \'HR360_ASSESSMENTQUESTION_QUESTION_A\' " +
+                                "is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.USE_BY_ALLColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public HR360_ASSESSMENTQUESTION_CATEGORY_ARow HR360_ASSESSMENTQUESTION_CATEGORY_ARow {
+                get {
+                    return ((HR360_ASSESSMENTQUESTION_CATEGORY_ARow)(this.GetParentRow(this.Table.ParentRelations["FK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsQUESTIONNull() {
+                return this.IsNull(this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.QUESTIONColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetQUESTIONNull() {
+                this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.QUESTIONColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCATEGORY_IDNull() {
+                return this.IsNull(this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.CATEGORY_IDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCATEGORY_IDNull() {
+                this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.CATEGORY_IDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsIN_USENull() {
+                return this.IsNull(this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.IN_USEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetIN_USENull() {
+                this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.IN_USEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsUSE_BY_ALLNull() {
+                return this.IsNull(this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.USE_BY_ALLColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetUSE_BY_ALLNull() {
+                this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.USE_BY_ALLColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -672,6 +1172,40 @@ namespace NIZING_BACKEND_Data_Config {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public HR360_ASSESSMENTQUESTION_CATEGORY_ARow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class HR360_ASSESSMENTQUESTION_QUESTION_ARowChangeEvent : global::System.EventArgs {
+            
+            private HR360_ASSESSMENTQUESTION_QUESTION_ARow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public HR360_ASSESSMENTQUESTION_QUESTION_ARowChangeEvent(HR360_ASSESSMENTQUESTION_QUESTION_ARow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public HR360_ASSESSMENTQUESTION_QUESTION_ARow Row {
                 get {
                     return this.eventRow;
                 }
@@ -835,12 +1369,35 @@ namespace NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT [ID],[NAME],[WEIGHT]\r\nFROM HR360_ASSESSMENTQUESTION_CATEGORY_A\r\nORDER BY [" +
                 "ID]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "DELETE FROM HR360_ASSESSMENTQUESTION_CATEGORY_A\r\nWHERE [ID]=@ID";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.NVarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "INSERT INTO [HR360_ASSESSMENTQUESTION_CATEGORY_A]\r\nVALUES (GETDATE(),@USER,GETDAT" +
+                "E(),@USER,@ID, @NAME, @WEIGHT)";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USER", global::System.Data.SqlDbType.NVarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "MODIFIER", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.NVarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NAME", global::System.Data.SqlDbType.NVarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WEIGHT", global::System.Data.SqlDbType.NVarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "WEIGHT", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "UPDATE HR360_ASSESSMENTQUESTION_CATEGORY_A\r\nSET MODIFIEDDATE=GETDATE(), MODIFIER=" +
+                "@USER, NAME=@NAME, WEIGHT=@WEIGHT\r\nWHERE [ID]=@ID";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USER", global::System.Data.SqlDbType.NVarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "MODIFIER", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NAME", global::System.Data.SqlDbType.NVarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WEIGHT", global::System.Data.SqlDbType.NVarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "WEIGHT", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.NVarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -895,6 +1452,531 @@ namespace NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters {
         public virtual int Update(global::System.Data.DataRow[] dataRows) {
             return this.Adapter.Update(dataRows);
         }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
+        public virtual int DeleteQuery(string ID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            if ((ID == null)) {
+                throw new global::System.ArgumentNullException("ID");
+            }
+            else {
+                command.Parameters[0].Value = ((string)(ID));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertQuery(string USER, string ID, string NAME, string WEIGHT) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            if ((USER == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(USER));
+            }
+            if ((ID == null)) {
+                throw new global::System.ArgumentNullException("ID");
+            }
+            else {
+                command.Parameters[1].Value = ((string)(ID));
+            }
+            if ((NAME == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(NAME));
+            }
+            if ((WEIGHT == null)) {
+                command.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[3].Value = ((string)(WEIGHT));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
+        public virtual int UpdateQuery(string USER, string NAME, string WEIGHT, string ID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
+            if ((USER == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(USER));
+            }
+            if ((NAME == null)) {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[1].Value = ((string)(NAME));
+            }
+            if ((WEIGHT == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(WEIGHT));
+            }
+            if ((ID == null)) {
+                throw new global::System.ArgumentNullException("ID");
+            }
+            else {
+                command.Parameters[3].Value = ((string)(ID));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class HR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public HR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "HR360_ASSESSMENTQUESTION_QUESTION_A";
+            tableMapping.ColumnMappings.Add("ID", "ID");
+            tableMapping.ColumnMappings.Add("QUESTION", "QUESTION");
+            tableMapping.ColumnMappings.Add("CATEGORY_ID", "CATEGORY_ID");
+            tableMapping.ColumnMappings.Add("IN_USE", "IN_USE");
+            tableMapping.ColumnMappings.Add("USE_BY_ALL", "USE_BY_ALL");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [HR360_ASSESSMENTQUESTION_QUESTION_A] WHERE (([ID] = @Original_ID) AND ((@IsNull_CATEGORY_ID = 1 AND [CATEGORY_ID] IS NULL) OR ([CATEGORY_ID] = @Original_CATEGORY_ID)) AND ((@IsNull_IN_USE = 1 AND [IN_USE] IS NULL) OR ([IN_USE] = @Original_IN_USE)) AND ((@IsNull_USE_BY_ALL = 1 AND [USE_BY_ALL] IS NULL) OR ([USE_BY_ALL] = @Original_USE_BY_ALL)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CATEGORY_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CATEGORY_ID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CATEGORY_ID", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CATEGORY_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_IN_USE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IN_USE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IN_USE", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IN_USE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USE_BY_ALL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USE_BY_ALL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USE_BY_ALL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USE_BY_ALL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [HR360_ASSESSMENTQUESTION_QUESTION_A] ([ID], [QUESTION], [CATEGORY_ID], [IN_USE], [USE_BY_ALL]) VALUES (@ID, @QUESTION, @CATEGORY_ID, @IN_USE, @USE_BY_ALL);
+SELECT ID, QUESTION, CATEGORY_ID, IN_USE, USE_BY_ALL FROM HR360_ASSESSMENTQUESTION_QUESTION_A WHERE (ID = @ID) ORDER BY ID";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@QUESTION", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "QUESTION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CATEGORY_ID", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CATEGORY_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IN_USE", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IN_USE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USE_BY_ALL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USE_BY_ALL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [HR360_ASSESSMENTQUESTION_QUESTION_A] SET [ID] = @ID, [QUESTION] = @QUESTION, [CATEGORY_ID] = @CATEGORY_ID, [IN_USE] = @IN_USE, [USE_BY_ALL] = @USE_BY_ALL WHERE (([ID] = @Original_ID) AND ((@IsNull_CATEGORY_ID = 1 AND [CATEGORY_ID] IS NULL) OR ([CATEGORY_ID] = @Original_CATEGORY_ID)) AND ((@IsNull_IN_USE = 1 AND [IN_USE] IS NULL) OR ([IN_USE] = @Original_IN_USE)) AND ((@IsNull_USE_BY_ALL = 1 AND [USE_BY_ALL] IS NULL) OR ([USE_BY_ALL] = @Original_USE_BY_ALL)));
+SELECT ID, QUESTION, CATEGORY_ID, IN_USE, USE_BY_ALL FROM HR360_ASSESSMENTQUESTION_QUESTION_A WHERE (ID = @ID) ORDER BY ID";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@QUESTION", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "QUESTION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CATEGORY_ID", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CATEGORY_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IN_USE", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IN_USE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USE_BY_ALL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USE_BY_ALL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CATEGORY_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CATEGORY_ID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CATEGORY_ID", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CATEGORY_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_IN_USE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IN_USE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IN_USE", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IN_USE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USE_BY_ALL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USE_BY_ALL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USE_BY_ALL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USE_BY_ALL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::NIZING_BACKEND_Data_Config.Properties.Settings.Default.NZ_ERP2ConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT [ID], [QUESTION], [CATEGORY_ID], [IN_USE], [USE_BY_ALL]\r\nFROM HR360_ASSESS" +
+                "MENTQUESTION_QUESTION_A\r\nORDER BY [ID]";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsAPA_Question.HR360_ASSESSMENTQUESTION_QUESTION_ADataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsAPA_Question.HR360_ASSESSMENTQUESTION_QUESTION_ADataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsAPA_Question.HR360_ASSESSMENTQUESTION_QUESTION_ADataTable dataTable = new dsAPA_Question.HR360_ASSESSMENTQUESTION_QUESTION_ADataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsAPA_Question.HR360_ASSESSMENTQUESTION_QUESTION_ADataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsAPA_Question dataSet) {
+            return this.Adapter.Update(dataSet, "HR360_ASSESSMENTQUESTION_QUESTION_A");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_ID, string Original_CATEGORY_ID, string Original_IN_USE, string Original_USE_BY_ALL) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
+            if ((Original_CATEGORY_ID == null)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_CATEGORY_ID));
+            }
+            if ((Original_IN_USE == null)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_IN_USE));
+            }
+            if ((Original_USE_BY_ALL == null)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_USE_BY_ALL));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(int ID, string QUESTION, string CATEGORY_ID, string IN_USE, string USE_BY_ALL) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(ID));
+            if ((QUESTION == null)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(QUESTION));
+            }
+            if ((CATEGORY_ID == null)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(CATEGORY_ID));
+            }
+            if ((IN_USE == null)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(IN_USE));
+            }
+            if ((USE_BY_ALL == null)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(USE_BY_ALL));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(int ID, string QUESTION, string CATEGORY_ID, string IN_USE, string USE_BY_ALL, int Original_ID, string Original_CATEGORY_ID, string Original_IN_USE, string Original_USE_BY_ALL) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
+            if ((QUESTION == null)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(QUESTION));
+            }
+            if ((CATEGORY_ID == null)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(CATEGORY_ID));
+            }
+            if ((IN_USE == null)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(IN_USE));
+            }
+            if ((USE_BY_ALL == null)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(USE_BY_ALL));
+            }
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_ID));
+            if ((Original_CATEGORY_ID == null)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_CATEGORY_ID));
+            }
+            if ((Original_IN_USE == null)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_IN_USE));
+            }
+            if ((Original_USE_BY_ALL == null)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_USE_BY_ALL));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
     }
     
     /// <summary>
@@ -910,6 +1992,8 @@ namespace NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters {
         private UpdateOrderOption _updateOrder;
         
         private HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter _hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter;
+        
+        private HR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter _hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -942,6 +2026,20 @@ namespace NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public HR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter HR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter {
+            get {
+                return this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter;
+            }
+            set {
+                this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -963,6 +2061,10 @@ namespace NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters {
                             && (this._hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter.Connection != null))) {
                     return this._hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter.Connection;
                 }
+                if (((this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter != null) 
+                            && (this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter.Connection != null))) {
+                    return this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -977,6 +2079,9 @@ namespace NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters {
             get {
                 int count = 0;
                 if ((this._hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -999,6 +2104,15 @@ namespace NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.HR360_ASSESSMENTQUESTION_QUESTION_A.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             return result;
         }
         
@@ -1017,6 +2131,14 @@ namespace NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.HR360_ASSESSMENTQUESTION_QUESTION_A.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             return result;
         }
         
@@ -1027,6 +2149,14 @@ namespace NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateDeletedRows(dsAPA_Question dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
+            if ((this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.HR360_ASSESSMENTQUESTION_QUESTION_A.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.HR360_ASSESSMENTQUESTION_CATEGORY_A.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -1079,6 +2209,11 @@ namespace NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
+            if (((this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
             global::System.Data.IDbConnection workConnection = this.Connection;
             if ((workConnection == null)) {
                 throw new global::System.ApplicationException("TableAdapterManager contains no connection information. Set each TableAdapterMana" +
@@ -1118,6 +2253,15 @@ namespace NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters {
                     if (this._hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter.Adapter);
+                    }
+                }
+                if ((this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter != null)) {
+                    revertConnections.Add(this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter, this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter.Connection);
+                    this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter.Adapter);
                     }
                 }
                 // 
@@ -1181,6 +2325,10 @@ namespace NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters {
                 if ((this._hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter != null)) {
                     this._hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter]));
                     this._hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter.Transaction = null;
+                }
+                if ((this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter != null)) {
+                    this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter]));
+                    this._hR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

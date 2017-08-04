@@ -113,9 +113,9 @@
                     <a href="https://www.facebook.com/NIZING.ELECTRIC/" target="_blank" title="facebook">
                         <img src="/images/icon/facebook.png" width="30" />
                     </a>
-                    <a href="https://line.me/R/ti/p/%40nizing" target="_blank" title="LineID">
+                    <%--<a href="https://line.me/R/ti/p/%40nizing" target="_blank" title="LineID">
                         <img src="/images/icon/line.png" width="30" />
-                    </a>
+                    </a>--%>
                 </div>
                 <div style="display: block;">
                     Office Hour: 08:30 ~ 18:00
