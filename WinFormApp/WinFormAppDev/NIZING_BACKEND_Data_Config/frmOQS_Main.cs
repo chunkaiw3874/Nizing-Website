@@ -15,7 +15,7 @@ namespace NIZING_BACKEND_Data_Config
         public string UserName { get; set; }
         private Boolean searchFormLoaded = false;
         private enum FunctionMode { ADD, EDIT, DELETE, SEARCH, HASRECORD, NORECORD };
-        int currentTabPage = 0;
+        TabPage currentTabPage;
         private FunctionMode accountTabMode = FunctionMode.NORECORD;
         private FunctionMode productTabMode = FunctionMode.NORECORD;
 
@@ -23,8 +23,8 @@ namespace NIZING_BACKEND_Data_Config
         {
             InitializeComponent();
             accountTabMode = FunctionMode.NORECORD;
-            LoadControlStatus(accountTabMode);
-            currentTabPage = tbcManagement.SelectedIndex;
+            currentTabPage = tbcManagement.SelectedTab;
+            LoadControlStatus(currentTabPage);
             #region 帳號管理
             btnAccountAdd.Enabled = true;
             btnAccountEdit.Enabled = false;
@@ -66,11 +66,11 @@ namespace NIZING_BACKEND_Data_Config
 
         }
 
-        private void LoadControlStatus(FunctionMode mode)
+        private void LoadControlStatus(TabPage tab)
         {
-            if (tbcManagement.SelectedTab == tbpAccountManagement)
+            if (tab == tbpAccountManagement)
             {
-                if (mode == FunctionMode.ADD)
+                if (accountTabMode == FunctionMode.ADD)
                 {
                     btnAccountAdd.Enabled = false;
                     btnAccountEdit.Enabled = false;
@@ -86,7 +86,7 @@ namespace NIZING_BACKEND_Data_Config
                     txtAccountPassword.Text = "";
                     txtAccountConfirmPassword.Text = "";
                 }
-                else if (mode == FunctionMode.EDIT)
+                else if (accountTabMode == FunctionMode.EDIT)
                 {
                     btnAccountAdd.Enabled = false;
                     btnAccountEdit.Enabled = false;
@@ -98,11 +98,11 @@ namespace NIZING_BACKEND_Data_Config
                     tlpAccountInputField.Enabled = true;
                     txtAccountId.Enabled = false;
                 }
-                else if (mode == FunctionMode.DELETE)
+                else if (accountTabMode == FunctionMode.DELETE)
                 {
 
                 }
-                else if (mode == FunctionMode.SEARCH)
+                else if (accountTabMode == FunctionMode.SEARCH)
                 {
                     btnAccountAdd.Enabled = false;
                     btnAccountEdit.Enabled = false;
@@ -113,7 +113,7 @@ namespace NIZING_BACKEND_Data_Config
                     gvAccountSearch_Result.Enabled = false;
                     tlpAccountInputField.Enabled = false;
                 }
-                else if (mode == FunctionMode.HASRECORD)
+                else if (accountTabMode == FunctionMode.HASRECORD)
                 {
                     btnAccountAdd.Enabled = true;
                     btnAccountEdit.Enabled = true;
@@ -124,7 +124,7 @@ namespace NIZING_BACKEND_Data_Config
                     gvAccountSearch_Result.Enabled = true;
                     tlpAccountInputField.Enabled = false;
                 }
-                else if (mode == FunctionMode.NORECORD)
+                else if (accountTabMode == FunctionMode.NORECORD)
                 {
                     btnAccountAdd.Enabled = true;
                     btnAccountEdit.Enabled = false;
@@ -190,11 +190,12 @@ namespace NIZING_BACKEND_Data_Config
         {
             if (accountTabMode == FunctionMode.ADD || accountTabMode == FunctionMode.EDIT || accountTabMode == FunctionMode.SEARCH)
             {
-                tbcManagement.SelectedIndex = currentTabPage;
+                tbcManagement.SelectedTab = currentTabPage;
             }
             else
             {
-                currentTabPage = tbcManagement.SelectedIndex;
+                currentTabPage = tbcManagement.SelectedTab;
+                LoadControlStatus(currentTabPage);
             }
         }
 
@@ -248,13 +249,13 @@ namespace NIZING_BACKEND_Data_Config
         private void btnAccountAdd_Click(object sender, EventArgs e)
         {
             accountTabMode = FunctionMode.ADD;
-            LoadControlStatus(accountTabMode);
+            LoadControlStatus(currentTabPage);
         }
 
         private void btnAccountEdit_Click(object sender, EventArgs e)
         {
             accountTabMode = FunctionMode.EDIT;
-            LoadControlStatus(accountTabMode);
+            LoadControlStatus(currentTabPage);
         }
 
         private void btnAccountDelete_Click(object sender, EventArgs e)
@@ -278,12 +279,12 @@ namespace NIZING_BACKEND_Data_Config
                     if (isGridViewEmpty(gvAccountSearch_Result))
                     {
                         accountTabMode = FunctionMode.NORECORD;
-                        LoadControlStatus(accountTabMode);
+                        LoadControlStatus(currentTabPage);
                     }
                     else
                     {
                         accountTabMode = FunctionMode.HASRECORD;
-                        LoadControlStatus(accountTabMode);
+                        LoadControlStatus(currentTabPage);
                     }
                 }
             }
@@ -324,12 +325,12 @@ namespace NIZING_BACKEND_Data_Config
                 if (isGridViewEmpty(gvAccountSearch_Result))
                 {
                     accountTabMode = FunctionMode.NORECORD;
-                    LoadControlStatus(accountTabMode);
+                    LoadControlStatus(currentTabPage);
                 }
                 else
                 {
                     accountTabMode = FunctionMode.HASRECORD;
-                    LoadControlStatus(accountTabMode);
+                    LoadControlStatus(currentTabPage);
                 }
             }
             else
@@ -347,19 +348,19 @@ namespace NIZING_BACKEND_Data_Config
             if (isGridViewEmpty(gvAccountSearch_Result))
             {
                 accountTabMode = FunctionMode.NORECORD;
-                LoadControlStatus(accountTabMode);
+                LoadControlStatus(currentTabPage);
             }
             else
             {
                 accountTabMode = FunctionMode.HASRECORD;
-                LoadControlStatus(accountTabMode);
+                LoadControlStatus(currentTabPage);
             }
         }        
         
         private void btnAccountSearch_Click(object sender, EventArgs e)
         {
             accountTabMode = FunctionMode.SEARCH;
-            LoadControlStatus(accountTabMode);
+            LoadControlStatus(currentTabPage);
 
             var frm = new frmOQS_AccountSearch();
             frm.Location = new Point(this.Location.X + this.Width, this.Location.Y);
@@ -386,12 +387,12 @@ namespace NIZING_BACKEND_Data_Config
             if (isGridViewEmpty(gvAccountSearch_Result))
             {
                 accountTabMode = FunctionMode.NORECORD;
-                LoadControlStatus(accountTabMode);
+                LoadControlStatus(currentTabPage);
             }
             else
             {
                 accountTabMode = FunctionMode.HASRECORD;
-                LoadControlStatus(accountTabMode);
+                LoadControlStatus(currentTabPage);
             }
         }
         void accountSearchForm_loadGridview(DataTable dt)

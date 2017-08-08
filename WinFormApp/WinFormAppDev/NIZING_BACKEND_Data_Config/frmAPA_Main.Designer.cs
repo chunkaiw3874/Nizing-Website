@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnLogout = new System.Windows.Forms.Button();
             this.tbcManagement = new System.Windows.Forms.TabControl();
@@ -179,6 +180,7 @@
             this.gvQuestionCategory.Size = new System.Drawing.Size(1162, 736);
             this.gvQuestionCategory.TabIndex = 1;
             this.gvQuestionCategory.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.gvQuestionCategory_CellValidating);
+            this.gvQuestionCategory.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.gvQuestionCategory_DataBindingComplete);
             this.gvQuestionCategory.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gvQuestionCategory_RowValidating);
             this.gvQuestionCategory.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gvQuestionCategory_KeyDown);
             // 
@@ -260,6 +262,13 @@
             // 
             this.gvQuestion.AllowUserToAddRows = false;
             this.gvQuestion.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvQuestion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gvQuestion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvQuestion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvQuestion.Location = new System.Drawing.Point(4, 34);
@@ -268,6 +277,7 @@
             this.gvQuestion.RowTemplate.Height = 24;
             this.gvQuestion.Size = new System.Drawing.Size(1162, 635);
             this.gvQuestion.TabIndex = 1;
+            this.gvQuestion.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.gvQuestion_DataBindingComplete);
             // 
             // txtQuestionTest
             // 
@@ -287,6 +297,7 @@
             this.btnQuestionEdit.TabIndex = 3;
             this.btnQuestionEdit.Text = "編輯";
             this.btnQuestionEdit.UseVisualStyleBackColor = true;
+            this.btnQuestionEdit.Click += new System.EventHandler(this.btnQuestionEdit_Click);
             // 
             // dsAPA_Question
             // 

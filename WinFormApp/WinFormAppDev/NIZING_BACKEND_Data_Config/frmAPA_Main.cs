@@ -17,7 +17,7 @@ namespace NIZING_BACKEND_Data_Config
         public string UserName { get; set; }
         private enum FunctionMode { ADD, EDIT, DELETE, SEARCH, HASRECORD, NORECORD }
         private enum TableRowStatus { DELETED, EDITED, NEW, UNCHANGED };
-        int currentTabPage = 0;
+        TabPage currentTabPage;
         #endregion
 
         #region 問題分類建立 Universal Variable
@@ -35,20 +35,26 @@ namespace NIZING_BACKEND_Data_Config
         public frmAPA_Main()
         {
             InitializeComponent();
-            #region 問題分類建立 Initialization
-            foreach (DataGridViewColumn col in gvQuestionCategory.Columns)
-            {
-                col.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }            
+            currentTabPage = tbcManagement.SelectedTab;
+
+            #region 問題分類建立 Initialization           
             dtQuestionCategorySource = adapterQuestionCategory.GetData();
             gvQuestionCategory.DataSource = dtQuestionCategorySource;            
             gvQuestionCategory.Columns["ID"].ReadOnly = true;
             questionCategoryTabMode = FunctionMode.HASRECORD;
-            LoadControlStatus(questionCategoryTabMode);
-            currentTabPage = tbcManagement.SelectedIndex;
+            LoadControlStatus(currentTabPage);
             #endregion
-
-            //gvQuestionCategory.Columns["NAME"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;  //change gv column to multiline
+            #region 問題建立 Initializaiton
+            dtQuestionSource = adapterQuestion.GetData();
+            gvQuestion.DataSource = dtQuestionSource;
+            gvQuestion.Columns["ID"].ReadOnly = true;
+            gvQuestion.Columns["QUESTION"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;  //change gv column to multiline
+            gvQuestion.Columns["QUESTION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            gvQuestion.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            questionTabMode = FunctionMode.HASRECORD;
+            LoadControlStatus(currentTabPage);
+            #endregion
+            
         }
 
         #region Frame Methods and Events
@@ -69,32 +75,52 @@ namespace NIZING_BACKEND_Data_Config
         {
             if (questionCategoryTabMode == FunctionMode.ADD || questionCategoryTabMode == FunctionMode.EDIT || questionCategoryTabMode == FunctionMode.SEARCH)
             {
-                tbcManagement.SelectedIndex = currentTabPage;
+                tbcManagement.SelectedTab = currentTabPage;
             }
             else
             {
-                currentTabPage = tbcManagement.SelectedIndex;
+                currentTabPage = tbcManagement.SelectedTab;
+                LoadControlStatus(currentTabPage);
             }
         }
-        private void LoadControlStatus(FunctionMode mode)
+        private void LoadControlStatus(TabPage tab)
         {
-            if (tbcManagement.SelectedTab == tbpQuestionCategory)
+            if (tab == tbpQuestionCategory)
             {
-                if (mode == FunctionMode.HASRECORD)
+                if (questionCategoryTabMode == FunctionMode.HASRECORD)
                 {
                     btnQuestionCategoryEdit.Enabled = true;
                     btnQuestionCategorySave.Enabled = false;
                     btnQuestionCategoryCancel.Enabled = false;
-                    gvQuestionCategory.Enabled = false;
+                    gvQuestionCategory.ReadOnly = true;
                     gvQuestionCategory.ForeColor = Color.Gray;
                 }
-                else if (mode == FunctionMode.EDIT)
+                else if (questionCategoryTabMode == FunctionMode.EDIT)
                 {
                     btnQuestionCategoryEdit.Enabled = false;
                     btnQuestionCategorySave.Enabled = true;
                     btnQuestionCategoryCancel.Enabled = true;
-                    gvQuestionCategory.Enabled = true;
+                    gvQuestionCategory.ReadOnly = false;
                     gvQuestionCategory.ForeColor = Color.Black;
+                }
+            }
+            else if (tab == tbpQuestion)
+            {
+                if (questionTabMode == FunctionMode.HASRECORD)
+                {
+                    btnQuestionEdit.Enabled = true;
+                    btnQuestionSave.Enabled = false;
+                    btnQuestionCancel.Enabled = false;
+                    gvQuestion.ReadOnly = true;
+                    gvQuestion.ForeColor = Color.Gray;
+                }
+                else if (questionTabMode == FunctionMode.EDIT)
+                {
+                    btnQuestionEdit.Enabled = false;
+                    btnQuestionSave.Enabled = true;
+                    btnQuestionCancel.Enabled = true;
+                    gvQuestion.ReadOnly = false;
+                    gvQuestion.ForeColor = Color.Black;
                 }
             }
         }
@@ -149,9 +175,60 @@ namespace NIZING_BACKEND_Data_Config
             }
 
         }
+        private void LoadGridViewStyle(DataGridView gv)
+        {
+            switch (gv.Name)
+            {
+                case "gvQuestionCategory":
+                    gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["ID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["WEIGHT"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    break;
+                case "gvQuestion":
+                    gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["ID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["CATEGORY_ID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["IN_USE"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["USE_BY_ALL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    DataTable dtTemp = adapterQuestionCategory.GetData();
+                    dtTemp.Columns.Add("ID_NAME");
+                    foreach (DataRow rows in dtTemp.Rows)
+                    {
+                        rows["ID_NAME"] = rows["ID"].ToString() + " " + rows["NAME"].ToString();
+                    }
+                    foreach (DataGridViewRow row in gv.Rows)
+                    {
+                        DataGridViewCheckBoxCell ckbIN_USECell = new DataGridViewCheckBoxCell()
+                        {
+                            TrueValue = "1",
+                            FalseValue = "0"
+                        };
+                        ckbIN_USECell.Style.NullValue = false;
+                        row.Cells["IN_USE"] = ckbIN_USECell;
+                        DataGridViewCheckBoxCell ckbUSE_BY_ALLCell = new DataGridViewCheckBoxCell()
+                        {
+                            TrueValue = "1",
+                            FalseValue = "0"
+                        };
+                        ckbUSE_BY_ALLCell.Style.NullValue = false;
+                        row.Cells["USE_BY_ALL"] = ckbUSE_BY_ALLCell;
+                        DataGridViewComboBoxCell cbxCATEGORY_IDCell = new DataGridViewComboBoxCell();
+                        cbxCATEGORY_IDCell.FlatStyle = FlatStyle.Flat;
+                        cbxCATEGORY_IDCell.DataSource = dtTemp;
+                        cbxCATEGORY_IDCell.ValueMember = "ID";
+                        cbxCATEGORY_IDCell.DisplayMember = "ID_NAME";
+                        row.Cells["CATEGORY_ID"] = cbxCATEGORY_IDCell;
+                    }
+                    break;
+            }
+        }
         #endregion      
 
         #region 問題分類建立 Tab Method and Events
+        private void gvQuestionCategory_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            LoadGridViewStyle(gvQuestionCategory);
+        }
         private void gvQuestionCategory_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {            
             if (String.IsNullOrWhiteSpace(e.FormattedValue.ToString()))
@@ -222,7 +299,7 @@ namespace NIZING_BACKEND_Data_Config
         private void btnQuestionCategoryEdit_Click(object sender, EventArgs e)
         {
             questionCategoryTabMode = FunctionMode.EDIT;
-            LoadControlStatus(questionCategoryTabMode);
+            LoadControlStatus(currentTabPage);
             this.Text = UserName;
         }
         private void btnQuestionCategorySave_Click(object sender, EventArgs e)
@@ -270,20 +347,28 @@ namespace NIZING_BACKEND_Data_Config
             gvQuestionCategory.DataSource = dtQuestionCategorySource;            
             tbcManagement.Enabled = true;
             questionCategoryTabMode = FunctionMode.HASRECORD;
-            LoadControlStatus(questionCategoryTabMode);
+            LoadControlStatus(currentTabPage);
         }
         private void btnQuestionCategoryCancel_Click(object sender, EventArgs e)
         {            
             dtQuestionCategorySource = adapterQuestionCategory.GetData();
             gvQuestionCategory.DataSource = dtQuestionCategorySource;
             questionCategoryTabMode = FunctionMode.HASRECORD;
-            LoadControlStatus(questionCategoryTabMode);
+            LoadControlStatus(currentTabPage);
         }
         #endregion
 
         #region 問題建立 Tab Method and Events
-
+        private void btnQuestionEdit_Click(object sender, EventArgs e)
+        {
+            txtQuestionTest.Text = gvQuestion.Rows[8].Cells[1].FormattedValue.ToString();
+        }
+        private void gvQuestion_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            LoadGridViewStyle(gvQuestion);
+        }
         #endregion
+
 
 
     }
