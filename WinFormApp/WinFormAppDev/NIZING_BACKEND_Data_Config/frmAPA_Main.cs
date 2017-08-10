@@ -18,6 +18,7 @@ namespace NIZING_BACKEND_Data_Config
         private enum FunctionMode { ADD, EDIT, DELETE, SEARCH, HASRECORD, NORECORD }
         private enum TableRowStatus { DELETED, EDITED, NEW, UNCHANGED };
         TabPage currentTabPage;
+        bool isCancel = false;  //Check if an event is triggered after Cancel button is hit;
         #endregion
 
         #region 問題分類建立 Universal Variable
@@ -222,6 +223,37 @@ namespace NIZING_BACKEND_Data_Config
                     break;
             }
         }
+        private string GetErrorMessage(int errorCode)
+        {
+            string message = "";
+            switch (errorCode)
+            {
+                case 101:
+                    message = "儲存格不得空白";
+                    break;
+                case 102:
+                    message = "儲存格值型態錯誤";
+                    break;
+                case 201:
+                    message = "尚有空白儲存格，請將資料完整填寫";
+                    break;
+                case 401:
+                    message = "資料刪除錯誤";
+                    break;
+                default:
+                    message = "未知錯誤";
+                    break;
+            }
+            return message;
+        }        
+        private void ShowError(int errorCode)
+        {
+            MessageBox.Show(GetErrorMessage(errorCode));
+        }
+        private void ShowError(string errorMessage)
+        {
+            MessageBox.Show(errorMessage);
+        }
         #endregion      
 
         #region 問題分類建立 Tab Method and Events
@@ -230,40 +262,46 @@ namespace NIZING_BACKEND_Data_Config
             LoadGridViewStyle(gvQuestionCategory);
         }
         private void gvQuestionCategory_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {            
-            if (String.IsNullOrWhiteSpace(e.FormattedValue.ToString()))
+        {
+            if (!isCancel)
             {
-                MessageBox.Show("cell cannot be empty");
-                e.Cancel = true;
-            }
-            else if (e.ColumnIndex == 0)
-            {
-                int result;
-                if (!int.TryParse(e.FormattedValue.ToString(), out result))
+                if (String.IsNullOrWhiteSpace(e.FormattedValue.ToString()))
                 {
-                    MessageBox.Show("ID must be an integer");
+                    ShowError(101);
                     e.Cancel = true;
                 }
-            }
-            else if (e.ColumnIndex == 2)
-            {
-                decimal result;
-                if (!decimal.TryParse(e.FormattedValue.ToString(), out result))
+                else if (e.ColumnIndex == 0)
                 {
-                    MessageBox.Show("Weight must be a number");
-                    e.Cancel = true;
+                    int result;
+                    if (!int.TryParse(e.FormattedValue.ToString(), out result))
+                    {
+                        ShowError(102);
+                        e.Cancel = true;
+                    }
+                }
+                else if (e.ColumnIndex == 2)
+                {
+                    decimal result;
+                    if (!decimal.TryParse(e.FormattedValue.ToString(), out result))
+                    {
+                        ShowError(102);
+                        e.Cancel = true;
+                    }
                 }
             }
         }
         private void gvQuestionCategory_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
         {
-            foreach (DataGridViewCell c in gvQuestionCategory.Rows[e.RowIndex].Cells)
+            if (!isCancel)
             {
-                if (String.IsNullOrWhiteSpace(c.EditedFormattedValue.ToString()))
+                foreach (DataGridViewCell c in gvQuestionCategory.Rows[e.RowIndex].Cells)
                 {
-                    MessageBox.Show("Row cannot contain empty cell");
-                    e.Cancel = true;
-                    break;
+                    if (String.IsNullOrWhiteSpace(c.EditedFormattedValue.ToString()))
+                    {
+                        ShowError(201);
+                        e.Cancel = true;
+                        break;
+                    }
                 }
             }
         }
@@ -278,15 +316,16 @@ namespace NIZING_BACKEND_Data_Config
                     {
                         if (String.IsNullOrWhiteSpace(c.EditedFormattedValue.ToString()))
                         {
-                            MessageBox.Show("Row cannot contain empty cell");
+                            ShowError(201);
                             e.Handled = true;
                             break;
                         }
                     }
                     if (!e.Handled)
                     {
-                        dtQuestionCategorySource.Rows.Add();
-                        dtQuestionCategorySource.Rows[dtQuestionCategorySource.Rows.Count - 1][0] = (Convert.ToInt16(gvQuestionCategory.CurrentRow.Cells[0].EditedFormattedValue) + 1).ToString();
+                        DataRow newRow = dtQuestionCategorySource.NewRow();
+                        newRow["ID"] = (Convert.ToInt16(gvQuestionCategory.CurrentRow.Cells[0].EditedFormattedValue) + 1).ToString();
+                        dtQuestionCategorySource.Rows.Add(newRow);
                         gvQuestionCategory.DataSource = dtQuestionCategorySource;
                         if (gvQuestionCategory.Rows.Count > 1 && gvQuestionCategory.Enabled == true)
                         {
@@ -335,10 +374,10 @@ namespace NIZING_BACKEND_Data_Config
                     switch (ex.Number)
                     {
                         case 547:
-                            MessageBox.Show("ID:" + dtSourceInterim.Rows[i]["ID"].ToString().Trim() + dtSourceInterim.Rows[i]["NAME"].ToString().Trim() + " 已連結至其他資料，不可刪除");
+                            ShowError("ID:" + dtSourceInterim.Rows[i]["ID"].ToString().Trim() + dtSourceInterim.Rows[i]["NAME"].ToString().Trim() + " 已連結至其他資料，不可刪除");
                             break;
                         default:
-                            MessageBox.Show("資料刪除錯誤");
+                            ShowError(401);
                             break;
                     }
                 }
@@ -350,18 +389,30 @@ namespace NIZING_BACKEND_Data_Config
             LoadControlStatus(currentTabPage);
         }
         private void btnQuestionCategoryCancel_Click(object sender, EventArgs e)
-        {            
+        {
+            isCancel = true;
+            if (gvQuestionCategory.Rows[gvQuestionCategory.Rows.Count - 1].IsNewRow)
+            {
+                gvQuestionCategory.Rows.RemoveAt(gvQuestionCategory.Rows.Count - 1);
+            }
             dtQuestionCategorySource = adapterQuestionCategory.GetData();
             gvQuestionCategory.DataSource = dtQuestionCategorySource;
             questionCategoryTabMode = FunctionMode.HASRECORD;
             LoadControlStatus(currentTabPage);
+            isCancel = false;
         }
         #endregion
 
         #region 問題建立 Tab Method and Events
         private void btnQuestionEdit_Click(object sender, EventArgs e)
         {
-            txtQuestionTest.Text = gvQuestion.Rows[8].Cells[1].FormattedValue.ToString();
+            questionTabMode = FunctionMode.EDIT;
+            LoadControlStatus(currentTabPage);
+            txtQuestionTest.Text += gvQuestion.Rows[8].Cells[0].FormattedValue.ToString() + "\r\n";
+            txtQuestionTest.Text += gvQuestion.Rows[8].Cells[1].FormattedValue.ToString() + "\r\n";
+            txtQuestionTest.Text += gvQuestion.Rows[8].Cells[2].Value + "\r\n";
+            txtQuestionTest.Text += gvQuestion.Rows[8].Cells[3].Value + "\r\n";
+            txtQuestionTest.Text += gvQuestion.Rows[8].Cells[4].FormattedValue.ToString() + "\r\n";
         }
         private void gvQuestion_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {

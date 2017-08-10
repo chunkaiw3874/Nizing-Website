@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnLogout = new System.Windows.Forms.Button();
             this.tbcManagement = new System.Windows.Forms.TabControl();
             this.tbpQuestionCategory = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnQuestionCategoryCancel = new System.Windows.Forms.Button();
             this.btnQuestionCategorySave = new System.Windows.Forms.Button();
             this.gvQuestionCategory = new System.Windows.Forms.DataGridView();
             this.btnQuestionCategoryEdit = new System.Windows.Forms.Button();
@@ -49,6 +48,7 @@
             this.btnQuestionEdit = new System.Windows.Forms.Button();
             this.dsAPA_Question = new NIZING_BACKEND_Data_Config.dsAPA_Question();
             this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter = new NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter();
+            this.btnQuestionCategoryCancel = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpQuestionCategory.SuspendLayout();
@@ -81,6 +81,7 @@
             // btnLogout
             // 
             this.btnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLogout.CausesValidation = false;
             this.btnLogout.Location = new System.Drawing.Point(1084, 0);
             this.btnLogout.Margin = new System.Windows.Forms.Padding(0);
             this.btnLogout.Name = "btnLogout";
@@ -105,6 +106,7 @@
             // 
             // tbpQuestionCategory
             // 
+            this.tbpQuestionCategory.CausesValidation = false;
             this.tbpQuestionCategory.Controls.Add(this.tableLayoutPanel2);
             this.tbpQuestionCategory.Location = new System.Drawing.Point(4, 22);
             this.tbpQuestionCategory.Name = "tbpQuestionCategory";
@@ -116,6 +118,7 @@
             // 
             // tableLayoutPanel2
             // 
+            this.tableLayoutPanel2.CausesValidation = false;
             this.tableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -135,6 +138,7 @@
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.CausesValidation = false;
             this.flowLayoutPanel1.Controls.Add(this.btnQuestionCategoryCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnQuestionCategorySave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -144,17 +148,6 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1168, 29);
             this.flowLayoutPanel1.TabIndex = 0;
-            // 
-            // btnQuestionCategoryCancel
-            // 
-            this.btnQuestionCategoryCancel.Enabled = false;
-            this.btnQuestionCategoryCancel.Location = new System.Drawing.Point(1090, 3);
-            this.btnQuestionCategoryCancel.Name = "btnQuestionCategoryCancel";
-            this.btnQuestionCategoryCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnQuestionCategoryCancel.TabIndex = 0;
-            this.btnQuestionCategoryCancel.Text = "取消";
-            this.btnQuestionCategoryCancel.UseVisualStyleBackColor = true;
-            this.btnQuestionCategoryCancel.Click += new System.EventHandler(this.btnQuestionCategoryCancel_Click);
             // 
             // btnQuestionCategorySave
             // 
@@ -262,13 +255,13 @@
             // 
             this.gvQuestion.AllowUserToAddRows = false;
             this.gvQuestion.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvQuestion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvQuestion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.gvQuestion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvQuestion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvQuestion.Location = new System.Drawing.Point(4, 34);
@@ -308,6 +301,18 @@
             // 
             this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter.ClearBeforeFill = true;
             // 
+            // btnQuestionCategoryCancel
+            // 
+            this.btnQuestionCategoryCancel.CausesValidation = false;
+            this.btnQuestionCategoryCancel.Enabled = false;
+            this.btnQuestionCategoryCancel.Location = new System.Drawing.Point(1090, 3);
+            this.btnQuestionCategoryCancel.Name = "btnQuestionCategoryCancel";
+            this.btnQuestionCategoryCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnQuestionCategoryCancel.TabIndex = 0;
+            this.btnQuestionCategoryCancel.Text = "取消";
+            this.btnQuestionCategoryCancel.UseVisualStyleBackColor = true;
+            this.btnQuestionCategoryCancel.Click += new System.EventHandler(this.btnQuestionCategoryCancel_Click);
+            // 
             // frmAPA_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -343,7 +348,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TabPage tbpQuestion;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button btnQuestionCategoryCancel;
         private System.Windows.Forms.Button btnQuestionCategorySave;
         private System.Windows.Forms.DataGridView gvQuestionCategory;
         private dsAPA_Question dsAPA_Question;
@@ -356,5 +360,6 @@
         private System.Windows.Forms.DataGridView gvQuestion;
         private System.Windows.Forms.TextBox txtQuestionTest;
         private System.Windows.Forms.Button btnQuestionEdit;
+        private System.Windows.Forms.Button btnQuestionCategoryCancel;
     }
 }
