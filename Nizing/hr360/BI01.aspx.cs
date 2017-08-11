@@ -255,8 +255,16 @@ public partial class hr360_BI01 : System.Web.UI.Page
             txtReenterPassword.CssClass = "required-field";
             txtEmail.ReadOnly = false;
             txtEmail.CssClass = "";
+            if (string.IsNullOrWhiteSpace(txtEmail.Text))
+            {
+                txtEmail.Text = "";
+            }
             txtLineId.ReadOnly = false;
             txtLineId.CssClass = "";
+            if (string.IsNullOrWhiteSpace(txtLineId.Text))
+            {
+                txtLineId.Text = "";
+            }
             chkSuperUser.Enabled = true;
             chkDisabled.Enabled = true;
             btnErpId_Search.Enabled = true;

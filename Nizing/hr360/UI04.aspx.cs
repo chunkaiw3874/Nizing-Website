@@ -10,7 +10,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-
+/*
+ 如果HR有人事變更，於本頁搜尋HR做更正!!!
+ */
 public partial class hr360_UI04 : System.Web.UI.Page
 {
     string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
@@ -1580,6 +1582,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     + " AND MV.MV001<>'0007'"
                     + " AND MV.MV001<>'0098'";  //這些人不會請假
         if (Session["erp_id"].ToString() != "0085"
+            && Session["erp_id"].ToString() != "0125"
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
             && Session["erp_id"].ToString() != "0007") //管理部跟HR可以查詢全部人的歷史資料
@@ -1600,7 +1603,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
             ddlSearch_Parameter_ApplicantID.DataSource = dt;
             ddlSearch_Parameter_ApplicantID.DataBind();
         }
-        if (!(Session["erp_id"].ToString() != "0085"    //Doris(HR) change when HR personnel changes
+        if (!(Session["erp_id"].ToString() != "0085"    //Edit: Doris(HR) change when HR personnel changes
+            && Session["erp_id"].ToString() != "0125"   
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
             && Session["erp_id"].ToString() != "0007")) //管理部跟HR可以查詢全部人的歷史資料
@@ -1872,7 +1876,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
         }
-        recipientId.Add("0085");    //Current HR, change when HR personnel changes
+        recipientId.Add("0085");    //Edit: Current HR, change when HR personnel changes
+        recipientId.Add("0125");
         //status 1:新申請/一般簽核通過(HR&下個簽核者) 2:申請撤銷(HR&代理人) 3:申請退回(HR&申請人&代理人) 4:最後一層簽核通過(HR&申請人&代理人)
         switch (appStatus)
         {
@@ -2032,9 +2037,12 @@ public partial class hr360_UI04 : System.Web.UI.Page
         gvSearchResult.DataSource = dt;
         gvSearchResult.DataBind();
 
+        //看報告
         if (Session["erp_id"].ToString() != "0007"      //Chrissy
             && Session["erp_id"].ToString() != "0080"   //Kevin
-            && Session["erp_id"].ToString() != "0085")  //Doris (HR) change when HR personnel changes
+            && Session["erp_id"].ToString() != "0085"   //Doris (HR) change when HR personnel changes
+            && Session["erp_id"].ToString() != "0125"   //Abbie (HR)
+            )  
         {
             gvSearchResult.Columns[10].Visible = false;
         }

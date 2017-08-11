@@ -324,7 +324,7 @@ namespace NIZING_BACKEND_Data_Config
                     if (!e.Handled)
                     {
                         DataRow newRow = dtQuestionCategorySource.NewRow();
-                        newRow["ID"] = (Convert.ToInt16(gvQuestionCategory.CurrentRow.Cells[0].EditedFormattedValue) + 1).ToString();
+                        newRow["ID"] = (Convert.ToInt16(gvQuestionCategory.CurrentRow.Cells[0].EditedFormattedValue) + 1).ToString("D2");
                         dtQuestionCategorySource.Rows.Add(newRow);
                         gvQuestionCategory.DataSource = dtQuestionCategorySource;
                         if (gvQuestionCategory.Rows.Count > 1 && gvQuestionCategory.Enabled == true)
@@ -339,7 +339,10 @@ namespace NIZING_BACKEND_Data_Config
         {
             questionCategoryTabMode = FunctionMode.EDIT;
             LoadControlStatus(currentTabPage);
-            this.Text = UserName;
+            if (gvQuestionCategory.Rows.Count > 0)
+            {
+                gvQuestionCategory.CurrentCell = gvQuestionCategory.Rows[0].Cells[0];
+            }
         }
         private void btnQuestionCategorySave_Click(object sender, EventArgs e)
         {
@@ -404,6 +407,46 @@ namespace NIZING_BACKEND_Data_Config
         #endregion
 
         #region 問題建立 Tab Method and Events
+
+        private void gvQuestion_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            LoadGridViewStyle(gvQuestion);
+        }
+        private void gvQuestion_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (!isCancel)
+            {
+                if (String.IsNullOrWhiteSpace(e.FormattedValue.ToString()))
+                {
+                    ShowError(101);
+                    e.Cancel = true;
+                }
+                else if (e.ColumnIndex == 0)
+                {
+                    int result;
+                    if (!int.TryParse(e.FormattedValue.ToString(), out result))
+                    {
+                        ShowError(102);
+                        e.Cancel = true;
+                    }
+                }
+            }
+        }
+        private void gvQuestion_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (!isCancel)
+            {
+                foreach (DataGridViewCell c in gvQuestion.Rows[e.RowIndex].Cells)
+                {
+                    if (String.IsNullOrWhiteSpace(c.EditedFormattedValue.ToString()))
+                    {
+                        ShowError(201);
+                        e.Cancel = true;
+                        break;
+                    }
+                }
+            }
+        }
         private void btnQuestionEdit_Click(object sender, EventArgs e)
         {
             questionTabMode = FunctionMode.EDIT;
@@ -414,13 +457,99 @@ namespace NIZING_BACKEND_Data_Config
             txtQuestionTest.Text += gvQuestion.Rows[8].Cells[3].Value + "\r\n";
             txtQuestionTest.Text += gvQuestion.Rows[8].Cells[4].FormattedValue.ToString() + "\r\n";
         }
-        private void gvQuestion_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        private void btnQuestionCancel_Click(object sender, EventArgs e)
         {
-            LoadGridViewStyle(gvQuestion);
+            isCancel = true;
+            if (gvQuestion.Rows[gvQuestionCategory.Rows.Count - 1].IsNewRow)
+            {
+                gvQuestion.Rows.RemoveAt(gvQuestionCategory.Rows.Count - 1);
+            }
+            dtQuestionSource = adapterQuestion.GetData();
+            gvQuestion.DataSource = dtQuestionSource;
+            questionTabMode = FunctionMode.HASRECORD;
+            LoadControlStatus(currentTabPage);
+            isCancel = false;
+        }       
+
+        private void gvQuestion_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Down)
+            {
+
+                if (gvQuestion.CurrentRow.Index == gvQuestion.Rows.Count - 1)
+                {
+                    foreach (DataGridViewCell c in gvQuestion.CurrentRow.Cells)
+                    {
+                        if (String.IsNullOrWhiteSpace(c.EditedFormattedValue.ToString()))
+                        {
+                            ShowError(201);
+                            e.Handled = true;
+                            break;
+                        }
+                    }
+                    if (!e.Handled)
+                    {
+                        DataRow newRow = dtQuestionSource.NewRow();
+                        newRow["ID"] = (Convert.ToInt16(gvQuestion.CurrentRow.Cells[0].EditedFormattedValue) + 1).ToString();
+                        dtQuestionSource.Rows.Add(newRow);
+                        gvQuestion.DataSource = dtQuestionSource;
+                        if (gvQuestion.Rows.Count > 1 && gvQuestion.Enabled == true)
+                        {
+                            gvQuestion.CurrentCell = gvQuestion.Rows[gvQuestion.CurrentRow.Index + 1].Cells[0];
+                        }
+                    }
+                }
+            }
+        }
+        private void btnQuestionSave_Click(object sender, EventArgs e)
+        {
+            DataTable dtOriginalTable = adapterQuestion.GetData();
+            tbcManagement.Enabled = false;
+            gvQuestion.DataSource = null;
+            CompareTables(dtOriginalTable, dtQuestionSource);
+            var tempRow = dtQuestionSource.AsEnumerable().Where(x => x.RowState != DataRowState.Deleted && (string)x["EDIT_STATUS"] == TableRowStatus.EDITED.ToString()).OrderBy(y => y["ID"]);
+            DataTable dtSourceInterim = tempRow.Any() ? tempRow.CopyToDataTable() : dtQuestionSource.Clone();
+            for (int i = 0; i < dtSourceInterim.Rows.Count; i++)
+            {
+                adapterQuestionCategory.UpdateQuery(UserName, dtSourceInterim.Rows[i]["NAME"].ToString().Trim(), dtSourceInterim.Rows[i]["WEIGHT"].ToString().Trim(), dtSourceInterim.Rows[i]["ID"].ToString().Trim());
+            }
+            tempRow = dtQuestionCategorySource.AsEnumerable().Where(x => x.RowState != DataRowState.Deleted && (string)x["EDIT_STATUS"] == TableRowStatus.NEW.ToString()).OrderBy(y => y["ID"]);
+            dtSourceInterim = new DataTable();
+            dtSourceInterim = tempRow.Any() ? tempRow.CopyToDataTable() : dtQuestionCategorySource.Clone();
+            for (int i = 0; i < dtSourceInterim.Rows.Count; i++)
+            {
+                adapterQuestionCategory.InsertQuery(UserName, dtSourceInterim.Rows[i]["ID"].ToString().Trim(), dtSourceInterim.Rows[i]["NAME"].ToString().Trim(), dtSourceInterim.Rows[i]["WEIGHT"].ToString().Trim());
+            }
+            tempRow = dtOriginalTable.AsEnumerable().Where(x => x.RowState != DataRowState.Deleted && (string)x["EDIT_STATUS"] == TableRowStatus.DELETED.ToString()).OrderBy(y => y["ID"]);
+            dtSourceInterim = new DataTable();
+            dtSourceInterim = tempRow.Any() ? tempRow.CopyToDataTable() : dtOriginalTable.Clone();
+            for (int i = 0; i < dtSourceInterim.Rows.Count; i++)
+            {
+                try
+                {
+                    adapterQuestionCategory.DeleteQuery(dtSourceInterim.Rows[i]["ID"].ToString().Trim());
+                }
+                catch (SqlException ex)
+                {
+                    switch (ex.Number)
+                    {
+                        case 547:
+                            ShowError("ID:" + dtSourceInterim.Rows[i]["ID"].ToString().Trim() + dtSourceInterim.Rows[i]["NAME"].ToString().Trim() + " 已連結至其他資料，不可刪除");
+                            break;
+                        default:
+                            ShowError(401);
+                            break;
+                    }
+                }
+            }
+            dtQuestionCategorySource = adapterQuestionCategory.GetData();
+            gvQuestionCategory.DataSource = dtQuestionCategorySource;
+            tbcManagement.Enabled = true;
+            questionCategoryTabMode = FunctionMode.HASRECORD;
+            LoadControlStatus(currentTabPage);
         }
         #endregion
 
-
-
+        
     }
 }
