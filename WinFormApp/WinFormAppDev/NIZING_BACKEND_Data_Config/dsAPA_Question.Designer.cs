@@ -28,8 +28,6 @@ namespace NIZING_BACKEND_Data_Config {
         
         private HR360_ASSESSMENTQUESTION_QUESTION_ADataTable tableHR360_ASSESSMENTQUESTION_QUESTION_A;
         
-        private global::System.Data.DataRelation relationFK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A;
-        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -220,7 +218,6 @@ namespace NIZING_BACKEND_Data_Config {
                     this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.InitVars();
                 }
             }
-            this.relationFK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A = this.Relations["FK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -235,10 +232,6 @@ namespace NIZING_BACKEND_Data_Config {
             base.Tables.Add(this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A);
             this.tableHR360_ASSESSMENTQUESTION_QUESTION_A = new HR360_ASSESSMENTQUESTION_QUESTION_ADataTable();
             base.Tables.Add(this.tableHR360_ASSESSMENTQUESTION_QUESTION_A);
-            this.relationFK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A = new global::System.Data.DataRelation("FK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A", new global::System.Data.DataColumn[] {
-                        this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.CATEGORY_IDColumn}, false);
-            this.Relations.Add(this.relationFK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -323,9 +316,9 @@ namespace NIZING_BACKEND_Data_Config {
             
             private global::System.Data.DataColumn columnID;
             
-            private global::System.Data.DataColumn columnNAME;
+            private global::System.Data.DataColumn column名稱;
             
-            private global::System.Data.DataColumn columnWEIGHT;
+            private global::System.Data.DataColumn column權重;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -370,17 +363,17 @@ namespace NIZING_BACKEND_Data_Config {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NAMEColumn {
+            public global::System.Data.DataColumn 名稱Column {
                 get {
-                    return this.columnNAME;
+                    return this.column名稱;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn WEIGHTColumn {
+            public global::System.Data.DataColumn 權重Column {
                 get {
-                    return this.columnWEIGHT;
+                    return this.column權重;
                 }
             }
             
@@ -421,15 +414,22 @@ namespace NIZING_BACKEND_Data_Config {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public HR360_ASSESSMENTQUESTION_CATEGORY_ARow AddHR360_ASSESSMENTQUESTION_CATEGORY_ARow(string ID, string NAME, string WEIGHT) {
+            public HR360_ASSESSMENTQUESTION_CATEGORY_ARow AddHR360_ASSESSMENTQUESTION_CATEGORY_ARow(string ID, string 名稱, string 權重) {
                 HR360_ASSESSMENTQUESTION_CATEGORY_ARow rowHR360_ASSESSMENTQUESTION_CATEGORY_ARow = ((HR360_ASSESSMENTQUESTION_CATEGORY_ARow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ID,
-                        NAME,
-                        WEIGHT};
+                        名稱,
+                        權重};
                 rowHR360_ASSESSMENTQUESTION_CATEGORY_ARow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowHR360_ASSESSMENTQUESTION_CATEGORY_ARow);
                 return rowHR360_ASSESSMENTQUESTION_CATEGORY_ARow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public HR360_ASSESSMENTQUESTION_CATEGORY_ARow FindByID(string ID) {
+                return ((HR360_ASSESSMENTQUESTION_CATEGORY_ARow)(this.Rows.Find(new object[] {
+                            ID})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -450,8 +450,8 @@ namespace NIZING_BACKEND_Data_Config {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columnID = base.Columns["ID"];
-                this.columnNAME = base.Columns["NAME"];
-                this.columnWEIGHT = base.Columns["WEIGHT"];
+                this.column名稱 = base.Columns["名稱"];
+                this.column權重 = base.Columns["權重"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -459,14 +459,17 @@ namespace NIZING_BACKEND_Data_Config {
             private void InitClass() {
                 this.columnID = new global::System.Data.DataColumn("ID", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnID);
-                this.columnNAME = new global::System.Data.DataColumn("NAME", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnNAME);
-                this.columnWEIGHT = new global::System.Data.DataColumn("WEIGHT", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnWEIGHT);
+                this.column名稱 = new global::System.Data.DataColumn("名稱", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.column名稱);
+                this.column權重 = new global::System.Data.DataColumn("權重", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.column權重);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnID}, true));
                 this.columnID.AllowDBNull = false;
+                this.columnID.Unique = true;
                 this.columnID.MaxLength = 20;
-                this.columnNAME.MaxLength = 255;
-                this.columnWEIGHT.MaxLength = 20;
+                this.column名稱.MaxLength = 255;
+                this.column權重.MaxLength = 20;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -602,13 +605,13 @@ namespace NIZING_BACKEND_Data_Config {
             
             private global::System.Data.DataColumn columnID;
             
-            private global::System.Data.DataColumn columnQUESTION;
+            private global::System.Data.DataColumn column問題;
             
-            private global::System.Data.DataColumn columnCATEGORY_ID;
+            private global::System.Data.DataColumn column分類;
             
-            private global::System.Data.DataColumn columnIN_USE;
+            private global::System.Data.DataColumn column使用中;
             
-            private global::System.Data.DataColumn columnUSE_BY_ALL;
+            private global::System.Data.DataColumn column全體共用;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -653,33 +656,33 @@ namespace NIZING_BACKEND_Data_Config {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn QUESTIONColumn {
+            public global::System.Data.DataColumn 問題Column {
                 get {
-                    return this.columnQUESTION;
+                    return this.column問題;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CATEGORY_IDColumn {
+            public global::System.Data.DataColumn 分類Column {
                 get {
-                    return this.columnCATEGORY_ID;
+                    return this.column分類;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn IN_USEColumn {
+            public global::System.Data.DataColumn 使用中Column {
                 get {
-                    return this.columnIN_USE;
+                    return this.column使用中;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn USE_BY_ALLColumn {
+            public global::System.Data.DataColumn 全體共用Column {
                 get {
-                    return this.columnUSE_BY_ALL;
+                    return this.column全體共用;
                 }
             }
             
@@ -720,20 +723,24 @@ namespace NIZING_BACKEND_Data_Config {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public HR360_ASSESSMENTQUESTION_QUESTION_ARow AddHR360_ASSESSMENTQUESTION_QUESTION_ARow(int ID, string QUESTION, HR360_ASSESSMENTQUESTION_CATEGORY_ARow parentHR360_ASSESSMENTQUESTION_CATEGORY_ARowByFK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A, string IN_USE, string USE_BY_ALL) {
+            public HR360_ASSESSMENTQUESTION_QUESTION_ARow AddHR360_ASSESSMENTQUESTION_QUESTION_ARow(int ID, string 問題, string 分類, string 使用中, string 全體共用) {
                 HR360_ASSESSMENTQUESTION_QUESTION_ARow rowHR360_ASSESSMENTQUESTION_QUESTION_ARow = ((HR360_ASSESSMENTQUESTION_QUESTION_ARow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ID,
-                        QUESTION,
-                        null,
-                        IN_USE,
-                        USE_BY_ALL};
-                if ((parentHR360_ASSESSMENTQUESTION_CATEGORY_ARowByFK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A != null)) {
-                    columnValuesArray[2] = parentHR360_ASSESSMENTQUESTION_CATEGORY_ARowByFK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A[0];
-                }
+                        問題,
+                        分類,
+                        使用中,
+                        全體共用};
                 rowHR360_ASSESSMENTQUESTION_QUESTION_ARow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowHR360_ASSESSMENTQUESTION_QUESTION_ARow);
                 return rowHR360_ASSESSMENTQUESTION_QUESTION_ARow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public HR360_ASSESSMENTQUESTION_QUESTION_ARow FindByID(int ID) {
+                return ((HR360_ASSESSMENTQUESTION_QUESTION_ARow)(this.Rows.Find(new object[] {
+                            ID})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -754,10 +761,10 @@ namespace NIZING_BACKEND_Data_Config {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columnID = base.Columns["ID"];
-                this.columnQUESTION = base.Columns["QUESTION"];
-                this.columnCATEGORY_ID = base.Columns["CATEGORY_ID"];
-                this.columnIN_USE = base.Columns["IN_USE"];
-                this.columnUSE_BY_ALL = base.Columns["USE_BY_ALL"];
+                this.column問題 = base.Columns["問題"];
+                this.column分類 = base.Columns["分類"];
+                this.column使用中 = base.Columns["使用中"];
+                this.column全體共用 = base.Columns["全體共用"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -765,19 +772,22 @@ namespace NIZING_BACKEND_Data_Config {
             private void InitClass() {
                 this.columnID = new global::System.Data.DataColumn("ID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnID);
-                this.columnQUESTION = new global::System.Data.DataColumn("QUESTION", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnQUESTION);
-                this.columnCATEGORY_ID = new global::System.Data.DataColumn("CATEGORY_ID", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCATEGORY_ID);
-                this.columnIN_USE = new global::System.Data.DataColumn("IN_USE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnIN_USE);
-                this.columnUSE_BY_ALL = new global::System.Data.DataColumn("USE_BY_ALL", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUSE_BY_ALL);
+                this.column問題 = new global::System.Data.DataColumn("問題", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.column問題);
+                this.column分類 = new global::System.Data.DataColumn("分類", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.column分類);
+                this.column使用中 = new global::System.Data.DataColumn("使用中", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.column使用中);
+                this.column全體共用 = new global::System.Data.DataColumn("全體共用", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.column全體共用);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnID}, true));
                 this.columnID.AllowDBNull = false;
-                this.columnQUESTION.MaxLength = 2147483647;
-                this.columnCATEGORY_ID.MaxLength = 20;
-                this.columnIN_USE.MaxLength = 20;
-                this.columnUSE_BY_ALL.MaxLength = 20;
+                this.columnID.Unique = true;
+                this.column問題.MaxLength = 2147483647;
+                this.column分類.MaxLength = 20;
+                this.column使用中.MaxLength = 20;
+                this.column全體共用.MaxLength = 20;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -931,71 +941,60 @@ namespace NIZING_BACKEND_Data_Config {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string NAME {
+            public string 名稱 {
                 get {
                     try {
-                        return ((string)(this[this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.NAMEColumn]));
+                        return ((string)(this[this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.名稱Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NAME\' in table \'HR360_ASSESSMENTQUESTION_CATEGORY_A\' is DBN" +
-                                "ull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'名稱\' in table \'HR360_ASSESSMENTQUESTION_CATEGORY_A\' is DBNul" +
+                                "l.", e);
                     }
                 }
                 set {
-                    this[this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.NAMEColumn] = value;
+                    this[this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.名稱Column] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string WEIGHT {
+            public string 權重 {
                 get {
                     try {
-                        return ((string)(this[this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.WEIGHTColumn]));
+                        return ((string)(this[this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.權重Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'WEIGHT\' in table \'HR360_ASSESSMENTQUESTION_CATEGORY_A\' is D" +
-                                "BNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'權重\' in table \'HR360_ASSESSMENTQUESTION_CATEGORY_A\' is DBNul" +
+                                "l.", e);
                     }
                 }
                 set {
-                    this[this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.WEIGHTColumn] = value;
+                    this[this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.權重Column] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsNAMENull() {
-                return this.IsNull(this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.NAMEColumn);
+            public bool Is名稱Null() {
+                return this.IsNull(this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.名稱Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetNAMENull() {
-                this[this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.NAMEColumn] = global::System.Convert.DBNull;
+            public void Set名稱Null() {
+                this[this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.名稱Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsWEIGHTNull() {
-                return this.IsNull(this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.WEIGHTColumn);
+            public bool Is權重Null() {
+                return this.IsNull(this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.權重Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetWEIGHTNull() {
-                this[this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.WEIGHTColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public HR360_ASSESSMENTQUESTION_QUESTION_ARow[] GetHR360_ASSESSMENTQUESTION_QUESTION_ARows() {
-                if ((this.Table.ChildRelations["FK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A"] == null)) {
-                    return new HR360_ASSESSMENTQUESTION_QUESTION_ARow[0];
-                }
-                else {
-                    return ((HR360_ASSESSMENTQUESTION_QUESTION_ARow[])(base.GetChildRows(this.Table.ChildRelations["FK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A"])));
-                }
+            public void Set權重Null() {
+                this[this.tableHR360_ASSESSMENTQUESTION_CATEGORY_A.權重Column] = global::System.Convert.DBNull;
             }
         }
         
@@ -1026,129 +1025,118 @@ namespace NIZING_BACKEND_Data_Config {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string QUESTION {
+            public string 問題 {
                 get {
                     try {
-                        return ((string)(this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.QUESTIONColumn]));
+                        return ((string)(this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.問題Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'QUESTION\' in table \'HR360_ASSESSMENTQUESTION_QUESTION_A\' is" +
-                                " DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'問題\' in table \'HR360_ASSESSMENTQUESTION_QUESTION_A\' is DBNul" +
+                                "l.", e);
                     }
                 }
                 set {
-                    this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.QUESTIONColumn] = value;
+                    this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.問題Column] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string CATEGORY_ID {
+            public string 分類 {
                 get {
                     try {
-                        return ((string)(this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.CATEGORY_IDColumn]));
+                        return ((string)(this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.分類Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CATEGORY_ID\' in table \'HR360_ASSESSMENTQUESTION_QUESTION_A\'" +
-                                " is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'分類\' in table \'HR360_ASSESSMENTQUESTION_QUESTION_A\' is DBNul" +
+                                "l.", e);
                     }
                 }
                 set {
-                    this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.CATEGORY_IDColumn] = value;
+                    this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.分類Column] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string IN_USE {
+            public string 使用中 {
                 get {
                     try {
-                        return ((string)(this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.IN_USEColumn]));
+                        return ((string)(this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.使用中Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'IN_USE\' in table \'HR360_ASSESSMENTQUESTION_QUESTION_A\' is D" +
-                                "BNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'使用中\' in table \'HR360_ASSESSMENTQUESTION_QUESTION_A\' is DBNu" +
+                                "ll.", e);
                     }
                 }
                 set {
-                    this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.IN_USEColumn] = value;
+                    this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.使用中Column] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string USE_BY_ALL {
+            public string 全體共用 {
                 get {
                     try {
-                        return ((string)(this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.USE_BY_ALLColumn]));
+                        return ((string)(this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.全體共用Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'USE_BY_ALL\' in table \'HR360_ASSESSMENTQUESTION_QUESTION_A\' " +
-                                "is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'全體共用\' in table \'HR360_ASSESSMENTQUESTION_QUESTION_A\' is DBN" +
+                                "ull.", e);
                     }
                 }
                 set {
-                    this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.USE_BY_ALLColumn] = value;
+                    this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.全體共用Column] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public HR360_ASSESSMENTQUESTION_CATEGORY_ARow HR360_ASSESSMENTQUESTION_CATEGORY_ARow {
-                get {
-                    return ((HR360_ASSESSMENTQUESTION_CATEGORY_ARow)(this.GetParentRow(this.Table.ParentRelations["FK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_HR360_ASSESSMENTQUESTION_QUESTION_A_HR360_ASSESSMENTQUESTION_CATEGORY_A"]);
-                }
+            public bool Is問題Null() {
+                return this.IsNull(this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.問題Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsQUESTIONNull() {
-                return this.IsNull(this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.QUESTIONColumn);
+            public void Set問題Null() {
+                this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.問題Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetQUESTIONNull() {
-                this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.QUESTIONColumn] = global::System.Convert.DBNull;
+            public bool Is分類Null() {
+                return this.IsNull(this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.分類Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsCATEGORY_IDNull() {
-                return this.IsNull(this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.CATEGORY_IDColumn);
+            public void Set分類Null() {
+                this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.分類Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetCATEGORY_IDNull() {
-                this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.CATEGORY_IDColumn] = global::System.Convert.DBNull;
+            public bool Is使用中Null() {
+                return this.IsNull(this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.使用中Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsIN_USENull() {
-                return this.IsNull(this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.IN_USEColumn);
+            public void Set使用中Null() {
+                this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.使用中Column] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetIN_USENull() {
-                this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.IN_USEColumn] = global::System.Convert.DBNull;
+            public bool Is全體共用Null() {
+                return this.IsNull(this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.全體共用Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsUSE_BY_ALLNull() {
-                return this.IsNull(this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.USE_BY_ALLColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetUSE_BY_ALLNull() {
-                this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.USE_BY_ALLColumn] = global::System.Convert.DBNull;
+            public void Set全體共用Null() {
+                this[this.tableHR360_ASSESSMENTQUESTION_QUESTION_A.全體共用Column] = global::System.Convert.DBNull;
             }
         }
         
@@ -1346,40 +1334,40 @@ namespace NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters {
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "HR360_ASSESSMENTQUESTION_CATEGORY_A";
             tableMapping.ColumnMappings.Add("ID", "ID");
-            tableMapping.ColumnMappings.Add("NAME", "NAME");
-            tableMapping.ColumnMappings.Add("WEIGHT", "WEIGHT");
+            tableMapping.ColumnMappings.Add("名稱", "名稱");
+            tableMapping.ColumnMappings.Add("權重", "權重");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
             this._adapter.DeleteCommand.CommandText = "DELETE FROM [HR360_ASSESSMENTQUESTION_CATEGORY_A] WHERE (([ID] = @Original_ID) AN" +
-                "D ((@IsNull_NAME = 1 AND [NAME] IS NULL) OR ([NAME] = @Original_NAME)) AND ((@Is" +
-                "Null_WEIGHT = 1 AND [WEIGHT] IS NULL) OR ([WEIGHT] = @Original_WEIGHT)))";
+                "D ((@IsNull_名稱 = 1 AND [NAME] IS NULL) OR ([NAME] = @Original_名稱)) AND ((@IsNull" +
+                "_權重 = 1 AND [WEIGHT] IS NULL) OR ([WEIGHT] = @Original_權重)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_NAME", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_NAME", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_WEIGHT", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WEIGHT", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WEIGHT", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WEIGHT", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_名稱", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "名稱", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_名稱", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "名稱", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_權重", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "權重", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_權重", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "權重", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = "INSERT INTO [HR360_ASSESSMENTQUESTION_CATEGORY_A] ([ID], [NAME], [WEIGHT]) VALUES" +
-                " (@ID, @NAME, @WEIGHT)";
+                " (@ID, @名稱, @權重)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NAME", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WEIGHT", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WEIGHT", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@名稱", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "名稱", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@權重", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "權重", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [HR360_ASSESSMENTQUESTION_CATEGORY_A] SET [ID] = @ID, [NAME] = @NAME, [WEIGHT] = @WEIGHT WHERE (([ID] = @Original_ID) AND ((@IsNull_NAME = 1 AND [NAME] IS NULL) OR ([NAME] = @Original_NAME)) AND ((@IsNull_WEIGHT = 1 AND [WEIGHT] IS NULL) OR ([WEIGHT] = @Original_WEIGHT)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [HR360_ASSESSMENTQUESTION_CATEGORY_A] SET [ID] = @ID, [NAME] = @名稱, [WEIGHT] = @權重 WHERE (([ID] = @Original_ID) AND ((@IsNull_名稱 = 1 AND [NAME] IS NULL) OR ([NAME] = @Original_名稱)) AND ((@IsNull_權重 = 1 AND [WEIGHT] IS NULL) OR ([WEIGHT] = @Original_權重)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NAME", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WEIGHT", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WEIGHT", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@名稱", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "名稱", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@權重", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "權重", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_NAME", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_NAME", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NAME", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_WEIGHT", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WEIGHT", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WEIGHT", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WEIGHT", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_名稱", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "名稱", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_名稱", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "名稱", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_權重", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "權重", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_權重", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "權重", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1395,8 +1383,8 @@ namespace NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT [ID],[NAME],[WEIGHT]\r\nFROM HR360_ASSESSMENTQUESTION_CATEGORY_A\r\nORDER BY [" +
-                "ID]";
+            this._commandCollection[0].CommandText = "SELECT [ID],[NAME] \'名稱\',[WEIGHT] \'權重\'\r\nFROM HR360_ASSESSMENTQUESTION_CATEGORY_A\r\n" +
+                "ORDER BY [ID]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
@@ -1722,49 +1710,49 @@ namespace NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters {
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "HR360_ASSESSMENTQUESTION_QUESTION_A";
             tableMapping.ColumnMappings.Add("ID", "ID");
-            tableMapping.ColumnMappings.Add("QUESTION", "QUESTION");
-            tableMapping.ColumnMappings.Add("CATEGORY_ID", "CATEGORY_ID");
-            tableMapping.ColumnMappings.Add("IN_USE", "IN_USE");
-            tableMapping.ColumnMappings.Add("USE_BY_ALL", "USE_BY_ALL");
+            tableMapping.ColumnMappings.Add("問題", "問題");
+            tableMapping.ColumnMappings.Add("分類", "分類");
+            tableMapping.ColumnMappings.Add("使用中", "使用中");
+            tableMapping.ColumnMappings.Add("全體共用", "全體共用");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [HR360_ASSESSMENTQUESTION_QUESTION_A] WHERE (([ID] = @Original_ID) AND ((@IsNull_CATEGORY_ID = 1 AND [CATEGORY_ID] IS NULL) OR ([CATEGORY_ID] = @Original_CATEGORY_ID)) AND ((@IsNull_IN_USE = 1 AND [IN_USE] IS NULL) OR ([IN_USE] = @Original_IN_USE)) AND ((@IsNull_USE_BY_ALL = 1 AND [USE_BY_ALL] IS NULL) OR ([USE_BY_ALL] = @Original_USE_BY_ALL)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [HR360_ASSESSMENTQUESTION_QUESTION_A] WHERE (([ID] = @Original_ID) AND ((@IsNull_分類 = 1 AND [CATEGORY_ID] IS NULL) OR ([CATEGORY_ID] = @Original_分類)) AND ((@IsNull_使用中 = 1 AND [IN_USE] IS NULL) OR ([IN_USE] = @Original_使用中)) AND ((@IsNull_全體共用 = 1 AND [USE_BY_ALL] IS NULL) OR ([USE_BY_ALL] = @Original_全體共用)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CATEGORY_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CATEGORY_ID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CATEGORY_ID", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CATEGORY_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_IN_USE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IN_USE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IN_USE", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IN_USE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USE_BY_ALL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USE_BY_ALL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USE_BY_ALL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USE_BY_ALL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_分類", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "分類", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_分類", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "分類", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_使用中", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "使用中", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_使用中", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "使用中", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_全體共用", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "全體共用", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_全體共用", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "全體共用", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [HR360_ASSESSMENTQUESTION_QUESTION_A] ([ID], [QUESTION], [CATEGORY_ID], [IN_USE], [USE_BY_ALL]) VALUES (@ID, @QUESTION, @CATEGORY_ID, @IN_USE, @USE_BY_ALL);
-SELECT ID, QUESTION, CATEGORY_ID, IN_USE, USE_BY_ALL FROM HR360_ASSESSMENTQUESTION_QUESTION_A WHERE (ID = @ID) ORDER BY ID";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [HR360_ASSESSMENTQUESTION_QUESTION_A] ([ID], [QUESTION], [CATEGORY_ID], [IN_USE], [USE_BY_ALL]) VALUES (@ID, @問題, @分類, @使用中, @全體共用);
+SELECT ID, QUESTION AS '問題', CATEGORY_ID AS '分類', IN_USE AS '使用中', USE_BY_ALL AS '全體共用' FROM HR360_ASSESSMENTQUESTION_QUESTION_A WHERE (ID = @ID) ORDER BY ID";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@QUESTION", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "QUESTION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CATEGORY_ID", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CATEGORY_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IN_USE", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IN_USE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USE_BY_ALL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USE_BY_ALL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@問題", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "問題", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@分類", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "分類", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@使用中", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "使用中", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@全體共用", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "全體共用", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [HR360_ASSESSMENTQUESTION_QUESTION_A] SET [ID] = @ID, [QUESTION] = @QUESTION, [CATEGORY_ID] = @CATEGORY_ID, [IN_USE] = @IN_USE, [USE_BY_ALL] = @USE_BY_ALL WHERE (([ID] = @Original_ID) AND ((@IsNull_CATEGORY_ID = 1 AND [CATEGORY_ID] IS NULL) OR ([CATEGORY_ID] = @Original_CATEGORY_ID)) AND ((@IsNull_IN_USE = 1 AND [IN_USE] IS NULL) OR ([IN_USE] = @Original_IN_USE)) AND ((@IsNull_USE_BY_ALL = 1 AND [USE_BY_ALL] IS NULL) OR ([USE_BY_ALL] = @Original_USE_BY_ALL)));
-SELECT ID, QUESTION, CATEGORY_ID, IN_USE, USE_BY_ALL FROM HR360_ASSESSMENTQUESTION_QUESTION_A WHERE (ID = @ID) ORDER BY ID";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [HR360_ASSESSMENTQUESTION_QUESTION_A] SET [ID] = @ID, [QUESTION] = @問題, [CATEGORY_ID] = @分類, [IN_USE] = @使用中, [USE_BY_ALL] = @全體共用 WHERE (([ID] = @Original_ID) AND ((@IsNull_分類 = 1 AND [CATEGORY_ID] IS NULL) OR ([CATEGORY_ID] = @Original_分類)) AND ((@IsNull_使用中 = 1 AND [IN_USE] IS NULL) OR ([IN_USE] = @Original_使用中)) AND ((@IsNull_全體共用 = 1 AND [USE_BY_ALL] IS NULL) OR ([USE_BY_ALL] = @Original_全體共用)));
+SELECT ID, QUESTION AS '問題', CATEGORY_ID AS '分類', IN_USE AS '使用中', USE_BY_ALL AS '全體共用' FROM HR360_ASSESSMENTQUESTION_QUESTION_A WHERE (ID = @ID) ORDER BY ID";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@QUESTION", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "QUESTION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CATEGORY_ID", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CATEGORY_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IN_USE", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IN_USE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USE_BY_ALL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USE_BY_ALL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@問題", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "問題", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@分類", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "分類", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@使用中", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "使用中", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@全體共用", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "全體共用", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CATEGORY_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CATEGORY_ID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CATEGORY_ID", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CATEGORY_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_IN_USE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IN_USE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_IN_USE", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "IN_USE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USE_BY_ALL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USE_BY_ALL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USE_BY_ALL", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USE_BY_ALL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_分類", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "分類", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_分類", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "分類", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_使用中", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "使用中", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_使用中", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "使用中", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_全體共用", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "全體共用", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_全體共用", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "全體共用", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1777,12 +1765,40 @@ SELECT ID, QUESTION, CATEGORY_ID, IN_USE, USE_BY_ALL FROM HR360_ASSESSMENTQUESTI
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT [ID], [QUESTION], [CATEGORY_ID], [IN_USE], [USE_BY_ALL]\r\nFROM HR360_ASSESS" +
-                "MENTQUESTION_QUESTION_A\r\nORDER BY [ID]";
+            this._commandCollection[0].CommandText = "SELECT [ID], [QUESTION] \'問題\', [CATEGORY_ID] \'分類\', [IN_USE] \'使用中\', [USE_BY_ALL] \'全" +
+                "體共用\'\r\nFROM HR360_ASSESSMENTQUESTION_QUESTION_A\r\nORDER BY [ID]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "DELETE FROM [HR360_ASSESSMENTQUESTION_QUESTION_A]\r\nWHERE [ID]=@ID";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "INSERT INTO [HR360_ASSESSMENTQUESTION_QUESTION_A]\r\nVALUES (GETDATE(),@USER,GETDAT" +
+                "E(),@USER,@ID,@QUESTION,@CATEGORY_ID,@IN_USE,@USE_BY_ALL)";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USER", global::System.Data.SqlDbType.NVarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "MODIFIER", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@QUESTION", global::System.Data.SqlDbType.NVarChar, 2147483647, global::System.Data.ParameterDirection.Input, 0, 0, "QUESTION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CATEGORY_ID", global::System.Data.SqlDbType.NVarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "CATEGORY_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IN_USE", global::System.Data.SqlDbType.NVarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "IN_USE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USE_BY_ALL", global::System.Data.SqlDbType.NVarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "USE_BY_ALL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "UPDATE [HR360_ASSESSMENTQUESTION_QUESTION_A] \r\nSET [MODIFIEDDATE]=GETDATE(), [MOD" +
+                "IFIER]=@USER, [QUESTION] = @QUESTION, [CATEGORY_ID] = @CATEGORY_ID, [IN_USE] = @" +
+                "IN_USE, [USE_BY_ALL] = @USE_BY_ALL\r\nWHERE [ID]=@ID\r\n";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USER", global::System.Data.SqlDbType.NVarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "MODIFIER", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@QUESTION", global::System.Data.SqlDbType.NVarChar, 2147483647, global::System.Data.ParameterDirection.Input, 0, 0, "QUESTION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CATEGORY_ID", global::System.Data.SqlDbType.NVarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "CATEGORY_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IN_USE", global::System.Data.SqlDbType.NVarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "IN_USE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USE_BY_ALL", global::System.Data.SqlDbType.NVarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "USE_BY_ALL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1842,31 +1858,28 @@ SELECT ID, QUESTION, CATEGORY_ID, IN_USE, USE_BY_ALL FROM HR360_ASSESSMENTQUESTI
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, string Original_CATEGORY_ID, string Original_IN_USE, string Original_USE_BY_ALL) {
+        public virtual int Delete(int Original_ID, string Original_分類, string Original_使用中, string Original_全體共用) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            if ((Original_CATEGORY_ID == null)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            if ((Original_分類 == null)) {
+                throw new global::System.ArgumentNullException("Original_分類");
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_CATEGORY_ID));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_分類));
             }
-            if ((Original_IN_USE == null)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            if ((Original_使用中 == null)) {
+                throw new global::System.ArgumentNullException("Original_使用中");
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_IN_USE));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_使用中));
             }
-            if ((Original_USE_BY_ALL == null)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            if ((Original_全體共用 == null)) {
+                throw new global::System.ArgumentNullException("Original_全體共用");
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_USE_BY_ALL));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_全體共用));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1888,31 +1901,31 @@ SELECT ID, QUESTION, CATEGORY_ID, IN_USE, USE_BY_ALL FROM HR360_ASSESSMENTQUESTI
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int ID, string QUESTION, string CATEGORY_ID, string IN_USE, string USE_BY_ALL) {
+        public virtual int Insert(int ID, string 問題, string 分類, string 使用中, string 全體共用) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(ID));
-            if ((QUESTION == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            if ((問題 == null)) {
+                throw new global::System.ArgumentNullException("問題");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(QUESTION));
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(問題));
             }
-            if ((CATEGORY_ID == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(CATEGORY_ID));
-            }
-            if ((IN_USE == null)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            if ((分類 == null)) {
+                throw new global::System.ArgumentNullException("分類");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(IN_USE));
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(分類));
             }
-            if ((USE_BY_ALL == null)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            if ((使用中 == null)) {
+                throw new global::System.ArgumentNullException("使用中");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(USE_BY_ALL));
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(使用中));
+            }
+            if ((全體共用 == null)) {
+                throw new global::System.ArgumentNullException("全體共用");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(全體共用));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1934,56 +1947,53 @@ SELECT ID, QUESTION, CATEGORY_ID, IN_USE, USE_BY_ALL FROM HR360_ASSESSMENTQUESTI
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ID, string QUESTION, string CATEGORY_ID, string IN_USE, string USE_BY_ALL, int Original_ID, string Original_CATEGORY_ID, string Original_IN_USE, string Original_USE_BY_ALL) {
+        public virtual int Update(int ID, string 問題, string 分類, string 使用中, string 全體共用, int Original_ID, string Original_分類, string Original_使用中, string Original_全體共用) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ID));
-            if ((QUESTION == null)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            if ((問題 == null)) {
+                throw new global::System.ArgumentNullException("問題");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(QUESTION));
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(問題));
             }
-            if ((CATEGORY_ID == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(CATEGORY_ID));
-            }
-            if ((IN_USE == null)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            if ((分類 == null)) {
+                throw new global::System.ArgumentNullException("分類");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(IN_USE));
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(分類));
             }
-            if ((USE_BY_ALL == null)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            if ((使用中 == null)) {
+                throw new global::System.ArgumentNullException("使用中");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(USE_BY_ALL));
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(使用中));
+            }
+            if ((全體共用 == null)) {
+                throw new global::System.ArgumentNullException("全體共用");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(全體共用));
             }
             this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_ID));
-            if ((Original_CATEGORY_ID == null)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            if ((Original_分類 == null)) {
+                throw new global::System.ArgumentNullException("Original_分類");
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_CATEGORY_ID));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_分類));
             }
-            if ((Original_IN_USE == null)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            if ((Original_使用中 == null)) {
+                throw new global::System.ArgumentNullException("Original_使用中");
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_IN_USE));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_使用中));
             }
-            if ((Original_USE_BY_ALL == null)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            if ((Original_全體共用 == null)) {
+                throw new global::System.ArgumentNullException("Original_全體共用");
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_USE_BY_ALL));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_全體共用));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1999,6 +2009,146 @@ SELECT ID, QUESTION, CATEGORY_ID, IN_USE, USE_BY_ALL FROM HR360_ASSESSMENTQUESTI
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string 問題, string 分類, string 使用中, string 全體共用, int Original_ID, string Original_分類, string Original_使用中, string Original_全體共用) {
+            return this.Update(Original_ID, 問題, 分類, 使用中, 全體共用, Original_ID, Original_分類, Original_使用中, Original_全體共用);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
+        public virtual int DeleteQuery(int ID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            command.Parameters[0].Value = ((int)(ID));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertQuery(string USER, int ID, string QUESTION, string CATEGORY_ID, string IN_USE, string USE_BY_ALL) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            if ((USER == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(USER));
+            }
+            command.Parameters[1].Value = ((int)(ID));
+            if ((QUESTION == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(QUESTION));
+            }
+            if ((CATEGORY_ID == null)) {
+                command.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[3].Value = ((string)(CATEGORY_ID));
+            }
+            if ((IN_USE == null)) {
+                command.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[4].Value = ((string)(IN_USE));
+            }
+            if ((USE_BY_ALL == null)) {
+                command.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[5].Value = ((string)(USE_BY_ALL));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
+        public virtual int UpdateQuery(string USER, string QUESTION, string CATEGORY_ID, string IN_USE, string USE_BY_ALL, int ID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
+            if ((USER == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(USER));
+            }
+            if ((QUESTION == null)) {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[1].Value = ((string)(QUESTION));
+            }
+            if ((CATEGORY_ID == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(CATEGORY_ID));
+            }
+            if ((IN_USE == null)) {
+                command.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[3].Value = ((string)(IN_USE));
+            }
+            if ((USE_BY_ALL == null)) {
+                command.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[4].Value = ((string)(USE_BY_ALL));
+            }
+            command.Parameters[5].Value = ((int)(ID));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     

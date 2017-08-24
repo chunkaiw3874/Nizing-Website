@@ -192,7 +192,7 @@ namespace NIZING_BACKEND_Data_Config
             this.cbxFunctionList.Location = new System.Drawing.Point(146, 167);
             this.cbxFunctionList.Name = "cbxFunctionList";
             this.cbxFunctionList.Size = new System.Drawing.Size(226, 20);
-            this.cbxFunctionList.TabIndex = 8;
+            this.cbxFunctionList.TabIndex = 4;
             this.cbxFunctionList.ValueMember = "ID";
             // 
             // bACKENDFUNCTIONLISTBindingSource

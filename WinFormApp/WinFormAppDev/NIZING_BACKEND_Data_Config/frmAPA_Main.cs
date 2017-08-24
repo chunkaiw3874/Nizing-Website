@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -14,6 +15,8 @@ namespace NIZING_BACKEND_Data_Config
     public partial class frmAPA_Main : Form
     {
         #region Frame Universal Variable
+        string NZConnectionString = ConfigurationManager.ConnectionStrings["OQS_Data_Config.Properties.Settings.NZConnectionString"].ConnectionString;
+        string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["OQS_Data_Config.Properties.Settings.NZ_ERP2ConnectionString"].ConnectionString;
         public string UserName { get; set; }
         private enum FunctionMode { ADD, EDIT, DELETE, SEARCH, HASRECORD, NORECORD }
         private enum TableRowStatus { DELETED, EDITED, NEW, UNCHANGED };
@@ -33,6 +36,11 @@ namespace NIZING_BACKEND_Data_Config
         DataTable dtQuestionSource = new DataTable();
         #endregion
 
+        #region 評核人員分配 Universal Variable
+        private FunctionMode personnelAssignmentTabMode = FunctionMode.HASRECORD;
+        DataTable dtPersonnelAssignmentSource = new DataTable();        
+        #endregion
+
         public frmAPA_Main()
         {
             InitializeComponent();
@@ -40,22 +48,29 @@ namespace NIZING_BACKEND_Data_Config
 
             #region 問題分類建立 Initialization           
             dtQuestionCategorySource = adapterQuestionCategory.GetData();
-            gvQuestionCategory.DataSource = dtQuestionCategorySource;            
-            gvQuestionCategory.Columns["ID"].ReadOnly = true;
+            gvQuestionCategory.DataSource = dtQuestionCategorySource;
+            LoadGridViewStyle(gvQuestionCategory);
             questionCategoryTabMode = FunctionMode.HASRECORD;
             LoadControlStatus(currentTabPage);
             #endregion
             #region 問題建立 Initializaiton
             dtQuestionSource = adapterQuestion.GetData();
             gvQuestion.DataSource = dtQuestionSource;
-            gvQuestion.Columns["ID"].ReadOnly = true;
-            gvQuestion.Columns["QUESTION"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;  //change gv column to multiline
-            gvQuestion.Columns["QUESTION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            gvQuestion.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            LoadGridViewStyle(gvQuestion);
             questionTabMode = FunctionMode.HASRECORD;
             LoadControlStatus(currentTabPage);
             #endregion
-            
+            #region 評核人員分配 Initialization
+            for (int i = DateTime.Now.Year; i >= 2016; i--)
+            {
+                cbxPersonnelAssignmentYear.Items.Add(i.ToString());
+            }
+            cbxPersonnelAssignmentYear.SelectedIndex = 0;
+            LoadgvPersonnelAssignment();
+            LoadGridViewStyle(gvPersonnelAssignment);
+            personnelAssignmentTabMode = FunctionMode.HASRECORD;
+            LoadControlStatus(currentTabPage);
+            #endregion
         }
 
         #region Frame Methods and Events
@@ -74,7 +89,10 @@ namespace NIZING_BACKEND_Data_Config
         }
         private void tbcManagement_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (questionCategoryTabMode == FunctionMode.ADD || questionCategoryTabMode == FunctionMode.EDIT || questionCategoryTabMode == FunctionMode.SEARCH)
+            if (questionCategoryTabMode == FunctionMode.ADD || questionCategoryTabMode == FunctionMode.EDIT || questionCategoryTabMode == FunctionMode.SEARCH
+                || questionTabMode == FunctionMode.ADD || questionTabMode == FunctionMode.EDIT || questionTabMode == FunctionMode.SEARCH
+                || personnelAssignmentTabMode == FunctionMode.ADD || personnelAssignmentTabMode == FunctionMode.EDIT || personnelAssignmentTabMode == FunctionMode.SEARCH
+                )
             {
                 tbcManagement.SelectedTab = currentTabPage;
             }
@@ -103,6 +121,7 @@ namespace NIZING_BACKEND_Data_Config
                     btnQuestionCategoryCancel.Enabled = true;
                     gvQuestionCategory.ReadOnly = false;
                     gvQuestionCategory.ForeColor = Color.Black;
+                    LoadGridViewStyle(gvQuestionCategory);
                 }
             }
             else if (tab == tbpQuestion)
@@ -122,6 +141,29 @@ namespace NIZING_BACKEND_Data_Config
                     btnQuestionCancel.Enabled = true;
                     gvQuestion.ReadOnly = false;
                     gvQuestion.ForeColor = Color.Black;
+                    LoadGridViewStyle(gvQuestion);
+                }
+            }
+            else if (tab == tbpPersonnelAssignment)
+            {
+                if (personnelAssignmentTabMode == FunctionMode.HASRECORD)
+                {                    
+                    btnPersonnelAssignmentEdit.Enabled = true;
+                    btnPersonnelAssignmentSave.Enabled = false;
+                    btnPersonnelAssignmentCancel.Enabled = false;
+                    cbxPersonnelAssignmentYear.Enabled = true;
+                    gvPersonnelAssignment.ReadOnly = true;
+                    gvPersonnelAssignment.ForeColor = Color.Gray;
+                }
+                else if (personnelAssignmentTabMode == FunctionMode.EDIT)
+                {
+                    btnPersonnelAssignmentEdit.Enabled = false;
+                    btnPersonnelAssignmentSave.Enabled = true;
+                    btnPersonnelAssignmentCancel.Enabled = true;
+                    cbxPersonnelAssignmentYear.Enabled = false;
+                    gvPersonnelAssignment.ReadOnly = false;
+                    gvPersonnelAssignment.ForeColor = Color.Black;
+                    LoadGridViewStyle(gvPersonnelAssignment);
                 }
             }
         }
@@ -182,43 +224,83 @@ namespace NIZING_BACKEND_Data_Config
             {
                 case "gvQuestionCategory":
                     gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["ID"].ReadOnly = true;
                     gv.Columns["ID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    gv.Columns["WEIGHT"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["權重"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     break;
                 case "gvQuestion":
+                    gv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
                     gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["ID"].ReadOnly = true;
                     gv.Columns["ID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    gv.Columns["CATEGORY_ID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    gv.Columns["IN_USE"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    gv.Columns["USE_BY_ALL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["問題"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;  //change gv column to multiline
+                    gv.Columns["問題"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    gv.Columns["分類"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["使用中"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["全體共用"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     DataTable dtTemp = adapterQuestionCategory.GetData();
                     dtTemp.Columns.Add("ID_NAME");
                     foreach (DataRow rows in dtTemp.Rows)
                     {
-                        rows["ID_NAME"] = rows["ID"].ToString() + " " + rows["NAME"].ToString();
+                        rows["ID_NAME"] = rows["ID"].ToString() + " " + rows["名稱"].ToString();
                     }
                     foreach (DataGridViewRow row in gv.Rows)
-                    {
+                    {                        
                         DataGridViewCheckBoxCell ckbIN_USECell = new DataGridViewCheckBoxCell()
                         {
                             TrueValue = "1",
-                            FalseValue = "0"
+                            FalseValue = "0"                            
                         };
                         ckbIN_USECell.Style.NullValue = false;
-                        row.Cells["IN_USE"] = ckbIN_USECell;
+                        row.Cells["使用中"] = ckbIN_USECell;
                         DataGridViewCheckBoxCell ckbUSE_BY_ALLCell = new DataGridViewCheckBoxCell()
                         {
                             TrueValue = "1",
                             FalseValue = "0"
                         };
                         ckbUSE_BY_ALLCell.Style.NullValue = false;
-                        row.Cells["USE_BY_ALL"] = ckbUSE_BY_ALLCell;
+                        row.Cells["全體共用"] = ckbUSE_BY_ALLCell;
                         DataGridViewComboBoxCell cbxCATEGORY_IDCell = new DataGridViewComboBoxCell();
                         cbxCATEGORY_IDCell.FlatStyle = FlatStyle.Flat;
                         cbxCATEGORY_IDCell.DataSource = dtTemp;
                         cbxCATEGORY_IDCell.ValueMember = "ID";
                         cbxCATEGORY_IDCell.DisplayMember = "ID_NAME";
-                        row.Cells["CATEGORY_ID"] = cbxCATEGORY_IDCell;
+                        row.Cells["分類"] = cbxCATEGORY_IDCell;
+                    }
+                    break;
+                case "gvPersonnelAssignment":
+                    gv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                    gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["年份"].ReadOnly = true;
+                    gv.Columns["年份"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["受評者"].ReadOnly = true;
+                    DataTable dtAssessorList = new DataTable();
+                    using (SqlConnection conn = new SqlConnection(NZConnectionString))
+                    {
+                        conn.Open();
+                        string query = "SELECT LTRIM(RTRIM(MV.MV001))+' '+LTRIM(RTRIM(MV.MV002)) 'NAME',LTRIM(RTRIM(MV.MV001)) 'ID'"
+                                    + " FROM CMSMV MV"
+                                    + " WHERE "
+                                    + " (MV.MV022=''"
+                                    + " OR MV.MV022 > @YEAR+'1232')"
+                                    + " AND MV.MV021 < @YEAR+'1232'"
+                                    + " AND MV.MV001 NOT LIKE 'PT%'"
+                                    + " AND MV.MV001<>'0000'"
+                                    + " AND MV.MV001<>'0098'"
+                                    + " ORDER BY MV.MV001";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@YEAR", cbxPersonnelAssignmentYear.Text);
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(dtAssessorList);
+                    }
+                    foreach (DataGridViewRow row in gv.Rows)
+                    {
+                        DataGridViewComboBoxCell cbxAssessorCell = new DataGridViewComboBoxCell();
+                        cbxAssessorCell.MaxDropDownItems = 5;
+                        cbxAssessorCell.DataSource = dtAssessorList;
+                        cbxAssessorCell.DisplayMember = "NAME";
+                        cbxAssessorCell.ValueMember = "NAME";
+                        row.Cells["評核者"] = cbxAssessorCell;
                     }
                     break;
             }
@@ -254,13 +336,13 @@ namespace NIZING_BACKEND_Data_Config
         {
             MessageBox.Show(errorMessage);
         }
+        private void gv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            LoadGridViewStyle((DataGridView)sender);
+        }
         #endregion      
 
         #region 問題分類建立 Tab Method and Events
-        private void gvQuestionCategory_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            LoadGridViewStyle(gvQuestionCategory);
-        }
         private void gvQuestionCategory_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             if (!isCancel)
@@ -354,14 +436,14 @@ namespace NIZING_BACKEND_Data_Config
             DataTable dtSourceInterim = tempRow.Any() ? tempRow.CopyToDataTable() : dtQuestionCategorySource.Clone();
             for (int i = 0; i < dtSourceInterim.Rows.Count; i++)
             {
-                adapterQuestionCategory.UpdateQuery(UserName, dtSourceInterim.Rows[i]["NAME"].ToString().Trim(), dtSourceInterim.Rows[i]["WEIGHT"].ToString().Trim(), dtSourceInterim.Rows[i]["ID"].ToString().Trim());
+                adapterQuestionCategory.UpdateQuery(UserName, dtSourceInterim.Rows[i]["名稱"].ToString().Trim(), dtSourceInterim.Rows[i]["權重"].ToString().Trim(), dtSourceInterim.Rows[i]["ID"].ToString().Trim());
             }
             tempRow = dtQuestionCategorySource.AsEnumerable().Where(x => x.RowState != DataRowState.Deleted && (string)x["EDIT_STATUS"] == TableRowStatus.NEW.ToString()).OrderBy(y => y["ID"]);
             dtSourceInterim = new DataTable();
             dtSourceInterim = tempRow.Any() ? tempRow.CopyToDataTable() : dtQuestionCategorySource.Clone();
             for (int i = 0; i < dtSourceInterim.Rows.Count; i++)
             {
-                adapterQuestionCategory.InsertQuery(UserName, dtSourceInterim.Rows[i]["ID"].ToString().Trim(), dtSourceInterim.Rows[i]["NAME"].ToString().Trim(), dtSourceInterim.Rows[i]["WEIGHT"].ToString().Trim());
+                adapterQuestionCategory.InsertQuery(UserName, dtSourceInterim.Rows[i]["ID"].ToString().Trim(), dtSourceInterim.Rows[i]["名稱"].ToString().Trim(), dtSourceInterim.Rows[i]["權重"].ToString().Trim());
             }
             tempRow = dtOriginalTable.AsEnumerable().Where(x => x.RowState != DataRowState.Deleted && (string)x["EDIT_STATUS"] == TableRowStatus.DELETED.ToString()).OrderBy(y => y["ID"]);
             dtSourceInterim = new DataTable();
@@ -377,7 +459,7 @@ namespace NIZING_BACKEND_Data_Config
                     switch (ex.Number)
                     {
                         case 547:
-                            ShowError("ID:" + dtSourceInterim.Rows[i]["ID"].ToString().Trim() + dtSourceInterim.Rows[i]["NAME"].ToString().Trim() + " 已連結至其他資料，不可刪除");
+                            ShowError("ID:" + dtSourceInterim.Rows[i]["ID"].ToString().Trim() + dtSourceInterim.Rows[i]["名稱"].ToString().Trim() + " 已連結至其他資料，不可刪除");
                             break;
                         default:
                             ShowError(401);
@@ -390,6 +472,7 @@ namespace NIZING_BACKEND_Data_Config
             tbcManagement.Enabled = true;
             questionCategoryTabMode = FunctionMode.HASRECORD;
             LoadControlStatus(currentTabPage);
+            txtQuestionCategoryTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;
         }
         private void btnQuestionCategoryCancel_Click(object sender, EventArgs e)
         {
@@ -403,15 +486,11 @@ namespace NIZING_BACKEND_Data_Config
             questionCategoryTabMode = FunctionMode.HASRECORD;
             LoadControlStatus(currentTabPage);
             isCancel = false;
+            txtQuestionCategoryTabMemo.Text += DateTime.Now.ToString() + " 資料更新取消" + Environment.NewLine;
         }
         #endregion
 
         #region 問題建立 Tab Method and Events
-
-        private void gvQuestion_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            LoadGridViewStyle(gvQuestion);
-        }
         private void gvQuestion_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             if (!isCancel)
@@ -451,11 +530,10 @@ namespace NIZING_BACKEND_Data_Config
         {
             questionTabMode = FunctionMode.EDIT;
             LoadControlStatus(currentTabPage);
-            txtQuestionTest.Text += gvQuestion.Rows[8].Cells[0].FormattedValue.ToString() + "\r\n";
-            txtQuestionTest.Text += gvQuestion.Rows[8].Cells[1].FormattedValue.ToString() + "\r\n";
-            txtQuestionTest.Text += gvQuestion.Rows[8].Cells[2].Value + "\r\n";
-            txtQuestionTest.Text += gvQuestion.Rows[8].Cells[3].Value + "\r\n";
-            txtQuestionTest.Text += gvQuestion.Rows[8].Cells[4].FormattedValue.ToString() + "\r\n";
+            if (gvQuestion.Rows.Count > 0)
+            {
+                gvQuestionCategory.CurrentCell = gvQuestionCategory.Rows[0].Cells[0];
+            }
         }
         private void btnQuestionCancel_Click(object sender, EventArgs e)
         {
@@ -468,6 +546,7 @@ namespace NIZING_BACKEND_Data_Config
             gvQuestion.DataSource = dtQuestionSource;
             questionTabMode = FunctionMode.HASRECORD;
             LoadControlStatus(currentTabPage);
+            txtQuestionTabMemo.Text += DateTime.Now.ToString() + " 資料更新取消" + Environment.NewLine;
             isCancel = false;
         }       
 
@@ -511,14 +590,22 @@ namespace NIZING_BACKEND_Data_Config
             DataTable dtSourceInterim = tempRow.Any() ? tempRow.CopyToDataTable() : dtQuestionSource.Clone();
             for (int i = 0; i < dtSourceInterim.Rows.Count; i++)
             {
-                adapterQuestionCategory.UpdateQuery(UserName, dtSourceInterim.Rows[i]["NAME"].ToString().Trim(), dtSourceInterim.Rows[i]["WEIGHT"].ToString().Trim(), dtSourceInterim.Rows[i]["ID"].ToString().Trim());
+                adapterQuestion.UpdateQuery(UserName, dtSourceInterim.Rows[i]["問題"].ToString().Trim(), dtSourceInterim.Rows[i]["分類"].ToString(), dtSourceInterim.Rows[i]["使用中"].ToString(), dtSourceInterim.Rows[i]["全體共用"].ToString(), Convert.ToInt16(dtSourceInterim.Rows[i]["ID"].ToString()));
             }
-            tempRow = dtQuestionCategorySource.AsEnumerable().Where(x => x.RowState != DataRowState.Deleted && (string)x["EDIT_STATUS"] == TableRowStatus.NEW.ToString()).OrderBy(y => y["ID"]);
+            tempRow = dtQuestionSource.AsEnumerable().Where(x => x.RowState != DataRowState.Deleted && (string)x["EDIT_STATUS"] == TableRowStatus.NEW.ToString()).OrderBy(y => y["ID"]);
             dtSourceInterim = new DataTable();
-            dtSourceInterim = tempRow.Any() ? tempRow.CopyToDataTable() : dtQuestionCategorySource.Clone();
+            dtSourceInterim = tempRow.Any() ? tempRow.CopyToDataTable() : dtQuestionSource.Clone();
             for (int i = 0; i < dtSourceInterim.Rows.Count; i++)
             {
-                adapterQuestionCategory.InsertQuery(UserName, dtSourceInterim.Rows[i]["ID"].ToString().Trim(), dtSourceInterim.Rows[i]["NAME"].ToString().Trim(), dtSourceInterim.Rows[i]["WEIGHT"].ToString().Trim());
+                if (String.IsNullOrWhiteSpace(dtSourceInterim.Rows[i]["使用中"].ToString()))
+                {
+                    dtSourceInterim.Rows[i]["使用中"] = "0";
+                }
+                if (String.IsNullOrWhiteSpace(dtSourceInterim.Rows[i]["全體共用"].ToString()))
+                {
+                    dtSourceInterim.Rows[i]["全體共用"] = "0";
+                }
+                adapterQuestion.InsertQuery(UserName, Convert.ToInt16(dtSourceInterim.Rows[i]["ID"].ToString()), dtSourceInterim.Rows[i]["問題"].ToString().Trim(), dtSourceInterim.Rows[i]["分類"].ToString(), dtSourceInterim.Rows[i]["使用中"].ToString(), dtSourceInterim.Rows[i]["全體共用"].ToString());
             }
             tempRow = dtOriginalTable.AsEnumerable().Where(x => x.RowState != DataRowState.Deleted && (string)x["EDIT_STATUS"] == TableRowStatus.DELETED.ToString()).OrderBy(y => y["ID"]);
             dtSourceInterim = new DataTable();
@@ -527,7 +614,7 @@ namespace NIZING_BACKEND_Data_Config
             {
                 try
                 {
-                    adapterQuestionCategory.DeleteQuery(dtSourceInterim.Rows[i]["ID"].ToString().Trim());
+                    adapterQuestion.DeleteQuery(Convert.ToInt16(dtSourceInterim.Rows[i]["ID"].ToString()));
                 }
                 catch (SqlException ex)
                 {
@@ -542,14 +629,70 @@ namespace NIZING_BACKEND_Data_Config
                     }
                 }
             }
-            dtQuestionCategorySource = adapterQuestionCategory.GetData();
-            gvQuestionCategory.DataSource = dtQuestionCategorySource;
+            dtQuestionSource = adapterQuestion.GetData();
+            gvQuestion.DataSource = dtQuestionSource;
             tbcManagement.Enabled = true;
-            questionCategoryTabMode = FunctionMode.HASRECORD;
+            questionTabMode = FunctionMode.HASRECORD;
+            txtQuestionTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;
             LoadControlStatus(currentTabPage);
         }
         #endregion
 
-        
+        #region 評核人員分配 Tab Metho and Events
+        /*這邊有個重點，自評的分配與調整將會自動於背景進行，以ERP中在職者為依據進行新增以及編輯(使已離職者INACTIVE)*/
+        private void LoadgvPersonnelAssignment()
+        {
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = ";WITH"
+                            + " ASSIGNMENT"
+                            + " AS"
+                            + " (SELECT *"
+                            + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+                            + " WHERE [YEAR]=@YEAR"
+                            + " )"
+                            + " SELECT COALESCE(ASSIGN.[YEAR],@YEAR) '年份'"
+                            + " ,LTRIM(RTRIM(MV.MV001)) + ' ' + LTRIM(RTRIM(MV.MV002)) '受評者'"
+                            + " ,COALESCE(LTRIM(RTRIM(ASSIGN.ASSESSOR_ID)) + ' ' + LTRIM(RTRIM(MVASSESSOR.MV002)),'') '評核者'"
+                            + " ,COALESCE([TYPE].NAME,'') '評核類型名稱'"
+                            + " FROM NZ.dbo.CMSMV MV"
+                            + " LEFT JOIN ASSIGNMENT ASSIGN ON MV.MV001=ASSIGN.ASSESSED_ID"
+                            + " LEFT JOIN NZ.dbo.CMSMV MVASSESSOR ON ASSIGN.ASSESSOR_ID=MVASSESSOR.MV001"
+                            + " LEFT JOIN HR360_ASSESSMENTPERSONNEL_TYPE_A [TYPE] ON ASSIGN.ASSESS_TYPE=[TYPE].ID"
+                            + " WHERE "
+                            + " (MV.MV022=''"
+                            + " OR MV.MV022 > @YEAR+'1232')"
+                            + " AND MV.MV021 < @YEAR+'1232'"
+                            + " AND MV.MV001 NOT LIKE 'PT%'"
+                            + " AND MV.MV001<>'0000'"
+                            + " AND MV.MV001<>'0006'"
+                            + " AND MV.MV001<>'0007'"
+                            + " AND MV.MV001<>'0098'"
+                            + " ORDER BY MV.MV001";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@YEAR", cbxPersonnelAssignmentYear.Text);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                dtPersonnelAssignmentSource = new DataTable();
+                da.Fill(dtPersonnelAssignmentSource);
+            }
+            gvPersonnelAssignment.DataSource = dtPersonnelAssignmentSource;
+        }
+
+        private void cbxPersonnelAssignmentYear_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadgvPersonnelAssignment();
+        }        
+
+        private void btnPersonnelAssignmentEdit_Click(object sender, EventArgs e)
+        {
+            personnelAssignmentTabMode = FunctionMode.EDIT;
+            LoadControlStatus(currentTabPage);
+            if (gvPersonnelAssignment.Rows.Count > 0)
+            {
+                gvQuestionCategory.CurrentCell = gvQuestionCategory.Rows[0].Cells[0];
+            }
+        }       
+        #endregion
     }
 }

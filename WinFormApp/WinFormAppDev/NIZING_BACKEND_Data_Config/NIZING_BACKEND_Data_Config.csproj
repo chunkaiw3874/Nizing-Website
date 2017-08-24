@@ -80,6 +80,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dsAPA_Question.cs">
+      <DependentUpon>dsAPA_Question.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsAPA_Question.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
