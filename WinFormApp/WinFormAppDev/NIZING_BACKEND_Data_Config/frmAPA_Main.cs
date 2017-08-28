@@ -21,7 +21,7 @@ namespace NIZING_BACKEND_Data_Config
         private enum FunctionMode { ADD, EDIT, DELETE, SEARCH, HASRECORD, NORECORD }
         private enum TableRowStatus { DELETED, EDITED, NEW, UNCHANGED };
         TabPage currentTabPage;
-        bool isCancel = false;  //Check if an event is triggered after Cancel button is hit;
+        bool isCancel = false;  //Check if an event is triggered after Cancel button is hit; deactivate cell and row validation if it's true
         #endregion
 
         #region 問題分類建立 Universal Variable
@@ -274,6 +274,7 @@ namespace NIZING_BACKEND_Data_Config
                     gv.Columns["年份"].ReadOnly = true;
                     gv.Columns["年份"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     gv.Columns["受評者"].ReadOnly = true;
+                    gv.Columns["評核類型名稱"].ReadOnly = true;
                     DataTable dtAssessorList = new DataTable();
                     using (SqlConnection conn = new SqlConnection(NZConnectionString))
                     {
@@ -296,6 +297,7 @@ namespace NIZING_BACKEND_Data_Config
                     foreach (DataGridViewRow row in gv.Rows)
                     {
                         DataGridViewComboBoxCell cbxAssessorCell = new DataGridViewComboBoxCell();
+                        cbxAssessorCell.FlatStyle = FlatStyle.Flat;
                         cbxAssessorCell.MaxDropDownItems = 5;
                         cbxAssessorCell.DataSource = dtAssessorList;
                         cbxAssessorCell.DisplayMember = "NAME";
@@ -655,7 +657,7 @@ namespace NIZING_BACKEND_Data_Config
                             + " SELECT COALESCE(ASSIGN.[YEAR],@YEAR) '年份'"
                             + " ,LTRIM(RTRIM(MV.MV001)) + ' ' + LTRIM(RTRIM(MV.MV002)) '受評者'"
                             + " ,COALESCE(LTRIM(RTRIM(ASSIGN.ASSESSOR_ID)) + ' ' + LTRIM(RTRIM(MVASSESSOR.MV002)),'') '評核者'"
-                            + " ,COALESCE([TYPE].NAME,'') '評核類型名稱'"
+                            + " ,COALESCE([TYPE].NAME,'主管評') '評核類型名稱'"
                             + " FROM NZ.dbo.CMSMV MV"
                             + " LEFT JOIN ASSIGNMENT ASSIGN ON MV.MV001=ASSIGN.ASSESSED_ID"
                             + " LEFT JOIN NZ.dbo.CMSMV MVASSESSOR ON ASSIGN.ASSESSOR_ID=MVASSESSOR.MV001"
@@ -693,6 +695,19 @@ namespace NIZING_BACKEND_Data_Config
                 gvQuestionCategory.CurrentCell = gvQuestionCategory.Rows[0].Cells[0];
             }
         }       
-        #endregion
+        private void btnPersonnelAssignmentCancel_Click(object sender, EventArgs e)
+        {
+            isCancel = true;
+            LoadgvPersonnelAssignment();
+            personnelAssignmentTabMode = FunctionMode.HASRECORD;
+            LoadControlStatus(currentTabPage);
+            txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 資料更新取消" + Environment.NewLine;
+            isCancel = false;
+        }
+        private void btnPersonnelAssignmentSave_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion                
     }
 }
