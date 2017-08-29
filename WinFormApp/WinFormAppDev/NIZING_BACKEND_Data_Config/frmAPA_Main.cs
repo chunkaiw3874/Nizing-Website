@@ -66,7 +66,8 @@ namespace NIZING_BACKEND_Data_Config
                 cbxPersonnelAssignmentYear.Items.Add(i.ToString());
             }
             cbxPersonnelAssignmentYear.SelectedIndex = 0;
-            LoadgvPersonnelAssignment();
+            dtPersonnelAssignmentSource = LoadgvPersonnelAssignment();
+            gvPersonnelAssignment.DataSource = dtPersonnelAssignmentSource;
             LoadGridViewStyle(gvPersonnelAssignment);
             personnelAssignmentTabMode = FunctionMode.HASRECORD;
             LoadControlStatus(currentTabPage);
@@ -104,68 +105,133 @@ namespace NIZING_BACKEND_Data_Config
         }
         private void LoadControlStatus(TabPage tab)
         {
-            if (tab == tbpQuestionCategory)
+            switch (tab.Name)
             {
-                if (questionCategoryTabMode == FunctionMode.HASRECORD)
-                {
-                    btnQuestionCategoryEdit.Enabled = true;
-                    btnQuestionCategorySave.Enabled = false;
-                    btnQuestionCategoryCancel.Enabled = false;
-                    gvQuestionCategory.ReadOnly = true;
-                    gvQuestionCategory.ForeColor = Color.Gray;
-                }
-                else if (questionCategoryTabMode == FunctionMode.EDIT)
-                {
-                    btnQuestionCategoryEdit.Enabled = false;
-                    btnQuestionCategorySave.Enabled = true;
-                    btnQuestionCategoryCancel.Enabled = true;
-                    gvQuestionCategory.ReadOnly = false;
-                    gvQuestionCategory.ForeColor = Color.Black;
-                    LoadGridViewStyle(gvQuestionCategory);
-                }
+                case "tbpQuestionCategory":
+                    switch (questionCategoryTabMode)
+                    {
+                        case FunctionMode.HASRECORD:
+                            btnQuestionCategoryEdit.Enabled = true;
+                            btnQuestionCategorySave.Enabled = false;
+                            btnQuestionCategoryCancel.Enabled = false;
+                            gvQuestionCategory.ReadOnly = true;
+                            gvQuestionCategory.ForeColor = Color.Gray;
+                            break;
+                        case FunctionMode.EDIT:
+                            btnQuestionCategoryEdit.Enabled = false;
+                            btnQuestionCategorySave.Enabled = true;
+                            btnQuestionCategoryCancel.Enabled = true;
+                            gvQuestionCategory.ReadOnly = false;
+                            gvQuestionCategory.ForeColor = Color.Black;
+                            LoadGridViewStyle(gvQuestionCategory);
+                            break;
+                    }
+                    break;
+                case "tbpQuestion":
+                    switch (questionTabMode)
+                    {
+                        case FunctionMode.HASRECORD:
+                            btnQuestionEdit.Enabled = true;
+                            btnQuestionSave.Enabled = false;
+                            btnQuestionCancel.Enabled = false;
+                            gvQuestion.ReadOnly = true;
+                            gvQuestion.ForeColor = Color.Gray;
+                            break;
+                        case FunctionMode.EDIT:
+                            btnQuestionEdit.Enabled = false;
+                            btnQuestionSave.Enabled = true;
+                            btnQuestionCancel.Enabled = true;
+                            gvQuestion.ReadOnly = false;
+                            gvQuestion.ForeColor = Color.Black;
+                            LoadGridViewStyle(gvQuestion);
+                            break;
+                    }
+                    break;
+                case "tbpPersonnelAssignment":
+                    switch (personnelAssignmentTabMode)
+                    {
+                        case FunctionMode.HASRECORD:
+                            btnPersonnelAssignmentEdit.Enabled = true;
+                            btnPersonnelAssignmentSave.Enabled = false;
+                            btnPersonnelAssignmentCancel.Enabled = false;
+                            cbxPersonnelAssignmentYear.Enabled = true;
+                            gvPersonnelAssignment.ReadOnly = true;
+                            gvPersonnelAssignment.ForeColor = Color.Gray;
+                            break;
+                        case FunctionMode.EDIT:
+                            btnPersonnelAssignmentEdit.Enabled = false;
+                            btnPersonnelAssignmentSave.Enabled = true;
+                            btnPersonnelAssignmentCancel.Enabled = true;
+                            cbxPersonnelAssignmentYear.Enabled = false;
+                            gvPersonnelAssignment.ReadOnly = false;
+                            gvPersonnelAssignment.ForeColor = Color.Black;
+                            LoadGridViewStyle(gvPersonnelAssignment);
+                            break;
+                    }
+                    break;
             }
-            else if (tab == tbpQuestion)
-            {
-                if (questionTabMode == FunctionMode.HASRECORD)
-                {
-                    btnQuestionEdit.Enabled = true;
-                    btnQuestionSave.Enabled = false;
-                    btnQuestionCancel.Enabled = false;
-                    gvQuestion.ReadOnly = true;
-                    gvQuestion.ForeColor = Color.Gray;
-                }
-                else if (questionTabMode == FunctionMode.EDIT)
-                {
-                    btnQuestionEdit.Enabled = false;
-                    btnQuestionSave.Enabled = true;
-                    btnQuestionCancel.Enabled = true;
-                    gvQuestion.ReadOnly = false;
-                    gvQuestion.ForeColor = Color.Black;
-                    LoadGridViewStyle(gvQuestion);
-                }
-            }
-            else if (tab == tbpPersonnelAssignment)
-            {
-                if (personnelAssignmentTabMode == FunctionMode.HASRECORD)
-                {                    
-                    btnPersonnelAssignmentEdit.Enabled = true;
-                    btnPersonnelAssignmentSave.Enabled = false;
-                    btnPersonnelAssignmentCancel.Enabled = false;
-                    cbxPersonnelAssignmentYear.Enabled = true;
-                    gvPersonnelAssignment.ReadOnly = true;
-                    gvPersonnelAssignment.ForeColor = Color.Gray;
-                }
-                else if (personnelAssignmentTabMode == FunctionMode.EDIT)
-                {
-                    btnPersonnelAssignmentEdit.Enabled = false;
-                    btnPersonnelAssignmentSave.Enabled = true;
-                    btnPersonnelAssignmentCancel.Enabled = true;
-                    cbxPersonnelAssignmentYear.Enabled = false;
-                    gvPersonnelAssignment.ReadOnly = false;
-                    gvPersonnelAssignment.ForeColor = Color.Black;
-                    LoadGridViewStyle(gvPersonnelAssignment);
-                }
-            }
+            //if (tab == tbpQuestionCategory)
+            //{
+            //    if (questionCategoryTabMode == FunctionMode.HASRECORD)
+            //    {
+            //        btnQuestionCategoryEdit.Enabled = true;
+            //        btnQuestionCategorySave.Enabled = false;
+            //        btnQuestionCategoryCancel.Enabled = false;
+            //        gvQuestionCategory.ReadOnly = true;
+            //        gvQuestionCategory.ForeColor = Color.Gray;
+            //    }
+            //    else if (questionCategoryTabMode == FunctionMode.EDIT)
+            //    {
+            //        btnQuestionCategoryEdit.Enabled = false;
+            //        btnQuestionCategorySave.Enabled = true;
+            //        btnQuestionCategoryCancel.Enabled = true;
+            //        gvQuestionCategory.ReadOnly = false;
+            //        gvQuestionCategory.ForeColor = Color.Black;
+            //        LoadGridViewStyle(gvQuestionCategory);
+            //    }
+            //}
+            //else if (tab == tbpQuestion)
+            //{
+            //    if (questionTabMode == FunctionMode.HASRECORD)
+            //    {
+            //        btnQuestionEdit.Enabled = true;
+            //        btnQuestionSave.Enabled = false;
+            //        btnQuestionCancel.Enabled = false;
+            //        gvQuestion.ReadOnly = true;
+            //        gvQuestion.ForeColor = Color.Gray;
+            //    }
+            //    else if (questionTabMode == FunctionMode.EDIT)
+            //    {
+            //        btnQuestionEdit.Enabled = false;
+            //        btnQuestionSave.Enabled = true;
+            //        btnQuestionCancel.Enabled = true;
+            //        gvQuestion.ReadOnly = false;
+            //        gvQuestion.ForeColor = Color.Black;
+            //        LoadGridViewStyle(gvQuestion);
+            //    }
+            //}
+            //else if (tab == tbpPersonnelAssignment)
+            //{
+            //    if (personnelAssignmentTabMode == FunctionMode.HASRECORD)
+            //    {                    
+            //        btnPersonnelAssignmentEdit.Enabled = true;
+            //        btnPersonnelAssignmentSave.Enabled = false;
+            //        btnPersonnelAssignmentCancel.Enabled = false;
+            //        cbxPersonnelAssignmentYear.Enabled = true;
+            //        gvPersonnelAssignment.ReadOnly = true;
+            //        gvPersonnelAssignment.ForeColor = Color.Gray;
+            //    }
+            //    else if (personnelAssignmentTabMode == FunctionMode.EDIT)
+            //    {
+            //        btnPersonnelAssignmentEdit.Enabled = false;
+            //        btnPersonnelAssignmentSave.Enabled = true;
+            //        btnPersonnelAssignmentCancel.Enabled = true;
+            //        cbxPersonnelAssignmentYear.Enabled = false;
+            //        gvPersonnelAssignment.ReadOnly = false;
+            //        gvPersonnelAssignment.ForeColor = Color.Black;
+            //        LoadGridViewStyle(gvPersonnelAssignment);
+            //    }
+            //}
         }
         private void CompareTables(DataTable dtOriginal, DataTable dtChanged)
         {
@@ -303,6 +369,18 @@ namespace NIZING_BACKEND_Data_Config
                         cbxAssessorCell.DisplayMember = "NAME";
                         cbxAssessorCell.ValueMember = "NAME";
                         row.Cells["評核者"] = cbxAssessorCell;
+                        if (row.Cells["評核類型名稱"].FormattedValue.ToString() != "主管評") //僅能編輯主管評的row，其他類型評核者為auto-generate
+                        {
+                            row.ReadOnly = true;
+                        }
+                        if (row.ReadOnly == true)
+                        {
+                            row.DefaultCellStyle.BackColor = Color.LightGray;
+                        }
+                        else
+                        {
+                            row.DefaultCellStyle.BackColor = Color.White;
+                        }
                     }
                     break;
             }
@@ -642,8 +720,9 @@ namespace NIZING_BACKEND_Data_Config
 
         #region 評核人員分配 Tab Metho and Events
         /*這邊有個重點，自評的分配與調整將會自動於背景進行，以ERP中在職者為依據進行新增以及編輯(使已離職者INACTIVE)*/
-        private void LoadgvPersonnelAssignment()
+        private DataTable LoadgvPersonnelAssignment()
         {
+            DataTable dt = new DataTable();
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
@@ -675,15 +754,15 @@ namespace NIZING_BACKEND_Data_Config
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@YEAR", cbxPersonnelAssignmentYear.Text);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
-                dtPersonnelAssignmentSource = new DataTable();
-                da.Fill(dtPersonnelAssignmentSource);
+                da.Fill(dt);
             }
-            gvPersonnelAssignment.DataSource = dtPersonnelAssignmentSource;
+            return dt;
         }
 
         private void cbxPersonnelAssignmentYear_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadgvPersonnelAssignment();
+            dtPersonnelAssignmentSource = LoadgvPersonnelAssignment();
+            gvPersonnelAssignment.DataSource = dtPersonnelAssignmentSource;
         }        
 
         private void btnPersonnelAssignmentEdit_Click(object sender, EventArgs e)
@@ -698,7 +777,8 @@ namespace NIZING_BACKEND_Data_Config
         private void btnPersonnelAssignmentCancel_Click(object sender, EventArgs e)
         {
             isCancel = true;
-            LoadgvPersonnelAssignment();
+            dtPersonnelAssignmentSource = LoadgvPersonnelAssignment();
+            gvPersonnelAssignment.DataSource = dtPersonnelAssignmentSource;
             personnelAssignmentTabMode = FunctionMode.HASRECORD;
             LoadControlStatus(currentTabPage);
             txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 資料更新取消" + Environment.NewLine;
@@ -706,7 +786,9 @@ namespace NIZING_BACKEND_Data_Config
         }
         private void btnPersonnelAssignmentSave_Click(object sender, EventArgs e)
         {
-
+            personnelAssignmentTabMode = FunctionMode.HASRECORD;
+            LoadControlStatus(currentTabPage);
+            txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;
         }
         #endregion                
     }
