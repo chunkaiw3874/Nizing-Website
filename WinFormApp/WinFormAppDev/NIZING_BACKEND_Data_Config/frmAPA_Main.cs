@@ -786,9 +786,64 @@ namespace NIZING_BACKEND_Data_Config
         }
         private void btnPersonnelAssignmentSave_Click(object sender, EventArgs e)
         {
+            UpdatePersonnelAssignment();
             personnelAssignmentTabMode = FunctionMode.HASRECORD;
             LoadControlStatus(currentTabPage);
             txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;
+        }
+        private void UpdatePersonnelAssignment()
+        {
+            bool duplicate = false;
+            DataTable dtEmployeeLeftThisYear = new DataTable();
+            //Check for employee pairings for the evaluation year for employees who left before that year's evaluation is conducted
+            txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 檢查已離職人員..." + Environment.NewLine;
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT [YEAR],ASSESSED_ID,ASSESSOR_ID"
+                            +" FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A ASSIGN"
+                            +" LEFT JOIN NZ.dbo.CMSMV MV ON ASSIGN.ASSESSED_ID=MV.MV001"
+                            +" WHERE MV.MV022 > @YEAR + '0100'"
+                            +" AND MV.MV022 < @YEAR+'1232'"
+                            +" AND MV.MV001 NOT LIKE 'PT%'"
+                            +" AND MV.MV001<>'0000'"
+                            +" AND MV.MV001<>'0006'"
+                            +" AND MV.MV001<>'0007'"
+                            +" AND MV.MV001<>'0098'"
+                            +" AND ASSIGN.[YEAR]=@YEAR"
+                            +" ORDER BY ASSIGN.ASSESSED_ID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@YEAR", cbxPersonnelAssignmentYear.Text);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dtEmployeeLeftThisYear);
+                txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 檢查已離職人員完成" + Environment.NewLine;
+                //Set records to inactive for the pairings found from the query above
+                txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 將已離職人員設為inactive..." + Environment.NewLine;
+                foreach (DataRow row in dtEmployeeLeftThisYear.Rows)
+                {
+                    query = "UPDATE HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+                        +" SET ACTIVE='0'"
+                        +" WHERE ASSESSED_ID=@ASSESSED_ID"
+                        +" AND ASSESSOR_ID=@ASSESSOR_ID"
+                        +" AND [YEAR]=@YEAR";
+                    cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@ASSESSED_ID", row["ASSESSED_ID"].ToString());
+                    cmd.Parameters.AddWithValue("@ASSESSOR_ID", row["ASSESSOR_ID"].ToString());
+                    cmd.Parameters.AddWithValue("@YEAR", row["YEAR"].ToString());
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 將已離職人員設為inactive完成" + Environment.NewLine;
+            //Check each row for duplicate record
+            txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 檢查" + Environment.NewLine;
+            foreach (DataGridViewRow row in gvPersonnelAssignment.Rows)
+            {
+                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                {
+                    
+                }
+            }
+
         }
         #endregion                
     }
