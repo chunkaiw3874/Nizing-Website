@@ -16,6 +16,13 @@ namespace NIZING_BACKEND_Data_Config
     {
         public string UserName { get; private set; }
 
+        //QUICK ACCESS TO USERNAME AND PW，REMOVE AFTER DEBUG PHASE!
+        private void label3_Click(object sender, EventArgs e)
+        {
+            txtUserName.Text = "admin";
+            txtPassword.Text = "nizing";
+        }
+
         public frmLogin()
         {
             InitializeComponent();
@@ -101,5 +108,7 @@ namespace NIZING_BACKEND_Data_Config
         {
             txtPassword.Clear();
         }
+
+
     }
 }

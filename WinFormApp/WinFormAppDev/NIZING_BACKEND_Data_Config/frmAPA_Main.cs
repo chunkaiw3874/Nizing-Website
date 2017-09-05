@@ -170,68 +170,6 @@ namespace NIZING_BACKEND_Data_Config
                     }
                     break;
             }
-            //if (tab == tbpQuestionCategory)
-            //{
-            //    if (questionCategoryTabMode == FunctionMode.HASRECORD)
-            //    {
-            //        btnQuestionCategoryEdit.Enabled = true;
-            //        btnQuestionCategorySave.Enabled = false;
-            //        btnQuestionCategoryCancel.Enabled = false;
-            //        gvQuestionCategory.ReadOnly = true;
-            //        gvQuestionCategory.ForeColor = Color.Gray;
-            //    }
-            //    else if (questionCategoryTabMode == FunctionMode.EDIT)
-            //    {
-            //        btnQuestionCategoryEdit.Enabled = false;
-            //        btnQuestionCategorySave.Enabled = true;
-            //        btnQuestionCategoryCancel.Enabled = true;
-            //        gvQuestionCategory.ReadOnly = false;
-            //        gvQuestionCategory.ForeColor = Color.Black;
-            //        LoadGridViewStyle(gvQuestionCategory);
-            //    }
-            //}
-            //else if (tab == tbpQuestion)
-            //{
-            //    if (questionTabMode == FunctionMode.HASRECORD)
-            //    {
-            //        btnQuestionEdit.Enabled = true;
-            //        btnQuestionSave.Enabled = false;
-            //        btnQuestionCancel.Enabled = false;
-            //        gvQuestion.ReadOnly = true;
-            //        gvQuestion.ForeColor = Color.Gray;
-            //    }
-            //    else if (questionTabMode == FunctionMode.EDIT)
-            //    {
-            //        btnQuestionEdit.Enabled = false;
-            //        btnQuestionSave.Enabled = true;
-            //        btnQuestionCancel.Enabled = true;
-            //        gvQuestion.ReadOnly = false;
-            //        gvQuestion.ForeColor = Color.Black;
-            //        LoadGridViewStyle(gvQuestion);
-            //    }
-            //}
-            //else if (tab == tbpPersonnelAssignment)
-            //{
-            //    if (personnelAssignmentTabMode == FunctionMode.HASRECORD)
-            //    {                    
-            //        btnPersonnelAssignmentEdit.Enabled = true;
-            //        btnPersonnelAssignmentSave.Enabled = false;
-            //        btnPersonnelAssignmentCancel.Enabled = false;
-            //        cbxPersonnelAssignmentYear.Enabled = true;
-            //        gvPersonnelAssignment.ReadOnly = true;
-            //        gvPersonnelAssignment.ForeColor = Color.Gray;
-            //    }
-            //    else if (personnelAssignmentTabMode == FunctionMode.EDIT)
-            //    {
-            //        btnPersonnelAssignmentEdit.Enabled = false;
-            //        btnPersonnelAssignmentSave.Enabled = true;
-            //        btnPersonnelAssignmentCancel.Enabled = true;
-            //        cbxPersonnelAssignmentYear.Enabled = false;
-            //        gvPersonnelAssignment.ReadOnly = false;
-            //        gvPersonnelAssignment.ForeColor = Color.Black;
-            //        LoadGridViewStyle(gvPersonnelAssignment);
-            //    }
-            //}
         }
         private void CompareTables(DataTable dtOriginal, DataTable dtChanged)
         {
@@ -340,7 +278,7 @@ namespace NIZING_BACKEND_Data_Config
                     gv.Columns["年份"].ReadOnly = true;
                     gv.Columns["年份"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     gv.Columns["受評者"].ReadOnly = true;
-                    gv.Columns["評核類型名稱"].ReadOnly = true;
+                    gv.Columns["評核類型"].ReadOnly = true;
                     DataTable dtAssessorList = new DataTable();
                     using (SqlConnection conn = new SqlConnection(NZConnectionString))
                     {
@@ -369,7 +307,7 @@ namespace NIZING_BACKEND_Data_Config
                         cbxAssessorCell.DisplayMember = "NAME";
                         cbxAssessorCell.ValueMember = "NAME";
                         row.Cells["評核者"] = cbxAssessorCell;
-                        if (row.Cells["評核類型名稱"].FormattedValue.ToString() != "主管評") //僅能編輯主管評的row，其他類型評核者為auto-generate
+                        if (row.Cells["評核類型"].FormattedValue.ToString() != "2. 主管評") //僅能編輯主管評的row，其他類型評核者為auto-generate
                         {
                             row.ReadOnly = true;
                         }
@@ -718,7 +656,7 @@ namespace NIZING_BACKEND_Data_Config
         }
         #endregion
 
-        #region 評核人員分配 Tab Metho and Events
+        #region 評核人員分配 Tab Methods and Events
         /*這邊有個重點，自評的分配與調整將會自動於背景進行，以ERP中在職者為依據進行新增以及編輯(使已離職者INACTIVE)*/
         private DataTable LoadgvPersonnelAssignment()
         {
@@ -732,11 +670,12 @@ namespace NIZING_BACKEND_Data_Config
                             + " (SELECT *"
                             + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
                             + " WHERE [YEAR]=@YEAR"
+                            + " AND ACTIVE='1'"
                             + " )"
                             + " SELECT COALESCE(ASSIGN.[YEAR],@YEAR) '年份'"
                             + " ,LTRIM(RTRIM(MV.MV001)) + ' ' + LTRIM(RTRIM(MV.MV002)) '受評者'"
                             + " ,COALESCE(LTRIM(RTRIM(ASSIGN.ASSESSOR_ID)) + ' ' + LTRIM(RTRIM(MVASSESSOR.MV002)),'') '評核者'"
-                            + " ,COALESCE([TYPE].NAME,'主管評') '評核類型名稱'"
+                            + " ,COALESCE([TYPE].[ID]+'. '+[TYPE].NAME,'2. 主管評') '評核類型'"
                             + " FROM NZ.dbo.CMSMV MV"
                             + " LEFT JOIN ASSIGNMENT ASSIGN ON MV.MV001=ASSIGN.ASSESSED_ID"
                             + " LEFT JOIN NZ.dbo.CMSMV MVASSESSOR ON ASSIGN.ASSESSOR_ID=MVASSESSOR.MV001"
@@ -750,7 +689,7 @@ namespace NIZING_BACKEND_Data_Config
                             + " AND MV.MV001<>'0006'"
                             + " AND MV.MV001<>'0007'"
                             + " AND MV.MV001<>'0098'"
-                            + " ORDER BY MV.MV001";
+                            + " ORDER BY MV.MV001,COALESCE([TYPE].[ID]+'. '+[TYPE].NAME,'2. 主管評')";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@YEAR", cbxPersonnelAssignmentYear.Text);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -787,63 +726,178 @@ namespace NIZING_BACKEND_Data_Config
         private void btnPersonnelAssignmentSave_Click(object sender, EventArgs e)
         {
             UpdatePersonnelAssignment();
+            dtPersonnelAssignmentSource = LoadgvPersonnelAssignment();
+            gvPersonnelAssignment.DataSource = dtPersonnelAssignmentSource;
             personnelAssignmentTabMode = FunctionMode.HASRECORD;
             LoadControlStatus(currentTabPage);
             txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;
         }
         private void UpdatePersonnelAssignment()
         {
-            bool duplicate = false;
             DataTable dtEmployeeLeftThisYear = new DataTable();
-            //Check for employee pairings for the evaluation year for employees who left before that year's evaluation is conducted
-            txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 檢查已離職人員..." + Environment.NewLine;
+            //Set all records in that year to inactive
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
-                string query = "SELECT [YEAR],ASSESSED_ID,ASSESSOR_ID"
-                            +" FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A ASSIGN"
-                            +" LEFT JOIN NZ.dbo.CMSMV MV ON ASSIGN.ASSESSED_ID=MV.MV001"
-                            +" WHERE MV.MV022 > @YEAR + '0100'"
-                            +" AND MV.MV022 < @YEAR+'1232'"
-                            +" AND MV.MV001 NOT LIKE 'PT%'"
-                            +" AND MV.MV001<>'0000'"
-                            +" AND MV.MV001<>'0006'"
-                            +" AND MV.MV001<>'0007'"
-                            +" AND MV.MV001<>'0098'"
-                            +" AND ASSIGN.[YEAR]=@YEAR"
-                            +" ORDER BY ASSIGN.ASSESSED_ID";
+                string query = "UPDATE HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+                            + " SET ACTIVE='0'"
+                            + " WHERE [YEAR]=@YEAR";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@YEAR", cbxPersonnelAssignmentYear.Text);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dtEmployeeLeftThisYear);
-                txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 檢查已離職人員完成" + Environment.NewLine;
-                //Set records to inactive for the pairings found from the query above
-                txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 將已離職人員設為inactive..." + Environment.NewLine;
-                foreach (DataRow row in dtEmployeeLeftThisYear.Rows)
-                {
-                    query = "UPDATE HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
-                        +" SET ACTIVE='0'"
-                        +" WHERE ASSESSED_ID=@ASSESSED_ID"
-                        +" AND ASSESSOR_ID=@ASSESSOR_ID"
-                        +" AND [YEAR]=@YEAR";
-                    cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@ASSESSED_ID", row["ASSESSED_ID"].ToString());
-                    cmd.Parameters.AddWithValue("@ASSESSOR_ID", row["ASSESSOR_ID"].ToString());
-                    cmd.Parameters.AddWithValue("@YEAR", row["YEAR"].ToString());
-                    cmd.ExecuteNonQuery();
-                }
             }
-            txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 將已離職人員設為inactive完成" + Environment.NewLine;
             //Check each row for duplicate record
-            txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 檢查" + Environment.NewLine;
+            int dataCount = 0;
             foreach (DataGridViewRow row in gvPersonnelAssignment.Rows)
             {
-                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                dataCount++;
+                txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 對比資料中...(" + dataCount.ToString() + "/" + gvPersonnelAssignment.Rows.Count + ")" + Environment.NewLine;
+                if (!String.IsNullOrWhiteSpace(row.Cells["評核者"].FormattedValue.ToString()))
                 {
-                    
+                    DataTable dtAssessedPairings = new DataTable();
+                    //Get all pairings of the assessed currently in database
+                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                    {
+                        conn.Open();
+                        string query = "SELECT [YEAR],ASSESSOR_ID,ASSESSED_ID,ASSESS_TYPE,ACTIVE"
+                                    + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+                                    + " WHERE [YEAR]=@YEAR"
+                                    + " AND ASSESSED_ID=@ASSESSED_ID"
+                                    + " AND ASSESS_TYPE=@ASSESS_TYPE";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@YEAR", row.Cells["年份"].FormattedValue.ToString());
+                        cmd.Parameters.AddWithValue("@ASSESSED_ID", row.Cells["受評者"].FormattedValue.ToString().Substring(0, 4));
+                        cmd.Parameters.AddWithValue("@ASSESS_TYPE", row.Cells["評核類型"].FormattedValue.ToString().Substring(0, 1));
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(dtAssessedPairings);
+                    }
+                    if (dtAssessedPairings.Rows.Count == 1) //Each type of assessment for each assessed should only return 1 result
+                    {
+                        if (dtAssessedPairings.Rows[0]["ASSESS_TYPE"].ToString() == "2")    //主管評類型，檢查評核者是否相同
+                        {
+                            //Check if a 自評 for this 受評者 exists
+                            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                            {
+                                conn.Open();
+                                string query = "SELECT *"
+                                            + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+                                            + " WHERE [YEAR]=@YEAR"
+                                            + " AND ASSESSED_ID=@ASSESSED_ID"
+                                            + " AND ASSESS_TYPE='1'";
+                                SqlCommand cmd = new SqlCommand(query, conn);
+                                cmd.Parameters.AddWithValue("@YEAR", dtAssessedPairings.Rows[0]["YEAR"].ToString());
+                                cmd.Parameters.AddWithValue("@ASSESSED_ID", dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim());
+                                using (SqlDataReader dr = cmd.ExecuteReader())
+                                {
+                                    while (dr.Read())
+                                    {
+                                        if (!dr.HasRows)    //這個受評者沒有自評，須新增
+                                        {
+                                            query = "INSERT INTO HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+                                                + " VALUES"
+                                                + " (GETDATE(),@USER,GETDATE(),@USER,@YEAR,@ASSESSED_ID,@ASSESSED_ID,'1','0','1')";
+                                            cmd = new SqlCommand(query, conn);
+                                            cmd.Parameters.AddWithValue("@USER", UserName);
+                                            cmd.Parameters.AddWithValue("@YEAR", dtAssessedPairings.Rows[0]["YEAR"].ToString());
+                                            cmd.Parameters.AddWithValue("@ASSESSED_ID", dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim());
+                                            cmd.ExecuteNonQuery();
+                                            txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 新增加" + dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim() + "自評" + Environment.NewLine;
+                                        }
+                                    }
+                                }
+                            }
+                            //Check if record in the gridview match record in database for this 受評者
+                            if (dtAssessedPairings.Rows[0]["ASSESSOR_ID"].ToString().Trim() == row.Cells["評核者"].FormattedValue.ToString().Substring(0, 4))
+                            {
+                                //Setting record to Active without changing anything else
+                                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                                {
+                                    conn.Open();
+                                    string query = "UPDATE HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+                                                + " SET ACTIVE='1'"
+                                                + " WHERE [YEAR]=@YEAR"
+                                                + " AND ASSESSED_ID=@ASSESSED_ID"
+                                                + " AND ASSESS_TYPE=@ASSESS_TYPE";
+                                    SqlCommand cmd = new SqlCommand(query, conn);
+                                    cmd.Parameters.AddWithValue("@YEAR", dtAssessedPairings.Rows[0]["YEAR"].ToString());
+                                    cmd.Parameters.AddWithValue("@ASSESSED_ID", dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim());
+                                    cmd.Parameters.AddWithValue("@ASSESS_TYPE", dtAssessedPairings.Rows[0]["ASSESS_TYPE"].ToString().Trim());
+                                    cmd.ExecuteNonQuery();
+                                }
+                            }
+                            else
+                            {
+                                //Modify record's Assessor and set it to Active
+                                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                                {
+                                    conn.Open();
+                                    string query = "UPDATE HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+                                                + " SET MODIFIEDDATE=GETDATE()"
+                                                + " ,MODIFIER=@MODIFIER"
+                                                + " ,ASSESSOR_ID=@ASSESSOR_ID"
+                                                + " ,ASSESSMENT_DONE='0'"
+                                                + " ,ACTIVE='1'"
+                                                + " WHERE [YEAR]=@YEAR"
+                                                + " AND ASSESSED_ID=@ASSESSED_ID"
+                                                + " AND ASSESS_TYPE=@ASSESS_TYPE";
+                                    SqlCommand cmd = new SqlCommand(query, conn);
+                                    cmd.Parameters.AddWithValue("@MODIFIER", UserName);
+                                    cmd.Parameters.AddWithValue("@ASSESSOR_ID", row.Cells["評核者"].FormattedValue.ToString().Substring(0, 4));
+                                    cmd.Parameters.AddWithValue("@YEAR", dtAssessedPairings.Rows[0]["YEAR"].ToString());
+                                    cmd.Parameters.AddWithValue("@ASSESSED_ID", dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim());
+                                    cmd.Parameters.AddWithValue("@ASSESS_TYPE", dtAssessedPairings.Rows[0]["ASSESS_TYPE"].ToString().Trim());
+                                    cmd.ExecuteNonQuery();
+                                }
+                                txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 更新" + dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim() + "主管評" + Environment.NewLine;
+                            }
+                        }
+                        else
+                        {
+                            //Setting record to Active without changing anything else
+                            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                            {
+                                conn.Open();
+                                string query = "UPDATE HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+                                            + " SET ACTIVE='1'"
+                                            + " WHERE [YEAR]=@YEAR"
+                                            + " AND ASSESSED_ID=@ASSESSED_ID"
+                                            + " AND ASSESS_TYPE=@ASSESS_TYPE";
+                                SqlCommand cmd = new SqlCommand(query, conn);
+                                cmd.Parameters.AddWithValue("@YEAR", dtAssessedPairings.Rows[0]["YEAR"].ToString());
+                                cmd.Parameters.AddWithValue("@ASSESSED_ID", dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim());
+                                cmd.Parameters.AddWithValue("@ASSESS_TYPE", dtAssessedPairings.Rows[0]["ASSESS_TYPE"].ToString().Trim());
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                    else if (dtAssessedPairings.Rows.Count == 0) //No pairings exist, 需新增自評與主管評
+                    {
+                        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                        {
+                            conn.Open();
+                            string query = "INSERT INTO HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+                                         + " VALUES"
+                                        + " (GETDATE(),@USER,GETDATE(),@USER,@YEAR,@ASSESSED_ID,@ASSESSED_ID,'1','0','1')"
+                                        + ",(GETDATE(),@USER,GETDATE(),@USER,@YEAR,@ASSESSOR_ID,@ASSESSED_ID,'2','0','1')";
+                            SqlCommand cmd = new SqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@USER", UserName);
+                            cmd.Parameters.AddWithValue("@YEAR", row.Cells["年份"].FormattedValue.ToString());
+                            cmd.Parameters.AddWithValue("@ASSESSOR_ID", row.Cells["評核者"].FormattedValue.ToString().Substring(0, 4));
+                            cmd.Parameters.AddWithValue("@ASSESSED_ID", row.Cells["受評者"].FormattedValue.ToString().Substring(0, 4));
+                            cmd.ExecuteNonQuery();
+                        }
+                        txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 新增加" + row.Cells["受評者"].FormattedValue.ToString().Substring(0, 4) + "自評" + Environment.NewLine;
+                        txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 新增加" + row.Cells["受評者"].FormattedValue.ToString().Substring(0, 4) + "主管評" + Environment.NewLine;
+                    }
+                    else
+                    {
+                        txtPersonnelAssignmentTabMemo.Text += "Error: " + row.Cells["受評者"].FormattedValue.ToString() + "同樣的評核類型有超過兩個ACTIVE的紀錄" + Environment.NewLine;
+                    }
+                }
+                else
+                {
+                    txtPersonnelAssignmentTabMemo.Text += "Warning: " + row.Cells["受評者"].FormattedValue.ToString() + "尚未配置評核者" + Environment.NewLine;
                 }
             }
-
         }
         #endregion                
     }
