@@ -583,10 +583,12 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 row = dt.Select("ID=" + ddlDayOffType.SelectedValue.ToString());
 
                 //未選擇、婚假、陪產假、產檢假、產假 並非每年都有的假，所以忽略假期天數的限制，由人事檢查
+                //2017.09.04 將特休也排到不須檢查剩餘量，因為新制(每年分成兩分，有不同天數的假)計算很困難
                 if (row.Any())
                 {
                     if (ddlDayOffType.SelectedValue.ToString() == "06" || ddlDayOffType.SelectedValue.ToString() == "09"
-                        || ddlDayOffType.SelectedValue.ToString() == "15" || ddlDayOffType.SelectedValue.ToString() == "08")
+                        || ddlDayOffType.SelectedValue.ToString() == "15" || ddlDayOffType.SelectedValue.ToString() == "08"
+                        || ddlDayOffType.SelectedValue.ToString() == "03")
                     {
                         lblDayOffRemainType.Text = "";
                         lblDayOffRemainAmount.Text = "";

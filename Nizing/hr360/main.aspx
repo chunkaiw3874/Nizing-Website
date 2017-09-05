@@ -74,13 +74,18 @@
             </div>
             <div class="side-note">
                 特休
-                <asp:Label ID="lblDayOff" runat="server"></asp:Label>
-                小時
+                <div>
+                    <asp:Label ID="lblFirstPartDayOff" runat="server"></asp:Label>
+                </div>
+                <div>
+                    <asp:Label ID="lblSecondPartDayOff" runat="server" Text="Label"></asp:Label>小時
+                </div>
             </div>
             <div class="side-note">
                 補休
-                <asp:Label ID="lblMakeupDayOff" runat="server"></asp:Label>
-                小時
+                <div>
+                    <asp:Label ID="lblMakeupDayOff" runat="server"></asp:Label>小時
+                </div>                
             </div>
             <div id="salaryAdjNotification" runat="server" visible="false">
                 <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/hr360/user_report/salary_change_notification.aspx">您有調薪通知!</asp:HyperLink>
