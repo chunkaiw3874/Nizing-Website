@@ -13,6 +13,10 @@ using System.Web.UI.WebControls;
 /*
  如果HR有人事變更，於本頁搜尋HR做更正!!!
  */
+/*
+ * 2017.09.19 人事審核部分，現在強制丟給ABBIE，等ABBIE正式取代DORIS後須改回
+ * PS: 搜尋"NEED FIX" for code
+ */
 public partial class hr360_UI04 : System.Web.UI.Page
 {
     string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
@@ -1334,8 +1338,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
                                 + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
                                 + " WHERE MV.MV022=''"
                                 + " AND MV.MV001<>@ID"
-                                + " AND MK.MK001='A20'"
-                                + " AND HIER.[RANK]=7";
+                                //+ " AND MK.MK001='A20'"           
+                                //+ " AND HIER.[RANK]=7";
+                                + "AND MV.MV001='0125'" //NEED FIX: 強制將假單丟給ABBIE審核人事部分，等ABBIE正式取代DORIS後改回
+                                + "AND MK.MK001='A21'";
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@ID", applicantID);
                     DataTable dt = new DataTable();
@@ -1606,7 +1612,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             ddlSearch_Parameter_ApplicantID.DataBind();
         }
         if (!(Session["erp_id"].ToString() != "0085"    //Edit: Doris(HR) change when HR personnel changes
-            && Session["erp_id"].ToString() != "0125"   
+            && Session["erp_id"].ToString() != "0125"   //Abbie replaces Doris as HR
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
             && Session["erp_id"].ToString() != "0007")) //管理部跟HR可以查詢全部人的歷史資料
@@ -1879,7 +1885,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             da.Fill(dt);
         }
         recipientId.Add("0085");    //Edit: Current HR, change when HR personnel changes
-        recipientId.Add("0125");
+        recipientId.Add("0125");    //Current HR, replaces Doris(0085) 2017.09.19
         //status 1:新申請/一般簽核通過(HR&下個簽核者) 2:申請撤銷(HR&代理人) 3:申請退回(HR&申請人&代理人) 4:最後一層簽核通過(HR&申請人&代理人)
         switch (appStatus)
         {

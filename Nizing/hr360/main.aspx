@@ -75,11 +75,12 @@
             <div class="side-note">
                 特休
                 <div>
-                    <asp:Label ID="lblFirstPartDayOff" runat="server"></asp:Label>
+                    <asp:Label ID="lblFirstPartDayOff" runat="server"></asp:Label>小時
                 </div>
-                <div>
+                <%--Uncomment for new way--%>
+                <%--<div>
                     <asp:Label ID="lblSecondPartDayOff" runat="server" Text="Label"></asp:Label>小時
-                </div>
+                </div>--%>
             </div>
             <div class="side-note">
                 補休

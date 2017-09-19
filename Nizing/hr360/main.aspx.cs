@@ -83,87 +83,91 @@ public partial class main : System.Web.UI.Page
                         if (Session["erp_id"].ToString() == "0010")
                         {
                             //Old way, uses ERP data for Annual Leave amount, obsolete since 2017.09.04 after government changed method to 歷年制
-                            //SqlCommand cmdSelect = new SqlCommand("SELECT"
-                            //                                + " CONVERT(NVARCHAR,(SELECT PALTK.TK003*8.5 FROM PALTK WHERE PALTK.TK001=@ID AND PALTK.TK002=YEAR(GETDATE()))"
-                            //                                + " -COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0))"
-                            //                                + " FROM PALTL"
-                            //                                + " WHERE PALTL.TL001=@ID AND PALTL.TL002=YEAR(GETDATE()) AND PALTL.TL004='03'", conn);
-                            string query = "SELECT COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)"
-                                        + " FROM PALTL"
-                                        + " WHERE PALTL.TL001=@ID"
-                                        + " AND PALTL.TL002=YEAR(GETDATE())"
-                                        + " AND PALTL.TL003 BETWEEN '01' AND @MONTH"
-                                        + " AND PALTL.TL004='03'";
-                            SqlCommand cmdSelect = new SqlCommand(query, conn);
+                            SqlCommand cmdSelect = new SqlCommand("SELECT"
+                                                            + " CONVERT(NVARCHAR,(SELECT PALTK.TK003*8.5 FROM PALTK WHERE PALTK.TK001=@ID AND PALTK.TK002=YEAR(GETDATE()))"
+                                                            + " -COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0))"
+                                                            + " FROM PALTL"
+                                                            + " WHERE PALTL.TL001=@ID AND PALTL.TL002=YEAR(GETDATE()) AND PALTL.TL004='03'", conn);
+                            //Comment part is the new way, replace the old way above
+                            //string query = "SELECT COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)"
+                            //            + " FROM PALTL"
+                            //            + " WHERE PALTL.TL001=@ID"
+                            //            + " AND PALTL.TL002=YEAR(GETDATE())"
+                            //            + " AND PALTL.TL003 BETWEEN '01' AND @MONTH"
+                            //            + " AND PALTL.TL004='03'";
+                            //SqlCommand cmdSelect = new SqlCommand(query, conn);
                             cmdSelect.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
-                            cmdSelect.Parameters.AddWithValue("@MONTH", (Convert.ToInt16(dtUserInfo.Rows[0]["START_MONTH"].ToString()) - 1).ToString("D2"));
-                            doubleFirstPartDayOffUsed = Convert.ToDouble(cmdSelect.ExecuteScalar());
-                            strFirstPartDayOff = (doubleFirstPartDayOff * 8.5 - doubleFirstPartDayOffUsed).ToString();
+                            //cmdSelect.Parameters.AddWithValue("@MONTH", (Convert.ToInt16(dtUserInfo.Rows[0]["START_MONTH"].ToString()) - 1).ToString("D2"));
+                            //doubleFirstPartDayOffUsed = Convert.ToDouble(cmdSelect.ExecuteScalar());
+                            //strFirstPartDayOff = (doubleFirstPartDayOff * 8.5 - doubleFirstPartDayOffUsed).ToString();
+                            lblFirstPartDayOff.Text = cmdSelect.ExecuteScalar().ToString();
 
-                            query = "SELECT COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)"
-                                        + " FROM PALTL"
-                                        + " WHERE PALTL.TL001=@ID"
-                                        + " AND PALTL.TL002=YEAR(GETDATE())"
-                                        + " AND PALTL.TL003 BETWEEN @MONTH AND '12'"
-                                        + " AND PALTL.TL004='03'";
-                            cmdSelect = new SqlCommand(query, conn);
-                            cmdSelect.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
-                            cmdSelect.Parameters.AddWithValue("@MONTH", dtUserInfo.Rows[0]["START_MONTH"].ToString());
-                            doubleSecondPartDayOffUsed = Convert.ToInt16(cmdSelect.ExecuteScalar());
-                            strSecondPartDayOff = (doubleSecondPartDayOff * 8.5 - doubleSecondPartDayOffUsed).ToString();
+                            //query = "SELECT COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)"
+                            //            + " FROM PALTL"
+                            //            + " WHERE PALTL.TL001=@ID"
+                            //            + " AND PALTL.TL002=YEAR(GETDATE())"
+                            //            + " AND PALTL.TL003 BETWEEN @MONTH AND '12'"
+                            //            + " AND PALTL.TL004='03'";
+                            //cmdSelect = new SqlCommand(query, conn);
+                            //cmdSelect.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
+                            //cmdSelect.Parameters.AddWithValue("@MONTH", dtUserInfo.Rows[0]["START_MONTH"].ToString());
+                            //doubleSecondPartDayOffUsed = Convert.ToInt16(cmdSelect.ExecuteScalar());
+                            //strSecondPartDayOff = (doubleSecondPartDayOff * 8.5 - doubleSecondPartDayOffUsed).ToString();
                         }
                         else
                         {
                             //Old way, uses ERP data for Annual Leave amount, obsolete since 2017.09.04 after government changed method to 歷年制
-                            //SqlCommand cmdSelect = new SqlCommand("SELECT"
-                            //                                + " COALESCE(CONVERT(NVARCHAR,(SELECT PALTK.TK003*8 FROM PALTK WHERE PALTK.TK001=@ID AND PALTK.TK002=YEAR(GETDATE()))"
-                            //                                + " -COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)), N'N/A')"
-                            //                                + " FROM PALTL"
-                            //                                + " WHERE PALTL.TL001=@ID AND PALTL.TL002=YEAR(GETDATE()) AND PALTL.TL004='03'", conn);
-                            string query = "SELECT COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)"
-                                        + " FROM PALTL"
-                                        + " WHERE PALTL.TL001=@ID"
-                                        + " AND PALTL.TL002=YEAR(GETDATE())"
-                                        + " AND PALTL.TL003 BETWEEN '01' AND @MONTH"
-                                        + " AND PALTL.TL004='03'";
-                            SqlCommand cmdSelect = new SqlCommand(query, conn);
+                            SqlCommand cmdSelect = new SqlCommand("SELECT"
+                                                            + " COALESCE(CONVERT(NVARCHAR,(SELECT PALTK.TK003*8 FROM PALTK WHERE PALTK.TK001=@ID AND PALTK.TK002=YEAR(GETDATE()))"
+                                                            + " -COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)), N'N/A')"
+                                                            + " FROM PALTL"
+                                                            + " WHERE PALTL.TL001=@ID AND PALTL.TL002=YEAR(GETDATE()) AND PALTL.TL004='03'", conn);
+                            //Comment part is the new way, replace the old way above
+                            //string query = "SELECT COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)"
+                            //            + " FROM PALTL"
+                            //            + " WHERE PALTL.TL001=@ID"
+                            //            + " AND PALTL.TL002=YEAR(GETDATE())"
+                            //            + " AND PALTL.TL003 BETWEEN '01' AND @MONTH"
+                            //            + " AND PALTL.TL004='03'";
+                            //SqlCommand cmdSelect = new SqlCommand(query, conn);
                             cmdSelect.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
-                            cmdSelect.Parameters.AddWithValue("@MONTH", (Convert.ToInt16(dtUserInfo.Rows[0]["START_MONTH"].ToString()) - 1).ToString("D2"));
-                            doubleFirstPartDayOffUsed = Convert.ToInt16(cmdSelect.ExecuteScalar());
-                            strFirstPartDayOff = (doubleFirstPartDayOff * 8.0 - doubleFirstPartDayOffUsed).ToString();
+                            //cmdSelect.Parameters.AddWithValue("@MONTH", (Convert.ToInt16(dtUserInfo.Rows[0]["START_MONTH"].ToString()) - 1).ToString("D2"));
+                            //doubleFirstPartDayOffUsed = Convert.ToInt16(cmdSelect.ExecuteScalar());
+                            //strFirstPartDayOff = (doubleFirstPartDayOff * 8.0 - doubleFirstPartDayOffUsed).ToString();
+                            lblFirstPartDayOff.Text = cmdSelect.ExecuteScalar().ToString();
 
-                            query = "SELECT COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)"
-                                        + " FROM PALTL"
-                                        + " WHERE PALTL.TL001=@ID"
-                                        + " AND PALTL.TL002=YEAR(GETDATE())"
-                                        + " AND PALTL.TL003 BETWEEN @MONTH AND '12'"
-                                        + " AND PALTL.TL004='03'";
-                            cmdSelect = new SqlCommand(query, conn);
-                            cmdSelect.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
-                            cmdSelect.Parameters.AddWithValue("@MONTH", dtUserInfo.Rows[0]["START_MONTH"].ToString());
-                            doubleSecondPartDayOffUsed = Convert.ToInt16(cmdSelect.ExecuteScalar());
-                            strSecondPartDayOff = (doubleSecondPartDayOff * 8.0 - doubleSecondPartDayOffUsed).ToString();
+                            //query = "SELECT COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)"
+                            //            + " FROM PALTL"
+                            //            + " WHERE PALTL.TL001=@ID"
+                            //            + " AND PALTL.TL002=YEAR(GETDATE())"
+                            //            + " AND PALTL.TL003 BETWEEN @MONTH AND '12'"
+                            //            + " AND PALTL.TL004='03'";
+                            //cmdSelect = new SqlCommand(query, conn);
+                            //cmdSelect.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
+                            //cmdSelect.Parameters.AddWithValue("@MONTH", dtUserInfo.Rows[0]["START_MONTH"].ToString());
+                            //doubleSecondPartDayOffUsed = Convert.ToInt16(cmdSelect.ExecuteScalar());
+                            //strSecondPartDayOff = (doubleSecondPartDayOff * 8.0 - doubleSecondPartDayOffUsed).ToString();
                         }
                     }
-                    if (dtUserInfo.Rows.Count > 0)
-                    {
-                        if (dtUserInfo.Rows[0]["START_MONTH"].ToString() == "01")
-                        {
-                            lblFirstPartDayOff.Visible = false;
-                        }
-                        else
-                        {
-                            lblFirstPartDayOff.Visible = true;
-                            lblFirstPartDayOff.Text = "1月-" + (Convert.ToInt16(dtUserInfo.Rows[0]["START_MONTH"].ToString()) - 1).ToString() + "月底剩餘: " + strFirstPartDayOff + "小時";
-                            lblSecondPartDayOff.Text = (Convert.ToInt16(dtUserInfo.Rows[0]["START_MONTH"].ToString())).ToString() + "月-12月底剩餘: " + strSecondPartDayOff;
-                        }
-                    }
-                    else
-                    {
-                        lblFirstPartDayOff.Visible = false;
-                        lblSecondPartDayOff.Visible = true;
-                        lblSecondPartDayOff.Text = "N/A";
-                    }                    
+                    //if (dtUserInfo.Rows.Count > 0)
+                    //{
+                    //    if (dtUserInfo.Rows[0]["START_MONTH"].ToString() == "01")
+                    //    {
+                    //        lblFirstPartDayOff.Visible = false;
+                    //    }
+                    //    else
+                    //    {
+                    //        lblFirstPartDayOff.Visible = true;
+                    //        lblFirstPartDayOff.Text = "1月-" + (Convert.ToInt16(dtUserInfo.Rows[0]["START_MONTH"].ToString()) - 1).ToString() + "月底剩餘: " + strFirstPartDayOff + "小時";
+                    //        lblSecondPartDayOff.Text = (Convert.ToInt16(dtUserInfo.Rows[0]["START_MONTH"].ToString())).ToString() + "月-12月底剩餘: " + strSecondPartDayOff;
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    lblFirstPartDayOff.Visible = false;
+                    //    lblSecondPartDayOff.Visible = true;
+                    //    lblSecondPartDayOff.Text = "N/A";
+                    //}                    
                     
                     //抓取剩餘補休時數(不需要為小倩(0010)特別做計算，因為使用的單位皆為小時)
                     SqlCommand cmdSelectMakeupDayOff = new SqlCommand("SELECT"
