@@ -654,6 +654,31 @@ namespace NIZING_BACKEND_Data_Config
             txtQuestionTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;
             LoadControlStatus(currentTabPage);
         }
+
+        #region 導向問題分配
+        //Right click to show menu for 問題分配 section
+        private void gvQuestion_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                var hit = gvQuestion.HitTest(e.X, e.Y);
+                gvQuestion.ClearSelection();
+                gvQuestion.CurrentCell = gvQuestion.Rows[hit.RowIndex].Cells[hit.ColumnIndex];
+                gvQuestion.Rows[hit.RowIndex].Selected = true;
+            }
+        }
+        private void tsmQuestionAssignment_Click(object sender, EventArgs e)
+        {
+            if (questionTabMode != FunctionMode.HASRECORD)
+            {
+                txtQuestionTabMemo.Text += "錯誤:分配問題前，請先離開問題編輯模式(儲存或取消變更)" + Environment.NewLine;
+            }
+            else
+            {
+                txtQuestionTabMemo.Text += "ID " + gvQuestion.Rows[gvQuestion.CurrentCell.RowIndex].Cells["ID"].FormattedValue + " is selected" + Environment.NewLine;
+            }
+        }
+        #endregion
         #endregion
 
         #region 評核人員分配 Tab Methods and Events
@@ -900,5 +925,10 @@ namespace NIZING_BACKEND_Data_Config
             }
         }
         #endregion                
+
+
+
+
+        
     }
 }

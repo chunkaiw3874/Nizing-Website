@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnLogout = new System.Windows.Forms.Button();
             this.tbcManagement = new System.Windows.Forms.TabControl();
@@ -47,8 +48,11 @@
             this.btnQuestionCancel = new System.Windows.Forms.Button();
             this.btnQuestionSave = new System.Windows.Forms.Button();
             this.gvQuestion = new System.Windows.Forms.DataGridView();
-            this.txtQuestionTabMemo = new System.Windows.Forms.TextBox();
+            this.ctxmsQuestion = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmQuestionAssignment = new System.Windows.Forms.ToolStripMenuItem();
             this.btnQuestionEdit = new System.Windows.Forms.Button();
+            this.txtQuestionTabMemo = new System.Windows.Forms.RichTextBox();
+            this.tbpQuestionAssignment = new System.Windows.Forms.TabPage();
             this.tbpPersonnelAssignment = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
@@ -61,7 +65,26 @@
             this.btnPersonnelAssignmentEdit = new System.Windows.Forms.Button();
             this.dsAPA_Question = new NIZING_BACKEND_Data_Config.dsAPA_Question();
             this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter = new NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter();
-            this.tbpQuestionAssignment = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtQuestionAssignmentTabMemo = new System.Windows.Forms.RichTextBox();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnQuestionAssignmentCancel = new System.Windows.Forms.Button();
+            this.btnQuestionAssignmentSave = new System.Windows.Forms.Button();
+            this.lblQuestionAssignmentQuestionCategory = new System.Windows.Forms.Label();
+            this.txtQuestionAssignmentQuestionBody = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lvQuestionAssignmentDept = new System.Windows.Forms.ListView();
+            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
+            this.cbxQuestionAssignmentDept = new System.Windows.Forms.ComboBox();
+            this.btnQuestionAssignmentAddDept = new System.Windows.Forms.Button();
+            this.btnQuestionAssignmentRemoveDept = new System.Windows.Forms.Button();
+            this.lvQuestionAssignmentEmp = new System.Windows.Forms.ListView();
+            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
+            this.cbxQuestionAssignmentEmp = new System.Windows.Forms.ComboBox();
+            this.btnQuestionAssignmentAddEmp = new System.Windows.Forms.Button();
+            this.btnQuestionAssignmentRemoveEmp = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpQuestionCategory.SuspendLayout();
@@ -72,12 +95,19 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvQuestion)).BeginInit();
+            this.ctxmsQuestion.SuspendLayout();
+            this.tbpQuestionAssignment.SuspendLayout();
             this.tbpPersonnelAssignment.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvPersonnelAssignment)).BeginInit();
             this.flowLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).BeginInit();
+            this.tableLayoutPanel5.SuspendLayout();
+            this.flowLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
+            this.flowLayoutPanel6.SuspendLayout();
+            this.flowLayoutPanel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -160,6 +190,7 @@
             // 
             // txtQuestionCategoryTabMemo
             // 
+            this.txtQuestionCategoryTabMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtQuestionCategoryTabMemo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtQuestionCategoryTabMemo.Location = new System.Drawing.Point(4, 706);
             this.txtQuestionCategoryTabMemo.Multiline = true;
@@ -250,8 +281,8 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Controls.Add(this.flowLayoutPanel2, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.gvQuestion, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.txtQuestionTabMemo, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.btnQuestionEdit, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.txtQuestionTabMemo, 0, 3);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
@@ -304,14 +335,15 @@
             // 
             this.gvQuestion.AllowUserToAddRows = false;
             this.gvQuestion.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvQuestion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvQuestion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gvQuestion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvQuestion.ContextMenuStrip = this.ctxmsQuestion;
             this.gvQuestion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvQuestion.Location = new System.Drawing.Point(4, 34);
             this.gvQuestion.MultiSelect = false;
@@ -323,17 +355,21 @@
             this.gvQuestion.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.gv_DataBindingComplete);
             this.gvQuestion.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gvQuestion_RowValidating);
             this.gvQuestion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gvQuestion_KeyDown);
+            this.gvQuestion.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gvQuestion_MouseDown);
             // 
-            // txtQuestionTabMemo
+            // ctxmsQuestion
             // 
-            this.txtQuestionTabMemo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtQuestionTabMemo.Location = new System.Drawing.Point(4, 706);
-            this.txtQuestionTabMemo.Multiline = true;
-            this.txtQuestionTabMemo.Name = "txtQuestionTabMemo";
-            this.txtQuestionTabMemo.ReadOnly = true;
-            this.txtQuestionTabMemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtQuestionTabMemo.Size = new System.Drawing.Size(1162, 94);
-            this.txtQuestionTabMemo.TabIndex = 2;
+            this.ctxmsQuestion.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmQuestionAssignment});
+            this.ctxmsQuestion.Name = "ctxmsQuestion";
+            this.ctxmsQuestion.Size = new System.Drawing.Size(125, 26);
+            // 
+            // tsmQuestionAssignment
+            // 
+            this.tsmQuestionAssignment.Name = "tsmQuestionAssignment";
+            this.tsmQuestionAssignment.Size = new System.Drawing.Size(124, 22);
+            this.tsmQuestionAssignment.Text = "問題分配";
+            this.tsmQuestionAssignment.Click += new System.EventHandler(this.tsmQuestionAssignment_Click);
             // 
             // btnQuestionEdit
             // 
@@ -344,6 +380,28 @@
             this.btnQuestionEdit.Text = "編輯";
             this.btnQuestionEdit.UseVisualStyleBackColor = true;
             this.btnQuestionEdit.Click += new System.EventHandler(this.btnQuestionEdit_Click);
+            // 
+            // txtQuestionTabMemo
+            // 
+            this.txtQuestionTabMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtQuestionTabMemo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtQuestionTabMemo.Location = new System.Drawing.Point(4, 706);
+            this.txtQuestionTabMemo.Name = "txtQuestionTabMemo";
+            this.txtQuestionTabMemo.ReadOnly = true;
+            this.txtQuestionTabMemo.Size = new System.Drawing.Size(1162, 94);
+            this.txtQuestionTabMemo.TabIndex = 4;
+            this.txtQuestionTabMemo.Text = "";
+            // 
+            // tbpQuestionAssignment
+            // 
+            this.tbpQuestionAssignment.Controls.Add(this.tableLayoutPanel5);
+            this.tbpQuestionAssignment.Location = new System.Drawing.Point(4, 22);
+            this.tbpQuestionAssignment.Name = "tbpQuestionAssignment";
+            this.tbpQuestionAssignment.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpQuestionAssignment.Size = new System.Drawing.Size(1176, 810);
+            this.tbpQuestionAssignment.TabIndex = 3;
+            this.tbpQuestionAssignment.Text = "問題分配";
+            this.tbpQuestionAssignment.UseVisualStyleBackColor = true;
             // 
             // tbpPersonnelAssignment
             // 
@@ -417,13 +475,13 @@
             // 
             this.gvPersonnelAssignment.AllowUserToAddRows = false;
             this.gvPersonnelAssignment.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvPersonnelAssignment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvPersonnelAssignment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gvPersonnelAssignment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvPersonnelAssignment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvPersonnelAssignment.Location = new System.Drawing.Point(4, 34);
@@ -436,6 +494,7 @@
             // 
             // txtPersonnelAssignmentTabMemo
             // 
+            this.txtPersonnelAssignmentTabMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtPersonnelAssignmentTabMemo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtPersonnelAssignmentTabMemo.Location = new System.Drawing.Point(4, 706);
             this.txtPersonnelAssignmentTabMemo.Multiline = true;
@@ -486,15 +545,244 @@
             // 
             this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter.ClearBeforeFill = true;
             // 
-            // tbpQuestionAssignment
+            // tableLayoutPanel5
             // 
-            this.tbpQuestionAssignment.Location = new System.Drawing.Point(4, 22);
-            this.tbpQuestionAssignment.Name = "tbpQuestionAssignment";
-            this.tbpQuestionAssignment.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpQuestionAssignment.Size = new System.Drawing.Size(1176, 810);
-            this.tbpQuestionAssignment.TabIndex = 3;
-            this.tbpQuestionAssignment.Text = "問題分配";
-            this.tbpQuestionAssignment.UseVisualStyleBackColor = true;
+            this.tableLayoutPanel5.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel5.ColumnCount = 1;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.Controls.Add(this.txtQuestionAssignmentTabMemo, 0, 4);
+            this.tableLayoutPanel5.Controls.Add(this.flowLayoutPanel5, 0, 3);
+            this.tableLayoutPanel5.Controls.Add(this.lblQuestionAssignmentQuestionCategory, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.txtQuestionAssignmentQuestionBody, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel6, 0, 2);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 5;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(1170, 804);
+            this.tableLayoutPanel5.TabIndex = 0;
+            // 
+            // txtQuestionAssignmentTabMemo
+            // 
+            this.txtQuestionAssignmentTabMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtQuestionAssignmentTabMemo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtQuestionAssignmentTabMemo.Location = new System.Drawing.Point(4, 705);
+            this.txtQuestionAssignmentTabMemo.Name = "txtQuestionAssignmentTabMemo";
+            this.txtQuestionAssignmentTabMemo.ReadOnly = true;
+            this.txtQuestionAssignmentTabMemo.Size = new System.Drawing.Size(1162, 95);
+            this.txtQuestionAssignmentTabMemo.TabIndex = 0;
+            this.txtQuestionAssignmentTabMemo.Text = "";
+            // 
+            // flowLayoutPanel5
+            // 
+            this.flowLayoutPanel5.Controls.Add(this.btnQuestionAssignmentCancel);
+            this.flowLayoutPanel5.Controls.Add(this.btnQuestionAssignmentSave);
+            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel5.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(1, 672);
+            this.flowLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(1168, 29);
+            this.flowLayoutPanel5.TabIndex = 1;
+            // 
+            // btnQuestionAssignmentCancel
+            // 
+            this.btnQuestionAssignmentCancel.Location = new System.Drawing.Point(1090, 3);
+            this.btnQuestionAssignmentCancel.Name = "btnQuestionAssignmentCancel";
+            this.btnQuestionAssignmentCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnQuestionAssignmentCancel.TabIndex = 0;
+            this.btnQuestionAssignmentCancel.Text = "button1";
+            this.btnQuestionAssignmentCancel.UseVisualStyleBackColor = true;
+            // 
+            // btnQuestionAssignmentSave
+            // 
+            this.btnQuestionAssignmentSave.Location = new System.Drawing.Point(1009, 3);
+            this.btnQuestionAssignmentSave.Name = "btnQuestionAssignmentSave";
+            this.btnQuestionAssignmentSave.Size = new System.Drawing.Size(75, 23);
+            this.btnQuestionAssignmentSave.TabIndex = 1;
+            this.btnQuestionAssignmentSave.Text = "button2";
+            this.btnQuestionAssignmentSave.UseVisualStyleBackColor = true;
+            // 
+            // lblQuestionAssignmentQuestionCategory
+            // 
+            this.lblQuestionAssignmentQuestionCategory.AutoSize = true;
+            this.lblQuestionAssignmentQuestionCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblQuestionAssignmentQuestionCategory.Font = new System.Drawing.Font("PMingLiU", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lblQuestionAssignmentQuestionCategory.Location = new System.Drawing.Point(4, 1);
+            this.lblQuestionAssignmentQuestionCategory.Name = "lblQuestionAssignmentQuestionCategory";
+            this.lblQuestionAssignmentQuestionCategory.Size = new System.Drawing.Size(1162, 26);
+            this.lblQuestionAssignmentQuestionCategory.TabIndex = 2;
+            this.lblQuestionAssignmentQuestionCategory.Text = "label1";
+            // 
+            // txtQuestionAssignmentQuestionBody
+            // 
+            this.txtQuestionAssignmentQuestionBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtQuestionAssignmentQuestionBody.Location = new System.Drawing.Point(4, 31);
+            this.txtQuestionAssignmentQuestionBody.Multiline = true;
+            this.txtQuestionAssignmentQuestionBody.Name = "txtQuestionAssignmentQuestionBody";
+            this.txtQuestionAssignmentQuestionBody.ReadOnly = true;
+            this.txtQuestionAssignmentQuestionBody.Size = new System.Drawing.Size(1162, 379);
+            this.txtQuestionAssignmentQuestionBody.TabIndex = 3;
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 4;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel6.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label3, 2, 0);
+            this.tableLayoutPanel6.Controls.Add(this.lvQuestionAssignmentDept, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.flowLayoutPanel6, 1, 1);
+            this.tableLayoutPanel6.Controls.Add(this.lvQuestionAssignmentEmp, 2, 1);
+            this.tableLayoutPanel6.Controls.Add(this.flowLayoutPanel7, 3, 1);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(1, 414);
+            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 2;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(1168, 257);
+            this.tableLayoutPanel6.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Font = new System.Drawing.Font("PMingLiU", 16F);
+            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(378, 22);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "適用部門";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Font = new System.Drawing.Font("PMingLiU", 16F);
+            this.label3.Location = new System.Drawing.Point(587, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(378, 22);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "適用員工";
+            // 
+            // lvQuestionAssignmentDept
+            // 
+            this.lvQuestionAssignmentDept.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lvQuestionAssignmentDept.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvQuestionAssignmentDept.Location = new System.Drawing.Point(3, 25);
+            this.lvQuestionAssignmentDept.Name = "lvQuestionAssignmentDept";
+            this.lvQuestionAssignmentDept.Size = new System.Drawing.Size(378, 229);
+            this.lvQuestionAssignmentDept.TabIndex = 2;
+            this.lvQuestionAssignmentDept.UseCompatibleStateImageBehavior = false;
+            // 
+            // flowLayoutPanel6
+            // 
+            this.flowLayoutPanel6.Controls.Add(this.cbxQuestionAssignmentDept);
+            this.flowLayoutPanel6.Controls.Add(this.btnQuestionAssignmentAddDept);
+            this.flowLayoutPanel6.Controls.Add(this.btnQuestionAssignmentRemoveDept);
+            this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel6.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(384, 22);
+            this.flowLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(200, 235);
+            this.flowLayoutPanel6.TabIndex = 3;
+            // 
+            // cbxQuestionAssignmentDept
+            // 
+            this.cbxQuestionAssignmentDept.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxQuestionAssignmentDept.FormattingEnabled = true;
+            this.cbxQuestionAssignmentDept.Location = new System.Drawing.Point(3, 3);
+            this.cbxQuestionAssignmentDept.Name = "cbxQuestionAssignmentDept";
+            this.cbxQuestionAssignmentDept.Size = new System.Drawing.Size(121, 20);
+            this.cbxQuestionAssignmentDept.TabIndex = 0;
+            // 
+            // btnQuestionAssignmentAddDept
+            // 
+            this.btnQuestionAssignmentAddDept.Font = new System.Drawing.Font("PMingLiU", 20F);
+            this.btnQuestionAssignmentAddDept.Location = new System.Drawing.Point(3, 29);
+            this.btnQuestionAssignmentAddDept.Name = "btnQuestionAssignmentAddDept";
+            this.btnQuestionAssignmentAddDept.Size = new System.Drawing.Size(40, 40);
+            this.btnQuestionAssignmentAddDept.TabIndex = 1;
+            this.btnQuestionAssignmentAddDept.Text = "+";
+            this.btnQuestionAssignmentAddDept.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnQuestionAssignmentAddDept.UseVisualStyleBackColor = true;
+            // 
+            // btnQuestionAssignmentRemoveDept
+            // 
+            this.btnQuestionAssignmentRemoveDept.Font = new System.Drawing.Font("PMingLiU", 20F);
+            this.btnQuestionAssignmentRemoveDept.Location = new System.Drawing.Point(3, 75);
+            this.btnQuestionAssignmentRemoveDept.Name = "btnQuestionAssignmentRemoveDept";
+            this.btnQuestionAssignmentRemoveDept.Size = new System.Drawing.Size(40, 40);
+            this.btnQuestionAssignmentRemoveDept.TabIndex = 2;
+            this.btnQuestionAssignmentRemoveDept.Text = "-";
+            this.btnQuestionAssignmentRemoveDept.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnQuestionAssignmentRemoveDept.UseVisualStyleBackColor = true;
+            // 
+            // lvQuestionAssignmentEmp
+            // 
+            this.lvQuestionAssignmentEmp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lvQuestionAssignmentEmp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvQuestionAssignmentEmp.Location = new System.Drawing.Point(587, 25);
+            this.lvQuestionAssignmentEmp.Name = "lvQuestionAssignmentEmp";
+            this.lvQuestionAssignmentEmp.Size = new System.Drawing.Size(378, 229);
+            this.lvQuestionAssignmentEmp.TabIndex = 4;
+            this.lvQuestionAssignmentEmp.UseCompatibleStateImageBehavior = false;
+            // 
+            // flowLayoutPanel7
+            // 
+            this.flowLayoutPanel7.Controls.Add(this.cbxQuestionAssignmentEmp);
+            this.flowLayoutPanel7.Controls.Add(this.btnQuestionAssignmentAddEmp);
+            this.flowLayoutPanel7.Controls.Add(this.btnQuestionAssignmentRemoveEmp);
+            this.flowLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel7.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel7.Location = new System.Drawing.Point(968, 22);
+            this.flowLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
+            this.flowLayoutPanel7.Size = new System.Drawing.Size(200, 235);
+            this.flowLayoutPanel7.TabIndex = 5;
+            // 
+            // cbxQuestionAssignmentEmp
+            // 
+            this.cbxQuestionAssignmentEmp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxQuestionAssignmentEmp.FormattingEnabled = true;
+            this.cbxQuestionAssignmentEmp.Location = new System.Drawing.Point(3, 3);
+            this.cbxQuestionAssignmentEmp.Name = "cbxQuestionAssignmentEmp";
+            this.cbxQuestionAssignmentEmp.Size = new System.Drawing.Size(121, 20);
+            this.cbxQuestionAssignmentEmp.TabIndex = 0;
+            // 
+            // btnQuestionAssignmentAddEmp
+            // 
+            this.btnQuestionAssignmentAddEmp.Font = new System.Drawing.Font("PMingLiU", 20F);
+            this.btnQuestionAssignmentAddEmp.Location = new System.Drawing.Point(3, 29);
+            this.btnQuestionAssignmentAddEmp.Name = "btnQuestionAssignmentAddEmp";
+            this.btnQuestionAssignmentAddEmp.Size = new System.Drawing.Size(40, 40);
+            this.btnQuestionAssignmentAddEmp.TabIndex = 3;
+            this.btnQuestionAssignmentAddEmp.Text = "+";
+            this.btnQuestionAssignmentAddEmp.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnQuestionAssignmentAddEmp.UseVisualStyleBackColor = true;
+            // 
+            // btnQuestionAssignmentRemoveEmp
+            // 
+            this.btnQuestionAssignmentRemoveEmp.Font = new System.Drawing.Font("PMingLiU", 20F);
+            this.btnQuestionAssignmentRemoveEmp.Location = new System.Drawing.Point(3, 75);
+            this.btnQuestionAssignmentRemoveEmp.Name = "btnQuestionAssignmentRemoveEmp";
+            this.btnQuestionAssignmentRemoveEmp.Size = new System.Drawing.Size(40, 40);
+            this.btnQuestionAssignmentRemoveEmp.TabIndex = 4;
+            this.btnQuestionAssignmentRemoveEmp.Text = "-";
+            this.btnQuestionAssignmentRemoveEmp.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnQuestionAssignmentRemoveEmp.UseVisualStyleBackColor = true;
             // 
             // frmAPA_Main
             // 
@@ -515,9 +803,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvQuestionCategory)).EndInit();
             this.tbpQuestion.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvQuestion)).EndInit();
+            this.ctxmsQuestion.ResumeLayout(false);
+            this.tbpQuestionAssignment.ResumeLayout(false);
             this.tbpPersonnelAssignment.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
@@ -525,6 +814,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvPersonnelAssignment)).EndInit();
             this.flowLayoutPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).EndInit();
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
+            this.flowLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
+            this.flowLayoutPanel6.ResumeLayout(false);
+            this.flowLayoutPanel7.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -548,7 +844,6 @@
         private System.Windows.Forms.Button btnQuestionCancel;
         private System.Windows.Forms.Button btnQuestionSave;
         private System.Windows.Forms.DataGridView gvQuestion;
-        private System.Windows.Forms.TextBox txtQuestionTabMemo;
         private System.Windows.Forms.Button btnQuestionEdit;
         private System.Windows.Forms.Button btnQuestionCategoryCancel;
         private System.Windows.Forms.TabPage tbpPersonnelAssignment;
@@ -563,5 +858,28 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.ComboBox cbxPersonnelAssignmentYear;
         private System.Windows.Forms.TabPage tbpQuestionAssignment;
+        private System.Windows.Forms.ContextMenuStrip ctxmsQuestion;
+        private System.Windows.Forms.ToolStripMenuItem tsmQuestionAssignment;
+        private System.Windows.Forms.RichTextBox txtQuestionTabMemo;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.RichTextBox txtQuestionAssignmentTabMemo;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
+        private System.Windows.Forms.Button btnQuestionAssignmentCancel;
+        private System.Windows.Forms.Button btnQuestionAssignmentSave;
+        private System.Windows.Forms.Label lblQuestionAssignmentQuestionCategory;
+        private System.Windows.Forms.TextBox txtQuestionAssignmentQuestionBody;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ListView lvQuestionAssignmentDept;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
+        private System.Windows.Forms.ComboBox cbxQuestionAssignmentDept;
+        private System.Windows.Forms.Button btnQuestionAssignmentAddDept;
+        private System.Windows.Forms.Button btnQuestionAssignmentRemoveDept;
+        private System.Windows.Forms.ListView lvQuestionAssignmentEmp;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel7;
+        private System.Windows.Forms.ComboBox cbxQuestionAssignmentEmp;
+        private System.Windows.Forms.Button btnQuestionAssignmentAddEmp;
+        private System.Windows.Forms.Button btnQuestionAssignmentRemoveEmp;
     }
 }
