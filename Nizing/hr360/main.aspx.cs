@@ -155,12 +155,16 @@ public partial class main : System.Web.UI.Page
                         if (dtUserInfo.Rows[0]["START_MONTH"].ToString() == "01")
                         {
                             lblFirstPartDayOff.Visible = false;
+                            lblDayOffMemo.Visible = false;
                         }
                         else
                         {
                             DateTime startDate = DateTime.ParseExact(dtUserInfo.Rows[0]["START_MONTH"].ToString() + "/" + dtUserInfo.Rows[0]["START_DAY"].ToString(), "MM/dd", new CultureInfo("zh-TW"));
                             lblFirstPartDayOff.Visible = true;
                             lblFirstPartDayOff.Text = "01/01-" + startDate.ToString("MM/dd") +  " 剩餘: " + strFirstPartDayOff + "小時";
+                            lblDayOffMemo.Visible = true;
+                            lblDayOffMemo.Text = "至" + startDate.ToString("MM/dd") + "止未休完之時數可延至12/31前請畢";
+                            
                             lblSecondPartDayOff.Text = startDate.AddDays(1).ToString("MM/dd") + "-12/31 剩餘: " + strSecondPartDayOff;
                         }
                     }
