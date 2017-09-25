@@ -17,7 +17,7 @@ public partial class main : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        Session["erp_id"] = "0067";
+        //Session["erp_id"] = "0067";
         //if (!((masterPage_HR360_Master)this.Master.Master).CheckAuthentication())
         //{
         //    ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('連線已逾時，將會回到登入頁面');window.location='login.aspx'", true);
@@ -172,8 +172,7 @@ public partial class main : System.Web.UI.Page
                             if (DateTime.Today < startDate)
                             {
                                 lblDayOffMemo.Visible = false;
-                                lblDayOffMemo.Text = "";
-                                lblSecondPartDayOff.Text = startDate.AddDays(1).ToString("MM/dd") + "-12/31 剩餘: " + strSecondPartDayOff;
+                                lblDayOffMemo.Text = "";                                
                             }
                             else
                             {
@@ -198,9 +197,9 @@ public partial class main : System.Web.UI.Page
                                     lblDayOffMemo.Text = "";                                    
                                 }
                                 lblFirstPartDayOff.Visible = true;
-                                lblFirstPartDayOff.Text = "01/01-" + startDate.ToString("MM/dd") + " 剩餘: " + strFirstPartDayOff + "小時";                            
-                                lblSecondPartDayOff.Text = startDate.AddDays(1).ToString("MM/dd") + "-12/31 剩餘: " + strSecondPartDayOff;
+                                lblFirstPartDayOff.Text = "01/01-" + startDate.AddDays(-1).ToString("MM/dd") + " 剩餘: " + strFirstPartDayOff + "小時";                                                            
                             }
+                            lblSecondPartDayOff.Text = startDate.ToString("MM/dd") + "-12/31 剩餘: " + strSecondPartDayOff;
                         }
                     }
                     else
