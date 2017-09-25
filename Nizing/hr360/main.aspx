@@ -78,7 +78,7 @@
                     <asp:Label ID="lblFirstPartDayOff" runat="server"></asp:Label>
                 </div>
                 <div>
-                    <asp:Label ID="lblDayOffMemo" runat="server" ForeColor="Red" Font-Size="Small"></asp:Label>
+                    <asp:Label ID="lblDayOffMemo" runat="server" ForeColor="Red" Font-Size="Smaller"></asp:Label>
                 </div>
                 <%--Uncomment for new way--%>
                 <div>

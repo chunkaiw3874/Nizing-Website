@@ -17,6 +17,7 @@ public partial class main : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        Session["erp_id"] = "0067";
         //if (!((masterPage_HR360_Master)this.Master.Master).CheckAuthentication())
         //{
         //    ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('連線已逾時，將會回到登入頁面');window.location='login.aspx'", true);
@@ -41,7 +42,7 @@ public partial class main : System.Web.UI.Page
                     SqlCommand cmdSelect = new SqlCommand("SELECT NAME"
                                                         + " FROM HR360_BI01_A"
                                                         + " WHERE ID=@ID", conn);
-                    cmdSelect.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
+                    cmdSelect.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
                     lblName.Text = (string)cmdSelect.ExecuteScalar();
                 }
                 //Get user's Year of Service, and the Month of when the user started                
@@ -52,7 +53,7 @@ public partial class main : System.Web.UI.Page
                                 +" FROM CMSMV MV"
                                 +" WHERE MV.MV001=@ID";
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
+                    cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     da.Fill(dtUserInfo);
                 }
@@ -98,7 +99,7 @@ public partial class main : System.Web.UI.Page
                                         + " AND PALTL.TL003 BETWEEN '01' AND @MONTH"
                                         + " AND PALTL.TL004='03'";
                             SqlCommand cmdSelect = new SqlCommand(query, conn);
-                            cmdSelect.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
+                            cmdSelect.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
                             cmdSelect.Parameters.AddWithValue("@MONTH", (Convert.ToInt16(dtUserInfo.Rows[0]["START_MONTH"].ToString()) - 1).ToString("D2"));
                             doubleFirstPartDayOffUsed = Convert.ToDouble(cmdSelect.ExecuteScalar());
                             doubleFirstPartFinal = doubleFirstPartDayOff * 8.5 - doubleFirstPartDayOffUsed;
@@ -112,7 +113,7 @@ public partial class main : System.Web.UI.Page
                                         + " AND PALTL.TL003 BETWEEN @MONTH AND '12'"
                                         + " AND PALTL.TL004='03'";
                             cmdSelect = new SqlCommand(query, conn);
-                            cmdSelect.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
+                            cmdSelect.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
                             cmdSelect.Parameters.AddWithValue("@MONTH", dtUserInfo.Rows[0]["START_MONTH"].ToString());
                             doubleSecondPartDayOffUsed = Convert.ToDouble(cmdSelect.ExecuteScalar());
                             doubleSecondPartFinal = doubleSecondPartDayOff * 8.5 - doubleSecondPartDayOffUsed;
@@ -134,7 +135,7 @@ public partial class main : System.Web.UI.Page
                                         + " AND PALTL.TL003 BETWEEN '01' AND @MONTH"
                                         + " AND PALTL.TL004='03'";
                             SqlCommand cmdSelect = new SqlCommand(query, conn);
-                            cmdSelect.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
+                            cmdSelect.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
                             cmdSelect.Parameters.AddWithValue("@MONTH", (Convert.ToInt16(dtUserInfo.Rows[0]["START_MONTH"].ToString()) - 1).ToString("D2"));
                             doubleFirstPartDayOffUsed = Convert.ToDouble(cmdSelect.ExecuteScalar());
                             doubleFirstPartFinal = doubleFirstPartDayOff * 8 - doubleFirstPartDayOffUsed;
@@ -148,7 +149,7 @@ public partial class main : System.Web.UI.Page
                                         + " AND PALTL.TL003 BETWEEN @MONTH AND '12'"
                                         + " AND PALTL.TL004='03'";
                             cmdSelect = new SqlCommand(query, conn);
-                            cmdSelect.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
+                            cmdSelect.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
                             cmdSelect.Parameters.AddWithValue("@MONTH", dtUserInfo.Rows[0]["START_MONTH"].ToString());
                             doubleSecondPartDayOffUsed = Convert.ToDouble(cmdSelect.ExecuteScalar());
                             doubleSecondPartFinal = doubleSecondPartDayOff * 8 - doubleSecondPartDayOffUsed;
@@ -186,6 +187,7 @@ public partial class main : System.Web.UI.Page
                                 }
                                 else if (doubleFirstPartFinal < 0)
                                 {
+                                    doubleFirstPartFinal *= -1;
                                     lblDayOffMemo.Text = "超休" + doubleFirstPartFinal.ToString() + "小時，於" + startDate.ToString("MM/dd") + "-12/31之特休時數扣除";
                                     doubleSecondPartFinal -= doubleFirstPartFinal;
                                     strSecondPartDayOff = doubleSecondPartFinal.ToString();
