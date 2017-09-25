@@ -105,6 +105,7 @@ namespace NIZING_BACKEND_Data_Config
         }
         private void LoadControlStatus(TabPage tab)
         {
+            tlpQuestionAssignmentAll.Enabled = false;
             switch (tab.Name)
             {
                 case "tbpQuestionCategory":
@@ -674,9 +675,15 @@ namespace NIZING_BACKEND_Data_Config
                 txtQuestionTabMemo.Text += "錯誤:分配問題前，請先離開問題編輯模式(儲存或取消變更)" + Environment.NewLine;
             }
             else
-            {
+            {                
+                tbcManagement.SelectedTab = tbpQuestionAssignment;
+
                 txtQuestionTabMemo.Text += "ID " + gvQuestion.Rows[gvQuestion.CurrentCell.RowIndex].Cells["ID"].FormattedValue + " is selected" + Environment.NewLine;
             }
+        }
+        private void loadQuestionAssignment()
+        {
+            
         }
         #endregion
         #endregion

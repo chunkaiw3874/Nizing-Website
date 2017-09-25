@@ -30,6 +30,8 @@ public partial class main : System.Web.UI.Page
                 double doubleSecondPartDayOff = 0;
                 double doubleFirstPartDayOffUsed = 0;
                 double doubleSecondPartDayOffUsed = 0;
+                double doubleFirstPartFinal = 0;
+                double doubleSecondPartFinal = 0;
                 string strFirstPartDayOff = "";
                 string strSecondPartDayOff = "";
 
@@ -99,7 +101,8 @@ public partial class main : System.Web.UI.Page
                             cmdSelect.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
                             cmdSelect.Parameters.AddWithValue("@MONTH", (Convert.ToInt16(dtUserInfo.Rows[0]["START_MONTH"].ToString()) - 1).ToString("D2"));
                             doubleFirstPartDayOffUsed = Convert.ToDouble(cmdSelect.ExecuteScalar());
-                            strFirstPartDayOff = (doubleFirstPartDayOff * 8.5 - doubleFirstPartDayOffUsed).ToString();
+                            doubleFirstPartFinal = doubleFirstPartDayOff * 8.5 - doubleFirstPartDayOffUsed;
+                            strFirstPartDayOff = doubleFirstPartFinal.ToString();
                             //lblFirstPartDayOff.Text = cmdSelect.ExecuteScalar().ToString();
 
                             query = "SELECT COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)"
@@ -112,7 +115,8 @@ public partial class main : System.Web.UI.Page
                             cmdSelect.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
                             cmdSelect.Parameters.AddWithValue("@MONTH", dtUserInfo.Rows[0]["START_MONTH"].ToString());
                             doubleSecondPartDayOffUsed = Convert.ToDouble(cmdSelect.ExecuteScalar());
-                            strSecondPartDayOff = (doubleSecondPartDayOff * 8.5 - doubleSecondPartDayOffUsed).ToString();
+                            doubleSecondPartFinal = doubleSecondPartDayOff * 8.5 - doubleSecondPartDayOffUsed;
+                            //strSecondPartDayOff = doubleSecondPartFinal.ToString();
                         }
                         else
                         {
@@ -133,8 +137,9 @@ public partial class main : System.Web.UI.Page
                             cmdSelect.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
                             cmdSelect.Parameters.AddWithValue("@MONTH", (Convert.ToInt16(dtUserInfo.Rows[0]["START_MONTH"].ToString()) - 1).ToString("D2"));
                             doubleFirstPartDayOffUsed = Convert.ToDouble(cmdSelect.ExecuteScalar());
-                            strFirstPartDayOff = (doubleFirstPartDayOff * 8.0 - doubleFirstPartDayOffUsed).ToString();
-                            //lblFirstPartDayOff.Text = cmdSelect.ExecuteScalar().ToString();
+                            doubleFirstPartFinal = doubleFirstPartDayOff * 8 - doubleFirstPartDayOffUsed;
+                            strFirstPartDayOff = doubleFirstPartFinal.ToString();
+                            lblFirstPartDayOff.Text = cmdSelect.ExecuteScalar().ToString();
 
                             query = "SELECT COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)"
                                         + " FROM PALTL"
@@ -146,7 +151,8 @@ public partial class main : System.Web.UI.Page
                             cmdSelect.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
                             cmdSelect.Parameters.AddWithValue("@MONTH", dtUserInfo.Rows[0]["START_MONTH"].ToString());
                             doubleSecondPartDayOffUsed = Convert.ToDouble(cmdSelect.ExecuteScalar());
-                            strSecondPartDayOff = (doubleSecondPartDayOff * 8.0 - doubleSecondPartDayOffUsed).ToString();
+                            doubleSecondPartFinal = doubleSecondPartDayOff * 8 - doubleSecondPartDayOffUsed;
+                            strSecondPartDayOff = doubleSecondPartFinal.ToString();
                         }
                     }
                     //Comment out with old way, uncomment with new way
@@ -159,13 +165,40 @@ public partial class main : System.Web.UI.Page
                         }
                         else
                         {
-                            DateTime startDate = DateTime.ParseExact(dtUserInfo.Rows[0]["START_MONTH"].ToString() + "/" + dtUserInfo.Rows[0]["START_DAY"].ToString(), "MM/dd", new CultureInfo("zh-TW"));
-                            lblFirstPartDayOff.Visible = true;
-                            lblFirstPartDayOff.Text = "01/01-" + startDate.ToString("MM/dd") +  " 剩餘: " + strFirstPartDayOff + "小時";
-                            lblDayOffMemo.Visible = true;
-                            lblDayOffMemo.Text = "至" + startDate.ToString("MM/dd") + "止未休完之時數可延至12/31前請畢";
+                            DateTime startDate = DateTime.ParseExact(dtUserInfo.Rows[0]["START_MONTH"].ToString() + "/" + dtUserInfo.Rows[0]["START_DAY"].ToString(), "MM/dd", new CultureInfo("zh-TW"));                            
                             
-                            lblSecondPartDayOff.Text = startDate.AddDays(1).ToString("MM/dd") + "-12/31 剩餘: " + strSecondPartDayOff;
+                            
+                            if (DateTime.Today < startDate)
+                            {
+                                lblDayOffMemo.Visible = false;
+                                lblDayOffMemo.Text = "";
+                                lblSecondPartDayOff.Text = startDate.AddDays(1).ToString("MM/dd") + "-12/31 剩餘: " + strSecondPartDayOff;
+                            }
+                            else
+                            {
+                                lblDayOffMemo.Visible = true;
+                                strFirstPartDayOff = "0";
+                                if (doubleFirstPartFinal > 0)
+                                {                                    
+                                    lblDayOffMemo.Text = "未休完之" + doubleFirstPartFinal.ToString() + "小時併入" + startDate.ToString("MM/dd") + "-12/31之剩餘時數";
+                                    doubleSecondPartFinal += doubleFirstPartFinal;
+                                    strSecondPartDayOff = doubleSecondPartFinal.ToString();
+                                }
+                                else if (doubleFirstPartFinal < 0)
+                                {
+                                    lblDayOffMemo.Text = "超休" + doubleFirstPartFinal.ToString() + "小時，於" + startDate.ToString("MM/dd") + "-12/31之特休時數扣除";
+                                    doubleSecondPartFinal -= doubleFirstPartFinal;
+                                    strSecondPartDayOff = doubleSecondPartFinal.ToString();
+                                }
+                                else
+                                {
+                                    lblDayOffMemo.Visible = false;
+                                    lblDayOffMemo.Text = "";                                    
+                                }
+                                lblFirstPartDayOff.Visible = true;
+                                lblFirstPartDayOff.Text = "01/01-" + startDate.ToString("MM/dd") + " 剩餘: " + strFirstPartDayOff + "小時";                            
+                                lblSecondPartDayOff.Text = startDate.AddDays(1).ToString("MM/dd") + "-12/31 剩餘: " + strSecondPartDayOff;
+                            }
                         }
                     }
                     else
