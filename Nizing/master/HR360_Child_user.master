@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/master/HR360_Master.master" AutoEventWireup="true" CodeFile="HR360_Child_user.master.cs" Inherits="masterPage_HR360_Child_user" %>
+<%@ MasterType TypeName="masterPage_HR360_Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <link href="../css/hr360/tabcontainer.css" rel="stylesheet" type="text/css" />

@@ -18,12 +18,12 @@ public partial class main : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //Session["erp_id"] = "0067";
-        //if (!((masterPage_HR360_Master)this.Master.Master).CheckAuthentication())
-        //{
-        //    ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('連線已逾時，將會回到登入頁面');window.location='login.aspx'", true);
-        //}
-        //else
-        //{            
+        if (!((masterPage_HR360_Master)this.Master.Master).CheckAuthentication())
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('連線已逾時，將會回到登入頁面');window.location='login.aspx'", true);
+        }
+        else
+        {            
             if (!IsPostBack)
             {
                 DataTable dtUserInfo = new DataTable();
@@ -236,6 +236,6 @@ public partial class main : System.Web.UI.Page
                     }
                 }
             }
-        //}
+        }
     }
 }

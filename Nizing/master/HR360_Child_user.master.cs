@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class masterPage_HR360_Child_user : System.Web.UI.MasterPage
+public partial class masterPage_HR360_Child_user : masterPage_HR360_Master
 {
     string NZConnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
     string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
