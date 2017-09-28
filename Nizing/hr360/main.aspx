@@ -82,7 +82,7 @@
                 </div>
                 <%--Uncomment for new way--%>
                 <div>
-                    <asp:Label ID="lblSecondPartDayOff" runat="server" Text="Label"></asp:Label>小時
+                    <asp:Label ID="lblSecondPartDayOff" runat="server" Text="Label"></asp:Label>
                 </div>
             </div>
             <div class="side-note">
