@@ -18,47 +18,50 @@ namespace NIZING_BACKEND_Data_Config
         string NZConnectionString = ConfigurationManager.ConnectionStrings["OQS_Data_Config.Properties.Settings.NZConnectionString"].ConnectionString;
         string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["OQS_Data_Config.Properties.Settings.NZ_ERP2ConnectionString"].ConnectionString;
         public string UserName { get; set; }
-        private enum FunctionMode { ADD, EDIT, DELETE, SEARCH, HASRECORD, NORECORD }
+        private enum FunctionMode { ADD, EDIT, DELETE, SEARCH, STATIC }
         private enum TableRowStatus { DELETED, EDITED, NEW, UNCHANGED };
         TabPage currentTabPage;
         bool isCancel = false;  //Check if an event is triggered after Cancel button is hit; deactivate cell and row validation if it's true
         #endregion
 
         #region 問題分類建立 Universal Variable
-        private FunctionMode questionCategoryTabMode = FunctionMode.HASRECORD;
+        private FunctionMode questionCategoryTabMode = FunctionMode.STATIC;
         dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter adapterQuestionCategory = new dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter();        
         DataTable dtQuestionCategorySource = new DataTable();
         #endregion
 
         #region 問題建立 Universal Variable
-        private FunctionMode questionTabMode = FunctionMode.HASRECORD;
+        private FunctionMode questionTabMode = FunctionMode.STATIC;
         dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter adapterQuestion = new dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter();
         DataTable dtQuestionSource = new DataTable();
         #endregion
 
         #region 評核人員分配 Universal Variable
-        private FunctionMode personnelAssignmentTabMode = FunctionMode.HASRECORD;
+        private FunctionMode personnelAssignmentTabMode = FunctionMode.STATIC;
         DataTable dtPersonnelAssignmentSource = new DataTable();        
+        #endregion
+
+        #region 問題分配 Universal Variable
+        private FunctionMode questionAssignmentTabMode = FunctionMode.STATIC;
         #endregion
 
         public frmAPA_Main()
         {
             InitializeComponent();
             currentTabPage = tbcManagement.SelectedTab;
+            LoadControlStatus(currentTabPage);
 
             #region 問題分類建立 Initialization           
             dtQuestionCategorySource = adapterQuestionCategory.GetData();
             gvQuestionCategory.DataSource = dtQuestionCategorySource;
             LoadGridViewStyle(gvQuestionCategory);
-            questionCategoryTabMode = FunctionMode.HASRECORD;
-            LoadControlStatus(currentTabPage);
+            questionCategoryTabMode = FunctionMode.STATIC;
             #endregion
             #region 問題建立 Initializaiton
             dtQuestionSource = adapterQuestion.GetData();
             gvQuestion.DataSource = dtQuestionSource;
             LoadGridViewStyle(gvQuestion);
-            questionTabMode = FunctionMode.HASRECORD;
-            LoadControlStatus(currentTabPage);
+            questionTabMode = FunctionMode.STATIC;
             #endregion
             #region 評核人員分配 Initialization
             for (int i = DateTime.Now.Year; i >= 2016; i--)
@@ -69,9 +72,12 @@ namespace NIZING_BACKEND_Data_Config
             dtPersonnelAssignmentSource = LoadgvPersonnelAssignment();
             gvPersonnelAssignment.DataSource = dtPersonnelAssignmentSource;
             LoadGridViewStyle(gvPersonnelAssignment);
-            personnelAssignmentTabMode = FunctionMode.HASRECORD;
-            LoadControlStatus(currentTabPage);
+            personnelAssignmentTabMode = FunctionMode.STATIC;
             #endregion
+            #region 問題分配 Initialization
+            questionAssignmentTabMode = FunctionMode.STATIC;
+            #endregion
+
         }
 
         #region Frame Methods and Events
@@ -90,28 +96,28 @@ namespace NIZING_BACKEND_Data_Config
         }
         private void tbcManagement_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (questionCategoryTabMode == FunctionMode.ADD || questionCategoryTabMode == FunctionMode.EDIT || questionCategoryTabMode == FunctionMode.SEARCH
-                || questionTabMode == FunctionMode.ADD || questionTabMode == FunctionMode.EDIT || questionTabMode == FunctionMode.SEARCH
-                || personnelAssignmentTabMode == FunctionMode.ADD || personnelAssignmentTabMode == FunctionMode.EDIT || personnelAssignmentTabMode == FunctionMode.SEARCH
+            if (questionCategoryTabMode == FunctionMode.STATIC
+                && questionTabMode == FunctionMode.STATIC
+                && personnelAssignmentTabMode == FunctionMode.STATIC
+                && questionAssignmentTabMode == FunctionMode.STATIC
                 )
             {
-                tbcManagement.SelectedTab = currentTabPage;
+                currentTabPage = tbcManagement.SelectedTab;
+                LoadControlStatus(currentTabPage);                
             }
             else
             {
-                currentTabPage = tbcManagement.SelectedTab;
-                LoadControlStatus(currentTabPage);
+                tbcManagement.SelectedTab = currentTabPage;
             }
         }
         private void LoadControlStatus(TabPage tab)
-        {
-            tlpQuestionAssignmentAll.Enabled = false;
+        {            
             switch (tab.Name)
             {
                 case "tbpQuestionCategory":
                     switch (questionCategoryTabMode)
                     {
-                        case FunctionMode.HASRECORD:
+                        case FunctionMode.STATIC:
                             btnQuestionCategoryEdit.Enabled = true;
                             btnQuestionCategorySave.Enabled = false;
                             btnQuestionCategoryCancel.Enabled = false;
@@ -131,7 +137,7 @@ namespace NIZING_BACKEND_Data_Config
                 case "tbpQuestion":
                     switch (questionTabMode)
                     {
-                        case FunctionMode.HASRECORD:
+                        case FunctionMode.STATIC:
                             btnQuestionEdit.Enabled = true;
                             btnQuestionSave.Enabled = false;
                             btnQuestionCancel.Enabled = false;
@@ -151,7 +157,7 @@ namespace NIZING_BACKEND_Data_Config
                 case "tbpPersonnelAssignment":
                     switch (personnelAssignmentTabMode)
                     {
-                        case FunctionMode.HASRECORD:
+                        case FunctionMode.STATIC:
                             btnPersonnelAssignmentEdit.Enabled = true;
                             btnPersonnelAssignmentSave.Enabled = false;
                             btnPersonnelAssignmentCancel.Enabled = false;
@@ -167,6 +173,17 @@ namespace NIZING_BACKEND_Data_Config
                             gvPersonnelAssignment.ReadOnly = false;
                             gvPersonnelAssignment.ForeColor = Color.Black;
                             LoadGridViewStyle(gvPersonnelAssignment);
+                            break;
+                    }
+                    break;
+                case "tbpQuestionAssignment":
+                    switch (questionAssignmentTabMode)
+                    {
+                        case FunctionMode.STATIC:
+                            tlpQuestionAssignmentAll.Enabled = false;
+                            break;
+                        case FunctionMode.EDIT:
+                            tlpQuestionAssignmentAll.Enabled = true;
                             break;
                     }
                     break;
@@ -489,7 +506,7 @@ namespace NIZING_BACKEND_Data_Config
             dtQuestionCategorySource = adapterQuestionCategory.GetData();
             gvQuestionCategory.DataSource = dtQuestionCategorySource;            
             tbcManagement.Enabled = true;
-            questionCategoryTabMode = FunctionMode.HASRECORD;
+            questionCategoryTabMode = FunctionMode.STATIC;
             LoadControlStatus(currentTabPage);
             txtQuestionCategoryTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;
         }
@@ -502,7 +519,7 @@ namespace NIZING_BACKEND_Data_Config
             }
             dtQuestionCategorySource = adapterQuestionCategory.GetData();
             gvQuestionCategory.DataSource = dtQuestionCategorySource;
-            questionCategoryTabMode = FunctionMode.HASRECORD;
+            questionCategoryTabMode = FunctionMode.STATIC;
             LoadControlStatus(currentTabPage);
             isCancel = false;
             txtQuestionCategoryTabMemo.Text += DateTime.Now.ToString() + " 資料更新取消" + Environment.NewLine;
@@ -563,7 +580,7 @@ namespace NIZING_BACKEND_Data_Config
             }
             dtQuestionSource = adapterQuestion.GetData();
             gvQuestion.DataSource = dtQuestionSource;
-            questionTabMode = FunctionMode.HASRECORD;
+            questionTabMode = FunctionMode.STATIC;
             LoadControlStatus(currentTabPage);
             txtQuestionTabMemo.Text += DateTime.Now.ToString() + " 資料更新取消" + Environment.NewLine;
             isCancel = false;
@@ -651,7 +668,7 @@ namespace NIZING_BACKEND_Data_Config
             dtQuestionSource = adapterQuestion.GetData();
             gvQuestion.DataSource = dtQuestionSource;
             tbcManagement.Enabled = true;
-            questionTabMode = FunctionMode.HASRECORD;
+            questionTabMode = FunctionMode.STATIC;
             txtQuestionTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;
             LoadControlStatus(currentTabPage);
         }
@@ -670,21 +687,19 @@ namespace NIZING_BACKEND_Data_Config
         }
         private void tsmQuestionAssignment_Click(object sender, EventArgs e)
         {
-            if (questionTabMode != FunctionMode.HASRECORD)
+            if (questionTabMode != FunctionMode.STATIC)
             {
                 txtQuestionTabMemo.Text += "錯誤:分配問題前，請先離開問題編輯模式(儲存或取消變更)" + Environment.NewLine;
             }
             else
             {                
                 tbcManagement.SelectedTab = tbpQuestionAssignment;
-
-                txtQuestionTabMemo.Text += "ID " + gvQuestion.Rows[gvQuestion.CurrentCell.RowIndex].Cells["ID"].FormattedValue + " is selected" + Environment.NewLine;
+                questionAssignmentTabMode = FunctionMode.EDIT;
+                LoadControlStatus(currentTabPage);
+                loadQuestionAssignment();
             }
         }
-        private void loadQuestionAssignment()
-        {
-            
-        }
+        
         #endregion
         #endregion
 
@@ -750,7 +765,7 @@ namespace NIZING_BACKEND_Data_Config
             isCancel = true;
             dtPersonnelAssignmentSource = LoadgvPersonnelAssignment();
             gvPersonnelAssignment.DataSource = dtPersonnelAssignmentSource;
-            personnelAssignmentTabMode = FunctionMode.HASRECORD;
+            personnelAssignmentTabMode = FunctionMode.STATIC;
             LoadControlStatus(currentTabPage);
             txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 資料更新取消" + Environment.NewLine;
             isCancel = false;
@@ -760,7 +775,7 @@ namespace NIZING_BACKEND_Data_Config
             UpdatePersonnelAssignment();
             dtPersonnelAssignmentSource = LoadgvPersonnelAssignment();
             gvPersonnelAssignment.DataSource = dtPersonnelAssignmentSource;
-            personnelAssignmentTabMode = FunctionMode.HASRECORD;
+            personnelAssignmentTabMode = FunctionMode.STATIC;
             LoadControlStatus(currentTabPage);
             txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;
         }
@@ -933,9 +948,28 @@ namespace NIZING_BACKEND_Data_Config
         }
         #endregion                
 
+        /*
+         * 問題分配跟其他TAB的差別在於，問題分配是由right click on問題建立中的問題進入的，而非直接選取TAB
+         */
+        #region 問題分配 Tab Methods and Events
+        private void loadQuestionAssignment()
+        {
+            lblQuestionAssignmentQuestionCategory.Text = gvQuestion.CurrentRow.Cells["分類"].FormattedValue.ToString();
+            if ((bool)gvQuestion.CurrentRow.Cells["使用中"].FormattedValue)
+            {
+                txtQuestionAssignmentQuestionBody.Text = "";
+            }
+            else
+            {
+                txtQuestionAssignmentQuestionBody.Text = "(此問題目前未被使用)" + Environment.NewLine;
+            }
+            txtQuestionAssignmentQuestionBody.Text += gvQuestion.CurrentRow.Cells["問題"].FormattedValue.ToString();
+            
+        }
+        #endregion
 
 
 
-        
+
     }
 }
