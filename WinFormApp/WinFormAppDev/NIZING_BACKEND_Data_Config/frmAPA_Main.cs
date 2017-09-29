@@ -963,13 +963,254 @@ namespace NIZING_BACKEND_Data_Config
             {
                 txtQuestionAssignmentQuestionBody.Text = "(此問題目前未被使用)" + Environment.NewLine;
             }
+            if ((bool)gvQuestion.CurrentRow.Cells["全體共用"].FormattedValue)
+            {
+                txtQuestionAssignmentQuestionBody.Text += "(此問題為全體共用，無須另外分配)" + Environment.NewLine;
+            }
             txtQuestionAssignmentQuestionBody.Text += gvQuestion.CurrentRow.Cells["問題"].FormattedValue.ToString();
-            
+            //Load listview
+            Dictionary<string, string> dictQuestionAssignmentDept = new Dictionary<string, string>();
+            Dictionary<string, string> dictQuestionAssignmentEmp = new Dictionary<string, string>();            
+            lvQuestionAssignmentDept.Clear();
+            lvQuestionAssignmentEmp.Clear();
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT ASSIGN.QUESTION_ID, LTRIM(RTRIM(ASSIGN.DEPT)) 'DEPT_ID', LTRIM(RTRIM(ME.ME002)) 'DEPT_NAME'"
+                            + " FROM HR360_ASSESSMENTQUESTION_ASSIGNMENT_A ASSIGN"
+                            + " LEFT JOIN NZ.dbo.CMSME ME ON ASSIGN.DEPT=ME.ME001"
+                            + " WHERE QUESTION_ID=@QUESTION_ID"
+                            + " ORDER BY ASSIGN.DEPT";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@QUESTION_ID", Convert.ToInt16(gvQuestion.CurrentRow.Cells["ID"].FormattedValue));                
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            if (!string.IsNullOrWhiteSpace(dr.GetString(1)))
+                            {
+                                lvQuestionAssignmentDept.Items.Add(dr.GetString(1) + " " + dr.GetString(2));
+                            }
+                        }
+                    }
+                }
+            }
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT ASSIGN.QUESTION_ID, LTRIM(RTRIM(ASSIGN.EMP_ID)) 'EMP_ID', LTRIM(RTRIM(MV.MV002)) 'EMP_NAME'"
+                            + " FROM HR360_ASSESSMENTQUESTION_ASSIGNMENT_A ASSIGN"
+                            + " LEFT JOIN NZ.dbo.CMSMV MV ON ASSIGN.EMP_ID=MV.MV001"
+                            + " WHERE QUESTION_ID=@QUESTION_ID"
+                            + " AND MV.MV022=''"
+                            + " ORDER BY ASSIGN.EMP_ID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@QUESTION_ID", Convert.ToInt16(gvQuestion.CurrentRow.Cells["ID"].FormattedValue));
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            if (!string.IsNullOrWhiteSpace(dr.GetString(1)))
+                            {
+                                lvQuestionAssignmentEmp.Items.Add(dr.GetString(1) + " " + dr.GetString(2));
+                            }
+                        }
+                    }
+                }
+            }
+            //Load combobox
+            Dictionary<string, string> dictFullDeptList = new Dictionary<string, string>();
+            Dictionary<string, string> dictFullEmpList = new Dictionary<string, string>();
+            Dictionary<string, string> dictcbxQuestionAssignmentDeptSource = new Dictionary<string,string>();
+            Dictionary<string, string> dictcbxQuestionAssignmentEmpSource = new Dictionary<string,string>();
+            cbxQuestionAssignmentDept.Items.Clear();
+            cbxQuestionAssignmentEmp.Items.Clear();
+            using (SqlConnection conn = new SqlConnection(NZConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT LTRIM(RTRIM(ME.ME001)) 'DEPT_ID', LTRIM(RTRIM(ME.ME002)) 'DEPT_NAME'"
+                            + " FROM CMSME ME"
+                            + " ORDER BY ME.ME001";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                //load all dept
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        string keyVal = dr.GetString(0);
+                        string valVal = dr.GetString(1);
+                        dictFullDeptList.Add(keyVal, valVal);
+                    }
+                }
+            }
+            using (SqlConnection conn = new SqlConnection(NZConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT LTRIM(RTRIM(MV.MV001)) 'EMP_ID', LTRIM(RTRIM(MV.MV002)) 'EMP_NAME'"
+                            + " FROM CMSMV MV"
+                            + " WHERE MV.MV022=''"
+                            + " AND MV.MV001 <> '0000'"
+                            + " AND MV.MV001 <> '0098'"
+                            + " AND MV.MV001 NOT LIKE 'PT%'"
+                            + " ORDER BY MV.MV001";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                //load all dept
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        string keyVal = dr.GetString(0);
+                        string valVal = dr.GetString(1);
+                        dictFullEmpList.Add(keyVal, valVal);
+                    }
+                }
+            }
+            dictcbxQuestionAssignmentDeptSource = RemoveItemsInListViewFromDictionary(dictFullDeptList, lvQuestionAssignmentDept);
+            foreach (KeyValuePair<string, string> kvp in dictcbxQuestionAssignmentDeptSource)
+            {
+                cbxQuestionAssignmentDept.Items.Add(kvp.Key + " " + kvp.Value);
+            }
+            if (cbxQuestionAssignmentDept.Items.Count > 0)
+            {
+                btnQuestionAssignmentAddDept.Enabled = true;
+                cbxQuestionAssignmentDept.SelectedIndex = 0;
+            }
+            else
+            {
+                btnQuestionAssignmentAddDept.Enabled = false;
+            }
+            dictcbxQuestionAssignmentEmpSource = RemoveItemsInListViewFromDictionary(dictFullEmpList, lvQuestionAssignmentEmp);
+            foreach (KeyValuePair<string, string> kvp in dictcbxQuestionAssignmentEmpSource)
+            {
+                cbxQuestionAssignmentEmp.Items.Add(kvp.Key + " " + kvp.Value);
+            }
+            if (cbxQuestionAssignmentEmp.Items.Count > 0)
+            {
+                btnQuestionAssignmentAddEmp.Enabled = true;
+                cbxQuestionAssignmentEmp.SelectedIndex = 0;
+            }
+            else
+            {
+                btnQuestionAssignmentAddEmp.Enabled = false;
+            }
+        }
+        private string[] SplitString(string s, string[] stringSeparators)
+        {
+            string[] returnStringArray;
+            returnStringArray = s.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
+            return returnStringArray;
+        }
+        private Dictionary<string, string> GetItemsFromListView(ListView lv)
+        {
+            Dictionary<string, string> returnValue = new Dictionary<string, string>();
+            foreach (ListViewItem lvi in lv.Items)
+            {
+                string[] tempStringArray;
+                tempStringArray = SplitString(lvi.Text, new string[] { " " });
+                returnValue.Add(tempStringArray[0], tempStringArray[1]);
+            }            
+            return returnValue;
+        }
+        /// <summary>
+        /// Remove Items in ListView from Dictionary
+        /// </summary>
+        /// <param name="dict"></param>
+        /// <param name="lv"></param>
+        /// <returns></returns>
+        private Dictionary<string, string> RemoveItemsInListViewFromDictionary(Dictionary<string,string> dict, ListView lv)
+        { 
+            Dictionary<string, string> remove = GetItemsFromListView(lv);
+            foreach (KeyValuePair<string, string> kvp in remove)
+            {
+                if (dict.ContainsKey(kvp.Key))
+                {
+                    dict.Remove(kvp.Key);
+                }
+            }
+            return dict;
+        }
+
+        private void btnQuestionAssignmentAddDept_Click(object sender, EventArgs e)
+        {
+            int selectedIndex = 0;
+            string[] tempStringArray;
+            if (cbxQuestionAssignmentDept.Items.Count > 0)
+            {
+                selectedIndex = cbxQuestionAssignmentDept.SelectedIndex;
+                tempStringArray = SplitString(cbxQuestionAssignmentDept.Text, new string[] { " " });
+                lvQuestionAssignmentDept.Items.Add(tempStringArray[0] + " " + tempStringArray[1]);
+                cbxQuestionAssignmentDept.Items.RemoveAt(selectedIndex);
+            }
+            if (cbxQuestionAssignmentDept.Items.Count > 0 && selectedIndex < cbxQuestionAssignmentDept.Items.Count)
+            {
+                cbxQuestionAssignmentDept.SelectedIndex = selectedIndex;
+            }
+            else if (cbxQuestionAssignmentDept.Items.Count > 0 && selectedIndex >= cbxQuestionAssignmentDept.Items.Count)
+            {
+                cbxQuestionAssignmentDept.SelectedIndex = cbxQuestionAssignmentDept.Items.Count - 1;
+            }
+        }
+        private void btnQuestionAssignmentRemoveDept_Click(object sender, EventArgs e)
+        {
+            if (lvQuestionAssignmentDept.SelectedItems.Count > 0)
+            {
+                foreach (ListViewItem item in lvQuestionAssignmentDept.SelectedItems)
+                {
+                    cbxQuestionAssignmentDept.Items.Add(item.Text);
+                    lvQuestionAssignmentDept.Items.Remove(item);
+                }
+            }
+            if (cbxQuestionAssignmentDept.Items.Count > 0)
+            {
+                cbxQuestionAssignmentDept.SelectedIndex = 0;
+            }
+        }
+
+        private void btnQuestionAssignmentAddEmp_Click(object sender, EventArgs e)
+        {
+            int selectedIndex = 0;
+            string[] tempStringArray;
+            if (cbxQuestionAssignmentEmp.Items.Count > 0)
+            {
+                selectedIndex = cbxQuestionAssignmentEmp.SelectedIndex;
+                tempStringArray = SplitString(cbxQuestionAssignmentEmp.Text, new string[] { " " });
+                lvQuestionAssignmentEmp.Items.Add(tempStringArray[0] + " " + tempStringArray[1]);
+                cbxQuestionAssignmentEmp.Items.RemoveAt(selectedIndex);
+            }
+            if (cbxQuestionAssignmentEmp.Items.Count > 0 && selectedIndex < cbxQuestionAssignmentEmp.Items.Count)
+            {
+                cbxQuestionAssignmentEmp.SelectedIndex = selectedIndex;
+            }
+            else if (cbxQuestionAssignmentEmp.Items.Count > 0 && selectedIndex >= cbxQuestionAssignmentEmp.Items.Count)
+            {
+                cbxQuestionAssignmentEmp.SelectedIndex = cbxQuestionAssignmentEmp.Items.Count - 1;
+            }
+        }
+
+        private void btnQuestionAssignmentRemoveEmp_Click(object sender, EventArgs e)
+        {
+            if (lvQuestionAssignmentEmp.SelectedItems.Count > 0)
+            {
+                foreach (ListViewItem item in lvQuestionAssignmentEmp.SelectedItems)
+                {
+                    cbxQuestionAssignmentEmp.Items.Add(item.Text);
+                    lvQuestionAssignmentEmp.Items.Remove(item);
+                }
+            }
+            if (cbxQuestionAssignmentEmp.Items.Count > 0)
+            {
+                cbxQuestionAssignmentEmp.SelectedIndex = 0;
+            }
+        }
+        private void btnQuestionAssignmentCancel_Click(object sender, EventArgs e)
+        {
+            questionAssignmentTabMode = FunctionMode.STATIC;
+            LoadControlStatus(currentTabPage);
         }
         #endregion
-
-
-
-
     }
 }

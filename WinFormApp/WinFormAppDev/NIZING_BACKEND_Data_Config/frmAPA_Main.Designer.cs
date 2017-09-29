@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnLogout = new System.Windows.Forms.Button();
             this.tbcManagement = new System.Windows.Forms.TabControl();
@@ -335,13 +335,13 @@
             // 
             this.gvQuestion.AllowUserToAddRows = false;
             this.gvQuestion.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvQuestion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvQuestion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.gvQuestion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvQuestion.ContextMenuStrip = this.ctxmsQuestion;
             this.gvQuestion.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -456,8 +456,9 @@
             this.btnQuestionAssignmentCancel.Name = "btnQuestionAssignmentCancel";
             this.btnQuestionAssignmentCancel.Size = new System.Drawing.Size(75, 23);
             this.btnQuestionAssignmentCancel.TabIndex = 0;
-            this.btnQuestionAssignmentCancel.Text = "button1";
+            this.btnQuestionAssignmentCancel.Text = "取消";
             this.btnQuestionAssignmentCancel.UseVisualStyleBackColor = true;
+            this.btnQuestionAssignmentCancel.Click += new System.EventHandler(this.btnQuestionAssignmentCancel_Click);
             // 
             // btnQuestionAssignmentSave
             // 
@@ -539,11 +540,14 @@
             // 
             this.lvQuestionAssignmentDept.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lvQuestionAssignmentDept.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvQuestionAssignmentDept.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.lvQuestionAssignmentDept.Location = new System.Drawing.Point(3, 25);
             this.lvQuestionAssignmentDept.Name = "lvQuestionAssignmentDept";
             this.lvQuestionAssignmentDept.Size = new System.Drawing.Size(378, 229);
+            this.lvQuestionAssignmentDept.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.lvQuestionAssignmentDept.TabIndex = 2;
             this.lvQuestionAssignmentDept.UseCompatibleStateImageBehavior = false;
+            this.lvQuestionAssignmentDept.View = System.Windows.Forms.View.List;
             // 
             // flowLayoutPanel6
             // 
@@ -565,6 +569,7 @@
             this.cbxQuestionAssignmentDept.Location = new System.Drawing.Point(3, 3);
             this.cbxQuestionAssignmentDept.Name = "cbxQuestionAssignmentDept";
             this.cbxQuestionAssignmentDept.Size = new System.Drawing.Size(121, 20);
+            this.cbxQuestionAssignmentDept.Sorted = true;
             this.cbxQuestionAssignmentDept.TabIndex = 0;
             // 
             // btnQuestionAssignmentAddDept
@@ -577,6 +582,7 @@
             this.btnQuestionAssignmentAddDept.Text = "+";
             this.btnQuestionAssignmentAddDept.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnQuestionAssignmentAddDept.UseVisualStyleBackColor = true;
+            this.btnQuestionAssignmentAddDept.Click += new System.EventHandler(this.btnQuestionAssignmentAddDept_Click);
             // 
             // btnQuestionAssignmentRemoveDept
             // 
@@ -588,16 +594,20 @@
             this.btnQuestionAssignmentRemoveDept.Text = "-";
             this.btnQuestionAssignmentRemoveDept.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnQuestionAssignmentRemoveDept.UseVisualStyleBackColor = true;
+            this.btnQuestionAssignmentRemoveDept.Click += new System.EventHandler(this.btnQuestionAssignmentRemoveDept_Click);
             // 
             // lvQuestionAssignmentEmp
             // 
             this.lvQuestionAssignmentEmp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lvQuestionAssignmentEmp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvQuestionAssignmentEmp.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.lvQuestionAssignmentEmp.Location = new System.Drawing.Point(587, 25);
             this.lvQuestionAssignmentEmp.Name = "lvQuestionAssignmentEmp";
             this.lvQuestionAssignmentEmp.Size = new System.Drawing.Size(378, 229);
+            this.lvQuestionAssignmentEmp.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.lvQuestionAssignmentEmp.TabIndex = 4;
             this.lvQuestionAssignmentEmp.UseCompatibleStateImageBehavior = false;
+            this.lvQuestionAssignmentEmp.View = System.Windows.Forms.View.List;
             // 
             // flowLayoutPanel7
             // 
@@ -619,6 +629,7 @@
             this.cbxQuestionAssignmentEmp.Location = new System.Drawing.Point(3, 3);
             this.cbxQuestionAssignmentEmp.Name = "cbxQuestionAssignmentEmp";
             this.cbxQuestionAssignmentEmp.Size = new System.Drawing.Size(121, 20);
+            this.cbxQuestionAssignmentEmp.Sorted = true;
             this.cbxQuestionAssignmentEmp.TabIndex = 0;
             // 
             // btnQuestionAssignmentAddEmp
@@ -631,6 +642,7 @@
             this.btnQuestionAssignmentAddEmp.Text = "+";
             this.btnQuestionAssignmentAddEmp.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnQuestionAssignmentAddEmp.UseVisualStyleBackColor = true;
+            this.btnQuestionAssignmentAddEmp.Click += new System.EventHandler(this.btnQuestionAssignmentAddEmp_Click);
             // 
             // btnQuestionAssignmentRemoveEmp
             // 
@@ -642,6 +654,7 @@
             this.btnQuestionAssignmentRemoveEmp.Text = "-";
             this.btnQuestionAssignmentRemoveEmp.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnQuestionAssignmentRemoveEmp.UseVisualStyleBackColor = true;
+            this.btnQuestionAssignmentRemoveEmp.Click += new System.EventHandler(this.btnQuestionAssignmentRemoveEmp_Click);
             // 
             // tbpPersonnelAssignment
             // 
@@ -715,13 +728,13 @@
             // 
             this.gvPersonnelAssignment.AllowUserToAddRows = false;
             this.gvPersonnelAssignment.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvPersonnelAssignment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvPersonnelAssignment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.gvPersonnelAssignment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvPersonnelAssignment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvPersonnelAssignment.Location = new System.Drawing.Point(4, 34);
