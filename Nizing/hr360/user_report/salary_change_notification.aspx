@@ -199,7 +199,7 @@
                     <div style="height:100%;">
                     <div style="display:inline-block;border-right:solid 1px #5e9cff;width:24%;height:100%;vertical-align:top;">
                         <div class="image-container">
-                            <asp:Image ID="Image1" runat="server" ImageUrl="~/hr360/image/image/signature/doris-2.png" />
+                            <asp:Image ID="Image1" runat="server" ImageUrl="~/hr360/image/image/signature/abbie.png" />
                         </div>
                     </div>
                     <div style="display:inline-block;border-right:solid 1px #5e9cff;width:24%;height:100%;vertical-align:top;">
