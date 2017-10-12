@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnLogout = new System.Windows.Forms.Button();
             this.tbcManagement = new System.Windows.Forms.TabControl();
@@ -54,11 +54,11 @@
             this.txtQuestionTabMemo = new System.Windows.Forms.RichTextBox();
             this.tbpQuestionAssignment = new System.Windows.Forms.TabPage();
             this.tlpQuestionAssignmentAll = new System.Windows.Forms.TableLayoutPanel();
+            this.lblQuestionAssignmentQuestionCategory = new System.Windows.Forms.Label();
             this.txtQuestionAssignmentTabMemo = new System.Windows.Forms.RichTextBox();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnQuestionAssignmentCancel = new System.Windows.Forms.Button();
             this.btnQuestionAssignmentSave = new System.Windows.Forms.Button();
-            this.lblQuestionAssignmentQuestionCategory = new System.Windows.Forms.Label();
             this.txtQuestionAssignmentQuestionBody = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
@@ -73,6 +73,7 @@
             this.cbxQuestionAssignmentEmp = new System.Windows.Forms.ComboBox();
             this.btnQuestionAssignmentAddEmp = new System.Windows.Forms.Button();
             this.btnQuestionAssignmentRemoveEmp = new System.Windows.Forms.Button();
+            this.lblQuestionAssignmentQuestionID = new System.Windows.Forms.Label();
             this.tbpPersonnelAssignment = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
@@ -85,6 +86,18 @@
             this.btnPersonnelAssignmentEdit = new System.Windows.Forms.Button();
             this.dsAPA_Question = new NIZING_BACKEND_Data_Config.dsAPA_Question();
             this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter = new NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter();
+            this.tbpScoreStandard = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtScoreStandardTabMemo = new System.Windows.Forms.TextBox();
+            this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnScoreStandardCancel = new System.Windows.Forms.Button();
+            this.btnScoreStandardSave = new System.Windows.Forms.Button();
+            this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtScoreStandardStandard = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnScoreStandardEdit = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpQuestionCategory.SuspendLayout();
@@ -108,6 +121,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvPersonnelAssignment)).BeginInit();
             this.flowLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).BeginInit();
+            this.tbpScoreStandard.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
+            this.flowLayoutPanel8.SuspendLayout();
+            this.flowLayoutPanel9.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -145,6 +163,7 @@
             this.tbcManagement.Controls.Add(this.tbpQuestion);
             this.tbcManagement.Controls.Add(this.tbpQuestionAssignment);
             this.tbcManagement.Controls.Add(this.tbpPersonnelAssignment);
+            this.tbcManagement.Controls.Add(this.tbpScoreStandard);
             this.tbcManagement.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcManagement.Location = new System.Drawing.Point(0, 26);
             this.tbcManagement.Margin = new System.Windows.Forms.Padding(0);
@@ -335,13 +354,13 @@
             // 
             this.gvQuestion.AllowUserToAddRows = false;
             this.gvQuestion.AllowUserToResizeRows = false;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvQuestion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvQuestion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gvQuestion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvQuestion.ContextMenuStrip = this.ctxmsQuestion;
             this.gvQuestion.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -408,24 +427,35 @@
             this.tlpQuestionAssignmentAll.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tlpQuestionAssignmentAll.ColumnCount = 1;
             this.tlpQuestionAssignmentAll.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpQuestionAssignmentAll.Controls.Add(this.txtQuestionAssignmentTabMemo, 0, 4);
-            this.tlpQuestionAssignmentAll.Controls.Add(this.flowLayoutPanel5, 0, 3);
-            this.tlpQuestionAssignmentAll.Controls.Add(this.lblQuestionAssignmentQuestionCategory, 0, 0);
-            this.tlpQuestionAssignmentAll.Controls.Add(this.txtQuestionAssignmentQuestionBody, 0, 1);
-            this.tlpQuestionAssignmentAll.Controls.Add(this.tableLayoutPanel6, 0, 2);
+            this.tlpQuestionAssignmentAll.Controls.Add(this.lblQuestionAssignmentQuestionCategory, 0, 1);
+            this.tlpQuestionAssignmentAll.Controls.Add(this.txtQuestionAssignmentTabMemo, 0, 5);
+            this.tlpQuestionAssignmentAll.Controls.Add(this.flowLayoutPanel5, 0, 4);
+            this.tlpQuestionAssignmentAll.Controls.Add(this.txtQuestionAssignmentQuestionBody, 0, 2);
+            this.tlpQuestionAssignmentAll.Controls.Add(this.tableLayoutPanel6, 0, 3);
+            this.tlpQuestionAssignmentAll.Controls.Add(this.lblQuestionAssignmentQuestionID, 0, 0);
             this.tlpQuestionAssignmentAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpQuestionAssignmentAll.Location = new System.Drawing.Point(3, 3);
             this.tlpQuestionAssignmentAll.Margin = new System.Windows.Forms.Padding(0);
             this.tlpQuestionAssignmentAll.Name = "tlpQuestionAssignmentAll";
-            this.tlpQuestionAssignmentAll.RowCount = 5;
+            this.tlpQuestionAssignmentAll.RowCount = 6;
+            this.tlpQuestionAssignmentAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tlpQuestionAssignmentAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tlpQuestionAssignmentAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tlpQuestionAssignmentAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tlpQuestionAssignmentAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tlpQuestionAssignmentAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tlpQuestionAssignmentAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpQuestionAssignmentAll.Size = new System.Drawing.Size(1170, 804);
             this.tlpQuestionAssignmentAll.TabIndex = 0;
+            // 
+            // lblQuestionAssignmentQuestionCategory
+            // 
+            this.lblQuestionAssignmentQuestionCategory.AutoSize = true;
+            this.lblQuestionAssignmentQuestionCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblQuestionAssignmentQuestionCategory.Font = new System.Drawing.Font("PMingLiU", 18F);
+            this.lblQuestionAssignmentQuestionCategory.Location = new System.Drawing.Point(4, 28);
+            this.lblQuestionAssignmentQuestionCategory.Name = "lblQuestionAssignmentQuestionCategory";
+            this.lblQuestionAssignmentQuestionCategory.Size = new System.Drawing.Size(1162, 26);
+            this.lblQuestionAssignmentQuestionCategory.TabIndex = 5;
             // 
             // txtQuestionAssignmentTabMemo
             // 
@@ -466,29 +496,20 @@
             this.btnQuestionAssignmentSave.Name = "btnQuestionAssignmentSave";
             this.btnQuestionAssignmentSave.Size = new System.Drawing.Size(75, 23);
             this.btnQuestionAssignmentSave.TabIndex = 1;
-            this.btnQuestionAssignmentSave.Text = "button2";
+            this.btnQuestionAssignmentSave.Text = "儲存";
             this.btnQuestionAssignmentSave.UseVisualStyleBackColor = true;
-            // 
-            // lblQuestionAssignmentQuestionCategory
-            // 
-            this.lblQuestionAssignmentQuestionCategory.AutoSize = true;
-            this.lblQuestionAssignmentQuestionCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblQuestionAssignmentQuestionCategory.Font = new System.Drawing.Font("PMingLiU", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lblQuestionAssignmentQuestionCategory.Location = new System.Drawing.Point(4, 1);
-            this.lblQuestionAssignmentQuestionCategory.Name = "lblQuestionAssignmentQuestionCategory";
-            this.lblQuestionAssignmentQuestionCategory.Size = new System.Drawing.Size(1162, 26);
-            this.lblQuestionAssignmentQuestionCategory.TabIndex = 2;
+            this.btnQuestionAssignmentSave.Click += new System.EventHandler(this.btnQuestionAssignmentSave_Click);
             // 
             // txtQuestionAssignmentQuestionBody
             // 
             this.txtQuestionAssignmentQuestionBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtQuestionAssignmentQuestionBody.Font = new System.Drawing.Font("PMingLiU", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtQuestionAssignmentQuestionBody.Location = new System.Drawing.Point(4, 31);
+            this.txtQuestionAssignmentQuestionBody.Location = new System.Drawing.Point(4, 58);
             this.txtQuestionAssignmentQuestionBody.Multiline = true;
             this.txtQuestionAssignmentQuestionBody.Name = "txtQuestionAssignmentQuestionBody";
             this.txtQuestionAssignmentQuestionBody.ReadOnly = true;
             this.txtQuestionAssignmentQuestionBody.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtQuestionAssignmentQuestionBody.Size = new System.Drawing.Size(1162, 379);
+            this.txtQuestionAssignmentQuestionBody.Size = new System.Drawing.Size(1162, 363);
             this.txtQuestionAssignmentQuestionBody.TabIndex = 3;
             // 
             // tableLayoutPanel6
@@ -505,13 +526,13 @@
             this.tableLayoutPanel6.Controls.Add(this.lvQuestionAssignmentEmp, 2, 1);
             this.tableLayoutPanel6.Controls.Add(this.flowLayoutPanel7, 3, 1);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(1, 414);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(1, 425);
             this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 2;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(1168, 257);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(1168, 246);
             this.tableLayoutPanel6.TabIndex = 4;
             // 
             // label2
@@ -543,7 +564,7 @@
             this.lvQuestionAssignmentDept.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.lvQuestionAssignmentDept.Location = new System.Drawing.Point(3, 25);
             this.lvQuestionAssignmentDept.Name = "lvQuestionAssignmentDept";
-            this.lvQuestionAssignmentDept.Size = new System.Drawing.Size(378, 229);
+            this.lvQuestionAssignmentDept.Size = new System.Drawing.Size(378, 218);
             this.lvQuestionAssignmentDept.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.lvQuestionAssignmentDept.TabIndex = 2;
             this.lvQuestionAssignmentDept.UseCompatibleStateImageBehavior = false;
@@ -559,7 +580,7 @@
             this.flowLayoutPanel6.Location = new System.Drawing.Point(384, 22);
             this.flowLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(200, 235);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(200, 224);
             this.flowLayoutPanel6.TabIndex = 3;
             // 
             // cbxQuestionAssignmentDept
@@ -603,7 +624,7 @@
             this.lvQuestionAssignmentEmp.Font = new System.Drawing.Font("PMingLiU", 12F);
             this.lvQuestionAssignmentEmp.Location = new System.Drawing.Point(587, 25);
             this.lvQuestionAssignmentEmp.Name = "lvQuestionAssignmentEmp";
-            this.lvQuestionAssignmentEmp.Size = new System.Drawing.Size(378, 229);
+            this.lvQuestionAssignmentEmp.Size = new System.Drawing.Size(378, 218);
             this.lvQuestionAssignmentEmp.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.lvQuestionAssignmentEmp.TabIndex = 4;
             this.lvQuestionAssignmentEmp.UseCompatibleStateImageBehavior = false;
@@ -619,7 +640,7 @@
             this.flowLayoutPanel7.Location = new System.Drawing.Point(968, 22);
             this.flowLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel7.Name = "flowLayoutPanel7";
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(200, 235);
+            this.flowLayoutPanel7.Size = new System.Drawing.Size(200, 224);
             this.flowLayoutPanel7.TabIndex = 5;
             // 
             // cbxQuestionAssignmentEmp
@@ -655,6 +676,16 @@
             this.btnQuestionAssignmentRemoveEmp.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnQuestionAssignmentRemoveEmp.UseVisualStyleBackColor = true;
             this.btnQuestionAssignmentRemoveEmp.Click += new System.EventHandler(this.btnQuestionAssignmentRemoveEmp_Click);
+            // 
+            // lblQuestionAssignmentQuestionID
+            // 
+            this.lblQuestionAssignmentQuestionID.AutoSize = true;
+            this.lblQuestionAssignmentQuestionID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblQuestionAssignmentQuestionID.Font = new System.Drawing.Font("PMingLiU", 18F);
+            this.lblQuestionAssignmentQuestionID.Location = new System.Drawing.Point(4, 1);
+            this.lblQuestionAssignmentQuestionID.Name = "lblQuestionAssignmentQuestionID";
+            this.lblQuestionAssignmentQuestionID.Size = new System.Drawing.Size(1162, 26);
+            this.lblQuestionAssignmentQuestionID.TabIndex = 2;
             // 
             // tbpPersonnelAssignment
             // 
@@ -728,13 +759,13 @@
             // 
             this.gvPersonnelAssignment.AllowUserToAddRows = false;
             this.gvPersonnelAssignment.AllowUserToResizeRows = false;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvPersonnelAssignment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvPersonnelAssignment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gvPersonnelAssignment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvPersonnelAssignment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvPersonnelAssignment.Location = new System.Drawing.Point(4, 34);
@@ -798,6 +829,152 @@
             // 
             this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter.ClearBeforeFill = true;
             // 
+            // tbpScoreStandard
+            // 
+            this.tbpScoreStandard.Controls.Add(this.tableLayoutPanel5);
+            this.tbpScoreStandard.Location = new System.Drawing.Point(4, 22);
+            this.tbpScoreStandard.Name = "tbpScoreStandard";
+            this.tbpScoreStandard.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpScoreStandard.Size = new System.Drawing.Size(1176, 810);
+            this.tbpScoreStandard.TabIndex = 4;
+            this.tbpScoreStandard.Text = "特評標準設定";
+            this.tbpScoreStandard.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.CausesValidation = false;
+            this.tableLayoutPanel5.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel5.ColumnCount = 1;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.Controls.Add(this.btnScoreStandardEdit, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.txtScoreStandardTabMemo, 0, 3);
+            this.tableLayoutPanel5.Controls.Add(this.flowLayoutPanel8, 0, 2);
+            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel7, 0, 1);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 4;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(1170, 804);
+            this.tableLayoutPanel5.TabIndex = 1;
+            // 
+            // txtScoreStandardTabMemo
+            // 
+            this.txtScoreStandardTabMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtScoreStandardTabMemo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtScoreStandardTabMemo.Location = new System.Drawing.Point(4, 706);
+            this.txtScoreStandardTabMemo.Multiline = true;
+            this.txtScoreStandardTabMemo.Name = "txtScoreStandardTabMemo";
+            this.txtScoreStandardTabMemo.ReadOnly = true;
+            this.txtScoreStandardTabMemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtScoreStandardTabMemo.Size = new System.Drawing.Size(1162, 94);
+            this.txtScoreStandardTabMemo.TabIndex = 4;
+            // 
+            // flowLayoutPanel8
+            // 
+            this.flowLayoutPanel8.CausesValidation = false;
+            this.flowLayoutPanel8.Controls.Add(this.btnScoreStandardCancel);
+            this.flowLayoutPanel8.Controls.Add(this.btnScoreStandardSave);
+            this.flowLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel8.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel8.Location = new System.Drawing.Point(1, 673);
+            this.flowLayoutPanel8.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel8.Name = "flowLayoutPanel8";
+            this.flowLayoutPanel8.Size = new System.Drawing.Size(1168, 29);
+            this.flowLayoutPanel8.TabIndex = 0;
+            // 
+            // btnScoreStandardCancel
+            // 
+            this.btnScoreStandardCancel.CausesValidation = false;
+            this.btnScoreStandardCancel.Enabled = false;
+            this.btnScoreStandardCancel.Location = new System.Drawing.Point(1090, 3);
+            this.btnScoreStandardCancel.Name = "btnScoreStandardCancel";
+            this.btnScoreStandardCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnScoreStandardCancel.TabIndex = 0;
+            this.btnScoreStandardCancel.Text = "取消";
+            this.btnScoreStandardCancel.UseVisualStyleBackColor = true;
+            this.btnScoreStandardCancel.Click += new System.EventHandler(this.btnScoreStandardCancel_Click);
+            // 
+            // btnScoreStandardSave
+            // 
+            this.btnScoreStandardSave.Enabled = false;
+            this.btnScoreStandardSave.Location = new System.Drawing.Point(1009, 3);
+            this.btnScoreStandardSave.Name = "btnScoreStandardSave";
+            this.btnScoreStandardSave.Size = new System.Drawing.Size(75, 23);
+            this.btnScoreStandardSave.TabIndex = 1;
+            this.btnScoreStandardSave.Text = "儲存";
+            this.btnScoreStandardSave.UseVisualStyleBackColor = true;
+            this.btnScoreStandardSave.Click += new System.EventHandler(this.btnScoreStandardSave_Click);
+            // 
+            // flowLayoutPanel9
+            // 
+            this.flowLayoutPanel9.Controls.Add(this.label1);
+            this.flowLayoutPanel9.Controls.Add(this.txtScoreStandardStandard);
+            this.flowLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel9.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel9.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel9.Name = "flowLayoutPanel9";
+            this.flowLayoutPanel9.Size = new System.Drawing.Size(1168, 29);
+            this.flowLayoutPanel9.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "特評標準分數:";
+            // 
+            // txtScoreStandardStandard
+            // 
+            this.txtScoreStandardStandard.Location = new System.Drawing.Point(89, 3);
+            this.txtScoreStandardStandard.Name = "txtScoreStandardStandard";
+            this.txtScoreStandardStandard.Size = new System.Drawing.Size(100, 22);
+            this.txtScoreStandardStandard.TabIndex = 1;
+            // 
+            // tableLayoutPanel7
+            // 
+            this.tableLayoutPanel7.ColumnCount = 1;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel7.Controls.Add(this.flowLayoutPanel9, 0, 0);
+            this.tableLayoutPanel7.Controls.Add(this.label4, 0, 1);
+            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(1, 31);
+            this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 2;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(1168, 641);
+            this.tableLayoutPanel7.TabIndex = 6;
+            // 
+            // btnScoreStandardEdit
+            // 
+            this.btnScoreStandardEdit.Location = new System.Drawing.Point(4, 4);
+            this.btnScoreStandardEdit.Name = "btnScoreStandardEdit";
+            this.btnScoreStandardEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnScoreStandardEdit.TabIndex = 7;
+            this.btnScoreStandardEdit.Text = "編輯";
+            this.btnScoreStandardEdit.UseVisualStyleBackColor = true;
+            this.btnScoreStandardEdit.Click += new System.EventHandler(this.btnScoreStandardEdit_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 29);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(201, 12);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "分數設定限制: 0-10之間，小數點一位";
+            // 
             // frmAPA_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -835,6 +1012,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvPersonnelAssignment)).EndInit();
             this.flowLayoutPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).EndInit();
+            this.tbpScoreStandard.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
+            this.flowLayoutPanel8.ResumeLayout(false);
+            this.flowLayoutPanel9.ResumeLayout(false);
+            this.flowLayoutPanel9.PerformLayout();
+            this.tableLayoutPanel7.ResumeLayout(false);
+            this.tableLayoutPanel7.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -880,7 +1065,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
         private System.Windows.Forms.Button btnQuestionAssignmentCancel;
         private System.Windows.Forms.Button btnQuestionAssignmentSave;
-        private System.Windows.Forms.Label lblQuestionAssignmentQuestionCategory;
         private System.Windows.Forms.TextBox txtQuestionAssignmentQuestionBody;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.Label label2;
@@ -895,5 +1079,19 @@
         private System.Windows.Forms.ComboBox cbxQuestionAssignmentEmp;
         private System.Windows.Forms.Button btnQuestionAssignmentAddEmp;
         private System.Windows.Forms.Button btnQuestionAssignmentRemoveEmp;
+        private System.Windows.Forms.Label lblQuestionAssignmentQuestionCategory;
+        private System.Windows.Forms.Label lblQuestionAssignmentQuestionID;
+        private System.Windows.Forms.TabPage tbpScoreStandard;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.TextBox txtScoreStandardTabMemo;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel8;
+        private System.Windows.Forms.Button btnScoreStandardCancel;
+        private System.Windows.Forms.Button btnScoreStandardSave;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel9;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtScoreStandardStandard;
+        private System.Windows.Forms.Button btnScoreStandardEdit;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
+        private System.Windows.Forms.Label label4;
     }
 }

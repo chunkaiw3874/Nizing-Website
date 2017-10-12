@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -45,6 +46,11 @@ namespace NIZING_BACKEND_Data_Config
         private FunctionMode questionAssignmentTabMode = FunctionMode.STATIC;
         #endregion
 
+        #region 特評分數設定 Universal Variable
+        private FunctionMode scoreStandardTabMode = FunctionMode.STATIC;
+        decimal scoreStandardValue;
+        #endregion
+
         public frmAPA_Main()
         {
             InitializeComponent();
@@ -77,7 +83,10 @@ namespace NIZING_BACKEND_Data_Config
             #region 問題分配 Initialization
             questionAssignmentTabMode = FunctionMode.STATIC;
             #endregion
-
+            #region 特評分數設定 Init
+            scoreStandardTabMode = FunctionMode.STATIC;
+            LoadScoreStandard();
+            #endregion
         }
 
         #region Frame Methods and Events
@@ -100,6 +109,7 @@ namespace NIZING_BACKEND_Data_Config
                 && questionTabMode == FunctionMode.STATIC
                 && personnelAssignmentTabMode == FunctionMode.STATIC
                 && questionAssignmentTabMode == FunctionMode.STATIC
+                && scoreStandardTabMode == FunctionMode.STATIC
                 )
             {
                 currentTabPage = tbcManagement.SelectedTab;
@@ -184,6 +194,23 @@ namespace NIZING_BACKEND_Data_Config
                             break;
                         case FunctionMode.EDIT:
                             tlpQuestionAssignmentAll.Enabled = true;
+                            break;
+                    }
+                    break;
+                case "tbpScoreStandard":
+                    switch (scoreStandardTabMode)
+                    {
+                        case FunctionMode.STATIC:
+                            btnScoreStandardEdit.Enabled = true;
+                            btnScoreStandardSave.Enabled = false;
+                            btnScoreStandardCancel.Enabled = false;
+                            txtScoreStandardStandard.Enabled = false;
+                            break;
+                        case FunctionMode.EDIT:
+                            btnScoreStandardEdit.Enabled = false;
+                            btnScoreStandardSave.Enabled = true;
+                            btnScoreStandardCancel.Enabled = true;
+                            txtScoreStandardStandard.Enabled = true;
                             break;
                     }
                     break;
@@ -696,7 +723,7 @@ namespace NIZING_BACKEND_Data_Config
                 tbcManagement.SelectedTab = tbpQuestionAssignment;
                 questionAssignmentTabMode = FunctionMode.EDIT;
                 LoadControlStatus(currentTabPage);
-                loadQuestionAssignment();
+                LoadQuestionAssignment();
             }
         }
         
@@ -952,9 +979,10 @@ namespace NIZING_BACKEND_Data_Config
          * 問題分配跟其他TAB的差別在於，問題分配是由right click on問題建立中的問題進入的，而非直接選取TAB
          */
         #region 問題分配 Tab Methods and Events
-        private void loadQuestionAssignment()
+        private void LoadQuestionAssignment()
         {
-            lblQuestionAssignmentQuestionCategory.Text = gvQuestion.CurrentRow.Cells["分類"].FormattedValue.ToString();
+            lblQuestionAssignmentQuestionID.Text = gvQuestion.CurrentRow.Cells["ID"].FormattedValue.ToString();
+            lblQuestionAssignmentQuestionCategory.Text = gvQuestion.CurrentRow.Cells["分類"].FormattedValue.ToString();            
             if ((bool)gvQuestion.CurrentRow.Cells["使用中"].FormattedValue)
             {
                 txtQuestionAssignmentQuestionBody.Text = "";
@@ -969,10 +997,43 @@ namespace NIZING_BACKEND_Data_Config
             }
             txtQuestionAssignmentQuestionBody.Text += gvQuestion.CurrentRow.Cells["問題"].FormattedValue.ToString();
             //Load listview
+            LoadQuestionAssignmentDeptListView();
+            LoadQuestionAssignmentEmpListView();
+            //Load combobox     
+            LoadcbxQuestionAssignmentDept();
+            LoadcbxQuestionAssignmentEmp();
+            if (cbxQuestionAssignmentDept.Items.Count > 0)
+            {
+                btnQuestionAssignmentAddDept.Enabled = true;
+                cbxQuestionAssignmentDept.SelectedIndex = 0;
+            }
+            else
+            {
+                btnQuestionAssignmentAddDept.Enabled = false;
+            }
+            if (cbxQuestionAssignmentEmp.Items.Count > 0)
+            {
+                btnQuestionAssignmentAddEmp.Enabled = true;
+                cbxQuestionAssignmentEmp.SelectedIndex = 0;
+            }
+            else
+            {
+                btnQuestionAssignmentAddEmp.Enabled = false;
+            }
+        }
+        private void LoadQuestionAssignmentDeptListView()
+        {
             Dictionary<string, string> dictQuestionAssignmentDept = new Dictionary<string, string>();
-            Dictionary<string, string> dictQuestionAssignmentEmp = new Dictionary<string, string>();            
             lvQuestionAssignmentDept.Clear();
-            lvQuestionAssignmentEmp.Clear();
+            dictQuestionAssignmentDept = GetCurrentDeptList();
+            foreach (KeyValuePair<string, string> kvp in dictQuestionAssignmentDept)
+            {
+                lvQuestionAssignmentDept.Items.Add(kvp.Key + " " + kvp.Value);
+            }
+        }
+        private Dictionary<string, string> GetCurrentDeptList()
+        {
+            Dictionary<string, string> returnDict = new Dictionary<string, string>();
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
@@ -982,7 +1043,7 @@ namespace NIZING_BACKEND_Data_Config
                             + " WHERE QUESTION_ID=@QUESTION_ID"
                             + " ORDER BY ASSIGN.DEPT";
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@QUESTION_ID", Convert.ToInt16(gvQuestion.CurrentRow.Cells["ID"].FormattedValue));                
+                cmd.Parameters.AddWithValue("@QUESTION_ID", Convert.ToInt16(gvQuestion.CurrentRow.Cells["ID"].FormattedValue));
                 using (SqlDataReader dr = cmd.ExecuteReader())
                 {
                     if (dr.HasRows)
@@ -991,12 +1052,29 @@ namespace NIZING_BACKEND_Data_Config
                         {
                             if (!string.IsNullOrWhiteSpace(dr.GetString(1)))
                             {
-                                lvQuestionAssignmentDept.Items.Add(dr.GetString(1) + " " + dr.GetString(2));
+                                string keyVal = dr.GetString(1);
+                                string valVal = dr.GetString(2);
+                                returnDict.Add(keyVal, valVal);
                             }
                         }
                     }
                 }
             }
+            return returnDict;
+        }
+        private void LoadQuestionAssignmentEmpListView()
+        {
+            Dictionary<string, string> dictQuestionAssignmentEmp = new Dictionary<string, string>();
+            lvQuestionAssignmentEmp.Clear();
+            dictQuestionAssignmentEmp = GetCurrentEmpList();
+            foreach (KeyValuePair<string, string> kvp in dictQuestionAssignmentEmp)
+            {
+                lvQuestionAssignmentEmp.Items.Add(kvp.Key + " " + kvp.Value);
+            }
+        }
+        private Dictionary<string, string> GetCurrentEmpList()
+        {
+            Dictionary<string, string> returnDict = new Dictionary<string, string>();
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
@@ -1016,19 +1094,31 @@ namespace NIZING_BACKEND_Data_Config
                         {
                             if (!string.IsNullOrWhiteSpace(dr.GetString(1)))
                             {
-                                lvQuestionAssignmentEmp.Items.Add(dr.GetString(1) + " " + dr.GetString(2));
+                                string keyVal = dr.GetString(1);
+                                string valVal = dr.GetString(2);
+                                returnDict.Add(keyVal, valVal);
                             }
                         }
                     }
                 }
             }
-            //Load combobox
+            return returnDict;
+        }
+        private void LoadcbxQuestionAssignmentDept()
+        {
             Dictionary<string, string> dictFullDeptList = new Dictionary<string, string>();
-            Dictionary<string, string> dictFullEmpList = new Dictionary<string, string>();
-            Dictionary<string, string> dictcbxQuestionAssignmentDeptSource = new Dictionary<string,string>();
-            Dictionary<string, string> dictcbxQuestionAssignmentEmpSource = new Dictionary<string,string>();
+            Dictionary<string, string> dictcbxQuestionAssignmentDeptSource = new Dictionary<string, string>();
             cbxQuestionAssignmentDept.Items.Clear();
-            cbxQuestionAssignmentEmp.Items.Clear();
+            dictFullDeptList = GetFullDeptList();
+            dictcbxQuestionAssignmentDeptSource = RemoveItemsInListViewFromDictionary(dictFullDeptList, lvQuestionAssignmentDept);
+            foreach (KeyValuePair<string, string> kvp in dictcbxQuestionAssignmentDeptSource)
+            {
+                cbxQuestionAssignmentDept.Items.Add(kvp.Key + " " + kvp.Value);
+            }
+        }
+        private Dictionary<string, string> GetFullDeptList()
+        {
+            Dictionary<string, string> returnDict = new Dictionary<string, string>();
             using (SqlConnection conn = new SqlConnection(NZConnectionString))
             {
                 conn.Open();
@@ -1036,17 +1126,36 @@ namespace NIZING_BACKEND_Data_Config
                             + " FROM CMSME ME"
                             + " ORDER BY ME.ME001";
                 SqlCommand cmd = new SqlCommand(query, conn);
-                //load all dept
                 using (SqlDataReader dr = cmd.ExecuteReader())
                 {
-                    while (dr.Read())
+                    if (dr.HasRows)
                     {
-                        string keyVal = dr.GetString(0);
-                        string valVal = dr.GetString(1);
-                        dictFullDeptList.Add(keyVal, valVal);
+                        while (dr.Read())
+                        {
+                            string keyVal = dr.GetString(0);
+                            string valVal = dr.GetString(1);
+                            returnDict.Add(keyVal, valVal);
+                        }
                     }
                 }
             }
+            return returnDict;
+        }
+        private void LoadcbxQuestionAssignmentEmp()
+        {
+            Dictionary<string, string> dictFullEmpList = new Dictionary<string, string>();
+            Dictionary<string, string> dictcbxQuestionAssignmentEmpSource = new Dictionary<string, string>();
+            cbxQuestionAssignmentEmp.Items.Clear();
+            dictFullEmpList = GetFullEmpList();
+            dictcbxQuestionAssignmentEmpSource = RemoveItemsInListViewFromDictionary(dictFullEmpList, lvQuestionAssignmentEmp);
+            foreach (KeyValuePair<string, string> kvp in dictcbxQuestionAssignmentEmpSource)
+            {
+                cbxQuestionAssignmentEmp.Items.Add(kvp.Key + " " + kvp.Value);
+            }
+        }
+        private Dictionary<string, string> GetFullEmpList()
+        {
+            Dictionary<string, string> returnDict = new Dictionary<string, string>();
             using (SqlConnection conn = new SqlConnection(NZConnectionString))
             {
                 conn.Open();
@@ -1058,45 +1167,18 @@ namespace NIZING_BACKEND_Data_Config
                             + " AND MV.MV001 NOT LIKE 'PT%'"
                             + " ORDER BY MV.MV001";
                 SqlCommand cmd = new SqlCommand(query, conn);
-                //load all dept
+                //load all emp
                 using (SqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {
                         string keyVal = dr.GetString(0);
                         string valVal = dr.GetString(1);
-                        dictFullEmpList.Add(keyVal, valVal);
+                        returnDict.Add(keyVal, valVal);
                     }
                 }
             }
-            dictcbxQuestionAssignmentDeptSource = RemoveItemsInListViewFromDictionary(dictFullDeptList, lvQuestionAssignmentDept);
-            foreach (KeyValuePair<string, string> kvp in dictcbxQuestionAssignmentDeptSource)
-            {
-                cbxQuestionAssignmentDept.Items.Add(kvp.Key + " " + kvp.Value);
-            }
-            if (cbxQuestionAssignmentDept.Items.Count > 0)
-            {
-                btnQuestionAssignmentAddDept.Enabled = true;
-                cbxQuestionAssignmentDept.SelectedIndex = 0;
-            }
-            else
-            {
-                btnQuestionAssignmentAddDept.Enabled = false;
-            }
-            dictcbxQuestionAssignmentEmpSource = RemoveItemsInListViewFromDictionary(dictFullEmpList, lvQuestionAssignmentEmp);
-            foreach (KeyValuePair<string, string> kvp in dictcbxQuestionAssignmentEmpSource)
-            {
-                cbxQuestionAssignmentEmp.Items.Add(kvp.Key + " " + kvp.Value);
-            }
-            if (cbxQuestionAssignmentEmp.Items.Count > 0)
-            {
-                btnQuestionAssignmentAddEmp.Enabled = true;
-                cbxQuestionAssignmentEmp.SelectedIndex = 0;
-            }
-            else
-            {
-                btnQuestionAssignmentAddEmp.Enabled = false;
-            }
+            return returnDict;
         }
         private string[] SplitString(string s, string[] stringSeparators)
         {
@@ -1208,9 +1290,196 @@ namespace NIZING_BACKEND_Data_Config
         }
         private void btnQuestionAssignmentCancel_Click(object sender, EventArgs e)
         {
+            LoadQuestionAssignment();
             questionAssignmentTabMode = FunctionMode.STATIC;
             LoadControlStatus(currentTabPage);
+            txtQuestionAssignmentTabMemo.Text += DateTime.Now.ToString() + " 問題" + lblQuestionAssignmentQuestionID.Text + "資料更新取消" + Environment.NewLine;
+        }
+
+        private void btnQuestionAssignmentSave_Click(object sender, EventArgs e)
+        {
+            Dictionary<string, string> dictDeptInListView = new Dictionary<string, string>();
+            Dictionary<string, string> dictEmpInListView = new Dictionary<string, string>();
+            Dictionary<string, string> dictDeptNotInList = new Dictionary<string, string>();
+            Dictionary<string, string> dictEmpNotInList = new Dictionary<string, string>();
+
+            dictDeptInListView = GetItemsFromListView(lvQuestionAssignmentDept);
+            dictDeptNotInList = GetFullDeptList();
+            foreach (KeyValuePair<string, string> kvp in dictDeptInListView)
+            {
+                dictDeptNotInList.Remove(kvp.Key);
+            }
+            dictEmpInListView = GetItemsFromListView(lvQuestionAssignmentEmp);
+            dictEmpNotInList = GetFullEmpList();
+            foreach (KeyValuePair<string, string> kvp in dictEmpInListView)
+            {
+                dictEmpNotInList.Remove(kvp.Key);
+            }
+
+            foreach (KeyValuePair<string, string> kvp in dictDeptNotInList)
+            {
+                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                {
+                    conn.Open();
+                    string query = "DELETE FROM HR360_ASSESSMENTQUESTION_ASSIGNMENT_A"
+                                + " WHERE QUESTION_ID=@ID"
+                                + " AND DEPT=@DEPT";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@ID", lblQuestionAssignmentQuestionID.Text);
+                    cmd.Parameters.AddWithValue("@DEPT", kvp.Key);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            foreach (KeyValuePair<string, string> kvp in dictEmpNotInList)
+            {
+                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                {
+                    conn.Open();
+                    string query = "DELETE FROM HR360_ASSESSMENTQUESTION_ASSIGNMENT_A"
+                                + " WHERE QUESTION_ID=@ID"
+                                + " AND EMP_ID=@EMP";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@ID", lblQuestionAssignmentQuestionID.Text);
+                    cmd.Parameters.AddWithValue("@EMP", kvp.Key);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            foreach (KeyValuePair<string, string> kvp in dictDeptInListView)
+            {
+                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT QUESTION_ID, DEPT"
+                                + " FROM HR360_ASSESSMENTQUESTION_ASSIGNMENT_A"
+                                + " WHERE QUESTION_ID=@ID"
+                                + " AND DEPT=@DEPT";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@ID", lblQuestionAssignmentQuestionID.Text);
+                    cmd.Parameters.AddWithValue("@DEPT", kvp.Key);
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (!dr.HasRows)
+                        {
+                            query = "INSERT INTO HR360_ASSESSMENTQUESTION_ASSIGNMENT_A"
+                                + " VALUES"
+                                + " (GETDATE(), @USERNAME, GETDATE(), @USERNAME, @ID, @DEPT, '')";
+                            SqlCommand cmdInsert = new SqlCommand(query, conn);
+                            cmdInsert.Parameters.AddWithValue("@USERNAME", UserName);
+                            cmdInsert.Parameters.AddWithValue("@ID", lblQuestionAssignmentQuestionID.Text);
+                            cmdInsert.Parameters.AddWithValue("@DEPT", kvp.Key);
+                            cmdInsert.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+            foreach (KeyValuePair<string, string> kvp in dictEmpInListView)
+            {
+                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT QUESTION_ID, EMP_ID"
+                                + " FROM HR360_ASSESSMENTQUESTION_ASSIGNMENT_A"
+                                + " WHERE QUESTION_ID=@ID"
+                                + " AND EMP_ID=@EMP";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@ID", lblQuestionAssignmentQuestionID.Text);
+                    cmd.Parameters.AddWithValue("@EMP", kvp.Key);
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (!dr.HasRows)
+                        {
+                            query = "INSERT INTO HR360_ASSESSMENTQUESTION_ASSIGNMENT_A"
+                                + " VALUES"
+                                + " (GETDATE(), @USERNAME, GETDATE(), @USERNAME, @ID, '', @EMP)";
+                            SqlCommand cmdInsert = new SqlCommand(query, conn);
+                            cmdInsert.Parameters.AddWithValue("@USERNAME", UserName);
+                            cmdInsert.Parameters.AddWithValue("@ID", lblQuestionAssignmentQuestionID.Text);
+                            cmdInsert.Parameters.AddWithValue("@EMP", kvp.Key);
+                            cmdInsert.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+            txtQuestionAssignmentTabMemo.Text += DateTime.Now.ToString() + " 問題" + lblQuestionAssignmentQuestionID.Text + "資料更新完成" + Environment.NewLine;
+            questionAssignmentTabMode = FunctionMode.STATIC;
+            LoadControlStatus(currentTabPage);
+            
         }
         #endregion
+
+        #region 特評分數設定 Tab Methods and Events
+        private void LoadScoreStandard()
+        {
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT *"
+                            + " FROM HR360_ASSESSMENTSCORE_STANDARD";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                scoreStandardValue = Convert.ToDecimal(cmd.ExecuteScalar());
+            }
+            txtScoreStandardStandard.Text = scoreStandardValue.ToString();
+        }
+
+        private void btnScoreStandardEdit_Click(object sender, EventArgs e)
+        {
+            txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " 特評標準編輯開始" + Environment.NewLine;
+            scoreStandardTabMode = FunctionMode.EDIT;
+            LoadControlStatus(currentTabPage);
+        }
+
+        private void btnScoreStandardCancel_Click(object sender, EventArgs e)
+        {
+            txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " 特評標準變更取消" + Environment.NewLine;
+            LoadScoreStandard();
+            scoreStandardTabMode = FunctionMode.STATIC;
+            LoadControlStatus(currentTabPage);
+        }
+
+        private void btnScoreStandardSave_Click(object sender, EventArgs e)
+        {
+            bool containsError = false;
+            decimal d;
+            
+            if (!decimal.TryParse(txtScoreStandardStandard.Text, out d))
+            {
+                txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " Error: 輸入格式非數字" + Environment.NewLine;
+                containsError = true;
+            }
+            else
+            {
+                if (d < 0 || d > 10)
+                {
+                    txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " Error: 輸入數字超出範圍" + Environment.NewLine;
+                    containsError = true;
+                }
+                if ((d * 100) % 10 != 0)
+                {
+                    txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " Error: 小數點僅能一位" + Environment.NewLine;
+                    containsError = true;
+                }
+            }
+
+            if (!containsError)
+            {
+                txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " 變更完成:特評標準從" + scoreStandardValue.ToString() +"變更為" + txtScoreStandardStandard.Text + Environment.NewLine;
+                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                {
+                    conn.Open();
+                    string query = "UPDATE HR360_ASSESSMENTSCORE_STANDARD"
+                                + " SET SCORE_STANDARD = @STANDARD";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@STANDARD", txtScoreStandardStandard.Text);
+                    cmd.ExecuteNonQuery();
+                }
+                LoadScoreStandard();                
+                scoreStandardTabMode = FunctionMode.STATIC;
+                LoadControlStatus(currentTabPage);
+            }            
+        }
+        #endregion
+
+
     }
 }

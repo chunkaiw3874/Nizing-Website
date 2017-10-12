@@ -857,8 +857,16 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
 
             //更新:2017.01.19 PER 吉田，移除特評制度
             //更新:2017.01.20 PER CHRISSY，恢復使用特評制度
-            double standard = 8.7; //特評標準分數的門檻 need edit annually
+            double standard //特評標準分數的門檻, retrieve from database HR360_ASSESSMENTSCORE_STANDARD
             double d;
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT *"
+                            + " FROM HR360_ASSESSMENTSCORE_STANDARD";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                standard = cmd.ExecuteNonQuery();
+            }            
             if (double.TryParse(hfFinalScore.Value, out d))
             {
                 if (lblEvalType.Text == "主管評" || lblEvalType.Text == "特評") //自評不需特別assign
