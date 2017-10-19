@@ -266,16 +266,28 @@ public partial class hr360_UI05 : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
-            //edit annually
             //讀取有權限才能看的清單
-            if (Session["erp_id"].ToString().Trim() == "0007" || Session["erp_id"].ToString().Trim() == "0080" || Session["erp_id"].ToString().Trim()=="0067" || Session["erp_id"].ToString().Trim()=="0006")
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
-                divAdminViewList.Visible = true;
-                loadAdminEvalList();
-            }
-            else
-            {
-                divAdminViewList.Visible = false;
+                conn.Open();
+                string query = "SELECT *"
+                            + " FROM HR360_ASSESSMENTREPORT_PRIVILEDGE"
+                            + " WHERE [ERP_ID]=@ID"
+                            + " AND [VIEW]='1'";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    if (dr.HasRows)
+                    {
+                        divAdminViewList.Visible = true;
+                        loadAdminEvalList();
+                    }
+                    else
+                    {
+                        divAdminViewList.Visible = false;
+                    }
+                }
             }
         }
 
