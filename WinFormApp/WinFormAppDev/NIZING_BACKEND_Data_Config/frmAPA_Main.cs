@@ -51,6 +51,11 @@ namespace NIZING_BACKEND_Data_Config
         decimal scoreStandardValue;
         #endregion
 
+        #region 帳號權限 Universal Variable
+        private FunctionMode accountPriviledgeTabMode = FunctionMode.STATIC;
+        DataTable dtAccountPriviledgeSource = new DataTable();
+        #endregion
+
         public frmAPA_Main()
         {
             InitializeComponent();
@@ -87,6 +92,12 @@ namespace NIZING_BACKEND_Data_Config
             scoreStandardTabMode = FunctionMode.STATIC;
             LoadScoreStandard();
             #endregion
+            #region 帳號權限 Init
+            dtAccountPriviledgeSource = LoadgvAccountPriviledge();
+            gvAccountPriviledge.DataSource = dtAccountPriviledgeSource;
+            LoadControlStatus(tbpAccountPriviledge);
+            accountPriviledgeTabMode = FunctionMode.STATIC;
+            #endregion
         }
 
         #region Frame Methods and Events
@@ -110,6 +121,7 @@ namespace NIZING_BACKEND_Data_Config
                 && personnelAssignmentTabMode == FunctionMode.STATIC
                 && questionAssignmentTabMode == FunctionMode.STATIC
                 && scoreStandardTabMode == FunctionMode.STATIC
+                && accountPriviledgeTabMode == FunctionMode.STATIC
                 )
             {
                 currentTabPage = tbcManagement.SelectedTab;
@@ -211,6 +223,27 @@ namespace NIZING_BACKEND_Data_Config
                             btnScoreStandardSave.Enabled = true;
                             btnScoreStandardCancel.Enabled = true;
                             txtScoreStandardStandard.Enabled = true;
+                            break;
+                    }
+                    break;
+                case "tbpAccountPriviledge":
+                    switch (accountPriviledgeTabMode)
+                    {
+                        case FunctionMode.STATIC:
+                            btnAccountPriviledgeEdit.Enabled = true;
+                            btnAccountPriviledgeSave.Enabled = false;
+                            btnAccountPriviledgeCancel.Enabled = false;
+                            gvAccountPriviledge.ReadOnly = true;
+                            gvAccountPriviledge.ForeColor = Color.Gray;
+                            LoadGridViewStyle(gvAccountPriviledge);
+                            break;
+                        case FunctionMode.EDIT:
+                            btnAccountPriviledgeEdit.Enabled = false;
+                            btnAccountPriviledgeSave.Enabled = true;
+                            btnAccountPriviledgeCancel.Enabled = true;
+                            gvAccountPriviledge.ReadOnly = false;
+                            gvAccountPriviledge.ForeColor = Color.Black;
+                            LoadGridViewStyle(gvAccountPriviledge);
                             break;
                     }
                     break;
@@ -364,6 +397,22 @@ namespace NIZING_BACKEND_Data_Config
                         {
                             row.DefaultCellStyle.BackColor = Color.White;
                         }
+                    }
+                    break;
+                case "gvAccountPriviledge":
+                    gv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                    gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["ID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["閱覽報表權限"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    foreach (DataGridViewRow row in gv.Rows)
+                    {
+                        DataGridViewCheckBoxCell ckbView = new DataGridViewCheckBoxCell()
+                        {
+                            TrueValue = "1",
+                            FalseValue = "0"
+                        };
+                        ckbView.Style.NullValue = false;
+                        row.Cells["閱覽報表權限"] = ckbView;
                     }
                     break;
             }
@@ -1480,6 +1529,33 @@ namespace NIZING_BACKEND_Data_Config
         }
         #endregion
 
+
+
+        #region 帳戶權限設定 Tab Methods and Events
+        private DataTable LoadgvAccountPriviledge()
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT PRIV.ERP_ID 'ID', MV.MV002 '名稱', PRIV.[VIEW] '閱覽報表權限'"
+                            + " FROM HR360_ASSESSMENTPRIVILEDGE PRIV"
+                            + " LEFT JOIN NZ.dbo.CMSMV MV ON PRIV.ERP_ID=MV.MV001"
+                            + " WHERE MV.MV022=''"
+                            + " ORDER BY MV.MV001";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            return dt;
+        }
+
+        private void btnAccountPriviledgeEdit_Click(object sender, EventArgs e)
+        {
+            accountPriviledgeTabMode = FunctionMode.EDIT;
+            LoadControlStatus(currentTabPage);
+        }
+        #endregion
 
     }
 }

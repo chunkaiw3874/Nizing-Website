@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnLogout = new System.Windows.Forms.Button();
             this.tbcManagement = new System.Windows.Forms.TabControl();
@@ -84,20 +85,28 @@
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.cbxPersonnelAssignmentYear = new System.Windows.Forms.ComboBox();
             this.btnPersonnelAssignmentEdit = new System.Windows.Forms.Button();
-            this.dsAPA_Question = new NIZING_BACKEND_Data_Config.dsAPA_Question();
-            this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter = new NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter();
             this.tbpScoreStandard = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnScoreStandardEdit = new System.Windows.Forms.Button();
             this.txtScoreStandardTabMemo = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnScoreStandardCancel = new System.Windows.Forms.Button();
             this.btnScoreStandardSave = new System.Windows.Forms.Button();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtScoreStandardStandard = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnScoreStandardEdit = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.tbpAccountPriviledge = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.flowLayoutPanel10 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnAccountPriviledgeCancel = new System.Windows.Forms.Button();
+            this.btnAccountPriviledgeSave = new System.Windows.Forms.Button();
+            this.gvAccountPriviledge = new System.Windows.Forms.DataGridView();
+            this.btnAccountPriviledgeEdit = new System.Windows.Forms.Button();
+            this.txtAccountPriviledgeMemo = new System.Windows.Forms.RichTextBox();
+            this.dsAPA_Question = new NIZING_BACKEND_Data_Config.dsAPA_Question();
+            this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter = new NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpQuestionCategory.SuspendLayout();
@@ -120,12 +129,16 @@
             this.flowLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvPersonnelAssignment)).BeginInit();
             this.flowLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).BeginInit();
             this.tbpScoreStandard.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.flowLayoutPanel8.SuspendLayout();
-            this.flowLayoutPanel9.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
+            this.flowLayoutPanel9.SuspendLayout();
+            this.tbpAccountPriviledge.SuspendLayout();
+            this.tableLayoutPanel8.SuspendLayout();
+            this.flowLayoutPanel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvAccountPriviledge)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -164,6 +177,7 @@
             this.tbcManagement.Controls.Add(this.tbpQuestionAssignment);
             this.tbcManagement.Controls.Add(this.tbpPersonnelAssignment);
             this.tbcManagement.Controls.Add(this.tbpScoreStandard);
+            this.tbcManagement.Controls.Add(this.tbpAccountPriviledge);
             this.tbcManagement.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcManagement.Location = new System.Drawing.Point(0, 26);
             this.tbcManagement.Margin = new System.Windows.Forms.Padding(0);
@@ -820,15 +834,6 @@
             this.btnPersonnelAssignmentEdit.UseVisualStyleBackColor = true;
             this.btnPersonnelAssignmentEdit.Click += new System.EventHandler(this.btnPersonnelAssignmentEdit_Click);
             // 
-            // dsAPA_Question
-            // 
-            this.dsAPA_Question.DataSetName = "dsAPA_Question";
-            this.dsAPA_Question.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter
-            // 
-            this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter.ClearBeforeFill = true;
-            // 
             // tbpScoreStandard
             // 
             this.tbpScoreStandard.Controls.Add(this.tableLayoutPanel5);
@@ -862,6 +867,16 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(1170, 804);
             this.tableLayoutPanel5.TabIndex = 1;
+            // 
+            // btnScoreStandardEdit
+            // 
+            this.btnScoreStandardEdit.Location = new System.Drawing.Point(4, 4);
+            this.btnScoreStandardEdit.Name = "btnScoreStandardEdit";
+            this.btnScoreStandardEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnScoreStandardEdit.TabIndex = 7;
+            this.btnScoreStandardEdit.Text = "編輯";
+            this.btnScoreStandardEdit.UseVisualStyleBackColor = true;
+            this.btnScoreStandardEdit.Click += new System.EventHandler(this.btnScoreStandardEdit_Click);
             // 
             // txtScoreStandardTabMemo
             // 
@@ -911,6 +926,23 @@
             this.btnScoreStandardSave.UseVisualStyleBackColor = true;
             this.btnScoreStandardSave.Click += new System.EventHandler(this.btnScoreStandardSave_Click);
             // 
+            // tableLayoutPanel7
+            // 
+            this.tableLayoutPanel7.ColumnCount = 1;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel7.Controls.Add(this.flowLayoutPanel9, 0, 0);
+            this.tableLayoutPanel7.Controls.Add(this.label4, 0, 1);
+            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(1, 31);
+            this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 2;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(1168, 641);
+            this.tableLayoutPanel7.TabIndex = 6;
+            // 
             // flowLayoutPanel9
             // 
             this.flowLayoutPanel9.Controls.Add(this.label1);
@@ -939,33 +971,6 @@
             this.txtScoreStandardStandard.Size = new System.Drawing.Size(100, 22);
             this.txtScoreStandardStandard.TabIndex = 1;
             // 
-            // tableLayoutPanel7
-            // 
-            this.tableLayoutPanel7.ColumnCount = 1;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel7.Controls.Add(this.flowLayoutPanel9, 0, 0);
-            this.tableLayoutPanel7.Controls.Add(this.label4, 0, 1);
-            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(1, 31);
-            this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.tableLayoutPanel7.RowCount = 2;
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(1168, 641);
-            this.tableLayoutPanel7.TabIndex = 6;
-            // 
-            // btnScoreStandardEdit
-            // 
-            this.btnScoreStandardEdit.Location = new System.Drawing.Point(4, 4);
-            this.btnScoreStandardEdit.Name = "btnScoreStandardEdit";
-            this.btnScoreStandardEdit.Size = new System.Drawing.Size(75, 23);
-            this.btnScoreStandardEdit.TabIndex = 7;
-            this.btnScoreStandardEdit.Text = "編輯";
-            this.btnScoreStandardEdit.UseVisualStyleBackColor = true;
-            this.btnScoreStandardEdit.Click += new System.EventHandler(this.btnScoreStandardEdit_Click);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -974,6 +979,123 @@
             this.label4.Size = new System.Drawing.Size(201, 12);
             this.label4.TabIndex = 6;
             this.label4.Text = "分數設定限制: 0-10之間，小數點一位";
+            // 
+            // tbpAccountPriviledge
+            // 
+            this.tbpAccountPriviledge.Controls.Add(this.tableLayoutPanel8);
+            this.tbpAccountPriviledge.Location = new System.Drawing.Point(4, 22);
+            this.tbpAccountPriviledge.Name = "tbpAccountPriviledge";
+            this.tbpAccountPriviledge.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpAccountPriviledge.Size = new System.Drawing.Size(1176, 810);
+            this.tbpAccountPriviledge.TabIndex = 5;
+            this.tbpAccountPriviledge.Text = "帳號權限";
+            this.tbpAccountPriviledge.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel8
+            // 
+            this.tableLayoutPanel8.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel8.ColumnCount = 1;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.Controls.Add(this.flowLayoutPanel10, 0, 2);
+            this.tableLayoutPanel8.Controls.Add(this.gvAccountPriviledge, 0, 1);
+            this.tableLayoutPanel8.Controls.Add(this.btnAccountPriviledgeEdit, 0, 0);
+            this.tableLayoutPanel8.Controls.Add(this.txtAccountPriviledgeMemo, 0, 3);
+            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
+            this.tableLayoutPanel8.RowCount = 4;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(1170, 804);
+            this.tableLayoutPanel8.TabIndex = 2;
+            // 
+            // flowLayoutPanel10
+            // 
+            this.flowLayoutPanel10.CausesValidation = false;
+            this.flowLayoutPanel10.Controls.Add(this.btnAccountPriviledgeCancel);
+            this.flowLayoutPanel10.Controls.Add(this.btnAccountPriviledgeSave);
+            this.flowLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel10.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel10.Location = new System.Drawing.Point(1, 673);
+            this.flowLayoutPanel10.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel10.Name = "flowLayoutPanel10";
+            this.flowLayoutPanel10.Size = new System.Drawing.Size(1168, 29);
+            this.flowLayoutPanel10.TabIndex = 0;
+            // 
+            // btnAccountPriviledgeCancel
+            // 
+            this.btnAccountPriviledgeCancel.CausesValidation = false;
+            this.btnAccountPriviledgeCancel.Enabled = false;
+            this.btnAccountPriviledgeCancel.Location = new System.Drawing.Point(1090, 3);
+            this.btnAccountPriviledgeCancel.Name = "btnAccountPriviledgeCancel";
+            this.btnAccountPriviledgeCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnAccountPriviledgeCancel.TabIndex = 0;
+            this.btnAccountPriviledgeCancel.Text = "取消";
+            this.btnAccountPriviledgeCancel.UseVisualStyleBackColor = true;
+            // 
+            // btnAccountPriviledgeSave
+            // 
+            this.btnAccountPriviledgeSave.Enabled = false;
+            this.btnAccountPriviledgeSave.Location = new System.Drawing.Point(1009, 3);
+            this.btnAccountPriviledgeSave.Name = "btnAccountPriviledgeSave";
+            this.btnAccountPriviledgeSave.Size = new System.Drawing.Size(75, 23);
+            this.btnAccountPriviledgeSave.TabIndex = 1;
+            this.btnAccountPriviledgeSave.Text = "儲存";
+            this.btnAccountPriviledgeSave.UseVisualStyleBackColor = true;
+            // 
+            // gvAccountPriviledge
+            // 
+            this.gvAccountPriviledge.AllowUserToAddRows = false;
+            this.gvAccountPriviledge.AllowUserToResizeRows = false;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvAccountPriviledge.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.gvAccountPriviledge.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvAccountPriviledge.ContextMenuStrip = this.ctxmsQuestion;
+            this.gvAccountPriviledge.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gvAccountPriviledge.Location = new System.Drawing.Point(4, 34);
+            this.gvAccountPriviledge.MultiSelect = false;
+            this.gvAccountPriviledge.Name = "gvAccountPriviledge";
+            this.gvAccountPriviledge.RowTemplate.Height = 24;
+            this.gvAccountPriviledge.Size = new System.Drawing.Size(1162, 635);
+            this.gvAccountPriviledge.TabIndex = 1;
+            // 
+            // btnAccountPriviledgeEdit
+            // 
+            this.btnAccountPriviledgeEdit.Location = new System.Drawing.Point(4, 4);
+            this.btnAccountPriviledgeEdit.Name = "btnAccountPriviledgeEdit";
+            this.btnAccountPriviledgeEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnAccountPriviledgeEdit.TabIndex = 3;
+            this.btnAccountPriviledgeEdit.Text = "編輯";
+            this.btnAccountPriviledgeEdit.UseVisualStyleBackColor = true;
+            this.btnAccountPriviledgeEdit.Click += new System.EventHandler(this.btnAccountPriviledgeEdit_Click);
+            // 
+            // txtAccountPriviledgeMemo
+            // 
+            this.txtAccountPriviledgeMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtAccountPriviledgeMemo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtAccountPriviledgeMemo.Location = new System.Drawing.Point(4, 706);
+            this.txtAccountPriviledgeMemo.Name = "txtAccountPriviledgeMemo";
+            this.txtAccountPriviledgeMemo.ReadOnly = true;
+            this.txtAccountPriviledgeMemo.Size = new System.Drawing.Size(1162, 94);
+            this.txtAccountPriviledgeMemo.TabIndex = 4;
+            this.txtAccountPriviledgeMemo.Text = "";
+            // 
+            // dsAPA_Question
+            // 
+            this.dsAPA_Question.DataSetName = "dsAPA_Question";
+            this.dsAPA_Question.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter
+            // 
+            this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter.ClearBeforeFill = true;
             // 
             // frmAPA_Main
             // 
@@ -1011,15 +1133,19 @@
             this.flowLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvPersonnelAssignment)).EndInit();
             this.flowLayoutPanel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).EndInit();
             this.tbpScoreStandard.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
             this.flowLayoutPanel8.ResumeLayout(false);
-            this.flowLayoutPanel9.ResumeLayout(false);
-            this.flowLayoutPanel9.PerformLayout();
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel7.PerformLayout();
+            this.flowLayoutPanel9.ResumeLayout(false);
+            this.flowLayoutPanel9.PerformLayout();
+            this.tbpAccountPriviledge.ResumeLayout(false);
+            this.tableLayoutPanel8.ResumeLayout(false);
+            this.flowLayoutPanel10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gvAccountPriviledge)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1093,5 +1219,13 @@
         private System.Windows.Forms.Button btnScoreStandardEdit;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TabPage tbpAccountPriviledge;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel10;
+        private System.Windows.Forms.Button btnAccountPriviledgeCancel;
+        private System.Windows.Forms.Button btnAccountPriviledgeSave;
+        private System.Windows.Forms.DataGridView gvAccountPriviledge;
+        private System.Windows.Forms.Button btnAccountPriviledgeEdit;
+        private System.Windows.Forms.RichTextBox txtAccountPriviledgeMemo;
     }
 }
