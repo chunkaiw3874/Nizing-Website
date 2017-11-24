@@ -271,7 +271,7 @@ public partial class hr360_UI05 : System.Web.UI.Page
             {
                 conn.Open();
                 string query = "SELECT *"
-                            + " FROM HR360_ASSESSMENTREPORT_PRIVILEDGE"
+                            + " FROM HR360_ASSESSMENTPRIVILEDGE"
                             + " WHERE [ERP_ID]=@ID"
                             + " AND [VIEW]='1'";
                 SqlCommand cmd = new SqlCommand(query, conn);

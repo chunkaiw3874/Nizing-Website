@@ -28,7 +28,7 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
         if (!IsPostBack)
         {
             assessed = Session["view_id"].ToString().Trim();
-            year = Session["view_year"].ToString().Trim();
+            year = Session["view_year"].ToString().Trim();                              
         }
         else
         {

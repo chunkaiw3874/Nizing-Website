@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnLogout = new System.Windows.Forms.Button();
             this.tbcManagement = new System.Windows.Forms.TabControl();
@@ -104,9 +104,16 @@
             this.btnAccountPriviledgeSave = new System.Windows.Forms.Button();
             this.gvAccountPriviledge = new System.Windows.Forms.DataGridView();
             this.btnAccountPriviledgeEdit = new System.Windows.Forms.Button();
-            this.txtAccountPriviledgeMemo = new System.Windows.Forms.RichTextBox();
+            this.txtAccountPriviledgeTabMemo = new System.Windows.Forms.RichTextBox();
             this.dsAPA_Question = new NIZING_BACKEND_Data_Config.dsAPA_Question();
             this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter = new NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter();
+            this.tbpReportPreview = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.cbxReportPreviewEmployee = new System.Windows.Forms.ComboBox();
+            this.btnReportPreviewPreview = new System.Windows.Forms.Button();
+            this.cbxReportPreviewYear = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpQuestionCategory.SuspendLayout();
@@ -139,6 +146,8 @@
             this.flowLayoutPanel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvAccountPriviledge)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).BeginInit();
+            this.tbpReportPreview.SuspendLayout();
+            this.tableLayoutPanel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -178,6 +187,7 @@
             this.tbcManagement.Controls.Add(this.tbpPersonnelAssignment);
             this.tbcManagement.Controls.Add(this.tbpScoreStandard);
             this.tbcManagement.Controls.Add(this.tbpAccountPriviledge);
+            this.tbcManagement.Controls.Add(this.tbpReportPreview);
             this.tbcManagement.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcManagement.Location = new System.Drawing.Point(0, 26);
             this.tbcManagement.Margin = new System.Windows.Forms.Padding(0);
@@ -368,13 +378,13 @@
             // 
             this.gvQuestion.AllowUserToAddRows = false;
             this.gvQuestion.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvQuestion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvQuestion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.gvQuestion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvQuestion.ContextMenuStrip = this.ctxmsQuestion;
             this.gvQuestion.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -773,13 +783,13 @@
             // 
             this.gvPersonnelAssignment.AllowUserToAddRows = false;
             this.gvPersonnelAssignment.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvPersonnelAssignment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvPersonnelAssignment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.gvPersonnelAssignment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvPersonnelAssignment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvPersonnelAssignment.Location = new System.Drawing.Point(4, 34);
@@ -999,7 +1009,7 @@
             this.tableLayoutPanel8.Controls.Add(this.flowLayoutPanel10, 0, 2);
             this.tableLayoutPanel8.Controls.Add(this.gvAccountPriviledge, 0, 1);
             this.tableLayoutPanel8.Controls.Add(this.btnAccountPriviledgeEdit, 0, 0);
-            this.tableLayoutPanel8.Controls.Add(this.txtAccountPriviledgeMemo, 0, 3);
+            this.tableLayoutPanel8.Controls.Add(this.txtAccountPriviledgeTabMemo, 0, 3);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0);
@@ -1035,6 +1045,7 @@
             this.btnAccountPriviledgeCancel.TabIndex = 0;
             this.btnAccountPriviledgeCancel.Text = "取消";
             this.btnAccountPriviledgeCancel.UseVisualStyleBackColor = true;
+            this.btnAccountPriviledgeCancel.Click += new System.EventHandler(this.btnAccountPriviledgeCancel_Click);
             // 
             // btnAccountPriviledgeSave
             // 
@@ -1050,13 +1061,13 @@
             // 
             this.gvAccountPriviledge.AllowUserToAddRows = false;
             this.gvAccountPriviledge.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvAccountPriviledge.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvAccountPriviledge.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.gvAccountPriviledge.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvAccountPriviledge.ContextMenuStrip = this.ctxmsQuestion;
             this.gvAccountPriviledge.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1066,6 +1077,9 @@
             this.gvAccountPriviledge.RowTemplate.Height = 24;
             this.gvAccountPriviledge.Size = new System.Drawing.Size(1162, 635);
             this.gvAccountPriviledge.TabIndex = 1;
+            this.gvAccountPriviledge.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.gvAccountPriviledge_CellValidating);
+            this.gvAccountPriviledge.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.gv_DataBindingComplete);
+            this.gvAccountPriviledge.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gvAccountPriviledge_KeyDown);
             // 
             // btnAccountPriviledgeEdit
             // 
@@ -1077,16 +1091,16 @@
             this.btnAccountPriviledgeEdit.UseVisualStyleBackColor = true;
             this.btnAccountPriviledgeEdit.Click += new System.EventHandler(this.btnAccountPriviledgeEdit_Click);
             // 
-            // txtAccountPriviledgeMemo
+            // txtAccountPriviledgeTabMemo
             // 
-            this.txtAccountPriviledgeMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtAccountPriviledgeMemo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtAccountPriviledgeMemo.Location = new System.Drawing.Point(4, 706);
-            this.txtAccountPriviledgeMemo.Name = "txtAccountPriviledgeMemo";
-            this.txtAccountPriviledgeMemo.ReadOnly = true;
-            this.txtAccountPriviledgeMemo.Size = new System.Drawing.Size(1162, 94);
-            this.txtAccountPriviledgeMemo.TabIndex = 4;
-            this.txtAccountPriviledgeMemo.Text = "";
+            this.txtAccountPriviledgeTabMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtAccountPriviledgeTabMemo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtAccountPriviledgeTabMemo.Location = new System.Drawing.Point(4, 706);
+            this.txtAccountPriviledgeTabMemo.Name = "txtAccountPriviledgeTabMemo";
+            this.txtAccountPriviledgeTabMemo.ReadOnly = true;
+            this.txtAccountPriviledgeTabMemo.Size = new System.Drawing.Size(1162, 94);
+            this.txtAccountPriviledgeTabMemo.TabIndex = 4;
+            this.txtAccountPriviledgeTabMemo.Text = "";
             // 
             // dsAPA_Question
             // 
@@ -1096,6 +1110,90 @@
             // hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter
             // 
             this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter.ClearBeforeFill = true;
+            // 
+            // tbpReportPreview
+            // 
+            this.tbpReportPreview.Controls.Add(this.tableLayoutPanel9);
+            this.tbpReportPreview.Location = new System.Drawing.Point(4, 22);
+            this.tbpReportPreview.Name = "tbpReportPreview";
+            this.tbpReportPreview.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpReportPreview.Size = new System.Drawing.Size(1176, 810);
+            this.tbpReportPreview.TabIndex = 6;
+            this.tbpReportPreview.Text = "報表預覽";
+            this.tbpReportPreview.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel9
+            // 
+            this.tableLayoutPanel9.ColumnCount = 2;
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel9.Controls.Add(this.cbxReportPreviewEmployee, 1, 1);
+            this.tableLayoutPanel9.Controls.Add(this.btnReportPreviewPreview, 1, 2);
+            this.tableLayoutPanel9.Controls.Add(this.cbxReportPreviewYear, 1, 0);
+            this.tableLayoutPanel9.Controls.Add(this.label5, 0, 0);
+            this.tableLayoutPanel9.Controls.Add(this.label6, 0, 1);
+            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel9.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
+            this.tableLayoutPanel9.RowCount = 3;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(1170, 804);
+            this.tableLayoutPanel9.TabIndex = 0;
+            // 
+            // cbxReportPreviewEmployee
+            // 
+            this.cbxReportPreviewEmployee.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxReportPreviewEmployee.FormattingEnabled = true;
+            this.cbxReportPreviewEmployee.Location = new System.Drawing.Point(103, 32);
+            this.cbxReportPreviewEmployee.Name = "cbxReportPreviewEmployee";
+            this.cbxReportPreviewEmployee.Size = new System.Drawing.Size(121, 20);
+            this.cbxReportPreviewEmployee.TabIndex = 0;
+            // 
+            // btnReportPreviewPreview
+            // 
+            this.btnReportPreviewPreview.Location = new System.Drawing.Point(103, 61);
+            this.btnReportPreviewPreview.Name = "btnReportPreviewPreview";
+            this.btnReportPreviewPreview.Size = new System.Drawing.Size(75, 23);
+            this.btnReportPreviewPreview.TabIndex = 1;
+            this.btnReportPreviewPreview.Text = "預覽";
+            this.btnReportPreviewPreview.UseVisualStyleBackColor = true;
+            this.btnReportPreviewPreview.Click += new System.EventHandler(this.btnReportPreviewPreview_Click);
+            // 
+            // cbxReportPreviewYear
+            // 
+            this.cbxReportPreviewYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxReportPreviewYear.FormattingEnabled = true;
+            this.cbxReportPreviewYear.Location = new System.Drawing.Point(103, 3);
+            this.cbxReportPreviewYear.Name = "cbxReportPreviewYear";
+            this.cbxReportPreviewYear.Size = new System.Drawing.Size(121, 20);
+            this.cbxReportPreviewYear.TabIndex = 2;
+            this.cbxReportPreviewYear.SelectedIndexChanged += new System.EventHandler(this.cbxReportPreviewYear_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label5.Location = new System.Drawing.Point(65, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(32, 29);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "年份:";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label6.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label6.Location = new System.Drawing.Point(65, 29);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(32, 29);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "人員:";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // frmAPA_Main
             // 
@@ -1146,6 +1244,9 @@
             this.flowLayoutPanel10.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvAccountPriviledge)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).EndInit();
+            this.tbpReportPreview.ResumeLayout(false);
+            this.tableLayoutPanel9.ResumeLayout(false);
+            this.tableLayoutPanel9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1226,6 +1327,13 @@
         private System.Windows.Forms.Button btnAccountPriviledgeSave;
         private System.Windows.Forms.DataGridView gvAccountPriviledge;
         private System.Windows.Forms.Button btnAccountPriviledgeEdit;
-        private System.Windows.Forms.RichTextBox txtAccountPriviledgeMemo;
+        private System.Windows.Forms.RichTextBox txtAccountPriviledgeTabMemo;
+        private System.Windows.Forms.TabPage tbpReportPreview;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
+        private System.Windows.Forms.ComboBox cbxReportPreviewEmployee;
+        private System.Windows.Forms.Button btnReportPreviewPreview;
+        private System.Windows.Forms.ComboBox cbxReportPreviewYear;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }

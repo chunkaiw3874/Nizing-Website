@@ -27,7 +27,7 @@ namespace NIZING_BACKEND_Data_Config
 
         #region 問題分類建立 Universal Variable
         private FunctionMode questionCategoryTabMode = FunctionMode.STATIC;
-        dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter adapterQuestionCategory = new dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter();        
+        dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter adapterQuestionCategory = new dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter();
         DataTable dtQuestionCategorySource = new DataTable();
         #endregion
 
@@ -39,7 +39,7 @@ namespace NIZING_BACKEND_Data_Config
 
         #region 評核人員分配 Universal Variable
         private FunctionMode personnelAssignmentTabMode = FunctionMode.STATIC;
-        DataTable dtPersonnelAssignmentSource = new DataTable();        
+        DataTable dtPersonnelAssignmentSource = new DataTable();
         #endregion
 
         #region 問題分配 Universal Variable
@@ -62,7 +62,7 @@ namespace NIZING_BACKEND_Data_Config
             currentTabPage = tbcManagement.SelectedTab;
             LoadControlStatus(currentTabPage);
 
-            #region 問題分類建立 Initialization           
+            #region 問題分類建立 Initialization
             dtQuestionCategorySource = adapterQuestionCategory.GetData();
             gvQuestionCategory.DataSource = dtQuestionCategorySource;
             LoadGridViewStyle(gvQuestionCategory);
@@ -98,6 +98,14 @@ namespace NIZING_BACKEND_Data_Config
             LoadControlStatus(tbpAccountPriviledge);
             accountPriviledgeTabMode = FunctionMode.STATIC;
             #endregion
+            #region 報表預覽 Init
+            for (int i = DateTime.Today.Year; i >= 2016; i--)
+            {
+                cbxReportPreviewYear.Items.Add(i);
+            }
+            cbxReportPreviewYear.SelectedIndex = 0;
+            LoadcbxReportPreviewEmployee();
+            #endregion
         }
 
         #region Frame Methods and Events
@@ -108,7 +116,7 @@ namespace NIZING_BACKEND_Data_Config
             frm.StartPosition = FormStartPosition.Manual;
             frm.Show();
             this.Hide();
-        }        
+        }
         private void frmAPA_Main_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'dsAPA_Question.HR360_ASSESSMENTQUESTION_CATEGORY_A' table. You can move, or remove it, as needed.
@@ -125,7 +133,7 @@ namespace NIZING_BACKEND_Data_Config
                 )
             {
                 currentTabPage = tbcManagement.SelectedTab;
-                LoadControlStatus(currentTabPage);                
+                LoadControlStatus(currentTabPage);
             }
             else
             {
@@ -133,7 +141,7 @@ namespace NIZING_BACKEND_Data_Config
             }
         }
         private void LoadControlStatus(TabPage tab)
-        {            
+        {
             switch (tab.Name)
             {
                 case "tbpQuestionCategory":
@@ -320,18 +328,18 @@ namespace NIZING_BACKEND_Data_Config
                     gv.Columns["分類"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     gv.Columns["使用中"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     gv.Columns["全體共用"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    DataTable dtTemp = adapterQuestionCategory.GetData();
-                    dtTemp.Columns.Add("ID_NAME");
-                    foreach (DataRow rows in dtTemp.Rows)
+                    DataTable dtgvQuestionTemp = adapterQuestionCategory.GetData();
+                    dtgvQuestionTemp.Columns.Add("ID_NAME");
+                    foreach (DataRow rows in dtgvQuestionTemp.Rows)
                     {
                         rows["ID_NAME"] = rows["ID"].ToString() + " " + rows["名稱"].ToString();
                     }
                     foreach (DataGridViewRow row in gv.Rows)
-                    {                        
+                    {
                         DataGridViewCheckBoxCell ckbIN_USECell = new DataGridViewCheckBoxCell()
                         {
                             TrueValue = "1",
-                            FalseValue = "0"                            
+                            FalseValue = "0"
                         };
                         ckbIN_USECell.Style.NullValue = false;
                         row.Cells["使用中"] = ckbIN_USECell;
@@ -344,7 +352,7 @@ namespace NIZING_BACKEND_Data_Config
                         row.Cells["全體共用"] = ckbUSE_BY_ALLCell;
                         DataGridViewComboBoxCell cbxCATEGORY_IDCell = new DataGridViewComboBoxCell();
                         cbxCATEGORY_IDCell.FlatStyle = FlatStyle.Flat;
-                        cbxCATEGORY_IDCell.DataSource = dtTemp;
+                        cbxCATEGORY_IDCell.DataSource = dtgvQuestionTemp;
                         cbxCATEGORY_IDCell.ValueMember = "ID";
                         cbxCATEGORY_IDCell.DisplayMember = "ID_NAME";
                         row.Cells["分類"] = cbxCATEGORY_IDCell;
@@ -402,8 +410,24 @@ namespace NIZING_BACKEND_Data_Config
                 case "gvAccountPriviledge":
                     gv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
                     gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    gv.Columns["ID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["帳號"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     gv.Columns["閱覽報表權限"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    DataTable dtAccountList = new DataTable();
+                    using (SqlConnection conn = new SqlConnection(NZConnectionString))
+                    {
+                        conn.Open();
+                        string query = "SELECT LTRIM(RTRIM(MV.MV001))+' '+LTRIM(RTRIM(MV.MV002)) 'NAME',LTRIM(RTRIM(MV.MV001)) 'ID'"
+                                    + " FROM CMSMV MV"
+                                    + " WHERE "
+                                    + " MV.MV022=''"
+                                    + " AND MV.MV001 NOT LIKE 'PT%'"
+                                    + " AND MV.MV001<>'0000'"
+                                    + " AND MV.MV001<>'0098'"
+                                    + " ORDER BY MV.MV001";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(dtAccountList);
+                    }
                     foreach (DataGridViewRow row in gv.Rows)
                     {
                         DataGridViewCheckBoxCell ckbView = new DataGridViewCheckBoxCell()
@@ -413,6 +437,13 @@ namespace NIZING_BACKEND_Data_Config
                         };
                         ckbView.Style.NullValue = false;
                         row.Cells["閱覽報表權限"] = ckbView;
+                        DataGridViewComboBoxCell cbxAccountCell = new DataGridViewComboBoxCell();
+                        cbxAccountCell.FlatStyle = FlatStyle.Flat;
+                        cbxAccountCell.MaxDropDownItems = 5;
+                        cbxAccountCell.DataSource = dtAccountList;
+                        cbxAccountCell.DisplayMember = "NAME";
+                        cbxAccountCell.ValueMember = "NAME";
+                        row.Cells["帳號"] = cbxAccountCell;
                     }
                     break;
             }
@@ -439,7 +470,7 @@ namespace NIZING_BACKEND_Data_Config
                     break;
             }
             return message;
-        }        
+        }
         private void ShowError(int errorCode)
         {
             MessageBox.Show(GetErrorMessage(errorCode));
@@ -452,7 +483,7 @@ namespace NIZING_BACKEND_Data_Config
         {
             LoadGridViewStyle((DataGridView)sender);
         }
-        #endregion      
+        #endregion
 
         #region 問題分類建立 Tab Method and Events
         private void gvQuestionCategory_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -503,7 +534,7 @@ namespace NIZING_BACKEND_Data_Config
         {
             if (e.KeyData == Keys.Down)
             {
-                
+
                 if (gvQuestionCategory.CurrentRow.Index == gvQuestionCategory.Rows.Count - 1)
                 {
                     foreach (DataGridViewCell c in gvQuestionCategory.CurrentRow.Cells)
@@ -580,7 +611,7 @@ namespace NIZING_BACKEND_Data_Config
                 }
             }
             dtQuestionCategorySource = adapterQuestionCategory.GetData();
-            gvQuestionCategory.DataSource = dtQuestionCategorySource;            
+            gvQuestionCategory.DataSource = dtQuestionCategorySource;
             tbcManagement.Enabled = true;
             questionCategoryTabMode = FunctionMode.STATIC;
             LoadControlStatus(currentTabPage);
@@ -650,9 +681,9 @@ namespace NIZING_BACKEND_Data_Config
         private void btnQuestionCancel_Click(object sender, EventArgs e)
         {
             isCancel = true;
-            if (gvQuestion.Rows[gvQuestionCategory.Rows.Count - 1].IsNewRow)
+            if (gvQuestion.Rows[gvQuestion.Rows.Count - 1].IsNewRow)
             {
-                gvQuestion.Rows.RemoveAt(gvQuestionCategory.Rows.Count - 1);
+                gvQuestion.Rows.RemoveAt(gvQuestion.Rows.Count - 1);
             }
             dtQuestionSource = adapterQuestion.GetData();
             gvQuestion.DataSource = dtQuestionSource;
@@ -660,8 +691,7 @@ namespace NIZING_BACKEND_Data_Config
             LoadControlStatus(currentTabPage);
             txtQuestionTabMemo.Text += DateTime.Now.ToString() + " 資料更新取消" + Environment.NewLine;
             isCancel = false;
-        }       
-
+        }
         private void gvQuestion_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Down)
@@ -768,14 +798,14 @@ namespace NIZING_BACKEND_Data_Config
                 txtQuestionTabMemo.Text += "錯誤:分配問題前，請先離開問題編輯模式(儲存或取消變更)" + Environment.NewLine;
             }
             else
-            {                
+            {
                 tbcManagement.SelectedTab = tbpQuestionAssignment;
                 questionAssignmentTabMode = FunctionMode.EDIT;
                 LoadControlStatus(currentTabPage);
                 LoadQuestionAssignment();
             }
         }
-        
+
         #endregion
         #endregion
 
@@ -825,7 +855,7 @@ namespace NIZING_BACKEND_Data_Config
         {
             dtPersonnelAssignmentSource = LoadgvPersonnelAssignment();
             gvPersonnelAssignment.DataSource = dtPersonnelAssignmentSource;
-        }        
+        }
 
         private void btnPersonnelAssignmentEdit_Click(object sender, EventArgs e)
         {
@@ -835,7 +865,7 @@ namespace NIZING_BACKEND_Data_Config
             {
                 gvQuestionCategory.CurrentCell = gvQuestionCategory.Rows[0].Cells[0];
             }
-        }       
+        }
         private void btnPersonnelAssignmentCancel_Click(object sender, EventArgs e)
         {
             isCancel = true;
@@ -1022,7 +1052,7 @@ namespace NIZING_BACKEND_Data_Config
                 }
             }
         }
-        #endregion                
+        #endregion
 
         /*
          * 問題分配跟其他TAB的差別在於，問題分配是由right click on問題建立中的問題進入的，而非直接選取TAB
@@ -1031,7 +1061,7 @@ namespace NIZING_BACKEND_Data_Config
         private void LoadQuestionAssignment()
         {
             lblQuestionAssignmentQuestionID.Text = gvQuestion.CurrentRow.Cells["ID"].FormattedValue.ToString();
-            lblQuestionAssignmentQuestionCategory.Text = gvQuestion.CurrentRow.Cells["分類"].FormattedValue.ToString();            
+            lblQuestionAssignmentQuestionCategory.Text = gvQuestion.CurrentRow.Cells["分類"].FormattedValue.ToString();
             if ((bool)gvQuestion.CurrentRow.Cells["使用中"].FormattedValue)
             {
                 txtQuestionAssignmentQuestionBody.Text = "";
@@ -1243,7 +1273,7 @@ namespace NIZING_BACKEND_Data_Config
                 string[] tempStringArray;
                 tempStringArray = SplitString(lvi.Text, new string[] { " " });
                 returnValue.Add(tempStringArray[0], tempStringArray[1]);
-            }            
+            }
             return returnValue;
         }
         /// <summary>
@@ -1252,8 +1282,8 @@ namespace NIZING_BACKEND_Data_Config
         /// <param name="dict"></param>
         /// <param name="lv"></param>
         /// <returns></returns>
-        private Dictionary<string, string> RemoveItemsInListViewFromDictionary(Dictionary<string,string> dict, ListView lv)
-        { 
+        private Dictionary<string, string> RemoveItemsInListViewFromDictionary(Dictionary<string, string> dict, ListView lv)
+        {
             Dictionary<string, string> remove = GetItemsFromListView(lv);
             foreach (KeyValuePair<string, string> kvp in remove)
             {
@@ -1453,7 +1483,7 @@ namespace NIZING_BACKEND_Data_Config
             txtQuestionAssignmentTabMemo.Text += DateTime.Now.ToString() + " 問題" + lblQuestionAssignmentQuestionID.Text + "資料更新完成" + Environment.NewLine;
             questionAssignmentTabMode = FunctionMode.STATIC;
             LoadControlStatus(currentTabPage);
-            
+
         }
         #endregion
 
@@ -1490,7 +1520,7 @@ namespace NIZING_BACKEND_Data_Config
         {
             bool containsError = false;
             decimal d;
-            
+
             if (!decimal.TryParse(txtScoreStandardStandard.Text, out d))
             {
                 txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " Error: 輸入格式非數字" + Environment.NewLine;
@@ -1512,7 +1542,7 @@ namespace NIZING_BACKEND_Data_Config
 
             if (!containsError)
             {
-                txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " 變更完成:特評標準從" + scoreStandardValue.ToString() +"變更為" + txtScoreStandardStandard.Text + Environment.NewLine;
+                txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " 變更完成:特評標準從" + scoreStandardValue.ToString() + "變更為" + txtScoreStandardStandard.Text + Environment.NewLine;
                 using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                 {
                     conn.Open();
@@ -1522,10 +1552,10 @@ namespace NIZING_BACKEND_Data_Config
                     cmd.Parameters.AddWithValue("@STANDARD", txtScoreStandardStandard.Text);
                     cmd.ExecuteNonQuery();
                 }
-                LoadScoreStandard();                
+                LoadScoreStandard();
                 scoreStandardTabMode = FunctionMode.STATIC;
                 LoadControlStatus(currentTabPage);
-            }            
+            }
         }
         #endregion
 
@@ -1538,7 +1568,7 @@ namespace NIZING_BACKEND_Data_Config
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
-                string query = "SELECT PRIV.ERP_ID 'ID', MV.MV002 '名稱', PRIV.[VIEW] '閱覽報表權限'"
+                string query = "SELECT LTRIM(RTRIM(PRIV.ERP_ID))+' '+ LTRIM(RTRIM(MV.MV002)) '帳號', PRIV.[VIEW] '閱覽報表權限'"
                             + " FROM HR360_ASSESSMENTPRIVILEDGE PRIV"
                             + " LEFT JOIN NZ.dbo.CMSMV MV ON PRIV.ERP_ID=MV.MV001"
                             + " WHERE MV.MV022=''"
@@ -1555,7 +1585,106 @@ namespace NIZING_BACKEND_Data_Config
             accountPriviledgeTabMode = FunctionMode.EDIT;
             LoadControlStatus(currentTabPage);
         }
-        #endregion
 
+        private void gvAccountPriviledge_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Down)
+            {
+
+                if (gvAccountPriviledge.CurrentRow.Index == gvAccountPriviledge.Rows.Count - 1)
+                {
+                    foreach (DataGridViewCell c in gvAccountPriviledge.CurrentRow.Cells)
+                    {
+                        if (String.IsNullOrWhiteSpace(c.EditedFormattedValue.ToString()))
+                        {
+                            ShowError(201);
+                            e.Handled = true;
+                            break;
+                        }
+                    }
+                    if (!e.Handled)
+                    {
+                        DataRow newRow = dtAccountPriviledgeSource.NewRow();                        
+                        dtAccountPriviledgeSource.Rows.Add(newRow);
+                        gvAccountPriviledge.DataSource = dtAccountPriviledgeSource;
+                        if (gvAccountPriviledge.Rows.Count > 1 && gvAccountPriviledge.Enabled == true)
+                        {
+                            gvAccountPriviledge.CurrentCell = gvAccountPriviledge.Rows[gvAccountPriviledge.CurrentRow.Index + 1].Cells[0];
+                        }
+                    }
+                }
+            }
+        }        
+
+        private void btnAccountPriviledgeCancel_Click(object sender, EventArgs e)
+        {
+            isCancel = true;
+            if (gvAccountPriviledge.Rows[gvAccountPriviledge.Rows.Count - 1].IsNewRow)
+            {
+                gvAccountPriviledge.Rows.RemoveAt(gvAccountPriviledge.Rows.Count - 1);
+            }
+            dtAccountPriviledgeSource = LoadgvAccountPriviledge();
+            gvAccountPriviledge.DataSource = dtAccountPriviledgeSource;
+            accountPriviledgeTabMode = FunctionMode.STATIC;
+            LoadControlStatus(currentTabPage);
+            txtAccountPriviledgeTabMemo.Text += DateTime.Now.ToString() + " 資料更新取消" + Environment.NewLine;
+            isCancel = false;
+        }
+        
+        private void gvAccountPriviledge_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (!isCancel)
+            {
+                if (String.IsNullOrWhiteSpace(e.FormattedValue.ToString()))
+                {
+                    ShowError(101);
+                    e.Cancel = true;
+                }
+            }
+        }
+        #endregion
+        #region 報表預覽 Tab Methods and Events
+        private void LoadcbxReportPreviewEmployee()
+        {
+            using (SqlConnection conn = new SqlConnection(NZConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT LTRIM(RTRIM(MV.MV001))+' '+LTRIM(RTRIM(MV.MV002)) 'NAME',MV.MV002 'ID'"
+                            + " FROM CMSMV MV"
+                            + " WHERE"
+                            + " MV.MV021<@YEAR+'1231'"
+                            + " AND (MV.MV022 = '' OR MV.MV022>@YEAR+'1231')"
+                            + " AND MV.MV001<>'0000'"
+                            + " AND MV.MV001<>'0098'"
+                            + " AND MV.MV001 NOT LIKE 'PT%'"
+                            + " ORDER BY MV.MV001";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@YEAR", cbxReportPreviewYear.Text);
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        if (dr.HasRows)
+                        {
+                            cbxReportPreviewEmployee.Items.Add(dr.GetString(0));
+                        }
+                    }
+                }
+            }
+            if (cbxReportPreviewEmployee.Items.Count > 0)
+            {
+                cbxReportPreviewEmployee.SelectedIndex = 0;
+            }
+        }
+        private void cbxReportPreviewYear_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadcbxReportPreviewEmployee();
+        }        
+
+        private void btnReportPreviewPreview_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
     }
 }
