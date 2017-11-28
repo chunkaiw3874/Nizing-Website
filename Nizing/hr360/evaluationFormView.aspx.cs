@@ -27,8 +27,27 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
         string year = "";
         if (!IsPostBack)
         {
-            assessed = Session["view_id"].ToString().Trim();
-            year = Session["view_year"].ToString().Trim();                              
+            //if (String.IsNullOrWhiteSpace(Request.QueryString["ReportString"].ToString()))
+            //{                
+            //    //ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('無此權限');", true);
+            //    assessed = Session["view_id"].ToString().Trim();
+            //    year = Session["view_year"].ToString().Trim();
+            //}
+            //else
+            //{
+            //    year = Request.Form["ReportString"].Substring(0, 4);
+            //    assessed = Request.Form["ReportString"].Substring(4, 4);
+            //}
+            if (Request.QueryString["ID"] != null)
+            {
+                year = Request.QueryString["year"];
+                assessed = Request.QueryString["ID"];                
+            }
+            else
+            {
+                assessed = Session["view_id"].ToString().Trim();
+                year = Session["view_year"].ToString().Trim();
+            }
         }
         else
         {
@@ -203,20 +222,23 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
             }
         }
         //Chrissy評語欄位
-        if (Session["erp_id"].ToString() == "0007")
+        if (Request.QueryString["ID"] == null)
         {
-            txt0007Comment.ReadOnly = false;
-            btnSave0007Comment.Visible = true;
-        }
-        else if(Session["erp_id"].ToString()=="0006")
-        {
-            txt0006Comment.ReadOnly = false;
-            btnSave0006Comment.Visible = true;
-        }
-        else if (Session["erp_id"].ToString() == "0067")
-        {
-            txt0067Comment.ReadOnly = false;
-            btnSave0067Comment.Visible = true;
+            if (Session["erp_id"].ToString() == "0007")
+            {
+                txt0007Comment.ReadOnly = false;
+                btnSave0007Comment.Visible = true;
+            }
+            else if (Session["erp_id"].ToString() == "0006")
+            {
+                txt0006Comment.ReadOnly = false;
+                btnSave0006Comment.Visible = true;
+            }
+            else if (Session["erp_id"].ToString() == "0067")
+            {
+                txt0067Comment.ReadOnly = false;
+                btnSave0067Comment.Visible = true;
+            }
         }
 
         if (!IsPostBack)

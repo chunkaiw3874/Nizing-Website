@@ -531,7 +531,7 @@
         <div id="last_comment">
             <div class="row">
                 <div class="col-xs-12 subtitle border">
-                    吉田評語
+                    吉田康森評語
                 </div>
             </div>
             <div class="row">

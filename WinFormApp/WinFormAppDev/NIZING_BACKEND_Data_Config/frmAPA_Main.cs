@@ -5,7 +5,9 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -1683,7 +1685,31 @@ namespace NIZING_BACKEND_Data_Config
 
         private void btnReportPreviewPreview_Click(object sender, EventArgs e)
         {
+            PassStringValueFromWinFormToWebForm();
+        }
 
+        private void PassStringValueFromWinFormToWebForm()
+        {
+            //var ReportString = "ReportKey=" + cbxReportPreviewYear.Text + cbxReportPreviewEmployee.Text.Substring(0, 4);
+            //var array = Encoding.UTF8.GetBytes(ReportString);
+            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.nizing.com.tw/hr360/evaluationFormView.aspx");
+            //request.Method = "POST";
+            //request.ContentLength = array.Length;
+            //request.ContentType = "application/x-www-form-urlencoded";
+            ////var Url = "http://www.nizing.com.tw/hr360/evaluationFormView.aspx";
+            //using (Stream postdata = request.GetRequestStream())
+            //{
+            //    postdata.Write(array, 0, array.Length);
+            //}
+            //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            //Stream dataStream = response.GetResponseStream();
+            //StreamReader reader = new StreamReader(dataStream);
+            //string responseFromServer = reader.ReadToEnd();
+            //reader.Close();
+            //dataStream.Close();
+            //response.Close();
+            ////var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            System.Diagnostics.Process.Start("http://www.nizing.com.tw/hr360/evaluationFormView.aspx" + "?year=" + cbxReportPreviewYear.Text + "&ID=" + cbxReportPreviewEmployee.Text.Substring(0, 4));            
         }
         #endregion
     }
