@@ -775,7 +775,7 @@ namespace NIZING_BACKEND_Data_Config
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "frmOQS_Main";
-            this.Text = "frmMain";
+            this.Text = "線上報價系統";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tbcManagement.ResumeLayout(false);

@@ -27,17 +27,6 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
         string year = "";
         if (!IsPostBack)
         {
-            //if (String.IsNullOrWhiteSpace(Request.QueryString["ReportString"].ToString()))
-            //{                
-            //    //ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('無此權限');", true);
-            //    assessed = Session["view_id"].ToString().Trim();
-            //    year = Session["view_year"].ToString().Trim();
-            //}
-            //else
-            //{
-            //    year = Request.Form["ReportString"].Substring(0, 4);
-            //    assessed = Request.Form["ReportString"].Substring(4, 4);
-            //}
             if (Request.QueryString["ID"] != null)
             {
                 year = Request.QueryString["year"];

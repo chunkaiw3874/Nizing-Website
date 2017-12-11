@@ -107,6 +107,9 @@ namespace NIZING_BACKEND_Data_Config
             }
             cbxReportPreviewYear.SelectedIndex = 0;
             LoadcbxReportPreviewEmployee();
+            btnReportPreviewPreview.Enabled = false;
+            cbxReportPreviewEmployee.Enabled = false;
+            cbxReportPreviewYear.Enabled = false;
             #endregion
         }
 
@@ -140,6 +143,32 @@ namespace NIZING_BACKEND_Data_Config
             else
             {
                 tbcManagement.SelectedTab = currentTabPage;
+            }
+
+            if (currentTabPage.Name == "tbpReportPreview")
+            {
+                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT ERP_ID"
+                                + " FROM HR360_ASSESSMENTPRIVILEDGE"
+                                + " WHERE ERP_ID=@ID"
+                                + " AND [VIEW]='1'";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@ID", UserName);
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            if (dr.HasRows)
+                            {
+                                btnReportPreviewPreview.Enabled = true;
+                                cbxReportPreviewEmployee.Enabled = true;
+                                cbxReportPreviewYear.Enabled = true;
+                            }
+                        }
+                    }
+                }
             }
         }
         private void LoadControlStatus(TabPage tab)
@@ -696,29 +725,31 @@ namespace NIZING_BACKEND_Data_Config
         }
         private void gvQuestion_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Down)
+            if (questionTabMode == FunctionMode.EDIT)
             {
-
-                if (gvQuestion.CurrentRow.Index == gvQuestion.Rows.Count - 1)
+                if (e.KeyData == Keys.Down)
                 {
-                    foreach (DataGridViewCell c in gvQuestion.CurrentRow.Cells)
+                    if (gvQuestion.CurrentRow.Index == gvQuestion.Rows.Count - 1)
                     {
-                        if (String.IsNullOrWhiteSpace(c.EditedFormattedValue.ToString()))
+                        foreach (DataGridViewCell c in gvQuestion.CurrentRow.Cells)
                         {
-                            ShowError(201);
-                            e.Handled = true;
-                            break;
+                            if (String.IsNullOrWhiteSpace(c.EditedFormattedValue.ToString()))
+                            {
+                                ShowError(201);
+                                e.Handled = true;
+                                break;
+                            }
                         }
-                    }
-                    if (!e.Handled)
-                    {
-                        DataRow newRow = dtQuestionSource.NewRow();
-                        newRow["ID"] = (Convert.ToInt16(gvQuestion.CurrentRow.Cells[0].EditedFormattedValue) + 1).ToString();
-                        dtQuestionSource.Rows.Add(newRow);
-                        gvQuestion.DataSource = dtQuestionSource;
-                        if (gvQuestion.Rows.Count > 1 && gvQuestion.Enabled == true)
+                        if (!e.Handled)
                         {
-                            gvQuestion.CurrentCell = gvQuestion.Rows[gvQuestion.CurrentRow.Index + 1].Cells[0];
+                            DataRow newRow = dtQuestionSource.NewRow();
+                            newRow["ID"] = (Convert.ToInt16(gvQuestion.CurrentRow.Cells[0].EditedFormattedValue) + 1).ToString();
+                            dtQuestionSource.Rows.Add(newRow);
+                            gvQuestion.DataSource = dtQuestionSource;
+                            if (gvQuestion.Rows.Count > 1 && gvQuestion.Enabled == true)
+                            {
+                                gvQuestion.CurrentCell = gvQuestion.Rows[gvQuestion.CurrentRow.Index + 1].Cells[0];
+                            }
                         }
                     }
                 }
@@ -1561,8 +1592,6 @@ namespace NIZING_BACKEND_Data_Config
         }
         #endregion
 
-
-
         #region 帳戶權限設定 Tab Methods and Events
         private DataTable LoadgvAccountPriviledge()
         {
@@ -1585,33 +1614,44 @@ namespace NIZING_BACKEND_Data_Config
         private void btnAccountPriviledgeEdit_Click(object sender, EventArgs e)
         {
             accountPriviledgeTabMode = FunctionMode.EDIT;
+            
+            if (gvAccountPriviledge.Rows.Count <= 0)
+            {
+                DataRow newRow = dtAccountPriviledgeSource.NewRow();
+                newRow["帳號"] = "0001 李世宗";
+                dtAccountPriviledgeSource.Rows.Add(newRow);
+                gvAccountPriviledge.DataSource = dtAccountPriviledgeSource;
+            }
             LoadControlStatus(currentTabPage);
         }
 
         private void gvAccountPriviledge_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Down)
+            if (accountPriviledgeTabMode == FunctionMode.EDIT)
             {
-
-                if (gvAccountPriviledge.CurrentRow.Index == gvAccountPriviledge.Rows.Count - 1)
+                if (e.KeyData == Keys.Down)
                 {
-                    foreach (DataGridViewCell c in gvAccountPriviledge.CurrentRow.Cells)
+
+                    if (gvAccountPriviledge.CurrentRow.Index == gvAccountPriviledge.Rows.Count - 1)
                     {
-                        if (String.IsNullOrWhiteSpace(c.EditedFormattedValue.ToString()))
+                        foreach (DataGridViewCell c in gvAccountPriviledge.CurrentRow.Cells)
                         {
-                            ShowError(201);
-                            e.Handled = true;
-                            break;
+                            if (String.IsNullOrWhiteSpace(c.EditedFormattedValue.ToString()))
+                            {
+                                ShowError(201);
+                                e.Handled = true;
+                                break;
+                            }
                         }
-                    }
-                    if (!e.Handled)
-                    {
-                        DataRow newRow = dtAccountPriviledgeSource.NewRow();                        
-                        dtAccountPriviledgeSource.Rows.Add(newRow);
-                        gvAccountPriviledge.DataSource = dtAccountPriviledgeSource;
-                        if (gvAccountPriviledge.Rows.Count > 1 && gvAccountPriviledge.Enabled == true)
+                        if (!e.Handled)
                         {
-                            gvAccountPriviledge.CurrentCell = gvAccountPriviledge.Rows[gvAccountPriviledge.CurrentRow.Index + 1].Cells[0];
+                            DataRow newRow = dtAccountPriviledgeSource.NewRow();
+                            dtAccountPriviledgeSource.Rows.Add(newRow);
+                            gvAccountPriviledge.DataSource = dtAccountPriviledgeSource;
+                            if (gvAccountPriviledge.Rows.Count > 1 && gvAccountPriviledge.Enabled == true)
+                            {
+                                gvAccountPriviledge.CurrentCell = gvAccountPriviledge.Rows[gvAccountPriviledge.CurrentRow.Index + 1].Cells[0];
+                            }
                         }
                     }
                 }
@@ -1620,17 +1660,22 @@ namespace NIZING_BACKEND_Data_Config
 
         private void btnAccountPriviledgeCancel_Click(object sender, EventArgs e)
         {
-            isCancel = true;
-            if (gvAccountPriviledge.Rows[gvAccountPriviledge.Rows.Count - 1].IsNewRow)
-            {
-                gvAccountPriviledge.Rows.RemoveAt(gvAccountPriviledge.Rows.Count - 1);
-            }
-            dtAccountPriviledgeSource = LoadgvAccountPriviledge();
-            gvAccountPriviledge.DataSource = dtAccountPriviledgeSource;
-            accountPriviledgeTabMode = FunctionMode.STATIC;
-            LoadControlStatus(currentTabPage);
-            txtAccountPriviledgeTabMemo.Text += DateTime.Now.ToString() + " 資料更新取消" + Environment.NewLine;
-            isCancel = false;
+            
+                isCancel = true;
+                if (gvAccountPriviledge.Rows.Count > 0)
+                {
+                    if (gvAccountPriviledge.Rows[gvAccountPriviledge.Rows.Count - 1].IsNewRow)
+                    {
+                        gvAccountPriviledge.Rows.RemoveAt(gvAccountPriviledge.Rows.Count - 1);
+                    }
+                    dtAccountPriviledgeSource = LoadgvAccountPriviledge();
+                    gvAccountPriviledge.DataSource = dtAccountPriviledgeSource;
+                }
+                accountPriviledgeTabMode = FunctionMode.STATIC;
+                LoadControlStatus(currentTabPage);
+                txtAccountPriviledgeTabMemo.Text += DateTime.Now.ToString() + " 資料更新取消" + Environment.NewLine;
+                isCancel = false;
+            
         }
         
         private void gvAccountPriviledge_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -1644,7 +1689,98 @@ namespace NIZING_BACKEND_Data_Config
                 }
             }
         }
+
+        private void btnAccountPriviledgeSave_Click(object sender, EventArgs e)
+        {
+            DataTable dtOriginalTable = LoadgvAccountPriviledge();
+            tbcManagement.Enabled = false;
+            gvAccountPriviledge.DataSource = null;
+            for (int i = 0; i < dtOriginalTable.Rows.Count; i++)
+            {
+                dtOriginalTable.Rows[i]["帳號"] = dtOriginalTable.Rows[i]["帳號"].ToString().Substring(0, 4);
+            }
+            for (int i = 0; i < dtAccountPriviledgeSource.Rows.Count; i++)
+            {
+                if (dtAccountPriviledgeSource.Rows[i].RowState != DataRowState.Deleted)
+                {
+                    dtAccountPriviledgeSource.Rows[i]["帳號"] = dtAccountPriviledgeSource.Rows[i]["帳號"].ToString().Substring(0, 4);
+                }
+
+            }
+            CompareTables(dtOriginalTable, dtAccountPriviledgeSource);
+            var tempRow = dtAccountPriviledgeSource.AsEnumerable().Where(x => x.RowState != DataRowState.Deleted && (string)x["EDIT_STATUS"] == TableRowStatus.EDITED.ToString()).OrderBy(y => y["帳號"]);
+            DataTable dtSourceInterim = tempRow.Any() ? tempRow.CopyToDataTable() : dtAccountPriviledgeSource.Clone();
+            
+            for (int i = 0; i < dtSourceInterim.Rows.Count; i++)
+            {
+                //perform DB update by using data in dtSourceInterim                
+                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                {
+                    conn.Open();
+                    string query = "UPDATE HR360_ASSESSMENTPRIVILEDGE"
+                                + " SET [VIEW]=@VIEW"
+                                + " WHERE ERP_ID=@ID";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@VIEW", dtSourceInterim.Rows[i]["閱覽報表權限"].ToString());
+                    cmd.Parameters.AddWithValue("@ID", dtSourceInterim.Rows[i]["帳號"].ToString());
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            
+            tempRow = dtAccountPriviledgeSource.AsEnumerable().Where(x => x.RowState != DataRowState.Deleted && (string)x["EDIT_STATUS"] == TableRowStatus.NEW.ToString()).OrderBy(y => y["帳號"]);
+            dtSourceInterim = new DataTable();
+            dtSourceInterim = tempRow.Any() ? tempRow.CopyToDataTable() : dtAccountPriviledgeSource.Clone();
+            for (int i = 0; i < dtSourceInterim.Rows.Count; i++)
+            {
+                if (String.IsNullOrWhiteSpace(dtSourceInterim.Rows[i]["閱覽報表權限"].ToString()))
+                {
+                    dtSourceInterim.Rows[i]["閱覽報表權限"] = "0";
+                }
+                //perform DB insert
+                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                {
+                    conn.Open();
+                    string query = "INSERT INTO HR360_ASSESSMENTPRIVILEDGE"
+                                +" VALUES (@ID, @VIEW)";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@VIEW", dtSourceInterim.Rows[i]["閱覽報表權限"].ToString());
+                    cmd.Parameters.AddWithValue("@ID", dtSourceInterim.Rows[i]["帳號"].ToString());
+                    cmd.ExecuteNonQuery();
+                }                
+            }
+            tempRow = dtOriginalTable.AsEnumerable().Where(x => x.RowState != DataRowState.Deleted && (string)x["EDIT_STATUS"] == TableRowStatus.DELETED.ToString()).OrderBy(y => y["帳號"]);
+            dtSourceInterim = new DataTable();
+            dtSourceInterim = tempRow.Any() ? tempRow.CopyToDataTable() : dtOriginalTable.Clone();
+            for (int i = 0; i < dtSourceInterim.Rows.Count; i++)
+            {
+                try
+                {
+                    //perform DB delete
+                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                    {
+                        conn.Open();
+                        string query = "DELETE HR360_ASSESSMENTPRIVILEDGE"
+                                    + " WHERE ERP_ID=@ID";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@ID", dtSourceInterim.Rows[i]["帳號"].ToString());
+                        cmd.ExecuteNonQuery();
+                    } 
+                }
+                catch
+                {                   
+                    ShowError(401);
+                    break;                    
+                }
+            }
+            dtAccountPriviledgeSource = LoadgvAccountPriviledge();
+            gvAccountPriviledge.DataSource = dtAccountPriviledgeSource;
+            tbcManagement.Enabled = true;
+            accountPriviledgeTabMode = FunctionMode.STATIC;
+            txtAccountPriviledgeTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;
+            LoadControlStatus(currentTabPage);
+        }
         #endregion
+
         #region 報表預覽 Tab Methods and Events
         private void LoadcbxReportPreviewEmployee()
         {
@@ -1689,28 +1825,11 @@ namespace NIZING_BACKEND_Data_Config
         }
 
         private void PassStringValueFromWinFormToWebForm()
-        {
-            //var ReportString = "ReportKey=" + cbxReportPreviewYear.Text + cbxReportPreviewEmployee.Text.Substring(0, 4);
-            //var array = Encoding.UTF8.GetBytes(ReportString);
-            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.nizing.com.tw/hr360/evaluationFormView.aspx");
-            //request.Method = "POST";
-            //request.ContentLength = array.Length;
-            //request.ContentType = "application/x-www-form-urlencoded";
-            ////var Url = "http://www.nizing.com.tw/hr360/evaluationFormView.aspx";
-            //using (Stream postdata = request.GetRequestStream())
-            //{
-            //    postdata.Write(array, 0, array.Length);
-            //}
-            //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            //Stream dataStream = response.GetResponseStream();
-            //StreamReader reader = new StreamReader(dataStream);
-            //string responseFromServer = reader.ReadToEnd();
-            //reader.Close();
-            //dataStream.Close();
-            //response.Close();
-            ////var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+        {            
             System.Diagnostics.Process.Start("http://www.nizing.com.tw/hr360/evaluationFormView.aspx" + "?year=" + cbxReportPreviewYear.Text + "&ID=" + cbxReportPreviewEmployee.Text.Substring(0, 4));            
         }
         #endregion
+
+        
     }
 }

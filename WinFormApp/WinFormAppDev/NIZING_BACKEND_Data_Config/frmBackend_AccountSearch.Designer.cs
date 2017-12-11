@@ -173,7 +173,7 @@
             this.ClientSize = new System.Drawing.Size(284, 362);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmBackend_AccountSearch";
-            this.Text = "frmBackend_AccountSearch";
+            this.Text = "帳號搜尋";
             this.flowLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

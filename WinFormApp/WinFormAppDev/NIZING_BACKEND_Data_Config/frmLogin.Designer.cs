@@ -36,13 +36,13 @@ namespace NIZING_BACKEND_Data_Config
             this.label2 = new System.Windows.Forms.Label();
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnLogin = new System.Windows.Forms.Button();
             this.lblLoginStatus = new System.Windows.Forms.Label();
             this.cbxFunctionList = new System.Windows.Forms.ComboBox();
             this.bACKENDFUNCTIONLISTBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dsBackendLoginAccount = new NIZING_BACKEND_Data_Config.dsBackendLoginAccount();
+            this.label3 = new System.Windows.Forms.Label();
             this.dsBackendLoginAccountBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bACKEND_FUNCTION_LISTTableAdapter = new NIZING_BACKEND_Data_Config.dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter();
             this.tableLayoutPanel1.SuspendLayout();
@@ -80,9 +80,9 @@ namespace NIZING_BACKEND_Data_Config
             this.tbpnlLogin.Controls.Add(this.label2, 0, 2);
             this.tbpnlLogin.Controls.Add(this.txtUserName, 1, 1);
             this.tbpnlLogin.Controls.Add(this.txtPassword, 1, 2);
-            this.tbpnlLogin.Controls.Add(this.label3, 0, 0);
             this.tbpnlLogin.Controls.Add(this.flowLayoutPanel1, 1, 4);
             this.tbpnlLogin.Controls.Add(this.cbxFunctionList, 1, 3);
+            this.tbpnlLogin.Controls.Add(this.label3, 1, 0);
             this.tbpnlLogin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbpnlLogin.Location = new System.Drawing.Point(159, 115);
             this.tbpnlLogin.Name = "tbpnlLogin";
@@ -99,22 +99,22 @@ namespace NIZING_BACKEND_Data_Config
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(86, 84);
+            this.label1.Location = new System.Drawing.Point(108, 84);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 12);
+            this.label1.Size = new System.Drawing.Size(32, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Username:";
+            this.label1.Text = "帳號:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(89, 133);
+            this.label2.Location = new System.Drawing.Point(108, 133);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 12);
+            this.label2.Size = new System.Drawing.Size(32, 12);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Password:";
+            this.label2.Text = "密碼:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtUserName
@@ -134,20 +134,6 @@ namespace NIZING_BACKEND_Data_Config
             this.txtPassword.TabIndex = 3;
             this.txtPassword.UseSystemPasswordChar = true;
             this.txtPassword.Enter += new System.EventHandler(this.txtPassword_Enter);
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.tbpnlLogin.SetColumnSpan(this.label3, 3);
-            this.label3.Font = new System.Drawing.Font("Calibri", 12F);
-            this.label3.Location = new System.Drawing.Point(3, 23);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(458, 19);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Nizing Backend Configuration System";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -206,6 +192,19 @@ namespace NIZING_BACKEND_Data_Config
             this.dsBackendLoginAccount.DataSetName = "dsBackendLoginAccount";
             this.dsBackendLoginAccount.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold);
+            this.label3.Location = new System.Drawing.Point(146, 23);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(226, 19);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "日進終端系統設定";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label3.Click += new System.EventHandler(this.fastLogin);
+            // 
             // dsBackendLoginAccountBindingSource
             // 
             this.dsBackendLoginAccountBindingSource.DataSource = this.dsBackendLoginAccount;
@@ -224,7 +223,7 @@ namespace NIZING_BACKEND_Data_Config
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "frmLogin";
-            this.Text = "Form1";
+            this.Text = "登入";
             this.Load += new System.EventHandler(this.frmLogin_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tbpnlLogin.ResumeLayout(false);
