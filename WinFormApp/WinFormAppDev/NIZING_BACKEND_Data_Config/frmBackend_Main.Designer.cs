@@ -52,8 +52,8 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnAccountConfirm = new System.Windows.Forms.Button();
             this.btnAccountCancel = new System.Windows.Forms.Button();
-            this.lblAccountSubmitStatus = new System.Windows.Forms.Label();
             this.gvAccountSearch_Result = new System.Windows.Forms.DataGridView();
+            this.txtAccountManagementMemo = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpAccountManagement.SuspendLayout();
@@ -204,7 +204,7 @@
             this.tlpAccountInputField.Controls.Add(this.flpAccountId, 1, 0);
             this.tlpAccountInputField.Controls.Add(this.groupBox1, 1, 3);
             this.tlpAccountInputField.Controls.Add(this.flowLayoutPanel2, 1, 4);
-            this.tlpAccountInputField.Controls.Add(this.lblAccountSubmitStatus, 1, 5);
+            this.tlpAccountInputField.Controls.Add(this.txtAccountManagementMemo, 1, 5);
             this.tlpAccountInputField.Location = new System.Drawing.Point(1, 58);
             this.tlpAccountInputField.Margin = new System.Windows.Forms.Padding(0);
             this.tlpAccountInputField.Name = "tlpAccountInputField";
@@ -295,6 +295,7 @@
             this.ckxFullAdminRights.TabIndex = 5;
             this.ckxFullAdminRights.Text = "權限全開";
             this.ckxFullAdminRights.UseVisualStyleBackColor = true;
+            this.ckxFullAdminRights.CheckedChanged += new System.EventHandler(this.ckxFullAdminRights_CheckedChanged);
             // 
             // groupBox1
             // 
@@ -319,6 +320,7 @@
             this.clbAdminRights.Name = "clbAdminRights";
             this.clbAdminRights.Size = new System.Drawing.Size(378, 131);
             this.clbAdminRights.TabIndex = 0;
+            this.clbAdminRights.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.clbAdminRights_ItemCheck);
             // 
             // flowLayoutPanel2
             // 
@@ -352,15 +354,6 @@
             this.btnAccountCancel.UseVisualStyleBackColor = true;
             this.btnAccountCancel.Click += new System.EventHandler(this.btnAccountCancel_Click);
             // 
-            // lblAccountSubmitStatus
-            // 
-            this.lblAccountSubmitStatus.AutoSize = true;
-            this.lblAccountSubmitStatus.Location = new System.Drawing.Point(76, 323);
-            this.lblAccountSubmitStatus.Name = "lblAccountSubmitStatus";
-            this.lblAccountSubmitStatus.Size = new System.Drawing.Size(33, 12);
-            this.lblAccountSubmitStatus.TabIndex = 14;
-            this.lblAccountSubmitStatus.Text = "label4";
-            // 
             // gvAccountSearch_Result
             // 
             this.gvAccountSearch_Result.AllowUserToAddRows = false;
@@ -379,6 +372,19 @@
             this.gvAccountSearch_Result.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvAccountSearch_Result.Size = new System.Drawing.Size(707, 745);
             this.gvAccountSearch_Result.TabIndex = 4;
+            this.gvAccountSearch_Result.SelectionChanged += new System.EventHandler(this.gvAccountSearch_Result_SelectionChanged);
+            // 
+            // txtAccountManagementMemo
+            // 
+            this.txtAccountManagementMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtAccountManagementMemo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtAccountManagementMemo.Location = new System.Drawing.Point(73, 323);
+            this.txtAccountManagementMemo.Margin = new System.Windows.Forms.Padding(0);
+            this.txtAccountManagementMemo.Multiline = true;
+            this.txtAccountManagementMemo.Name = "txtAccountManagementMemo";
+            this.txtAccountManagementMemo.ReadOnly = true;
+            this.txtAccountManagementMemo.Size = new System.Drawing.Size(387, 142);
+            this.txtAccountManagementMemo.TabIndex = 14;
             // 
             // frmBackend_Main
             // 
@@ -431,7 +437,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Button btnAccountConfirm;
         private System.Windows.Forms.Button btnAccountCancel;
-        private System.Windows.Forms.Label lblAccountSubmitStatus;
         private System.Windows.Forms.DataGridView gvAccountSearch_Result;
+        private System.Windows.Forms.TextBox txtAccountManagementMemo;
     }
 }

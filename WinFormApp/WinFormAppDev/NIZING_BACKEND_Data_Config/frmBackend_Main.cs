@@ -29,7 +29,7 @@ namespace NIZING_BACKEND_Data_Config
             accountTabMode = FunctionMode.NORECORD;
             currentTabPage = tbcManagement.SelectedTab;
             LoadControlStatus(currentTabPage);
-            lblAccountSubmitStatus.Text = String.Empty;            
+            txtAccountManagementMemo.Text = String.Empty;            
         }
 
         #region Frame Method and Button Behavior
@@ -237,7 +237,10 @@ namespace NIZING_BACKEND_Data_Config
         
         private void displayGridviewSearch_ResultInControls(DataGridView gv)
         {
-
+            if (gv.Name == "gvAccountSearch_Result")
+            {
+                txtAccountId.Text = gvAccountSearch_Result.SelectedRows[0].Cells["LOGIN_ID"].Value.ToString();
+            }
         }
         #endregion
 
@@ -246,9 +249,9 @@ namespace NIZING_BACKEND_Data_Config
         {
             dsBackendLoginAccountTableAdapters.BACKEND_LOGIN_ACCOUNTTableAdapter accountAdapter = new dsBackendLoginAccountTableAdapters.BACKEND_LOGIN_ACCOUNTTableAdapter();
             dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter functionListAdapter = new dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter();            
-            List<string> errorList = CheckConfirmError(accountTabMode);           
+            List<string> errorList = CheckConfirmError(accountTabMode);
 
-            lblAccountSubmitStatus.Text = "";
+            txtAccountManagementMemo.Text = "";
             if (errorList.Count == 0)
             {
                 DataTable dtFunctionList = functionListAdapter.GetData();
@@ -266,8 +269,7 @@ namespace NIZING_BACKEND_Data_Config
                     {
                         accountAdapter.UpdateAuthRecordQuery("1", accountId, authorizationId);
                     }
-                    lblAccountSubmitStatus.Text = "資料新增完成";
-                    lblAccountSubmitStatus.ForeColor = Color.Green;
+                    txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":資料新增完成" + Environment.NewLine;
                 }
                 else if (accountTabMode == FunctionMode.EDIT)
                 {
@@ -283,17 +285,16 @@ namespace NIZING_BACKEND_Data_Config
                     {
                         accountAdapter.UpdateLoginRecordQuery(password, accountId);
                     }
-                    lblAccountSubmitStatus.Text = "資料更新完成";
-                    lblAccountSubmitStatus.ForeColor = Color.Green;
+                    txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":資料更新完成" + Environment.NewLine;
                 }
             }
             else
             {
+                txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":ERROR" + Environment.NewLine;
                 foreach (string s in errorList)
                 {
-                    lblAccountSubmitStatus.Text += s + "\n";                    
+                    txtAccountManagementMemo.Text += s + Environment.NewLine;
                 }
-                lblAccountSubmitStatus.ForeColor = Color.Red;
             }
 
             if (isGridViewEmpty(gvAccountSearch_Result))
@@ -333,7 +334,6 @@ namespace NIZING_BACKEND_Data_Config
             accountTabMode = FunctionMode.DELETE;
             List<string> errorList = CheckConfirmError(accountTabMode);           
             
-            lblAccountSubmitStatus.Text = "";
             if (errorList.Count == 0)
             {
                 var confirmResult = MessageBox.Show("確定要刪除" + txtAccountId.Text.Trim() + "的資料嗎?", "刪除確認", MessageBoxButtons.YesNo);
@@ -343,8 +343,7 @@ namespace NIZING_BACKEND_Data_Config
                     adapter.DeleteAuthRecordQuery(txtAccountId.Text);
                     adapter.DeleteLoginRecordQuery(txtAccountId.Text);
                     gvAccountSearch_Result.DataSource = null;
-                    lblAccountSubmitStatus.Text = "資料已刪除";
-                    lblAccountSubmitStatus.ForeColor = Color.Green;
+                    txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":資料已刪除" + Environment.NewLine;
 
                     searchFormLoaded = false;
                     gvAccountSearch_Result.DataSource = adapter.GetData();
@@ -363,11 +362,11 @@ namespace NIZING_BACKEND_Data_Config
             }
             else
             {
+                txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":ERROR" + Environment.NewLine;
                 foreach (string s in errorList)
                 {
-                    lblAccountSubmitStatus.Text += s + "\n";
+                    txtAccountManagementMemo.Text += s + Environment.NewLine;
                 }
-                lblAccountSubmitStatus.ForeColor = Color.Red;
             }            
         }
         private void gvAccountSearch_Result_SelectionChanged(object sender, EventArgs e)
@@ -389,6 +388,24 @@ namespace NIZING_BACKEND_Data_Config
             frm.loadButtonEvent += new searchForm_Close(accountSearchForm_loadButton);
             frm.loadGridviewEvent += new searchForm_Search(accountSearchForm_loadGridview);
             frm.Show();
+        }
+        private void ckxFullAdminRights_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckxFullAdminRights.Checked)
+            {
+                for (int i = 0; i < clbAdminRights.Items.Count; i++)
+                {
+                    clbAdminRights.SetItemCheckState(i, CheckState.Checked);
+                }
+            }
+        }
+
+        private void clbAdminRights_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.NewValue == CheckState.Unchecked)
+            {
+                ckxFullAdminRights.Checked = false;
+            }
         }
         #endregion
 
@@ -428,5 +445,11 @@ namespace NIZING_BACKEND_Data_Config
             }
         }
         #endregion
+
+        
+
+
+
+        
     }
 }
