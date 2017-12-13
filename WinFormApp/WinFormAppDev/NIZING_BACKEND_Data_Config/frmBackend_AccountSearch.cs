@@ -134,5 +134,10 @@ namespace NIZING_BACKEND_Data_Config
             }
             this.Close();
         }
+
+        private void frmBackend_AccountSearch_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            btnAccountSearch_Cancel_Click(sender, e);
+        }
     }
 }

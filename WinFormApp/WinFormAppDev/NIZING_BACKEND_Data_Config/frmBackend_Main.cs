@@ -240,6 +240,19 @@ namespace NIZING_BACKEND_Data_Config
             if (gv.Name == "gvAccountSearch_Result")
             {
                 txtAccountId.Text = gvAccountSearch_Result.SelectedRows[0].Cells["LOGIN_ID"].Value.ToString();
+                txtAccountPassword.Text = gvAccountSearch_Result.SelectedRows[0].Cells["LOGIN_PASSWORD"].Value.ToString();
+                txtAccountConfirmPassword.Text = gvAccountSearch_Result.SelectedRows[0].Cells["LOGIN_PASSWORD"].Value.ToString();
+                for (int i = 2; i < gvAccountSearch_Result.Columns.Count; i++)
+                {
+                    if (gvAccountSearch_Result.SelectedRows[0].Cells[i].Value.ToString() == "0")
+                    {
+                        clbAdminRights.SetItemCheckState(i - 2, CheckState.Unchecked);
+                    }
+                    else
+                    {
+                        clbAdminRights.SetItemCheckState(i - 2, CheckState.Checked);
+                    }
+                }
             }
         }
         #endregion
@@ -382,7 +395,7 @@ namespace NIZING_BACKEND_Data_Config
             LoadControlStatus(currentTabPage);
 
             var frm = new frmBackend_AccountSearch();
-            frm.Location = new Point(this.Location.X + this.Width, this.Location.Y);
+            frm.Location = new Point(this.Location.X + (this.Width / 2), this.Location.Y + (this.Height / 4));
             frm.StartPosition = FormStartPosition.Manual;
             frm.FormClosing += delegate { frm.Hide(); };
             frm.loadButtonEvent += new searchForm_Close(accountSearchForm_loadButton);
