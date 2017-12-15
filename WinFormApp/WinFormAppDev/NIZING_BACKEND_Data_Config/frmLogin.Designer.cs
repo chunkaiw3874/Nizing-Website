@@ -203,7 +203,6 @@ namespace NIZING_BACKEND_Data_Config
             this.label3.TabIndex = 5;
             this.label3.Text = "日進終端系統設定";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label3.Click += new System.EventHandler(this.fastLogin);
             // 
             // dsBackendLoginAccountBindingSource
             // 

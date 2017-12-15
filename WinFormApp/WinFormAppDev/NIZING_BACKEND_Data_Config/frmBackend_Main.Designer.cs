@@ -52,8 +52,8 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnAccountConfirm = new System.Windows.Forms.Button();
             this.btnAccountCancel = new System.Windows.Forms.Button();
-            this.gvAccountSearch_Result = new System.Windows.Forms.DataGridView();
             this.txtAccountManagementMemo = new System.Windows.Forms.TextBox();
+            this.gvAccountSearch_Result = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpAccountManagement.SuspendLayout();
@@ -169,6 +169,7 @@
             this.btnAccountEdit.TabIndex = 1;
             this.btnAccountEdit.Text = "修改";
             this.btnAccountEdit.UseVisualStyleBackColor = true;
+            this.btnAccountEdit.Click += new System.EventHandler(this.btnAccountEdit_Click);
             // 
             // btnAccountDelete
             // 
@@ -354,6 +355,18 @@
             this.btnAccountCancel.UseVisualStyleBackColor = true;
             this.btnAccountCancel.Click += new System.EventHandler(this.btnAccountCancel_Click);
             // 
+            // txtAccountManagementMemo
+            // 
+            this.txtAccountManagementMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtAccountManagementMemo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtAccountManagementMemo.Location = new System.Drawing.Point(73, 323);
+            this.txtAccountManagementMemo.Margin = new System.Windows.Forms.Padding(0);
+            this.txtAccountManagementMemo.Multiline = true;
+            this.txtAccountManagementMemo.Name = "txtAccountManagementMemo";
+            this.txtAccountManagementMemo.ReadOnly = true;
+            this.txtAccountManagementMemo.Size = new System.Drawing.Size(387, 142);
+            this.txtAccountManagementMemo.TabIndex = 14;
+            // 
             // gvAccountSearch_Result
             // 
             this.gvAccountSearch_Result.AllowUserToAddRows = false;
@@ -373,18 +386,6 @@
             this.gvAccountSearch_Result.Size = new System.Drawing.Size(707, 745);
             this.gvAccountSearch_Result.TabIndex = 4;
             this.gvAccountSearch_Result.SelectionChanged += new System.EventHandler(this.gvAccountSearch_Result_SelectionChanged);
-            // 
-            // txtAccountManagementMemo
-            // 
-            this.txtAccountManagementMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtAccountManagementMemo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtAccountManagementMemo.Location = new System.Drawing.Point(73, 323);
-            this.txtAccountManagementMemo.Margin = new System.Windows.Forms.Padding(0);
-            this.txtAccountManagementMemo.Multiline = true;
-            this.txtAccountManagementMemo.Name = "txtAccountManagementMemo";
-            this.txtAccountManagementMemo.ReadOnly = true;
-            this.txtAccountManagementMemo.Size = new System.Drawing.Size(387, 142);
-            this.txtAccountManagementMemo.TabIndex = 14;
             // 
             // frmBackend_Main
             // 

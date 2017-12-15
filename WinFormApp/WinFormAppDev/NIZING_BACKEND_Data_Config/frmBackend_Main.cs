@@ -240,17 +240,15 @@ namespace NIZING_BACKEND_Data_Config
             if (gv.Name == "gvAccountSearch_Result")
             {
                 txtAccountId.Text = gvAccountSearch_Result.SelectedRows[0].Cells["LOGIN_ID"].Value.ToString();
-                txtAccountPassword.Text = gvAccountSearch_Result.SelectedRows[0].Cells["LOGIN_PASSWORD"].Value.ToString();
-                txtAccountConfirmPassword.Text = gvAccountSearch_Result.SelectedRows[0].Cells["LOGIN_PASSWORD"].Value.ToString();
-                for (int i = 2; i < gvAccountSearch_Result.Columns.Count; i++)
+                for (int i = 1; i < gvAccountSearch_Result.Columns.Count; i++)
                 {
                     if (gvAccountSearch_Result.SelectedRows[0].Cells[i].Value.ToString() == "0")
                     {
-                        clbAdminRights.SetItemCheckState(i - 2, CheckState.Unchecked);
+                        clbAdminRights.SetItemCheckState(i - 1, CheckState.Unchecked);
                     }
                     else
                     {
-                        clbAdminRights.SetItemCheckState(i - 2, CheckState.Checked);
+                        clbAdminRights.SetItemCheckState(i - 1, CheckState.Checked);
                     }
                 }
             }
@@ -420,6 +418,12 @@ namespace NIZING_BACKEND_Data_Config
                 ckxFullAdminRights.Checked = false;
             }
         }
+
+        private void btnAccountEdit_Click(object sender, EventArgs e)
+        {
+            accountTabMode = FunctionMode.EDIT;
+            LoadControlStatus(currentTabPage);
+        }
         #endregion
 
         #region method for search form
@@ -458,11 +462,5 @@ namespace NIZING_BACKEND_Data_Config
             }
         }
         #endregion
-
-        
-
-
-
-        
     }
 }
