@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Net.Mail;
+using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -66,6 +67,46 @@ public partial class hr360_UI04 : System.Web.UI.Page
             }
         }
     }
+
+    //#region Test Area!!!!!!!!!! Test Methods ONLY!!!!!!
+    ////Test for Different ID
+    //protected void btnTestName_Click(object sender, EventArgs e)
+    //{
+    //    Session["erp_id"] = txtTestName.Text.Trim();
+    //    lblTest.Text = "測試帳號" + txtTestName.Text.Trim();
+    //}
+    ////Test for simple email construction
+    //protected void btnTestEmail_Click(object sender, EventArgs e)
+    //{
+    //    // create the email message
+    //    string from = "chrissy@nizing.com.tw";
+    //    string to = "kevin@nizing.com.tw";
+    //    string subject = "test for smtp speed";
+    //    string body = "How fast is this email sent?";
+    //    MailMessage completeMessage = new MailMessage(from, to, subject, body);
+
+    //    Thread email = new Thread(delegate(){
+    //        SendEmail(to, from, subject, body);
+    //    });
+    //    email.IsBackground = true;
+    //    email.Start();
+    //    //// create smtp client at mail server location
+    //    //SmtpClient client = new SmtpClient("mail.nizing.com.tw");
+
+    //    //// add credentials
+    //    //client.UseDefaultCredentials = true;
+
+    //    //try
+    //    //{
+    //    //    // send message
+    //    //    client.Send(completeMessage);
+    //    //}
+    //    //catch (Exception)
+    //    //{
+    //    //    throw;
+    //    //}
+    //}    
+    //#endregion
 
     protected void btnDayOffAdd_Click(object sender, ImageClickEventArgs e)
     {
@@ -711,16 +752,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         return allDates.ToArray();
     }
 
-    /// <summary>
-    /// test only for different IDs
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    //protected void btnTestName_Click(object sender, EventArgs e)
-    //{
-    //    Session["erp_id"] = txtTestName.Text.Trim();
-    //    lblTest.Text = "測試帳號" + txtTestName.Text.Trim();
-    //}
+
 
     /// <summary>
     /// fill day off application table
@@ -1589,8 +1621,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     + " AND MV.MV001<>'0006'"
                     + " AND MV.MV001<>'0007'"
                     + " AND MV.MV001<>'0098'";  //這些人不會請假
-        if (Session["erp_id"].ToString() != "0085"
-            && Session["erp_id"].ToString() != "0125"
+        if (Session["erp_id"].ToString() != "0125"
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
             && Session["erp_id"].ToString() != "0007") //管理部跟HR可以查詢全部人的歷史資料
@@ -1611,8 +1642,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             ddlSearch_Parameter_ApplicantID.DataSource = dt;
             ddlSearch_Parameter_ApplicantID.DataBind();
         }
-        if (!(Session["erp_id"].ToString() != "0085"    //Edit: Doris(HR) change when HR personnel changes
-            && Session["erp_id"].ToString() != "0125"   //Abbie replaces Doris as HR
+        if (!(Session["erp_id"].ToString() != "0125"   //Abbie replaces Doris as HR
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
             && Session["erp_id"].ToString() != "0007")) //管理部跟HR可以查詢全部人的歷史資料
@@ -1883,9 +1913,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@APP_ID", appId);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
-        }
-        recipientId.Add("0085");    //Edit: Current HR, change when HR personnel changes
-        recipientId.Add("0125");    //Current HR, replaces Doris(0085) 2017.09.19
+        }        
+        recipientId.Add("0125");    //Current HR 2017.09.19
         //status 1:新申請/一般簽核通過(HR&下個簽核者) 2:申請撤銷(HR&代理人) 3:申請退回(HR&申請人&代理人) 4:最後一層簽核通過(HR&申請人&代理人)
         switch (appStatus)
         {
@@ -1965,20 +1994,39 @@ public partial class hr360_UI04 : System.Web.UI.Page
         // create the email message
         MailMessage completeMessage = new MailMessage(from, to, subject, body);
 
+        Thread email = new Thread(delegate()
+        {
+            SendEmail(to, from, subject, body);
+        });
+        email.IsBackground = true;
+        email.Start();
         // create smtp client at mail server location
-        SmtpClient client = new SmtpClient("mail.nizing.com.tw");
+        //SmtpClient client = new SmtpClient("mail.nizing.com.tw");
 
-        // add credentials
-        client.UseDefaultCredentials = true;
+        //// add credentials
+        //client.UseDefaultCredentials = true;
 
-        try
+        //try
+        //{
+        //    // send message
+        //    client.Send(completeMessage);
+        //}
+        //catch (Exception)
+        //{
+        //    throw;
+        //}
+    }
+    private void SendEmail(string to, string from, string subject, string body)
+    {
+        using (MailMessage mm = new MailMessage(from, to))
         {
-            // send message
-            client.Send(completeMessage);
-        }
-        catch (Exception)
-        {
-            throw;
+            mm.Subject = subject;
+            mm.Body = body;
+            mm.IsBodyHtml = false;
+            SmtpClient client = new SmtpClient();
+            client.Host = "mail.nizing.com.tw";
+            client.UseDefaultCredentials = true;
+            client.Send(mm);
         }
     }
     /// <summary>
@@ -2048,7 +2096,6 @@ public partial class hr360_UI04 : System.Web.UI.Page
         //看報告
         if (Session["erp_id"].ToString() != "0007"      //Chrissy
             && Session["erp_id"].ToString() != "0080"   //Kevin
-            && Session["erp_id"].ToString() != "0085"   //Doris (HR) change when HR personnel changes
             && Session["erp_id"].ToString() != "0125"   //Abbie (HR)
             )  
         {
@@ -2079,4 +2126,5 @@ public partial class hr360_UI04 : System.Web.UI.Page
         gvSearchResult.PageIndex = e.NewPageIndex;
         btnSearchSubmit_Click(sender, e);
     }
+
 }

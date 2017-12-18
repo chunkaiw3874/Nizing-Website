@@ -125,6 +125,9 @@
                 <asp:Button ID="btnTestName" runat="server" Text="測試ERP ID" OnClick="btnTestName_Click" />
                 <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>
             </div>
+            <div class="row form-group">
+                <asp:Button ID="btnTestEmail" runat="server" Text="Send Test Email" OnClick="btnTestEmail_Click" />
+            </div>
             <hr />
         </div>--%>
         <div class="row form-group">
