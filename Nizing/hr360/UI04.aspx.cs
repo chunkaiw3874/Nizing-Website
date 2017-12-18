@@ -1994,27 +1994,13 @@ public partial class hr360_UI04 : System.Web.UI.Page
         // create the email message
         MailMessage completeMessage = new MailMessage(from, to, subject, body);
 
+        //send email async in the bg
         Thread email = new Thread(delegate()
         {
             SendEmail(to, from, subject, body);
         });
         email.IsBackground = true;
         email.Start();
-        // create smtp client at mail server location
-        //SmtpClient client = new SmtpClient("mail.nizing.com.tw");
-
-        //// add credentials
-        //client.UseDefaultCredentials = true;
-
-        //try
-        //{
-        //    // send message
-        //    client.Send(completeMessage);
-        //}
-        //catch (Exception)
-        //{
-        //    throw;
-        //}
     }
     private void SendEmail(string to, string from, string subject, string body)
     {
