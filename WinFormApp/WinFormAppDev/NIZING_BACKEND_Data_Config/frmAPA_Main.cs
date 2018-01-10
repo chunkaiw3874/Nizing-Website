@@ -58,6 +58,11 @@ namespace NIZING_BACKEND_Data_Config
         DataTable dtAccountPriviledgeSource = new DataTable();
         #endregion
 
+        #region 員工應工作時數 Universal Variable
+        private FunctionMode employeeWorkHourInputTabMode = FunctionMode.STATIC;
+        DataTable dtEmployeeWorkhourSource = new DataTable();
+        #endregion
+
         public frmAPA_Main()
         {
             InitializeComponent();
@@ -110,6 +115,47 @@ namespace NIZING_BACKEND_Data_Config
             btnReportPreviewPreview.Enabled = false;
             cbxReportPreviewEmployee.Enabled = false;
             cbxReportPreviewYear.Enabled = false;
+            #endregion
+            #region 年份及評核時間設定 Init
+            for (int i = DateTime.Today.Year - 1; i >= 2016; i--)
+            {
+                cbxYearAndEvalTimeYear.Items.Add(i);
+            }
+            cbxYearAndEvalTimeYear.SelectedIndex = 0;
+            dtpYearAndEvalTimeStartTime.Format = DateTimePickerFormat.Custom;
+            dtpYearAndEvalTimeStartTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            dtpYearAndEvalTimeEndTime.Format = DateTimePickerFormat.Custom;
+            dtpYearAndEvalTimeEndTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT *"
+                            + " FROM HR360_ASSESSMENTTIME";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        if (dr.HasRows)
+                        {
+                            cbxYearAndEvalTimeYear.Text = dr.GetString(0);
+                            dtpYearAndEvalTimeStartTime.Value = dr.GetDateTime(1);
+                            dtpYearAndEvalTimeEndTime.Value = dr.GetDateTime(2);
+                        }
+                    }
+                }
+            }
+            #endregion
+            #region 員工應工作時數 Init
+            employeeWorkHourInputTabMode = FunctionMode.STATIC;
+            for (int i = DateTime.Today.Year; i >= 2016; i--)
+            {
+                cbxEmployeeWorkhourInputYear.Items.Add(i);
+            }
+            cbxEmployeeWorkhourInputYear.Text = (DateTime.Today.Year - 1).ToString();
+            dtEmployeeWorkhourSource = LoadgvEmployeeWorkhourInputField();
+            gvEmployeeWorkhourInputField.DataSource = dtEmployeeWorkhourSource;
+            LoadGridViewStyle(gvEmployeeWorkhourInputField);
             #endregion
         }
 
@@ -283,6 +329,29 @@ namespace NIZING_BACKEND_Data_Config
                             gvAccountPriviledge.ReadOnly = false;
                             gvAccountPriviledge.ForeColor = Color.Black;
                             LoadGridViewStyle(gvAccountPriviledge);
+                            break;
+                    }
+                    break;
+                case "tbpEmployeeWorkhourInput":
+                    switch (employeeWorkHourInputTabMode)
+                    {
+                        case FunctionMode.STATIC:
+                            cbxEmployeeWorkhourInputYear.Enabled = true;
+                            btnEmployeeWorkhourInputEdit.Enabled = true;
+                            btnEmployeeWorkhourInputSave.Enabled = false;
+                            btnEmployeeWorkhourInputCancel.Enabled = false;
+                            gvEmployeeWorkhourInputField.ReadOnly = true;
+                            gvEmployeeWorkhourInputField.ForeColor = Color.Gray;
+                            LoadGridViewStyle(gvEmployeeWorkhourInputField);
+                            break;
+                        case FunctionMode.EDIT:
+                            cbxEmployeeWorkhourInputYear.Enabled = false;
+                            btnEmployeeWorkhourInputEdit.Enabled = false;
+                            btnEmployeeWorkhourInputSave.Enabled = true;
+                            btnEmployeeWorkhourInputCancel.Enabled = true;
+                            gvEmployeeWorkhourInputField.ReadOnly = false;
+                            gvEmployeeWorkhourInputField.ForeColor = Color.Black;
+                            LoadGridViewStyle(gvEmployeeWorkhourInputField);
                             break;
                     }
                     break;
@@ -476,6 +545,14 @@ namespace NIZING_BACKEND_Data_Config
                         cbxAccountCell.ValueMember = "NAME";
                         row.Cells["帳號"] = cbxAccountCell;
                     }
+                    break;
+                case "gvEmployeeWorkhourInputField":
+                    gv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                    gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["評核年份"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["員工ID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["員工姓名"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["應工作時數"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     break;
             }
         }
@@ -1830,6 +1907,54 @@ namespace NIZING_BACKEND_Data_Config
         }
         #endregion
 
-        
+        #region 年份及評核時間設定 Tab Methods and Events
+        private void btnYearAndEvalTimeSave_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "UPDATE HR360_ASSESSMENTTIME"
+                            + " SET EVAL_YEAR=@EVAL_YEAR"
+                            + " ,EVAL_START_TIME=@EVAL_START_TIME"
+                            + " ,EVAL_END_TIME=@EVAL_END_TIME";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@EVAL_YEAR", cbxYearAndEvalTimeYear.Text);
+                cmd.Parameters.AddWithValue("@EVAL_START_TIME", dtpYearAndEvalTimeStartTime.Value);
+                cmd.Parameters.AddWithValue("@EVAL_END_TIME", dtpYearAndEvalTimeEndTime.Value);
+                cmd.ExecuteNonQuery();
+            }
+            txtYearAndEvalTimeTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;            
+        }
+        #endregion
+        #region 員工應工作時數 Tab Methods and Events
+        private DataTable LoadgvEmployeeWorkhourInputField()
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT COALESCE(WH.[YEAR],'') [評核年份]"
+                            +" ,MV.MV001 [員工ID]"
+                            +" ,MV.MV002 [員工姓名]"
+                            +" ,COALESCE(CONVERT(NVARCHAR(10),WH.[EXPECTED_WORK_HOUR]),'') [應工作時數]"
+                            +" FROM EMPLOYEE_EXPECTED_WORKHOUR WH"
+                            +" RIGHT JOIN NZ.dbo.CMSMV MV ON WH.EMP_ID=MV.MV001"
+                            +" WHERE (MV.MV001 NOT LIKE 'PT%'"
+                            +" AND MV.MV001<>'0000'"
+                            +" AND MV.MV001<>'0006'"
+                            +" AND MV.MV001<>'0007'"
+                            +" AND MV.MV001<>'0098'"
+                            +" AND ((MV.MV021<=@YEAR+'1231' AND MV.MV022='')"
+                            +" OR (MV.MV021<=@YEAR+'1231' AND MV.MV022>@YEAR+'1231')))"
+                            +" OR WH.[YEAR]=@YEAR"
+                            +" ORDER BY MV.MV001";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@YEAR", cbxEmployeeWorkhourInputYear.Text);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }            
+            return dt;
+        }
+        #endregion
     }
 }

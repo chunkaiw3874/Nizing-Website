@@ -29,6 +29,23 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
         }
         else        
         {
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT EVAL_YEAR"
+                            + " FROM HR360_ASSESSMENTTIME";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        if (dr.HasRows)
+                        {
+                            year = dr.GetString(0);
+                        }
+                    }
+                }
+            }
             string assessor = Session["erp_id"].ToString().Trim();
             string assessed = "";
             if (!IsPostBack)

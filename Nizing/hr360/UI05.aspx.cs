@@ -23,10 +23,31 @@ public partial class hr360_UI05 : System.Web.UI.Page
     {
         DateTime start = new DateTime(2017, 1, 13, 19, 0, 0);
         DateTime end = new DateTime(2017, 1, 19, 17, 30, 0);
+
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            string query = "SELECT EVAL_YEAR, EVAL_START_TIME, EVAL_END_TIME"
+                        + " FROM HR360_ASSESSMENTTIME";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            using (SqlDataReader dr = cmd.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    if (dr.HasRows)
+                    {
+                        year = dr.GetString(0);
+                        start = dr.GetDateTime(1);
+                        end = dr.GetDateTime(2);
+                    }
+                }
+            }
+        }
         if (DateTime.Now >= start && DateTime.Now < end)
         {
             divAssessmentList.Visible = true;
             divAssessmentLookup.Visible = false;
+            divBonusLookup.Visible = false;
             //Create table for all three assessment type (自評、主管評、特評)
             DataTable dtEvalSelf = new DataTable();  //自評 table
             DataTable dtEvalBoss = new DataTable();  //主管評 table
@@ -255,6 +276,7 @@ public partial class hr360_UI05 : System.Web.UI.Page
         {
             divAssessmentList.Visible = false;
             divAssessmentLookup.Visible = true;
+            divBonusLookup.Visible = true;
             if (!IsPostBack)
             {
                 for (int i = 2016; i <= DateTime.Today.Year; i++)

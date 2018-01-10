@@ -68,7 +68,14 @@ public partial class main : System.Web.UI.Page
                                     + " FROM _HR360_ANNUAL_LEAVE_TABLE"
                                     + " WHERE YEAR_IN_SERVICE=@YEAR_IN_SERVICE";
                         SqlCommand cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@YEAR_IN_SERVICE", dtUserInfo.Rows[0]["YEAR_IN_SERVICE"].ToString());
+                        if ((int)dtUserInfo.Rows[0]["YEAR_IN_SERVICE"] < 25)
+                        {
+                            cmd.Parameters.AddWithValue("@YEAR_IN_SERVICE", dtUserInfo.Rows[0]["YEAR_IN_SERVICE"].ToString());
+                        }
+                        else
+                        {
+                            cmd.Parameters.AddWithValue("@YEAR_IN_SERVICE", "25");
+                        }
                         string tempString = cmd.ExecuteScalar().ToString();
                         string[] tempStringArray;
                         string[] stringSeparators = new string[] { "," };
