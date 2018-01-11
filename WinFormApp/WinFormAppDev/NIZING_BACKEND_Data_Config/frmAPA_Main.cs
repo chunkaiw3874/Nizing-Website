@@ -181,6 +181,7 @@ namespace NIZING_BACKEND_Data_Config
                 && questionAssignmentTabMode == FunctionMode.STATIC
                 && scoreStandardTabMode == FunctionMode.STATIC
                 && accountPriviledgeTabMode == FunctionMode.STATIC
+                && employeeWorkHourInputTabMode == FunctionMode.STATIC
                 )
             {
                 currentTabPage = tbcManagement.SelectedTab;
@@ -550,8 +551,11 @@ namespace NIZING_BACKEND_Data_Config
                     gv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
                     gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     gv.Columns["評核年份"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["評核年份"].ReadOnly = true;
                     gv.Columns["員工ID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["員工ID"].ReadOnly = true;
                     gv.Columns["員工姓名"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["員工姓名"].ReadOnly = true;
                     gv.Columns["應工作時數"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     break;
             }
@@ -997,7 +1001,7 @@ namespace NIZING_BACKEND_Data_Config
         }
         private void UpdatePersonnelAssignment()
         {
-            DataTable dtEmployeeLeftThisYear = new DataTable();
+            //DataTable dtEmployeeLeftThisYear = new DataTable();
             //Set all records in that year to inactive
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
@@ -1926,6 +1930,7 @@ namespace NIZING_BACKEND_Data_Config
             txtYearAndEvalTimeTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;            
         }
         #endregion
+
         #region 員工應工作時數 Tab Methods and Events
         private DataTable LoadgvEmployeeWorkhourInputField()
         {
@@ -1933,21 +1938,21 @@ namespace NIZING_BACKEND_Data_Config
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
-                string query = "SELECT COALESCE(WH.[YEAR],'') [評核年份]"
-                            +" ,MV.MV001 [員工ID]"
-                            +" ,MV.MV002 [員工姓名]"
-                            +" ,COALESCE(CONVERT(NVARCHAR(10),WH.[EXPECTED_WORK_HOUR]),'') [應工作時數]"
-                            +" FROM EMPLOYEE_EXPECTED_WORKHOUR WH"
-                            +" RIGHT JOIN NZ.dbo.CMSMV MV ON WH.EMP_ID=MV.MV001"
-                            +" WHERE (MV.MV001 NOT LIKE 'PT%'"
-                            +" AND MV.MV001<>'0000'"
-                            +" AND MV.MV001<>'0006'"
-                            +" AND MV.MV001<>'0007'"
-                            +" AND MV.MV001<>'0098'"
-                            +" AND ((MV.MV021<=@YEAR+'1231' AND MV.MV022='')"
-                            +" OR (MV.MV021<=@YEAR+'1231' AND MV.MV022>@YEAR+'1231')))"
-                            +" OR WH.[YEAR]=@YEAR"
-                            +" ORDER BY MV.MV001";
+                string query = "SELECT COALESCE(WH.[YEAR],(@YEAR)) [評核年份]"
+                            + " ,LTRIM(RTRIM(MV.MV001)) [員工ID]"
+                            + " ,MV.MV002 [員工姓名]"
+                            + " ,COALESCE(CONVERT(NVARCHAR(10),WH.[EXPECTED_WORK_HOUR]),'') [應工作時數]"
+                            + " FROM EMPLOYEE_EXPECTED_WORKHOUR WH"
+                            + " RIGHT JOIN NZ.dbo.CMSMV MV ON WH.EMP_ID=MV.MV001 AND WH.[YEAR]=(@YEAR)"
+                            + " WHERE (MV.MV001 NOT LIKE 'PT%'"
+                            + " AND MV.MV001<>'0000'"
+                            + " AND MV.MV001<>'0006'"
+                            + " AND MV.MV001<>'0007'"
+                            + " AND MV.MV001<>'0098'"
+                            + " AND ((MV.MV021<=@YEAR+'1231' AND MV.MV022='')"
+                            + " OR (MV.MV021<=@YEAR+'1231' AND MV.MV022>@YEAR+'1231')))"
+                            + " OR WH.[YEAR]=@YEAR"
+                            + " ORDER BY MV.MV001";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@YEAR", cbxEmployeeWorkhourInputYear.Text);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -1955,6 +1960,92 @@ namespace NIZING_BACKEND_Data_Config
             }            
             return dt;
         }
+
+        private void cbxEmployeeWorkhourInputYear_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dtEmployeeWorkhourSource = LoadgvEmployeeWorkhourInputField();
+            gvEmployeeWorkhourInputField.DataSource = dtEmployeeWorkhourSource;
+            LoadGridViewStyle(gvEmployeeWorkhourInputField);
+        }
+
+        private void btnEmployeeWorkhourInputEdit_Click(object sender, EventArgs e)
+        {
+            employeeWorkHourInputTabMode = FunctionMode.EDIT;
+            LoadControlStatus(tbpEmployeeWorkhourInput);
+        }
+
+        private void btnEmployeeWorkhourInputCancel_Click(object sender, EventArgs e)
+        {
+            employeeWorkHourInputTabMode = FunctionMode.STATIC;
+            LoadControlStatus(tbpEmployeeWorkhourInput);
+            txtEmployeeWorkhourInputTabMemo.Text += DateTime.Now.ToString() + " 資料更新取消" + Environment.NewLine;
+        }
+
+        private void btnEmployeeWorkhourInputSave_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in gvEmployeeWorkhourInputField.Rows)
+            {                
+                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                {
+                    conn.Open();
+                    //Check for duplicate entry
+                    string query = "SELECT [YEAR],[EMP_ID],[EXPECTED_WORK_HOUR]"
+                                + " FROM EMPLOYEE_EXPECTED_WORKHOUR"
+                                + " WHERE [YEAR]=@YEAR"
+                                + " AND [EMP_ID]=@ID";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@YEAR", row.Cells["評核年份"].FormattedValue.ToString());
+                    cmd.Parameters.AddWithValue("@ID", row.Cells["員工ID"].FormattedValue.ToString());
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        decimal d;
+                        //Already have entry, use update
+                        if (dr.HasRows)
+                        {
+                            query = "UPDATE EMPLOYEE_EXPECTED_WORKHOUR"
+                                + " SET [EXPECTED_WORK_HOUR]=@WORKHOUR"
+                                + " WHERE [YEAR]=@YEAR"
+                                + " AND [EMP_ID]=@ID";
+                            cmd = new SqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@YEAR", row.Cells["評核年份"].FormattedValue.ToString());
+                            cmd.Parameters.AddWithValue("@ID", row.Cells["員工ID"].FormattedValue.ToString());
+                            if (decimal.TryParse(row.Cells["應工作時數"].FormattedValue.ToString(), out d))
+                            {
+                                cmd.Parameters.AddWithValue("@WORKHOUR", d);
+                            }
+                            else
+                            {
+                                cmd.Parameters.AddWithValue("@WORKHOUR", DBNull.Value);
+                            }
+                            cmd.ExecuteNonQuery();
+                        }
+                        else
+                        {
+                            query = "INSERT INTO EMPLOYEE_EXPECTED_WORKHOUR"
+                                + " VALUES (@YEAR, @ID, @WORKHOUR)";
+                            cmd = new SqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@YEAR", row.Cells["評核年份"].FormattedValue.ToString());
+                            cmd.Parameters.AddWithValue("@ID", row.Cells["員工ID"].FormattedValue.ToString());
+                            if (decimal.TryParse(row.Cells["應工作時數"].FormattedValue.ToString(), out d))
+                            {
+                                cmd.Parameters.AddWithValue("@WORKHOUR", d);
+                            }
+                            else
+                            {
+                                cmd.Parameters.AddWithValue("@WORKHOUR", DBNull.Value);
+                            }
+                            cmd.ExecuteNonQuery();
+                        }                        
+                    }
+                }
+            }
+            employeeWorkHourInputTabMode = FunctionMode.STATIC;
+            dtEmployeeWorkhourSource = LoadgvEmployeeWorkhourInputField();
+            gvEmployeeWorkhourInputField.DataSource = dtEmployeeWorkhourSource;
+            LoadControlStatus(tbpEmployeeWorkhourInput);
+            txtEmployeeWorkhourInputTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;
+        }
+
         #endregion
     }
 }

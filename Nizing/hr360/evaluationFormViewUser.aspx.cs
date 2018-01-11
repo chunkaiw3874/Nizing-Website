@@ -561,58 +561,22 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
         //計算出勤率
         //每年須手動修改需出勤時數 edit annually
         double onJobHour = 0;
-        if (lblEmpID.Text.Trim() == "0010") //小倩
+        object checkForNull;
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
-            onJobHour = 2099.5;
-            lblOnJobPercent.Text = (Math.Round(100 * (1 - (dayOffSum / onJobHour)), 2, MidpointRounding.AwayFromZero)).ToString();
+            conn.Open();
+            query = "SELECT [EXPECTED_WORK_HOUR]"
+                + " FROM EMPLOYEE_EXPECTED_WORKHOUR"
+                + " WHERE [YEAR]=@YEAR"
+                + " AND [EMP_ID]=@ID";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@YEAR", lblEvalYear.Text);
+            cmd.Parameters.AddWithValue("@ID", lblEmpID.Text);
+            checkForNull = cmd.ExecuteScalar();
         }
-        else if (lblEmpID.Text.Trim() == "0001" || lblEmpID.Text.Trim() == "0002" || lblEmpID.Text.Trim() == "0004" ||
-            lblEmpID.Text.Trim() == "0008" || lblEmpID.Text.Trim() == "0009" || lblEmpID.Text.Trim() == "0011" ||
-            lblEmpID.Text.Trim() == "0012" || lblEmpID.Text.Trim() == "0013" || lblEmpID.Text.Trim() == "0034" ||
-            lblEmpID.Text.Trim() == "0039" || lblEmpID.Text.Trim() == "0049" || lblEmpID.Text.Trim() == "0057" ||
-            lblEmpID.Text.Trim() == "0062" || lblEmpID.Text.Trim() == "0066" || lblEmpID.Text.Trim() == "0067" ||
-            lblEmpID.Text.Trim() == "0079" || lblEmpID.Text.Trim() == "0093" || lblEmpID.Text.Trim() == "0094" ||
-            lblEmpID.Text.Trim() == "0096") //廠內人員
+        if (checkForNull != null)
         {
-            onJobHour = 1984;
-            lblOnJobPercent.Text = (Math.Round(100 * (1 - (dayOffSum / onJobHour)), 2, MidpointRounding.AwayFromZero)).ToString();
-        }
-        else if (lblEmpID.Text.Trim() == "0005" || lblEmpID.Text.Trim() == "0015" || lblEmpID.Text.Trim() == "0031" ||
-            lblEmpID.Text.Trim() == "0047" || lblEmpID.Text.Trim() == "0063" || lblEmpID.Text.Trim() == "0074" ||
-            lblEmpID.Text.Trim() == "0080" || lblEmpID.Text.Trim() == "0085" || lblEmpID.Text.Trim() == "0023" ||
-            lblEmpID.Text.Trim() == "0124" || lblEmpID.Text.Trim() == "0125") //辦公室人員
-        {
-            onJobHour = 1976;
-            lblOnJobPercent.Text = (Math.Round(100 * (1 - (dayOffSum / onJobHour)), 2, MidpointRounding.AwayFromZero)).ToString();
-        }
-        else if (lblEmpID.Text.Trim() == "0103")    //以下皆為未滿一年人員
-        {
-            onJobHour = 1616;
-            lblOnJobPercent.Text = (Math.Round(100 * (1 - (dayOffSum / onJobHour)), 2, MidpointRounding.AwayFromZero)).ToString();
-        }
-        else if (lblEmpID.Text.Trim() == "0107" || lblEmpID.Text.Trim() == "0108")
-        {
-            onJobHour = 1472;
-            lblOnJobPercent.Text = (Math.Round(100 * (1 - (dayOffSum / onJobHour)), 2, MidpointRounding.AwayFromZero)).ToString();
-        }
-        else if (lblEmpID.Text.Trim() == "0105")
-        {
-            onJobHour = 1352;
-            lblOnJobPercent.Text = (Math.Round(100 * (1 - (dayOffSum / onJobHour)), 2, MidpointRounding.AwayFromZero)).ToString();
-        }
-        else if (lblEmpID.Text.Trim() == "0109")
-        {
-            onJobHour = 1120;
-            lblOnJobPercent.Text = (Math.Round(100 * (1 - (dayOffSum / onJobHour)), 2, MidpointRounding.AwayFromZero)).ToString();
-        }
-        else if (lblEmpID.Text.Trim() == "0112" || lblEmpID.Text.Trim() == "0113")
-        {
-            onJobHour = 728;
-            lblOnJobPercent.Text = (Math.Round(100 * (1 - (dayOffSum / onJobHour)), 2, MidpointRounding.AwayFromZero)).ToString();
-        }
-        else if (lblEmpID.Text.Trim() == "0114")
-        {
-            onJobHour = 576;
+            onJobHour = Convert.ToDouble(checkForNull);
             lblOnJobPercent.Text = (Math.Round(100 * (1 - (dayOffSum / onJobHour)), 2, MidpointRounding.AwayFromZero)).ToString();
         }
         else
