@@ -577,7 +577,7 @@
         </div>
         <!--放置支援圖片-->
         <div id="image">
-            <div class="row">
+            <%--<div class="row">
                 <div class="col-xs-8 border" style="border-right:none;">
                     <img src="image/assessment/2016/2016_production_efficiency.jpg" style="max-width:100%;" />
                 </div>
@@ -589,7 +589,7 @@
                 <div class="col-xs-12 border">
                     <img src="image/assessment/2016/2016_production_amount.jpg" style="max-width:100%" />
                 </div>
-            </div> 
+            </div> --%>
         </div>
     </div>
 </asp:Content>
