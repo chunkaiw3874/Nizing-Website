@@ -248,6 +248,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
         }         
         rowCount = dtAssessmentQuestion.Rows.Count;
         //讀取出勤資料
+        //edit annually:假別代號有更改或增加新假別時需更新
         DataTable dtAttendance = new DataTable();
         using (SqlConnection conn = new SqlConnection(NZconnectionString))
         {
@@ -294,6 +295,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                                         + " CASE CTE1.DAY_OFF_ID"
                                         + " WHEN 04 THEN 2"
                                         + " WHEN 05 THEN 2"
+                                        + " WHEN 10 THEN 2"
                                         + " WHEN 98 THEN 2"
                                         + " WHEN 99 THEN 2"
                                         + " ELSE 1"
@@ -330,16 +332,21 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             Label lblDayOffName = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOffName" + (i + 1).ToString()));
             if (lblDayOffName != null)
             {
-                lblDayOffName.Text = dtAttendance.Rows[i][2].ToString();
+                lblDayOffName.Text = dtAttendance.Rows[i]["DAY_OFF_TYPE"].ToString();
             }
             Label lblDayOff = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOff" + (i + 1).ToString()));
             if (lblDayOff != null)
             {
-                lblDayOff.Text = dtAttendance.Rows[i][3].ToString();
-                if (i > 11)
+                lblDayOff.Text = dtAttendance.Rows[i]["DAY_OFF_AMOUNT"].ToString();
+                if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
                 {
                     dayOffSum += Convert.ToDouble(dtAttendance.Rows[i][3]);
                 }
+            }
+            Label lblDayOffUnit = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOffUnit" + (i + 1).ToString()));
+            if (lblDayOffUnit != null)
+            {
+                lblDayOffUnit.Text = dtAttendance.Rows[i]["DAY_OFF_UNIT"].ToString();
             }
         }
         //計算小計

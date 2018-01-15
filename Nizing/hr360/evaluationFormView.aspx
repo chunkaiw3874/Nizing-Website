@@ -142,7 +142,7 @@
                     <asp:Label ID="lblDayOff1" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
-                    時
+                    <asp:Label ID="lblDayOffUnit1" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
                     嘉獎
@@ -162,7 +162,7 @@
                     <asp:Label ID="lblDayOff2" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
-                    時
+                    <asp:Label ID="lblDayOffUnit2" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
                     小功
@@ -182,7 +182,7 @@
                     <asp:Label ID="lblDayOff3" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
-                    時
+                    <asp:Label ID="lblDayOffUnit3" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
                     大功
@@ -202,7 +202,7 @@
                     <asp:Label ID="lblDayOff4" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
-                    時
+                    <asp:Label ID="lblDayOffUnit4" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
                     申誡
@@ -222,7 +222,7 @@
                     <asp:Label ID="lblDayOff5" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
-                    時
+                    <asp:Label ID="lblDayOffUnit5" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
                     小過
@@ -242,7 +242,7 @@
                     <asp:Label ID="lblDayOff6" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
-                    時
+                    <asp:Label ID="lblDayOffUnit6" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
                     大過
@@ -262,7 +262,7 @@
                     <asp:Label ID="lblDayOff7" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
-                    時
+                    <asp:Label ID="lblDayOffUnit7" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
                     <br />
@@ -282,7 +282,7 @@
                     <asp:Label ID="lblDayOff8" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
-                    時
+                    <asp:Label ID="lblDayOffUnit8" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
                     <br />
@@ -302,7 +302,7 @@
                     <asp:Label ID="lblDayOff9" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
-                    時
+                    <asp:Label ID="lblDayOffUnit9" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
                     <br />
@@ -322,7 +322,7 @@
                     <asp:Label ID="lblDayOff10" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
-                    時
+                    <asp:Label ID="lblDayOffUnit10" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
                     <br />
@@ -342,7 +342,7 @@
                     <asp:Label ID="lblDayOff11" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
-                    時
+                    <asp:Label ID="lblDayOffUnit11" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
                     <br />
@@ -362,7 +362,7 @@
                     <asp:Label ID="lblDayOff12" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
-                    時
+                    <asp:Label ID="lblDayOffUnit12" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
                     <br />
@@ -382,7 +382,7 @@
                     <asp:Label ID="lblDayOff13" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
-                    時
+                    <asp:Label ID="lblDayOffUnit13" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
                     <br />
@@ -402,7 +402,7 @@
                     <asp:Label ID="lblDayOff14" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
-                    時
+                    <asp:Label ID="lblDayOffUnit14" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
                     <br />
@@ -422,7 +422,7 @@
                     <asp:Label ID="lblDayOff15" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
-                    時
+                    <asp:Label ID="lblDayOffUnit15" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
                     <br />
@@ -442,7 +442,27 @@
                     <asp:Label ID="lblDayOff16" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
-                    時
+                    <asp:Label ID="lblDayOffUnit16" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOffName17" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOff17" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOffUnit17" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
                     <br />
@@ -528,7 +548,7 @@
                 </div>
             </div>
         </div>
-        <div id="last_comment">
+        <div id="div0067_comment" runat="server">
             <div class="row">
                 <div class="col-xs-12 subtitle border">
                     吉田康森評語
@@ -544,6 +564,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div id="div0007_comment" runat="server">
             <div class="row">
                 <div class="col-xs-12 subtitle border">
                     Chrissy評語
@@ -559,6 +581,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div id="div0006_comment" runat="server">
             <div class="row">
                 <div class="col-xs-12 subtitle border">
                     Kelven評語

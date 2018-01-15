@@ -26,6 +26,9 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
     {
         string assessed = "";
         string year = "";
+        //test info
+        //Session["erp_id"] = "0001";
+        //Session["view_year"] = "2017";        
         if (!IsPostBack)
         {
             assessed = Session["erp_id"].ToString().Trim();
@@ -425,7 +428,7 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
         finalScoreRow.Controls.Add(div);
         lbl = new Label();
         lbl.CssClass = "form-control text-right text-color-green";
-        lbl.Text = "考核構面小計";
+        lbl.Text = "小計";
         div.Controls.Add(lbl);
         div = new HtmlGenericControl();
         div.TagName = "div";
@@ -451,7 +454,7 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dtFinalScoreRecord);
         }
-        if (dtFinalScoreRecord.Rows.Count == 0)
+        if (dtFinalScoreRecord.Rows.Count == 0 || string.IsNullOrWhiteSpace(dtFinalScoreRecord.Rows[0][0].ToString()))
         {
             lbl.Text = "未評核";
         }
@@ -544,16 +547,21 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
             Label lblDayOffName = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOffName" + (i + 1).ToString()));
             if (lblDayOffName != null)
             {
-                lblDayOffName.Text = dtAttendance.Rows[i][2].ToString();
+                lblDayOffName.Text = dtAttendance.Rows[i]["DAY_OFF_TYPE"].ToString();
             }
             Label lblDayOff = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOff" + (i + 1).ToString()));
             if (lblDayOff != null)
             {
-                lblDayOff.Text = dtAttendance.Rows[i][3].ToString();
-                if (i > 11)
+                lblDayOff.Text = dtAttendance.Rows[i]["DAY_OFF_AMOUNT"].ToString();
+                if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
                 {
                     dayOffSum += Convert.ToDouble(dtAttendance.Rows[i][3]);
                 }
+            }
+            Label lblDayOffUnit = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOffUnit" + (i + 1).ToString()));
+            if (lblDayOffUnit != null)
+            {
+                lblDayOffUnit.Text = dtAttendance.Rows[i]["DAY_OFF_UNIT"].ToString();
             }
         }
         //計算小計
@@ -604,6 +612,30 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@ID", lblEmpID.Text);
             cmd.Parameters.AddWithValue("@YEAR", lblEvalYear.Text);
             lblDayOffUnused.Text = cmd.ExecuteScalar().ToString();
+        }
+        if (string.IsNullOrWhiteSpace(txt0006Comment.Text))
+        {
+            div0006_comment.Visible = false;
+        }
+        else
+        {
+            div0006_comment.Visible = true;
+        }
+        if (string.IsNullOrWhiteSpace(txt0007Comment.Text))
+        {
+            div0007_comment.Visible = false;
+        }
+        else
+        {
+            div0007_comment.Visible = true;
+        }
+        if (string.IsNullOrWhiteSpace(txt0067Comment.Text))
+        {
+            div0067_comment.Visible = false;
+        }
+        else
+        {
+            div0067_comment.Visible = true;
         }
     }
 }

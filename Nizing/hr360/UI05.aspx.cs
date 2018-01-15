@@ -21,8 +21,8 @@ public partial class hr360_UI05 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        DateTime start = new DateTime(2017, 1, 13, 19, 0, 0);
-        DateTime end = new DateTime(2017, 1, 19, 17, 30, 0);
+        DateTime start = new DateTime(2017, 1, 1, 19, 0, 0);
+        DateTime end = new DateTime(2017, 1, 1, 17, 30, 0);
 
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
@@ -46,8 +46,16 @@ public partial class hr360_UI05 : System.Web.UI.Page
         if (DateTime.Now >= start && DateTime.Now < end)
         {
             divAssessmentList.Visible = true;
-            divAssessmentLookup.Visible = false;
-            divBonusLookup.Visible = false;
+            divAssessmentLookup.Visible = true;
+            divBonusLookup.Visible = true;
+            if (!IsPostBack)
+            {
+                for (int i = 2016; i <= DateTime.Today.Year; i++)
+                {
+                    ddlAssessmentYear.Items.Add(i.ToString());
+                    ddlBonusYear.Items.Add(i.ToString());
+                }
+            }
             //Create table for all three assessment type (自評、主管評、特評)
             DataTable dtEvalSelf = new DataTable();  //自評 table
             DataTable dtEvalBoss = new DataTable();  //主管評 table
@@ -113,11 +121,12 @@ public partial class hr360_UI05 : System.Web.UI.Page
                 HtmlGenericControl tr = new HtmlGenericControl();
                 tr.TagName = "tr";
                 tr.ID = "tr1_" + (i + 1).ToString();
-                tbFirstAssessmentBody.Controls.Add(tr);
+                tbFirstAssessmentBody.Controls.Add(tr);                
                 //insert first column into row (自評)
                 HtmlGenericControl td = new HtmlGenericControl();
                 td.TagName = "td";
                 td.ID = tr.ID.ToString() + "_1";
+                td.Attributes["class"] = "text-center";
                 tr.Controls.Add(td);
                 //判斷dtEvalSelf裡面有沒有東西
                 if (dtEvalSelf != null && dtEvalSelf.Rows.Count > i)
@@ -133,6 +142,7 @@ public partial class hr360_UI05 : System.Web.UI.Page
                 td = new HtmlGenericControl();
                 td.TagName = "td";
                 td.ID = tr.ID.ToString() + "_2";
+                td.Attributes["class"] = "text-center";
                 tr.Controls.Add(td);
                 //判斷dtEvalBoss裡面有沒有東西
                 if (dtEvalBoss != null && dtEvalBoss.Rows.Count > i)
@@ -148,6 +158,7 @@ public partial class hr360_UI05 : System.Web.UI.Page
                 td = new HtmlGenericControl();
                 td.TagName = "td";
                 td.ID = tr.ID.ToString() + "_3";
+                td.Attributes["class"] = "text-center";
                 tr.Controls.Add(td);
                 //判斷dtEvalSpecial裡面有沒有東西
                 if (dtEvalSpecial != null && dtEvalSpecial.Rows.Count > i)
@@ -229,6 +240,7 @@ public partial class hr360_UI05 : System.Web.UI.Page
                 HtmlGenericControl td = new HtmlGenericControl();
                 td.TagName = "td";
                 td.ID = tr.ID.ToString() + "_1";
+                td.Attributes["class"] = "text-center";
                 tr.Controls.Add(td);
                 //判斷dtEvalSelf裡面有沒有東西
                 if (dtEvalSelf != null && dtEvalSelf.Rows.Count > i)
@@ -244,6 +256,7 @@ public partial class hr360_UI05 : System.Web.UI.Page
                 td = new HtmlGenericControl();
                 td.TagName = "td";
                 td.ID = tr.ID.ToString() + "_2";
+                td.Attributes["class"] = "text-center";
                 tr.Controls.Add(td);
                 //判斷dtEvalBoss裡面有沒有東西
                 if (dtEvalBoss != null && dtEvalBoss.Rows.Count > i)
@@ -259,6 +272,7 @@ public partial class hr360_UI05 : System.Web.UI.Page
                 td = new HtmlGenericControl();
                 td.TagName = "td";
                 td.ID = tr.ID.ToString() + "_3";
+                td.Attributes["class"] = "text-center";
                 tr.Controls.Add(td);
                 //判斷dtEvalSpecial裡面有沒有東西
                 if (dtEvalSpecial != null && dtEvalSpecial.Rows.Count > i)
