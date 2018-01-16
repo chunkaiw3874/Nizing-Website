@@ -21,13 +21,17 @@ public partial class hr360_UI05 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        DateTime start = new DateTime(2017, 1, 1, 19, 0, 0);
-        DateTime end = new DateTime(2017, 1, 1, 17, 30, 0);
+        DateTime evalStart = new DateTime(2017, 1, 1, 19, 0, 0);
+        DateTime evalEnd = new DateTime(2017, 1, 1, 17, 30, 0);
+        DateTime selfEvalStart = new DateTime();
+        DateTime selfEvalEnd = new DateTime();
+        DateTime superEvalStart = new DateTime();
+        DateTime superEvalEnd = new DateTime();
 
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             conn.Open();
-            string query = "SELECT EVAL_YEAR, EVAL_START_TIME, EVAL_END_TIME"
+            string query = "SELECT EVAL_YEAR,EVAL_STARTTIME,EVAL_ENDTIME,EVAL_SELF_STARTTIME, EVAL_SELF_ENDTIME, EVAL_SUPERVISOR_STARTTIME, EVAL_SUPERVISOR_ENDTIME"
                         + " FROM HR360_ASSESSMENTTIME";
             SqlCommand cmd = new SqlCommand(query, conn);
             using (SqlDataReader dr = cmd.ExecuteReader())
@@ -37,13 +41,17 @@ public partial class hr360_UI05 : System.Web.UI.Page
                     if (dr.HasRows)
                     {
                         year = dr.GetString(0);
-                        start = dr.GetDateTime(1);
-                        end = dr.GetDateTime(2);
+                        evalStart = dr.GetDateTime(1);
+                        evalEnd = dr.GetDateTime(2);
+                        selfEvalStart = dr.GetDateTime(3);
+                        selfEvalEnd = dr.GetDateTime(4);
+                        superEvalStart = dr.GetDateTime(5);
+                        superEvalEnd = dr.GetDateTime(6);
                     }
                 }
             }
         }
-        if (DateTime.Now >= start && DateTime.Now < end)
+        if (DateTime.Now >= evalStart && DateTime.Now < evalEnd)
         {
             divAssessmentList.Visible = true;
             divAssessmentLookup.Visible = true;
@@ -131,12 +139,23 @@ public partial class hr360_UI05 : System.Web.UI.Page
                 //判斷dtEvalSelf裡面有沒有東西
                 if (dtEvalSelf != null && dtEvalSelf.Rows.Count > i)
                 {
-                    //insert control into 自評 column
-                    LinkButton lb = new LinkButton();
-                    lb.ID = dtEvalSelf.Rows[i][0].ToString();
-                    lb.Text = dtEvalSelf.Rows[i][1].ToString();
-                    lb.Click += new EventHandler(lb_Click);
-                    td.Controls.Add(lb);
+                    if (DateTime.Now >= selfEvalStart && DateTime.Now < selfEvalEnd)
+                    {
+                        //insert control into 自評 column
+                        LinkButton lb = new LinkButton();
+                        lb.ID = dtEvalSelf.Rows[i][0].ToString();
+                        lb.Text = dtEvalSelf.Rows[i][1].ToString();
+                        lb.Click += new EventHandler(lb_Click);
+                        td.Controls.Add(lb);
+                    }
+                    else
+                    {
+                        //insert non-clickable item
+                        Label lbl = new Label();
+                        lbl.ID = dtEvalSelf.Rows[i][0].ToString();
+                        lbl.Text = dtEvalSelf.Rows[i][1].ToString();
+                        td.Controls.Add(lbl);
+                    }
                 }
                 //insert second column into row (主管評)
                 td = new HtmlGenericControl();
@@ -147,14 +166,24 @@ public partial class hr360_UI05 : System.Web.UI.Page
                 //判斷dtEvalBoss裡面有沒有東西
                 if (dtEvalBoss != null && dtEvalBoss.Rows.Count > i)
                 {
-                    //insert control into 自評 column
-                    LinkButton lb = new LinkButton();
-                    lb.ID = dtEvalBoss.Rows[i][0].ToString();
-                    lb.Text = dtEvalBoss.Rows[i][1].ToString();
-                    lb.Click += new EventHandler(lb_Click);
-                    td.Controls.Add(lb);
+                    if (DateTime.Now >= superEvalStart && DateTime.Now < superEvalEnd)
+                    {
+                        //insert control into 主管評 column
+                        LinkButton lb = new LinkButton();
+                        lb.ID = dtEvalBoss.Rows[i][0].ToString();
+                        lb.Text = dtEvalBoss.Rows[i][1].ToString();
+                        lb.Click += new EventHandler(lb_Click);
+                        td.Controls.Add(lb);
+                    }
+                    else
+                    {
+                        Label lbl = new Label();
+                        lbl.ID = dtEvalBoss.Rows[i][0].ToString();
+                        lbl.Text = dtEvalBoss.Rows[i][1].ToString();
+                        td.Controls.Add(lbl);
+                    }
                 }
-                //insert first column into row (自評)
+                //insert first column into row (特評)
                 td = new HtmlGenericControl();
                 td.TagName = "td";
                 td.ID = tr.ID.ToString() + "_3";
@@ -163,12 +192,22 @@ public partial class hr360_UI05 : System.Web.UI.Page
                 //判斷dtEvalSpecial裡面有沒有東西
                 if (dtEvalSpecial != null && dtEvalSpecial.Rows.Count > i)
                 {
-                    //insert control into 自評 column
-                    LinkButton lb = new LinkButton();
-                    lb.ID = dtEvalSpecial.Rows[i][0].ToString();
-                    lb.Text = dtEvalSpecial.Rows[i][1].ToString();
-                    lb.Click += new EventHandler(lb_Click);
-                    td.Controls.Add(lb);
+                    if (DateTime.Now >= superEvalStart && DateTime.Now < superEvalEnd)
+                    {
+                        //insert control into 特評 column
+                        LinkButton lb = new LinkButton();
+                        lb.ID = dtEvalSpecial.Rows[i][0].ToString();
+                        lb.Text = dtEvalSpecial.Rows[i][1].ToString();
+                        lb.Click += new EventHandler(lb_Click);
+                        td.Controls.Add(lb);
+                    }
+                    else
+                    {
+                        Label lbl = new Label();
+                        lbl.ID = dtEvalSpecial.Rows[i][0].ToString();
+                        lbl.Text = dtEvalSpecial.Rows[i][1].ToString();
+                        td.Controls.Add(lbl);
+                    }
                 }
             }
             //Fill tables (已評核人員)
@@ -245,12 +284,22 @@ public partial class hr360_UI05 : System.Web.UI.Page
                 //判斷dtEvalSelf裡面有沒有東西
                 if (dtEvalSelf != null && dtEvalSelf.Rows.Count > i)
                 {
-                    //insert control into 自評 column
-                    LinkButton lb = new LinkButton();
-                    lb.ID = dtEvalSelf.Rows[i][0].ToString().Trim();
-                    lb.Text = dtEvalSelf.Rows[i][1].ToString().Trim();
-                    lb.Click += new EventHandler(lb_Click);
-                    td.Controls.Add(lb);
+                    if (DateTime.Now >= selfEvalStart && DateTime.Now < selfEvalEnd)
+                    {
+                        //insert control into 自評 column
+                        LinkButton lb = new LinkButton();
+                        lb.ID = dtEvalSelf.Rows[i][0].ToString().Trim();
+                        lb.Text = dtEvalSelf.Rows[i][1].ToString().Trim();
+                        lb.Click += new EventHandler(lb_Click);
+                        td.Controls.Add(lb);
+                    }
+                    else
+                    {
+                        Label lbl = new Label();
+                        lbl.ID = dtEvalSelf.Rows[i][0].ToString();
+                        lbl.Text = dtEvalSelf.Rows[i][1].ToString();
+                        td.Controls.Add(lbl);
+                    }
                 }
                 //insert second column (主管評)
                 td = new HtmlGenericControl();
@@ -261,12 +310,22 @@ public partial class hr360_UI05 : System.Web.UI.Page
                 //判斷dtEvalBoss裡面有沒有東西
                 if (dtEvalBoss != null && dtEvalBoss.Rows.Count > i)
                 {
-                    //insert control into 主管評 column
-                    LinkButton lb = new LinkButton();
-                    lb.ID = dtEvalBoss.Rows[i][0].ToString().Trim();
-                    lb.Text = dtEvalBoss.Rows[i][1].ToString().Trim();
-                    lb.Click += new EventHandler(lb_Click);
-                    td.Controls.Add(lb);
+                    if (DateTime.Now >= superEvalStart && DateTime.Now < superEvalEnd)
+                    {
+                        //insert control into 主管評 column
+                        LinkButton lb = new LinkButton();
+                        lb.ID = dtEvalBoss.Rows[i][0].ToString().Trim();
+                        lb.Text = dtEvalBoss.Rows[i][1].ToString().Trim();
+                        lb.Click += new EventHandler(lb_Click);
+                        td.Controls.Add(lb);
+                    }
+                    else
+                    {
+                        Label lbl = new Label();
+                        lbl.ID = dtEvalBoss.Rows[i][0].ToString();
+                        lbl.Text = dtEvalBoss.Rows[i][1].ToString();
+                        td.Controls.Add(lbl);
+                    }
                 }
                 //insert third column (特評)
                 td = new HtmlGenericControl();
@@ -277,12 +336,22 @@ public partial class hr360_UI05 : System.Web.UI.Page
                 //判斷dtEvalSpecial裡面有沒有東西
                 if (dtEvalSpecial != null && dtEvalSpecial.Rows.Count > i)
                 {
-                    //insert control into 特評 column
-                    LinkButton lb = new LinkButton();
-                    lb.ID = dtEvalSpecial.Rows[i][0].ToString().Trim();
-                    lb.Text = dtEvalSpecial.Rows[i][1].ToString().Trim();
-                    lb.Click += new EventHandler(lb_Click);
-                    td.Controls.Add(lb);
+                    if (DateTime.Now >= superEvalStart && DateTime.Now < superEvalEnd)
+                    {
+                        //insert control into 特評 column
+                        LinkButton lb = new LinkButton();
+                        lb.ID = dtEvalSpecial.Rows[i][0].ToString().Trim();
+                        lb.Text = dtEvalSpecial.Rows[i][1].ToString().Trim();
+                        lb.Click += new EventHandler(lb_Click);
+                        td.Controls.Add(lb);
+                    }
+                    else
+                    {
+                        Label lbl = new Label();
+                        lbl.ID = dtEvalSpecial.Rows[i][0].ToString();
+                        lbl.Text = dtEvalSpecial.Rows[i][1].ToString();
+                        td.Controls.Add(lbl);
+                    }
                 }
             }
         }

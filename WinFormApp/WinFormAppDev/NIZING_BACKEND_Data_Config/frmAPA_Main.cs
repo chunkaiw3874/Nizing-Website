@@ -126,6 +126,14 @@ namespace NIZING_BACKEND_Data_Config
             dtpYearAndEvalTimeStartTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             dtpYearAndEvalTimeEndTime.Format = DateTimePickerFormat.Custom;
             dtpYearAndEvalTimeEndTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            dtpYearAndEvalTimeSelfStartTime.Format = DateTimePickerFormat.Custom;
+            dtpYearAndEvalTimeSelfStartTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            dtpYearAndEvalTimeSelfEndTime.Format = DateTimePickerFormat.Custom;
+            dtpYearAndEvalTimeSelfEndTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            dtpYearAndEvalTimeSupervisorStartTime.Format = DateTimePickerFormat.Custom;
+            dtpYearAndEvalTimeSupervisorStartTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            dtpYearAndEvalTimeSupervisorEndTime.Format = DateTimePickerFormat.Custom;
+            dtpYearAndEvalTimeSupervisorEndTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
@@ -141,6 +149,10 @@ namespace NIZING_BACKEND_Data_Config
                             cbxYearAndEvalTimeYear.Text = dr.GetString(0);
                             dtpYearAndEvalTimeStartTime.Value = dr.GetDateTime(1);
                             dtpYearAndEvalTimeEndTime.Value = dr.GetDateTime(2);
+                            dtpYearAndEvalTimeSelfStartTime.Value = dr.GetDateTime(3);
+                            dtpYearAndEvalTimeSelfEndTime.Value = dr.GetDateTime(4);
+                            dtpYearAndEvalTimeSupervisorStartTime.Value = dr.GetDateTime(5);
+                            dtpYearAndEvalTimeSupervisorEndTime.Value = dr.GetDateTime(6);
                         }
                     }
                 }
@@ -1919,12 +1931,20 @@ namespace NIZING_BACKEND_Data_Config
                 conn.Open();
                 string query = "UPDATE HR360_ASSESSMENTTIME"
                             + " SET EVAL_YEAR=@EVAL_YEAR"
-                            + " ,EVAL_START_TIME=@EVAL_START_TIME"
-                            + " ,EVAL_END_TIME=@EVAL_END_TIME";
+                            + " ,EVAL_STARTTIME=@EVAL_START_TIME"
+                            + " ,EVAL_ENDTIME=@EVAL_END_TIME"
+                            + " ,EVAL_SELF_STARTTIME=@SELFSTART"
+                            + " ,EVAL_SELF_ENDTIME=@SELFEND"
+                            + " ,EVAL_SUPERVISOR_STARTTIME=@SUPERSTART"
+                            + " ,EVAL_SUPERVISOR_ENDTIME=@SUPEREND";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@EVAL_YEAR", cbxYearAndEvalTimeYear.Text);
                 cmd.Parameters.AddWithValue("@EVAL_START_TIME", dtpYearAndEvalTimeStartTime.Value);
                 cmd.Parameters.AddWithValue("@EVAL_END_TIME", dtpYearAndEvalTimeEndTime.Value);
+                cmd.Parameters.AddWithValue("@SELFSTART", dtpYearAndEvalTimeSelfStartTime.Value);
+                cmd.Parameters.AddWithValue("@SELFEND", dtpYearAndEvalTimeSelfEndTime.Value);
+                cmd.Parameters.AddWithValue("@SUPERSTART", dtpYearAndEvalTimeSupervisorStartTime.Value);
+                cmd.Parameters.AddWithValue("@SUPEREND", dtpYearAndEvalTimeSupervisorEndTime.Value);
                 cmd.ExecuteNonQuery();
             }
             txtYearAndEvalTimeTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;            

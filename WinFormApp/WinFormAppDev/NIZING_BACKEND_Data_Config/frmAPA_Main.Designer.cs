@@ -31,8 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnLogout = new System.Windows.Forms.Button();
             this.tbcManagement = new System.Windows.Forms.TabControl();
@@ -86,6 +86,16 @@
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.cbxPersonnelAssignmentYear = new System.Windows.Forms.ComboBox();
             this.btnPersonnelAssignmentEdit = new System.Windows.Forms.Button();
+            this.tbpEmployeeWorkhourInput = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.flowLayoutPanel12 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnEmployeeWorkhourInputCancel = new System.Windows.Forms.Button();
+            this.btnEmployeeWorkhourInputSave = new System.Windows.Forms.Button();
+            this.gvEmployeeWorkhourInputField = new System.Windows.Forms.DataGridView();
+            this.txtEmployeeWorkhourInputTabMemo = new System.Windows.Forms.TextBox();
+            this.flowLayoutPanel13 = new System.Windows.Forms.FlowLayoutPanel();
+            this.cbxEmployeeWorkhourInputYear = new System.Windows.Forms.ComboBox();
+            this.btnEmployeeWorkhourInputEdit = new System.Windows.Forms.Button();
             this.tbpScoreStandard = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.btnScoreStandardEdit = new System.Windows.Forms.Button();
@@ -98,6 +108,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtScoreStandardStandard = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.tbpYearAndEvalTime = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cbxYearAndEvalTimeYear = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.dtpYearAndEvalTimeStartTime = new System.Windows.Forms.DateTimePicker();
+            this.dtpYearAndEvalTimeEndTime = new System.Windows.Forms.DateTimePicker();
+            this.flowLayoutPanel11 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnYearAndEvalTimeSave = new System.Windows.Forms.Button();
+            this.txtYearAndEvalTimeTabMemo = new System.Windows.Forms.RichTextBox();
             this.tbpAccountPriviledge = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel10 = new System.Windows.Forms.FlowLayoutPanel();
@@ -113,30 +135,16 @@
             this.cbxReportPreviewYear = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.tbpYearAndEvalTime = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.label9 = new System.Windows.Forms.Label();
-            this.cbxYearAndEvalTimeYear = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.dtpYearAndEvalTimeStartTime = new System.Windows.Forms.DateTimePicker();
-            this.dtpYearAndEvalTimeEndTime = new System.Windows.Forms.DateTimePicker();
-            this.flowLayoutPanel11 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnYearAndEvalTimeSave = new System.Windows.Forms.Button();
-            this.txtYearAndEvalTimeTabMemo = new System.Windows.Forms.RichTextBox();
-            this.tbpEmployeeWorkhourInput = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel12 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnEmployeeWorkhourInputCancel = new System.Windows.Forms.Button();
-            this.btnEmployeeWorkhourInputSave = new System.Windows.Forms.Button();
-            this.gvEmployeeWorkhourInputField = new System.Windows.Forms.DataGridView();
-            this.txtEmployeeWorkhourInputTabMemo = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel13 = new System.Windows.Forms.FlowLayoutPanel();
-            this.cbxEmployeeWorkhourInputYear = new System.Windows.Forms.ComboBox();
-            this.btnEmployeeWorkhourInputEdit = new System.Windows.Forms.Button();
             this.dsAPA_Question = new NIZING_BACKEND_Data_Config.dsAPA_Question();
             this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter = new NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.dtpYearAndEvalTimeSelfStartTime = new System.Windows.Forms.DateTimePicker();
+            this.dtpYearAndEvalTimeSelfEndTime = new System.Windows.Forms.DateTimePicker();
+            this.dtpYearAndEvalTimeSupervisorStartTime = new System.Windows.Forms.DateTimePicker();
+            this.dtpYearAndEvalTimeSupervisorEndTime = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpQuestionCategory.SuspendLayout();
@@ -159,26 +167,26 @@
             this.flowLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvPersonnelAssignment)).BeginInit();
             this.flowLayoutPanel4.SuspendLayout();
+            this.tbpEmployeeWorkhourInput.SuspendLayout();
+            this.tableLayoutPanel12.SuspendLayout();
+            this.flowLayoutPanel12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvEmployeeWorkhourInputField)).BeginInit();
+            this.flowLayoutPanel13.SuspendLayout();
             this.tbpScoreStandard.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.flowLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.flowLayoutPanel9.SuspendLayout();
+            this.tbpYearAndEvalTime.SuspendLayout();
+            this.tableLayoutPanel11.SuspendLayout();
+            this.tableLayoutPanel10.SuspendLayout();
+            this.flowLayoutPanel11.SuspendLayout();
             this.tbpAccountPriviledge.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.flowLayoutPanel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvAccountPriviledge)).BeginInit();
             this.tbpReportPreview.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
-            this.tbpYearAndEvalTime.SuspendLayout();
-            this.tableLayoutPanel11.SuspendLayout();
-            this.tableLayoutPanel10.SuspendLayout();
-            this.flowLayoutPanel11.SuspendLayout();
-            this.tbpEmployeeWorkhourInput.SuspendLayout();
-            this.tableLayoutPanel12.SuspendLayout();
-            this.flowLayoutPanel12.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gvEmployeeWorkhourInputField)).BeginInit();
-            this.flowLayoutPanel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).BeginInit();
             this.SuspendLayout();
             // 
@@ -878,6 +886,138 @@
             this.btnPersonnelAssignmentEdit.UseVisualStyleBackColor = true;
             this.btnPersonnelAssignmentEdit.Click += new System.EventHandler(this.btnPersonnelAssignmentEdit_Click);
             // 
+            // tbpEmployeeWorkhourInput
+            // 
+            this.tbpEmployeeWorkhourInput.Controls.Add(this.tableLayoutPanel12);
+            this.tbpEmployeeWorkhourInput.Location = new System.Drawing.Point(4, 22);
+            this.tbpEmployeeWorkhourInput.Name = "tbpEmployeeWorkhourInput";
+            this.tbpEmployeeWorkhourInput.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpEmployeeWorkhourInput.Size = new System.Drawing.Size(1176, 810);
+            this.tbpEmployeeWorkhourInput.TabIndex = 8;
+            this.tbpEmployeeWorkhourInput.Text = "員工應工作時數設定";
+            this.tbpEmployeeWorkhourInput.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel12
+            // 
+            this.tableLayoutPanel12.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel12.ColumnCount = 1;
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel12.Controls.Add(this.flowLayoutPanel12, 0, 2);
+            this.tableLayoutPanel12.Controls.Add(this.gvEmployeeWorkhourInputField, 0, 1);
+            this.tableLayoutPanel12.Controls.Add(this.txtEmployeeWorkhourInputTabMemo, 0, 3);
+            this.tableLayoutPanel12.Controls.Add(this.flowLayoutPanel13, 0, 0);
+            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel12.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
+            this.tableLayoutPanel12.RowCount = 4;
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(1170, 804);
+            this.tableLayoutPanel12.TabIndex = 3;
+            // 
+            // flowLayoutPanel12
+            // 
+            this.flowLayoutPanel12.CausesValidation = false;
+            this.flowLayoutPanel12.Controls.Add(this.btnEmployeeWorkhourInputCancel);
+            this.flowLayoutPanel12.Controls.Add(this.btnEmployeeWorkhourInputSave);
+            this.flowLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel12.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel12.Location = new System.Drawing.Point(1, 673);
+            this.flowLayoutPanel12.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel12.Name = "flowLayoutPanel12";
+            this.flowLayoutPanel12.Size = new System.Drawing.Size(1168, 29);
+            this.flowLayoutPanel12.TabIndex = 0;
+            // 
+            // btnEmployeeWorkhourInputCancel
+            // 
+            this.btnEmployeeWorkhourInputCancel.CausesValidation = false;
+            this.btnEmployeeWorkhourInputCancel.Enabled = false;
+            this.btnEmployeeWorkhourInputCancel.Location = new System.Drawing.Point(1090, 3);
+            this.btnEmployeeWorkhourInputCancel.Name = "btnEmployeeWorkhourInputCancel";
+            this.btnEmployeeWorkhourInputCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnEmployeeWorkhourInputCancel.TabIndex = 0;
+            this.btnEmployeeWorkhourInputCancel.Text = "取消";
+            this.btnEmployeeWorkhourInputCancel.UseVisualStyleBackColor = true;
+            this.btnEmployeeWorkhourInputCancel.Click += new System.EventHandler(this.btnEmployeeWorkhourInputCancel_Click);
+            // 
+            // btnEmployeeWorkhourInputSave
+            // 
+            this.btnEmployeeWorkhourInputSave.Enabled = false;
+            this.btnEmployeeWorkhourInputSave.Location = new System.Drawing.Point(1009, 3);
+            this.btnEmployeeWorkhourInputSave.Name = "btnEmployeeWorkhourInputSave";
+            this.btnEmployeeWorkhourInputSave.Size = new System.Drawing.Size(75, 23);
+            this.btnEmployeeWorkhourInputSave.TabIndex = 1;
+            this.btnEmployeeWorkhourInputSave.Text = "儲存";
+            this.btnEmployeeWorkhourInputSave.UseVisualStyleBackColor = true;
+            this.btnEmployeeWorkhourInputSave.Click += new System.EventHandler(this.btnEmployeeWorkhourInputSave_Click);
+            // 
+            // gvEmployeeWorkhourInputField
+            // 
+            this.gvEmployeeWorkhourInputField.AllowUserToAddRows = false;
+            this.gvEmployeeWorkhourInputField.AllowUserToResizeRows = false;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvEmployeeWorkhourInputField.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.gvEmployeeWorkhourInputField.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvEmployeeWorkhourInputField.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gvEmployeeWorkhourInputField.Location = new System.Drawing.Point(4, 34);
+            this.gvEmployeeWorkhourInputField.MultiSelect = false;
+            this.gvEmployeeWorkhourInputField.Name = "gvEmployeeWorkhourInputField";
+            this.gvEmployeeWorkhourInputField.RowTemplate.Height = 24;
+            this.gvEmployeeWorkhourInputField.Size = new System.Drawing.Size(1162, 635);
+            this.gvEmployeeWorkhourInputField.TabIndex = 1;
+            // 
+            // txtEmployeeWorkhourInputTabMemo
+            // 
+            this.txtEmployeeWorkhourInputTabMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtEmployeeWorkhourInputTabMemo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtEmployeeWorkhourInputTabMemo.Location = new System.Drawing.Point(4, 706);
+            this.txtEmployeeWorkhourInputTabMemo.Multiline = true;
+            this.txtEmployeeWorkhourInputTabMemo.Name = "txtEmployeeWorkhourInputTabMemo";
+            this.txtEmployeeWorkhourInputTabMemo.ReadOnly = true;
+            this.txtEmployeeWorkhourInputTabMemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtEmployeeWorkhourInputTabMemo.Size = new System.Drawing.Size(1162, 94);
+            this.txtEmployeeWorkhourInputTabMemo.TabIndex = 2;
+            // 
+            // flowLayoutPanel13
+            // 
+            this.flowLayoutPanel13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanel13.Controls.Add(this.cbxEmployeeWorkhourInputYear);
+            this.flowLayoutPanel13.Controls.Add(this.btnEmployeeWorkhourInputEdit);
+            this.flowLayoutPanel13.Location = new System.Drawing.Point(1, 1);
+            this.flowLayoutPanel13.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel13.Name = "flowLayoutPanel13";
+            this.flowLayoutPanel13.Size = new System.Drawing.Size(1168, 29);
+            this.flowLayoutPanel13.TabIndex = 3;
+            // 
+            // cbxEmployeeWorkhourInputYear
+            // 
+            this.cbxEmployeeWorkhourInputYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxEmployeeWorkhourInputYear.FormattingEnabled = true;
+            this.cbxEmployeeWorkhourInputYear.Location = new System.Drawing.Point(3, 3);
+            this.cbxEmployeeWorkhourInputYear.Name = "cbxEmployeeWorkhourInputYear";
+            this.cbxEmployeeWorkhourInputYear.Size = new System.Drawing.Size(121, 20);
+            this.cbxEmployeeWorkhourInputYear.TabIndex = 0;
+            this.cbxEmployeeWorkhourInputYear.SelectedIndexChanged += new System.EventHandler(this.cbxEmployeeWorkhourInputYear_SelectedIndexChanged);
+            // 
+            // btnEmployeeWorkhourInputEdit
+            // 
+            this.btnEmployeeWorkhourInputEdit.Location = new System.Drawing.Point(130, 3);
+            this.btnEmployeeWorkhourInputEdit.Name = "btnEmployeeWorkhourInputEdit";
+            this.btnEmployeeWorkhourInputEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnEmployeeWorkhourInputEdit.TabIndex = 3;
+            this.btnEmployeeWorkhourInputEdit.Text = "編輯";
+            this.btnEmployeeWorkhourInputEdit.UseVisualStyleBackColor = true;
+            this.btnEmployeeWorkhourInputEdit.Click += new System.EventHandler(this.btnEmployeeWorkhourInputEdit_Click);
+            // 
             // tbpScoreStandard
             // 
             this.tbpScoreStandard.Controls.Add(this.tableLayoutPanel5);
@@ -1023,6 +1163,158 @@
             this.label4.Size = new System.Drawing.Size(201, 12);
             this.label4.TabIndex = 6;
             this.label4.Text = "分數設定限制: 0-10之間，小數點一位";
+            // 
+            // tbpYearAndEvalTime
+            // 
+            this.tbpYearAndEvalTime.Controls.Add(this.tableLayoutPanel11);
+            this.tbpYearAndEvalTime.Location = new System.Drawing.Point(4, 22);
+            this.tbpYearAndEvalTime.Name = "tbpYearAndEvalTime";
+            this.tbpYearAndEvalTime.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpYearAndEvalTime.Size = new System.Drawing.Size(1176, 810);
+            this.tbpYearAndEvalTime.TabIndex = 7;
+            this.tbpYearAndEvalTime.Text = "年份及評核時間設定";
+            this.tbpYearAndEvalTime.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel11
+            // 
+            this.tableLayoutPanel11.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel11.ColumnCount = 1;
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel11.Controls.Add(this.tableLayoutPanel10, 0, 0);
+            this.tableLayoutPanel11.Controls.Add(this.txtYearAndEvalTimeTabMemo, 0, 1);
+            this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
+            this.tableLayoutPanel11.RowCount = 2;
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(1170, 804);
+            this.tableLayoutPanel11.TabIndex = 2;
+            // 
+            // tableLayoutPanel10
+            // 
+            this.tableLayoutPanel10.ColumnCount = 2;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.Controls.Add(this.label9, 0, 2);
+            this.tableLayoutPanel10.Controls.Add(this.cbxYearAndEvalTimeYear, 1, 0);
+            this.tableLayoutPanel10.Controls.Add(this.label7, 0, 0);
+            this.tableLayoutPanel10.Controls.Add(this.label8, 0, 1);
+            this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeStartTime, 1, 1);
+            this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeEndTime, 1, 2);
+            this.tableLayoutPanel10.Controls.Add(this.flowLayoutPanel11, 1, 7);
+            this.tableLayoutPanel10.Controls.Add(this.label10, 0, 3);
+            this.tableLayoutPanel10.Controls.Add(this.label11, 0, 4);
+            this.tableLayoutPanel10.Controls.Add(this.label12, 0, 5);
+            this.tableLayoutPanel10.Controls.Add(this.label13, 0, 6);
+            this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeSelfStartTime, 1, 3);
+            this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeSelfEndTime, 1, 4);
+            this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeSupervisorStartTime, 1, 5);
+            this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeSupervisorEndTime, 1, 6);
+            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(1, 1);
+            this.tableLayoutPanel10.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 8;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(1168, 701);
+            this.tableLayoutPanel10.TabIndex = 1;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label9.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label9.Location = new System.Drawing.Point(17, 58);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(80, 29);
+            this.label9.TabIndex = 6;
+            this.label9.Text = "評核結束時間:";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cbxYearAndEvalTimeYear
+            // 
+            this.cbxYearAndEvalTimeYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxYearAndEvalTimeYear.FormattingEnabled = true;
+            this.cbxYearAndEvalTimeYear.Location = new System.Drawing.Point(103, 3);
+            this.cbxYearAndEvalTimeYear.Name = "cbxYearAndEvalTimeYear";
+            this.cbxYearAndEvalTimeYear.Size = new System.Drawing.Size(121, 20);
+            this.cbxYearAndEvalTimeYear.TabIndex = 2;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label7.Location = new System.Drawing.Point(41, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(56, 29);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "評核年份:";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label8.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label8.Location = new System.Drawing.Point(17, 29);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(80, 29);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "評核開始時間:";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dtpYearAndEvalTimeStartTime
+            // 
+            this.dtpYearAndEvalTimeStartTime.Location = new System.Drawing.Point(103, 32);
+            this.dtpYearAndEvalTimeStartTime.Name = "dtpYearAndEvalTimeStartTime";
+            this.dtpYearAndEvalTimeStartTime.Size = new System.Drawing.Size(200, 22);
+            this.dtpYearAndEvalTimeStartTime.TabIndex = 5;
+            // 
+            // dtpYearAndEvalTimeEndTime
+            // 
+            this.dtpYearAndEvalTimeEndTime.Location = new System.Drawing.Point(103, 61);
+            this.dtpYearAndEvalTimeEndTime.Name = "dtpYearAndEvalTimeEndTime";
+            this.dtpYearAndEvalTimeEndTime.Size = new System.Drawing.Size(200, 22);
+            this.dtpYearAndEvalTimeEndTime.TabIndex = 7;
+            // 
+            // flowLayoutPanel11
+            // 
+            this.flowLayoutPanel11.Controls.Add(this.btnYearAndEvalTimeSave);
+            this.flowLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel11.Location = new System.Drawing.Point(100, 203);
+            this.flowLayoutPanel11.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel11.Name = "flowLayoutPanel11";
+            this.flowLayoutPanel11.Size = new System.Drawing.Size(1068, 498);
+            this.flowLayoutPanel11.TabIndex = 8;
+            // 
+            // btnYearAndEvalTimeSave
+            // 
+            this.btnYearAndEvalTimeSave.Location = new System.Drawing.Point(3, 3);
+            this.btnYearAndEvalTimeSave.Name = "btnYearAndEvalTimeSave";
+            this.btnYearAndEvalTimeSave.Size = new System.Drawing.Size(75, 23);
+            this.btnYearAndEvalTimeSave.TabIndex = 1;
+            this.btnYearAndEvalTimeSave.Text = "儲存";
+            this.btnYearAndEvalTimeSave.UseVisualStyleBackColor = true;
+            this.btnYearAndEvalTimeSave.Click += new System.EventHandler(this.btnYearAndEvalTimeSave_Click);
+            // 
+            // txtYearAndEvalTimeTabMemo
+            // 
+            this.txtYearAndEvalTimeTabMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtYearAndEvalTimeTabMemo.Location = new System.Drawing.Point(4, 706);
+            this.txtYearAndEvalTimeTabMemo.Name = "txtYearAndEvalTimeTabMemo";
+            this.txtYearAndEvalTimeTabMemo.ReadOnly = true;
+            this.txtYearAndEvalTimeTabMemo.Size = new System.Drawing.Size(1162, 94);
+            this.txtYearAndEvalTimeTabMemo.TabIndex = 9;
+            this.txtYearAndEvalTimeTabMemo.Text = "";
             // 
             // tbpAccountPriviledge
             // 
@@ -1221,278 +1513,6 @@
             this.label6.Text = "人員:";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // tbpYearAndEvalTime
-            // 
-            this.tbpYearAndEvalTime.Controls.Add(this.tableLayoutPanel11);
-            this.tbpYearAndEvalTime.Location = new System.Drawing.Point(4, 22);
-            this.tbpYearAndEvalTime.Name = "tbpYearAndEvalTime";
-            this.tbpYearAndEvalTime.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpYearAndEvalTime.Size = new System.Drawing.Size(1176, 810);
-            this.tbpYearAndEvalTime.TabIndex = 7;
-            this.tbpYearAndEvalTime.Text = "年份及評核時間設定";
-            this.tbpYearAndEvalTime.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel11
-            // 
-            this.tableLayoutPanel11.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel11.ColumnCount = 1;
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel11.Controls.Add(this.tableLayoutPanel10, 0, 0);
-            this.tableLayoutPanel11.Controls.Add(this.txtYearAndEvalTimeTabMemo, 0, 1);
-            this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
-            this.tableLayoutPanel11.RowCount = 2;
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel11.Size = new System.Drawing.Size(1170, 804);
-            this.tableLayoutPanel11.TabIndex = 2;
-            // 
-            // tableLayoutPanel10
-            // 
-            this.tableLayoutPanel10.ColumnCount = 2;
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel10.Controls.Add(this.label9, 0, 2);
-            this.tableLayoutPanel10.Controls.Add(this.cbxYearAndEvalTimeYear, 1, 0);
-            this.tableLayoutPanel10.Controls.Add(this.label7, 0, 0);
-            this.tableLayoutPanel10.Controls.Add(this.label8, 0, 1);
-            this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeStartTime, 1, 1);
-            this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeEndTime, 1, 2);
-            this.tableLayoutPanel10.Controls.Add(this.flowLayoutPanel11, 1, 3);
-            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(1, 1);
-            this.tableLayoutPanel10.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RowCount = 4;
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(1168, 701);
-            this.tableLayoutPanel10.TabIndex = 1;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label9.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label9.Location = new System.Drawing.Point(17, 58);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(80, 29);
-            this.label9.TabIndex = 6;
-            this.label9.Text = "評核結束時間:";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // cbxYearAndEvalTimeYear
-            // 
-            this.cbxYearAndEvalTimeYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxYearAndEvalTimeYear.FormattingEnabled = true;
-            this.cbxYearAndEvalTimeYear.Location = new System.Drawing.Point(103, 3);
-            this.cbxYearAndEvalTimeYear.Name = "cbxYearAndEvalTimeYear";
-            this.cbxYearAndEvalTimeYear.Size = new System.Drawing.Size(121, 20);
-            this.cbxYearAndEvalTimeYear.TabIndex = 2;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label7.Location = new System.Drawing.Point(41, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(56, 29);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "評核年份:";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label8.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label8.Location = new System.Drawing.Point(17, 29);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(80, 29);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "評核開始時間:";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // dtpYearAndEvalTimeStartTime
-            // 
-            this.dtpYearAndEvalTimeStartTime.Location = new System.Drawing.Point(103, 32);
-            this.dtpYearAndEvalTimeStartTime.Name = "dtpYearAndEvalTimeStartTime";
-            this.dtpYearAndEvalTimeStartTime.Size = new System.Drawing.Size(200, 22);
-            this.dtpYearAndEvalTimeStartTime.TabIndex = 5;
-            // 
-            // dtpYearAndEvalTimeEndTime
-            // 
-            this.dtpYearAndEvalTimeEndTime.Location = new System.Drawing.Point(103, 61);
-            this.dtpYearAndEvalTimeEndTime.Name = "dtpYearAndEvalTimeEndTime";
-            this.dtpYearAndEvalTimeEndTime.Size = new System.Drawing.Size(200, 22);
-            this.dtpYearAndEvalTimeEndTime.TabIndex = 7;
-            // 
-            // flowLayoutPanel11
-            // 
-            this.flowLayoutPanel11.Controls.Add(this.btnYearAndEvalTimeSave);
-            this.flowLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel11.Location = new System.Drawing.Point(100, 87);
-            this.flowLayoutPanel11.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel11.Name = "flowLayoutPanel11";
-            this.flowLayoutPanel11.Size = new System.Drawing.Size(1068, 614);
-            this.flowLayoutPanel11.TabIndex = 8;
-            // 
-            // btnYearAndEvalTimeSave
-            // 
-            this.btnYearAndEvalTimeSave.Location = new System.Drawing.Point(3, 3);
-            this.btnYearAndEvalTimeSave.Name = "btnYearAndEvalTimeSave";
-            this.btnYearAndEvalTimeSave.Size = new System.Drawing.Size(75, 23);
-            this.btnYearAndEvalTimeSave.TabIndex = 1;
-            this.btnYearAndEvalTimeSave.Text = "儲存";
-            this.btnYearAndEvalTimeSave.UseVisualStyleBackColor = true;
-            this.btnYearAndEvalTimeSave.Click += new System.EventHandler(this.btnYearAndEvalTimeSave_Click);
-            // 
-            // txtYearAndEvalTimeTabMemo
-            // 
-            this.txtYearAndEvalTimeTabMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtYearAndEvalTimeTabMemo.Location = new System.Drawing.Point(4, 706);
-            this.txtYearAndEvalTimeTabMemo.Name = "txtYearAndEvalTimeTabMemo";
-            this.txtYearAndEvalTimeTabMemo.ReadOnly = true;
-            this.txtYearAndEvalTimeTabMemo.Size = new System.Drawing.Size(1162, 94);
-            this.txtYearAndEvalTimeTabMemo.TabIndex = 9;
-            this.txtYearAndEvalTimeTabMemo.Text = "";
-            // 
-            // tbpEmployeeWorkhourInput
-            // 
-            this.tbpEmployeeWorkhourInput.Controls.Add(this.tableLayoutPanel12);
-            this.tbpEmployeeWorkhourInput.Location = new System.Drawing.Point(4, 22);
-            this.tbpEmployeeWorkhourInput.Name = "tbpEmployeeWorkhourInput";
-            this.tbpEmployeeWorkhourInput.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpEmployeeWorkhourInput.Size = new System.Drawing.Size(1176, 810);
-            this.tbpEmployeeWorkhourInput.TabIndex = 8;
-            this.tbpEmployeeWorkhourInput.Text = "員工應工作時數設定";
-            this.tbpEmployeeWorkhourInput.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel12
-            // 
-            this.tableLayoutPanel12.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel12.ColumnCount = 1;
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel12.Controls.Add(this.flowLayoutPanel12, 0, 2);
-            this.tableLayoutPanel12.Controls.Add(this.gvEmployeeWorkhourInputField, 0, 1);
-            this.tableLayoutPanel12.Controls.Add(this.txtEmployeeWorkhourInputTabMemo, 0, 3);
-            this.tableLayoutPanel12.Controls.Add(this.flowLayoutPanel13, 0, 0);
-            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel12.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
-            this.tableLayoutPanel12.RowCount = 4;
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(1170, 804);
-            this.tableLayoutPanel12.TabIndex = 3;
-            // 
-            // flowLayoutPanel12
-            // 
-            this.flowLayoutPanel12.CausesValidation = false;
-            this.flowLayoutPanel12.Controls.Add(this.btnEmployeeWorkhourInputCancel);
-            this.flowLayoutPanel12.Controls.Add(this.btnEmployeeWorkhourInputSave);
-            this.flowLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel12.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel12.Location = new System.Drawing.Point(1, 673);
-            this.flowLayoutPanel12.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel12.Name = "flowLayoutPanel12";
-            this.flowLayoutPanel12.Size = new System.Drawing.Size(1168, 29);
-            this.flowLayoutPanel12.TabIndex = 0;
-            // 
-            // btnEmployeeWorkhourInputCancel
-            // 
-            this.btnEmployeeWorkhourInputCancel.CausesValidation = false;
-            this.btnEmployeeWorkhourInputCancel.Enabled = false;
-            this.btnEmployeeWorkhourInputCancel.Location = new System.Drawing.Point(1090, 3);
-            this.btnEmployeeWorkhourInputCancel.Name = "btnEmployeeWorkhourInputCancel";
-            this.btnEmployeeWorkhourInputCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnEmployeeWorkhourInputCancel.TabIndex = 0;
-            this.btnEmployeeWorkhourInputCancel.Text = "取消";
-            this.btnEmployeeWorkhourInputCancel.UseVisualStyleBackColor = true;
-            this.btnEmployeeWorkhourInputCancel.Click += new System.EventHandler(this.btnEmployeeWorkhourInputCancel_Click);
-            // 
-            // btnEmployeeWorkhourInputSave
-            // 
-            this.btnEmployeeWorkhourInputSave.Enabled = false;
-            this.btnEmployeeWorkhourInputSave.Location = new System.Drawing.Point(1009, 3);
-            this.btnEmployeeWorkhourInputSave.Name = "btnEmployeeWorkhourInputSave";
-            this.btnEmployeeWorkhourInputSave.Size = new System.Drawing.Size(75, 23);
-            this.btnEmployeeWorkhourInputSave.TabIndex = 1;
-            this.btnEmployeeWorkhourInputSave.Text = "儲存";
-            this.btnEmployeeWorkhourInputSave.UseVisualStyleBackColor = true;
-            this.btnEmployeeWorkhourInputSave.Click += new System.EventHandler(this.btnEmployeeWorkhourInputSave_Click);
-            // 
-            // gvEmployeeWorkhourInputField
-            // 
-            this.gvEmployeeWorkhourInputField.AllowUserToAddRows = false;
-            this.gvEmployeeWorkhourInputField.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvEmployeeWorkhourInputField.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.gvEmployeeWorkhourInputField.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvEmployeeWorkhourInputField.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gvEmployeeWorkhourInputField.Location = new System.Drawing.Point(4, 34);
-            this.gvEmployeeWorkhourInputField.MultiSelect = false;
-            this.gvEmployeeWorkhourInputField.Name = "gvEmployeeWorkhourInputField";
-            this.gvEmployeeWorkhourInputField.RowTemplate.Height = 24;
-            this.gvEmployeeWorkhourInputField.Size = new System.Drawing.Size(1162, 635);
-            this.gvEmployeeWorkhourInputField.TabIndex = 1;
-            // 
-            // txtEmployeeWorkhourInputTabMemo
-            // 
-            this.txtEmployeeWorkhourInputTabMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtEmployeeWorkhourInputTabMemo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtEmployeeWorkhourInputTabMemo.Location = new System.Drawing.Point(4, 706);
-            this.txtEmployeeWorkhourInputTabMemo.Multiline = true;
-            this.txtEmployeeWorkhourInputTabMemo.Name = "txtEmployeeWorkhourInputTabMemo";
-            this.txtEmployeeWorkhourInputTabMemo.ReadOnly = true;
-            this.txtEmployeeWorkhourInputTabMemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtEmployeeWorkhourInputTabMemo.Size = new System.Drawing.Size(1162, 94);
-            this.txtEmployeeWorkhourInputTabMemo.TabIndex = 2;
-            // 
-            // flowLayoutPanel13
-            // 
-            this.flowLayoutPanel13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel13.Controls.Add(this.cbxEmployeeWorkhourInputYear);
-            this.flowLayoutPanel13.Controls.Add(this.btnEmployeeWorkhourInputEdit);
-            this.flowLayoutPanel13.Location = new System.Drawing.Point(1, 1);
-            this.flowLayoutPanel13.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel13.Name = "flowLayoutPanel13";
-            this.flowLayoutPanel13.Size = new System.Drawing.Size(1168, 29);
-            this.flowLayoutPanel13.TabIndex = 3;
-            // 
-            // cbxEmployeeWorkhourInputYear
-            // 
-            this.cbxEmployeeWorkhourInputYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxEmployeeWorkhourInputYear.FormattingEnabled = true;
-            this.cbxEmployeeWorkhourInputYear.Location = new System.Drawing.Point(3, 3);
-            this.cbxEmployeeWorkhourInputYear.Name = "cbxEmployeeWorkhourInputYear";
-            this.cbxEmployeeWorkhourInputYear.Size = new System.Drawing.Size(121, 20);
-            this.cbxEmployeeWorkhourInputYear.TabIndex = 0;
-            this.cbxEmployeeWorkhourInputYear.SelectedIndexChanged += new System.EventHandler(this.cbxEmployeeWorkhourInputYear_SelectedIndexChanged);
-            // 
-            // btnEmployeeWorkhourInputEdit
-            // 
-            this.btnEmployeeWorkhourInputEdit.Location = new System.Drawing.Point(130, 3);
-            this.btnEmployeeWorkhourInputEdit.Name = "btnEmployeeWorkhourInputEdit";
-            this.btnEmployeeWorkhourInputEdit.Size = new System.Drawing.Size(75, 23);
-            this.btnEmployeeWorkhourInputEdit.TabIndex = 3;
-            this.btnEmployeeWorkhourInputEdit.Text = "編輯";
-            this.btnEmployeeWorkhourInputEdit.UseVisualStyleBackColor = true;
-            this.btnEmployeeWorkhourInputEdit.Click += new System.EventHandler(this.btnEmployeeWorkhourInputEdit_Click);
-            // 
             // dsAPA_Question
             // 
             this.dsAPA_Question.DataSetName = "dsAPA_Question";
@@ -1501,6 +1521,86 @@
             // hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter
             // 
             this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter.ClearBeforeFill = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label10.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label10.ForeColor = System.Drawing.Color.Blue;
+            this.label10.Location = new System.Drawing.Point(17, 87);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(80, 29);
+            this.label10.TabIndex = 9;
+            this.label10.Text = "自評開始時間:";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label11.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label11.ForeColor = System.Drawing.Color.Blue;
+            this.label11.Location = new System.Drawing.Point(17, 116);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(80, 29);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "自評結束時間:";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label12.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label12.ForeColor = System.Drawing.Color.Crimson;
+            this.label12.Location = new System.Drawing.Point(5, 145);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(92, 29);
+            this.label12.TabIndex = 11;
+            this.label12.Text = "主管評開始時間:";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label13.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label13.ForeColor = System.Drawing.Color.Crimson;
+            this.label13.Location = new System.Drawing.Point(5, 174);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(92, 29);
+            this.label13.TabIndex = 12;
+            this.label13.Text = "主管評結束時間:";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dtpYearAndEvalTimeSelfStartTime
+            // 
+            this.dtpYearAndEvalTimeSelfStartTime.Location = new System.Drawing.Point(103, 90);
+            this.dtpYearAndEvalTimeSelfStartTime.Name = "dtpYearAndEvalTimeSelfStartTime";
+            this.dtpYearAndEvalTimeSelfStartTime.Size = new System.Drawing.Size(200, 22);
+            this.dtpYearAndEvalTimeSelfStartTime.TabIndex = 13;
+            // 
+            // dtpYearAndEvalTimeSelfEndTime
+            // 
+            this.dtpYearAndEvalTimeSelfEndTime.Location = new System.Drawing.Point(103, 119);
+            this.dtpYearAndEvalTimeSelfEndTime.Name = "dtpYearAndEvalTimeSelfEndTime";
+            this.dtpYearAndEvalTimeSelfEndTime.Size = new System.Drawing.Size(200, 22);
+            this.dtpYearAndEvalTimeSelfEndTime.TabIndex = 14;
+            // 
+            // dtpYearAndEvalTimeSupervisorStartTime
+            // 
+            this.dtpYearAndEvalTimeSupervisorStartTime.Location = new System.Drawing.Point(103, 148);
+            this.dtpYearAndEvalTimeSupervisorStartTime.Name = "dtpYearAndEvalTimeSupervisorStartTime";
+            this.dtpYearAndEvalTimeSupervisorStartTime.Size = new System.Drawing.Size(200, 22);
+            this.dtpYearAndEvalTimeSupervisorStartTime.TabIndex = 15;
+            // 
+            // dtpYearAndEvalTimeSupervisorEndTime
+            // 
+            this.dtpYearAndEvalTimeSupervisorEndTime.Location = new System.Drawing.Point(103, 177);
+            this.dtpYearAndEvalTimeSupervisorEndTime.Name = "dtpYearAndEvalTimeSupervisorEndTime";
+            this.dtpYearAndEvalTimeSupervisorEndTime.Size = new System.Drawing.Size(200, 22);
+            this.dtpYearAndEvalTimeSupervisorEndTime.TabIndex = 16;
             // 
             // frmAPA_Main
             // 
@@ -1538,6 +1638,12 @@
             this.flowLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvPersonnelAssignment)).EndInit();
             this.flowLayoutPanel4.ResumeLayout(false);
+            this.tbpEmployeeWorkhourInput.ResumeLayout(false);
+            this.tableLayoutPanel12.ResumeLayout(false);
+            this.tableLayoutPanel12.PerformLayout();
+            this.flowLayoutPanel12.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gvEmployeeWorkhourInputField)).EndInit();
+            this.flowLayoutPanel13.ResumeLayout(false);
             this.tbpScoreStandard.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
@@ -1546,6 +1652,11 @@
             this.tableLayoutPanel7.PerformLayout();
             this.flowLayoutPanel9.ResumeLayout(false);
             this.flowLayoutPanel9.PerformLayout();
+            this.tbpYearAndEvalTime.ResumeLayout(false);
+            this.tableLayoutPanel11.ResumeLayout(false);
+            this.tableLayoutPanel10.ResumeLayout(false);
+            this.tableLayoutPanel10.PerformLayout();
+            this.flowLayoutPanel11.ResumeLayout(false);
             this.tbpAccountPriviledge.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
             this.flowLayoutPanel10.ResumeLayout(false);
@@ -1553,17 +1664,6 @@
             this.tbpReportPreview.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
-            this.tbpYearAndEvalTime.ResumeLayout(false);
-            this.tableLayoutPanel11.ResumeLayout(false);
-            this.tableLayoutPanel10.ResumeLayout(false);
-            this.tableLayoutPanel10.PerformLayout();
-            this.flowLayoutPanel11.ResumeLayout(false);
-            this.tbpEmployeeWorkhourInput.ResumeLayout(false);
-            this.tableLayoutPanel12.ResumeLayout(false);
-            this.tableLayoutPanel12.PerformLayout();
-            this.flowLayoutPanel12.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gvEmployeeWorkhourInputField)).EndInit();
-            this.flowLayoutPanel13.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).EndInit();
             this.ResumeLayout(false);
 
@@ -1675,5 +1775,13 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel13;
         private System.Windows.Forms.ComboBox cbxEmployeeWorkhourInputYear;
         private System.Windows.Forms.Button btnEmployeeWorkhourInputEdit;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.DateTimePicker dtpYearAndEvalTimeSelfStartTime;
+        private System.Windows.Forms.DateTimePicker dtpYearAndEvalTimeSelfEndTime;
+        private System.Windows.Forms.DateTimePicker dtpYearAndEvalTimeSupervisorStartTime;
+        private System.Windows.Forms.DateTimePicker dtpYearAndEvalTimeSupervisorEndTime;
     }
 }

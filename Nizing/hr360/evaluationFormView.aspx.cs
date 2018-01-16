@@ -229,8 +229,8 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
             }
             else if (Session["erp_id"].ToString() == "0067")
             {
-                txt0067Comment.ReadOnly = false;
-                btnSave0067Comment.Visible = true;
+                txt0067Comment.ReadOnly = true;
+                btnSave0067Comment.Visible = false;
             }
         }
 
