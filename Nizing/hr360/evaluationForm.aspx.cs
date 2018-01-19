@@ -56,21 +56,154 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             {
                 assessed = lblEmpID.Text.Trim();                
             }
-            string evaluated = isEvaluated(assessor, assessed);
+            DataTable dtEval = new DataTable();
+            //string evaluated = isEvaluated(assessor, assessed);
+            dtEval = isEvaluated(assessor, assessed);
 
-            if (evaluated == "0")
+            if (dtEval.Rows.Count <= 0)
             {
-                loadCleanForm(assessor, assessed);
-            }
-            else if (evaluated == "1")
-            {
-                loadAssessedForm(assessor, assessed);
+                lblErrorMessage.Text = "沒有此組合";
             }
             else
             {
-                lblErrorMessage.Text = evaluated;
+                if (dtEval.Rows[0]["ASSESSMENT_DONE"].ToString() == "0")
+                {
+                    loadCleanForm(assessor, assessed, dtEval.Rows[0]["ASSESS_TYPE"].ToString());
+                }
+                else
+                {
+                    loadAssessedForm(assessor, assessed, dtEval.Rows[0]["ASSESS_TYPE"].ToString());
+                }
             }
-            //Load_Question.FindControl("txtAssessmentScore1").Focus();
+            //if (evaluated == "0")
+            //{
+            //    loadCleanForm(assessor, assessed);
+            //}
+            //else if (evaluated == "1")
+            //{
+            //    loadAssessedForm(assessor, assessed);
+            //}
+            //else
+            //{
+            //    lblErrorMessage.Text = evaluated;
+            //}
+            HtmlGenericControl headerDiv = new HtmlGenericControl();
+            headerDiv.TagName = "div";
+            headerDiv.Attributes["class"] = "col-xs-1 border";
+            Question_Title.Controls.Add(headerDiv);
+            HtmlGenericControl headerText = new HtmlGenericControl();
+            headerText.TagName = "span";
+            headerText.Attributes["class"] = "form-control text-center";
+            headerText.InnerText = "#";
+            headerDiv.Controls.Add(headerText);
+            headerDiv = new HtmlGenericControl();
+            headerDiv.TagName = "div";
+            headerDiv.Attributes["class"] = "col-xs-2 border";
+            Question_Title.Controls.Add(headerDiv);
+            headerText = new HtmlGenericControl();
+            headerText.TagName = "span";
+            headerText.Attributes["class"] = "form-control text-center";
+            headerText.InnerText = "分類";
+            headerDiv.Controls.Add(headerText);
+            headerDiv = new HtmlGenericControl();
+            headerDiv.TagName = "div";
+            headerDiv.Attributes["class"] = "col-xs-1 border";
+            Question_Title.Controls.Add(headerDiv);
+            headerText = new HtmlGenericControl();
+            headerText.TagName = "span";
+            headerText.Attributes["class"] = "form-control text-center";
+            headerText.InnerText = "權重";
+            headerDiv.Controls.Add(headerText);
+            if (dtEval.Rows[0]["ASSESS_TYPE"].ToString() == "1")
+            {
+                headerDiv = new HtmlGenericControl();
+                headerDiv.TagName = "div";
+                headerDiv.Attributes["class"] = "col-xs-6 border";
+                Question_Title.Controls.Add(headerDiv);
+                headerText = new HtmlGenericControl();
+                headerText.TagName = "span";
+                headerText.Attributes["class"] = "form-control text-center";
+                headerText.InnerText = "問題";
+                headerDiv.Controls.Add(headerText);
+                headerDiv = new HtmlGenericControl();
+                headerDiv.TagName = "div";
+                headerDiv.Attributes["class"] = "col-xs-2 border";
+                Question_Title.Controls.Add(headerDiv);
+                headerText = new HtmlGenericControl();
+                headerText.TagName = "span";
+                headerText.Attributes["class"] = "form-control text-center";
+                headerText.InnerText = "自評分數";
+                headerDiv.Controls.Add(headerText);
+            }
+            else if (dtEval.Rows[0]["ASSESS_TYPE"].ToString() == "2")
+            {
+                headerDiv = new HtmlGenericControl();
+                headerDiv.TagName = "div";
+                headerDiv.Attributes["class"] = "col-xs-4 border";
+                Question_Title.Controls.Add(headerDiv);
+                headerText = new HtmlGenericControl();
+                headerText.TagName = "span";
+                headerText.Attributes["class"] = "form-control text-center";
+                headerText.InnerText = "問題";
+                headerDiv.Controls.Add(headerText);
+                headerDiv = new HtmlGenericControl();
+                headerDiv.TagName = "div";
+                headerDiv.Attributes["class"] = "col-xs-2 border";
+                Question_Title.Controls.Add(headerDiv);
+                headerText = new HtmlGenericControl();
+                headerText.TagName = "span";
+                headerText.Attributes["class"] = "form-control text-center";
+                headerText.InnerText = "自評分數";
+                headerDiv.Controls.Add(headerText);
+                headerDiv = new HtmlGenericControl();
+                headerDiv.TagName = "div";
+                headerDiv.Attributes["class"] = "col-xs-2 border";
+                Question_Title.Controls.Add(headerDiv);
+                headerText = new HtmlGenericControl();
+                headerText.TagName = "span";
+                headerText.Attributes["class"] = "form-control text-center";
+                headerText.InnerText = "主管評分數";
+                headerDiv.Controls.Add(headerText);
+            }
+            else if (dtEval.Rows[0]["ASSESS_TYPE"].ToString() == "9")
+            {
+                headerDiv = new HtmlGenericControl();
+                headerDiv.TagName = "div";
+                headerDiv.Attributes["class"] = "col-xs-2 border";
+                Question_Title.Controls.Add(headerDiv);
+                headerText = new HtmlGenericControl();
+                headerText.TagName = "span";
+                headerText.Attributes["class"] = "form-control text-center";
+                headerText.InnerText = "問題";
+                headerDiv.Controls.Add(headerText);
+                headerDiv = new HtmlGenericControl();
+                headerDiv.TagName = "div";
+                headerDiv.Attributes["class"] = "col-xs-2 border";
+                Question_Title.Controls.Add(headerDiv);
+                headerText = new HtmlGenericControl();
+                headerText.TagName = "span";
+                headerText.Attributes["class"] = "form-control text-center";
+                headerText.InnerText = "自評分數";
+                headerDiv.Controls.Add(headerText);
+                headerDiv = new HtmlGenericControl();
+                headerDiv.TagName = "div";
+                headerDiv.Attributes["class"] = "col-xs-2 border";
+                Question_Title.Controls.Add(headerDiv);
+                headerText = new HtmlGenericControl();
+                headerText.TagName = "span";
+                headerText.Attributes["class"] = "form-control text-center";
+                headerText.InnerText = "主管評分數";
+                headerDiv.Controls.Add(headerText);
+                headerDiv = new HtmlGenericControl();
+                headerDiv.TagName = "div";
+                headerDiv.Attributes["class"] = "col-xs-2 border";
+                Question_Title.Controls.Add(headerDiv);
+                headerText = new HtmlGenericControl();
+                headerText.TagName = "span";
+                headerText.Attributes["class"] = "form-control text-center";
+                headerText.InnerText = "特評分數";
+                headerDiv.Controls.Add(headerText);
+            }
         }
     }
 
@@ -78,13 +211,14 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
     /// 查詢這個assessor/assessed組合是否有評核過，回傳1表示有，0表示沒有
     /// </summary>
     /// <returns></returns>
-    protected string isEvaluated(string assessor, string assessed)
+    protected DataTable isEvaluated(string assessor, string assessed)
     {
-        string evaluated = "0";
+        DataTable dt = new DataTable();
+        //string evaluated = "0";
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             conn.Open();
-            string query = "SELECT ASSESSMENT_DONE"
+            string query = "SELECT ASSESS_TYPE,ASSESSMENT_DONE"
                         + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
                         + " WHERE ASSESSOR_ID=@ASSESSOR_ID"
                         + " AND ASSESSED_ID=@ASSESSED_ID"
@@ -93,26 +227,29 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@ASSESSOR_ID", assessor);
             cmd.Parameters.AddWithValue("@ASSESSED_ID", assessed);
             cmd.Parameters.AddWithValue("@YEAR", year);
-            using (SqlDataReader dr = cmd.ExecuteReader())
-            {
-                if (!dr.HasRows)
-                {
-                    dr.Close();
-                    return "沒有此組合";
-                }
-                else
-                {
-                    dr.Close();
-                    evaluated = cmd.ExecuteScalar().ToString();
-                    return evaluated;
-                }
-            }
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            //using (SqlDataReader dr = cmd.ExecuteReader())
+            //{
+            //    if (!dr.HasRows)
+            //    {
+            //        dr.Close();
+            //        return "沒有此組合";
+            //    }
+            //    else
+            //    {
+            //        dr.Close();
+            //        evaluated = cmd.ExecuteScalar().ToString();
+            //        return evaluated;
+            //    }
+            //}
         }
+        return dt;
     }
     /// <summary>
     /// 讀取乾淨的表單
     /// </summary>
-    protected void loadCleanForm(string assessor, string assessed)
+    protected void loadCleanForm(string assessor, string assessed, string assess_type)
     {        
         //被評核員工基本資料
         using (SqlConnection conn = new SqlConnection(NZconnectionString))
@@ -149,102 +286,331 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
         }
         //讀取評量問題
         DataTable dtAssessmentQuestion = new DataTable();
-        using (SqlConnection conn = new SqlConnection(NZconnectionString))
+        if (assess_type == "1")
         {
-            conn.Open();
-            SqlCommand cmd = new SqlCommand("SELECT DISTINCT A.ID,A.NAME,A.WEIGHT,B.QUESTION"
-                                        + " FROM NZ_ERP2.dbo.HR360_ASSESSMENTQUESTION_QUESTION_A B"
-                                        + " LEFT JOIN NZ_ERP2.dbo.HR360_ASSESSMENTQUESTION_CATEGORY_A A ON B.CATEGORY_ID=A.ID"
-                                        + " LEFT JOIN NZ_ERP2.dbo.HR360_ASSESSMENTQUESTION_ASSIGNMENT_A C ON B.ID=C.QUESTION_ID"
-                                        + " WHERE"
-                                        + " B.IN_USE='1'"
-                                        + " AND"
-                                        + " ("
-                                        + " B.USE_BY_ALL='1'"
-                                        + " OR"
-                                        + " C.DEPT IN (SELECT CMSMV.MV004"
-                                        + " FROM CMSMV"
-                                        + " LEFT JOIN CMSMK ON CMSMV.MV001=CMSMK.MK002"
-                                        + " WHERE CMSMV.MV001=@ID)"
-                                        + " OR"
-                                        + " C.EMP_ID IN (SELECT CMSMV.MV001"
-                                        + " FROM CMSMV"
-                                        + " LEFT JOIN CMSMK ON CMSMV.MV001=CMSMK.MK002"
-                                        + " WHERE CMSMV.MV001=@ID)"
-                                        + " )"
-                                        + " ORDER BY ID", conn);
-            cmd.Parameters.AddWithValue("@ID", lblEmpID.Text.Trim());
-            using (SqlDataReader dr = cmd.ExecuteReader())
+            using (SqlConnection conn = new SqlConnection(NZconnectionString))
             {
-                dtAssessmentQuestion.Load(dr);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT DISTINCT A.ID,A.NAME,A.WEIGHT,B.QUESTION"
+                                            + " FROM NZ_ERP2.dbo.HR360_ASSESSMENTQUESTION_QUESTION_A B"
+                                            + " LEFT JOIN NZ_ERP2.dbo.HR360_ASSESSMENTQUESTION_CATEGORY_A A ON B.CATEGORY_ID=A.ID"
+                                            + " LEFT JOIN NZ_ERP2.dbo.HR360_ASSESSMENTQUESTION_ASSIGNMENT_A C ON B.ID=C.QUESTION_ID"
+                                            + " WHERE"
+                                            + " B.IN_USE='1'"
+                                            + " AND"
+                                            + " ("
+                                            + " B.USE_BY_ALL='1'"
+                                            + " OR"
+                                            + " C.DEPT IN (SELECT CMSMV.MV004"
+                                            + " FROM CMSMV"
+                                            + " LEFT JOIN CMSMK ON CMSMV.MV001=CMSMK.MK002"
+                                            + " WHERE CMSMV.MV001=@ID)"
+                                            + " OR"
+                                            + " C.EMP_ID IN (SELECT CMSMV.MV001"
+                                            + " FROM CMSMV"
+                                            + " LEFT JOIN CMSMK ON CMSMV.MV001=CMSMK.MK002"
+                                            + " WHERE CMSMV.MV001=@ID)"
+                                            + " )"
+                                            + " ORDER BY ID", conn);
+                cmd.Parameters.AddWithValue("@ID", lblEmpID.Text.Trim());
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    dtAssessmentQuestion.Load(dr);
+                }
             }
         }
+        else if(assess_type == "2")
+        {
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT [INDEX],QUESTION_CATEGORY_ID,QUESTION_CATEGORY_NAME,QUESTION_CATEGORY_WEIGHT,QUESTION,SCORE"
+                    + " FROM HR360_ASSESSMENTSCORE_SCORE_A"
+                    + " WHERE ASSESSOR_ID=@ASSESSED_ID"
+                    + " AND ASSESSED_ID=@ASSESSED_ID"
+                    + " AND ASSESS_YEAR=@ASSESS_YEAR"
+                    + " ORDER BY [INDEX]";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ASSESSED_ID", lblEmpID.Text);
+                cmd.Parameters.AddWithValue("@ASSESS_YEAR", year);
+                dtAssessmentQuestion = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dtAssessmentQuestion);
+            }
+        }
+        else if (assess_type == "9")
+        {
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = ";WITH SUPER_TABLE"
+                            + " AS"
+                            + " ("
+                            + " SELECT [INDEX],SCORE"
+                            + " FROM HR360_ASSESSMENTSCORE_SCORE_A"
+                            + " WHERE ASSESSOR_ID=@ASSESSOR_ID"
+                            + " AND ASSESSED_ID=@ASSESSED_ID"
+                            + " AND ASSESS_YEAR=@ASSESS_YEAR"
+                            + " )"
+                            + " SELECT [SELF].[INDEX]"
+                            + " ,[SELF].QUESTION_CATEGORY_ID"
+                            + " ,[SELF].QUESTION_CATEGORY_NAME"
+                            + " ,[SELF].QUESTION_CATEGORY_WEIGHT"
+                            + " ,[SELF].QUESTION"
+                            + " ,[SELF].SCORE 'SELF_SCORE'"
+                            + " ,SUPER.SCORE 'SUPER_SCORE'"
+                            + " FROM HR360_ASSESSMENTSCORE_SCORE_A [SELF]"
+                            + " LEFT JOIN SUPER_TABLE SUPER ON SUPER.[INDEX]=[SELF].[INDEX]"
+                            + " WHERE [SELF].ASSESSOR_ID=@ASSESSED_ID"
+                            + " AND [SELF].ASSESSED_ID=@ASSESSED_ID"
+                            + " AND [SELF].ASSESS_YEAR=@ASSESS_YEAR"
+                            + " ORDER BY [INDEX]";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ASSESSOR_ID", assessor);
+                cmd.Parameters.AddWithValue("@ASSESSED_ID", lblEmpID.Text);
+                cmd.Parameters.AddWithValue("@ASSESS_YEAR", year);
+                dtAssessmentQuestion = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dtAssessmentQuestion);
+            }
+        }
+        
         for (int questionRowCount = 0; questionRowCount < dtAssessmentQuestion.Rows.Count; questionRowCount++)
         {
-            //row
-            HtmlGenericControl outerDiv = new HtmlGenericControl();
-            outerDiv.TagName = "div";
-            outerDiv.ID = "questionRow" + (questionRowCount + 1).ToString();
-            outerDiv.Attributes["class"] = "row";
-            Load_Question.Controls.Add(outerDiv);
-            //column 1 題號
-            HtmlGenericControl innerDiv = new HtmlGenericControl();
-            innerDiv.TagName = "div";
-            innerDiv.ID = outerDiv.ID + "_1";
-            innerDiv.Attributes["class"] = "col-xs-1 border text-center";
-            outerDiv.Controls.Add(innerDiv);
-            Label label = new Label();
-            label.ID = "lblIndex" + (questionRowCount + 1).ToString();
-            label.CssClass = "form-control col" + (questionRowCount + 1) + "_1";
-            label.Text = (questionRowCount + 1).ToString();
-            innerDiv.Controls.Add(label);
-            //column 2 分類
-            innerDiv = new HtmlGenericControl();
-            innerDiv.TagName = "div";
-            innerDiv.ID = outerDiv.ID + "_2";
-            innerDiv.Attributes["class"] = "col-xs-2 border text-center";
-            outerDiv.Controls.Add(innerDiv);
-            label = new Label();
-            label.ID = "lblAssessmentCategory" + (questionRowCount + 1).ToString();
-            label.CssClass = "form-control col" + (questionRowCount + 1) + "_2";
-            label.Text = dtAssessmentQuestion.Rows[questionRowCount][0].ToString() + '_' + dtAssessmentQuestion.Rows[questionRowCount][1].ToString();
-            innerDiv.Controls.Add(label);
-            //column 3 權重
-            innerDiv = new HtmlGenericControl();
-            innerDiv.TagName = "div";
-            innerDiv.ID = outerDiv.ID + "_3";
-            innerDiv.Attributes["class"] = "col-xs-1 border text-center";
-            outerDiv.Controls.Add(innerDiv);
-            label = new Label();
-            label.ID = "lblAssessmentCategoryWeight" + (questionRowCount + 1).ToString();
-            label.CssClass = "form-control col" + (questionRowCount + 1) + "_3";
-            label.Text = dtAssessmentQuestion.Rows[questionRowCount][2].ToString();
-            innerDiv.Controls.Add(label);
-            //column 4 問題
-            innerDiv = new HtmlGenericControl();
-            innerDiv.TagName = "div";
-            innerDiv.ID = outerDiv.ID + "_4";
-            innerDiv.Attributes["class"] = "col-xs-6 border";
-            outerDiv.Controls.Add(innerDiv);
-            TextBox txt = new TextBox();
-            txt.ID = "txtAssessmentQuestion" + (questionRowCount + 1).ToString();
-            txt.CssClass = "form-control no-resize autosize col" + (questionRowCount + 1) + "_4";
-            txt.TextMode = TextBoxMode.MultiLine;
-            txt.Wrap = true;
-            txt.ReadOnly = true;
-            txt.Text = dtAssessmentQuestion.Rows[questionRowCount][3].ToString();
-            innerDiv.Controls.Add(txt);
-            //column 5 分數
-            innerDiv = new HtmlGenericControl();
-            innerDiv.TagName = "div";
-            innerDiv.ID = outerDiv.ID + "_5";
-            innerDiv.Attributes["class"] = "col-xs-2 border text-center";
-            outerDiv.Controls.Add(innerDiv);
-            txt = new TextBox();
-            txt.ID = "txtAssessmentScore" + (questionRowCount + 1).ToString();
-            txt.CssClass = "form-control numbers-only add-number col" + (questionRowCount + 1) + "_5";
-            txt.Attributes["placeholder"] = "請打分數";
-            innerDiv.Controls.Add(txt);
+            if (assess_type == "1")
+            {                
+                //row
+                HtmlGenericControl outerDiv = new HtmlGenericControl();
+                outerDiv.TagName = "div";
+                outerDiv.ID = "questionRow" + (questionRowCount + 1).ToString();
+                outerDiv.Attributes["class"] = "row";
+                Load_Question.Controls.Add(outerDiv);
+                //column 1 題號
+                HtmlGenericControl innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_1";
+                innerDiv.Attributes["class"] = "col-xs-1 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                Label label = new Label();
+                label.ID = "lblIndex" + (questionRowCount + 1).ToString();
+                label.CssClass = "form-control col" + (questionRowCount + 1) + "_1";
+                label.Text = (questionRowCount + 1).ToString();
+                innerDiv.Controls.Add(label);
+                //column 2 分類
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_2";
+                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                label = new Label();
+                label.ID = "lblAssessmentCategory" + (questionRowCount + 1).ToString();
+                label.CssClass = "form-control col" + (questionRowCount + 1) + "_2";
+                label.Text = dtAssessmentQuestion.Rows[questionRowCount][0].ToString() + '_' + dtAssessmentQuestion.Rows[questionRowCount][1].ToString();
+                innerDiv.Controls.Add(label);
+                //column 3 權重
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_3";
+                innerDiv.Attributes["class"] = "col-xs-1 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                label = new Label();
+                label.ID = "lblAssessmentCategoryWeight" + (questionRowCount + 1).ToString();
+                label.CssClass = "form-control col" + (questionRowCount + 1) + "_3";
+                label.Text = dtAssessmentQuestion.Rows[questionRowCount][2].ToString();
+                innerDiv.Controls.Add(label);
+                //column 4 問題
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_4";
+                innerDiv.Attributes["class"] = "col-xs-6 border";
+                outerDiv.Controls.Add(innerDiv);
+                TextBox txt = new TextBox();
+                txt.ID = "txtAssessmentQuestion" + (questionRowCount + 1).ToString();
+                txt.CssClass = "form-control no-resize autosize col" + (questionRowCount + 1) + "_4";
+                txt.TextMode = TextBoxMode.MultiLine;
+                txt.Wrap = true;
+                txt.ReadOnly = true;
+                txt.Text = dtAssessmentQuestion.Rows[questionRowCount][3].ToString();
+                innerDiv.Controls.Add(txt);
+                //column 5 分數
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_5";
+                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                txt = new TextBox();
+                txt.ID = "txtAssessmentScore" + (questionRowCount + 1).ToString();
+                txt.CssClass = "form-control numbers-only add-number col" + (questionRowCount + 1) + "_5";
+                txt.Attributes["placeholder"] = "請打分數";
+                innerDiv.Controls.Add(txt);
+            }
+            else if (assess_type == "2")
+            {
+                //row
+                HtmlGenericControl outerDiv = new HtmlGenericControl();
+                outerDiv.TagName = "div";
+                outerDiv.ID = "questionRow" + (questionRowCount + 1).ToString();
+                outerDiv.Attributes["class"] = "row";
+                Load_Question.Controls.Add(outerDiv);
+                //column 1 題號
+                HtmlGenericControl innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_1";
+                innerDiv.Attributes["class"] = "col-xs-1 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                Label label = new Label();
+                label.ID = "lblIndex" + (questionRowCount + 1).ToString();
+                label.CssClass = "form-control col" + (questionRowCount + 1) + "_1";
+                label.Text = dtAssessmentQuestion.Rows[questionRowCount]["INDEX"].ToString();
+                innerDiv.Controls.Add(label);
+                //column 2 分類
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_2";
+                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                label = new Label();
+                label.ID = "lblAssessmentCategory" + (questionRowCount + 1).ToString();
+                label.CssClass = "form-control col" + (questionRowCount + 1) + "_2";
+                label.Text = dtAssessmentQuestion.Rows[questionRowCount]["QUESTION_CATEGORY_ID"].ToString() + '_' + dtAssessmentQuestion.Rows[questionRowCount]["QUESTION_CATEGORY_NAME"].ToString();
+                innerDiv.Controls.Add(label);
+                //column 3 權重
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_3";
+                innerDiv.Attributes["class"] = "col-xs-1 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                label = new Label();
+                label.ID = "lblAssessmentCategoryWeight" + (questionRowCount + 1).ToString();
+                label.CssClass = "form-control col" + (questionRowCount + 1) + "_3";
+                label.Text = dtAssessmentQuestion.Rows[questionRowCount]["QUESTION_CATEGORY_WEIGHT"].ToString();
+                innerDiv.Controls.Add(label);
+                //column 4 問題
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_4";
+                innerDiv.Attributes["class"] = "col-xs-4 border";
+                outerDiv.Controls.Add(innerDiv);
+                TextBox txt = new TextBox();
+                txt.ID = "txtAssessmentQuestion" + (questionRowCount + 1).ToString();
+                txt.CssClass = "form-control no-resize autosize col" + (questionRowCount + 1) + "_4";
+                txt.TextMode = TextBoxMode.MultiLine;
+                txt.Wrap = true;
+                txt.ReadOnly = true;
+                txt.Text = dtAssessmentQuestion.Rows[questionRowCount]["QUESTION"].ToString();
+                innerDiv.Controls.Add(txt);
+                //column 6 自評分數
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_6";
+                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                label = new Label();
+                label.ID = "lblSelfAssessmentScore" + (questionRowCount + 1).ToString();
+                label.CssClass = "form-control text-center col" + (questionRowCount + 1) + "_6";
+                label.Text = dtAssessmentQuestion.Rows[questionRowCount]["SCORE"].ToString();
+                innerDiv.Controls.Add(label);
+                //column 5 分數
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_5";
+                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                txt = new TextBox();
+                txt.ID = "txtAssessmentScore" + (questionRowCount + 1).ToString();
+                txt.CssClass = "form-control numbers-only add-number col" + (questionRowCount + 1) + "_5";
+                txt.Attributes["placeholder"] = "請打分數";
+                innerDiv.Controls.Add(txt);
+            }
+            else if (assess_type == "9")
+            {
+                //row
+                HtmlGenericControl outerDiv = new HtmlGenericControl();
+                outerDiv.TagName = "div";
+                outerDiv.ID = "questionRow" + (questionRowCount + 1).ToString();
+                outerDiv.Attributes["class"] = "row";
+                Load_Question.Controls.Add(outerDiv);
+                //column 1 題號
+                HtmlGenericControl innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_1";
+                innerDiv.Attributes["class"] = "col-xs-1 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                Label label = new Label();
+                label.ID = "lblIndex" + (questionRowCount + 1).ToString();
+                label.CssClass = "form-control col" + (questionRowCount + 1) + "_1";
+                label.Text = (questionRowCount + 1).ToString();
+                innerDiv.Controls.Add(label);
+                //column 2 分類
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_2";
+                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                label = new Label();
+                label.ID = "lblAssessmentCategory" + (questionRowCount + 1).ToString();
+                label.CssClass = "form-control col" + (questionRowCount + 1) + "_2";
+                label.Text = dtAssessmentQuestion.Rows[questionRowCount][0].ToString() + '_' + dtAssessmentQuestion.Rows[questionRowCount][1].ToString();
+                innerDiv.Controls.Add(label);
+                //column 3 權重
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_3";
+                innerDiv.Attributes["class"] = "col-xs-1 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                label = new Label();
+                label.ID = "lblAssessmentCategoryWeight" + (questionRowCount + 1).ToString();
+                label.CssClass = "form-control col" + (questionRowCount + 1) + "_3";
+                label.Text = dtAssessmentQuestion.Rows[questionRowCount][2].ToString();
+                innerDiv.Controls.Add(label);
+                //column 4 問題
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_4";
+                innerDiv.Attributes["class"] = "col-xs-2 border";
+                outerDiv.Controls.Add(innerDiv);
+                TextBox txt = new TextBox();
+                txt.ID = "txtAssessmentQuestion" + (questionRowCount + 1).ToString();
+                txt.CssClass = "form-control no-resize autosize col" + (questionRowCount + 1) + "_4";
+                txt.TextMode = TextBoxMode.MultiLine;
+                txt.Wrap = true;
+                txt.ReadOnly = true;
+                txt.Text = dtAssessmentQuestion.Rows[questionRowCount][3].ToString();
+                innerDiv.Controls.Add(txt);
+                //column 6 自評分數
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_6";
+                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                label = new Label();
+                label.ID = "lblSelfAssessmentScore" + (questionRowCount + 1).ToString();
+                label.CssClass = "form-control text-center col" + (questionRowCount + 1) + "_6";
+                label.Text = dtAssessmentQuestion.Rows[questionRowCount]["SELF_SCORE"].ToString();
+                innerDiv.Controls.Add(label);
+                //column 7 主管評分數
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_7";
+                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                label = new Label();
+                label.ID = "lblSelfAssessmentScore" + (questionRowCount + 1).ToString();
+                label.CssClass = "form-control text-center col" + (questionRowCount + 1) + "_7";
+                label.Text = dtAssessmentQuestion.Rows[questionRowCount]["SELF_SCORE"].ToString();
+                innerDiv.Controls.Add(label);
+                //column 5 分數
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_5";
+                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                txt = new TextBox();
+                txt.ID = "txtAssessmentScore" + (questionRowCount + 1).ToString();
+                txt.CssClass = "form-control numbers-only add-number col" + (questionRowCount + 1) + "_5";
+                txt.Attributes["placeholder"] = "請打分數";
+                innerDiv.Controls.Add(txt);
+            }
         }         
         rowCount = dtAssessmentQuestion.Rows.Count;
         //讀取出勤資料
@@ -451,13 +817,13 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
     /// </summary>
     /// <param name="assessor"></param>
     /// <param name="assessed"></param>
-    protected void loadAssessedForm(string assessor, string assessed)
+    protected void loadAssessedForm(string assessor, string assessed, string assess_type)
     {
         DataTable dtSurveyContent = new DataTable();
-        string query = "";
+        string query = "";        
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
-            conn.Open();            
+            conn.Open();
             query = "SELECT A.ASSESSED_ID,B.MV002,A.ASSESSED_RANK,A.ASSESSED_WORKYEAR,A.ASSESS_YEAR,A.ASSESS_DATE,D.NAME,A.WEIGHTED_SCORE,A.OVERALL_COMMENT"
                 + " FROM HR360_ASSESSMENTSCORE_ASSESSED_A A"
                 + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
@@ -708,22 +1074,118 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             lblDayOffUnused.Text = cmd.ExecuteScalar().ToString();
         }
         //load question from HR360_ASSESSMENTSCORE_SCORE_A
-        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        if (assess_type == "1")
         {
-            conn.Open();
-            query = "SELECT [INDEX],QUESTION_CATEGORY_ID,QUESTION_CATEGORY_NAME,QUESTION_CATEGORY_WEIGHT,QUESTION,SCORE"
-                + " FROM HR360_ASSESSMENTSCORE_SCORE_A"
-                + " WHERE ASSESSOR_ID=@ASSESSOR_ID"
-                + " AND ASSESSED_ID=@ASSESSED_ID"
-                + " AND ASSESS_YEAR=@ASSESS_YEAR"
-                + " ORDER BY [INDEX]";
-            SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@ASSESSOR_ID", assessor);
-            cmd.Parameters.AddWithValue("@ASSESSED_ID", lblEmpID.Text);
-            cmd.Parameters.AddWithValue("@ASSESS_YEAR", year);
-            dtSurveyContent = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            da.Fill(dtSurveyContent);
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                query = "SELECT [INDEX],QUESTION_CATEGORY_ID,QUESTION_CATEGORY_NAME,QUESTION_CATEGORY_WEIGHT,QUESTION,SCORE"
+                    + " FROM HR360_ASSESSMENTSCORE_SCORE_A"
+                    + " WHERE ASSESSOR_ID=@ASSESSOR_ID"
+                    + " AND ASSESSED_ID=@ASSESSED_ID"
+                    + " AND ASSESS_YEAR=@ASSESS_YEAR"
+                    + " ORDER BY [INDEX]";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ASSESSOR_ID", assessor);
+                cmd.Parameters.AddWithValue("@ASSESSED_ID", lblEmpID.Text);
+                cmd.Parameters.AddWithValue("@ASSESS_YEAR", year);
+                dtSurveyContent = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dtSurveyContent);
+            }
+        }
+        else if (assess_type == "2")
+        {
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                query = ";WITH SUPER_TABLE"
+                    + " AS"
+                    + " ("
+                    + " SELECT [INDEX],SCORE"
+                    + " FROM HR360_ASSESSMENTSCORE_SCORE_A"
+                    + " WHERE ASSESSOR_ID=@ASSESSOR_ID"
+                    + " AND ASSESSED_ID=@ASSESSED_ID"
+                    + " AND ASSESS_YEAR=@ASSESS_YEAR"
+                    + " )"
+                    + " SELECT [SELF].[INDEX]"
+                    + " ,[SELF].QUESTION_CATEGORY_ID"
+                    + " ,[SELF].QUESTION_CATEGORY_NAME"
+                    + " ,[SELF].QUESTION_CATEGORY_WEIGHT"
+                    + " ,[SELF].QUESTION"
+                    + " ,[SELF].SCORE 'SELF_SCORE'"
+                    + " ,SUPER.SCORE 'SUPER_SCORE'"
+                    + " FROM HR360_ASSESSMENTSCORE_SCORE_A [SELF]"
+                    + " LEFT JOIN SUPER_TABLE SUPER ON SUPER.[INDEX]=[SELF].[INDEX]"
+                    + " WHERE [SELF].ASSESSOR_ID=@ASSESSED_ID"
+                    + " AND [SELF].ASSESSED_ID=@ASSESSED_ID"
+                    + " AND [SELF].ASSESS_YEAR=@ASSESS_YEAR"
+                    + " ORDER BY [INDEX]";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ASSESSOR_ID", assessor);
+                cmd.Parameters.AddWithValue("@ASSESSED_ID", lblEmpID.Text);
+                cmd.Parameters.AddWithValue("@ASSESS_YEAR", year);
+                dtSurveyContent = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dtSurveyContent);
+            }
+        }
+        else if (assess_type == "9")
+        {
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                query = ";WITH ASSESS_TABLE"
+                    + " AS"
+                    + " ("
+                    + " SELECT ASSESSOR_ID,ASSESS_TYPE"
+                    + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+                    + " WHERE [YEAR]=@ASSESS_YEAR"
+                    + " AND ASSESSED_ID=@ASSESSED_ID"
+                    + " )"
+                    + " ,SUPER_TABLE"
+                    + " AS"
+                    + " ("
+                    + " SELECT A.[INDEX],A.SCORE"
+                    + " FROM HR360_ASSESSMENTSCORE_SCORE_A A"
+                    + " LEFT JOIN ASSESS_TABLE ASSESS ON ASSESS.ASSESS_TYPE='2'"
+                    + " WHERE A.ASSESSOR_ID=ASSESS.ASSESSOR_ID"
+                    + " AND A.ASSESSED_ID=@ASSESSED_ID"
+                    + " AND A.ASSESS_YEAR=@ASSESS_YEAR"
+                    + " ),"
+                    + " SPECIAL_TABLE"
+                    + " AS"
+                    + " ("
+                    + " SELECT A.[INDEX],A.SCORE"
+                    + " FROM HR360_ASSESSMENTSCORE_SCORE_A A"
+                    + " LEFT JOIN ASSESS_TABLE ASSESS ON ASSESS.ASSESS_TYPE='9'"
+                    + " WHERE A.ASSESSOR_ID=ASSESS.ASSESSOR_ID"
+                    + " AND A.ASSESSED_ID=@ASSESSED_ID"
+                    + " AND A.ASSESS_YEAR=@ASSESS_YEAR"
+                    + " )"
+                    + " SELECT [SELF].[INDEX]"
+                    + " ,[SELF].QUESTION_CATEGORY_ID"
+                    + " ,[SELF].QUESTION_CATEGORY_NAME"
+                    + " ,[SELF].QUESTION_CATEGORY_WEIGHT"
+                    + " ,[SELF].QUESTION"
+                    + " ,[SELF].SCORE 'SELF_SCORE'"
+                    + " ,SUPER.SCORE 'SUPER_SCORE'"
+                    + " ,[SPECIAL].SCORE 'SPECIAL_SCORE'"
+                    + " FROM HR360_ASSESSMENTSCORE_SCORE_A [SELF]"
+                    + " LEFT JOIN SUPER_TABLE SUPER ON SUPER.[INDEX]=[SELF].[INDEX]"
+                    + " LEFT JOIN SPECIAL_TABLE SPECIAL ON SPECIAL.[INDEX]=[SELF].[INDEX]"
+                    + " WHERE [SELF].ASSESSOR_ID=@ASSESSED_ID"
+                    + " AND [SELF].ASSESSED_ID=@ASSESSED_ID"
+                    + " AND [SELF].ASSESS_YEAR=@ASSESS_YEAR"
+                    + " ORDER BY [INDEX]";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ASSESSOR_ID", assessor);
+                cmd.Parameters.AddWithValue("@ASSESSED_ID", lblEmpID.Text);
+                cmd.Parameters.AddWithValue("@ASSESS_YEAR", year);
+                dtSurveyContent = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dtSurveyContent);
+            }
         }
         for (int i = 0; i < dtSurveyContent.Rows.Count; i++)
         {
@@ -766,32 +1228,126 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             label.CssClass = "form-control col" + (i + 1) + "_3";
             label.Text = dtSurveyContent.Rows[i][3].ToString();
             innerDiv.Controls.Add(label);
-            //column 4 問題
-            innerDiv = new HtmlGenericControl();
-            innerDiv.TagName = "div";
-            innerDiv.ID = outerDiv.ID + "_4";
-            innerDiv.Attributes["class"] = "col-xs-6 border";
-            outerDiv.Controls.Add(innerDiv);
-            TextBox txt = new TextBox();
-            txt.ID = "txtAssessmentQuestion" + (i + 1).ToString();
-            txt.CssClass = "form-control no-resize autosize col" + (i + 1) + "_4";
-            txt.TextMode = TextBoxMode.MultiLine;
-            txt.Wrap = true;
-            txt.ReadOnly = true;
-            txt.Text = dtSurveyContent.Rows[i][4].ToString();
-            innerDiv.Controls.Add(txt);
-            //column 5 分數
-            innerDiv = new HtmlGenericControl();
-            innerDiv.TagName = "div";
-            innerDiv.ID = outerDiv.ID + "_5";
-            innerDiv.Attributes["class"] = "col-xs-2 border text-center";
-            outerDiv.Controls.Add(innerDiv);
-            txt = new TextBox();
-            txt.ID = "txtAssessmentScore" + (i + 1).ToString();
-            txt.CssClass = "form-control numbers-only add-number col" + (i + 1) + "_5";
-            txt.Attributes["placeholder"] = "請打分數";
-            txt.Text = dtSurveyContent.Rows[i][5].ToString();
-            innerDiv.Controls.Add(txt);
+            if (assess_type == "1")
+            {
+                //column 4 問題
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_4";
+                innerDiv.Attributes["class"] = "col-xs-6 border";
+                outerDiv.Controls.Add(innerDiv);
+                TextBox txt = new TextBox();
+                txt.ID = "txtAssessmentQuestion" + (i + 1).ToString();
+                txt.CssClass = "form-control no-resize autosize col" + (i + 1) + "_4";
+                txt.TextMode = TextBoxMode.MultiLine;
+                txt.Wrap = true;
+                txt.ReadOnly = true;
+                txt.Text = dtSurveyContent.Rows[i][4].ToString();
+                innerDiv.Controls.Add(txt);
+                //column 5 分數
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_5";
+                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                txt = new TextBox();
+                txt.ID = "txtAssessmentScore" + (i + 1).ToString();
+                txt.CssClass = "form-control numbers-only add-number col" + (i + 1) + "_5";
+                txt.Attributes["placeholder"] = "請打分數";
+                txt.Text = dtSurveyContent.Rows[i][5].ToString();
+                innerDiv.Controls.Add(txt);
+            }
+            else if (assess_type == "2")
+            {
+                //column 4 問題
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_4";
+                innerDiv.Attributes["class"] = "col-xs-4 border";
+                outerDiv.Controls.Add(innerDiv);
+                TextBox txt = new TextBox();
+                txt.ID = "txtAssessmentQuestion" + (i + 1).ToString();
+                txt.CssClass = "form-control no-resize autosize col" + (i + 1) + "_4";
+                txt.TextMode = TextBoxMode.MultiLine;
+                txt.Wrap = true;
+                txt.ReadOnly = true;
+                txt.Text = dtSurveyContent.Rows[i][4].ToString();
+                innerDiv.Controls.Add(txt);
+                //column 6 自評分數
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_6";
+                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                label = new Label();
+                label.ID = "lblSelfAssessmentScore" + (i + 1).ToString();
+                label.CssClass = "form-control text-center col" + (i + 1) + "_6";
+                label.Text = dtSurveyContent.Rows[i]["SELF_SCORE"].ToString();
+                innerDiv.Controls.Add(label);
+                //column 5 分數
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_5";
+                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                txt = new TextBox();
+                txt.ID = "txtAssessmentScore" + (i + 1).ToString();
+                txt.CssClass = "form-control numbers-only add-number col" + (i + 1) + "_5";
+                txt.Attributes["placeholder"] = "請打分數";
+                txt.Text = dtSurveyContent.Rows[i]["SUPER_SCORE"].ToString();
+                innerDiv.Controls.Add(txt);
+            }
+            else if (assess_type == "9")
+            {
+                //column 4 問題
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_4";
+                innerDiv.Attributes["class"] = "col-xs-6 border";
+                outerDiv.Controls.Add(innerDiv);
+                TextBox txt = new TextBox();
+                txt.ID = "txtAssessmentQuestion" + (i + 1).ToString();
+                txt.CssClass = "form-control no-resize autosize col" + (i + 1) + "_4";
+                txt.TextMode = TextBoxMode.MultiLine;
+                txt.Wrap = true;
+                txt.ReadOnly = true;
+                txt.Text = dtSurveyContent.Rows[i][4].ToString();
+                innerDiv.Controls.Add(txt);
+                //column 6 自評分數
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_6";
+                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                label = new Label();
+                label.ID = "lblSelfAssessmentScore" + (i + 1).ToString();
+                label.CssClass = "form-control text-center col" + (i + 1) + "_6";
+                label.Text = dtSurveyContent.Rows[i]["SELF_SCORE"].ToString();
+                innerDiv.Controls.Add(label);
+                //column 7 主管評分數
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_7";
+                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                label = new Label();
+                label.ID = "lblSelfAssessmentScore" + (i + 1).ToString();
+                label.CssClass = "form-control text-center col" + (i + 1) + "_7";
+                label.Text = dtSurveyContent.Rows[i]["SUPER_SCORE"].ToString();
+                innerDiv.Controls.Add(label);
+                //column 5 分數
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_5";
+                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                txt = new TextBox();
+                txt.ID = "txtAssessmentScore" + (i + 1).ToString();
+                txt.CssClass = "form-control numbers-only add-number col" + (i + 1) + "_5";
+                txt.Attributes["placeholder"] = "請打分數";
+                txt.Text = dtSurveyContent.Rows[i]["SPECIAL_SCORE"].ToString();
+                innerDiv.Controls.Add(txt);
+            }
         }
         rowCount = dtSurveyContent.Rows.Count;
     }

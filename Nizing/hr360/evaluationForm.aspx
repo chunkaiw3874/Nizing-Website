@@ -148,28 +148,7 @@
                     考核項目
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-1 border">
-                    <span class="form-control text-center">#</span>
-                </div>
-                <div class="col-xs-2 border">
-                    <span class="form-control text-center">分類</span>
-                </div>
-                <div class="col-xs-1 border">
-                    <span class="form-control text-center">權重</span>
-                </div>
-                <div class="col-xs-6 border">
-                    <span class="form-control text-center">問題</span>
-                </div>
-                <div class="col-xs-2 border">
-                    <span class="form-control text-center">分數</span>
-                </div>
-                <%--                <div class="col-xs-1 border">
-                    <span class="form-control text-center">加權分數</span>
-                </div>--%>
-<%--                <div class="col-xs-2 border">
-                    <span class="form-control text-center">評語</span>
-                </div>--%>
+            <div class="row" id="Question_Title" runat="server">
             </div>
             <div id="Load_Question" runat="server">
             </div>
