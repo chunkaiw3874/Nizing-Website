@@ -508,7 +508,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 label = new Label();
                 label.ID = "lblSelfAssessmentScore" + (questionRowCount + 1).ToString();
                 label.CssClass = "form-control text-center col" + (questionRowCount + 1) + "_6";
-                label.Text = dtAssessmentQuestion.Rows[questionRowCount]["SCORE"].ToString();
+                label.Text = dtAssessmentQuestion.Rows[questionRowCount]["SCORE"].ToString() ?? "未評核";
                 innerDiv.Controls.Add(label);
                 //column 5 分數
                 innerDiv = new HtmlGenericControl();
@@ -586,7 +586,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 label = new Label();
                 label.ID = "lblSelfAssessmentScore" + (questionRowCount + 1).ToString();
                 label.CssClass = "form-control text-center col" + (questionRowCount + 1) + "_6";
-                label.Text = dtAssessmentQuestion.Rows[questionRowCount]["SELF_SCORE"].ToString();
+                label.Text = dtAssessmentQuestion.Rows[questionRowCount]["SELF_SCORE"].ToString() ?? "未評核";
                 innerDiv.Controls.Add(label);
                 //column 7 主管評分數
                 innerDiv = new HtmlGenericControl();
@@ -597,7 +597,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 label = new Label();
                 label.ID = "lblSelfAssessmentScore" + (questionRowCount + 1).ToString();
                 label.CssClass = "form-control text-center col" + (questionRowCount + 1) + "_7";
-                label.Text = dtAssessmentQuestion.Rows[questionRowCount]["SELF_SCORE"].ToString();
+                label.Text = dtAssessmentQuestion.Rows[questionRowCount]["SELF_SCORE"].ToString() ?? "未評核";
                 innerDiv.Controls.Add(label);
                 //column 5 分數
                 innerDiv = new HtmlGenericControl();
@@ -1254,7 +1254,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 txt.ID = "txtAssessmentScore" + (i + 1).ToString();
                 txt.CssClass = "form-control numbers-only add-number col" + (i + 1) + "_5";
                 txt.Attributes["placeholder"] = "請打分數";
-                txt.Text = dtSurveyContent.Rows[i][5].ToString();
+                txt.Text = dtSurveyContent.Rows[i][5].ToString() ?? "未評核";
                 innerDiv.Controls.Add(txt);
             }
             else if (assess_type == "2")
@@ -1282,7 +1282,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 label = new Label();
                 label.ID = "lblSelfAssessmentScore" + (i + 1).ToString();
                 label.CssClass = "form-control text-center col" + (i + 1) + "_6";
-                label.Text = dtSurveyContent.Rows[i]["SELF_SCORE"].ToString();
+                label.Text = dtSurveyContent.Rows[i]["SELF_SCORE"].ToString() ?? "未評核";
                 innerDiv.Controls.Add(label);
                 //column 5 分數
                 innerDiv = new HtmlGenericControl();
@@ -1294,7 +1294,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 txt.ID = "txtAssessmentScore" + (i + 1).ToString();
                 txt.CssClass = "form-control numbers-only add-number col" + (i + 1) + "_5";
                 txt.Attributes["placeholder"] = "請打分數";
-                txt.Text = dtSurveyContent.Rows[i]["SUPER_SCORE"].ToString();
+                txt.Text = dtSurveyContent.Rows[i]["SUPER_SCORE"].ToString() ?? "未評核";
                 innerDiv.Controls.Add(txt);
             }
             else if (assess_type == "9")
@@ -1322,7 +1322,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 label = new Label();
                 label.ID = "lblSelfAssessmentScore" + (i + 1).ToString();
                 label.CssClass = "form-control text-center col" + (i + 1) + "_6";
-                label.Text = dtSurveyContent.Rows[i]["SELF_SCORE"].ToString();
+                label.Text = dtSurveyContent.Rows[i]["SELF_SCORE"].ToString() ?? "未評核";
                 innerDiv.Controls.Add(label);
                 //column 7 主管評分數
                 innerDiv = new HtmlGenericControl();
@@ -1333,7 +1333,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 label = new Label();
                 label.ID = "lblSelfAssessmentScore" + (i + 1).ToString();
                 label.CssClass = "form-control text-center col" + (i + 1) + "_7";
-                label.Text = dtSurveyContent.Rows[i]["SUPER_SCORE"].ToString();
+                label.Text = dtSurveyContent.Rows[i]["SUPER_SCORE"].ToString() ?? "未評核";
                 innerDiv.Controls.Add(label);
                 //column 5 分數
                 innerDiv = new HtmlGenericControl();
@@ -1345,7 +1345,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 txt.ID = "txtAssessmentScore" + (i + 1).ToString();
                 txt.CssClass = "form-control numbers-only add-number col" + (i + 1) + "_5";
                 txt.Attributes["placeholder"] = "請打分數";
-                txt.Text = dtSurveyContent.Rows[i]["SPECIAL_SCORE"].ToString();
+                txt.Text = dtSurveyContent.Rows[i]["SPECIAL_SCORE"].ToString() ?? "未評核";
                 innerDiv.Controls.Add(txt);
             }
         }
