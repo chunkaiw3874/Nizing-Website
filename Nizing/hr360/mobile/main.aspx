@@ -4,61 +4,54 @@
     <script type="text/javascript">
         //load news table from codebehind (converted to json)
         var newsTable = <%=jsonAnnouncementData%>;
-
+        var newsLoaded = 0;
         //load json to textbox
         $(document).ready(function () {
             //var obj = JSON.parse(newsTable);
-            //ToJavaScriptDate(newsTable.CREATE_TIME);
-            for(var i=0;i<newsTable.length;i++){
+            //ToJavaScriptDate(newsTable.CREATE_TIME);           
+            LoadNews(2);
+        });
+        function LoadNews(numbersToLoad){
+            for(var i=newsLoaded;i<newsLoaded+numbersToLoad;i++){
                 var createDate = new Date(parseInt(newsTable[i]['CREATE_TIME'].replace('/Date(', '')));
                 var modifyDate = new Date(parseInt(newsTable[i]['LAST_EDIT_TIME'].replace('/Date(', '')));
-                var textarea = document.createElement("textarea")
-                textarea.readOnly=true;
-                textarea.attributes["class"] = "form-group no-resize autosize";
-                textarea.style="border-width:0px;width:100%;color:Gray;";
-                textarea.innerHTML = newsTable[i]['BODY'].replace(/(?:\r\n|\r|\n)/g, '<br>');
-                $('[id$=news_list]').append(textarea);
-                //$('[id$=news_list]').append('<hr/>')
-                //.append('<div class="row">')
-                //    .append('<div class="col-sm-2">')
-                //        .append('<span class="form-ctonrol">')
-                //            .append(createDate.getFullYear()+'-'+createDate.getMonth()+'-'+createDate.getDay())
-                //        .append('</span>')
-                //    .append('</div>')
-                //    .append('<div class="col-sm-9">')
-                //        .append('<textarea readonly="readonly" class="form-group no-resize autosize" style="border-width:0px;width:100%;">')
-                //            .append(newsTable[i]['BODY'].replace(/(?:\r\n|\r|\n)/g, '<br />'))
-                //        .append('</textarea>')
-                //    .append('</div>')
-                //    .append('<div>')
-                //        .append('<span style="color:Gray;font-size:6pt;font-style:italic;">')
-                //            .append('最後編輯: ' + newsTable[i]['EDITOR_NAME'] + ' ' + modifyDate)
-                //        .append('</span>')
-                //    .append('</div>')
-                //.append('</div>')
+                var divRow = document.createElement('div');
+                divRow.className = 'row';
+                var divHeading = document.createElement('div');
+                divHeading.className = 'col-sm-2';                
+                var heading = document.createElement('span');
+                heading.innerText = newsTable[i]['CREATE_TIME'].substring(0,10);
+                var divBody = document.createElement('div');
+                divBody.className = 'col-sm-9';
+                var txtBody = document.createElement('textarea');
+                txtBody.readOnly=true;
+                txtBody.className = 'form-group no-resize autosize';
+                txtBody.style="border-width:0px;width:100%;";
+                txtBody.innerHTML = newsTable[i]['BODY'].replace(/(?:\r\n|\r|\n)/g, '\n');
+                var editNote = document.createElement('span');
+                editNote.style = 'color:Gray;font-size:6pt;font-style:italic;';
+                editNote.innerText = '最後編輯: ' + newsTable[i]['EDITOR_NAME'] + ' ' + newsTable[i]['LAST_EDIT_TIME'];
+                divHeading.appendChild(heading);
+                divBody.appendChild(txtBody);
+                divBody.appendChild(editNote);
+                divRow.appendChild(divHeading);
+                divRow.appendChild(divBody);
+                $('[id$=news_list]').append('<hr/>').append(divRow);                
             }
-            //$('[id$=txtTest]').val('123');
-        });
-        //function ToJavaScriptDate(value) {
-        //    var pattern = /Date\(([^)]+)\)/;
-        //    var results = pattern.exec(value);
-        //    var dt = new Date(parseFloat(results[1]));
-        //    return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
-        //}
+            newsLoaded+=numbersToLoad;
+        }
         //detects when user reaches the end
-        //window.addEventListener("scroll", function () {
-        //    var wrap = document.getElementById('news_list');
-        //    var contentHeight = wrap.offsetHeight;
-        //    var yOffset = window.pageYOffset;
-        //    var y = yOffset + window.innerHeight;
-        //    var x = 0;
-        //    if (y >= contentHeight) {
-        //        x += 1
-        //        //load new content
-        //        wrap.innerHTML = wrap.innerHTML + "<div>this is added line " + x.toString() + "</div>";
+        window.addEventListener("scroll", function () {
+            var wrap = document.getElementById('news_list');
+            var contentHeight = wrap.offsetHeight;
+            var yOffset = window.pageYOffset;
+            var y = yOffset + window.innerHeight;
+            if (y >= contentHeight) {
+                //load new content
+                LoadNews(1);
 
-        //    }
-        //})
+            }
+        })
         $(function () {
             $('.autosize').autosize();
         });
@@ -141,9 +134,9 @@
         </div>
         <div id="news_list" class="infinite-scroll" runat="server">
         </div>
-        <div>
+<%--        <div>
             <asp:TextBox ID="txtTest" runat="server" TextMode="MultiLine"></asp:TextBox>
-        </div>
+        </div>--%>
     </div>
 </asp:Content>
 

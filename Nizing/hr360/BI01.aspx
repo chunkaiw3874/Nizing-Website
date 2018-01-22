@@ -61,9 +61,9 @@
                                             密碼
                                         </td>
                                         <td>
-                                            <asp:TextBox ID="txtPassword" runat="server" MaxLength="20" placeholder="最大字元數量20" BorderColor="#a9caff" Font-Size="12" TextMode="Password"></asp:TextBox>
+                                            <%--<asp:TextBox ID="txtPassword" runat="server" MaxLength="20" placeholder="最大字元數量20" BorderColor="#a9caff" Font-Size="12" TextMode="Password"></asp:TextBox>--%>
                                             <!--可看到密碼-->
-                                            <%--<asp:TextBox ID="txtPassword" runat="server" MaxLength="20" placeholder="最大字元數量20" BorderColor="#a9caff" Font-Size="12"></asp:TextBox>--%>
+                                            <asp:TextBox ID="txtPassword" runat="server" MaxLength="20" placeholder="最大字元數量20" BorderColor="#a9caff" Font-Size="12"></asp:TextBox>
                                         </td>
                                         <td>
                                             失效帳號

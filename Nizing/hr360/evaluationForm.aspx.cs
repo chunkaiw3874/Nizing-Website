@@ -18,7 +18,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
     string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
 
     //Setup basic info for the assessment 
-    string year = "2016"; //edit annually
+    string year = "";
     int rowCount = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -1373,7 +1373,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 string query = "SELECT *"
                             + " FROM HR360_ASSESSMENTSCORE_STANDARD";
                 SqlCommand cmd = new SqlCommand(query, conn);
-                standard = cmd.ExecuteNonQuery();
+                standard = Convert.ToDouble(cmd.ExecuteScalar().ToString());
             }            
             if (double.TryParse(hfFinalScore.Value, out d))
             {
@@ -1620,7 +1620,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                                     query = "INSERT INTO HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
                                         + " VALUES (GETDATE(),@CREATOR,GETDATE(),@MODIFIER"
                                         + " ,@YEAR,@ASSESSOR_ID,@ASSESSED_ID"
-                                        + " ,9,0,1)";
+                                        + " ,'9','0','1')";
                                     cmd = new SqlCommand(query, conn);
                                     cmd.Parameters.AddWithValue("@CREATOR", assessor);
                                     cmd.Parameters.AddWithValue("@MODIFIER", assessor);
