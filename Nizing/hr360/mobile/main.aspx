@@ -7,54 +7,61 @@
         var newsLoaded = 0;
         //load json to textbox
         $(document).ready(function () {
-            //var obj = JSON.parse(newsTable);
-            //ToJavaScriptDate(newsTable.CREATE_TIME);           
-            LoadNews(2);
+            var wrap = document.getElementById('<%=news_list.ClientID%>');
+            var contentHeight = wrap.offsetHeight;
+            var win = $(window).height;
+            do{
+                LoadNews(1);
+            }
+            while(contentHeight<win);
+            
         });
         function LoadNews(numbersToLoad){
             for(var i=newsLoaded;i<newsLoaded+numbersToLoad;i++){
-                var createDate = new Date(parseInt(newsTable[i]['CREATE_TIME'].replace('/Date(', '')));
-                var modifyDate = new Date(parseInt(newsTable[i]['LAST_EDIT_TIME'].replace('/Date(', '')));
-                var divRow = document.createElement('div');
-                divRow.className = 'row';
-                var divHeading = document.createElement('div');
-                divHeading.className = 'col-sm-2';                
-                var heading = document.createElement('span');
-                heading.innerText = newsTable[i]['CREATE_TIME'].substring(0,10);
-                var divBody = document.createElement('div');
-                divBody.className = 'col-sm-9';
-                var txtBody = document.createElement('textarea');
-                txtBody.readOnly=true;
-                txtBody.className = 'form-group no-resize autosize';
-                txtBody.style="border-width:0px;width:100%;";
-                txtBody.innerHTML = newsTable[i]['BODY'].replace(/(?:\r\n|\r|\n)/g, '\n');
-                var editNote = document.createElement('span');
-                editNote.style = 'color:Gray;font-size:6pt;font-style:italic;';
-                editNote.innerText = '最後編輯: ' + newsTable[i]['EDITOR_NAME'] + ' ' + newsTable[i]['LAST_EDIT_TIME'];
-                divHeading.appendChild(heading);
-                divBody.appendChild(txtBody);
-                divBody.appendChild(editNote);
-                divRow.appendChild(divHeading);
-                divRow.appendChild(divBody);
-                $('[id$=news_list]').append('<hr/>').append(divRow);                
+                if(i<newsTable.length){
+                    var createDate = new Date(parseInt(newsTable[i]['CREATE_TIME'].replace('/Date(', '')));
+                    var modifyDate = new Date(parseInt(newsTable[i]['LAST_EDIT_TIME'].replace('/Date(', '')));
+                    var divRow = document.createElement('div');
+                    divRow.className = 'row';
+                    var divHeading = document.createElement('div');
+                    divHeading.className = 'col-sm-2';                
+                    var heading = document.createElement('span');
+                    heading.innerText = newsTable[i]['CREATE_TIME'].substring(0,10);
+                    var divBody = document.createElement('div');
+                    divBody.className = 'col-sm-9';
+                    var txtBody = document.createElement('textarea');
+                    txtBody.readOnly=true;
+                    txtBody.className = 'form-group no-resize autosize';
+                    txtBody.style="border-width:0px;width:100%;";
+                    txtBody.innerHTML = newsTable[i]['BODY'].replace(/(?:\r\n|\r|\n)/g, '\n');
+                    var editNote = document.createElement('span');
+                    editNote.style = 'color:Gray;font-size:6pt;font-style:italic;';
+                    editNote.innerText = '最後編輯: ' + newsTable[i]['EDITOR_NAME'] + ' ' + newsTable[i]['LAST_EDIT_TIME'];
+                    divHeading.appendChild(heading);
+                    divBody.appendChild(txtBody);
+                    divBody.appendChild(editNote);
+                    divRow.appendChild(divHeading);
+                    divRow.appendChild(divBody);
+                    $('[id$=news_list]').append('<hr/>').append(divRow);  
+                }
             }
             newsLoaded+=numbersToLoad;
         }
         //detects when user reaches the end
-        window.addEventListener("scroll", function () {
-            var wrap = document.getElementById('news_list');
+        window.addEventListener("scroll", function (){
+            var wrap = document.getElementById('<%=news_list.ClientID%>');
             var contentHeight = wrap.offsetHeight;
             var yOffset = window.pageYOffset;
             var y = yOffset + window.innerHeight;
             if (y >= contentHeight) {
                 //load new content
                 LoadNews(1);
-
             }
-        })
+        });
         $(function () {
             $('.autosize').autosize();
         });
+        
         //$('.infinite-scroll').jscroll({
         //    autoTrigger: false
         //});

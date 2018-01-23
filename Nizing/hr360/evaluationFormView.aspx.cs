@@ -221,6 +221,8 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
             {
                 txt0007Comment.ReadOnly = false;
                 btnSave0007Comment.Visible = true;
+                div0006_comment.Visible = true;
+                div0007_comment.Visible = true;                
             }
             else if (Session["erp_id"].ToString() == "0006")
             {
@@ -706,29 +708,49 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@YEAR", lblEvalYear.Text);
             lblDayOffUnused.Text = cmd.ExecuteScalar().ToString();
 
-            if (string.IsNullOrWhiteSpace(txt0006Comment.Text))
+            if (Request.QueryString["ID"] == null)
             {
-                div0006_comment.Visible = false;
-            }
-            else
-            {
-                div0006_comment.Visible = true;
-            }
-            if (string.IsNullOrWhiteSpace(txt0007Comment.Text))
-            {
-                div0007_comment.Visible = false;
-            }
-            else
-            {
-                div0007_comment.Visible = true;
-            }
-            if (string.IsNullOrWhiteSpace(txt0067Comment.Text))
-            {
-                div0067_comment.Visible = false;
-            }
-            else
-            {
-                div0067_comment.Visible = true;
+                if (Session["erp_id"].ToString() != "0007" && Session["erp_id"].ToString() != "0006")
+                {
+                    if (string.IsNullOrWhiteSpace(txt0006Comment.Text))
+                    {
+                        div0006_comment.Visible = false;
+                    }
+                    else
+                    {
+                        div0006_comment.Visible = true;
+                    }
+                    if (string.IsNullOrWhiteSpace(txt0007Comment.Text))
+                    {
+                        div0007_comment.Visible = false;
+                    }
+                    else
+                    {
+                        div0007_comment.Visible = true;
+                    }
+                    if (string.IsNullOrWhiteSpace(txt0067Comment.Text))
+                    {
+                        div0067_comment.Visible = false;
+                    }
+                    else
+                    {
+                        div0067_comment.Visible = true;
+                    }
+                }
+                else
+                {
+
+                    div0006_comment.Visible = true;
+                    div0007_comment.Visible = true;
+                    if (string.IsNullOrWhiteSpace(txt0067Comment.Text))
+                    {
+                        div0067_comment.Visible = false;
+                    }
+                    else
+                    {
+                        div0067_comment.Visible = true;
+                    }
+                }
             }
         }
     }
