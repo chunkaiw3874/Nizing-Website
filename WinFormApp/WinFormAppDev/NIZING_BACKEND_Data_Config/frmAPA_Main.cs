@@ -1896,7 +1896,7 @@ namespace NIZING_BACKEND_Data_Config
                     while (dr.Read())
                     {
                         if (dr.HasRows)
-                        {
+                        {                            
                             cbxReportPreviewEmployee.Items.Add(dr.GetString(0));
                         }
                     }
@@ -1909,6 +1909,7 @@ namespace NIZING_BACKEND_Data_Config
         }
         private void cbxReportPreviewYear_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cbxReportPreviewEmployee.Items.Clear();
             LoadcbxReportPreviewEmployee();
         }        
 
