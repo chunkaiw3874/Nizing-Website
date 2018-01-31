@@ -20,14 +20,14 @@ public partial class hr360_UI05 : System.Web.UI.Page
     string year = "2016"; //edit annually
 
     protected void Page_Load(object sender, EventArgs e)
-    {
+    {        
         DateTime evalStart = new DateTime(2017, 1, 1, 19, 0, 0);
         DateTime evalEnd = new DateTime(2017, 1, 1, 17, 30, 0);
         DateTime selfEvalStart = new DateTime();
         DateTime selfEvalEnd = new DateTime();
         DateTime superEvalStart = new DateTime();
         DateTime superEvalEnd = new DateTime();
-
+        divPlaceholder.Visible = false;
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             conn.Open();
@@ -395,7 +395,10 @@ public partial class hr360_UI05 : System.Web.UI.Page
                 }
             }
         }
-
+        //edit set lookup to non visible before evaluation is complete
+        divPlaceholder.Visible = true;
+        divAssessmentLookup.Visible = false;
+        divBonusLookup.Visible = false;
     }
     /// <summary>
     /// 讀取只有特定人有權限看的評核表清單

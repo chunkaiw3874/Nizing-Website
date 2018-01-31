@@ -18,14 +18,28 @@ public partial class hr360_mobile_main : System.Web.UI.Page
     string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
     string ERP2connectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
     public DataTable dtAnnouncementData = new DataTable();
-    public int lastNewsRow = 0;
     public string jsonAnnouncementData;
+    public byte[] blob;
     protected void Page_Load(object sender, EventArgs e)
     {
         LoadNewsFromDB();
-        //ConstructNewsDiv(dtAnnouncementData, lastNewsRow, 2);
         jsonAnnouncementData = ConvertDtToString(dtAnnouncementData);
-        //txtTest.Text = jsonAnnouncementData;
+        loadBlob();
+    }
+    private void loadBlob()
+    {
+        using (SqlConnection conn = new SqlConnection(ERP2connectionString))
+        {
+            conn.Open();
+            string query = "SELECT [DATA] FROM HR360_FILE_STORAGE";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.Text;
+            blob = (byte[])cmd.ExecuteScalar();
+            //SqlDataReader dr = cmd.ExecuteReader();
+            //dr.Read();
+            //Response.BinaryWrite((byte[])dr["DATA"]);
+        }
+
     }
     private DataTable LoadNewsFromDB()
     {
@@ -76,63 +90,4 @@ public partial class hr360_mobile_main : System.Web.UI.Page
         }
         return serializer.Serialize(rows);
     }
-    private void ConstructNewsDiv(DataTable dt, int lastRow, int numberOfItemsToLoad)
-    {       
-        
-        for (int i = lastRow; i < lastRow + numberOfItemsToLoad; i++)
-        {
-            news_list.Controls.Add(new Literal() { Text = "<hr/>" });
-            HtmlGenericControl div = new HtmlGenericControl();
-            div.TagName = "div";
-            div.ID = "news" + i;
-            div.Attributes["class"] = "row";
-            news_list.Controls.Add(div);
-            HtmlGenericControl row = new HtmlGenericControl();
-            row.TagName = "div";
-            row.ID = div.ID + "_headingrow";
-            row.Attributes["class"] = "col-sm-2";
-            div.Controls.Add(row);
-            Label heading = new Label();
-            heading.ID = div.ID + "_heading";
-            heading.CssClass = "form-ctonrol";
-            heading.Text = ((DateTime)dtAnnouncementData.Rows[i]["CREATE_TIME"]).ToString("yyyy-MM-dd");
-            row.Controls.Add(heading);
-            row = new HtmlGenericControl();
-            row.TagName = "div";
-            row.ID = div.ID + "_bodyrow";
-            row.Attributes["class"] = "col-sm-9";
-            div.Controls.Add(row);
-            TextBox body = new TextBox();
-            body.TextMode = TextBoxMode.MultiLine;
-            body.ID = div.ID + "_body";
-            body.ReadOnly = true;
-            body.Width = new Unit("100%");
-            body.CssClass = "form-group no-resize autosize";
-            body.Text = dtAnnouncementData.Rows[i]["BODY"].ToString();
-            body.BorderWidth = 0;
-            row.Controls.Add(body);
-            Label edit_note = new Label();
-            edit_note.ID = div.ID + "_editnote";
-            edit_note.Font.Size = 6;
-            edit_note.Font.Italic = true;
-            edit_note.ForeColor = System.Drawing.Color.Gray;
-            edit_note.Text = "最後編輯: " + dtAnnouncementData.Rows[i]["EDITOR_NAME"].ToString() + " " + dtAnnouncementData.Rows[i]["LAST_EDIT_TIME"].ToString();
-            row.Controls.Add(edit_note);            
-        }
-        lastNewsRow += numberOfItemsToLoad;
-    }
-
-    //[WebMethod]
-    //public static DataTable GetNews(DataTable dt, int row)
-    //{
-    //    return dt;
-    //}
-
-    //[WebMethod]
-    //public static string GetCurrentTime(string name)
-    //{
-    //    return "Hello " + name + Environment.NewLine + "The Current Time is: "
-    //        + DateTime.Now.ToString();
-    //}
-
 }

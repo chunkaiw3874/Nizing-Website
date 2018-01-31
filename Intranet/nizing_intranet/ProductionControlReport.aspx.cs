@@ -46,7 +46,7 @@ public partial class ProductionControlReport : System.Web.UI.Page
     {
         try
         {
-            if (ddlBeginMonth.SelectedItem.Text == "1")
+            if (ddlBeginMonth.SelectedItem.Text == "01")
             {
                 Begin.Value = Convert.ToString(Convert.ToInt32(ddlBeginYear.SelectedItem.Value)-1) + ddlBeginMonth.SelectedItem.Value;
             }
@@ -77,7 +77,7 @@ public partial class ProductionControlReport : System.Web.UI.Page
             {
                 lblStatus.Text = "";
 
-                if (ddlBeginMonth.SelectedItem.Text == "1")
+                if (ddlBeginMonth.SelectedItem.Text == "01")
                 {
                     lblRange.Text = Convert.ToString(Convert.ToInt32(ddlBeginYear.SelectedItem.Value) - 1)
                                 + ddlBeginMonth.SelectedItem.Value + "至"

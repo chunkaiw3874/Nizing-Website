@@ -5,6 +5,7 @@
         //load news table from codebehind (converted to json)
         var newsTable = <%=jsonAnnouncementData%>;
         var newsLoaded = 0;
+        var imgBlob=Convert.toBase64String(<%=blob%>);
         //load json to textbox
         $(document).ready(function () {
             var wrap = document.getElementById('<%=news_list.ClientID%>');
@@ -12,9 +13,14 @@
             var win = $(window).height;
             do{
                 LoadNews(1);
+                
             }
             while(contentHeight<win);
+            autosize($('textarea'));
             
+            var image = document.createElement('image');
+            image.src='data:image/jpeg;base64,'+Base64.encode(blob);
+            $('[id$=news_list]').append(image);
         });
         function LoadNews(numbersToLoad){
             for(var i=newsLoaded;i<newsLoaded+numbersToLoad;i++){
@@ -31,7 +37,7 @@
                     divBody.className = 'col-sm-9';
                     var txtBody = document.createElement('textarea');
                     txtBody.readOnly=true;
-                    txtBody.className = 'form-group no-resize autosize';
+                    txtBody.className = 'form-group no-resize';
                     txtBody.style="border-width:0px;width:100%;";
                     txtBody.innerHTML = newsTable[i]['BODY'].replace(/(?:\r\n|\r|\n)/g, '\n');
                     var editNote = document.createElement('span');
@@ -46,6 +52,9 @@
                 }
             }
             newsLoaded+=numbersToLoad;
+            $('textarea').each(function(index,textArea){
+                autosize(textArea);
+            })
         }
         //detects when user reaches the end
         window.addEventListener("scroll", function (){
@@ -58,45 +67,6 @@
                 LoadNews(1);
             }
         });
-        $(function () {
-            $('.autosize').autosize();
-        });
-        
-        //$('.infinite-scroll').jscroll({
-        //    autoTrigger: false
-        //});
-<%--        function ShowNews() {
-            $.ajax({
-                type: "POST",
-                url: "main.aspx/GetNews",
-                data: '{dt: ' + <%=this.dtAnnouncementData%> + ', row: ' + <%=this.lastNewsRow%> + '}',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: OnSuccess,
-                failure: function () {
-                    alert('failed');
-                }
-            });
-        }
-        function OnSuccess() {
-            alert('success');
-        }--%>
-        //function ShowCurrentTime() {
-        //    $.ajax({
-        //        type: "POST",
-        //        url: "main.aspx/GetCurrentTime",
-        //        data: '{name: "Kevin" }',
-        //        contentType: "application/json; charset=utf-8",
-        //        dataType: "json",
-        //        success: OnSuccess,
-        //        failure: function (response) {
-        //            alert(response.d);
-        //        }
-        //    });
-        //}
-        //function OnSuccess(response) {
-        //    alert(response.d);
-        //}
     </script>
     <style>
         .form-control {
@@ -134,16 +104,14 @@
         </div>
     </div>
     <div class="container">
-        <input id="btnGetTime" type="button" value="Show More News"
-    onclick = "ShowNews()" />
         <div>
             <h2>最新公告</h2>
         </div>
         <div id="news_list" class="infinite-scroll" runat="server">
         </div>
-<%--        <div>
-            <asp:TextBox ID="txtTest" runat="server" TextMode="MultiLine"></asp:TextBox>
-        </div>--%>
+    </div>
+    <div>
+        <%--<asp:Image ID="Image1" runat="server" ImageUrl="~/hr360/mobile/GetImage.aspx" />--%>
     </div>
 </asp:Content>
 

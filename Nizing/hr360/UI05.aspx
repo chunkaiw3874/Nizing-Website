@@ -77,7 +77,10 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div> 
+        <div id="divPlaceholder" class="row" runat="server">
+            *查詢功能將會於評分結束後重新開啟
+        </div>       
         <div id="divAssessmentLookup" runat="server">
             <div class="row">
                 <div class="col-xs-9" style="margin-bottom: 10px; margin-top: 10px;">
