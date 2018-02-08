@@ -28,6 +28,9 @@
         <div style="margin-bottom:10px;">
             <asp:Button ID="btnSubmit" runat="server" Text="查詢" OnClick="btnSubmit_Click" />
         </div>
+        <div style="margin-bottom:10px;">
+            *此系統為薪資單查詢，非銀行入帳證明
+        </div>
         <div style="margin-bottom:10px">
             <asp:Label ID="lblErrorMessage" runat="server" CssClass="error-message"></asp:Label>
         </div>

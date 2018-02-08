@@ -125,7 +125,7 @@ public partial class main : System.Web.UI.Page
                             cmdSelect.Parameters.AddWithValue("@MONTH", dtUserInfo.Rows[0]["START_MONTH"].ToString());
                             doubleSecondPartDayOffUsed = Convert.ToDouble(cmdSelect.ExecuteScalar());
                             doubleSecondPartFinal = doubleSecondPartDayOff * 8.5 - doubleSecondPartDayOffUsed;
-                            //strSecondPartDayOff = doubleSecondPartFinal.ToString();
+                            strSecondPartDayOff = doubleSecondPartFinal.ToString();
                         }
                         else
                         {

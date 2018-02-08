@@ -41,41 +41,6 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
     {
 
     }
-
-    //private void SqlSearch(string query)
-    //{
-    //    using (SqlConnection conn = new SqlConnection(connectionString))
-    //    {
-    //        conn.Open();
-
-    //        SqlCommand cmd = new SqlCommand(query, conn);
-    //        SqlDataAdapter da = new SqlDataAdapter(cmd);
-    //        DataSet ds = new DataSet();
-    //        da.Fill(ds);
-    //        grdReport.DataSource = ds;
-    //        grdReport.DataBind();
-    //    }
-    //}
-
-    //private string GetQuery()
-    //{
-    //    string query = "SELECT *"
-    //                    + " FROM"
-    //                    + " ("
-    //                    + " SELECT CMSMV.MV001 員工代號, CMSMV.MV002 員工名稱, PALMC.MC002 假別名稱, (PALTL.TL006+PALTL.TL007) 請假天數"
-    //                    + " FROM PALTL"
-    //                    + " RIGHT JOIN PALMC ON PALTL.TL004 = PALMC.MC001 "
-    //                    + " RIGHT JOIN CMSMV ON PALTL.TL001 = CMSMV.MV001 AND PALTL.TL002 = " + ddlYear.SelectedValue.ToString()
-    //                    + " WHERE (CMSMV.MV022 = 0 AND (CAST(SUBSTRING(CMSMV.MV021,1,4) AS INT) <= " + ddlYear.SelectedValue.ToString() + ")) OR (CAST(SUBSTRING(CMSMV.MV022,1,4) AS INT) >= " + ddlYear.SelectedValue.ToString() + " AND CAST(SUBSTRING(CMSMV.MV021,1,4) AS INT) <= " + ddlYear.SelectedValue.ToString() + ")"
-    //                    + " ) AS S"
-    //                    + " PIVOT"
-    //                    + " ("
-    //                    + " SUM(請假天數)"
-    //                    + " FOR 假別名稱 IN ([特休], [病假], [事假], [婚假], [喪假], [產假], [陪產假], [曠職], [颱風假], [公假], [公休假], [公傷假], [產檢假])"
-    //                    + " ) AS PIVOTTABLE"
-    //                    + " ORDER BY 員工代號";
-    //    return query;
-    //}
     protected void btnReport_Click(object sender, EventArgs e)
     {       
         string condition = "";
@@ -101,34 +66,42 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(connectionString))
         {
             SqlCommand cmdSelect = new SqlCommand("SELECT *"
-+ " FROM"
-+ " ("
-+ " SELECT CMSMV.MV001 [EMPLOYEE_ID]"
-+ " , CMSMV.MV002 [EMPLOYEE_NAME]"
-+ " , PALTK.TK002"
-+ " , CONVERT(NVARCHAR,CONVERT(DECIMAL(4,0),PALTK.TK003))+N' / '+CONVERT(NVARCHAR,PALTK.TK003*8) [DAYOFF_TOTAL]"
-+ " , PALMC.MC001 [DAYOFF_ID]"
-+ " , CASE"
-+ " WHEN PALMC.MC004='1' THEN (PALTL.TL006+PALTL.TL007)*8"
-+ " ELSE (PALTL.TL006+PALTL.TL007)"
-+ " END [DAYOFF_DAYS]"
-+ " FROM CMSMV"
-+ " LEFT JOIN PALTK ON CMSMV.MV001 = PALTK.TK001 AND PALTK.TK002 = @YEAR"
-+ " LEFT JOIN PALTL ON PALTK.TK001 = PALTL.TL001 AND PALTL.TL002 = @YEAR"
-+ leftJoinCondition
-+ " LEFT JOIN PALMC ON PALTL.TL004 = PALMC.MC001"
-+ " WHERE CMSMV.MV001<>'0000'"
-+ " AND CMSMV.MV001<>'0006'"
-+ " AND CMSMV.MV001<>'0007'"
-+ " AND CMSMV.MV001<>'0098'"
-+ " AND CMSMV.MV001 NOT LIKE 'PT%'"
-+ condition
-+ " )"
-+ " AS"
-+ " S"
-+ " PIVOT"
-+ " ( SUM([DAYOFF_DAYS]) FOR [DAYOFF_ID] IN ([03], [04], [05], [06], [07], [08], [09], [10], [11], [12], [13], [14], [15]) )"
-+ " AS PIVOTTABLE", conn);
+                                            + " FROM"
+                                            + " ("
+                                            + " SELECT CMSMV.MV001 [EMPLOYEE_ID]"
+                                            + " , CMSMV.MV002 [EMPLOYEE_NAME]"
+                                            + " , PALTK.TK002"
+                                            + " , CASE CMSMV.MV001"
+                                            + " WHEN '0010' THEN CONVERT(NVARCHAR,CONVERT(DECIMAL(4,0),PALTK.TK003))+N' / '+CONVERT(NVARCHAR,CONVERT(DECIMAL(5,2),PALTK.TK003*8.5))"
+                                            + " ELSE"
+                                            + " CONVERT(NVARCHAR,CONVERT(DECIMAL(4,0),PALTK.TK003))+N' / '+CONVERT(NVARCHAR,CONVERT(DECIMAL(5,2),PALTK.TK003*8))"
+                                            + " END AS [DAYOFF_TOTAL]"
+                                            + " , PALMC.MC001 [DAYOFF_ID]"
+                                            + " , CASE"
+                                            + " WHEN PALMC.MC004='1' THEN"
+                                            + " CASE CMSMV.MV001"
+                                            + " WHEN '0010' THEN CONVERT(DECIMAL(5,2),(PALTL.TL006+PALTL.TL007)*8.5)"
+                                            + " ELSE CONVERT(DECIMAL(5,2),(PALTL.TL006+PALTL.TL007)*8.0)"
+                                            + " END"
+                                            + " ELSE CONVERT(DECIMAL(5,2),(PALTL.TL006+PALTL.TL007))"
+                                            + " END [DAYOFF_DAYS]"
+                                            + " FROM CMSMV"
+                                            + " LEFT JOIN PALTK ON CMSMV.MV001 = PALTK.TK001 AND PALTK.TK002 = @YEAR"
+                                            + " LEFT JOIN PALTL ON PALTK.TK001 = PALTL.TL001 AND PALTL.TL002 = @YEAR"
+                                            + leftJoinCondition
+                                            + " LEFT JOIN PALMC ON PALTL.TL004 = PALMC.MC001"
+                                            + " WHERE CMSMV.MV001<>'0000'"
+                                            + " AND CMSMV.MV001<>'0006'"
+                                            + " AND CMSMV.MV001<>'0007'"
+                                            + " AND CMSMV.MV001<>'0098'"
+                                            + " AND CMSMV.MV001 NOT LIKE 'PT%'"
+                                            + condition
+                                            + " )"
+                                            + " AS"
+                                            + " S"
+                                            + " PIVOT"
+                                            + " ( SUM([DAYOFF_DAYS]) FOR [DAYOFF_ID] IN ([03], [04], [05], [06], [07], [08], [09], [10], [11], [12], [13], [14], [15]) )"
+                                            + " AS PIVOTTABLE", conn);
             cmdSelect.Parameters.AddWithValue("@YEAR", ddlYear.SelectedValue);
             cmdSelect.Parameters.AddWithValue("@YEARPLUSMONTH", ddlYear.SelectedValue + ddlMonth.SelectedValue);
             cmdSelect.Parameters.AddWithValue("@MONTH", ddlMonth.SelectedValue);

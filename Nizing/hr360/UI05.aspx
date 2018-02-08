@@ -14,7 +14,8 @@
                 <img src="image/banner/公告.png" height="30" />
             </div>
         </div>
-        <div class="row">
+        <!--2018.02.08 per Chrissy, 隱藏公告-->
+        <div class="row" hidden="hidden">   
             <div class="col-xs-9" style="border: solid 1px #006837; border-radius: 5px; margin-top: 5px;">
                 <div style="margin-bottom: 10px;">
                     2017年年終獎金參考計算方式:評核時間為2016/01/01~2016/12/31之綜合表現<br />

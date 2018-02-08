@@ -208,7 +208,7 @@ public partial class hr360_UI06 : System.Web.UI.Page
             else
             {
                 salary_slip.Visible = false;
-                lblErrorMessage.Text = "請於次月五號下午五點以後再查詢";
+                lblErrorMessage.Text = "請於次月六號以後再查詢";
             }
         }
         catch (Exception ex)
