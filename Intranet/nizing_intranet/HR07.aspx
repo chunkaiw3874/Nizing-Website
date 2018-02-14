@@ -64,9 +64,9 @@
                                     <asp:Label ID="lbl5" runat="server" Text='<%#Eval("年度考績備註") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="休假未休" HeaderStyle-CssClass="text-center">
+                            <asp:TemplateField HeaderText="特休未休" HeaderStyle-CssClass="text-center">
                                 <ItemTemplate>
-                                    <asp:Label ID="lbl6" runat="server" Text='<%#Eval("休假未休") %>'></asp:Label>
+                                    <asp:Label ID="lbl6" runat="server" Text='<%#Eval("特休未休") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="備註" HeaderStyle-CssClass="text-center">
@@ -94,17 +94,17 @@
                                     <asp:Label ID="lbl11" runat="server" Text='<%#Eval("年度獎懲備註") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="其他加項" HeaderStyle-CssClass="text-center">
+                            <asp:TemplateField HeaderText="其他項目" HeaderStyle-CssClass="text-center">
                                 <ItemTemplate>
-                                    <asp:Label ID="lbl12" runat="server" Text='<%#Eval("其他加項") %>'></asp:Label>
+                                    <asp:Label ID="lbl12" runat="server" Text='<%#Eval("其他項目") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="備註" HeaderStyle-CssClass="text-center">
                                 <ItemTemplate>
-                                    <asp:Label ID="lbl13" runat="server" Text='<%#Eval("其他加項備註") %>'></asp:Label>
+                                    <asp:Label ID="lbl13" runat="server" Text='<%#Eval("其他項目備註") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="其他減項" HeaderStyle-CssClass="text-center">
+<%--                            <asp:TemplateField HeaderText="其他減項" HeaderStyle-CssClass="text-center">
                                 <ItemTemplate>
                                     <asp:Label ID="lbl14" runat="server" Text='<%#Eval("其他減項") %>'></asp:Label>
                                 </ItemTemplate>
@@ -113,10 +113,10 @@
                                 <ItemTemplate>
                                     <asp:Label ID="lbl15" runat="server" Text='<%#Eval("其他減項備註") %>'></asp:Label>
                                 </ItemTemplate>
-                            </asp:TemplateField>
+                            </asp:TemplateField>--%>
                             <asp:TemplateField HeaderText="總金額" HeaderStyle-CssClass="text-center">
                                 <ItemTemplate>
-                                    <asp:Label ID="lbl16" runat="server" Text='<%#Eval("總金額") %>'></asp:Label>
+                                    <asp:Label ID="lbl14" runat="server" Text='<%#Eval("總金額") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>

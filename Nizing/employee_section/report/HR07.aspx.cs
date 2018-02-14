@@ -46,11 +46,11 @@ public partial class nizing_intranet_HR07 : System.Web.UI.Page
             conn.Open();
             string query = "SELECT A.[ASSESS_YEAR] [年度],A.ASSESSED_ID [員工編號],MV.MV002 [員工姓名]"
                         + " ,A.ASSESSMENT_BONUS [年度考績],A.ASSESSMENT_MEMO [年度考績備註]"
-                        + " ,A.UNUSEDDAYOFF_BONUS [休假未休],A.UNUSEDDAYOFF_MEMO [休假未休備註]"
+                        + " ,A.UNUSEDDAYOFF_BONUS [特休未休],A.UNUSEDDAYOFF_MEMO [休假未休備註]"
                         + " ,A.ATTENDANCE_BONUS [年度全勤],A.ATTENDANCE_MEMO [年度全勤備註]"
                         + " ,A.RNP_BONUS [年度獎懲],A.RNP_MEMO [年度獎懲備註]"
-                        + " ,A.OTHER_BONUS [其他加項],A.OTHER_BONUS_MEMO [其他加項備註]"
-                        + " ,A.OTHER_DEDUCTION [其他減項],A.OTHER_DEDUCTION_MEMO [其他減項備註]"
+                        + " ,A.OTHER_BONUS-COALESCE(A.OTHER_DEDUCTION,0) [其他項目],A.OTHER_BONUS_MEMO [其他項目備註]"
+                        //+ " ,A.OTHER_DEDUCTION [其他減項],A.OTHER_DEDUCTION_MEMO [其他減項備註]"
                         + " ,(A.ASSESSMENT_BONUS+A.UNUSEDDAYOFF_BONUS+A.ATTENDANCE_BONUS+A.RNP_BONUS+A.OTHER_BONUS-A.OTHER_DEDUCTION) [總金額]"
                         + " FROM HR360_ASSESSMENTBONUS_BONUS_A A"
                         + " LEFT JOIN NZ.dbo.CMSMV MV ON A.ASSESSED_ID=MV.MV001"
@@ -102,7 +102,7 @@ public partial class nizing_intranet_HR07 : System.Web.UI.Page
         int sum = 0;
         if (_gd.Rows.Count > 0)
         {
-            for (int i = 15; i < 16; i++)
+            for (int i = 13; i < 14; i++)
             {
                 sum = 0;
                 for (int j = 0; j < _gd.Rows.Count; j++)

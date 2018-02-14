@@ -17,7 +17,7 @@
             <asp:CheckBox ID="chkDisplay" runat="server" Text="顯示已離職員工" Checked="false" />
             <br />
             <br />
-            <asp:Label ID="lblError" runat="server" CssClass="error-message"></asp:Label>
+            <asp:Label ID="lblError" runat="server" CssClass="error-message"></asp:Label>            
         </div>
         <br />
         <div>
@@ -27,6 +27,8 @@
         <br />
         <div>
             <asp:Label ID="lblScope" runat="server"></asp:Label>
+            <br />
+            <asp:Label ID="lblEmpCount" runat="server" Text=""></asp:Label>
             <br />
             <asp:GridView ID="grdReport" runat="server" CssClass="grdResult">
             </asp:GridView>

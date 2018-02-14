@@ -1303,7 +1303,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 innerDiv = new HtmlGenericControl();
                 innerDiv.TagName = "div";
                 innerDiv.ID = outerDiv.ID + "_4";
-                innerDiv.Attributes["class"] = "col-xs-6 border";
+                innerDiv.Attributes["class"] = "col-xs-2 border";
                 outerDiv.Controls.Add(innerDiv);
                 TextBox txt = new TextBox();
                 txt.ID = "txtAssessmentQuestion" + (i + 1).ToString();

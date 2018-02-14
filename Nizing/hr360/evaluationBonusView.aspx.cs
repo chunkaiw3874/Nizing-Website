@@ -53,10 +53,10 @@ public partial class hr360_evaluationBonusView : System.Web.UI.Page
             lblAttendanceMemo.Text = dt.Rows[0][7].ToString().Trim();
             lblRnPBonus.Text = dt.Rows[0][8].ToString().Trim();
             lblRnPMemo.Text = dt.Rows[0][9].ToString().Trim();
-            lblOtherBonus.Text = dt.Rows[0][10].ToString().Trim();
+            lblOtherBonus.Text = (Convert.ToDouble(dt.Rows[0][10].ToString()) + Convert.ToDouble(dt.Rows[0][12].ToString())).ToString();
             lblOtherBonusMemo.Text = dt.Rows[0][11].ToString().Trim();
-            lblOtherDeduction.Text = dt.Rows[0][12].ToString().Trim();
-            lblOtherDeductionMemo.Text = dt.Rows[0][13].ToString().Trim();
+            //lblOtherDeduction.Text = dt.Rows[0][12].ToString().Trim();
+            //lblOtherDeductionMemo.Text = dt.Rows[0][13].ToString().Trim();
             calculateTotal();
         }
 
@@ -70,12 +70,12 @@ public partial class hr360_evaluationBonusView : System.Web.UI.Page
         double attendanceBonus;
         double rnpBonus;
         double otherBonus;
-        double otherDeduction;
+        //double otherDeduction;
 
         if (double.TryParse(lblAssessmentBonus.Text, out assessmentBonus) && double.TryParse(lblUnusedDayOffBonus.Text, out unusedDayOffBonus) && double.TryParse(lblAttendanceBonus.Text, out attendanceBonus)
-            && double.TryParse(lblRnPBonus.Text, out rnpBonus) && double.TryParse(lblOtherBonus.Text, out otherBonus) && double.TryParse(lblOtherDeduction.Text, out otherDeduction))
+            && double.TryParse(lblRnPBonus.Text, out rnpBonus) && double.TryParse(lblOtherBonus.Text, out otherBonus))
         {
-            lblFinalBonus.Text = (assessmentBonus + unusedDayOffBonus + attendanceBonus + rnpBonus + otherBonus - otherDeduction).ToString();
+            lblFinalBonus.Text = (assessmentBonus + unusedDayOffBonus + attendanceBonus + rnpBonus + otherBonus).ToString();
         }
         else
         {

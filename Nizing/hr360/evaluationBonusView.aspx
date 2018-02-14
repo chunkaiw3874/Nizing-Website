@@ -37,7 +37,7 @@
                          </tr>                         
                          <tr>
                              <td>
-                                 休假未休
+                                 特休未休
                              </td>
                              <td>
                                  <asp:Label ID="lblUnusedDayOffBonus" runat="server" Text=""></asp:Label>
@@ -70,7 +70,7 @@
                          </tr>                         
                          <tr>
                              <td>
-                                 其他加項
+                                 其他項目
                              </td>
                              <td>
                                  <asp:Label ID="lblOtherBonus" runat="server" Text=""></asp:Label>
@@ -79,7 +79,7 @@
                                  <asp:Label ID="lblOtherBonusMemo" runat="server" Text=""></asp:Label>
                              </td>
                          </tr>                         
-                         <tr>
+                         <%--<tr>
                              <td>
                                  其他減項
                              </td>
@@ -90,7 +90,7 @@
                                  <asp:Label ID="lblOtherDeductionMemo" runat="server" Text=""></asp:Label>
                              </td>
                          </tr>                         
-                         <tr>
+ --%>                        <tr>
                              <td>
                                  總金額
                              </td>

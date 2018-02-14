@@ -103,7 +103,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-3 border">
-                    休假未修:
+                    特休未修:
                 </div>
                 <div class="col-xs-3 border">
                     <asp:TextBox ID="txtUnusedDayOffBonus" runat="server" CssClass="form-control" placeholder="金額"></asp:TextBox>
@@ -136,7 +136,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-3 border">
-                    其他加項:
+                    其他項目:
                 </div>
                 <div class="col-xs-3 border">
                     <asp:TextBox ID="txtOtherBonus" runat="server" CssClass="form-control" placeholder="金額"></asp:TextBox>
@@ -145,7 +145,7 @@
                     <asp:TextBox ID="txtOtherBonusMemo" runat="server" CssClass="form-control" placeholder="備註"></asp:TextBox>
                 </div>
             </div>
-            <div class="row">
+<%--            <div class="row">
                 <div class="col-xs-3 border">
                     其他減項:
                 </div>
@@ -155,7 +155,7 @@
                 <div class="col-xs-3 border">
                     <asp:TextBox ID="txtOtherDeductionMemo" runat="server" CssClass="form-control" placeholder="備註"></asp:TextBox>
                 </div>
-            </div>
+            </div>--%>
             <div class="row">
                 <div class="col-xs-3 border">
                     總金額:

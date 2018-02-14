@@ -26,11 +26,13 @@ public partial class WorkDuration : System.Web.UI.Page
         if (string.IsNullOrEmpty(txtEndDate.Text))
         {
             lblScope.Text = "";
+            lblEmpCount.Text = "";
             lblError.Text = "結束日期不可為空白";
         }
         else if (CheckDate(txtEndDate.Text)==false)
         {
             lblScope.Text = "";
+            lblEmpCount.Text = "";
             lblError.Text = "請使用正確的日期格式YYYYMMDD";
         }
         else
@@ -38,6 +40,7 @@ public partial class WorkDuration : System.Web.UI.Page
             lblError.Text = "";
             lblScope.Text = "員工年資 - 截至" + txtEndDate.Text;
             SqlSearch(GetQuery());
+            lblEmpCount.Text = "報表總人數" + (grdReport.Rows.Count - 1).ToString() + "人";
         }
     }
 
@@ -63,13 +66,13 @@ public partial class WorkDuration : System.Web.UI.Page
 
         if (chkDisplay.Checked == false)
         {
-            query = "SELECT CMSMV.MV002 員工姓名, CMSMV.MV021 到職日, CMSMV.MV022 離職日, CONVERT(DECIMAL(5,2), CONVERT(DECIMAL(7,2), DATEDIFF(DAY, CMSMV.MV021, N'" + txtEndDate.Text + "'))/365) 年資"
+            query = "SELECT CMSMV.MV001 員工ID,CMSMV.MV002 員工姓名, CMSMV.MV021 到職日, CMSMV.MV022 離職日, CONVERT(DECIMAL(5,2), CONVERT(DECIMAL(7,2), DATEDIFF(DAY, CMSMV.MV021, N'" + txtEndDate.Text + "'))/365) 年資"
                     + " FROM CMSMV"
                     + " WHERE CMSMV.MV022 = N''";
         }
         else
         {
-            query = "SELECT CMSMV.MV002 員工姓名, CMSMV.MV021 到職日, CMSMV.MV022 離職日"
+            query = "SELECT CMSMV.MV001 員工ID,CMSMV.MV002 員工姓名, CMSMV.MV021 到職日, CMSMV.MV022 離職日"
                     + " ,CASE"
                     + " WHEN CMSMV.MV022 = N'' THEN CONVERT(DECIMAL(5,2), CONVERT(DECIMAL(7,2), DATEDIFF(DAY, CMSMV.MV021, N'" + txtEndDate.Text + "'))/365)"
                     + " WHEN CMSMV.MV022 < N'" + txtEndDate.Text + "' THEN CONVERT(DECIMAL(5,2), CONVERT(DECIMAL(7,2), DATEDIFF(DAY, CMSMV.MV021, CMSMV.MV022))/365)"

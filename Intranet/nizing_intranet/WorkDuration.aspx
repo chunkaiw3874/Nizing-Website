@@ -28,6 +28,8 @@
         <div>
             <asp:Label ID="lblScope" runat="server"></asp:Label>
             <br />
+            <asp:Label ID="lblEmpCount" runat="server" Text=""></asp:Label>
+            <br />
             <asp:GridView ID="grdReport" runat="server" CssClass="grdResult">
             </asp:GridView>
         </div>
