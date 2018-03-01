@@ -24,9 +24,9 @@ public partial class hr360_mobile_main : System.Web.UI.Page
     {
         LoadNewsFromDB();
         jsonAnnouncementData = ConvertDtToString(dtAnnouncementData);
-        loadBlob();
+        LoadBlob();
     }
-    private void loadBlob()
+    private void LoadBlob()
     {
         using (SqlConnection conn = new SqlConnection(ERP2connectionString))
         {
@@ -57,15 +57,14 @@ public partial class hr360_mobile_main : System.Web.UI.Page
                         + " ,ANNOUNCE.[BODY]"
                         + " FROM HR360_COMPANYANNOUNCEMENT ANNOUNCE"
                         + " LEFT JOIN NZ.dbo.CMSMV MVCREATOR ON ANNOUNCE.[CREATOR] = MVCREATOR.MV001"
-                        + " LEFT JOIN NZ.dbo.CMSMV MVEDITOR ON ANNOUNCE.LAST_EDITOR = MVEDITOR.MV001"
-                        + " ORDER BY [CREATE_TIME] DESC, [ID] DESC";            
+                        + " LEFT JOIN NZ.dbo.CMSMV MVEDITOR ON ANNOUNCE.LAST_EDITOR = MVEDITOR.MV001";            
             SqlCommand cmd = new SqlCommand(query, conn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dtAnnouncementData);
         }
         return dtAnnouncementData;
     }
-    public string ConvertDtToString(DataTable dt)
+    private string ConvertDtToString(DataTable dt)
     {
         JavaScriptSerializer serializer = new JavaScriptSerializer();
         List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
@@ -89,5 +88,11 @@ public partial class hr360_mobile_main : System.Web.UI.Page
             rows.Add(row);
         }
         return serializer.Serialize(rows);
+    }
+    private DataTable LoadDayoffFromDB()
+    {
+        DataTable dt = new DataTable();
+        
+        return dt;
     }
 }

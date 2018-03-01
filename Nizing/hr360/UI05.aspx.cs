@@ -396,9 +396,9 @@ public partial class hr360_UI05 : System.Web.UI.Page
             }
         }
         //edit set lookup to non visible before evaluation is complete
-        divPlaceholder.Visible = true;
-        divAssessmentLookup.Visible = false;
-        divBonusLookup.Visible = false;
+        //divPlaceholder.Visible = true;
+        //divAssessmentLookup.Visible = false;
+        //divBonusLookup.Visible = false;
     }
     /// <summary>
     /// 讀取只有特定人有權限看的評核表清單

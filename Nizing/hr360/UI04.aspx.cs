@@ -1372,8 +1372,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                                 + " AND MV.MV001<>@ID"
                                 //+ " AND MK.MK001='A20'"           
                                 //+ " AND HIER.[RANK]=7";
-                                + "AND MV.MV001='0125'" //NEED FIX: 強制將假單丟給ABBIE審核人事部分，等ABBIE正式取代DORIS後改回
-                                + "AND MK.MK001='A21'";
+                                + " AND MV.MV001='0125'" //NEED FIX: 強制將假單丟給ABBIE審核人事部分，等ABBIE正式取代DORIS後改回
+                                + " AND MK.MK001='A21'";
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@ID", applicantID);
                     DataTable dt = new DataTable();

@@ -5,22 +5,22 @@
         //load news table from codebehind (converted to json)
         var newsTable = <%=jsonAnnouncementData%>;
         var newsLoaded = 0;
-        var imgBlob=Convert.toBase64String(<%=blob%>);
+        //var imgBlob=Convert.toBase64String(<%=blob%>);
         //load json to textbox
         $(document).ready(function () {
             var wrap = document.getElementById('<%=news_list.ClientID%>');
+            var offsetHeight = document.getElementById('<%=day_off_window.ClientID%>').offsetHeight;
             var contentHeight = wrap.offsetHeight;
-            var win = $(window).height;
+            var win = $(window.top).height()-offsetHeight;
             do{
-                LoadNews(1);
-                
-            }
-            while(contentHeight<win);
+                LoadNews(1);   
+                contentHeight=wrap.offsetHeight;
+            }while(contentHeight<win);
             autosize($('textarea'));
             
-            var image = document.createElement('image');
-            image.src='data:image/jpeg;base64,'+Base64.encode(blob);
-            $('[id$=news_list]').append(image);
+            //var image = document.createElement('image');
+            //image.src='data:image/jpeg;base64,'+Base64.encode(blob);
+            //$('[id$=news_list]').append(image);
         });
         function LoadNews(numbersToLoad){
             for(var i=newsLoaded;i<newsLoaded+numbersToLoad;i++){
@@ -79,7 +79,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="container">
+    <div id="day_off_window" runat="server" class="container">
         <div class="panel-group" id="accordion">
             <div class="panel-info">
                 <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#dayoff_remain">
@@ -90,13 +90,21 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-sm-3">特休</div>
-                            <div class="col-sm-3">上半季特休剩餘</div>
-                            <div class="col-sm-3">下半季特休剩餘</div>
-                            <div class="col-sm-3">kakakalalalalalala</div>
+                            <div class="col-sm-3">
+                                上半季特休剩餘<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                            </div>
+                            <div class="col-sm-3">
+                                下半季特休剩餘<asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+                            </div>
+                            <div class="col-sm-3">
+                                <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-3">補休</div>
-                            <div class="col-sm-3">剩餘時數</div>
+                            <div class="col-sm-3">
+                                剩餘時數<asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -16,23 +18,68 @@ public partial class hr360_mobile_login : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (!IsPostBack)
+        {
+            txtUsername.Text = "";
+            txtPassword.Text = "";
+            lblLoginMessage.Text = "";
+        }
     }
     protected void btnLogin_Click(object sender, EventArgs e)
     {
-        
+        if (isValid(txtUsername.Text, txtPassword.Text))
+        {
+            lblLoginMessage.Text = "成功登入";
+            lblLoginMessage.ForeColor = Color.Green;
+            Response.Redirect("main.aspx");            
+        }
     }
 
     protected bool isValid(string username, string password)
     {
         bool match = false;
-
+        DataTable dt = new DataTable();
         using (SqlConnection conn = new SqlConnection(erp2ConnectionString))
         {
             conn.Open();
-
+            string query = "SELECT [PASSWORD],[DISABLED],[ID],[ERP_ID]"
+                        + " FROM HR360_BI01_A"
+                        + " WHERE [ID]=@ID";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@ID", txtUsername.Text.ToUpper());
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
         }
-
+        if (dt.Rows.Count == 0)
+        {
+            lblLoginMessage.Text = "帳號錯誤，請輸入正確帳號";
+            txtPassword.Text = "";
+            lblLoginMessage.ForeColor = Color.Red;
+            txtUsername.Focus();
+            match = false;
+        }
+        else if (dt.Rows[0]["DISABLED"].ToString() == "1")
+        {
+            lblLoginMessage.Text = "帳號已被停用，請聯絡管理員";
+            txtPassword.Text = "";
+            lblLoginMessage.ForeColor = Color.Red;
+            txtUsername.Focus();
+            match = false;
+        }
+        else if (Decrypt(dt.Rows[0]["PASSWORD"].ToString()) != txtPassword.Text)
+        {
+            lblLoginMessage.Text = "密碼不正確";
+            txtPassword.Text = "";
+            lblLoginMessage.ForeColor = Color.Red;
+            txtUsername.Focus();
+            match = false;
+        }
+        else if (Decrypt(dt.Rows[0]["PASSWORD"].ToString()) == txtPassword.Text)
+        {
+            match = true;
+            Session["user_id"] = dt.Rows[0]["ID"].ToString();
+            Session["erp_id"] = dt.Rows[0]["ERP_ID"].ToString();
+        }
         return match;
     }
     public string Decrypt(string cipherText)
