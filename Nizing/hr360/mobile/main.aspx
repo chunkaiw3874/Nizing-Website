@@ -79,6 +79,13 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div class="container">
+        <div>
+            <h3>
+                <asp:Label ID="lblName" runat="server" Text="Label"></asp:Label>，您好
+            </h3>
+        </div>
+    </div>
     <div id="day_off_window" runat="server" class="container">
         <div class="panel-group" id="accordion">
             <div class="panel-info">
@@ -91,19 +98,19 @@
                         <div class="row">
                             <div class="col-sm-3">特休</div>
                             <div class="col-sm-3">
-                                上半季特休剩餘<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                                <asp:Label ID="lblFirstPartDayOff" runat="server" Text=""></asp:Label>
                             </div>
                             <div class="col-sm-3">
-                                下半季特休剩餘<asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+                                <asp:Label ID="lblSecondPartDayOff" runat="server" Text=""></asp:Label>
                             </div>
                             <div class="col-sm-3">
-                                <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
+                                <asp:Label ID="lblDayOffMemo" runat="server" Text="" ForeColor="Red" Font-Size="Smaller"></asp:Label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-3">補休</div>
                             <div class="col-sm-3">
-                                剩餘時數<asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
+                                <asp:Label ID="lblMakeupDayOff" runat="server" Text=""></asp:Label>
                             </div>
                         </div>
                     </div>

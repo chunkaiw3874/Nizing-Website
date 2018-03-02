@@ -93,13 +93,6 @@ public partial class main : System.Web.UI.Page
                         //為0010特別做計算，因為0010一天是8.5小時，其他人一天為8小時
                         if (Session["erp_id"].ToString() == "0010")
                         {
-                            //Old way, uses ERP data for Annual Leave amount, obsolete since 2017.09.04 after government changed method to 歷年制
-                            //SqlCommand cmdSelect = new SqlCommand("SELECT"
-                            //                                + " CONVERT(NVARCHAR,(SELECT PALTK.TK003*8.5 FROM PALTK WHERE PALTK.TK001=@ID AND PALTK.TK002=YEAR(GETDATE()))"
-                            //                                + " -COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0))"
-                            //                                + " FROM PALTL"
-                            //                                + " WHERE PALTL.TL001=@ID AND PALTL.TL002=YEAR(GETDATE()) AND PALTL.TL004='03'", conn);
-                            //Comment part is the new way, replace the old way above
                             string query = "SELECT COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)"
                                         + " FROM PALTL"
                                         + " WHERE PALTL.TL001=@ID"
@@ -129,13 +122,6 @@ public partial class main : System.Web.UI.Page
                         }
                         else
                         {
-                            //Old way, uses ERP data for Annual Leave amount, obsolete since 2017.09.04 after government changed method to 歷年制
-                            //SqlCommand cmdSelect = new SqlCommand("SELECT"
-                            //                                + " COALESCE(CONVERT(NVARCHAR,(SELECT PALTK.TK003*8 FROM PALTK WHERE PALTK.TK001=@ID AND PALTK.TK002=YEAR(GETDATE()))"
-                            //                                + " -COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)), N'N/A')"
-                            //                                + " FROM PALTL"
-                            //                                + " WHERE PALTL.TL001=@ID AND PALTL.TL002=YEAR(GETDATE()) AND PALTL.TL004='03'", conn);
-                            //Comment part is the new way, replace the old way above
                             string query = "SELECT COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)"
                                         + " FROM PALTL"
                                         + " WHERE PALTL.TL001=@ID"

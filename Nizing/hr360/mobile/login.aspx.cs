@@ -20,6 +20,8 @@ public partial class hr360_mobile_login : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            Session["user_id"] = null;
+            Session["erp_id"] = null;
             txtUsername.Text = "";
             txtPassword.Text = "";
             lblLoginMessage.Text = "";
