@@ -211,6 +211,23 @@ public partial class hr360_mobile_main : System.Web.UI.Page
                                                 + " WHERE PALTL.TL001=@ID AND PALTL.TL002=YEAR(GETDATE()) AND PALTL.TL004='02'", conn);
             cmdSelectMakeupDayOff.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
             lblMakeupDayOff.Text = "剩餘: " + (string)cmdSelectMakeupDayOff.ExecuteScalar() + "小時";
+
+            //調薪通知
+            SqlCommand cmdSalaryAdj = new SqlCommand("SELECT PALTD.TD001"
+                                                        + " FROM PALTD"
+                                                        + " WHERE PALTD.TD008=N'Y' AND PALTD.TD001=@ID AND PALTD.TD002<@FIRSTDAY AND PALTD.TD002>@LASTDAY", conn);
+            cmdSalaryAdj.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+            cmdSalaryAdj.Parameters.AddWithValue("@FIRSTDAY", DateTime.Today.AddDays(-4).ToString("yyyyMMdd"));
+            cmdSalaryAdj.Parameters.AddWithValue("@LASTDAY", DateTime.Today.AddMonths(-1).AddDays(-5).ToString("yyyyMMdd"));
+            SqlDataReader reader = cmdSalaryAdj.ExecuteReader();
+            if (reader.HasRows)
+            {
+                hlSalaryNotification.Visible = true;
+            }
+            else
+            {
+                hlSalaryNotification.Visible = false;
+            }
         }
     }
     private void LoadBlob()

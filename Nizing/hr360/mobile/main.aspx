@@ -80,10 +80,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container">
-        <div>
-            <h3>
-                <asp:Label ID="lblName" runat="server" Text="Label"></asp:Label>，您好
-            </h3>
+        <div class="row">
+            <div class="col-sm-12">
+                <h5>
+                    <asp:Label ID="lblName" runat="server" Text="Label"></asp:Label>，您好，<asp:HyperLink ID="hlSalaryNotification" runat="server" NavigateUrl="~/hr360/user_report/salary_change_notification.aspx">您有調薪通知!</asp:HyperLink>
+                </h5>
+                
+            </div>
         </div>
     </div>
     <div id="day_off_window" runat="server" class="container">
@@ -119,8 +122,11 @@
         </div>
     </div>
     <div class="container">
+        <div></div>
+    </div>
+    <div class="container">
         <div>
-            <h2>最新公告</h2>
+            <h2>公告</h2>
         </div>
         <div id="news_list" class="infinite-scroll" runat="server">
         </div>
