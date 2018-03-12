@@ -89,6 +89,15 @@ namespace NIZING_BACKEND_Data_Config
                             frmOQS.Show();
                             this.Hide();
                             break;
+                        case "HR360":
+                            var frmHR360 = new frmHR360_Main();
+                            frmHR360.Location = this.Location;
+                            frmHR360.StartPosition = FormStartPosition.Manual;
+                            frmHR360.FormClosing += delegate { Application.Exit(); };
+                            frmHR360.UserName = this.UserName;
+                            frmHR360.Show();
+                            this.Hide();
+                            break;
                         default:
                             break;
                     }
