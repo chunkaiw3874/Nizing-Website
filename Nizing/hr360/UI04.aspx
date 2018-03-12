@@ -130,98 +130,6 @@
             </div>
             <hr />
         </div>--%>
-        <div class="row form-group">
-            <div class="col-xs-12">
-                <span class="label label-info" id="btnSearchVisibility" style="cursor: pointer; font-size: 20px;">查詢歷史假單</span>
-                <asp:HiddenField ID="hdnIsSearchFieldVisible" runat="server" />
-            </div>
-        </div>
-        <div id="search_section">
-            <div class="row form-group">
-                <div class="col-xs-3">
-                    <asp:DropDownList ID="ddlSearch_Parameter_ApplicantID" runat="server" CssClass="form-control"></asp:DropDownList>
-                </div>
-                <div class="col-xs-2">
-                    <asp:TextBox ID="txtSearch_Parameter_StartDate" runat="server" CssClass="form-control datepicker" placeholder="查詢起始日期"></asp:TextBox>
-                </div>
-                <div class="col-xs-2">
-                    <asp:TextBox ID="txtSearch_Parameter_EndDate" runat="server" CssClass="form-control datepicker" placeholder="查詢結束日期"></asp:TextBox>
-                </div>
-                <div class="col-xs-3">
-                    <asp:DropDownList ID="ddlSearch_Parameter_ApplicationStatus" runat="server" CssClass="form-control"></asp:DropDownList>
-                </div>
-                <div class="col-xs-2">
-                    <asp:Button ID="btnSearchSubmit" runat="server" Text="查詢" CssClass="btn btn-success" OnClick="btnSearchSubmit_Click" />
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-xs-12">
-                    <asp:GridView ID="gvSearchResult" runat="server" AutoGenerateColumns="false" CssClass="table table-striped" 
-                        OnRowDataBound="gvSearchResult_RowDataBound" OnPageIndexChanging="gvSearchResult_PageIndexChanging" 
-                        AllowPaging="True" PageSize="5" PagerSettings-Position="Top" PagerSettings-Mode="NumericFirstLast" PagerSettings-PageButtonCount="4"
-                        PagerSettings-FirstPageText="首頁" PagerSettings-LastPageText="尾頁">
-                        <Columns>
-                            <asp:TemplateField HeaderText="假單單號" ItemStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <asp:Label ID="lblAppId" runat="server" Text='<%#Eval("APPLICATION_ID") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="申請時間" ItemStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label1" runat="server" Text='<%#Eval("APPLICATION_DATE") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="申請者" ItemStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label2" runat="server" Text='<%#Eval("APPLICANT_NAME") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="假別" ItemStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label3" runat="server" Text='<%#Eval("DAYOFF_NAME") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="請假開始時間" ItemStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label4" runat="server" Text='<%#Eval("DAYOFF_START_TIME") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="請假結束時間" ItemStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label5" runat="server" Text='<%#Eval("DAYOFF_END_TIME") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="請假總量" ItemStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label6" runat="server" Text='<%#Eval("DAYOFF_TOTAL_TIME") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="代理人" ItemStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label7" runat="server" Text='<%#Eval("FUNC_SUB_NAME") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="請假原因" ItemStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label8" runat="server" Text='<%#Eval("REASON") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="假單狀態" ItemStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <asp:Label ID="lblAppStatus" runat="server" Text='<%#Eval("STATUS") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="人事退回" ItemStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <asp:Button ID="btnSearch_Deny" runat="server" Text="退回" CssClass="btn btn-danger" OnClientClick="javascript:return confirmDeny();" OnClick="btnDeny_Click" />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        </Columns>
-                    </asp:GridView>
-                </div>
-            </div>
-        </div>
-        <hr />
         <div id="application_section">
             <%--<div class="row form-group">
                 <div class="col-xs-12">
@@ -369,6 +277,98 @@
                             </table>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row form-group">
+            <div class="col-xs-12">
+                <span class="label label-info" id="btnSearchVisibility" style="cursor: pointer; font-size: 20px;">查詢歷史假單</span>
+                <asp:HiddenField ID="hdnIsSearchFieldVisible" runat="server" />
+            </div>
+        </div>
+        <div id="search_section">
+            <div class="row form-group">
+                <div class="col-xs-3">
+                    <asp:DropDownList ID="ddlSearch_Parameter_ApplicantID" runat="server" CssClass="form-control"></asp:DropDownList>
+                </div>
+                <div class="col-xs-2">
+                    <asp:TextBox ID="txtSearch_Parameter_StartDate" runat="server" CssClass="form-control datepicker" placeholder="查詢起始日期"></asp:TextBox>
+                </div>
+                <div class="col-xs-2">
+                    <asp:TextBox ID="txtSearch_Parameter_EndDate" runat="server" CssClass="form-control datepicker" placeholder="查詢結束日期"></asp:TextBox>
+                </div>
+                <div class="col-xs-3">
+                    <asp:DropDownList ID="ddlSearch_Parameter_ApplicationStatus" runat="server" CssClass="form-control"></asp:DropDownList>
+                </div>
+                <div class="col-xs-2">
+                    <asp:Button ID="btnSearchSubmit" runat="server" Text="查詢" CssClass="btn btn-success" OnClick="btnSearchSubmit_Click" />
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <asp:GridView ID="gvSearchResult" runat="server" AutoGenerateColumns="false" CssClass="table table-striped" 
+                        OnRowDataBound="gvSearchResult_RowDataBound" OnPageIndexChanging="gvSearchResult_PageIndexChanging" 
+                        AllowPaging="True" PageSize="5" PagerSettings-Position="Top" PagerSettings-Mode="NumericFirstLast" PagerSettings-PageButtonCount="4"
+                        PagerSettings-FirstPageText="首頁" PagerSettings-LastPageText="尾頁">
+                        <Columns>
+                            <asp:TemplateField HeaderText="假單單號" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblAppId" runat="server" Text='<%#Eval("APPLICATION_ID") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="申請時間" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text='<%#Eval("APPLICATION_DATE") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="申請者" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label2" runat="server" Text='<%#Eval("APPLICANT_NAME") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="假別" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label3" runat="server" Text='<%#Eval("DAYOFF_NAME") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="請假開始時間" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label4" runat="server" Text='<%#Eval("DAYOFF_START_TIME") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="請假結束時間" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label5" runat="server" Text='<%#Eval("DAYOFF_END_TIME") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="請假總量" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label6" runat="server" Text='<%#Eval("DAYOFF_TOTAL_TIME") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="代理人" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label7" runat="server" Text='<%#Eval("FUNC_SUB_NAME") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="請假原因" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label8" runat="server" Text='<%#Eval("REASON") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="假單狀態" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblAppStatus" runat="server" Text='<%#Eval("STATUS") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="人事退回" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Button ID="btnSearch_Deny" runat="server" Text="退回" CssClass="btn btn-danger" OnClientClick="javascript:return confirmDeny();" OnClick="btnDeny_Click" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
                 </div>
             </div>
         </div>
