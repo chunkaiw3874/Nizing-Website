@@ -15,7 +15,7 @@ using System.Web.UI.WebControls;
  如果HR有人事變更，於本頁搜尋HR做更正!!!
  */
 /*
- * 2017.09.19 人事審核部分，現在強制丟給ABBIE，等ABBIE正式取代DORIS後須改回
+ * 2017.09.19 人事審核部分，現在強制丟給ABBIE，如升為人事主任後改回
  * PS: 搜尋"NEED FIX" for code
  */
 public partial class hr360_UI04 : System.Web.UI.Page
@@ -1363,7 +1363,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                 {
                     conn.Open();
-                    //簽核限制:人事主任 RANK 7
+                    //簽核限制:人事主任 RANK 7 (2018.03.12 現行丟給ABBIE，因職位未到人事主任，故用ERP ID強制丟給ABBIE)
                     string query = "SELECT MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
                                 + " FROM NZ.dbo.CMSMV MV"
                                 + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
@@ -1372,7 +1372,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                                 + " AND MV.MV001<>@ID"
                                 //+ " AND MK.MK001='A20'"           
                                 //+ " AND HIER.[RANK]=7";
-                                + " AND MV.MV001='0125'" //NEED FIX: 強制將假單丟給ABBIE審核人事部分，等ABBIE正式取代DORIS後改回
+                                + " AND MV.MV001='0125'" //NEED FIX: 強制將假單丟給ABBIE審核人事部分，如升為人事主任後改回
                                 + " AND MK.MK001='A21'";
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@ID", applicantID);
@@ -1613,7 +1613,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// </summary>
     protected void SearchSection_Init_Load()
     {
-        hdnIsSearchFieldVisible.Value = "0";
+        hdnIsSearchFieldVisible.Value = "1";
         string query = "SELECT MV.MV001+' '+MV.MV002 'display',MV.MV001 'value'"
                     + " FROM CMSMV MV"
                     + " WHERE MV.MV022=''"
@@ -1621,7 +1621,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     + " AND MV.MV001<>'0006'"
                     + " AND MV.MV001<>'0007'"
                     + " AND MV.MV001<>'0098'";  //這些人不會請假
-        if (Session["erp_id"].ToString() != "0125"
+        if (Session["erp_id"].ToString() != "0125"      //HR
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
             && Session["erp_id"].ToString() != "0007") //管理部跟HR可以查詢全部人的歷史資料
@@ -1642,7 +1642,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             ddlSearch_Parameter_ApplicantID.DataSource = dt;
             ddlSearch_Parameter_ApplicantID.DataBind();
         }
-        if (!(Session["erp_id"].ToString() != "0125"   //Abbie replaces Doris as HR
+        if (!(Session["erp_id"].ToString() != "0125"   //HR
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
             && Session["erp_id"].ToString() != "0007")) //管理部跟HR可以查詢全部人的歷史資料
@@ -2055,16 +2055,51 @@ public partial class hr360_UI04 : System.Web.UI.Page
             + " LEFT JOIN NZ.dbo.CMSMV MV ON APP.APPLICANT_ID=MV.MV001"
             + " LEFT JOIN NZ.dbo.CMSMV MV2 ON APP.FUNCTIONAL_SUBSTITUTE_ID=MV2.MV001"
             + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPLICATION_STATUS [STATUS] ON APP.APPLICATION_STATUS_ID=[STATUS].ID";
-        condition = " WHERE APP.DAYOFF_START_TIME BETWEEN @STARTTIME AND @ENDTIME";
-        if (ddlSearch_Parameter_ApplicantID.SelectedValue != "ALL")
+        if (!String.IsNullOrWhiteSpace(txtSearch_Parameter_StartDate.Text) && String.IsNullOrWhiteSpace(txtSearch_Parameter_EndDate.Text))
         {
-            condition += " AND APP.APPLICANT_ID=@APPLICANT_ID";
+            condition = " WHERE APP.DAYOFF_START_TIME >= @STARTTIME";
         }
-        if (ddlSearch_Parameter_ApplicationStatus.SelectedValue != "ALL")
+        else if (!String.IsNullOrWhiteSpace(txtSearch_Parameter_EndDate.Text) && String.IsNullOrWhiteSpace(txtSearch_Parameter_StartDate.Text))
         {
-            condition += " AND APP.APPLICATION_STATUS_ID=@STATUS_ID";
+            condition = " WHERE APP.DAYOFF_START_TIME <= @ENDTIME";
         }
-        order = " ORDER BY APP.APPLICATION_ID";
+        else if (!String.IsNullOrWhiteSpace(txtSearch_Parameter_StartDate.Text) && !String.IsNullOrWhiteSpace(txtSearch_Parameter_EndDate.Text))
+        {
+            condition = " WHERE APP.DAYOFF_START_TIME BETWEEN @STARTTIME AND @ENDTIME";
+        }
+        else if (String.IsNullOrWhiteSpace(txtSearch_Parameter_StartDate.Text) && String.IsNullOrWhiteSpace(txtSearch_Parameter_EndDate.Text))
+        {
+            condition = "";
+        }
+        if (String.IsNullOrWhiteSpace(txtSearch_Parameter_StartDate.Text) && String.IsNullOrWhiteSpace(txtSearch_Parameter_EndDate.Text))
+        {
+            if (ddlSearch_Parameter_ApplicantID.SelectedValue != "ALL")
+            {
+                condition += " WHERE APP.APPLICANT_ID=@APPLICANT_ID";
+            }
+        }
+        else
+        {
+            if (ddlSearch_Parameter_ApplicantID.SelectedValue != "ALL")
+            {
+                condition += " AND APP.APPLICANT_ID=@APPLICANT_ID";
+            }
+        }
+        if (String.IsNullOrWhiteSpace(txtSearch_Parameter_StartDate.Text) && String.IsNullOrWhiteSpace(txtSearch_Parameter_EndDate.Text) && ddlSearch_Parameter_ApplicantID.SelectedValue == "ALL")
+        {
+            if (ddlSearch_Parameter_ApplicationStatus.SelectedValue != "ALL")
+            {
+                condition += " WHERE APP.APPLICATION_STATUS_ID=@STATUS_ID";
+            }
+        }
+        else
+        {
+            if (ddlSearch_Parameter_ApplicationStatus.SelectedValue != "ALL")
+            {
+                condition += " AND APP.APPLICATION_STATUS_ID=@STATUS_ID";
+            }
+        }
+        order = " ORDER BY APP.APPLICATION_ID DESC";
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             conn.Open();
