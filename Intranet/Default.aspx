@@ -123,6 +123,7 @@
                     <asp:ImageButton ID="ImageButton13" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/HR-4.png" PostBackUrl="~/nizing_intranet/WorkDuration.aspx" /></li>
                 <li>
                     <asp:ImageButton ID="ImageButton7" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/HR-5.png" PostBackUrl="~/nizing_intranet/HR05.aspx" /></li>
+                <li><a href="nizing_intranet/HR09.aspx">部門人力配置表</a></li>
                 <li><a href="nizing_intranet/HR04.aspx">面試表</a></li>
                 <li><a href="nizing_intranet/HR06.aspx">Chrissy's Stuff</a></li>
                 <li><a href="nizing_intranet/HR07.aspx">Annual Report</a></li>
