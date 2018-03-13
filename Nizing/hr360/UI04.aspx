@@ -34,7 +34,7 @@
             var isPostBack = $('#<%=hdnIsPostBack.ClientID%>').val();
             if (isPostBack == '0') {
                 $('#DayOffApp').hide();
-                $('#search_section').hide();
+                $('#search_section').show();
             }
             else {
                     if ($('#<%=hdnIsDayOffAppVisible.ClientID%>').val() == '1') {
@@ -309,7 +309,7 @@
                 <div class="col-xs-12">
                     <asp:GridView ID="gvSearchResult" runat="server" AutoGenerateColumns="false" CssClass="table table-striped" 
                         OnRowDataBound="gvSearchResult_RowDataBound" OnPageIndexChanging="gvSearchResult_PageIndexChanging" 
-                        AllowPaging="True" PageSize="10" PagerSettings-Position="Top" PagerSettings-Mode="NumericFirstLast" PagerSettings-PageButtonCount="4"
+                        AllowPaging="True" PageSize="10" PagerSettings-Position="Top" PagerSettings-Mode="NumericFirstLast"
                         PagerSettings-FirstPageText="首頁" PagerSettings-LastPageText="尾頁">
                         <Columns>
                             <asp:TemplateField HeaderText="假單單號" ItemStyle-HorizontalAlign="Center">
@@ -322,39 +322,44 @@
                                     <asp:Label ID="Label1" runat="server" Text='<%#Eval("APPLICATION_DATE") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
+                            <asp:TemplateField HeaderText="最後動作時間" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label2" runat="server" Text='<%#Eval("LAST_ACTION_TIME") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="申請者" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:Label ID="Label2" runat="server" Text='<%#Eval("APPLICANT_NAME") %>'></asp:Label>
+                                    <asp:Label ID="Label3" runat="server" Text='<%#Eval("APPLICANT_NAME") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="假別" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:Label ID="Label3" runat="server" Text='<%#Eval("DAYOFF_NAME") %>'></asp:Label>
+                                    <asp:Label ID="Label4" runat="server" Text='<%#Eval("DAYOFF_NAME") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="請假開始時間" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:Label ID="Label4" runat="server" Text='<%#Eval("DAYOFF_START_TIME") %>'></asp:Label>
+                                    <asp:Label ID="Label5" runat="server" Text='<%#Eval("DAYOFF_START_TIME") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="請假結束時間" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:Label ID="Label5" runat="server" Text='<%#Eval("DAYOFF_END_TIME") %>'></asp:Label>
+                                    <asp:Label ID="Label6" runat="server" Text='<%#Eval("DAYOFF_END_TIME") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="請假總量" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:Label ID="Label6" runat="server" Text='<%#Eval("DAYOFF_TOTAL_TIME") %>'></asp:Label>
+                                    <asp:Label ID="Label7" runat="server" Text='<%#Eval("DAYOFF_TOTAL_TIME") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="代理人" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:Label ID="Label7" runat="server" Text='<%#Eval("FUNC_SUB_NAME") %>'></asp:Label>
+                                    <asp:Label ID="Label8" runat="server" Text='<%#Eval("FUNC_SUB_NAME") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="請假原因" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:Label ID="Label8" runat="server" Text='<%#Eval("REASON") %>'></asp:Label>
+                                    <asp:Label ID="Label9" runat="server" Text='<%#Eval("REASON") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="假單狀態" ItemStyle-HorizontalAlign="Center">

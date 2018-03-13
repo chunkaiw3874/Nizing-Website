@@ -65,6 +65,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             {
                 hdnNormalWorkHour.Value = "8";
             }
+            btnSearchSubmit_Click(sender, e);   //does search automatically everytime page loads
         }
     }
 
@@ -2041,8 +2042,16 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             endTime = endTime.AddDays(1);
         }
-        query = "SELECT APP.APPLICATION_ID"
+        query = ";WITH APP_LAST_ACTION_TIME"
+            + " AS"
+            + " ("
+            + " SELECT APPLICATION_ID,MAX(ACTION_TIME) 'LAST_ACTION_TIME'"
+            + " FROM HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B"
+            + " GROUP BY APPLICATION_ID"
+            + " )"
+            + " SELECT DISTINCT APP.APPLICATION_ID"
             + " ,APP.APPLICATION_DATE"
+            + " ,[LAST_ACTION].LAST_ACTION_TIME"
             + " ,MV.MV002 'APPLICANT_NAME'"
             + " ,APP.DAYOFF_NAME"
             + " ,APP.DAYOFF_START_TIME"
@@ -2054,7 +2063,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
             + " FROM HR360_DAYOFFAPPLICATION_APPLICATION APP"
             + " LEFT JOIN NZ.dbo.CMSMV MV ON APP.APPLICANT_ID=MV.MV001"
             + " LEFT JOIN NZ.dbo.CMSMV MV2 ON APP.FUNCTIONAL_SUBSTITUTE_ID=MV2.MV001"
-            + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPLICATION_STATUS [STATUS] ON APP.APPLICATION_STATUS_ID=[STATUS].ID";
+            + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPLICATION_STATUS [STATUS] ON APP.APPLICATION_STATUS_ID=[STATUS].ID"
+            + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B [TRAIL] ON APP.APPLICATION_ID = [TRAIL].APPLICATION_ID"
+            + " LEFT JOIN APP_LAST_ACTION_TIME [LAST_ACTION] ON APP.APPLICATION_ID = LAST_ACTION.APPLICATION_ID";
         if (!String.IsNullOrWhiteSpace(txtSearch_Parameter_StartDate.Text) && String.IsNullOrWhiteSpace(txtSearch_Parameter_EndDate.Text))
         {
             condition = " WHERE APP.DAYOFF_START_TIME >= @STARTTIME";
@@ -2132,13 +2143,13 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {        
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            if (((Label)e.Row.Cells[9].FindControl("lblAppStatus")).Text == "退回" || ((Label)e.Row.Cells[9].FindControl("lblAppStatus")).Text == "撤銷")
+            if (((Label)e.Row.Cells[10].FindControl("lblAppStatus")).Text == "退回" || ((Label)e.Row.Cells[9].FindControl("lblAppStatus")).Text == "撤銷")
             {
-                ((Button)e.Row.Cells[10].FindControl("btnSearch_Deny")).Enabled = false;
+                ((Button)e.Row.Cells[11].FindControl("btnSearch_Deny")).Enabled = false;
             }
             else
             {
-                ((Button)e.Row.Cells[10].FindControl("btnSearch_Deny")).Enabled = true;
+                ((Button)e.Row.Cells[11].FindControl("btnSearch_Deny")).Enabled = true;
             }
         }
     }
