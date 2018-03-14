@@ -22,10 +22,5 @@ namespace NIZING_BACKEND_Data_Config
         {
             InitializeComponent();
         }
-
-        private void frmHR360_Main_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

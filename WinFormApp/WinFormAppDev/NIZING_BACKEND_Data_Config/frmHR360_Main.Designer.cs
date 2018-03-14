@@ -39,11 +39,14 @@
             this.btnAccountDelete = new System.Windows.Forms.Button();
             this.btnAccountSearch = new System.Windows.Forms.Button();
             this.tlpAccountInputField = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtAccountConfirmPassword = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtAccountPassword = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.flpAccountId = new System.Windows.Forms.FlowLayoutPanel();
             this.txtAccountId = new System.Windows.Forms.TextBox();
             this.ckxFullAdminRights = new System.Windows.Forms.CheckBox();
@@ -51,36 +54,33 @@
             this.btnAccountConfirm = new System.Windows.Forms.Button();
             this.btnAccountCancel = new System.Windows.Forms.Button();
             this.txtAccountManagementMemo = new System.Windows.Forms.TextBox();
-            this.gvAccountSearch_Result = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtAccountPassword = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtAccountConfirmPassword = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.gvAccountSearch_Result = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpAccountManagement.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tlpAccountInputField.SuspendLayout();
+            this.flowLayoutPanel4.SuspendLayout();
             this.flpAccountId.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gvAccountSearch_Result)).BeginInit();
             this.flowLayoutPanel3.SuspendLayout();
-            this.flowLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvAccountSearch_Result)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -245,53 +245,77 @@
             this.tlpAccountInputField.Size = new System.Drawing.Size(460, 745);
             this.tlpAccountInputField.TabIndex = 3;
             // 
-            // label1
+            // flowLayoutPanel4
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "使用者代號:";
+            this.flowLayoutPanel4.Controls.Add(this.textBox5);
+            this.flowLayoutPanel4.Controls.Add(this.checkBox1);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(92, 196);
+            this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(368, 28);
+            this.flowLayoutPanel4.TabIndex = 24;
             // 
-            // txtAccountConfirmPassword
+            // textBox5
             // 
-            this.txtAccountConfirmPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtAccountConfirmPassword.Location = new System.Drawing.Point(95, 59);
-            this.txtAccountConfirmPassword.Name = "txtAccountConfirmPassword";
-            this.txtAccountConfirmPassword.Size = new System.Drawing.Size(150, 22);
-            this.txtAccountConfirmPassword.TabIndex = 6;
-            this.txtAccountConfirmPassword.UseSystemPasswordChar = true;
+            this.textBox5.Location = new System.Drawing.Point(3, 3);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(150, 22);
+            this.textBox5.TabIndex = 4;
             // 
-            // label3
+            // checkBox1
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 64);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 12);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "確認密碼:";
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkBox1.Location = new System.Drawing.Point(159, 3);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(72, 22);
+            this.checkBox1.TabIndex = 5;
+            this.checkBox1.Text = "失效帳號";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // txtAccountPassword
+            // textBox4
             // 
-            this.txtAccountPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtAccountPassword.Location = new System.Drawing.Point(95, 31);
-            this.txtAccountPassword.Name = "txtAccountPassword";
-            this.txtAccountPassword.Size = new System.Drawing.Size(150, 22);
-            this.txtAccountPassword.TabIndex = 5;
-            this.txtAccountPassword.UseSystemPasswordChar = true;
+            this.textBox4.Location = new System.Drawing.Point(95, 171);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(150, 22);
+            this.textBox4.TabIndex = 23;
             // 
-            // label2
+            // textBox3
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(57, 36);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(32, 12);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "密碼:";
+            this.textBox3.Location = new System.Drawing.Point(95, 143);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(150, 22);
+            this.textBox3.TabIndex = 22;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(45, 148);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(44, 12);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "EMAIL:";
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(21, 120);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(68, 12);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "使用者名稱:";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 92);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 12);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "ERP員工代號:";
             // 
             // flpAccountId
             // 
@@ -364,24 +388,53 @@
             this.txtAccountManagementMemo.Size = new System.Drawing.Size(368, 493);
             this.txtAccountManagementMemo.TabIndex = 14;
             // 
-            // gvAccountSearch_Result
+            // label1
             // 
-            this.gvAccountSearch_Result.AllowUserToAddRows = false;
-            this.gvAccountSearch_Result.AllowUserToDeleteRows = false;
-            this.gvAccountSearch_Result.AllowUserToResizeRows = false;
-            this.gvAccountSearch_Result.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gvAccountSearch_Result.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvAccountSearch_Result.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gvAccountSearch_Result.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.gvAccountSearch_Result.Location = new System.Drawing.Point(462, 58);
-            this.gvAccountSearch_Result.Margin = new System.Windows.Forms.Padding(0);
-            this.gvAccountSearch_Result.MultiSelect = false;
-            this.gvAccountSearch_Result.Name = "gvAccountSearch_Result";
-            this.gvAccountSearch_Result.RowHeadersVisible = false;
-            this.gvAccountSearch_Result.RowTemplate.Height = 24;
-            this.gvAccountSearch_Result.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvAccountSearch_Result.Size = new System.Drawing.Size(707, 745);
-            this.gvAccountSearch_Result.TabIndex = 4;
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(21, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "使用者代號:";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(57, 36);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(32, 12);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "密碼:";
+            // 
+            // txtAccountPassword
+            // 
+            this.txtAccountPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtAccountPassword.Location = new System.Drawing.Point(95, 31);
+            this.txtAccountPassword.Name = "txtAccountPassword";
+            this.txtAccountPassword.Size = new System.Drawing.Size(150, 22);
+            this.txtAccountPassword.TabIndex = 5;
+            this.txtAccountPassword.UseSystemPasswordChar = true;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(33, 64);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 12);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "確認密碼:";
+            // 
+            // txtAccountConfirmPassword
+            // 
+            this.txtAccountConfirmPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtAccountConfirmPassword.Location = new System.Drawing.Point(95, 59);
+            this.txtAccountConfirmPassword.Name = "txtAccountConfirmPassword";
+            this.txtAccountConfirmPassword.Size = new System.Drawing.Size(150, 22);
+            this.txtAccountConfirmPassword.TabIndex = 6;
+            this.txtAccountConfirmPassword.UseSystemPasswordChar = true;
             // 
             // flowLayoutPanel3
             // 
@@ -394,75 +447,12 @@
             this.flowLayoutPanel3.Size = new System.Drawing.Size(368, 28);
             this.flowLayoutPanel3.TabIndex = 16;
             // 
-            // label4
-            // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 92);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 12);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "ERP員工代號:";
-            // 
-            // label5
-            // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(21, 120);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(68, 12);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "使用者名稱:";
-            // 
-            // label6
-            // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(45, 148);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(44, 12);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "EMAIL:";
-            // 
-            // label7
-            // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(40, 176);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(49, 12);
-            this.label7.TabIndex = 20;
-            this.label7.Text = "LINE ID:";
-            // 
-            // label8
-            // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(89, 232);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(0, 12);
-            this.label8.TabIndex = 21;
-            // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(3, 3);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(150, 22);
             this.textBox2.TabIndex = 16;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(95, 143);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(150, 22);
-            this.textBox3.TabIndex = 22;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(95, 171);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(150, 22);
-            this.textBox4.TabIndex = 23;
             // 
             // button1
             // 
@@ -473,33 +463,15 @@
             this.button1.Text = "...";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel4
+            // label7
             // 
-            this.flowLayoutPanel4.Controls.Add(this.textBox5);
-            this.flowLayoutPanel4.Controls.Add(this.checkBox1);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(92, 196);
-            this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(368, 28);
-            this.flowLayoutPanel4.TabIndex = 24;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(3, 3);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(150, 22);
-            this.textBox5.TabIndex = 4;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkBox1.Location = new System.Drawing.Point(159, 3);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(72, 22);
-            this.checkBox1.TabIndex = 5;
-            this.checkBox1.Text = "失效帳號";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(40, 176);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(49, 12);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "LINE ID:";
             // 
             // flowLayoutPanel5
             // 
@@ -533,6 +505,15 @@
             this.label9.Text = "*如無員工代號才需填寫";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label8
+            // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(89, 232);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(0, 12);
+            this.label8.TabIndex = 21;
+            // 
             // label10
             // 
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -543,6 +524,25 @@
             this.label10.TabIndex = 26;
             this.label10.Text = "失效日期:";
             // 
+            // gvAccountSearch_Result
+            // 
+            this.gvAccountSearch_Result.AllowUserToAddRows = false;
+            this.gvAccountSearch_Result.AllowUserToDeleteRows = false;
+            this.gvAccountSearch_Result.AllowUserToResizeRows = false;
+            this.gvAccountSearch_Result.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gvAccountSearch_Result.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvAccountSearch_Result.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gvAccountSearch_Result.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.gvAccountSearch_Result.Location = new System.Drawing.Point(462, 58);
+            this.gvAccountSearch_Result.Margin = new System.Windows.Forms.Padding(0);
+            this.gvAccountSearch_Result.MultiSelect = false;
+            this.gvAccountSearch_Result.Name = "gvAccountSearch_Result";
+            this.gvAccountSearch_Result.RowHeadersVisible = false;
+            this.gvAccountSearch_Result.RowTemplate.Height = 24;
+            this.gvAccountSearch_Result.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gvAccountSearch_Result.Size = new System.Drawing.Size(707, 745);
+            this.gvAccountSearch_Result.TabIndex = 4;
+            // 
             // frmHR360_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -552,7 +552,6 @@
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "frmHR360_Main";
             this.Text = "frmHR360_Main";
-            this.Load += new System.EventHandler(this.frmHR360_Main_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tbcManagement.ResumeLayout(false);
             this.tbpAccountManagement.ResumeLayout(false);
@@ -560,16 +559,16 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.tlpAccountInputField.ResumeLayout(false);
             this.tlpAccountInputField.PerformLayout();
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel4.PerformLayout();
             this.flpAccountId.ResumeLayout(false);
             this.flpAccountId.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gvAccountSearch_Result)).EndInit();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
-            this.flowLayoutPanel4.ResumeLayout(false);
-            this.flowLayoutPanel4.PerformLayout();
             this.flowLayoutPanel5.ResumeLayout(false);
             this.flowLayoutPanel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvAccountSearch_Result)).EndInit();
             this.ResumeLayout(false);
 
         }

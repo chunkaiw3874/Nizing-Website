@@ -106,7 +106,7 @@ public partial class nizing_intranet_HR09 : System.Web.UI.Page
                         divCol.Controls.Add(tb);
                         HtmlTableRow headerRow = new HtmlTableRow();
                         HtmlTableCell headerCell = new HtmlTableCell("th");
-                        headerCell.InnerText = dtDept.Rows[currentDeptNumber]["DEPT_NAME"].ToString().Trim() + ":" + dtEmployee.Rows.Count.ToString() + "人";
+                        headerCell.InnerText = filteredResult[currentDeptNumber]["DEPT_NAME"].ToString().Trim() + ":" + dtEmployee.Rows.Count.ToString() + "人";
                         headerCell.ColSpan = 2;
                         headerCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
                         headerRow.Controls.Add(headerCell);
