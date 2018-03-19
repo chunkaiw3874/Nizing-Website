@@ -30,7 +30,7 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnLogout = new System.Windows.Forms.Button();
-            this.tbcManagement = new System.Windows.Forms.TabControl();
+            this.tbcAccountManagement = new System.Windows.Forms.TabControl();
             this.tbpAccountManagement = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -40,16 +40,16 @@
             this.btnAccountSearch = new System.Windows.Forms.Button();
             this.tlpAccountInputField = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtAccountDisabledDate = new System.Windows.Forms.TextBox();
+            this.ckxAccountDisable = new System.Windows.Forms.CheckBox();
+            this.txtAccountLineId = new System.Windows.Forms.TextBox();
+            this.txtAccountEmail = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.flpAccountId = new System.Windows.Forms.FlowLayoutPanel();
             this.txtAccountId = new System.Windows.Forms.TextBox();
-            this.ckxFullAdminRights = new System.Windows.Forms.CheckBox();
+            this.ckxAccountSuperUser = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnAccountConfirm = new System.Windows.Forms.Button();
             this.btnAccountCancel = new System.Windows.Forms.Button();
@@ -60,17 +60,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtAccountConfirmPassword = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.txtAccountERPID = new System.Windows.Forms.TextBox();
+            this.btnAccountSearchERPID = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtAccountName = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.gvAccountSearch_Result = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tbcManagement.SuspendLayout();
+            this.tbcAccountManagement.SuspendLayout();
             this.tbpAccountManagement.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -88,7 +88,7 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.btnLogout, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tbcManagement, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tbcAccountManagement, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -111,16 +111,16 @@
             this.btnLogout.Text = "登出";
             this.btnLogout.UseVisualStyleBackColor = true;
             // 
-            // tbcManagement
+            // tbcAccountManagement
             // 
-            this.tbcManagement.Controls.Add(this.tbpAccountManagement);
-            this.tbcManagement.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbcManagement.Location = new System.Drawing.Point(0, 26);
-            this.tbcManagement.Margin = new System.Windows.Forms.Padding(0);
-            this.tbcManagement.Name = "tbcManagement";
-            this.tbcManagement.SelectedIndex = 0;
-            this.tbcManagement.Size = new System.Drawing.Size(1184, 836);
-            this.tbcManagement.TabIndex = 1;
+            this.tbcAccountManagement.Controls.Add(this.tbpAccountManagement);
+            this.tbcAccountManagement.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbcAccountManagement.Location = new System.Drawing.Point(0, 26);
+            this.tbcAccountManagement.Margin = new System.Windows.Forms.Padding(0);
+            this.tbcAccountManagement.Name = "tbcAccountManagement";
+            this.tbcAccountManagement.SelectedIndex = 0;
+            this.tbcAccountManagement.Size = new System.Drawing.Size(1184, 836);
+            this.tbcAccountManagement.TabIndex = 1;
             // 
             // tbpAccountManagement
             // 
@@ -209,8 +209,8 @@
             this.tlpAccountInputField.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tlpAccountInputField.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tlpAccountInputField.Controls.Add(this.flowLayoutPanel4, 1, 7);
-            this.tlpAccountInputField.Controls.Add(this.textBox4, 1, 6);
-            this.tlpAccountInputField.Controls.Add(this.textBox3, 1, 5);
+            this.tlpAccountInputField.Controls.Add(this.txtAccountLineId, 1, 6);
+            this.tlpAccountInputField.Controls.Add(this.txtAccountEmail, 1, 5);
             this.tlpAccountInputField.Controls.Add(this.label6, 0, 5);
             this.tlpAccountInputField.Controls.Add(this.label5, 0, 4);
             this.tlpAccountInputField.Controls.Add(this.label4, 0, 3);
@@ -247,45 +247,45 @@
             // 
             // flowLayoutPanel4
             // 
-            this.flowLayoutPanel4.Controls.Add(this.textBox5);
-            this.flowLayoutPanel4.Controls.Add(this.checkBox1);
+            this.flowLayoutPanel4.Controls.Add(this.txtAccountDisabledDate);
+            this.flowLayoutPanel4.Controls.Add(this.ckxAccountDisable);
             this.flowLayoutPanel4.Location = new System.Drawing.Point(92, 196);
             this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(368, 28);
             this.flowLayoutPanel4.TabIndex = 24;
             // 
-            // textBox5
+            // txtAccountDisabledDate
             // 
-            this.textBox5.Location = new System.Drawing.Point(3, 3);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(150, 22);
-            this.textBox5.TabIndex = 4;
+            this.txtAccountDisabledDate.Location = new System.Drawing.Point(3, 3);
+            this.txtAccountDisabledDate.Name = "txtAccountDisabledDate";
+            this.txtAccountDisabledDate.Size = new System.Drawing.Size(150, 22);
+            this.txtAccountDisabledDate.TabIndex = 4;
             // 
-            // checkBox1
+            // ckxAccountDisable
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkBox1.Location = new System.Drawing.Point(159, 3);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(72, 22);
-            this.checkBox1.TabIndex = 5;
-            this.checkBox1.Text = "失效帳號";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.ckxAccountDisable.AutoSize = true;
+            this.ckxAccountDisable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ckxAccountDisable.Location = new System.Drawing.Point(159, 3);
+            this.ckxAccountDisable.Name = "ckxAccountDisable";
+            this.ckxAccountDisable.Size = new System.Drawing.Size(72, 22);
+            this.ckxAccountDisable.TabIndex = 5;
+            this.ckxAccountDisable.Text = "失效帳號";
+            this.ckxAccountDisable.UseVisualStyleBackColor = true;
             // 
-            // textBox4
+            // txtAccountLineId
             // 
-            this.textBox4.Location = new System.Drawing.Point(95, 171);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(150, 22);
-            this.textBox4.TabIndex = 23;
+            this.txtAccountLineId.Location = new System.Drawing.Point(95, 171);
+            this.txtAccountLineId.Name = "txtAccountLineId";
+            this.txtAccountLineId.Size = new System.Drawing.Size(150, 22);
+            this.txtAccountLineId.TabIndex = 23;
             // 
-            // textBox3
+            // txtAccountEmail
             // 
-            this.textBox3.Location = new System.Drawing.Point(95, 143);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(150, 22);
-            this.textBox3.TabIndex = 22;
+            this.txtAccountEmail.Location = new System.Drawing.Point(95, 143);
+            this.txtAccountEmail.Name = "txtAccountEmail";
+            this.txtAccountEmail.Size = new System.Drawing.Size(150, 22);
+            this.txtAccountEmail.TabIndex = 22;
             // 
             // label6
             // 
@@ -320,7 +320,7 @@
             // flpAccountId
             // 
             this.flpAccountId.Controls.Add(this.txtAccountId);
-            this.flpAccountId.Controls.Add(this.ckxFullAdminRights);
+            this.flpAccountId.Controls.Add(this.ckxAccountSuperUser);
             this.flpAccountId.Location = new System.Drawing.Point(92, 0);
             this.flpAccountId.Margin = new System.Windows.Forms.Padding(0);
             this.flpAccountId.Name = "flpAccountId";
@@ -334,16 +334,16 @@
             this.txtAccountId.Size = new System.Drawing.Size(150, 22);
             this.txtAccountId.TabIndex = 4;
             // 
-            // ckxFullAdminRights
+            // ckxAccountSuperUser
             // 
-            this.ckxFullAdminRights.AutoSize = true;
-            this.ckxFullAdminRights.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ckxFullAdminRights.Location = new System.Drawing.Point(159, 3);
-            this.ckxFullAdminRights.Name = "ckxFullAdminRights";
-            this.ckxFullAdminRights.Size = new System.Drawing.Size(72, 22);
-            this.ckxFullAdminRights.TabIndex = 5;
-            this.ckxFullAdminRights.Text = "權限全開";
-            this.ckxFullAdminRights.UseVisualStyleBackColor = true;
+            this.ckxAccountSuperUser.AutoSize = true;
+            this.ckxAccountSuperUser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ckxAccountSuperUser.Location = new System.Drawing.Point(159, 3);
+            this.ckxAccountSuperUser.Name = "ckxAccountSuperUser";
+            this.ckxAccountSuperUser.Size = new System.Drawing.Size(84, 22);
+            this.ckxAccountSuperUser.TabIndex = 5;
+            this.ckxAccountSuperUser.Text = "超級使用者";
+            this.ckxAccountSuperUser.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel2
             // 
@@ -438,8 +438,8 @@
             // 
             // flowLayoutPanel3
             // 
-            this.flowLayoutPanel3.Controls.Add(this.textBox2);
-            this.flowLayoutPanel3.Controls.Add(this.button1);
+            this.flowLayoutPanel3.Controls.Add(this.txtAccountERPID);
+            this.flowLayoutPanel3.Controls.Add(this.btnAccountSearchERPID);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel3.Location = new System.Drawing.Point(92, 84);
             this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
@@ -447,21 +447,21 @@
             this.flowLayoutPanel3.Size = new System.Drawing.Size(368, 28);
             this.flowLayoutPanel3.TabIndex = 16;
             // 
-            // textBox2
+            // txtAccountERPID
             // 
-            this.textBox2.Location = new System.Drawing.Point(3, 3);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(150, 22);
-            this.textBox2.TabIndex = 16;
+            this.txtAccountERPID.Location = new System.Drawing.Point(3, 3);
+            this.txtAccountERPID.Name = "txtAccountERPID";
+            this.txtAccountERPID.Size = new System.Drawing.Size(150, 22);
+            this.txtAccountERPID.TabIndex = 16;
             // 
-            // button1
+            // btnAccountSearchERPID
             // 
-            this.button1.Location = new System.Drawing.Point(159, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(23, 23);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "...";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAccountSearchERPID.Location = new System.Drawing.Point(159, 3);
+            this.btnAccountSearchERPID.Name = "btnAccountSearchERPID";
+            this.btnAccountSearchERPID.Size = new System.Drawing.Size(23, 23);
+            this.btnAccountSearchERPID.TabIndex = 17;
+            this.btnAccountSearchERPID.Text = "...";
+            this.btnAccountSearchERPID.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
@@ -475,7 +475,7 @@
             // 
             // flowLayoutPanel5
             // 
-            this.flowLayoutPanel5.Controls.Add(this.textBox1);
+            this.flowLayoutPanel5.Controls.Add(this.txtAccountName);
             this.flowLayoutPanel5.Controls.Add(this.label9);
             this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel5.Location = new System.Drawing.Point(92, 112);
@@ -484,14 +484,14 @@
             this.flowLayoutPanel5.Size = new System.Drawing.Size(368, 28);
             this.flowLayoutPanel5.TabIndex = 25;
             // 
-            // textBox1
+            // txtAccountName
             // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox1.Location = new System.Drawing.Point(3, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(150, 22);
-            this.textBox1.TabIndex = 7;
-            this.textBox1.UseSystemPasswordChar = true;
+            this.txtAccountName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtAccountName.Location = new System.Drawing.Point(3, 3);
+            this.txtAccountName.Name = "txtAccountName";
+            this.txtAccountName.Size = new System.Drawing.Size(150, 22);
+            this.txtAccountName.TabIndex = 7;
+            this.txtAccountName.UseSystemPasswordChar = true;
             // 
             // label9
             // 
@@ -553,7 +553,7 @@
             this.Name = "frmHR360_Main";
             this.Text = "frmHR360_Main";
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tbcManagement.ResumeLayout(false);
+            this.tbcAccountManagement.ResumeLayout(false);
             this.tbpAccountManagement.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -577,7 +577,7 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btnLogout;
-        private System.Windows.Forms.TabControl tbcManagement;
+        private System.Windows.Forms.TabControl tbcAccountManagement;
         private System.Windows.Forms.TabPage tbpAccountManagement;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
@@ -593,7 +593,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.FlowLayoutPanel flpAccountId;
         private System.Windows.Forms.TextBox txtAccountId;
-        private System.Windows.Forms.CheckBox ckxFullAdminRights;
+        private System.Windows.Forms.CheckBox ckxAccountSuperUser;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Button btnAccountConfirm;
         private System.Windows.Forms.Button btnAccountCancel;
@@ -606,14 +606,14 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtAccountDisabledDate;
+        private System.Windows.Forms.CheckBox ckxAccountDisable;
+        private System.Windows.Forms.TextBox txtAccountLineId;
+        private System.Windows.Forms.TextBox txtAccountEmail;
+        private System.Windows.Forms.TextBox txtAccountERPID;
+        private System.Windows.Forms.Button btnAccountSearchERPID;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtAccountName;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
     }
