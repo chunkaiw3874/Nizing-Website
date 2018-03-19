@@ -308,61 +308,94 @@
             <div class="row form-group">
                 <div class="col-xs-12">
                     <asp:GridView ID="gvSearchResult" runat="server" AutoGenerateColumns="false" CssClass="table table-striped" 
-                        OnRowDataBound="gvSearchResult_RowDataBound" OnPageIndexChanging="gvSearchResult_PageIndexChanging" 
+                        OnRowDataBound="gvSearchResult_RowDataBound" OnPageIndexChanging="gvSearchResult_PageIndexChanging"                                         
                         AllowPaging="True" PageSize="10" PagerSettings-Position="Top" PagerSettings-Mode="NumericFirstLast"
-                        PagerSettings-FirstPageText="首頁" PagerSettings-LastPageText="尾頁">
+                        PagerSettings-FirstPageText="首頁" PagerSettings-LastPageText="尾頁" OnRowCommand="gvSearchResult_RowCommand">
                         <Columns>
-                            <asp:TemplateField HeaderText="假單單號" ItemStyle-HorizontalAlign="Center">
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                <HeaderTemplate>
+                                    <asp:LinkButton ID="lbApplication_ID" runat="server" Text="假單單號" CommandName="Sort" CommandArgument="APPLICATION_ID"></asp:LinkButton>
+                                </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="lblAppId" runat="server" Text='<%#Eval("APPLICATION_ID") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="申請時間" ItemStyle-HorizontalAlign="Center">
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                <HeaderTemplate>
+                                    <asp:LinkButton ID="lbApplication_Date" runat="server" Text="申請時間" CommandName="Sort" CommandArgument="APPLICATION_DATE"></asp:LinkButton>
+                                </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label1" runat="server" Text='<%#Eval("APPLICATION_DATE") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="最後動作時間" ItemStyle-HorizontalAlign="Center">
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                <HeaderTemplate>
+                                    <asp:LinkButton ID="lbLAST_ACTION_TIME" runat="server" Text="最後動作時間" CommandName="Sort" CommandArgument="LAST_ACTION_TIME"></asp:LinkButton>
+                                </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label2" runat="server" Text='<%#Eval("LAST_ACTION_TIME") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="申請者" ItemStyle-HorizontalAlign="Center">
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                <HeaderTemplate>
+                                    <asp:LinkButton ID="lbAPPLICANT_NAME" runat="server" Text="申請者" CommandName="Sort" CommandArgument="APPLICANT_NAME"></asp:LinkButton>
+                                </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label3" runat="server" Text='<%#Eval("APPLICANT_NAME") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="假別" ItemStyle-HorizontalAlign="Center">
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                <HeaderTemplate>
+                                    <asp:LinkButton ID="lbDAYOFF_NAME" runat="server" Text="假別" CommandName="Sort" CommandArgument="DAYOFF_NAME"></asp:LinkButton>
+                                </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label4" runat="server" Text='<%#Eval("DAYOFF_NAME") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="請假開始時間" ItemStyle-HorizontalAlign="Center">
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                <HeaderTemplate>
+                                    <asp:LinkButton ID="lbDAYOFF_START_TIME" runat="server" Text="請假開始時間" CommandName="Sort" CommandArgument="DAYOFF_START_TIME"></asp:LinkButton>
+                                </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label5" runat="server" Text='<%#Eval("DAYOFF_START_TIME") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="請假結束時間" ItemStyle-HorizontalAlign="Center">
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                <HeaderTemplate>
+                                    <asp:LinkButton ID="lbDAYOFF_END_TIME" runat="server" Text="請假結束時間" CommandName="Sort" CommandArgument="DAYOFF_END_TIME"></asp:LinkButton>
+                                </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label6" runat="server" Text='<%#Eval("DAYOFF_END_TIME") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="請假總量" ItemStyle-HorizontalAlign="Center">
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                <HeaderTemplate>
+                                    <asp:LinkButton ID="lbDAYOFF_TOTAL_TIME" runat="server" Text="請假總量" CommandName="Sort" CommandArgument="DAYOFF_TOTAL_TIME"></asp:LinkButton>
+                                </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label7" runat="server" Text='<%#Eval("DAYOFF_TOTAL_TIME") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="代理人" ItemStyle-HorizontalAlign="Center">
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                <HeaderTemplate>
+                                    <asp:LinkButton ID="lbFUNC_SUB_NAME" runat="server" Text="代理人" CommandName="Sort" CommandArgument="FUNC_SUB_NAME"></asp:LinkButton>
+                                </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label8" runat="server" Text='<%#Eval("FUNC_SUB_NAME") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="請假原因" ItemStyle-HorizontalAlign="Center">
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                <HeaderTemplate>
+                                    <asp:LinkButton ID="lbREASON" runat="server" Text="請假原因" CommandName="Sort" CommandArgument="REASON"></asp:LinkButton>
+                                </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label9" runat="server" Text='<%#Eval("REASON") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="假單狀態" ItemStyle-HorizontalAlign="Center">
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                <HeaderTemplate>
+                                    <asp:LinkButton ID="lbSTATUS" runat="server" Text="假單狀態" CommandName="Sort" CommandArgument="STATUS"></asp:LinkButton>
+                                </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="lblAppStatus" runat="server" Text='<%#Eval("STATUS") %>'></asp:Label>
                                 </ItemTemplate>

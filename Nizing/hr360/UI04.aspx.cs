@@ -2122,6 +2122,14 @@ public partial class hr360_UI04 : System.Web.UI.Page
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
         }
+        if (dt.Rows.Count > 0)
+        {
+            DataView dv = dt.DefaultView;
+            if (this.ViewState["SortExpression"] != null)
+            {
+                dv.Sort = string.Format("{0} {1}", ViewState["SortExpression"].ToString(), this.ViewState["SortOrder"].ToString());
+            }
+        }
         gvSearchResult.DataSource = dt;
         gvSearchResult.DataBind();
 
@@ -2159,4 +2167,35 @@ public partial class hr360_UI04 : System.Web.UI.Page
         btnSearchSubmit_Click(sender, e);
     }
 
+    protected void gvSearchResult_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName.Equals("Sort"))
+        {
+            if (ViewState["SortExpression"] != null)
+            {
+                if (this.ViewState["SortExpression"].ToString() == e.CommandArgument.ToString())
+                {
+                    if (ViewState["SortOrder"].ToString() == "ASC")
+                    {
+                        ViewState["SortOrder"] = "DESC";
+                    }
+                    else
+                    {
+                        ViewState["SortOrder"] = "ASC";
+                    }
+                }
+                else
+                {
+                    ViewState["SortOrder"] = "ASC";
+                    ViewState["SortExpression"] = e.CommandArgument.ToString();
+                }
+            }
+            else
+            {
+                ViewState["SortExpression"] = e.CommandArgument.ToString();
+                ViewState["SortOrder"] = "ASC";
+            }
+        }
+        btnSearchSubmit_Click(sender, e);
+    }
 }
