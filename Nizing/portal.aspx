@@ -13,8 +13,11 @@
             <div style="margin-right:50px;">
                 <a href="employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/nizing.png" /></a>
             </div>
-            <div>
+            <div style="margin-right:50px;">
                 <a href="revivify_employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/RVI.png" /></a>
+            </div>
+            <div>
+                <a href="neo_employee_section/Default.aspx" target="_blank">日進光電</a>
             </div>
         </div>
     </div>    
