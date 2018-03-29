@@ -174,6 +174,7 @@
             this.btnAccountAdd.TabIndex = 0;
             this.btnAccountAdd.Text = "新增";
             this.btnAccountAdd.UseVisualStyleBackColor = true;
+            this.btnAccountAdd.Click += new System.EventHandler(this.btnAccountAdd_Click);
             // 
             // btnAccountEdit
             // 
@@ -183,6 +184,7 @@
             this.btnAccountEdit.TabIndex = 1;
             this.btnAccountEdit.Text = "修改";
             this.btnAccountEdit.UseVisualStyleBackColor = true;
+            this.btnAccountEdit.Click += new System.EventHandler(this.btnAccountEdit_Click);
             // 
             // btnAccountDelete
             // 
@@ -192,6 +194,7 @@
             this.btnAccountDelete.TabIndex = 2;
             this.btnAccountDelete.Text = "刪除";
             this.btnAccountDelete.UseVisualStyleBackColor = true;
+            this.btnAccountDelete.Click += new System.EventHandler(this.btnAccountDelete_Click);
             // 
             // btnAccountSearch
             // 
