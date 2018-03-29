@@ -37,6 +37,12 @@ public partial class hr360_UI04 : System.Web.UI.Page
         public string funcSub { set; get; }
         public string reason { set; get; }
     }
+
+    //protected override void Render(HtmlTextWriter writer)
+    //{
+    //    ClientScript.RegisterForEventValidation("btnSearch_Deny");
+    //    base.Render(writer);
+    //}
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["user_id"].ToString().ToUpper().Trim() != "ADMIN")  //admin doesnt have the proper erp information and will crash the system
@@ -65,7 +71,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             {
                 hdnNormalWorkHour.Value = "8";
             }
-            btnSearchSubmit_Click(sender, e);   //does search automatically everytime page loads
+            //btnSearchSubmit_Click(sender, e);   //does search automatically everytime page loads
         }
     }
 
