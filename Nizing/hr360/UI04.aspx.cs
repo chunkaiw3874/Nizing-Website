@@ -38,11 +38,6 @@ public partial class hr360_UI04 : System.Web.UI.Page
         public string reason { set; get; }
     }
 
-    //protected override void Render(HtmlTextWriter writer)
-    //{
-    //    ClientScript.RegisterForEventValidation("btnSearch_Deny");
-    //    base.Render(writer);
-    //}
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["user_id"].ToString().ToUpper().Trim() != "ADMIN")  //admin doesnt have the proper erp information and will crash the system
@@ -2159,9 +2154,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             LinkButton btn = (LinkButton)e.Row.Cells[11].FindControl("btnSearch_Deny");
             if (((Label)e.Row.Cells[10].FindControl("lblAppStatus")).Text == "退回" || ((Label)e.Row.Cells[9].FindControl("lblAppStatus")).Text == "撤銷")
-            {
-                //((LinkButton)e.Row.Cells[11].FindControl("btnSearch_Deny")).Enabled = false;
-                
+            {               
                 btn.Attributes.Remove("href");
                 btn.CssClass = "btn disabled";
                 btn.Attributes.CssStyle[HtmlTextWriterStyle.Color] = "gray";
