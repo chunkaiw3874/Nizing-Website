@@ -222,7 +222,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 conn.Open();
                 string query = "SELECT APPLICATION_ID"
                             + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
-                            + " WHERE (FUNCTIONAL_SUBSTITUTE_ID=@ID)"  //自己已經是其他人的代理人
+                            + " WHERE (FUNCTIONAL_SUBSTITUTE_ID=@ID)"  //自己已經是其他人的代理人                            
+                            + " AND APPLICATION_STATUS_ID <> '07'"
+                            + " AND APPLICATION_STATUS_ID <> '08'"
                             + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
                             + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
                             + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
