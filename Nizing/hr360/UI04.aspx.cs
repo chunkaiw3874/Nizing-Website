@@ -2154,17 +2154,28 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// <param name="sender"></param>
     /// <param name="e"></param>
     protected void gvSearchResult_RowDataBound(object sender, GridViewRowEventArgs e)
-    {        
+    {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
+            LinkButton btn = (LinkButton)e.Row.Cells[11].FindControl("btnSearch_Deny");
             if (((Label)e.Row.Cells[10].FindControl("lblAppStatus")).Text == "退回" || ((Label)e.Row.Cells[9].FindControl("lblAppStatus")).Text == "撤銷")
             {
-                ((LinkButton)e.Row.Cells[11].FindControl("btnSearch_Deny")).Enabled = false;
-            }
-            else
-            {
-                ((LinkButton)e.Row.Cells[11].FindControl("btnSearch_Deny")).Enabled = true;
-            }
+                //((LinkButton)e.Row.Cells[11].FindControl("btnSearch_Deny")).Enabled = false;
+                
+                btn.Attributes.Remove("href");
+                btn.CssClass = "btn disabled";
+                btn.Attributes.CssStyle[HtmlTextWriterStyle.Color] = "gray";
+                btn.Attributes.CssStyle[HtmlTextWriterStyle.Cursor] = "default";
+                if (btn.Enabled != false)
+                {
+                    btn.Enabled = false;
+                }
+                
+                if (btn.OnClientClick != null)
+                {
+                    btn.OnClientClick = null;
+                }
+            }            
         }
     }
     protected void gvSearchResult_PageIndexChanging(object sender, GridViewPageEventArgs e)
