@@ -71,7 +71,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             {
                 hdnNormalWorkHour.Value = "8";
             }
-            //btnSearchSubmit_Click(sender, e);   //does search automatically everytime page loads
+            btnSearchSubmit_Click(sender, e);   //does search automatically everytime page loads
         }
     }
 
@@ -1464,8 +1464,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// <param name="e"></param>
     protected void btnDeny_Click(object sender, EventArgs e)
     {
-        
-        Button btn = (Button)sender;
+        Control btn = (Control)sender;
+        //Button btn = (Button)sender;
         string btnID = btn.ID;
         string denyID = "";
         //退回可以在簽核過程產生，或於簽核結束後，由ADM或HR因特殊原因產生-兩者得到denyID的過程不同
@@ -2159,11 +2159,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             if (((Label)e.Row.Cells[10].FindControl("lblAppStatus")).Text == "退回" || ((Label)e.Row.Cells[9].FindControl("lblAppStatus")).Text == "撤銷")
             {
-                ((Button)e.Row.Cells[11].FindControl("btnSearch_Deny")).Enabled = false;
+                ((LinkButton)e.Row.Cells[11].FindControl("btnSearch_Deny")).Enabled = false;
             }
             else
             {
-                ((Button)e.Row.Cells[11].FindControl("btnSearch_Deny")).Enabled = true;
+                ((LinkButton)e.Row.Cells[11].FindControl("btnSearch_Deny")).Enabled = true;
             }
         }
     }

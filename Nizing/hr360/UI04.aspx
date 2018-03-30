@@ -402,7 +402,8 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="人事退回" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:Button ID="btnSearch_Deny" runat="server" Text="退回" CssClass="btn btn-danger" OnClientClick="return confirmDeny();" OnClick="btnDeny_Click" />
+                                    <asp:LinkButton ID="btnSearch_Deny" runat="server" Text="退回" CssClass="btn btn-danger" OnClientClick="return confirmDeny();" OnClick="btnDeny_Click"></asp:LinkButton>
+                                    <%--<asp:Button ID="btnSearch_Deny" runat="server" Text="退回" CssClass="btn btn-danger" OnClientClick="return confirmDeny();" OnClick="btnDeny_Click" />--%>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
