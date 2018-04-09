@@ -18,11 +18,27 @@
             left:50%;
             text-align:center;
         }
+        .highlight{
+            background-color:lightblue;
+        }
+        .nohighlight{
+            background-color:none;
+        }
+        th td {
+            user-select: none; /* CSS3 (little to no support) */
+            -ms-user-select: none; /* IE 10+ */
+            -moz-user-select: none; /* Gecko (Firefox) */
+            -webkit-user-select: none; /* Webkit (Safari, Chrome) */
+        }
     </style>
     <script type="text/javascript">
         $(function () {
             $('.autosize').autosize();
         });
+        $(document).on('click', '#<%=tbApprovalPending.ClientID%> tr', function () {
+            $(this).toggleClass('highlight');
+        });
+        //$('td').attr('unselectable', 'on');
         $(document).ready(function () {
             $('.datepicker').datepicker({
                 language: 'zh-TW',
