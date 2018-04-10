@@ -122,7 +122,10 @@
             </div>
             <div class="default-content">
                 <ul>
-                    <%-- 最上面一排ID必須為url1，圖片才會變成預設顯示 --%>                    
+                    <%-- 最上面一排ID必須為url1，圖片才會變成預設顯示 --%>                        
+                    <li>
+                        <asp:HyperLink ID="url6" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20150225_Nizing_First_Day_Ceremony.jpg"> 2015.02.25 開工大吉~日進展開全新的一年! </asp:HyperLink>
+                    </li>                
                     <li>
                         <asp:HyperLink ID="url1" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20170108_year_end_banquet.jpg" NavigateUrl="https://www.facebook.com/pg/NIZING.ELECTRIC/photos/?tab=album&album_id=1328290773900592" Target="_blank"> 2017.01.08 日進尾牙圓滿落幕，恭喜各位大獎得主~ </asp:HyperLink>
                     </li>
@@ -137,9 +140,6 @@
                     </li>
                     <li>
                         <asp:HyperLink ID="url2" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20150513_optical_fiber_extrusion.jpg" NavigateUrl="https://www.facebook.com/367173643345648/videos/vb.367173643345648/902348333161507/?type=2&theater" Target="_blank"> 2015.05.13 導光型 100芯 玻璃光纖一次共壓~ </asp:HyperLink>
-                    </li>
-                    <li>
-                        <asp:HyperLink ID="url6" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20150225_Nizing_First_Day_Ceremony.jpg"> 2015.02.25 開工大吉~日進展開全新的一年! </asp:HyperLink>
                     </li>
                     <li style="border:none; text-align:right;">
                         <asp:HyperLink ID="urlMore" runat="server" NavigateUrl="news.aspx">more news...</asp:HyperLink>

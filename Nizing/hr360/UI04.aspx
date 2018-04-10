@@ -35,10 +35,21 @@
         $(function () {
             $('.autosize').autosize();
         });
-        $(document).on('click', '#<%=tbApprovalPending.ClientID%> tr', function () {
-            $(this).toggleClass('highlight');
-        });
-        //$('td').attr('unselectable', 'on');
+        //$(document).on('click', '.tbApprovalPending tr', function () {
+            //$('#<=tbApprovalPending.ClientID%> > tbody > tr').each($(this).toggleClass('highlight'));
+            //$(this).toggleClass('.highlight');
+            /*var rowList = document.getElementById('<=tbApprovalPending.ClientID%>').getElementsByTagName('tr');
+            for (var i = 1; i < rowList.length; i++) {
+                //alert(rowList[i].cells[0].innerHTML);
+                if (!rowList[i].hasAttribute('highlight')) {
+                    rowList[i].setAttribute('class', 'highlight');                    
+                }
+                else {
+                    rowList[i].removeAttribute('class', 'highlight');
+                }
+            }*/
+            
+        //});
         $(document).ready(function () {
             $('.datepicker').datepicker({
                 language: 'zh-TW',
@@ -91,7 +102,33 @@
             $("[data-toggle='popover']").popover({
                 trigger: 'click'
             });
+
+            <%--var ApprovalPendingTable = document.getElementById('<%=tbApprovalPending.ClientID%>');
+            var ApprovalRowList = ApprovalPendingTable.getElementsByTagName('tr');
+            ApprovalPendingTable.onclick = function (e) {
+                alert("row" + e.)
+            }; --%>
+            
+            $('.classApprovalPending tr').click(function () {
+                approvalTableSelection($(this).index());
+            });
         });
+        var approvalPendingAnchor = 0;
+        function approvalTableSelection(e) {
+            if (approvalPendingAnchor == 0) {
+                approvalPendingAnchor = e;
+            }
+            else {
+
+                selectBetween(approvalPendingAnchor, e);
+                approvalPendingAnchor = e;
+            }
+        }
+        function selectBetween(a, b) {
+            for (var i = a; i <= b; i++) {                    
+                $('.classApprovalPending tr').eq(i).addClass('highlight');
+            }            
+        }
         function confirmWithdrawal() {
             if (confirm('確定要撤銷此張假單嗎?')) {
                 return true;
@@ -289,7 +326,7 @@
                        
                         </div>
                         <div class="panel-body">
-                            <table id="tbApprovalPending" class="table col-xs-12" runat="server">
+                            <table id="tbApprovalPending" class="table col-xs-12 classApprovalPending" runat="server">
                             </table>
                         </div>
                     </div>
