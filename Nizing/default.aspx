@@ -124,10 +124,10 @@
                 <ul>
                     <%-- 最上面一排ID必須為url1，圖片才會變成預設顯示 --%>                        
                     <li>
-                        <asp:HyperLink ID="url6" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20150225_Nizing_First_Day_Ceremony.jpg"> 2015.02.25 開工大吉~日進展開全新的一年! </asp:HyperLink>
+                        <asp:HyperLink ID="url1" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20170108_year_end_banquet.jpg"> 2018.03.28 4/4(三)~4/8(日)為清明連假，為配合貨運公司，4/3出貨將於4/9送達，請多加留意~ </asp:HyperLink>
                     </li>                
                     <li>
-                        <asp:HyperLink ID="url1" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20170108_year_end_banquet.jpg" NavigateUrl="https://www.facebook.com/pg/NIZING.ELECTRIC/photos/?tab=album&album_id=1328290773900592" Target="_blank"> 2017.01.08 日進尾牙圓滿落幕，恭喜各位大獎得主~ </asp:HyperLink>
+                        <asp:HyperLink ID="url6" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20170108_year_end_banquet.jpg" NavigateUrl="https://www.facebook.com/pg/NIZING.ELECTRIC/photos/?tab=album&album_id=1328290773900592" Target="_blank"> 2017.01.08 日進尾牙圓滿落幕，恭喜各位大獎得主~ </asp:HyperLink>
                     </li>
                     <li>                        
                         <asp:HyperLink ID="url3" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20161117_inv_check_announce.jpg"> 2016.11.17 我司將於12/26~12/27進行年度盤點作業，最後出貨時間為12/23 17:00，並於12/28恢復正常作業。<br />我司將於2016/12/30(五)休假一日。 </asp:HyperLink>

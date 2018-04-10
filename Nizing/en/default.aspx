@@ -120,7 +120,10 @@
             </div>
             <div class="default-content">
                 <ul>
-                    <%-- 最上面一排ID必須為url1，圖片才會變成預設顯示 --%>                    
+                    <%-- 最上面一排ID必須為url1，圖片才會變成預設顯示 --%>      
+                    <li>
+                        <asp:HyperLink ID="HyperLink42" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20170108_year_end_banquet.jpg"> 2018.03.28 In accordance with the delivery company, no delivery will be made during the long weekend between 4/4~4/8, goods sent out on 4/3 will arrive no earlier than 4/9.</asp:HyperLink>
+                    </li>
                     <li>
                         <asp:HyperLink ID="url1" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20170108_year_end_banquet.jpg" NavigateUrl="https://www.facebook.com/pg/NIZING.ELECTRIC/photos/?tab=album&album_id=1328290773900592" Target="_blank"> 2017.01.08 Great fun at Nizing's Year-End Banquet, congratulations to all the prize winners! </asp:HyperLink>
                     </li>
@@ -135,9 +138,6 @@
                     </li>
                     <li>
                         <asp:HyperLink ID="url2" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20150513_optical_fiber_extrusion.jpg" NavigateUrl="https://www.facebook.com/367173643345648/videos/vb.367173643345648/902348333161507/?type=2&theater" Target="_blank"> 2015.05.13 Optical Fiber 100 strand extrusion! </asp:HyperLink>
-                    </li>
-                    <li>
-                        <asp:HyperLink ID="url6" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20150225_Nizing_First_Day_Ceremony.jpg"> 2015.02.25 First day back to work, Nizing is ready for a brand new year! </asp:HyperLink>
                     </li>
                     <li style="border:none; text-align:right;">
                         <asp:HyperLink ID="urlMore" runat="server" NavigateUrl="news.aspx">more news...</asp:HyperLink>

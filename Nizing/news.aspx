@@ -13,15 +13,10 @@
 <asp:Content ID="Content5" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div id="news">
         <ul>
+            <li>2018.03.28 4/4(三)~4/8(日)為清明連假，為配合貨運公司，4/3出貨將於4/9送達，請多加留意~</li>
             <li><a href="https://www.facebook.com/pg/NIZING.ELECTRIC/photos/?tab=album&album_id=1328290773900592" target="_blank">2017.01.08 日進尾牙圓滿落幕，恭喜各位大獎得主~</a></li>
             <li>2016.11.17 我司將於12/26~12/27進行年度盤點作業，最後出貨時間為12/23 17:00，並於12/28恢復正常作業。<br />我司將於2016/12/30(五)休假一日。</li>
             <li>2015.11.30 我司將於12/25~12/27進行年度結帳相關作業，最後出貨時間為12/24 17:00，並於12/28恢復正常作業</li>
-            <li>2015.08.27 一年一度的中元普度，保佑日進生意興隆~</li>
-            <li><a href="https://www.facebook.com/367173643345648/videos/vb.367173643345648/902348333161507/?type=2&theater" target="_blank">2015.05.13 導光型 100芯 玻璃光纖一次共壓~</a></li>
-            <li>2015.02.25 開工大吉~日進展開全新的一年!</li>
-            <li>2015.02.13 年關近了~恭賀新喜~ 祝大家過好年~</li>
-            <li>2015.01.25 日進尾牙圓滿落幕~ 恭喜各位大獎得主~</li>
-            <li><a href="https://www.facebook.com/%E6%97%A5%E9%80%B2%E9%9B%BB%E7%B7%9A%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-367173643345648/" target="_blank">2015.11.30 我司將於12/25~12/27進行年度結帳相關作業，最後出貨時間為12/24 17:00，並於12/28恢復正常作業</a></li>
             <li>2015.08.27 一年一度的中元普度，保佑日進生意興隆~</li>
             <li><a href="https://www.facebook.com/367173643345648/videos/vb.367173643345648/902348333161507/?type=2&amp;theater" target="_blank">2015.05.13 導光型 100芯 玻璃光纖一次共壓~</a></li>
     	    <li><a href="https://www.facebook.com/367173643345648/photos/pcb.861666613896346/861666393896368/?type=1&amp;theater" target="_blank">2015.02.25 開工大吉~日進展開全新的一年!</a></li>
