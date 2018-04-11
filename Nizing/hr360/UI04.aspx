@@ -102,16 +102,10 @@
             $("[data-toggle='popover']").popover({
                 trigger: 'click'
             });
-
-            <%--var ApprovalPendingTable = document.getElementById('<%=tbApprovalPending.ClientID%>');
-            var ApprovalRowList = ApprovalPendingTable.getElementsByTagName('tr');
-            ApprovalPendingTable.onclick = function (e) {
-                alert("row" + e.)
-            }; --%>
             
-            $('.classApprovalPending tr').click(function () {
-                approvalTableSelection($(this).index());
-            });
+            //$('.classApprovalPending tr').click(function () {
+            //    approvalTableSelection($(this).index());
+            //});
         });
         var approvalPendingAnchor = 0;
         function approvalTableSelection(e) {
