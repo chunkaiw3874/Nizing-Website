@@ -103,9 +103,9 @@
                 trigger: 'click'
             });
             
-            //$('.classApprovalPending tr').click(function () {
-            //    approvalTableSelection($(this).index());
-            //});
+            $('.classApprovalPending tr').click(function () {
+                approvalTableSelection($(this).index());
+            });
         });
         var approvalPendingAnchor = 0;
         function approvalTableSelection(e) {
