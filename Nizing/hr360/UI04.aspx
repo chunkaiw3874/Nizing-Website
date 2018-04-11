@@ -103,9 +103,12 @@
                 trigger: 'click'
             });
             
-            $('.classApprovalPending tr').click(function () {
-                approvalTableSelection($(this).index());
-            });
+            //$('.classApprovalPending tr').click(function () {
+            //    approvalTableSelection($(this).index());
+            //});
+function abcde(){
+
+}
         });
         var approvalPendingAnchor = 0;
         function approvalTableSelection(e) {
