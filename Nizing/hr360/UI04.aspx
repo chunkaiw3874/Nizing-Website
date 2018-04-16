@@ -35,21 +35,6 @@
         $(function () {
             $('.autosize').autosize();
         });
-        //$(document).on('click', '.tbApprovalPending tr', function () {
-            //$('#<=tbApprovalPending.ClientID%> > tbody > tr').each($(this).toggleClass('highlight'));
-            //$(this).toggleClass('.highlight');
-            /*var rowList = document.getElementById('<=tbApprovalPending.ClientID%>').getElementsByTagName('tr');
-            for (var i = 1; i < rowList.length; i++) {
-                //alert(rowList[i].cells[0].innerHTML);
-                if (!rowList[i].hasAttribute('highlight')) {
-                    rowList[i].setAttribute('class', 'highlight');                    
-                }
-                else {
-                    rowList[i].removeAttribute('class', 'highlight');
-                }
-            }*/
-            
-        //});
         $(document).ready(function () {
             $('.datepicker').datepicker({
                 language: 'zh-TW',
@@ -103,28 +88,79 @@
                 trigger: 'click'
             });
             
-            //$('.classApprovalPending tr').click(function () {
-            //    approvalTableSelection($(this).index());
-            //});
-function abcde(){
-
-}
+            $('.classApprovalPending tr').click(function () {
+                approvalTableSelection($(this).index());
+            }
+            );
         });
         var approvalPendingAnchor = 0;
         function approvalTableSelection(e) {
-            if (approvalPendingAnchor == 0) {
-                approvalPendingAnchor = e;
+            if (e != 0) {
+                if (window.event.shiftKey) {
+                    if (approvalPendingAnchor == 0) {
+                        selectBetweenItemsIntbApprovalPending(e, e);
+                        approvalPendingAnchor = e;
+                    }
+                    else {
+                        if (approvalPendingAnchor <= e) {
+                            selectBetweenItemsIntbApprovalPending(approvalPendingAnchor, e);
+                        }
+                        else {
+                            selectBetweenItemsIntbApprovalPending(e, approvalPendingAnchor);
+                        }
+                        approvalPendingAnchor = e;
+                    }
+                }
+                else if (window.event.ctrlKey) {
+                    $('.classApprovalPending tr').eq(e).toggleClass('highlight');
+                    approvalPendingAnchor = e;
+                }
+                else {
+                    var isSelected = false;
+                    var isClickedSelected = false;
+                    var numberSelected = 0;
+                    for (var i = 1; i <= $('.classApprovalPending tr').length; i++) {
+                        if ($('.classApprovalPending tr').eq(i).hasClass('highlight')) {
+                            isSelected = true;
+                            if (i == e) {
+                                isClickedSelected = true;
+                            }
+                            numberSelected++;
+                        }
+                    }
+                    if (isSelected) {
+                        if (!isClickedSelected || numberSelected != 1) {
+                            clearSelectionOntbApprovalPending();
+                        }
+                    }
+
+                    $('.classApprovalPending tr').eq(e).toggleClass('highlight');
+                    approvalPendingAnchor = e;
+                }
             }
             else {
-
-                selectBetween(approvalPendingAnchor, e);
-                approvalPendingAnchor = e;
             }
         }
-        function selectBetween(a, b) {
+        function selectBetweenItemsIntbApprovalPending(a, b) {
             for (var i = a; i <= b; i++) {                    
                 $('.classApprovalPending tr').eq(i).addClass('highlight');
             }            
+        }
+        function clearSelectionOntbApprovalPending(){
+            for(var i=1; i<= $('.classApprovalPending tr').length; i++){
+                $('.classApprovalPending tr').eq(i).removeClass('highlight');
+            }
+        }
+        function storeApprovalPendingSelectionToHiddenField() {
+            var selectionList = [];
+            var applicationID = "";
+            for (var i = 1; i <= $('.classApprovalPending tr').length; i++) {
+                if ($('.classApprovalPending tr').eq(i).hasClass('highlight')) {
+                    applicationID = $('.classApprovalPending tr').eq(i).find('td').eq(0).text();
+                    selectionList.push(applicationID);
+                }
+            }
+            $('#hdnApprovalPendingSelection').val(selectionList);
         }
         function confirmWithdrawal() {
             if (confirm('確定要撤銷此張假單嗎?')) {
@@ -135,12 +171,13 @@ function abcde(){
             }
         };
         function confirmApprove() {
-            if (confirm('確定要簽核此張假單嗎?')) {                
+            if (confirm('確定要簽核選取的假單嗎?')) {
+                storeApprovalPendingSelectionToHiddenField();
                 return true;
             }
             else {
                 return false;
-            }
+            }            
         };
         function confirmDeny() {
             var reason = prompt("請輸入退回原因(必填、50字內):");
@@ -165,7 +202,7 @@ function abcde(){
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="top_menu" runat="Server">
 </asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="page_content" runat="Server">
+<asp:Content ID="Content4" ContentPlaceHolderID="page_content" runat="Server">    
     <div class="container">
         <%--<div id="test_section">
             <div class="row form-group">
@@ -181,11 +218,6 @@ function abcde(){
             <hr />
         </div>--%>
         <div id="application_section">
-            <%--<div class="row form-group">
-                <div class="col-xs-12">
-                    <h2>新申請</h2>
-                </div>
-            </div>--%>
             <div class="row form-group" style="margin-top: 10px;">
                 <div class="col-xs-12">
                     <span class="label label-info" id="btnDayOffAppVisibility" style="cursor: pointer; font-size: 20px;">我要請假</span>
@@ -323,6 +355,11 @@ function abcde(){
                        
                         </div>
                         <div class="panel-body">
+                            <div style="color:red;">
+                                *請先點選要簽核的假單，再點選最上層的"簽核"按鈕;如欲一次簽核多張假單，可按住Shift一次選擇，或按住Ctrl增選<br />
+                                **退回不可複選
+                            </div>
+                            <asp:HiddenField ID="hdnApprovalPendingSelection" ClientIDMode="Static" runat="server" />
                             <table id="tbApprovalPending" class="table col-xs-12 classApprovalPending" runat="server">
                             </table>
                         </div>
@@ -461,6 +498,6 @@ function abcde(){
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
 </asp:Content>
 
