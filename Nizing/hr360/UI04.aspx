@@ -358,6 +358,7 @@
                             <div style="color:red;">
                                 *請先點選要簽核的假單，再點選最上層的"簽核"按鈕;如欲一次簽核多張假單，可按住Shift一次選擇，或按住Ctrl增選<br />
                                 **退回不可複選
+                                ***如操作上有疑問，請詢問人事部
                             </div>
                             <asp:HiddenField ID="hdnApprovalPendingSelection" ClientIDMode="Static" runat="server" />
                             <table id="tbApprovalPending" class="table col-xs-12 classApprovalPending" runat="server">
