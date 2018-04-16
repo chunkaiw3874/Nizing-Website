@@ -24,7 +24,7 @@
         .nohighlight{
             background-color:none;
         }
-        th td {
+        .noselect {
             user-select: none; /* CSS3 (little to no support) */
             -ms-user-select: none; /* IE 10+ */
             -moz-user-select: none; /* Gecko (Firefox) */
@@ -361,7 +361,7 @@
                                 ***如操作上有疑問，請詢問人事部
                             </div>
                             <asp:HiddenField ID="hdnApprovalPendingSelection" ClientIDMode="Static" runat="server" />
-                            <table id="tbApprovalPending" class="table col-xs-12 classApprovalPending" runat="server">
+                            <table id="tbApprovalPending" class="table col-xs-12 classApprovalPending noselect" runat="server">
                             </table>
                         </div>
                     </div>
