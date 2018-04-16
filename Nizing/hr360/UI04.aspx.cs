@@ -40,11 +40,12 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Session["user_id"] = "0007";    //test only to avoid error on loading, delete after trial            
         if (Session["user_id"].ToString().ToUpper().Trim() != "ADMIN")  //admin doesnt have the proper erp information and will crash the system
         {
             if (!IsPostBack)
             {
-                //Session["erp_id"] = "0080"; //test only to avoid error on loading, delete after trial            
+                //Session["erp_id"] = "0007"; //test only to avoid error on loading, delete after trial            
                 ApplicationSection_Init_Load();
                 InProgressSection_Init_Load();
                 ApprovalSection_Init_Load();
@@ -983,6 +984,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         tbApprovalPending.Rows.Clear();
 
         HtmlTableRow newHeaderRow = new HtmlTableRow();
+        newHeaderRow.Attributes.Add("style", "background-color:lightblue; color:white;");
         HtmlTableCell newHeaderCell = new HtmlTableCell("th");
         newHeaderCell.InnerText = "假單ID";
         newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
@@ -1020,8 +1022,14 @@ public partial class hr360_UI04 : System.Web.UI.Page
         newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
         newHeaderRow.Controls.Add(newHeaderCell);
         newHeaderCell = new HtmlTableCell("th");
-        newHeaderCell.InnerText = "";
-        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        Button btn = new Button();
+        //btn.ID = "btnApprove" + i;
+        btn.Text = "簽核";
+        btn.CssClass = "btn btn-success";
+        btn.OnClientClick = "javascript:return confirmApprove();";
+        btn.Click += new EventHandler(btnApprove_Click);
+        newHeaderCell.Controls.Add(btn);
+        newHeaderCell.Attributes.Add("style", "text-align:center;");
         newHeaderRow.Controls.Add(newHeaderCell);
         newHeaderCell = new HtmlTableCell("th");
         newHeaderCell.InnerText = "";
@@ -1082,16 +1090,16 @@ public partial class hr360_UI04 : System.Web.UI.Page
             cell.InnerText = dt.Rows[i][10].ToString();
             cell.Attributes.Add("style", "text-align:center;");
             newRow.Controls.Add(cell);
-            cell = new HtmlTableCell();
-            Button btn = new Button();
-            btn.ID = "btnApprove" + i;
-            btn.Text = "簽核";
-            btn.CssClass = "btn btn-success";
-            btn.OnClientClick = "javascript:return confirmApprove();";
-            btn.Click += new EventHandler(btnApprove_Click);
-            cell.Controls.Add(btn);
-            cell.Attributes.Add("style", "text-align:center;");
-            newRow.Controls.Add(cell);
+            //cell = new HtmlTableCell();
+            //Button btn = new Button();
+            //btn.ID = "btnApprove" + i;
+            //btn.Text = "簽核";
+            //btn.CssClass = "btn btn-success";
+            //btn.OnClientClick = "javascript:return confirmApprove();";
+            ////btn.Click += new EventHandler(btnApprove_Click);
+            //cell.Controls.Add(btn);
+            //cell.Attributes.Add("style", "text-align:center;");
+            //newRow.Controls.Add(cell);
             cell = new HtmlTableCell();
             btn = new Button();
             btn.ID = "btnDeny" + i;
@@ -1227,121 +1235,157 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// <param name="e"></param>
     protected void btnApprove_Click(object sender, EventArgs e)
     {
-        Button btn = (Button)sender;
-        string btnID = btn.ID;
-        int rowNumber = Convert.ToInt16(btn.ID.Substring(10, btn.ID.Length - 10));
-        string approveID = tbApprovalPending.Rows[rowNumber + 1].Cells[0].InnerText;
-        string approveID_status = "";
-        string applicantID = "";
-        string memberOf = "";
-        string nextReviewer = Session["erp_id"].ToString();
-        DataTable dtApplicant = new DataTable();
-        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        string[] list = hdnApprovalPendingSelection.Value.ToString().Split(',');
+        foreach (string s in list)
         {
-            conn.Open();            
-            //get current state of the application
-            string query = "SELECT APP.APPLICATION_STATUS_ID,HIER.MEMBEROF,APP.APPLICANT_ID"
-                        + " FROM HR360_DAYOFFAPPLICATION_APPLICATION APP"
-                        + " LEFT JOIN NZ.dbo.CMSMV MV ON APP.APPLICANT_ID=MV.MV001"
-                        + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MV.MV006=HIER.JOB_ID"
-                        + " WHERE APPLICATION_ID=@APP_ID";
-            SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@APP_ID", approveID);
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            da.Fill(dtApplicant);
-        }
-        approveID_status = dtApplicant.Rows[0][0].ToString();
-        memberOf = dtApplicant.Rows[0][1].ToString();
-        applicantID = dtApplicant.Rows[0][2].ToString().Trim();
-        do
-        {
+            string approveID = s;
+            string approveID_status = "";
+            string applicantID = "";
+            string memberOf = "";
+            string nextReviewer = Session["erp_id"].ToString();
+            DataTable dtApplicant = new DataTable();
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
-                //insert approval trail to DB
-                string query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B (APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID)"
-                    + " VALUES(@APP_ID,GETDATE(),@EXE_ID,'02')";
+                //get current state of the application
+                string query = "SELECT APP.APPLICATION_STATUS_ID,HIER.MEMBEROF,APP.APPLICANT_ID"
+                            + " FROM HR360_DAYOFFAPPLICATION_APPLICATION APP"
+                            + " LEFT JOIN NZ.dbo.CMSMV MV ON APP.APPLICANT_ID=MV.MV001"
+                            + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MV.MV006=HIER.JOB_ID"
+                            + " WHERE APPLICATION_ID=@APP_ID";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@APP_ID", approveID);
-                cmd.Parameters.AddWithValue("@EXE_ID", nextReviewer);
-                cmd.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dtApplicant);
             }
-            //update application status to next stage
-            approveID_status = (Convert.ToInt16(approveID_status) + 1).ToString("D2");
-            if (approveID_status == "02")  //代理人簽核通過，搜尋第一層簽核人(部門最高負責人 BELOW RANK 7)
+            approveID_status = dtApplicant.Rows[0][0].ToString();
+            memberOf = dtApplicant.Rows[0][1].ToString();
+            applicantID = dtApplicant.Rows[0][2].ToString().Trim();
+            do
             {
                 using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                 {
                     conn.Open();
-                    DataTable dt = new DataTable();
-                    //get applicant's dept
-                    string query = "SELECT MV.MV004,HIER.[RANK]"
-                                + " FROM NZ.dbo.CMSMV MV"
-                                + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MV.MV006=HIER.JOB_ID"
-                                + " WHERE MV.MV001=@ID";
+                    //insert approval trail to DB
+                    string query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B (APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID)"
+                        + " VALUES(@APP_ID,GETDATE(),@EXE_ID,'02')";
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@ID", applicantID);
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    da.Fill(dt);
-                    //第一層簽核 限制:RANK 2-7、RANK高於申請者RANK、同部門或可替換部門
-                    query = ";WITH REF_DEPT"
-                        + " AS"
-                        + " ("
-                        + " SELECT REF.DEPT_MAIN MAIN,REF.DEPT_REF REF"
-                        + " FROM NZ.dbo.CMSMV MV"
-                        + " LEFT JOIN HR360_DAYOFFAPPLICATION_DEPT_REFERENCE REF ON MV.MV004=REF.DEPT_MAIN AND REF.ACTIVE=1"
-                        + " WHERE MV.MV001=@ID"
-                        + " )"
-                        + " SELECT TOP 1 MV.MV001,MV.MV002,MV.MV004,MK.MK001,HIER.[RANK],HIER.MEMBEROF"
-                        + " FROM NZ.dbo.CMSMV MV"
-                        + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
-                        + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
-                        + " LEFT JOIN REF_DEPT REF ON MV.MV004=REF.MAIN OR MV.MV004=REF.REF"
-                        + " WHERE MV.MV022=''"
-                        + " AND MV.MV001<>'0000'"
-                        + " AND MV.MV001<>'0098'"
-                        + " AND MV.MV001<>@ID"
-                        + " AND (MV.MV004=@DEPT OR MV.MV004=REF.REF)"
-                        + " AND HIER.[RANK] > @RANK"
-                        + " AND HIER.[RANK] BETWEEN 2 AND 7"
-                        + " AND MV.MV004<>'B-C'"  //SPECIAL RULE FOR 上膠部，因為沒人會電腦，故上膠部請假直接到第二層，由生管口頭詢問上膠主管 (DELETE WHEN SITUATION CHANGES)
-                        + " AND MV.MV004<>'A-SD'"   //KELVEN不需要簽核，業務部主管簽核由SYSTEM直接過 (DELETE WHEN SITUATION CHANGES)
-                        + " ORDER BY HIER.[RANK] DESC,MV.MV001";
-                    cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@ID", applicantID);
-                    cmd.Parameters.AddWithValue("@DEPT", dt.Rows[0][0].ToString().Trim());
-                    cmd.Parameters.AddWithValue("@RANK", dt.Rows[0][1].ToString().Trim());
-                    dt = new DataTable();
-                    da = new SqlDataAdapter(cmd);
-                    da.Fill(dt);
-                    if (dt.Rows.Count > 0)
+                    cmd.Parameters.AddWithValue("@APP_ID", approveID);
+                    cmd.Parameters.AddWithValue("@EXE_ID", nextReviewer);
+                    cmd.ExecuteNonQuery();
+                }
+                //update application status to next stage
+                approveID_status = (Convert.ToInt16(approveID_status) + 1).ToString("D2");
+                if (approveID_status == "02")  //代理人簽核通過，搜尋第一層簽核人(部門最高負責人 BELOW RANK 7)
+                {
+                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                     {
-                        nextReviewer = dt.Rows[0][0].ToString().Trim();
+                        conn.Open();
+                        DataTable dt = new DataTable();
+                        //get applicant's dept
+                        string query = "SELECT MV.MV004,HIER.[RANK]"
+                                    + " FROM NZ.dbo.CMSMV MV"
+                                    + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MV.MV006=HIER.JOB_ID"
+                                    + " WHERE MV.MV001=@ID";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@ID", applicantID);
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(dt);
+                        //第一層簽核 限制:RANK 2-7、RANK高於申請者RANK、同部門或可替換部門
+                        query = ";WITH REF_DEPT"
+                            + " AS"
+                            + " ("
+                            + " SELECT REF.DEPT_MAIN MAIN,REF.DEPT_REF REF"
+                            + " FROM NZ.dbo.CMSMV MV"
+                            + " LEFT JOIN HR360_DAYOFFAPPLICATION_DEPT_REFERENCE REF ON MV.MV004=REF.DEPT_MAIN AND REF.ACTIVE=1"
+                            + " WHERE MV.MV001=@ID"
+                            + " )"
+                            + " SELECT TOP 1 MV.MV001,MV.MV002,MV.MV004,MK.MK001,HIER.[RANK],HIER.MEMBEROF"
+                            + " FROM NZ.dbo.CMSMV MV"
+                            + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
+                            + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
+                            + " LEFT JOIN REF_DEPT REF ON MV.MV004=REF.MAIN OR MV.MV004=REF.REF"
+                            + " WHERE MV.MV022=''"
+                            + " AND MV.MV001<>'0000'"
+                            + " AND MV.MV001<>'0098'"
+                            + " AND MV.MV001<>@ID"
+                            + " AND (MV.MV004=@DEPT OR MV.MV004=REF.REF)"
+                            + " AND HIER.[RANK] > @RANK"
+                            + " AND HIER.[RANK] BETWEEN 2 AND 7"
+                            + " AND MV.MV004<>'B-C'"  //SPECIAL RULE FOR 上膠部，因為沒人會電腦，故上膠部請假直接到第二層，由生管口頭詢問上膠主管 (DELETE WHEN SITUATION CHANGES)
+                            + " AND MV.MV004<>'A-SD'"   //KELVEN不需要簽核，業務部主管簽核由SYSTEM直接過 (DELETE WHEN SITUATION CHANGES)
+                            + " ORDER BY HIER.[RANK] DESC,MV.MV001";
+                        cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@ID", applicantID);
+                        cmd.Parameters.AddWithValue("@DEPT", dt.Rows[0][0].ToString().Trim());
+                        cmd.Parameters.AddWithValue("@RANK", dt.Rows[0][1].ToString().Trim());
+                        dt = new DataTable();
+                        da = new SqlDataAdapter(cmd);
+                        da.Fill(dt);
+                        if (dt.Rows.Count > 0)
+                        {
+                            nextReviewer = dt.Rows[0][0].ToString().Trim();
+                        }
+                        else
+                        {
+                            nextReviewer = "SYSTEM";
+                        }
+                    }
+                }
+                else if (approveID_status == "03")  //第一層通過，搜尋第二層審核者(廠長/副廠長/生管主任)
+                {
+                    //產線才需要第二層(廠長)簽核，辦公室直接通過
+                    if (memberOf == "產線")
+                    {
+                        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                        {
+                            conn.Open();
+                            //簽核限制:產線 RANK 4-6
+                            string query = "SELECT TOP 1 MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
+                                        + " FROM NZ.dbo.CMSMV MV"
+                                        + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
+                                        + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
+                                        + " WHERE MV.MV022=''"
+                                        + " AND HIER.MEMBEROF='產線'"
+                                        + " AND HIER.[RANK] BETWEEN 4 AND 6"
+                                        + " AND MV.MV001<>@ID"
+                                        + " ORDER BY HIER.[RANK] DESC";
+                            SqlCommand cmd = new SqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@ID", applicantID);
+                            DataTable dt = new DataTable();
+                            SqlDataAdapter da = new SqlDataAdapter(cmd);
+                            da.Fill(dt);
+                            if (dt.Rows.Count > 0)
+                            {
+                                nextReviewer = dt.Rows[0][0].ToString().Trim();
+                            }
+                            else
+                            {
+                                nextReviewer = "SYSTEM";
+                            }
+                        }
                     }
                     else
                     {
                         nextReviewer = "SYSTEM";
                     }
                 }
-            }
-            else if (approveID_status == "03")  //第一層通過，搜尋第二層審核者(廠長/副廠長/生管主任)
-            {
-                //產線才需要第二層(廠長)簽核，辦公室直接通過
-                if (memberOf == "產線")
+                else if (approveID_status == "04")  //第二層通過，搜尋第三層審核者(人事主任)
                 {
                     using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                     {
                         conn.Open();
-                        //簽核限制:產線 RANK 4-6
-                        string query = "SELECT TOP 1 MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
+                        //簽核限制:人事主任 RANK 7 (2018.03.12 現行丟給ABBIE，因職位未到人事主任，故用ERP ID強制丟給ABBIE)
+                        string query = "SELECT MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
                                     + " FROM NZ.dbo.CMSMV MV"
                                     + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
                                     + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
                                     + " WHERE MV.MV022=''"
-                                    + " AND HIER.MEMBEROF='產線'"
-                                    + " AND HIER.[RANK] BETWEEN 4 AND 6"
                                     + " AND MV.MV001<>@ID"
-                                    + " ORDER BY HIER.[RANK] DESC";
+                            //+ " AND MK.MK001='A20'"           
+                            //+ " AND HIER.[RANK]=7";
+                                    + " AND MV.MV001='0125'" //NEED FIX: 強制將假單丟給ABBIE審核人事部分，如升為人事主任後改回
+                                    + " AND MK.MK001='A21'";
                         SqlCommand cmd = new SqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@ID", applicantID);
                         DataTable dt = new DataTable();
@@ -1357,101 +1401,68 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         }
                     }
                 }
-                else
+                else if (approveID_status == "05")  //第三層通過，搜尋第四層審核者(副總)
                 {
-                    nextReviewer = "SYSTEM";
+                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                    {
+                        conn.Open();
+                        //簽核限制:副總 RANK 8
+                        string query = "SELECT MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
+                                    + " FROM NZ.dbo.CMSMV MV"
+                                    + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
+                                    + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
+                                    + " WHERE MV.MV022=''"
+                                    + " AND MV.MV001<>@ID"
+                                    + " AND MK.MK001='A03'"
+                                    + " AND HIER.[RANK]=8";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@ID", applicantID);
+                        DataTable dt = new DataTable();
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(dt);
+                        if (dt.Rows.Count > 0)
+                        {
+                            nextReviewer = dt.Rows[0][0].ToString().Trim();
+                        }
+                        else
+                        {
+                            nextReviewer = "SYSTEM";
+                        }
+                    }
                 }
-            }
-            else if (approveID_status == "04")  //第二層通過，搜尋第三層審核者(人事主任)
-            {
+                else if (approveID_status == "06")
+                {
+                    nextReviewer = "";
+                }
                 using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                 {
+                    //update application with new status and reviewer
                     conn.Open();
-                    //簽核限制:人事主任 RANK 7 (2018.03.12 現行丟給ABBIE，因職位未到人事主任，故用ERP ID強制丟給ABBIE)
-                    string query = "SELECT MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
-                                + " FROM NZ.dbo.CMSMV MV"
-                                + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
-                                + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
-                                + " WHERE MV.MV022=''"
-                                + " AND MV.MV001<>@ID"
-                                //+ " AND MK.MK001='A20'"           
-                                //+ " AND HIER.[RANK]=7";
-                                + " AND MV.MV001='0125'" //NEED FIX: 強制將假單丟給ABBIE審核人事部分，如升為人事主任後改回
-                                + " AND MK.MK001='A21'";
+                    string query = "UPDATE HR360_DAYOFFAPPLICATION_APPLICATION"
+                            + " SET APPLICATION_STATUS_ID=@STATUS,NEXT_REVIEWER=@REVIEWER"
+                            + " WHERE APPLICATION_ID=@APPLICATION";
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@ID", applicantID);
-                    DataTable dt = new DataTable();
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    da.Fill(dt);
-                    if (dt.Rows.Count > 0)
-                    {
-                        nextReviewer = dt.Rows[0][0].ToString().Trim();
-                    }
-                    else
-                    {
-                        nextReviewer = "SYSTEM";
-                    }
+                    cmd.Parameters.AddWithValue("@STATUS", approveID_status);
+                    cmd.Parameters.AddWithValue("@REVIEWER", nextReviewer);
+                    cmd.Parameters.AddWithValue("@APPLICATION", approveID);
+                    cmd.ExecuteNonQuery();
                 }
-            }
-            else if (approveID_status == "05")  //第三層通過，搜尋第四層審核者(副總)
+                System.Threading.Thread.Sleep(1000);    //sleeps for 1 second before continuing so trail records can be ordered by time
+            } while (nextReviewer == "SYSTEM" && approveID_status != "06"); //stops when somebody is required to review the application,
+            //or when approval status reached 6, which means the application is approved by everyone necessary
+            //automatic approval should only happen on 1st and 2nd level,
+            //3rd and 4th level should always have reviewer (人事主管/副總)
+            if (approveID_status != "06")
             {
-                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-                {
-                    conn.Open();
-                    //簽核限制:副總 RANK 8
-                    string query = "SELECT MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
-                                + " FROM NZ.dbo.CMSMV MV"
-                                + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
-                                + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
-                                + " WHERE MV.MV022=''"
-                                + " AND MV.MV001<>@ID"
-                                + " AND MK.MK001='A03'"
-                                + " AND HIER.[RANK]=8";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@ID", applicantID);
-                    DataTable dt = new DataTable();
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    da.Fill(dt);
-                    if (dt.Rows.Count > 0)
-                    {
-                        nextReviewer = dt.Rows[0][0].ToString().Trim();
-                    }
-                    else
-                    {
-                        nextReviewer = "SYSTEM";
-                    }
-                }
+                SendEmailNotification(approveID, 1);
             }
-            else if (approveID_status == "06")
+            else
             {
-                nextReviewer = "";
+                SendEmailNotification(approveID, 4);
             }
-            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-            {
-                //update application with new status and reviewer
-                conn.Open();
-                string query = "UPDATE HR360_DAYOFFAPPLICATION_APPLICATION"
-                        + " SET APPLICATION_STATUS_ID=@STATUS,NEXT_REVIEWER=@REVIEWER"
-                        + " WHERE APPLICATION_ID=@APPLICATION";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@STATUS", approveID_status);
-                cmd.Parameters.AddWithValue("@REVIEWER", nextReviewer);
-                cmd.Parameters.AddWithValue("@APPLICATION", approveID);
-                cmd.ExecuteNonQuery();
-            }
-            System.Threading.Thread.Sleep(1000);    //sleeps for 1 second before continuing so trail records can be ordered by time
-        } while (nextReviewer == "SYSTEM" && approveID_status != "06"); //stops when somebody is required to review the application,
-                                                                        //or when approval status reached 6, which means the application is approved by everyone necessary
-                                                                        //automatic approval should only happen on 1st and 2nd level,
-                                                                        //3rd and 4th level should always have reviewer (人事主管/副總)
-        if (approveID_status != "06")
-        {
-            SendEmailNotification(approveID, 1);
         }
-        else
-        {
-            SendEmailNotification(approveID, 4);
-        }
+
+        //fill table after selection iteration is done, or it'll mess up the table row selection
         fillApprovalTable();
     }
     /// <summary>
