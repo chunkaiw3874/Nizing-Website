@@ -13,6 +13,7 @@
 <asp:Content ID="Content5" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div id="news">
         <ul>
+            <li><a href="https://www.facebook.com/NIZING.ELECTRIC/photos/pb.367173643345648.-2207520000.1524197134./1818663161530015/?type=3&theater" Target="_blank"> 2018.04.20 Moving Notice: Nizing will be moving to a new location on 2018.05.14, we will have new address, phone number, and fax number, please contact us if there's any questions or concerns.</a></li>
             <li>2018.03.28 In accordance with the delivery company, no delivery will be made during the long weekend between 4/4~4/8, goods sent out on 4/3 will arrive no earlier than 4/9.</li>
             <li><a href="https://www.facebook.com/pg/NIZING.ELECTRIC/photos/?tab=album&album_id=1328290773900592" Target="_blank"> 2017.01.08 Great fun at Nizing's Year-End Banquet, congratulations to all the prize winners! </a></li>
             <li>2016.11.17 We will be conducting End-Of-Year Inventory Check between 12/26 and 12/27, no goods will be distributed during those date. Operation will be back to normal on 12/28. Office is closed on 12/30.</li>

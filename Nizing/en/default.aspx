@@ -122,10 +122,13 @@
                 <ul>
                     <%-- 最上面一排ID必須為url1，圖片才會變成預設顯示 --%>      
                     <li>
-                        <asp:HyperLink ID="HyperLink42" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20170108_year_end_banquet.jpg"> 2018.03.28 In accordance with the delivery company, no delivery will be made during the long weekend between 4/4~4/8, goods sent out on 4/3 will arrive no earlier than 4/9.</asp:HyperLink>
+                        <asp:HyperLink ID="url1" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20180420_moving_notice.jpg" NavigateUrl="https://www.facebook.com/NIZING.ELECTRIC/photos/pb.367173643345648.-2207520000.1524197134./1818663161530015/?type=3&theater" Target="_blank"> 2018.04.20 Moving Notice: Nizing will be moving to a new location on 2018.05.14, we will have new address, phone number, and fax number, please contact us if there's any questions or concerns.</asp:HyperLink>
                     </li>
                     <li>
-                        <asp:HyperLink ID="url1" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20170108_year_end_banquet.jpg" NavigateUrl="https://www.facebook.com/pg/NIZING.ELECTRIC/photos/?tab=album&album_id=1328290773900592" Target="_blank"> 2017.01.08 Great fun at Nizing's Year-End Banquet, congratulations to all the prize winners! </asp:HyperLink>
+                        <asp:HyperLink ID="url2" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20170108_year_end_banquet.jpg"> 2018.03.28 In accordance with the delivery company, no delivery will be made during the long weekend between 4/4~4/8, goods sent out on 4/3 will arrive no earlier than 4/9.</asp:HyperLink>
+                    </li>
+                    <li>
+                        <asp:HyperLink ID="url6" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20170108_year_end_banquet.jpg" NavigateUrl="https://www.facebook.com/pg/NIZING.ELECTRIC/photos/?tab=album&album_id=1328290773900592" Target="_blank"> 2017.01.08 Great fun at Nizing's Year-End Banquet, congratulations to all the prize winners! </asp:HyperLink>
                     </li>
                     <li>
                         <asp:HyperLink ID="url3" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20161117_inv_check_announce.jpg">2016.11.17 We will be conducting End-Of-Year Inventory Check between 12/26 and 12/27, no goods will be distributed during those date. Operation will be back to normal on 12/28.<br /> Office is closed on 12/30. </asp:HyperLink>
@@ -135,9 +138,6 @@
                     </li>
                     <li>
                         <asp:HyperLink ID="url5" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20150827中元普渡.jpg"> 2015.08.27 Spirit Festival~ May the spirits watch over us~ </asp:HyperLink>
-                    </li>
-                    <li>
-                        <asp:HyperLink ID="url2" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20150513_optical_fiber_extrusion.jpg" NavigateUrl="https://www.facebook.com/367173643345648/videos/vb.367173643345648/902348333161507/?type=2&theater" Target="_blank"> 2015.05.13 Optical Fiber 100 strand extrusion! </asp:HyperLink>
                     </li>
                     <li style="border:none; text-align:right;">
                         <asp:HyperLink ID="urlMore" runat="server" NavigateUrl="news.aspx">more news...</asp:HyperLink>
