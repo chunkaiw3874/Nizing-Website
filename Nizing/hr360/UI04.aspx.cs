@@ -40,34 +40,41 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "0007";    //test only to avoid error on loading, delete after trial            
-        if (Session["user_id"].ToString().ToUpper().Trim() != "ADMIN")  //admin doesnt have the proper erp information and will crash the system
+        if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
         {
-            if (!IsPostBack)
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('連線已逾時，將會回到登入頁面');window.location='login.aspx'", true);
+        }
+        else
+        {
+            //Session["user_id"] = "0007";    //test only to avoid error on loading, delete after trial            
+            if (Session["user_id"].ToString().ToUpper().Trim() != "ADMIN")  //admin doesnt have the proper erp information and will crash the system
             {
-                //Session["erp_id"] = "0007"; //test only to avoid error on loading, delete after trial            
-                ApplicationSection_Init_Load();
-                InProgressSection_Init_Load();
-                ApprovalSection_Init_Load();
-                SearchSection_Init_Load();
-            }
-            else
-            {
-                ApplicationSection_PostBack_Load();
-                InProgressSection_PostBack_Load();
-                ApprovalSection_PostBack_Load();
-            }
+                if (!IsPostBack)
+                {
+                    //Session["erp_id"] = "0007"; //test only to avoid error on loading, delete after trial            
+                    ApplicationSection_Init_Load();
+                    InProgressSection_Init_Load();
+                    ApprovalSection_Init_Load();
+                    SearchSection_Init_Load();
+                }
+                else
+                {
+                    ApplicationSection_PostBack_Load();
+                    InProgressSection_PostBack_Load();
+                    ApprovalSection_PostBack_Load();
+                }
 
-            //hidden field that contains normal work hour per day for current user
-            if (Session["erp_id"].ToString() == "0010")  //小倩8.5hr/day
-            {
-                hdnNormalWorkHour.Value = "8.5";
+                //hidden field that contains normal work hour per day for current user
+                if (Session["erp_id"].ToString() == "0010")  //小倩8.5hr/day
+                {
+                    hdnNormalWorkHour.Value = "8.5";
+                }
+                else
+                {
+                    hdnNormalWorkHour.Value = "8";
+                }
+                btnSearchSubmit_Click(sender, e);   //does search automatically everytime page loads
             }
-            else
-            {
-                hdnNormalWorkHour.Value = "8";
-            }
-            btnSearchSubmit_Click(sender, e);   //does search automatically everytime page loads
         }
     }
 

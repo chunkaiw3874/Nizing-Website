@@ -12,8 +12,7 @@ public partial class masterPage_HR360_Master : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Page.MaintainScrollPositionOnPostBack = true;
-        //Response.Cache.SetNoStore();
+       
     }
     public string Encrypt(string clearText)
     {
