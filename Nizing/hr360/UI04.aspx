@@ -171,13 +171,20 @@
             }
         };
         function confirmApprove() {
-            if (confirm('確定要簽核選取的假單嗎?')) {
-                storeApprovalPendingSelectionToHiddenField();
-                return true;
+            storeApprovalPendingSelectionToHiddenField();
+            if ($('#hdnApprovalPendingSelection').val().trim() != "") {
+                if (confirm('確定要簽核選取的假單嗎?')) {
+
+                    return true;
+                }
+                else {
+                    return false;
+                }
             }
             else {
+                alert("尚未選取要簽核的假單，請先點選要簽核的假單 (被選取的假單，背景顏色會變成藍色)");
                 return false;
-            }            
+            }
         };
         function confirmDeny() {
             var reason = prompt("請輸入退回原因(必填、50字內):");
