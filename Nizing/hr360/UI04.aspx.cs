@@ -40,13 +40,14 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Session["user_id"] = "0067";    //test only to avoid error on loading, delete after trial            
+        //Session["erp_id"] = "0067";
         if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('連線已逾時，將會回到登入頁面');window.location='login.aspx'", true);
         }
         else
-        {
-            //Session["user_id"] = "0007";    //test only to avoid error on loading, delete after trial            
+        {            
             if (Session["user_id"].ToString().ToUpper().Trim() != "ADMIN")  //admin doesnt have the proper erp information and will crash the system
             {
                 if (!IsPostBack)
@@ -225,7 +226,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
         if (test102 && test103 && test104)
         {
-            if (Session["erp_id"] != "0067")    //2018.05.02特殊規則給吉田，不用檢查自己是否為其他人的代理人
+            if (Session["user_id"].ToString() != "0067")    //2018.05.02特殊規則給吉田，不用檢查自己是否為其他人的代理人
             {
                 using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))  //測試錯誤 107.申請人於此時段已代理他人，不可請假
                 {
