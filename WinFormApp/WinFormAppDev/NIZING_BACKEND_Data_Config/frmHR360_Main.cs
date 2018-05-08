@@ -338,10 +338,57 @@ namespace NIZING_BACKEND_Data_Config
             }
         }
 
+        private void btnAccountSearch_Click(object sender, EventArgs e)
+        {
+            accountTabMode = FunctionMode.SEARCH;
+            LoadControlStatus(currentTabPage);
+
+            var frm = new frmHR360_AccountSearch();
+            frm.Location = new Point(this.Location.X + (this.Width / 2), this.Location.Y + (this.Height / 4));
+            frm.StartPosition = FormStartPosition.Manual;
+            frm.FormClosing += delegate { frm.Hide(); };
+            frm.loadButtonEvent += new searchForm_Close(accountSearchForm_loadButton);
+            frm.loadGridviewEvent += new searchForm_Search(accountSearchForm_loadGridview);
+            frm.Show();
+        }
         #endregion
 
 
-
-        
+        #region method for search form
+        void accountSearchForm_loadButton()
+        {
+            if (isGridViewEmpty(gvAccountSearch_Result))
+            {
+                accountTabMode = FunctionMode.NORECORD;
+                LoadControlStatus(currentTabPage);
+            }
+            else
+            {
+                accountTabMode = FunctionMode.HASRECORD;
+                LoadControlStatus(currentTabPage);
+            }
+        }
+        void accountSearchForm_loadGridview(DataTable dt)
+        {
+            searchFormLoaded = false;
+            gvAccountSearch_Result.DataSource = dt;
+            searchFormLoaded = true;
+            if (!isGridViewEmpty(gvAccountSearch_Result))
+            {
+                gvAccountSearch_Result.Rows[0].Selected = true;
+                displayGridviewSearch_ResultInControls(gvAccountSearch_Result);
+            }
+            else
+            {
+                txtAccountId.Text = "";
+                txtAccountPassword.Text = "";
+                txtAccountConfirmPassword.Text = "";
+            }
+            foreach (DataGridViewColumn col in gvAccountSearch_Result.Columns)
+            {
+                col.SortMode = DataGridViewColumnSortMode.Automatic;
+            }
+        }
+        #endregion
     }
 }

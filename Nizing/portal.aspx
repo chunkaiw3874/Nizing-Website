@@ -17,7 +17,7 @@
                 <a href="revivify_employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/RVI.png" /></a>
             </div>
             <div>
-                <a href="neo_employee_section/Default.aspx" target="_blank">日進光電</a>
+                <a href="neo_employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/NEO.png" /></a>
             </div>
         </div>
     </div>    

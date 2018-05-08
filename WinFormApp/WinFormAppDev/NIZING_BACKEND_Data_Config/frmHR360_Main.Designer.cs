@@ -205,6 +205,7 @@
             this.btnAccountSearch.TabIndex = 1;
             this.btnAccountSearch.Text = "查詢";
             this.btnAccountSearch.UseVisualStyleBackColor = true;
+            this.btnAccountSearch.Click += new System.EventHandler(this.btnAccountSearch_Click);
             // 
             // tlpAccountInputField
             // 
