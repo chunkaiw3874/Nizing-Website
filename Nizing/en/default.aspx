@@ -122,7 +122,7 @@
                 <ul>
                     <%-- 最上面一排ID必須為url1，圖片才會變成預設顯示 --%>      
                     <li>
-                        <asp:HyperLink ID="url1" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20180420_moving_notice.jpg" NavigateUrl="https://www.facebook.com/NIZING.ELECTRIC/photos/pb.367173643345648.-2207520000.1524197134./1818663161530015/?type=3&theater" Target="_blank"> 2018.04.20 Moving Notice: Nizing will be moving to a new location on 2018.05.14, we will have new address, phone number, and fax number, please contact us if there's any questions or concerns.</asp:HyperLink>
+                        <asp:HyperLink ID="url1" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20180420_moving_notice.jpg" NavigateUrl="https://www.facebook.com/NIZING.ELECTRIC/photos/pb.367173643345648.-2207520000.1524197134./1818663161530015/?type=3&theater" Target="_blank"> 2018.04.20 Moving Notice: Nizing will be moving to a new location on 2018.06.04, we will have new address, phone number, and fax number, please contact us if there's any questions or concerns.</asp:HyperLink>
                     </li>
                     <li>
                         <asp:HyperLink ID="url2" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20170108_year_end_banquet.jpg"> 2018.03.28 In accordance with the delivery company, no delivery will be made during the long weekend between 4/4~4/8, goods sent out on 4/3 will arrive no earlier than 4/9.</asp:HyperLink>

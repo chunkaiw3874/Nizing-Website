@@ -124,7 +124,7 @@
                 <ul>
                     <%-- 最上面一排ID必須為url1，圖片才會變成預設顯示 --%>                                            
                     <li>
-                        <asp:HyperLink ID="url1" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20180420_moving_notice.jpg" NavigateUrl="https://www.facebook.com/NIZING.ELECTRIC/photos/pb.367173643345648.-2207520000.1524197134./1818663161530015/?type=3&theater" Target="_blank"> 2018.04.20 遷移啟事：本公司將於107/5/14(一)遷至新址，並照常出貨至5/11(五)，5/12(六)全廠加班搬遷，5/14(一)恢復正常營運，搬遷期間一切正常營運，屆時請依新址、電話及傳真聯絡，繼續給予支持指教！ </asp:HyperLink>
+                        <asp:HyperLink ID="url1" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20180420_moving_notice.jpg" NavigateUrl="https://www.facebook.com/NIZING.ELECTRIC/photos/pb.367173643345648.-2207520000.1524197134./1818663161530015/?type=3&theater" Target="_blank"> 2018.04.20 遷移啟事：本公司將於107/06/04(一)遷至新址，並照常出貨至06/01(五)，06/02(六)全廠加班搬遷，06/04(一)恢復正常營運，搬遷期間一切正常營運，屆時請依新址、電話及傳真聯絡，繼續給予支持指教！ </asp:HyperLink>
                     </li>
                     <li>
                         <asp:HyperLink ID="url2" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20170108_year_end_banquet.jpg"> 2018.03.28 4/4(三)~4/8(日)為清明連假，為配合貨運公司，4/3出貨將於4/9送達，請多加留意~ </asp:HyperLink>
