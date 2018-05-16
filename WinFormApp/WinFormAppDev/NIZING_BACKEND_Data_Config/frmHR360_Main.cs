@@ -449,9 +449,11 @@ namespace NIZING_BACKEND_Data_Config
                 LoadControlStatus(currentTabPage);
             }            
         }
-        void accountSearchERPIDForm_loadSelection(DataTable dt)
+        void accountSearchERPIDForm_loadSelection(DataRow[] dr)
         {
-            
+            accountSearchFormERPID_loadButton();
+            txtAccountERPID.Text = dr[0][0].ToString().Trim();
+            txtAccountName.Text = dr[0][1].ToString().Trim();
         }
         #endregion
 

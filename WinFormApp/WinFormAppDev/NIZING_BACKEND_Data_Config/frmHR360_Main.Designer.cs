@@ -499,7 +499,6 @@
             this.txtAccountName.Name = "txtAccountName";
             this.txtAccountName.Size = new System.Drawing.Size(150, 22);
             this.txtAccountName.TabIndex = 7;
-            this.txtAccountName.UseSystemPasswordChar = true;
             // 
             // label9
             // 

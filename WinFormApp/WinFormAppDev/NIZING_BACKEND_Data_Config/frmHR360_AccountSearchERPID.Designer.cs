@@ -50,14 +50,20 @@
             // 
             // gvERPIDList
             // 
+            this.gvERPIDList.AllowUserToAddRows = false;
+            this.gvERPIDList.AllowUserToDeleteRows = false;
             this.gvERPIDList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvERPIDList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvERPIDList.Location = new System.Drawing.Point(0, 0);
             this.gvERPIDList.Margin = new System.Windows.Forms.Padding(0);
+            this.gvERPIDList.MultiSelect = false;
             this.gvERPIDList.Name = "gvERPIDList";
+            this.gvERPIDList.ReadOnly = true;
             this.gvERPIDList.RowTemplate.Height = 24;
+            this.gvERPIDList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvERPIDList.Size = new System.Drawing.Size(284, 362);
             this.gvERPIDList.TabIndex = 0;
+            this.gvERPIDList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvERPIDList_CellDoubleClick);
             // 
             // frmHR360_AccountSearchERPID
             // 
