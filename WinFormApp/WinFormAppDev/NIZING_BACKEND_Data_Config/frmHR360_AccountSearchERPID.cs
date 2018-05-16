@@ -9,21 +9,22 @@ using System.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace NIZING_BACKEND_Data_Config
 {
-    public partial class frmHR360_AccountSearch : Form
+    public partial class frmHR360_AccountSearchERPID : Form
     {
         string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
+        string NZConnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
         public event searchForm_Close loadButtonEvent;
-        public event searchForm_Search loadGridviewEvent;
+        public event searchForm_Select loadSelectionEvent;
 
-        public frmHR360_AccountSearch()
+        public frmHR360_AccountSearchERPID()
         {
             InitializeComponent();
+            
         }
 
-        private void btnAccountSearch_Cancel_Click(object sender, EventArgs e)
+        private void btnAccountSearchERPID_Cancel_Click(object sender, EventArgs e)
         {
             if (loadButtonEvent != null)
             {
@@ -32,9 +33,9 @@ namespace NIZING_BACKEND_Data_Config
             this.Close();
         }
 
-        private void frmHR360_AccountSearch_FormClosing(object sender, FormClosingEventArgs e)
+        private void frmHR360_AccountSearchERPID_FormClosing(object sender, FormClosingEventArgs e)
         {
-            btnAccountSearch_Cancel_Click(sender, e);
+            btnAccountSearchERPID_Cancel_Click(sender, e);
         }
     }
 }

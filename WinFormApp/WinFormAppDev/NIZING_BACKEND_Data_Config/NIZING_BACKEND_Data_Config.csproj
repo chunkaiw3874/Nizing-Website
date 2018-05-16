@@ -136,6 +136,12 @@
     <Compile Include="frmHR360_AccountSearch.Designer.cs">
       <DependentUpon>frmHR360_AccountSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmHR360_AccountSearchERPID.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHR360_AccountSearchERPID.Designer.cs">
+      <DependentUpon>frmHR360_AccountSearchERPID.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmHR360_Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmHR360_AccountSearch.resx">
       <DependentUpon>frmHR360_AccountSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHR360_AccountSearchERPID.resx">
+      <DependentUpon>frmHR360_AccountSearchERPID.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmHR360_Main.resx">
       <DependentUpon>frmHR360_Main.cs</DependentUpon>

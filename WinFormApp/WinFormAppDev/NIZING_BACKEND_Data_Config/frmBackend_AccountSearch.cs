@@ -14,7 +14,7 @@ namespace NIZING_BACKEND_Data_Config
 {
     public partial class frmBackend_AccountSearch : Form
     {
-        string erp2ConnectionString = ConfigurationManager.ConnectionStrings["OQS_Data_Config.Properties.Settings.NZ_ERP2ConnectionString"].ConnectionString;
+        string erp2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
         public event searchForm_Close loadButtonEvent;
         public event searchForm_Search loadGridviewEvent;
 

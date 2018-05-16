@@ -276,6 +276,7 @@
             this.ckxAccountDisable.TabIndex = 5;
             this.ckxAccountDisable.Text = "失效帳號";
             this.ckxAccountDisable.UseVisualStyleBackColor = true;
+            this.ckxAccountDisable.CheckedChanged += new System.EventHandler(this.ckxAccountDisable_CheckedChanged);
             // 
             // txtAccountLineId
             // 
@@ -369,6 +370,7 @@
             this.btnAccountConfirm.TabIndex = 3;
             this.btnAccountConfirm.Text = "確認";
             this.btnAccountConfirm.UseVisualStyleBackColor = true;
+            this.btnAccountConfirm.Click += new System.EventHandler(this.btnAccountConfirm_Click);
             // 
             // btnAccountCancel
             // 
@@ -378,6 +380,7 @@
             this.btnAccountCancel.TabIndex = 4;
             this.btnAccountCancel.Text = "取消";
             this.btnAccountCancel.UseVisualStyleBackColor = true;
+            this.btnAccountCancel.Click += new System.EventHandler(this.btnAccountCancel_Click);
             // 
             // txtAccountManagementMemo
             // 
@@ -466,6 +469,7 @@
             this.btnAccountSearchERPID.TabIndex = 17;
             this.btnAccountSearchERPID.Text = "...";
             this.btnAccountSearchERPID.UseVisualStyleBackColor = true;
+            this.btnAccountSearchERPID.Click += new System.EventHandler(this.btnAccountSearchERPID_Click);
             // 
             // label7
             // 

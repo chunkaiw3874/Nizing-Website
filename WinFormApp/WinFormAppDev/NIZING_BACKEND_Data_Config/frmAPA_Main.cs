@@ -18,8 +18,8 @@ namespace NIZING_BACKEND_Data_Config
     public partial class frmAPA_Main : Form
     {
         #region Frame Universal Variable
-        string NZConnectionString = ConfigurationManager.ConnectionStrings["OQS_Data_Config.Properties.Settings.NZConnectionString"].ConnectionString;
-        string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["OQS_Data_Config.Properties.Settings.NZ_ERP2ConnectionString"].ConnectionString;
+        string NZConnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
+        string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
         public string UserName { get; set; }
         private enum FunctionMode { ADD, EDIT, DELETE, SEARCH, STATIC }
         private enum TableRowStatus { DELETED, EDITED, NEW, UNCHANGED };

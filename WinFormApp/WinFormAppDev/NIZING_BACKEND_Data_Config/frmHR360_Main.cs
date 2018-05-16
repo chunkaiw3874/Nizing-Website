@@ -14,13 +14,14 @@ namespace NIZING_BACKEND_Data_Config
 {
     public partial class frmHR360_Main : Form
     {
-        string NZConnectionString = ConfigurationManager.ConnectionStrings["OQS_Data_Config.Properties.Settings.NZConnectionString"].ConnectionString;
-        string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["OQS_Data_Config.Properties.Settings.NZ_ERP2ConnectionString"].ConnectionString;
+        string NZConnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
+        string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
         public string UserName { get; set; }
         private Boolean searchFormLoaded = false;
         private enum FunctionMode { ADD, EDIT, DELETE, SEARCH, HASRECORD, NORECORD };
         TabPage currentTabPage;
         private FunctionMode accountTabMode = FunctionMode.NORECORD;
+        private FunctionMode tabModeTempStorage;
 
         public frmHR360_Main()
         {
@@ -351,6 +352,53 @@ namespace NIZING_BACKEND_Data_Config
             frm.loadGridviewEvent += new searchForm_Search(accountSearchForm_loadGridview);
             frm.Show();
         }
+
+        private void btnAccountSearchERPID_Click(object sender, EventArgs e)
+        {
+            tabModeTempStorage = accountTabMode;
+            accountTabMode = FunctionMode.SEARCH;
+            LoadControlStatus(currentTabPage);
+
+            var frm = new frmHR360_AccountSearchERPID();
+            frm.Location = new Point(this.Location.X + (this.Width / 2), this.Location.Y + (this.Height / 4));
+            frm.StartPosition = FormStartPosition.Manual;
+            frm.FormClosing += delegate { frm.Hide(); };
+            frm.loadButtonEvent += new searchForm_Close(accountSearchFormERPID_loadButton);
+            frm.loadSelectionEvent += new searchForm_Select(accountSearchERPIDForm_loadSelection);
+            frm.Show();
+        }
+
+        private void ckxAccountDisable_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckxAccountDisable.Checked == true)
+            {
+                txtAccountDisabledDate.Text = DateTime.Today.Year.ToString() + "/" + DateTime.Today.Month.ToString() + "/" + DateTime.Today.Day;
+            }
+            else
+            {
+                txtAccountDisabledDate.Clear();
+            }
+        }
+
+        private void btnAccountConfirm_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAccountCancel_Click(object sender, EventArgs e)
+        {
+            if (isGridViewEmpty(gvAccountSearch_Result))
+            {
+                accountTabMode = FunctionMode.NORECORD;
+                LoadControlStatus(currentTabPage);
+            }
+            else
+            {
+                accountTabMode = FunctionMode.HASRECORD;
+                LoadControlStatus(currentTabPage);
+            }
+        }
+
         #endregion
 
 
@@ -389,6 +437,23 @@ namespace NIZING_BACKEND_Data_Config
                 col.SortMode = DataGridViewColumnSortMode.Automatic;
             }
         }
+        void accountSearchFormERPID_loadButton()
+        {
+            accountTabMode = tabModeTempStorage;
+            if (accountTabMode == FunctionMode.ADD)
+            {
+                LoadControlStatus(currentTabPage);
+            }
+            else if (accountTabMode == FunctionMode.EDIT)
+            {
+                LoadControlStatus(currentTabPage);
+            }            
+        }
+        void accountSearchERPIDForm_loadSelection(DataTable dt)
+        {
+            
+        }
         #endregion
+
     }
 }

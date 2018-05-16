@@ -13,6 +13,7 @@ namespace NIZING_BACKEND_Data_Config
 {
     public delegate void searchForm_Close();
     public delegate void searchForm_Search(DataTable dt);
+    public delegate void searchForm_Select(DataTable dt);
     public partial class frmOQS_AccountSearch : Form
     {
         public event searchForm_Close loadButtonEvent;
