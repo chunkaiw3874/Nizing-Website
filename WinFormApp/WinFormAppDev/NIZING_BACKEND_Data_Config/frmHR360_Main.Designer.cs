@@ -69,6 +69,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.gvAccountSearch_Result = new System.Windows.Forms.DataGridView();
+            this.btnAccountClearERPID = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcAccountManagement.SuspendLayout();
             this.tbpAccountManagement.SuspendLayout();
@@ -447,6 +448,7 @@
             // 
             this.flowLayoutPanel3.Controls.Add(this.txtAccountERPID);
             this.flowLayoutPanel3.Controls.Add(this.btnAccountSearchERPID);
+            this.flowLayoutPanel3.Controls.Add(this.btnAccountClearERPID);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel3.Location = new System.Drawing.Point(92, 84);
             this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
@@ -550,6 +552,16 @@
             this.gvAccountSearch_Result.Size = new System.Drawing.Size(707, 745);
             this.gvAccountSearch_Result.TabIndex = 4;
             // 
+            // btnAccountClearERPID
+            // 
+            this.btnAccountClearERPID.Location = new System.Drawing.Point(188, 3);
+            this.btnAccountClearERPID.Name = "btnAccountClearERPID";
+            this.btnAccountClearERPID.Size = new System.Drawing.Size(75, 23);
+            this.btnAccountClearERPID.TabIndex = 18;
+            this.btnAccountClearERPID.Text = "清除代號";
+            this.btnAccountClearERPID.UseVisualStyleBackColor = true;
+            this.btnAccountClearERPID.Click += new System.EventHandler(this.btnAccountClearERPID_Click);
+            // 
             // frmHR360_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -623,5 +635,6 @@
         private System.Windows.Forms.TextBox txtAccountName;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnAccountClearERPID;
     }
 }

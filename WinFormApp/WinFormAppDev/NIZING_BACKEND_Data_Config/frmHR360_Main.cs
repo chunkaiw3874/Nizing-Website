@@ -100,11 +100,18 @@ namespace NIZING_BACKEND_Data_Config
                     txtAccountPassword.Text = String.Empty;
                     txtAccountConfirmPassword.Enabled = true;
                     txtAccountConfirmPassword.Text = String.Empty;
-                    txtAccountERPID.Enabled = true;
-                    txtAccountERPID.Text = string.Empty;
+                    txtAccountERPID.Enabled = false;
+                    if (string.IsNullOrWhiteSpace(txtAccountERPID.Text))
+                    {                        
+                        txtAccountName.Enabled = true;
+                        txtAccountName.Text = string.Empty;
+                    }
+                    else
+                    {
+                        txtAccountName.Enabled = false;
+                    }
                     btnAccountSearchERPID.Enabled = true;
-                    txtAccountName.Enabled = true;
-                    txtAccountName.Text = string.Empty;
+                    btnAccountClearERPID.Enabled = true;
                     txtAccountEmail.Enabled = true;
                     txtAccountEmail.Text = string.Empty;
                     txtAccountLineId.Enabled = true;
@@ -130,8 +137,9 @@ namespace NIZING_BACKEND_Data_Config
                     txtAccountPassword.Text = String.Empty;
                     txtAccountConfirmPassword.Enabled = true;
                     txtAccountConfirmPassword.Text = String.Empty;
-                    txtAccountERPID.Enabled = true;
+                    txtAccountERPID.Enabled = false;
                     btnAccountSearchERPID.Enabled = true;
+                    btnAccountClearERPID.Enabled = true;
                     if (string.IsNullOrWhiteSpace(txtAccountERPID.Text))
                     {
                         txtAccountName.Enabled = true;
@@ -165,6 +173,7 @@ namespace NIZING_BACKEND_Data_Config
                     txtAccountConfirmPassword.Enabled = false;
                     txtAccountERPID.Enabled = false;
                     btnAccountSearchERPID.Enabled = false;
+                    btnAccountClearERPID.Enabled = false;
                     txtAccountName.Enabled = false;
                     txtAccountEmail.Enabled = false;
                     txtAccountLineId.Enabled = false;
@@ -189,6 +198,7 @@ namespace NIZING_BACKEND_Data_Config
                     txtAccountConfirmPassword.Text = String.Empty;
                     txtAccountERPID.Enabled = false;
                     btnAccountSearchERPID.Enabled = false;
+                    btnAccountClearERPID.Enabled = false;
                     txtAccountName.Enabled = false;
                     txtAccountEmail.Enabled = false;
                     txtAccountLineId.Enabled = false;
@@ -216,6 +226,7 @@ namespace NIZING_BACKEND_Data_Config
                     txtAccountERPID.Enabled = false;
                     txtAccountERPID.Text = string.Empty;
                     btnAccountSearchERPID.Enabled = false;
+                    btnAccountClearERPID.Enabled = false;
                     txtAccountName.Enabled = false;
                     txtAccountName.Text = string.Empty;
                     txtAccountEmail.Enabled = false;
@@ -368,6 +379,16 @@ namespace NIZING_BACKEND_Data_Config
             frm.Show();
         }
 
+        private void btnAccountClearERPID_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtAccountERPID.Text))
+            {
+                txtAccountERPID.Text = string.Empty;
+                txtAccountName.Text = string.Empty;
+            }
+            LoadControlStatus(currentTabPage);
+        }
+
         private void ckxAccountDisable_CheckedChanged(object sender, EventArgs e)
         {
             if (ckxAccountDisable.Checked == true)
@@ -454,8 +475,10 @@ namespace NIZING_BACKEND_Data_Config
             accountSearchFormERPID_loadButton();
             txtAccountERPID.Text = dr[0][0].ToString().Trim();
             txtAccountName.Text = dr[0][1].ToString().Trim();
+            txtAccountName.Enabled = false;
         }
         #endregion
+
 
     }
 }
