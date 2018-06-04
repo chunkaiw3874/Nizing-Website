@@ -20,7 +20,7 @@
                         <th>日進電線股份有限公司</th>
                     </tr>
                     <tr>
-                        <td>地址: 新北市三重區光復路二段87巷10-12號</td>
+                        <td>地址: 新北市三重區光復路二段87巷10-12號 (神農街底)</td>
                     </tr>
                     <tr>
                         <td>ADD: No.10-12, Ln. 87, Sec. 2, Guangfu Rd., Sanchong Dist., New Taipei City 241, Taiwan (R.O.C.)</td>
