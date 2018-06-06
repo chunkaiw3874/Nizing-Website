@@ -42,12 +42,12 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         //Session["user_id"] = "0067";    //test only to avoid error on loading, delete after trial            
         //Session["erp_id"] = "0067";
-        if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
-        {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('連線已逾時，將會回到登入頁面');window.location='login.aspx'", true);
-        }
-        else
-        {            
+        //if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
+        //{
+        //    ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('連線已逾時，將會回到登入頁面');window.location='login.aspx'", true);
+        //}
+        //else
+        //{            
             if (Session["user_id"].ToString().ToUpper().Trim() != "ADMIN")  //admin doesnt have the proper erp information and will crash the system
             {
                 if (!IsPostBack)
@@ -76,7 +76,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 }
                 btnSearchSubmit_Click(sender, e);   //does search automatically everytime page loads
             }
-        }
+        //}
     }
 
     //#region Test Area!!!!!!!!!! Test Methods ONLY!!!!!!
