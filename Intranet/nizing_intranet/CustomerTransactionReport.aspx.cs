@@ -16,7 +16,6 @@ public partial class CustomerTransactionReport : System.Web.UI.Page
 {
     DateTime eom = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year,DateTime.Today.Month));
     string connectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
-    static string fileName = "";
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -51,6 +50,7 @@ public partial class CustomerTransactionReport : System.Web.UI.Page
         string query = "";
         string startYear = "";
         string condition = "";
+        string includeNoSalesRecord = " WHERE COPTG.TG042 IS NOT NULL";
         if (ddlStartMonth.SelectedItem.Text == "01")
         {
             startYear = (Convert.ToInt16(ddlStartYear.SelectedItem.Text) - 1).ToString();
@@ -62,6 +62,10 @@ public partial class CustomerTransactionReport : System.Web.UI.Page
         if (ddlPersonnel.SelectedItem.Text != "全部人員")
         {
             condition = " WHERE SALENAME = N'" + ddlPersonnel.SelectedItem.Text + "'";
+        }
+        if (ckxIncludeNoSaleRecord.Checked == true)
+        {
+            includeNoSalesRecord = "";
         }
         query = "SELECT *,(ISNULL([01],0)+ISNULL([02],0)+ISNULL([03],0)+ISNULL([04],0)+ISNULL([05],0)+ISNULL([06],0)+ISNULL([07],0)+ISNULL([08],0)+ISNULL([09],0)+ISNULL([10],0)+ISNULL([11],0)+ISNULL([12],0)) TOTAL"
 + " FROM"
@@ -97,11 +101,11 @@ public partial class CustomerTransactionReport : System.Web.UI.Page
 + " WHEN SUBSTRING(COPTG.TG042,5,2)=N'12' AND SUBSTRING(COPTG.TG042,7,2)<=N'25' THEN N'12'"
 + " WHEN SUBSTRING(COPTG.TG042,5,2)=N'11' AND SUBSTRING(COPTG.TG042,7,2)>=N'26' THEN N'12'"
 + " END MN"
-+ " , COPMA.MA001 CLIENTNO, COPMA.MA002 CLIENTNAME, CONVERT(DECIMAL(10,2),COALESCE(COPTG.TG045,0)) AMT, CMSMV.MV002 SALENAME"
++ " , COPMA.MA001 CLIENTNO, COPMA.MA002 CLIENTNAME, CONVERT(DECIMAL(10,2),COALESCE(COPTG.TG045,0)) AMT,CMSMV.MV001 SALEID, CMSMV.MV002 SALENAME"
 + " FROM COPMA"
 + " LEFT JOIN COPTG ON COPMA.MA001 = COPTG.TG004 AND COPTG.TG042 BETWEEN N'" + startYear + ddlStartMonth.SelectedValue + "' AND N'" + ddlEndYear.SelectedItem.Text + ddlEndMonth.SelectedValue + "'"
 + " LEFT JOIN CMSMV ON COPMA.MA016 = CMSMV.MV001"
-+ " WHERE COPTG.TG042 IS NOT NULL"
++ includeNoSalesRecord
 + " ) AS S"
 + " PIVOT"
 + " ("
@@ -128,11 +132,6 @@ public partial class CustomerTransactionReport : System.Web.UI.Page
         }
     }
 
-    //protected DataTable getDataTable(string query, string condition)
-    //{
-        
-    //    SqlSearch(GetQuery());
-    //}
     protected void btnExport_Click(object sender, EventArgs e)
     {
         try
@@ -154,108 +153,119 @@ public partial class CustomerTransactionReport : System.Web.UI.Page
     }
     private void Export_Excel()
     {
-        Response.ClearContent();
-        Response.Write("<meta http-equiv=Content-Type content=text/html;charset=utf-8>");
-        string excelFileName = "CustomerTransactionReport" + ddlStartYear.Text + ddlStartMonth.Text + "~" + ddlEndYear.Text + ddlEndMonth.Text + ".xls";
-        Response.AddHeader("content-disposition", "attachment;filename=" + Server.UrlEncode(excelFileName));
-        Response.ContentType = "application/excel";
-        System.IO.StringWriter stringWrite = new System.IO.StringWriter();
-        System.Web.UI.HtmlTextWriter htmlWrite = new HtmlTextWriter(stringWrite);
-        grdReport.RenderControl(htmlWrite);
-        Response.Write(stringWrite.ToString());
-        Response.End();
-        //HSSFWorkbook workbook = new HSSFWorkbook();
-        //MemoryStream ms = new MemoryStream();
-        //ISheet sheet1 = workbook.CreateSheet("客戶交易情況" + ddlStartYear.Text+ddlStartMonth.Text + "~" + ddlEndYear.Text+ddlEndMonth.Text);
-        //IRow rowHeader1 = sheet1.CreateRow(0);
-        ////IRow rowFooter1 = sheet1.CreateRow(grdReport.Rows.Count + 1);
-        //HSSFCellStyle headerCellStyle = (HSSFCellStyle)workbook.CreateCellStyle();
-        //HSSFCellStyle oddRowCellStyle = (HSSFCellStyle)workbook.CreateCellStyle();
-        //HSSFCellStyle evenRowCellStyle = (HSSFCellStyle)workbook.CreateCellStyle();
-        //HSSFFont headerFont = (HSSFFont)workbook.CreateFont();
-        //HSSFFont oddRowFont = (HSSFFont)workbook.CreateFont();
-        //HSSFFont evenRowFont = (HSSFFont)workbook.CreateFont();
+        //Response.ClearContent();
+        //Response.Write("<meta http-equiv=Content-Type content=text/html;charset=utf-8>");
+        //string excelFileName = "CustomerTransactionReport" + ddlStartYear.Text + ddlStartMonth.Text + "~" + ddlEndYear.Text + ddlEndMonth.Text + ".xls";
+        //Response.AddHeader("content-disposition", "attachment;filename=" + Server.UrlEncode(excelFileName));
+        //Response.ContentType = "application/excel";
+        //System.IO.StringWriter stringWrite = new System.IO.StringWriter();
+        //System.Web.UI.HtmlTextWriter htmlWrite = new HtmlTextWriter(stringWrite);
+        //grdReport.RenderControl(htmlWrite);
+        //Response.Write(stringWrite.ToString());
+        //Response.End();
+        string startYear = "";
+        if (ddlStartMonth.SelectedItem.Text == "01")
+        {
+            startYear = Convert.ToString(Convert.ToInt16(ddlStartYear.SelectedValue) - 1);
+        }
+        else
+        {
+            startYear = ddlStartYear.Text;
+        }
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        MemoryStream ms = new MemoryStream();        
+        ISheet sheet1 = workbook.CreateSheet("客戶交易情況" + startYear + ddlStartMonth.Text + "~" + ddlEndYear.Text + ddlEndMonth.Text);
+        IRow rowHeader1 = sheet1.CreateRow(0);
+        //IRow rowFooter1 = sheet1.CreateRow(grdReport.Rows.Count + 1);
+        HSSFCellStyle headerCellStyle = (HSSFCellStyle)workbook.CreateCellStyle();
+        HSSFCellStyle oddRowCellStyle = (HSSFCellStyle)workbook.CreateCellStyle();
+        HSSFCellStyle evenRowCellStyle = (HSSFCellStyle)workbook.CreateCellStyle();
+        HSSFFont headerFont = (HSSFFont)workbook.CreateFont();
+        HSSFFont oddRowFont = (HSSFFont)workbook.CreateFont();
+        HSSFFont evenRowFont = (HSSFFont)workbook.CreateFont();
 
-        ////set Header's Cell Style
-        //SetCustomCellColor(workbook, HSSFColor.CornflowerBlue.Index, "5D7B9D");
-        //headerCellStyle.FillForegroundColor = HSSFColor.CornflowerBlue.Index;
-        //headerCellStyle.FillPattern = FillPattern.SolidForeground;
-        //headerFont.Color = HSSFColor.White.Index;
-        //headerFont.Boldweight = (short)FontBoldWeight.Bold;
-        //headerCellStyle.SetFont(headerFont);
-        ////set Odd Row's Cell Style
-        //SetCustomCellColor(workbook, HSSFColor.Grey25Percent.Index, "F7F6F3");
-        //oddRowCellStyle.FillForegroundColor = HSSFColor.Grey25Percent.Index;
-        //oddRowCellStyle.FillPattern = FillPattern.SolidForeground;
-        //oddRowFont.Color = HSSFColor.Black.Index;
-        //oddRowCellStyle.SetFont(oddRowFont);
-        ////set Even Row's Cell Style
-        //SetCustomCellColor(workbook, HSSFColor.PaleBlue.Index, "284775");
-        //evenRowCellStyle.FillForegroundColor = HSSFColor.White.Index;
-        //evenRowCellStyle.FillPattern = FillPattern.SolidForeground;
-        //evenRowFont.Color = HSSFColor.PaleBlue.Index;
-        //evenRowCellStyle.SetFont(evenRowFont);
+        //set Header's Cell Style
+        SetCustomCellColor(workbook, HSSFColor.CornflowerBlue.Index, "29ABE2");
+        headerCellStyle.FillForegroundColor = HSSFColor.CornflowerBlue.Index;
+        headerCellStyle.FillPattern = FillPattern.SolidForeground;
+        headerFont.Color = HSSFColor.White.Index;
+        headerFont.Boldweight = (short)FontBoldWeight.Bold;
+        headerCellStyle.SetFont(headerFont);
+        //set Odd Row's Cell Style
+        SetCustomCellColor(workbook, HSSFColor.Grey25Percent.Index, "c3e8f4");
+        oddRowCellStyle.FillForegroundColor = HSSFColor.Grey25Percent.Index;
+        oddRowCellStyle.FillPattern = FillPattern.SolidForeground;
+        oddRowFont.Color = HSSFColor.Black.Index;
+        oddRowCellStyle.SetFont(oddRowFont);
+        //set Even Row's Cell Style
+        SetCustomCellColor(workbook, HSSFColor.PaleBlue.Index, "ffffff");
+        evenRowCellStyle.FillForegroundColor = HSSFColor.White.Index;
+        evenRowCellStyle.FillPattern = FillPattern.SolidForeground;
+        evenRowFont.Color = HSSFColor.PaleBlue.Index;
+        evenRowFont.Color = HSSFColor.Black.Index;
+        evenRowCellStyle.SetFont(evenRowFont);
 
 
-        ////grdReport資料匯入sheet1
-        ////sheet1 Header
-        //for (int i = 0, iCount = grdReport.HeaderRow.Cells.Count; i < iCount; i++)
+        //grdReport資料匯入sheet1
+        //sheet1 Header
+        for (int i = 0, iCount = grdReport.HeaderRow.Cells.Count; i < iCount; i++)
+        {
+            ICell cell = rowHeader1.CreateCell(i);
+            cell.CellStyle = headerCellStyle;
+            cell.SetCellValue(grdReport.HeaderRow.Cells[i].Text.Replace("&nbsp;", "").Trim());
+        }
+        //sheet1 Body
+        for (int i = 0, iCount = grdReport.Rows.Count; i < iCount; i++)
+        {
+            IRow rowItem = sheet1.CreateRow(i + 1);
+            for (int j = 0, jCount = grdReport.HeaderRow.Cells.Count; j < jCount; j++)
+            {
+                ICell cell = rowItem.CreateCell(j);
+                if ((i + 1) % 2 == 1)
+                {
+                    cell.CellStyle = oddRowCellStyle;
+                }
+                else
+                {
+                    cell.CellStyle = evenRowCellStyle;
+                }
+                //cell.SetCellValue(grdReport.Rows[i].Cells[j].Text.Replace("&nbsp;", "").Trim());
+                cell.SetCellValue(((Label)grdReport.Rows[i].Cells[j].FindControl("Label" + (j + 4).ToString())).Text.Replace("&nbsp;", "").Trim());
+                sheet1.AutoSizeColumn(j);
+            }
+            sheet1.GetRow(i).HeightInPoints = 16.5f;
+        }
+        //sheet1 footer
+        //for (int i = 0; i < grdReport.FooterRow.Cells.Count; i++)
         //{
-        //    ICell cell = rowHeader1.CreateCell(i);
+        //    ICell cell = rowFooter1.CreateCell(i);
         //    cell.CellStyle = headerCellStyle;
-        //    cell.SetCellValue(grdReport.HeaderRow.Cells[i].Text.Replace("&nbsp;", "").Trim());
+        //    cell.SetCellValue(grdReport.FooterRow.Cells[i].Text.Replace("&nbsp;", "").Trim());
         //}
-        ////sheet1 Body
-        //for (int i = 0, iCount = grdReport.Rows.Count; i < iCount; i++)
-        //{
-        //    IRow rowItem = sheet1.CreateRow(i + 1);
-        //    for (int j = 0, jCount = grdReport.HeaderRow.Cells.Count; j < jCount; j++)
-        //    {
-        //        ICell cell = rowItem.CreateCell(j);
-        //        if ((i + 1) % 2 == 1)
-        //        {
-        //            cell.CellStyle = oddRowCellStyle;
-        //        }
-        //        else
-        //        {
-        //            cell.CellStyle = evenRowCellStyle;
-        //        }
-        //        cell.SetCellValue(grdReport.Rows[i].Cells[j].Text.Replace("&nbsp;", "").Trim());
-        //        sheet1.AutoSizeColumn(j);
-        //    }
-        //    sheet1.GetRow(i).HeightInPoints = 16.5f;
-        //}
-        ////sheet1 footer
-        ////for (int i = 0; i < grdReport.FooterRow.Cells.Count; i++)
-        ////{
-        ////    ICell cell = rowFooter1.CreateCell(i);
-        ////    cell.CellStyle = headerCellStyle;
-        ////    cell.SetCellValue(grdReport.FooterRow.Cells[i].Text.Replace("&nbsp;", "").Trim());
-        ////}
 
-        ////workbook匯出至excel
-        //workbook.Write(ms);
-        //string fileName = "CustomerTransactionReport" + ddlStartYear.Text + ddlStartMonth.Text + "~" + ddlEndYear.Text + ddlEndMonth.Text;
-        //Response.AddHeader("Content-Disposition", string.Format("attachment; filename=" + Server.UrlEncode(fileName) + ".xls"));
-        //Response.BinaryWrite(ms.ToArray());
-        ////收尾
-        //workbook = null;
-        //ms.Close();
-        //ms.Dispose();
+        //workbook匯出至excel
+        workbook.Write(ms);
+        string fileName = "CustomerTransactionReport" + startYear + ddlStartMonth.Text + "~" + ddlEndYear.Text + ddlEndMonth.Text;
+        Response.AddHeader("Content-Disposition", string.Format("attachment; filename=" + Server.UrlEncode(fileName) + ".xls"));
+        Response.BinaryWrite(ms.ToArray());
+        //收尾
+        workbook = null;
+        ms.Close();
+        ms.Dispose();
     }
-    //private void SetCustomCellColor(HSSFWorkbook workbook, short originalColorIndex, string alternateColor)
-    //{
-    //    HSSFPalette cellPalette = workbook.GetCustomPalette();
-    //    byte CR, CG, CB;
-    //    CR = Convert.ToByte("0x" + alternateColor.Substring(0, 2), 16);
-    //    CG = Convert.ToByte("0x" + alternateColor.Substring(2, 2), 16);
-    //    CB = Convert.ToByte("0x" + alternateColor.Substring(4, 2), 16);
-    //    cellPalette.SetColorAtIndex(originalColorIndex, CR, CG, CB);
-    //}
-    public override void VerifyRenderingInServerForm(Control control)
+    private void SetCustomCellColor(HSSFWorkbook workbook, short originalColorIndex, string alternateColor)
     {
-        // '處理'GridView' 的控制項 'GridView' 必須置於有 runat=server 的表單標記之中   
+        HSSFPalette cellPalette = workbook.GetCustomPalette();
+        byte CR, CG, CB;
+        CR = Convert.ToByte("0x" + alternateColor.Substring(0, 2), 16);
+        CG = Convert.ToByte("0x" + alternateColor.Substring(2, 2), 16);
+        CB = Convert.ToByte("0x" + alternateColor.Substring(4, 2), 16);
+        cellPalette.SetColorAtIndex(originalColorIndex, CR, CG, CB);
     }
+    //public override void VerifyRenderingInServerForm(Control control)
+    //{
+    //    // '處理'GridView' 的控制項 'GridView' 必須置於有 runat=server 的表單標記之中   
+    //}
     protected void grdReport_DataBound(object sender, EventArgs e)
     {
         foreach (GridViewRow row in grdReport.Rows)

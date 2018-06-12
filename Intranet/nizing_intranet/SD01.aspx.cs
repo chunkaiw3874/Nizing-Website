@@ -542,7 +542,7 @@ public partial class SD01 : System.Web.UI.Page
             cell.CellStyle = headerCellStyle;
             cell.SetCellValue(grdReport2.HeaderRow.Cells[i].Text.Replace("&nbsp;", "").Trim());
         }
-        //sheet1 Body
+        //sheet2 Body
         for (int i = 0, iCount = grdReport2.Rows.Count; i < iCount; i++)
         {
             IRow rowItem = sheet2.CreateRow(i + 1);

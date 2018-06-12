@@ -57,7 +57,7 @@
             </div>
             <div class="row form-group">
                 <div class="col-xs-3">
-                    <asp:CheckBox ID="ckbExactProdId" runat="server" Checked="false" Text="品號=" />
+                    <asp:CheckBox ID="ckbExactProdId" runat="server" Checked="false" Text="品號完全符合" />
                 </div>
             </div>
             <div class="row">
