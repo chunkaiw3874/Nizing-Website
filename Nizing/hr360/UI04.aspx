@@ -299,7 +299,10 @@
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-xs-1 col-xs-offset-5">
+                    <div class="col-xs-5">
+                        <asp:Label ID="Label10" runat="server" Text="*請假半小時無須代理人" ForeColor="Red"></asp:Label>
+                    </div>
+                    <div class="col-xs-1">
                         <asp:ImageButton ID="btnDayOffAdd" runat="server" ImageUrl="~/hr360/image/icon/green-arrow-down.png" Width="40" OnClick="btnDayOffAdd_Click" />
                     </div>
                     <div class="col-xs-6">
