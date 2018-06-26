@@ -2128,7 +2128,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             mm.Body = body;
             mm.IsBodyHtml = false;
             SmtpClient client = new SmtpClient();
-            client.Host = "mail.nizing.com.tw";
+            client.Host = "192.168.10.249";
             client.UseDefaultCredentials = true;
             client.Send(mm);
         }
