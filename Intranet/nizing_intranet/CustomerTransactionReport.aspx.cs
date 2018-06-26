@@ -153,16 +153,6 @@ public partial class CustomerTransactionReport : System.Web.UI.Page
     }
     private void Export_Excel()
     {
-        //Response.ClearContent();
-        //Response.Write("<meta http-equiv=Content-Type content=text/html;charset=utf-8>");
-        //string excelFileName = "CustomerTransactionReport" + ddlStartYear.Text + ddlStartMonth.Text + "~" + ddlEndYear.Text + ddlEndMonth.Text + ".xls";
-        //Response.AddHeader("content-disposition", "attachment;filename=" + Server.UrlEncode(excelFileName));
-        //Response.ContentType = "application/excel";
-        //System.IO.StringWriter stringWrite = new System.IO.StringWriter();
-        //System.Web.UI.HtmlTextWriter htmlWrite = new HtmlTextWriter(stringWrite);
-        //grdReport.RenderControl(htmlWrite);
-        //Response.Write(stringWrite.ToString());
-        //Response.End();
         string startYear = "";
         if (ddlStartMonth.SelectedItem.Text == "01")
         {
@@ -172,6 +162,18 @@ public partial class CustomerTransactionReport : System.Web.UI.Page
         {
             startYear = ddlStartYear.Text;
         }
+        //Response.ClearContent();
+        //Response.Write("<meta http-equiv=Content-Type content=text/html;charset=utf-8>");
+        //string excelFileName = "CustomerTransactionReport" + startYear + ddlStartMonth.Text + "~" + ddlEndYear.Text + ddlEndMonth.Text + ".xls";
+        //Response.AddHeader("content-disposition", "attachment;filename=" + Server.UrlEncode(excelFileName));
+        //Response.ContentType = "application/excel";
+        //System.IO.StringWriter stringWrite = new System.IO.StringWriter();
+        //System.Web.UI.HtmlTextWriter htmlWrite = new HtmlTextWriter(stringWrite);
+        //grdReport.RenderControl(htmlWrite);
+        //Response.Write(stringWrite.ToString());
+        //Response.End();
+        
+        
         HSSFWorkbook workbook = new HSSFWorkbook();
         MemoryStream ms = new MemoryStream();        
         ISheet sheet1 = workbook.CreateSheet("客戶交易情況" + startYear + ddlStartMonth.Text + "~" + ddlEndYear.Text + ddlEndMonth.Text);

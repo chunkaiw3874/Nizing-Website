@@ -128,14 +128,15 @@ public partial class hr360_UI04 : System.Web.UI.Page
         DateTime workEndTime = new DateTime();  //請假週期內，每日工作開始時間
         DateTime workStartTime = new DateTime();  //請假週期內，每日工作結束時間
         DateTime breakStartTime = new DateTime();  //請假週期內，每日休息開始時間
-        DateTime breakEndTime = new DateTime();  //請假週期內，每日休息結束時間        
+        DateTime breakEndTime = new DateTime();  //請假週期內，每日休息結束時間
+        bool needFunctionalSubstitute = true; //檢查請假時間是否小於或等於半小時
         bool test101 = false;
         bool test102 = false;
         bool test103 = false;
         bool test104 = false;
-        bool test105 = false;
-        bool test106 = false;
-        bool test107 = false;
+        //bool test105 = false;
+        //bool test106 = false;
+        //bool test107 = false;
         bool test108 = false;
         bool test204 = false;
         DataTable dtDayOffDaysInfo = new DataTable();
@@ -185,83 +186,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             test104 = true;
         }
-        if (ddlDayOffFuncSub.SelectedValue == "0")  //測試錯誤 105.未選擇代理人
-        {
-            errorList.Add(errorCode(105));
-            test105 = false;
-        }
-        else
-        {
-            test105 = true;
-        }
-        if (test102 && test103 && test104)
-        {
-            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))  //測試錯誤 106.代理人有事，不能代理
-            {
-                conn.Open();
-                string query = "SELECT APPLICATION_ID"
-                            + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
-                            //+ " WHERE (APPLICANT_ID=@ID OR FUNCTIONAL_SUBSTITUTE_ID=@ID)"  //2017.03.24 移除代理人只能代理一個人的限制
-                            + " WHERE (APPLICANT_ID=@ID)"  //代理人已請假
-                            + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
-                            + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
-                            + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@ID", ddlDayOffFuncSub.SelectedValue);
-                cmd.Parameters.AddWithValue("@STARTTIME", dayOffStartTime);
-                cmd.Parameters.AddWithValue("@ENDTIME", dayOffEndTime);
-                using (SqlDataReader dr = cmd.ExecuteReader())
-                {
-                    if (dr.HasRows)
-                    {
-                        errorList.Add(errorCode(106));
-                        test106 = false;
-                    }
-                    else
-                    {
-                        test106 = true;
-                    }
-                }
-            }
-        }
-        if (test102 && test103 && test104)
-        {
-            if (Session["user_id"].ToString() != "0067")    //2018.05.02特殊規則給吉田，不用檢查自己是否為其他人的代理人
-            {
-                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))  //測試錯誤 107.申請人於此時段已代理他人，不可請假
-                {
-                    conn.Open();
-                    string query = "SELECT APPLICATION_ID"
-                                + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
-                                + " WHERE (FUNCTIONAL_SUBSTITUTE_ID=@ID)"  //自己已經是其他人的代理人                            
-                                + " AND APPLICATION_STATUS_ID <> '07'"
-                                + " AND APPLICATION_STATUS_ID <> '08'"
-                                + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
-                                + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
-                                + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
-                    cmd.Parameters.AddWithValue("@STARTTIME", dayOffStartTime);
-                    cmd.Parameters.AddWithValue("@ENDTIME", dayOffEndTime);
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        if (dr.HasRows)
-                        {
-                            errorList.Add(errorCode(107));
-                            test107 = false;
-                        }
-                        else
-                        {
-                            test107 = true;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                test107 = true;
-            }
-        }
+
+        
         if (ddlDayOffType.SelectedValue == "05" && txtReason.Text.Trim() == "") //測試錯誤 108.請事假未填寫請假原因
         {
             errorList.Add(errorCode(108));
@@ -271,7 +197,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             test108 = true;
         }
-        if (test101 && test102 && test103 && test104 && test105 && test106 && test107 && test108)  //PASS ALL INPUT TESTS, NEED TO START CALCULATING FOR OTHER ERRORS
+        if (test101 && test102 && test103 && test104 && test108)  //PASS ALL INPUT TESTS (except for functional substitute), NEED TO START CALCULATING FOR OTHER ERRORS
         {
             DateTime[] days = GetDatesBetween(dayOffStartTime.Date, dayOffEndTime.Date);
             for (int i = 0; i < days.Length; i++)
@@ -438,6 +364,95 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     }
                 }
             }
+
+            if (totalDayOffAmount > (decimal)0.5)   //2018.06.13 如果請假時間超過半小時，才需要做代理人測試
+            {
+                needFunctionalSubstitute = true;
+            }
+            else
+            {
+                needFunctionalSubstitute = false;
+            }
+
+            if (needFunctionalSubstitute)   
+            {
+                if (ddlDayOffFuncSub.SelectedValue == "0")  //測試錯誤 105.未選擇代理人
+                {
+                    errorList.Add(errorCode(105));
+                    //test105 = false;
+                }
+                else
+                {
+                    //test105 = true;
+                }
+                if (test102 && test103 && test104)
+                {
+                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))  //測試錯誤 106.代理人有事，不能代理
+                    {
+                        conn.Open();
+                        string query = "SELECT APPLICATION_ID"
+                                    + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
+                            //+ " WHERE (APPLICANT_ID=@ID OR FUNCTIONAL_SUBSTITUTE_ID=@ID)"  //2017.03.24 移除代理人只能代理一個人的限制
+                                    + " WHERE (APPLICANT_ID=@ID)"  //代理人已請假
+                                    + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
+                                    + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
+                                    + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@ID", ddlDayOffFuncSub.SelectedValue);
+                        cmd.Parameters.AddWithValue("@STARTTIME", dayOffStartTime);
+                        cmd.Parameters.AddWithValue("@ENDTIME", dayOffEndTime);
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                errorList.Add(errorCode(106));
+                                //test106 = false;
+                            }
+                            else
+                            {
+                                //test106 = true;
+                            }
+                        }
+                    }
+                }
+                if (test102 && test103 && test104)
+                {
+                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))  //測試錯誤 107.申請人於此時段已代理他人，不可請假
+                    {
+                        conn.Open();
+                        string query = "SELECT APPLICATION_ID"
+                                    + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
+                                    + " WHERE (FUNCTIONAL_SUBSTITUTE_ID=@ID)"  //自己已經是其他人的代理人                            
+                                    + " AND APPLICATION_STATUS_ID <> '07'"
+                                    + " AND APPLICATION_STATUS_ID <> '08'"
+                                    + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
+                                    + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
+                                    + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                        cmd.Parameters.AddWithValue("@STARTTIME", dayOffStartTime);
+                        cmd.Parameters.AddWithValue("@ENDTIME", dayOffEndTime);
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                errorList.Add(errorCode(107));
+                                //test107 = false;
+                            }
+                            else
+                            {
+                                //test107 = true;
+                            }
+                        }
+                    }
+                }
+            }
+            //else
+            //{
+            //    test105 = true;
+            //    test106 = true;
+            //    test107 = true;
+            //}
             if (hdnDayOffTypeUnit.Value == "天")  //需要考慮一天工作時數非整數的人 (ie. 小倩8.5hr)
             {
                 hdnTotalDayOffTime.Value = (totalDayOffAmount / Convert.ToDecimal(hdnNormalWorkHour.Value)).ToString();
@@ -519,7 +534,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
         if (errorList.Count == 0) //都沒有錯誤，可執行之後的步驟
         {
-            if (lblDayOffRemainAmount.Text == "")
+            if (lblDayOffRemainAmount.Text == "" && needFunctionalSubstitute)
             {
                 lstDayOffAppSummary.Add(new dayOffInfo
                 {
@@ -534,7 +549,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     reason = txtReason.Text.Trim()
                 });
             }
-            else
+            else if (lblDayOffRemainAmount.Text != "" && needFunctionalSubstitute)
             {
                 lstDayOffAppSummary.Add(new dayOffInfo
                 {
@@ -546,6 +561,36 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     amountUsing = hdnTotalDayOffTime.Value,
                     restrictedAmountSet = "Y",
                     funcSub = ddlDayOffFuncSub.SelectedItem.ToString().Trim(),
+                    reason = txtReason.Text.Trim()
+                });
+            }
+            else if (lblDayOffRemainAmount.Text == "" && !needFunctionalSubstitute)
+            {
+                lstDayOffAppSummary.Add(new dayOffInfo
+                {
+                    typeID = ddlDayOffType.SelectedValue.Trim(),
+                    typeName = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3).Trim(),
+                    startTime = dayOffStartTime,
+                    endTime = dayOffEndTime,
+                    unit = hdnDayOffTypeUnit.Value,
+                    amountUsing = hdnTotalDayOffTime.Value,
+                    restrictedAmountSet = "N",
+                    funcSub = "N/A",
+                    reason = txtReason.Text.Trim()
+                });
+            }
+            else if (lblDayOffRemainAmount.Text != "" && !needFunctionalSubstitute)
+            {
+                lstDayOffAppSummary.Add(new dayOffInfo
+                {
+                    typeID = ddlDayOffType.SelectedValue.Trim(),
+                    typeName = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3).Trim(),
+                    startTime = dayOffStartTime,
+                    endTime = dayOffEndTime,
+                    unit = hdnDayOffTypeUnit.Value,
+                    amountUsing = hdnTotalDayOffTime.Value,
+                    restrictedAmountSet = "Y",
+                    funcSub = "N/A",
                     reason = txtReason.Text.Trim()
                 });
             }
@@ -863,7 +908,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             conn.Open();
-            string query = "SELECT A.APPLICATION_ID,A.DAYOFF_NAME,A.DAYOFF_START_TIME,A.DAYOFF_END_TIME,CONVERT(NVARCHAR(20),A.DAYOFF_TOTAL_TIME)+DAYOFF_TIME_UNIT,MV.MV002,B.NAME"
+            string query = "SELECT A.APPLICATION_ID,A.DAYOFF_NAME,A.DAYOFF_START_TIME,A.DAYOFF_END_TIME,CONVERT(NVARCHAR(20),A.DAYOFF_TOTAL_TIME)+DAYOFF_TIME_UNIT,COALESCE(MV.MV002,'N/A'),B.NAME"
                         + " ,A.NEXT_REVIEWER+' '+MV2.MV002"
                         + " FROM HR360_DAYOFFAPPLICATION_APPLICATION A"
                         + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPLICATION_STATUS B ON A.APPLICATION_STATUS_ID=B.ID"
@@ -977,7 +1022,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             conn.Open();
             string query = "SELECT APP.APPLICATION_ID,APP.APPLICATION_DATE,MV.MV002,APP.DAYOFF_NAME"
                         + " ,APP.DAYOFF_START_TIME,APP.DAYOFF_END_TIME,CONVERT(NVARCHAR(20),APP.DAYOFF_TOTAL_TIME)+APP.DAYOFF_TIME_UNIT"
-                        + " ,MV2.MV002"
+                        + " ,COALESCE(MV2.MV002,'N/A')"
                         + " ,CASE"
                         + " WHEN APP.REASON='' THEN '無'"
                         + " ELSE '點選查看'"
@@ -1265,7 +1310,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 {
                     conn.Open();
                     //get current state of the application
-                    string query = "SELECT APP.APPLICATION_STATUS_ID,HIER.MEMBEROF,APP.APPLICANT_ID"
+                    string query = "SELECT APP.APPLICATION_STATUS_ID,HIER.MEMBEROF,APP.APPLICANT_ID,APP.FUNCTIONAL_SUBSTITUTE_ID"
                                 + " FROM HR360_DAYOFFAPPLICATION_APPLICATION APP"
                                 + " LEFT JOIN NZ.dbo.CMSMV MV ON APP.APPLICANT_ID=MV.MV001"
                                 + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MV.MV006=HIER.JOB_ID"
@@ -1278,6 +1323,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 approveID_status = dtApplicant.Rows[0][0].ToString();
                 memberOf = dtApplicant.Rows[0][1].ToString();
                 applicantID = dtApplicant.Rows[0][2].ToString().Trim();
+                if (dtApplicant.Rows[0]["FUNCTIONAL_SUBSTITUTE_ID"].ToString() == "N/A")
+                {
+                    nextReviewer = "SYSTEM";
+                }
                 do
                 {
                     using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
@@ -1287,7 +1336,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         string query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B (APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID)"
                             + " VALUES(@APP_ID,GETDATE(),@EXE_ID,'02')";
                         SqlCommand cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@APP_ID", approveID);
+                        cmd.Parameters.AddWithValue("@APP_ID", approveID);                        
                         cmd.Parameters.AddWithValue("@EXE_ID", nextReviewer);
                         cmd.ExecuteNonQuery();
                     }
@@ -1584,8 +1633,16 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("@DAYOFF_END_TIME", dayoff.endTime);
                     cmd.Parameters.AddWithValue("@DAYOFF_TOTAL_TIME", dayoff.amountUsing);
                     cmd.Parameters.AddWithValue("@DAYOFF_TIME_UNIT", dayoff.unit);
-                    cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub.Substring(0,4));
-                    cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.funcSub.Substring(0, 4));
+                    if (dayoff.funcSub == "N/A")
+                    {
+                        cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub);
+                        cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.funcSub);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub.Substring(0, 4));
+                        cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.funcSub.Substring(0, 4));
+                    }
                     cmd.Parameters.AddWithValue("@REASON", dayoff.reason);
                     cmd.ExecuteNonQuery();
                     query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B (APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID)"
@@ -1617,8 +1674,16 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         cmd.Parameters.AddWithValue("@DAYOFF_END_TIME", dayoff.endTime);
                         cmd.Parameters.AddWithValue("@DAYOFF_TOTAL_TIME", dayoff.amountUsing);
                         cmd.Parameters.AddWithValue("@DAYOFF_TIME_UNIT", dayoff.unit);
-                        cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub.Substring(0, 4));
-                        cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.funcSub.Substring(0, 4));
+                        if (dayoff.funcSub == "N/A")
+                        {
+                            cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub);
+                            cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.funcSub);
+                        }
+                        else
+                        {
+                            cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub.Substring(0, 4));
+                            cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.funcSub.Substring(0, 4));
+                        }
                         cmd.Parameters.AddWithValue("@REASON", dayoff.reason);
                         cmd.ExecuteNonQuery();
                         query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B (APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID)"
@@ -1636,7 +1701,16 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     {
                        
                     }
-                }
+                }                
+            }
+            if (dayoff.funcSub == "N/A")    //此單不需要代理人，可直接執行代理人APPROVE
+            {
+                hdnApprovalPendingSelection.Value = string.Empty;
+                hdnApprovalPendingSelection.Value = uid;
+                btnApprove_Click(sender, e);                
+            }
+            else
+            {
                 SendEmailNotification(uid, 1);
             }
         }
@@ -1960,12 +2034,18 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 break;
             case 2:
                 //recipientId.Add(dt.Rows[0]["NEXT_REVIEWER"].ToString());
-                recipientId.Add(dt.Rows[0]["FUNCTIONAL_SUBSTITUTE_ID"].ToString());
+                if (dt.Rows[0]["FUNCTIONAL_SUBSTITUTE_ID"].ToString() != "N/A")
+                {
+                    recipientId.Add(dt.Rows[0]["FUNCTIONAL_SUBSTITUTE_ID"].ToString());
+                }
                 break;
             case 3:
             case 4:
                 recipientId.Add(dt.Rows[0]["APPLICANT_ID"].ToString());
-                recipientId.Add(dt.Rows[0]["FUNCTIONAL_SUBSTITUTE_ID"].ToString());
+                if (dt.Rows[0]["FUNCTIONAL_SUBSTITUTE_ID"].ToString() != "N/A")
+                {
+                    recipientId.Add(dt.Rows[0]["FUNCTIONAL_SUBSTITUTE_ID"].ToString());
+                }
                 break;
             default:
                 break;
@@ -1977,11 +2057,12 @@ public partial class hr360_UI04 : System.Web.UI.Page
             using (SqlConnection conn = new SqlConnection(NZconnectionString))
             {
                 conn.Open();
-                string query = "SELECT MV.MV020"
+                string query = "SELECT COALESCE(MV.MV020,'')"
                             + " FROM CMSMV MV"
                             + " WHERE MV.MV001=@RECIPIENT_ID";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@RECIPIENT_ID", recipient);
+                
                 recipientEmailList.Add(cmd.ExecuteScalar().ToString());
             }
         }
@@ -2093,7 +2174,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             + " ,APP.DAYOFF_START_TIME"
             + " ,APP.DAYOFF_END_TIME"
             + " ,CONVERT(NVARCHAR(20),APP.DAYOFF_TOTAL_TIME)+DAYOFF_TIME_UNIT 'DAYOFF_TOTAL_TIME'"
-            + " ,MV2.MV002 'FUNC_SUB_NAME'"
+            + " ,COALESCE(MV2.MV002,'N/A') 'FUNC_SUB_NAME'"
             + " ,APP.REASON"
             + " ,[STATUS].NAME 'STATUS'"
             + " FROM HR360_DAYOFFAPPLICATION_APPLICATION APP"
