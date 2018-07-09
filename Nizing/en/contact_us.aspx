@@ -20,9 +20,6 @@
                         <th>Nizing Electric Wire & Cable Co., Ltd</th>
                     </tr>
                     <tr>
-                        <td>地址: 新北市三重區光復路二段87巷10-12號 (神農街底)</td>
-                    </tr>
-                    <tr>
                         <td>ADD: No.10-12, Ln. 87, Sec. 2, Guangfu Rd., Sanchong Dist., New Taipei City 241, Taiwan (R.O.C.)</td>
                     </tr>
                     <tr>
@@ -44,25 +41,25 @@
                 <table>
                     <tr>
                         <th colspan="2">    
-                            國內業務專員 / Domestic Sales Rep
+                            Domestic Sales Rep
                         </th>
                     </tr>
                     <tr>
-                        <td>黃憲騰 / Chris</td>
+                        <td>Chris Huang</td>
                         <td><a href="mailto:chris@nizing.com.tw">chris@nizing.com.tw</a></td>
                     </tr>
                     <tr>
-                        <td>陳淑倩 / Aris</td>
+                        <td>Aris Chen</td>
                         <td><a href="mailto:aris@nizing.com.tw">aris@nizing.com.tw</a></td>
                     </tr>
                     <tr>
                         <th colspan="2">
-                            外銷業務專員 / International Sales Rep
+                            International Sales Rep
                         </th>
                     </tr>
                     <tr>
-                        <td>陳逸樺 / Ehwa</td>
-                        <td><a href="mailto:ehwa@nizing.com.tw">ehwa@nizing.com.tw</a></td>
+                        <td>Kevin Wang</td>
+                        <td><a href="mailto:kevin@nizing.com.tw">kevin@nizing.com.tw</a></td>
                     </tr>
                 </table>
             </div>            

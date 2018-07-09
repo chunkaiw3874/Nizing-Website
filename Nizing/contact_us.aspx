@@ -61,8 +61,8 @@
                         </th>
                     </tr>
                     <tr>
-                        <td>陳逸樺 / Ehwa</td>
-                        <td><a href="mailto:ehwa@nizing.com.tw">ehwa@nizing.com.tw</a></td>
+                        <td>王君凱 / Kevin</td>
+                        <td><a href="mailto:kevin@nizing.com.tw">kevin@nizing.com.tw</a></td>
                     </tr>
                 </table>
             </div>
