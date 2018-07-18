@@ -289,8 +289,11 @@
                         <asp:Label ID="lblDayOffRemainAmount" runat="server" Text=""></asp:Label>
                         <asp:Label ID="lblDayOffRemainUnit" runat="server" Text=""></asp:Label>
                     </div>
-                    <div class="col-xs-10">
+                    <div class="col-xs-8">
                         <span class="label label-default" style="font-size: 16px;">請假原因</span>
+                    </div>
+                    <div class="col-xs-2">
+                        <asp:CheckBox ID="ckbTyphoonDayNoSub" runat="server" CssClass="checkbox-inline" Checked="false" Text="此假用在颱風天，無須代理人" />
                     </div>
                 </div>
                 <div class="row form-group">
@@ -313,7 +316,7 @@
                     <div class="col-xs-12">
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                本次請假內容                       
+                                本次請假內容                      
                            
                             </div>
                             <div class="panel-body">

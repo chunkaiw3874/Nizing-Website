@@ -24,6 +24,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
     List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
     DataTable userInfo = new DataTable();
+    
 
     public class dayOffInfo
     {
@@ -129,7 +130,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
         DateTime workStartTime = new DateTime();  //請假週期內，每日工作結束時間
         DateTime breakStartTime = new DateTime();  //請假週期內，每日休息開始時間
         DateTime breakEndTime = new DateTime();  //請假週期內，每日休息結束時間
-        bool needFunctionalSubstitute = true; //檢查請假時間是否小於或等於半小時
+        bool needFunctionalSubstitute = true; //Flag for if functional substitute is needed
+        bool dayOffUnderHalfHour = false;   //Flag for if dayoff is under half an hour
+        bool typhoonDay = false;    //Flag for if the entire duration of the day off is typhoon day
         bool test101 = false;
         bool test102 = false;
         bool test103 = false;
@@ -186,7 +189,6 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             test104 = true;
         }
-
         
         if (ddlDayOffType.SelectedValue == "05" && txtReason.Text.Trim() == "") //測試錯誤 108.請事假未填寫請假原因
         {
@@ -297,9 +299,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         if (timeDifference.Hours != 0 || timeDifference.Minutes != 0)
                         {   
                             //判斷假期開始時間是否合理
-                            if (hdnOfficeOrProduction.Value == "production"  //線廠人員僅能以上、下午為單位請假
+                            if ((hdnOfficeOrProduction.Value == "production" && ddlDayOffType.SelectedValue != "11")  //除非是颱風假，線廠人員僅能以上、下午為單位請假
                                 || ddlDayOffType.SelectedValue == "06" || ddlDayOffType.SelectedValue=="07" || ddlDayOffType.SelectedValue=="08" || ddlDayOffType.SelectedValue=="09"
-                                || ddlDayOffType.SelectedValue == "11")  //婚、喪、陪產、颱風假，無論人員身分，僅能以上、下午為單位請假
+                                )  //婚、喪、陪產，無論人員身分，僅能以上、下午為單位請假
                             {
                                 if ((!(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(3, 2))     //開始放假時間(hhmm)!=開始上班時間
                                     && !(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(3, 2))  //開始放假時間(hhmm)!=休息開始時間
@@ -340,9 +342,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         if (timeDifference.Hours != 0 || timeDifference.Minutes != 0)
                         {
                             //判斷假期開始時間是否合理
-                            if (hdnOfficeOrProduction.Value == "production"  //線廠人員僅能以上、下午為單位請假
+                            if ((hdnOfficeOrProduction.Value == "production" && ddlDayOffType.SelectedValue != "11")  //除非是颱風假，線廠人員僅能以上、下午為單位請假
                                 || ddlDayOffType.SelectedValue == "06" || ddlDayOffType.SelectedValue == "07" || ddlDayOffType.SelectedValue == "08" || ddlDayOffType.SelectedValue == "09"
-                                || ddlDayOffType.SelectedValue == "11")  //婚、喪、陪產、颱風假，無論人員身分，僅能以上、下午為單位請假
+                                )  //婚、喪、陪產、颱風假，無論人員身分，僅能以上、下午為單位請假
                             {
                                 if ((!(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(3, 2))     //開始放假時間(hhmm)!=開始上班時間
                                     && !(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(3, 2))  //開始放假時間(hhmm)!=休息開始時間
@@ -365,13 +367,36 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 }
             }
 
-            if (totalDayOffAmount > (decimal)0.5)   //2018.06.13 如果請假時間超過半小時，才需要做代理人測試
+            //是否需要代理人條件整理
+            if (totalDayOffAmount > (decimal)0.5)   //請假是否超過半小時
             {
-                needFunctionalSubstitute = true;
+                dayOffUnderHalfHour = false;
             }
             else
             {
+                dayOffUnderHalfHour = true;
+            }
+
+            if (ddlDayOffType.SelectedValue == "11")
+            {
+                typhoonDay = true;
+            }
+            else
+            {
+                typhoonDay = false;
+            }
+
+            
+            if (dayOffUnderHalfHour //2018.06.13 如果請假時間超過半小時，才需要做代理人測試
+                || typhoonDay   //2018.07.12 颱風假不需要代理人
+                || ckbTyphoonDayNoSub.Checked   //2018.07.12 颱風假當天用其他的假抵，不需要代理人
+                )    
+            {
                 needFunctionalSubstitute = false;
+            }
+            else
+            {
+                needFunctionalSubstitute = true;
             }
 
             if (needFunctionalSubstitute)   
@@ -534,6 +559,18 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
         if (errorList.Count == 0) //都沒有錯誤，可執行之後的步驟
         {
+            if (ckbTyphoonDayNoSub.Checked)
+            {
+                string temp = "此單請假期間應為颱風假期，請人事確認";
+                if (string.IsNullOrWhiteSpace(txtReason.Text.Trim()))
+                {
+                    txtReason.Text += temp;
+                }
+                else
+                {
+                    txtReason.Text += Environment.NewLine + temp;
+                }
+            }
             if (lblDayOffRemainAmount.Text == "" && needFunctionalSubstitute)
             {
                 lstDayOffAppSummary.Add(new dayOffInfo
