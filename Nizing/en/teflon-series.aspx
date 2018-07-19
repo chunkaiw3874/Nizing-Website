@@ -332,7 +332,7 @@
                         </tr>
                         <tr>
                             <td>Nominal Temperature:</td>
-                            <td>-60°C~ +200°C</td>
+                            <td>-40°C~ +150°C</td>
                         </tr>
                         <tr>
                             <td>Conductor:</td>
