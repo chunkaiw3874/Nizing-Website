@@ -152,6 +152,16 @@ public partial class hr360_UI04 : System.Web.UI.Page
         decimal totalDayOffAmount = 0;     
         
         txtErrorMessage.Text = ""; //reset 錯誤訊息
+        
+        if (ddlDayOffType.SelectedValue == "11" || ckbTyphoonDayNoSub.Checked)  //檢查是否為颱風假申請
+        {
+            typhoonDay = true;
+        }
+        else
+        {
+            typhoonDay = false;
+        }
+
         if (((List<dayOffInfo>)Session["lstDayOffAppSummary"]).Count != 0)
         {
             lstDayOffAppSummary = (List<dayOffInfo>)Session["lstDayOffAppSummary"];
@@ -305,7 +315,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         if (timeDifference.Hours != 0 || timeDifference.Minutes != 0)
                         {   
                             //判斷假期開始時間是否合理
-                            if ((hdnOfficeOrProduction.Value == "production" && ddlDayOffType.SelectedValue != "11")  //除非是颱風假，線廠人員僅能以上、下午為單位請假
+                            if ((hdnOfficeOrProduction.Value == "production" && !typhoonDay)  //除非是颱風假，線廠人員僅能以上、下午為單位請假
                                 || ddlDayOffType.SelectedValue == "06" || ddlDayOffType.SelectedValue=="07" || ddlDayOffType.SelectedValue=="08" || ddlDayOffType.SelectedValue=="09"
                                 )  //婚、喪、陪產，無論人員身分，僅能以上、下午為單位請假
                             {
@@ -348,7 +358,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         if (timeDifference.Hours != 0 || timeDifference.Minutes != 0)
                         {
                             //判斷假期開始時間是否合理
-                            if ((hdnOfficeOrProduction.Value == "production" && ddlDayOffType.SelectedValue != "11")  //除非是颱風假，線廠人員僅能以上、下午為單位請假
+                            if ((hdnOfficeOrProduction.Value == "production" && !typhoonDay)  //除非是颱風假，線廠人員僅能以上、下午為單位請假
                                 || ddlDayOffType.SelectedValue == "06" || ddlDayOffType.SelectedValue == "07" || ddlDayOffType.SelectedValue == "08" || ddlDayOffType.SelectedValue == "09"
                                 )  //婚、喪、陪產、颱風假，無論人員身分，僅能以上、下午為單位請假
                             {
@@ -383,19 +393,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 dayOffUnderHalfHour = true;
             }
 
-            if (ddlDayOffType.SelectedValue == "11")
-            {
-                typhoonDay = true;
-            }
-            else
-            {
-                typhoonDay = false;
-            }
 
             
             if (dayOffUnderHalfHour //2018.06.13 如果請假時間超過半小時，才需要做代理人測試
                 || typhoonDay   //2018.07.12 颱風假不需要代理人
-                || ckbTyphoonDayNoSub.Checked   //2018.07.12 颱風假當天用其他的假抵，不需要代理人
                 )    
             {
                 needFunctionalSubstitute = false;
@@ -495,9 +496,19 @@ public partial class hr360_UI04 : System.Web.UI.Page
             else
             {
                 hdnTotalDayOffTime.Value = Convert.ToDecimal(totalDayOffAmount).ToString();
-                if (Convert.ToDecimal(hdnTotalDayOffTime.Value) * 10 % Convert.ToInt16((Convert.ToDecimal(hdnDayOffTimeRestraint.Value) * 10)) != 0)  //測試錯誤 203.請假單位與限制不符
+                if (typhoonDay)    //颱風假則任何人都可以0.5小時請假
                 {
-                    errorList.Add(errorCode(203));
+                    if (Convert.ToDecimal(hdnTotalDayOffTime.Value) * 10 % Convert.ToInt16((Convert.ToDecimal(0.5) * 10)) != 0)  //測試錯誤 203.請假單位與限制不符
+                    {
+                        errorList.Add(errorCode(203));
+                    }
+                }
+                else
+                {
+                    if (Convert.ToDecimal(hdnTotalDayOffTime.Value) * 10 % Convert.ToInt16((Convert.ToDecimal(hdnDayOffTimeRestraint.Value) * 10)) != 0)  //測試錯誤 203.請假單位與限制不符
+                    {
+                        errorList.Add(errorCode(203));
+                    }
                 }
             }
             if (totalDayOffAmount <= 0)  //測試錯誤 201.此請假週期非上班時間，無須請假
