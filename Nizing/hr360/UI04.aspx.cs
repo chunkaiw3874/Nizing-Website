@@ -75,10 +75,16 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 {
                     hdnNormalWorkHour.Value = "8";
                 }
-                btnSearchSubmit_Click(sender, e);   //does search automatically everytime page loads
+                Page.LoadComplete += new EventHandler(Page_LoadComplete);
             }
         }
     }
+
+    void Page_LoadComplete(object sender, EventArgs e)
+    {
+        btnSearchSubmit_Click(sender, e);   //does search automatically everytime page finishes loading
+    }
+
 
     //#region Test Area!!!!!!!!!! Test Methods ONLY!!!!!!
     ////Test for Different ID
@@ -640,6 +646,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 lblDayOffRemainAmount.Text = (Convert.ToDouble(hdnDayOffTimeRemainBeforeSubmit.Value) - sumFromList).ToString();
             }
             txtReason.Text = string.Empty;
+            ckbTyphoonDayNoSub.Checked = false;
         }
     }
     /// <summary>
@@ -2049,6 +2056,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         + " ,TRAIL.ACTION_ID"
                         + " ,TRAIL_A.NAME 'ACTION_NAME'"
                         + " ,COALESCE(TRAIL.ACTION_MEMO,'') 'ACTION_MEMO'"
+                        + " ,COALESCE(APP.REASON,'') 'REASON'"
                         + " FROM HR360_DAYOFFAPPLICATION_APPLICATION APP"
                         + " LEFT JOIN NZ.dbo.CMSMV MV ON APP.APPLICANT_ID=MV.MV001"
                         + " LEFT JOIN NZ.dbo.CMSMV MV2 ON APP.NEXT_REVIEWER=MV2.MV001"
@@ -2141,6 +2149,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         body += "申請時間: " + dt.Rows[0]["APPLICATION_DATE"].ToString() + "\n";
         body += "開始時間: " + dt.Rows[0]["DAYOFF_START_TIME"].ToString() + "\n";
         body += "結束時間: " + dt.Rows[0]["DAYOFF_END_TIME"].ToString() + "\n";
+        body += "請假原因: " + dt.Rows[0]["REASON"].ToString() + "\n";
         body += "簽核狀態: " + dt.Rows[0]["STATUS_NAME"].ToString() + "\n";
         body += "最後動作執行者: " + dt.Rows[0]["EXECUTOR_NAME"].ToString() + "\n";
         body += "最後動作備註: " + dt.Rows[0]["ACTION_MEMO"].ToString() + "\n\n";
