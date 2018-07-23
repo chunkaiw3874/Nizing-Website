@@ -680,7 +680,8 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
         if (checkForNull != null)
         {
             onJobHour = Convert.ToDouble(checkForNull);
-            lblOnJobPercent.Text = (Math.Round(100 * (1 - (dayOffSum / onJobHour)), 2, MidpointRounding.AwayFromZero)).ToString();
+            lblOnJobPercent.Text = (Math.Floor(100 * 100 * (1 - (dayOffSum / onJobHour))) / 100).ToString();    //2018.07.23 改成小數第二位無條件捨去
+            //lblOnJobPercent.Text = (Math.Round(100 * (1 - (dayOffSum / onJobHour)), 2, MidpointRounding.AwayFromZero)).ToString();
         }
         else
         {
