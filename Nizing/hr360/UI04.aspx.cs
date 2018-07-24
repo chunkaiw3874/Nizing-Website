@@ -15,7 +15,7 @@ using System.Web.UI.WebControls;
  如果HR有人事變更，於本頁搜尋HR做更正!!!
  */
 /*
- * 2018.07.20 人事審核部分，現在強制丟給FEI，如升為人事主任後改回
+ * 2018.07.24 現行無HR，由0080暫代
  * PS: 搜尋"NEED FIX" for code
  */
 public partial class hr360_UI04 : System.Web.UI.Page
@@ -41,8 +41,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "0067";    //test only to avoid error on loading, delete after trial            
-        //Session["erp_id"] = "0067";
+        //Session["user_id"] = "0136";    //test only to avoid error on loading, delete after trial            
+        //Session["erp_id"] = "0136";
         if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('連線已逾時，將會回到登入頁面');window.location='login.aspx'", true);
@@ -1497,7 +1497,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                         {
                             conn.Open();
-                            //簽核限制:人事主任 RANK 7 (2018.07.20 現行丟給FEI，因職位未到人事主任，故用ERP ID強制丟給FEI)
+                            //簽核限制:人事主任 RANK 7 (2018.07.20 現行無人事，此審核自動通過)
                             string query = "SELECT MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
                                         + " FROM NZ.dbo.CMSMV MV"
                                         + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
@@ -1506,7 +1506,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                                         + " AND MV.MV001<>@ID"
                                 //+ " AND MK.MK001='A20'"           
                                 //+ " AND HIER.[RANK]=7";
-                                        + " AND MV.MV001='0136'" //NEED FIX: 強制將假單丟給FEI審核人事部分，如升為人事主任後改回
+                                        + " AND MV.MV001='0080'" //NEED FIX: 如無人事主任(A20)，則指定人事專員審核
                                         + " AND MK.MK001='A21'";
                             SqlCommand cmd = new SqlCommand(query, conn);
                             cmd.Parameters.AddWithValue("@ID", applicantID);
@@ -1788,7 +1788,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     + " AND MV.MV001<>'0006'"
                     + " AND MV.MV001<>'0007'"
                     + " AND MV.MV001<>'0098'";  //這些人不會請假
-        if (Session["erp_id"].ToString() != "0136"      //HR
+        if (Session["erp_id"].ToString() != "0080"      //HR
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
             && Session["erp_id"].ToString() != "0007") //管理部跟HR可以查詢全部人的歷史資料
@@ -1809,7 +1809,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             ddlSearch_Parameter_ApplicantID.DataSource = dt;
             ddlSearch_Parameter_ApplicantID.DataBind();
         }
-        if (!(Session["erp_id"].ToString() != "0136"   //HR
+        if (!(Session["erp_id"].ToString() != "0080"   //HR
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
             && Session["erp_id"].ToString() != "0007")) //管理部跟HR可以查詢全部人的歷史資料
@@ -2082,7 +2082,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
         }        
-        recipientId.Add("0136");    //Current HR 2018.07.20
+        recipientId.Add("0080");    //Current HR 2018.07.20
         //status 1:新申請/一般簽核通過(HR&下個簽核者) 2:申請撤銷(HR&代理人) 3:申請退回(HR&申請人&代理人) 4:最後一層簽核通過(HR&申請人&代理人)
         switch (appStatus)
         {
@@ -2311,7 +2311,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         //看報告
         if (Session["erp_id"].ToString() != "0007"      //Chrissy
             && Session["erp_id"].ToString() != "0080"   //Kevin
-            && Session["erp_id"].ToString() != "0136"   //FEI (HR)
+            && Session["erp_id"].ToString() != "0080"   //HR
             )  
         {
             gvSearchResult.Columns[10].Visible = false;
