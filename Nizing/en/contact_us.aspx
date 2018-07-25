@@ -20,7 +20,7 @@
                         <th>Nizing Electric Wire & Cable Co., Ltd</th>
                     </tr>
                     <tr>
-                        <td>ADD: No.10-12, Ln. 87, Sec. 2, Guangfu Rd., Sanchong Dist., New Taipei City 241, Taiwan (R.O.C.)</td>
+                        <td>ADD: No.10-12, Ln. 87, Sec. 2, Guangfu Rd., Sanchong Dist., New Taipei City 24158, Taiwan (R.O.C.)</td>
                     </tr>
                     <tr>
                         <td>TEL: +886-2-2999-9181 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FAX: +886-2-2999-9771</td>
