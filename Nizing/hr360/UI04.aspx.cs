@@ -1360,7 +1360,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 string approveID_status = "";
                 string applicantID = "";
                 string memberOf = "";
-                string nextReviewer = Session["erp_id"].ToString();
+                string nextReviewer = "";
                 DataTable dtApplicant = new DataTable();
                 using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                 {
@@ -1379,9 +1379,13 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 approveID_status = dtApplicant.Rows[0][0].ToString();
                 memberOf = dtApplicant.Rows[0][1].ToString();
                 applicantID = dtApplicant.Rows[0][2].ToString().Trim();
-                if (dtApplicant.Rows[0]["FUNCTIONAL_SUBSTITUTE_ID"].ToString() == "N/A")
+                if (dtApplicant.Rows[0]["FUNCTIONAL_SUBSTITUTE_ID"].ToString() == "N/A" && approveID_status == "01")
                 {
                     nextReviewer = "SYSTEM";
+                }
+                else
+                {
+                    nextReviewer = Session["erp_id"].ToString();
                 }
                 do
                 {
@@ -1390,14 +1394,17 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         conn.Open();
                         //insert approval trail to DB
                         string query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B (APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID)"
-                            + " VALUES(@APP_ID,GETDATE(),@EXE_ID,'02')";
+                                    + " VALUES(@APP_ID,GETDATE(),@EXE_ID,'02')";
                         SqlCommand cmd = new SqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@APP_ID", approveID);                        
                         cmd.Parameters.AddWithValue("@EXE_ID", nextReviewer);
                         cmd.ExecuteNonQuery();
                     }
                     //update application status to next stage
-                    approveID_status = (Convert.ToInt16(approveID_status) + 1).ToString("D2");
+                    if (Convert.ToInt16(approveID_status) < 6)
+                    {
+                        approveID_status = (Convert.ToInt16(approveID_status) + 1).ToString("D2");
+                    }
                     if (approveID_status == "02")  //代理人簽核通過，搜尋第一層簽核人(部門最高負責人 BELOW RANK 7)
                     {
                         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
@@ -1569,8 +1576,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         cmd.Parameters.AddWithValue("@APPLICATION", approveID);
                         cmd.ExecuteNonQuery();
                     }
-                    System.Threading.Thread.Sleep(1000);    //sleeps for 1 second before continuing so trail records can be ordered by time
-                } while (nextReviewer == "SYSTEM" && approveID_status != "06"); //stops when somebody is required to review the application,
+                    System.Threading.Thread.Sleep(3000);    //sleeps for 1 second before continuing so trail records can be ordered by time
+                } while (nextReviewer == "SYSTEM" && Convert.ToInt16(approveID_status) < 6); //stops when somebody is required to review the application,
                 //or when approval status reached 6, which means the application is approved by everyone necessary
                 //automatic approval should only happen on 1st and 2nd level,
                 //3rd and 4th level should always have reviewer (人事主管/副總)
@@ -1788,7 +1795,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     + " AND MV.MV001<>'0006'"
                     + " AND MV.MV001<>'0007'"
                     + " AND MV.MV001<>'0098'";  //這些人不會請假
-        if (Session["erp_id"].ToString() != "0080"      //HR
+        if (Session["erp_id"].ToString() != "0136"      //HR
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
             && Session["erp_id"].ToString() != "0007") //管理部跟HR可以查詢全部人的歷史資料
@@ -1809,7 +1816,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             ddlSearch_Parameter_ApplicantID.DataSource = dt;
             ddlSearch_Parameter_ApplicantID.DataBind();
         }
-        if (!(Session["erp_id"].ToString() != "0080"   //HR
+        if (!(Session["erp_id"].ToString() != "0136"   //HR
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
             && Session["erp_id"].ToString() != "0007")) //管理部跟HR可以查詢全部人的歷史資料
@@ -2311,7 +2318,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         //看報告
         if (Session["erp_id"].ToString() != "0007"      //Chrissy
             && Session["erp_id"].ToString() != "0080"   //Kevin
-            && Session["erp_id"].ToString() != "0080"   //HR
+            && Session["erp_id"].ToString() != "0136"   //HR
             )  
         {
             gvSearchResult.Columns[10].Visible = false;
