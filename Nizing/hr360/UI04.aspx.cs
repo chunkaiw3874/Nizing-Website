@@ -15,7 +15,7 @@ using System.Web.UI.WebControls;
  如果HR有人事變更，於本頁搜尋HR做更正!!!
  */
 /*
- * 2018.07.24 現行無HR，由0080暫代
+ * 2018.08.20 現行HR 0137
  * PS: 搜尋"NEED FIX" for code
  */
 public partial class hr360_UI04 : System.Web.UI.Page
@@ -1513,7 +1513,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                                         + " AND MV.MV001<>@ID"
                                 //+ " AND MK.MK001='A20'"           
                                 //+ " AND HIER.[RANK]=7";
-                                        + " AND MV.MV001='0080'" //NEED FIX: 如無人事主任(A20)，則指定人事專員審核
+                                        + " AND MV.MV001='0137'" //NEED FIX: 如無人事主任(A20)，則指定人事專員審核
                                         + " AND MK.MK001='A21'";
                             SqlCommand cmd = new SqlCommand(query, conn);
                             cmd.Parameters.AddWithValue("@ID", applicantID);
@@ -1795,7 +1795,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     + " AND MV.MV001<>'0006'"
                     + " AND MV.MV001<>'0007'"
                     + " AND MV.MV001<>'0098'";  //這些人不會請假
-        if (Session["erp_id"].ToString() != "0136"      //HR
+        if (Session["erp_id"].ToString() != "0137"      //HR
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
             && Session["erp_id"].ToString() != "0007") //管理部跟HR可以查詢全部人的歷史資料
@@ -1816,7 +1816,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             ddlSearch_Parameter_ApplicantID.DataSource = dt;
             ddlSearch_Parameter_ApplicantID.DataBind();
         }
-        if (!(Session["erp_id"].ToString() != "0136"   //HR
+        if (!(Session["erp_id"].ToString() != "0137"   //HR
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
             && Session["erp_id"].ToString() != "0007")) //管理部跟HR可以查詢全部人的歷史資料
@@ -2089,7 +2089,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
         }        
-        recipientId.Add("0080");    //Current HR 2018.07.20
+        recipientId.Add("0137");    //HR 2018.08.20
         //status 1:新申請/一般簽核通過(HR&下個簽核者) 2:申請撤銷(HR&代理人) 3:申請退回(HR&申請人&代理人) 4:最後一層簽核通過(HR&申請人&代理人)
         switch (appStatus)
         {
@@ -2318,7 +2318,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         //看報告
         if (Session["erp_id"].ToString() != "0007"      //Chrissy
             && Session["erp_id"].ToString() != "0080"   //Kevin
-            && Session["erp_id"].ToString() != "0136"   //HR
+            && Session["erp_id"].ToString() != "0137"   //HR
             )  
         {
             gvSearchResult.Columns[10].Visible = false;
