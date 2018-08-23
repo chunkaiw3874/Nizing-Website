@@ -81,10 +81,10 @@ public partial class nizing_intranet_HR10 : System.Web.UI.Page
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(ds.Tables[0]);
         }
-        foreach (DataRow row in ds.Tables[0].Rows)
-        {
-            userIndex.Add(row["UserIndex"])
-        }
+        //foreach (DataRow row in ds.Tables[0].Rows)
+        //{
+        //    userIndex.Add(row["UserIndex"])
+        //}
         gvResult.DataSource = ds.Tables[0];
         
         gvResult.DataBind();
