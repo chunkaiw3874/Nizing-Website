@@ -2356,12 +2356,6 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     btn.OnClientClick = null;
                 }
             }
-            //string temp = ((Label)e.Row.Cells[4].FindControl("lblDayoffStartTime")).Text;
-            //DateTime dtTemp = new DateTime();
-            //if (DateTime.TryParse(temp, out dtTemp))
-            //{
-            //    ((Label)e.Row.Cells[4].FindControl("lblDayoffStartTime")).Text = dtTemp.ToString("yyyy/MM/dd HH:mm");
-            //}
             ((Label)e.Row.Cells[4].FindControl("lblDayoffStartTime")).Text = (DateTime.Parse(((Label)e.Row.Cells[4].FindControl("lblDayoffStartTime")).Text)).ToString("yyyy/MM/dd HH:mm");
             ((Label)e.Row.Cells[5].FindControl("lblDayoffEndTime")).Text = (DateTime.Parse(((Label)e.Row.Cells[5].FindControl("lblDayoffEndTime")).Text)).ToString("yyyy/MM/dd HH:mm");
             ((Label)e.Row.Cells[10].FindControl("lblApplicationTime")).Text = (DateTime.Parse(((Label)e.Row.Cells[10].FindControl("lblApplicationTime")).Text)).ToString("yyyy/MM/dd HH:mm");
