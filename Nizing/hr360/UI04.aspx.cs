@@ -2234,6 +2234,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             + " GROUP BY APPLICATION_ID"
             + " )"
             + " SELECT DISTINCT APP.APPLICATION_ID"
+            + " ,APP.APPLICANT_ID"
             + " ,APP.APPLICATION_DATE"
             + " ,[LAST_ACTION].LAST_ACTION_TIME"
             + " ,MV.MV002 'APPLICANT_NAME'"
@@ -2335,9 +2336,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {            
-            LinkButton btn = (LinkButton)e.Row.Cells[11].FindControl("btnSearch_Deny");
+            LinkButton btn = (LinkButton)e.Row.Cells[12].FindControl("btnSearch_Deny");
             if (
-                ((Label)e.Row.Cells[10].FindControl("lblAppStatus")).Text == "退回" 
+                ((Label)e.Row.Cells[9].FindControl("lblAppStatus")).Text == "退回" 
                 || ((Label)e.Row.Cells[9].FindControl("lblAppStatus")).Text == "撤銷"
                 )
             {               
@@ -2354,7 +2355,17 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 {
                     btn.OnClientClick = null;
                 }
-            }            
+            }
+            //string temp = ((Label)e.Row.Cells[4].FindControl("lblDayoffStartTime")).Text;
+            //DateTime dtTemp = new DateTime();
+            //if (DateTime.TryParse(temp, out dtTemp))
+            //{
+            //    ((Label)e.Row.Cells[4].FindControl("lblDayoffStartTime")).Text = dtTemp.ToString("yyyy/MM/dd HH:mm");
+            //}
+            ((Label)e.Row.Cells[4].FindControl("lblDayoffStartTime")).Text = (DateTime.Parse(((Label)e.Row.Cells[4].FindControl("lblDayoffStartTime")).Text)).ToString("yyyy/MM/dd HH:mm");
+            ((Label)e.Row.Cells[5].FindControl("lblDayoffEndTime")).Text = (DateTime.Parse(((Label)e.Row.Cells[5].FindControl("lblDayoffEndTime")).Text)).ToString("yyyy/MM/dd HH:mm");
+            ((Label)e.Row.Cells[10].FindControl("lblApplicationTime")).Text = (DateTime.Parse(((Label)e.Row.Cells[10].FindControl("lblApplicationTime")).Text)).ToString("yyyy/MM/dd HH:mm");
+            ((Label)e.Row.Cells[11].FindControl("lblLastActionTime")).Text = (DateTime.Parse(((Label)e.Row.Cells[11].FindControl("lblLastActionTime")).Text)).ToString("yyyy/MM/dd HH:mm");
         }
     }
     protected void gvSearchResult_PageIndexChanging(object sender, GridViewPageEventArgs e)

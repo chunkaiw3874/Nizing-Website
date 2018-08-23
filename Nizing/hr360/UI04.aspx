@@ -423,18 +423,10 @@
                             </asp:TemplateField>
                             <asp:TemplateField ItemStyle-HorizontalAlign="Center">
                                 <HeaderTemplate>
-                                    <asp:LinkButton ID="lbApplication_Date" runat="server" Text="申請時間" CommandName="Sort" CommandArgument="APPLICATION_DATE"></asp:LinkButton>
+                                    <asp:LinkButton ID="lbApplicant_ID" runat="server" Text="員工代號" CommandName="Sort" CommandArgument="APPLICANT_ID"></asp:LinkButton>
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <asp:Label ID="Label1" runat="server" Text='<%#Eval("APPLICATION_DATE") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
-                                <HeaderTemplate>
-                                    <asp:LinkButton ID="lbLAST_ACTION_TIME" runat="server" Text="最後動作時間" CommandName="Sort" CommandArgument="LAST_ACTION_TIME"></asp:LinkButton>
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="Label2" runat="server" Text='<%#Eval("LAST_ACTION_TIME") %>'></asp:Label>
+                                    <asp:Label ID="Label10" runat="server" Text='<%#Eval("APPLICANT_ID") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField ItemStyle-HorizontalAlign="Center">
@@ -458,7 +450,7 @@
                                     <asp:LinkButton ID="lbDAYOFF_START_TIME" runat="server" Text="請假開始時間" CommandName="Sort" CommandArgument="DAYOFF_START_TIME"></asp:LinkButton>
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <asp:Label ID="Label5" runat="server" Text='<%#Eval("DAYOFF_START_TIME") %>'></asp:Label>
+                                    <asp:Label ID="lblDayoffStartTime" runat="server" Text='<%#Eval("DAYOFF_START_TIME") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField ItemStyle-HorizontalAlign="Center">
@@ -466,7 +458,7 @@
                                     <asp:LinkButton ID="lbDAYOFF_END_TIME" runat="server" Text="請假結束時間" CommandName="Sort" CommandArgument="DAYOFF_END_TIME"></asp:LinkButton>
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <asp:Label ID="Label6" runat="server" Text='<%#Eval("DAYOFF_END_TIME") %>'></asp:Label>
+                                    <asp:Label ID="lblDayoffEndTime" runat="server" Text='<%#Eval("DAYOFF_END_TIME") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField ItemStyle-HorizontalAlign="Center">
@@ -499,6 +491,22 @@
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="lblAppStatus" runat="server" Text='<%#Eval("STATUS") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                <HeaderTemplate>
+                                    <asp:LinkButton ID="lbApplication_Time" runat="server" Text="申請時間" CommandName="Sort" CommandArgument="APPLICATION_DATE"></asp:LinkButton>
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="lblApplicationTime" runat="server" Text='<%#Eval("APPLICATION_DATE") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                <HeaderTemplate>
+                                    <asp:LinkButton ID="lbLAST_ACTION_TIME" runat="server" Text="最後動作時間" CommandName="Sort" CommandArgument="LAST_ACTION_TIME"></asp:LinkButton>
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="lblLastActionTime" runat="server" Text='<%#Eval("LAST_ACTION_TIME") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="人事退回" ItemStyle-HorizontalAlign="Center">
