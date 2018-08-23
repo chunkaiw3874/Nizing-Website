@@ -33,46 +33,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
             ddlMonth.Items.Insert(0, new ListItem("整年", "ALL"));
             ddlMonth.SelectedIndex = 0;
             btnReport_Click(sender, e);
-            foreach (GridViewRow row in grdReport.Rows)
-            {
-                if (row.RowType == DataControlRowType.DataRow)
-                {
-                    string[] alldayoff = (row.Cells[2].FindControl("Label2") as Label).Text.Split('/');
-                    string[] dayoffused = (row.Cells[2].FindControl("Label3") as Label).Text.Split('/');
-                    decimal alldayoffInDec = 0;
-                    decimal dayoffusedInDec = 0;
-
-                    if (alldayoff.Length > 1 && dayoffused.Length > 1)
-                    {
-                        if (!(string.IsNullOrWhiteSpace(alldayoff[1]) && string.IsNullOrWhiteSpace(dayoffused[1])))
-                        {
-                            decimal.TryParse(alldayoff[1], out alldayoffInDec);
-                            decimal.TryParse(dayoffused[1], out dayoffusedInDec);
-
-                            if (dayoffusedInDec > alldayoffInDec)
-                            {
-                                (row.Cells[0].FindControl("Label0") as Label).ForeColor = System.Drawing.Color.Red;
-                                (row.Cells[1].FindControl("Label1") as Label).ForeColor = System.Drawing.Color.Red;
-                                (row.Cells[2].FindControl("Label2") as Label).ForeColor = System.Drawing.Color.Red;
-                                (row.Cells[3].FindControl("Label3") as Label).ForeColor = System.Drawing.Color.Red;
-                                (row.Cells[4].FindControl("Label4") as Label).ForeColor = System.Drawing.Color.Red;
-                                (row.Cells[5].FindControl("Label5") as Label).ForeColor = System.Drawing.Color.Red;
-                                (row.Cells[6].FindControl("Label6") as Label).ForeColor = System.Drawing.Color.Red;
-                                (row.Cells[7].FindControl("Label7") as Label).ForeColor = System.Drawing.Color.Red;
-                                (row.Cells[8].FindControl("Label8") as Label).ForeColor = System.Drawing.Color.Red;
-                                (row.Cells[9].FindControl("Label9") as Label).ForeColor = System.Drawing.Color.Red;
-                                (row.Cells[10].FindControl("Label10") as Label).ForeColor = System.Drawing.Color.Red;
-                                (row.Cells[11].FindControl("Label11") as Label).ForeColor = System.Drawing.Color.Red;
-                                (row.Cells[12].FindControl("Label12") as Label).ForeColor = System.Drawing.Color.Red;
-                                (row.Cells[13].FindControl("Label13") as Label).ForeColor = System.Drawing.Color.Red;
-                                (row.Cells[14].FindControl("Label14") as Label).ForeColor = System.Drawing.Color.Red;
-                                (row.Cells[15].FindControl("Label15") as Label).ForeColor = System.Drawing.Color.Red;
-                                (row.Cells[16].FindControl("lblRowSum") as Label).ForeColor = System.Drawing.Color.Red;
-                            }
-                        }
-                    }
-                }
-            }
+            checkUncommonResultAndChangeFontColor();
         }
     }
 
@@ -152,6 +113,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
             grdReport.DataSource = dt;
             grdReport.DataBind();
         }
+        checkUncommonResultAndChangeFontColor();
     }
 
     protected void btnExport_Click(object sender, EventArgs e)
@@ -450,6 +412,49 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
             
             //Adding the Row at the 0th position (first row) in the Grid
             ProductGrid.Controls[0].Controls.AddAt(0, HeaderRow);            
+        }
+    }
+    protected void checkUncommonResultAndChangeFontColor()
+    {
+        foreach (GridViewRow row in grdReport.Rows)
+        {
+            if (row.RowType == DataControlRowType.DataRow)
+            {
+                string[] alldayoff = (row.Cells[2].FindControl("Label2") as Label).Text.Split('/');
+                string[] dayoffused = (row.Cells[2].FindControl("Label3") as Label).Text.Split('/');
+                decimal alldayoffInDec = 0;
+                decimal dayoffusedInDec = 0;
+
+                if (alldayoff.Length > 1 && dayoffused.Length > 1)
+                {
+                    if (!(string.IsNullOrWhiteSpace(alldayoff[1]) && string.IsNullOrWhiteSpace(dayoffused[1])))
+                    {
+                        decimal.TryParse(alldayoff[1], out alldayoffInDec);
+                        decimal.TryParse(dayoffused[1], out dayoffusedInDec);
+
+                        if (dayoffusedInDec > alldayoffInDec)
+                        {
+                            (row.Cells[0].FindControl("Label0") as Label).ForeColor = System.Drawing.Color.Red;
+                            (row.Cells[1].FindControl("Label1") as Label).ForeColor = System.Drawing.Color.Red;
+                            (row.Cells[2].FindControl("Label2") as Label).ForeColor = System.Drawing.Color.Red;
+                            (row.Cells[3].FindControl("Label3") as Label).ForeColor = System.Drawing.Color.Red;
+                            (row.Cells[4].FindControl("Label4") as Label).ForeColor = System.Drawing.Color.Red;
+                            (row.Cells[5].FindControl("Label5") as Label).ForeColor = System.Drawing.Color.Red;
+                            (row.Cells[6].FindControl("Label6") as Label).ForeColor = System.Drawing.Color.Red;
+                            (row.Cells[7].FindControl("Label7") as Label).ForeColor = System.Drawing.Color.Red;
+                            (row.Cells[8].FindControl("Label8") as Label).ForeColor = System.Drawing.Color.Red;
+                            (row.Cells[9].FindControl("Label9") as Label).ForeColor = System.Drawing.Color.Red;
+                            (row.Cells[10].FindControl("Label10") as Label).ForeColor = System.Drawing.Color.Red;
+                            (row.Cells[11].FindControl("Label11") as Label).ForeColor = System.Drawing.Color.Red;
+                            (row.Cells[12].FindControl("Label12") as Label).ForeColor = System.Drawing.Color.Red;
+                            (row.Cells[13].FindControl("Label13") as Label).ForeColor = System.Drawing.Color.Red;
+                            (row.Cells[14].FindControl("Label14") as Label).ForeColor = System.Drawing.Color.Red;
+                            (row.Cells[15].FindControl("Label15") as Label).ForeColor = System.Drawing.Color.Red;
+                            (row.Cells[16].FindControl("lblRowSum") as Label).ForeColor = System.Drawing.Color.Red;
+                        }
+                    }
+                }
+            }
         }
     }
 }
