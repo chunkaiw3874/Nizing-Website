@@ -122,9 +122,12 @@
             </div>
             <div class="default-content">
                 <ul>
-                    <%-- 最上面一排ID必須為url1，圖片才會變成預設顯示 --%>                                            
+                    <%-- 最上面一排ID必須為url1，圖片才會變成預設顯示 --%>                      
                     <li>
-                        <asp:HyperLink ID="url1" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20180420_moving_notice.jpg" NavigateUrl="https://www.facebook.com/NIZING.ELECTRIC/photos/pb.367173643345648.-2207520000.1524197134./1818663161530015/?type=3&theater" Target="_blank"> 2018.04.20 遷移啟事：本公司將於107/06/04(一)遷至新址，並照常出貨至06/01(五)，06/02(六)全廠加班搬遷，06/04(一)恢復正常營運，搬遷期間一切正常營運，屆時請依新址、電話及傳真聯絡，繼續給予支持指教！ </asp:HyperLink>
+                        <asp:HyperLink ID="url1" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20180823中元普渡.jpg"> 2018.08.23 一年一度的中元普度，保佑日進生意興隆~ </asp:HyperLink>
+                    </li>                                         
+                    <li>
+                        <asp:HyperLink ID="url5" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20180420_moving_notice.jpg" NavigateUrl="https://www.facebook.com/NIZING.ELECTRIC/photos/pb.367173643345648.-2207520000.1524197134./1818663161530015/?type=3&theater" Target="_blank"> 2018.04.20 遷移啟事：本公司將於107/06/04(一)遷至新址，並照常出貨至06/01(五)，06/02(六)全廠加班搬遷，06/04(一)恢復正常營運，搬遷期間一切正常營運，屆時請依新址、電話及傳真聯絡，繼續給予支持指教！ </asp:HyperLink>
                     </li>
                     <li>
                         <asp:HyperLink ID="url2" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20170108_year_end_banquet.jpg"> 2018.03.28 4/4(三)~4/8(日)為清明連假，為配合貨運公司，4/3出貨將於4/9送達，請多加留意~ </asp:HyperLink>
@@ -137,9 +140,6 @@
                     </li>
                     <li>
                         <asp:HyperLink ID="url4" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20151130_InvCheckAnnounce.jpg"> 2015.11.30 我司將於12/25~12/27進行年度結帳相關作業，最後出貨時間為12/24 17:00，並於12/28恢復正常作業 </asp:HyperLink>
-                    </li>
-                    <li>
-                        <asp:HyperLink ID="url5" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20150827中元普渡.jpg"> 2015.08.27 一年一度的中元普度，保佑日進生意興隆~ </asp:HyperLink>
                     </li>
                     <li style="border:none; text-align:right;">
                         <asp:HyperLink ID="urlMore" runat="server" NavigateUrl="news.aspx">more news...</asp:HyperLink>
