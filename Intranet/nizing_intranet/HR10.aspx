@@ -35,8 +35,8 @@
             </div>
         </div>
     </div>
-    <div class="row printarea">
-        <div class="col-xs-12">
+    <div class="row">
+        <div class="col-xs-12 printarea">
             <asp:GridView ID="gvResult" runat="server"></asp:GridView>
         </div>
     </div>

@@ -1798,6 +1798,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     + " AND MV.MV001<>'0007'"
                     + " AND MV.MV001<>'0098'";  //這些人不會請假
         if (Session["erp_id"].ToString() != "0080"      //HR
+            && Session["erp_id"].ToString() != "0015"   //小榆
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
             && Session["erp_id"].ToString() != "0007") //管理部跟HR可以查詢全部人的歷史資料
@@ -1819,6 +1820,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             ddlSearch_Parameter_ApplicantID.DataBind();
         }
         if (!(Session["erp_id"].ToString() != "0080"   //HR
+            && Session["erp_id"].ToString() != "0015"   //小榆
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
             && Session["erp_id"].ToString() != "0007")) //管理部跟HR可以查詢全部人的歷史資料

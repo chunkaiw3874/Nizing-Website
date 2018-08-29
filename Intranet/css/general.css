@@ -289,15 +289,14 @@ ul{
 
 @media print{
     body *{
-        visibility: hidden;
-        /*display:none;*/
+        /*visibility: hidden;*/
+        display:none;
     }
      
     .printarea *{
-        visibility: visible;
-        /*position:absolute; width:100%; top:0; padding:0; margin:-1px;*/
+        display:normal;    
     }
-    #banner{
+    /*#banner{
         display:none;
-    }
+    }*/
 }
