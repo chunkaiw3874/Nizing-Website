@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/masterPage/MasterPage.master" AutoEventWireup="true" CodeFile="HR10.aspx.cs" Inherits="nizing_intranet_HR10" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-    <link href="../Content/bootstrap-datepicker3.css" rel="stylesheet" />    
+    <link href="../Content/bootstrap-datepicker3.css" rel="stylesheet" />
+    <link href="../css/paper.css" rel="stylesheet" />
     <script src="../Scripts/bootstrap-datepicker.js"></script>
     <script src="../Scripts/locales/bootstrap-datepicker.zh-TW.min.js"></script>
     <script type="text/javascript">
@@ -15,6 +16,11 @@
             });
         })
     </script>
+    <style>
+        @page{
+            size: A4;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class="row">
@@ -35,8 +41,8 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-xs-12 printarea">
+    <div class="row printarea">
+        <div class="col-xs-12">
             <asp:GridView ID="gvResult" runat="server"></asp:GridView>
         </div>
     </div>
