@@ -2094,6 +2094,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             da.Fill(dt);
         }        
         recipientId.Add("0137");    //HR
+        recipientId.Add("0080");    //Kevin for the sake of testing mail delivery function
         //status 1:新申請/一般簽核通過(HR&下個簽核者) 2:申請撤銷(HR&代理人) 3:申請退回(HR&申請人&代理人) 4:最後一層簽核通過(HR&申請人&代理人)
         switch (appStatus)
         {
