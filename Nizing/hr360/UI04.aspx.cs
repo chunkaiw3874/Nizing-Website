@@ -1506,7 +1506,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                         {
                             conn.Open();
-                            //簽核限制:人事主任 RANK 7 (2018.07.20 現行無人事，此審核自動通過)
+                            //簽核限制:人事主任 RANK 7 //HR(2018.09.05 HR:0137)
                             string query = "SELECT MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
                                         + " FROM NZ.dbo.CMSMV MV"
                                         + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
