@@ -2198,7 +2198,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             mm.Body = body;
             mm.IsBodyHtml = false;
             SmtpClient client = new SmtpClient();
-            client.Host = "192.168.10.240";
+            client.Host = "192.168.10.239";
             client.UseDefaultCredentials = true;
             client.Send(mm);
         }
