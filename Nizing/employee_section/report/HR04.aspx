@@ -20,6 +20,9 @@
                     <asp:ListItem Value="年薪">年薪</asp:ListItem>
                     <asp:ListItem Value="底薪">底薪</asp:ListItem>
                 </asp:DropDownList>
+            </div>            
+            <div class="col-sm-2">
+                <asp:DropDownList ID="ddlDept" runat="server" CssClass="form-control"></asp:DropDownList>
             </div>
         </div>
         <div class="row form-group">
@@ -46,6 +49,11 @@
                         <asp:TemplateField HeaderText="員工姓名">
                             <ItemTemplate>
                                 <asp:Label ID="lbl2" runat="server" Text='<%#Eval("NAME") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>                        
+                        <asp:TemplateField HeaderText="員工部門">
+                            <ItemTemplate>
+                                <asp:Label ID="label1" runat="server" Text='<%#Eval("DEPT") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="一月">

@@ -20,26 +20,51 @@ public partial class nizing_intranet_HR04 : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            for (int i = 0; i > (2011-Convert.ToInt16(DateTime.Today.Year)); i--)
+            for (int i = 0; i > (2012-Convert.ToInt16(DateTime.Today.Year)); i--)
             {
                 ddlYear.Items.Add(DateTime.Today.AddYears(i).Year.ToString());
             }
             ddlYear.SelectedIndex = 0;
             ddlType.SelectedIndex = 0;
+            using (SqlConnection conn = new SqlConnection(NZconnectionString))
+            {
+                conn.Open();
+                string query = "SELECT CMSME.ME001 'ID', CMSME.ME002 'NAME'"
+                            + " FROM CMSME"
+                            + " ORDER BY CMSME.ME001";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                ddlDept.DataSource = dt;
+                ddlDept.DataTextField = "NAME";
+                ddlDept.DataValueField = "ID";
+                ddlDept.DataBind();
+            }
+            ddlDept.Items.Insert(0, new ListItem("全部部門", "ALL"));
+            ddlDept.SelectedIndex = 0;
         }
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         string cmdText = "";
+        string deptCondition = "";
+        if (ddlDept.SelectedValue != "ALL")
+        {
+            deptCondition = " AND CMSME.ME001=@DEPT";
+        }
         if (ddlType.SelectedValue == "底薪")
         {
+            
             cmdText = "SELECT *"
                     + " FROM"
                     + " ("
-                    + " SELECT PALTI.TI001 ID, CMSMV.MV002 NAME, SUBSTRING(PALTI.TI002,5,2) MN, COALESCE((PALTI.TI023+PALTI.TI024),N'-') SA"
+                    + " SELECT PALTI.TI001 ID, CMSMV.MV002 NAME, CMSME.ME002 'DEPT', SUBSTRING(PALTI.TI002,5,2) MN, COALESCE((PALTI.TI023+PALTI.TI024),N'-') SA"
                     + " FROM PALTI"
                     + " LEFT JOIN CMSMV ON PALTI.TI001=CMSMV.MV001"
+                    + " LEFT JOIN CMSME ON CMSMV.MV004=CMSME.ME001"
                     + " WHERE SUBSTRING(PALTI.TI002,1,4)=@YEAR"
+                    + deptCondition
                     + " )"
                     + " AS SALARY"
                     + " PIVOT"
@@ -55,10 +80,12 @@ public partial class nizing_intranet_HR04 : System.Web.UI.Page
             cmdText = "SELECT *"
                     + " FROM"
                     + " ("
-                    + " SELECT PALTI.TI001 ID, CMSMV.MV002 NAME, SUBSTRING(PALTI.TI002,5,2) MN, COALESCE((PALTI.TI040+PALTI.TI041),N'-') SA"
+                    + " SELECT PALTI.TI001 ID, CMSMV.MV002 NAME, CMSME.ME002 'DEPT', SUBSTRING(PALTI.TI002,5,2) MN, COALESCE((PALTI.TI040+PALTI.TI041),N'-') SA"
                     + " FROM PALTI"
                     + " LEFT JOIN CMSMV ON PALTI.TI001=CMSMV.MV001"
+                    + " LEFT JOIN CMSME ON CMSMV.MV004=CMSME.ME001"
                     + " WHERE SUBSTRING(PALTI.TI002,1,4)=@YEAR"
+                    + deptCondition
                     + " )"
                     + " AS SALARY"
                     + " PIVOT"
@@ -74,6 +101,7 @@ public partial class nizing_intranet_HR04 : System.Web.UI.Page
             conn.Open();
             SqlCommand cmdSelect = new SqlCommand(cmdText, conn);
             cmdSelect.Parameters.AddWithValue("@YEAR", ddlYear.SelectedValue);
+            cmdSelect.Parameters.AddWithValue("@DEPT", ddlDept.SelectedValue);
             SqlDataAdapter da = new SqlDataAdapter(cmdSelect);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -203,16 +231,16 @@ public partial class nizing_intranet_HR04 : System.Web.UI.Page
 
         if (_gd.Rows.Count > 0)
         {
-            for (int i = 2; i < _gd.Rows[0].Cells.Count-1; i++)
+            for (int i = 3; i < _gd.Rows[0].Cells.Count; i++)
             {
                 sum = 0;
                 for (int j = 0; j < _gd.Rows.Count; j++)
                 {
                     decimal temp = 0;
-                    decimal? decimalValue = decimal.TryParse(((Label)_gd.Rows[j].Cells[i].FindControl("lbl" + (i + 1).ToString())).Text, out temp) ? temp:default(decimal?);
+                    decimal? decimalValue = decimal.TryParse(((Label)_gd.Rows[j].Cells[i].FindControl("lbl" + i.ToString())).Text, out temp) ? temp:default(decimal?);
                     sum += temp;
                 }
-                if (i == 14 || i == 15)
+                if (i == 15 || i == 16)
                 {
                     _gd.FooterRow.Cells[i].Text = sum.ToString("C", new CultureInfo("zh-TW"));
                 }
