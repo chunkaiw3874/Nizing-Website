@@ -1578,7 +1578,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         cmd.Parameters.AddWithValue("@APPLICATION", approveID);
                         cmd.ExecuteNonQuery();
                     }
-                    System.Threading.Thread.Sleep(3000);    //sleeps for 1 second before continuing so trail records can be ordered by time
+                    System.Threading.Thread.Sleep(3000);    //sleeps for 3 second before continuing so trail records can be ordered by time
                 } while (nextReviewer == "SYSTEM" && Convert.ToInt16(approveID_status) < 6); //stops when somebody is required to review the application,
                 //or when approval status reached 6, which means the application is approved by everyone necessary
                 //automatic approval should only happen on 1st and 2nd level,
