@@ -259,4 +259,8 @@ public partial class nizing_intranet_HR04 : System.Web.UI.Page
     //    grdReport.FooterRow.Cells[2].Text = total.ToString("N2");
         
     //}
+    protected void grdReport_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+
+    }
 }

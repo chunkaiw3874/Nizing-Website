@@ -39,10 +39,12 @@
         </div>
         <div id="search-result" class="row">
             <div class="inline-top col-xs-12">
-                <asp:GridView ID="grdReport" runat="server" GridLines="None" AutoGenerateColumns="false" OnRowDataBound="grdReport_RowDataBound" OnDataBound="grdReport_DataBound" OnRowCreated="grdReport_RowCreated" ShowFooter="True" CssClass="grdResultWithFooter">
+                <asp:GridView ID="grdReport" runat="server" GridLines="None" AutoGenerateColumns="false" OnRowDataBound="grdReport_RowDataBound" OnDataBound="grdReport_DataBound" OnRowCreated="grdReport_RowCreated"
+                    OnRowCommand="grdReport_RowCommand" ShowFooter="True" CssClass="grdResultWithFooter">
                     <Columns>
                         <asp:TemplateField HeaderText="員工代號">
                             <ItemTemplate>
+                                <asp:LinkButton ID="lb_ID" runat="server">LinkButton</asp:LinkButton>
                                 <asp:Label ID="lbl1" runat="server" Text='<%#Eval("ID") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
