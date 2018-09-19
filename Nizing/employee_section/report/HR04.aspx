@@ -42,18 +42,26 @@
                 <asp:GridView ID="grdReport" runat="server" GridLines="None" AutoGenerateColumns="false" OnRowDataBound="grdReport_RowDataBound" OnDataBound="grdReport_DataBound" OnRowCreated="grdReport_RowCreated"
                     OnRowCommand="grdReport_RowCommand" ShowFooter="True" CssClass="grdResultWithFooter">
                     <Columns>
-                        <asp:TemplateField HeaderText="員工代號">
-                            <ItemTemplate>
-                                <asp:LinkButton ID="lb_ID" runat="server">LinkButton</asp:LinkButton>
+                        <asp:TemplateField>
+                            <HeaderTemplate>
+                                <asp:LinkButton ID="lb_ID" runat="server" CommandName="Sort" CommandArgument="ID" Text="員工代號" ForeColor="White"></asp:LinkButton>
+                            </HeaderTemplate>
+                            <ItemTemplate>                                
                                 <asp:Label ID="lbl1" runat="server" Text='<%#Eval("ID") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="員工姓名">
+                            <HeaderTemplate>
+                                <asp:LinkButton ID="lb_Name" runat="server" CommandName="Sort" CommandArgument="NAME" Text="員工姓名" ForeColor="White"></asp:LinkButton>
+                            </HeaderTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="lbl2" runat="server" Text='<%#Eval("NAME") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>                        
                         <asp:TemplateField HeaderText="員工部門">
+                            <HeaderTemplate>
+                                <asp:LinkButton ID="lb_Dept" runat="server" CommandName="Sort" CommandArgument="DEPT" Text="員工部門" ForeColor="White"></asp:LinkButton>
+                            </HeaderTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="label1" runat="server" Text='<%#Eval("DEPT") %>'></asp:Label>
                             </ItemTemplate>
