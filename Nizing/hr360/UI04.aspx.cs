@@ -1506,7 +1506,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                         {
                             conn.Open();
-                            //簽核限制:人事主任 RANK 7 //HR(2018.09.05 HR:0137)
+                            //簽核限制:人事主任 RANK 7 //HR(2018.09.25 HR:none)
                             string query = "SELECT MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
                                         + " FROM NZ.dbo.CMSMV MV"
                                         + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
@@ -1515,7 +1515,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                                         + " AND MV.MV001<>@ID"
                                 //+ " AND MK.MK001='A20'"           
                                 //+ " AND HIER.[RANK]=7";
-                                        + " AND MV.MV001='0137'" //HR NEED FIX: 如無人事主任(A20)，則指定人事專員審核
+                                        + " AND MV.MV001='0080'" //HR NEED FIX: 如無人事主任(A20)，則指定人事專員審核
                                         + " AND MK.MK001='A21'";
                             SqlCommand cmd = new SqlCommand(query, conn);
                             cmd.Parameters.AddWithValue("@ID", applicantID);
@@ -2324,10 +2324,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
         //看報告
         if (Session["erp_id"].ToString() != "0007"      //Chrissy
             && Session["erp_id"].ToString() != "0080"   //Kevin
+            && Session["erp_id"].ToString() != "0015"   //小榆
             && Session["erp_id"].ToString() != "0137"   //HR
             )  
         {
-            gvSearchResult.Columns[11].Visible = false;
+            gvSearchResult.Columns[12].Visible = false;
         }
     }
     /// <summary>
