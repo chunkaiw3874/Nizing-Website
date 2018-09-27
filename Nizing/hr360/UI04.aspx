@@ -495,6 +495,14 @@
                             </asp:TemplateField>
                             <asp:TemplateField ItemStyle-HorizontalAlign="Center">
                                 <HeaderTemplate>
+                                    <asp:LinkButton ID="lbNEXT_REVIEWER" runat="server" Text="下位簽核者" CommandName="Sort" CommandArgument="NEXT_REVIEWER"></asp:LinkButton>
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="lblNextReviewer" runat="server" Text='<%#Eval("NEXT_REVIEWER") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                <HeaderTemplate>
                                     <asp:LinkButton ID="lbApplication_Time" runat="server" Text="申請時間" CommandName="Sort" CommandArgument="APPLICATION_DATE"></asp:LinkButton>
                                 </HeaderTemplate>
                                 <ItemTemplate>

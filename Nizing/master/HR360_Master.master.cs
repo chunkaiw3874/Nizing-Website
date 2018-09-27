@@ -12,7 +12,14 @@ public partial class masterPage_HR360_Master : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-       
+        try
+        {
+
+        }
+        catch
+        {
+            Server.Transfer("~/hr360/no_permission.aspx"); //session expires and value stored in session value disappears
+        }
     }
     public string Encrypt(string clearText)
     {

@@ -15,7 +15,7 @@ using System.Web.UI.WebControls;
  如果HR有人事變更，於本頁搜尋HR做更正!!!
  */
 /*
- * 2018.08.22 無HR
+ * 2018.09.27 無HR
  * PS: 搜尋"NEED FIX" for code
  */
 public partial class hr360_UI04 : System.Web.UI.Page
@@ -43,12 +43,13 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         //Session["user_id"] = "0136";    //test only to avoid error on loading, delete after trial            
         //Session["erp_id"] = "0136";
+
         if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('連線已逾時，將會回到登入頁面');window.location='login.aspx'", true);
         }
         else
-        {            
+        {
             if (Session["user_id"].ToString().ToUpper().Trim() != "ADMIN")  //admin doesnt have the proper erp information and will crash the system
             {
                 if (!IsPostBack)
@@ -78,6 +79,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 Page.LoadComplete += new EventHandler(Page_LoadComplete);
             }
         }
+
     }
 
     void Page_LoadComplete(object sender, EventArgs e)
@@ -2209,7 +2211,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// <param name="sender"></param>
     /// <param name="e"></param>
     protected void btnSearchSubmit_Click(object sender, EventArgs e)
-    {
+    {        
         DateTime startTime = new DateTime();
         DateTime endTime = new DateTime();
         DataTable dt = new DataTable();
@@ -2248,9 +2250,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
             + " ,COALESCE(MV2.MV002,'N/A') 'FUNC_SUB_NAME'"
             + " ,APP.REASON"
             + " ,[STATUS].NAME 'STATUS'"
+            + " ,COALESCE(MV3.MV002,'N/A') 'NEXT_REVIEWER'"
             + " FROM HR360_DAYOFFAPPLICATION_APPLICATION APP"
             + " LEFT JOIN NZ.dbo.CMSMV MV ON APP.APPLICANT_ID=MV.MV001"
             + " LEFT JOIN NZ.dbo.CMSMV MV2 ON APP.FUNCTIONAL_SUBSTITUTE_ID=MV2.MV001"
+            + " LEFT JOIN NZ.dbo.CMSMV MV3 ON APP.NEXT_REVIEWER=MV3.MV001"
             + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPLICATION_STATUS [STATUS] ON APP.APPLICATION_STATUS_ID=[STATUS].ID"
             + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B [TRAIL] ON APP.APPLICATION_ID = [TRAIL].APPLICATION_ID"
             + " LEFT JOIN APP_LAST_ACTION_TIME [LAST_ACTION] ON APP.APPLICATION_ID = LAST_ACTION.APPLICATION_ID";
@@ -2322,13 +2326,20 @@ public partial class hr360_UI04 : System.Web.UI.Page
         gvSearchResult.DataBind();
 
         //看報告
-        if (Session["erp_id"].ToString() != "0007"      //Chrissy
-            && Session["erp_id"].ToString() != "0080"   //Kevin
-            && Session["erp_id"].ToString() != "0015"   //小榆
-            && Session["erp_id"].ToString() != "0137"   //HR
-            )  
+        try
         {
-            gvSearchResult.Columns[12].Visible = false;
+            if (Session["erp_id"].ToString() != "0007"      //Chrissy
+                && Session["erp_id"].ToString() != "0080"   //Kevin
+                && Session["erp_id"].ToString() != "0015"   //小榆
+                && Session["erp_id"].ToString() != "0137"   //HR
+                )
+            {
+                gvSearchResult.Columns[13].Visible = false;
+            }
+        }
+        catch
+        {
+            Server.Transfer("~/hr360/no_permission.aspx"); //session expires and value stored in session value disappears
         }
     }
     /// <summary>
