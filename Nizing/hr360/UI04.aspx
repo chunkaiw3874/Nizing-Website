@@ -303,7 +303,10 @@
                 </div>
                 <div class="row form-group">
                     <div class="col-xs-5">
-                        <asp:Label ID="Label10" runat="server" Text="*請假半小時無須代理人" ForeColor="Red"></asp:Label>
+                        <asp:Label ID="Label101" runat="server" Text="*請假半小時無須代理人" ForeColor="Red"></asp:Label>
+                    </div>
+                    <div class="col-xs-5">
+                        <asp:Label ID="Label1" runat="server" Text="*假單不得跨天" ForeColor="Red"></asp:Label>
                     </div>
                     <div class="col-xs-1">
                         <asp:ImageButton ID="btnDayOffAdd" runat="server" ImageUrl="~/hr360/image/icon/green-arrow-down.png" Width="40" OnClick="btnDayOffAdd_Click" />

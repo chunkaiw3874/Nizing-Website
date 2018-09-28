@@ -16,6 +16,7 @@ using System.Web.UI.WebControls;
  */
 /*
  * 2018.09.27 無HR
+ * 2018.09.27 改版為假單不跨天
  * PS: 搜尋"NEED FIX" for code
  */
 public partial class hr360_UI04 : System.Web.UI.Page
@@ -198,16 +199,27 @@ public partial class hr360_UI04 : System.Web.UI.Page
             errorList.Add(errorCode(103));
             test103 = false;
         }
-        if (dayOffEndTime < dayOffStartTime)  //測試錯誤 104.結束日期小於開始日期
+        //if (dayOffEndTime < dayOffStartTime)  //測試錯誤 104.結束日期小於開始日期
+        //{
+        //    errorList.Add(errorCode(104));
+        //    test104 = false;
+        //}
+        //else
+        //{
+        //    test104 = true;
+        //}
+        if (txtDatePickerStart.Text != txtDatePickerEnd.Text)  //測試錯誤 104.假單不可跨天
         {
-            errorList.Add(errorCode(104));
-            test104 = false;
+            if (ddlDayOffEndHour.SelectedValue != "00" || ddlDayOffEndMin.SelectedValue != "00" || DateTime.Parse(txtDatePickerEnd.Text).Date != DateTime.Parse(txtDatePickerStart.Text).Date.AddDays(1))
+            {
+                errorList.Add(errorCode(104));
+                test104 = false;
+            }
         }
         else
         {
             test104 = true;
-        }
-        
+        }    
         if (ddlDayOffType.SelectedValue == "05" && txtReason.Text.Trim() == "") //測試錯誤 108.請事假未填寫請假原因
         {
             errorList.Add(errorCode(108));
@@ -219,42 +231,46 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
         if (test101 && test102 && test103 && test104 && test108)  //PASS ALL INPUT TESTS (except for functional substitute), NEED TO START CALCULATING FOR OTHER ERRORS
         {
-            DateTime[] days = GetDatesBetween(dayOffStartTime.Date, dayOffEndTime.Date);
-            for (int i = 0; i < days.Length; i++)
-            {
+            //DateTime[] days = GetDatesBetween(dayOffStartTime.Date, dayOffEndTime.Date);
+            //for (int i = 0; i < days.Length; i++)
+            //{
                 using (SqlConnection conn = new SqlConnection(NZconnectionString))
                 {
                     conn.Open();
-                    string query = "SELECT MP.MP004 '日期',MP.MP005 '放假'," + "MB.MB0" + (Convert.ToInt16(days[i].Day.ToString()) + 2).ToString("D2") + " '班別',CONVERT(TIME,STUFF(MK.MK003,3,0,':')) '上班時間',CONVERT(TIME,STUFF(MK.MK004,3,0,':'))  '下班時間'"
+                    string query = "SELECT MP.MP004 '日期',MP.MP005 '放假'," + "MB.MB0" + (Convert.ToInt16(dayOffStartTime.Day.ToString()) + 2).ToString("D2") + " '班別',CONVERT(TIME,STUFF(MK.MK003,3,0,':')) '上班時間',CONVERT(TIME,STUFF(MK.MK004,3,0,':'))  '下班時間'"
                             + " ,CONVERT(TIME,STUFF(MK.MK009,3,0,':')) '休息開始時間',CONVERT(TIME,STUFF(MK.MK010,3,0,':')) '休息結束時間'"
                             + " ,CASE"
                             + " WHEN MK.MK003>MK.MK004 THEN 24.0-CONVERT(DECIMAL(5,2),DATEDIFF(MINUTE,CONVERT(TIME,'00:00'),CONVERT(TIME,STUFF('1700', 3, 0, ':')))/60.0)+CONVERT(DECIMAL(5,2),DATEDIFF(MINUTE,CONVERT(TIME,'00:00'),CONVERT(TIME,STUFF('0100',3,0,':')))/60.0)-CONVERT(DECIMAL(5,2),DATEDIFF(MINUTE,CONVERT(TIME,STUFF(MK.MK009, 3, 0, ':')),CONVERT(TIME,STUFF(MK.MK010, 3, 0, ':')))/60.0)"
                             + " ELSE CONVERT(DECIMAL(5,2),DATEDIFF(MINUTE,CONVERT(TIME,STUFF(MK.MK003, 3, 0, ':')),CONVERT(TIME,STUFF(MK.MK004, 3, 0, ':')))/60.0)-CONVERT(DECIMAL(5,2),DATEDIFF(MINUTE,CONVERT(TIME,STUFF(MK.MK009, 3, 0, ':')),CONVERT(TIME,STUFF(MK.MK010, 3, 0, ':')))/60.0)"
                             + " END '工作時數'"
+                            + " ,CASE"
+                            + " WHEN MK.MK003>MK.MK004 THEN '1'"
+                            + " ELSE '0'"
+                            + " END '跨天'"
                             + " FROM AMSMB MB"
-                            + " LEFT JOIN CMSMP MP ON MP.MP001='3' AND MP.MP004=@YYYYMMDD AND MP.MP003=" + "MB.MB0" + (Convert.ToInt16(days[i].Day.ToString()) + 2).ToString("D2")
+                            + " LEFT JOIN CMSMP MP ON MP.MP001='3' AND MP.MP004=@YYYYMMDD AND MP.MP003=" + "MB.MB0" + (Convert.ToInt16(dayOffStartTime.Day.ToString()) + 2).ToString("D2")
                             + " LEFT JOIN PALMK MK ON MB.MB007=MK.MK001"
                             + " WHERE MB.MB001=@ID"
                             + " AND MB.MB002=@YYYYMM";
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@YYYYMMDD", days[i].ToString("yyyyMMdd"));
+                    cmd.Parameters.AddWithValue("@YYYYMMDD", dayOffStartTime.Date.ToString("yyyyMMdd"));
                     cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
-                    cmd.Parameters.AddWithValue("@YYYYMM", days[i].ToString("yyyyMM"));
+                    cmd.Parameters.AddWithValue("@YYYYMM", dayOffStartTime.Date.ToString("yyyyMM"));
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
                         dtDayOffDaysInfo.Load(dr);
                     }
                     //fill in null cells with desired data
-                    if (dtDayOffDaysInfo.Rows[dtDayOffDaysInfo.Rows.Count - 1][0].ToString() == "")
+                    if (String.IsNullOrWhiteSpace(dtDayOffDaysInfo.Rows[dtDayOffDaysInfo.Rows.Count - 1][0].ToString()))
                     {
-                        dtDayOffDaysInfo.Rows[dtDayOffDaysInfo.Rows.Count - 1][0] = days[i].ToString("yyyyMMdd");
+                        dtDayOffDaysInfo.Rows[dtDayOffDaysInfo.Rows.Count - 1][0] = dayOffStartTime.Date.ToString("yyyyMMdd");
                     }
-                    if (dtDayOffDaysInfo.Rows[dtDayOffDaysInfo.Rows.Count - 1][1].ToString() == "")
+                    if (String.IsNullOrWhiteSpace(dtDayOffDaysInfo.Rows[dtDayOffDaysInfo.Rows.Count - 1][1].ToString()))
                     {
                         dtDayOffDaysInfo.Rows[dtDayOffDaysInfo.Rows.Count - 1][1] = "3";
                     }
                 }
-            }
+            //}
 
             for (int i = 0; i < dtDayOffDaysInfo.Rows.Count; i++)  //calculating total hours of dayoff
             {
@@ -385,6 +401,24 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 }
             }
 
+
+            if (dtDayOffDaysInfo.Rows[0]["跨天"].ToString() == "1")   //測試錯誤 109.請假時間非上班時間，請確認
+            {
+                if (dayOffStartTime < DateTime.Parse(DateTime.ParseExact(dtDayOffDaysInfo.Rows[0]["日期"].ToString(), "yyyyMMdd", null).ToString("yyyy/MM/dd") + " " + dtDayOffDaysInfo.Rows[0]["上班時間"].ToString()))
+                {
+                    errorList.Add(errorCode(999));
+                }
+            }
+            else
+            {
+                if (dayOffStartTime < DateTime.Parse(DateTime.ParseExact(dtDayOffDaysInfo.Rows[0]["日期"].ToString(), "yyyyMMdd", null).ToString("yyyy/MM/dd") + " " + dtDayOffDaysInfo.Rows[0]["上班時間"].ToString())
+                    || dayOffStartTime > DateTime.Parse(DateTime.ParseExact(dtDayOffDaysInfo.Rows[0]["日期"].ToString(), "yyyyMMdd", null).ToString("yyyy/MM/dd") + " " + dtDayOffDaysInfo.Rows[0]["下班時間"].ToString())
+                    || dayOffEndTime < DateTime.Parse(DateTime.ParseExact(dtDayOffDaysInfo.Rows[0]["日期"].ToString(), "yyyyMMdd", null).ToString("yyyy/MM/dd") + " " + dtDayOffDaysInfo.Rows[0]["上班時間"].ToString())
+                    || dayOffEndTime > DateTime.Parse(DateTime.ParseExact(dtDayOffDaysInfo.Rows[0]["日期"].ToString(), "yyyyMMdd", null).ToString("yyyy/MM/dd") + " " + dtDayOffDaysInfo.Rows[0]["下班時間"].ToString()))
+                {
+                    errorList.Add(errorCode(109));
+                }
+            }
             //是否需要代理人條件整理
             if (totalDayOffAmount > (decimal)0.5)   //請假是否超過半小時
             {
@@ -394,8 +428,6 @@ public partial class hr360_UI04 : System.Web.UI.Page
             {
                 dayOffUnderHalfHour = true;
             }
-
-
             
             if (dayOffUnderHalfHour //2018.06.13 如果請假時間超過半小時，才需要做代理人測試
                 || typhoonDay   //2018.07.12 颱風假不需要代理人
@@ -515,7 +547,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     }
                 }
             }
-            if (totalDayOffAmount <= 0)  //測試錯誤 201.此請假週期非上班時間，無須請假
+            if (totalDayOffAmount <= 0)  //測試錯誤 201.請假時數為0，請確認
             {
                 errorList.Add(errorCode(201));
             }
@@ -815,7 +847,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
         else if (errorID == 104)
         {
-            error += "結束日期不可小於起始日期";
+            error += "假單不可跨天";
         }
         else if (errorID == 105)
         {
@@ -833,9 +865,13 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             error += "請事假未填寫請假原因";
         }
+        else if (errorID == 109)
+        {
+            error += "請假時間非上班時間，請確認";
+        }
         else if (errorID == 201)
         {
-            error += "此請假週期非上班時間，無須請假";
+            error += "請假時數為0，請確認";
         }
         else if (errorID == 202)
         {
@@ -857,6 +893,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
         else if (errorID == 206)
         {
             error += "請假時間不符規定，請與人事部確認";
+        }
+        else if (errorID == 999)
+        {
+            error += "班別為跨天班，需人工請假";
         }
         return error;
     }
