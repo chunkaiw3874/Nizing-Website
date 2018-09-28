@@ -1901,6 +1901,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         Session["lstDayOffAppSummary"] = lstDayOffAppSummary;
         hdnIsPostBack.Value = "0";  //variable for determining whether this page is a postback for jquery
         hdnIsDayOffAppVisible.Value = "0";  //variable for determining whether the div DayOffApp is visible
+        txtMessage.Text = "*假單不得跨天" + Environment.NewLine + "*請假半小時無須代理人";
         DataSet ds = new DataSet();
         string query = "";
         using (SqlConnection conn = new SqlConnection(NZconnectionString))
