@@ -242,6 +242,16 @@
                 </div>
             </div>
             <div id="DayOffApp">
+                <div class="row">                    
+                    <div class="col-xs-5">
+                        <asp:Label ID="Label1" runat="server" Text="*假單不得跨天" ForeColor="Red"></asp:Label>
+                    </div>
+                </div>
+                <div class="row">                    
+                    <div class="col-xs-5">
+                        <asp:Label ID="Label101" runat="server" Text="*請假半小時無須代理人" ForeColor="Red"></asp:Label>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-xs-2">
                         <span class="label label-default" style="font-size: 16px;">假別</span>
@@ -302,13 +312,7 @@
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-xs-5">
-                        <asp:Label ID="Label101" runat="server" Text="*請假半小時無須代理人" ForeColor="Red"></asp:Label>
-                    </div>
-                    <div class="col-xs-5">
-                        <asp:Label ID="Label1" runat="server" Text="*假單不得跨天" ForeColor="Red"></asp:Label>
-                    </div>
-                    <div class="col-xs-1">
+                    <div class="col-xs-6">
                         <asp:ImageButton ID="btnDayOffAdd" runat="server" ImageUrl="~/hr360/image/icon/green-arrow-down.png" Width="40" OnClick="btnDayOffAdd_Click" />
                     </div>
                     <div class="col-xs-6">
