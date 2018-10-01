@@ -1901,7 +1901,12 @@ public partial class hr360_UI04 : System.Web.UI.Page
         Session["lstDayOffAppSummary"] = lstDayOffAppSummary;
         hdnIsPostBack.Value = "0";  //variable for determining whether this page is a postback for jquery
         hdnIsDayOffAppVisible.Value = "0";  //variable for determining whether the div DayOffApp is visible
-        txtMessage.Text = "*假單不得跨天" + Environment.NewLine + "*請假半小時無須代理人";
+        //txtMessage.Text = "*假單不得跨天"
+        //    + Environment.NewLine + "*請假半小時無須代理人"
+        //    + Environment.NewLine + "*休假最小單位為:辦公室0.5小時;製造部門0.5天"
+        //    + Environment.NewLine + "*請假前須確認當天工作進度已安排人員支援，且有代理人簽名"
+        //    + Environment.NewLine + "*請事假、病假過多者，會影響到年終獎金之發放"
+        //    + Environment.NewLine + "*未經主管核簽及人事核准，假單不生效";
         DataSet ds = new DataSet();
         string query = "";
         using (SqlConnection conn = new SqlConnection(NZconnectionString))

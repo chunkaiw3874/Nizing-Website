@@ -225,6 +225,9 @@
             <hr />
         </div>--%>
         <div id="application_section">
+            <div class="row" style="color:red">
+                *本次版更內容: 一張假單僅能請一天假，如需多天請假需登打多張假單
+            </div>
             <div class="row form-group" style="margin-top: 10px;">
                 <div class="col-xs-12">
                     <span class="label label-info" id="btnDayOffAppVisibility" style="cursor: pointer; font-size: 20px;">我要請假</span>
@@ -289,27 +292,22 @@
                         <asp:Label ID="lblDayOffRemainAmount" runat="server" Text=""></asp:Label>
                         <asp:Label ID="lblDayOffRemainUnit" runat="server" Text=""></asp:Label>
                     </div>
-                    <div class="col-xs-8">
-                        <span class="label label-default" style="font-size: 16px;">請假原因</span>
-                    </div>
-                    <div class="col-xs-2">
+                    <div class="col-xs-2 col-xs-offset-8">
                         <asp:CheckBox ID="ckbTyphoonDayNoSub" runat="server" CssClass="checkbox-inline" Checked="false" Text="此假用在颱風天，無須代理人" />
                     </div>
                 </div>
-                <div class="row form-group">
-                    <div class="col-xs-4 col-xs-offset-2" style="display: inline;">
-                        <asp:TextBox ID="txtReason" runat="server" CssClass="form-control" MaxLength="20" placeholder="事假必填(20字內)"></asp:TextBox>
+                <div class="row">                    
+                    <div class="col-xs-12">
+                        <span class="label label-default" style="font-size: 16px;">請假原因</span>
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-xs-5">
-                        <asp:TextBox ID="txtMessage" runat="server" TextMode="MultiLine" Text="" CssClass="no-resize" ForeColor="Red" ReadOnly="true" BorderStyle="None"></asp:TextBox>
-                        <%--<asp:Label ID="Label1" runat="server" Text="*假單不得跨天" ForeColor="Red"></asp:Label>--%>
+                    <div class="col-xs-12" style="display: inline;">
+                        <asp:TextBox ID="txtReason" runat="server" CssClass="form-control" MaxLength="100" placeholder="事假必填(100字內)"></asp:TextBox>
                     </div>
-<%--                    <div class="col-xs-3">
-                        <asp:Label ID="Label101" runat="server" Text="*請假半小時無須代理人" ForeColor="Red"></asp:Label>
-                    </div>--%>
-                    <div class="col-xs-1">
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-1 col-xs-offset-5">
                         <asp:ImageButton ID="btnDayOffAdd" runat="server" ImageUrl="~/hr360/image/icon/green-arrow-down.png" Width="40" OnClick="btnDayOffAdd_Click" />
                     </div>
                     <div class="col-xs-6">
@@ -324,6 +322,15 @@
                            
                             </div>
                             <div class="panel-body">
+                                <div style="color:red">
+                                    *假單不得跨天，請假半小時無須代理人<br />
+                                    *休假最小單位為:辦公室0.5小時;製造部門0.5天<br />
+                                    *請假前須確認當天工作進度已安排人員支援，且有代理人簽名<br />
+                                    *請事假、病假過多者，會影響到年終獎金之發放<br />
+                                    *未經主管核簽及人事核准，假單不生效，不出勤將視為曠職<br />
+                                    *請病假1天以內，需附上合法醫療院所之收據；2日(含)以上者，需附上醫生診斷證明<br />
+                                    *連續請假3日(含)者，須有正當理由
+                                </div>
                                 <table id="tbAppSummary" class="table col-xs-12" runat="server">
                                 </table>
                             </div>
