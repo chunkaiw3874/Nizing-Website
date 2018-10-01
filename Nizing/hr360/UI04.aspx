@@ -375,8 +375,7 @@
                 <div class="col-xs-12">
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            待簽核假單
-                       
+                            待簽核假單                       
                         </div>
                         <div class="panel-body">
                             <div style="color:red;">

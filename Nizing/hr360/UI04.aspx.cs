@@ -1120,22 +1120,39 @@ public partial class hr360_UI04 : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             conn.Open();
-            string query = "SELECT APP.APPLICATION_ID,APP.APPLICATION_DATE,MV.MV002,APP.DAYOFF_NAME"
-                        + " ,APP.DAYOFF_START_TIME,APP.DAYOFF_END_TIME,CONVERT(NVARCHAR(20),APP.DAYOFF_TOTAL_TIME)+APP.DAYOFF_TIME_UNIT"
-                        + " ,COALESCE(MV2.MV002,'N/A')"
+            string query = ";WITH CTE"
+                        + " AS"
+                        + " ("
+                        + " SELECT APP.APPLICATION_ID,APP.APPLICANT_ID,MV.MV002,APP.DAYOFF_NAME"
+                        + " ,APP.DAYOFF_START_TIME,APP.DAYOFF_END_TIME,CONVERT(NVARCHAR(20),APP.DAYOFF_TOTAL_TIME)+APP.DAYOFF_TIME_UNIT 'DAYOFF_TOTAL_TIME'"
+                        + " ,COALESCE(MV2.MV002,'N/A') 'FUNCTIONAL_SUBSTITUTE'"
                         + " ,CASE"
                         + " WHEN APP.REASON='' THEN '無'"
                         + " ELSE '點選查看'"
-                        + " END AS REASON"
+                        + " END AS 'HAS_REASON'"
                         + " ,APP.REASON"
-                        + " ,SUBSTRING(ST.NAME,1,5)"
+                        + " ,SUBSTRING(ST.NAME,1,5) 'APP_STATUS'"
                         + " FROM HR360_DAYOFFAPPLICATION_APPLICATION APP"
                         + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPLICATION_STATUS ST ON '0'+CONVERT(NVARCHAR(20),CONVERT(INT,APP.APPLICATION_STATUS_ID)+1)=ST.ID"
                         + " LEFT JOIN NZ.dbo.CMSMV MV ON APP.APPLICANT_ID=MV.MV001"
                         + " LEFT JOIN NZ.dbo.CMSMV MV2 ON APP.FUNCTIONAL_SUBSTITUTE_ID=MV2.MV001"
                         + " WHERE CONVERT(INT,APP.APPLICATION_STATUS_ID)<7"
                         + " AND APP.NEXT_REVIEWER=@ID"
-                        + " ORDER BY APP.APPLICATION_STATUS_ID,APP.APPLICATION_ID";
+                        + " )"
+                        + " SELECT *, CASE"
+                        + " WHEN EXISTS"
+                        + " ("
+                        + " 	SELECT *"
+                        + " 	FROM NZ.dbo.PALTF TF"
+                        + " 	WHERE TF.TF001=CTE.APPLICANT_ID"
+                        + " 	AND TF.TF002=CONVERT(NVARCHAR(8),CTE.DAYOFF_START_TIME,112)"
+                        + " 	AND TF.TF008=CONVERT(NVARCHAR(3),CTE.DAYOFF_TOTAL_TIME)"
+                        + " )"
+                        + " THEN '已登入'"
+                        + " ELSE '未登入'"
+                        + " END AS 'ERP狀態'"
+                        + " FROM CTE"
+                        + " ORDER BY CTE.APP_STATUS,CTE.APPLICATION_ID";
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -1147,6 +1164,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
         newHeaderRow.Attributes.Add("style", "background-color:lightblue; color:white;");
         HtmlTableCell newHeaderCell = new HtmlTableCell("th");
         newHeaderCell.InnerText = "假單ID";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "申請人ID";
         newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
         newHeaderRow.Controls.Add(newHeaderCell);
         newHeaderCell = new HtmlTableCell("th");
@@ -1182,6 +1203,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
         newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
         newHeaderRow.Controls.Add(newHeaderCell);
         newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "ERP狀態";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
         Button btn = new Button();
         //btn.ID = "btnApprove" + i;
         btn.Text = "簽核";
@@ -1203,10 +1228,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
             cell.InnerText = dt.Rows[i][0].ToString();
             cell.Attributes.Add("style", "text-align:center;");
             newRow.Controls.Add(cell);
-            //cell = new HtmlTableCell();
-            //cell.InnerText = dt.Rows[i][1].ToString();
-            //cell.Attributes.Add("style", "text-align:center;");
-            //newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            cell.InnerText = dt.Rows[i][1].ToString();
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
             cell = new HtmlTableCell();
             cell.InnerText = dt.Rows[i][2].ToString();
             cell.Attributes.Add("style", "text-align:center;");
@@ -1248,6 +1273,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
             newRow.Controls.Add(cell);
             cell = new HtmlTableCell();
             cell.InnerText = dt.Rows[i][10].ToString();
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            cell.InnerText = dt.Rows[i][11].ToString();
             cell.Attributes.Add("style", "text-align:center;");
             newRow.Controls.Add(cell);
             //cell = new HtmlTableCell();
