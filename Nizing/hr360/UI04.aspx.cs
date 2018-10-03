@@ -42,8 +42,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "0136";    //test only to avoid error on loading, delete after trial            
-        //Session["erp_id"] = "0136";
+        //Session["user_id"] = "0137";    //test only to avoid error on loading, delete after trial            
+        //Session["erp_id"] = "0137";
 
         if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
         {
@@ -2313,6 +2313,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
             + " FROM HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B"
             + " GROUP BY APPLICATION_ID"
             + " )"
+            + " , CTE"
+            + " AS ("
             + " SELECT DISTINCT APP.APPLICATION_ID"
             + " ,APP.APPLICANT_ID"
             + " ,APP.APPLICATION_DATE"
@@ -2332,7 +2334,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             + " LEFT JOIN NZ.dbo.CMSMV MV3 ON APP.NEXT_REVIEWER=MV3.MV001"
             + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPLICATION_STATUS [STATUS] ON APP.APPLICATION_STATUS_ID=[STATUS].ID"
             + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B [TRAIL] ON APP.APPLICATION_ID = [TRAIL].APPLICATION_ID"
-            + " LEFT JOIN APP_LAST_ACTION_TIME [LAST_ACTION] ON APP.APPLICATION_ID = LAST_ACTION.APPLICATION_ID";
+            + " LEFT JOIN APP_LAST_ACTION_TIME [LAST_ACTION] ON APP.APPLICATION_ID = LAST_ACTION.APPLICATION_ID";            
         if (!String.IsNullOrWhiteSpace(txtSearch_Parameter_StartDate.Text) && String.IsNullOrWhiteSpace(txtSearch_Parameter_EndDate.Text))
         {
             condition = " WHERE APP.DAYOFF_START_TIME >= @STARTTIME";
@@ -2377,11 +2379,27 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 condition += " AND APP.APPLICATION_STATUS_ID=@STATUS_ID";
             }
         }
-        order = " ORDER BY APP.APPLICATION_ID DESC";
+        query += condition;
+        query += " )"
+                + " SELECT *, CASE"
+                + " WHEN EXISTS"
+                + " ("
+                + " 	SELECT *"
+                + " 	FROM NZ.dbo.PALTF TF"
+                + " 	WHERE TF.TF001=CTE.APPLICANT_ID"
+                + " 	AND TF.TF002=CONVERT(NVARCHAR(8),CTE.DAYOFF_START_TIME,112)"
+                + " 	AND TF.TF008=CONVERT(NVARCHAR(3),CTE.DAYOFF_TOTAL_TIME)"
+                + " )"
+                + " THEN '已登入'"
+                + " ELSE '未登入'"
+                + " END AS 'ERP_STATUS'"
+                + " FROM CTE";
+        order = " ORDER BY APPLICATION_ID DESC";
+        query += order;
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             conn.Open();
-            SqlCommand cmd = new SqlCommand(query + condition + order, conn);
+            SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@STARTTIME", startTime);
             cmd.Parameters.AddWithValue("@ENDTIME", endTime);
             cmd.Parameters.AddWithValue("@APPLICANT_ID", ddlSearch_Parameter_ApplicantID.SelectedValue);

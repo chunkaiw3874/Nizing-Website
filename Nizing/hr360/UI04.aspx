@@ -533,6 +533,14 @@
                                     <%--<asp:Button ID="btnSearch_Deny" runat="server" Text="退回" CssClass="btn btn-danger" OnClientClick="return confirmDeny();" OnClick="btnDeny_Click" />--%>
                                 </ItemTemplate>
                             </asp:TemplateField>
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                <HeaderTemplate>
+                                    <asp:LinkButton ID="lbERP_STATUS" runat="server" Text="ERP登入狀態" CommandName="Sort" CommandArgument="ERP_STATUS"></asp:LinkButton>
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="lblERPStatus" runat="server" Text='<%#Eval("ERP_STATUS") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </div>
