@@ -116,7 +116,7 @@
                                     <asp:Label ID="Label3" runat="server" Text='<%#Eval("生產線別") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField>
+                            <asp:TemplateField HeaderStyle-Width="100px">
                                 <HeaderTemplate>
                                     <asp:LinkButton ID="lb2" runat="server" Text="生產人員" CommandName="Sort" CommandArgument="生產人員" ForeColor="White"></asp:LinkButton>
                                 </HeaderTemplate>
@@ -132,7 +132,7 @@
                                     <asp:Label ID="Label5" runat="server" Text='<%#Eval("單據日期") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField>
+                            <asp:TemplateField HeaderStyle-Width="100px">
                                 <HeaderTemplate>
                                     <asp:LinkButton ID="lb4" runat="server" Text="品號" CommandName="Sort" CommandArgument="品號" ForeColor="White"></asp:LinkButton>
                                 </HeaderTemplate>
@@ -145,11 +145,11 @@
                                     <asp:Label ID="Label7" runat="server" Text='<%#Eval("品名") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="規格">
+                            <%--<asp:TemplateField HeaderText="規格" HeaderStyle-Width="100px">
                                 <ItemTemplate>
                                     <asp:Label ID="Label8" runat="server" Text='<%#Eval("規格") %>'></asp:Label>
                                 </ItemTemplate>
-                            </asp:TemplateField>
+                            </asp:TemplateField>--%>
                             <asp:TemplateField HeaderText="入庫數量">
                                 <ItemTemplate>
                                     <asp:Label ID="lblAmount" runat="server" Text='<%#Eval("入庫數量") %>'></asp:Label>
@@ -160,7 +160,7 @@
                                     <asp:Label ID="Label10" runat="server" Text='<%#Eval("單位") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField>
+                            <asp:TemplateField HeaderStyle-Width="100px">
                                 <HeaderTemplate>
                                     <asp:LinkButton ID="lb11" runat="server" Text="庫別" CommandName="Sort" CommandArgument="庫別" ForeColor="White"></asp:LinkButton>
                                 </HeaderTemplate>
@@ -168,12 +168,12 @@
                                     <asp:Label ID="Label11" runat="server" Text='<%#Eval("庫別") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="庫別名稱">
+                            <asp:TemplateField HeaderText="庫別名稱" HeaderStyle-Width="100px">
                                 <ItemTemplate>
                                     <asp:Label ID="Label12" runat="server" Text='<%#Eval("庫別名稱") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField>
+                            <asp:TemplateField HeaderStyle-Width="100px">
                                 <HeaderTemplate>
                                     <asp:LinkButton ID="lb13" runat="server" Text="製令單號" CommandName="Sort" CommandArgument="製令單號" ForeColor="White"></asp:LinkButton>
                                 </HeaderTemplate>

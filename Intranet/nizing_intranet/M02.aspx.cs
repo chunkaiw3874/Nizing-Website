@@ -172,7 +172,7 @@ public partial class nizing_intranet_M02 : System.Web.UI.Page
         decimal result;
         if (_gd.Rows.Count > 0)
         {            
-            for (int i = 6; i <= 6; i++)
+            for (int i = 5; i <= 5; i++)
             {
                 sum = 0;
                 for (int j = 0; j < _gd.Rows.Count; j++)
