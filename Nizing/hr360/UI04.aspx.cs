@@ -15,7 +15,7 @@ using System.Web.UI.WebControls;
  如果HR有人事變更，於本頁搜尋HR做更正!!!
  */
 /*
- * 2018.09.27 無HR
+ * 2018.10.08 HR:0139
  * 2018.09.27 改版為假單不跨天
  * PS: 搜尋"NEED FIX" for code
  */
@@ -1577,7 +1577,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                         {
                             conn.Open();
-                            //簽核限制:人事主任 RANK 7 //HR(2018.09.25 HR:none)
+                            //簽核限制:人事主任 RANK 7 //HR(2018.10.08 HR:0139)
                             string query = "SELECT MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
                                         + " FROM NZ.dbo.CMSMV MV"
                                         + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
@@ -1586,7 +1586,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                                         + " AND MV.MV001<>@ID"
                                 //+ " AND MK.MK001='A20'"           
                                 //+ " AND HIER.[RANK]=7";
-                                        + " AND MV.MV001='0080'" //HR NEED FIX: 如無人事主任(A20)，則指定人事專員審核
+                                        + " AND MV.MV001='0139'" //HR NEED FIX: 如無人事主任(A20)，則指定人事專員審核
                                         + " AND MK.MK001='A21'";
                             SqlCommand cmd = new SqlCommand(query, conn);
                             cmd.Parameters.AddWithValue("@ID", applicantID);
@@ -1868,7 +1868,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     + " AND MV.MV001<>'0006'"
                     + " AND MV.MV001<>'0007'"
                     + " AND MV.MV001<>'0098'";  //這些人不會請假
-        if (Session["erp_id"].ToString() != "0137"      //HR
+        if (Session["erp_id"].ToString() != "0139"      //HR
             && Session["erp_id"].ToString() != "0015"   //小榆
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
@@ -1890,7 +1890,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             ddlSearch_Parameter_ApplicantID.DataSource = dt;
             ddlSearch_Parameter_ApplicantID.DataBind();
         }
-        if (!(Session["erp_id"].ToString() != "0137"   //HR
+        if (!(Session["erp_id"].ToString() != "0139"   //HR
             && Session["erp_id"].ToString() != "0015"   //小榆
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
@@ -2170,7 +2170,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
         }        
-        recipientId.Add("0137");    //HR
+        recipientId.Add("0139");    //HR
         recipientId.Add("0080");    //Kevin for the sake of testing mail delivery function
         //status 1:新申請/一般簽核通過(HR&下個簽核者) 2:申請撤銷(HR&代理人) 3:申請退回(HR&申請人&代理人) 4:最後一層簽核通過(HR&申請人&代理人)
         switch (appStatus)
@@ -2424,7 +2424,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             if (Session["erp_id"].ToString() != "0007"      //Chrissy
                 && Session["erp_id"].ToString() != "0080"   //Kevin
                 && Session["erp_id"].ToString() != "0015"   //小榆
-                && Session["erp_id"].ToString() != "0137"   //HR
+                && Session["erp_id"].ToString() != "0139"   //HR
                 )
             {
                 gvSearchResult.Columns[13].Visible = false;

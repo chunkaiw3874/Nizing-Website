@@ -51,6 +51,9 @@
                     <asp:ImageButton ID="ImageButton11" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/M-1.png" PostBackUrl="~/nizing_intranet/M01.aspx" /></li>
                 <li>
                     <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/PC-3.png" PostBackUrl="~/nizing_intranet/ProductionEfficiencyReport.aspx" /></li>
+                <li>
+                    <a href="/nizing_intranet/M02.aspx">人員生產入庫明細表</a>
+                </li>
             </ul>
         </div>
     </div>

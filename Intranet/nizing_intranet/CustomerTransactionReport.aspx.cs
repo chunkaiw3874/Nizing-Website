@@ -11,9 +11,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-//using DocumentFormat.OpenXml;
-//using DocumentFormat.OpenXml.Spreadsheet;
-//using SpreadsheetLight;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Spreadsheet;
+using SpreadsheetLight;
 
 public partial class CustomerTransactionReport : System.Web.UI.Page
 {
@@ -156,28 +156,31 @@ public partial class CustomerTransactionReport : System.Web.UI.Page
     }
     private void Export_Excel()
     {
-        //SLDocument slCTR = new SLDocument();
-        //string fileName = "test";
-        //string fileExt = ".xlsx";
-        ////header
-        //for (int i = 0; i < grdReport.HeaderRow.Cells.Count; i++)
-        //{
-        //    if (grdReport.HeaderRow.Cells[i].Controls.Count > 0)
-        //    {
+        SLDocument slCTR = new SLDocument();
+        string fileName = "test";
+        string fileExt = ".xlsx";
+        //header
+        for (int i = 0; i < grdReport.HeaderRow.Cells.Count; i++)
+        {
+            if (grdReport.HeaderRow.Cells[i].Controls.Count > 0)
+            {
                 
+            }
+            slCTR.SetCellValue(1, i + 1, grdReport.HeaderRow.Cells[i].Text.Replace("&nbsp;", "").Trim());
+        }
+        //for (int i = 0; i < grdReport.Rows.Count; i++)
+        //{
+        //    for (int j = 0; j < grdReport.Columns.Count; j++)
+        //    {
+        //        slCTR.SetCellValue(i, j, grdReport.Rows[i].Cells[j].Text.Trim());
         //    }
-        //    slCTR.SetCellValue(1, i + 1, grdReport.HeaderRow.Cells[i].Text.Replace("&nbsp;", "").Trim());
         //}
-        ////for (int i = 0; i < grdReport.Rows.Count; i++)
-        ////{
-        ////    for (int j = 0; j < grdReport.Columns.Count; j++)
-        ////    {
-        ////        slCTR.SetCellValue(i, j, grdReport.Rows[i].Cells[j].Text.Trim());
-        ////    }
-        ////}
 
-        ////slCTR.SaveAs(System.IO.Path.GetTempPath() + "\\Test.xlsx");
-        //slCTR.SaveAs(fileName + fileExt);
+        Response.Clear();
+        Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+        Response.AddHeader("Content-Disposition", "attachment; filename=" + fileName + fileExt);
+        slCTR.SaveAs(Response.OutputStream);
+        Response.End();
     }
     //private void Export_Excel()
     //{
