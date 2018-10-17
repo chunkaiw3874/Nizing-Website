@@ -43,6 +43,9 @@
             <ul>
                 <li><%--<asp:ImageButton ID="ImageButton11" runat="server" ImageUrl="~/employee_section/report/image/button/dept/M-1.png" PostBackUrl="~/employee_section/report/M01.aspx" />--%></li>
                 <li><%--<asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/employee_section/report/image/button/dept/PC-3.png" PostBackUrl="~/employee_section/report/ProductionEfficiencyReport.aspx" />--%></li>
+                <li>
+                    <a href="/employee_section/report/M02.aspx">人員生產入庫明細</a>
+                </li>
             </ul>
         </div>
     </div>
