@@ -157,24 +157,53 @@ public partial class CustomerTransactionReport : System.Web.UI.Page
     private void Export_Excel()
     {
         SLDocument slCTR = new SLDocument();
-        string fileName = "test";
+        string fileName = "";
         string fileExt = ".xlsx";
-        //header
-        for (int i = 0; i < grdReport.HeaderRow.Cells.Count; i++)
+        if (ddlStartMonth.SelectedValue == "1226")
         {
-            if (grdReport.HeaderRow.Cells[i].Controls.Count > 0)
-            {
-                
-            }
-            slCTR.SetCellValue(1, i + 1, grdReport.HeaderRow.Cells[i].Text.Replace("&nbsp;", "").Trim());
+            fileName = (Convert.ToInt16(ddlStartYear.SelectedValue) - 1).ToString() + ddlStartMonth.SelectedValue + "_" + ddlEndYear.SelectedValue + ddlEndMonth.SelectedValue + "-" + ddlPersonnel.SelectedValue;
         }
-        //for (int i = 0; i < grdReport.Rows.Count; i++)
+        else
+        {
+            fileName = ddlStartYear.SelectedValue + ddlStartMonth.SelectedValue + "_" + ddlEndYear.SelectedValue + ddlEndMonth.SelectedValue + "-" + ddlPersonnel.SelectedValue;
+        }
+        //header
+        //for (int i = 0; i < grdReport.HeaderRow.Cells.Count; i++)
         //{
-        //    for (int j = 0; j < grdReport.Columns.Count; j++)
+        //    if (String.IsNullOrWhiteSpace(grdReport.HeaderRow.Cells[i].Text.Trim()))
         //    {
-        //        slCTR.SetCellValue(i, j, grdReport.Rows[i].Cells[j].Text.Trim());
+        //        slCTR.SetCellValue(1, i + 1, ((LinkButton)grdReport.HeaderRow.Cells[i].FindControl("lb" + i)).Text.Replace("&nbsp", "").Trim());
+        //    }
+        //    else
+        //    {
+        //        slCTR.SetCellValue(1, i + 1, grdReport.HeaderRow.Cells[i].Text.Replace("&nbsp;", "").Trim());
         //    }
         //}
+        for (int i = 0; i < grdReport.Rows.Count; i++)
+        {
+            if (i == 0)
+            {
+                for (int j = 0; j < grdReport.Columns.Count; j++)
+                {
+                    if (String.IsNullOrWhiteSpace(grdReport.HeaderRow.Cells[j].Text.Trim()))
+                    {
+                        slCTR.SetCellValue(i + 1, j + 1, ((LinkButton)grdReport.HeaderRow.Cells[i].FindControl("lb" + j)).Text.Replace("&nbsp", "").Trim());
+                    }
+                    else
+                    {
+                        slCTR.SetCellValue(i + 1, j + 1, grdReport.HeaderRow.Cells[j].Text.Replace("&nbsp;", "").Trim());
+                    }
+                }
+            }
+            else
+            {
+                for (int j = 0; j < grdReport.Columns.Count; j++)
+                {
+                    slCTR.SetCellValue(i + 1, j + 1, ((Label)grdReport.Rows[i].Cells[j].FindControl("lbl" + j)).Text.Trim());
+
+                }
+            }
+        }
 
         Response.Clear();
         Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
@@ -305,9 +334,9 @@ public partial class CustomerTransactionReport : System.Web.UI.Page
         {
             for (int i = 4; i < row.Cells.Count; i++)
             {
-                if (((Label)row.Cells[i].FindControl("Label"+(i+4).ToString())).Text == "0.00")
+                if (((Label)row.Cells[i].FindControl("lbl"+(i).ToString())).Text == "0.00")
                 {
-                    ((Label)row.Cells[i].FindControl("Label" + (i + 4).ToString())).Text = "-";
+                    ((Label)row.Cells[i].FindControl("lbl" + (i).ToString())).Text = "-";
                 }
             }
         }

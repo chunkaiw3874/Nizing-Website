@@ -85,87 +85,93 @@
                 <Columns>
                     <asp:TemplateField HeaderText="年度">
                         <ItemTemplate>
-                            <asp:Label ID="Label4" runat="server" Text='<%#Eval("YR") %>'></asp:Label>
+                            <asp:Label ID="lbl0" runat="server" Text='<%#Eval("YR") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="客戶代號" SortExpression="CLIENTNO">
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:LinkButton ID="lb1" runat="server" Text="客戶代號" CommandName="Sort" CommandArgument="CLIENTNO" ForeColor="White"></asp:LinkButton>
+                        </HeaderTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="Label5" runat="server" Text='<%#Eval("CLIENTNO") %>'></asp:Label>
+                            <asp:Label ID="lbl1" runat="server" Text='<%#Eval("CLIENTNO") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="客戶名稱">
                         <ItemTemplate>
-                            <asp:Label ID="Label6" runat="server" Text='<%#Eval("CLIENTNAME") %>'></asp:Label>
+                            <asp:Label ID="lbl2" runat="server" Text='<%#Eval("CLIENTNAME") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="負責業務">
                         <ItemTemplate>
-                            <asp:Label ID="Label7" runat="server" Text='<%#Eval("SALENAME") %>'></asp:Label>
+                            <asp:Label ID="lbl3" runat="server" Text='<%#Eval("SALENAME") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="一月">
                         <ItemTemplate>
-                            <asp:Label ID="Label8" runat="server" Text='<%#Eval("01") %>'></asp:Label>
+                            <asp:Label ID="lbl4" runat="server" Text='<%#Eval("01") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="二月">
                         <ItemTemplate>
-                            <asp:Label ID="Label9" runat="server" Text='<%#Eval("02") %>'></asp:Label>
+                            <asp:Label ID="lbl5" runat="server" Text='<%#Eval("02") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="三月">
                         <ItemTemplate>
-                            <asp:Label ID="Label10" runat="server" Text='<%#Eval("03") %>'></asp:Label>
+                            <asp:Label ID="lbl6" runat="server" Text='<%#Eval("03") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="四月">
                         <ItemTemplate>
-                            <asp:Label ID="Label11" runat="server" Text='<%#Eval("04") %>'></asp:Label>
+                            <asp:Label ID="lbl7" runat="server" Text='<%#Eval("04") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="五月">
                         <ItemTemplate>
-                            <asp:Label ID="Label12" runat="server" Text='<%#Eval("05") %>'></asp:Label>
+                            <asp:Label ID="lbl8" runat="server" Text='<%#Eval("05") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="六月">
                         <ItemTemplate>
-                            <asp:Label ID="Label13" runat="server" Text='<%#Eval("06") %>'></asp:Label>
+                            <asp:Label ID="lbl9" runat="server" Text='<%#Eval("06") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="七月">
                         <ItemTemplate>
-                            <asp:Label ID="Label14" runat="server" Text='<%#Eval("07") %>'></asp:Label>
+                            <asp:Label ID="lbl10" runat="server" Text='<%#Eval("07") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="八月">
                         <ItemTemplate>
-                            <asp:Label ID="Label15" runat="server" Text='<%#Eval("08") %>'></asp:Label>
+                            <asp:Label ID="lbl11" runat="server" Text='<%#Eval("08") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="九月">
                         <ItemTemplate>
-                            <asp:Label ID="Label16" runat="server" Text='<%#Eval("09") %>'></asp:Label>
+                            <asp:Label ID="lbl12" runat="server" Text='<%#Eval("09") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="十月">
                         <ItemTemplate>
-                            <asp:Label ID="Label17" runat="server" Text='<%#Eval("10") %>'></asp:Label>
+                            <asp:Label ID="lbl13" runat="server" Text='<%#Eval("10") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="十一月">
                         <ItemTemplate>
-                            <asp:Label ID="Label18" runat="server" Text='<%#Eval("11") %>'></asp:Label>
+                            <asp:Label ID="lbl14" runat="server" Text='<%#Eval("11") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="十二月">
                         <ItemTemplate>
-                            <asp:Label ID="Label19" runat="server" Text='<%#Eval("12") %>'></asp:Label>
+                            <asp:Label ID="lbl15" runat="server" Text='<%#Eval("12") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="總金額" SortExpression="TOTAL">
+                    <asp:TemplateField>
+                        <HeaderTemplate>
+                            <asp:LinkButton ID="lb16" runat="server" Text="總金額" CommandName="Sort" CommandArgument="TOTAL" ForeColor="White"></asp:LinkButton>
+                        </HeaderTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="Label20" runat="server" Text='<%#Eval("TOTAL") %>'></asp:Label>
+                            <asp:Label ID="lbl16" runat="server" Text='<%#Eval("TOTAL") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
