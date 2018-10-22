@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+//using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -1649,7 +1650,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         cmd.Parameters.AddWithValue("@APPLICATION", approveID);
                         cmd.ExecuteNonQuery();
                     }
-                    System.Threading.Thread.Sleep(3000);    //sleeps for 3 second before continuing so trail records can be ordered by time
+                    System.Threading.Thread.Sleep(1000);    //sleeps for 1 second before continuing so trail records can be ordered by time
                 } while (nextReviewer == "SYSTEM" && Convert.ToInt16(approveID_status) < 6); //stops when somebody is required to review the application,
                 //or when approval status reached 6, which means the application is approved by everyone necessary
                 //automatic approval should only happen on 1st and 2nd level,
@@ -1861,13 +1862,22 @@ public partial class hr360_UI04 : System.Web.UI.Page
     protected void SearchSection_Init_Load()
     {
         hdnIsSearchFieldVisible.Value = "1";
-        string query = "SELECT MV.MV001+' '+MV.MV002 'display',MV.MV001 'value'"
+        string query = "SELECT MV.MV001+' '+MV.MV002 'display',MV.MV001 'value','0' 'list_order'"
                     + " FROM CMSMV MV"
                     + " WHERE MV.MV022=''"
                     + " AND MV.MV001<>'0000'"
                     + " AND MV.MV001<>'0006'"
                     + " AND MV.MV001<>'0007'"
-                    + " AND MV.MV001<>'0098'";  //這些人不會請假
+                    + " AND MV.MV001<>'0098'"  //這些人不會請假
+                    //以下為離職員工query
+                    + " UNION"                  
+                    + " SELECT MV.MV001+' '+MV.MV002+'(已離職)' 'display',MV.MV001 'value','1' 'list_order'"
+                    + " FROM CMSMV MV"
+                    + " WHERE MV.MV022<>''"
+                    + " AND MV.MV001<>'0000'"
+                    + " AND MV.MV001<>'0006'"
+                    + " AND MV.MV001<>'0007'"
+                    + " AND MV.MV001<>'0098'";
         if (Session["erp_id"].ToString() != "0139"      //HR
             && Session["erp_id"].ToString() != "0015"   //小榆
             && Session["erp_id"].ToString() != "0080"
@@ -1879,7 +1889,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(NZconnectionString))  //FILL ddlSearch_Parameter_ApplicantID
         {
             conn.Open();
-            query += " ORDER BY MV.MV001";
+            query += " ORDER BY 'list_order','value'";
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
@@ -2260,13 +2270,24 @@ public partial class hr360_UI04 : System.Web.UI.Page
         MailMessage completeMessage = new MailMessage(from, to, subject, body);
 
         //send email async in the bg
+        //var bg = new BackgroundWorker();
+        //bg.DoWork += delegate
+        //{
         Thread email = new Thread(delegate()
-        {
-            SendEmail(to, from, subject, body);
-        });
+                {
+                    SendEmail(to, from, subject, body);
+                });
         email.IsBackground = true;
         email.Start();
+ 
+        //};
+
+        //bg.RunWorkerAsync();
     }
+    /// <summary>
+    /// Threading Setup
+    /// </summary>
+    
     private void SendEmail(string to, string from, string subject, string body)
     {
         using (MailMessage mm = new MailMessage(from, to))

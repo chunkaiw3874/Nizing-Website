@@ -1,6 +1,6 @@
-﻿using NPOI.HSSF.UserModel;
-using NPOI.HSSF.Util;
-using NPOI.SS.UserModel;
+﻿//using NPOI.HSSF.UserModel;
+//using NPOI.HSSF.Util;
+//using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -315,15 +315,15 @@ public partial class CustomerTransactionReport : System.Web.UI.Page
     //    ms.Close();
     //    ms.Dispose();
     //}
-    private void SetCustomCellColor(HSSFWorkbook workbook, short originalColorIndex, string alternateColor)
-    {
-        HSSFPalette cellPalette = workbook.GetCustomPalette();
-        byte CR, CG, CB;
-        CR = Convert.ToByte("0x" + alternateColor.Substring(0, 2), 16);
-        CG = Convert.ToByte("0x" + alternateColor.Substring(2, 2), 16);
-        CB = Convert.ToByte("0x" + alternateColor.Substring(4, 2), 16);
-        cellPalette.SetColorAtIndex(originalColorIndex, CR, CG, CB);
-    }
+    //private void SetCustomCellColor(HSSFWorkbook workbook, short originalColorIndex, string alternateColor)
+    //{
+    //    HSSFPalette cellPalette = workbook.GetCustomPalette();
+    //    byte CR, CG, CB;
+    //    CR = Convert.ToByte("0x" + alternateColor.Substring(0, 2), 16);
+    //    CG = Convert.ToByte("0x" + alternateColor.Substring(2, 2), 16);
+    //    CB = Convert.ToByte("0x" + alternateColor.Substring(4, 2), 16);
+    //    cellPalette.SetColorAtIndex(originalColorIndex, CR, CG, CB);
+    //}
     //public override void VerifyRenderingInServerForm(Control control)
     //{
     //    // '處理'GridView' 的控制項 'GridView' 必須置於有 runat=server 的表單標記之中   
