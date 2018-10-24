@@ -50,14 +50,14 @@
                                 <asp:Label ID="Label2" runat="server" Text='<%#Eval("START_DATE") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="年度特休-天/小時">
-                            <ItemTemplate>
-                                <asp:Label ID="Label3" runat="server" Text='<%#Eval("DAYOFF_TOTAL") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="已休時數-天/小時">
                             <ItemTemplate>
-                                <asp:Label ID="Label4" runat="server" Text='<%#Eval("03")==DBNull.Value || Eval("03")==DBNull.Value?"":Convert.ToInt16(Math.Floor(double.Parse(Eval("03").ToString())/8)).ToString()+" / "+Eval("03") %>'></asp:Label>
+                                <asp:Label ID="Label3" runat="server" Text='<%#Eval("03")==DBNull.Value || Eval("03")==DBNull.Value?"":Eval("03") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="年度特休-天/小時">
+                            <ItemTemplate>
+                                <asp:Label ID="Label4" runat="server" Text='<%#Eval("DAYOFF_TOTAL") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="病假">

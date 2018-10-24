@@ -16,7 +16,7 @@ using System.Web.UI.WebControls;
  如果HR有人事變更，於本頁搜尋HR做更正!!!
  */
 /*
- * 2018.10.08 HR:0139
+ * 2018.10.24 HR:NONE
  * 2018.09.27 改版為假單不跨天
  * PS: 搜尋"NEED FIX" for code
  */
@@ -43,8 +43,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "0137";    //test only to avoid error on loading, delete after trial            
-        //Session["erp_id"] = "0137";
+        //Session["user_id"] = "0010";    //test only to avoid error on loading, delete after trial            
+        //Session["erp_id"] = "0010";
 
         if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
         {
@@ -1578,7 +1578,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                         {
                             conn.Open();
-                            //簽核限制:人事主任 RANK 7 //HR(2018.10.08 HR:0139)
+                            //簽核限制:人事主任 RANK 7 //HR(2018.10.08 HR:NONE)
                             string query = "SELECT MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
                                         + " FROM NZ.dbo.CMSMV MV"
                                         + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
@@ -1587,7 +1587,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                                         + " AND MV.MV001<>@ID"
                                 //+ " AND MK.MK001='A20'"           
                                 //+ " AND HIER.[RANK]=7";
-                                        + " AND MV.MV001='0139'" //HR NEED FIX: 如無人事主任(A20)，則指定人事專員審核
+                                        + " AND MV.MV001='0080'" //HR NEED FIX: 如無人事主任(A20)，則指定人事專員審核
                                         + " AND MK.MK001='A21'";
                             SqlCommand cmd = new SqlCommand(query, conn);
                             cmd.Parameters.AddWithValue("@ID", applicantID);
@@ -1862,6 +1862,19 @@ public partial class hr360_UI04 : System.Web.UI.Page
     protected void SearchSection_Init_Load()
     {
         hdnIsSearchFieldVisible.Value = "1";
+        string nonAdminCondition = "";
+        if (Session["erp_id"].ToString() != "0080"      //HR
+            && Session["erp_id"].ToString() != "0015"   //小榆
+            && Session["erp_id"].ToString() != "0080"
+            && Session["erp_id"].ToString() != "0006"
+            && Session["erp_id"].ToString() != "0007") //管理部跟HR可以查詢全部人的歷史資料
+        {
+            nonAdminCondition = " AND MV.MV001=@ID";
+        }
+        else
+        {
+            nonAdminCondition = "";
+        }
         string query = "SELECT MV.MV001+' '+MV.MV002 'display',MV.MV001 'value','0' 'list_order'"
                     + " FROM CMSMV MV"
                     + " WHERE MV.MV022=''"
@@ -1869,6 +1882,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     + " AND MV.MV001<>'0006'"
                     + " AND MV.MV001<>'0007'"
                     + " AND MV.MV001<>'0098'"  //這些人不會請假
+                    + nonAdminCondition
                     //以下為離職員工query
                     + " UNION"                  
                     + " SELECT MV.MV001+' '+MV.MV002+'(已離職)' 'display',MV.MV001 'value','1' 'list_order'"
@@ -1877,15 +1891,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     + " AND MV.MV001<>'0000'"
                     + " AND MV.MV001<>'0006'"
                     + " AND MV.MV001<>'0007'"
-                    + " AND MV.MV001<>'0098'";
-        if (Session["erp_id"].ToString() != "0139"      //HR
-            && Session["erp_id"].ToString() != "0015"   //小榆
-            && Session["erp_id"].ToString() != "0080"
-            && Session["erp_id"].ToString() != "0006"
-            && Session["erp_id"].ToString() != "0007") //管理部跟HR可以查詢全部人的歷史資料
-        {
-            query += " AND MV.MV001=@ID";
-        }
+                    + " AND MV.MV001<>'0098'"
+                    + nonAdminCondition;
+
+        
         using (SqlConnection conn = new SqlConnection(NZconnectionString))  //FILL ddlSearch_Parameter_ApplicantID
         {
             conn.Open();
@@ -1900,7 +1909,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             ddlSearch_Parameter_ApplicantID.DataSource = dt;
             ddlSearch_Parameter_ApplicantID.DataBind();
         }
-        if (!(Session["erp_id"].ToString() != "0139"   //HR
+        if (!(Session["erp_id"].ToString() != "0080"   //HR
             && Session["erp_id"].ToString() != "0015"   //小榆
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
@@ -2180,7 +2189,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
         }        
-        recipientId.Add("0139");    //HR
+        recipientId.Add("0080");    //HR
         recipientId.Add("0080");    //Kevin for the sake of testing mail delivery function
         //status 1:新申請/一般簽核通過(HR&下個簽核者) 2:申請撤銷(HR&代理人) 3:申請退回(HR&申請人&代理人) 4:最後一層簽核通過(HR&申請人&代理人)
         switch (appStatus)
@@ -2262,31 +2271,21 @@ public partial class hr360_UI04 : System.Web.UI.Page
         body += "請假原因: " + dt.Rows[0]["REASON"].ToString() + "\n";
         body += "簽核狀態: " + dt.Rows[0]["STATUS_NAME"].ToString() + "\n";
         body += "最後動作執行者: " + dt.Rows[0]["EXECUTOR_NAME"].ToString() + "\n";
-        body += "最後動作備註: " + dt.Rows[0]["ACTION_MEMO"].ToString() + "\n\n";
+        body += "最後動作備註: " + dt.Rows[0]["ACTION_MEMO"].ToString() + "\n";
+        body += "下個簽核者: " + dt.Rows[0]["REVIEWER_NAME"].ToString() + "\n\n";
         body += "請登入 http://www.nizing.com.tw/hr360/login.aspx > \"我要請假\" 確認細節";
 
 
         // create the email message
         MailMessage completeMessage = new MailMessage(from, to, subject, body);
 
-        //send email async in the bg
-        //var bg = new BackgroundWorker();
-        //bg.DoWork += delegate
-        //{
         Thread email = new Thread(delegate()
                 {
                     SendEmail(to, from, subject, body);
                 });
         email.IsBackground = true;
         email.Start();
- 
-        //};
-
-        //bg.RunWorkerAsync();
     }
-    /// <summary>
-    /// Threading Setup
-    /// </summary>
     
     private void SendEmail(string to, string from, string subject, string body)
     {
@@ -2445,7 +2444,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             if (Session["erp_id"].ToString() != "0007"      //Chrissy
                 && Session["erp_id"].ToString() != "0080"   //Kevin
                 && Session["erp_id"].ToString() != "0015"   //小榆
-                && Session["erp_id"].ToString() != "0139"   //HR
+                && Session["erp_id"].ToString() != "0080"   //HR
                 )
             {
                 gvSearchResult.Columns[13].Visible = false;
