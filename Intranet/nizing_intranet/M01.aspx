@@ -1,9 +1,61 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/masterPage/MasterPage.master" AutoEventWireup="true" CodeFile="M01.aspx.cs" Inherits="nizing_intranet_M01" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var isPostBack = $('#<%=hdnIsPostBack.ClientID%>').val();
+            if (isPostBack == '0') {
+                $('#TargetSetter').hide();
+            }
+            else {
+                if ($('#<%=hdnIsbtnShowTargetSetterTrue.ClientID%>').val() == '1') {
+                    $('#TargetSetter').show();
+                }
+                else {
+                    $('#TargetSetter').hide();
+                }
+            }
+            $(document).on('click', '#btnShowTargetSetter', function () {
+                $('#TargetSetter').toggle();
+                if ($('#TargetSetter').is(":visible") == true) {
+                    $('#TargetSetter').show();
+                    $('#<%=hdnIsbtnShowTargetSetterTrue.ClientID%>').val('1');
+                }
+                else {
+                    $('#TargetSetter').hide();
+                    $('#<%=hdnIsbtnShowTargetSetterTrue.ClientID%>').val('0');
+                }
+            });
+        })
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div id="M01">
+    <div id="M01" class="container-fluid">
+        <div id="Admin" runat="server" visible="false">
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    <span class="label label-info" id="btnShowTargetSetter" style="cursor: pointer; font-size: 20px;">我要請假</span>
+                    <asp:HiddenField ID="hdnIsPostBack" runat="server" />
+                    <asp:HiddenField ID="hdnIsbtnShowTargetSetterTrue" runat="server" />
+                </div>
+            </div>
+            <div id="TargetSetter">
+                <div class="row form-group">
+                    <div class="col-xs-2">
+                        <asp:DropDownList ID="ddlTargetYear" runat="server" CssClass="form-control"></asp:DropDownList>
+                    </div>
+                    <div class="col-xs-2">
+                        <asp:DropDownList ID="ddlTargetProductionLine" runat="server" CssClass="form-control"></asp:DropDownList>
+                    </div>
+                    <div class="col-xs-1">
+                        <asp:Button ID="btnTargetSubmit" runat="server" Text="搜尋" CssClass="btn btn-success btn-lg" OnClick="btnTargetSubmit_Click" />
+                    </div>
+                </div>
+                <div class="row form-group">
+
+                </div>
+            </div>
+        </div>
         <div>
             <h2>生產統計表</h2>
         </div>

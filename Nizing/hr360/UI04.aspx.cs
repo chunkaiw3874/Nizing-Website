@@ -16,7 +16,7 @@ using System.Web.UI.WebControls;
  如果HR有人事變更，於本頁搜尋HR做更正!!!
  */
 /*
- * 2018.10.24 HR:NONE
+ * 2018.11.01 HR:0142
  * 2018.09.27 改版為假單不跨天
  * PS: 搜尋"NEED FIX" for code
  */
@@ -26,6 +26,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
     List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
     DataTable userInfo = new DataTable();
+    string currentHREmployeeID = "0142"; //current //HR code;
     
 
     public class dayOffInfo
@@ -43,8 +44,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "0010";    //test only to avoid error on loading, delete after trial            
-        //Session["erp_id"] = "0010";
+        //Session["user_id"] = "0140";    //test only to avoid error on loading, delete after trial            
+        //Session["erp_id"] = "0140";
 
         if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
         {
@@ -554,7 +555,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
             }
             if (lblDayOffRemainAmount.Text.Trim() != "")  //測試錯誤 202.剩餘假期不足  --如假別無量的限制，則無需執行此測試
             {
-                if (totalDayOffAmount > Convert.ToDecimal(lblDayOffRemainAmount.Text))
+                decimal r;
+                if (totalDayOffAmount > (Decimal.TryParse(lblDayOffRemainAmount.Text, out r)?Convert.ToDecimal(lblDayOffRemainAmount.Text):0))
                 {
                     errorList.Add(errorCode(202));
                 }
@@ -1587,7 +1589,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                                         + " AND MV.MV001<>@ID"
                                 //+ " AND MK.MK001='A20'"           
                                 //+ " AND HIER.[RANK]=7";
-                                        + " AND MV.MV001='0080'" //HR NEED FIX: 如無人事主任(A20)，則指定人事專員審核
+                                        + " AND MV.MV001='" + currentHREmployeeID + "'" //HR NEED FIX: 如無人事主任(A20)，則指定人事專員審核
                                         + " AND MK.MK001='A21'";
                             SqlCommand cmd = new SqlCommand(query, conn);
                             cmd.Parameters.AddWithValue("@ID", applicantID);
@@ -1863,7 +1865,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         hdnIsSearchFieldVisible.Value = "1";
         string nonAdminCondition = "";
-        if (Session["erp_id"].ToString() != "0080"      //HR
+        if (Session["erp_id"].ToString() != currentHREmployeeID      //HR
             && Session["erp_id"].ToString() != "0015"   //小榆
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
@@ -1909,7 +1911,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             ddlSearch_Parameter_ApplicantID.DataSource = dt;
             ddlSearch_Parameter_ApplicantID.DataBind();
         }
-        if (!(Session["erp_id"].ToString() != "0080"   //HR
+        if (!(Session["erp_id"].ToString() != currentHREmployeeID  //HR
             && Session["erp_id"].ToString() != "0015"   //小榆
             && Session["erp_id"].ToString() != "0080"
             && Session["erp_id"].ToString() != "0006"
@@ -2188,8 +2190,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@APP_ID", appId);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
-        }        
-        recipientId.Add("0080");    //HR
+        }
+        recipientId.Add(currentHREmployeeID);    //HR
         recipientId.Add("0080");    //Kevin for the sake of testing mail delivery function
         //status 1:新申請/一般簽核通過(HR&下個簽核者) 2:申請撤銷(HR&代理人) 3:申請退回(HR&申請人&代理人) 4:最後一層簽核通過(HR&申請人&代理人)
         switch (appStatus)
@@ -2444,7 +2446,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             if (Session["erp_id"].ToString() != "0007"      //Chrissy
                 && Session["erp_id"].ToString() != "0080"   //Kevin
                 && Session["erp_id"].ToString() != "0015"   //小榆
-                && Session["erp_id"].ToString() != "0080"   //HR
+                && Session["erp_id"].ToString() != currentHREmployeeID   //HR
                 )
             {
                 gvSearchResult.Columns[13].Visible = false;

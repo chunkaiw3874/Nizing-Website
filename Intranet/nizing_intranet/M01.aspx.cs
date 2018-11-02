@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.DataVisualization.Charting;
@@ -29,7 +30,40 @@ public partial class nizing_intranet_M01 : System.Web.UI.Page
             }
             ddlStartYear.SelectedIndex = 0;
             ddlEndYear.SelectedIndex = 0;
+            hdnIsPostBack.Value = "0";
+            
+            try
+            {
+                List<string> roleList = getRoles();
+
+                foreach (string s in roleList)
+                {
+                    if (s == "NIZING\\管理部")// || s == "NIZING\\生管處")
+                    {
+                        Admin.Visible = true;
+                    }
+                }
+            }
+            catch
+            {
+                Server.Transfer("ErrorPage.aspx");
+            }
+            
         }
+    }
+    protected List<string> getRoles()
+    {
+        List<string> role = new List<string>();
+        
+        WindowsPrincipal principal = (WindowsPrincipal)User;
+        WindowsIdentity identity = (WindowsIdentity)User.Identity;
+        foreach (IdentityReference SIDRef in identity.Groups)
+        {
+            SecurityIdentifier sid = (SecurityIdentifier)SIDRef.Translate(typeof(SecurityIdentifier));
+            NTAccount account = (NTAccount)SIDRef.Translate(typeof(NTAccount));
+            role.Add(account.Value);
+        }
+        return role;
     }
     //protected void R1_CheckedChanged(object sender, EventArgs e)
     //{
@@ -276,4 +310,8 @@ public partial class nizing_intranet_M01 : System.Web.UI.Page
         cellPalette.SetColorAtIndex(originalColorIndex, CR, CG, CB);
     }
 
+    protected void btnTargetSubmit_Click(object sender, EventArgs e)
+    {
+
+    }
 }
