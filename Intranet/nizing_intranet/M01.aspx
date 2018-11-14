@@ -34,7 +34,7 @@
         <div id="Admin" runat="server" visible="false">
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    <span class="label label-info" id="btnShowTargetSetter" style="cursor: pointer; font-size: 20px;">我要請假</span>
+                    <span class="label label-info" id="btnShowTargetSetter" style="cursor: pointer; font-size: 20px;">設定生產目標</span>
                     <asp:HiddenField ID="hdnIsPostBack" runat="server" />
                     <asp:HiddenField ID="hdnIsbtnShowTargetSetterTrue" runat="server" />
                 </div>
@@ -48,11 +48,94 @@
                         <asp:DropDownList ID="ddlTargetProductionLine" runat="server" CssClass="form-control"></asp:DropDownList>
                     </div>
                     <div class="col-xs-1">
-                        <asp:Button ID="btnTargetSubmit" runat="server" Text="搜尋" CssClass="btn btn-success btn-lg" OnClick="btnTargetSubmit_Click" />
+                        <asp:Button ID="btnTargetSubmit" runat="server" Text="搜尋" CssClass="btn btn-success" OnClick="btnTargetSubmit_Click" />
                     </div>
                 </div>
                 <div class="row form-group">
-
+                    <div class="col-xs-12">
+                        <asp:GridView ID="gvTargetSetter" runat="server" AutoGenerateColumns="false" CssClass="grdResult">
+                            <Columns>
+                                <asp:TemplateField>
+                                    <HeaderTemplate>
+                                        <asp:Label ID="lblTargetSetterProductionLine" runat="server" Text=""></asp:Label>
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblTargetSetterProductionYear" runat="server" Text=""></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="一月">
+                                    <ItemTemplate>
+                                        <asp:TextBox ID="txtTargetSetterProductionTarget1" runat="server" Text='<%#string.IsNullOrWhiteSpace(Eval("1").ToString())?"":Eval("1") %>' MaxLength="10" Width="100"></asp:TextBox>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="二月">
+                                    <ItemTemplate>
+                                        <asp:TextBox ID="txtTargetSetterProductionTarget2" runat="server" Text='<%#string.IsNullOrWhiteSpace(Eval("2").ToString())?"":Eval("2") %>' MaxLength="10" Width="100"></asp:TextBox>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="三月">
+                                    <ItemTemplate>
+                                        <asp:TextBox ID="txtTargetSetterProductionTarget3" runat="server" Text='<%#string.IsNullOrWhiteSpace(Eval("3").ToString())?"":Eval("3") %>' MaxLength="10" Width="100"></asp:TextBox>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="四月">
+                                    <ItemTemplate>
+                                        <asp:TextBox ID="txtTargetSetterProductionTarget4" runat="server" Text='<%#string.IsNullOrWhiteSpace(Eval("4").ToString())?"":Eval("4") %>' MaxLength="10" Width="100"></asp:TextBox>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="五月">
+                                    <ItemTemplate>
+                                        <asp:TextBox ID="txtTargetSetterProductionTarget5" runat="server" Text='<%#string.IsNullOrWhiteSpace(Eval("5").ToString())?"":Eval("5") %>' MaxLength="10" Width="100"></asp:TextBox>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="六月">
+                                    <ItemTemplate>
+                                        <asp:TextBox ID="txtTargetSetterProductionTarget6" runat="server" Text='<%#string.IsNullOrWhiteSpace(Eval("6").ToString())?"":Eval("6") %>' MaxLength="10" Width="100"></asp:TextBox>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="七月">
+                                    <ItemTemplate>
+                                        <asp:TextBox ID="txtTargetSetterProductionTarget7" runat="server" Text='<%#string.IsNullOrWhiteSpace(Eval("7").ToString())?"":Eval("7") %>' MaxLength="10" Width="100"></asp:TextBox>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="八月">
+                                    <ItemTemplate>
+                                        <asp:TextBox ID="txtTargetSetterProductionTarget8" runat="server" Text='<%#string.IsNullOrWhiteSpace(Eval("8").ToString())?"":Eval("8") %>' MaxLength="10" Width="100"></asp:TextBox>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="九月">
+                                    <ItemTemplate>
+                                        <asp:TextBox ID="txtTargetSetterProductionTarget9" runat="server" Text='<%#string.IsNullOrWhiteSpace(Eval("9").ToString())?"":Eval("9") %>' MaxLength="10" Width="100"></asp:TextBox>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="十月">
+                                    <ItemTemplate>
+                                        <asp:TextBox ID="txtTargetSetterProductionTarget10" runat="server" Text='<%#string.IsNullOrWhiteSpace(Eval("10").ToString())?"":Eval("10") %>' MaxLength="10" Width="100"></asp:TextBox>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="十一月">
+                                    <ItemTemplate>
+                                        <asp:TextBox ID="txtTargetSetterProductionTarget11" runat="server" Text='<%#string.IsNullOrWhiteSpace(Eval("11").ToString())?"":Eval("11") %>' MaxLength="10" Width="100"></asp:TextBox>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="十二月">
+                                    <ItemTemplate>
+                                        <asp:TextBox ID="txtTargetSetterProductionTarget12" runat="server" Text='<%#string.IsNullOrWhiteSpace(Eval("12").ToString())?"":Eval("12") %>' MaxLength="10" Width="100"></asp:TextBox>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        <asp:Button ID="btnSaveTarget" runat="server" Text="儲存" CssClass="btn-success btn" Visible="false" OnClick="btnSaveTarget_Click"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        <asp:Label ID="lblTargetSetterMessage" runat="server" Text=""></asp:Label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -86,6 +169,11 @@
         <div>
             <asp:GridView ID="grdProduction" runat="server" AutoGenerateColumns="false" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="grdResult" OnRowDataBound="grdProduction_RowDataBound">
                 <Columns>
+                    <asp:TemplateField HeaderText="型別">
+                        <ItemTemplate>
+                            <asp:Label ID="Label1" runat="server" Text='<%#Eval("TYPE") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="生產線別">
                         <ItemTemplate>
                             <asp:Label ID="lbl1" runat="server" Text='<%#Eval("ProductionLine") %>'></asp:Label>

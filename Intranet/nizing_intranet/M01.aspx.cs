@@ -18,6 +18,7 @@ using System.Web.UI.WebControls;
 public partial class nizing_intranet_M01 : System.Web.UI.Page
 {
     string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
+    string ERP2connectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -30,7 +31,7 @@ public partial class nizing_intranet_M01 : System.Web.UI.Page
             }
             ddlStartYear.SelectedIndex = 0;
             ddlEndYear.SelectedIndex = 0;
-            hdnIsPostBack.Value = "0";
+            hdnIsPostBack.Value = "1";
             
             try
             {
@@ -38,9 +39,30 @@ public partial class nizing_intranet_M01 : System.Web.UI.Page
 
                 foreach (string s in roleList)
                 {
-                    if (s == "NIZING\\管理部")// || s == "NIZING\\生管處")
+                    if (s == "NIZING\\管理部" || s == "NIZING\\生管處")
                     {
                         Admin.Visible = true;
+                        for (int i = DateTime.Today.Year; i > 2016; i--)
+                        {
+                            ddlTargetYear.Items.Add(new ListItem(i.ToString(), i.ToString()));
+                        }
+                        ddlTargetYear.SelectedIndex = 0;
+                        using (SqlConnection conn = new SqlConnection(NZconnectionString))
+                        {
+                            conn.Open();
+                            string query = "SELECT MD002, MD001"
+                                        + " FROM CMSMD";
+                            SqlCommand cmd = new SqlCommand(query, conn);
+                            using (SqlDataReader dr = cmd.ExecuteReader())
+                            {
+                                while (dr.Read())
+                                {
+                                    ddlTargetProductionLine.Items.Add(new ListItem(dr[0].ToString(), dr[1].ToString()));
+                                }
+                            }
+                        }
+                        ddlTargetProductionLine.SelectedIndex = 0;
+                        lblTargetSetterMessage.Text = "";
                     }
                 }
             }
@@ -85,23 +107,41 @@ public partial class nizing_intranet_M01 : System.Web.UI.Page
             using (SqlConnection conn = new SqlConnection(NZconnectionString))
             {
                 conn.Open();
-                SqlCommand cmdSelect = new SqlCommand("SELECT *"
-                                                    + " FROM"
-                                                    + " ("
-                                                    + " SELECT MOCTF.TF011 ProductionLine, SUBSTRING(MOCTF.TF003,1,4) YR, SUBSTRING(MOCTF.TF003,5,2) MN, CONVERT(INT, SUM(MOCTG.TG011)) ProductionAmount"
-                                                    + " FROM MOCTF"
-                                                    + " LEFT JOIN MOCTG ON MOCTF.TF001 = MOCTG.TG001 AND MOCTF.TF002 = MOCTG.TG002"
-                                                    + " WHERE MOCTF.TF006 = N'Y' AND MOCTF.TF011 <> N'SM' AND SUBSTRING(MOCTF.TF003,1,4) BETWEEN @START AND @END"
-                                                    + " GROUP BY MOCTF.TF011, SUBSTRING(MOCTF.TF003,5,2), SUBSTRING(MOCTF.TF003,1,4)"
-                                                    + " ) AS PROD"
-                                                    + " PIVOT"
-                                                    + " ("
-                                                    + " SUM(ProductionAmount)"
-                                                    + " FOR"
-                                                    + " MN IN ([01], [02], [03], [04], [05], [06], [07], [08], [09], [10], [11], [12])"
-                                                    + " )"
-                                                    + " AS PIVOTTABLE"
-                                                    + " ORDER BY ProductionLine, YR", conn);
+                string query = "SELECT '實際' [TYPE],*"
++" FROM"
++" ("
++" SELECT MOCTF.TF011 ProductionLine, SUBSTRING(MOCTF.TF003,1,4) YR, SUBSTRING(MOCTF.TF003,5,2) MN, CONVERT(INT, SUM(MOCTG.TG011)) ProductionAmount"
++" FROM MOCTF"
++" LEFT JOIN MOCTG ON MOCTF.TF001 = MOCTG.TG001 AND MOCTF.TF002 = MOCTG.TG002"
++" WHERE MOCTF.TF006 = N'Y' AND MOCTF.TF011 <> N'SM' AND SUBSTRING(MOCTF.TF003,1,4) BETWEEN @START AND @END"
++" GROUP BY MOCTF.TF011, SUBSTRING(MOCTF.TF003,5,2), SUBSTRING(MOCTF.TF003,1,4)"
++" ) AS PROD"
++" PIVOT"
++" ("
++" SUM(ProductionAmount)"
++" FOR"
++" MN IN ([01], [02], [03], [04], [05], [06], [07], [08], [09], [10], [11], [12])"
++" )"
++" AS PIVOTTABLE"
++" UNION"
++" SELECT '目標' [TYPE],*"
++" FROM("
++" SELECT ProductionLine"
++" , [Year] YR"
++" , RIGHT ('00'+LTRIM(STR([Month])),2 ) MN"
++" ,COALESCE(ProductionTarget,0) AS 'ProductionTarget'"
++" FROM NZ_ERP2.dbo.ProductionLineMonthlyTarget PLMT"
++" WHERE PLMT.[Year] BETWEEN @START AND @END"
++" ) AS SRC"
++" PIVOT"
++" ("
++" SUM(ProductionTarget)"
++" FOR"
++" MN IN ([01],[02],[03],[04],[05],[06],[07],[08],[09],[10],[11],[12])"
++" )"
++ " AS PVT"
++" ORDER BY ProductionLine, YR, [TYPE]";
+                SqlCommand cmdSelect = new SqlCommand(query, conn);
                 cmdSelect.Parameters.AddWithValue("@START", ddlStartYear.SelectedValue);
                 cmdSelect.Parameters.AddWithValue("@END", ddlEndYear.SelectedValue);
                 SqlDataAdapter da = new SqlDataAdapter(cmdSelect);
@@ -312,6 +352,134 @@ public partial class nizing_intranet_M01 : System.Web.UI.Page
 
     protected void btnTargetSubmit_Click(object sender, EventArgs e)
     {
+        using (SqlConnection conn = new SqlConnection(ERP2connectionString))
+        {
+            conn.Open();
+            string query = "SELECT *"
+                        +" FROM("
+                        +" SELECT ProductionLine"
+                        +" ,[Year]"
+                        +" ,[Month]"
+                        +" ,COALESCE(ProductionTarget,0) AS 'ProductionTarget'"
+                        +" FROM ProductionLineMonthlyTarget PLMT"
+                        +" WHERE PLMT.ProductionLine=@ProductionLine"
+                        +" AND PLMT.[Year]=@Year"
+                        +" ) AS SRC"
+                        +" PIVOT"
+                        +" ("
+                        +" SUM(ProductionTarget)"
+                        +" FOR"
+                        +" [Month] IN ([1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12])"
+                        +" )"
+                        +" AS PVT";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@ProductionLine", ddlTargetProductionLine.SelectedValue);
+            cmd.Parameters.AddWithValue("@Year", ddlTargetYear.SelectedValue);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            if (dt.Rows.Count == 0)
+            {
+                for (int i = 0; i < 14; i++)
+                {
+                    DataColumn dc = new DataColumn();
+                    dc.DataType = System.Type.GetType("System.String");
+                    dt.Columns.Add(dc);
+                }                
+                dt.Columns[0].ColumnName = "ProductionLine";
+                dt.Columns[1].ColumnName = "Year";
+                dt.Columns[2].ColumnName = "1";
+                dt.Columns[3].ColumnName = "2";
+                dt.Columns[4].ColumnName = "3";
+                dt.Columns[5].ColumnName = "4";
+                dt.Columns[6].ColumnName = "5";
+                dt.Columns[7].ColumnName = "6";
+                dt.Columns[8].ColumnName = "7";
+                dt.Columns[9].ColumnName = "8";
+                dt.Columns[10].ColumnName = "9";
+                dt.Columns[11].ColumnName = "10";
+                dt.Columns[12].ColumnName = "11";
+                dt.Columns[13].ColumnName = "12";
+                DataRow dr = dt.NewRow();
+                dr[0] = ddlTargetProductionLine.SelectedValue.Trim();
+                dr[1] = ddlTargetYear.SelectedValue;
+                dr[2] = "0";
+                dr[3] = "0";
+                dr[4] = "0";
+                dr[5] = "0";
+                dr[6] = "0";
+                dr[7] = "0";
+                dr[8] = "0";
+                dr[9] = "0";
+                dr[10] = "0";
+                dr[11] = "0";
+                dr[12] = "0";
+                dr[13] = "0";
+                dt.Rows.Add(dr);
+            }
+            gvTargetSetter.DataSource = dt;
+            gvTargetSetter.DataBind();
+        }
+        if (gvTargetSetter.Rows.Count != 0)
+        {
+            ((Label)gvTargetSetter.HeaderRow.Cells[0].FindControl("lblTargetSetterProductionLine")).Text = ddlTargetProductionLine.SelectedValue.Trim();
+            ((Label)gvTargetSetter.Rows[0].Cells[0].FindControl("lblTargetSetterProductionYear")).Text = ddlTargetYear.SelectedValue;
+            btnSaveTarget.Visible = true;
+        }
+        else
+        {
+            btnSaveTarget.Visible = false;
+        }
+    }
+    protected void btnSaveTarget_Click(object sender, EventArgs e)
+    {
+        //lblScope.Text = User.Identity.Name.Substring(7, User.Identity.Name.Length - 1);
+        bool isProductionTargetValueCorrect = false;
+        for (int i = 1; i < gvTargetSetter.Columns.Count; i++)
+        {
+            decimal result;
+            if (!decimal.TryParse(((TextBox)gvTargetSetter.Rows[0].Cells[i].FindControl("txtTargetSetterProductionTarget" + i.ToString())).Text, out result) || result < 0)
+            {
+                isProductionTargetValueCorrect = false;
+                lblTargetSetterMessage.Text = "生產目標有錯誤，請更正";
+                lblTargetSetterMessage.ForeColor = System.Drawing.Color.Red;
+                ((TextBox)gvTargetSetter.Rows[0].Cells[i].FindControl("txtTargetSetterProductionTarget" + i.ToString())).Focus();
+                break;                
+            }
+            else
+            {
+                isProductionTargetValueCorrect = true;                
+            }
 
+        }
+        if (isProductionTargetValueCorrect == true)
+        {
+            for (int i = 1; i < gvTargetSetter.Columns.Count; i++)
+            {
+                using (SqlConnection conn = new SqlConnection(ERP2connectionString))
+                {
+                    conn.Open();
+                    string query = "Update ProductionLineMonthlyTarget"
+                                + " Set ProductionTarget=@ProductionTarget"
+                                + " ,LastModifier=@LastModifier"
+                                + " ,LastModifiedDate=GETDATE()"
+                                + " Where [Year]=@Year"
+                                + " And [Month]=@Month"
+                                + " And ProductionLine=@ProductionLine"
+                                + " If @@ROWCOUNT=0"
+                                + " Insert Into ProductionLineMonthlyTarget"
+                                + " Values (@Year,@Month,@ProductionLine,@ProductionTarget,@LastModifier,GETDATE())";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@Year", ((Label)gvTargetSetter.Rows[0].Cells[0].FindControl("lblTargetSetterProductionYear")).Text);
+                    cmd.Parameters.AddWithValue("@Month", i.ToString());
+                    cmd.Parameters.AddWithValue("@ProductionLine", ((Label)gvTargetSetter.HeaderRow.Cells[0].FindControl("lblTargetSetterProductionLine")).Text);
+                    cmd.Parameters.AddWithValue("@ProductionTarget", decimal.Parse(((TextBox)gvTargetSetter.Rows[0].Cells[i].FindControl("txtTargetSetterProductionTarget" + i.ToString())).Text));
+                    cmd.Parameters.AddWithValue("@LastModifier", User.Identity.Name);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            lblTargetSetterMessage.Text = "儲存完成";
+            lblTargetSetterMessage.ForeColor = System.Drawing.Color.Green;
+        }
     }
 }
