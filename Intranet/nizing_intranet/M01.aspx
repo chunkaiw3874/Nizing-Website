@@ -31,7 +31,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div id="M01" class="container-fluid">
-        <div id="Admin" runat="server" visible="false">
+        <div id="Admin" runat="server" visible="false" class="form-group">
             <div class="row">
                 <div class="col-xs-12 form-group">
                     <span class="label label-info" id="btnShowTargetSetter" style="cursor: pointer; font-size: 20px;">設定生產目標</span>
@@ -139,35 +139,49 @@
                 </div>
             </div>
         </div>
-        <div>
-            <h2>生產統計表</h2>
+        <div class="row form-group">
+            <div class="col-xs-12">
+                <h2>生產統計表</h2>
+            </div>
         </div>
 <%--        <div>
             <asp:RadioButton ID="rdoYear" runat="server" Text="年報表" GroupName="R1" AutoPostBack="true" OnCheckedChanged="R1_CheckedChanged" />
             <asp:RadioButton ID="rdoMonth" runat="server" Text="月報表" Checked="true" GroupName="R1" AutoPostBack="true" OnCheckedChanged="R1_CheckedChanged" />
         </div>--%>
-        <div>
-            開始查詢年份
-            <asp:DropDownList ID="ddlStartYear" runat="server">
-            </asp:DropDownList>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-2">
+                    開始查詢年份       
+                    <asp:DropDownList ID="ddlStartYear" runat="server" CssClass="form-control">
+                    </asp:DropDownList>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">
+                    結束查詢年份
+                    <asp:DropDownList ID="ddlEndYear" runat="server" CssClass="form-control">
+                    </asp:DropDownList>
+                </div>
+            </div>
         </div>
-        <div>
-            結束查詢年份
-            <asp:DropDownList ID="ddlEndYear" runat="server">
-            </asp:DropDownList>
+        <div class="form-group row">
+            <div class="col-xs-2 btn-group">
+                <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="查詢" CssClass="btn btn-success" />
+                <asp:Button ID="btnExport" runat="server" Text="匯出至Excel" OnClick="btnExport_Click" CssClass="btn btn-success" />
+            </div>
         </div>
-        <div style="margin-top:10px; margin-bottom:10px;">
-            <asp:ImageButton ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" ImageUrl="~/nizing_intranet/image/button/Search_Button.png" />
-            <asp:Button ID="btnExport" runat="server" Text="匯出至Excel" OnClick="btnExport_Click" />
+        <div class="form-group row">
+            <div class="col-xs-12">
+                <asp:Label ID="lblErrorMessage" runat="server" CssClass="error-message"></asp:Label>
+            </div>
         </div>
-        <div>
-            <asp:Label ID="lblErrorMessage" runat="server" CssClass="error-message"></asp:Label>
+        <div class="form-group row">
+            <div class="col-xs-12">
+                <asp:Label ID="lblScope" runat="server"></asp:Label>
+            </div>
         </div>
-        <div>
-            <asp:Label ID="lblScope" runat="server"></asp:Label>
-        </div>
-        <div>
-            <asp:GridView ID="grdProduction" runat="server" AutoGenerateColumns="false" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="grdResult" OnRowDataBound="grdProduction_RowDataBound">
+        <div class="form-group row">
+            <asp:GridView ID="grdProduction" runat="server" AutoGenerateColumns="false" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="grdResult col-xs-12" OnRowDataBound="grdProduction_RowDataBound">
                 <Columns>
                     <asp:TemplateField HeaderText="型別">
                         <ItemTemplate>

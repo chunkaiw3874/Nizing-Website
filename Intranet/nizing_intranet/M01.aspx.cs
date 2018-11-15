@@ -100,10 +100,11 @@ public partial class nizing_intranet_M01 : System.Web.UI.Page
     //        ddlMonth.Visible = true;
     //    }
     //}
-    protected void btnSubmit_Click(object sender, ImageClickEventArgs e)
+    protected void btnSubmit_Click(object sender, EventArgs e)
     {
         try
         {
+            lblErrorMessage.Text = "";
             using (SqlConnection conn = new SqlConnection(NZconnectionString))
             {
                 conn.Open();
