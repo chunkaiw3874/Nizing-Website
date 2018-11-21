@@ -22,7 +22,8 @@ public partial class hr360_mobile_main : System.Web.UI.Page
     public string jsonAnnouncementData;
     public byte[] blob;
     protected void Page_Load(object sender, EventArgs e)
-    {        
+    {
+        
         LoadNewsFromDB();
         jsonAnnouncementData = ConvertDtToString(dtAnnouncementData);
         LoadBlob();
@@ -43,7 +44,16 @@ public partial class hr360_mobile_main : System.Web.UI.Page
             SqlCommand cmdSelect = new SqlCommand("SELECT NAME"
                                                 + " FROM HR360_BI01_A"
                                                 + " WHERE ID=@ID", conn);
-            cmdSelect.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+            try
+            {
+                cmdSelect.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+            }
+            catch
+            {
+                
+                Response.Redirect("login.aspx");
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('連線已逾時，將會回到登入頁面');window.location='login.aspx'", true);
+            }
             lblName.Text = (string)cmdSelect.ExecuteScalar();
         }
         //Get user's Year of Service, and the Month of when the user started                

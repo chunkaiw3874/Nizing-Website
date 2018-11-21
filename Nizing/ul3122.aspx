@@ -19,7 +19,7 @@
     <asp:Image ID="Image4" runat="server" ImageUrl="~/images/product_pic/professional_3.jpg" AlternateText="UL3122 矽膠編織耐熱線" />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
-    <asp:Image ID="Image5" runat="server" ImageUrl="~/images/product_pic/lshf.jpg" AlternateText="UL3122 矽膠編織耐熱線" />
+    <%--<asp:Image ID="Image5" runat="server" ImageUrl="~/images/product_pic/lshf.jpg" AlternateText="UL3122 矽膠編織耐熱線" />--%>
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="prdTitle" runat="server">
     矽膠編織耐熱線<br />

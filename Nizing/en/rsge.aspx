@@ -19,7 +19,7 @@
     <asp:Image ID="Image4" runat="server" ImageUrl="~/en/images/product_pic/professional_1.jpg" AlternateText="RS-GE Silicone Braided Wire" />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
-    <asp:Image ID="Image5" runat="server" ImageUrl="~/en/images/product_pic/lshf.jpg" AlternateText="RS-GE Silicone Braided Wire" />
+    <%--<asp:Image ID="Image5" runat="server" ImageUrl="~/en/images/product_pic/lshf.jpg" AlternateText="RS-GE Silicone Braided Wire" />--%>
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="prdTitle" runat="server">
     Silicone Braided Wire<br />

@@ -19,7 +19,7 @@
         <asp:Image ID="Image4" runat="server" ImageUrl="~/en/images/product_pic/professional_3.jpg" AlternateText="UL3075 Silicone Fiberglass Wire" />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
-        <asp:Image ID="Image5" runat="server" ImageUrl="~/en/images/product_pic/lshf.jpg" AlternateText="UL3075 Silicone Fiberglass Wire" />
+        <%--<asp:Image ID="Image5" runat="server" ImageUrl="~/en/images/product_pic/lshf.jpg" AlternateText="UL3075 Silicone Fiberglass Wire" />--%>
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="prdTitle" runat="server">
     Silicone Fiberglass Wire<br />

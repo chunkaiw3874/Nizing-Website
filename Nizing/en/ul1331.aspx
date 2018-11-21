@@ -23,7 +23,7 @@
     <asp:Image ID="Image4" runat="server" ImageUrl="~/en/images/product_pic/professional_3_2.jpg" AlternateText="UL1331 FEP Teflon Wire" />
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="largePicArea3" Runat="Server">
-    <asp:Image ID="Image5" runat="server" ImageUrl="~/en/images/product_pic/lshf.jpg" AlternateText="UL1331 FEP Teflon Wire" />
+    <%--<asp:Image ID="Image5" runat="server" ImageUrl="~/en/images/product_pic/lshf.jpg" AlternateText="UL1331 FEP Teflon Wire" />--%>
 </asp:Content>
 <asp:Content ID="Content8" ContentPlaceHolderID="titleRowLink" runat="server">
     <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/en/pdf/ul1331.pdf" ImageUrl="~/en/images/button/download_pdf_button2.jpg" Target="_blank"></asp:HyperLink>

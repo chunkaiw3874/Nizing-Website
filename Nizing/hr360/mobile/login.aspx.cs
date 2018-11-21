@@ -105,4 +105,9 @@ public partial class hr360_mobile_login : System.Web.UI.Page
         }
         return cipherText;
     }
+
+    public void SetlblLoginMessageText(string s)
+    {
+        lblLoginMessage.Text = s;
+    }
 }

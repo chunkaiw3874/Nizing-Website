@@ -36,7 +36,7 @@
         <div class="jumbotron green">
             <div class="container">
                 <h1>歡迎來到日進HR360系統</h1>
-                <asp:Button ID="Button2" runat="server" Text="回到日進網站" CssClass="btn btn-primary btn-lg green" />
+                <asp:Button ID="btnNizingWebsite" runat="server" Text="回到日進網站" CssClass="btn btn-primary btn-lg green" />
             </div>
         </div>
         <div class="container">

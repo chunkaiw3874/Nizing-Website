@@ -92,6 +92,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <div class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -110,7 +111,7 @@
                         <li><a href="#">我要請假</a></li>
                         <li><a href="#">我的考績系統</a></li>
                         <li><a href="#">我的薪資明細</a></li>
-                        <li><a href="login.aspx">登出</a></li>
+                        <li><asp:LinkButton ID="lbLogout" runat="server" OnClick="lbLogout_Click">登出</asp:LinkButton></li>
 
                     </ul>
                 </div>

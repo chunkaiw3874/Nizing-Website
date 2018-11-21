@@ -19,7 +19,7 @@
         <asp:Image ID="Image4" runat="server" ImageUrl="~/en/images/product_pic/professional_2.jpg" AlternateText="VDE FG4G4 Duo-Layer Silicone Wire" />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
-        <asp:Image ID="Image5" runat="server" ImageUrl="~/en/images/product_pic/lshf.jpg" AlternateText="VDE FG4G4 Duo-Layer Silicone Wire" />
+        <%--<asp:Image ID="Image5" runat="server" ImageUrl="~/en/images/product_pic/lshf.jpg" AlternateText="VDE FG4G4 Duo-Layer Silicone Wire" />--%>
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="prdTitle" runat="server">
     Duo-Layer Silicone Wire<br />
