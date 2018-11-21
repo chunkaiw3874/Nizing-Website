@@ -104,7 +104,7 @@
         <div class="content-row">
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/images/product_pic/silicone_tube-menu.jpg" Text="單層矽膠套管" NavigateUrl="~/silione-tube.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/images/product_pic/silicone_tube-menu.jpg" Text="單層矽膠套管" NavigateUrl="~/silicone-tube.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     單層矽膠套管<br />

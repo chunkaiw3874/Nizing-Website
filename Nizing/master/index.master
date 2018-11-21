@@ -13,9 +13,9 @@
     <link rel="shortcut icon" href="../images/icon/nizing.ico.gif" />    
     <link href="~/css/normalize.css" rel="stylesheet" type="text/css" />
     <link href="~/css/base.css" rel="stylesheet" type="text/css" />
-    <link href="~/css/template.css" rel="stylesheet" type="text/css" />
-    <link href="~/css/tabcontainer.css" rel="stylesheet" type="text/css" />
     <link href="~/css/general.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/template.css?version=1" rel="stylesheet" type="text/css" />
+    <link href="~/css/tabcontainer.css" rel="stylesheet" type="text/css" />    
     <link href="~/css/gridview.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="DocTitleKeywords" runat="server"></asp:ContentPlaceHolder>
     <script type="text/javascript">
