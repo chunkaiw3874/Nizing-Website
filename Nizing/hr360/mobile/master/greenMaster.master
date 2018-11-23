@@ -105,7 +105,7 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="#">基本資料</a></li>
+                        <li><a href="basicInformation.aspx">基本資料</a></li>
                         <li><a href="#">教育訓練</a></li>
                         <li><a href="#">填寫加班單</a></li>
                         <li><a href="#">我要請假</a></li>

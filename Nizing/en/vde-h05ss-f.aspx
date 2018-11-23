@@ -16,7 +16,7 @@
         <asp:Image ID="Image3" runat="server" ImageUrl="~/en/images/product_pic/vde_h05ss-f-3.jpg" AlternateText="VDE H05SS-F Silicone Multi-Core Wire" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="largePicArea2" Runat="Server">
-        <asp:Image ID="Image5" runat="server" ImageUrl="~/en/images/product_pic/professional_2_4.jpg" AlternateText="VDE H05SS-F Silicone Multi-Core Wire" />
+        <asp:Image ID="Image5" runat="server" ImageUrl="~/en/images/product_pic/certificate-6.svg" AlternateText="VDE H05SS-F Silicone Multi-Core Wire" />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
 </asp:Content>

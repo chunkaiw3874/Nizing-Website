@@ -120,6 +120,7 @@ namespace NIZING_BACKEND_Data_Config
                     txtAccountDisabledDate.Text = string.Empty;
                     ckxAccountDisable.Enabled = true;
                     ckxAccountDisable.Checked = false;
+                    btnAvatarImageFilePathSearch.Enabled = true;
                     gvAccountSearch_Result.Enabled = false;
                     btnLogout.Enabled = false;
                 }
@@ -152,6 +153,7 @@ namespace NIZING_BACKEND_Data_Config
                     txtAccountLineId.Enabled = true;
                     txtAccountDisabledDate.Enabled = false;
                     ckxAccountDisable.Enabled = true;
+                    btnAvatarImageFilePathSearch.Enabled = true;
                     gvAccountSearch_Result.Enabled = false;
                     btnLogout.Enabled = false;
                 }
@@ -179,6 +181,7 @@ namespace NIZING_BACKEND_Data_Config
                     txtAccountLineId.Enabled = false;
                     txtAccountDisabledDate.Enabled = false;
                     ckxAccountDisable.Enabled = false;
+                    btnAvatarImageFilePathSearch.Enabled = false;
                     gvAccountSearch_Result.Enabled = false;
                     btnLogout.Enabled = false;
                 }
@@ -204,6 +207,7 @@ namespace NIZING_BACKEND_Data_Config
                     txtAccountLineId.Enabled = false;
                     txtAccountDisabledDate.Enabled = false;
                     ckxAccountDisable.Enabled = false;
+                    btnAvatarImageFilePathSearch.Enabled = false;
                     gvAccountSearch_Result.Enabled = true;
                     btnLogout.Enabled = true;
                 }
@@ -237,6 +241,7 @@ namespace NIZING_BACKEND_Data_Config
                     txtAccountDisabledDate.Text = string.Empty;
                     ckxAccountDisable.Enabled = false;
                     ckxAccountDisable.Checked = false;
+                    btnAvatarImageFilePathSearch.Enabled = false;
                     gvAccountSearch_Result.Enabled = false;
                     gvAccountSearch_Result.DataSource = null;
                     btnLogout.Enabled = true;
@@ -401,6 +406,22 @@ namespace NIZING_BACKEND_Data_Config
             }
         }
 
+        private void btnAvatarImageFilePathSearch_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.InitialDirectory = "D:\\Nizing Website CC\\Nizing\\hr360\\image\\employee_profile";
+                ofd.RestoreDirectory = true;
+                ofd.Filter = "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|All files (*.*)|*.*";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    txtAvatarImageFilePath.Text = ofd.FileName;
+                }
+            }
+
+            
+        }
+
         private void btnAccountConfirm_Click(object sender, EventArgs e)
         {
 
@@ -478,6 +499,8 @@ namespace NIZING_BACKEND_Data_Config
             txtAccountName.Enabled = false;
         }
         #endregion
+
+
 
 
     }

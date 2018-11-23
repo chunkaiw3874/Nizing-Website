@@ -16,7 +16,7 @@
     <asp:Image ID="Image3" runat="server" ImageUrl="~/images/product_pic/ul3589-3.jpg" AlternateText="UL3589 發熱線" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="largePicArea2" Runat="Server">
-    <asp:Image ID="Image4" runat="server" ImageUrl="~/images/product_pic/professional_3.jpg" AlternateText="UL3589 發熱線" />
+    <asp:Image ID="Image4" runat="server" ImageUrl="~/images/product_pic/certificate-4.svg" AlternateText="UL3589 發熱線" />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
 </asp:Content>

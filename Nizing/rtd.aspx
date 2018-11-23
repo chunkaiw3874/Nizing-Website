@@ -16,7 +16,7 @@
         <asp:Image ID="Image3" runat="server" ImageUrl="~/images/product_pic/rtd-3.jpg" AlternateText="RTD 鉑電阻" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="largePicArea2" Runat="Server">
-        <asp:Image ID="Image4" runat="server" ImageUrl="~/images/product_pic/lshf.jpg" AlternateText="RTD 鉑電阻" />
+        <%--<asp:Image ID="Image4" runat="server" ImageUrl="~/images/product_pic/lshf.jpg" AlternateText="RTD 鉑電阻" />--%>
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
 </asp:Content>

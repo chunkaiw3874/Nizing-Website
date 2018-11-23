@@ -16,7 +16,7 @@
         <asp:Image ID="Image3" runat="server" ImageUrl="~/en/images/product_pic/vde_reg-nr103874-3.jpg" AlternateText="VDE REG-NR103874 Medical Parallel Silicone Cable" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="largePicArea2" Runat="Server">
-        <asp:Image ID="Image5" runat="server" ImageUrl="~/en/images/product_pic/lshf.jpg" AlternateText="VDE REG-NR103874 Medical Parallel Silicone Cable" />
+        <%--<asp:Image ID="Image5" runat="server" ImageUrl="~/en/images/product_pic/lshf.jpg" AlternateText="VDE REG-NR103874 Medical Parallel Silicone Cable" />--%>
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
 </asp:Content>

@@ -16,7 +16,7 @@
         <asp:Image ID="Image3" runat="server" ImageUrl="~/en/images/product_pic/ul10109-3.jpg" AlternateText="UL10109 ETFE Teflon Wire" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="largePicArea2" Runat="Server">
-        <asp:Image ID="Image4" runat="server" ImageUrl="~/en/images/product_pic/professional_3_8.jpg" AlternateText="UL10109 ETFE Teflon Wire" />
+        <asp:Image ID="Image4" runat="server" ImageUrl="~/en/images/product_pic/certificate-10.svg" AlternateText="UL10109 ETFE Teflon Wire" />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
         <%--<asp:Image ID="Image5" runat="server" ImageUrl="~/en/images/product_pic/lshf.jpg" AlternateText="UL10109 ETFE Teflon Wire" />--%>

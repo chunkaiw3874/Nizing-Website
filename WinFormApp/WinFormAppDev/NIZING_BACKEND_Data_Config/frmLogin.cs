@@ -21,6 +21,7 @@ namespace NIZING_BACKEND_Data_Config
         {
             txtUserName.Text = "admin";
             txtPassword.Text = "nizing";
+            cbxFunctionList.SelectedIndex = 2;
         }
 
         public frmLogin()

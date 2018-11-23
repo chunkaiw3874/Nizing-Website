@@ -16,7 +16,7 @@
     <asp:Image ID="Image3" runat="server" ImageUrl="~/en/images/product_pic/phc-3.jpg" AlternateText="PHC Parallel Heating Cable" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="largePicArea2" Runat="Server">
-    <asp:Image ID="Image4" runat="server" ImageUrl="~/en/images/product_pic/professional_3.jpg" AlternateText="PHC Parallel Heating Cable" />
+    <asp:Image ID="Image4" runat="server" ImageUrl="~/en/images/product_pic/certificate-5.svg" AlternateText="PHC Parallel Heating Cable" />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
 </asp:Content>

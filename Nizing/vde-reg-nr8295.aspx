@@ -16,7 +16,7 @@
         <asp:Image ID="Image3" runat="server" ImageUrl="~/images/product_pic/vde_reg-nr8295-3.jpg" AlternateText="VDE REG-NR8295 雙絕緣鐵氟龍線" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="largePicArea2" Runat="Server">
-        <asp:Image ID="Image4" runat="server" ImageUrl="~/images/product_pic/professional_2_6.jpg" AlternateText="VDE REG-NR8295 雙絕緣鐵氟龍線" />
+        <asp:Image ID="Image4" runat="server" ImageUrl="~/images/product_pic/certificate-9.svg" AlternateText="VDE REG-NR8295 雙絕緣鐵氟龍線" />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
         <%--<asp:Image ID="Image5" runat="server" ImageUrl="~/images/product_pic/lshf.jpg" AlternateText="VDE REG-NR8295 雙絕緣鐵氟龍線" />--%>

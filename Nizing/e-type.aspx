@@ -16,7 +16,7 @@
     <asp:Image ID="Image3" runat="server" ImageUrl="~/images/product_pic/etype-3.jpg" AlternateText="E-Type 補償導線" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="largePicArea2" Runat="Server">
-    <asp:Image ID="Image4" runat="server" ImageUrl="~/images/product_pic/lshf.jpg" AlternateText="E-Type 補償導線" />
+    <%--<asp:Image ID="Image4" runat="server" ImageUrl="~/images/product_pic/lshf.jpg" AlternateText="E-Type 補償導線" />--%>
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
 </asp:Content>

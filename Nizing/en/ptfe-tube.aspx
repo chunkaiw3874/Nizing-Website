@@ -16,7 +16,7 @@
     <asp:Image ID="Image3" runat="server" ImageUrl="~/en/images/product_pic/ptfe_tube-3.jpg" AlternateText="PTFE Teflon Tube" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="largePicArea2" Runat="Server">
-    <asp:Image ID="Image4" runat="server" ImageUrl="~/en/images/product_pic/professional_3_4.jpg" AlternateText="PTFE Teflon Tube" />
+    <asp:Image ID="Image4" runat="server" ImageUrl="~/en/images/product_pic/certificate-15.svg" AlternateText="PTFE Teflon Tube" />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
 </asp:Content>

@@ -16,7 +16,7 @@
         <asp:Image ID="Image3" runat="server" ImageUrl="~/en/images/product_pic/ul2464-3.jpg" AlternateText="UL2464/UL2517 PVC Signal Transmission Wire" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="largePicArea2" Runat="Server">
-        <asp:Image ID="Image4" runat="server" ImageUrl="~/en/images/product_pic/professional_3_6.jpg" AlternateText="UL2464/UL2517 PVC Signal Transmission Wire" />
+        <asp:Image ID="Image4" runat="server" ImageUrl="~/en/images/product_pic/certificate-12.svg" AlternateText="UL2464/UL2517 PVC Signal Transmission Wire" />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
 </asp:Content>

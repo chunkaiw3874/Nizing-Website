@@ -16,7 +16,7 @@
     <asp:Image ID="Image3" runat="server" ImageUrl="~/images/product_pic/ul10368-3.jpg" AlternateText="UL10368 XLPE交連照射線" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="largePicArea2" Runat="Server">
-    <asp:Image ID="Image4" runat="server" ImageUrl="~/images/product_pic/professional_3_2.jpg" AlternateText="UL10368 XLPE交連照射線" />
+    <asp:Image ID="Image4" runat="server" ImageUrl="~/images/product_pic/certificate-2.svg" AlternateText="UL10368 XLPE交連照射線" />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
 </asp:Content>

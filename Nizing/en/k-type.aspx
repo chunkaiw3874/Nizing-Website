@@ -16,7 +16,7 @@
     <asp:Image ID="Image3" runat="server" ImageUrl="~/en/images/product_pic/ktype-3.jpg" AlternateText="K-Type Thermocouple" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="largePicArea2" Runat="Server">
-    <asp:Image ID="Image4" runat="server" ImageUrl="~/en/images/product_pic/lshf.jpg" AlternateText="K-Type Thermocouple" />
+    <%--<asp:Image ID="Image4" runat="server" ImageUrl="~/en/images/product_pic/lshf.jpg" AlternateText="K-Type Thermocouple" />--%>
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
 </asp:Content>

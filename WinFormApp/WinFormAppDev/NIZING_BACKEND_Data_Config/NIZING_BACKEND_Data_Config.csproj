@@ -22,7 +22,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -53,10 +53,10 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>C1F1A2B8BBE4E206B712B098B8A78D48250886FF</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>C2EFC2AEE2CD2770DD9146FC9E58442E0132519F</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>OQS_Data_Config_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>NIZING_BACKEND_Data_Config_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -249,6 +249,7 @@
     <None Include="dsOQS_ProductInfo.xss">
       <DependentUpon>dsOQS_ProductInfo.xsd</DependentUpon>
     </None>
+    <None Include="NIZING_BACKEND_Data_Config_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -34,7 +34,10 @@ namespace NIZING_BACKEND_Data_Config
 
         private void frmHR360_AccountSearch_FormClosing(object sender, FormClosingEventArgs e)
         {
-            btnAccountSearch_Cancel_Click(sender, e);
+            if (loadButtonEvent != null)
+            {
+                loadButtonEvent();
+            }
         }
     }
 }
