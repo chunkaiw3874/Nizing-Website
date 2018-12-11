@@ -44,8 +44,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "0140";    //test only to avoid error on loading, delete after trial            
-        //Session["erp_id"] = "0140";
+        //Session["user_id"] = "0145";    //test only to avoid error on loading, delete after trial            
+        //Session["erp_id"] = "0145";
 
         if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
         {

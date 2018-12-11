@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Principal;
 
 namespace NIZING_BACKEND_Data_Config
 {
@@ -417,14 +418,22 @@ namespace NIZING_BACKEND_Data_Config
                 {
                     txtAvatarImageFilePath.Text = ofd.FileName;
                 }
-            }
-
-            
+            }            
         }
 
         private void btnAccountConfirm_Click(object sender, EventArgs e)
         {
+            if (!String.IsNullOrWhiteSpace(txtAvatarImageFilePath.Text))
+            {
+                AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
+                WindowsIdentity identity = new WindowsIdentity("nizing\\mis", "@WSX3edc&UJM8ik,@WSX");
+                WindowsImpersonationContext context = identity.Impersonate();
+                //using(new Impersonator)
+                System.IO.File.Copy(txtAvatarImageFilePath.Text, "\\192.168.10.222\\Web\\Nizing\\hr360\\image\\avatar.jpg", true);
+                context.Undo();
+                txtAccountManagementMemo.Text = "file saved";
 
+            }
         }
 
         private void btnAccountCancel_Click(object sender, EventArgs e)
