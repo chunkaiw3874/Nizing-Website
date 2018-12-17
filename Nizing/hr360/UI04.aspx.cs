@@ -44,8 +44,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "0145";    //test only to avoid error on loading, delete after trial            
-        //Session["erp_id"] = "0145";
+        //Session["user_id"] = "0080";    //test only to avoid error on loading, delete after trial            
+        //Session["erp_id"] = "0080";
 
         if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
         {
@@ -56,8 +56,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             if (Session["user_id"].ToString().ToUpper().Trim() != "ADMIN")  //admin doesnt have the proper erp information and will crash the system
             {
                 if (!IsPostBack)
-                {
-                    //Session["erp_id"] = "0007"; //test only to avoid error on loading, delete after trial            
+                {       
                     ApplicationSection_Init_Load();
                     InProgressSection_Init_Load();
                     ApprovalSection_Init_Load();
@@ -2216,6 +2215,13 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 break;
             default:
                 break;
+        }
+        //Organize list in recipientId
+        recipientId.Distinct();
+        int chrissyIndex = recipientId.IndexOf("0007");
+        if (chrissyIndex != -1)
+        {
+            recipientId.RemoveAt(chrissyIndex);
         }
         //Get Email address of all recipients
         List<string> recipientEmailList = new List<string>();
