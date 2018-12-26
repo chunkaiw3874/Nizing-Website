@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Principal;
+using System.Net;
 
 namespace NIZING_BACKEND_Data_Config
 {
@@ -425,13 +426,18 @@ namespace NIZING_BACKEND_Data_Config
         {
             if (!String.IsNullOrWhiteSpace(txtAvatarImageFilePath.Text))
             {
-                AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
-                WindowsIdentity identity = new WindowsIdentity("nizing\\mis", "@WSX3edc&UJM8ik,@WSX");
-                WindowsImpersonationContext context = identity.Impersonate();
-                //using(new Impersonator)
-                System.IO.File.Copy(txtAvatarImageFilePath.Text, "\\192.168.10.222\\Web\\Nizing\\hr360\\image\\avatar.jpg", true);
-                context.Undo();
-                txtAccountManagementMemo.Text = "file saved";
+                //AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
+                //WindowsIdentity identity = new WindowsIdentity("nizing\\mis", "@WSX3edc&UJM8ik,@WSX");
+                //WindowsImpersonationContext context = identity.Impersonate();
+                ////using(new Impersonator)
+                //System.IO.File.Copy(txtAvatarImageFilePath.Text, "\\192.168.10.222\\Web\\Nizing\\hr360\\image\\avatar.jpg", true);
+                //context.Undo();
+                //txtAccountManagementMemo.Text = "file saved";
+                //WebClient client = new WebClient();
+                //client.Credentials = CredentialCache.DefaultNetworkCredentials;
+                //client.UploadFile("file:////192.168.10.222//Web//Nizing//hr360//image//avatar.jpg", "POST", txtAvatarImageFilePath.Text);
+                //client.Dispose();
+
 
             }
         }
