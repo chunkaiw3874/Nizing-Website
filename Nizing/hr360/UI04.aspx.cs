@@ -27,7 +27,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
     List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
     DataTable userInfo = new DataTable();
     string currentHREmployeeID = "0142"; //current //HR code;
-    
+    double remainingDayOff = 0.0;
+    double remainingMakeupDayOff = 0.0;
 
     public class dayOffInfo
     {
@@ -44,8 +45,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "0080";    //test only to avoid error on loading, delete after trial            
-        //Session["erp_id"] = "0080";
+        Session["user_id"] = "0067";    //test only to avoid error on loading, delete after trial            
+        Session["erp_id"] = "0067";        
 
         if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
         {
@@ -552,10 +553,98 @@ public partial class hr360_UI04 : System.Web.UI.Page
             {
                 errorList.Add(errorCode(201));
             }
-            if (lblDayOffRemainAmount.Text.Trim() != "")  //測試錯誤 202.剩餘假期不足  --如假別無量的限制，則無需執行此測試
+            if (lblDayOffRemainAmount.Text.Trim() != "" || ddlDayOffType.SelectedValue == "02" || ddlDayOffType.SelectedValue == "03")  //測試錯誤 202.剩餘假期不足  --如假別無量的限制，則無需執行此測試
             {
                 decimal r;
-                if (totalDayOffAmount > (Decimal.TryParse(lblDayOffRemainAmount.Text, out r)?Convert.ToDecimal(lblDayOffRemainAmount.Text):0))
+                if (ddlDayOffType.SelectedValue == "02")  //補休(02)用此判斷
+                {
+                    r = 0;
+                    for (int i = 0; i < tbAppSummary.Rows.Count; i++)
+                    {
+                        if (tbAppSummary.Rows[i].Cells[0].ToString() == "補休")
+                        {
+                            string usedAmount = tbAppSummary.Rows[i].Cells[3].ToString().Substring(0, tbAppSummary.Rows[i].Cells[3].ToString().Length - 3);
+                            r += decimal.Parse(usedAmount);
+                        }                        
+                    }
+                    for (int i = 0; i < tbApprovalPending.Rows.Count; i++)
+                    {
+                        if (tbApprovalPending.Rows[i].Cells[1].ToString() == "補休")
+                        {
+                            string usedAmount = tbApprovalPending.Rows[i].Cells[4].ToString().Substring(0, tbApprovalPending.Rows[i].Cells[4].ToString().Length - 3);
+                            r += decimal.Parse(usedAmount);
+                        }
+                    }
+                    if(totalDayOffAmount > decimal.Parse(Session["makeupDayOff"].ToString()) - r)
+                    {
+                        errorList.Add(errorCode(202));
+                    }
+                }
+                else if (ddlDayOffType.SelectedValue == "03")  //特休(03)用此判斷 依據請假日期會有4種可能
+                {
+                    r = 0;
+                    decimal totalDayOffUsed;
+                    DateTime dayOffStartDate = DateTime.ParseExact(dtDayOffDaysInfo.Rows[0]["日期"].ToString(), "yyyy/MM/dd", new CultureInfo("zh-TW"));
+                    DateTime startWorkDate = DateTime.ParseExact(dayOffStartDate.Year.ToString() + "/" + Session["startDate"].ToString(), "MM/dd", new CultureInfo("zh-TW"));
+                    /*
+                     * 兩種可能性的計算方式                    
+                     */
+                    /* Scenario 1
+                     * 請假月日為到職月日之前
+                     */
+                    if (dayOffStartDate < startWorkDate)
+                    {
+                        for (int i = 0; i < tbAppSummary.Rows.Count; i++)
+                        {
+                            if (tbAppSummary.Rows[i].Cells[0].ToString() == "特休" && DateTime.Parse(tbAppSummary.Rows[i].Cells[1].ToString()) < startWorkDate)
+                            {
+                                string usedAmount = tbAppSummary.Rows[i].Cells[3].ToString().Substring(0, tbAppSummary.Rows[i].Cells[3].ToString().Length - 3);
+                                r += decimal.Parse(usedAmount);
+                            }
+                        }
+                        for (int i = 0; i < tbApprovalPending.Rows.Count; i++)
+                        {
+                            if (tbApprovalPending.Rows[i].Cells[1].ToString() == "特休" && DateTime.Parse(tbApprovalPending.Rows[i].Cells[2].ToString()) < startWorkDate)
+                            {
+                                string usedAmount = tbApprovalPending.Rows[i].Cells[4].ToString().Substring(0, tbApprovalPending.Rows[i].Cells[4].ToString().Length - 3);
+                                r += decimal.Parse(usedAmount);
+                            }
+                        }
+                        totalDayOffUsed = decimal.Parse(Session["firstPartDayOff"].ToString());
+                        if (totalDayOffAmount > totalDayOffUsed - r)
+                        {
+                            errorList.Add(errorCode(202));
+                        }
+                    }
+                    /* Scenario 2
+                     * 請假月日為到職月日之後
+                     */
+                    else if (dayOffStartDate >= startWorkDate)
+                    {
+                        for (int i = 0; i < tbAppSummary.Rows.Count; i++)
+                        {
+                            if (tbAppSummary.Rows[i].Cells[0].ToString() == "特休")
+                            {
+                                string usedAmount = tbAppSummary.Rows[i].Cells[3].ToString().Substring(0, tbAppSummary.Rows[i].Cells[3].ToString().Length - 3);
+                                r += decimal.Parse(usedAmount);
+                            }
+                        }
+                        for (int i = 0; i < tbApprovalPending.Rows.Count; i++)
+                        {
+                            if (tbApprovalPending.Rows[i].Cells[1].ToString() == "特休")
+                            {
+                                string usedAmount = tbApprovalPending.Rows[i].Cells[4].ToString().Substring(0, tbApprovalPending.Rows[i].Cells[4].ToString().Length - 3);
+                                r += decimal.Parse(usedAmount);
+                            }
+                        }
+                        totalDayOffUsed = decimal.Parse(Session["firstPartDayOff"].ToString()) + decimal.Parse(Session["secondPartDayOff"].ToString());
+                        if (totalDayOffAmount > totalDayOffUsed - r)
+                        {
+                            errorList.Add(errorCode(202));
+                        }
+                    }                    
+                }
+                else if (totalDayOffAmount > (Decimal.TryParse(lblDayOffRemainAmount.Text, out r)?Convert.ToDecimal(lblDayOffRemainAmount.Text):0))
                 {
                     errorList.Add(errorCode(202));
                 }

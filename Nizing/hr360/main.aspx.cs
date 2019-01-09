@@ -87,6 +87,7 @@ public partial class main : System.Web.UI.Page
                 using (SqlConnection conn = new SqlConnection(NZconnectionString))
                 {
                     conn.Open();
+                    //計算剩餘特休
                     if (dtUserInfo.Rows.Count > 0)
                     {
                         //使用PALTL請假明細計算剩餘特休時數因為PALTK自動計算會有誤差
@@ -150,7 +151,10 @@ public partial class main : System.Web.UI.Page
                             strSecondPartDayOff = doubleSecondPartFinal.ToString();
                         }
                     }
-                    //Comment out with old way, uncomment with new way
+                    Session["firstPartDayOff"] = doubleFirstPartFinal;
+                    Session["secondPartDayOff"] = doubleSecondPartFinal;
+                    Session["startDate"] = dtUserInfo.Rows[0]["START_MONTH"].ToString() + "/" + dtUserInfo.Rows[0]["START_DAY"].ToString();
+                    //顯示剩餘特休
                     if (dtUserInfo.Rows.Count > 0)
                     {
                         if (dtUserInfo.Rows[0]["START_MONTH"].ToString() == "01")
@@ -211,7 +215,7 @@ public partial class main : System.Web.UI.Page
                                                         + " WHERE PALTL.TL001=@ID AND PALTL.TL002=YEAR(GETDATE()) AND PALTL.TL004='02'", conn);
                     cmdSelectMakeupDayOff.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
                     lblMakeupDayOff.Text = (string)cmdSelectMakeupDayOff.ExecuteScalar();
-
+                    Session["makeupDayOff"] = lblMakeupDayOff.Text;
                     //conditional statement for salary adjustment notification
                     SqlCommand cmdSalaryAdj = new SqlCommand("SELECT PALTD.TD001"
                                                         + " FROM PALTD"
