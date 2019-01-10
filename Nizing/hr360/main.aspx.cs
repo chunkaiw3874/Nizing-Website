@@ -17,7 +17,7 @@ public partial class main : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["erp_id"] = "0063";
+        //Session["erp_id"] = "0141";
         //if(false)
         if (!((masterPage_HR360_Master)this.Master.Master).CheckAuthentication())        
         {
@@ -50,7 +50,7 @@ public partial class main : System.Web.UI.Page
                 using (SqlConnection conn = new SqlConnection(NZconnectionString))
                 {
                     conn.Open();
-                    string query = "SELECT YEAR(GETDATE())-SUBSTRING(MV.MV021,1,4) 'YEAR_IN_SERVICE', SUBSTRING(MV.MV021,5,2) 'START_MONTH', SUBSTRING(MV.MV021,7,2) 'START_DAY'"
+                    string query = "SELECT YEAR(GETDATE())-SUBSTRING(MV.MV021,1,4) 'YEAR_IN_SERVICE', SUBSTRING(MV.MV021,1,4) 'START_YEAR', SUBSTRING(MV.MV021,5,2) 'START_MONTH', SUBSTRING(MV.MV021,7,2) 'START_DAY'"
                                 +" FROM CMSMV MV"
                                 +" WHERE MV.MV001=@ID";
                     SqlCommand cmd = new SqlCommand(query, conn);
@@ -150,9 +150,10 @@ public partial class main : System.Web.UI.Page
                             doubleSecondPartFinal = doubleSecondPartDayOff * 8 - doubleSecondPartDayOffUsed;
                             strSecondPartDayOff = doubleSecondPartFinal.ToString();
                         }
-                    }
+                    }                    
                     Session["firstPartDayOff"] = doubleFirstPartFinal;
                     Session["secondPartDayOff"] = doubleSecondPartFinal;
+                    Session["startYear"] = dtUserInfo.Rows[0]["START_YEAR"].ToString();
                     Session["startDate"] = dtUserInfo.Rows[0]["START_MONTH"].ToString() + dtUserInfo.Rows[0]["START_DAY"].ToString();
                     //顯示剩餘特休
                     if (dtUserInfo.Rows.Count > 0)
@@ -196,7 +197,14 @@ public partial class main : System.Web.UI.Page
                                 }
                             }
                             lblFirstPartDayOff.Visible = true;
-                            lblFirstPartDayOff.Text = "01/01-" + startDate.AddDays(-1).ToString("MM/dd") + " 剩餘: " + strFirstPartDayOff + "小時";                                                            
+                            if (Convert.ToInt16(dtUserInfo.Rows[0]["YEAR_IN_SERVICE"].ToString()) == 1 && Convert.ToInt16(dtUserInfo.Rows[0]["START_MONTH"].ToString()) > 6)
+                            {
+                                lblFirstPartDayOff.Text = startDate.AddMonths(6).ToString("MM/dd") + "-" + startDate.AddDays(-1).ToString("MM/dd") + " 剩餘: " + strFirstPartDayOff + "小時";
+                            }
+                            else
+                            {
+                                lblFirstPartDayOff.Text = "01/01-" + startDate.AddDays(-1).ToString("MM/dd") + " 剩餘: " + strFirstPartDayOff + "小時";
+                            }
                             lblSecondPartDayOff.Text = startDate.ToString("MM/dd") + "-12/31 剩餘: " + strSecondPartDayOff + "小時";
                         }
                     }
