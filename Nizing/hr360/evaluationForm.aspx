@@ -524,6 +524,86 @@
                     <br />
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOffName18" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOff18" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOffUnit18" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOffName19" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOff19" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOffUnit19" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOffName20" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOff20" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOffUnit20" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOffName21" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOff21" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOffUnit21" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+            </div>
             <div class="row" style="border-top: solid 1px #337ab7;">
                 <div class="col-xs-2 border">
                     缺勤時數小計

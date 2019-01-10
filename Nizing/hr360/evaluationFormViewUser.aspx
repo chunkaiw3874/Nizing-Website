@@ -120,12 +120,12 @@
         </div>
         <div class="row" id="finalScoreRow" runat="server">
         </div>        
-        <div class="row">
-<%--            <div class="col-xs-12 border">
+<%--        <div class="row">
+            <div class="col-xs-12 border">
                 * 評分範圍:  分數為1~10分，最多小數點後一位。<br />  
                 * 評分標準: 0:極差/完全沒有; 1~3:差/有很大的進步空間; 4~6:普通/有待加強; 7~9:良好/已經很好，但可再進步; 10:極好/非常好
-            </div>--%>
-        </div>
+            </div>
+        </div>--%>
         <div id="record">
             <div class="row">
                 <div class="col-xs-6 subtitle border">
@@ -464,6 +464,86 @@
                 </div>
                 <div class="col-xs-2 border">
                     <asp:Label ID="lblDayOffUnit17" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOffName18" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOff18" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOffUnit18" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOffName19" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOff19" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOffUnit19" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOffName20" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOff20" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOffUnit20" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+                <div class="col-xs-2 border">
+                    <br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOffName21" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOff21" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border">
+                    <asp:Label ID="lblDayOffUnit21" runat="server" Text="&nbsp"></asp:Label>
                 </div>
                 <div class="col-xs-2 border">
                     <br />
