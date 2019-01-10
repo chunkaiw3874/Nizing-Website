@@ -153,7 +153,7 @@ public partial class main : System.Web.UI.Page
                     }
                     Session["firstPartDayOff"] = doubleFirstPartFinal;
                     Session["secondPartDayOff"] = doubleSecondPartFinal;
-                    Session["startDate"] = dtUserInfo.Rows[0]["START_MONTH"].ToString() + "/" + dtUserInfo.Rows[0]["START_DAY"].ToString();
+                    Session["startDate"] = dtUserInfo.Rows[0]["START_MONTH"].ToString() + dtUserInfo.Rows[0]["START_DAY"].ToString();
                     //顯示剩餘特休
                     if (dtUserInfo.Rows.Count > 0)
                     {
