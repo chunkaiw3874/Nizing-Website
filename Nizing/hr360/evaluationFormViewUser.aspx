@@ -121,10 +121,10 @@
         <div class="row" id="finalScoreRow" runat="server">
         </div>        
         <div class="row">
-            <div class="col-xs-12 border">
+<%--            <div class="col-xs-12 border">
                 * 評分範圍:  分數為1~10分，最多小數點後一位。<br />  
                 * 評分標準: 0:極差/完全沒有; 1~3:差/有很大的進步空間; 4~6:普通/有待加強; 7~9:良好/已經很好，但可再進步; 10:極好/非常好
-            </div>
+            </div>--%>
         </div>
         <div id="record">
             <div class="row">
