@@ -122,7 +122,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-2">
-                    <asp:DropDownList ID="ddlViewYear" runat="server" CssClass="form-control"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlViewYear" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlViewYear_SelectedIndexChanged"></asp:DropDownList>
                 </div>
                 <div class="col-xs-2">
                     <asp:DropDownList ID="ddlAdminViewList" runat="server" CssClass="form-control"></asp:DropDownList>
@@ -138,7 +138,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-2">
-                    <asp:DropDownList ID="ddlViewYear2" runat="server" CssClass="form-control"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlViewYear2" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlViewYear2_SelectedIndexChanged"></asp:DropDownList>
                 </div>
                 <div class="col-xs-2">
                     <asp:DropDownList ID="ddlAdminViewList2" runat="server" CssClass="form-control"></asp:DropDownList>

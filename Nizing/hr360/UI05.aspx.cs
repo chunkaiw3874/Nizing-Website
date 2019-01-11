@@ -414,31 +414,33 @@ public partial class hr360_UI05 : System.Web.UI.Page
     {
         try
         {
-            DataTable dtViewList = new DataTable();
-            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-            {
-                conn.Open();
-                string query = "SELECT DISTINCT A.ASSESSED_ID + ' ' + B.MV002,A.ASSESSED_ID"
-                            + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
-                            + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
-                            + " WHERE A.ASSESS_TYPE='1'"
-                            + " AND YEAR=@YEAR"
-                            + " ORDER BY A.ASSESSED_ID";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@YEAR", year);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dtViewList);
-            }
-            for (int i = 2016; i <= DateTime.Today.Year; i++)
+            for (int i = 2016; i < DateTime.Today.Year; i++)
             {
                 ddlViewYear.Items.Add(i.ToString());
                 ddlViewYear2.Items.Add(i.ToString());
             }
-            for (int i = 0; i < dtViewList.Rows.Count; i++)
-            {
-                ddlAdminViewList.Items.Add(new ListItem(dtViewList.Rows[i][0].ToString(), dtViewList.Rows[i][1].ToString()));
-                ddlAdminViewList2.Items.Add(new ListItem(dtViewList.Rows[i][0].ToString(), dtViewList.Rows[i][1].ToString()));
-            }
+            populateAdminViewList(ddlAdminViewList, ddlViewYear.SelectedItem.Text);
+            populateAdminViewList(ddlAdminViewList2, ddlViewYear2.SelectedItem.Text);
+            //using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            //{
+            //    conn.Open();
+            //    string query = "SELECT DISTINCT A.ASSESSED_ID + ' ' + B.MV002,A.ASSESSED_ID"
+            //                + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
+            //                + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
+            //                + " WHERE A.ASSESS_TYPE='1'"
+            //                + " AND YEAR=@YEAR"
+            //                + " ORDER BY A.ASSESSED_ID";
+            //    SqlCommand cmd = new SqlCommand(query, conn);
+            //    cmd.Parameters.AddWithValue("@YEAR", ddlViewYear2.SelectedItem.Text);
+            //    SqlDataAdapter da = new SqlDataAdapter(cmd);
+            //    da.Fill(dtViewList2);
+            //}
+
+            //for (int i = 0; i < dtViewList.Rows.Count; i++)
+            //{
+            //    ddlAdminViewList.Items.Add(new ListItem(dtViewList.Rows[i][0].ToString(), dtViewList.Rows[i][1].ToString()));
+            //    ddlAdminViewList2.Items.Add(new ListItem(dtViewList2.Rows[i][0].ToString(), dtViewList2.Rows[i][1].ToString()));
+            //}
         }
         catch
         {
@@ -472,5 +474,39 @@ public partial class hr360_UI05 : System.Web.UI.Page
     {
         Session["view_year"] = ddlBonusYear.SelectedValue.ToString().Trim();
         ScriptManager.RegisterStartupScript(this, GetType(), "open_form", "window.open('/hr360/evaluationBonusView.aspx');", true);
+    }
+    protected void populateAdminViewList(DropDownList ddlTarget, string year)
+    {
+        ddlTarget.Items.Clear();
+        DataTable dtViewList = new DataTable();
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            string query = "SELECT DISTINCT A.ASSESSED_ID + ' ' + B.MV002,A.ASSESSED_ID"
+                        + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
+                        + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
+                        + " WHERE A.ASSESS_TYPE='1'"
+                        + " AND YEAR=@YEAR"
+                        + " ORDER BY A.ASSESSED_ID";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@YEAR", year);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dtViewList);
+        }
+        for (int i = 0; i < dtViewList.Rows.Count; i++)
+        {
+            ddlTarget.Items.Add(new ListItem(dtViewList.Rows[i][0].ToString(), dtViewList.Rows[i][1].ToString()));
+        }
+
+    }
+    protected void ddlViewYear_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        //Session["ddlViewYearSelection"] = ddlViewYear.SelectedIndex;
+        populateAdminViewList(ddlAdminViewList, ddlViewYear.SelectedItem.Text);
+    }
+    protected void ddlViewYear2_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        //Session["ddlViewYear2Selection"] = ddlViewYear2.SelectedIndex;
+        populateAdminViewList(ddlAdminViewList2, ddlViewYear2.SelectedItem.Text);
     }
 }
