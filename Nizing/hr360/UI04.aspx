@@ -174,7 +174,6 @@
             storeApprovalPendingSelectionToHiddenField();
             if ($('#hdnApprovalPendingSelection').val().trim() != "") {
                 if (confirm('確定要簽核選取的假單嗎?')) {
-
                     return true;
                 }
                 else {
@@ -387,6 +386,22 @@
                             </div>
                             <asp:HiddenField ID="hdnApprovalPendingSelection" ClientIDMode="Static" runat="server" />
                             <table id="tbApprovalPending" class="table col-xs-12 classApprovalPending noselect" runat="server">
+                                <tr style="background-color:lightblue; color:white;">
+                                    <th style="text-align:center;font-weight:bold;">假單ID</th>
+		                            <th style="text-align:center;font-weight:bold;">申請人ID</th>
+		                            <th style="text-align:center;font-weight:bold;">申請人</th>
+		                            <th style="text-align:center;font-weight:bold;">假別</th>
+		                            <th style="text-align:center;font-weight:bold;">開始時間</th>
+		                            <th style="text-align:center;font-weight:bold;">結束時間</th>
+		                            <th style="text-align:center;font-weight:bold;">請假總量</th>
+		                            <th style="text-align:center;font-weight:bold;">代理人</th>
+		                            <th style="text-align:center;font-weight:bold;">請假原因</th>
+		                            <th style="text-align:center;font-weight:bold;">簽核階段</th>
+		                            <th style="text-align:center;font-weight:bold;">ERP狀態</th>
+                                    <th style="text-align:center;font-weight:bold;">
+                                        <asp:Button ID="btnApprove" runat="server" Text="簽核" CssClass="btn btn-success" OnClientClick="javascript:return confirmApprove();" OnClick="btnApprove_Click" />
+                                    </th>
+                                </tr>
                             </table>
                         </div>
                     </div>
