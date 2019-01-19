@@ -582,7 +582,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     {
                         if (tbAppSummary.Rows[i].Cells[0].InnerText == "補休")
                         {
-                            string usedAmount = tbAppSummary.Rows[i].Cells[3].ToString().Substring(0, tbAppSummary.Rows[i].Cells[3].InnerText.Length - 3);
+                            string usedAmount = tbAppSummary.Rows[i].Cells[3].ToString().Substring(0, tbAppSummary.Rows[i].Cells[3].InnerText.Length - 2);
                             r += decimal.Parse(usedAmount);
                         }                        
                     }
@@ -590,7 +590,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     {
                         if (tbInProgressSummary.Rows[i].Cells[1].InnerText == "補休")
                         {
-                            string usedAmount = tbInProgressSummary.Rows[i].Cells[4].InnerText.Substring(0, tbInProgressSummary.Rows[i].Cells[4].InnerText.Length - 3);
+                            string usedAmount = tbInProgressSummary.Rows[i].Cells[4].InnerText.Substring(0, tbInProgressSummary.Rows[i].Cells[4].InnerText.Length - 2);
                             r += decimal.Parse(usedAmount);
                         }
                     }
