@@ -43,8 +43,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "0142";    //test only to avoid error on loading, delete after trial            
-        //Session["erp_id"] = "0142";        
+        //Session["user_id"] = "chrissy";    //test only to avoid error on loading, delete after trial            
+        //Session["erp_id"] = "0007";        
 
         if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
         {
@@ -620,7 +620,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                             {
                                 if (tbAppSummary.Rows[i].Cells[0].InnerText == "特休" && DateTime.Parse(tbAppSummary.Rows[i].Cells[1].InnerText) < relevantWorkDate)
                                 {
-                                    string usedAmount = tbAppSummary.Rows[i].Cells[3].InnerText.Substring(0, tbAppSummary.Rows[i].Cells[3].InnerText.Length - 3);
+                                    string usedAmount = tbAppSummary.Rows[i].Cells[3].InnerText.Substring(0, tbAppSummary.Rows[i].Cells[3].InnerText.Length - 2);
                                     r += decimal.Parse(usedAmount);
                                 }
                             }
@@ -628,7 +628,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                             {
                                 if (tbInProgressSummary.Rows[i].Cells[1].InnerText == "特休" && DateTime.Parse(tbInProgressSummary.Rows[i].Cells[2].InnerText) < relevantWorkDate)
                                 {
-                                    string usedAmount = tbInProgressSummary.Rows[i].Cells[4].InnerText.Substring(0, tbInProgressSummary.Rows[i].Cells[4].InnerText.Length - 3);
+                                    string usedAmount = tbInProgressSummary.Rows[i].Cells[4].InnerText.Substring(0, tbInProgressSummary.Rows[i].Cells[4].InnerText.Length - 2);
                                     r += decimal.Parse(usedAmount);
                                 }
                             }
@@ -647,7 +647,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                             {
                                 if (tbAppSummary.Rows[i].Cells[0].InnerText == "特休")
                                 {
-                                    string usedAmount = tbAppSummary.Rows[i].Cells[3].InnerText.Substring(0, tbAppSummary.Rows[i].Cells[3].InnerText.Length - 3);
+                                    string usedAmount = tbAppSummary.Rows[i].Cells[3].InnerText.Substring(0, tbAppSummary.Rows[i].Cells[3].InnerText.Length - 2);
                                     r += decimal.Parse(usedAmount);
                                 }
                             }
@@ -655,7 +655,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                             {
                                 if (tbInProgressSummary.Rows[i].Cells[1].InnerText == "特休")
                                 {
-                                    string usedAmount = tbInProgressSummary.Rows[i].Cells[4].InnerText.Substring(0, tbInProgressSummary.Rows[i].Cells[4].InnerText.Length - 3);
+                                    string usedAmount = tbInProgressSummary.Rows[i].Cells[4].InnerText.Substring(0, tbInProgressSummary.Rows[i].Cells[4].InnerText.Length - 2);
                                     r += decimal.Parse(usedAmount);
                                 }
                             }
