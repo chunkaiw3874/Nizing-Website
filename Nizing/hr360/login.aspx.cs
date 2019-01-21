@@ -23,6 +23,16 @@ public partial class login : System.Web.UI.Page
             if (Login_Validation(HR360Login.UserName, HR360Login.Password))
             {
                 Read_Permission(HR360Login.UserName);
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "UPDATE HR360_BI01_A"
+                                + " SET [LAST_LOGIN]=GETDATE()"
+                                + " WHERE [ID]=@USER_ID";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@USER_ID", HR360Login.UserName);
+                    cmd.ExecuteNonQuery();
+                }
                 Response.Redirect("~/hr360/main.aspx");
             }
             else
