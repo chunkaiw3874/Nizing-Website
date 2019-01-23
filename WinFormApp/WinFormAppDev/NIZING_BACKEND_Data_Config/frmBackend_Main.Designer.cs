@@ -55,29 +55,6 @@
             this.txtAccountManagementMemo = new System.Windows.Forms.TextBox();
             this.gvAccountSearch_Result = new System.Windows.Forms.DataGridView();
             this.backenD_FUNCTION_LISTTableAdapter1 = new NIZING_BACKEND_Data_Config.dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter();
-            this.tbpCompanyAnnouncement = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnAnnouncementAdd = new System.Windows.Forms.Button();
-            this.btnAnnouncementEdit = new System.Windows.Forms.Button();
-            this.btnAnnouncementDelete = new System.Windows.Forms.Button();
-            this.btnAnnouncementSearch = new System.Windows.Forms.Button();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
-            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpAccountManagement.SuspendLayout();
@@ -88,14 +65,6 @@
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvAccountSearch_Result)).BeginInit();
-            this.tbpCompanyAnnouncement.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.flowLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            this.flowLayoutPanel4.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.flowLayoutPanel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -130,7 +99,6 @@
             // tbcManagement
             // 
             this.tbcManagement.Controls.Add(this.tbpAccountManagement);
-            this.tbcManagement.Controls.Add(this.tbpCompanyAnnouncement);
             this.tbcManagement.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcManagement.Location = new System.Drawing.Point(0, 26);
             this.tbcManagement.Margin = new System.Windows.Forms.Padding(0);
@@ -425,278 +393,6 @@
             // 
             this.backenD_FUNCTION_LISTTableAdapter1.ClearBeforeFill = true;
             // 
-            // tbpCompanyAnnouncement
-            // 
-            this.tbpCompanyAnnouncement.Controls.Add(this.tableLayoutPanel3);
-            this.tbpCompanyAnnouncement.Location = new System.Drawing.Point(4, 22);
-            this.tbpCompanyAnnouncement.Name = "tbpCompanyAnnouncement";
-            this.tbpCompanyAnnouncement.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpCompanyAnnouncement.Size = new System.Drawing.Size(1176, 810);
-            this.tbpCompanyAnnouncement.TabIndex = 1;
-            this.tbpCompanyAnnouncement.Text = "公司公告";
-            this.tbpCompanyAnnouncement.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 460F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.flowLayoutPanel3, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.btnAnnouncementSearch, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.dataGridView1, 1, 1);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 93F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1170, 804);
-            this.tableLayoutPanel3.TabIndex = 0;
-            // 
-            // flowLayoutPanel3
-            // 
-            this.flowLayoutPanel3.Controls.Add(this.btnAnnouncementAdd);
-            this.flowLayoutPanel3.Controls.Add(this.btnAnnouncementEdit);
-            this.flowLayoutPanel3.Controls.Add(this.btnAnnouncementDelete);
-            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(1, 1);
-            this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(460, 56);
-            this.flowLayoutPanel3.TabIndex = 0;
-            // 
-            // btnAnnouncementAdd
-            // 
-            this.btnAnnouncementAdd.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnAnnouncementAdd.Location = new System.Drawing.Point(3, 3);
-            this.btnAnnouncementAdd.Name = "btnAnnouncementAdd";
-            this.btnAnnouncementAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAnnouncementAdd.TabIndex = 0;
-            this.btnAnnouncementAdd.Text = "新增";
-            this.btnAnnouncementAdd.UseVisualStyleBackColor = true;
-            // 
-            // btnAnnouncementEdit
-            // 
-            this.btnAnnouncementEdit.Location = new System.Drawing.Point(84, 3);
-            this.btnAnnouncementEdit.Name = "btnAnnouncementEdit";
-            this.btnAnnouncementEdit.Size = new System.Drawing.Size(75, 23);
-            this.btnAnnouncementEdit.TabIndex = 1;
-            this.btnAnnouncementEdit.Text = "修改";
-            this.btnAnnouncementEdit.UseVisualStyleBackColor = true;
-            // 
-            // btnAnnouncementDelete
-            // 
-            this.btnAnnouncementDelete.Location = new System.Drawing.Point(165, 3);
-            this.btnAnnouncementDelete.Name = "btnAnnouncementDelete";
-            this.btnAnnouncementDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnAnnouncementDelete.TabIndex = 2;
-            this.btnAnnouncementDelete.Text = "刪除";
-            this.btnAnnouncementDelete.UseVisualStyleBackColor = true;
-            // 
-            // btnAnnouncementSearch
-            // 
-            this.btnAnnouncementSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAnnouncementSearch.Location = new System.Drawing.Point(1091, 4);
-            this.btnAnnouncementSearch.Name = "btnAnnouncementSearch";
-            this.btnAnnouncementSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnAnnouncementSearch.TabIndex = 1;
-            this.btnAnnouncementSearch.Text = "查詢";
-            this.btnAnnouncementSearch.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.04884F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 83.95116F));
-            this.tableLayoutPanel4.Controls.Add(this.label4, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.textBox1, 1, 2);
-            this.tableLayoutPanel4.Controls.Add(this.label5, 0, 2);
-            this.tableLayoutPanel4.Controls.Add(this.textBox2, 1, 1);
-            this.tableLayoutPanel4.Controls.Add(this.label6, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.flowLayoutPanel4, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.groupBox2, 1, 3);
-            this.tableLayoutPanel4.Controls.Add(this.flowLayoutPanel5, 1, 4);
-            this.tableLayoutPanel4.Controls.Add(this.textBox4, 1, 5);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(1, 58);
-            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 6;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(460, 465);
-            this.tableLayoutPanel4.TabIndex = 3;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(38, 17);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(32, 12);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "帳號:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox1.Location = new System.Drawing.Point(76, 106);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(150, 22);
-            this.textBox1.TabIndex = 6;
-            this.textBox1.UseSystemPasswordChar = true;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 111);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(56, 12);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "確認密碼:";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox2.Location = new System.Drawing.Point(76, 59);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(150, 22);
-            this.textBox2.TabIndex = 5;
-            this.textBox2.UseSystemPasswordChar = true;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(38, 64);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 12);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "密碼:";
-            // 
-            // flowLayoutPanel4
-            // 
-            this.flowLayoutPanel4.Controls.Add(this.textBox3);
-            this.flowLayoutPanel4.Controls.Add(this.checkBox1);
-            this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(73, 0);
-            this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(387, 47);
-            this.flowLayoutPanel4.TabIndex = 12;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.textBox3.Location = new System.Drawing.Point(3, 3);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(150, 22);
-            this.textBox3.TabIndex = 4;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkBox1.Location = new System.Drawing.Point(159, 3);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(72, 22);
-            this.checkBox1.TabIndex = 5;
-            this.checkBox1.Text = "權限全開";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.checkedListBox1);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(73, 141);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(384, 152);
-            this.groupBox2.TabIndex = 13;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "開啟權限";
-            // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.checkedListBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(3, 18);
-            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.checkedListBox1.MultiColumn = true;
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(378, 131);
-            this.checkedListBox1.TabIndex = 0;
-            // 
-            // flowLayoutPanel5
-            // 
-            this.flowLayoutPanel5.Controls.Add(this.button5);
-            this.flowLayoutPanel5.Controls.Add(this.button6);
-            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(73, 293);
-            this.flowLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(387, 30);
-            this.flowLayoutPanel5.TabIndex = 11;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(0, 3);
-            this.button5.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 3;
-            this.button5.Text = "確認";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(81, 3);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 4;
-            this.button6.Text = "取消";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // textBox4
-            // 
-            this.textBox4.BackColor = System.Drawing.Color.White;
-            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox4.Location = new System.Drawing.Point(73, 323);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(0);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(387, 142);
-            this.textBox4.TabIndex = 14;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridView1.Location = new System.Drawing.Point(462, 58);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(0);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(707, 745);
-            this.dataGridView1.TabIndex = 4;
-            // 
             // frmBackend_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -718,16 +414,6 @@
             this.groupBox1.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvAccountSearch_Result)).EndInit();
-            this.tbpCompanyAnnouncement.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.flowLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
-            this.flowLayoutPanel4.ResumeLayout(false);
-            this.flowLayoutPanel4.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.flowLayoutPanel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -761,28 +447,5 @@
         private System.Windows.Forms.DataGridView gvAccountSearch_Result;
         private System.Windows.Forms.TextBox txtAccountManagementMemo;
         private dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter backenD_FUNCTION_LISTTableAdapter1;
-        private System.Windows.Forms.TabPage tbpCompanyAnnouncement;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
-        private System.Windows.Forms.Button btnAnnouncementAdd;
-        private System.Windows.Forms.Button btnAnnouncementEdit;
-        private System.Windows.Forms.Button btnAnnouncementDelete;
-        private System.Windows.Forms.Button btnAnnouncementSearch;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

@@ -30,8 +30,72 @@
         <div class="horizontal-wrapper" style="width:69%;margin-right:5%;">
             <div class="title">
                 <asp:Image ID="Image1" runat="server" ImageUrl="~/hr360/image/banner/news.png" />
-            </div>
-            <div class="announcement">
+            </div>            
+            <asp:UpdatePanel ID="upCompanyAnnouncement" runat="server">
+                <ContentTemplate>
+                    <div id="announcement_section">
+                        <div id="announcement_body">
+                            <asp:Repeater ID="rptCompanyAnnouncement" runat="server" >
+                                    <HeaderTemplate>
+                                        <table id="tbCompanyAnnouncement" style="width:100%;border-collapse:collapse;">
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <tr>
+                                            <td style="border-bottom:dotted 1px gray;">
+                                                <span><%#Eval("CREATE_TIME") %></span><br /><br />
+                                                <span style="white-space:pre"><%#Eval("BODY") %></span><br /><br />
+                                                <span style="font-size:6px; font-style:italic; color:gray">最後編輯: <%#Eval("LAST_EDITOR") %> <%#Eval("LAST_EDIT_TIME") %></span>
+                                            </td>
+                                        </tr>
+                                    </ItemTemplate>   
+                                    <FooterTemplate>
+                                        </table>
+                                    </FooterTemplate>         
+                            </asp:Repeater>
+                        </div>
+                        <div id="announcement_pagination_control" style="margin-top:10px;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td>
+                                        <asp:LinkButton ID="lbFirst" runat="server" 
+                                            OnClick="lbFirst_Click">首頁</asp:LinkButton>
+                                    </td>
+                                    <td>
+                                        <asp:LinkButton ID="lbPrevious" runat="server"
+                                            OnClick="lbPrevious_Click">前一頁</asp:LinkButton>
+                                    </td>
+                                    <td>
+                                        <asp:DataList ID="rptPaging" runat="server"
+                                            OnItemCommand="rptPaging_ItemCommand" 
+                                            OnItemDataBound="rptPaging_ItemDataBound" 
+                                            RepeatDirection="Horizontal">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lbPaging" runat="server" 
+                                                    CommandArgument='<%# Eval("PageIndex") %>' 
+                                                    CommandName="newPage"
+                                                    Text='<%# Eval("PageText") %>' ></asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:DataList>
+                                    </td>
+                                    <td>
+                                        <asp:LinkButton ID="lbNext" runat="server" 
+                                            OnClick="lbNext_Click">下一頁</asp:LinkButton>
+                                    </td>
+                                    <td>
+                                        <asp:LinkButton ID="lbLast" runat="server" 
+                                            OnClick="lbLast_Click">末頁</asp:LinkButton>
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="lblPage" runat="server" Text="[placeholder]"></asp:Label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>             
+                           
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            <%--<div class="announcement">
                 2016.11.15 <br />
                 公告:<br />
                 105/12/25(日)行憲紀念日適逢週日，我司將於12/30(五)補假一日。
@@ -59,9 +123,8 @@
                 2016.02.26<br />於 2016/01/01 起，我司改為周周休，故今年不調薪
             </div>
             <div>
-                <%--<asp:Image ID="Image3" runat="server" ImageUrl="~/hr360/image/image/2016.jpg" />--%>
                 <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/hr360/image/image/2016.jpg" Target="_blank"><asp:Image ID="Image3" runat="server" ImageUrl="~/hr360/image/image/2016.jpg" Width="200px" /></asp:HyperLink>
-            </div>
+            </div>--%>
         </div>
 
         <div class="horizontal-wrapper" style="width:25%;">

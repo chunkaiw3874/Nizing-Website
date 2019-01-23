@@ -25,13 +25,22 @@ namespace NIZING_BACKEND_Data_Config
         private FunctionMode accountTabMode = FunctionMode.NORECORD;
         private FunctionMode tabModeTempStorage;
 
+        #region 公司公告 Universal Variable
+        private FunctionMode companyAccouncementTabMode = FunctionMode.NORECORD;
+        #endregion
+
         public frmHR360_Main()
         {
             InitializeComponent();
             accountTabMode = FunctionMode.NORECORD;
             currentTabPage = tbcAccountManagement.SelectedTab;
             LoadControlStatus(currentTabPage);
-            txtAccountManagementMemo.Text = String.Empty;      
+            txtAccountManagementMemo.Text = String.Empty;
+
+            #region 公司公告 Init
+            companyAccouncementTabMode = FunctionMode.NORECORD;
+            txtCompanyAnnouncementMemo.Text = String.Empty;
+            #endregion
         }
 
         #region Frame Method and Button Behavior
@@ -77,6 +86,27 @@ namespace NIZING_BACKEND_Data_Config
                             errorList.Add("密碼與確認密碼不符");
                         }
                     }
+                }
+            }
+            else if (tbcAccountManagement.SelectedTab == tbpCompanyAnnouncement)
+            {
+                if (mode == FunctionMode.ADD)
+                {
+                    if (!String.IsNullOrWhiteSpace(txtCompanyAnnouncementBody.Text.Trim()))
+                    {
+                        errorList.Add("內容不可為空白");
+                    }
+                }
+                else if (mode == FunctionMode.EDIT)
+                {
+                    if (!String.IsNullOrWhiteSpace(txtCompanyAnnouncementBody.Text.Trim()))
+                    {
+                        errorList.Add("內容不可為空白");
+                    }
+                }
+                else if (mode == FunctionMode.DELETE)
+                {
+
                 }
             }
             return errorList;

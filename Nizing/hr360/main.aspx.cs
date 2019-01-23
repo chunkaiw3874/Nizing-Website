@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -15,6 +16,27 @@ public partial class main : System.Web.UI.Page
     string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
     string ERP2connectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
 
+    #region Announcement Repeater Pagination Variable
+    readonly PagedDataSource _pgsource = new PagedDataSource();
+    int _firstIndex, _lastIndex;
+    private int _pageSize = 2;
+    private int CurrentPage
+    {
+        get
+        {
+            if (ViewState["CurrentPage"] == null)
+            {
+                return 0;
+            }
+            return ((int)ViewState["CurrentPage"]);
+        }
+        set
+        {
+            ViewState["CurrentPage"] = value;
+        }
+    }
+    #endregion
+
     protected void Page_Load(object sender, EventArgs e)
     {
         //Session["erp_id"] = "0141";
@@ -24,10 +46,12 @@ public partial class main : System.Web.UI.Page
             ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('連線已逾時，將會回到登入頁面');window.location='login.aspx'", true);
         }
         else
-        {            
+        {   
             if (!IsPostBack)
-            {
+            {                
                 DataTable dtUserInfo = new DataTable();
+
+                #region 補休、特休計算 variable
                 double doubleFirstPartDayOff = 0;
                 double doubleSecondPartDayOff = 0;
                 double doubleFirstPartDayOffUsed = 0;
@@ -36,6 +60,11 @@ public partial class main : System.Web.UI.Page
                 double doubleSecondPartFinal = 0;
                 string strFirstPartDayOff = "";
                 string strSecondPartDayOff = "";
+                #endregion
+
+                #region 公司公告 variable
+                DataTable dtCompanyAnnouncement = new DataTable();
+                #endregion
 
                 using (SqlConnection conn = new SqlConnection(ERP2connectionString))
                 {
@@ -241,7 +270,129 @@ public partial class main : System.Web.UI.Page
                         salaryAdjNotification.Visible = false;
                     }
                 }
+                BindDataTorptCompanyAnnouncement();
             }
         }
     }
+
+    #region Company Announcement Databinding and Repeater Pagination
+    private DataTable GetCompanyAnnouncementData()
+    {
+        DataTable dt = new DataTable();
+        using (SqlConnection conn = new SqlConnection(ERP2connectionString))
+        {
+            conn.Open();
+            string query = "SELECT LTRIM(RTRIM(ANNOUNCEMENT.[ID])) 'ID'"
+                        + " ,LTRIM(RTRIM(ANNOUNCEMENT.[CREATE_TIME])) 'CREATE_TIME'"
+                        + " ,LTRIM(RTRIM(ANNOUNCEMENT.[CREATOR])) 'CREATOR'"
+                        + " ,LTRIM(RTRIM(ANNOUNCEMENT.[LAST_EDIT_TIME])) 'LAST_EDIT_TIME'"
+                        + " ,LTRIM(RTRIM(MV.MV002)) 'LAST_EDITOR'"
+                        + " ,LTRIM(RTRIM(ANNOUNCEMENT.[BODY])) 'BODY'"
+                        + " ,ANNOUNCEMENT.[VISIBLE]"
+                        + " FROM HR360_COMPANYANNOUNCEMENT ANNOUNCEMENT"
+                        + " LEFT JOIN NZ.dbo.CMSMV MV ON ANNOUNCEMENT.LAST_EDITOR=MV.MV001"
+                        + " WHERE [VISIBLE]=1";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+        }
+        return dt;
+    }
+    private void BindDataTorptCompanyAnnouncement()
+    {
+        DataTable dt = GetCompanyAnnouncementData();
+        _pgsource.DataSource = dt.DefaultView;
+        _pgsource.AllowPaging = true;
+        //Number of items to be displaed in the Repeater
+        _pgsource.PageSize = _pageSize;
+        _pgsource.CurrentPageIndex = CurrentPage;
+        //Keep the total pages in ViewState
+        ViewState["TotalPages"] = _pgsource.PageCount;
+        //Ex. 3/10
+        lblPage.Text = (CurrentPage + 1) + "/" + _pgsource.PageCount;
+        //Enable Control Buttons
+        lbFirst.Enabled = !_pgsource.IsFirstPage;
+        lbPrevious.Enabled = !_pgsource.IsFirstPage;
+        lbNext.Enabled = !_pgsource.IsLastPage;
+        lbLast.Enabled = !_pgsource.IsLastPage;
+
+        rptCompanyAnnouncement.DataSource = dt;
+        rptCompanyAnnouncement.DataBind();
+
+        HandlePaging();
+    }
+
+    private void HandlePaging()
+    {
+        DataTable dt = new DataTable();
+        dt.Columns.Add("PageIndex");  //starts from 0
+        dt.Columns.Add("PageText");  //starts from 1
+
+        _firstIndex = CurrentPage - 2;
+        if (CurrentPage > 2)
+        {
+            _lastIndex = CurrentPage + 2;
+        }
+        else
+        {
+            _lastIndex = 4;
+        }
+
+        //check last index to see if it's greater than total pages
+        if (_lastIndex > Convert.ToInt32(ViewState["TotalPages"]))
+        {
+            _lastIndex = Convert.ToInt32(ViewState["TotalPages"]);
+            _firstIndex = _lastIndex - 4;
+        }
+        if (_firstIndex < 0)
+        {
+            _firstIndex = 0;
+        }
+
+        //create page number based on the calculation above
+        for (int i = _firstIndex; i < _lastIndex; i++)
+        {
+            DataRow dr = dt.NewRow();
+            dr[0] = i;
+            dr[1] = i + 1;
+            dt.Rows.Add(dr);
+        }
+
+        rptPaging.DataSource = dt;
+        rptPaging.DataBind();
+    }
+    protected void lbFirst_Click(object sender, EventArgs e)
+    {
+        CurrentPage = 0;
+        BindDataTorptCompanyAnnouncement();
+    }
+    protected void lbPrevious_Click(object sender, EventArgs e)
+    {
+        CurrentPage -= 1;
+        BindDataTorptCompanyAnnouncement();
+    }
+    protected void lbNext_Click(object sender, EventArgs e)
+    {
+        CurrentPage += 1;
+        BindDataTorptCompanyAnnouncement();
+    }
+    protected void lbLast_Click(object sender, EventArgs e)
+    {
+        CurrentPage = (Convert.ToInt32(ViewState["TotalPages"]) - 1);
+        BindDataTorptCompanyAnnouncement();
+    }
+    protected void rptPaging_ItemCommand(object source, DataListCommandEventArgs e)
+    {
+        if (!e.CommandName.Equals("newPage")) return;
+        CurrentPage = Convert.ToInt32(e.CommandArgument.ToString());
+        BindDataTorptCompanyAnnouncement();
+    }
+    protected void rptPaging_ItemDataBound(object sender, DataListItemEventArgs e)
+    {
+        var lb = (LinkButton)e.Item.FindControl("lbPaging");
+        if (lb.CommandArgument != CurrentPage.ToString()) return;
+        lb.Enabled = false;
+        lb.ForeColor = Color.FromName("#333333");
+    }
+    #endregion
 }

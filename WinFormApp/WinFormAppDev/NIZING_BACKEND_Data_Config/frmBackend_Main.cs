@@ -16,10 +16,17 @@ namespace NIZING_BACKEND_Data_Config
         private Boolean searchFormLoaded = false; 
         private enum FunctionMode { ADD, EDIT, DELETE, SEARCH, HASRECORD, NORECORD };
         TabPage currentTabPage;
+
+        #region 帳號管理 Universal Variable
         private FunctionMode accountTabMode = FunctionMode.NORECORD;
+        #endregion
+
         public frmBackend_Main()
         {
             InitializeComponent();
+            currentTabPage = tbcManagement.SelectedTab;
+            LoadControlStatus(currentTabPage);
+            #region 帳號管理 Init
             flpAccountId.Margin = new Padding(0, (flpAccountId.Height - (txtAccountId.Height + 3)) / 2, 0, 0);
             dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter adapter = new dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter();
             DataTable dtFunctionList = adapter.GetData();
@@ -27,9 +34,9 @@ namespace NIZING_BACKEND_Data_Config
             ((ListBox)this.clbAdminRights).DisplayMember = "NAME";
             ((ListBox)this.clbAdminRights).ValueMember = "ID";
             accountTabMode = FunctionMode.NORECORD;
-            currentTabPage = tbcManagement.SelectedTab;
-            LoadControlStatus(currentTabPage);
-            txtAccountManagementMemo.Text = String.Empty;            
+            txtAccountManagementMemo.Text = String.Empty;
+            #endregion
+
         }
 
         #region Frame Method and Button Behavior
@@ -45,7 +52,7 @@ namespace NIZING_BACKEND_Data_Config
         private List<string> GetSelectedItem(CheckedListBox clb)
         {
             List<string> checkedList = new List<string>();
-            foreach (DataRowView row in clbAdminRights.CheckedItems)
+            foreach (DataRowView row in clb.CheckedItems)
             {
                 checkedList.Add(row["ID"].ToString());
             }
@@ -94,6 +101,7 @@ namespace NIZING_BACKEND_Data_Config
                     }
                 }
             }
+            
             return errorList;
         }
 
