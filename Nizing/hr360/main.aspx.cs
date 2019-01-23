@@ -19,7 +19,7 @@ public partial class main : System.Web.UI.Page
     #region Announcement Repeater Pagination Variable
     readonly PagedDataSource _pgsource = new PagedDataSource();
     int _firstIndex, _lastIndex;
-    private int _pageSize = 2;
+    private int _pageSize = 5;  //公告每頁顯示數量
     private int CurrentPage
     {
         get
@@ -311,12 +311,40 @@ public partial class main : System.Web.UI.Page
         //Ex. 3/10
         lblPage.Text = (CurrentPage + 1) + "/" + _pgsource.PageCount;
         //Enable Control Buttons
-        lbFirst.Enabled = !_pgsource.IsFirstPage;
-        lbPrevious.Enabled = !_pgsource.IsFirstPage;
-        lbNext.Enabled = !_pgsource.IsLastPage;
-        lbLast.Enabled = !_pgsource.IsLastPage;
+        if (!_pgsource.IsFirstPage)
+        {
+            lbFirst.Enabled = true;
+            lbFirst.ForeColor = ColorTranslator.FromHtml("#337ab7");
+            lbPrevious.Enabled = true;
+            lbPrevious.ForeColor = ColorTranslator.FromHtml("#337ab7");
+        }
+        else
+        {
+            lbFirst.Enabled = false;
+            lbFirst.ForeColor = Color.Gray;            
+            lbPrevious.Enabled = false;
+            lbPrevious.ForeColor = Color.Gray;
+        }
+        if (!_pgsource.IsLastPage)
+        {
+            lbLast.Enabled = true;
+            lbLast.ForeColor = ColorTranslator.FromHtml("#337ab7");
+            lbNext.Enabled = true;
+            lbNext.ForeColor = ColorTranslator.FromHtml("#337ab7");
+        }
+        else
+        {
+            lbLast.Enabled = false;
+            lbLast.ForeColor = Color.Gray;
+            lbNext.Enabled = false;
+            lbNext.ForeColor = Color.Gray;
+        }
+        //lbFirst.Enabled = !_pgsource.IsFirstPage;
+        //lbPrevious.Enabled = !_pgsource.IsFirstPage;
+        //lbNext.Enabled = !_pgsource.IsLastPage;
+        //lbLast.Enabled = !_pgsource.IsLastPage;
 
-        rptCompanyAnnouncement.DataSource = dt;
+        rptCompanyAnnouncement.DataSource = _pgsource;
         rptCompanyAnnouncement.DataBind();
 
         HandlePaging();

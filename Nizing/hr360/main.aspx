@@ -34,6 +34,44 @@
             <asp:UpdatePanel ID="upCompanyAnnouncement" runat="server">
                 <ContentTemplate>
                     <div id="announcement_section">
+                        <div id="announcement_pagination_control" style="margin-top:10px;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td>
+                                        <asp:LinkButton ID="lbFirst" runat="server" style="text-decoration:none;"
+                                            OnClick="lbFirst_Click">首頁</asp:LinkButton>
+                                    </td>
+                                    <td>
+                                        <asp:LinkButton ID="lbPrevious" runat="server" style="text-decoration:none;"
+                                            OnClick="lbPrevious_Click">前一頁</asp:LinkButton>
+                                    </td>
+                                    <td>
+                                        <asp:DataList ID="rptPaging" runat="server"
+                                            OnItemCommand="rptPaging_ItemCommand" 
+                                            OnItemDataBound="rptPaging_ItemDataBound" 
+                                            RepeatDirection="Horizontal">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lbPaging" runat="server" 
+                                                    CommandArgument='<%# Eval("PageIndex") %>' 
+                                                    CommandName="newPage"
+                                                    Text='<%# Eval("PageText") %>' ></asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:DataList>
+                                    </td>
+                                    <td>
+                                        <asp:LinkButton ID="lbNext" runat="server" style="text-decoration:none;"
+                                            OnClick="lbNext_Click">下一頁</asp:LinkButton>
+                                    </td>
+                                    <td>
+                                        <asp:LinkButton ID="lbLast" runat="server" style="text-decoration:none;"
+                                            OnClick="lbLast_Click">末頁</asp:LinkButton>
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="lblPage" runat="server" Text="[placeholder]"></asp:Label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                         <div id="announcement_body">
                             <asp:Repeater ID="rptCompanyAnnouncement" runat="server" >
                                     <HeaderTemplate>
@@ -53,44 +91,7 @@
                                     </FooterTemplate>         
                             </asp:Repeater>
                         </div>
-                        <div id="announcement_pagination_control" style="margin-top:10px;">
-                            <table style="width:100%;">
-                                <tr>
-                                    <td>
-                                        <asp:LinkButton ID="lbFirst" runat="server" 
-                                            OnClick="lbFirst_Click">首頁</asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:LinkButton ID="lbPrevious" runat="server"
-                                            OnClick="lbPrevious_Click">前一頁</asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:DataList ID="rptPaging" runat="server"
-                                            OnItemCommand="rptPaging_ItemCommand" 
-                                            OnItemDataBound="rptPaging_ItemDataBound" 
-                                            RepeatDirection="Horizontal">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="lbPaging" runat="server" 
-                                                    CommandArgument='<%# Eval("PageIndex") %>' 
-                                                    CommandName="newPage"
-                                                    Text='<%# Eval("PageText") %>' ></asp:LinkButton>
-                                            </ItemTemplate>
-                                        </asp:DataList>
-                                    </td>
-                                    <td>
-                                        <asp:LinkButton ID="lbNext" runat="server" 
-                                            OnClick="lbNext_Click">下一頁</asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:LinkButton ID="lbLast" runat="server" 
-                                            OnClick="lbLast_Click">末頁</asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:Label ID="lblPage" runat="server" Text="[placeholder]"></asp:Label>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+                        
                     </div>             
                            
                 </ContentTemplate>
