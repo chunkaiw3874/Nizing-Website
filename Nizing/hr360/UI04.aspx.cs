@@ -43,8 +43,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "chrissy";    //test only to avoid error on loading, delete after trial            
-        //Session["erp_id"] = "0007";        
+        Session["user_id"] = "0031";    //test only to avoid error on loading, delete after trial            
+        Session["erp_id"] = "0031";        
 
         if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
         {
@@ -588,7 +588,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     }
                     for (int i = 0; i < tbInProgressSummary.Rows.Count - 1; i++)
                     {
-                        if (tbInProgressSummary.Rows[i].Cells[1].InnerText == "補休")
+                        if (tbInProgressSummary.Rows[i].Cells[1].InnerText == "補休" && tbInProgressSummary.Rows[i].Cells[8].InnerText=="未登入")
                         {
                             string usedAmount = tbInProgressSummary.Rows[i].Cells[4].InnerText.Substring(0, tbInProgressSummary.Rows[i].Cells[4].InnerText.Length - 2);
                             r += decimal.Parse(usedAmount);
@@ -626,7 +626,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                             }
                             for (int i = 1; i < tbInProgressSummary.Rows.Count; i++)
                             {
-                                if (tbInProgressSummary.Rows[i].Cells[1].InnerText == "特休" && DateTime.Parse(tbInProgressSummary.Rows[i].Cells[2].InnerText) < relevantWorkDate)
+                                if (tbInProgressSummary.Rows[i].Cells[1].InnerText == "特休" && DateTime.Parse(tbInProgressSummary.Rows[i].Cells[2].InnerText) < relevantWorkDate && tbInProgressSummary.Rows[i].Cells[8].InnerText == "未登入")
                                 {
                                     string usedAmount = tbInProgressSummary.Rows[i].Cells[4].InnerText.Substring(0, tbInProgressSummary.Rows[i].Cells[4].InnerText.Length - 2);
                                     r += decimal.Parse(usedAmount);
@@ -643,7 +643,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                          */
                         else if (dayOffStartDate >= relevantWorkDate)
                         {
-                            for (int i = 0; i < tbAppSummary.Rows.Count - 1; i++)
+                            for (int i = 1; i < tbAppSummary.Rows.Count; i++)
                             {
                                 if (tbAppSummary.Rows[i].Cells[0].InnerText == "特休")
                                 {
@@ -651,9 +651,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
                                     r += decimal.Parse(usedAmount);
                                 }
                             }
-                            for (int i = 0; i < tbInProgressSummary.Rows.Count - 1; i++)
+                            for (int i = 1; i < tbInProgressSummary.Rows.Count; i++)
                             {
-                                if (tbInProgressSummary.Rows[i].Cells[1].InnerText == "特休")
+                                if (tbInProgressSummary.Rows[i].Cells[1].InnerText == "特休" && tbInProgressSummary.Rows[i].Cells[8].InnerText == "未登入")
                                 {
                                     string usedAmount = tbInProgressSummary.Rows[i].Cells[4].InnerText.Substring(0, tbInProgressSummary.Rows[i].Cells[4].InnerText.Length - 2);
                                     r += decimal.Parse(usedAmount);
@@ -1138,8 +1138,17 @@ public partial class hr360_UI04 : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             conn.Open();
-            string query = "SELECT A.APPLICATION_ID,A.DAYOFF_NAME,A.DAYOFF_START_TIME,A.DAYOFF_END_TIME,CONVERT(NVARCHAR(20),A.DAYOFF_TOTAL_TIME)+DAYOFF_TIME_UNIT,COALESCE(MV.MV002,'N/A'),B.NAME"
-                        + " ,A.NEXT_REVIEWER+' '+MV2.MV002"
+            string query = ";WITH CTE"
+                        + " AS"
+                        + " ("
+                        + " SELECT A.APPLICATION_ID"
+                        + " ,A.DAYOFF_NAME"
+                        + " ,A.DAYOFF_START_TIME"
+                        + " ,A.DAYOFF_END_TIME"
+                        + " ,CONVERT(NVARCHAR(20),A.DAYOFF_TOTAL_TIME)+DAYOFF_TIME_UNIT 'DAYOFF_TOTAL_TIME'"
+                        + " ,COALESCE(MV.MV002,'N/A') 'FUNC_SUB'"
+                        + " ,B.NAME"
+                        + " ,A.NEXT_REVIEWER+' '+MV2.MV002 'NEXT_REVIEWER'"
                         + " FROM HR360_DAYOFFAPPLICATION_APPLICATION A"
                         + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPLICATION_STATUS B ON A.APPLICATION_STATUS_ID=B.ID"
                         + " LEFT JOIN NZ.dbo.CMSMV MV ON A.FUNCTIONAL_SUBSTITUTE_ID=MV.MV001"
@@ -1147,7 +1156,22 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         + " WHERE A.APPLICANT_ID=@APPLICANT"
                         + " AND A.APPLICATION_STATUS_ID<>'06'"
                         + " AND A.APPLICATION_STATUS_ID<>'07'"
-                        + " AND A.APPLICATION_STATUS_ID<>'08'";
+                        + " AND A.APPLICATION_STATUS_ID<>'08'"
+                        + " )"
+                        + " SELECT *, CASE"
+                        + " WHEN EXISTS"
+                        + " ("
+                        + " SELECT *"
+                        + " FROM NZ.dbo.PALTF TF"
+                        + " WHERE TF.TF001=@APPLICANT"
+                        + " AND TF.TF002=CONVERT(NVARCHAR(8),CTE.DAYOFF_START_TIME,112)"
+                        + " AND TF.TF008=CONVERT(NVARCHAR(3),CTE.DAYOFF_TOTAL_TIME)"
+                        + " )"
+                        + " THEN '已登入'"
+                        + " ELSE '未登入'"
+                        + " END AS 'ERP狀態'"
+                        + " FROM CTE"
+                        + " ORDER BY APPLICATION_ID";
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@APPLICANT", Session["erp_id"].ToString());
             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -1189,6 +1213,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
         newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
         newHeaderRow.Controls.Add(newHeaderCell);
         newHeaderCell = new HtmlTableCell("th");
+        newHeaderCell.InnerText = "ERP狀態";
+        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        newHeaderRow.Controls.Add(newHeaderCell);
+        newHeaderCell = new HtmlTableCell("th");
         newHeaderCell.InnerText = "撤銷申請";
         newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
         newHeaderRow.Controls.Add(newHeaderCell);
@@ -1226,6 +1254,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
             newRow.Controls.Add(cell);
             cell = new HtmlTableCell();
             cell.InnerText = dt.Rows[i][7].ToString();
+            cell.Attributes.Add("style", "text-align:center;");
+            newRow.Controls.Add(cell);
+            cell = new HtmlTableCell();
+            cell.InnerText = dt.Rows[i][8].ToString();
             cell.Attributes.Add("style", "text-align:center;");
             newRow.Controls.Add(cell);
             cell = new HtmlTableCell();

@@ -695,26 +695,48 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
         double dayOffSum = 0;  //缺勤小記
         for (int i = 0; i < dtAttendance.Rows.Count; i++)
         {
-            Label lblDayOffName = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOffName" + (i + 1).ToString()));
-            if (lblDayOffName != null)
+            HtmlGenericControl attendanceDiv1 = new HtmlGenericControl("div");
+            attendanceDiv1.Attributes["class"] = "row";
+            attendanceRecord.Controls.Add(attendanceDiv1);
+            HtmlGenericControl attendanceDiv2 = new HtmlGenericControl("div");
+            attendanceDiv2.Attributes["class"] = "col-xs-4 border";
+            attendanceDiv2.InnerText = dtAttendance.Rows[i]["DAY_OFF_TYPE"].ToString();
+            attendanceDiv1.Controls.Add(attendanceDiv2);
+            attendanceDiv2 = new HtmlGenericControl("div");
+            attendanceDiv2.Attributes["class"] = "col-xs-4 border";
+            attendanceDiv2.InnerText = dtAttendance.Rows[i]["DAY_OFF_AMOUNT"].ToString();
+            attendanceDiv1.Controls.Add(attendanceDiv2);
+            attendanceDiv2 = new HtmlGenericControl("div");
+            attendanceDiv2.Attributes["class"] = "col-xs-4 border";
+            attendanceDiv2.InnerText = dtAttendance.Rows[i]["DAY_OFF_UNIT"].ToString();
+            attendanceDiv1.Controls.Add(attendanceDiv2);
+            if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
             {
-                lblDayOffName.Text = dtAttendance.Rows[i]["DAY_OFF_TYPE"].ToString();
-            }
-            Label lblDayOff = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOff" + (i + 1).ToString()));
-            if (lblDayOff != null)
-            {
-                lblDayOff.Text = dtAttendance.Rows[i]["DAY_OFF_AMOUNT"].ToString();
-                if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
-                {
-                    dayOffSum += Convert.ToDouble(dtAttendance.Rows[i][3]);
-                }
-            }
-            Label lblDayOffUnit = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOffUnit" + (i + 1).ToString()));
-            if (lblDayOffUnit != null)
-            {
-                lblDayOffUnit.Text = dtAttendance.Rows[i]["DAY_OFF_UNIT"].ToString();
+                dayOffSum += Convert.ToDouble(dtAttendance.Rows[i]["DAY_OFF_AMOUNT"]);
             }
         }
+        //for (int i = 0; i < dtAttendance.Rows.Count; i++)
+        //{
+        //    Label lblDayOffName = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOffName" + (i + 1).ToString()));
+        //    if (lblDayOffName != null)
+        //    {
+        //        lblDayOffName.Text = dtAttendance.Rows[i]["DAY_OFF_TYPE"].ToString();
+        //    }
+        //    Label lblDayOff = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOff" + (i + 1).ToString()));
+        //    if (lblDayOff != null)
+        //    {
+        //        lblDayOff.Text = dtAttendance.Rows[i]["DAY_OFF_AMOUNT"].ToString();
+        //        if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
+        //        {
+        //            dayOffSum += Convert.ToDouble(dtAttendance.Rows[i][3]);
+        //        }
+        //    }
+        //    Label lblDayOffUnit = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOffUnit" + (i + 1).ToString()));
+        //    if (lblDayOffUnit != null)
+        //    {
+        //        lblDayOffUnit.Text = dtAttendance.Rows[i]["DAY_OFF_UNIT"].ToString();
+        //    }
+        //}
         //計算小計
         lblDayOffSum.Text = dayOffSum.ToString();
         //計算出勤率
@@ -766,7 +788,107 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@YEAR", lblEvalYear.Text);
             lblDayOffUnused.Text = cmd.ExecuteScalar().ToString();
         }
-
+        //讀取獎懲紀錄
+        DataTable dtRnPRecord = new DataTable();
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            string query = "select eventCategory.Name 'EventName'"
+                + " ,record.[EventContent] 'EventContent'"
+                + " ,value.Name 'CategoryName'"
+                + " ,record.RNPCount 'RnPCount'"
+                + " ,value.[Unit] 'RnPUnit'"
+                + " ,record.RNPCount * value.Value 'RnPScore'"
+                + " ,'分' 'RnPScoreUnit'"
+                + " , record.Verified 'VerifiedID'"
+                + " ,case record.Verified"
+                + " when 1 then '已核准'"
+                + " else '未核准'"
+                + " end as 'Verified'"
+                + " ,coalesce(record.Memo,'') 'Memo'"
+                + " from HR360_RewardAndPenalty_Record record"
+                + " left join HR360_RewardAndPenalty_ValueSetting value on record.RNPID=value.[UID]"
+                + " left join HR360_RewardAndPenalty_Category category on value.Category=category.[UID]"
+                + " left join HR360_RewardAndPenalty_EventCategory eventCategory on record.EventID=eventCategory.[UID]"
+                + " where record.EmpID=@ID"
+                + " and record.[Year]=@year"
+                + " order by record.RNPID,record.EventID,record.CreateDate";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@ID", assessed);
+            cmd.Parameters.AddWithValue("@year", year);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dtRnPRecord);
+        }
+        int rnpSum = 0;
+        for (int i = 0; i < dtRnPRecord.Rows.Count; i++)
+        {
+            HtmlGenericControl divRnP1 = new HtmlGenericControl("div");
+            divRnP1.Attributes["class"] = "row";
+            RnPRecord.Controls.Add(divRnP1);
+            HtmlGenericControl divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = (i + 1).ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["EventName"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-3 border";
+            divRnP1.Controls.Add(divRnP2);
+            TextBox txt = new TextBox();
+            txt.TextMode = TextBoxMode.MultiLine;
+            txt.Enabled = false;
+            txt.CssClass = "autosize rnp-textbox";
+            txt.Text = dtRnPRecord.Rows[i]["EventContent"].ToString();
+            divRnP2.Controls.Add(txt);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["CategoryName"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["RnPCount"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["RnPUnit"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["RnPScore"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["RnPScoreUnit"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["Verified"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP1.Controls.Add(divRnP2);
+            txt = new TextBox();
+            txt.TextMode = TextBoxMode.MultiLine;
+            txt.Enabled = false;
+            txt.CssClass = "autosize rnp-textbox";
+            txt.Text = dtRnPRecord.Rows[i]["Memo"].ToString();
+            divRnP2.Controls.Add(txt);
+            if ((bool)dtRnPRecord.Rows[i]["VerifiedID"])
+            {
+                rnpSum += Convert.ToInt32(dtRnPRecord.Rows[i]["RnPScore"].ToString());
+            }
+        }
+        lblFinalRnPScore.Text = rnpSum.ToString();
         //動態增加自評以外的評語格
         if (lblEvalType.Text != "自評") //判斷非自評
         {
@@ -824,7 +946,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             conn.Open();
-            query = "SELECT A.ASSESSED_ID,B.MV002,A.ASSESSED_RANK,A.ASSESSED_WORKYEAR,A.ASSESS_YEAR,A.ASSESS_DATE,D.NAME,A.WEIGHTED_SCORE,A.OVERALL_COMMENT"
+            query = "SELECT A.ASSESSED_ID,B.MV002,A.ASSESSED_RANK,A.ASSESSED_WORKYEAR,A.ASSESS_YEAR,A.ASSESS_DATE,D.NAME,A.WEIGHTED_SCORE,A.OVERALL_COMMENT,COALESCE(A.RNP_SCORE,0) 'RNP_SCORE'"
                 + " FROM HR360_ASSESSMENTSCORE_ASSESSED_A A"
                 + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
                 + " LEFT JOIN HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A C ON A.ASSESSOR_ID=C.ASSESSOR_ID AND A.ASSESSED_ID=C.ASSESSED_ID AND A.ASSESS_YEAR=C.[YEAR]"
@@ -1007,21 +1129,43 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
         double dayOffSum = 0;  //缺勤小記
         for (int i = 0; i < dtAttendance.Rows.Count; i++)
         {
-            Label lblDayOffName = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOffName" + (i + 1).ToString()));
-            if (lblDayOffName != null)
+            HtmlGenericControl attendanceDiv1 = new HtmlGenericControl("div");
+            attendanceDiv1.Attributes["class"] = "row";
+            attendanceRecord.Controls.Add(attendanceDiv1);
+            HtmlGenericControl attendanceDiv2 = new HtmlGenericControl("div");
+            attendanceDiv2.Attributes["class"] = "col-xs-4 border";
+            attendanceDiv2.InnerText = dtAttendance.Rows[i]["DAY_OFF_TYPE"].ToString();
+            attendanceDiv1.Controls.Add(attendanceDiv2);
+            attendanceDiv2 = new HtmlGenericControl("div");
+            attendanceDiv2.Attributes["class"] = "col-xs-4 border";
+            attendanceDiv2.InnerText = dtAttendance.Rows[i]["DAY_OFF_AMOUNT"].ToString();
+            attendanceDiv1.Controls.Add(attendanceDiv2);
+            attendanceDiv2 = new HtmlGenericControl("div");
+            attendanceDiv2.Attributes["class"] = "col-xs-4 border";
+            attendanceDiv2.InnerText = dtAttendance.Rows[i]["DAY_OFF_UNIT"].ToString();
+            attendanceDiv1.Controls.Add(attendanceDiv2);
+            if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
             {
-                lblDayOffName.Text = dtAttendance.Rows[i][2].ToString();
-            }
-            Label lblDayOff = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOff" + (i + 1).ToString()));
-            if (lblDayOff != null)
-            {
-                lblDayOff.Text = dtAttendance.Rows[i][3].ToString();
-                if (i > 11)
-                {
-                    dayOffSum += Convert.ToDouble(dtAttendance.Rows[i][3]);
-                }
+                dayOffSum += Convert.ToDouble(dtAttendance.Rows[i]["DAY_OFF_AMOUNT"]);
             }
         }
+        //for (int i = 0; i < dtAttendance.Rows.Count; i++)
+        //{
+        //    Label lblDayOffName = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOffName" + (i + 1).ToString()));
+        //    if (lblDayOffName != null)
+        //    {
+        //        lblDayOffName.Text = dtAttendance.Rows[i][2].ToString();
+        //    }
+        //    Label lblDayOff = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOff" + (i + 1).ToString()));
+        //    if (lblDayOff != null)
+        //    {
+        //        lblDayOff.Text = dtAttendance.Rows[i][3].ToString();
+        //        if (i > 11)
+        //        {
+        //            dayOffSum += Convert.ToDouble(dtAttendance.Rows[i][3]);
+        //        }
+        //    }
+        //}
         //計算小計
         lblDayOffSum.Text = dayOffSum.ToString();
         //計算出勤率
@@ -1073,6 +1217,107 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@YEAR", lblEvalYear.Text);
             lblDayOffUnused.Text = cmd.ExecuteScalar().ToString();
         }
+        //讀取獎懲紀錄
+        DataTable dtRnPRecord = new DataTable();
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            query = "select eventCategory.Name 'EventName'"
+                + " ,record.[EventContent] 'EventContent'"
+                + " ,value.Name 'CategoryName'"
+                + " ,record.RNPCount 'RnPCount'"
+                + " ,value.[Unit] 'RnPUnit'"
+                + " ,record.RNPCount * value.Value 'RnPScore'"
+                + " ,'分' 'RnPScoreUnit'"
+                + " , record.Verified 'VerifiedID'"
+                + " ,case record.Verified"
+                + " when 1 then '已核准'"
+                + " else '未核准'"
+                + " end as 'Verified'"
+                + " ,coalesce(record.Memo,'') 'Memo'"
+                + " from HR360_RewardAndPenalty_Record record"
+                + " left join HR360_RewardAndPenalty_ValueSetting value on record.RNPID=value.[UID]"
+                + " left join HR360_RewardAndPenalty_Category category on value.Category=category.[UID]"
+                + " left join HR360_RewardAndPenalty_EventCategory eventCategory on record.EventID=eventCategory.[UID]"
+                + " where record.EmpID=@ID"
+                + " and record.[Year]=@year"
+                + " order by record.RNPID,record.EventID,record.CreateDate";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@ID", assessed);
+            cmd.Parameters.AddWithValue("@year", year);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dtRnPRecord);
+        }
+        //int rnpSum = 0;
+        for (int i = 0; i < dtRnPRecord.Rows.Count; i++)
+        {
+            HtmlGenericControl divRnP1 = new HtmlGenericControl("div");
+            divRnP1.Attributes["class"] = "row";
+            RnPRecord.Controls.Add(divRnP1);
+            HtmlGenericControl divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = (i + 1).ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["EventName"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-3 border";
+            divRnP1.Controls.Add(divRnP2);
+            TextBox txt = new TextBox();
+            txt.TextMode = TextBoxMode.MultiLine;
+            txt.Enabled = false;
+            txt.CssClass = "autosize rnp-textbox";
+            txt.Text = dtRnPRecord.Rows[i]["EventContent"].ToString();
+            divRnP2.Controls.Add(txt);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["CategoryName"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["RnPCount"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["RnPUnit"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["RnPScore"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["RnPScoreUnit"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["Verified"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP1.Controls.Add(divRnP2);
+            txt = new TextBox();
+            txt.TextMode = TextBoxMode.MultiLine;
+            txt.Enabled = false;
+            txt.CssClass = "autosize rnp-textbox";
+            txt.Text = dtRnPRecord.Rows[i]["Memo"].ToString();
+            divRnP2.Controls.Add(txt);
+            //if ((bool)dtRnPRecord.Rows[i]["VerifiedID"])
+            //{
+            //    rnpSum += Convert.ToInt32(dtRnPRecord.Rows[i]["RnPScore"].ToString());
+            //}
+        }
+        lblFinalRnPScore.Text = dtSurveyContent.Rows[0]["RNP_SCORE"].ToString();
         //load question from HR360_ASSESSMENTSCORE_SCORE_A
         if (assess_type == "1")
         {
@@ -1432,7 +1677,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                         query = "INSERT INTO HR360_ASSESSMENTSCORE_ASSESSED_A"
                             + " VALUES (GETDATE(),@CREATOR,GETDATE(),@MODIFIER,@ASSESSOR_ID"
                             + " ,@ASSESS_DATE,@ASSESS_YEAR,@ASSESSED_ID,@ASSESSED_RANK,@ASSESSED_WORKYEAR"
-                            + " ,@WEIGHTED_SCORE,@ATTENDANCE_SCORE,@OVERALL_COMMENT)";
+                            + " ,@WEIGHTED_SCORE,@ATTENDANCE_SCORE,@RNP_SCORE,@OVERALL_COMMENT)";
                         cmd = new SqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@CREATOR", assessor);
                         cmd.Parameters.AddWithValue("@MODIFIER", assessor);
@@ -1443,6 +1688,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                         cmd.Parameters.AddWithValue("@ASSESSED_RANK", lblEmpJob.Text);
                         cmd.Parameters.AddWithValue("@ASSESSED_WORKYEAR", lblEmpWorkYear.Text);
                         cmd.Parameters.AddWithValue("@ATTENDANCE_SCORE", lblOnJobPercent.Text);
+                        cmd.Parameters.AddWithValue("@RNP_SCORE", lblFinalRnPScore.Text);
                         cmd.Parameters.AddWithValue("@WEIGHTED_SCORE", hfFinalScore.Value.ToString());
                         //評語，自評跟非自評要擷取不同的控制項
                         if (lblEvalType.Text.Trim() == "自評")
@@ -1496,7 +1742,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                         query = "UPDATE HR360_ASSESSMENTSCORE_ASSESSED_A"
                             + " SET MODIFIEDDATE=GETDATE()"
                             + " ,ASSESS_DATE=@ASSESS_DATE,ASSESSED_RANK=@ASSESSED_RANK,ASSESSED_WORKYEAR=@ASSESSED_WORKYEAR"
-                            + " ,WEIGHTED_SCORE=@WEIGHTED_SCORE,OVERALL_COMMENT=@OVERALL_COMMENT"
+                            + " ,WEIGHTED_SCORE=@WEIGHTED_SCORE,RNP_SCORE=@RNP_SCORE,OVERALL_COMMENT=@OVERALL_COMMENT"
                             + " WHERE ASSESSOR_ID=@ASSESSOR_ID AND ASSESS_YEAR=@ASSESS_YEAR AND ASSESSED_ID=@ASSESSED_ID";
                         cmd = new SqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@ASSESSOR_ID", assessor);
@@ -1505,6 +1751,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                         cmd.Parameters.AddWithValue("@ASSESSED_ID", lblEmpID.Text);
                         cmd.Parameters.AddWithValue("@ASSESSED_RANK", lblEmpJob.Text);
                         cmd.Parameters.AddWithValue("@ASSESSED_WORKYEAR", lblEmpWorkYear.Text);
+                        cmd.Parameters.AddWithValue("@RNP_SCORE", lblFinalRnPScore.Text);
                         cmd.Parameters.AddWithValue("@WEIGHTED_SCORE", hfFinalScore.Value.ToString());
                         //評語，自評跟非自評要擷取不同的控制項
                         if (lblEvalType.Text.Trim() == "自評")

@@ -581,26 +581,49 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
         double dayOffSum = 0;  //缺勤小記
         for (int i = 0; i < dtAttendance.Rows.Count; i++)
         {
-            Label lblDayOffName = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOffName" + (i + 1).ToString()));
-            if (lblDayOffName != null)
+            HtmlGenericControl attendanceDiv1 = new HtmlGenericControl("div");
+            attendanceDiv1.Attributes["class"] = "row";
+            attendanceRecord.Controls.Add(attendanceDiv1);
+            HtmlGenericControl attendanceDiv2 = new HtmlGenericControl("div");
+            attendanceDiv2.Attributes["class"] = "col-xs-4 border";
+            attendanceDiv2.InnerText = dtAttendance.Rows[i]["DAY_OFF_TYPE"].ToString();
+            attendanceDiv1.Controls.Add(attendanceDiv2);
+            attendanceDiv2 = new HtmlGenericControl("div");
+            attendanceDiv2.Attributes["class"] = "col-xs-4 border";
+            attendanceDiv2.InnerText = dtAttendance.Rows[i]["DAY_OFF_AMOUNT"].ToString();
+            attendanceDiv1.Controls.Add(attendanceDiv2);
+            attendanceDiv2 = new HtmlGenericControl("div");
+            attendanceDiv2.Attributes["class"] = "col-xs-4 border";
+            attendanceDiv2.InnerText = dtAttendance.Rows[i]["DAY_OFF_UNIT"].ToString();
+            attendanceDiv1.Controls.Add(attendanceDiv2);
+            if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
             {
-                lblDayOffName.Text = dtAttendance.Rows[i]["DAY_OFF_TYPE"].ToString();
-            }
-            Label lblDayOff = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOff" + (i + 1).ToString()));
-            if (lblDayOff != null)
-            {
-                lblDayOff.Text = dtAttendance.Rows[i]["DAY_OFF_AMOUNT"].ToString();
-                if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
-                {
-                    dayOffSum += Convert.ToDouble(dtAttendance.Rows[i][3]);
-                }
-            }
-            Label lblDayOffUnit = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOffUnit" + (i + 1).ToString()));
-            if (lblDayOffUnit != null)
-            {
-                lblDayOffUnit.Text = dtAttendance.Rows[i]["DAY_OFF_UNIT"].ToString();
+                dayOffSum += Convert.ToDouble(dtAttendance.Rows[i]["DAY_OFF_AMOUNT"]);
             }
         }
+        
+        //for (int i = 0; i < dtAttendance.Rows.Count; i++)
+        //{
+        //    Label lblDayOffName = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOffName" + (i + 1).ToString()));
+        //    if (lblDayOffName != null)
+        //    {
+        //        lblDayOffName.Text = dtAttendance.Rows[i]["DAY_OFF_TYPE"].ToString();
+        //    }
+        //    Label lblDayOff = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOff" + (i + 1).ToString()));
+        //    if (lblDayOff != null)
+        //    {
+        //        lblDayOff.Text = dtAttendance.Rows[i]["DAY_OFF_AMOUNT"].ToString();
+        //        if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
+        //        {
+        //            dayOffSum += Convert.ToDouble(dtAttendance.Rows[i][3]);
+        //        }
+        //    }
+        //    Label lblDayOffUnit = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOffUnit" + (i + 1).ToString()));
+        //    if (lblDayOffUnit != null)
+        //    {
+        //        lblDayOffUnit.Text = dtAttendance.Rows[i]["DAY_OFF_UNIT"].ToString();
+        //    }
+        //}
         //計算小計
         lblDayOffSum.Text = dayOffSum.ToString();
         //計算出勤率
@@ -708,51 +731,153 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@ID", lblEmpID.Text);
             cmd.Parameters.AddWithValue("@YEAR", lblEvalYear.Text);
             lblDayOffUnused.Text = cmd.ExecuteScalar().ToString();
-
-            if (Request.QueryString["ID"] == null)
+        }
+        //讀取獎懲紀錄
+        DataTable dtRnPRecord = new DataTable();
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            query = "select eventCategory.Name 'EventName'"
+                + " ,record.[EventContent] 'EventContent'"
+                + " ,value.Name 'CategoryName'"
+                + " ,record.RNPCount 'RnPCount'"
+                + " ,value.[Unit] 'RnPUnit'"
+                + " ,record.RNPCount * value.Value 'RnPScore'"
+                + " ,'分' 'RnPScoreUnit'"
+                + " , record.Verified 'VerifiedID'"
+                + " ,case record.Verified"
+                + " when 1 then '已核准'"
+                + " else '未核准'"
+                + " end as 'Verified'"
+                + " ,coalesce(record.Memo,'') 'Memo'"
+                + " from HR360_RewardAndPenalty_Record record"
+                + " left join HR360_RewardAndPenalty_ValueSetting value on record.RNPID=value.[UID]"
+                + " left join HR360_RewardAndPenalty_Category category on value.Category=category.[UID]"
+                + " left join HR360_RewardAndPenalty_EventCategory eventCategory on record.EventID=eventCategory.[UID]"
+                + " where record.EmpID=@ID"
+                + " and record.[Year]=@year"
+                + " order by record.RNPID,record.EventID,record.CreateDate";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@ID", assessed);
+            cmd.Parameters.AddWithValue("@year", year);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dtRnPRecord);
+        }
+        int rnpSum = 0;
+        for (int i = 0; i < dtRnPRecord.Rows.Count; i++)
+        {
+            HtmlGenericControl divRnP1 = new HtmlGenericControl("div");
+            divRnP1.Attributes["class"] = "row";
+            RnPRecord.Controls.Add(divRnP1);
+            HtmlGenericControl divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = (i + 1).ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["EventName"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-3 border";
+            divRnP1.Controls.Add(divRnP2);
+            TextBox txt = new TextBox();
+            txt.TextMode = TextBoxMode.MultiLine;
+            txt.Enabled = false;
+            txt.CssClass = "autosize rnp-textbox";
+            txt.Text = dtRnPRecord.Rows[i]["EventContent"].ToString();
+            divRnP2.Controls.Add(txt);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["CategoryName"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["RnPCount"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["RnPUnit"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["RnPScore"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["RnPScoreUnit"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP2.Attributes["style"] = "text-align:center;";
+            divRnP2.InnerText = dtRnPRecord.Rows[i]["Verified"].ToString();
+            divRnP1.Controls.Add(divRnP2);
+            divRnP2 = new HtmlGenericControl("div");
+            divRnP2.Attributes["class"] = "col-xs-1 border";
+            divRnP1.Controls.Add(divRnP2);
+            txt = new TextBox();
+            txt.TextMode = TextBoxMode.MultiLine;
+            txt.Enabled = false;
+            txt.CssClass = "autosize rnp-textbox";
+            txt.Text = dtRnPRecord.Rows[i]["Memo"].ToString();
+            divRnP2.Controls.Add(txt);
+            if ((bool)dtRnPRecord.Rows[i]["VerifiedID"])
             {
-                if (Session["erp_id"].ToString() != "0007" && Session["erp_id"].ToString() != "0006")
+                rnpSum += Convert.ToInt32(dtRnPRecord.Rows[i]["RnPScore"].ToString());
+            }
+        }
+        lblFinalRnPScore.Text = rnpSum.ToString();
+        //評語欄位控制
+        if (Request.QueryString["ID"] == null)
+        {
+            if (Session["erp_id"].ToString() != "0007" && Session["erp_id"].ToString() != "0006")
+            {
+                if (string.IsNullOrWhiteSpace(txt0006Comment.Text))
                 {
-                    if (string.IsNullOrWhiteSpace(txt0006Comment.Text))
-                    {
-                        div0006_comment.Visible = false;
-                    }
-                    else
-                    {
-                        div0006_comment.Visible = true;
-                    }
-                    if (string.IsNullOrWhiteSpace(txt0007Comment.Text))
-                    {
-                        div0007_comment.Visible = false;
-                    }
-                    else
-                    {
-                        div0007_comment.Visible = true;
-                    }
-                    if (string.IsNullOrWhiteSpace(txt0067Comment.Text))
-                    {
-                        div0067_comment.Visible = false;
-                    }
-                    else
-                    {
-                        div0067_comment.Visible = true;
-                    }
+                    div0006_comment.Visible = false;
                 }
                 else
                 {
-
                     div0006_comment.Visible = true;
+                }
+                if (string.IsNullOrWhiteSpace(txt0007Comment.Text))
+                {
+                    div0007_comment.Visible = false;
+                }
+                else
+                {
                     div0007_comment.Visible = true;
-                    if (string.IsNullOrWhiteSpace(txt0067Comment.Text))
-                    {
-                        div0067_comment.Visible = false;
-                    }
-                    else
-                    {
-                        div0067_comment.Visible = true;
-                    }
+                }
+                if (string.IsNullOrWhiteSpace(txt0067Comment.Text))
+                {
+                    div0067_comment.Visible = false;
+                }
+                else
+                {
+                    div0067_comment.Visible = true;
                 }
             }
+            else
+            {
+
+                div0006_comment.Visible = true;
+                div0007_comment.Visible = true;
+                if (string.IsNullOrWhiteSpace(txt0067Comment.Text))
+                {
+                    div0067_comment.Visible = false;
+                }
+                else
+                {
+                    div0067_comment.Visible = true;
+                }
+            }
+            
         }
     }
     protected void btnSaveComment_Click(object sender, EventArgs e)

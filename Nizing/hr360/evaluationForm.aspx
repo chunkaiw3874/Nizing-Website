@@ -59,6 +59,12 @@
             color: green;
             font-size: 2em;
         }
+        .rnp-textbox{
+            border:none;
+            resize:none;
+            background-color:white;
+            width:100%;
+        }
     </style>
     <script>
         $(function () {
@@ -175,7 +181,89 @@
                 </div>
             </div>--%>
         </div>
-        <div id="record">
+        <div id="attendanceRecord" runat="server">
+            <div class="row">
+                <div class="col-xs-12 subtitle border">
+                    年度考勤紀錄
+                </div>
+            </div>
+            <%--Records added programmatically here --%>            
+        </div>
+        <div id="attendanceRecordCalculation">
+            <div class="row" style="border-top: solid 1px #337ab7;">
+                <div class="col-xs-4 border">
+                    缺勤時數小計
+                </div>
+                <div class="col-xs-4 border">
+                    <asp:Label ID="lblDayOffSum" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-4 border">
+                    時
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 border">
+                    年度出勤率
+                </div>
+                <div class="col-xs-4 border">
+                    <asp:Label ID="lblOnJobPercent" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-4 border">
+                    %
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 border">
+                    未使用特/補休時數
+                </div>
+                <div class="col-xs-4 border">
+                    <asp:Label ID="lblDayOffUnused" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-4 border">
+                    時
+                </div>
+            </div>
+        </div>
+        <div id="RnPRecord" runat="server">
+            <div class="row">
+                <div class="col-xs-12 subtitle border">
+                    年度獎懲紀錄
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-1 border" style="text-align:center;">
+                    項次
+                </div>
+                <div class="col-xs-1 border" style="text-align:center;">
+                    事件分類
+                </div>
+                <div class="col-xs-3 border" style="text-align:center;">
+                    事件內容
+                </div>
+                <div class="col-xs-5 border" style="text-align:center;">
+                    獎懲內容
+                </div>
+                <div class="col-xs-1 border" style="text-align:center;">
+                    核單狀態
+                </div>
+                <div class="col-xs-1 border" style="text-align:center;">
+                    備註
+                </div>
+            </div>
+            <%--Records added programmatically here --%> 
+        </div>
+        <div id="RnPCalculation">
+            <div class="row">
+                <div class="col-xs-8 border" style="text-align:right;">
+                    小計:
+                </div>
+                <div class="col-xs-1 border" style="text-align:center">
+                    <asp:Label ID="lblFinalRnPScore" runat="server" Text="Label"></asp:Label>
+                </div>
+                <div class="col-xs-3 border"></div>
+            </div>
+        </div>
+        <%--<div id="record">
             <div class="row">
                 <div class="col-xs-6 subtitle border">
                     年度考勤紀錄
@@ -664,7 +752,7 @@
                     <br />
                 </div>
             </div>
-        </div>
+        </div>--%>
         <div id="comment" runat="server">
             <!--非自評的話，需於code behind加上一個動態div for 評核者 comment-->
             <div class="row">

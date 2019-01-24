@@ -354,8 +354,7 @@
                 <div class="col-xs-12">
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            申請中假單
-                       
+                            申請中假單                       
                         </div>
                         <div class="panel-body">
                             <table id="tbInProgressSummary" class="table col-xs-12" runat="server">
