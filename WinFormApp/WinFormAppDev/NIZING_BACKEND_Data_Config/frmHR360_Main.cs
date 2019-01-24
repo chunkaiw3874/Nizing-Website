@@ -279,6 +279,10 @@ namespace NIZING_BACKEND_Data_Config
                     btnLogout.Enabled = true;
                 }
             }
+            else if (tbcAccountManagement.SelectedTab == tbpCompanyAnnouncement)
+            {
+                //control display for each function mode
+            }
         }
 
         private bool isGridViewEmpty(DataGridView gv)
