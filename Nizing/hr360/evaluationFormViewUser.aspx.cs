@@ -634,7 +634,20 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@ID", lblEmpID.Text);
             cmd.Parameters.AddWithValue("@YEAR", lblEvalYear.Text);
-            lblDayOffUnused.Text = cmd.ExecuteScalar().ToString();
+            using (SqlDataReader dr = cmd.ExecuteReader())
+            {
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        lblDayOffUnused.Text = dr[0].ToString();
+                    }
+                }
+                else
+                {
+                    lblDayOffUnused.Text = "0.0";
+                }
+            }
         }
         //讀取獎懲紀錄
         DataTable dtRnPRecord = new DataTable();

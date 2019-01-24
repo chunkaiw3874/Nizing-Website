@@ -37,8 +37,8 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
                 assessed = Session["view_id"].ToString().Trim();
                 year = Session["view_year"].ToString().Trim();
                 //test 
-                //assessed = "0080";
-                //year = "2016";
+                //assessed = "0141";
+                //year = "2018";
                 //Session["erp_id"] = "0080";
             }
         }
@@ -730,7 +730,21 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@ID", lblEmpID.Text);
             cmd.Parameters.AddWithValue("@YEAR", lblEvalYear.Text);
-            lblDayOffUnused.Text = cmd.ExecuteScalar().ToString();
+            using (SqlDataReader dr = cmd.ExecuteReader())
+            {
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        lblDayOffUnused.Text = dr[0].ToString();
+                    }
+                }
+                else
+                {
+                    lblDayOffUnused.Text = "0.0";
+                }
+            }
+            //lblDayOffUnused.Text = cmd.ExecuteScalar().ToString();
         }
         //讀取獎懲紀錄
         DataTable dtRnPRecord = new DataTable();
