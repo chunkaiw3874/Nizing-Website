@@ -174,12 +174,12 @@
                     </div>
                 </div>
             </div>
-<%--            <div class="row">
+            <div class="row">
                 <div class="col-xs-12 border">
                     * 評分範圍:  分數為1~10分，最多小數點後一位。<br />  
                     * 評分標準: 0:極差/完全沒有; 1~3:差/有很大的進步空間; 4~6:普通/有待加強; 7~9:良好/已經很好，但可再進步; 10:極好/非常好
                 </div>
-            </div>--%>
+            </div>
         </div>
         <div id="attendanceRecord" runat="server">
             <div class="row">
@@ -187,40 +187,61 @@
                     年度考勤紀錄
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-2 border" style="text-align:center;">
+                    假別
+                </div>
+                <div class="col-xs-2 border" style="text-align:center;">
+                    時數
+                </div>
+                <div class="col-xs-2 border" style="text-align:center;">
+                    未修完時數
+                </div>
+                <div class="col-xs-2 border" style="text-align:center;">
+                    加扣基底
+                </div>
+                <div class="col-xs-2 border" style="text-align:center;">
+                    單位
+                </div>
+                <div class="col-xs-2 border" style="text-align:center;">
+                    小計
+                </div>
+            </div>
             <%--Records added programmatically here --%>            
         </div>
         <div id="attendanceRecordCalculation">
             <div class="row" style="border-top: solid 1px #337ab7;">
-                <div class="col-xs-4 border">
+                <div class="col-xs-2 border" style="text-align:center;">
                     缺勤時數小計
                 </div>
-                <div class="col-xs-4 border">
+                <div class="col-xs-2 border" style="text-align:center;">
                     <asp:Label ID="lblDayOffSum" runat="server" Text="&nbsp"></asp:Label>
                 </div>
-                <div class="col-xs-4 border">
-                    時
+                <div class="col-xs-4 border"></div>
+                <div class="col-xs-2 border" style="text-align:right">合計:</div>
+                <div class="col-xs-2 border" style="text-align:right">
+                    <asp:Label ID="lblDayOffValueSum" runat="server" Text="Label"></asp:Label>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-4 border">
-                    年度出勤率
-                </div>
-                <div class="col-xs-4 border">
-                    <asp:Label ID="lblOnJobPercent" runat="server" Text="&nbsp"></asp:Label>
-                </div>
-                <div class="col-xs-4 border">
-                    %
+                <div class="col-xs-8 border"></div>
+                <div class="col-xs-2 border" style="text-align:right">實際出勤時數:</div>
+                <div class="col-xs-2 border" style="text-align:right">
+                    <asp:Label ID="lblActualAttendance" runat="server" Text="&nbsp"></asp:Label>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-4 border">
-                    未使用特/補休時數
+                <div class="col-xs-8 border"></div>
+                <div class="col-xs-2 border" style="text-align:right">應出勤時數:</div>
+                <div class="col-xs-2 border" style="text-align:right">
+                    <asp:Label ID="lblExpectedAttendance" runat="server" Text="&nbsp"></asp:Label>
                 </div>
-                <div class="col-xs-4 border">
-                    <asp:Label ID="lblDayOffUnused" runat="server" Text="&nbsp"></asp:Label>
-                </div>
-                <div class="col-xs-4 border">
-                    時
+            </div>
+            <div class="row">
+                <div class="col-xs-8 border"></div>
+                <div class="col-xs-2 border" style="text-align:right">出勤分數:</div>
+                <div class="col-xs-2 border" style="text-align:right">
+                    <asp:Label ID="lblAttendanceScore" runat="server" Text="&nbsp"></asp:Label>
                 </div>
             </div>
         </div>

@@ -58,8 +58,8 @@
                         </th>
                     </tr>
                     <tr>
-                        <td>Alper Chen</td>
-                        <td><a href="mailto:alperchen@nizing.com.tw">alperchen@nizing.com.tw</a></td>
+                        <td>Kevin Wang</td>
+                        <td><a href="mailto:kevin@nizing.com.tw">kevin@nizing.com.tw</a></td>
                     </tr>
                 </table>
             </div>            

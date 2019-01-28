@@ -61,8 +61,8 @@
                         </th>
                     </tr>
                     <tr>
-                        <td>陳沛文 / Alper</td>
-                        <td><a href="mailto:alperchen@nizing.com.tw">alperchen@nizing.com.tw</a></td>
+                        <td>王君凱 / Kevin</td>
+                        <td><a href="mailto:kevin@nizing.com.tw">kevin@nizing.com.tw</a></td>
                     </tr>
                 </table>
             </div>

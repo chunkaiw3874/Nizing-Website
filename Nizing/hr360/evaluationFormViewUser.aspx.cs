@@ -27,8 +27,8 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
         string assessed = "";
         string year = "";
         //test info
-        //Session["erp_id"] = "0001";
-        //Session["view_year"] = "2017";        
+        //Session["erp_id"] = "0010";
+        //Session["view_year"] = "2018";        
         if (!IsPostBack)
         {
             assessed = Session["erp_id"].ToString().Trim();
@@ -263,7 +263,7 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
-                query = "SELECT ASSESSOR_ID"
+                query = "SELECT ASSESSOR_ID,COALESCE(RNP_SCORE,0.0) 'RNP_SCORE'"
                     + " FROM HR360_ASSESSMENTSCORE_ASSESSED_A"
                     + " WHERE ASSESS_YEAR=@ASSESS_YEAR"
                     + " AND ASSESSED_ID=@ASSESSED_ID";
@@ -469,71 +469,103 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(NZconnectionString))
         {
             conn.Open();
-            SqlCommand cmd = new SqlCommand("WITH CTE1"
-                                        + " AS"
-                                        + " ("
-                                        + " SELECT PALTL.TL001 EMP_ID"
-                                        + " ,PALMC.MC001 DAY_OFF_ID"
-                                        + " ,PALMC.MC002 DAY_OFF_TYPE"
-                                        + " ,COALESCE(SUM(PALTL.TL006+PALTL.TL007),0) DAY_OFF_AMOUNT"
-                                        + " ,CASE PALMC.MC004"
-                                        + " WHEN 1 THEN N'天'"
-                                        + " WHEN 2 THEN N'時'"
-                                        + " WHEN 3 THEN N'次'"
-                                        + " WHEN 4 THEN N'分'"
-                                        + " END AS DAY_OFF_UNIT"
-                                        + " FROM PALMC"
-                                        + " LEFT OUTER JOIN PALTL ON PALMC.MC001=PALTL.TL004 AND PALTL.TL002=@YEAR AND PALTL.TL001=@ID"
-                                        + " GROUP BY PALTL.TL001,PALMC.MC001,PALMC.MC002,PALMC.MC004"
-                                        + " UNION"
-                                        + " SELECT"
-                                        + " UNPIVOTTABLE.EMP_ID"
-                                        + " ,CASE UNPIVOTTABLE.DAY_OFF_TYPE"
-                                        + " WHEN N'遲到' THEN N'98'"
-                                        + " WHEN N'早退' THEN N'99'"
-                                        + " END AS DAY_OFF_ID"
-                                        + " ,UNPIVOTTABLE.DAY_OFF_TYPE,UNPIVOTTABLE.DAY_OFF_AMOUNT,N'分' AS DAY_OFF_UNIT"
-                                        + " FROM"
-                                        + " ("
-                                        + " SELECT PALTB.TB001 EMP_ID"
-                                        + " ,CONVERT(DECIMAL(16,2),SUM(PALTB.TB007)) 遲到"
-                                        + " ,CONVERT(DECIMAL(16,2),SUM(PALTB.TB008)) 早退"
-                                        + " FROM PALTB"
-                                        + " WHERE PALTB.TB001=@ID AND SUBSTRING(PALTB.TB002,1,4)=@YEAR"
-                                        + " GROUP BY PALTB.TB001"
-                                        + " ) AS GROUPTABLE"
-                                        + " UNPIVOT"
-                                        + " ("
-                                        + " DAY_OFF_AMOUNT FOR DAY_OFF_TYPE IN (遲到,早退)"
-                                        + " ) AS UNPIVOTTABLE"
-                                        + " )"
-                                        + " SELECT"
-                                        + " CASE CTE1.DAY_OFF_ID"
-                                        + " WHEN 04 THEN 2"
-                                        + " WHEN 05 THEN 2"
-                                        + " WHEN 98 THEN 2"
-                                        + " WHEN 99 THEN 2"
-                                        + " ELSE 1"
-                                        + " END AS DAY_OFF_CATEGORY"
-                                        + " , DAY_OFF_ID, DAY_OFF_TYPE"
-                                        + " , CASE"
-                                        + " 	WHEN CTE1.EMP_ID=0010"
-                                        + " 	THEN"
-                                        + " 		CASE CTE1.DAY_OFF_UNIT"
-                                        + " 		WHEN N'天' THEN CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT*8.5)"
-                                        + " 		WHEN N'分' THEN CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT/60.0)"
-                                        + " 		ELSE CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)"
-                                        + " 		END"
-                                        + " 	ELSE"
-                                        + " 		CASE CTE1.DAY_OFF_UNIT"
-                                        + " 		WHEN N'天' THEN CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT*8.0)"
-                                        + " 		WHEN N'分' THEN CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT/60.0)"
-                                        + " 		ELSE CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)"
-                                        + " 		END"
-                                        + " 	END AS DAY_OFF_AMOUNT"
-                                        + " , N'時' AS DAY_OFF_UNIT"
-                                        + " FROM CTE1"
-                                        + " ORDER BY DAY_OFF_CATEGORY,DAY_OFF_ID", conn);
+            SqlCommand cmd = new SqlCommand(";WITH CTE1"
++ " AS"
++ " ("
++ " SELECT PALTL.TL001 EMP_ID"
++ " ,PALMC.MC001 DAY_OFF_ID"
++ " ,PALMC.MC002 DAY_OFF_TYPE"
++ " ,COALESCE(SUM(PALTL.TL006+PALTL.TL007),0) DAY_OFF_AMOUNT"
++ " ,CASE PALMC.MC004"
++ " WHEN 1 THEN N'天'"
++ " WHEN 2 THEN N'時'"
++ " WHEN 3 THEN N'次'"
++ " WHEN 4 THEN N'分'"
++ " END AS DAY_OFF_UNIT"
++ " FROM PALMC"
++ " LEFT OUTER JOIN PALTL ON PALMC.MC001=PALTL.TL004 AND PALTL.TL002=@YEAR AND PALTL.TL001=@ID"
++ " GROUP BY PALTL.TL001,PALMC.MC001,PALMC.MC002,PALMC.MC004"
++ " UNION"
++ " SELECT"
++ " UNPIVOTTABLE.EMP_ID"
++ " ,CASE UNPIVOTTABLE.DAY_OFF_TYPE"
++ " WHEN N'遲到' THEN N'98'"
++ " WHEN N'早退' THEN N'99'"
++ " END AS DAY_OFF_ID"
++ " ,UNPIVOTTABLE.DAY_OFF_TYPE,UNPIVOTTABLE.DAY_OFF_AMOUNT,N'分' AS DAY_OFF_UNIT"
++ " FROM"
++ " ("
++ " SELECT PALTB.TB001 EMP_ID"
++ " ,CONVERT(DECIMAL(16,2),SUM(PALTB.TB007))/60.0 遲到"
++ " ,CONVERT(DECIMAL(16,2),SUM(PALTB.TB008))/60.0 早退"
++ " FROM PALTB"
++ " WHERE PALTB.TB001=@ID AND SUBSTRING(PALTB.TB002,1,4)=@YEAR"
++ " GROUP BY PALTB.TB001"
++ " ) AS GROUPTABLE"
++ " UNPIVOT"
++ " ("
++ " DAY_OFF_AMOUNT FOR DAY_OFF_TYPE IN (遲到,早退)"
++ " ) AS UNPIVOTTABLE"
++ " ),"
++ " DAYOFF_SUMMARY"
++ " AS"
++ " ("
++ " SELECT CASE CTE1.DAY_OFF_ID"
++ " WHEN 04 THEN 2"
++ " WHEN 05 THEN 2"
++ " WHEN 10 THEN 2"
++ " WHEN 98 THEN 2"
++ " WHEN 99 THEN 2"
++ " ELSE 1"
++ " END AS DAY_OFF_CATEGORY"
++ " , DAY_OFF_ID, DAY_OFF_TYPE"
++ " , CASE"
++ " WHEN CTE1.EMP_ID='0010'"
++ " THEN"
++ " CASE CTE1.DAY_OFF_UNIT"
++ " WHEN N'天' THEN CONVERT(DECIMAL(16,2),CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)*8.5)"
++ " WHEN N'分' THEN CONVERT(DECIMAL(16,2),CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)/60.0)"
++ " ELSE CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)"
++ " END"
++ " ELSE"
++ " CASE CTE1.DAY_OFF_UNIT"
++ " WHEN N'天' THEN CONVERT(DECIMAL(16,2),CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)*8.0)"
++ " WHEN N'分' THEN CONVERT(DECIMAL(16,2),CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)/60.0)"
++ " ELSE CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)"
++ " END"
++ " END AS DAY_OFF_AMOUNT"
++ " , N'時' AS DAY_OFF_UNIT"
++ " FROM CTE1"
++ " )"
++ " SELECT Summary.DAY_OFF_CATEGORY"
++ " ,Summary.DAY_OFF_ID"
++ " ,Summary.DAY_OFF_TYPE"
++ " ,Summary.DAY_OFF_AMOUNT"
++ " ,Case Summary.DAY_OFF_ID"
++ " When '02' THEN CONVERT(DECIMAL(16,1),(TK.TK005-TK.TK006))"
++ " When '03' Then"
++ " CASE"
++ " WHEN @ID='0010' THEN CONVERT(DECIMAL(16,1),TK.TK003)*8.5-(SELECT SUM(TF008)"
++ " FROM PALTF"
++ " WHERE TF001=@ID"
++ " AND TF002 LIKE @YEAR+'%'"
++ " AND TF004='03')"
++ " ELSE CONVERT(DECIMAL(16,1),TK.TK003)*8.0-(SELECT SUM(TF008)"
++ " FROM PALTF"
++ " WHERE TF001=@ID"
++ " AND TF002 LIKE @YEAR+'%'"
++ " AND TF004='03')"
++ " End"
++ " Else 0"
++ " END AS DAY_OFF_TOTAL"
++ " ,Summary.DAY_OFF_UNIT"
++ " ,COALESCE(Value.[Value],null) 'Value'"
++ " ,N'分' 'ValueUnit'"
++ " ,COALESCE(Convert(decimal(4,2),Summary.DAY_OFF_AMOUNT*Value.[Value]),null) 'Subtotal'"
++ " FROM DAYOFF_SUMMARY Summary"
++ " LEFT JOIN NZ_ERP2.dbo.HR360_Attendance_CategoryValue Value on Summary.DAY_OFF_ID=Value.[UID] and Value.[Year]=@YEAR"
++ " LEFT JOIN PALTK TK ON TK.TK001=@ID AND TK.TK002=@YEAR"
++ " ORDER BY DAY_OFF_CATEGORY,DAY_OFF_ID", conn);
             cmd.Parameters.AddWithValue("@ID", lblEmpID.Text.Trim());
             cmd.Parameters.AddWithValue("@YEAR", year);
             using (SqlDataReader dr = cmd.ExecuteReader())
@@ -542,55 +574,97 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
             }
         }
         double dayOffSum = 0;  //缺勤小記
+        double dayOffValue = 0; //出勤分數
         for (int i = 0; i < dtAttendance.Rows.Count; i++)
         {
             HtmlGenericControl attendanceDiv1 = new HtmlGenericControl("div");
             attendanceDiv1.Attributes["class"] = "row";
             attendanceRecord.Controls.Add(attendanceDiv1);
             HtmlGenericControl attendanceDiv2 = new HtmlGenericControl("div");
-            attendanceDiv2.Attributes["class"] = "col-xs-4 border";
-            attendanceDiv2.InnerText = dtAttendance.Rows[i]["DAY_OFF_TYPE"].ToString();
+            if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
+            {
+                attendanceDiv2.Attributes["style"] = "text-align:center; background-color:yellow;";
+            }
+            else
+            {
+                attendanceDiv2.Attributes["style"] = "text-align:center";
+            }
+            attendanceDiv2.Attributes["class"] = "col-xs-2 border";
+            attendanceDiv2.InnerText = dtAttendance.Rows[i]["DAY_OFF_TYPE"].ToString() ?? "";
             attendanceDiv1.Controls.Add(attendanceDiv2);
             attendanceDiv2 = new HtmlGenericControl("div");
-            attendanceDiv2.Attributes["class"] = "col-xs-4 border";
-            attendanceDiv2.InnerText = dtAttendance.Rows[i]["DAY_OFF_AMOUNT"].ToString();
+            if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
+            {
+                attendanceDiv2.Attributes["style"] = "text-align:center; background-color:yellow;";
+                attendanceDiv2.InnerHtml = "<span style=\"color:red\">" + dtAttendance.Rows[i]["DAY_OFF_AMOUNT"].ToString() ?? "" + "</span>;";
+            }
+            else
+            {
+                attendanceDiv2.Attributes["style"] = "text-align:center";
+                attendanceDiv2.InnerHtml = dtAttendance.Rows[i]["DAY_OFF_AMOUNT"].ToString() ?? "";
+            }
+            attendanceDiv2.Attributes["class"] = "col-xs-2 border";
+
             attendanceDiv1.Controls.Add(attendanceDiv2);
             attendanceDiv2 = new HtmlGenericControl("div");
-            attendanceDiv2.Attributes["class"] = "col-xs-4 border";
-            attendanceDiv2.InnerText = dtAttendance.Rows[i]["DAY_OFF_UNIT"].ToString();
+            if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
+            {
+                attendanceDiv2.Attributes["style"] = "text-align:center; background-color:yellow;";
+            }
+            else
+            {
+                attendanceDiv2.Attributes["style"] = "text-align:center";
+            }
+            attendanceDiv2.Attributes["class"] = "col-xs-2 border";
+            attendanceDiv2.InnerText = dtAttendance.Rows[i]["DAY_OFF_TOTAL"].ToString() ?? "";
+            attendanceDiv1.Controls.Add(attendanceDiv2);
+            attendanceDiv2 = new HtmlGenericControl("div");
+            if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
+            {
+                attendanceDiv2.Attributes["style"] = "text-align:center; background-color:yellow;";
+            }
+            else
+            {
+                attendanceDiv2.Attributes["style"] = "text-align:center";
+            }
+            attendanceDiv2.Attributes["class"] = "col-xs-2 border";
+            attendanceDiv2.InnerText = dtAttendance.Rows[i]["Value"].ToString() ?? "";
+            attendanceDiv1.Controls.Add(attendanceDiv2);
+            attendanceDiv2 = new HtmlGenericControl("div");
+            if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
+            {
+                attendanceDiv2.Attributes["style"] = "text-align:center; background-color:yellow;";
+            }
+            else
+            {
+                attendanceDiv2.Attributes["style"] = "text-align:center";
+            }
+            attendanceDiv2.Attributes["class"] = "col-xs-2 border";
+            attendanceDiv2.InnerText = dtAttendance.Rows[i]["ValueUnit"].ToString() ?? "";
+            attendanceDiv1.Controls.Add(attendanceDiv2);
+            attendanceDiv2 = new HtmlGenericControl("div");
+            if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
+            {
+                attendanceDiv2.Attributes["style"] = "text-align:right; background-color:yellow;";
+            }
+            else
+            {
+                attendanceDiv2.Attributes["style"] = "text-align:right";
+            }
+            attendanceDiv2.Attributes["class"] = "col-xs-2 border";
+            attendanceDiv2.InnerText = dtAttendance.Rows[i]["Subtotal"].ToString() ?? "";
             attendanceDiv1.Controls.Add(attendanceDiv2);
             if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
             {
                 dayOffSum += Convert.ToDouble(dtAttendance.Rows[i]["DAY_OFF_AMOUNT"]);
+                dayOffValue += Convert.ToDouble(dtAttendance.Rows[i]["SubTotal"]);
             }
         }
-        //for (int i = 0; i < dtAttendance.Rows.Count; i++)
-        //{
-        //    Label lblDayOffName = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOffName" + (i + 1).ToString()));
-        //    if (lblDayOffName != null)
-        //    {
-        //        lblDayOffName.Text = dtAttendance.Rows[i]["DAY_OFF_TYPE"].ToString();
-        //    }
-        //    Label lblDayOff = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOff" + (i + 1).ToString()));
-        //    if (lblDayOff != null)
-        //    {
-        //        lblDayOff.Text = dtAttendance.Rows[i]["DAY_OFF_AMOUNT"].ToString();
-        //        if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
-        //        {
-        //            dayOffSum += Convert.ToDouble(dtAttendance.Rows[i][3]);
-        //        }
-        //    }
-        //    Label lblDayOffUnit = (Label)(Master.FindControl("ContentPlaceHolder1").FindControl("lblDayOffUnit" + (i + 1).ToString()));
-        //    if (lblDayOffUnit != null)
-        //    {
-        //        lblDayOffUnit.Text = dtAttendance.Rows[i]["DAY_OFF_UNIT"].ToString();
-        //    }
-        //}
         //計算小計
-        lblDayOffSum.Text = dayOffSum.ToString();
+        lblDayOffSum.Text = dayOffSum.ToString("N2");
+        lblDayOffValueSum.Text = dayOffValue.ToString("N2");
         //計算出勤率
         //每年須手動修改需出勤時數 edit annually
-        double onJobHour = 0;
         object checkForNull;
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
@@ -606,48 +680,16 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
         }
         if (checkForNull != null)
         {
-            onJobHour = Convert.ToDouble(checkForNull);
-            lblOnJobPercent.Text = (Math.Floor(100 * 100 * (1 - (dayOffSum / onJobHour))) / 100).ToString();    //2018.07.23 改成小數第二位無條件捨去
-            //lblOnJobPercent.Text = (Math.Round(100 * (1 - (dayOffSum / onJobHour)), 2, MidpointRounding.AwayFromZero)).ToString();
+            lblExpectedAttendance.Text = Convert.ToDouble(checkForNull).ToString("N2");
+            lblActualAttendance.Text = (Convert.ToDouble(checkForNull) - dayOffSum).ToString("N2");
+            lblAttendanceScore.Text = (100 + dayOffValue).ToString("N2");
+            //lblOnJobPercent.Text = (Math.Floor(100 * 100 * (1 - (dayOffSum / onJobHour))) / 100).ToString();    //2018.07.23 改成小數第二位無條件捨去
         }
         else
         {
-            lblOnJobPercent.Text = "N/A";
-        }
-        using (SqlConnection conn = new SqlConnection(NZconnectionString))
-        {
-            conn.Open();
-            if (lblEmpID.Text == "0010")
-            {
-                query = "SELECT CONVERT(DECIMAL(16,1),((PALTK.TK003-PALTK.TK004)*8.5)+(PALTK.TK005-PALTK.TK006))"
-                + " FROM PALTK"
-                + " WHERE PALTK.TK001=@ID"
-                + " AND PALTK.TK002=@YEAR";
-            }
-            else
-            {
-                query = "SELECT CONVERT(DECIMAL(16,1),((PALTK.TK003-PALTK.TK004)*8.0)+(PALTK.TK005-PALTK.TK006))"
-                + " FROM PALTK"
-                + " WHERE PALTK.TK001=@ID"
-                + " AND PALTK.TK002=@YEAR";
-            }
-            SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@ID", lblEmpID.Text);
-            cmd.Parameters.AddWithValue("@YEAR", lblEvalYear.Text);
-            using (SqlDataReader dr = cmd.ExecuteReader())
-            {
-                if (dr.HasRows)
-                {
-                    while (dr.Read())
-                    {
-                        lblDayOffUnused.Text = dr[0].ToString();
-                    }
-                }
-                else
-                {
-                    lblDayOffUnused.Text = "0.0";
-                }
-            }
+            lblExpectedAttendance.Text = "N/A";
+            lblActualAttendance.Text = "N/A";
+            lblAttendanceScore.Text = "N/A";
         }
         //讀取獎懲紀錄
         DataTable dtRnPRecord = new DataTable();
@@ -656,20 +698,21 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
             conn.Open();
             query = "select eventCategory.Name 'EventName'"
                 + " ,record.[EventContent] 'EventContent'"
-                + " ,value.Name 'CategoryName'"
+                + " ,rnpCategory.Name 'CategoryName'"
                 + " ,record.RNPCount 'RnPCount'"
-                + " ,value.[Unit] 'RnPUnit'"
+                + " ,rnpCategory.[Unit] 'RnPUnit'"
                 + " ,record.RNPCount * value.Value 'RnPScore'"
                 + " ,'分' 'RnPScoreUnit'"
-                + " , record.Verified 'VerifiedID'"
+                + " ,record.Verified 'VerifiedID'"
                 + " ,case record.Verified"
                 + " when 1 then '已核准'"
                 + " else '未核准'"
                 + " end as 'Verified'"
                 + " ,coalesce(record.Memo,'') 'Memo'"
                 + " from HR360_RewardAndPenalty_Record record"
-                + " left join HR360_RewardAndPenalty_ValueSetting value on record.RNPID=value.[UID]"
-                + " left join HR360_RewardAndPenalty_Category category on value.Category=category.[UID]"
+                + " left join HR360_RewardAndPenalty_RnPCategory rnpCategory on record.RNPID=rnpCategory.[UID]"
+                + " left join HR360_RewardAndPenalty_RnPValueSetting value on rnpCategory.[UID]=value.[UID] and value.[Year]=@year"
+                + " left join HR360_RewardAndPenalty_Category category on rnpCategory.Category=category.[UID]"
                 + " left join HR360_RewardAndPenalty_EventCategory eventCategory on record.EventID=eventCategory.[UID]"
                 + " where record.EmpID=@ID"
                 + " and record.[Year]=@year"
@@ -680,7 +723,7 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dtRnPRecord);
         }
-        int rnpSum = 0;
+        decimal rnpSum = 0;
         for (int i = 0; i < dtRnPRecord.Rows.Count; i++)
         {
             HtmlGenericControl divRnP1 = new HtmlGenericControl("div");
@@ -723,7 +766,7 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
             divRnP2 = new HtmlGenericControl("div");
             divRnP2.Attributes["class"] = "col-xs-1 border";
             divRnP2.Attributes["style"] = "text-align:center;";
-            divRnP2.InnerText = dtRnPRecord.Rows[i]["RnPScore"].ToString();
+            divRnP2.InnerText = Convert.ToDecimal(dtRnPRecord.Rows[i]["RnPScore"].ToString()).ToString("N2");
             divRnP1.Controls.Add(divRnP2);
             divRnP2 = new HtmlGenericControl("div");
             divRnP2.Attributes["class"] = "col-xs-1 border";
@@ -746,10 +789,18 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
             divRnP2.Controls.Add(txt);
             if ((bool)dtRnPRecord.Rows[i]["VerifiedID"])
             {
-                rnpSum += Convert.ToInt32(dtRnPRecord.Rows[i]["RnPScore"].ToString());
+                rnpSum += Convert.ToDecimal(dtRnPRecord.Rows[i]["RnPScore"].ToString());
             }
         }
-        lblFinalRnPScore.Text = rnpSum.ToString();
+        if (isAssessed)
+        {
+            lblFinalRnPScore.Text = Convert.ToDecimal(dtScoreOverallRecord.Rows[0]["RNP_SCORE"]).ToString("N2");
+        }
+        else
+        {
+            lblFinalRnPScore.Text = rnpSum.ToString("N2");
+        }
+
         if (string.IsNullOrWhiteSpace(txt0006Comment.Text))
         {
             div0006_comment.Visible = false;
