@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnLogout = new System.Windows.Forms.Button();
             this.tbcManagement = new System.Windows.Forms.TabControl();
@@ -54,6 +54,12 @@
             this.tsmQuestionAssignment = new System.Windows.Forms.ToolStripMenuItem();
             this.btnQuestionEdit = new System.Windows.Forms.Button();
             this.txtQuestionTabMemo = new System.Windows.Forms.RichTextBox();
+            this.tbpFinalScoreCalculation = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnFinalScoreCalculate = new System.Windows.Forms.Button();
+            this.cbxFinalScoreYear = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtFinalScoreMemo = new System.Windows.Forms.TextBox();
             this.tbpQuestionAssignment = new System.Windows.Forms.TabPage();
             this.tlpQuestionAssignmentAll = new System.Windows.Forms.TableLayoutPanel();
             this.lblQuestionAssignmentQuestionCategory = new System.Windows.Forms.Label();
@@ -119,6 +125,14 @@
             this.dtpYearAndEvalTimeEndTime = new System.Windows.Forms.DateTimePicker();
             this.flowLayoutPanel11 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnYearAndEvalTimeSave = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.dtpYearAndEvalTimeSelfStartTime = new System.Windows.Forms.DateTimePicker();
+            this.dtpYearAndEvalTimeSelfEndTime = new System.Windows.Forms.DateTimePicker();
+            this.dtpYearAndEvalTimeSupervisorStartTime = new System.Windows.Forms.DateTimePicker();
+            this.dtpYearAndEvalTimeSupervisorEndTime = new System.Windows.Forms.DateTimePicker();
             this.txtYearAndEvalTimeTabMemo = new System.Windows.Forms.RichTextBox();
             this.tbpAccountPriviledge = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
@@ -137,14 +151,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.dsAPA_Question = new NIZING_BACKEND_Data_Config.dsAPA_Question();
             this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter = new NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.dtpYearAndEvalTimeSelfStartTime = new System.Windows.Forms.DateTimePicker();
-            this.dtpYearAndEvalTimeSelfEndTime = new System.Windows.Forms.DateTimePicker();
-            this.dtpYearAndEvalTimeSupervisorStartTime = new System.Windows.Forms.DateTimePicker();
-            this.dtpYearAndEvalTimeSupervisorEndTime = new System.Windows.Forms.DateTimePicker();
+            this.label15 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpQuestionCategory.SuspendLayout();
@@ -156,6 +163,8 @@
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvQuestion)).BeginInit();
             this.ctxmsQuestion.SuspendLayout();
+            this.tbpFinalScoreCalculation.SuspendLayout();
+            this.tableLayoutPanel13.SuspendLayout();
             this.tbpQuestionAssignment.SuspendLayout();
             this.tlpQuestionAssignmentAll.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
@@ -230,6 +239,7 @@
             this.tbcManagement.Controls.Add(this.tbpYearAndEvalTime);
             this.tbcManagement.Controls.Add(this.tbpAccountPriviledge);
             this.tbcManagement.Controls.Add(this.tbpReportPreview);
+            this.tbcManagement.Controls.Add(this.tbpFinalScoreCalculation);
             this.tbcManagement.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcManagement.Location = new System.Drawing.Point(0, 26);
             this.tbcManagement.Margin = new System.Windows.Forms.Padding(0);
@@ -420,13 +430,13 @@
             // 
             this.gvQuestion.AllowUserToAddRows = false;
             this.gvQuestion.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvQuestion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvQuestion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.gvQuestion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvQuestion.ContextMenuStrip = this.ctxmsQuestion;
             this.gvQuestion.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -476,6 +486,82 @@
             this.txtQuestionTabMemo.Size = new System.Drawing.Size(1162, 94);
             this.txtQuestionTabMemo.TabIndex = 4;
             this.txtQuestionTabMemo.Text = "";
+            // 
+            // tbpFinalScoreCalculation
+            // 
+            this.tbpFinalScoreCalculation.Controls.Add(this.tableLayoutPanel13);
+            this.tbpFinalScoreCalculation.Location = new System.Drawing.Point(4, 22);
+            this.tbpFinalScoreCalculation.Name = "tbpFinalScoreCalculation";
+            this.tbpFinalScoreCalculation.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpFinalScoreCalculation.Size = new System.Drawing.Size(1176, 810);
+            this.tbpFinalScoreCalculation.TabIndex = 9;
+            this.tbpFinalScoreCalculation.Text = "最終成績計算";
+            this.tbpFinalScoreCalculation.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel13
+            // 
+            this.tableLayoutPanel13.ColumnCount = 2;
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel13.Controls.Add(this.btnFinalScoreCalculate, 1, 1);
+            this.tableLayoutPanel13.Controls.Add(this.cbxFinalScoreYear, 1, 0);
+            this.tableLayoutPanel13.Controls.Add(this.label14, 0, 0);
+            this.tableLayoutPanel13.Controls.Add(this.txtFinalScoreMemo, 1, 3);
+            this.tableLayoutPanel13.Controls.Add(this.label15, 1, 2);
+            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel13.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
+            this.tableLayoutPanel13.RowCount = 4;
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(1170, 804);
+            this.tableLayoutPanel13.TabIndex = 0;
+            // 
+            // btnFinalScoreCalculate
+            // 
+            this.btnFinalScoreCalculate.Location = new System.Drawing.Point(103, 32);
+            this.btnFinalScoreCalculate.Name = "btnFinalScoreCalculate";
+            this.btnFinalScoreCalculate.Size = new System.Drawing.Size(75, 23);
+            this.btnFinalScoreCalculate.TabIndex = 1;
+            this.btnFinalScoreCalculate.Text = "計算成績";
+            this.btnFinalScoreCalculate.UseVisualStyleBackColor = true;
+            this.btnFinalScoreCalculate.Click += new System.EventHandler(this.btnFinalScoreCalculate_Click);
+            // 
+            // cbxFinalScoreYear
+            // 
+            this.cbxFinalScoreYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxFinalScoreYear.FormattingEnabled = true;
+            this.cbxFinalScoreYear.Location = new System.Drawing.Point(103, 3);
+            this.cbxFinalScoreYear.Name = "cbxFinalScoreYear";
+            this.cbxFinalScoreYear.Size = new System.Drawing.Size(121, 20);
+            this.cbxFinalScoreYear.TabIndex = 2;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label14.Location = new System.Drawing.Point(65, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(32, 29);
+            this.label14.TabIndex = 3;
+            this.label14.Text = "年份:";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtFinalScoreMemo
+            // 
+            this.txtFinalScoreMemo.BackColor = System.Drawing.Color.White;
+            this.txtFinalScoreMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtFinalScoreMemo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtFinalScoreMemo.Location = new System.Drawing.Point(103, 707);
+            this.txtFinalScoreMemo.Multiline = true;
+            this.txtFinalScoreMemo.Name = "txtFinalScoreMemo";
+            this.txtFinalScoreMemo.ReadOnly = true;
+            this.txtFinalScoreMemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtFinalScoreMemo.Size = new System.Drawing.Size(1064, 94);
+            this.txtFinalScoreMemo.TabIndex = 4;
             // 
             // tbpQuestionAssignment
             // 
@@ -825,13 +911,13 @@
             // 
             this.gvPersonnelAssignment.AllowUserToAddRows = false;
             this.gvPersonnelAssignment.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvPersonnelAssignment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvPersonnelAssignment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.gvPersonnelAssignment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvPersonnelAssignment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvPersonnelAssignment.Location = new System.Drawing.Point(4, 34);
@@ -958,13 +1044,13 @@
             // 
             this.gvEmployeeWorkhourInputField.AllowUserToAddRows = false;
             this.gvEmployeeWorkhourInputField.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvEmployeeWorkhourInputField.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvEmployeeWorkhourInputField.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.gvEmployeeWorkhourInputField.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvEmployeeWorkhourInputField.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvEmployeeWorkhourInputField.Location = new System.Drawing.Point(4, 34);
@@ -1306,6 +1392,86 @@
             this.btnYearAndEvalTimeSave.UseVisualStyleBackColor = true;
             this.btnYearAndEvalTimeSave.Click += new System.EventHandler(this.btnYearAndEvalTimeSave_Click);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label10.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label10.ForeColor = System.Drawing.Color.Blue;
+            this.label10.Location = new System.Drawing.Point(17, 87);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(80, 29);
+            this.label10.TabIndex = 9;
+            this.label10.Text = "自評開始時間:";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label11.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label11.ForeColor = System.Drawing.Color.Blue;
+            this.label11.Location = new System.Drawing.Point(17, 116);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(80, 29);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "自評結束時間:";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label12.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label12.ForeColor = System.Drawing.Color.Crimson;
+            this.label12.Location = new System.Drawing.Point(5, 145);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(92, 29);
+            this.label12.TabIndex = 11;
+            this.label12.Text = "主管評開始時間:";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label13.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label13.ForeColor = System.Drawing.Color.Crimson;
+            this.label13.Location = new System.Drawing.Point(5, 174);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(92, 29);
+            this.label13.TabIndex = 12;
+            this.label13.Text = "主管評結束時間:";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dtpYearAndEvalTimeSelfStartTime
+            // 
+            this.dtpYearAndEvalTimeSelfStartTime.Location = new System.Drawing.Point(103, 90);
+            this.dtpYearAndEvalTimeSelfStartTime.Name = "dtpYearAndEvalTimeSelfStartTime";
+            this.dtpYearAndEvalTimeSelfStartTime.Size = new System.Drawing.Size(200, 22);
+            this.dtpYearAndEvalTimeSelfStartTime.TabIndex = 13;
+            // 
+            // dtpYearAndEvalTimeSelfEndTime
+            // 
+            this.dtpYearAndEvalTimeSelfEndTime.Location = new System.Drawing.Point(103, 119);
+            this.dtpYearAndEvalTimeSelfEndTime.Name = "dtpYearAndEvalTimeSelfEndTime";
+            this.dtpYearAndEvalTimeSelfEndTime.Size = new System.Drawing.Size(200, 22);
+            this.dtpYearAndEvalTimeSelfEndTime.TabIndex = 14;
+            // 
+            // dtpYearAndEvalTimeSupervisorStartTime
+            // 
+            this.dtpYearAndEvalTimeSupervisorStartTime.Location = new System.Drawing.Point(103, 148);
+            this.dtpYearAndEvalTimeSupervisorStartTime.Name = "dtpYearAndEvalTimeSupervisorStartTime";
+            this.dtpYearAndEvalTimeSupervisorStartTime.Size = new System.Drawing.Size(200, 22);
+            this.dtpYearAndEvalTimeSupervisorStartTime.TabIndex = 15;
+            // 
+            // dtpYearAndEvalTimeSupervisorEndTime
+            // 
+            this.dtpYearAndEvalTimeSupervisorEndTime.Location = new System.Drawing.Point(103, 177);
+            this.dtpYearAndEvalTimeSupervisorEndTime.Name = "dtpYearAndEvalTimeSupervisorEndTime";
+            this.dtpYearAndEvalTimeSupervisorEndTime.Size = new System.Drawing.Size(200, 22);
+            this.dtpYearAndEvalTimeSupervisorEndTime.TabIndex = 16;
+            // 
             // txtYearAndEvalTimeTabMemo
             // 
             this.txtYearAndEvalTimeTabMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -1388,13 +1554,13 @@
             // 
             this.gvAccountPriviledge.AllowUserToAddRows = false;
             this.gvAccountPriviledge.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvAccountPriviledge.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvAccountPriviledge.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.gvAccountPriviledge.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvAccountPriviledge.ContextMenuStrip = this.ctxmsQuestion;
             this.gvAccountPriviledge.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1522,85 +1688,15 @@
             // 
             this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter.ClearBeforeFill = true;
             // 
-            // label10
+            // label15
             // 
-            this.label10.AutoSize = true;
-            this.label10.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label10.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label10.ForeColor = System.Drawing.Color.Blue;
-            this.label10.Location = new System.Drawing.Point(17, 87);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(80, 29);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "自評開始時間:";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label11.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label11.ForeColor = System.Drawing.Color.Blue;
-            this.label11.Location = new System.Drawing.Point(17, 116);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(80, 29);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "自評結束時間:";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label12.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label12.ForeColor = System.Drawing.Color.Crimson;
-            this.label12.Location = new System.Drawing.Point(5, 145);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(92, 29);
-            this.label12.TabIndex = 11;
-            this.label12.Text = "主管評開始時間:";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label13.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label13.ForeColor = System.Drawing.Color.Crimson;
-            this.label13.Location = new System.Drawing.Point(5, 174);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(92, 29);
-            this.label13.TabIndex = 12;
-            this.label13.Text = "主管評結束時間:";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // dtpYearAndEvalTimeSelfStartTime
-            // 
-            this.dtpYearAndEvalTimeSelfStartTime.Location = new System.Drawing.Point(103, 90);
-            this.dtpYearAndEvalTimeSelfStartTime.Name = "dtpYearAndEvalTimeSelfStartTime";
-            this.dtpYearAndEvalTimeSelfStartTime.Size = new System.Drawing.Size(200, 22);
-            this.dtpYearAndEvalTimeSelfStartTime.TabIndex = 13;
-            // 
-            // dtpYearAndEvalTimeSelfEndTime
-            // 
-            this.dtpYearAndEvalTimeSelfEndTime.Location = new System.Drawing.Point(103, 119);
-            this.dtpYearAndEvalTimeSelfEndTime.Name = "dtpYearAndEvalTimeSelfEndTime";
-            this.dtpYearAndEvalTimeSelfEndTime.Size = new System.Drawing.Size(200, 22);
-            this.dtpYearAndEvalTimeSelfEndTime.TabIndex = 14;
-            // 
-            // dtpYearAndEvalTimeSupervisorStartTime
-            // 
-            this.dtpYearAndEvalTimeSupervisorStartTime.Location = new System.Drawing.Point(103, 148);
-            this.dtpYearAndEvalTimeSupervisorStartTime.Name = "dtpYearAndEvalTimeSupervisorStartTime";
-            this.dtpYearAndEvalTimeSupervisorStartTime.Size = new System.Drawing.Size(200, 22);
-            this.dtpYearAndEvalTimeSupervisorStartTime.TabIndex = 15;
-            // 
-            // dtpYearAndEvalTimeSupervisorEndTime
-            // 
-            this.dtpYearAndEvalTimeSupervisorEndTime.Location = new System.Drawing.Point(103, 177);
-            this.dtpYearAndEvalTimeSupervisorEndTime.Name = "dtpYearAndEvalTimeSupervisorEndTime";
-            this.dtpYearAndEvalTimeSupervisorEndTime.Size = new System.Drawing.Size(200, 22);
-            this.dtpYearAndEvalTimeSupervisorEndTime.TabIndex = 16;
+            this.label15.AutoSize = true;
+            this.label15.ForeColor = System.Drawing.Color.Red;
+            this.label15.Location = new System.Drawing.Point(103, 58);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(365, 12);
+            this.label15.TabIndex = 5;
+            this.label15.Text = "*2018計算公式為: 最終成績=考核成績*0.8+出勤成績*0.2+獎懲加減分";
             // 
             // frmAPA_Main
             // 
@@ -1624,6 +1720,9 @@
             this.flowLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvQuestion)).EndInit();
             this.ctxmsQuestion.ResumeLayout(false);
+            this.tbpFinalScoreCalculation.ResumeLayout(false);
+            this.tableLayoutPanel13.ResumeLayout(false);
+            this.tableLayoutPanel13.PerformLayout();
             this.tbpQuestionAssignment.ResumeLayout(false);
             this.tlpQuestionAssignmentAll.ResumeLayout(false);
             this.tlpQuestionAssignmentAll.PerformLayout();
@@ -1783,5 +1882,12 @@
         private System.Windows.Forms.DateTimePicker dtpYearAndEvalTimeSelfEndTime;
         private System.Windows.Forms.DateTimePicker dtpYearAndEvalTimeSupervisorStartTime;
         private System.Windows.Forms.DateTimePicker dtpYearAndEvalTimeSupervisorEndTime;
+        private System.Windows.Forms.TabPage tbpFinalScoreCalculation;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
+        private System.Windows.Forms.Button btnFinalScoreCalculate;
+        private System.Windows.Forms.ComboBox cbxFinalScoreYear;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txtFinalScoreMemo;
+        private System.Windows.Forms.Label label15;
     }
 }

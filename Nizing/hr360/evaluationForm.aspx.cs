@@ -59,8 +59,8 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             }
 
             //test value
-            //string assessor = "0080";
-            //string assessed = "0080";
+            //string assessor = "0015";
+            //string assessed = "0031";
 
 
             DataTable dtEval = new DataTable();
@@ -814,7 +814,10 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
             {
                 dayOffSum += Convert.ToDouble(dtAttendance.Rows[i]["DAY_OFF_AMOUNT"]);
-                dayOffValue += Convert.ToDouble(dtAttendance.Rows[i]["SubTotal"]);
+                if (!string.IsNullOrWhiteSpace(dtAttendance.Rows[i]["SubTotal"].ToString()))
+                {
+                    dayOffValue += Convert.ToDouble(dtAttendance.Rows[i]["SubTotal"]);
+                }
             }
         }
         //計算小計

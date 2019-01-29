@@ -27,8 +27,8 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
         string assessed = "";
         string year = "";
         //test info
-        //Session["erp_id"] = "0010";
-        //Session["view_year"] = "2018";        
+        //Session["erp_id"] = "0080";
+        //Session["view_year"] = "2016";        
         if (!IsPostBack)
         {
             assessed = Session["erp_id"].ToString().Trim();
@@ -657,7 +657,10 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
             if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
             {
                 dayOffSum += Convert.ToDouble(dtAttendance.Rows[i]["DAY_OFF_AMOUNT"]);
-                dayOffValue += Convert.ToDouble(dtAttendance.Rows[i]["SubTotal"]);
+                if (!String.IsNullOrWhiteSpace(dtAttendance.Rows[i]["SubTotal"].ToString()))
+                {
+                    dayOffValue += Convert.ToDouble(dtAttendance.Rows[i]["SubTotal"]);
+                }
             }
         }
         //計算小計

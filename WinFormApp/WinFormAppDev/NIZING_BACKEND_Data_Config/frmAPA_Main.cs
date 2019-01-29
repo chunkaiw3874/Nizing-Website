@@ -116,6 +116,17 @@ namespace NIZING_BACKEND_Data_Config
             cbxReportPreviewEmployee.Enabled = false;
             cbxReportPreviewYear.Enabled = false;
             #endregion
+            #region 最終成績計算 Universal Variable
+            for (int i = DateTime.Today.Year - 1; i >= 2016; i--)
+            {
+                cbxFinalScoreYear.Items.Add(i);
+            }
+            cbxFinalScoreYear.SelectedIndex = 0;
+            cbxFinalScoreYear.Enabled = false;
+            btnFinalScoreCalculate.Enabled = false;
+            txtFinalScoreMemo.Enabled = false;
+            txtFinalScoreMemo.Text = string.Empty;
+            #endregion  
             #region 年份及評核時間設定 Init
             for (int i = DateTime.Today.Year - 1; i >= 2016; i--)
             {
@@ -212,7 +223,7 @@ namespace NIZING_BACKEND_Data_Config
                     string query = "SELECT ERP_ID"
                                 + " FROM HR360_ASSESSMENTPRIVILEDGE"
                                 + " WHERE ERP_ID=@ID"
-                                + " AND [VIEW]='1'";
+                                + " AND [VIEW]=1";
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@ID", UserName);
                     using (SqlDataReader dr = cmd.ExecuteReader())
@@ -224,6 +235,30 @@ namespace NIZING_BACKEND_Data_Config
                                 btnReportPreviewPreview.Enabled = true;
                                 cbxReportPreviewEmployee.Enabled = true;
                                 cbxReportPreviewYear.Enabled = true;
+                            }
+                        }
+                    }
+                }
+            }
+            if (currentTabPage.Name == "tbpFinalScoreCalculation")
+            {
+                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT ERP_ID"
+                                + " FROM HR360_ASSESSMENTPRIVILEDGE"
+                                + " WHERE ERP_ID=@ID"
+                                + " AND [CALCULATE]=1";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@ID", UserName);
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            if (dr.HasRows)
+                            {
+                                cbxFinalScoreYear.Enabled = true;
+                                btnFinalScoreCalculate.Enabled = true;
                             }
                         }
                     }
@@ -525,6 +560,7 @@ namespace NIZING_BACKEND_Data_Config
                     gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     gv.Columns["帳號"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     gv.Columns["閱覽報表權限"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["計算成績權限"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     DataTable dtAccountList = new DataTable();
                     using (SqlConnection conn = new SqlConnection(NZConnectionString))
                     {
@@ -545,11 +581,18 @@ namespace NIZING_BACKEND_Data_Config
                     {
                         DataGridViewCheckBoxCell ckbView = new DataGridViewCheckBoxCell()
                         {
-                            TrueValue = "1",
-                            FalseValue = "0"
+                            TrueValue = 1,
+                            FalseValue = 0
                         };
                         ckbView.Style.NullValue = false;
                         row.Cells["閱覽報表權限"] = ckbView;
+                        ckbView = new DataGridViewCheckBoxCell()
+                        {
+                            TrueValue=1,
+                            FalseValue=0
+                        };
+                        ckbView.Style.NullValue = false;
+                        row.Cells["計算成績權限"] = ckbView;
                         DataGridViewComboBoxCell cbxAccountCell = new DataGridViewComboBoxCell();
                         cbxAccountCell.FlatStyle = FlatStyle.Flat;
                         cbxAccountCell.MaxDropDownItems = 5;
@@ -1692,7 +1735,9 @@ namespace NIZING_BACKEND_Data_Config
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
-                string query = "SELECT LTRIM(RTRIM(PRIV.ERP_ID))+' '+ LTRIM(RTRIM(MV.MV002)) '帳號', PRIV.[VIEW] '閱覽報表權限'"
+                string query = "SELECT LTRIM(RTRIM(PRIV.ERP_ID))+' '+ LTRIM(RTRIM(MV.MV002)) '帳號'"
+                            + " , PRIV.[VIEW] '閱覽報表權限'"
+                            + " , PRIV.CALCULATE '計算成績權限'"
                             + " FROM HR360_ASSESSMENTPRIVILEDGE PRIV"
                             + " LEFT JOIN NZ.dbo.CMSMV MV ON PRIV.ERP_ID=MV.MV001"
                             + " WHERE MV.MV022=''"
@@ -1812,9 +1857,11 @@ namespace NIZING_BACKEND_Data_Config
                     conn.Open();
                     string query = "UPDATE HR360_ASSESSMENTPRIVILEDGE"
                                 + " SET [VIEW]=@VIEW"
+                                + " ,CALCULATE=@CALCULATE"
                                 + " WHERE ERP_ID=@ID";
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@VIEW", dtSourceInterim.Rows[i]["閱覽報表權限"].ToString());
+                    cmd.Parameters.AddWithValue("@CALCULATE", dtSourceInterim.Rows[i]["計算成績權限"].ToString());
                     cmd.Parameters.AddWithValue("@ID", dtSourceInterim.Rows[i]["帳號"].ToString());
                     cmd.ExecuteNonQuery();
                 }
@@ -1827,16 +1874,21 @@ namespace NIZING_BACKEND_Data_Config
             {
                 if (String.IsNullOrWhiteSpace(dtSourceInterim.Rows[i]["閱覽報表權限"].ToString()))
                 {
-                    dtSourceInterim.Rows[i]["閱覽報表權限"] = "0";
+                    dtSourceInterim.Rows[i]["閱覽報表權限"] = 0;
+                }
+                if (String.IsNullOrWhiteSpace(dtSourceInterim.Rows[i]["計算成績權限"].ToString()))
+                {
+                    dtSourceInterim.Rows[i]["計算成績權限"] = 0;
                 }
                 //perform DB insert
                 using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                 {
                     conn.Open();
-                    string query = "INSERT INTO HR360_ASSESSMENTPRIVILEDGE"
-                                +" VALUES (@ID, @VIEW)";
+                    string query = "INSERT INTO HR360_ASSESSMENTPRIVILEDGE(ERP_ID,[VIEW],CALCULATE)"
+                                +" VALUES (@ID, @VIEW, @CALCULATE)";
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@VIEW", dtSourceInterim.Rows[i]["閱覽報表權限"].ToString());
+                    cmd.Parameters.AddWithValue("@CALCULATE", dtSourceInterim.Rows[i]["計算成績權限"].ToString());
                     cmd.Parameters.AddWithValue("@ID", dtSourceInterim.Rows[i]["帳號"].ToString());
                     cmd.ExecuteNonQuery();
                 }                
@@ -2067,6 +2119,163 @@ namespace NIZING_BACKEND_Data_Config
             txtEmployeeWorkhourInputTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;
         }
 
+        #endregion
+
+        #region 最終成績計算 Tab Methods and Events
+        private void btnFinalScoreCalculate_Click(object sender, EventArgs e)
+        {
+            DataTable dtScores = new DataTable();
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT A.[YEAR] [年度]"
++ " ,A.ASSESSED_ID [受評者ID]"
++ " ,B.WEIGHTED_SCORE [主管評分數]"
++ " ,COALESCE(C.WEIGHTED_SCORE,null) [特評分數]"
++ " ,SCORE.ATTENDANCE_SCORE [出勤成績]"
++ " ,COALESCE(SCORE.RNP_SCORE,null) [獎懲成績]"
++ " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
++ " LEFT JOIN NZ.dbo.CMSMV MV ON A.ASSESSED_ID=MV.MV001"
++ " LEFT JOIN HR360_ASSESSMENTSCORE_ASSESSED_A SCORE ON A.ASSESSOR_ID=SCORE.ASSESSOR_ID AND A.ASSESSED_ID=SCORE.ASSESSED_ID AND A.[YEAR]=SCORE.ASSESS_YEAR"
++ " LEFT JOIN"
++ " ("
++ " SELECT A.ASSESSED_ID,A.ASSESSOR_ID,MV.MV002,SCORE.WEIGHTED_SCORE"
++ " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
++ " LEFT JOIN NZ.dbo.CMSMV MV ON A.ASSESSOR_ID=MV.MV001"
++ " LEFT JOIN HR360_ASSESSMENTSCORE_ASSESSED_A SCORE ON A.ASSESSOR_ID=SCORE.ASSESSOR_ID AND A.ASSESSED_ID=SCORE.ASSESSED_ID AND A.[YEAR]=SCORE.ASSESS_YEAR"
++ " WHERE A.ACTIVE='1' AND A.ASSESS_TYPE='2'"
++ " AND A.[YEAR]=@YEAR"
++ " ) B ON A.ASSESSOR_ID=B.ASSESSED_ID"
++ " LEFT JOIN"
++ " ("
++ " SELECT A.ASSESSED_ID,A.ASSESSOR_ID,MV.MV002,SCORE.WEIGHTED_SCORE"
++ " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
++ " LEFT JOIN NZ.dbo.CMSMV MV ON A.ASSESSOR_ID=MV.MV001"
++ " LEFT JOIN HR360_ASSESSMENTSCORE_ASSESSED_A SCORE ON A.ASSESSOR_ID=SCORE.ASSESSOR_ID AND A.ASSESSED_ID=SCORE.ASSESSED_ID AND A.[YEAR]=SCORE.ASSESS_YEAR"
++ " WHERE A.ACTIVE='1' AND A.ASSESS_TYPE='9'"
++ " AND A.[YEAR]=@YEAR"
++ " ) C ON A.ASSESSOR_ID=C.ASSESSED_ID"
++ " WHERE A.ACTIVE='1'"
++ " AND A.ASSESS_TYPE='1'"
++ " AND A.[YEAR]=@YEAR";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@YEAR", cbxFinalScoreYear.SelectedItem.ToString());
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dtScores);
+            }
+            CalculateFinalScore(dtScores);
+            txtFinalScoreMemo.Text += DateTime.Now.ToString() + " 最終成績計算完成" + Environment.NewLine;
+        }
+        protected void CalculateFinalScore(DataTable dt)
+        {
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                string year = dt.Rows[i]["年度"].ToString();
+                string id = dt.Rows[i]["受評者ID"].ToString();
+                double attendanceScore = 0;
+                double rnpScore = 0;
+                double evalScore = 0;
+                double finalScore = 0;
+                string finalGrade = "";
+                if (!double.TryParse(dt.Rows[i]["出勤成績"].ToString(), out attendanceScore))
+                {
+                    attendanceScore = 0;
+                }
+                if (!double.TryParse(dt.Rows[i]["獎懲成績"].ToString(), out rnpScore))
+                {
+                    rnpScore = 0;
+                }
+                if (!double.TryParse(dt.Rows[i]["特評分數"].ToString(), out evalScore))
+                {
+                    evalScore = Convert.ToDouble(dt.Rows[i]["主管評分數"]);
+                }
+                if (attendanceScore >= 100)
+                {
+                    finalScore = evalScore * 10 * 0.9 + 100 * 0.1 + rnpScore;
+                }
+                else if (attendanceScore >= 99 && attendanceScore < 100)
+                {
+                    finalScore = evalScore * 10 * 0.9 + 90 * 0.1 + rnpScore;
+                }
+                else if (attendanceScore >= 98 && attendanceScore < 99)
+                {
+                    finalScore = evalScore * 10 * 0.9 + 80 * 0.1 + rnpScore;
+                }
+                else if (attendanceScore >= 97 && attendanceScore < 98)
+                {
+                    finalScore = evalScore * 10 * 0.9 + 70 * 0.1 + rnpScore;
+                }
+                else if (attendanceScore >= 96 && attendanceScore < 97)
+                {
+                    finalScore = evalScore * 10 * 0.9 + 60 * 0.1 + rnpScore;
+                }
+                else if (attendanceScore >= 95 && attendanceScore < 96)
+                {
+                    finalScore = evalScore * 10 * 0.9 + 50 * 0.1 + rnpScore;
+                }
+                else if (attendanceScore >= 94 && attendanceScore < 95)
+                {
+                    finalScore = evalScore * 10 * 0.9 + 40 * 0.1 + rnpScore;
+                }
+                else if (attendanceScore >= 93 && attendanceScore < 94)
+                {
+                    finalScore = evalScore * 10 * 0.9 + 30 * 0.1 + rnpScore;
+                }
+                else if (attendanceScore >= 92 && attendanceScore < 93)
+                {
+                    finalScore = evalScore * 10 * 0.9 + 20 * 0.1 + rnpScore;
+                }
+                else if (attendanceScore >= 91 && attendanceScore < 92)
+                {
+                    finalScore = evalScore * 10 * 0.9 + 10 * 0.1 + rnpScore;
+                }
+                else
+                {
+                    finalScore = evalScore * 10 * 0.9 + 0 * 0.1 + rnpScore;
+                }
+
+                if (finalScore >= 90)
+                {
+                    finalGrade = "甲";
+                }
+                else if (finalScore >= 80)
+                {
+                    finalGrade = "乙";
+                }
+                else if (finalScore >= 70)
+                {
+                    finalGrade = "丙";
+                }
+                else
+                {
+                    finalGrade = "丁";
+                }
+                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                {
+                    conn.Open();
+                    string query = "UPDATE HR360_AssessmentScore_FinalScore"
++ " Set EvaluationScore=@EvaluationScore"
++ " ,AttendanceScore=@AttendanceScore"
++ " ,RewardAndPenaltyScore=@RewardAndPenaltyScore"
++ " ,FinalScore=@FinalScore"
++ " ,FinalScoreGrade=@FinalScoreGrade"
++ " Where AssessYear=@AssessYear"
++ " and EmpID=@EmpID"
++ " IF @@ROWCOUNT=0"
++ " INSERT INTO HR360_AssessmentScore_FinalScore(AssessYear,EmpID,EvaluationScore,AttendanceScore,RewardAndPenaltyScore,FinalScore,FinalScoreGrade)"
++ " VALUES(@AssessYear,@EmpID,@EvaluationScore,@AttendanceScore,@RewardAndPenaltyScore,@FinalScore,@FinalScoreGrade)";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@AssessYear", year);
+                    cmd.Parameters.AddWithValue("@EmpID", id);
+                    cmd.Parameters.AddWithValue("@EvaluationScore", evalScore);
+                    cmd.Parameters.AddWithValue("@AttendanceScore", dt.Rows[i]["出勤成績"]);
+                    cmd.Parameters.AddWithValue("@RewardAndPenaltyScore", dt.Rows[i]["獎懲成績"]);
+                    cmd.Parameters.AddWithValue("@FinalScore", finalScore);
+                    cmd.Parameters.AddWithValue("@FinalScoreGrade", finalGrade);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
         #endregion
     }
 }

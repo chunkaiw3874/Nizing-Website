@@ -244,6 +244,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             errorList.Add(errorCode(111, "請假日期不得早於" + DateTime.Today.AddDays(-2).ToString("d", new CultureInfo("zh-TW"))));
             test111 = false;
+            //test111 = true;
         }
         else
         {

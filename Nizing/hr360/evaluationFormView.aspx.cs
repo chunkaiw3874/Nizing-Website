@@ -693,7 +693,10 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
             if (dtAttendance.Rows[i]["DAY_OFF_CATEGORY"].ToString() == "2")
             {
                 dayOffSum += Convert.ToDouble(dtAttendance.Rows[i]["DAY_OFF_AMOUNT"]);
-                dayOffValue += Convert.ToDouble(dtAttendance.Rows[i]["SubTotal"]);
+                if (!string.IsNullOrWhiteSpace(dtAttendance.Rows[i]["SubTotal"].ToString()))
+                {
+                    dayOffValue += Convert.ToDouble(dtAttendance.Rows[i]["SubTotal"]);
+                }
             }
         }
         //計算小計
