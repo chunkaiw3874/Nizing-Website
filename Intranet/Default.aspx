@@ -130,6 +130,8 @@
                 <li><a href="nizing_intranet/HR04.aspx">面試表</a></li>
                 <li><a href="nizing_intranet/HR06.aspx">考核成績表</a></li>
                 <li><a href="nizing_intranet/HR07.aspx">Annual Report</a></li>
+                <li><%--<a href="backend_program/NIZING_BACKEND_Data_Config.application">test</a>--%></li>
+
             </ul>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
