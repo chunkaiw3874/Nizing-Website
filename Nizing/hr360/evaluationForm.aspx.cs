@@ -59,8 +59,8 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             }
 
             //test value
-            //string assessor = "0015";
-            //string assessed = "0031";
+            //string assessor = "0080";
+            //string assessed = "0105";
 
 
             DataTable dtEval = new DataTable();
@@ -993,6 +993,33 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
         //動態增加自評以外的評語格
         if (lblEvalType.Text != "自評") //判斷非自評
         {
+            //讀取自評評語
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT OVERALL_COMMENT"
+                + " FROM HR360_ASSESSMENTSCORE_ASSESSED_A"
+                + " WHERE ASSESSOR_ID=@ASSESSOR_ID"
+                + " AND ASSESSED_ID=@ASSESSED_ID"
+                + " AND ASSESS_YEAR=@ASSESS_YEAR";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ASSESSOR_ID", lblEmpID.Text);
+                cmd.Parameters.AddWithValue("@ASSESSED_ID", lblEmpID.Text);
+                cmd.Parameters.AddWithValue("@ASSESS_YEAR", year);
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    if (dr.HasRows)
+                    {
+                        dr.Close();
+                        txtSelfComment.Text = cmd.ExecuteScalar().ToString();
+                    }
+                    else
+                    {
+                        dr.Close();
+                        txtSelfComment.Text = "";
+                    }
+                }
+            }
             txtSelfComment.ReadOnly = true; //如非自評，則自評評語不可更改
             txtSelfComment.Attributes["placeholder"] = "";
             //評語 title
