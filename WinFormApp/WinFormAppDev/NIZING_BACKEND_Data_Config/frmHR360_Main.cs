@@ -282,6 +282,66 @@ namespace NIZING_BACKEND_Data_Config
             else if (tbcAccountManagement.SelectedTab == tbpCompanyAnnouncement)
             {
                 //control display for each function mode
+                if (companyAccouncementTabMode == FunctionMode.ADD)
+                {
+                    btnCompanyAnnouncementAdd.Enabled = false;
+                    btnCompanyAnnouncementEdit.Enabled = false;
+                    btnCompanyAnnouncementDelete.Enabled = false;
+                    btnCompanyAnnouncementSearch.Enabled = false;
+                    btnCompanyAnnoucementConfirm.Enabled = true;
+                    btnCompanyAnnouncementCancel.Enabled = true;
+                    txtCompanyAnnouncementBody.Text = String.Empty;
+                    txtCompanyAnnouncementBody.Enabled = true;
+                    gvCompanyAnnouncementSearch_Result.Enabled = false;
+                }
+                else if (companyAccouncementTabMode == FunctionMode.EDIT)
+                {
+                    btnCompanyAnnouncementAdd.Enabled = false;
+                    btnCompanyAnnouncementEdit.Enabled = false;
+                    btnCompanyAnnouncementDelete.Enabled = false;
+                    btnCompanyAnnouncementSearch.Enabled = false;
+                    btnCompanyAnnoucementConfirm.Enabled = true;
+                    btnCompanyAnnouncementCancel.Enabled = true;
+                    txtCompanyAnnouncementBody.Enabled = true;
+                    gvCompanyAnnouncementSearch_Result.Enabled = false;
+                }
+                else if (companyAccouncementTabMode == FunctionMode.DELETE)
+                {
+
+                }
+                else if (companyAccouncementTabMode == FunctionMode.SEARCH)
+                {
+                    btnCompanyAnnouncementAdd.Enabled = false;
+                    btnCompanyAnnouncementEdit.Enabled = false;
+                    btnCompanyAnnouncementDelete.Enabled = false;
+                    btnCompanyAnnouncementSearch.Enabled = false;
+                    btnCompanyAnnoucementConfirm.Enabled = false;
+                    btnCompanyAnnouncementCancel.Enabled = false;
+                    txtCompanyAnnouncementBody.Enabled = false;
+                    gvCompanyAnnouncementSearch_Result.Enabled = false;
+                }
+                else if (companyAccouncementTabMode == FunctionMode.HASRECORD)
+                {
+                    btnCompanyAnnouncementAdd.Enabled = true;
+                    btnCompanyAnnouncementEdit.Enabled = true;
+                    btnCompanyAnnouncementDelete.Enabled = true;
+                    btnCompanyAnnouncementSearch.Enabled = true;
+                    btnCompanyAnnoucementConfirm.Enabled = false;
+                    btnCompanyAnnouncementCancel.Enabled = false;
+                    txtCompanyAnnouncementBody.Enabled = false;
+                    gvCompanyAnnouncementSearch_Result.Enabled = true;
+                }
+                else if (companyAccouncementTabMode == FunctionMode.NORECORD)
+                {
+                    btnCompanyAnnouncementAdd.Enabled = true;
+                    btnCompanyAnnouncementEdit.Enabled = false;
+                    btnCompanyAnnouncementDelete.Enabled = true;
+                    btnCompanyAnnouncementSearch.Enabled = true;
+                    btnCompanyAnnoucementConfirm.Enabled = false;
+                    btnCompanyAnnouncementCancel.Enabled = false;
+                    txtCompanyAnnouncementBody.Enabled = false;
+                    gvCompanyAnnouncementSearch_Result.Enabled = false;
+                }
             }
         }
 
@@ -301,7 +361,9 @@ namespace NIZING_BACKEND_Data_Config
 
         private void tbcManagement_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (accountTabMode == FunctionMode.ADD || accountTabMode == FunctionMode.EDIT || accountTabMode == FunctionMode.SEARCH)
+            if (accountTabMode == FunctionMode.ADD || accountTabMode == FunctionMode.EDIT || accountTabMode == FunctionMode.SEARCH
+                ||companyAccouncementTabMode == FunctionMode.ADD || companyAccouncementTabMode==FunctionMode.EDIT || companyAccouncementTabMode==FunctionMode.SEARCH
+                )
             {
                 tbcAccountManagement.SelectedTab = currentTabPage;
             }
@@ -328,6 +390,10 @@ namespace NIZING_BACKEND_Data_Config
                 //        clbAdminRights.SetItemCheckState(i - 1, CheckState.Checked);
                 //    }
                 //}
+            }
+            else if (gv.Name == "gvCompanyAnnouncementSearch_Result")
+            {
+
             }
         }
         #endregion        
