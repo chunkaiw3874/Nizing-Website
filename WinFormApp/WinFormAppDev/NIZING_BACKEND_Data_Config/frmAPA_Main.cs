@@ -2168,112 +2168,76 @@ namespace NIZING_BACKEND_Data_Config
         }
         protected void CalculateFinalScore(DataTable dt)
         {
-            for (int i = 0; i < dt.Rows.Count; i++)
+            try
             {
-                string year = dt.Rows[i]["年度"].ToString();
-                string id = dt.Rows[i]["受評者ID"].ToString();
-                double attendanceScore = 0;
-                double rnpScore = 0;
-                double evalScore = 0;
-                double finalScore = 0;
-                string finalGrade = "";
-                if (!double.TryParse(dt.Rows[i]["出勤成績"].ToString(), out attendanceScore))
+                for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    attendanceScore = 0;
-                }
-                if (!double.TryParse(dt.Rows[i]["獎懲成績"].ToString(), out rnpScore))
-                {
-                    rnpScore = 0;
-                }
-                if (!double.TryParse(dt.Rows[i]["特評分數"].ToString(), out evalScore))
-                {
-                    evalScore = Convert.ToDouble(dt.Rows[i]["主管評分數"]);
-                }
-                if (attendanceScore >= 100)
-                {
-                    finalScore = evalScore * 10 * 0.9 + 100 * 0.1 + rnpScore;
-                }
-                else if (attendanceScore >= 99 && attendanceScore < 100)
-                {
-                    finalScore = evalScore * 10 * 0.9 + 90 * 0.1 + rnpScore;
-                }
-                else if (attendanceScore >= 98 && attendanceScore < 99)
-                {
-                    finalScore = evalScore * 10 * 0.9 + 80 * 0.1 + rnpScore;
-                }
-                else if (attendanceScore >= 97 && attendanceScore < 98)
-                {
-                    finalScore = evalScore * 10 * 0.9 + 70 * 0.1 + rnpScore;
-                }
-                else if (attendanceScore >= 96 && attendanceScore < 97)
-                {
-                    finalScore = evalScore * 10 * 0.9 + 60 * 0.1 + rnpScore;
-                }
-                else if (attendanceScore >= 95 && attendanceScore < 96)
-                {
-                    finalScore = evalScore * 10 * 0.9 + 50 * 0.1 + rnpScore;
-                }
-                else if (attendanceScore >= 94 && attendanceScore < 95)
-                {
-                    finalScore = evalScore * 10 * 0.9 + 40 * 0.1 + rnpScore;
-                }
-                else if (attendanceScore >= 93 && attendanceScore < 94)
-                {
-                    finalScore = evalScore * 10 * 0.9 + 30 * 0.1 + rnpScore;
-                }
-                else if (attendanceScore >= 92 && attendanceScore < 93)
-                {
-                    finalScore = evalScore * 10 * 0.9 + 20 * 0.1 + rnpScore;
-                }
-                else if (attendanceScore >= 91 && attendanceScore < 92)
-                {
-                    finalScore = evalScore * 10 * 0.9 + 10 * 0.1 + rnpScore;
-                }
-                else
-                {
-                    finalScore = evalScore * 10 * 0.9 + 0 * 0.1 + rnpScore;
-                }
+                    string year = dt.Rows[i]["年度"].ToString();
+                    string id = dt.Rows[i]["受評者ID"].ToString();
+                    double attendanceScore = 0;
+                    double rnpScore = 0;
+                    double evalScore = 0;
+                    double finalScore = 0;
+                    string finalGrade = "";
+                    if (!double.TryParse(dt.Rows[i]["出勤成績"].ToString(), out attendanceScore))
+                    {
+                        attendanceScore = 0;
+                    }
+                    if (!double.TryParse(dt.Rows[i]["獎懲成績"].ToString(), out rnpScore))
+                    {
+                        rnpScore = 0;
+                    }
+                    if (!double.TryParse(dt.Rows[i]["特評分數"].ToString(), out evalScore))
+                    {
+                        evalScore = Convert.ToDouble(dt.Rows[i]["主管評分數"]);
+                    }
+                    finalScore = evalScore * 10 * 0.8 + attendanceScore * 0.2 + rnpScore;
 
-                if (finalScore >= 90)
-                {
-                    finalGrade = "甲";
+                    if (finalScore >= 90)
+                    {
+                        finalGrade = "甲";
+                    }
+                    else if (finalScore >= 80)
+                    {
+                        finalGrade = "乙";
+                    }
+                    else if (finalScore >= 70)
+                    {
+                        finalGrade = "丙";
+                    }
+                    else
+                    {
+                        finalGrade = "丁";
+                    }
+                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                    {
+                        conn.Open();
+                        string query = "UPDATE HR360_AssessmentScore_FinalScore"
+    + " Set EvaluationScore=@EvaluationScore"
+    + " ,AttendanceScore=@AttendanceScore"
+    + " ,RewardAndPenaltyScore=@RewardAndPenaltyScore"
+    + " ,FinalScore=@FinalScore"
+    + " ,FinalScoreGrade=@FinalScoreGrade"
+    + " Where AssessYear=@AssessYear"
+    + " and EmpID=@EmpID"
+    + " IF @@ROWCOUNT=0"
+    + " INSERT INTO HR360_AssessmentScore_FinalScore(AssessYear,EmpID,EvaluationScore,AttendanceScore,RewardAndPenaltyScore,FinalScore,FinalScoreGrade)"
+    + " VALUES(@AssessYear,@EmpID,@EvaluationScore,@AttendanceScore,@RewardAndPenaltyScore,@FinalScore,@FinalScoreGrade)";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@AssessYear", year);
+                        cmd.Parameters.AddWithValue("@EmpID", id);
+                        cmd.Parameters.AddWithValue("@EvaluationScore", evalScore);
+                        cmd.Parameters.AddWithValue("@AttendanceScore", dt.Rows[i]["出勤成績"]);
+                        cmd.Parameters.AddWithValue("@RewardAndPenaltyScore", dt.Rows[i]["獎懲成績"]);
+                        cmd.Parameters.AddWithValue("@FinalScore", finalScore);
+                        cmd.Parameters.AddWithValue("@FinalScoreGrade", finalGrade);
+                        cmd.ExecuteNonQuery();
+                    }
                 }
-                else if (finalScore >= 80)
-                {
-                    finalGrade = "乙";
-                }
-                else if (finalScore >= 70)
-                {
-                    finalGrade = "丙";
-                }
-                else
-                {
-                    finalGrade = "丁";
-                }
-                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-                {
-                    conn.Open();
-                    string query = "UPDATE HR360_AssessmentScore_FinalScore"
-+ " Set EvaluationScore=@EvaluationScore"
-+ " ,AttendanceScore=@AttendanceScore"
-+ " ,RewardAndPenaltyScore=@RewardAndPenaltyScore"
-+ " ,FinalScore=@FinalScore"
-+ " ,FinalScoreGrade=@FinalScoreGrade"
-+ " Where AssessYear=@AssessYear"
-+ " and EmpID=@EmpID"
-+ " IF @@ROWCOUNT=0"
-+ " INSERT INTO HR360_AssessmentScore_FinalScore(AssessYear,EmpID,EvaluationScore,AttendanceScore,RewardAndPenaltyScore,FinalScore,FinalScoreGrade)"
-+ " VALUES(@AssessYear,@EmpID,@EvaluationScore,@AttendanceScore,@RewardAndPenaltyScore,@FinalScore,@FinalScoreGrade)";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@AssessYear", year);
-                    cmd.Parameters.AddWithValue("@EmpID", id);
-                    cmd.Parameters.AddWithValue("@EvaluationScore", evalScore);
-                    cmd.Parameters.AddWithValue("@AttendanceScore", dt.Rows[i]["出勤成績"]);
-                    cmd.Parameters.AddWithValue("@RewardAndPenaltyScore", dt.Rows[i]["獎懲成績"]);
-                    cmd.Parameters.AddWithValue("@FinalScore", finalScore);
-                    cmd.Parameters.AddWithValue("@FinalScoreGrade", finalGrade);
-                    cmd.ExecuteNonQuery();
-                }
+            }
+            catch (Exception ex)
+            {
+                txtFinalScoreMemo.Text += DateTime.Now.ToString() + ex.Message + Environment.NewLine;
             }
         }
         #endregion

@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnLogout = new System.Windows.Forms.Button();
             this.tbcManagement = new System.Windows.Forms.TabControl();
@@ -54,12 +54,6 @@
             this.tsmQuestionAssignment = new System.Windows.Forms.ToolStripMenuItem();
             this.btnQuestionEdit = new System.Windows.Forms.Button();
             this.txtQuestionTabMemo = new System.Windows.Forms.RichTextBox();
-            this.tbpFinalScoreCalculation = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnFinalScoreCalculate = new System.Windows.Forms.Button();
-            this.cbxFinalScoreYear = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.txtFinalScoreMemo = new System.Windows.Forms.TextBox();
             this.tbpQuestionAssignment = new System.Windows.Forms.TabPage();
             this.tlpQuestionAssignmentAll = new System.Windows.Forms.TableLayoutPanel();
             this.lblQuestionAssignmentQuestionCategory = new System.Windows.Forms.Label();
@@ -149,9 +143,15 @@
             this.cbxReportPreviewYear = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.tbpFinalScoreCalculation = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnFinalScoreCalculate = new System.Windows.Forms.Button();
+            this.cbxFinalScoreYear = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtFinalScoreMemo = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.dsAPA_Question = new NIZING_BACKEND_Data_Config.dsAPA_Question();
             this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter = new NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter();
-            this.label15 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpQuestionCategory.SuspendLayout();
@@ -163,8 +163,6 @@
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvQuestion)).BeginInit();
             this.ctxmsQuestion.SuspendLayout();
-            this.tbpFinalScoreCalculation.SuspendLayout();
-            this.tableLayoutPanel13.SuspendLayout();
             this.tbpQuestionAssignment.SuspendLayout();
             this.tlpQuestionAssignmentAll.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
@@ -196,6 +194,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvAccountPriviledge)).BeginInit();
             this.tbpReportPreview.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
+            this.tbpFinalScoreCalculation.SuspendLayout();
+            this.tableLayoutPanel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).BeginInit();
             this.SuspendLayout();
             // 
@@ -430,13 +430,13 @@
             // 
             this.gvQuestion.AllowUserToAddRows = false;
             this.gvQuestion.AllowUserToResizeRows = false;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvQuestion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvQuestion.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gvQuestion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvQuestion.ContextMenuStrip = this.ctxmsQuestion;
             this.gvQuestion.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -486,82 +486,6 @@
             this.txtQuestionTabMemo.Size = new System.Drawing.Size(1162, 94);
             this.txtQuestionTabMemo.TabIndex = 4;
             this.txtQuestionTabMemo.Text = "";
-            // 
-            // tbpFinalScoreCalculation
-            // 
-            this.tbpFinalScoreCalculation.Controls.Add(this.tableLayoutPanel13);
-            this.tbpFinalScoreCalculation.Location = new System.Drawing.Point(4, 22);
-            this.tbpFinalScoreCalculation.Name = "tbpFinalScoreCalculation";
-            this.tbpFinalScoreCalculation.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpFinalScoreCalculation.Size = new System.Drawing.Size(1176, 810);
-            this.tbpFinalScoreCalculation.TabIndex = 9;
-            this.tbpFinalScoreCalculation.Text = "最終成績計算";
-            this.tbpFinalScoreCalculation.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel13
-            // 
-            this.tableLayoutPanel13.ColumnCount = 2;
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel13.Controls.Add(this.btnFinalScoreCalculate, 1, 1);
-            this.tableLayoutPanel13.Controls.Add(this.cbxFinalScoreYear, 1, 0);
-            this.tableLayoutPanel13.Controls.Add(this.label14, 0, 0);
-            this.tableLayoutPanel13.Controls.Add(this.txtFinalScoreMemo, 1, 3);
-            this.tableLayoutPanel13.Controls.Add(this.label15, 1, 2);
-            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel13.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel13.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
-            this.tableLayoutPanel13.RowCount = 4;
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel13.Size = new System.Drawing.Size(1170, 804);
-            this.tableLayoutPanel13.TabIndex = 0;
-            // 
-            // btnFinalScoreCalculate
-            // 
-            this.btnFinalScoreCalculate.Location = new System.Drawing.Point(103, 32);
-            this.btnFinalScoreCalculate.Name = "btnFinalScoreCalculate";
-            this.btnFinalScoreCalculate.Size = new System.Drawing.Size(75, 23);
-            this.btnFinalScoreCalculate.TabIndex = 1;
-            this.btnFinalScoreCalculate.Text = "計算成績";
-            this.btnFinalScoreCalculate.UseVisualStyleBackColor = true;
-            this.btnFinalScoreCalculate.Click += new System.EventHandler(this.btnFinalScoreCalculate_Click);
-            // 
-            // cbxFinalScoreYear
-            // 
-            this.cbxFinalScoreYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxFinalScoreYear.FormattingEnabled = true;
-            this.cbxFinalScoreYear.Location = new System.Drawing.Point(103, 3);
-            this.cbxFinalScoreYear.Name = "cbxFinalScoreYear";
-            this.cbxFinalScoreYear.Size = new System.Drawing.Size(121, 20);
-            this.cbxFinalScoreYear.TabIndex = 2;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label14.Location = new System.Drawing.Point(65, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(32, 29);
-            this.label14.TabIndex = 3;
-            this.label14.Text = "年份:";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtFinalScoreMemo
-            // 
-            this.txtFinalScoreMemo.BackColor = System.Drawing.Color.White;
-            this.txtFinalScoreMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtFinalScoreMemo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtFinalScoreMemo.Location = new System.Drawing.Point(103, 707);
-            this.txtFinalScoreMemo.Multiline = true;
-            this.txtFinalScoreMemo.Name = "txtFinalScoreMemo";
-            this.txtFinalScoreMemo.ReadOnly = true;
-            this.txtFinalScoreMemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtFinalScoreMemo.Size = new System.Drawing.Size(1064, 94);
-            this.txtFinalScoreMemo.TabIndex = 4;
             // 
             // tbpQuestionAssignment
             // 
@@ -911,13 +835,13 @@
             // 
             this.gvPersonnelAssignment.AllowUserToAddRows = false;
             this.gvPersonnelAssignment.AllowUserToResizeRows = false;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvPersonnelAssignment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvPersonnelAssignment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.gvPersonnelAssignment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvPersonnelAssignment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvPersonnelAssignment.Location = new System.Drawing.Point(4, 34);
@@ -1044,13 +968,13 @@
             // 
             this.gvEmployeeWorkhourInputField.AllowUserToAddRows = false;
             this.gvEmployeeWorkhourInputField.AllowUserToResizeRows = false;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvEmployeeWorkhourInputField.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvEmployeeWorkhourInputField.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gvEmployeeWorkhourInputField.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvEmployeeWorkhourInputField.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvEmployeeWorkhourInputField.Location = new System.Drawing.Point(4, 34);
@@ -1554,13 +1478,13 @@
             // 
             this.gvAccountPriviledge.AllowUserToAddRows = false;
             this.gvAccountPriviledge.AllowUserToResizeRows = false;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvAccountPriviledge.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvAccountPriviledge.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.gvAccountPriviledge.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvAccountPriviledge.ContextMenuStrip = this.ctxmsQuestion;
             this.gvAccountPriviledge.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1679,6 +1603,92 @@
             this.label6.Text = "人員:";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // tbpFinalScoreCalculation
+            // 
+            this.tbpFinalScoreCalculation.Controls.Add(this.tableLayoutPanel13);
+            this.tbpFinalScoreCalculation.Location = new System.Drawing.Point(4, 22);
+            this.tbpFinalScoreCalculation.Name = "tbpFinalScoreCalculation";
+            this.tbpFinalScoreCalculation.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpFinalScoreCalculation.Size = new System.Drawing.Size(1176, 810);
+            this.tbpFinalScoreCalculation.TabIndex = 9;
+            this.tbpFinalScoreCalculation.Text = "最終成績計算";
+            this.tbpFinalScoreCalculation.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel13
+            // 
+            this.tableLayoutPanel13.ColumnCount = 2;
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel13.Controls.Add(this.btnFinalScoreCalculate, 1, 1);
+            this.tableLayoutPanel13.Controls.Add(this.cbxFinalScoreYear, 1, 0);
+            this.tableLayoutPanel13.Controls.Add(this.label14, 0, 0);
+            this.tableLayoutPanel13.Controls.Add(this.txtFinalScoreMemo, 1, 3);
+            this.tableLayoutPanel13.Controls.Add(this.label15, 1, 2);
+            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel13.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
+            this.tableLayoutPanel13.RowCount = 4;
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(1170, 804);
+            this.tableLayoutPanel13.TabIndex = 0;
+            // 
+            // btnFinalScoreCalculate
+            // 
+            this.btnFinalScoreCalculate.Location = new System.Drawing.Point(103, 32);
+            this.btnFinalScoreCalculate.Name = "btnFinalScoreCalculate";
+            this.btnFinalScoreCalculate.Size = new System.Drawing.Size(75, 23);
+            this.btnFinalScoreCalculate.TabIndex = 1;
+            this.btnFinalScoreCalculate.Text = "計算成績";
+            this.btnFinalScoreCalculate.UseVisualStyleBackColor = true;
+            this.btnFinalScoreCalculate.Click += new System.EventHandler(this.btnFinalScoreCalculate_Click);
+            // 
+            // cbxFinalScoreYear
+            // 
+            this.cbxFinalScoreYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxFinalScoreYear.FormattingEnabled = true;
+            this.cbxFinalScoreYear.Location = new System.Drawing.Point(103, 3);
+            this.cbxFinalScoreYear.Name = "cbxFinalScoreYear";
+            this.cbxFinalScoreYear.Size = new System.Drawing.Size(121, 20);
+            this.cbxFinalScoreYear.TabIndex = 2;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label14.Location = new System.Drawing.Point(65, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(32, 29);
+            this.label14.TabIndex = 3;
+            this.label14.Text = "年份:";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtFinalScoreMemo
+            // 
+            this.txtFinalScoreMemo.BackColor = System.Drawing.Color.White;
+            this.txtFinalScoreMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtFinalScoreMemo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtFinalScoreMemo.Location = new System.Drawing.Point(103, 707);
+            this.txtFinalScoreMemo.Multiline = true;
+            this.txtFinalScoreMemo.Name = "txtFinalScoreMemo";
+            this.txtFinalScoreMemo.ReadOnly = true;
+            this.txtFinalScoreMemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtFinalScoreMemo.Size = new System.Drawing.Size(1064, 94);
+            this.txtFinalScoreMemo.TabIndex = 4;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.ForeColor = System.Drawing.Color.Red;
+            this.label15.Location = new System.Drawing.Point(103, 58);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(383, 12);
+            this.label15.TabIndex = 5;
+            this.label15.Text = "*2018計算公式為: 最終成績=考核成績*10*0.8+出勤成績*0.2+獎懲加減分";
+            // 
             // dsAPA_Question
             // 
             this.dsAPA_Question.DataSetName = "dsAPA_Question";
@@ -1687,16 +1697,6 @@
             // hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter
             // 
             this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter.ClearBeforeFill = true;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.ForeColor = System.Drawing.Color.Red;
-            this.label15.Location = new System.Drawing.Point(103, 58);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(365, 12);
-            this.label15.TabIndex = 5;
-            this.label15.Text = "*2018計算公式為: 最終成績=考核成績*0.8+出勤成績*0.2+獎懲加減分";
             // 
             // frmAPA_Main
             // 
@@ -1720,9 +1720,6 @@
             this.flowLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvQuestion)).EndInit();
             this.ctxmsQuestion.ResumeLayout(false);
-            this.tbpFinalScoreCalculation.ResumeLayout(false);
-            this.tableLayoutPanel13.ResumeLayout(false);
-            this.tableLayoutPanel13.PerformLayout();
             this.tbpQuestionAssignment.ResumeLayout(false);
             this.tlpQuestionAssignmentAll.ResumeLayout(false);
             this.tlpQuestionAssignmentAll.PerformLayout();
@@ -1763,6 +1760,9 @@
             this.tbpReportPreview.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
+            this.tbpFinalScoreCalculation.ResumeLayout(false);
+            this.tableLayoutPanel13.ResumeLayout(false);
+            this.tableLayoutPanel13.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).EndInit();
             this.ResumeLayout(false);
 

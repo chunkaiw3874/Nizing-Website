@@ -64,7 +64,7 @@ public partial class hr360_UI05 : System.Web.UI.Page
                 divBonusLookup.Visible = true;
                 if (!IsPostBack)
                 {
-                    for (int i = 2016; i <= DateTime.Today.Year; i++)
+                    for (int i = DateTime.Today.Year - 1; i >= 2016; i--)
                     {
                         ddlAssessmentYear.Items.Add(i.ToString());
                         ddlBonusYear.Items.Add(i.ToString());
@@ -368,7 +368,7 @@ public partial class hr360_UI05 : System.Web.UI.Page
                 divBonusLookup.Visible = true;
                 if (!IsPostBack)
                 {
-                    for (int i = 2016; i <= DateTime.Today.Year; i++)
+                    for (int i = DateTime.Today.Year - 1; i >= 2016; i--)
                     {
                         ddlAssessmentYear.Items.Add(i.ToString());
                         ddlBonusYear.Items.Add(i.ToString());
@@ -414,7 +414,7 @@ public partial class hr360_UI05 : System.Web.UI.Page
     {
         try
         {
-            for (int i = 2016; i < DateTime.Today.Year; i++)
+            for (int i = DateTime.Today.Year - 1; i >= 2016; i--)
             {
                 ddlViewYear.Items.Add(i.ToString());
                 ddlViewYear2.Items.Add(i.ToString());
