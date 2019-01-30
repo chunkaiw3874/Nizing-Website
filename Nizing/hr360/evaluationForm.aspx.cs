@@ -59,8 +59,8 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             }
 
             //test value
-            //string assessor = "0080";
-            //string assessed = "0105";
+            //string assessor = "0001";
+            //string assessed = "0001";
 
 
             DataTable dtEval = new DataTable();

@@ -39,7 +39,10 @@ public partial class main : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["erp_id"] = "0141";
+        //test area
+        //Session["erp_id"] = "0004";
+        //Session["user_id"] = "0004";
+
         //if(false)
         if (!((masterPage_HR360_Master)this.Master.Master).CheckAuthentication())        
         {
