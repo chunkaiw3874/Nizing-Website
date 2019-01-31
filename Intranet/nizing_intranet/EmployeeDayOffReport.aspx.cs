@@ -275,14 +275,14 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
                 decimal label17 = 0;
                 decimal label18 = 0;
                 decimal label19 = 0;
-                if (decimal.TryParse((row.Cells[4].FindControl("Label4") as Label).Text.ToString(), out label4))
-                {
-                    sum += label4;
-                }
-                else
-                {
-                    sum += label4;
-                }
+                //if (decimal.TryParse((row.Cells[4].FindControl("Label4") as Label).Text.ToString(), out label4))
+                //{
+                //    sum += label4;
+                //}
+                //else
+                //{
+                //    sum += label4;
+                //}
                 if (decimal.TryParse((row.Cells[5].FindControl("Label5") as Label).Text.ToString(), out label5))
                 {
                     sum += label5;
