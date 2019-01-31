@@ -111,7 +111,6 @@ namespace NIZING_BACKEND_Data_Config
                 cbxReportPreviewYear.Items.Add(i);
             }
             cbxReportPreviewYear.SelectedIndex = 0;
-            LoadcbxReportPreviewEmployee();
             btnReportPreviewPreview.Enabled = false;
             cbxReportPreviewEmployee.Enabled = false;
             cbxReportPreviewYear.Enabled = false;

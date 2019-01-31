@@ -26,7 +26,7 @@ public partial class hr360_UI06 : System.Web.UI.Page
         {
             if (!IsPostBack)
             {
-                for (int i = Convert.ToInt16(DateTime.Today.Year); i > 2015; i--)
+                for (int i = DateTime.Today.Year; i > DateTime.Today.Year - 2; i--)
                 {
                     ddlYear.Items.Add(i.ToString());
                 }
@@ -215,7 +215,6 @@ public partial class hr360_UI06 : System.Web.UI.Page
             else
             {
                 salary_slip.Visible = false;
-                lblErrorMessage.Text = "請於次月六號以後再查詢";
             }
         }
         catch (Exception ex)
@@ -227,8 +226,14 @@ public partial class hr360_UI06 : System.Web.UI.Page
     {
         DateTime slipAvailableDate = DateTime.ParseExact(ddlYear.SelectedValue + ddlMonth.SelectedValue + "05170000", "yyyyMMddHHmmss", null);
 
-        if (DateTime.Now < slipAvailableDate.AddMonths(1))
+        if (DateTime.Now > slipAvailableDate.AddYears(1).AddMonths(1))  //2019.01.31 Check implemented per Chrissy
         {
+            lblErrorMessage.Text = "此系統僅能查詢一年內薪資單，如需查詢更久以前的，請與人事部聯繫";
+            return false;
+        }
+        else if (DateTime.Now < slipAvailableDate.AddMonths(1))
+        {
+            lblErrorMessage.Text = "請於次月六號以後再查詢";
             return false;
         }
         else

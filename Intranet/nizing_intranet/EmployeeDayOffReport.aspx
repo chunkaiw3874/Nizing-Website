@@ -55,6 +55,11 @@
                                 <asp:Label ID="Label3" runat="server" Text='<%#Eval("03")==DBNull.Value || Eval("03")==DBNull.Value?"":Eval("03") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                        <asp:TemplateField HeaderText="未休時數-天/小時">
+                            <ItemTemplate>
+                                <asp:Label ID="lblUnusedDayoff" runat="server" Text=""></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="年度特休-天/小時">
                             <ItemTemplate>
                                 <asp:Label ID="Label4" runat="server" Text='<%#Eval("DAYOFF_TOTAL") %>'></asp:Label>

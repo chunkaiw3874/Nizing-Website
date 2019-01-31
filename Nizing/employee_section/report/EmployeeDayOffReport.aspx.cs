@@ -294,7 +294,8 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
             if (row.RowType == DataControlRowType.DataRow)
             {
                 decimal sum = 0;
-                decimal label4 = 0;
+                decimal label3 = 0;
+                //decimal label4 = 0;
                 decimal label5 = 0;
                 decimal label6 = 0;
                 decimal label7 = 0;
@@ -310,6 +311,17 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
                 decimal label17 = 0;
                 decimal label18 = 0;
                 decimal label19 = 0;
+
+                //Calculate Unused dayoff
+                if (decimal.TryParse(((Label)row.Cells[3].FindControl("Label3")).Text, out label3))
+                {
+                    ((Label)row.Cells[4].FindControl("lblUnusedDayoff")).Text = (Convert.ToDecimal(((Label)row.Cells[5].FindControl("Label4")).Text) - label3).ToString();
+                }
+                else
+                {
+                    ((Label)row.Cells[4].FindControl("lblUnusedDayoff")).Text = ((Label)row.Cells[5].FindControl("Label4")).Text;
+                }
+
                 //if (decimal.TryParse((row.Cells[4].FindControl("Label4") as Label).Text.ToString(), out label4))
                 //{
                 //    sum += label4;
@@ -318,7 +330,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
                 //{
                 //    sum += label4;
                 //}
-                if (decimal.TryParse((row.Cells[5].FindControl("Label5") as Label).Text.ToString(), out label5))
+                if (decimal.TryParse((row.Cells[6].FindControl("Label5") as Label).Text.ToString(), out label5))
                 {
                     sum += label5;
                 }
@@ -326,7 +338,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
                 {
                     sum += label5;
                 }
-                if (decimal.TryParse((row.Cells[6].FindControl("Label6") as Label).Text.ToString(), out label6))
+                if (decimal.TryParse((row.Cells[7].FindControl("Label6") as Label).Text.ToString(), out label6))
                 {
                     sum += label6;
                 }
@@ -334,7 +346,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
                 {
                     sum += label6;
                 }
-                if (decimal.TryParse((row.Cells[7].FindControl("Label7") as Label).Text.ToString(), out label7))
+                if (decimal.TryParse((row.Cells[8].FindControl("Label7") as Label).Text.ToString(), out label7))
                 {
                     sum += label7;
                 }
@@ -342,7 +354,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
                 {
                     sum += label7;
                 }
-                if (decimal.TryParse((row.Cells[8].FindControl("Label8") as Label).Text.ToString(), out label8))
+                if (decimal.TryParse((row.Cells[9].FindControl("Label8") as Label).Text.ToString(), out label8))
                 {
                     sum += label8;
                 }
@@ -350,7 +362,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
                 {
                     sum += label8;
                 }
-                if (decimal.TryParse((row.Cells[9].FindControl("Label9") as Label).Text.ToString(), out label9))
+                if (decimal.TryParse((row.Cells[10].FindControl("Label9") as Label).Text.ToString(), out label9))
                 {
                     sum += label9;
                 }
@@ -358,7 +370,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
                 {
                     sum += label9;
                 }
-                if (decimal.TryParse((row.Cells[10].FindControl("Label10") as Label).Text.ToString(), out label10))
+                if (decimal.TryParse((row.Cells[11].FindControl("Label10") as Label).Text.ToString(), out label10))
                 {
                     sum += label10;
                 }
@@ -366,7 +378,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
                 {
                     sum += label10;
                 }
-                if (decimal.TryParse((row.Cells[11].FindControl("Label11") as Label).Text.ToString(), out label11))
+                if (decimal.TryParse((row.Cells[12].FindControl("Label11") as Label).Text.ToString(), out label11))
                 {
                     sum += label11;
                 }
@@ -374,7 +386,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
                 {
                     sum += label11;
                 }
-                if (decimal.TryParse((row.Cells[12].FindControl("Label12") as Label).Text.ToString(), out label12))
+                if (decimal.TryParse((row.Cells[13].FindControl("Label12") as Label).Text.ToString(), out label12))
                 {
                     sum += label12;
                 }
@@ -382,7 +394,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
                 {
                     sum += label12;
                 }
-                if (decimal.TryParse((row.Cells[13].FindControl("Label13") as Label).Text.ToString(), out label13))
+                if (decimal.TryParse((row.Cells[14].FindControl("Label13") as Label).Text.ToString(), out label13))
                 {
                     sum += label13;
                 }
@@ -390,7 +402,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
                 {
                     sum += label13;
                 }
-                if (decimal.TryParse((row.Cells[14].FindControl("Label14") as Label).Text.ToString(), out label14))
+                if (decimal.TryParse((row.Cells[15].FindControl("Label14") as Label).Text.ToString(), out label14))
                 {
                     sum += label14;
                 }
@@ -398,7 +410,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
                 {
                     sum += label14;
                 }
-                if (decimal.TryParse((row.Cells[15].FindControl("Label15") as Label).Text.ToString(), out label15))
+                if (decimal.TryParse((row.Cells[16].FindControl("Label15") as Label).Text.ToString(), out label15))
                 {
                     sum += label15;
                 }
@@ -406,7 +418,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
                 {
                     sum += label15;
                 }
-                if (decimal.TryParse((row.Cells[16].FindControl("Label16") as Label).Text.ToString(), out label16))
+                if (decimal.TryParse((row.Cells[17].FindControl("Label16") as Label).Text.ToString(), out label16))
                 {
                     sum += label16;
                 }
@@ -414,7 +426,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
                 {
                     sum += label16;
                 }
-                if (decimal.TryParse((row.Cells[17].FindControl("Label17") as Label).Text.ToString(), out label17))
+                if (decimal.TryParse((row.Cells[18].FindControl("Label17") as Label).Text.ToString(), out label17))
                 {
                     sum += label17;
                 }
@@ -422,7 +434,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
                 {
                     sum += label17;
                 }
-                if (decimal.TryParse((row.Cells[18].FindControl("Label18") as Label).Text.ToString(), out label18))
+                if (decimal.TryParse((row.Cells[19].FindControl("Label18") as Label).Text.ToString(), out label18))
                 {
                     sum += label18;
                 }
@@ -430,7 +442,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
                 {
                     sum += label18;
                 }
-                if (decimal.TryParse((row.Cells[19].FindControl("Label19") as Label).Text.ToString(), out label19))
+                if (decimal.TryParse((row.Cells[20].FindControl("Label19") as Label).Text.ToString(), out label19))
                 {
                     sum += label19;
                 }
@@ -464,7 +476,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
             HeaderCell.Font.Size = 14;
             HeaderCell.Font.Bold = true;
             HeaderCell.HorizontalAlign = HorizontalAlign.Center;
-            HeaderCell.ColumnSpan = 2;
+            HeaderCell.ColumnSpan = 3;
             HeaderRow.Cells.Add(HeaderCell);
 
             HeaderCell = new TableCell();
