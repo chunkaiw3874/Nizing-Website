@@ -719,6 +719,7 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
                 + " left join HR360_RewardAndPenalty_EventCategory eventCategory on record.EventID=eventCategory.[UID]"
                 + " where record.EmpID=@ID"
                 + " and record.[Year]=@year"
+                + " and record.[Verified]=1"
                 + " order by record.RNPID,record.EventID,record.CreateDate";
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@ID", assessed);
