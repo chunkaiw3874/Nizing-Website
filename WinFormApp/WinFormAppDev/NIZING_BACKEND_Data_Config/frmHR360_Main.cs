@@ -93,14 +93,14 @@ namespace NIZING_BACKEND_Data_Config
             {
                 if (mode == FunctionMode.ADD)
                 {
-                    if (!String.IsNullOrWhiteSpace(txtCompanyAnnouncementBody.Text.Trim()))
+                    if (String.IsNullOrWhiteSpace(txtCompanyAnnouncementBody.Text.Trim()))
                     {
                         errorList.Add("內容不可為空白");
                     }
                 }
                 else if (mode == FunctionMode.EDIT)
                 {
-                    if (!String.IsNullOrWhiteSpace(txtCompanyAnnouncementBody.Text.Trim()))
+                    if (String.IsNullOrWhiteSpace(txtCompanyAnnouncementBody.Text.Trim()))
                     {
                         errorList.Add("內容不可為空白");
                     }
@@ -291,7 +291,8 @@ namespace NIZING_BACKEND_Data_Config
                     btnCompanyAnnouncementSearch.Enabled = false;
                     btnCompanyAnnoucementConfirm.Enabled = true;
                     btnCompanyAnnouncementCancel.Enabled = true;
-                    ckxCompanyAnnouncementVisible.Enabled = false;
+                    ckxCompanyAnnouncementVisible.Enabled = true;
+                    ckxCompanyAnnouncementVisible.Checked = true;
                     txtCompanyAnnouncementBody.Text = String.Empty;
                     txtCompanyAnnouncementBody.Enabled = true;
                     gvCompanyAnnouncementSearch_Result.Enabled = false;
@@ -631,12 +632,14 @@ namespace NIZING_BACKEND_Data_Config
             companyAccouncementTabMode = FunctionMode.ADD;
             lblCompanyAnnouncementID.Text = GetNewCompanyAnnouncementID().ToString();
             LoadControlStatus(currentTabPage);
+            txtCompanyAnnouncementBody.Focus();
         }
 
         private void btnCompanyAnnouncementEdit_Click(object sender, EventArgs e)
         {
             companyAccouncementTabMode = FunctionMode.EDIT;
             LoadControlStatus(currentTabPage);
+            txtCompanyAnnouncementBody.Focus();
         }
 
         private void btnCompanyAnnouncementDelete_Click(object sender, EventArgs e)
@@ -707,7 +710,53 @@ namespace NIZING_BACKEND_Data_Config
 
             if (errorList.Count == 0)
             {
-                
+                if (companyAccouncementTabMode == FunctionMode.ADD)
+                {
+                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                    {
+                        conn.Open();
+                        string query = "INSERT INTO HR360_COMPANYANNOUNCEMENT ([ID],CREATE_TIME,CREATOR,LAST_EDIT_TIME,LAST_EDITOR,[BODY],VISIBLE)"
+                                    + " VALUES(@ID,GETDATE(),@CREATOR,GETDATE(),@EDITOR,@BODY,@VISIBLE)";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@ID", lblCompanyAnnouncementID.Text);
+                        cmd.Parameters.AddWithValue("@CREATOR", UserName);
+                        cmd.Parameters.AddWithValue("@EDITOR", UserName);
+                        cmd.Parameters.AddWithValue("@BODY", txtCompanyAnnouncementBody.Text.Trim());
+                        cmd.Parameters.AddWithValue("@VISIBLE", ckxCompanyAnnouncementVisible.Checked);
+                        cmd.ExecuteNonQuery();                                    
+                    }
+                    txtCompanyAnnouncementMemo.Text += DateTime.Now.ToString() + ":資料新增完成" + Environment.NewLine;
+                }
+                else if (companyAccouncementTabMode == FunctionMode.EDIT)
+                {
+                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                    {
+                        conn.Open();
+                        string query = "UPDATE HR360_COMPANYANNOUNCEMENT"
+                                    + " SET LAST_EDIT_TIME=GETDATE()"
+                                    + " ,LAST_EDITOR=@EDITOR"
+                                    + " ,BODY=@BODY"
+                                    + " ,VISIBLE=@VISIBLE"
+                                    + " WHERE [ID]=@ID";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@ID", lblCompanyAnnouncementID.Text);
+                        cmd.Parameters.AddWithValue("@EDITOR", UserName);
+                        cmd.Parameters.AddWithValue("@BODY", txtCompanyAnnouncementBody.Text.Trim());
+                        cmd.Parameters.AddWithValue("@VISIBLE", ckxCompanyAnnouncementVisible.Checked);
+                        cmd.ExecuteNonQuery();
+                    }
+                    txtCompanyAnnouncementMemo.Text += DateTime.Now.ToString() + ":資料更新完成" + Environment.NewLine;
+                }
+                if (isGridViewEmpty(gvCompanyAnnouncementSearch_Result))
+                {
+                    companyAccouncementTabMode = FunctionMode.NORECORD;
+                    LoadControlStatus(tbpCompanyAnnouncement);
+                }
+                else
+                {
+                    companyAccouncementTabMode = FunctionMode.HASRECORD;
+                    LoadControlStatus(tbpCompanyAnnouncement);
+                }
             }
             else
             {
@@ -716,7 +765,18 @@ namespace NIZING_BACKEND_Data_Config
                 {
                     txtCompanyAnnouncementMemo.Text += s + Environment.NewLine;
                 }
-            } 
+            }
+            btnCompanyAnnouncementSearch_Click(sender, e);
+            if (isGridViewEmpty(gvCompanyAnnouncementSearch_Result))
+            {
+                companyAccouncementTabMode = FunctionMode.NORECORD;
+                LoadControlStatus(tbpCompanyAnnouncement);
+            }
+            else
+            {
+                companyAccouncementTabMode = FunctionMode.HASRECORD;
+                LoadControlStatus(tbpCompanyAnnouncement);
+            }
         }
 
         private void btnCompanyAnnouncementCancel_Click(object sender, EventArgs e)

@@ -165,7 +165,7 @@
             this.tbpAccountManagement.Padding = new System.Windows.Forms.Padding(3);
             this.tbpAccountManagement.Size = new System.Drawing.Size(1176, 810);
             this.tbpAccountManagement.TabIndex = 0;
-            this.tbpAccountManagement.Text = "帳號管理";
+            this.tbpAccountManagement.Text = "(維護中，請勿使用)帳號管理";
             this.tbpAccountManagement.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel2

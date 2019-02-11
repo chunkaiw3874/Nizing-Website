@@ -294,7 +294,8 @@ public partial class main : System.Web.UI.Page
                         + " ,ANNOUNCEMENT.[VISIBLE]"
                         + " FROM HR360_COMPANYANNOUNCEMENT ANNOUNCEMENT"
                         + " LEFT JOIN NZ.dbo.CMSMV MV ON ANNOUNCEMENT.LAST_EDITOR=MV.MV001"
-                        + " WHERE [VISIBLE]=1";
+                        + " WHERE [VISIBLE]=1"
+                        + " ORDER BY LAST_EDIT_TIME DESC";
             SqlCommand cmd = new SqlCommand(query, conn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
