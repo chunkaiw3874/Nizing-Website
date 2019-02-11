@@ -33,13 +33,14 @@ namespace NIZING_BACKEND_Data_Config
         {
             InitializeComponent();
             accountTabMode = FunctionMode.NORECORD;
-            currentTabPage = tbcAccountManagement.SelectedTab;
+            currentTabPage = tbcManagement.SelectedTab;
             LoadControlStatus(currentTabPage);
             txtAccountManagementMemo.Text = String.Empty;
 
             #region 公司公告 Init
             companyAccouncementTabMode = FunctionMode.NORECORD;
             txtCompanyAnnouncementMemo.Text = String.Empty;
+            flpCompanyAnnouncementID.Margin = new Padding(0, (flpCompanyAnnouncementID.Height - lblCompanyAnnouncementID.Height - 10) / 2, 0, 0);
             #endregion
         }
 
@@ -56,7 +57,7 @@ namespace NIZING_BACKEND_Data_Config
         private List<string> CheckConfirmError(FunctionMode mode)
         {
             List<string> errorList = new List<string>();
-            if (tbcAccountManagement.SelectedTab == tbpAccountManagement)
+            if (tbcManagement.SelectedTab == tbpAccountManagement)
             {
                 if (mode == FunctionMode.ADD)
                 {
@@ -88,7 +89,7 @@ namespace NIZING_BACKEND_Data_Config
                     }
                 }
             }
-            else if (tbcAccountManagement.SelectedTab == tbpCompanyAnnouncement)
+            else if (tbcManagement.SelectedTab == tbpCompanyAnnouncement)
             {
                 if (mode == FunctionMode.ADD)
                 {
@@ -279,7 +280,7 @@ namespace NIZING_BACKEND_Data_Config
                     btnLogout.Enabled = true;
                 }
             }
-            else if (tbcAccountManagement.SelectedTab == tbpCompanyAnnouncement)
+            else if (tbcManagement.SelectedTab == tbpCompanyAnnouncement)
             {
                 //control display for each function mode
                 if (companyAccouncementTabMode == FunctionMode.ADD)
@@ -290,6 +291,7 @@ namespace NIZING_BACKEND_Data_Config
                     btnCompanyAnnouncementSearch.Enabled = false;
                     btnCompanyAnnoucementConfirm.Enabled = true;
                     btnCompanyAnnouncementCancel.Enabled = true;
+                    ckxCompanyAnnouncementVisible.Enabled = false;
                     txtCompanyAnnouncementBody.Text = String.Empty;
                     txtCompanyAnnouncementBody.Enabled = true;
                     gvCompanyAnnouncementSearch_Result.Enabled = false;
@@ -302,6 +304,7 @@ namespace NIZING_BACKEND_Data_Config
                     btnCompanyAnnouncementSearch.Enabled = false;
                     btnCompanyAnnoucementConfirm.Enabled = true;
                     btnCompanyAnnouncementCancel.Enabled = true;
+                    ckxCompanyAnnouncementVisible.Enabled = true;
                     txtCompanyAnnouncementBody.Enabled = true;
                     gvCompanyAnnouncementSearch_Result.Enabled = false;
                 }
@@ -317,6 +320,7 @@ namespace NIZING_BACKEND_Data_Config
                     btnCompanyAnnouncementSearch.Enabled = false;
                     btnCompanyAnnoucementConfirm.Enabled = false;
                     btnCompanyAnnouncementCancel.Enabled = false;
+                    ckxCompanyAnnouncementVisible.Enabled = false;
                     txtCompanyAnnouncementBody.Enabled = false;
                     gvCompanyAnnouncementSearch_Result.Enabled = false;
                 }
@@ -328,6 +332,7 @@ namespace NIZING_BACKEND_Data_Config
                     btnCompanyAnnouncementSearch.Enabled = true;
                     btnCompanyAnnoucementConfirm.Enabled = false;
                     btnCompanyAnnouncementCancel.Enabled = false;
+                    ckxCompanyAnnouncementVisible.Enabled = false;
                     txtCompanyAnnouncementBody.Enabled = false;
                     gvCompanyAnnouncementSearch_Result.Enabled = true;
                 }
@@ -335,10 +340,11 @@ namespace NIZING_BACKEND_Data_Config
                 {
                     btnCompanyAnnouncementAdd.Enabled = true;
                     btnCompanyAnnouncementEdit.Enabled = false;
-                    btnCompanyAnnouncementDelete.Enabled = true;
+                    btnCompanyAnnouncementDelete.Enabled = false;
                     btnCompanyAnnouncementSearch.Enabled = true;
                     btnCompanyAnnoucementConfirm.Enabled = false;
                     btnCompanyAnnouncementCancel.Enabled = false;
+                    ckxCompanyAnnouncementVisible.Enabled = false;
                     txtCompanyAnnouncementBody.Enabled = false;
                     gvCompanyAnnouncementSearch_Result.Enabled = false;
                 }
@@ -365,11 +371,11 @@ namespace NIZING_BACKEND_Data_Config
                 ||companyAccouncementTabMode == FunctionMode.ADD || companyAccouncementTabMode==FunctionMode.EDIT || companyAccouncementTabMode==FunctionMode.SEARCH
                 )
             {
-                tbcAccountManagement.SelectedTab = currentTabPage;
+                tbcManagement.SelectedTab = currentTabPage;
             }
             else
             {
-                currentTabPage = tbcAccountManagement.SelectedTab;
+                currentTabPage = tbcManagement.SelectedTab;
                 LoadControlStatus(currentTabPage);
             }
         }
@@ -393,7 +399,9 @@ namespace NIZING_BACKEND_Data_Config
             }
             else if (gv.Name == "gvCompanyAnnouncementSearch_Result")
             {
-
+                lblCompanyAnnouncementID.Text = gv.SelectedRows[0].Cells["ID"].Value.ToString();
+                ckxCompanyAnnouncementVisible.Checked = (bool)gv.SelectedRows[0].Cells["VISIBLE"].Value;
+                txtCompanyAnnouncementBody.Text = gv.SelectedRows[0].Cells["BODY"].Value.ToString();
             }
         }
         #endregion        
@@ -615,6 +623,132 @@ namespace NIZING_BACKEND_Data_Config
         }
         #endregion
 
+
+        #region Company Announcement Methods and Events
+
+        private void btnCompanyAnnouncementAdd_Click(object sender, EventArgs e)
+        {
+            companyAccouncementTabMode = FunctionMode.ADD;
+            lblCompanyAnnouncementID.Text = GetNewCompanyAnnouncementID().ToString();
+            LoadControlStatus(currentTabPage);
+        }
+
+        private void btnCompanyAnnouncementEdit_Click(object sender, EventArgs e)
+        {
+            companyAccouncementTabMode = FunctionMode.EDIT;
+            LoadControlStatus(currentTabPage);
+        }
+
+        private void btnCompanyAnnouncementDelete_Click(object sender, EventArgs e)
+        {
+            companyAccouncementTabMode = FunctionMode.DELETE;
+            List<string> errorList = CheckConfirmError(companyAccouncementTabMode);
+
+            if (errorList.Count == 0)
+            {
+                var confirmResult = MessageBox.Show("確定要刪除公告" + lblCompanyAnnouncementID.Text.Trim() + "的資料嗎?", "刪除確認", MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    //delete selected item
+                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                    {
+                        conn.Open();
+                        string query = "DELETE FROM HR360_COMPANYANNOUNCEMENT"
+                                    + " WHERE [ID]=@ID";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@ID", lblCompanyAnnouncementID.Text.Trim());
+                        cmd.ExecuteNonQuery();
+                    }
+                    gvCompanyAnnouncementSearch_Result.DataSource = null;
+                    txtCompanyAnnouncementMemo.Text += DateTime.Now.ToString() + ":資料已刪除" + Environment.NewLine;
+                    btnCompanyAnnouncementSearch_Click(sender, e);
+
+                }
+            }
+            else
+            {
+                txtCompanyAnnouncementMemo.Text += DateTime.Now.ToString() + ":ERROR" + Environment.NewLine;
+                foreach (string s in errorList)
+                {
+                    txtCompanyAnnouncementMemo.Text += s + Environment.NewLine;
+                }
+            } 
+        }
+
+        private void btnCompanyAnnouncementSearch_Click(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT [ID],[BODY],[VISIBLE]"
+                            + " FROM HR360_COMPANYANNOUNCEMENT"
+                            + " ORDER BY [ID]";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            gvCompanyAnnouncementSearch_Result.DataSource = dt;
+            if (isGridViewEmpty(gvCompanyAnnouncementSearch_Result))
+            {
+                companyAccouncementTabMode = FunctionMode.NORECORD;
+                LoadControlStatus(currentTabPage);
+            }
+            else
+            {
+                companyAccouncementTabMode = FunctionMode.HASRECORD;
+                LoadControlStatus(currentTabPage);
+            }
+        }
+
+        private void btnCompanyAnnoucementConfirm_Click(object sender, EventArgs e)
+        {
+            List<string> errorList = CheckConfirmError(companyAccouncementTabMode);
+
+            if (errorList.Count == 0)
+            {
+                
+            }
+            else
+            {
+                txtCompanyAnnouncementMemo.Text += DateTime.Now.ToString() + ":ERROR" + Environment.NewLine;
+                foreach (string s in errorList)
+                {
+                    txtCompanyAnnouncementMemo.Text += s + Environment.NewLine;
+                }
+            } 
+        }
+
+        private void btnCompanyAnnouncementCancel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gvCompanyAnnouncementSearch_Result_SelectionChanged(object sender, EventArgs e)
+        {
+            if (gvCompanyAnnouncementSearch_Result.SelectedRows.Count > 0)
+            {
+                displayGridviewSearch_ResultInControls(gvCompanyAnnouncementSearch_Result);
+            }
+        }
+
+        protected int GetNewCompanyAnnouncementID()
+        {
+            int newID;
+
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "select MAX([ID]) + 1 [newID]"
+                            + " FROM HR360_COMPANYANNOUNCEMENT";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                newID = Convert.ToInt16(cmd.ExecuteScalar());
+            }
+
+            return newID;
+        }
+        
+        #endregion
 
 
 

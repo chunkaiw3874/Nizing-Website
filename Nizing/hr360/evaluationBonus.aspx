@@ -103,7 +103,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-3 border">
-                    特休未修:
+                    特休未休:
                 </div>
                 <div class="col-xs-3 border">
                     <asp:TextBox ID="txtUnusedDayOffBonus" runat="server" CssClass="form-control" placeholder="金額"></asp:TextBox>

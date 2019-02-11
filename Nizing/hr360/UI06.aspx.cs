@@ -231,11 +231,11 @@ public partial class hr360_UI06 : System.Web.UI.Page
             lblErrorMessage.Text = "此系統僅能查詢一年內薪資單，如需查詢更久以前的，請與人事部聯繫";
             return false;
         }
-        else if (DateTime.Now < slipAvailableDate.AddMonths(1))
-        {
-            lblErrorMessage.Text = "請於次月六號以後再查詢";
-            return false;
-        }
+        //else if (DateTime.Now < slipAvailableDate.AddMonths(1))
+        //{
+        //    lblErrorMessage.Text = "請於次月六號以後再查詢";
+        //    return false;
+        //}
         else
         {
             return true;
