@@ -1,7 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/HR360_Child_user.master" AutoEventWireup="true" CodeFile="main.aspx.cs" Inherits="main" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="javascript_section" Runat="Server">
+    <script src="../Scripts/text.area.auto.adjust.js"></script>
     <style>
+        .no-resize {
+            resize: none;
+        }
         .horizontal-wrapper{
             display:inline-block;
             vertical-align:top;
@@ -20,6 +24,11 @@
             margin-bottom:10px;
         }
     </style>
+    <script type="text/javascript">
+        $(function () {
+            $('.autosize').autosize();
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="page_title" Runat="server">
 </asp:Content>
@@ -79,9 +88,10 @@
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr>
-                                            <td style="border-bottom:dotted 1px gray;">
+                                            <td style="border-bottom:dotted 1px gray;text-wrap:normal;word-wrap:break-word;">
                                                 <span><%#Eval("CREATE_TIME") %></span><br /><br />
-                                                <span style="white-space:pre"><%#Eval("BODY") %></span><br /><br />
+                                                <asp:TextBox ID="TextBox1" runat="server" CssClass="no-resize autosize" Width="100%" BorderStyle="None" ReadOnly="true" TextMode="MultiLine" Text='<%#Eval("BODY") %>' ></asp:TextBox><br /><br />
+                                                <%--<span style="white-space:pre"><%#Eval("BODY") %></span><br /><br />--%>
                                                 <span style="font-size:6px; font-style:italic; color:gray">最後編輯: <%#Eval("LAST_EDITOR") %> <%#Eval("LAST_EDIT_TIME") %></span>
                                             </td>
                                         </tr>
