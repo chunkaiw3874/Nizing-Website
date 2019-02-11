@@ -26,17 +26,18 @@ public partial class login : System.Web.UI.Page
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string query = "UPDATE HR360_BI01_A"
-                                + " SET [LAST_LOGIN]=GETDATE()"
-                                + " WHERE [ID]=@USER_ID";
+                    string query = "INSERT INTO HR360_LoginLog ([ID],LoginAttemptTime,LoginSuccessful)"
+                                + "VALUES (@ID,GETDATE(),1)";
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@USER_ID", HR360Login.UserName);
+                    cmd.Parameters.AddWithValue("@ID", HR360Login.UserName);
                     cmd.ExecuteNonQuery();
+
                 }
                 Response.Redirect("~/hr360/main.aspx");
             }
             else
             {
+                
                 e.Cancel = true;
             }
 
@@ -81,6 +82,15 @@ public partial class login : System.Web.UI.Page
                         }
                         else
                         {
+                            if (!reader.IsClosed)
+                            {
+                                reader.Close();
+                            }
+                            string query = "INSERT INTO HR360_LoginLog ([ID],LoginAttemptTime,LoginSuccessful)"
+                                + "VALUES (@ID,GETDATE(),0)";
+                            cmd = new SqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@ID", username.ToUpper().Trim());
+                            cmd.ExecuteNonQuery();
                             lblErrorMessage.Text = "密碼不正確，如忘記密碼，請聯絡管理員";
                             match = false;
                         }

@@ -721,7 +721,16 @@ namespace NIZING_BACKEND_Data_Config
 
         private void btnCompanyAnnouncementCancel_Click(object sender, EventArgs e)
         {
-
+            if (isGridViewEmpty(gvCompanyAnnouncementSearch_Result))
+            {
+                companyAccouncementTabMode = FunctionMode.NORECORD;
+                LoadControlStatus(tbpCompanyAnnouncement);
+            }
+            else
+            {
+                companyAccouncementTabMode = FunctionMode.HASRECORD;
+                LoadControlStatus(tbpCompanyAnnouncement);
+            }
         }
 
         private void gvCompanyAnnouncementSearch_Result_SelectionChanged(object sender, EventArgs e)
