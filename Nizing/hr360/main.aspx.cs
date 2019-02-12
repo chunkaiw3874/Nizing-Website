@@ -292,10 +292,11 @@ public partial class main : System.Web.UI.Page
                         + " ,LTRIM(RTRIM(MV.MV002)) 'LAST_EDITOR'"
                         + " ,LTRIM(RTRIM(ANNOUNCEMENT.[BODY])) 'BODY'"
                         + " ,ANNOUNCEMENT.[VISIBLE]"
+                        + " ,ANNOUNCEMENT.ON_TOP"
                         + " FROM HR360_COMPANYANNOUNCEMENT ANNOUNCEMENT"
                         + " LEFT JOIN NZ.dbo.CMSMV MV ON ANNOUNCEMENT.LAST_EDITOR=MV.MV001"
                         + " WHERE [VISIBLE]=1"
-                        + " ORDER BY LAST_EDIT_TIME DESC";
+                        + " ORDER BY ANNOUNCEMENT.ON_TOP DESC, ANNOUNCEMENT.[ID] DESC";
             SqlCommand cmd = new SqlCommand(query, conn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);

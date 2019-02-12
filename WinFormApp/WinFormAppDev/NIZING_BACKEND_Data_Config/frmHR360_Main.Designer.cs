@@ -93,6 +93,7 @@
             this.lblCompanyAnnouncementID = new System.Windows.Forms.Label();
             this.ckxCompanyAnnouncementVisible = new System.Windows.Forms.CheckBox();
             this.gvCompanyAnnouncementSearch_Result = new System.Windows.Forms.DataGridView();
+            this.ckxCompanyAnnouncementOnTop = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpAccountManagement.SuspendLayout();
@@ -719,7 +720,7 @@
             this.btnCompanyAnnouncementSearch.Location = new System.Drawing.Point(1091, 4);
             this.btnCompanyAnnouncementSearch.Name = "btnCompanyAnnouncementSearch";
             this.btnCompanyAnnouncementSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnCompanyAnnouncementSearch.TabIndex = 1;
+            this.btnCompanyAnnouncementSearch.TabIndex = 0;
             this.btnCompanyAnnouncementSearch.Text = "查詢";
             this.btnCompanyAnnouncementSearch.UseVisualStyleBackColor = true;
             this.btnCompanyAnnouncementSearch.Click += new System.EventHandler(this.btnCompanyAnnouncementSearch_Click);
@@ -746,7 +747,7 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(460, 465);
-            this.tableLayoutPanel4.TabIndex = 3;
+            this.tableLayoutPanel4.TabIndex = 1;
             // 
             // label12
             // 
@@ -767,7 +768,7 @@
             this.flowLayoutPanel8.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel8.Name = "flowLayoutPanel8";
             this.flowLayoutPanel8.Size = new System.Drawing.Size(387, 30);
-            this.flowLayoutPanel8.TabIndex = 11;
+            this.flowLayoutPanel8.TabIndex = 3;
             // 
             // btnCompanyAnnoucementConfirm
             // 
@@ -775,7 +776,7 @@
             this.btnCompanyAnnoucementConfirm.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.btnCompanyAnnoucementConfirm.Name = "btnCompanyAnnoucementConfirm";
             this.btnCompanyAnnoucementConfirm.Size = new System.Drawing.Size(75, 23);
-            this.btnCompanyAnnoucementConfirm.TabIndex = 3;
+            this.btnCompanyAnnoucementConfirm.TabIndex = 0;
             this.btnCompanyAnnoucementConfirm.Text = "確認";
             this.btnCompanyAnnoucementConfirm.UseVisualStyleBackColor = true;
             this.btnCompanyAnnoucementConfirm.Click += new System.EventHandler(this.btnCompanyAnnoucementConfirm_Click);
@@ -785,7 +786,7 @@
             this.btnCompanyAnnouncementCancel.Location = new System.Drawing.Point(81, 3);
             this.btnCompanyAnnouncementCancel.Name = "btnCompanyAnnouncementCancel";
             this.btnCompanyAnnouncementCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCompanyAnnouncementCancel.TabIndex = 4;
+            this.btnCompanyAnnouncementCancel.TabIndex = 1;
             this.btnCompanyAnnouncementCancel.Text = "取消";
             this.btnCompanyAnnouncementCancel.UseVisualStyleBackColor = true;
             this.btnCompanyAnnouncementCancel.Click += new System.EventHandler(this.btnCompanyAnnouncementCancel_Click);
@@ -801,7 +802,7 @@
             this.txtCompanyAnnouncementMemo.Name = "txtCompanyAnnouncementMemo";
             this.txtCompanyAnnouncementMemo.ReadOnly = true;
             this.txtCompanyAnnouncementMemo.Size = new System.Drawing.Size(387, 141);
-            this.txtCompanyAnnouncementMemo.TabIndex = 14;
+            this.txtCompanyAnnouncementMemo.TabIndex = 0;
             // 
             // label13
             // 
@@ -810,7 +811,7 @@
             this.label13.Location = new System.Drawing.Point(38, 47);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(32, 247);
-            this.label13.TabIndex = 15;
+            this.label13.TabIndex = 5;
             this.label13.Text = "內容:";
             // 
             // txtCompanyAnnouncementBody
@@ -820,18 +821,19 @@
             this.txtCompanyAnnouncementBody.Multiline = true;
             this.txtCompanyAnnouncementBody.Name = "txtCompanyAnnouncementBody";
             this.txtCompanyAnnouncementBody.Size = new System.Drawing.Size(381, 241);
-            this.txtCompanyAnnouncementBody.TabIndex = 17;
+            this.txtCompanyAnnouncementBody.TabIndex = 2;
             // 
             // flpCompanyAnnouncementID
             // 
             this.flpCompanyAnnouncementID.Controls.Add(this.lblCompanyAnnouncementID);
             this.flpCompanyAnnouncementID.Controls.Add(this.ckxCompanyAnnouncementVisible);
+            this.flpCompanyAnnouncementID.Controls.Add(this.ckxCompanyAnnouncementOnTop);
             this.flpCompanyAnnouncementID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpCompanyAnnouncementID.Location = new System.Drawing.Point(73, 0);
             this.flpCompanyAnnouncementID.Margin = new System.Windows.Forms.Padding(0);
             this.flpCompanyAnnouncementID.Name = "flpCompanyAnnouncementID";
             this.flpCompanyAnnouncementID.Size = new System.Drawing.Size(387, 47);
-            this.flpCompanyAnnouncementID.TabIndex = 18;
+            this.flpCompanyAnnouncementID.TabIndex = 1;
             // 
             // lblCompanyAnnouncementID
             // 
@@ -840,7 +842,7 @@
             this.lblCompanyAnnouncementID.Location = new System.Drawing.Point(3, 5);
             this.lblCompanyAnnouncementID.Name = "lblCompanyAnnouncementID";
             this.lblCompanyAnnouncementID.Size = new System.Drawing.Size(24, 12);
-            this.lblCompanyAnnouncementID.TabIndex = 0;
+            this.lblCompanyAnnouncementID.TabIndex = 1;
             this.lblCompanyAnnouncementID.Text = "N/A";
             // 
             // ckxCompanyAnnouncementVisible
@@ -850,7 +852,7 @@
             this.ckxCompanyAnnouncementVisible.Location = new System.Drawing.Point(33, 3);
             this.ckxCompanyAnnouncementVisible.Name = "ckxCompanyAnnouncementVisible";
             this.ckxCompanyAnnouncementVisible.Size = new System.Drawing.Size(72, 16);
-            this.ckxCompanyAnnouncementVisible.TabIndex = 1;
+            this.ckxCompanyAnnouncementVisible.TabIndex = 0;
             this.ckxCompanyAnnouncementVisible.Text = "是否顯示";
             this.ckxCompanyAnnouncementVisible.UseVisualStyleBackColor = true;
             // 
@@ -871,8 +873,18 @@
             this.gvCompanyAnnouncementSearch_Result.RowTemplate.Height = 24;
             this.gvCompanyAnnouncementSearch_Result.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvCompanyAnnouncementSearch_Result.Size = new System.Drawing.Size(707, 745);
-            this.gvCompanyAnnouncementSearch_Result.TabIndex = 4;
+            this.gvCompanyAnnouncementSearch_Result.TabIndex = 3;
             this.gvCompanyAnnouncementSearch_Result.SelectionChanged += new System.EventHandler(this.gvCompanyAnnouncementSearch_Result_SelectionChanged);
+            // 
+            // ckxCompanyAnnouncementOnTop
+            // 
+            this.ckxCompanyAnnouncementOnTop.AutoSize = true;
+            this.ckxCompanyAnnouncementOnTop.Location = new System.Drawing.Point(111, 3);
+            this.ckxCompanyAnnouncementOnTop.Name = "ckxCompanyAnnouncementOnTop";
+            this.ckxCompanyAnnouncementOnTop.Size = new System.Drawing.Size(72, 16);
+            this.ckxCompanyAnnouncementOnTop.TabIndex = 1;
+            this.ckxCompanyAnnouncementOnTop.Text = "是否置頂";
+            this.ckxCompanyAnnouncementOnTop.UseVisualStyleBackColor = true;
             // 
             // frmHR360_Main
             // 
@@ -982,5 +994,6 @@
         private System.Windows.Forms.FlowLayoutPanel flpCompanyAnnouncementID;
         private System.Windows.Forms.Label lblCompanyAnnouncementID;
         private System.Windows.Forms.CheckBox ckxCompanyAnnouncementVisible;
+        private System.Windows.Forms.CheckBox ckxCompanyAnnouncementOnTop;
     }
 }

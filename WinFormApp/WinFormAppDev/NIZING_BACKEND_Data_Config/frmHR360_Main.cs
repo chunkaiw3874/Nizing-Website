@@ -293,6 +293,8 @@ namespace NIZING_BACKEND_Data_Config
                     btnCompanyAnnouncementCancel.Enabled = true;
                     ckxCompanyAnnouncementVisible.Enabled = true;
                     ckxCompanyAnnouncementVisible.Checked = true;
+                    ckxCompanyAnnouncementOnTop.Enabled = true;
+                    ckxCompanyAnnouncementOnTop.Checked = false;
                     txtCompanyAnnouncementBody.Text = String.Empty;
                     txtCompanyAnnouncementBody.Enabled = true;
                     gvCompanyAnnouncementSearch_Result.Enabled = false;
@@ -306,6 +308,7 @@ namespace NIZING_BACKEND_Data_Config
                     btnCompanyAnnoucementConfirm.Enabled = true;
                     btnCompanyAnnouncementCancel.Enabled = true;
                     ckxCompanyAnnouncementVisible.Enabled = true;
+                    ckxCompanyAnnouncementOnTop.Enabled = true;
                     txtCompanyAnnouncementBody.Enabled = true;
                     gvCompanyAnnouncementSearch_Result.Enabled = false;
                 }
@@ -322,6 +325,7 @@ namespace NIZING_BACKEND_Data_Config
                     btnCompanyAnnoucementConfirm.Enabled = false;
                     btnCompanyAnnouncementCancel.Enabled = false;
                     ckxCompanyAnnouncementVisible.Enabled = false;
+                    ckxCompanyAnnouncementOnTop.Enabled = false;
                     txtCompanyAnnouncementBody.Enabled = false;
                     gvCompanyAnnouncementSearch_Result.Enabled = false;
                 }
@@ -334,6 +338,7 @@ namespace NIZING_BACKEND_Data_Config
                     btnCompanyAnnoucementConfirm.Enabled = false;
                     btnCompanyAnnouncementCancel.Enabled = false;
                     ckxCompanyAnnouncementVisible.Enabled = false;
+                    ckxCompanyAnnouncementOnTop.Enabled = false;
                     txtCompanyAnnouncementBody.Enabled = false;
                     gvCompanyAnnouncementSearch_Result.Enabled = true;
                 }
@@ -346,6 +351,7 @@ namespace NIZING_BACKEND_Data_Config
                     btnCompanyAnnoucementConfirm.Enabled = false;
                     btnCompanyAnnouncementCancel.Enabled = false;
                     ckxCompanyAnnouncementVisible.Enabled = false;
+                    ckxCompanyAnnouncementOnTop.Enabled = false;
                     txtCompanyAnnouncementBody.Enabled = false;
                     gvCompanyAnnouncementSearch_Result.Enabled = false;
                 }
@@ -402,6 +408,7 @@ namespace NIZING_BACKEND_Data_Config
             {
                 lblCompanyAnnouncementID.Text = gv.SelectedRows[0].Cells["ID"].Value.ToString();
                 ckxCompanyAnnouncementVisible.Checked = (bool)gv.SelectedRows[0].Cells["VISIBLE"].Value;
+                ckxCompanyAnnouncementOnTop.Checked = (bool)gv.SelectedRows[0].Cells["ON_TOP"].Value;
                 txtCompanyAnnouncementBody.Text = gv.SelectedRows[0].Cells["BODY"].Value.ToString();
             }
         }
@@ -684,7 +691,7 @@ namespace NIZING_BACKEND_Data_Config
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
-                string query = "SELECT [ID],[BODY],[VISIBLE]"
+                string query = "SELECT [ID],[BODY],[VISIBLE],[ON_TOP]"
                             + " FROM HR360_COMPANYANNOUNCEMENT"
                             + " ORDER BY [ID]";
                 SqlCommand cmd = new SqlCommand(query, conn);
@@ -712,20 +719,37 @@ namespace NIZING_BACKEND_Data_Config
             {
                 if (companyAccouncementTabMode == FunctionMode.ADD)
                 {
-                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                    try
                     {
-                        conn.Open();
-                        string query = "INSERT INTO HR360_COMPANYANNOUNCEMENT ([ID],CREATE_TIME,CREATOR,LAST_EDIT_TIME,LAST_EDITOR,[BODY],VISIBLE)"
-                                    + " VALUES(@ID,GETDATE(),@CREATOR,GETDATE(),@EDITOR,@BODY,@VISIBLE)";
-                        SqlCommand cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@ID", lblCompanyAnnouncementID.Text);
-                        cmd.Parameters.AddWithValue("@CREATOR", UserName);
-                        cmd.Parameters.AddWithValue("@EDITOR", UserName);
-                        cmd.Parameters.AddWithValue("@BODY", txtCompanyAnnouncementBody.Text.Trim());
-                        cmd.Parameters.AddWithValue("@VISIBLE", ckxCompanyAnnouncementVisible.Checked);
-                        cmd.ExecuteNonQuery();                                    
+                        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                        {
+                            conn.Open();
+                            string query = "INSERT INTO HR360_COMPANYANNOUNCEMENT ([ID],CREATE_TIME,CREATOR,LAST_EDIT_TIME,LAST_EDITOR,[BODY],VISIBLE,ON_TOP)"
+                                        + " VALUES(@ID,GETDATE(),@CREATOR,GETDATE(),@EDITOR,@BODY,@VISIBLE,@ONTOP)";
+                            SqlCommand cmd = new SqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@ID", lblCompanyAnnouncementID.Text);
+                            cmd.Parameters.AddWithValue("@CREATOR", UserName);
+                            cmd.Parameters.AddWithValue("@EDITOR", UserName);
+                            cmd.Parameters.AddWithValue("@BODY", txtCompanyAnnouncementBody.Text.Trim());
+                            cmd.Parameters.AddWithValue("@VISIBLE", ckxCompanyAnnouncementVisible.Checked);
+                            cmd.Parameters.AddWithValue("@ONTOP", ckxCompanyAnnouncementOnTop.Checked);
+                            cmd.ExecuteNonQuery();
+                        }
+                        txtCompanyAnnouncementMemo.Text += DateTime.Now.ToString() + ":資料新增完成" + Environment.NewLine;
                     }
-                    txtCompanyAnnouncementMemo.Text += DateTime.Now.ToString() + ":資料新增完成" + Environment.NewLine;
+                    catch (SqlException ex)
+                    {
+                        if (ex.Number == 2627)
+                        {
+                            lblCompanyAnnouncementID.Text = GetNewCompanyAnnouncementID().ToString();
+                            btnCompanyAnnoucementConfirm_Click(sender, e);
+                        }
+                        else
+                        {
+                            txtCompanyAnnouncementMemo.Text += DateTime.Now.ToString() + ":Error 新增出現錯誤" + Environment.NewLine;
+                        }
+                    }
+                    
                 }
                 else if (companyAccouncementTabMode == FunctionMode.EDIT)
                 {
@@ -737,12 +761,14 @@ namespace NIZING_BACKEND_Data_Config
                                     + " ,LAST_EDITOR=@EDITOR"
                                     + " ,BODY=@BODY"
                                     + " ,VISIBLE=@VISIBLE"
+                                    + " ,ON_TOP=@ONTOP"
                                     + " WHERE [ID]=@ID";
                         SqlCommand cmd = new SqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@ID", lblCompanyAnnouncementID.Text);
                         cmd.Parameters.AddWithValue("@EDITOR", UserName);
                         cmd.Parameters.AddWithValue("@BODY", txtCompanyAnnouncementBody.Text.Trim());
                         cmd.Parameters.AddWithValue("@VISIBLE", ckxCompanyAnnouncementVisible.Checked);
+                        cmd.Parameters.AddWithValue("@ONTOP", ckxCompanyAnnouncementOnTop.Checked);
                         cmd.ExecuteNonQuery();
                     }
                     txtCompanyAnnouncementMemo.Text += DateTime.Now.ToString() + ":資料更新完成" + Environment.NewLine;
