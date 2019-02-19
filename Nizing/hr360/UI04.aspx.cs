@@ -978,7 +978,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
         else if (errorID == 107)
         {
-            error += "已於此時段代理他人，不可請假";
+            error += "你已於此時段代理他人，不可請假";
         }
         else if (errorID == 108)
         {
@@ -1321,9 +1321,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
         }
-        for (int i = 1; i < tbApprovalPending.Rows.Count; i++)
+        int count = tbApprovalPending.Rows.Count;
+        for (int i = 1; i < count; i++)
         {
-            tbApprovalPending.Rows.RemoveAt(i);
+            tbApprovalPending.Rows.RemoveAt(1);
         }
         //tbApprovalPending.Rows.Clear();
 

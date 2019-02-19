@@ -92,8 +92,8 @@
             this.flpCompanyAnnouncementID = new System.Windows.Forms.FlowLayoutPanel();
             this.lblCompanyAnnouncementID = new System.Windows.Forms.Label();
             this.ckxCompanyAnnouncementVisible = new System.Windows.Forms.CheckBox();
-            this.gvCompanyAnnouncementSearch_Result = new System.Windows.Forms.DataGridView();
             this.ckxCompanyAnnouncementOnTop = new System.Windows.Forms.CheckBox();
+            this.gvCompanyAnnouncementSearch_Result = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpAccountManagement.SuspendLayout();
@@ -166,7 +166,7 @@
             this.tbpAccountManagement.Padding = new System.Windows.Forms.Padding(3);
             this.tbpAccountManagement.Size = new System.Drawing.Size(1176, 810);
             this.tbpAccountManagement.TabIndex = 0;
-            this.tbpAccountManagement.Text = "(維護中，請勿使用)帳號管理";
+            this.tbpAccountManagement.Text = "(維護中請勿使用)帳號管理";
             this.tbpAccountManagement.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel2
@@ -856,6 +856,16 @@
             this.ckxCompanyAnnouncementVisible.Text = "是否顯示";
             this.ckxCompanyAnnouncementVisible.UseVisualStyleBackColor = true;
             // 
+            // ckxCompanyAnnouncementOnTop
+            // 
+            this.ckxCompanyAnnouncementOnTop.AutoSize = true;
+            this.ckxCompanyAnnouncementOnTop.Location = new System.Drawing.Point(111, 3);
+            this.ckxCompanyAnnouncementOnTop.Name = "ckxCompanyAnnouncementOnTop";
+            this.ckxCompanyAnnouncementOnTop.Size = new System.Drawing.Size(72, 16);
+            this.ckxCompanyAnnouncementOnTop.TabIndex = 1;
+            this.ckxCompanyAnnouncementOnTop.Text = "是否置頂";
+            this.ckxCompanyAnnouncementOnTop.UseVisualStyleBackColor = true;
+            // 
             // gvCompanyAnnouncementSearch_Result
             // 
             this.gvCompanyAnnouncementSearch_Result.AllowUserToAddRows = false;
@@ -875,16 +885,6 @@
             this.gvCompanyAnnouncementSearch_Result.Size = new System.Drawing.Size(707, 745);
             this.gvCompanyAnnouncementSearch_Result.TabIndex = 3;
             this.gvCompanyAnnouncementSearch_Result.SelectionChanged += new System.EventHandler(this.gvCompanyAnnouncementSearch_Result_SelectionChanged);
-            // 
-            // ckxCompanyAnnouncementOnTop
-            // 
-            this.ckxCompanyAnnouncementOnTop.AutoSize = true;
-            this.ckxCompanyAnnouncementOnTop.Location = new System.Drawing.Point(111, 3);
-            this.ckxCompanyAnnouncementOnTop.Name = "ckxCompanyAnnouncementOnTop";
-            this.ckxCompanyAnnouncementOnTop.Size = new System.Drawing.Size(72, 16);
-            this.ckxCompanyAnnouncementOnTop.TabIndex = 1;
-            this.ckxCompanyAnnouncementOnTop.Text = "是否置頂";
-            this.ckxCompanyAnnouncementOnTop.UseVisualStyleBackColor = true;
             // 
             // frmHR360_Main
             // 
