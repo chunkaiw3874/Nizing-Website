@@ -27,7 +27,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
     DataTable userInfo = new DataTable();
     string currentHREmployeeID = "0142"; //current //HR code;
-    string openException = "0067";  //only use when opening exception for certain persion
+    string openException = "";  //only use when opening exception for certain persion
 
     public class dayOffInfo
     {
