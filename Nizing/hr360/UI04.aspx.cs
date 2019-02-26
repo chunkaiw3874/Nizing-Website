@@ -27,6 +27,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
     DataTable userInfo = new DataTable();
     string currentHREmployeeID = "0142"; //current //HR code;
+    string openException = "0067";  //only use when opening exception for certain persion
 
     public class dayOffInfo
     {
@@ -242,9 +243,15 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
         if (DateTime.ParseExact(txtDatePickerStart.Text, "yyyy/MM/dd", new CultureInfo("zh-TW")) < DateTime.Today.AddDays(-2))
         {
-            errorList.Add(errorCode(111, "請假日期不得早於" + DateTime.Today.AddDays(-2).ToString("d", new CultureInfo("zh-TW"))));
-            test111 = false;
-            //test111 = true;
+            if (Session["erp_id"].ToString().Trim() == openException)
+            {
+                test111 = true;
+            }
+            else
+            {
+                errorList.Add(errorCode(111, "請假日期不得早於" + DateTime.Today.AddDays(-2).ToString("d", new CultureInfo("zh-TW"))));
+                test111 = false;
+            }
         }
         else
         {
@@ -572,6 +579,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
             {
                 errorList.Add(errorCode(201));
             }
+
+
             if (lblDayOffRemainAmount.Text.Trim() != "" || ddlDayOffType.SelectedValue == "02" || ddlDayOffType.SelectedValue == "03")  //測試錯誤 202.剩餘假期不足  --如假別無量的限制，則無需執行此測試
             {
                 decimal r;
@@ -603,76 +612,83 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 }
                 else if (ddlDayOffType.SelectedValue == "03")  //特休(03)用此判斷 依據請假日期會有2種可能
                 {
-                    r = 0;
-                    DateTime dayOffStartDate = DateTime.ParseExact(dtDayOffDaysInfo.Rows[0]["日期"].ToString(), "yyyyMMdd", null);
-                    DateTime startWorkDate = DateTime.ParseExact(Session["startYear"].ToString() + Session["startDate"].ToString(), "yyyyMMdd", null);
-                    DateTime relevantWorkDate = DateTime.ParseExact(dayOffStartDate.Year.ToString() + Session["startDate"].ToString(), "yyyyMMdd", null);
-                    /*
-                     * 兩種可能性的計算方式                    
-                     */
-                    if (dayOffStartDate >= startWorkDate.AddMonths(6))  //確認請假同仁已任職滿六個月
+                    if (Session["erp_id"].ToString().Trim() == openException)
                     {
-                        /* Scenario 1
-                         * 請假月日為到職月日之前
-                         */
-                        if (dayOffStartDate < relevantWorkDate)
-                        {
-                            for (int i = 1; i < tbAppSummary.Rows.Count; i++)
-                            {
-                                if (tbAppSummary.Rows[i].Cells[0].InnerText == "特休" && DateTime.Parse(tbAppSummary.Rows[i].Cells[1].InnerText) < relevantWorkDate)
-                                {
-                                    string usedAmount = tbAppSummary.Rows[i].Cells[3].InnerText.Substring(0, tbAppSummary.Rows[i].Cells[3].InnerText.Length - 2);
-                                    r += decimal.Parse(usedAmount);
-                                }
-                            }
-                            for (int i = 1; i < tbInProgressSummary.Rows.Count; i++)
-                            {
-                                if (tbInProgressSummary.Rows[i].Cells[1].InnerText == "特休" && DateTime.Parse(tbInProgressSummary.Rows[i].Cells[2].InnerText) < relevantWorkDate && tbInProgressSummary.Rows[i].Cells[8].InnerText == "未登入")
-                                {
-                                    string usedAmount = tbInProgressSummary.Rows[i].Cells[4].InnerText.Substring(0, tbInProgressSummary.Rows[i].Cells[4].InnerText.Length - 2);
-                                    r += decimal.Parse(usedAmount);
-                                }
-                            }
-                            totalDayOffRemain = decimal.Parse(Session["firstPartDayOff"].ToString()) - r;
-                            if (totalDayOffAmount > totalDayOffRemain)
-                            {
-                                errorList.Add(errorCode(202, "於請假日期，特休時數僅剩餘" + totalDayOffRemain.ToString() + "小時"));
-                            }
-                        }
-                        /* Scenario 2
-                         * 請假月日為到職月日之後
-                         */
-                        else if (dayOffStartDate >= relevantWorkDate)
-                        {
-                            for (int i = 1; i < tbAppSummary.Rows.Count; i++)
-                            {
-                                if (tbAppSummary.Rows[i].Cells[0].InnerText == "特休")
-                                {
-                                    string usedAmount = tbAppSummary.Rows[i].Cells[3].InnerText.Substring(0, tbAppSummary.Rows[i].Cells[3].InnerText.Length - 2);
-                                    r += decimal.Parse(usedAmount);
-                                }
-                            }
-                            for (int i = 1; i < tbInProgressSummary.Rows.Count; i++)
-                            {
-                                if (tbInProgressSummary.Rows[i].Cells[1].InnerText == "特休" && tbInProgressSummary.Rows[i].Cells[8].InnerText == "未登入")
-                                {
-                                    string usedAmount = tbInProgressSummary.Rows[i].Cells[4].InnerText.Substring(0, tbInProgressSummary.Rows[i].Cells[4].InnerText.Length - 2);
-                                    r += decimal.Parse(usedAmount);
-                                }
-                            }
-                            totalDayOffRemain = decimal.Parse(Session["firstPartDayOff"].ToString()) + decimal.Parse(Session["secondPartDayOff"].ToString()) - r;
-                            if (totalDayOffAmount > totalDayOffRemain)
-                            {
-                                errorList.Add(errorCode(202, "於請假日期，特休時數僅剩餘" + totalDayOffRemain.ToString() + "小時"));
-                            }
-                        }
+
                     }
                     else
                     {
-                        errorList.Add(errorCode(202, "於請假日期尚未任職滿六個月，故無特休"));
+                        r = 0;
+                        DateTime dayOffStartDate = DateTime.ParseExact(dtDayOffDaysInfo.Rows[0]["日期"].ToString(), "yyyyMMdd", null);
+                        DateTime startWorkDate = DateTime.ParseExact(Session["startYear"].ToString() + Session["startDate"].ToString(), "yyyyMMdd", null);
+                        DateTime relevantWorkDate = DateTime.ParseExact(dayOffStartDate.Year.ToString() + Session["startDate"].ToString(), "yyyyMMdd", null);
+                        /*
+                         * 兩種可能性的計算方式                    
+                         */
+                        if (dayOffStartDate >= startWorkDate.AddMonths(6))  //確認請假同仁已任職滿六個月
+                        {
+                            /* Scenario 1
+                             * 請假月日為到職月日之前
+                             */
+                            if (dayOffStartDate < relevantWorkDate)
+                            {
+                                for (int i = 1; i < tbAppSummary.Rows.Count; i++)
+                                {
+                                    if (tbAppSummary.Rows[i].Cells[0].InnerText == "特休" && DateTime.Parse(tbAppSummary.Rows[i].Cells[1].InnerText) < relevantWorkDate)
+                                    {
+                                        string usedAmount = tbAppSummary.Rows[i].Cells[3].InnerText.Substring(0, tbAppSummary.Rows[i].Cells[3].InnerText.Length - 2);
+                                        r += decimal.Parse(usedAmount);
+                                    }
+                                }
+                                for (int i = 1; i < tbInProgressSummary.Rows.Count; i++)
+                                {
+                                    if (tbInProgressSummary.Rows[i].Cells[1].InnerText == "特休" && DateTime.Parse(tbInProgressSummary.Rows[i].Cells[2].InnerText) < relevantWorkDate && tbInProgressSummary.Rows[i].Cells[8].InnerText == "未登入")
+                                    {
+                                        string usedAmount = tbInProgressSummary.Rows[i].Cells[4].InnerText.Substring(0, tbInProgressSummary.Rows[i].Cells[4].InnerText.Length - 2);
+                                        r += decimal.Parse(usedAmount);
+                                    }
+                                }
+                                totalDayOffRemain = decimal.Parse(Session["firstPartDayOff"].ToString()) - r;
+                                if (totalDayOffAmount > totalDayOffRemain)
+                                {
+                                    errorList.Add(errorCode(202, "於請假日期，特休時數僅剩餘" + totalDayOffRemain.ToString() + "小時"));
+                                }
+                            }
+                            /* Scenario 2
+                             * 請假月日為到職月日之後
+                             */
+                            else if (dayOffStartDate >= relevantWorkDate)
+                            {
+                                for (int i = 1; i < tbAppSummary.Rows.Count; i++)
+                                {
+                                    if (tbAppSummary.Rows[i].Cells[0].InnerText == "特休")
+                                    {
+                                        string usedAmount = tbAppSummary.Rows[i].Cells[3].InnerText.Substring(0, tbAppSummary.Rows[i].Cells[3].InnerText.Length - 2);
+                                        r += decimal.Parse(usedAmount);
+                                    }
+                                }
+                                for (int i = 1; i < tbInProgressSummary.Rows.Count; i++)
+                                {
+                                    if (tbInProgressSummary.Rows[i].Cells[1].InnerText == "特休" && tbInProgressSummary.Rows[i].Cells[8].InnerText == "未登入")
+                                    {
+                                        string usedAmount = tbInProgressSummary.Rows[i].Cells[4].InnerText.Substring(0, tbInProgressSummary.Rows[i].Cells[4].InnerText.Length - 2);
+                                        r += decimal.Parse(usedAmount);
+                                    }
+                                }
+                                totalDayOffRemain = decimal.Parse(Session["firstPartDayOff"].ToString()) + decimal.Parse(Session["secondPartDayOff"].ToString()) - r;
+                                if (totalDayOffAmount > totalDayOffRemain)
+                                {
+                                    errorList.Add(errorCode(202, "於請假日期，特休時數僅剩餘" + totalDayOffRemain.ToString() + "小時"));
+                                }
+                            }
+                        }
+                        else
+                        {
+                            errorList.Add(errorCode(202, "於請假日期尚未任職滿六個月，故無特休"));
+                        }
                     }
                 }
-                else if (totalDayOffAmount > (Decimal.TryParse(lblDayOffRemainAmount.Text, out r)?Convert.ToDecimal(lblDayOffRemainAmount.Text):0))
+                else if (totalDayOffAmount > (Decimal.TryParse(lblDayOffRemainAmount.Text, out r) ? Convert.ToDecimal(lblDayOffRemainAmount.Text) : 0))
                 {
                     errorList.Add(errorCode(202));
                 }
