@@ -44,8 +44,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "0031";    //test only to avoid error on loading, delete after trial            
-        //Session["erp_id"] = "0031";        
+        //Session["user_id"] = "0105";    //test only to avoid error on loading, delete after trial            
+        //Session["erp_id"] = "0105";        
 
         if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
         {
@@ -2249,9 +2249,16 @@ public partial class hr360_UI04 : System.Web.UI.Page
         //還需要代理人是否eligible for代理的篩選條件
         ddlDayOffFuncSub.Items.Add(new ListItem("請選擇代理人", "0"));
         ddlDayOffFuncSub.SelectedIndex = 0;
-        for (int i = 0; i < ds.Tables[1].Rows.Count; i++)
+        if (ds.Tables[1].Rows.Count == 0)   //此人沒代理人，用小K
         {
-            ddlDayOffFuncSub.Items.Add(new ListItem(ds.Tables[1].Rows[i][0].ToString().Trim(), ds.Tables[1].Rows[i][1].ToString().Trim()));
+            ddlDayOffFuncSub.Items.Add(new ListItem("0080 王君凱", "0080"));
+        }
+        else
+        {
+            for (int i = 0; i < ds.Tables[1].Rows.Count; i++)
+            {
+                ddlDayOffFuncSub.Items.Add(new ListItem(ds.Tables[1].Rows[i][0].ToString().Trim(), ds.Tables[1].Rows[i][1].ToString().Trim()));
+            }
         }
         //hidden field insertion
         //determine if applicant is within 0.5hr restraint or 4hr restraint (by dept)
