@@ -37,7 +37,6 @@
             this.btnAccountAdd = new System.Windows.Forms.Button();
             this.btnAccountEdit = new System.Windows.Forms.Button();
             this.btnAccountDelete = new System.Windows.Forms.Button();
-            this.btnAccountSearch = new System.Windows.Forms.Button();
             this.tlpAccountInputField = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.txtAvatarImageFilePath = new System.Windows.Forms.TextBox();
@@ -94,6 +93,9 @@
             this.ckxCompanyAnnouncementVisible = new System.Windows.Forms.CheckBox();
             this.ckxCompanyAnnouncementOnTop = new System.Windows.Forms.CheckBox();
             this.gvCompanyAnnouncementSearch_Result = new System.Windows.Forms.DataGridView();
+            this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnAccountSearch = new System.Windows.Forms.Button();
+            this.ckxAccountShowDisabled = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpAccountManagement.SuspendLayout();
@@ -114,6 +116,7 @@
             this.flowLayoutPanel8.SuspendLayout();
             this.flpCompanyAnnouncementID.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvCompanyAnnouncementSearch_Result)).BeginInit();
+            this.flowLayoutPanel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -176,9 +179,9 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 460F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnAccountSearch, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.tlpAccountInputField, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.gvAccountSearch_Result, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel9, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
@@ -231,17 +234,6 @@
             this.btnAccountDelete.Text = "刪除";
             this.btnAccountDelete.UseVisualStyleBackColor = true;
             this.btnAccountDelete.Click += new System.EventHandler(this.btnAccountDelete_Click);
-            // 
-            // btnAccountSearch
-            // 
-            this.btnAccountSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAccountSearch.Location = new System.Drawing.Point(1091, 4);
-            this.btnAccountSearch.Name = "btnAccountSearch";
-            this.btnAccountSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnAccountSearch.TabIndex = 3;
-            this.btnAccountSearch.Text = "查詢";
-            this.btnAccountSearch.UseVisualStyleBackColor = true;
-            this.btnAccountSearch.Click += new System.EventHandler(this.btnAccountSearch_Click);
             // 
             // tlpAccountInputField
             // 
@@ -886,6 +878,40 @@
             this.gvCompanyAnnouncementSearch_Result.TabIndex = 3;
             this.gvCompanyAnnouncementSearch_Result.SelectionChanged += new System.EventHandler(this.gvCompanyAnnouncementSearch_Result_SelectionChanged);
             // 
+            // flowLayoutPanel9
+            // 
+            this.flowLayoutPanel9.Controls.Add(this.btnAccountSearch);
+            this.flowLayoutPanel9.Controls.Add(this.ckxAccountShowDisabled);
+            this.flowLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel9.Location = new System.Drawing.Point(462, 1);
+            this.flowLayoutPanel9.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel9.Name = "flowLayoutPanel9";
+            this.flowLayoutPanel9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.flowLayoutPanel9.Size = new System.Drawing.Size(707, 56);
+            this.flowLayoutPanel9.TabIndex = 3;
+            // 
+            // btnAccountSearch
+            // 
+            this.btnAccountSearch.Location = new System.Drawing.Point(629, 3);
+            this.btnAccountSearch.Name = "btnAccountSearch";
+            this.btnAccountSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnAccountSearch.TabIndex = 4;
+            this.btnAccountSearch.Text = "查詢";
+            this.btnAccountSearch.UseVisualStyleBackColor = true;
+            this.btnAccountSearch.Click += new System.EventHandler(this.btnAccountSearch_Click);
+            // 
+            // ckxAccountShowDisabled
+            // 
+            this.ckxAccountShowDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ckxAccountShowDisabled.AutoSize = true;
+            this.ckxAccountShowDisabled.Location = new System.Drawing.Point(527, 10);
+            this.ckxAccountShowDisabled.Name = "ckxAccountShowDisabled";
+            this.ckxAccountShowDisabled.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.ckxAccountShowDisabled.Size = new System.Drawing.Size(96, 16);
+            this.ckxAccountShowDisabled.TabIndex = 5;
+            this.ckxAccountShowDisabled.Text = "顯示失效帳號";
+            this.ckxAccountShowDisabled.UseVisualStyleBackColor = true;
+            // 
             // frmHR360_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -923,6 +949,8 @@
             this.flpCompanyAnnouncementID.ResumeLayout(false);
             this.flpCompanyAnnouncementID.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvCompanyAnnouncementSearch_Result)).EndInit();
+            this.flowLayoutPanel9.ResumeLayout(false);
+            this.flowLayoutPanel9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -938,7 +966,6 @@
         private System.Windows.Forms.Button btnAccountAdd;
         private System.Windows.Forms.Button btnAccountEdit;
         private System.Windows.Forms.Button btnAccountDelete;
-        private System.Windows.Forms.Button btnAccountSearch;
         private System.Windows.Forms.TableLayoutPanel tlpAccountInputField;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtAccountConfirmPassword;
@@ -995,5 +1022,8 @@
         private System.Windows.Forms.Label lblCompanyAnnouncementID;
         private System.Windows.Forms.CheckBox ckxCompanyAnnouncementVisible;
         private System.Windows.Forms.CheckBox ckxCompanyAnnouncementOnTop;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel9;
+        private System.Windows.Forms.Button btnAccountSearch;
+        private System.Windows.Forms.CheckBox ckxAccountShowDisabled;
     }
 }

@@ -477,14 +477,36 @@ namespace NIZING_BACKEND_Data_Config
         {
             accountTabMode = FunctionMode.SEARCH;
             LoadControlStatus(currentTabPage);
-
-            var frm = new frmHR360_AccountSearch();
-            frm.Location = new Point(this.Location.X + (this.Width / 2), this.Location.Y + (this.Height / 4));
-            frm.StartPosition = FormStartPosition.Manual;
-            frm.FormClosing += delegate { frm.Hide(); };
-            frm.loadButtonEvent += new searchForm_Close(accountSearchForm_loadButton);
-            frm.loadGridviewEvent += new searchForm_Search(accountSearchForm_loadGridview);
-            frm.Show();
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT [ID],[ERP_ID],[NAME],[EMAIL],[LINE_ID],[DISABLED],[DISABLEDDATE],[SUPER_USER]"
+                            + " FROM HR360_BI01_A"
+                            + " WHERE [ID]<>'ADMIN'"
+                            + " ORDER BY [ID]";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                gvAccountSearch_Result.DataSource = dt;
+                
+            }
+            if (gvAccountSearch_Result.Rows.Count > 0)
+            {
+                accountTabMode = FunctionMode.HASRECORD;
+            }
+            else
+            {
+                accountTabMode = FunctionMode.NORECORD;
+            }
+            LoadControlStatus(currentTabPage);
+            //var frm = new frmHR360_AccountSearch();
+            //frm.Location = new Point(this.Location.X + (this.Width / 2), this.Location.Y + (this.Height / 4));
+            //frm.StartPosition = FormStartPosition.Manual;
+            //frm.FormClosing += delegate { frm.Hide(); };
+            //frm.loadButtonEvent += new searchForm_Close(accountSearchForm_loadButton);
+            //frm.loadGridviewEvent += new searchForm_Search(accountSearchForm_loadGridview);
+            //frm.Show();
         }
 
         private void btnAccountSearchERPID_Click(object sender, EventArgs e)

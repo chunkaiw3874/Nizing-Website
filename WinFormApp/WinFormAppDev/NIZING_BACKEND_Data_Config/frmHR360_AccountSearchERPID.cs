@@ -47,7 +47,6 @@ namespace NIZING_BACKEND_Data_Config
                 loadButtonEvent();
             }
             selectionMade = false;
-            this.Close();
         }
 
         private void frmHR360_AccountSearchERPID_FormClosing(object sender, FormClosingEventArgs e)
