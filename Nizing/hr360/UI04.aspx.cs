@@ -44,8 +44,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "0105";    //test only to avoid error on loading, delete after trial            
-        //Session["erp_id"] = "0105";        
+        //Session["user_id"] = "0142";    //test only to avoid error on loading, delete after trial            
+        //Session["erp_id"] = "0142";        
 
         if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
         {
@@ -241,7 +241,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             test110 = true;
         }
-        if (DateTime.ParseExact(txtDatePickerStart.Text, "yyyy/MM/dd", new CultureInfo("zh-TW")) < DateTime.Today.AddDays(-2))
+        if (Session["erp_id"].ToString() != "0067" && DateTime.ParseExact(txtDatePickerStart.Text, "yyyy/MM/dd", new CultureInfo("zh-TW")) < DateTime.Today.AddDays(-2))
         {
             if (Session["erp_id"].ToString().Trim() == openException)
             {
@@ -824,8 +824,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
             //re-calculate day off remain display
             if (lblDayOffRemainAmount.Text != "")
             {
-                double sumFromList = lstDayOffAppSummary.Where(x => x.typeID == ddlDayOffType.SelectedValue).Sum(x => double.Parse(x.amountUsing));
-                lblDayOffRemainAmount.Text = (Convert.ToDouble(hdnDayOffTimeRemainBeforeSubmit.Value) - sumFromList).ToString();
+                //decimal sumFromList = lstDayOffAppSummary.Where(x => x.typeID == ddlDayOffType.SelectedValue).Sum(x => double.Parse(x.amountUsing));
+                //decimal sumFromList = GetDayOffTimeInApp(DateTime.Parse(txtDatePickerStart.Text).Year, DateTime.Parse(txtDatePickerStart.Text).Month);
+                //lblDayOffRemainAmount.Text = (Convert.ToDecimal(hdnDayOffTimeRemainBeforeSubmit.Value) - sumFromList).ToString();
+                CheckRemainingDayOffTime();
             }
             txtReason.Text = string.Empty;
             ckbTyphoonDayNoSub.Checked = false;
@@ -838,8 +840,30 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// <param name="e"></param>
     protected void ddlDayOffType_SelectedIndexChanged(object sender, EventArgs e)
     {
+        CheckRemainingDayOffTime();
+    }
+    /// <summary>
+    /// 日期改變也須檢查假別剩餘時數
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void txtDatePickerStart_TextChanged(object sender, EventArgs e)
+    {
+        CheckRemainingDayOffTime();
+    }
+    protected void CheckRemainingDayOffTime()
+    {
         //顯示選擇假別剩餘時數            
-        if (ddlDayOffType.SelectedValue.ToString() == "0")
+        //未選擇、婚假、喪假、陪產假、產檢假、產假、安胎假 並非每年都有的假，所以忽略假期天數的限制，由人事檢查
+        //2017.09.04 將特休也排到不須檢查剩餘量，因為新制(每年分成兩分，有不同天數的假)計算很困難
+        if (ddlDayOffType.SelectedValue.ToString() == "0"
+            || ddlDayOffType.SelectedValue.ToString() == "03"
+            || ddlDayOffType.SelectedValue.ToString() == "06"
+            || ddlDayOffType.SelectedValue.ToString() == "07"
+            || ddlDayOffType.SelectedValue.ToString() == "08"
+            || ddlDayOffType.SelectedValue.ToString() == "09"
+            || ddlDayOffType.SelectedValue.ToString() == "15"
+            || ddlDayOffType.SelectedValue.ToString() == "19")
         {
             lblDayOffRemainType.Text = "";
             lblDayOffRemainAmount.Text = "";
@@ -847,119 +871,277 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
         else
         {
-            DataTable dt = new DataTable();
-            string query = "";
-            lblDayOffRemainType.Text = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3).Trim() + "剩餘";
-            using (SqlConnection conn = new SqlConnection(NZconnectionString))
-            {
-                /*JOIN APPLICATION DB, AND SUBTRACT OFF THE AMOUNT PRESENT IN ALL ACTIVE APPLICATIONS*/
-                conn.Open();
-                query = ";WITH INPROGRESS_APP"
-                    + " AS"
-                    + " ("
-                    + " SELECT APP.APPLICANT_ID 'APPLICANT_ID',YEAR(APP.DAYOFF_START_TIME) 'YEAR',APP.DAYOFF_ID 'DAYOFF_ID',CONVERT(DECIMAL(5,2),COALESCE(SUM(APP.DAYOFF_TOTAL_TIME),0)) 'TOTAL_DAYOFF_TIME'"
-                    + " ,CASE APP.DAYOFF_ID"
-                    + " WHEN '02' THEN '小時'"
-                    + " WHEN '03' THEN '小時'"
-                    + " ELSE CASE MC.MC004"
-                    + " 	WHEN '1' THEN '天'"
-                    + " 	WHEN '2' THEN '小時'"
-                    + " 	END"
-                    + " END 'UNIT'"
-                    + " FROM NZ_ERP2.dbo.HR360_DAYOFFAPPLICATION_APPLICATION APP"
-                    + " LEFT JOIN PALMC MC ON APP.DAYOFF_ID=MC.MC001"
-                    + " WHERE APP.APPLICANT_ID=@ID"
-                    + " AND YEAR(APP.DAYOFF_START_TIME)=@YEAR"
-                    + " AND APP.APPLICATION_STATUS_ID<>'06'"
-                    + " AND APP.APPLICATION_STATUS_ID<>'07'"
-                    + " AND APP.APPLICATION_STATUS_ID<>'08'"
-                    + " GROUP BY APP.APPLICANT_ID,YEAR(APP.DAYOFF_START_TIME),APP.DAYOFF_ID,MC.MC004"
-                    + " )"
-                    + " SELECT '02' 'ID',CONVERT(DECIMAL(5,2),TK.TK005),CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0))"
-                    + " ,COALESCE(APP.TOTAL_DAYOFF_TIME,0),'小時'"
-                    + " FROM PALTK TK"
-                    + " LEFT JOIN PALTL TL ON TK.TK001=TL.TL001 AND TK.TK002=TL.TL002 AND TL.TL004='02'"
-                    + " LEFT JOIN INPROGRESS_APP APP ON APP.DAYOFF_ID='02'"
-                    + " WHERE TK.TK001=@ID AND TK.TK002=@YEAR"
-                    + " GROUP BY TK.TK005,APP.TOTAL_DAYOFF_TIME"
-                    + " UNION"
-                    + " SELECT '03' 'ID',CONVERT(DECIMAL(5,2),TK.TK003*8),CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0))"
-                    + " ,COALESCE(APP.TOTAL_DAYOFF_TIME,0),'小時'"
-                    + " FROM PALTK TK"
-                    + " LEFT JOIN PALTL TL ON TK.TK001=TL.TL001 AND TK.TK002=TL.TL002 AND TL.TL004='03'"
-                    + " LEFT JOIN INPROGRESS_APP APP ON APP.DAYOFF_ID='03'"
-                    + " WHERE TK.TK001=@ID AND TK.TK002=@YEAR"
-                    + " GROUP BY TK.TK003,APP.TOTAL_DAYOFF_TIME"
-                    + " UNION"
-                    + " SELECT MC.MC001 'ID',CONVERT(DECIMAL(5,2),MC.MC007),CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0))"
-                    + " ,COALESCE(APP.TOTAL_DAYOFF_TIME,0)"
-                    + " ,CASE MC.MC004"
-                    + " WHEN '1' THEN '天'"
-                    + " WHEN '2' THEN '小時'"
-                    + " END"
-                    + " FROM PALMC MC"
-                    + " LEFT JOIN PALTL TL ON TL.TL001=@ID AND TL.TL002=@YEAR AND TL.TL004=MC.MC001"
-                    + " LEFT JOIN INPROGRESS_APP APP ON MC.MC001=APP.DAYOFF_ID"
-                    + " WHERE MC.MC001<>'02' AND MC.MC001<>'03'"
-                    + " GROUP BY MC.MC001,MC.MC007,MC.MC004,APP.TOTAL_DAYOFF_TIME";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString().Trim());
-                cmd.Parameters.AddWithValue("@YEAR", DateTime.Now.Year.ToString().Trim());
-                using (SqlDataReader dr = cmd.ExecuteReader())
-                {
-                    if (dr.HasRows)
-                    {
-                        dt.Load(dr);
-                    }
-                }
-            }
+            //try
+            //{
+                //DataTable dt = new DataTable();
+                //string query = "";
+                
+                //using (SqlConnection conn = new SqlConnection(NZconnectionString))
+                //{
+                //    /*JOIN APPLICATION DB, AND SUBTRACT OFF THE AMOUNT PRESENT IN ALL ACTIVE APPLICATIONS*/
+                //    conn.Open();
+                //    query = ";WITH INPROGRESS_APP"
+                //        + " AS"
+                //        + " ("
+                //        + " SELECT APP.APPLICANT_ID 'APPLICANT_ID',YEAR(APP.DAYOFF_START_TIME) 'YEAR',APP.DAYOFF_ID 'DAYOFF_ID',CONVERT(DECIMAL(5,2),COALESCE(SUM(APP.DAYOFF_TOTAL_TIME),0)) 'TOTAL_DAYOFF_TIME'"
+                //        + " ,CASE APP.DAYOFF_ID"
+                //        + " WHEN '02' THEN '小時'"
+                //        + " WHEN '03' THEN '小時'"
+                //        + " ELSE CASE MC.MC004"
+                //        + " 	WHEN '1' THEN '天'"
+                //        + " 	WHEN '2' THEN '小時'"
+                //        + " 	END"
+                //        + " END 'UNIT'"
+                //        + " FROM NZ_ERP2.dbo.HR360_DAYOFFAPPLICATION_APPLICATION APP"
+                //        + " LEFT JOIN PALMC MC ON APP.DAYOFF_ID=MC.MC001"
+                //        + " WHERE APP.APPLICANT_ID=@ID"
+                //        + " AND YEAR(APP.DAYOFF_START_TIME)=@YEAR"
+                //        + " AND APP.APPLICATION_STATUS_ID<>'06'"
+                //        + " AND APP.APPLICATION_STATUS_ID<>'07'"
+                //        + " AND APP.APPLICATION_STATUS_ID<>'08'"
+                //        + " GROUP BY APP.APPLICANT_ID,YEAR(APP.DAYOFF_START_TIME),APP.DAYOFF_ID,MC.MC004"
+                //        + " )"
+                //        + " SELECT '02' 'ID'"
+                //        + " ,CONVERT(DECIMAL(5,2),TK.TK005) 'YEARLY_ALLOWED_AMOUNT'"
+                //        + " ,CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0)) 'YEARLY_AMOUNT_USED'"
+                //        + " ,COALESCE(APP.TOTAL_DAYOFF_TIME,0) 'IN_PROGRESS_AMOUNT'"
+                //        + " ,'小時' 'TIME_UNIT'"
+                //        + " FROM PALTK TK"
+                //        + " LEFT JOIN PALTL TL ON TK.TK001=TL.TL001 AND TK.TK002=TL.TL002 AND TL.TL004='02'"
+                //        + " LEFT JOIN INPROGRESS_APP APP ON APP.DAYOFF_ID='02'"
+                //        + " WHERE TK.TK001=@ID AND TK.TK002=@YEAR"
+                //        + " GROUP BY TK.TK005,APP.TOTAL_DAYOFF_TIME"
+                //        + " UNION"
+                //        + " SELECT '03' 'ID',CONVERT(DECIMAL(5,2),TK.TK003*8),CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0))"
+                //        + " ,COALESCE(APP.TOTAL_DAYOFF_TIME,0),'小時'"
+                //        + " FROM PALTK TK"
+                //        + " LEFT JOIN PALTL TL ON TK.TK001=TL.TL001 AND TK.TK002=TL.TL002 AND TL.TL004='03'"
+                //        + " LEFT JOIN INPROGRESS_APP APP ON APP.DAYOFF_ID='03'"
+                //        + " WHERE TK.TK001=@ID AND TK.TK002=@YEAR"
+                //        + " GROUP BY TK.TK003,APP.TOTAL_DAYOFF_TIME"
+                //        + " UNION"
+                //        + " SELECT MC.MC001 'ID',CONVERT(DECIMAL(5,2),MC.MC007),CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0))"
+                //        + " ,COALESCE(APP.TOTAL_DAYOFF_TIME,0)"
+                //        + " ,CASE MC.MC004"
+                //        + " WHEN '1' THEN '天'"
+                //        + " WHEN '2' THEN '小時'"
+                //        + " END"
+                //        + " FROM PALMC MC"
+                //        + " LEFT JOIN PALTL TL ON TL.TL001=@ID AND TL.TL002=@YEAR AND TL.TL004=MC.MC001"
+                //        + " LEFT JOIN INPROGRESS_APP APP ON MC.MC001=APP.DAYOFF_ID"
+                //        + " WHERE MC.MC001<>'02' AND MC.MC001<>'03'"
+                //        + " GROUP BY MC.MC001,MC.MC007,MC.MC004,APP.TOTAL_DAYOFF_TIME";
+                //    SqlCommand cmd = new SqlCommand(query, conn);
+                //    cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString().Trim());
+                //    cmd.Parameters.AddWithValue("@YEAR", DateTime.Now.Year.ToString().Trim());
+                //    //cmd.Parameters.AddWithValue("@YEAR", txtDatePickerStart.Text.Substring(0,4));
+                //    using (SqlDataReader dr = cmd.ExecuteReader())
+                //    {
+                //        if (dr.HasRows)
+                //        {
+                //            dt.Load(dr);
+                //        }
+                //    }
+                //}
+                //if (dt.Rows.Count > 0)
+                //{
+                //    DisplayRemainingDayOffTime(dt, Int16.Parse(txtDatePickerStart.Text.Substring(0, 4)), Int16.Parse(txtDatePickerStart.Text.Substring(5, 2)));
+                //}
+                DataTable dt = new DataTable();
+                dt = GetDayOffTypeInfo(ddlDayOffType.SelectedValue);
+                SetDayOffUnit(dt);
 
-            if (dt.Rows.Count > 0)
-            {
-                DataRow[] row;
-                row = dt.Select("ID=" + ddlDayOffType.SelectedValue.ToString());
-
-                //未選擇、婚假、陪產假、產檢假、產假 並非每年都有的假，所以忽略假期天數的限制，由人事檢查
-                //2017.09.04 將特休也排到不須檢查剩餘量，因為新制(每年分成兩分，有不同天數的假)計算很困難
-                if (row.Any())
+                if (dt.Rows[0]["DAY_OFF_ACCUMULATION_PERIOD"].ToString() == "1")
                 {
-                    if (ddlDayOffType.SelectedValue.ToString() == "06" || ddlDayOffType.SelectedValue.ToString() == "09"
-                        || ddlDayOffType.SelectedValue.ToString() == "15" || ddlDayOffType.SelectedValue.ToString() == "08"
-                        || ddlDayOffType.SelectedValue.ToString() == "03")
-                    {
-                        lblDayOffRemainType.Text = "";
-                        lblDayOffRemainAmount.Text = "";
-                        lblDayOffRemainUnit.Text = "";
-                        hdnDayOffTypeUnit.Value = row[0][4].ToString();
-                    }
-                    else
-                    {
-                        if (Convert.ToDouble(row[0][1]) > 0)
-                        {
-                            double sumFromList = lstDayOffAppSummary.Where(x => x.typeID == ddlDayOffType.SelectedValue).Sum(x => double.Parse(x.amountUsing));
-                            hdnDayOffTimeRemainBeforeSubmit.Value = (Convert.ToDouble(row[0][1]) - Convert.ToDouble(row[0][2]) - Convert.ToDouble(row[0][3])).ToString();
-                            lblDayOffRemainAmount.Text = (Convert.ToDouble(hdnDayOffTimeRemainBeforeSubmit.Value) - sumFromList).ToString();
-                            lblDayOffRemainUnit.Text = row[0][4].ToString();
-                        }
-                        else
-                        {
-                            lblDayOffRemainType.Text = "";
-                            lblDayOffRemainAmount.Text = "";
-                            lblDayOffRemainUnit.Text = "";
-                        }
-                        hdnDayOffTypeUnit.Value = row[0][4].ToString();
-                    }
+                    lblDayOffRemainAmount.Text = (GetDayOffRemainingQuota(dt, DateTime.Parse(txtDatePickerStart.Text).Year, DateTime.Parse(txtDatePickerStart.Text).Month)
+                        - GetDayOffTimeInProgress(DateTime.Parse(txtDatePickerStart.Text).Year, DateTime.Parse(txtDatePickerStart.Text).Month)
+                        - GetDayOffTimeInApp(DateTime.Parse(txtDatePickerStart.Text).Year, DateTime.Parse(txtDatePickerStart.Text).Month)).ToString();
                 }
                 else
                 {
-                    lblDayOffRemainType.Text = "";
-                    lblDayOffRemainAmount.Text = "N/A";
-                    lblDayOffRemainUnit.Text = "";
+                    lblDayOffRemainAmount.Text = (GetDayOffRemainingQuota(dt, DateTime.Parse(txtDatePickerStart.Text).Year)
+                        - GetDayOffTimeInProgress(DateTime.Parse(txtDatePickerStart.Text).Year)
+                        - GetDayOffTimeInApp(DateTime.Parse(txtDatePickerStart.Text).Year)).ToString();
                 }
+                lblDayOffRemainType.Text = dt.Rows[0]["NAME"].ToString() + "剩餘";
+                lblDayOffRemainUnit.Text = hdnDayOffTypeUnit.Value;
+
+            //}
+            //catch
+            //{
+
+            //}
+        }
+    }
+
+    protected DataTable GetDayOffTypeInfo(string dayOffID)
+    {
+        DataTable dt = new DataTable();
+        string query = "SELECT MC001 'ID'"
+                    + " ,MC002 'NAME'"
+                    + " ,MC004 'DAY_OFF_UNIT'"
+                    + " ,MC005 'DAY_OFF_ACCUMULATION_PERIOD'"
+                    + " ,MC007 'ANNUAL_QUOTA'"
+                    + " ,MC017 'MONTHLY_QUOTA'"
+                    + " FROM PALMC"
+                    + " WHERE MC001=@ID";
+        using (SqlConnection conn = new SqlConnection(NZconnectionString))
+        {
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@ID", dayOffID);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+        }
+        return dt;
+    }
+    protected void SetDayOffUnit(DataTable dt)
+    {
+        if (dt.Rows[0]["DAY_OFF_UNIT"].ToString().Trim() == "1")
+        {
+            hdnDayOffTypeUnit.Value = "天";
+        }
+        else
+        {
+            hdnDayOffTypeUnit.Value = "小時";
+        }
+    }
+    protected decimal GetDayOffRemainingQuota(DataTable dt, int year, int month = 0)
+    {
+        decimal r = 0;
+        string query = "";
+        if (month == 0)
+        {
+            if (dt.Rows[0]["ID"].ToString().Trim() == "02")
+            {
+                query = "SELECT CONVERT(DECIMAL(5,2),TK.TK005)-CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0)) 'AMOUNT_LEFT'"
+                        + " FROM PALTK TK"
+                        + " LEFT JOIN PALTL TL ON TK.TK001=TL.TL001 AND TK.TK002=TL.TL002 AND TL.TL004='02'"
+                        + " WHERE TK.TK001=@ApplicantID"
+                        + " AND TK.TK002=@Year"
+                        + " GROUP BY TK.TK005";
+            }
+            else
+            {
+                query = " SELECT CONVERT(DECIMAL(5,2),MC.MC007)-CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0))"
+                        + " FROM PALMC MC"
+                        + " LEFT JOIN PALTL TL ON TL.TL001=@ApplicantID AND TL.TL002=@Year AND TL.TL004=MC.MC001"
+                        + " WHERE MC.MC001=@DayOffID"
+                        + " GROUP BY MC.MC001,MC.MC007,MC.MC004";
             }
         }
-
+        else
+        {
+            query = "SELECT CONVERT(DECIMAL(5,2),MC.MC017)-CONVERT(DECIMAL(5,2),COALESCE(SUM(TL.TL006+TL.TL007),0)) 'AMOUNT_LEFT'"
+                + " FROM PALMC MC"
+                + " LEFT JOIN PALTL TL ON TL.TL001=@ApplicantID AND TL.TL002=@Year AND TL.TL003=@Month AND TL.TL004=MC.MC001"
+                + " WHERE MC.MC001=@DayOffID"
+                + " GROUP BY MC.MC001,MC.MC017,MC.MC004";
+        }
+        using (SqlConnection conn = new SqlConnection(NZconnectionString))
+        {
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@ApplicantID", Session["erp_id"].ToString());
+            cmd.Parameters.AddWithValue("@DayOffID", dt.Rows[0]["ID"].ToString());
+            cmd.Parameters.AddWithValue("@Year", year);
+            cmd.Parameters.AddWithValue("@Month", month.ToString("D2"));
+            r = cmd.ExecuteScalar() == null ? 0 : Convert.ToDecimal(cmd.ExecuteScalar());
+        }
+        return r;
     }
+    protected decimal GetDayOffTimeInProgress(int year, int month = 0)
+    {
+        decimal r = 0;
+        string query = "SELECT CONVERT(DECIMAL(5,2),COALESCE(SUM(APP.DAYOFF_TOTAL_TIME),0)) 'TOTAL_DAYOFF_TIME'"
+                    + " FROM HR360_DAYOFFAPPLICATION_APPLICATION APP";
+        string where = " WHERE APP.APPLICATION_STATUS_ID<>'06'"
+                    + " AND APP.APPLICATION_STATUS_ID<>'07'"
+                    + " AND APP.APPLICATION_STATUS_ID<>'08'"
+                    + " AND APP.APPLICANT_ID=@ApplicantID"
+                    + " AND APP.DAYOFF_ID=@DayOffID"
+                    + " AND YEAR(APP.DAYOFF_START_TIME)=@Year";
+        if (month != 0)
+        {
+            where += " AND MONTH(APP.DAYOFF_START_TIME)=@Month";
+        }
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(query + where, conn);
+            cmd.Parameters.AddWithValue("@ApplicantID", Session["erp_id"].ToString());
+            cmd.Parameters.AddWithValue("@DayOffID", ddlDayOffType.SelectedValue);
+            cmd.Parameters.AddWithValue("@Year", year);
+            cmd.Parameters.AddWithValue("@Month", month.ToString("D2"));
+            r = cmd.ExecuteScalar() == null ? Convert.ToDecimal(cmd.ExecuteScalar()) : 0;
+        }
+
+        return r;
+    }
+    protected decimal GetDayOffTimeInApp(int year, int month = 0)
+    {
+        decimal r = 0;
+        if (month == 0)
+        {
+            r = lstDayOffAppSummary.Where(x => x.typeID == ddlDayOffType.SelectedValue && x.startTime.Year == year).Sum(x => decimal.Parse(x.amountUsing));
+        }
+        else
+        {
+            r = lstDayOffAppSummary.Where(x => x.typeID == ddlDayOffType.SelectedValue && x.startTime.Year == year && x.startTime.Month == month).Sum(x => decimal.Parse(x.amountUsing));
+        }
+
+        return r;
+    }
+    //protected void DisplayRemainingDayOffTime(DataTable dt, int year, int month)
+    //{
+    //    DataRow[] row;
+    //    row = dt.Select("ID=" + ddlDayOffType.SelectedValue.ToString());
+        
+    //    //未選擇、婚假、喪假、陪產假、產檢假、產假、安胎假 並非每年都有的假，所以忽略假期天數的限制，由人事檢查
+    //    //2017.09.04 將特休也排到不須檢查剩餘量，因為新制(每年分成兩分，有不同天數的假)計算很困難
+    //    if (row.Any())
+    //    {
+    //        if (ddlDayOffType.SelectedValue.ToString() == "03"
+    //            || ddlDayOffType.SelectedValue.ToString() == "06"
+    //            || ddlDayOffType.SelectedValue.ToString() == "07"
+    //            || ddlDayOffType.SelectedValue.ToString() == "08"
+    //            || ddlDayOffType.SelectedValue.ToString() == "09"
+    //            || ddlDayOffType.SelectedValue.ToString() == "15"
+    //            || ddlDayOffType.SelectedValue.ToString() == "19")
+    //        {
+    //            lblDayOffRemainType.Text = "";
+    //            lblDayOffRemainAmount.Text = "";
+    //            lblDayOffRemainUnit.Text = "";
+    //            hdnDayOffTypeUnit.Value = row[0][4].ToString();
+    //        }
+    //        else
+    //        {
+    //            if (Convert.ToDouble(row[0][1]) > 0)
+    //            {
+    //                //decimal yearSumFromList = lstDayOffAppSummary.Where(x => x.typeID == ddlDayOffType.SelectedValue).Sum(x => double.Parse(x.amountUsing));
+    //                decimal yearSumFromList = GetDayOffTimeInApp(DateTime.Parse(txtDatePickerStart.Text).Year, DateTime.Parse(txtDatePickerStart.Text).Month);
+
+    //                hdnDayOffTimeRemainBeforeSubmit.Value = (Convert.ToDecimal(row[0]["YEARLY_ALLOWED_AMOUNT"]) - Convert.ToDecimal(row[0]["YEARLY_AMOUNT_USED"]) - Convert.ToDecimal(row[0]["IN_PROGRESS_AMOUNT"])).ToString();
+    //                lblDayOffRemainType.Text = ddlDayOffType.SelectedItem.Text.Substring(3, ddlDayOffType.SelectedItem.Text.Length - 3).Trim() + "剩餘";
+    //                lblDayOffRemainAmount.Text = (Convert.ToDecimal(hdnDayOffTimeRemainBeforeSubmit.Value) - yearSumFromList).ToString();
+    //                lblDayOffRemainUnit.Text = row[0][4].ToString();
+    //            }
+    //            else
+    //            {
+    //                lblDayOffRemainType.Text = "";
+    //                lblDayOffRemainAmount.Text = "";
+    //                lblDayOffRemainUnit.Text = "";
+    //            }
+    //            hdnDayOffTypeUnit.Value = row[0][4].ToString();
+    //        }
+    //    }
+    //    else
+    //    {
+    //        lblDayOffRemainType.Text = "";
+    //        lblDayOffRemainAmount.Text = "N/A";
+    //        lblDayOffRemainUnit.Text = "";
+    //    }
+    //}
     /// <summary>
     /// 錯誤訊息
     /// </summary>
@@ -1557,8 +1739,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
                                                                                                                              amount set up*/
         {
             lstDayOffAppSummary.RemoveAt(Convert.ToInt16(btnID.Substring(12, btnID.Length - 12)) - 1);
-            double sumFromList = lstDayOffAppSummary.Where(x => x.typeID == ddlDayOffType.SelectedValue).Sum(x => double.Parse(x.amountUsing));
-            lblDayOffRemainAmount.Text = (Convert.ToDouble(hdnDayOffTimeRemainBeforeSubmit.Value) - sumFromList).ToString();
+            //double sumFromList = lstDayOffAppSummary.Where(x => x.typeID == ddlDayOffType.SelectedValue).Sum(x => double.Parse(x.amountUsing));
+            //decimal sumFromList = GetDayOffTimeInApp(DateTime.Parse(txtDatePickerStart.Text).Year, DateTime.Parse(txtDatePickerStart.Text).Month);
+            //lblDayOffRemainAmount.Text = (Convert.ToDecimal(hdnDayOffTimeRemainBeforeSubmit.Value) - sumFromList).ToString();
+            CheckRemainingDayOffTime();
         }
         else
         {
@@ -2151,21 +2335,26 @@ public partial class hr360_UI04 : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString().Trim());
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(userInfo);
-            if (userInfo.Rows[0][0].ToString() == "1")  //性別為男性，不可用產檢假及產假
+            if (userInfo.Rows[0][0].ToString() == "1")  //性別為男性
             {
                 query = "SELECT PALMC.MC001+' '+PALMC.MC002,PALMC.MC001"
                     + " FROM PALMC"
-                    + " WHERE PALMC.MC001<>'15'" //產檢假
-                    + " AND PALMC.MC001<>'08'" //產假
+                    + " WHERE PALMC.MC001<>'08'" //產假
+                    + " AND PALMC.MC001<>'16'" //生理假
+                    + " AND PALMC.MC001<>'19'" //安胎假
                     + " AND PALMC.MC001<>'10'" //曠職
+                    + " AND PALMC.MC001<>'18'" //育嬰留停
+                    + " AND PALMC.MC001<>'21'" //遲到(HR將會移除此選項)
                     + " ORDER BY PALMC.MC001";
             }
             else //女性無陪產假
             {
                 query = "SELECT PALMC.MC001+' '+PALMC.MC002,PALMC.MC001"
                     + " FROM PALMC"
-                    + " WHERE PALMC.MC001<>'10'" //曠職
-                    + " AND PALMC.MC001<>'09'" //陪產假
+                    + " WHERE PALMC.MC001<>'09'" //陪產假
+                    + " AND PALMC.MC001<>'10'" //曠職
+                    + " AND PALMC.MC001<>'18'" //育嬰留停
+                    + " AND PALMC.MC001<>'21'" //遲到(HR將會移除此選項)
                     + " ORDER BY PALMC.MC001";
             }
             cmd = new SqlCommand(query, conn);
@@ -2724,4 +2913,5 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
         btnSearchSubmit_Click(sender, e);
     }
+
 }

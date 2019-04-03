@@ -36,13 +36,17 @@
             $('.autosize').autosize();
         });
         $(document).ready(function () {
+
             $('.datepicker').datepicker({
                 language: 'zh-TW',
                 format: 'yyyy/mm/dd',
                 autoclose: true,
                 todayBtn: true,
                 todayHighlight: true
+            }).on('changeDate', function () {
+                __doPostBack('txtDatePickerStart', 'TextChanged');
             });
+
             var isPostBack = $('#<%=hdnIsPostBack.ClientID%>').val();
             if (isPostBack == '0') {
                 $('#DayOffApp').hide();
@@ -93,6 +97,7 @@
             }
             );
         });
+
         var approvalPendingAnchor = 0;
         function approvalTableSelection(e) {
             if (e != 0) {
@@ -264,7 +269,7 @@
                         </asp:DropDownList>
                     </div>
                     <div class="col-xs-2" style="display: inline; padding-right: 0px;">
-                        <asp:TextBox ID="txtDatePickerStart" runat="server" CssClass="form-control datepicker" placeholder="請假起始日期"></asp:TextBox>
+                        <asp:TextBox ID="txtDatePickerStart" runat="server" CssClass="form-control datepicker" placeholder="請假起始日期" OnTextChanged="txtDatePickerStart_TextChanged"></asp:TextBox>
                     </div>
                     <div class="col-xs-1" style="display: inline; padding: 0px;">
                         <asp:DropDownList ID="ddlDayOffStartHour" runat="server" CssClass="form-control"></asp:DropDownList>
@@ -408,6 +413,8 @@
             </div>
         </div>
         <hr />
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>
         <div class="row form-group">
             <div class="col-xs-12">
                 <span class="label label-info" id="btnSearchVisibility" style="cursor: pointer; font-size: 20px;">查詢歷史假單</span>
@@ -562,6 +569,8 @@
                 </div>
             </div>
         </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
     </div>    
 </asp:Content>
 

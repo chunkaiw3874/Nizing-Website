@@ -105,7 +105,7 @@
             <td>導體電阻<br />
               Maximum Resistance at 20°C ohm/km</td>
             <td>電流量<br />
-              Intens. Max 1. maxa 170°C-AMP</td>
+              Intens. Max 1. maxa 20°C-AMP</td>
             <td>米/卷<br />
               Meters/ Coil</td>
           </tr>
