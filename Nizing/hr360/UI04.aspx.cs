@@ -871,8 +871,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
         else
         {
-            //try
-            //{
+            try
+            {
                 //DataTable dt = new DataTable();
                 //string query = "";
                 
@@ -966,11 +966,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 lblDayOffRemainType.Text = dt.Rows[0]["NAME"].ToString() + "剩餘";
                 lblDayOffRemainUnit.Text = hdnDayOffTypeUnit.Value;
 
-            //}
-            //catch
-            //{
+            }
+            catch
+            {
 
-            //}
+            }
         }
     }
 
