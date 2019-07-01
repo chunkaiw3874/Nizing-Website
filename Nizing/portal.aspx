@@ -19,6 +19,9 @@
             <div>
                 <a href="neo_employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/NEO.png" /></a>
             </div>
+            <div>
+                <%--<a href="oqs/quotation-list.aspx" target="_blank">oqs</a>--%>
+            </div>
         </div>
     </div>    
 </asp:Content>

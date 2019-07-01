@@ -35,7 +35,7 @@
       <submenuitem url="~/en/vde-reg-nr103874.aspx" enTitle="VDE-REG-NR103874 Parallel Silicone Medical Wire" cnTitle="VDE-REG-NR103874 醫療線" />
       <submenuitem url="~/en/vde-h05ss-f.aspx" enTitle="VDE-H05SS-F Silicone Multi-Core Wire" cnTitle="VDE-H05SS-F 多芯線" />
       <submenuitem url="~/en/vde-fg4g4.aspx" enTitle="VDE-FG4G4 Double Layer Silicone Wire" cnTitle="VDE FG4G4 雙層絕緣線" />
-      <submenuitem url="~/en/pse-3323.aspx" enTitle="PSE-3323 Silicone Wire" cnTitle="PSE-3323" />
+      <!--<submenuitem url="~/en/pse-3323.aspx" enTitle="PSE-3323 Silicone Wire" cnTitle="PSE-3323" />-->
     </menuitem>
     <menuitem url="~/en/teflon-series.aspx" enTitle="Teflon Series" cnTitle="鐵氟龍線系列">
       <submenuitem url="~/en/ul1199.aspx" enTitle="UL1199 PTFE Teflon Wire" cnTitle="UL1199 PTFE" />

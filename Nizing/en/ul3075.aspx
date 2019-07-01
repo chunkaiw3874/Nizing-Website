@@ -33,7 +33,7 @@
     </div>
     <table>
         <tr>
-            <td>UL3075 is suitable for electric cloth, dryer, and other home appliances not exceeding a 200°C usage temperature. Passed UL VW-1 Vertical fire test and multiple IEC tests, proven to be low smoke density, halogen free, and flame retardant.</td>
+            <td>UL3075 is suitable for electric cloth, dryer, and other home appliances not exceeding a 200°C usage temperature.</td>
         </tr>
     </table>
     <div class="subtitle">

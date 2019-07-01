@@ -2,3 +2,6 @@ User-Agent:*
 Allow:/
 Disallow:/hr360
 Disallow:/employee_section
+Disallow:/neo_employee_section
+Disallow:/revivify_employee_section
+Disallow:/oqs

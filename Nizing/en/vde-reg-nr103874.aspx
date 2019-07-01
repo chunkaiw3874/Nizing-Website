@@ -33,7 +33,7 @@
     </div>
     <table>
         <tr>
-            <td>VDE REG-NR103874 Parallel Silicone Cable is suitable for non-toxic usage such as medical equipment wiring. Passed UL VW-1 Vertical fire test and multiple IEC tests, proven to be low smoke density, halogen free, and flame retardant.</td>
+            <td>VDE REG-NR103874 Parallel Silicone Cable is suitable for non-toxic usage such as medical equipment wiring.</td>
         </tr>
     </table>
     <div class="subtitle">

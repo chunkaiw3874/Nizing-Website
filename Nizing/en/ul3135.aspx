@@ -34,7 +34,7 @@
     </div>
     <table>
         <tr>
-            <td>UL3135 Silicone Wire is suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces. Passed UL VW-1 Vertical fire test and multiple IEC tests, proven to be low smoke density, halogen free, and flame retardant.</td>
+            <td>UL3135 Silicone Wire is suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces.</td>
         </tr>
     </table>
     <div class="subtitle">

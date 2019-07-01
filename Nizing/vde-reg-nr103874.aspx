@@ -33,7 +33,7 @@
     </div>
     <table>
         <tr>
-            <td>VDE REG-NR103874適用於醫療器材配線。通過UL VW-1垂直燃燒測試以及多項IEC測試，證實為低煙、無鹵、耐燃之產品。</td>
+            <td>VDE REG-NR103874適用於醫療器材配線。</td>
         </tr>
     </table>
     <div class="subtitle">

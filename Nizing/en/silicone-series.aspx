@@ -289,7 +289,7 @@
             </div>
         </div>
         <div class="content-row">
-            <div class="content-column">
+            <%--<div class="content-column">
                 <div class="button">
                     <asp:HyperLink ID="HyperLink10" runat="server" ImageUrl="~/en/images/product_pic/pse3323-menu.jpg" alt="PSE3323 Silicone Wire" NavigateUrl="pse-3323.aspx"></asp:HyperLink>
                 </div>
@@ -318,7 +318,7 @@
                         </tr>
                     </table>
                 </div>
-            </div>                     
+            </div>--%>                     
         </div>           
     </div>
 </asp:Content>
