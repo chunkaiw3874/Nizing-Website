@@ -51,9 +51,9 @@ namespace NIZING_BACKEND_Data_Config
 
         private void frmHR360_AccountSearchERPID_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (selectionMade == false)
+            if (loadButtonEvent != null)
             {
-                btnAccountSearchERPID_Cancel_Click(sender, e);
+                loadButtonEvent();
             }
         }
 

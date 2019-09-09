@@ -134,25 +134,35 @@ public partial class nizing_intranet_ProductionProgress_Dept : System.Web.UI.Pag
     }
     internal void GridViewAddFooter_sum(GridView _gd)
     {
-        //int sum = 0;
+        decimal sum = 0;
         if (_gd.Rows.Count > 0)
         {
-            //for (int i = 9; i < 10; i++)
-            //{
-            //    sum = 0;
-            //    for (int j = 0; j < _gd.Rows.Count; j++)
-            //    {
-            //        sum += int.Parse(_gd.Rows[j].Cells[i].Text, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
-            //    }
-            //    //if (i == 3)
-            //    //{
-            //    //    _gd.FooterRow.Cells[i].Text = sum.ToString("C", new CultureInfo("zh-TW"));
-            //    //}
-            //    //else
-            //    //{
-            //    _gd.FooterRow.Cells[i].Text = sum.ToString("N3");
-            //    //}
-            //}
+            for (int i = 10; i < _gd.Columns.Count; i++)
+            {
+                sum = 0;
+                if (i != 11)
+                {
+                    for (int j = 0; j < _gd.Rows.Count; j++)
+                    {
+                        sum += decimal.Parse(_gd.Rows[j].Cells[i].Text, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
+                    }
+                    _gd.FooterRow.Cells[i].Text = sum.ToString("N3");
+                }
+                else if (i == 11)
+                {
+                    List<string> unitList = new List<string>();
+                    for (int j = 0; j < _gd.Rows.Count; j++)
+                    {
+                        unitList.Add(_gd.Rows[j].Cells[i].Text);
+                    }
+                    unitList = unitList.Distinct().ToList();
+                    if (unitList.Count == 1)
+                    {
+                        _gd.FooterRow.Cells[i].Text = unitList[0];
+                    }
+
+                }
+            }
             _gd.FooterRow.Cells[8].Text = _gd.Rows.Count.ToString() + "筆";
         }
     }

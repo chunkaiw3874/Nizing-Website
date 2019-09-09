@@ -21,7 +21,7 @@
                         <asp:Label ID="lblEmployee_Name" runat="server"></asp:Label>
                     </div>
                 </div>
-                <div style="width:100%;display:flex;flex-direction:row;justify-content:center;">                    
+                <div style="width:100%;display:flex;flex-direction:row;justify-content:center;visibility:hidden">                    
                     <div style="width:45%;text-align:right;margin-right:10%;margin-bottom:10px;">
                         <asp:Label ID="lblEmployee_Department" runat="server"></asp:Label>
                     </div>

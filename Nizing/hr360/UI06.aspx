@@ -51,7 +51,7 @@
                             <asp:Label ID="lblYear" runat="server" Text=""></asp:Label>/<asp:Label ID="lblMonth" runat="server" Text=""></asp:Label>
                         </div>
                         <div>
-                            <asp:Label ID="lblJob" runat="server" Text=""></asp:Label>
+                            <asp:Label ID="lblJob" runat="server" Text="" Visible="false"></asp:Label>
                         </div>
                         <div>
                             <span style="margin-right:5px;"><asp:Label ID="lblDept_Id" runat="server" Text=""></asp:Label></span>

@@ -39,7 +39,7 @@
             this.btnAccountDelete = new System.Windows.Forms.Button();
             this.tlpAccountInputField = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
-            this.txtAvatarImageFilePath = new System.Windows.Forms.TextBox();
+            this.txtAccountAvatarImageFilePath = new System.Windows.Forms.TextBox();
             this.btnAvatarImageFilePathSearch = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
@@ -73,6 +73,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.gvAccountSearch_Result = new System.Windows.Forms.DataGridView();
+            this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnAccountSearch = new System.Windows.Forms.Button();
+            this.ckxAccountShowDisabled = new System.Windows.Forms.CheckBox();
             this.tbpCompanyAnnouncement = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
@@ -93,9 +96,6 @@
             this.ckxCompanyAnnouncementVisible = new System.Windows.Forms.CheckBox();
             this.ckxCompanyAnnouncementOnTop = new System.Windows.Forms.CheckBox();
             this.gvCompanyAnnouncementSearch_Result = new System.Windows.Forms.DataGridView();
-            this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnAccountSearch = new System.Windows.Forms.Button();
-            this.ckxAccountShowDisabled = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpAccountManagement.SuspendLayout();
@@ -109,6 +109,7 @@
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvAccountSearch_Result)).BeginInit();
+            this.flowLayoutPanel9.SuspendLayout();
             this.tbpCompanyAnnouncement.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel7.SuspendLayout();
@@ -116,7 +117,6 @@
             this.flowLayoutPanel8.SuspendLayout();
             this.flpCompanyAnnouncementID.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvCompanyAnnouncementSearch_Result)).BeginInit();
-            this.flowLayoutPanel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -282,7 +282,7 @@
             // 
             // flowLayoutPanel6
             // 
-            this.flowLayoutPanel6.Controls.Add(this.txtAvatarImageFilePath);
+            this.flowLayoutPanel6.Controls.Add(this.txtAccountAvatarImageFilePath);
             this.flowLayoutPanel6.Controls.Add(this.btnAvatarImageFilePathSearch);
             this.flowLayoutPanel6.Location = new System.Drawing.Point(92, 224);
             this.flowLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
@@ -290,13 +290,13 @@
             this.flowLayoutPanel6.Size = new System.Drawing.Size(368, 28);
             this.flowLayoutPanel6.TabIndex = 16;
             // 
-            // txtAvatarImageFilePath
+            // txtAccountAvatarImageFilePath
             // 
-            this.txtAvatarImageFilePath.Enabled = false;
-            this.txtAvatarImageFilePath.Location = new System.Drawing.Point(3, 3);
-            this.txtAvatarImageFilePath.Name = "txtAvatarImageFilePath";
-            this.txtAvatarImageFilePath.Size = new System.Drawing.Size(150, 22);
-            this.txtAvatarImageFilePath.TabIndex = 0;
+            this.txtAccountAvatarImageFilePath.Enabled = false;
+            this.txtAccountAvatarImageFilePath.Location = new System.Drawing.Point(3, 3);
+            this.txtAccountAvatarImageFilePath.Name = "txtAccountAvatarImageFilePath";
+            this.txtAccountAvatarImageFilePath.Size = new System.Drawing.Size(150, 22);
+            this.txtAccountAvatarImageFilePath.TabIndex = 0;
             // 
             // btnAvatarImageFilePathSearch
             // 
@@ -631,6 +631,41 @@
             this.gvAccountSearch_Result.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvAccountSearch_Result.Size = new System.Drawing.Size(707, 745);
             this.gvAccountSearch_Result.TabIndex = 2;
+            this.gvAccountSearch_Result.SelectionChanged += new System.EventHandler(this.gvAccountSearch_Result_SelectionChanged);
+            // 
+            // flowLayoutPanel9
+            // 
+            this.flowLayoutPanel9.Controls.Add(this.btnAccountSearch);
+            this.flowLayoutPanel9.Controls.Add(this.ckxAccountShowDisabled);
+            this.flowLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel9.Location = new System.Drawing.Point(462, 1);
+            this.flowLayoutPanel9.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel9.Name = "flowLayoutPanel9";
+            this.flowLayoutPanel9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.flowLayoutPanel9.Size = new System.Drawing.Size(707, 56);
+            this.flowLayoutPanel9.TabIndex = 3;
+            // 
+            // btnAccountSearch
+            // 
+            this.btnAccountSearch.Location = new System.Drawing.Point(629, 3);
+            this.btnAccountSearch.Name = "btnAccountSearch";
+            this.btnAccountSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnAccountSearch.TabIndex = 4;
+            this.btnAccountSearch.Text = "查詢";
+            this.btnAccountSearch.UseVisualStyleBackColor = true;
+            this.btnAccountSearch.Click += new System.EventHandler(this.btnAccountSearch_Click);
+            // 
+            // ckxAccountShowDisabled
+            // 
+            this.ckxAccountShowDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ckxAccountShowDisabled.AutoSize = true;
+            this.ckxAccountShowDisabled.Location = new System.Drawing.Point(527, 10);
+            this.ckxAccountShowDisabled.Name = "ckxAccountShowDisabled";
+            this.ckxAccountShowDisabled.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.ckxAccountShowDisabled.Size = new System.Drawing.Size(96, 16);
+            this.ckxAccountShowDisabled.TabIndex = 5;
+            this.ckxAccountShowDisabled.Text = "顯示失效帳號";
+            this.ckxAccountShowDisabled.UseVisualStyleBackColor = true;
             // 
             // tbpCompanyAnnouncement
             // 
@@ -878,40 +913,6 @@
             this.gvCompanyAnnouncementSearch_Result.TabIndex = 3;
             this.gvCompanyAnnouncementSearch_Result.SelectionChanged += new System.EventHandler(this.gvCompanyAnnouncementSearch_Result_SelectionChanged);
             // 
-            // flowLayoutPanel9
-            // 
-            this.flowLayoutPanel9.Controls.Add(this.btnAccountSearch);
-            this.flowLayoutPanel9.Controls.Add(this.ckxAccountShowDisabled);
-            this.flowLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel9.Location = new System.Drawing.Point(462, 1);
-            this.flowLayoutPanel9.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel9.Name = "flowLayoutPanel9";
-            this.flowLayoutPanel9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel9.Size = new System.Drawing.Size(707, 56);
-            this.flowLayoutPanel9.TabIndex = 3;
-            // 
-            // btnAccountSearch
-            // 
-            this.btnAccountSearch.Location = new System.Drawing.Point(629, 3);
-            this.btnAccountSearch.Name = "btnAccountSearch";
-            this.btnAccountSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnAccountSearch.TabIndex = 4;
-            this.btnAccountSearch.Text = "查詢";
-            this.btnAccountSearch.UseVisualStyleBackColor = true;
-            this.btnAccountSearch.Click += new System.EventHandler(this.btnAccountSearch_Click);
-            // 
-            // ckxAccountShowDisabled
-            // 
-            this.ckxAccountShowDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ckxAccountShowDisabled.AutoSize = true;
-            this.ckxAccountShowDisabled.Location = new System.Drawing.Point(527, 10);
-            this.ckxAccountShowDisabled.Name = "ckxAccountShowDisabled";
-            this.ckxAccountShowDisabled.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ckxAccountShowDisabled.Size = new System.Drawing.Size(96, 16);
-            this.ckxAccountShowDisabled.TabIndex = 5;
-            this.ckxAccountShowDisabled.Text = "顯示失效帳號";
-            this.ckxAccountShowDisabled.UseVisualStyleBackColor = true;
-            // 
             // frmHR360_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -940,6 +941,8 @@
             this.flowLayoutPanel5.ResumeLayout(false);
             this.flowLayoutPanel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvAccountSearch_Result)).EndInit();
+            this.flowLayoutPanel9.ResumeLayout(false);
+            this.flowLayoutPanel9.PerformLayout();
             this.tbpCompanyAnnouncement.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel7.ResumeLayout(false);
@@ -949,8 +952,6 @@
             this.flpCompanyAnnouncementID.ResumeLayout(false);
             this.flpCompanyAnnouncementID.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvCompanyAnnouncementSearch_Result)).EndInit();
-            this.flowLayoutPanel9.ResumeLayout(false);
-            this.flowLayoutPanel9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -999,7 +1000,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnAccountClearERPID;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
-        private System.Windows.Forms.TextBox txtAvatarImageFilePath;
+        private System.Windows.Forms.TextBox txtAccountAvatarImageFilePath;
         private System.Windows.Forms.Button btnAvatarImageFilePathSearch;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TabPage tbpCompanyAnnouncement;

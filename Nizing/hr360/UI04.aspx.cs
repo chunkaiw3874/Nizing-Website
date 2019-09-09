@@ -27,7 +27,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
     List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
     DataTable userInfo = new DataTable();
     string currentHREmployeeID = "0142"; //current //HR code;
-    List<string> openExceptionList = new List<string>();    //Exception list
+    List<string> exceptionList111 = new List<string>();    //三天內請假錯誤例外清單
+    List<string> exceptionList202 = new List<string>(); //剩餘假期不足錯誤例外清單
 
     public class dayOffInfo
     {
@@ -44,11 +45,12 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "0015";    //test only to avoid error on loading, delete after trial            
-        //Session["erp_id"] = "0015";        
+        //Session["user_id"] = "0112";    //test only to avoid error on loading, delete after trial            
+        //Session["erp_id"] = "0112";        
 
         //only use when opening check exception for certain persion
-        //openExceptionList.Add("0109");
+        //exceptionList111.Add("0012");
+        //exceptionList202.Add("0112");
 
         if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
         {
@@ -247,7 +249,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
         if (Session["erp_id"].ToString() != "0067" && DateTime.ParseExact(txtDatePickerStart.Text, "yyyy/MM/dd", new CultureInfo("zh-TW")) < DateTime.Today.AddDays(-2))    //測試錯誤 111.請假日期不得小於三日前
         {
-            if (openExceptionList.Contains(Session["erp_id"].ToString().Trim()))
+            if (exceptionList111.Contains(Session["erp_id"].ToString().Trim()))
             {
                 test111 = true;
             }
@@ -256,11 +258,13 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 errorList.Add(errorCode(111, "請假日期不得早於" + DateTime.Today.AddDays(-2).ToString("d", new CultureInfo("zh-TW"))));
                 test111 = false;
             }
+            //test111 = true;
         }
         else
         {
             test111 = true;
         }
+
         if (test101 && test102 && test103 && test104 && test108 && test110 && test111)  //PASS ALL INPUT TESTS (except for functional substitute), NEED TO START CALCULATING FOR OTHER ERRORS
         {
             //DateTime[] days = GetDatesBetween(dayOffStartTime.Date, dayOffEndTime.Date);
@@ -624,7 +628,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 }
                 else if (ddlDayOffType.SelectedValue == "03" && !IsDataTableEmpty(dtDayOffDaysInfo))  //特休(03)用此判斷 依據請假日期會有2種可能
                 {
-                    if (openExceptionList.Contains(Session["erp_id"].ToString().Trim()))
+                    if (exceptionList202.Contains(Session["erp_id"].ToString().Trim()))
                     {
 
                     }
@@ -866,7 +870,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     protected void CheckRemainingDayOffTime()
     {
         //顯示選擇假別剩餘時數            
-        //未選擇、婚假、喪假、陪產假、產檢假、產假、安胎假 並非每年都有的假，所以忽略假期天數的限制，由人事檢查
+        //未選擇、婚假、喪假、陪產假、產檢假、產假、安胎假、颱風假 並非每年都有的假，所以忽略假期天數的限制，由人事檢查
         //2017.09.04 將特休也排到不須檢查剩餘量，因為新制(每年分成兩分，有不同天數的假)計算很困難
         //Error 202 條件
         if (ddlDayOffType.SelectedValue.ToString() == "0"
@@ -875,6 +879,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             || ddlDayOffType.SelectedValue.ToString() == "07"
             || ddlDayOffType.SelectedValue.ToString() == "08"
             || ddlDayOffType.SelectedValue.ToString() == "09"
+            || ddlDayOffType.SelectedValue.ToString() == "11"
             || ddlDayOffType.SelectedValue.ToString() == "12"
             || ddlDayOffType.SelectedValue.ToString() == "14"
             || ddlDayOffType.SelectedValue.ToString() == "15"

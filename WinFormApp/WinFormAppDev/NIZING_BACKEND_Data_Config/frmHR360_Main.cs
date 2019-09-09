@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Principal;
 using System.Net;
+using System.Security.Cryptography;
+using System.IO;
 
 namespace NIZING_BACKEND_Data_Config
 {
@@ -153,7 +155,7 @@ namespace NIZING_BACKEND_Data_Config
                     txtAccountDisabledDate.Text = string.Empty;
                     ckxAccountDisable.Enabled = true;
                     ckxAccountDisable.Checked = false;
-                    btnAvatarImageFilePathSearch.Enabled = true;
+                    btnAvatarImageFilePathSearch.Enabled = false;
                     gvAccountSearch_Result.Enabled = false;
                     btnLogout.Enabled = false;
                 }
@@ -186,7 +188,7 @@ namespace NIZING_BACKEND_Data_Config
                     txtAccountLineId.Enabled = true;
                     txtAccountDisabledDate.Enabled = false;
                     ckxAccountDisable.Enabled = true;
-                    btnAvatarImageFilePathSearch.Enabled = true;
+                    btnAvatarImageFilePathSearch.Enabled = false;
                     gvAccountSearch_Result.Enabled = false;
                     btnLogout.Enabled = false;
                 }
@@ -403,6 +405,8 @@ namespace NIZING_BACKEND_Data_Config
                 //        clbAdminRights.SetItemCheckState(i - 1, CheckState.Checked);
                 //    }
                 //}
+                txtAccountId.Text = gvAccountSearch_Result.SelectedRows[0].Cells["ID"].Value.ToString();
+
             }
             else if (gv.Name == "gvCompanyAnnouncementSearch_Result")
             {
@@ -411,6 +415,50 @@ namespace NIZING_BACKEND_Data_Config
                 ckxCompanyAnnouncementOnTop.Checked = (bool)gv.SelectedRows[0].Cells["ON_TOP"].Value;
                 txtCompanyAnnouncementBody.Text = gv.SelectedRows[0].Cells["BODY"].Value.ToString();
             }
+        }
+
+        public string Encrypt(string clearText)
+        {
+            string EncryptionKey = "IMTHEBOSS999";
+            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(clearBytes, 0, clearBytes.Length);
+                        cs.Close();
+                    }
+                    clearText = Convert.ToBase64String(ms.ToArray());
+                }
+            }
+            return clearText;
+        }
+
+        public string Decrypt(string cipherText)
+        {
+            string EncryptionKey = "IMTHEBOSS999";
+            byte[] cipherBytes = Convert.FromBase64String(cipherText);
+            using (Aes encryptor = Aes.Create())
+            {
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(cipherBytes, 0, cipherBytes.Length);
+                        cs.Close();
+                    }
+                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
+                }
+            }
+            return cipherText;
         }
         #endregion        
 
@@ -475,20 +523,29 @@ namespace NIZING_BACKEND_Data_Config
 
         private void btnAccountSearch_Click(object sender, EventArgs e)
         {
+            ClearContent();
             accountTabMode = FunctionMode.SEARCH;
             LoadControlStatus(currentTabPage);
+            string condition = "";
+            if (!ckxAccountShowDisabled.Checked)
+            {
+                condition = " AND [DISABLED]='0'";
+            }
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
                 string query = "SELECT [ID],[ERP_ID],[NAME],[EMAIL],[LINE_ID],[DISABLED],[DISABLEDDATE],[SUPER_USER]"
                             + " FROM HR360_BI01_A"
                             + " WHERE [ID]<>'ADMIN'"
+                            + condition
                             + " ORDER BY [ID]";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
+                searchFormLoaded = false;
                 gvAccountSearch_Result.DataSource = dt;
+                searchFormLoaded = true;
                 
             }
             if (gvAccountSearch_Result.Rows.Count > 0)
@@ -500,6 +557,7 @@ namespace NIZING_BACKEND_Data_Config
                 accountTabMode = FunctionMode.NORECORD;
             }
             LoadControlStatus(currentTabPage);
+            
             //var frm = new frmHR360_AccountSearch();
             //frm.Location = new Point(this.Location.X + (this.Width / 2), this.Location.Y + (this.Height / 4));
             //frm.StartPosition = FormStartPosition.Manual;
@@ -555,29 +613,50 @@ namespace NIZING_BACKEND_Data_Config
                 ofd.Filter = "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|All files (*.*)|*.*";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    txtAvatarImageFilePath.Text = ofd.FileName;
+                    txtAccountAvatarImageFilePath.Text = ofd.FileName;
                 }
             }            
         }
 
         private void btnAccountConfirm_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrWhiteSpace(txtAvatarImageFilePath.Text))
+            if (accountTabMode == FunctionMode.ADD)
             {
-                //AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
-                //WindowsIdentity identity = new WindowsIdentity("nizing\\mis", "@WSX3edc&UJM8ik,@WSX");
-                //WindowsImpersonationContext context = identity.Impersonate();
-                ////using(new Impersonator)
-                //System.IO.File.Copy(txtAvatarImageFilePath.Text, "\\192.168.10.222\\Web\\Nizing\\hr360\\image\\avatar.jpg", true);
-                //context.Undo();
-                //txtAccountManagementMemo.Text = "file saved";
-                //WebClient client = new WebClient();
-                //client.Credentials = CredentialCache.DefaultNetworkCredentials;
-                //client.UploadFile("file:////192.168.10.222//Web//Nizing//hr360//image//avatar.jpg", "POST", txtAvatarImageFilePath.Text);
-                //client.Dispose();
-
-
+                //新增模式下執行確認的動作
             }
+            else if (accountTabMode == FunctionMode.EDIT)
+            {
+                //編輯模式下執行確認的動作
+            }
+
+            if (isGridViewEmpty(gvAccountSearch_Result))
+            {
+                accountTabMode = FunctionMode.NORECORD;
+                LoadControlStatus(currentTabPage);
+            }
+            else
+            {
+                accountTabMode = FunctionMode.HASRECORD;
+                LoadControlStatus(currentTabPage);
+            }
+            //if (!String.IsNullOrWhiteSpace(txtAccountAvatarImageFilePath.Text))
+            //{
+            //    //AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
+            //    //WindowsIdentity identity = new WindowsIdentity("nizing\\mis", "@WSX3edc&UJM8ik,@WSX");
+            //    //WindowsImpersonationContext context = identity.Impersonate();
+            //    ////using(new Impersonator)
+            //    //System.IO.File.Copy(txtAccountAvatarImageFilePath.Text, "\\192.168.10.222\\Web\\Nizing\\hr360\\image\\avatar.jpg", true);
+            //    //context.Undo();
+            //    //txtAccountManagementMemo.Text = "file saved";
+            //    WebClient client = new WebClient();
+            //    client.Credentials = CredentialCache.DefaultNetworkCredentials;
+            //    client.UploadFile("\\\\192.168.10.222\\Web\\Nizing\\hr360\\image\\employee_profile\\avatar.jpg", txtAccountAvatarImageFilePath.Text);
+            //    client.Dispose();
+            //}
+            //else
+            //{
+            //    txtAccountManagementMemo.Text = "no image saved";
+            //}
         }
 
         private void btnAccountCancel_Click(object sender, EventArgs e)
@@ -594,44 +673,67 @@ namespace NIZING_BACKEND_Data_Config
             }
         }
 
+        private void gvAccountSearch_Result_SelectionChanged(object sender, EventArgs e)
+        {
+            if (searchFormLoaded)
+            {
+                displayGridviewSearch_ResultInControls(gvAccountSearch_Result);
+            }
+        }
+
+        private void ClearContent()
+        {
+            txtAccountId.Text = "";
+            ckxAccountSuperUser.Checked = false;
+            txtAccountPassword.Text = "";
+            txtAccountConfirmPassword.Text = "";
+            txtAccountERPID.Text = "";
+            txtAccountName.Text = "";
+            txtAccountEmail.Text = "";
+            txtAccountLineId.Text = "";
+            txtAccountDisabledDate.Text = "";
+            ckxAccountDisable.Checked = false;
+            txtAccountAvatarImageFilePath.Text = "";
+        }
+
         #endregion
 
 
         #region method for search form
-        void accountSearchForm_loadButton()
-        {
-            if (isGridViewEmpty(gvAccountSearch_Result))
-            {
-                accountTabMode = FunctionMode.NORECORD;
-                LoadControlStatus(currentTabPage);
-            }
-            else
-            {
-                accountTabMode = FunctionMode.HASRECORD;
-                LoadControlStatus(currentTabPage);
-            }
-        }
-        void accountSearchForm_loadGridview(DataTable dt)
-        {
-            searchFormLoaded = false;
-            gvAccountSearch_Result.DataSource = dt;
-            searchFormLoaded = true;
-            if (!isGridViewEmpty(gvAccountSearch_Result))
-            {
-                gvAccountSearch_Result.Rows[0].Selected = true;
-                displayGridviewSearch_ResultInControls(gvAccountSearch_Result);
-            }
-            else
-            {
-                txtAccountId.Text = "";
-                txtAccountPassword.Text = "";
-                txtAccountConfirmPassword.Text = "";
-            }
-            foreach (DataGridViewColumn col in gvAccountSearch_Result.Columns)
-            {
-                col.SortMode = DataGridViewColumnSortMode.Automatic;
-            }
-        }
+        //void accountSearchForm_loadButton()
+        //{
+        //    if (isGridViewEmpty(gvAccountSearch_Result))
+        //    {
+        //        accountTabMode = FunctionMode.NORECORD;
+        //        LoadControlStatus(currentTabPage);
+        //    }
+        //    else
+        //    {
+        //        accountTabMode = FunctionMode.HASRECORD;
+        //        LoadControlStatus(currentTabPage);
+        //    }
+        //}
+        //void accountSearchForm_loadGridview(DataTable dt)
+        //{
+        //    searchFormLoaded = false;
+        //    gvAccountSearch_Result.DataSource = dt;
+        //    searchFormLoaded = true;
+        //    if (!isGridViewEmpty(gvAccountSearch_Result))
+        //    {
+        //        gvAccountSearch_Result.Rows[0].Selected = true;
+        //        displayGridviewSearch_ResultInControls(gvAccountSearch_Result);
+        //    }
+        //    else
+        //    {
+        //        txtAccountId.Text = "";
+        //        txtAccountPassword.Text = "";
+        //        txtAccountConfirmPassword.Text = "";
+        //    }
+        //    foreach (DataGridViewColumn col in gvAccountSearch_Result.Columns)
+        //    {
+        //        col.SortMode = DataGridViewColumnSortMode.Automatic;
+        //    }
+        //}
         void accountSearchFormERPID_loadButton()
         {
             accountTabMode = tabModeTempStorage;
@@ -866,6 +968,8 @@ namespace NIZING_BACKEND_Data_Config
         }
         
         #endregion
+
+
 
 
 
