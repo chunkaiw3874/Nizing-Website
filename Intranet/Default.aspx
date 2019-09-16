@@ -27,6 +27,8 @@
                 <li>
                     <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/PC-2.png" PostBackUrl="~/nizing_intranet/ProductionControlReport.aspx" /></li>
                 <li>
+                    <asp:ImageButton ID="ImageButton17" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/PC-4.png" Width="150px" Height="30px" PostBackUrl="~/nizing_intranet/PC04.aspx" /></li>
+                <li>
                     <a href="/nizing_intranet/PC03.aspx">RSGE/3122預計出貨報表</a>
                 </li>
             </ul>

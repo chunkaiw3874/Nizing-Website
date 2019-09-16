@@ -40,8 +40,8 @@ public partial class main : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //test area
-        //Session["erp_id"] = "0004";
-        //Session["user_id"] = "0004";
+        //Session["erp_id"] = "0133";
+        //Session["user_id"] = "0133";
 
         //if(false)
         if (!((masterPage_HR360_Master)this.Master.Master).CheckAuthentication())        
@@ -112,7 +112,25 @@ public partial class main : System.Web.UI.Page
                         string[] tempStringArray;
                         string[] stringSeparators = new string[] { "," };
                         tempStringArray = tempString.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
-                        doubleFirstPartDayOff = Convert.ToDouble(tempStringArray[0]);
+
+                        query = "SELECT TK.TK013"
+                            + " FROM NZ.dbo.PALTK TK"
+                            + " WHERE TK.TK001=@ID"
+                            + " AND TK.TK002=YEAR(GETDATE())";
+                        cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                        double previousCycleDayOff = Convert.ToDouble(cmd.ExecuteScalar());
+                        if (Session["erp_id"].ToString() == "0010")
+                        {
+                            previousCycleDayOff = previousCycleDayOff / 8.5;
+                        }
+                        else
+                        {
+                            previousCycleDayOff = previousCycleDayOff / 8.0;
+                        }
+                        
+                        
+                        doubleFirstPartDayOff = Convert.ToDouble(tempStringArray[0]) + previousCycleDayOff;
                         doubleSecondPartDayOff = Convert.ToDouble(tempStringArray[1]);
                     }
                 }                

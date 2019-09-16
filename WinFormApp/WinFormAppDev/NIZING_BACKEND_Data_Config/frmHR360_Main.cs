@@ -614,6 +614,7 @@ namespace NIZING_BACKEND_Data_Config
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     txtAccountAvatarImageFilePath.Text = ofd.FileName;
+
                 }
             }            
         }
