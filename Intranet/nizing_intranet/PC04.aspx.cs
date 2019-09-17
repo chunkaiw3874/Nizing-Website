@@ -69,6 +69,34 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
+
+            //Remove duplicate rows based conditions that the row has REPEATED ID and YEAR is null
+            if (dt.Rows.Count > 0)
+            {
+                List<string> lst = new List<string>();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    lst.Add(dt.Rows[i]["ID"].ToString());
+                }
+                var duplicates = lst.GroupBy(x => x)
+                                    .Where(g => g.Count() > 1)
+                                    .Select(y => y.Key)
+                                    .ToList();
+                List<int> rowsToDelete = new List<int>();
+                foreach (string s in duplicates)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        if (row["ID"].ToString() == s && row["yr"].ToString() == "N/A")
+                        {
+                            //finds the row that has repeated ID and a NULL yr
+                            row.Delete();
+                        }
+                    }
+                    dt.AcceptChanges();
+                }
+            }
+
             gvResult.DataSource = dt;
             gvResult.DataBind();
         }
@@ -114,10 +142,6 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
                     + " ,COALESCE(mn,'N/A') 'mn'"
                     + " ,COALESCE(saleAmount,0) 'saleAmount'"
                     + " FROM SALESTABLE"
-                    + " WHERE"
-                    + " (yr IS NULL AND mn IS NULL AND saleAmount IS NULL)"
-                    + " OR"
-                    + " (yr IS NOT NULL AND mn IS NOT NULL)"
                     + " ) AS SRC"
                     + " PIVOT"
                     + " ("
