@@ -393,19 +393,30 @@ namespace NIZING_BACKEND_Data_Config
         {
             if (gv.Name == "gvAccountSearch_Result")
             {
-                //txtAccountId.Text = gvAccountSearch_Result.SelectedRows[0].Cells["LOGIN_ID"].Value.ToString();
-                //for (int i = 1; i < gvAccountSearch_Result.Columns.Count; i++)
-                //{
-                //    if (gvAccountSearch_Result.SelectedRows[0].Cells[i].Value.ToString() == "0")
-                //    {
-                //        clbAdminRights.SetItemCheckState(i - 1, CheckState.Unchecked);
-                //    }
-                //    else
-                //    {
-                //        clbAdminRights.SetItemCheckState(i - 1, CheckState.Checked);
-                //    }
-                //}
                 txtAccountId.Text = gvAccountSearch_Result.SelectedRows[0].Cells["ID"].Value.ToString();
+                if ((bool)gvAccountSearch_Result.SelectedRows[0].Cells["SUPER_USER"].Value == true)
+                {
+                    ckxAccountSuperUser.Checked = true;
+                }
+                else
+                {
+                    ckxAccountSuperUser.Checked = false;
+                }
+                txtAccountERPID.Text = gvAccountSearch_Result.SelectedRows[0].Cells["ERP_ID"].Value.ToString();
+                txtAccountName.Text = gvAccountSearch_Result.SelectedRows[0].Cells["NAME"].Value.ToString();
+                txtAccountEmail.Text = gvAccountSearch_Result.SelectedRows[0].Cells["EMAIL"].Value.ToString();
+                txtAccountLineId.Text = gvAccountSearch_Result.SelectedRows[0].Cells["LINE_ID"].Value.ToString();
+                if ((bool)gvAccountSearch_Result.SelectedRows[0].Cells["DISABLED"].Value == true)
+                {
+                    ckxAccountDisable.Checked = true;
+                }
+                else
+                {
+                    ckxAccountDisable.Checked = false;
+                }
+                txtAccountDisabledDate.Text = gvAccountSearch_Result.SelectedRows[0].Cells["DISABLEDDATE"].Value.ToString();
+
+                txtAccountManagementMemo.Text = Decrypt(gvAccountSearch_Result.SelectedRows[0].Cells["PASSWORD"].Value.ToString());
 
             }
             else if (gv.Name == "gvCompanyAnnouncementSearch_Result")
@@ -534,7 +545,7 @@ namespace NIZING_BACKEND_Data_Config
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
-                string query = "SELECT [ID],[ERP_ID],[NAME],[EMAIL],[LINE_ID],[DISABLED],[DISABLEDDATE],[SUPER_USER]"
+                string query = "SELECT [ID],[ERP_ID],[NAME],[EMAIL],[LINE_ID],[DISABLED],[DISABLEDDATE],[SUPER_USER],[PASSWORD]"
                             + " FROM HR360_BI01_A"
                             + " WHERE [ID]<>'ADMIN'"
                             + condition
@@ -558,13 +569,6 @@ namespace NIZING_BACKEND_Data_Config
             }
             LoadControlStatus(currentTabPage);
             
-            //var frm = new frmHR360_AccountSearch();
-            //frm.Location = new Point(this.Location.X + (this.Width / 2), this.Location.Y + (this.Height / 4));
-            //frm.StartPosition = FormStartPosition.Manual;
-            //frm.FormClosing += delegate { frm.Hide(); };
-            //frm.loadButtonEvent += new searchForm_Close(accountSearchForm_loadButton);
-            //frm.loadGridviewEvent += new searchForm_Search(accountSearchForm_loadGridview);
-            //frm.Show();
         }
 
         private void btnAccountSearchERPID_Click(object sender, EventArgs e)

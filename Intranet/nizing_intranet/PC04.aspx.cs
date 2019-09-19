@@ -203,6 +203,7 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
                 if (currentInv < safeInv)
                 {
                     ((Label)e.Row.FindControl("Label2")).ForeColor = c;
+                    ((Label)e.Row.FindControl("Label2")).CssClass = "bold";
                 }
                 else
                 {
@@ -229,7 +230,6 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
             double oct = 0;
             double nov = 0;
             double dec = 0;
-            double monthlySum = 0;
 
             if (!double.TryParse(((Label)e.Row.FindControl("Label4")).Text, out jan))
             {
@@ -285,6 +285,29 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
     }
     protected void gvResult_RowCreated(object sender, GridViewRowEventArgs e)
     {
+        if (e.Row.RowType == DataControlRowType.Header)
+        {
+            GridView HeaderGrid = (GridView)sender;
+            GridViewRow HeaderGridRow = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Insert);
+            TableCell HeaderCell = new TableCell();
+            HeaderCell.Text = "";
+            HeaderCell.ColumnSpan = 4;
+            HeaderCell.CssClass = "stackedHeader-1";
+            HeaderGridRow.Cells.Add(HeaderCell);
+
+            HeaderCell = new TableCell();
+            HeaderCell.Text = "銷售月份";
+            HeaderCell.ColumnSpan = 12;
+            HeaderCell.CssClass = "stackedHeader-2";
+            HeaderGridRow.Cells.Add(HeaderCell);
+
+            HeaderCell = new TableCell();
+            HeaderCell.Text = "";
+            HeaderCell.ColumnSpan = 1;
+            HeaderCell.CssClass = "stackedHeader-2";
+            HeaderGridRow.Cells.Add(HeaderCell);
+            gvResult.Controls[0].Controls.AddAt(0, HeaderGridRow);
+        }
         if (e.Row.RowType == DataControlRowType.Footer)
         {
             GridviewAddFooter("小計", e);
@@ -314,14 +337,7 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
                     }
                 }
 
-                //if (i == 3)
-                //{
-                //_gd.FooterRow.Cells[i].Text = sum.ToString("C", new CultureInfo("zh-TW"));
-                //}
-                //else
-                //{
                 _gd.FooterRow.Cells[i].Text = sum.ToString("N0");
-                //}
             }
         }
     }

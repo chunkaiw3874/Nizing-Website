@@ -1,6 +1,52 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/masterPage/MasterPage.master" AutoEventWireup="true" CodeFile="PC04.aspx.cs" Inherits="nizing_intranet_PC04" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style>
+    .grdResultWithFooter{
+    min-width:100%;
+    }
+    .grdResultWithFooter tr th{
+        padding:4px;
+        background-color:#29ABE2;
+        color:#FFFFFF;
+        border:solid 1px #ffffff;
+    }
+    .grdResultWithFooter tr th:nth-child(n+5){
+        background-color:#9400D3;
+    }
+    .grdResultWithFooter tr td{
+        padding:4px;
+        background-color:#ffffff;
+        color:#000000;
+        text-align:center;
+        border:solid 1px #ffffff;
+    }
+    .grdResultWithFooter tr:nth-child(2n) td{
+        padding:4px;
+        background-color:#c3e8f4;
+        color:#000000;    
+        text-align:center;
+        border:solid 1px #ffffff;
+    }
+        .grdResultWithFooter tr td .bold{
+        font-weight:bold;
+    }
+    .grdResultWithFooter tr:last-child td{
+        padding:4px;
+        background-color:#29ABE2;
+        color:#FFFFFF;    
+        text-align:center;
+        font-weight:bold;
+        border:solid 1px #ffffff;
+    }
+    .grdResultWithFooter .stackedHeader-1{
+        background-color:#29ABE2;
+    }
+    .grdResultWithFooter .stackedHeader-2{
+        background-color:#9400D3;
+        color:#ffffff;
+    }
+        </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>    
