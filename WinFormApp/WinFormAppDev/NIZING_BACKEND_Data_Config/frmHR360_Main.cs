@@ -79,6 +79,20 @@ namespace NIZING_BACKEND_Data_Config
                     {
                         errorList.Add("密碼與確認密碼不符");
                     }
+                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                    {
+                        conn.Open();
+                        string query = "SELECT [ID]"
+                                    +" FROM HR360_BI01_A"
+                                    +" WHERE [ID]=@ID";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@ID", txtAccountId.Text.Trim());
+                        object result = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            errorList.Add("此帳號已被使用，請選擇其他帳號");
+                        }
+                    }
                 }
                 else if (mode == FunctionMode.EDIT)
                 {
@@ -414,9 +428,7 @@ namespace NIZING_BACKEND_Data_Config
                 {
                     ckxAccountDisable.Checked = false;
                 }
-                txtAccountDisabledDate.Text = gvAccountSearch_Result.SelectedRows[0].Cells["DISABLEDDATE"].Value.ToString();
-
-                txtAccountManagementMemo.Text = Decrypt(gvAccountSearch_Result.SelectedRows[0].Cells["PASSWORD"].Value.ToString());
+                txtAccountDisabledDate.Text = gvAccountSearch_Result.SelectedRows[0].Cells["DISABLEDDATE"].Value.ToString();               
 
             }
             else if (gv.Name == "gvCompanyAnnouncementSearch_Result")
@@ -498,35 +510,33 @@ namespace NIZING_BACKEND_Data_Config
                     conn.Open();   
                     string query = "SELECT [ID], [NO_DELETE] FROM [HR360_BI01_A] WHERE [ID] = @ID";
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@ID", txtAccountId.Text.ToUpper().Trim());
+                    cmd.Parameters.AddWithValue("@ID", txtAccountId.Text.Trim());
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     da.Fill(dt);
                 }
-                if (dt.Rows[0]["NO_DELETE"].ToString() == "1")
+                if (dt.Rows.Count > 0)
                 {
-                    MessageBox.Show("不可刪除此帳號", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                    if (dt.Rows[0]["NO_DELETE"].ToString() == "1")
                     {
-                        conn.Open();
-                        string query = "DELETE FROM [HR360_BI01_A] WHERE [ID] = @ID";
-                        SqlCommand cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@ID", txtAccountId.Text.ToUpper().Trim());
-                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("不可刪除此帳號", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    gvAccountSearch_Result.DataSource = null;
-                    txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":" + txtAccountId.Text.Trim() +"資料已刪除" + Environment.NewLine;
-
-                    searchFormLoaded = false;
-                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                    else
                     {
-                        conn.Open();
-                        string query = "DELETE FROM [HR360_BI01_A] WHERE [ID] = @ID";
-                        SqlCommand cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@ID", txtAccountId.Text.ToUpper().Trim());
-                        cmd.ExecuteNonQuery();
+                        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                        {
+                            conn.Open();
+                            string query = "DELETE FROM [HR360_BI01_A] WHERE [ID] = @ID";
+                            SqlCommand cmd = new SqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@ID", txtAccountId.Text.Trim());
+                            cmd.ExecuteNonQuery();
+                        }
+                        txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":" + txtAccountId.Text.Trim() + "資料已刪除" + Environment.NewLine;
+                        searchFormLoaded = false;
+                        gvAccountSearch_Result.DataSource = null;
+                        searchFormLoaded = true;
+                        btnAccountSearch_Click(sender, e);
+                        
+
                     }
                 }
             }
@@ -625,13 +635,60 @@ namespace NIZING_BACKEND_Data_Config
 
         private void btnAccountConfirm_Click(object sender, EventArgs e)
         {
+            List<string> errorMsg = new List<string>();
             if (accountTabMode == FunctionMode.ADD)
             {
                 //新增模式下執行確認的動作
+                errorMsg = CheckConfirmError(FunctionMode.ADD);
+                if (errorMsg.Count == 0)
+                {
+                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                    {
+                        conn.Open();
+                        string query = "INSERT INTO HR360_BI01_A"
+                                    + " VALUES (GETDATE(),@CREATOR,GETDATE(),@MODIFIER,@ID,@ERP_ID,@NAME,@PASSWORD,@EMAIL,@LINE_ID,@NO_DELETE,@DISABLED,@DISABLEDDATE,@SUPER_USER)";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@CREATOR", UserName);
+                        cmd.Parameters.AddWithValue("@MODIFIER", UserName);
+                        cmd.Parameters.AddWithValue("@ID", txtAccountId.Text.Trim());
+                        cmd.Parameters.AddWithValue("@ERP_ID", txtAccountERPID.Text.Trim());
+                        cmd.Parameters.AddWithValue("@NAME", txtAccountName.Text.Trim());
+                        cmd.Parameters.AddWithValue("@PASSWORD", Encrypt(txtAccountPassword.Text.Trim()));
+                        cmd.Parameters.AddWithValue("@EMAIL", txtAccountEmail.Text.Trim());
+                        cmd.Parameters.AddWithValue("@LINE_ID", txtAccountLineId.Text.Trim());
+                        cmd.Parameters.AddWithValue("@NO_DELETE", "0");
+                        cmd.Parameters.AddWithValue("@DISABLED", Convert.ToInt32(ckxAccountDisable.Checked).ToString());
+                        cmd.Parameters.AddWithValue("@DISABLEDDATE", txtAccountDisabledDate.Text.Trim());
+                        cmd.Parameters.AddWithValue("@SUPER_USER", Convert.ToInt32(ckxAccountSuperUser.Checked).ToString());
+                        cmd.ExecuteNonQuery();
+                    }
+                    txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":新增使用者" + txtAccountId.Text.Trim() + "完成" + Environment.NewLine;
+                }
+                else
+                {
+                    txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":";
+                    foreach (string s in errorMsg)
+                    {
+                        txtAccountManagementMemo.Text += s + Environment.NewLine;
+                    }
+                }
             }
             else if (accountTabMode == FunctionMode.EDIT)
             {
                 //編輯模式下執行確認的動作
+                errorMsg = CheckConfirmError(FunctionMode.EDIT);
+                if (errorMsg.Count == 0)
+                {
+
+                }
+                else
+                {
+                    txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":";
+                    foreach (string s in errorMsg)
+                    {
+                        txtAccountManagementMemo.Text += s + Environment.NewLine;
+                    }
+                }
             }
 
             if (isGridViewEmpty(gvAccountSearch_Result))
