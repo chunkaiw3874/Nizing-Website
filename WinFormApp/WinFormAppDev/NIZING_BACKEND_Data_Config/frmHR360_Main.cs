@@ -608,7 +608,7 @@ namespace NIZING_BACKEND_Data_Config
         {
             if (ckxAccountDisable.Checked == true)
             {
-                txtAccountDisabledDate.Text = DateTime.Today.Year.ToString() + "/" + DateTime.Today.Month.ToString() + "/" + DateTime.Today.Day;
+                txtAccountDisabledDate.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             }
             else
             {
@@ -661,6 +661,7 @@ namespace NIZING_BACKEND_Data_Config
                         cmd.ExecuteNonQuery();
                     }
                     txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":新增使用者" + txtAccountId.Text.Trim() + "完成" + Environment.NewLine;
+                    btnAccountSearch_Click(sender, e);
                 }
                 else
                 {
@@ -677,7 +678,38 @@ namespace NIZING_BACKEND_Data_Config
                 errorMsg = CheckConfirmError(FunctionMode.EDIT);
                 if (errorMsg.Count == 0)
                 {
+                    string passwordChange = "";
 
+                    if (!string.IsNullOrWhiteSpace(txtAccountPassword.Text))
+                    {
+                        passwordChange = " ,PASSWORD=@PASSWORD";
+                    }
+                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                    {
+                        conn.Open();
+                        string query = "UPDATE HR360_BI01_A"
+                                    + " SET MODIFIEDDATE=GETDATE()"
+                                    + " ,MODIFIER=@MODIFIER"
+                                    + " ,SUPER_USER=@SUPER_USER"
+                                    + " ,DISABLED=@DISABLED"
+                                    + " ,DISABLEDDATE=@DISABLEDDATE"
+                                    + " ,EMAIL=@EMAIL"
+                                    + " ,LINE_ID=@LINE_ID"
+                                    + passwordChange
+                                    + " WHERE [ID]=@ID";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@ID", txtAccountId.Text.Trim());
+                        cmd.Parameters.AddWithValue("@MODIFIER", UserName);
+                        cmd.Parameters.AddWithValue("@PASSWORD", Encrypt(txtAccountPassword.Text.Trim()));
+                        cmd.Parameters.AddWithValue("@EMAIL", txtAccountEmail.Text.Trim());
+                        cmd.Parameters.AddWithValue("@LINE_ID", txtAccountLineId.Text.Trim());
+                        cmd.Parameters.AddWithValue("@DISABLED", Convert.ToInt32(ckxAccountDisable.Checked).ToString());
+                        cmd.Parameters.AddWithValue("@DISABLEDDATE", txtAccountDisabledDate.Text.Trim());
+                        cmd.Parameters.AddWithValue("@SUPER_USER", Convert.ToInt32(ckxAccountSuperUser.Checked).ToString());
+                        cmd.ExecuteNonQuery();
+                    }
+                    txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":編輯使用者" + txtAccountId.Text.Trim() + "完成" + Environment.NewLine;
+                    btnAccountSearch_Click(sender, e);
                 }
                 else
                 {
