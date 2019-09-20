@@ -40,7 +40,7 @@
     <table>
         <tr>
             <td>Nominal Temperature:</td>
-            <td>-40°C~105°C</td>
+            <td>-40°C~85°C</td>
         </tr>
         <tr>
             <td>Conductor:</td>

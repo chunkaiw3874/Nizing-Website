@@ -40,7 +40,7 @@
     <table>
         <tr>
             <td>溫度範圍:</td>
-            <td>-40°C~105°C</td>
+            <td>-40°C~85°C</td>
         </tr>
         <tr>
             <td>導體:</td>

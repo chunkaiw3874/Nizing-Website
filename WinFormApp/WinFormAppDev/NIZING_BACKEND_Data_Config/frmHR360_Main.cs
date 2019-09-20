@@ -535,8 +535,6 @@ namespace NIZING_BACKEND_Data_Config
                         gvAccountSearch_Result.DataSource = null;
                         searchFormLoaded = true;
                         btnAccountSearch_Click(sender, e);
-                        
-
                     }
                 }
             }
