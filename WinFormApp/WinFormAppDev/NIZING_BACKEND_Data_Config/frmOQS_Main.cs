@@ -82,10 +82,12 @@ namespace NIZING_BACKEND_Data_Config
             
             #endregion
         }
+
         private void frmOQS_Main_Shown(object sender, EventArgs e)
         {
             _frmLogin.LoadCbxFunctionList(this);
         }
+
         #region Frame Method and Button Behavior
         private void btnLogout_Click(object sender, EventArgs e)
         {
@@ -94,6 +96,11 @@ namespace NIZING_BACKEND_Data_Config
             frm.StartPosition = FormStartPosition.Manual;
             frm.Show();
             this.Hide();
+        }
+
+        private void cbxFunctionList_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            _frmLogin.ChangeForm(cbxFunctionList.SelectedValue.ToString());
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -661,6 +668,8 @@ namespace NIZING_BACKEND_Data_Config
             this.Enabled = true;
         }
         #endregion
+
+
     }
 
     public static class ExtensionMethods

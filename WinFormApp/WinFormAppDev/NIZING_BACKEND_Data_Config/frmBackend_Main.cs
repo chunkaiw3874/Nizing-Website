@@ -66,6 +66,8 @@ namespace NIZING_BACKEND_Data_Config
             _frmLogin.LoadCbxFunctionList(this);
         }
 
+
+
         #region Frame Method and Button Behavior
         private void btnLogout_Click(object sender, EventArgs e)
         {
@@ -74,7 +76,12 @@ namespace NIZING_BACKEND_Data_Config
             frm.StartPosition = FormStartPosition.Manual;
             frm.Show();
             this.Hide();
-        }        
+        }
+
+        private void cbxFunctionList_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            _frmLogin.ChangeForm(cbxFunctionList.SelectedValue.ToString());
+        }
 
         private List<string> GetSelectedItem(CheckedListBox clb)
         {
@@ -302,7 +309,7 @@ namespace NIZING_BACKEND_Data_Config
             {
                 DataTable dtFunctionList = functionListAdapter.GetData();
                 List<string> authorizationList = GetSelectedItem(clbAdminRights);
-                string accountId = txtAccountId.Text.ToUpper().Trim();
+                string accountId = txtAccountId.Text.Trim();
                 string password = txtAccountPassword.Text;
                 if (accountTabMode == FunctionMode.ADD)
                 {
@@ -388,12 +395,14 @@ namespace NIZING_BACKEND_Data_Config
                     dsBackendLoginAccountTableAdapters.BACKEND_LOGIN_ACCOUNTTableAdapter adapter = new dsBackendLoginAccountTableAdapters.BACKEND_LOGIN_ACCOUNTTableAdapter();
                     adapter.DeleteAuthRecordQuery(txtAccountId.Text);
                     adapter.DeleteLoginRecordQuery(txtAccountId.Text);
+                    searchFormLoaded = false;
                     gvAccountSearch_Result.DataSource = null;
+                    searchFormLoaded = true;
                     txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":資料已刪除" + Environment.NewLine;
 
-                    searchFormLoaded = false;
-                    gvAccountSearch_Result.DataSource = adapter.GetData();
-                    searchFormLoaded = true;
+                    //searchFormLoaded = false;
+                    //gvAccountSearch_Result.DataSource = adapter.GetData();
+                    //searchFormLoaded = true;
                     if (isGridViewEmpty(gvAccountSearch_Result))
                     {
                         accountTabMode = FunctionMode.NORECORD;
@@ -497,6 +506,8 @@ namespace NIZING_BACKEND_Data_Config
             }
         }
         #endregion
+
+
 
 
     }

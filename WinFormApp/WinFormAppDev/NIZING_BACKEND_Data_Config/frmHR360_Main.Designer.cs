@@ -990,6 +990,7 @@
             this.cbxFunctionList.Size = new System.Drawing.Size(226, 20);
             this.cbxFunctionList.TabIndex = 6;
             this.cbxFunctionList.ValueMember = "ID";
+            this.cbxFunctionList.SelectionChangeCommitted += new System.EventHandler(this.cbxFunctionList_SelectionChangeCommitted);
             // 
             // frmHR360_Main
             // 

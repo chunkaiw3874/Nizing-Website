@@ -85,11 +85,11 @@ namespace NIZING_BACKEND_Data_Config
             this.label12 = new System.Windows.Forms.Label();
             this.pgbProductSyncProgress = new System.Windows.Forms.ProgressBar();
             this.lblProductSyncStatus = new System.Windows.Forms.Label();
-            this.bgwProductSyncLoader = new System.ComponentModel.BackgroundWorker();
-            this.aCCOUNT_VIPLEVELTableAdapter = new NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnLogout = new System.Windows.Forms.Button();
             this.cbxFunctionList = new System.Windows.Forms.ComboBox();
+            this.bgwProductSyncLoader = new System.ComponentModel.BackgroundWorker();
+            this.aCCOUNT_VIPLEVELTableAdapter = new NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpAccountManagement.SuspendLayout();
@@ -747,17 +747,6 @@ namespace NIZING_BACKEND_Data_Config
             this.lblProductSyncStatus.Size = new System.Drawing.Size(0, 12);
             this.lblProductSyncStatus.TabIndex = 5;
             // 
-            // bgwProductSyncLoader
-            // 
-            this.bgwProductSyncLoader.WorkerReportsProgress = true;
-            this.bgwProductSyncLoader.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwProductSyncLoader_DoWork);
-            this.bgwProductSyncLoader.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwProductSyncLoader_ProgressChanged);
-            this.bgwProductSyncLoader.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwProductSyncLoader_RunWorkerCompleted);
-            // 
-            // aCCOUNT_VIPLEVELTableAdapter
-            // 
-            this.aCCOUNT_VIPLEVELTableAdapter.ClearBeforeFill = true;
-            // 
             // flowLayoutPanel6
             // 
             this.flowLayoutPanel6.Controls.Add(this.btnLogout);
@@ -794,6 +783,18 @@ namespace NIZING_BACKEND_Data_Config
             this.cbxFunctionList.Size = new System.Drawing.Size(226, 20);
             this.cbxFunctionList.TabIndex = 7;
             this.cbxFunctionList.ValueMember = "ID";
+            this.cbxFunctionList.SelectionChangeCommitted += new System.EventHandler(this.cbxFunctionList_SelectionChangeCommitted);
+            // 
+            // bgwProductSyncLoader
+            // 
+            this.bgwProductSyncLoader.WorkerReportsProgress = true;
+            this.bgwProductSyncLoader.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwProductSyncLoader_DoWork);
+            this.bgwProductSyncLoader.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwProductSyncLoader_ProgressChanged);
+            this.bgwProductSyncLoader.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwProductSyncLoader_RunWorkerCompleted);
+            // 
+            // aCCOUNT_VIPLEVELTableAdapter
+            // 
+            this.aCCOUNT_VIPLEVELTableAdapter.ClearBeforeFill = true;
             // 
             // frmOQS_Main
             // 

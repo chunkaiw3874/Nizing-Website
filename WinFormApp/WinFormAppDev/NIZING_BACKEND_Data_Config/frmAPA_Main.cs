@@ -308,19 +308,6 @@ namespace NIZING_BACKEND_Data_Config
             _frmLogin.LoadCbxFunctionList(this);
         }
 
-        #region public method
-        //public void LoadCbxFunctionList()
-        //{
-        //    if (dtAuthorizedFunctionTable != null)
-        //    {
-        //        cbxFunctionList.DataSource = dtAuthorizedFunctionTable;
-        //        cbxFunctionList.DisplayMember = "NAME";
-        //        cbxFunctionList.ValueMember = "ID";
-        //        cbxFunctionList.SelectedValue = CurrentForm;
-        //    }
-        //}            
-        #endregion
-
         #region Frame Methods and Events
         private void btnLogout_Click(object sender, EventArgs e)
         {
@@ -330,6 +317,12 @@ namespace NIZING_BACKEND_Data_Config
             frm.Show();
             this.Hide();
         }
+
+        private void cbxFunctionList_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            _frmLogin.ChangeForm(cbxFunctionList.SelectedValue.ToString());
+        }
+
         private void frmAPA_Main_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'dsAPA_Question.HR360_ASSESSMENTQUESTION_CATEGORY_A' table. You can move, or remove it, as needed.
@@ -2380,5 +2373,8 @@ namespace NIZING_BACKEND_Data_Config
             }
         }
         #endregion
+
+
+
     }
 }

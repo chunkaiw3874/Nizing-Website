@@ -76,10 +76,7 @@ namespace NIZING_BACKEND_Data_Config
             _frmLogin.LoadCbxFunctionList(this);
         }
 
-        #region Frame Method and Button Behavior
-
-        
-
+        #region Frame Method and Button Behavior        
         private void btnLogout_Click(object sender, EventArgs e)
         {
             var frm = new frmLogin();
@@ -87,6 +84,10 @@ namespace NIZING_BACKEND_Data_Config
             frm.StartPosition = FormStartPosition.Manual;
             frm.Show();
             this.Hide();
+        }
+        private void cbxFunctionList_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            _frmLogin.ChangeForm(cbxFunctionList.SelectedValue.ToString());
         }
 
         private List<string> CheckConfirmError(FunctionMode mode)
@@ -1201,10 +1202,6 @@ namespace NIZING_BACKEND_Data_Config
         }
         
         #endregion
-
-
-
-
 
     }
 }

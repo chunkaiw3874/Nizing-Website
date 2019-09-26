@@ -53,10 +53,10 @@
             this.btnAccountCancel = new System.Windows.Forms.Button();
             this.txtAccountManagementMemo = new System.Windows.Forms.TextBox();
             this.gvAccountSearch_Result = new System.Windows.Forms.DataGridView();
-            this.backenD_FUNCTION_LISTTableAdapter1 = new NIZING_BACKEND_Data_Config.dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnLogout = new System.Windows.Forms.Button();
             this.cbxFunctionList = new System.Windows.Forms.ComboBox();
+            this.backenD_FUNCTION_LISTTableAdapter1 = new NIZING_BACKEND_Data_Config.dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpAccountManagement.SuspendLayout();
@@ -380,10 +380,6 @@
             this.gvAccountSearch_Result.TabIndex = 4;
             this.gvAccountSearch_Result.SelectionChanged += new System.EventHandler(this.gvAccountSearch_Result_SelectionChanged);
             // 
-            // backenD_FUNCTION_LISTTableAdapter1
-            // 
-            this.backenD_FUNCTION_LISTTableAdapter1.ClearBeforeFill = true;
-            // 
             // flowLayoutPanel3
             // 
             this.flowLayoutPanel3.Controls.Add(this.btnLogout);
@@ -420,6 +416,11 @@
             this.cbxFunctionList.Size = new System.Drawing.Size(226, 20);
             this.cbxFunctionList.TabIndex = 6;
             this.cbxFunctionList.ValueMember = "ID";
+            this.cbxFunctionList.SelectionChangeCommitted += new System.EventHandler(this.cbxFunctionList_SelectionChangeCommitted);
+            // 
+            // backenD_FUNCTION_LISTTableAdapter1
+            // 
+            this.backenD_FUNCTION_LISTTableAdapter1.ClearBeforeFill = true;
             // 
             // frmBackend_Main
             // 
