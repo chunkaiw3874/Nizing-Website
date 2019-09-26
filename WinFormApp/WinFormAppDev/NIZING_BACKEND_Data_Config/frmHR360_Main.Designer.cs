@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnLogout = new System.Windows.Forms.Button();
             this.tbcManagement = new System.Windows.Forms.TabControl();
             this.tbpAccountManagement = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -41,6 +40,7 @@
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.txtAccountAvatarImageFilePath = new System.Windows.Forms.TextBox();
             this.btnAccountAvatarImageFilePathSearch = new System.Windows.Forms.Button();
+            this.btnAccountClearAvatarPath = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.txtAccountDisabledDate = new System.Windows.Forms.TextBox();
@@ -72,6 +72,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel10 = new System.Windows.Forms.FlowLayoutPanel();
+            this.picAccountAvatar = new System.Windows.Forms.PictureBox();
+            this.lblAccountAvatarFileName = new System.Windows.Forms.Label();
             this.gvAccountSearch_Result = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnAccountSearch = new System.Windows.Forms.Button();
@@ -96,10 +99,9 @@
             this.ckxCompanyAnnouncementVisible = new System.Windows.Forms.CheckBox();
             this.ckxCompanyAnnouncementOnTop = new System.Windows.Forms.CheckBox();
             this.gvCompanyAnnouncementSearch_Result = new System.Windows.Forms.DataGridView();
-            this.btnAccountClearAvatarPath = new System.Windows.Forms.Button();
-            this.flowLayoutPanel10 = new System.Windows.Forms.FlowLayoutPanel();
-            this.picAccountAvatar = new System.Windows.Forms.PictureBox();
-            this.lblAccountAvatarFileName = new System.Windows.Forms.Label();
+            this.flowLayoutPanel11 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.cbxFunctionList = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpAccountManagement.SuspendLayout();
@@ -112,6 +114,8 @@
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
+            this.flowLayoutPanel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picAccountAvatar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvAccountSearch_Result)).BeginInit();
             this.flowLayoutPanel9.SuspendLayout();
             this.tbpCompanyAnnouncement.SuspendLayout();
@@ -121,16 +125,15 @@
             this.flowLayoutPanel8.SuspendLayout();
             this.flpCompanyAnnouncementID.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvCompanyAnnouncementSearch_Result)).BeginInit();
-            this.flowLayoutPanel10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picAccountAvatar)).BeginInit();
+            this.flowLayoutPanel11.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.btnLogout, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tbcManagement, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel11, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -141,18 +144,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 96.93877F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1184, 862);
             this.tableLayoutPanel1.TabIndex = 2;
-            // 
-            // btnLogout
-            // 
-            this.btnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLogout.Location = new System.Drawing.Point(1084, 0);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(0);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(100, 26);
-            this.btnLogout.TabIndex = 0;
-            this.btnLogout.Text = "登出";
-            this.btnLogout.UseVisualStyleBackColor = true;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // tbcManagement
             // 
@@ -317,6 +308,16 @@
             this.btnAccountAvatarImageFilePathSearch.Text = "...";
             this.btnAccountAvatarImageFilePathSearch.UseVisualStyleBackColor = true;
             this.btnAccountAvatarImageFilePathSearch.Click += new System.EventHandler(this.btnAccountAvatarImageFilePathSearch_Click);
+            // 
+            // btnAccountClearAvatarPath
+            // 
+            this.btnAccountClearAvatarPath.Location = new System.Drawing.Point(188, 3);
+            this.btnAccountClearAvatarPath.Name = "btnAccountClearAvatarPath";
+            this.btnAccountClearAvatarPath.Size = new System.Drawing.Size(75, 23);
+            this.btnAccountClearAvatarPath.TabIndex = 2;
+            this.btnAccountClearAvatarPath.Text = "清除路徑";
+            this.btnAccountClearAvatarPath.UseVisualStyleBackColor = true;
+            this.btnAccountClearAvatarPath.Click += new System.EventHandler(this.btnAccountClearAvatarPath_Click);
             // 
             // label11
             // 
@@ -622,6 +623,37 @@
             this.label10.TabIndex = 13;
             this.label10.Text = "失效日期:";
             // 
+            // flowLayoutPanel10
+            // 
+            this.flowLayoutPanel10.Controls.Add(this.picAccountAvatar);
+            this.flowLayoutPanel10.Controls.Add(this.lblAccountAvatarFileName);
+            this.flowLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel10.Location = new System.Drawing.Point(92, 0);
+            this.flowLayoutPanel10.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel10.Name = "flowLayoutPanel10";
+            this.flowLayoutPanel10.Size = new System.Drawing.Size(368, 150);
+            this.flowLayoutPanel10.TabIndex = 22;
+            // 
+            // picAccountAvatar
+            // 
+            this.picAccountAvatar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.picAccountAvatar.Location = new System.Drawing.Point(3, 3);
+            this.picAccountAvatar.Name = "picAccountAvatar";
+            this.picAccountAvatar.Size = new System.Drawing.Size(144, 144);
+            this.picAccountAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picAccountAvatar.TabIndex = 0;
+            this.picAccountAvatar.TabStop = false;
+            this.picAccountAvatar.LoadCompleted += new System.ComponentModel.AsyncCompletedEventHandler(this.picAccountAvatar_LoadCompleted);
+            // 
+            // lblAccountAvatarFileName
+            // 
+            this.lblAccountAvatarFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblAccountAvatarFileName.AutoSize = true;
+            this.lblAccountAvatarFileName.Location = new System.Drawing.Point(153, 138);
+            this.lblAccountAvatarFileName.Name = "lblAccountAvatarFileName";
+            this.lblAccountAvatarFileName.Size = new System.Drawing.Size(0, 12);
+            this.lblAccountAvatarFileName.TabIndex = 1;
+            // 
             // gvAccountSearch_Result
             // 
             this.gvAccountSearch_Result.AllowUserToAddRows = false;
@@ -922,46 +954,42 @@
             this.gvCompanyAnnouncementSearch_Result.TabIndex = 3;
             this.gvCompanyAnnouncementSearch_Result.SelectionChanged += new System.EventHandler(this.gvCompanyAnnouncementSearch_Result_SelectionChanged);
             // 
-            // btnAccountClearAvatarPath
+            // flowLayoutPanel11
             // 
-            this.btnAccountClearAvatarPath.Location = new System.Drawing.Point(188, 3);
-            this.btnAccountClearAvatarPath.Name = "btnAccountClearAvatarPath";
-            this.btnAccountClearAvatarPath.Size = new System.Drawing.Size(75, 23);
-            this.btnAccountClearAvatarPath.TabIndex = 2;
-            this.btnAccountClearAvatarPath.Text = "清除路徑";
-            this.btnAccountClearAvatarPath.UseVisualStyleBackColor = true;
-            this.btnAccountClearAvatarPath.Click += new System.EventHandler(this.btnAccountClearAvatarPath_Click);
+            this.flowLayoutPanel11.Controls.Add(this.btnLogout);
+            this.flowLayoutPanel11.Controls.Add(this.cbxFunctionList);
+            this.flowLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel11.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel11.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel11.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel11.Name = "flowLayoutPanel11";
+            this.flowLayoutPanel11.Size = new System.Drawing.Size(1184, 26);
+            this.flowLayoutPanel11.TabIndex = 2;
             // 
-            // flowLayoutPanel10
+            // btnLogout
             // 
-            this.flowLayoutPanel10.Controls.Add(this.picAccountAvatar);
-            this.flowLayoutPanel10.Controls.Add(this.lblAccountAvatarFileName);
-            this.flowLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel10.Location = new System.Drawing.Point(92, 0);
-            this.flowLayoutPanel10.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel10.Name = "flowLayoutPanel10";
-            this.flowLayoutPanel10.Size = new System.Drawing.Size(368, 150);
-            this.flowLayoutPanel10.TabIndex = 22;
+            this.btnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLogout.Location = new System.Drawing.Point(1084, 0);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(0);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(100, 26);
+            this.btnLogout.TabIndex = 1;
+            this.btnLogout.Text = "登出";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
-            // picAccountAvatar
+            // cbxFunctionList
             // 
-            this.picAccountAvatar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picAccountAvatar.Location = new System.Drawing.Point(3, 3);
-            this.picAccountAvatar.Name = "picAccountAvatar";
-            this.picAccountAvatar.Size = new System.Drawing.Size(144, 144);
-            this.picAccountAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picAccountAvatar.TabIndex = 0;
-            this.picAccountAvatar.TabStop = false;
-            this.picAccountAvatar.LoadCompleted += new System.ComponentModel.AsyncCompletedEventHandler(this.picAccountAvatar_LoadCompleted);
-            // 
-            // lblAccountAvatarFileName
-            // 
-            this.lblAccountAvatarFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblAccountAvatarFileName.AutoSize = true;
-            this.lblAccountAvatarFileName.Location = new System.Drawing.Point(153, 138);
-            this.lblAccountAvatarFileName.Name = "lblAccountAvatarFileName";
-            this.lblAccountAvatarFileName.Size = new System.Drawing.Size(0, 12);
-            this.lblAccountAvatarFileName.TabIndex = 1;
+            this.cbxFunctionList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxFunctionList.DisplayMember = "NAME";
+            this.cbxFunctionList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxFunctionList.FormattingEnabled = true;
+            this.cbxFunctionList.Location = new System.Drawing.Point(855, 3);
+            this.cbxFunctionList.Name = "cbxFunctionList";
+            this.cbxFunctionList.Size = new System.Drawing.Size(226, 20);
+            this.cbxFunctionList.TabIndex = 6;
+            this.cbxFunctionList.ValueMember = "ID";
             // 
             // frmHR360_Main
             // 
@@ -972,6 +1000,7 @@
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "frmHR360_Main";
             this.Text = "frmHR360_Main";
+            this.Shown += new System.EventHandler(this.frmHR360_Main_Shown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tbcManagement.ResumeLayout(false);
             this.tbpAccountManagement.ResumeLayout(false);
@@ -990,6 +1019,9 @@
             this.flowLayoutPanel3.PerformLayout();
             this.flowLayoutPanel5.ResumeLayout(false);
             this.flowLayoutPanel5.PerformLayout();
+            this.flowLayoutPanel10.ResumeLayout(false);
+            this.flowLayoutPanel10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picAccountAvatar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvAccountSearch_Result)).EndInit();
             this.flowLayoutPanel9.ResumeLayout(false);
             this.flowLayoutPanel9.PerformLayout();
@@ -1002,9 +1034,7 @@
             this.flpCompanyAnnouncementID.ResumeLayout(false);
             this.flpCompanyAnnouncementID.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvCompanyAnnouncementSearch_Result)).EndInit();
-            this.flowLayoutPanel10.ResumeLayout(false);
-            this.flowLayoutPanel10.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picAccountAvatar)).EndInit();
+            this.flowLayoutPanel11.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1012,7 +1042,6 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.TabControl tbcManagement;
         private System.Windows.Forms.TabPage tbpAccountManagement;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
@@ -1083,5 +1112,8 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel10;
         private System.Windows.Forms.PictureBox picAccountAvatar;
         private System.Windows.Forms.Label lblAccountAvatarFileName;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel11;
+        private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.ComboBox cbxFunctionList;
     }
 }

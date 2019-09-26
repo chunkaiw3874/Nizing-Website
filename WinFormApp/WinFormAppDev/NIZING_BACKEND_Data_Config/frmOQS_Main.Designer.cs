@@ -31,7 +31,6 @@ namespace NIZING_BACKEND_Data_Config
         {
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnLogout = new System.Windows.Forms.Button();
             this.tbcManagement = new System.Windows.Forms.TabControl();
             this.tbpAccountManagement = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -88,6 +87,9 @@ namespace NIZING_BACKEND_Data_Config
             this.lblProductSyncStatus = new System.Windows.Forms.Label();
             this.bgwProductSyncLoader = new System.ComponentModel.BackgroundWorker();
             this.aCCOUNT_VIPLEVELTableAdapter = new NIZING_BACKEND_Data_Config.dsOQS_LoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter();
+            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.cbxFunctionList = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpAccountManagement.SuspendLayout();
@@ -106,14 +108,15 @@ namespace NIZING_BACKEND_Data_Config
             this.tableLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
+            this.flowLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.btnLogout, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tbcManagement, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel6, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -123,18 +126,6 @@ namespace NIZING_BACKEND_Data_Config
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 96.93877F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1184, 862);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // btnLogout
-            // 
-            this.btnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLogout.Location = new System.Drawing.Point(1084, 0);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(0);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(100, 26);
-            this.btnLogout.TabIndex = 0;
-            this.btnLogout.Text = "登出";
-            this.btnLogout.UseVisualStyleBackColor = true;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // tbcManagement
             // 
@@ -767,6 +758,43 @@ namespace NIZING_BACKEND_Data_Config
             // 
             this.aCCOUNT_VIPLEVELTableAdapter.ClearBeforeFill = true;
             // 
+            // flowLayoutPanel6
+            // 
+            this.flowLayoutPanel6.Controls.Add(this.btnLogout);
+            this.flowLayoutPanel6.Controls.Add(this.cbxFunctionList);
+            this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel6.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(1184, 26);
+            this.flowLayoutPanel6.TabIndex = 2;
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLogout.Location = new System.Drawing.Point(1084, 0);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(0);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(100, 26);
+            this.btnLogout.TabIndex = 1;
+            this.btnLogout.Text = "登出";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // cbxFunctionList
+            // 
+            this.cbxFunctionList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxFunctionList.DisplayMember = "NAME";
+            this.cbxFunctionList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxFunctionList.FormattingEnabled = true;
+            this.cbxFunctionList.Location = new System.Drawing.Point(855, 3);
+            this.cbxFunctionList.Name = "cbxFunctionList";
+            this.cbxFunctionList.Size = new System.Drawing.Size(226, 20);
+            this.cbxFunctionList.TabIndex = 7;
+            this.cbxFunctionList.ValueMember = "ID";
+            // 
             // frmOQS_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -777,6 +805,7 @@ namespace NIZING_BACKEND_Data_Config
             this.Name = "frmOQS_Main";
             this.Text = "線上報價系統";
             this.Load += new System.EventHandler(this.frmMain_Load);
+            this.Shown += new System.EventHandler(this.frmOQS_Main_Shown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tbcManagement.ResumeLayout(false);
             this.tbpAccountManagement.ResumeLayout(false);
@@ -799,6 +828,7 @@ namespace NIZING_BACKEND_Data_Config
             this.flowLayoutPanel4.ResumeLayout(false);
             this.flowLayoutPanel5.ResumeLayout(false);
             this.flowLayoutPanel5.PerformLayout();
+            this.flowLayoutPanel6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -806,7 +836,6 @@ namespace NIZING_BACKEND_Data_Config
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.TabPage tbpAccountManagement;
         private System.Windows.Forms.TabPage tbpProductManagement;
         private System.Windows.Forms.TabControl tbcManagement;
@@ -864,5 +893,8 @@ namespace NIZING_BACKEND_Data_Config
         private dsOQS_LoginAccount dsOQS_LoginAccount;
         private System.Windows.Forms.BindingSource aCCOUNTVIPLEVELBindingSource;
         private dsOQS_LoginAccountTableAdapters.ACCOUNT_VIPLEVELTableAdapter aCCOUNT_VIPLEVELTableAdapter;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
+        private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.ComboBox cbxFunctionList;
     }
 }

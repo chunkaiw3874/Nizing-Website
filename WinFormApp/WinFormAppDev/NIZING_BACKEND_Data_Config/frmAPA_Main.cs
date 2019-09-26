@@ -21,6 +21,9 @@ namespace NIZING_BACKEND_Data_Config
         string NZConnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
         string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
         public string UserName { get; set; }
+        public DataTable dtAuthorizedFunctionTable { get; set; }
+        public string CurrentForm { get; set; }
+        private readonly frmLogin _frmLogin;
         private enum FunctionMode { ADD, EDIT, DELETE, SEARCH, STATIC }
         private enum TableRowStatus { DELETED, EDITED, NEW, UNCHANGED };
         TabPage currentTabPage;
@@ -62,6 +65,125 @@ namespace NIZING_BACKEND_Data_Config
         private FunctionMode employeeWorkHourInputTabMode = FunctionMode.STATIC;
         DataTable dtEmployeeWorkhourSource = new DataTable();
         #endregion
+
+        public frmAPA_Main(frmLogin frmLogin)
+        {            
+            InitializeComponent();
+            _frmLogin = frmLogin;
+            currentTabPage = tbcManagement.SelectedTab;
+            LoadControlStatus(currentTabPage);
+
+            #region 問題分類建立 Initialization
+            dtQuestionCategorySource = adapterQuestionCategory.GetData();
+            gvQuestionCategory.DataSource = dtQuestionCategorySource;
+            LoadGridViewStyle(gvQuestionCategory);
+            questionCategoryTabMode = FunctionMode.STATIC;
+            #endregion
+            #region 問題建立 Initializaiton
+            dtQuestionSource = adapterQuestion.GetData();
+            gvQuestion.DataSource = dtQuestionSource;
+            LoadGridViewStyle(gvQuestion);
+            questionTabMode = FunctionMode.STATIC;
+            #endregion
+            #region 評核人員分配 Initialization
+            for (int i = DateTime.Now.Year; i >= 2016; i--)
+            {
+                cbxPersonnelAssignmentYear.Items.Add(i.ToString());
+            }
+            cbxPersonnelAssignmentYear.SelectedIndex = 0;
+            dtPersonnelAssignmentSource = LoadgvPersonnelAssignment();
+            gvPersonnelAssignment.DataSource = dtPersonnelAssignmentSource;
+            LoadGridViewStyle(gvPersonnelAssignment);
+            personnelAssignmentTabMode = FunctionMode.STATIC;
+            #endregion
+            #region 問題分配 Initialization
+            questionAssignmentTabMode = FunctionMode.STATIC;
+            #endregion
+            #region 特評分數設定 Init
+            scoreStandardTabMode = FunctionMode.STATIC;
+            LoadScoreStandard();
+            #endregion
+            #region 帳號權限 Init
+            dtAccountPriviledgeSource = LoadgvAccountPriviledge();
+            gvAccountPriviledge.DataSource = dtAccountPriviledgeSource;
+            LoadControlStatus(tbpAccountPriviledge);
+            accountPriviledgeTabMode = FunctionMode.STATIC;
+            #endregion
+            #region 報表預覽 Init
+            for (int i = DateTime.Today.Year; i >= 2016; i--)
+            {
+                cbxReportPreviewYear.Items.Add(i);
+            }
+            cbxReportPreviewYear.SelectedIndex = 0;
+            btnReportPreviewPreview.Enabled = false;
+            cbxReportPreviewEmployee.Enabled = false;
+            cbxReportPreviewYear.Enabled = false;
+            #endregion
+            #region 最終成績計算 Universal Variable
+            for (int i = DateTime.Today.Year - 1; i >= 2016; i--)
+            {
+                cbxFinalScoreYear.Items.Add(i);
+            }
+            cbxFinalScoreYear.SelectedIndex = 0;
+            cbxFinalScoreYear.Enabled = false;
+            btnFinalScoreCalculate.Enabled = false;
+            txtFinalScoreMemo.Enabled = false;
+            txtFinalScoreMemo.Text = string.Empty;
+            #endregion
+            #region 年份及評核時間設定 Init
+            for (int i = DateTime.Today.Year - 1; i >= 2016; i--)
+            {
+                cbxYearAndEvalTimeYear.Items.Add(i);
+            }
+            cbxYearAndEvalTimeYear.SelectedIndex = 0;
+            dtpYearAndEvalTimeStartTime.Format = DateTimePickerFormat.Custom;
+            dtpYearAndEvalTimeStartTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            dtpYearAndEvalTimeEndTime.Format = DateTimePickerFormat.Custom;
+            dtpYearAndEvalTimeEndTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            dtpYearAndEvalTimeSelfStartTime.Format = DateTimePickerFormat.Custom;
+            dtpYearAndEvalTimeSelfStartTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            dtpYearAndEvalTimeSelfEndTime.Format = DateTimePickerFormat.Custom;
+            dtpYearAndEvalTimeSelfEndTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            dtpYearAndEvalTimeSupervisorStartTime.Format = DateTimePickerFormat.Custom;
+            dtpYearAndEvalTimeSupervisorStartTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            dtpYearAndEvalTimeSupervisorEndTime.Format = DateTimePickerFormat.Custom;
+            dtpYearAndEvalTimeSupervisorEndTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT *"
+                            + " FROM HR360_ASSESSMENTTIME";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        if (dr.HasRows)
+                        {
+                            cbxYearAndEvalTimeYear.Text = dr.GetString(0);
+                            dtpYearAndEvalTimeStartTime.Value = dr.GetDateTime(1);
+                            dtpYearAndEvalTimeEndTime.Value = dr.GetDateTime(2);
+                            dtpYearAndEvalTimeSelfStartTime.Value = dr.GetDateTime(3);
+                            dtpYearAndEvalTimeSelfEndTime.Value = dr.GetDateTime(4);
+                            dtpYearAndEvalTimeSupervisorStartTime.Value = dr.GetDateTime(5);
+                            dtpYearAndEvalTimeSupervisorEndTime.Value = dr.GetDateTime(6);
+                        }
+                    }
+                }
+            }
+            #endregion
+            #region 員工應工作時數 Init
+            employeeWorkHourInputTabMode = FunctionMode.STATIC;
+            for (int i = DateTime.Today.Year; i >= 2016; i--)
+            {
+                cbxEmployeeWorkhourInputYear.Items.Add(i);
+            }
+            cbxEmployeeWorkhourInputYear.Text = (DateTime.Today.Year - 1).ToString();
+            dtEmployeeWorkhourSource = LoadgvEmployeeWorkhourInputField();
+            gvEmployeeWorkhourInputField.DataSource = dtEmployeeWorkhourSource;
+            LoadGridViewStyle(gvEmployeeWorkhourInputField);
+            #endregion
+        }
 
         public frmAPA_Main()
         {
@@ -180,6 +302,24 @@ namespace NIZING_BACKEND_Data_Config
             LoadGridViewStyle(gvEmployeeWorkhourInputField);
             #endregion
         }
+        
+        private void frmAPA_Shown(object sender, EventArgs e)
+        {
+            _frmLogin.LoadCbxFunctionList(this);
+        }
+
+        #region public method
+        //public void LoadCbxFunctionList()
+        //{
+        //    if (dtAuthorizedFunctionTable != null)
+        //    {
+        //        cbxFunctionList.DataSource = dtAuthorizedFunctionTable;
+        //        cbxFunctionList.DisplayMember = "NAME";
+        //        cbxFunctionList.ValueMember = "ID";
+        //        cbxFunctionList.SelectedValue = CurrentForm;
+        //    }
+        //}            
+        #endregion
 
         #region Frame Methods and Events
         private void btnLogout_Click(object sender, EventArgs e)

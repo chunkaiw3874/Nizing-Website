@@ -23,6 +23,9 @@ namespace NIZING_BACKEND_Data_Config
         string NZConnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
         string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
         public string UserName { get; set; }
+        public DataTable dtAuthorizedFunctionTable { get; set; }
+        public string CurrentForm { get; set; }
+        private readonly frmLogin _frmLogin;
         private Boolean searchFormLoaded = false;
         private enum FunctionMode { ADD, EDIT, DELETE, SEARCH, HASRECORD, NORECORD };
         TabPage currentTabPage;
@@ -37,6 +40,22 @@ namespace NIZING_BACKEND_Data_Config
         private FunctionMode companyAccouncementTabMode = FunctionMode.NORECORD;
         #endregion
 
+        public frmHR360_Main(frmLogin frmLogin)
+        {
+            InitializeComponent();
+            _frmLogin = frmLogin;
+            accountTabMode = FunctionMode.NORECORD;
+            currentTabPage = tbcManagement.SelectedTab;
+            LoadControlStatus(currentTabPage);
+            txtAccountManagementMemo.Text = String.Empty;
+
+            #region 公司公告 Init
+            companyAccouncementTabMode = FunctionMode.NORECORD;
+            txtCompanyAnnouncementMemo.Text = String.Empty;
+            flpCompanyAnnouncementID.Margin = new Padding(0, (flpCompanyAnnouncementID.Height - lblCompanyAnnouncementID.Height - 10) / 2, 0, 0);
+            #endregion
+        }
+
         public frmHR360_Main()
         {
             InitializeComponent();
@@ -50,6 +69,11 @@ namespace NIZING_BACKEND_Data_Config
             txtCompanyAnnouncementMemo.Text = String.Empty;
             flpCompanyAnnouncementID.Margin = new Padding(0, (flpCompanyAnnouncementID.Height - lblCompanyAnnouncementID.Height - 10) / 2, 0, 0);
             #endregion
+        }
+
+        private void frmHR360_Main_Shown(object sender, EventArgs e)
+        {
+            _frmLogin.LoadCbxFunctionList(this);
         }
 
         #region Frame Method and Button Behavior
@@ -1177,6 +1201,8 @@ namespace NIZING_BACKEND_Data_Config
         }
         
         #endregion
+
+
 
 
 

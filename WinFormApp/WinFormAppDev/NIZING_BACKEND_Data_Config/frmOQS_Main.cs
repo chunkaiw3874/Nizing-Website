@@ -13,11 +13,45 @@ namespace NIZING_BACKEND_Data_Config
     public partial class frmOQS_Main : Form
     {
         public string UserName { get; set; }
+        public DataTable dtAuthorizedFunctionTable { get; set; }
+        public string CurrentForm { get; set; }
+        private readonly frmLogin _frmLogin;
         private Boolean searchFormLoaded = false;
         private enum FunctionMode { ADD, EDIT, DELETE, SEARCH, HASRECORD, NORECORD };
         TabPage currentTabPage;
         private FunctionMode accountTabMode = FunctionMode.NORECORD;
         private FunctionMode productTabMode = FunctionMode.NORECORD;
+
+        public frmOQS_Main(frmLogin frmLogin)
+        {
+            InitializeComponent();
+            _frmLogin = frmLogin;
+            accountTabMode = FunctionMode.NORECORD;
+            currentTabPage = tbcManagement.SelectedTab;
+            LoadControlStatus(currentTabPage);
+            #region 帳號管理
+            btnAccountAdd.Enabled = true;
+            btnAccountEdit.Enabled = false;
+            btnAccountDelete.Enabled = false;
+            btnAccountConfirm.Enabled = false;
+            btnAccountCancel.Enabled = false;
+            btnAccountSearch.Enabled = true;
+            gvAccountSearch_Result.Enabled = true;
+            tlpAccountInputField.Enabled = false;
+            txtAccountId.Text = "";
+            lblAccountName.Text = "";
+            txtAccountPassword.Text = "";
+            txtAccountConfirmPassword.Text = "";
+            #endregion
+            #region 產品管理
+            btnProductEdit.Enabled = false;
+            btnProductSearch.Enabled = true;
+            btnProductSync.Enabled = true;
+            btnProductConfirm.Enabled = false;
+            btnProductCancel.Enabled = false;
+
+            #endregion
+        }
 
         public frmOQS_Main()
         {
@@ -48,7 +82,10 @@ namespace NIZING_BACKEND_Data_Config
             
             #endregion
         }
-
+        private void frmOQS_Main_Shown(object sender, EventArgs e)
+        {
+            _frmLogin.LoadCbxFunctionList(this);
+        }
         #region Frame Method and Button Behavior
         private void btnLogout_Click(object sender, EventArgs e)
         {
@@ -624,8 +661,6 @@ namespace NIZING_BACKEND_Data_Config
             this.Enabled = true;
         }
         #endregion
-
-
     }
 
     public static class ExtensionMethods

@@ -13,6 +13,9 @@ namespace NIZING_BACKEND_Data_Config
     public partial class frmBackend_Main : Form
     {
         public string UserName { get; set; }
+        public DataTable dtAuthorizedFunctionTable { get; set; }
+        public string CurrentForm { get; set; }
+        private readonly frmLogin _frmLogin;
         private Boolean searchFormLoaded = false; 
         private enum FunctionMode { ADD, EDIT, DELETE, SEARCH, HASRECORD, NORECORD };
         TabPage currentTabPage;
@@ -20,6 +23,25 @@ namespace NIZING_BACKEND_Data_Config
         #region 帳號管理 Universal Variable
         private FunctionMode accountTabMode = FunctionMode.NORECORD;
         #endregion
+
+
+        public frmBackend_Main(frmLogin frmLogin)
+        {
+            InitializeComponent();
+            _frmLogin = frmLogin;
+            currentTabPage = tbcManagement.SelectedTab;
+            LoadControlStatus(currentTabPage);
+            #region 帳號管理 Init
+            flpAccountId.Margin = new Padding(0, (flpAccountId.Height - (txtAccountId.Height + 3)) / 2, 0, 0);
+            dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter adapter = new dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter();
+            DataTable dtFunctionList = adapter.GetData();
+            ((ListBox)this.clbAdminRights).DataSource = dtFunctionList;
+            ((ListBox)this.clbAdminRights).DisplayMember = "NAME";
+            ((ListBox)this.clbAdminRights).ValueMember = "ID";
+            accountTabMode = FunctionMode.NORECORD;
+            txtAccountManagementMemo.Text = String.Empty;
+            #endregion
+        }
 
         public frmBackend_Main()
         {
@@ -37,6 +59,11 @@ namespace NIZING_BACKEND_Data_Config
             txtAccountManagementMemo.Text = String.Empty;
             #endregion
 
+        }
+
+        private void frmBackend_Main_Shown(object sender, EventArgs e)
+        {
+            _frmLogin.LoadCbxFunctionList(this);
         }
 
         #region Frame Method and Button Behavior
@@ -470,5 +497,7 @@ namespace NIZING_BACKEND_Data_Config
             }
         }
         #endregion
+
+
     }
 }
