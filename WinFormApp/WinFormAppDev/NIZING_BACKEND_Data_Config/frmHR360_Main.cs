@@ -13,6 +13,8 @@ using System.Security.Principal;
 using System.Net;
 using System.Security.Cryptography;
 using System.IO;
+using System.Web;
+using System.Collections.Specialized;
 
 namespace NIZING_BACKEND_Data_Config
 {
@@ -26,6 +28,10 @@ namespace NIZING_BACKEND_Data_Config
         TabPage currentTabPage;
         private FunctionMode accountTabMode = FunctionMode.NORECORD;
         private FunctionMode tabModeTempStorage;
+
+        #region 帳號管理 Universal Variable
+        string avatarFilePath = @"\\192.168.10.222\Web\Nizing\hr360\image\employee_profile\";
+        #endregion
 
         #region 公司公告 Universal Variable
         private FunctionMode companyAccouncementTabMode = FunctionMode.NORECORD;
@@ -47,6 +53,9 @@ namespace NIZING_BACKEND_Data_Config
         }
 
         #region Frame Method and Button Behavior
+
+        
+
         private void btnLogout_Click(object sender, EventArgs e)
         {
             var frm = new frmLogin();
@@ -169,7 +178,8 @@ namespace NIZING_BACKEND_Data_Config
                     txtAccountDisabledDate.Text = string.Empty;
                     ckxAccountDisable.Enabled = true;
                     ckxAccountDisable.Checked = false;
-                    btnAvatarImageFilePathSearch.Enabled = false;
+                    btnAccountAvatarImageFilePathSearch.Enabled = true;
+                    btnAccountClearAvatarPath.Enabled = true;                    
                     gvAccountSearch_Result.Enabled = false;
                     btnLogout.Enabled = false;
                 }
@@ -202,7 +212,8 @@ namespace NIZING_BACKEND_Data_Config
                     txtAccountLineId.Enabled = true;
                     txtAccountDisabledDate.Enabled = false;
                     ckxAccountDisable.Enabled = true;
-                    btnAvatarImageFilePathSearch.Enabled = false;
+                    btnAccountAvatarImageFilePathSearch.Enabled = true;
+                    btnAccountClearAvatarPath.Enabled = true;
                     gvAccountSearch_Result.Enabled = false;
                     btnLogout.Enabled = false;
                 }
@@ -230,7 +241,8 @@ namespace NIZING_BACKEND_Data_Config
                     txtAccountLineId.Enabled = false;
                     txtAccountDisabledDate.Enabled = false;
                     ckxAccountDisable.Enabled = false;
-                    btnAvatarImageFilePathSearch.Enabled = false;
+                    btnAccountAvatarImageFilePathSearch.Enabled = false; //false
+                    btnAccountClearAvatarPath.Enabled = false;
                     gvAccountSearch_Result.Enabled = false;
                     btnLogout.Enabled = false;
                 }
@@ -256,7 +268,8 @@ namespace NIZING_BACKEND_Data_Config
                     txtAccountLineId.Enabled = false;
                     txtAccountDisabledDate.Enabled = false;
                     ckxAccountDisable.Enabled = false;
-                    btnAvatarImageFilePathSearch.Enabled = false;
+                    btnAccountAvatarImageFilePathSearch.Enabled = false; //false
+                    btnAccountClearAvatarPath.Enabled = false;
                     gvAccountSearch_Result.Enabled = true;
                     btnLogout.Enabled = true;
                 }
@@ -290,7 +303,8 @@ namespace NIZING_BACKEND_Data_Config
                     txtAccountDisabledDate.Text = string.Empty;
                     ckxAccountDisable.Enabled = false;
                     ckxAccountDisable.Checked = false;
-                    btnAvatarImageFilePathSearch.Enabled = false;
+                    btnAccountAvatarImageFilePathSearch.Enabled = false; //false
+                    btnAccountClearAvatarPath.Enabled = false;
                     gvAccountSearch_Result.Enabled = false;
                     gvAccountSearch_Result.DataSource = null;
                     btnLogout.Enabled = true;
@@ -428,7 +442,16 @@ namespace NIZING_BACKEND_Data_Config
                 {
                     ckxAccountDisable.Checked = false;
                 }
-                txtAccountDisabledDate.Text = gvAccountSearch_Result.SelectedRows[0].Cells["DISABLEDDATE"].Value.ToString();               
+                txtAccountDisabledDate.Text = gvAccountSearch_Result.SelectedRows[0].Cells["DISABLEDDATE"].Value.ToString();
+                //load image for selection change
+                if (File.Exists(avatarFilePath + txtAccountId.Text.Trim() + ".jpg"))
+                {
+                    LoadAvatarFile(avatarFilePath + txtAccountId.Text.Trim() + @".jpg");
+                }
+                else
+                {
+                    ClearPicAccountAvatar();
+                }
 
             }
             else if (gv.Name == "gvCompanyAnnouncementSearch_Result")
@@ -438,6 +461,7 @@ namespace NIZING_BACKEND_Data_Config
                 ckxCompanyAnnouncementOnTop.Checked = (bool)gv.SelectedRows[0].Cells["ON_TOP"].Value;
                 txtCompanyAnnouncementBody.Text = gv.SelectedRows[0].Cells["BODY"].Value.ToString();
             }
+
         }
 
         public string Encrypt(string clearText)
@@ -490,6 +514,7 @@ namespace NIZING_BACKEND_Data_Config
         private void btnAccountAdd_Click(object sender, EventArgs e)
         {
             accountTabMode = FunctionMode.ADD;
+            ClearContent();
             LoadControlStatus(currentTabPage);
         }
 
@@ -598,8 +623,8 @@ namespace NIZING_BACKEND_Data_Config
         {
             if (!string.IsNullOrWhiteSpace(txtAccountERPID.Text))
             {
-                txtAccountERPID.Text = string.Empty;
-                txtAccountName.Text = string.Empty;
+                txtAccountERPID.Clear();
+                txtAccountName.Clear();
             }
             LoadControlStatus(currentTabPage);
         }
@@ -616,19 +641,31 @@ namespace NIZING_BACKEND_Data_Config
             }
         }
 
-        private void btnAvatarImageFilePathSearch_Click(object sender, EventArgs e)
+        private void btnAccountAvatarImageFilePathSearch_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                ofd.InitialDirectory = "D:\\Nizing Website CC\\Nizing\\hr360\\image\\employee_profile";
+                ofd.InitialDirectory = @"C:\";
                 ofd.RestoreDirectory = true;
                 ofd.Filter = "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|All files (*.*)|*.*";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    txtAccountAvatarImageFilePath.Text = ofd.FileName;
-
+                    LoadAvatarFile(ofd.FileName);                    
                 }
+                
             }            
+        }
+
+        private void LoadAvatarFile(string fileName)
+        {
+            txtAccountAvatarImageFilePath.Text = fileName;
+            picAccountAvatar.LoadAsync(txtAccountAvatarImageFilePath.Text.Trim());
+        }
+
+        private void btnAccountClearAvatarPath_Click(object sender, EventArgs e)
+        {
+            txtAccountAvatarImageFilePath.Clear();
+            ClearPicAccountAvatar();
         }
 
         private void btnAccountConfirm_Click(object sender, EventArgs e)
@@ -660,7 +697,24 @@ namespace NIZING_BACKEND_Data_Config
                         cmd.Parameters.AddWithValue("@SUPER_USER", Convert.ToInt32(ckxAccountSuperUser.Checked).ToString());
                         cmd.ExecuteNonQuery();
                     }
-                    txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":新增使用者" + txtAccountId.Text.Trim() + "完成" + Environment.NewLine;
+                    
+                    if (!string.IsNullOrEmpty(txtAccountAvatarImageFilePath.Text))
+                    {
+                        if (SaveAvatarFile())
+                        {
+                            txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":新增使用者" + txtAccountId.Text.Trim() + "完成" + Environment.NewLine;
+                            txtAccountManagementMemo.Text += "檔案名稱:" + lblAccountAvatarFileName.Text + "已存檔" + Environment.NewLine;
+                        }
+                        else
+                        {
+                            txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":新增使用者" + txtAccountId.Text.Trim() + "完成" + Environment.NewLine;
+                            txtAccountManagementMemo.Text += "檔案名稱:" + lblAccountAvatarFileName.Text + "未存檔" + Environment.NewLine;
+                        }
+                    }
+                    else
+                    {
+                        txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":新增使用者" + txtAccountId.Text.Trim() + "完成" + Environment.NewLine;
+                    }
                     btnAccountSearch_Click(sender, e);
                 }
                 else
@@ -708,7 +762,25 @@ namespace NIZING_BACKEND_Data_Config
                         cmd.Parameters.AddWithValue("@SUPER_USER", Convert.ToInt32(ckxAccountSuperUser.Checked).ToString());
                         cmd.ExecuteNonQuery();
                     }
-                    txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":編輯使用者" + txtAccountId.Text.Trim() + "完成" + Environment.NewLine;
+                    
+
+                    if (!string.IsNullOrEmpty(txtAccountAvatarImageFilePath.Text))
+                    {
+                        if (SaveAvatarFile())
+                        {
+                            txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":編輯使用者" + txtAccountId.Text.Trim() + "完成" + Environment.NewLine;
+                            txtAccountManagementMemo.Text += "檔案名稱:" + lblAccountAvatarFileName.Text + "已存檔" + Environment.NewLine;
+                        }
+                        else
+                        {
+                            txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":編輯使用者" + txtAccountId.Text.Trim() + "完成" + Environment.NewLine;
+                            txtAccountManagementMemo.Text += "檔案名稱:" + lblAccountAvatarFileName.Text + "未存檔" + Environment.NewLine;
+                        }                        
+                    }
+                    else
+                    {
+                        txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":編輯使用者" + txtAccountId.Text.Trim() + "完成" + Environment.NewLine;
+                    }
                     btnAccountSearch_Click(sender, e);
                 }
                 else
@@ -731,24 +803,6 @@ namespace NIZING_BACKEND_Data_Config
                 accountTabMode = FunctionMode.HASRECORD;
                 LoadControlStatus(currentTabPage);
             }
-            //if (!String.IsNullOrWhiteSpace(txtAccountAvatarImageFilePath.Text))
-            //{
-            //    //AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
-            //    //WindowsIdentity identity = new WindowsIdentity("nizing\\mis", "@WSX3edc&UJM8ik,@WSX");
-            //    //WindowsImpersonationContext context = identity.Impersonate();
-            //    ////using(new Impersonator)
-            //    //System.IO.File.Copy(txtAccountAvatarImageFilePath.Text, "\\192.168.10.222\\Web\\Nizing\\hr360\\image\\avatar.jpg", true);
-            //    //context.Undo();
-            //    //txtAccountManagementMemo.Text = "file saved";
-            //    WebClient client = new WebClient();
-            //    client.Credentials = CredentialCache.DefaultNetworkCredentials;
-            //    client.UploadFile("\\\\192.168.10.222\\Web\\Nizing\\hr360\\image\\employee_profile\\avatar.jpg", txtAccountAvatarImageFilePath.Text);
-            //    client.Dispose();
-            //}
-            //else
-            //{
-            //    txtAccountManagementMemo.Text = "no image saved";
-            //}
         }
 
         private void btnAccountCancel_Click(object sender, EventArgs e)
@@ -786,6 +840,69 @@ namespace NIZING_BACKEND_Data_Config
             txtAccountDisabledDate.Text = "";
             ckxAccountDisable.Checked = false;
             txtAccountAvatarImageFilePath.Text = "";
+            ClearPicAccountAvatar();
+        }
+
+        private bool SaveAvatarFile()
+        {
+            //Using webclient to upload file  (Works, but no prompt for overwrite or other controls)
+            WebClient myWebClient = new WebClient();
+            string originalFileName = txtAccountAvatarImageFilePath.Text.Trim();
+            string destinationFileName = avatarFilePath + txtAccountId.Text.Trim();
+
+            if (File.Exists(destinationFileName + Path.GetExtension(txtAccountAvatarImageFilePath.Text.Trim())))
+            {
+                var confirmFileName = MessageBox.Show(@"檔案已存在，請問要覆蓋嗎? (OK:覆蓋/Cancel:取消)", "檔案名稱重複", MessageBoxButtons.OKCancel);
+                if (confirmFileName == DialogResult.OK)
+                {
+                    destinationFileName += Path.GetExtension(txtAccountAvatarImageFilePath.Text.Trim());
+                    myWebClient.UploadFile(destinationFileName, originalFileName);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                //else if (confirmFileName == DialogResult.No)
+                //{
+                //    int i = 0;
+                //    string temp;
+                //    temp = destinationFileName;
+                //    while (File.Exists(destinationFileName + Path.GetExtension(txtAccountAvatarImageFilePath.Text.Trim())))
+                //    {
+                //        i += 1;
+                //        destinationFileName = temp + "-" + i.ToString();
+                //    }
+                //    destinationFileName += Path.GetExtension(txtAccountAvatarImageFilePath.Text.Trim());
+                //    myWebClient.UploadFile(destinationFileName, originalFileName);
+                //    txtAccountManagementMemo.Text += "檔案名稱:" + Path.GetFileName(destinationFileName) + "已存檔" + Environment.NewLine;
+                //}
+            }
+            else
+            {
+                destinationFileName += Path.GetExtension(txtAccountAvatarImageFilePath.Text.Trim());
+                myWebClient.UploadFile(destinationFileName, originalFileName);
+                return true;
+            }
+
+        }
+
+        private void picAccountAvatar_LoadCompleted(object sender, AsyncCompletedEventArgs e)
+        {            
+            if (picAccountAvatar.Image == null)
+            {
+                lblAccountAvatarFileName.Text = string.Empty;
+            }
+            else
+            {
+                lblAccountAvatarFileName.Text = Path.GetFileName((string)picAccountAvatar.ImageLocation);
+            }
+        }
+
+        private void ClearPicAccountAvatar()
+        {
+            picAccountAvatar.Image = null;
+            lblAccountAvatarFileName.Text = string.Empty;
         }
 
         #endregion
@@ -1060,8 +1177,6 @@ namespace NIZING_BACKEND_Data_Config
         }
         
         #endregion
-
-
 
 
 
