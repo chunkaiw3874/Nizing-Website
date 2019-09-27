@@ -26,9 +26,9 @@ namespace NIZING_BACKEND_Data_Config
         //QUICK ACCESS TO USERNAME AND PW，REMOVE AFTER DEBUG PHASE!
         private void fastLogin(object sender, EventArgs e)
         {
-            txtUserName.Text = "0080";
-            txtPassword.Text = "387485";
-            cbxFunctionList.SelectedIndex = 1;
+            //txtUserName.Text = "0080";
+            //txtPassword.Text = "387485";
+            //cbxFunctionList.SelectedIndex = 1;
         }
 
         #region public methods
@@ -45,10 +45,10 @@ namespace NIZING_BACKEND_Data_Config
             }
         }
 
-        public void ChangeForm(string frm)
+        public void ChangeForm(Form sourceForm, string newForm)
         {
-            CurrentForm = frm;
-            switch (frm)
+            CurrentForm = newForm;
+            switch (newForm)
             {
                 case "ADMIN":
                     var frmBackend = new frmBackend_Main(this);
@@ -59,7 +59,7 @@ namespace NIZING_BACKEND_Data_Config
                     frmBackend.CurrentForm = this.CurrentForm;
                     frmBackend.dtAuthorizedFunctionTable = this.dtAuthorizedFunctionTable;
                     frmBackend.Show();
-                    this.Hide();
+                    sourceForm.Hide();
                     break;
                 case "APA":
                     var frmAPA = new frmAPA_Main(this);
@@ -70,7 +70,7 @@ namespace NIZING_BACKEND_Data_Config
                     frmAPA.CurrentForm = this.CurrentForm;
                     frmAPA.dtAuthorizedFunctionTable = this.dtAuthorizedFunctionTable;
                     frmAPA.Show();
-                    this.Hide();
+                    sourceForm.Hide();
                     break;
                 case "OQS":
                     var frmOQS = new frmOQS_Main(this);
@@ -79,7 +79,7 @@ namespace NIZING_BACKEND_Data_Config
                     frmOQS.FormClosing += delegate { Application.Exit(); };
                     frmOQS.UserName = this.UserName;
                     frmOQS.Show();
-                    this.Hide();
+                    sourceForm.Hide();
                     break;
                 case "HR360":
                     var frmHR360 = new frmHR360_Main(this);
@@ -88,7 +88,7 @@ namespace NIZING_BACKEND_Data_Config
                     frmHR360.FormClosing += delegate { Application.Exit(); };
                     frmHR360.UserName = this.UserName;
                     frmHR360.Show();
-                    this.Hide();
+                    sourceForm.Hide();
                     break;
                 default:
                     break;
@@ -135,7 +135,7 @@ namespace NIZING_BACKEND_Data_Config
                     UserName = txtUserName.Text.Trim();
                     dtAuthorizedFunctionTable = GetAuthorizedFunctionList();
                     CurrentForm = cbxFunctionList.SelectedValue.ToString();
-                    ChangeForm(CurrentForm);
+                    ChangeForm(this, CurrentForm);
                     //switch (CurrentForm)
                     //{
                     //    case "ADMIN":                            

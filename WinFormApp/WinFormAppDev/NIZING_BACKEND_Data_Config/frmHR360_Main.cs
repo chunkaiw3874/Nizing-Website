@@ -87,7 +87,7 @@ namespace NIZING_BACKEND_Data_Config
         }
         private void cbxFunctionList_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            _frmLogin.ChangeForm(cbxFunctionList.SelectedValue.ToString());
+            _frmLogin.ChangeForm(this, cbxFunctionList.SelectedValue.ToString());
         }
 
         private List<string> CheckConfirmError(FunctionMode mode)
@@ -475,6 +475,7 @@ namespace NIZING_BACKEND_Data_Config
                 }
                 else
                 {
+                    txtAccountAvatarImageFilePath.Clear();
                     ClearPicAccountAvatar();
                 }
 

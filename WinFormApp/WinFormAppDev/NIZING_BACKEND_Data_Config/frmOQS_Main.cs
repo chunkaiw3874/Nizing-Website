@@ -100,7 +100,7 @@ namespace NIZING_BACKEND_Data_Config
 
         private void cbxFunctionList_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            _frmLogin.ChangeForm(cbxFunctionList.SelectedValue.ToString());
+            _frmLogin.ChangeForm(this, cbxFunctionList.SelectedValue.ToString());
         }
 
         private void frmMain_Load(object sender, EventArgs e)
