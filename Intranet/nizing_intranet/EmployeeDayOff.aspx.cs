@@ -25,8 +25,8 @@ public partial class EmployeeDayOff : System.Web.UI.Page
         string query = "SELECT TK001 員工代號, MV002 員工姓名, TK002 年度, TK003 特休天數, TK004 已休天數, TK003-TK004 未休天數"
                     + " FROM PALTK"
                     + " LEFT JOIN CMSMV ON TK001 = MV001"
-                    + " WHERE TK001 = " + ddlPerson.SelectedValue.ToString() + "AND TK002 = " + DateTime.Now.Year.ToString();
-
+                    + " WHERE TK001 = @ID"
+                    + " AND TK002 = @YEAR";
         return query;
     }
     private void SqlSearch(string query)
@@ -36,6 +36,8 @@ public partial class EmployeeDayOff : System.Web.UI.Page
             conn.Open();
 
             SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@ID", ddlPerson.SelectedValue.ToString().Trim());
+            cmd.Parameters.AddWithValue("@YEAR", DateTime.Today.Year);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
