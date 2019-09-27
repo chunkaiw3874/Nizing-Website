@@ -59,7 +59,14 @@ public partial class ABC_Comparison : System.Web.UI.Page
             SqlDataAdapter da = new SqlDataAdapter(cmdSelect);
             DataTable dt = new DataTable();
             da.Fill(dt);
-
+            if (dt.Rows.Count > 0)
+            {
+                DataView dv = dt.DefaultView;
+                if (this.ViewState["SortExpression"] != null)
+                {
+                    dv.Sort = string.Format("{0} {1}", ViewState["SortExpression"].ToString(), this.ViewState["SortOrder"].ToString());
+                }
+            }
             grdReport.DataSource = dt;
             grdReport.DataBind();
         }
@@ -117,7 +124,7 @@ public partial class ABC_Comparison : System.Web.UI.Page
 + " , [SALES_NOW].[SALESNAME] [SALESNAME]"
 + " , CONVERT(VARCHAR, CONVERT(MONEY, COALESCE([SALES_NOW].[SALE],0)-COALESCE([RETURN_NOW].[RETURN],0)), 1) [SALENOW]"
 + " , CONVERT(VARCHAR, CONVERT(MONEY, COALESCE([SALES_HISTORY].[SALE],0)-COALESCE([RETURN_HISTORY].[RETURN],0)), 1) [SALEPREV]"
-+ " , CONVERT(VARCHAR(20), CONVERT(DECIMAL(20,2), 100*COALESCE(((COALESCE([SALES_NOW].[SALE],0)-COALESCE([RETURN_NOW].[RETURN],0))-(COALESCE([SALES_HISTORY].[SALE],0)-COALESCE([RETURN_HISTORY].[RETURN],0)))/NULLIF((COALESCE([SALES_HISTORY].[SALE],0)-COALESCE([RETURN_HISTORY].[RETURN],0)),0), N'0')))+'%' [GROWTH]"
++ " ,CONVERT(DECIMAL(20,2), 100*COALESCE(((COALESCE([SALES_NOW].[SALE],0)-COALESCE([RETURN_NOW].[RETURN],0))-(COALESCE([SALES_HISTORY].[SALE],0)-COALESCE([RETURN_HISTORY].[RETURN],0)))/NULLIF((COALESCE([SALES_HISTORY].[SALE],0)-COALESCE([RETURN_HISTORY].[RETURN],0)),0), N'0')) [GROWTH]"
 + " FROM [SALES_NOW]"
 + " LEFT JOIN [SALES_HISTORY] ON [SALES_NOW].[CUSTID] = [SALES_HISTORY].[CUSTID]"
 + " LEFT JOIN [RETURN_NOW] ON [SALES_NOW].[CUSTID] = [RETURN_NOW].[CUSTID]"
@@ -176,5 +183,36 @@ public partial class ABC_Comparison : System.Web.UI.Page
     protected void grdReport_DataBound(object sender, EventArgs e)
     {
         GridViewAddFooter_sum(grdReport);
+    }
+    protected void grdReport_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName.Equals("Sort"))
+        {
+            if (ViewState["SortExpression"] != null)
+            {
+                if (this.ViewState["SortExpression"].ToString() == e.CommandArgument.ToString())
+                {
+                    if (ViewState["SortOrder"].ToString() == "ASC")
+                    {
+                        ViewState["SortOrder"] = "DESC";
+                    }
+                    else
+                    {
+                        ViewState["SortOrder"] = "ASC";
+                    }
+                }
+                else
+                {
+                    ViewState["SortOrder"] = "ASC";
+                    ViewState["SortExpression"] = e.CommandArgument.ToString();
+                }
+            }
+            else
+            {
+                ViewState["SortExpression"] = e.CommandArgument.ToString();
+                ViewState["SortOrder"] = "ASC";
+            }
+        }
+        btnGenerateReport_Click(sender, e);
     }
 }

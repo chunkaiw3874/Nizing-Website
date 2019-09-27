@@ -105,7 +105,8 @@
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <asp:GridView ID="grdReport" runat="server" AutoGenerateColumns="false" CssClass="grdResult" OnRowCommand="grdReport_RowCommand"
+                    <asp:GridView ID="grdReport" runat="server" 
+                        AutoGenerateColumns="false" CssClass="grdResult" OnRowCommand="grdReport_RowCommand"
                         ShowFooter="true" OnDataBound="grdReport_DataBound" OnRowCreated="grdReport_RowCreated" >
                         <Columns>
                             <asp:TemplateField>
