@@ -35,12 +35,12 @@ public partial class nizing_intranet_M01 : System.Web.UI.Page
             
             try
             {
-                List<string> roleList = getRoles();
+                //List<string> roleList = getRoles();
 
-                foreach (string s in roleList)
-                {
-                    if (s == "NIZING\\管理部" || s == "NIZING\\生管處")
-                    {
+                //foreach (string s in roleList)
+                //{
+                //    if (s == "NIZING\\管理部" || s == "NIZING\\生管處")
+                //    {
                         Admin.Visible = true;
                         for (int i = DateTime.Today.Year; i > 2016; i--)
                         {
@@ -63,11 +63,12 @@ public partial class nizing_intranet_M01 : System.Web.UI.Page
                         }
                         ddlTargetProductionLine.SelectedIndex = 0;
                         lblTargetSetterMessage.Text = "";
-                    }
-                }
+                //    }
+                //}
             }
             catch
             {
+                Response.StatusCode = 302;
                 Server.Transfer("ErrorPage.aspx");
             }
             

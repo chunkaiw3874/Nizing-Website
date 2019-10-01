@@ -30,29 +30,26 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div id="M01" class="container-fluid">
+    <div id="M01" class="container">
         <div id="Admin" runat="server" visible="false" class="form-group">
             <div class="row">
-                <div class="col-xs-12 form-group">
+                <div class="col-sm-12 form-group">
                     <span class="label label-info" id="btnShowTargetSetter" style="cursor: pointer; font-size: 20px;">設定生產目標</span>
                     <asp:HiddenField ID="hdnIsPostBack" runat="server" />
                     <asp:HiddenField ID="hdnIsbtnShowTargetSetterTrue" runat="server" />
                 </div>
             </div>
             <div id="TargetSetter">
-                <div class="row form-group">
-                    <div class="col-xs-2">
-                        <asp:DropDownList ID="ddlTargetYear" runat="server" CssClass="form-control"></asp:DropDownList>
+                <div class="input-group-sm">
+                    <div class="input-group-prepend">
+                        <asp:DropDownList ID="ddlTargetYear" runat="server" CssClass="custom-select"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlTargetProductionLine" runat="server" CssClass="custom-select"></asp:DropDownList>
+                        <asp:Button ID="btnTargetSubmit" runat="server" Text="搜尋" CssClass="btn btn-success" OnClick="btnTargetSubmit_Click" />    
                     </div>
-                    <div class="col-xs-2">
-                        <asp:DropDownList ID="ddlTargetProductionLine" runat="server" CssClass="form-control"></asp:DropDownList>
-                    </div>
-                    <div class="col-xs-1">
-                        <asp:Button ID="btnTargetSubmit" runat="server" Text="搜尋" CssClass="btn btn-success" OnClick="btnTargetSubmit_Click" />
-                    </div>
+                    
                 </div>
                 <div class="row form-group">
-                    <div class="col-xs-12">
+                    <div class="col-sm-12">
                         <asp:GridView ID="gvTargetSetter" runat="server" AutoGenerateColumns="false" CssClass="grdResult">
                             <Columns>
                                 <asp:TemplateField>
@@ -128,81 +125,78 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-2">
+                    <div class="col-sm-2">
                         <asp:Button ID="btnSaveTarget" runat="server" Text="儲存" CssClass="btn-success btn" Visible="false" OnClick="btnSaveTarget_Click"/>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-2">
+                    <div class="col-sm-2">
                         <asp:Label ID="lblTargetSetterMessage" runat="server" Text=""></asp:Label>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row form-group">
-            <div class="col-xs-12">
-                <h2>生產統計表</h2>
+            <div class="col-sm-12 h2">
+                生產統計表
             </div>
         </div>
-<%--        <div>
-            <asp:RadioButton ID="rdoYear" runat="server" Text="年報表" GroupName="R1" AutoPostBack="true" OnCheckedChanged="R1_CheckedChanged" />
-            <asp:RadioButton ID="rdoMonth" runat="server" Text="月報表" Checked="true" GroupName="R1" AutoPostBack="true" OnCheckedChanged="R1_CheckedChanged" />
-        </div>--%>
         <div class="form-group">
-            <div class="row">
-                <div class="col-xs-2">
-                    開始查詢年份       
-                    <asp:DropDownList ID="ddlStartYear" runat="server" CssClass="form-control">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <asp:Label ID="Label2" runat="server" CssClass="input-group-text" Text="開始查詢年份"></asp:Label>                           
+                    <asp:DropDownList ID="ddlStartYear" runat="server" CssClass="custom-select">
                     </asp:DropDownList>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-2">
-                    結束查詢年份
-                    <asp:DropDownList ID="ddlEndYear" runat="server" CssClass="form-control">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <asp:Label ID="Label3" runat="server" CssClass="input-group-text" Text="結束查詢年份"></asp:Label>
+                    <asp:DropDownList ID="ddlEndYear" runat="server" CssClass="custom-select">
                     </asp:DropDownList>
                 </div>
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-xs-2 btn-group">
+            <div class="col-sm-12 btn-group">
                 <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="查詢" CssClass="btn btn-success" />
                 <asp:Button ID="btnExport" runat="server" Text="匯出至Excel" OnClick="btnExport_Click" CssClass="btn btn-success" />
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-xs-12">
+            <div class="col-sm-12">
                 <asp:Label ID="lblErrorMessage" runat="server" CssClass="error-message"></asp:Label>
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-xs-12">
+            <div class="col-sm-12">
                 <asp:Label ID="lblScope" runat="server"></asp:Label>
             </div>
         </div>
         <div class="form-group row">
-            <asp:GridView ID="grdProduction" runat="server" AutoGenerateColumns="false" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="grdResult col-xs-12" OnRowDataBound="grdProduction_RowDataBound">
-                <Columns>
-                    <asp:TemplateField HeaderText="型別">
-                        <ItemTemplate>
-                            <asp:Label ID="Label1" runat="server" Text='<%#Eval("TYPE") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="生產線別">
-                        <ItemTemplate>
-                            <asp:Label ID="lbl1" runat="server" Text='<%#Eval("ProductionLine") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="年度">
-                        <ItemTemplate>
-                            <asp:Label ID="lbl2" runat="server" Text='<%#Eval("YR") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <%--<asp:TemplateField HeaderText="生產數量">
-                        <ItemTemplate>
-                            <asp:Label ID="lbl2" runat="server" Text='<%#Eval("ProductionAmount") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>--%>
+            <div class="col-sm-12">
+                <asp:GridView ID="grdProduction" runat="server" AutoGenerateColumns="false" CellPadding="4" ForeColor="#333333" GridLines="None" CssClass="grdResult col-xs-12" OnRowDataBound="grdProduction_RowDataBound">
+                    <Columns>
+                        <asp:TemplateField HeaderText="型別">
+                            <ItemTemplate>
+                                <asp:Label ID="Label1" runat="server" Text='<%#Eval("TYPE") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="生產線別">
+                            <ItemTemplate>
+                                <asp:Label ID="lbl1" runat="server" Text='<%#Eval("ProductionLine") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="年度">
+                            <ItemTemplate>
+                                <asp:Label ID="lbl2" runat="server" Text='<%#Eval("YR") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <%--<asp:TemplateField HeaderText="生產數量">
+                            <ItemTemplate>
+                                <asp:Label ID="lbl2" runat="server" Text='<%#Eval("ProductionAmount") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>--%>
                         <asp:TemplateField HeaderText="一月">
                             <ItemTemplate>
                                 <asp:Label ID="lbl3" runat="server" Text='<%#Eval("01") %>'></asp:Label>
@@ -268,8 +262,9 @@
                                 <asp:Label ID="lbl15" runat="server"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                </Columns>
-            </asp:GridView>
+                    </Columns>
+                </asp:GridView>
+            </div>            
         </div>
     </div>
 </asp:Content>
