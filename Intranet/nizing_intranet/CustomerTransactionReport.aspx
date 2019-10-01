@@ -10,13 +10,11 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="row form-group">
-                <label class="control-label col-sm-1">查詢範圍</label>
-                <div class="col-sm-3">
-                    <asp:DropDownList ID="ddlStartYear" runat="server" CssClass="form-control"></asp:DropDownList>
-                </div>
-                <div class="col-sm-2">
-                    <asp:DropDownList ID="ddlStartMonth" runat="server" CssClass="form-control">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">起始年月</label>
+                    <asp:DropDownList ID="ddlStartYear" runat="server" CssClass="custom-select"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlStartMonth" runat="server" CssClass="custom-select">
                         <asp:ListItem Value="1226">01</asp:ListItem>
                         <asp:ListItem Value="0126">02</asp:ListItem>
                         <asp:ListItem Value="0226">03</asp:ListItem>
@@ -31,12 +29,12 @@
                         <asp:ListItem Value="1126">12</asp:ListItem>
                     </asp:DropDownList>
                 </div>
-                <label class="control-label col-sm-1">到</label>
-                <div class="col-sm-3">
-                    <asp:DropDownList ID="ddlEndYear" runat="server" CssClass="form-control"></asp:DropDownList>
-                </div>
-                <div class="col-sm-2">
-                    <asp:DropDownList ID="ddlEndMonth" runat="server" CssClass="form-control">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">結束年月</label>
+                    <asp:DropDownList ID="ddlEndYear" runat="server" CssClass="custom-select"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlEndMonth" runat="server" CssClass="custom-select">
                         <asp:ListItem Value="0125">01</asp:ListItem>
                         <asp:ListItem Value="0225">02</asp:ListItem>
                         <asp:ListItem Value="0325">03</asp:ListItem>
@@ -52,17 +50,17 @@
                     </asp:DropDownList>
                 </div>
             </div>
-            <div class="row form-group">
-                <label class="control-label col-sm-1">查詢業務</label>
-                <div class="col-sm-3">
-                    <asp:DropDownList ID="ddlPersonnel" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource1" DataTextField="MV002" DataValueField="TG006" CssClass="form-control">
-                    <asp:ListItem Selected="True">全部人員</asp:ListItem>
-                    </asp:DropDownList>
-                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:NZConnectionString %>" SelectCommand="SELECT DISTINCT TG006, MV002
-                    FROM COPTG
-	                LEFT JOIN CMSMV MV ON TG006 = MV001
-                    WHERE TG006 &lt;&gt; ''
-                    ORDER BY TG006"></asp:SqlDataSource>  
+            <div class="input-group">
+                <div class="input-group-prepend">
+                <label class="input-group-text">查詢業務</label>
+                <asp:DropDownList ID="ddlPersonnel" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource1" DataTextField="MV002" DataValueField="TG006" CssClass="custom-select">
+                <asp:ListItem Selected="True">全部人員</asp:ListItem>
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:NZConnectionString %>" SelectCommand="SELECT DISTINCT TG006, MV002
+                FROM COPTG
+	            LEFT JOIN CMSMV MV ON TG006 = MV001
+                WHERE TG006 &lt;&gt; ''
+                ORDER BY TG006"></asp:SqlDataSource>  
                 </div>
             </div>
             <div class="row form-group">
@@ -70,13 +68,13 @@
                     <asp:CheckBox ID="ckxIncludeNoSaleRecord" runat="server" Checked="false" Text="包含沒銷貨的客戶" />
                 </div>
             </div>
-            <div class="row form-group">
+            <div class="row">
                 <div class="col-sm-12">
                     <asp:Label ID="lblError" runat="server" CssClass="error-message"></asp:Label>
                 </div>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group btn-group">
                 <asp:Button ID="btnReport" runat="server" Text="查詢" OnClick="btnReport_Click" CssClass="btn btn-success" />
                 <asp:Button ID="btnExport" runat="server" Text="匯出至Excel" OnClick="btnExport_Click" CssClass="btn btn-success" />
         </div>
