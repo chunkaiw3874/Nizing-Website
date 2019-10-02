@@ -21,7 +21,7 @@ public partial class oqs_quotation_list : System.Web.UI.Page
     {            
         //Setup Adm list
         adm.Add("chrissy");
-        //adm.Add("kevin");
+        adm.Add("kevin");
         
         if (!IsPostBack)
         {
@@ -38,25 +38,28 @@ public partial class oqs_quotation_list : System.Web.UI.Page
             ddlCategory.Items.Insert(1, new ListItem("其他", "other"));
 
             //獲取最新成本價格
-            int subtractMonth = 0;
+            //int subtractMonth = 0;
             DateTime lastUpdateTime = new DateTime();
+            dt = new DataTable();
             try
             {
-                do
-                {
-                    subtractMonth--;
-                    dt = new DataTable();
-                    lastUpdateTime = DateTime.Today.AddMonths(subtractMonth);
-                    dt = GetQuotationList(lastUpdateTime);
-                } while (dt.Rows.Count == 0);
+                //do
+                //{
+                //    subtractMonth--;
+                //    dt = new DataTable();
+                //    lastUpdateTime = DateTime.Today.AddMonths(subtractMonth);
+                //    dt = GetQuotationList(lastUpdateTime);
+                //} while (dt.Rows.Count == 0);
+                lastUpdateTime = GetLastUpdateTime();
+                dt = GetQuotationList(lastUpdateTime);
 
                 BindGridviewToDatatable(gvQuotationList, dt);
 
-                lblQuotationRefreshTime.Text = lastUpdateTime.ToString("yyyy/MM/dd HH:mm:ss");
+                lblQuotationRefreshTime.Text = lastUpdateTime.ToString("yyyy/MM");//dd HH:mm:ss");
             }
-            catch
+            catch (Exception ex)
             {
-
+                Console.Write(ex.ToString());
             }
 
             //Format gvQuotationList based on user's access level
@@ -99,14 +102,15 @@ public partial class oqs_quotation_list : System.Web.UI.Page
     protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
     {
         DataTable dt = new DataTable();
-        int subtractMonth = 0;
-        do
-        {
-            subtractMonth--;
-            dt = new DataTable();
-            dt = GetQuotationList(DateTime.Today.AddMonths(subtractMonth));
-        } while (dt.Rows.Count == 0);
-        
+        //int subtractMonth = 0;
+        //do
+        //{
+        //    subtractMonth--;
+        //    dt = new DataTable();
+        //    dt = GetQuotationList(DateTime.Today.AddMonths(subtractMonth));
+        //} while (dt.Rows.Count == 0);
+        dt = GetQuotationList(GetLastUpdateTime());
+
         BindGridviewToDatatable(gvQuotationList, dt);
         DisplayInterimSessionValueInHeaderInput();
         CalculateInternalCost();
@@ -174,6 +178,22 @@ public partial class oqs_quotation_list : System.Web.UI.Page
         }
 
         return category;
+    }
+
+    private DateTime GetLastUpdateTime()
+    {
+        DateTime time = new DateTime();
+
+        using (SqlConnection conn = new SqlConnection(NZconnectionString))
+        {
+            conn.Open();
+            string query = "SELECT MA.MA019+'-'+MA.MA018+'-01'"
+                        + " FROM CMSMA MA";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            time = Convert.ToDateTime(cmd.ExecuteScalar().ToString());
+        }
+
+        return time;
     }
 
     /// <summary>
