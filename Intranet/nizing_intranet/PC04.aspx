@@ -54,7 +54,7 @@
         <div id="formTitle" class="form-group">
             <div class="row">
                 <div class="col-sm-12 h2">
-                    商品銷貨統計表
+                    備庫量建議表
                 </div>
             </div>
         </div>   
