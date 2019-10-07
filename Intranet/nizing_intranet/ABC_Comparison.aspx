@@ -16,7 +16,7 @@
         <div id="formTitle" class="form-group">
             <div class="row">
                 <div class="col-sm-12 h2">
-                    客戶銷貨淨額成長率123
+                    客戶銷貨淨額成長率
                 </div>
             </div>
         </div>
