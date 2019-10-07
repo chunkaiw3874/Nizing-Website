@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Deployment.Application;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -99,6 +100,23 @@ namespace NIZING_BACKEND_Data_Config
         public frmLogin()
         {
             InitializeComponent();
+            if (ApplicationDeployment.IsNetworkDeployed)
+            {
+                lblVersion.Text = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+            }
+            else
+            {
+                if (System.Reflection.Assembly.GetExecutingAssembly() != null)
+                {
+                    lblVersion.Text = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                }
+            }
+            //string version = System.Windows.Forms.Application.ProductVersion;
+            //Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            //DateTime buildDate = new DateTime(2000, 1, 1)
+            //            .AddDays(version.Build).AddSeconds(version.Revision * 2);
+            //this.Text = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(3);
+            //lblVersion.Text = version.Major + "." + version.Minor + "." + version.Build + Environment.NewLine + buildDate.ToString();
         }
         /// <summary>
         /// disable window's move

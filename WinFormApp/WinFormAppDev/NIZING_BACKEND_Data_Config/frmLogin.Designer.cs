@@ -45,6 +45,7 @@ namespace NIZING_BACKEND_Data_Config
             this.label3 = new System.Windows.Forms.Label();
             this.dsBackendLoginAccountBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bACKEND_FUNCTION_LISTTableAdapter = new NIZING_BACKEND_Data_Config.dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter();
+            this.lblVersion = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbpnlLogin.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -60,6 +61,7 @@ namespace NIZING_BACKEND_Data_Config
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.Controls.Add(this.tbpnlLogin, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblVersion, 2, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -214,6 +216,15 @@ namespace NIZING_BACKEND_Data_Config
             // 
             this.bACKEND_FUNCTION_LISTTableAdapter.ClearBeforeFill = true;
             // 
+            // lblVersion
+            // 
+            this.lblVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Location = new System.Drawing.Point(781, 550);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(0, 12);
+            this.lblVersion.TabIndex = 1;
+            // 
             // frmLogin
             // 
             this.AcceptButton = this.btnLogin;
@@ -226,6 +237,7 @@ namespace NIZING_BACKEND_Data_Config
             this.Text = "登入";
             this.Load += new System.EventHandler(this.frmLogin_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.tbpnlLogin.ResumeLayout(false);
             this.tbpnlLogin.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -254,6 +266,7 @@ namespace NIZING_BACKEND_Data_Config
         private System.Windows.Forms.BindingSource dsBackendLoginAccountBindingSource;
         private System.Windows.Forms.BindingSource bACKENDFUNCTIONLISTBindingSource;
         private NIZING_BACKEND_Data_Config.dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter bACKEND_FUNCTION_LISTTableAdapter;
+        private System.Windows.Forms.Label lblVersion;
 
     }
 }
