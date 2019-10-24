@@ -21,7 +21,7 @@
                     <asp:Image ID="Image6" runat="server" ImageUrl="~/employee_section/report/image/button/dept/PC.png" /></li>
             </ul>
             <ul>
-                <li><%--<asp:ImageButton ID="ImageButton8" runat="server" ImageUrl="~/employee_section/report/image/button/dept/PC-1.png" PostBackUrl="~/employee_section/report/ProductionProgress_Dept.aspx" />--%></li>
+                <li><asp:ImageButton ID="ImageButton8" runat="server" Width="150px" Height="30px" ImageUrl="~/employee_section/report/image/button/dept/PC-4.png" PostBackUrl="~/employee_section/report/PC04.aspx" /></li>
                 <li><%--<asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/employee_section/report/image/button/dept/PC-2.png" PostBackUrl="~/employee_section/report/ProductionControlReport.aspx" />--%></li>
             </ul>
         </div>
