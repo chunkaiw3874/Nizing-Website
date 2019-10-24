@@ -51,6 +51,7 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
             ckxID.Checked = false;
         }
     }
+
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         performSearch();
@@ -218,6 +219,53 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
 + IDCondition
 + " ORDER BY ID,yr,[type] DESC";
         return query;
+    }
+
+
+
+
+    protected void btnExportToExcel_Click(object sender, EventArgs e)
+    {
+        if (gvResult.Rows.Count > 0)
+        {
+            Export_Excel();
+        }
+    }
+
+    private void Export_Excel()
+    {
+        string filename = "備庫量建議表" + ddlStartYear.SelectedValue + ddlStartMonth.SelectedValue + "~" + ddlEndYear.SelectedValue + ddlEndMonth.SelectedValue;
+        if (ckxSmallCategory.Checked)
+        {
+            filename += "-" + ddlSmallCategory.SelectedItem.Text.Trim();
+        }
+        if (ckxID.Checked)
+        {
+            filename += "-" + txtSearchID.Text.Trim();
+        }
+        string strfileext = ".xls";
+        StringWriter tw = new StringWriter();
+        HtmlTextWriter hw = new HtmlTextWriter(tw);
+        HttpContext.Current.Response.ContentType = "application/vnd.ms-excel";
+        HttpContext.Current.Response.AppendHeader("Content-Disposition", "attachment; filename=" + filename + strfileext);
+        HttpContext.Current.Response.Write("<meta http-equiv=Content-Type content=text/html;charset=utf-8>");
+
+        //先把分頁關掉
+        //gvResult.AllowPaging = false;
+        //bindgv();
+
+        //Get the HTML for the control.
+        gvResult.RenderControl(hw);
+        HttpContext.Current.Response.Write(tw.ToString());
+        HttpContext.Current.Response.End();
+
+        //gvResult.AllowPaging = true;
+        //bindgv();
+    }
+
+    public override void VerifyRenderingInServerForm(Control control)
+    {
+        //用export_excel必須要有這個override
     }
     
     protected void ckxID_CheckedChanged(object sender, EventArgs e)
@@ -430,4 +478,5 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
     {
         GridViewAddFooter_sum(gvResult);
     }
+
 }
