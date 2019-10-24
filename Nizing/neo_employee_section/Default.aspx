@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/report/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">        
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="row">
@@ -12,12 +12,11 @@
             <ul>
                 <li>
                     <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD-1.png" PostBackUrl="~/neo_employee_section/report/SD01.aspx" /></li>
-                <li>
             </ul>            
             <ul>
                 <li>
                     <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl="~/neo_employee_section/report/CostAnalysis.aspx">成本計算表</asp:LinkButton>
-                <li>
+                </li>
             </ul>
         </div>
     </div>

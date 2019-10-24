@@ -28,6 +28,7 @@
         $(function () {
             $('.autosize').autosize();
         });
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="page_title" Runat="server">

@@ -27,7 +27,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     List<dayOffInfo> lstDayOffAppSummary = new List<dayOffInfo>();
     DataTable userInfo = new DataTable();
     string currentHREmployeeID = "0142"; //current //HR code;
-    List<string> exceptionList111 = new List<string>();    //三天內請假錯誤例外清單
+    List<string> exceptionList111 = new List<string>(); //三天內請假錯誤例外清單
     List<string> exceptionList202 = new List<string>(); //剩餘假期不足錯誤例外清單
 
     public class dayOffInfo
@@ -45,8 +45,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "0112";    //test only to avoid error on loading, delete after trial            
-        //Session["erp_id"] = "0112";        
+        //Session["user_id"] = "0007";    //test only to avoid error on loading, delete after trial            
+        //Session["erp_id"] = "0007";        
 
         //only use when opening check exception for certain persion
         //exceptionList111.Add("0012");

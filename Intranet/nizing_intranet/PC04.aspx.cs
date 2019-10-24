@@ -73,23 +73,47 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
             //Remove duplicate rows based conditions that the row has REPEATED ID and YEAR is null
             if (dt.Rows.Count > 0)
             {
-                List<string> lst = new List<string>();
+                List<string> lstSale = new List<string>();
+                List<string> lstProd = new List<string>();
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    lst.Add(dt.Rows[i]["ID"].ToString());
+                    if (dt.Rows[i]["type"].ToString() == "銷貨")
+                    {
+                        lstSale.Add(dt.Rows[i]["ID"].ToString());
+                    }
+                    else
+                    {
+                        lstProd.Add(dt.Rows[i]["ID"].ToString());
+                    }
                 }
-                var duplicates = lst.GroupBy(x => x)
-                                    .Where(g => g.Count() > 1)
-                                    .Select(y => y.Key)
-                                    .ToList();
+                var duplicatesSale = lstSale.GroupBy(x => x)
+                                            .Where(g => g.Count() > 1)
+                                            .Select(y => y.Key)
+                                            .ToList();
+                var duplicatesProd = lstProd.GroupBy(x => x)
+                                            .Where(g => g.Count() > 1)
+                                            .Select(y => y.Key)
+                                            .ToList();
                 List<int> rowsToDelete = new List<int>();
-                foreach (string s in duplicates)
+                foreach (string s in duplicatesSale)
                 {
                     foreach (DataRow row in dt.Rows)
                     {
-                        if (row["ID"].ToString() == s && row["yr"].ToString() == "N/A")
+                        if (row["ID"].ToString() == s && row["yr"].ToString() == "N/A" && row["type"].ToString() == "銷貨")
                         {
-                            //finds the row that has repeated ID and a NULL yr
+                            //finds the row that has repeated ID and a NULL yr with type "銷貨"
+                            row.Delete();
+                        }
+                    }
+                    dt.AcceptChanges();
+                }
+                foreach (string s in duplicatesProd)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        if (row["ID"].ToString() == s && row["yr"].ToString() == "N/A" && row["type"].ToString() == "生產")
+                        {
+                            //finds the row that has repeated ID and a NULL yr with type "生產"
                             row.Delete();
                         }
                     }
@@ -117,39 +141,76 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
 
 
         string query = ";WITH SALESTABLE"
-                    + " AS"
-                    + " ("
-                    + " SELECT MB.MB001 'ID'"
-                    + " , CAST(COALESCE(MC.MC004,0) AS INT) 'safeInv'"
-                    + " , CAST(COALESCE(SUM(MC.MC007),0) AS INT) 'invAmount'"
-                    + " , SUBSTRING(TG.TG042,1,4) 'yr'"
-                    + " , SUBSTRING(TG.TG042,5,2) 'mn'"
-                    + " , CAST(TH.TH008 AS INT) 'saleAmount'"
-                    + " FROM INVMB MB"
-                    + " LEFT JOIN INVMC MC ON MB.MB001=MC.MC001 AND MC.MC002='INV-1'"
-                    + " LEFT JOIN COPTH TH ON MB.MB001=TH.TH004"
-                    + " LEFT JOIN COPTG TG ON TH.TH001=TG.TG001 AND TH.TH002=TG.TG002 AND TG.TG042 BETWEEN @beginDate AND @endDate"
-                    + smallCategoryCondition
-                    + " GROUP BY MB.MB001,MC.MC004,TH.TH008,TG.TG042,TH.TH001,TH.TH002,TH.TH003"
-                    + " )"
-                    + " SELECT *"
-                    + " FROM"
-                    + " ("
-                    + " SELECT ID"
-                    + " ,COALESCE(safeInv,0) 'safeInv'"
-                    + " ,COALESCE(invAmount,0) 'invAmount'"
-                    + " ,COALESCE(yr,'N/A') 'yr'"
-                    + " ,COALESCE(mn,'N/A') 'mn'"
-                    + " ,COALESCE(saleAmount,0) 'saleAmount'"
-                    + " FROM SALESTABLE"
-                    + " ) AS SRC"
-                    + " PIVOT"
-                    + " ("
-                    + " SUM(saleAmount)"
-                    + " FOR mn IN ([01],[02],[03],[04],[05],[06],[07],[08],[09],[10],[11],[12])"
-                    + " ) AS DS"
-                    + IDCondition
-                    + " ORDER BY ID,yr";
++ " AS"
++ " ("
++ " SELECT MB.MB001 'ID'"
++ " , CAST(COALESCE(MC.MC004,0) AS DECIMAL) 'safeInv'"
++ " , CAST(COALESCE(SUM(MC.MC007),0) AS DECIMAL) 'invAmount'"
++ " , SUBSTRING(TG.TG042,1,4) 'yr'"
++ " , SUBSTRING(TG.TG042,5,2) 'mn'"
++ " , CAST(TH.TH008 AS DECIMAL) 'saleAmount'"
++ " FROM INVMB MB"
++ " LEFT JOIN INVMC MC ON MB.MB001=MC.MC001 AND MC.MC002='INV-1'"
++ " LEFT JOIN COPTH TH ON MB.MB001=TH.TH004"
++ " LEFT JOIN COPTG TG ON TH.TH001=TG.TG001 AND TH.TH002=TG.TG002 AND TG.TG042 BETWEEN @beginDate AND @endDate"
++ smallCategoryCondition
++ " GROUP BY MB.MB001,MC.MC004,TH.TH008,TG.TG042,TH.TH001,TH.TH002,TH.TH003"
++ " )"
++ " ,"
++ " PRODUCTIONTABLE"
++ " AS"
++ " ("
++ " SELECT MB.MB001 'ID'"
++ " , CAST(COALESCE(MC.MC004,0) AS DECIMAL) 'safeInv'"
++ " , CAST(COALESCE(SUM(MC.MC007),0) AS DECIMAL) 'invAmount'"
++ " , SUBSTRING(TF.TF003,1,4) 'yr'"
++ " , SUBSTRING(TF.TF003,5,2) 'mn'"
++ " , CAST(TG.TG011 AS DECIMAL) 'productionAmount'"
++ " FROM INVMB MB"
++ " LEFT JOIN INVMC MC ON MB.MB001=MC.MC001 AND MC.MC002='INV-1'"
++ " LEFT JOIN MOCTG TG ON MB.MB001=TG.TG004"
++ " LEFT JOIN MOCTF TF ON TF.TF001=TG.TG001 AND TF.TF002=TG.TG002 AND TF.TF003 BETWEEN @beginDate AND @endDate"
++ smallCategoryCondition
++ " GROUP BY MB.MB001,MC.MC004,TF003,TG011,TG.TG001,TG.TG002,TG.TG003"
++ " )"
++ " SELECT *"
++ " FROM"
++ " ("
++ " SELECT ID"
++ " ,COALESCE(safeInv,0) 'safeInv'"
++ " ,COALESCE(invAmount,0) 'invAmount'"
++ " ,'銷貨' AS 'type'"
++ " ,COALESCE(yr,'N/A') 'yr'"
++ " ,COALESCE(mn,'N/A') 'mn'"
++ " ,COALESCE(saleAmount,0) 'saleAmount'"
++ " FROM SALESTABLE"
++ " ) AS SRC"
++ " PIVOT"
++ " ("
++ " SUM(saleAmount)"
++ " FOR mn IN ([01],[02],[03],[04],[05],[06],[07],[08],[09],[10],[11],[12])"
++ " ) AS DS"
++ IDCondition
++ " UNION"
++ " SELECT *"
++ " FROM"
++ " ("
++ " SELECT ID"
++ " ,COALESCE(safeInv,0) 'safeInv'"
++ " ,COALESCE(invAmount,0) 'invAmount'"
++ " ,'生產' 'type'"
++ " ,COALESCE(yr,'N/A') 'yr'"
++ " ,COALESCE(mn,'N/A') 'mn'"
++ " ,COALESCE(productionAmount,0) 'productionAmount'"
++ " FROM PRODUCTIONTABLE"
++ " ) AS SRC"
++ " PIVOT"
++ " ("
++ " SUM(productionAmount)"
++ " FOR mn IN ([01],[02],[03],[04],[05],[06],[07],[08],[09],[10],[11],[12])"
++ " ) AS DS"
++ IDCondition
++ " ORDER BY ID,yr,[type] DESC";
         return query;
     }
     
@@ -173,6 +234,28 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
         replaceNullCellWithZero(e);
         compareInvAndSafeInvAmountWithColorChange(e, System.Drawing.Color.Red);
         calculateMonthlySubtotal(e);
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            if (((Label)e.Row.Cells[3].FindControl("Label3")).Text == "銷貨")
+            {
+                for (int i = 0; i < e.Row.Cells.Count; i++)
+                {
+                    Label lbl = (Label)e.Row.Cells[i].FindControl("Label" + i.ToString());
+                    lbl.BackColor = System.Drawing.ColorTranslator.FromHtml("#c3e8f4");
+                    e.Row.Cells[i].Style.Add("background-color", "#c3e8f4");
+                }
+                
+            }
+            else
+            {
+                for (int i = 0; i < e.Row.Cells.Count; i++)
+                {                    
+                    Label lbl = (Label)e.Row.Cells[i].FindControl("Label" + i.ToString());
+                    lbl.BackColor = System.Drawing.ColorTranslator.FromHtml("#faf0bb");
+                    e.Row.Cells[i].Style.Add("background-color", "#faf0bb");
+                }
+            }
+        }
     }
 
     protected void replaceNullCellWithZero(GridViewRowEventArgs e)
@@ -231,56 +314,56 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
             double nov = 0;
             double dec = 0;
 
-            if (!double.TryParse(((Label)e.Row.FindControl("Label4")).Text, out jan))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label5")).Text, out jan))
             {
                 jan = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label5")).Text, out feb))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label6")).Text, out feb))
             {
                 feb = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label6")).Text, out mar))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label7")).Text, out mar))
             {
                 mar = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label7")).Text, out apr))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label8")).Text, out apr))
             {
                 apr = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label8")).Text, out may))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label9")).Text, out may))
             {
                 may = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label9")).Text, out june))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label10")).Text, out june))
             {
                 june = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label10")).Text, out july))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label11")).Text, out july))
             {
                 july = 0;
             } 
-            if (!double.TryParse(((Label)e.Row.FindControl("Label11")).Text, out aug))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label12")).Text, out aug))
             {
                 aug = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label12")).Text, out sept))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label13")).Text, out sept))
             {
                 sept = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label13")).Text, out oct))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label14")).Text, out oct))
             {
                 oct = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label14")).Text, out nov))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label15")).Text, out nov))
             {
                 nov = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label15")).Text, out dec))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label16")).Text, out dec))
             {
                 dec = 0;
             }
 
-            ((Label)e.Row.FindControl("lblAnnualSum")).Text = (jan + feb + mar + apr + may + june + july + aug + sept + oct + nov + dec).ToString();
+            ((Label)e.Row.FindControl("Label17")).Text = (jan + feb + mar + apr + may + june + july + aug + sept + oct + nov + dec).ToString();
         }
     }
     protected void gvResult_RowCreated(object sender, GridViewRowEventArgs e)
@@ -291,7 +374,7 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
             GridViewRow HeaderGridRow = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Insert);
             TableCell HeaderCell = new TableCell();
             HeaderCell.Text = "";
-            HeaderCell.ColumnSpan = 4;
+            HeaderCell.ColumnSpan = 5;
             HeaderCell.CssClass = "stackedHeader-1";
             HeaderGridRow.Cells.Add(HeaderCell);
 
@@ -310,7 +393,12 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
         }
         if (e.Row.RowType == DataControlRowType.Footer)
         {
-            GridviewAddFooter("小計", e);
+            e.Row.Cells[3].Text = "銷售";
+            e.Row.Cells[4].Text = "小計";
+            //GridView FooterGrid = (GridView)sender;
+            //GridViewRow FooterGridRow = new GridViewRow(0, 0, DataControlRowType.Footer, DataControlRowState.Insert);
+            //TableCell FooterCell = new TableCell();
+            
         }
     }
     internal void GridViewAddFooter_sum(GridView _gd)
@@ -318,25 +406,16 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
         double sum = 0;
         if (_gd.Rows.Count > 0)
         {
-            for (int i = 4; i < _gd.Rows[0].Cells.Count; i++)
+            for (int i = 5; i < _gd.Rows[0].Cells.Count; i++)
             {
                 sum = 0;
-
-                if (i != _gd.Rows[0].Cells.Count - 1)
+                for (int j = 1; j < _gd.Rows.Count; j++)
                 {
-                    for (int j = 1; j < _gd.Rows.Count; j++)
+                    if (((Label)_gd.Rows[j].Cells[3].FindControl("Label3")).Text == "銷貨")
                     {
                         sum += double.Parse(((Label)_gd.Rows[j].Cells[i].FindControl("Label" + i.ToString())).Text, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
                     }
                 }
-                else
-                {
-                    for (int j = 1; j < _gd.Rows.Count; j++)
-                    {
-                        sum += double.Parse(((Label)_gd.Rows[j].Cells[i].FindControl("lblAnnualSum")).Text, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
-                    }
-                }
-
                 _gd.FooterRow.Cells[i].Text = sum.ToString("N0");
             }
         }
@@ -344,26 +423,5 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
     protected void gvResult_DataBound(object sender, EventArgs e)
     {
         GridViewAddFooter_sum(gvResult);
-    }
-    internal void GridviewAddFooter(string _strFooterName, GridViewRowEventArgs _gd)
-    {
-        int col = _gd.Row.Cells.Count;
-        TableCellCollection tc = _gd.Row.Cells;
-        tc.Clear();
-        TableCell tc1;
-
-        for (int i = 0; i < col; i++)
-        {
-            if (i == 3)
-            {
-                tc1 = new TableCell();
-                tc1.Text = _strFooterName;
-                tc.Add(tc1);
-            }
-            else
-            {
-                tc.Add(new TableCell());
-            }
-        }
     }
 }

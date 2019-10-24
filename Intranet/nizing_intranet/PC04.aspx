@@ -11,9 +11,10 @@
         color:#FFFFFF;
         border:solid 1px #ffffff;
     }
-    .grdResultWithFooter tr th:nth-child(n+5){
+    .grdResultWithFooter tr th:nth-child(n+6){
         background-color:#9400D3;
     }
+
     .grdResultWithFooter tr td{
         padding:4px;
         background-color:#ffffff;
@@ -28,8 +29,9 @@
         text-align:center;
         border:solid 1px #ffffff;
     }
-        .grdResultWithFooter tr td .bold{
+    .grdResultWithFooter tr td .bold{
         font-weight:bold;
+        /*background-color:#faf0bb*/
     }
     .grdResultWithFooter tr:last-child td{
         padding:4px;
@@ -138,7 +140,7 @@
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="Label0" runat="server" Text='<%#Eval("ID") %>'></asp:Label>
-                                    </ItemTemplate>                                
+                                    </ItemTemplate>                           
                                 </asp:TemplateField>
                                                         
                                 <asp:TemplateField>
@@ -161,11 +163,32 @@
 
                                 <asp:TemplateField>
                                     <HeaderTemplate>
+                                        <span>類別</span>
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label3" runat="server" Text='<%#Eval("type") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+
+                                <asp:TemplateField>
+                                    <HeaderTemplate>
                                         <span>年分</span>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label3" runat="server" Text='<%#Eval("yr") %>'></asp:Label>
+                                        <asp:Label ID="Label4" runat="server" Text='<%#Eval("yr") %>'></asp:Label>
                                     </ItemTemplate>
+                                   <%-- <FooterTemplate>
+                                        <tr>
+                                            <td>
+                                                <span>銷貨小計</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>生產小計</span>
+                                            </td>
+                                        </tr>
+                                    </FooterTemplate>--%>
                                 </asp:TemplateField>
 
                                 <asp:TemplateField>
@@ -173,7 +196,7 @@
                                         <span>01</span>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label4" runat="server" Text='<%#Eval("01") %>'></asp:Label>
+                                        <asp:Label ID="Label5" runat="server" Text='<%#Eval("01") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
@@ -182,7 +205,7 @@
                                         <span>02</span>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label5" runat="server" Text='<%#Eval("02") %>'></asp:Label>
+                                        <asp:Label ID="Label6" runat="server" Text='<%#Eval("02") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
@@ -191,7 +214,7 @@
                                         <span>03</span>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label6" runat="server" Text='<%#Eval("03") %>'></asp:Label>
+                                        <asp:Label ID="Label7" runat="server" Text='<%#Eval("03") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
@@ -200,7 +223,7 @@
                                         <span>04</span>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label7" runat="server" Text='<%#Eval("04") %>'></asp:Label>
+                                        <asp:Label ID="Label8" runat="server" Text='<%#Eval("04") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
@@ -209,7 +232,7 @@
                                         <span>05</span>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label8" runat="server" Text='<%#Eval("05") %>'></asp:Label>
+                                        <asp:Label ID="Label9" runat="server" Text='<%#Eval("05") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
@@ -218,7 +241,7 @@
                                         <span>06</span>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label9" runat="server" Text='<%#Eval("06") %>'></asp:Label>
+                                        <asp:Label ID="Label10" runat="server" Text='<%#Eval("06") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
@@ -227,7 +250,7 @@
                                         <span>07</span>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label10" runat="server" Text='<%#Eval("07") %>'></asp:Label>
+                                        <asp:Label ID="Label11" runat="server" Text='<%#Eval("07") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
@@ -236,7 +259,7 @@
                                         <span>08</span>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label11" runat="server" Text='<%#Eval("08") %>'></asp:Label>
+                                        <asp:Label ID="Label12" runat="server" Text='<%#Eval("08") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
@@ -245,7 +268,7 @@
                                         <span>09</span>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label12" runat="server" Text='<%#Eval("09") %>'></asp:Label>
+                                        <asp:Label ID="Label13" runat="server" Text='<%#Eval("09") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
@@ -254,7 +277,7 @@
                                         <span>10</span>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label13" runat="server" Text='<%#Eval("10") %>'></asp:Label>
+                                        <asp:Label ID="Label14" runat="server" Text='<%#Eval("10") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
@@ -263,7 +286,7 @@
                                         <span>11</span>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label14" runat="server" Text='<%#Eval("11") %>'></asp:Label>
+                                        <asp:Label ID="Label15" runat="server" Text='<%#Eval("11") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
@@ -272,7 +295,7 @@
                                         <span>12</span>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label15" runat="server" Text='<%#Eval("12") %>'></asp:Label>
+                                        <asp:Label ID="Label16" runat="server" Text='<%#Eval("12") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
@@ -281,10 +304,11 @@
                                         <span>小計</span>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="lblAnnualSum" runat="server" Text=""></asp:Label>
+                                        <asp:Label ID="Label17" runat="server" Text=""></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
+                            
                         </asp:GridView>
                     </div>
                 </div>

@@ -36,7 +36,6 @@
             $('.autosize').autosize();
         });
         $(document).ready(function () {
-
             $('.datepicker').datepicker({
                 language: 'zh-TW',
                 format: 'yyyy/mm/dd',

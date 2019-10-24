@@ -5,6 +5,7 @@
     <meta name="description" content="AESSX日規極薄耐熱XLPE汽車花線,適用於汽車、機車及各式運送工具之日規耐熱低壓XLPVC絕緣花線，符合JASO D611規範">	
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
+
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="smallPicArea" Runat="Server">
     <div class="content-row">
