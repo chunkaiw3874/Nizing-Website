@@ -376,8 +376,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         {   
                             //判斷假期開始時間是否合理
                             if ((hdnOfficeOrProduction.Value == "production" && !typhoonDay)  //除非是颱風假，線廠人員僅能以上、下午為單位請假
-                                || ddlDayOffType.SelectedValue == "06" || ddlDayOffType.SelectedValue=="07" || ddlDayOffType.SelectedValue=="08" || ddlDayOffType.SelectedValue=="09"
-                                )  //婚、喪、陪產，無論人員身分，僅能以上、下午為單位請假
+                                || ddlDayOffType.SelectedValue=="08"
+                                )  //產假，無論人員身分，僅能以上、下午為單位請假
                             {
                                 if ((!(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(3, 2))     //開始放假時間(hhmm)!=開始上班時間
                                     && !(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(3, 2))  //開始放假時間(hhmm)!=休息開始時間
@@ -419,8 +419,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         {
                             //判斷假期開始時間是否合理
                             if ((hdnOfficeOrProduction.Value == "production" && !typhoonDay)  //除非是颱風假，線廠人員僅能以上、下午為單位請假
-                                || ddlDayOffType.SelectedValue == "06" || ddlDayOffType.SelectedValue == "07" || ddlDayOffType.SelectedValue == "08" || ddlDayOffType.SelectedValue == "09"
-                                )  //婚、喪、陪產、颱風假，無論人員身分，僅能以上、下午為單位請假
+                                ||  ddlDayOffType.SelectedValue == "08"
+                                )  //產假，無論人員身分，僅能以上、下午為單位請假
                             {
                                 if ((!(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(3, 2))     //開始放假時間(hhmm)!=開始上班時間
                                     && !(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(3, 2))  //開始放假時間(hhmm)!=休息開始時間
