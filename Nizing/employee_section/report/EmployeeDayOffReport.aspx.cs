@@ -132,6 +132,7 @@ public partial class EmployeeDayOffReport : System.Web.UI.Page
                                             + " AND CMSMV.MV001<>'0007'"
                                             + " AND CMSMV.MV001<>'0098'"
                                             + " AND CMSMV.MV001 NOT LIKE 'PT%'"
+                                            + " AND PALTL.TL004<>'0001'"
                                             + condition
                                             + " )"
                                             + " AS"

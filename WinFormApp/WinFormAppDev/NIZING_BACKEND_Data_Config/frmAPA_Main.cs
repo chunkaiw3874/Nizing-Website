@@ -32,13 +32,13 @@ namespace NIZING_BACKEND_Data_Config
 
         #region 問題分類建立 Universal Variable
         private FunctionMode questionCategoryTabMode = FunctionMode.STATIC;
-        dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter adapterQuestionCategory = new dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter();
+        private dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter adapterQuestionCategory = new dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter();
         DataTable dtQuestionCategorySource = new DataTable();
         #endregion
 
         #region 問題建立 Universal Variable
         private FunctionMode questionTabMode = FunctionMode.STATIC;
-        dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter adapterQuestion = new dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter();
+        private dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter adapterQuestion = new dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_QUESTION_ATableAdapter();
         DataTable dtQuestionSource = new DataTable();
         #endregion
 
@@ -474,20 +474,20 @@ namespace NIZING_BACKEND_Data_Config
                             break;
                     }
                     break;
-                case "tbpScoreStandard":
+                case "tbpScoreStandard":    //2019.11.05 停止使用特評
                     switch (scoreStandardTabMode)
                     {
                         case FunctionMode.STATIC:
-                            btnScoreStandardEdit.Enabled = true;
+                            btnScoreStandardEdit.Enabled = false;
                             btnScoreStandardSave.Enabled = false;
                             btnScoreStandardCancel.Enabled = false;
                             txtScoreStandardStandard.Enabled = false;
                             break;
                         case FunctionMode.EDIT:
                             btnScoreStandardEdit.Enabled = false;
-                            btnScoreStandardSave.Enabled = true;
-                            btnScoreStandardCancel.Enabled = true;
-                            txtScoreStandardStandard.Enabled = true;
+                            btnScoreStandardSave.Enabled = false;
+                            btnScoreStandardCancel.Enabled = false;
+                            txtScoreStandardStandard.Enabled = false;
                             break;
                     }
                     break;
