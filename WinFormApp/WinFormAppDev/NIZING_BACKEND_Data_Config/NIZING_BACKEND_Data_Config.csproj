@@ -24,7 +24,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -91,7 +91,6 @@
     </Compile>
     <Compile Include="dsBackendLoginAccount.cs">
       <DependentUpon>dsBackendLoginAccount.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="dsBackendLoginAccount.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -100,7 +99,6 @@
     </Compile>
     <Compile Include="dsOQS_LoginAccount.cs">
       <DependentUpon>dsOQS_LoginAccount.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="dsOQS_LoginAccount.Designer.cs">
       <AutoGen>True</AutoGen>

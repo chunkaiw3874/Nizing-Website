@@ -33,9 +33,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tbcManagement = new System.Windows.Forms.TabControl();
             this.tbpQuestionCategory = new System.Windows.Forms.TabPage();
+            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.txtQuestionCategoryTabMemo = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -77,16 +79,31 @@
             this.lblQuestionAssignmentQuestionID = new System.Windows.Forms.Label();
             this.tbpSetScoreWeight = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnSetScoreWeightEdit = new System.Windows.Forms.Button();
+            this.txtSetScoreWeightMemo = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel15 = new System.Windows.Forms.FlowLayoutPanel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnSetScoreWeightCancel = new System.Windows.Forms.Button();
+            this.btnSetScoreWeightSave = new System.Windows.Forms.Button();
             this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel16 = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtSetScoreWeightSupervisorWeight = new System.Windows.Forms.TextBox();
+            this.txtSetScoreWeightSelfWeight = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
+            this.cbxSetScoreWeightYear = new System.Windows.Forms.ComboBox();
+            this.txtSetScoreWeightFinalizerWeight = new System.Windows.Forms.TextBox();
+            this.tbpSetSupervisorAmount = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
+            this.flowLayoutPanel16 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnSetSupervisorAmountCancel = new System.Windows.Forms.Button();
+            this.btnSetSupervisorAmountSave = new System.Windows.Forms.Button();
+            this.gvSetSupervisorAmountInputField = new System.Windows.Forms.DataGridView();
+            this.txtSetSupervisorAmountMemo = new System.Windows.Forms.TextBox();
+            this.flowLayoutPanel17 = new System.Windows.Forms.FlowLayoutPanel();
+            this.cbxSetSupervisorAmountYear = new System.Windows.Forms.ComboBox();
+            this.btnSetSupervisorAmountEdit = new System.Windows.Forms.Button();
             this.tbpPersonnelAssignment = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
@@ -130,6 +147,7 @@
             this.dtpYearAndEvalTimeEndTime = new System.Windows.Forms.DateTimePicker();
             this.flowLayoutPanel11 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnYearAndEvalTimeSave = new System.Windows.Forms.Button();
+            this.btnYearAndEvalTimeCancel = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -138,6 +156,10 @@
             this.dtpYearAndEvalTimeSelfEndTime = new System.Windows.Forms.DateTimePicker();
             this.dtpYearAndEvalTimeSupervisorStartTime = new System.Windows.Forms.DateTimePicker();
             this.dtpYearAndEvalTimeSupervisorEndTime = new System.Windows.Forms.DateTimePicker();
+            this.dtpYearAndEvalTimeFinalizerStartTime = new System.Windows.Forms.DateTimePicker();
+            this.dtpYearAndEvalTimeFinalizerEndTime = new System.Windows.Forms.DateTimePicker();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.txtYearAndEvalTimeTabMemo = new System.Windows.Forms.RichTextBox();
             this.tbpAccountPriviledge = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
@@ -187,7 +209,11 @@
             this.tableLayoutPanel14.SuspendLayout();
             this.flowLayoutPanel15.SuspendLayout();
             this.tableLayoutPanel15.SuspendLayout();
+            this.tbpSetSupervisorAmount.SuspendLayout();
+            this.tableLayoutPanel16.SuspendLayout();
             this.flowLayoutPanel16.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvSetSupervisorAmountInputField)).BeginInit();
+            this.flowLayoutPanel17.SuspendLayout();
             this.tbpPersonnelAssignment.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -233,7 +259,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.061224F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 96.93877F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1184, 862);
-            this.tableLayoutPanel1.TabIndex = 1;
+            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tbcManagement
             // 
@@ -241,6 +267,7 @@
             this.tbcManagement.Controls.Add(this.tbpQuestion);
             this.tbcManagement.Controls.Add(this.tbpQuestionAssignment);
             this.tbcManagement.Controls.Add(this.tbpSetScoreWeight);
+            this.tbcManagement.Controls.Add(this.tbpSetSupervisorAmount);
             this.tbcManagement.Controls.Add(this.tbpPersonnelAssignment);
             this.tbcManagement.Controls.Add(this.tbpEmployeeWorkhourInput);
             this.tbcManagement.Controls.Add(this.tbpScoreStandard);
@@ -254,12 +281,14 @@
             this.tbcManagement.Name = "tbcManagement";
             this.tbcManagement.SelectedIndex = 0;
             this.tbcManagement.Size = new System.Drawing.Size(1184, 836);
-            this.tbcManagement.TabIndex = 1;
+            this.tbcManagement.TabIndex = 0;
+            this.tbcManagement.TabStop = false;
             this.tbcManagement.SelectedIndexChanged += new System.EventHandler(this.tbcManagement_SelectedIndexChanged);
             // 
             // tbpQuestionCategory
             // 
             this.tbpQuestionCategory.CausesValidation = false;
+            this.tbpQuestionCategory.Controls.Add(this.maskedTextBox1);
             this.tbpQuestionCategory.Controls.Add(this.tableLayoutPanel2);
             this.tbpQuestionCategory.Location = new System.Drawing.Point(4, 22);
             this.tbpQuestionCategory.Name = "tbpQuestionCategory";
@@ -268,6 +297,13 @@
             this.tbpQuestionCategory.TabIndex = 0;
             this.tbpQuestionCategory.Text = "問題分類建立";
             this.tbpQuestionCategory.UseVisualStyleBackColor = true;
+            // 
+            // maskedTextBox1
+            // 
+            this.maskedTextBox1.Location = new System.Drawing.Point(8, 34);
+            this.maskedTextBox1.Name = "maskedTextBox1";
+            this.maskedTextBox1.Size = new System.Drawing.Size(100, 22);
+            this.maskedTextBox1.TabIndex = 1;
             // 
             // tableLayoutPanel2
             // 
@@ -301,7 +337,8 @@
             this.txtQuestionCategoryTabMemo.ReadOnly = true;
             this.txtQuestionCategoryTabMemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtQuestionCategoryTabMemo.Size = new System.Drawing.Size(1162, 94);
-            this.txtQuestionCategoryTabMemo.TabIndex = 4;
+            this.txtQuestionCategoryTabMemo.TabIndex = 3;
+            this.txtQuestionCategoryTabMemo.TabStop = false;
             // 
             // flowLayoutPanel1
             // 
@@ -314,7 +351,7 @@
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1168, 29);
-            this.flowLayoutPanel1.TabIndex = 0;
+            this.flowLayoutPanel1.TabIndex = 2;
             // 
             // btnQuestionCategoryCancel
             // 
@@ -323,7 +360,7 @@
             this.btnQuestionCategoryCancel.Location = new System.Drawing.Point(1090, 3);
             this.btnQuestionCategoryCancel.Name = "btnQuestionCategoryCancel";
             this.btnQuestionCategoryCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnQuestionCategoryCancel.TabIndex = 0;
+            this.btnQuestionCategoryCancel.TabIndex = 1;
             this.btnQuestionCategoryCancel.Text = "取消";
             this.btnQuestionCategoryCancel.UseVisualStyleBackColor = true;
             this.btnQuestionCategoryCancel.Click += new System.EventHandler(this.btnQuestionCategoryCancel_Click);
@@ -334,7 +371,7 @@
             this.btnQuestionCategorySave.Location = new System.Drawing.Point(1009, 3);
             this.btnQuestionCategorySave.Name = "btnQuestionCategorySave";
             this.btnQuestionCategorySave.Size = new System.Drawing.Size(75, 23);
-            this.btnQuestionCategorySave.TabIndex = 1;
+            this.btnQuestionCategorySave.TabIndex = 0;
             this.btnQuestionCategorySave.Text = "儲存";
             this.btnQuestionCategorySave.UseVisualStyleBackColor = true;
             this.btnQuestionCategorySave.Click += new System.EventHandler(this.btnQuestionCategorySave_Click);
@@ -361,7 +398,7 @@
             this.btnQuestionCategoryEdit.Location = new System.Drawing.Point(4, 4);
             this.btnQuestionCategoryEdit.Name = "btnQuestionCategoryEdit";
             this.btnQuestionCategoryEdit.Size = new System.Drawing.Size(75, 23);
-            this.btnQuestionCategoryEdit.TabIndex = 3;
+            this.btnQuestionCategoryEdit.TabIndex = 0;
             this.btnQuestionCategoryEdit.Text = "編輯";
             this.btnQuestionCategoryEdit.UseVisualStyleBackColor = true;
             this.btnQuestionCategoryEdit.Click += new System.EventHandler(this.btnQuestionCategoryEdit_Click);
@@ -396,7 +433,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(1170, 804);
-            this.tableLayoutPanel3.TabIndex = 1;
+            this.tableLayoutPanel3.TabIndex = 0;
             // 
             // flowLayoutPanel2
             // 
@@ -409,7 +446,7 @@
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(1168, 29);
-            this.flowLayoutPanel2.TabIndex = 0;
+            this.flowLayoutPanel2.TabIndex = 2;
             // 
             // btnQuestionCancel
             // 
@@ -418,7 +455,7 @@
             this.btnQuestionCancel.Location = new System.Drawing.Point(1090, 3);
             this.btnQuestionCancel.Name = "btnQuestionCancel";
             this.btnQuestionCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnQuestionCancel.TabIndex = 0;
+            this.btnQuestionCancel.TabIndex = 1;
             this.btnQuestionCancel.Text = "取消";
             this.btnQuestionCancel.UseVisualStyleBackColor = true;
             this.btnQuestionCancel.Click += new System.EventHandler(this.btnQuestionCancel_Click);
@@ -429,7 +466,7 @@
             this.btnQuestionSave.Location = new System.Drawing.Point(1009, 3);
             this.btnQuestionSave.Name = "btnQuestionSave";
             this.btnQuestionSave.Size = new System.Drawing.Size(75, 23);
-            this.btnQuestionSave.TabIndex = 1;
+            this.btnQuestionSave.TabIndex = 0;
             this.btnQuestionSave.Text = "儲存";
             this.btnQuestionSave.UseVisualStyleBackColor = true;
             this.btnQuestionSave.Click += new System.EventHandler(this.btnQuestionSave_Click);
@@ -479,7 +516,7 @@
             this.btnQuestionEdit.Location = new System.Drawing.Point(4, 4);
             this.btnQuestionEdit.Name = "btnQuestionEdit";
             this.btnQuestionEdit.Size = new System.Drawing.Size(75, 23);
-            this.btnQuestionEdit.TabIndex = 3;
+            this.btnQuestionEdit.TabIndex = 0;
             this.btnQuestionEdit.Text = "編輯";
             this.btnQuestionEdit.UseVisualStyleBackColor = true;
             this.btnQuestionEdit.Click += new System.EventHandler(this.btnQuestionEdit_Click);
@@ -492,7 +529,8 @@
             this.txtQuestionTabMemo.Name = "txtQuestionTabMemo";
             this.txtQuestionTabMemo.ReadOnly = true;
             this.txtQuestionTabMemo.Size = new System.Drawing.Size(1162, 94);
-            this.txtQuestionTabMemo.TabIndex = 4;
+            this.txtQuestionTabMemo.TabIndex = 3;
+            this.txtQuestionTabMemo.TabStop = false;
             this.txtQuestionTabMemo.Text = "";
             // 
             // tbpQuestionAssignment
@@ -539,7 +577,7 @@
             this.lblQuestionAssignmentQuestionCategory.Location = new System.Drawing.Point(4, 28);
             this.lblQuestionAssignmentQuestionCategory.Name = "lblQuestionAssignmentQuestionCategory";
             this.lblQuestionAssignmentQuestionCategory.Size = new System.Drawing.Size(1162, 26);
-            this.lblQuestionAssignmentQuestionCategory.TabIndex = 5;
+            this.lblQuestionAssignmentQuestionCategory.TabIndex = 3;
             // 
             // txtQuestionAssignmentTabMemo
             // 
@@ -549,7 +587,8 @@
             this.txtQuestionAssignmentTabMemo.Name = "txtQuestionAssignmentTabMemo";
             this.txtQuestionAssignmentTabMemo.ReadOnly = true;
             this.txtQuestionAssignmentTabMemo.Size = new System.Drawing.Size(1162, 95);
-            this.txtQuestionAssignmentTabMemo.TabIndex = 0;
+            this.txtQuestionAssignmentTabMemo.TabIndex = 5;
+            this.txtQuestionAssignmentTabMemo.TabStop = false;
             this.txtQuestionAssignmentTabMemo.Text = "";
             // 
             // flowLayoutPanel5
@@ -569,7 +608,7 @@
             this.btnQuestionAssignmentCancel.Location = new System.Drawing.Point(1090, 3);
             this.btnQuestionAssignmentCancel.Name = "btnQuestionAssignmentCancel";
             this.btnQuestionAssignmentCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnQuestionAssignmentCancel.TabIndex = 0;
+            this.btnQuestionAssignmentCancel.TabIndex = 1;
             this.btnQuestionAssignmentCancel.Text = "取消";
             this.btnQuestionAssignmentCancel.UseVisualStyleBackColor = true;
             this.btnQuestionAssignmentCancel.Click += new System.EventHandler(this.btnQuestionAssignmentCancel_Click);
@@ -579,7 +618,7 @@
             this.btnQuestionAssignmentSave.Location = new System.Drawing.Point(1009, 3);
             this.btnQuestionAssignmentSave.Name = "btnQuestionAssignmentSave";
             this.btnQuestionAssignmentSave.Size = new System.Drawing.Size(75, 23);
-            this.btnQuestionAssignmentSave.TabIndex = 1;
+            this.btnQuestionAssignmentSave.TabIndex = 0;
             this.btnQuestionAssignmentSave.Text = "儲存";
             this.btnQuestionAssignmentSave.UseVisualStyleBackColor = true;
             this.btnQuestionAssignmentSave.Click += new System.EventHandler(this.btnQuestionAssignmentSave_Click);
@@ -594,7 +633,8 @@
             this.txtQuestionAssignmentQuestionBody.ReadOnly = true;
             this.txtQuestionAssignmentQuestionBody.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtQuestionAssignmentQuestionBody.Size = new System.Drawing.Size(1162, 363);
-            this.txtQuestionAssignmentQuestionBody.TabIndex = 3;
+            this.txtQuestionAssignmentQuestionBody.TabIndex = 4;
+            this.txtQuestionAssignmentQuestionBody.TabStop = false;
             // 
             // tableLayoutPanel6
             // 
@@ -617,7 +657,7 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(1168, 246);
-            this.tableLayoutPanel6.TabIndex = 4;
+            this.tableLayoutPanel6.TabIndex = 0;
             // 
             // label2
             // 
@@ -627,7 +667,7 @@
             this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(378, 22);
-            this.label2.TabIndex = 0;
+            this.label2.TabIndex = 4;
             this.label2.Text = "適用部門";
             // 
             // label3
@@ -638,7 +678,7 @@
             this.label3.Location = new System.Drawing.Point(587, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(378, 22);
-            this.label3.TabIndex = 1;
+            this.label3.TabIndex = 5;
             this.label3.Text = "適用員工";
             // 
             // lvQuestionAssignmentDept
@@ -650,7 +690,7 @@
             this.lvQuestionAssignmentDept.Name = "lvQuestionAssignmentDept";
             this.lvQuestionAssignmentDept.Size = new System.Drawing.Size(378, 218);
             this.lvQuestionAssignmentDept.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.lvQuestionAssignmentDept.TabIndex = 2;
+            this.lvQuestionAssignmentDept.TabIndex = 0;
             this.lvQuestionAssignmentDept.UseCompatibleStateImageBehavior = false;
             this.lvQuestionAssignmentDept.View = System.Windows.Forms.View.List;
             // 
@@ -665,7 +705,7 @@
             this.flowLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
             this.flowLayoutPanel6.Size = new System.Drawing.Size(200, 224);
-            this.flowLayoutPanel6.TabIndex = 3;
+            this.flowLayoutPanel6.TabIndex = 1;
             // 
             // cbxQuestionAssignmentDept
             // 
@@ -710,7 +750,7 @@
             this.lvQuestionAssignmentEmp.Name = "lvQuestionAssignmentEmp";
             this.lvQuestionAssignmentEmp.Size = new System.Drawing.Size(378, 218);
             this.lvQuestionAssignmentEmp.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.lvQuestionAssignmentEmp.TabIndex = 4;
+            this.lvQuestionAssignmentEmp.TabIndex = 2;
             this.lvQuestionAssignmentEmp.UseCompatibleStateImageBehavior = false;
             this.lvQuestionAssignmentEmp.View = System.Windows.Forms.View.List;
             // 
@@ -725,7 +765,7 @@
             this.flowLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel7.Name = "flowLayoutPanel7";
             this.flowLayoutPanel7.Size = new System.Drawing.Size(200, 224);
-            this.flowLayoutPanel7.TabIndex = 5;
+            this.flowLayoutPanel7.TabIndex = 3;
             // 
             // cbxQuestionAssignmentEmp
             // 
@@ -743,7 +783,7 @@
             this.btnQuestionAssignmentAddEmp.Location = new System.Drawing.Point(3, 29);
             this.btnQuestionAssignmentAddEmp.Name = "btnQuestionAssignmentAddEmp";
             this.btnQuestionAssignmentAddEmp.Size = new System.Drawing.Size(40, 40);
-            this.btnQuestionAssignmentAddEmp.TabIndex = 3;
+            this.btnQuestionAssignmentAddEmp.TabIndex = 1;
             this.btnQuestionAssignmentAddEmp.Text = "+";
             this.btnQuestionAssignmentAddEmp.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnQuestionAssignmentAddEmp.UseVisualStyleBackColor = true;
@@ -788,8 +828,8 @@
             this.tableLayoutPanel14.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel14.ColumnCount = 1;
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel14.Controls.Add(this.button1, 0, 0);
-            this.tableLayoutPanel14.Controls.Add(this.textBox1, 0, 3);
+            this.tableLayoutPanel14.Controls.Add(this.btnSetScoreWeightEdit, 0, 0);
+            this.tableLayoutPanel14.Controls.Add(this.txtSetScoreWeightMemo, 0, 3);
             this.tableLayoutPanel14.Controls.Add(this.flowLayoutPanel15, 0, 2);
             this.tableLayoutPanel14.Controls.Add(this.tableLayoutPanel15, 0, 1);
             this.tableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -803,116 +843,307 @@
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel14.Size = new System.Drawing.Size(1170, 804);
-            this.tableLayoutPanel14.TabIndex = 2;
+            this.tableLayoutPanel14.TabIndex = 0;
             // 
-            // button1
+            // btnSetScoreWeightEdit
             // 
-            this.button1.Location = new System.Drawing.Point(4, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "編輯";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSetScoreWeightEdit.Location = new System.Drawing.Point(4, 4);
+            this.btnSetScoreWeightEdit.Name = "btnSetScoreWeightEdit";
+            this.btnSetScoreWeightEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnSetScoreWeightEdit.TabIndex = 0;
+            this.btnSetScoreWeightEdit.Text = "編輯";
+            this.btnSetScoreWeightEdit.UseVisualStyleBackColor = true;
+            this.btnSetScoreWeightEdit.Click += new System.EventHandler(this.btnSetScoreWeightEdit_Click);
             // 
-            // textBox1
+            // txtSetScoreWeightMemo
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(4, 706);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(1162, 94);
-            this.textBox1.TabIndex = 4;
+            this.txtSetScoreWeightMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtSetScoreWeightMemo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSetScoreWeightMemo.Location = new System.Drawing.Point(4, 706);
+            this.txtSetScoreWeightMemo.Multiline = true;
+            this.txtSetScoreWeightMemo.Name = "txtSetScoreWeightMemo";
+            this.txtSetScoreWeightMemo.ReadOnly = true;
+            this.txtSetScoreWeightMemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtSetScoreWeightMemo.Size = new System.Drawing.Size(1162, 94);
+            this.txtSetScoreWeightMemo.TabIndex = 3;
+            this.txtSetScoreWeightMemo.TabStop = false;
             // 
             // flowLayoutPanel15
             // 
             this.flowLayoutPanel15.CausesValidation = false;
-            this.flowLayoutPanel15.Controls.Add(this.button2);
-            this.flowLayoutPanel15.Controls.Add(this.button3);
+            this.flowLayoutPanel15.Controls.Add(this.btnSetScoreWeightCancel);
+            this.flowLayoutPanel15.Controls.Add(this.btnSetScoreWeightSave);
             this.flowLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel15.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel15.Location = new System.Drawing.Point(1, 673);
             this.flowLayoutPanel15.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel15.Name = "flowLayoutPanel15";
             this.flowLayoutPanel15.Size = new System.Drawing.Size(1168, 29);
-            this.flowLayoutPanel15.TabIndex = 0;
+            this.flowLayoutPanel15.TabIndex = 2;
             // 
-            // button2
+            // btnSetScoreWeightCancel
             // 
-            this.button2.CausesValidation = false;
-            this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(1090, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "取消";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnSetScoreWeightCancel.CausesValidation = false;
+            this.btnSetScoreWeightCancel.Enabled = false;
+            this.btnSetScoreWeightCancel.Location = new System.Drawing.Point(1090, 3);
+            this.btnSetScoreWeightCancel.Name = "btnSetScoreWeightCancel";
+            this.btnSetScoreWeightCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnSetScoreWeightCancel.TabIndex = 1;
+            this.btnSetScoreWeightCancel.Text = "取消";
+            this.btnSetScoreWeightCancel.UseVisualStyleBackColor = true;
+            this.btnSetScoreWeightCancel.Click += new System.EventHandler(this.btnSetScoreWeightCancel_Click);
             // 
-            // button3
+            // btnSetScoreWeightSave
             // 
-            this.button3.Enabled = false;
-            this.button3.Location = new System.Drawing.Point(1009, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "儲存";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnSetScoreWeightSave.Enabled = false;
+            this.btnSetScoreWeightSave.Location = new System.Drawing.Point(1009, 3);
+            this.btnSetScoreWeightSave.Name = "btnSetScoreWeightSave";
+            this.btnSetScoreWeightSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSetScoreWeightSave.TabIndex = 0;
+            this.btnSetScoreWeightSave.Text = "儲存";
+            this.btnSetScoreWeightSave.UseVisualStyleBackColor = true;
+            this.btnSetScoreWeightSave.Click += new System.EventHandler(this.btnSetScoreWeightSave_Click);
             // 
             // tableLayoutPanel15
             // 
-            this.tableLayoutPanel15.ColumnCount = 1;
+            this.tableLayoutPanel15.ColumnCount = 2;
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel15.Controls.Add(this.flowLayoutPanel16, 0, 0);
-            this.tableLayoutPanel15.Controls.Add(this.label17, 0, 1);
+            this.tableLayoutPanel15.Controls.Add(this.txtSetScoreWeightSupervisorWeight, 1, 2);
+            this.tableLayoutPanel15.Controls.Add(this.txtSetScoreWeightSelfWeight, 1, 1);
+            this.tableLayoutPanel15.Controls.Add(this.label18, 0, 0);
+            this.tableLayoutPanel15.Controls.Add(this.label20, 0, 2);
+            this.tableLayoutPanel15.Controls.Add(this.label22, 0, 1);
+            this.tableLayoutPanel15.Controls.Add(this.label16, 0, 3);
+            this.tableLayoutPanel15.Controls.Add(this.label17, 1, 4);
+            this.tableLayoutPanel15.Controls.Add(this.cbxSetScoreWeightYear, 1, 0);
+            this.tableLayoutPanel15.Controls.Add(this.txtSetScoreWeightFinalizerWeight, 1, 3);
             this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel15.Location = new System.Drawing.Point(1, 31);
             this.tableLayoutPanel15.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel15.Name = "tableLayoutPanel15";
-            this.tableLayoutPanel15.RowCount = 2;
+            this.tableLayoutPanel15.RowCount = 5;
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel15.Size = new System.Drawing.Size(1168, 641);
-            this.tableLayoutPanel15.TabIndex = 6;
+            this.tableLayoutPanel15.TabIndex = 1;
             // 
-            // flowLayoutPanel16
+            // txtSetScoreWeightSupervisorWeight
             // 
-            this.flowLayoutPanel16.Controls.Add(this.label16);
-            this.flowLayoutPanel16.Controls.Add(this.textBox2);
-            this.flowLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel16.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel16.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel16.Name = "flowLayoutPanel16";
-            this.flowLayoutPanel16.Size = new System.Drawing.Size(1168, 29);
-            this.flowLayoutPanel16.TabIndex = 5;
+            this.txtSetScoreWeightSupervisorWeight.Location = new System.Drawing.Point(103, 61);
+            this.txtSetScoreWeightSupervisorWeight.Name = "txtSetScoreWeightSupervisorWeight";
+            this.txtSetScoreWeightSupervisorWeight.Size = new System.Drawing.Size(100, 22);
+            this.txtSetScoreWeightSupervisorWeight.TabIndex = 2;
+            // 
+            // txtSetScoreWeightSelfWeight
+            // 
+            this.txtSetScoreWeightSelfWeight.Location = new System.Drawing.Point(103, 32);
+            this.txtSetScoreWeightSelfWeight.Name = "txtSetScoreWeightSelfWeight";
+            this.txtSetScoreWeightSelfWeight.Size = new System.Drawing.Size(100, 22);
+            this.txtSetScoreWeightSelfWeight.TabIndex = 1;
+            // 
+            // label18
+            // 
+            this.label18.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(65, 8);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(32, 12);
+            this.label18.TabIndex = 4;
+            this.label18.Text = "年份:";
+            // 
+            // label20
+            // 
+            this.label20.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(29, 66);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(68, 12);
+            this.label20.TabIndex = 6;
+            this.label20.Text = "主管評權重:";
+            // 
+            // label22
+            // 
+            this.label22.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(41, 37);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(56, 12);
+            this.label22.TabIndex = 5;
+            this.label22.Text = "自評權重:";
             // 
             // label16
             // 
-            this.label16.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label16.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(3, 8);
+            this.label16.Location = new System.Drawing.Point(17, 95);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(80, 12);
-            this.label16.TabIndex = 0;
-            this.label16.Text = "特評標準分數:";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(89, 3);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 22);
-            this.textBox2.TabIndex = 1;
+            this.label16.TabIndex = 7;
+            this.label16.Text = "核決主管權重:";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(3, 29);
+            this.label17.Location = new System.Drawing.Point(103, 116);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(201, 12);
-            this.label17.TabIndex = 6;
-            this.label17.Text = "分數設定限制: 0-10之間，小數點一位";
+            this.label17.Size = new System.Drawing.Size(249, 12);
+            this.label17.TabIndex = 8;
+            this.label17.Text = "設定數值: 0-100，無小數點，三項合計需為100";
+            // 
+            // cbxSetScoreWeightYear
+            // 
+            this.cbxSetScoreWeightYear.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cbxSetScoreWeightYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxSetScoreWeightYear.FormattingEnabled = true;
+            this.cbxSetScoreWeightYear.Location = new System.Drawing.Point(103, 4);
+            this.cbxSetScoreWeightYear.Name = "cbxSetScoreWeightYear";
+            this.cbxSetScoreWeightYear.Size = new System.Drawing.Size(121, 20);
+            this.cbxSetScoreWeightYear.TabIndex = 0;
+            this.cbxSetScoreWeightYear.SelectedIndexChanged += new System.EventHandler(this.cbxSetScoreWeightYear_SelectedIndexChanged);
+            // 
+            // txtSetScoreWeightFinalizerWeight
+            // 
+            this.txtSetScoreWeightFinalizerWeight.Location = new System.Drawing.Point(103, 90);
+            this.txtSetScoreWeightFinalizerWeight.Name = "txtSetScoreWeightFinalizerWeight";
+            this.txtSetScoreWeightFinalizerWeight.Size = new System.Drawing.Size(100, 22);
+            this.txtSetScoreWeightFinalizerWeight.TabIndex = 3;
+            // 
+            // tbpSetSupervisorAmount
+            // 
+            this.tbpSetSupervisorAmount.Controls.Add(this.tableLayoutPanel16);
+            this.tbpSetSupervisorAmount.Location = new System.Drawing.Point(4, 22);
+            this.tbpSetSupervisorAmount.Name = "tbpSetSupervisorAmount";
+            this.tbpSetSupervisorAmount.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpSetSupervisorAmount.Size = new System.Drawing.Size(1176, 810);
+            this.tbpSetSupervisorAmount.TabIndex = 11;
+            this.tbpSetSupervisorAmount.Text = "評核主管人數設定";
+            this.tbpSetSupervisorAmount.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel16
+            // 
+            this.tableLayoutPanel16.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel16.ColumnCount = 1;
+            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel16.Controls.Add(this.flowLayoutPanel16, 0, 2);
+            this.tableLayoutPanel16.Controls.Add(this.gvSetSupervisorAmountInputField, 0, 1);
+            this.tableLayoutPanel16.Controls.Add(this.txtSetSupervisorAmountMemo, 0, 3);
+            this.tableLayoutPanel16.Controls.Add(this.flowLayoutPanel17, 0, 0);
+            this.tableLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel16.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel16.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel16.Name = "tableLayoutPanel16";
+            this.tableLayoutPanel16.RowCount = 4;
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel16.Size = new System.Drawing.Size(1170, 804);
+            this.tableLayoutPanel16.TabIndex = 1;
+            // 
+            // flowLayoutPanel16
+            // 
+            this.flowLayoutPanel16.CausesValidation = false;
+            this.flowLayoutPanel16.Controls.Add(this.btnSetSupervisorAmountCancel);
+            this.flowLayoutPanel16.Controls.Add(this.btnSetSupervisorAmountSave);
+            this.flowLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel16.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel16.Location = new System.Drawing.Point(1, 673);
+            this.flowLayoutPanel16.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel16.Name = "flowLayoutPanel16";
+            this.flowLayoutPanel16.Size = new System.Drawing.Size(1168, 29);
+            this.flowLayoutPanel16.TabIndex = 2;
+            // 
+            // btnSetSupervisorAmountCancel
+            // 
+            this.btnSetSupervisorAmountCancel.CausesValidation = false;
+            this.btnSetSupervisorAmountCancel.Enabled = false;
+            this.btnSetSupervisorAmountCancel.Location = new System.Drawing.Point(1090, 3);
+            this.btnSetSupervisorAmountCancel.Name = "btnSetSupervisorAmountCancel";
+            this.btnSetSupervisorAmountCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnSetSupervisorAmountCancel.TabIndex = 1;
+            this.btnSetSupervisorAmountCancel.Text = "取消";
+            this.btnSetSupervisorAmountCancel.UseVisualStyleBackColor = true;
+            this.btnSetSupervisorAmountCancel.Click += new System.EventHandler(this.btnSetSupervisorAmountCancel_Click);
+            // 
+            // btnSetSupervisorAmountSave
+            // 
+            this.btnSetSupervisorAmountSave.Enabled = false;
+            this.btnSetSupervisorAmountSave.Location = new System.Drawing.Point(1009, 3);
+            this.btnSetSupervisorAmountSave.Name = "btnSetSupervisorAmountSave";
+            this.btnSetSupervisorAmountSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSetSupervisorAmountSave.TabIndex = 0;
+            this.btnSetSupervisorAmountSave.Text = "儲存";
+            this.btnSetSupervisorAmountSave.UseVisualStyleBackColor = true;
+            this.btnSetSupervisorAmountSave.Click += new System.EventHandler(this.btnSetSupervisorAmountSave_Click);
+            // 
+            // gvSetSupervisorAmountInputField
+            // 
+            this.gvSetSupervisorAmountInputField.AllowUserToAddRows = false;
+            this.gvSetSupervisorAmountInputField.AllowUserToResizeRows = false;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvSetSupervisorAmountInputField.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.gvSetSupervisorAmountInputField.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvSetSupervisorAmountInputField.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gvSetSupervisorAmountInputField.Location = new System.Drawing.Point(4, 34);
+            this.gvSetSupervisorAmountInputField.MultiSelect = false;
+            this.gvSetSupervisorAmountInputField.Name = "gvSetSupervisorAmountInputField";
+            this.gvSetSupervisorAmountInputField.RowTemplate.Height = 24;
+            this.gvSetSupervisorAmountInputField.Size = new System.Drawing.Size(1162, 635);
+            this.gvSetSupervisorAmountInputField.TabIndex = 1;
+            // 
+            // txtSetSupervisorAmountMemo
+            // 
+            this.txtSetSupervisorAmountMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtSetSupervisorAmountMemo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSetSupervisorAmountMemo.Location = new System.Drawing.Point(4, 706);
+            this.txtSetSupervisorAmountMemo.Multiline = true;
+            this.txtSetSupervisorAmountMemo.Name = "txtSetSupervisorAmountMemo";
+            this.txtSetSupervisorAmountMemo.ReadOnly = true;
+            this.txtSetSupervisorAmountMemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtSetSupervisorAmountMemo.Size = new System.Drawing.Size(1162, 94);
+            this.txtSetSupervisorAmountMemo.TabIndex = 3;
+            this.txtSetSupervisorAmountMemo.TabStop = false;
+            // 
+            // flowLayoutPanel17
+            // 
+            this.flowLayoutPanel17.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanel17.Controls.Add(this.cbxSetSupervisorAmountYear);
+            this.flowLayoutPanel17.Controls.Add(this.btnSetSupervisorAmountEdit);
+            this.flowLayoutPanel17.Location = new System.Drawing.Point(1, 1);
+            this.flowLayoutPanel17.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel17.Name = "flowLayoutPanel17";
+            this.flowLayoutPanel17.Size = new System.Drawing.Size(1168, 29);
+            this.flowLayoutPanel17.TabIndex = 0;
+            // 
+            // cbxSetSupervisorAmountYear
+            // 
+            this.cbxSetSupervisorAmountYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxSetSupervisorAmountYear.FormattingEnabled = true;
+            this.cbxSetSupervisorAmountYear.Location = new System.Drawing.Point(3, 3);
+            this.cbxSetSupervisorAmountYear.Name = "cbxSetSupervisorAmountYear";
+            this.cbxSetSupervisorAmountYear.Size = new System.Drawing.Size(121, 20);
+            this.cbxSetSupervisorAmountYear.TabIndex = 0;
+            this.cbxSetSupervisorAmountYear.SelectedIndexChanged += new System.EventHandler(this.cbxSetSupervisorAmountYear_SelectedIndexChanged);
+            // 
+            // btnSetSupervisorAmountEdit
+            // 
+            this.btnSetSupervisorAmountEdit.Location = new System.Drawing.Point(130, 3);
+            this.btnSetSupervisorAmountEdit.Name = "btnSetSupervisorAmountEdit";
+            this.btnSetSupervisorAmountEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnSetSupervisorAmountEdit.TabIndex = 1;
+            this.btnSetSupervisorAmountEdit.Text = "編輯";
+            this.btnSetSupervisorAmountEdit.UseVisualStyleBackColor = true;
+            this.btnSetSupervisorAmountEdit.Click += new System.EventHandler(this.btnSetSupervisorAmountEdit_Click);
             // 
             // tbpPersonnelAssignment
             // 
@@ -944,7 +1175,7 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(1170, 804);
-            this.tableLayoutPanel4.TabIndex = 2;
+            this.tableLayoutPanel4.TabIndex = 0;
             // 
             // flowLayoutPanel3
             // 
@@ -957,7 +1188,7 @@
             this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(1168, 29);
-            this.flowLayoutPanel3.TabIndex = 0;
+            this.flowLayoutPanel3.TabIndex = 2;
             // 
             // btnPersonnelAssignmentCancel
             // 
@@ -966,7 +1197,7 @@
             this.btnPersonnelAssignmentCancel.Location = new System.Drawing.Point(1090, 3);
             this.btnPersonnelAssignmentCancel.Name = "btnPersonnelAssignmentCancel";
             this.btnPersonnelAssignmentCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnPersonnelAssignmentCancel.TabIndex = 0;
+            this.btnPersonnelAssignmentCancel.TabIndex = 1;
             this.btnPersonnelAssignmentCancel.Text = "取消";
             this.btnPersonnelAssignmentCancel.UseVisualStyleBackColor = true;
             this.btnPersonnelAssignmentCancel.Click += new System.EventHandler(this.btnPersonnelAssignmentCancel_Click);
@@ -977,7 +1208,7 @@
             this.btnPersonnelAssignmentSave.Location = new System.Drawing.Point(1009, 3);
             this.btnPersonnelAssignmentSave.Name = "btnPersonnelAssignmentSave";
             this.btnPersonnelAssignmentSave.Size = new System.Drawing.Size(75, 23);
-            this.btnPersonnelAssignmentSave.TabIndex = 1;
+            this.btnPersonnelAssignmentSave.TabIndex = 2;
             this.btnPersonnelAssignmentSave.Text = "儲存";
             this.btnPersonnelAssignmentSave.UseVisualStyleBackColor = true;
             this.btnPersonnelAssignmentSave.Click += new System.EventHandler(this.btnPersonnelAssignmentSave_Click);
@@ -985,14 +1216,15 @@
             // gvPersonnelAssignment
             // 
             this.gvPersonnelAssignment.AllowUserToAddRows = false;
+            this.gvPersonnelAssignment.AllowUserToDeleteRows = false;
             this.gvPersonnelAssignment.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvPersonnelAssignment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvPersonnelAssignment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gvPersonnelAssignment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvPersonnelAssignment.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvPersonnelAssignment.Location = new System.Drawing.Point(4, 34);
@@ -1013,7 +1245,8 @@
             this.txtPersonnelAssignmentTabMemo.ReadOnly = true;
             this.txtPersonnelAssignmentTabMemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtPersonnelAssignmentTabMemo.Size = new System.Drawing.Size(1162, 94);
-            this.txtPersonnelAssignmentTabMemo.TabIndex = 2;
+            this.txtPersonnelAssignmentTabMemo.TabIndex = 3;
+            this.txtPersonnelAssignmentTabMemo.TabStop = false;
             // 
             // flowLayoutPanel4
             // 
@@ -1025,7 +1258,7 @@
             this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(1168, 29);
-            this.flowLayoutPanel4.TabIndex = 3;
+            this.flowLayoutPanel4.TabIndex = 0;
             // 
             // cbxPersonnelAssignmentYear
             // 
@@ -1042,7 +1275,7 @@
             this.btnPersonnelAssignmentEdit.Location = new System.Drawing.Point(130, 3);
             this.btnPersonnelAssignmentEdit.Name = "btnPersonnelAssignmentEdit";
             this.btnPersonnelAssignmentEdit.Size = new System.Drawing.Size(75, 23);
-            this.btnPersonnelAssignmentEdit.TabIndex = 3;
+            this.btnPersonnelAssignmentEdit.TabIndex = 1;
             this.btnPersonnelAssignmentEdit.Text = "編輯";
             this.btnPersonnelAssignmentEdit.UseVisualStyleBackColor = true;
             this.btnPersonnelAssignmentEdit.Click += new System.EventHandler(this.btnPersonnelAssignmentEdit_Click);
@@ -1077,7 +1310,7 @@
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel12.Size = new System.Drawing.Size(1170, 804);
-            this.tableLayoutPanel12.TabIndex = 3;
+            this.tableLayoutPanel12.TabIndex = 0;
             // 
             // flowLayoutPanel12
             // 
@@ -1090,7 +1323,7 @@
             this.flowLayoutPanel12.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel12.Name = "flowLayoutPanel12";
             this.flowLayoutPanel12.Size = new System.Drawing.Size(1168, 29);
-            this.flowLayoutPanel12.TabIndex = 0;
+            this.flowLayoutPanel12.TabIndex = 2;
             // 
             // btnEmployeeWorkhourInputCancel
             // 
@@ -1099,7 +1332,7 @@
             this.btnEmployeeWorkhourInputCancel.Location = new System.Drawing.Point(1090, 3);
             this.btnEmployeeWorkhourInputCancel.Name = "btnEmployeeWorkhourInputCancel";
             this.btnEmployeeWorkhourInputCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnEmployeeWorkhourInputCancel.TabIndex = 0;
+            this.btnEmployeeWorkhourInputCancel.TabIndex = 1;
             this.btnEmployeeWorkhourInputCancel.Text = "取消";
             this.btnEmployeeWorkhourInputCancel.UseVisualStyleBackColor = true;
             this.btnEmployeeWorkhourInputCancel.Click += new System.EventHandler(this.btnEmployeeWorkhourInputCancel_Click);
@@ -1110,7 +1343,7 @@
             this.btnEmployeeWorkhourInputSave.Location = new System.Drawing.Point(1009, 3);
             this.btnEmployeeWorkhourInputSave.Name = "btnEmployeeWorkhourInputSave";
             this.btnEmployeeWorkhourInputSave.Size = new System.Drawing.Size(75, 23);
-            this.btnEmployeeWorkhourInputSave.TabIndex = 1;
+            this.btnEmployeeWorkhourInputSave.TabIndex = 2;
             this.btnEmployeeWorkhourInputSave.Text = "儲存";
             this.btnEmployeeWorkhourInputSave.UseVisualStyleBackColor = true;
             this.btnEmployeeWorkhourInputSave.Click += new System.EventHandler(this.btnEmployeeWorkhourInputSave_Click);
@@ -1119,13 +1352,13 @@
             // 
             this.gvEmployeeWorkhourInputField.AllowUserToAddRows = false;
             this.gvEmployeeWorkhourInputField.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvEmployeeWorkhourInputField.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvEmployeeWorkhourInputField.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.gvEmployeeWorkhourInputField.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvEmployeeWorkhourInputField.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvEmployeeWorkhourInputField.Location = new System.Drawing.Point(4, 34);
@@ -1145,7 +1378,8 @@
             this.txtEmployeeWorkhourInputTabMemo.ReadOnly = true;
             this.txtEmployeeWorkhourInputTabMemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtEmployeeWorkhourInputTabMemo.Size = new System.Drawing.Size(1162, 94);
-            this.txtEmployeeWorkhourInputTabMemo.TabIndex = 2;
+            this.txtEmployeeWorkhourInputTabMemo.TabIndex = 3;
+            this.txtEmployeeWorkhourInputTabMemo.TabStop = false;
             // 
             // flowLayoutPanel13
             // 
@@ -1157,7 +1391,7 @@
             this.flowLayoutPanel13.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel13.Name = "flowLayoutPanel13";
             this.flowLayoutPanel13.Size = new System.Drawing.Size(1168, 29);
-            this.flowLayoutPanel13.TabIndex = 3;
+            this.flowLayoutPanel13.TabIndex = 0;
             // 
             // cbxEmployeeWorkhourInputYear
             // 
@@ -1174,7 +1408,7 @@
             this.btnEmployeeWorkhourInputEdit.Location = new System.Drawing.Point(130, 3);
             this.btnEmployeeWorkhourInputEdit.Name = "btnEmployeeWorkhourInputEdit";
             this.btnEmployeeWorkhourInputEdit.Size = new System.Drawing.Size(75, 23);
-            this.btnEmployeeWorkhourInputEdit.TabIndex = 3;
+            this.btnEmployeeWorkhourInputEdit.TabIndex = 1;
             this.btnEmployeeWorkhourInputEdit.Text = "編輯";
             this.btnEmployeeWorkhourInputEdit.UseVisualStyleBackColor = true;
             this.btnEmployeeWorkhourInputEdit.Click += new System.EventHandler(this.btnEmployeeWorkhourInputEdit_Click);
@@ -1211,17 +1445,17 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(1170, 804);
-            this.tableLayoutPanel5.TabIndex = 1;
+            this.tableLayoutPanel5.TabIndex = 0;
             // 
             // btnScoreStandardEdit
             // 
+            this.btnScoreStandardEdit.Enabled = false;
             this.btnScoreStandardEdit.Location = new System.Drawing.Point(4, 4);
             this.btnScoreStandardEdit.Name = "btnScoreStandardEdit";
             this.btnScoreStandardEdit.Size = new System.Drawing.Size(75, 23);
-            this.btnScoreStandardEdit.TabIndex = 7;
+            this.btnScoreStandardEdit.TabIndex = 0;
             this.btnScoreStandardEdit.Text = "編輯";
             this.btnScoreStandardEdit.UseVisualStyleBackColor = true;
-            this.btnScoreStandardEdit.Click += new System.EventHandler(this.btnScoreStandardEdit_Click);
             // 
             // txtScoreStandardTabMemo
             // 
@@ -1233,7 +1467,8 @@
             this.txtScoreStandardTabMemo.ReadOnly = true;
             this.txtScoreStandardTabMemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtScoreStandardTabMemo.Size = new System.Drawing.Size(1162, 94);
-            this.txtScoreStandardTabMemo.TabIndex = 4;
+            this.txtScoreStandardTabMemo.TabIndex = 3;
+            this.txtScoreStandardTabMemo.TabStop = false;
             // 
             // flowLayoutPanel8
             // 
@@ -1246,7 +1481,7 @@
             this.flowLayoutPanel8.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel8.Name = "flowLayoutPanel8";
             this.flowLayoutPanel8.Size = new System.Drawing.Size(1168, 29);
-            this.flowLayoutPanel8.TabIndex = 0;
+            this.flowLayoutPanel8.TabIndex = 2;
             // 
             // btnScoreStandardCancel
             // 
@@ -1255,10 +1490,9 @@
             this.btnScoreStandardCancel.Location = new System.Drawing.Point(1090, 3);
             this.btnScoreStandardCancel.Name = "btnScoreStandardCancel";
             this.btnScoreStandardCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnScoreStandardCancel.TabIndex = 0;
+            this.btnScoreStandardCancel.TabIndex = 1;
             this.btnScoreStandardCancel.Text = "取消";
             this.btnScoreStandardCancel.UseVisualStyleBackColor = true;
-            this.btnScoreStandardCancel.Click += new System.EventHandler(this.btnScoreStandardCancel_Click);
             // 
             // btnScoreStandardSave
             // 
@@ -1266,10 +1500,9 @@
             this.btnScoreStandardSave.Location = new System.Drawing.Point(1009, 3);
             this.btnScoreStandardSave.Name = "btnScoreStandardSave";
             this.btnScoreStandardSave.Size = new System.Drawing.Size(75, 23);
-            this.btnScoreStandardSave.TabIndex = 1;
+            this.btnScoreStandardSave.TabIndex = 0;
             this.btnScoreStandardSave.Text = "儲存";
             this.btnScoreStandardSave.UseVisualStyleBackColor = true;
-            this.btnScoreStandardSave.Click += new System.EventHandler(this.btnScoreStandardSave_Click);
             // 
             // tableLayoutPanel7
             // 
@@ -1286,7 +1519,7 @@
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel7.Size = new System.Drawing.Size(1168, 641);
-            this.tableLayoutPanel7.TabIndex = 6;
+            this.tableLayoutPanel7.TabIndex = 1;
             // 
             // flowLayoutPanel9
             // 
@@ -1297,7 +1530,7 @@
             this.flowLayoutPanel9.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel9.Name = "flowLayoutPanel9";
             this.flowLayoutPanel9.Size = new System.Drawing.Size(1168, 29);
-            this.flowLayoutPanel9.TabIndex = 5;
+            this.flowLayoutPanel9.TabIndex = 0;
             // 
             // label1
             // 
@@ -1306,7 +1539,7 @@
             this.label1.Location = new System.Drawing.Point(3, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 12);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 1;
             this.label1.Text = "特評標準分數:";
             // 
             // txtScoreStandardStandard
@@ -1314,7 +1547,7 @@
             this.txtScoreStandardStandard.Location = new System.Drawing.Point(89, 3);
             this.txtScoreStandardStandard.Name = "txtScoreStandardStandard";
             this.txtScoreStandardStandard.Size = new System.Drawing.Size(100, 22);
-            this.txtScoreStandardStandard.TabIndex = 1;
+            this.txtScoreStandardStandard.TabIndex = 0;
             // 
             // label4
             // 
@@ -1322,7 +1555,7 @@
             this.label4.Location = new System.Drawing.Point(3, 29);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(201, 12);
-            this.label4.TabIndex = 6;
+            this.label4.TabIndex = 1;
             this.label4.Text = "分數設定限制: 0-10之間，小數點一位";
             // 
             // tbpYearAndEvalTime
@@ -1351,12 +1584,12 @@
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel11.Size = new System.Drawing.Size(1170, 804);
-            this.tableLayoutPanel11.TabIndex = 2;
+            this.tableLayoutPanel11.TabIndex = 0;
             // 
             // tableLayoutPanel10
             // 
             this.tableLayoutPanel10.ColumnCount = 2;
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel10.Controls.Add(this.label9, 0, 2);
             this.tableLayoutPanel10.Controls.Add(this.cbxYearAndEvalTimeYear, 1, 0);
@@ -1364,7 +1597,7 @@
             this.tableLayoutPanel10.Controls.Add(this.label8, 0, 1);
             this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeStartTime, 1, 1);
             this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeEndTime, 1, 2);
-            this.tableLayoutPanel10.Controls.Add(this.flowLayoutPanel11, 1, 7);
+            this.tableLayoutPanel10.Controls.Add(this.flowLayoutPanel11, 1, 9);
             this.tableLayoutPanel10.Controls.Add(this.label10, 0, 3);
             this.tableLayoutPanel10.Controls.Add(this.label11, 0, 4);
             this.tableLayoutPanel10.Controls.Add(this.label12, 0, 5);
@@ -1373,11 +1606,17 @@
             this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeSelfEndTime, 1, 4);
             this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeSupervisorStartTime, 1, 5);
             this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeSupervisorEndTime, 1, 6);
+            this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeFinalizerStartTime, 1, 7);
+            this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeFinalizerEndTime, 1, 8);
+            this.tableLayoutPanel10.Controls.Add(this.label19, 0, 7);
+            this.tableLayoutPanel10.Controls.Add(this.label21, 0, 8);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel10.Location = new System.Drawing.Point(1, 1);
             this.tableLayoutPanel10.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RowCount = 8;
+            this.tableLayoutPanel10.RowCount = 10;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
@@ -1387,17 +1626,17 @@
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel10.Size = new System.Drawing.Size(1168, 701);
-            this.tableLayoutPanel10.TabIndex = 1;
+            this.tableLayoutPanel10.TabIndex = 0;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Dock = System.Windows.Forms.DockStyle.Right;
             this.label9.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label9.Location = new System.Drawing.Point(17, 58);
+            this.label9.Location = new System.Drawing.Point(37, 58);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(80, 29);
-            this.label9.TabIndex = 6;
+            this.label9.TabIndex = 13;
             this.label9.Text = "評核結束時間:";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -1405,19 +1644,20 @@
             // 
             this.cbxYearAndEvalTimeYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxYearAndEvalTimeYear.FormattingEnabled = true;
-            this.cbxYearAndEvalTimeYear.Location = new System.Drawing.Point(103, 3);
+            this.cbxYearAndEvalTimeYear.Location = new System.Drawing.Point(123, 3);
             this.cbxYearAndEvalTimeYear.Name = "cbxYearAndEvalTimeYear";
             this.cbxYearAndEvalTimeYear.Size = new System.Drawing.Size(121, 20);
-            this.cbxYearAndEvalTimeYear.TabIndex = 2;
+            this.cbxYearAndEvalTimeYear.TabIndex = 0;
+            this.cbxYearAndEvalTimeYear.SelectedIndexChanged += new System.EventHandler(this.cbxYearAndEvalTimeYear_SelectedIndexChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label7.Location = new System.Drawing.Point(41, 0);
+            this.label7.Location = new System.Drawing.Point(61, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(56, 29);
-            this.label7.TabIndex = 3;
+            this.label7.TabIndex = 12;
             this.label7.Text = "評核年份:";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -1426,46 +1666,57 @@
             this.label8.AutoSize = true;
             this.label8.Dock = System.Windows.Forms.DockStyle.Right;
             this.label8.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label8.Location = new System.Drawing.Point(17, 29);
+            this.label8.Location = new System.Drawing.Point(37, 29);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(80, 29);
-            this.label8.TabIndex = 4;
+            this.label8.TabIndex = 12;
             this.label8.Text = "評核開始時間:";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // dtpYearAndEvalTimeStartTime
             // 
-            this.dtpYearAndEvalTimeStartTime.Location = new System.Drawing.Point(103, 32);
+            this.dtpYearAndEvalTimeStartTime.Location = new System.Drawing.Point(123, 32);
             this.dtpYearAndEvalTimeStartTime.Name = "dtpYearAndEvalTimeStartTime";
             this.dtpYearAndEvalTimeStartTime.Size = new System.Drawing.Size(200, 22);
-            this.dtpYearAndEvalTimeStartTime.TabIndex = 5;
+            this.dtpYearAndEvalTimeStartTime.TabIndex = 1;
             // 
             // dtpYearAndEvalTimeEndTime
             // 
-            this.dtpYearAndEvalTimeEndTime.Location = new System.Drawing.Point(103, 61);
+            this.dtpYearAndEvalTimeEndTime.Location = new System.Drawing.Point(123, 61);
             this.dtpYearAndEvalTimeEndTime.Name = "dtpYearAndEvalTimeEndTime";
             this.dtpYearAndEvalTimeEndTime.Size = new System.Drawing.Size(200, 22);
-            this.dtpYearAndEvalTimeEndTime.TabIndex = 7;
+            this.dtpYearAndEvalTimeEndTime.TabIndex = 2;
             // 
             // flowLayoutPanel11
             // 
             this.flowLayoutPanel11.Controls.Add(this.btnYearAndEvalTimeSave);
+            this.flowLayoutPanel11.Controls.Add(this.btnYearAndEvalTimeCancel);
             this.flowLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel11.Location = new System.Drawing.Point(100, 203);
+            this.flowLayoutPanel11.Location = new System.Drawing.Point(120, 261);
             this.flowLayoutPanel11.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel11.Name = "flowLayoutPanel11";
-            this.flowLayoutPanel11.Size = new System.Drawing.Size(1068, 498);
-            this.flowLayoutPanel11.TabIndex = 8;
+            this.flowLayoutPanel11.Size = new System.Drawing.Size(1048, 440);
+            this.flowLayoutPanel11.TabIndex = 9;
             // 
             // btnYearAndEvalTimeSave
             // 
             this.btnYearAndEvalTimeSave.Location = new System.Drawing.Point(3, 3);
             this.btnYearAndEvalTimeSave.Name = "btnYearAndEvalTimeSave";
             this.btnYearAndEvalTimeSave.Size = new System.Drawing.Size(75, 23);
-            this.btnYearAndEvalTimeSave.TabIndex = 1;
+            this.btnYearAndEvalTimeSave.TabIndex = 9;
             this.btnYearAndEvalTimeSave.Text = "儲存";
             this.btnYearAndEvalTimeSave.UseVisualStyleBackColor = true;
             this.btnYearAndEvalTimeSave.Click += new System.EventHandler(this.btnYearAndEvalTimeSave_Click);
+            // 
+            // btnYearAndEvalTimeCancel
+            // 
+            this.btnYearAndEvalTimeCancel.Location = new System.Drawing.Point(84, 3);
+            this.btnYearAndEvalTimeCancel.Name = "btnYearAndEvalTimeCancel";
+            this.btnYearAndEvalTimeCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnYearAndEvalTimeCancel.TabIndex = 10;
+            this.btnYearAndEvalTimeCancel.Text = "取消";
+            this.btnYearAndEvalTimeCancel.UseVisualStyleBackColor = true;
+            this.btnYearAndEvalTimeCancel.Click += new System.EventHandler(this.btnYearAndEvalTimeCancel_Click);
             // 
             // label10
             // 
@@ -1473,10 +1724,10 @@
             this.label10.Dock = System.Windows.Forms.DockStyle.Right;
             this.label10.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label10.ForeColor = System.Drawing.Color.Blue;
-            this.label10.Location = new System.Drawing.Point(17, 87);
+            this.label10.Location = new System.Drawing.Point(37, 87);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(80, 29);
-            this.label10.TabIndex = 9;
+            this.label10.TabIndex = 14;
             this.label10.Text = "自評開始時間:";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -1486,10 +1737,10 @@
             this.label11.Dock = System.Windows.Forms.DockStyle.Right;
             this.label11.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label11.ForeColor = System.Drawing.Color.Blue;
-            this.label11.Location = new System.Drawing.Point(17, 116);
+            this.label11.Location = new System.Drawing.Point(37, 116);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(80, 29);
-            this.label11.TabIndex = 10;
+            this.label11.TabIndex = 15;
             this.label11.Text = "自評結束時間:";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -1499,10 +1750,10 @@
             this.label12.Dock = System.Windows.Forms.DockStyle.Right;
             this.label12.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label12.ForeColor = System.Drawing.Color.Crimson;
-            this.label12.Location = new System.Drawing.Point(5, 145);
+            this.label12.Location = new System.Drawing.Point(25, 145);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(92, 29);
-            this.label12.TabIndex = 11;
+            this.label12.TabIndex = 16;
             this.label12.Text = "主管評開始時間:";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -1512,40 +1763,80 @@
             this.label13.Dock = System.Windows.Forms.DockStyle.Right;
             this.label13.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label13.ForeColor = System.Drawing.Color.Crimson;
-            this.label13.Location = new System.Drawing.Point(5, 174);
+            this.label13.Location = new System.Drawing.Point(25, 174);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(92, 29);
-            this.label13.TabIndex = 12;
+            this.label13.TabIndex = 17;
             this.label13.Text = "主管評結束時間:";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // dtpYearAndEvalTimeSelfStartTime
             // 
-            this.dtpYearAndEvalTimeSelfStartTime.Location = new System.Drawing.Point(103, 90);
+            this.dtpYearAndEvalTimeSelfStartTime.Location = new System.Drawing.Point(123, 90);
             this.dtpYearAndEvalTimeSelfStartTime.Name = "dtpYearAndEvalTimeSelfStartTime";
             this.dtpYearAndEvalTimeSelfStartTime.Size = new System.Drawing.Size(200, 22);
-            this.dtpYearAndEvalTimeSelfStartTime.TabIndex = 13;
+            this.dtpYearAndEvalTimeSelfStartTime.TabIndex = 3;
             // 
             // dtpYearAndEvalTimeSelfEndTime
             // 
-            this.dtpYearAndEvalTimeSelfEndTime.Location = new System.Drawing.Point(103, 119);
+            this.dtpYearAndEvalTimeSelfEndTime.Location = new System.Drawing.Point(123, 119);
             this.dtpYearAndEvalTimeSelfEndTime.Name = "dtpYearAndEvalTimeSelfEndTime";
             this.dtpYearAndEvalTimeSelfEndTime.Size = new System.Drawing.Size(200, 22);
-            this.dtpYearAndEvalTimeSelfEndTime.TabIndex = 14;
+            this.dtpYearAndEvalTimeSelfEndTime.TabIndex = 4;
             // 
             // dtpYearAndEvalTimeSupervisorStartTime
             // 
-            this.dtpYearAndEvalTimeSupervisorStartTime.Location = new System.Drawing.Point(103, 148);
+            this.dtpYearAndEvalTimeSupervisorStartTime.Location = new System.Drawing.Point(123, 148);
             this.dtpYearAndEvalTimeSupervisorStartTime.Name = "dtpYearAndEvalTimeSupervisorStartTime";
             this.dtpYearAndEvalTimeSupervisorStartTime.Size = new System.Drawing.Size(200, 22);
-            this.dtpYearAndEvalTimeSupervisorStartTime.TabIndex = 15;
+            this.dtpYearAndEvalTimeSupervisorStartTime.TabIndex = 5;
             // 
             // dtpYearAndEvalTimeSupervisorEndTime
             // 
-            this.dtpYearAndEvalTimeSupervisorEndTime.Location = new System.Drawing.Point(103, 177);
+            this.dtpYearAndEvalTimeSupervisorEndTime.Location = new System.Drawing.Point(123, 177);
             this.dtpYearAndEvalTimeSupervisorEndTime.Name = "dtpYearAndEvalTimeSupervisorEndTime";
             this.dtpYearAndEvalTimeSupervisorEndTime.Size = new System.Drawing.Size(200, 22);
-            this.dtpYearAndEvalTimeSupervisorEndTime.TabIndex = 16;
+            this.dtpYearAndEvalTimeSupervisorEndTime.TabIndex = 6;
+            // 
+            // dtpYearAndEvalTimeFinalizerStartTime
+            // 
+            this.dtpYearAndEvalTimeFinalizerStartTime.Location = new System.Drawing.Point(123, 206);
+            this.dtpYearAndEvalTimeFinalizerStartTime.Name = "dtpYearAndEvalTimeFinalizerStartTime";
+            this.dtpYearAndEvalTimeFinalizerStartTime.Size = new System.Drawing.Size(200, 22);
+            this.dtpYearAndEvalTimeFinalizerStartTime.TabIndex = 7;
+            // 
+            // dtpYearAndEvalTimeFinalizerEndTime
+            // 
+            this.dtpYearAndEvalTimeFinalizerEndTime.Location = new System.Drawing.Point(123, 235);
+            this.dtpYearAndEvalTimeFinalizerEndTime.Name = "dtpYearAndEvalTimeFinalizerEndTime";
+            this.dtpYearAndEvalTimeFinalizerEndTime.Size = new System.Drawing.Size(200, 22);
+            this.dtpYearAndEvalTimeFinalizerEndTime.TabIndex = 8;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label19.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label19.ForeColor = System.Drawing.Color.Crimson;
+            this.label19.Location = new System.Drawing.Point(3, 203);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(114, 29);
+            this.label19.TabIndex = 18;
+            this.label19.Text = "核決主管開始時間:";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label21.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label21.ForeColor = System.Drawing.Color.Crimson;
+            this.label21.Location = new System.Drawing.Point(3, 232);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(114, 29);
+            this.label21.TabIndex = 19;
+            this.label21.Text = "核決主管結束時間:";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtYearAndEvalTimeTabMemo
             // 
@@ -1554,7 +1845,8 @@
             this.txtYearAndEvalTimeTabMemo.Name = "txtYearAndEvalTimeTabMemo";
             this.txtYearAndEvalTimeTabMemo.ReadOnly = true;
             this.txtYearAndEvalTimeTabMemo.Size = new System.Drawing.Size(1162, 94);
-            this.txtYearAndEvalTimeTabMemo.TabIndex = 9;
+            this.txtYearAndEvalTimeTabMemo.TabIndex = 1;
+            this.txtYearAndEvalTimeTabMemo.TabStop = false;
             this.txtYearAndEvalTimeTabMemo.Text = "";
             // 
             // tbpAccountPriviledge
@@ -1587,7 +1879,7 @@
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel8.Size = new System.Drawing.Size(1170, 804);
-            this.tableLayoutPanel8.TabIndex = 2;
+            this.tableLayoutPanel8.TabIndex = 0;
             // 
             // flowLayoutPanel10
             // 
@@ -1600,7 +1892,7 @@
             this.flowLayoutPanel10.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel10.Name = "flowLayoutPanel10";
             this.flowLayoutPanel10.Size = new System.Drawing.Size(1168, 29);
-            this.flowLayoutPanel10.TabIndex = 0;
+            this.flowLayoutPanel10.TabIndex = 2;
             // 
             // btnAccountPriviledgeCancel
             // 
@@ -1609,7 +1901,7 @@
             this.btnAccountPriviledgeCancel.Location = new System.Drawing.Point(1090, 3);
             this.btnAccountPriviledgeCancel.Name = "btnAccountPriviledgeCancel";
             this.btnAccountPriviledgeCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnAccountPriviledgeCancel.TabIndex = 0;
+            this.btnAccountPriviledgeCancel.TabIndex = 1;
             this.btnAccountPriviledgeCancel.Text = "取消";
             this.btnAccountPriviledgeCancel.UseVisualStyleBackColor = true;
             this.btnAccountPriviledgeCancel.Click += new System.EventHandler(this.btnAccountPriviledgeCancel_Click);
@@ -1620,7 +1912,7 @@
             this.btnAccountPriviledgeSave.Location = new System.Drawing.Point(1009, 3);
             this.btnAccountPriviledgeSave.Name = "btnAccountPriviledgeSave";
             this.btnAccountPriviledgeSave.Size = new System.Drawing.Size(75, 23);
-            this.btnAccountPriviledgeSave.TabIndex = 1;
+            this.btnAccountPriviledgeSave.TabIndex = 2;
             this.btnAccountPriviledgeSave.Text = "儲存";
             this.btnAccountPriviledgeSave.UseVisualStyleBackColor = true;
             this.btnAccountPriviledgeSave.Click += new System.EventHandler(this.btnAccountPriviledgeSave_Click);
@@ -1629,13 +1921,13 @@
             // 
             this.gvAccountPriviledge.AllowUserToAddRows = false;
             this.gvAccountPriviledge.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvAccountPriviledge.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvAccountPriviledge.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.gvAccountPriviledge.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvAccountPriviledge.ContextMenuStrip = this.ctxmsQuestion;
             this.gvAccountPriviledge.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1654,7 +1946,7 @@
             this.btnAccountPriviledgeEdit.Location = new System.Drawing.Point(4, 4);
             this.btnAccountPriviledgeEdit.Name = "btnAccountPriviledgeEdit";
             this.btnAccountPriviledgeEdit.Size = new System.Drawing.Size(75, 23);
-            this.btnAccountPriviledgeEdit.TabIndex = 3;
+            this.btnAccountPriviledgeEdit.TabIndex = 0;
             this.btnAccountPriviledgeEdit.Text = "編輯";
             this.btnAccountPriviledgeEdit.UseVisualStyleBackColor = true;
             this.btnAccountPriviledgeEdit.Click += new System.EventHandler(this.btnAccountPriviledgeEdit_Click);
@@ -1667,7 +1959,8 @@
             this.txtAccountPriviledgeTabMemo.Name = "txtAccountPriviledgeTabMemo";
             this.txtAccountPriviledgeTabMemo.ReadOnly = true;
             this.txtAccountPriviledgeTabMemo.Size = new System.Drawing.Size(1162, 94);
-            this.txtAccountPriviledgeTabMemo.TabIndex = 4;
+            this.txtAccountPriviledgeTabMemo.TabIndex = 3;
+            this.txtAccountPriviledgeTabMemo.TabStop = false;
             this.txtAccountPriviledgeTabMemo.Text = "";
             // 
             // tbpReportPreview
@@ -1709,14 +2002,14 @@
             this.cbxReportPreviewEmployee.Location = new System.Drawing.Point(103, 32);
             this.cbxReportPreviewEmployee.Name = "cbxReportPreviewEmployee";
             this.cbxReportPreviewEmployee.Size = new System.Drawing.Size(121, 20);
-            this.cbxReportPreviewEmployee.TabIndex = 0;
+            this.cbxReportPreviewEmployee.TabIndex = 1;
             // 
             // btnReportPreviewPreview
             // 
             this.btnReportPreviewPreview.Location = new System.Drawing.Point(103, 61);
             this.btnReportPreviewPreview.Name = "btnReportPreviewPreview";
             this.btnReportPreviewPreview.Size = new System.Drawing.Size(75, 23);
-            this.btnReportPreviewPreview.TabIndex = 1;
+            this.btnReportPreviewPreview.TabIndex = 2;
             this.btnReportPreviewPreview.Text = "預覽";
             this.btnReportPreviewPreview.UseVisualStyleBackColor = true;
             this.btnReportPreviewPreview.Click += new System.EventHandler(this.btnReportPreviewPreview_Click);
@@ -1728,7 +2021,7 @@
             this.cbxReportPreviewYear.Location = new System.Drawing.Point(103, 3);
             this.cbxReportPreviewYear.Name = "cbxReportPreviewYear";
             this.cbxReportPreviewYear.Size = new System.Drawing.Size(121, 20);
-            this.cbxReportPreviewYear.TabIndex = 2;
+            this.cbxReportPreviewYear.TabIndex = 0;
             this.cbxReportPreviewYear.SelectedIndexChanged += new System.EventHandler(this.cbxReportPreviewYear_SelectedIndexChanged);
             // 
             // label5
@@ -1804,7 +2097,8 @@
             this.cbxFinalScoreYear.Location = new System.Drawing.Point(103, 3);
             this.cbxFinalScoreYear.Name = "cbxFinalScoreYear";
             this.cbxFinalScoreYear.Size = new System.Drawing.Size(121, 20);
-            this.cbxFinalScoreYear.TabIndex = 2;
+            this.cbxFinalScoreYear.TabIndex = 0;
+            this.cbxFinalScoreYear.SelectedIndexChanged += new System.EventHandler(this.cbxFinalScoreYear_SelectedIndexChanged);
             // 
             // label14
             // 
@@ -1813,7 +2107,7 @@
             this.label14.Location = new System.Drawing.Point(65, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(32, 29);
-            this.label14.TabIndex = 3;
+            this.label14.TabIndex = 2;
             this.label14.Text = "年份:";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -1829,6 +2123,7 @@
             this.txtFinalScoreMemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtFinalScoreMemo.Size = new System.Drawing.Size(1064, 94);
             this.txtFinalScoreMemo.TabIndex = 4;
+            this.txtFinalScoreMemo.TabStop = false;
             // 
             // label15
             // 
@@ -1837,7 +2132,7 @@
             this.label15.Location = new System.Drawing.Point(103, 58);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(383, 12);
-            this.label15.TabIndex = 5;
+            this.label15.TabIndex = 3;
             this.label15.Text = "*2018計算公式為: 最終成績=考核成績*10*0.8+出勤成績*0.2+獎懲加減分";
             // 
             // flowLayoutPanel14
@@ -1850,7 +2145,7 @@
             this.flowLayoutPanel14.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel14.Name = "flowLayoutPanel14";
             this.flowLayoutPanel14.Size = new System.Drawing.Size(1184, 26);
-            this.flowLayoutPanel14.TabIndex = 2;
+            this.flowLayoutPanel14.TabIndex = 1;
             // 
             // btnLogout
             // 
@@ -1875,7 +2170,7 @@
             this.cbxFunctionList.Location = new System.Drawing.Point(855, 3);
             this.cbxFunctionList.Name = "cbxFunctionList";
             this.cbxFunctionList.Size = new System.Drawing.Size(226, 20);
-            this.cbxFunctionList.TabIndex = 5;
+            this.cbxFunctionList.TabIndex = 0;
             this.cbxFunctionList.ValueMember = "ID";
             this.cbxFunctionList.SelectionChangeCommitted += new System.EventHandler(this.cbxFunctionList_SelectionChangeCommitted);
             // 
@@ -1902,6 +2197,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tbcManagement.ResumeLayout(false);
             this.tbpQuestionCategory.ResumeLayout(false);
+            this.tbpQuestionCategory.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -1925,8 +2221,12 @@
             this.flowLayoutPanel15.ResumeLayout(false);
             this.tableLayoutPanel15.ResumeLayout(false);
             this.tableLayoutPanel15.PerformLayout();
+            this.tbpSetSupervisorAmount.ResumeLayout(false);
+            this.tableLayoutPanel16.ResumeLayout(false);
+            this.tableLayoutPanel16.PerformLayout();
             this.flowLayoutPanel16.ResumeLayout(false);
-            this.flowLayoutPanel16.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvSetSupervisorAmountInputField)).EndInit();
+            this.flowLayoutPanel17.ResumeLayout(false);
             this.tbpPersonnelAssignment.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
@@ -2093,15 +2393,36 @@
         private System.Windows.Forms.ComboBox cbxFunctionList;
         private System.Windows.Forms.TabPage tbpSetScoreWeight;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel14;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btnSetScoreWeightEdit;
+        private System.Windows.Forms.TextBox txtSetScoreWeightMemo;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel15;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnSetScoreWeightCancel;
+        private System.Windows.Forms.Button btnSetScoreWeightSave;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel15;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel16;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtSetScoreWeightFinalizerWeight;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox txtSetScoreWeightSupervisorWeight;
+        private System.Windows.Forms.TextBox txtSetScoreWeightSelfWeight;
+        private System.Windows.Forms.ComboBox cbxSetScoreWeightYear;
+        private System.Windows.Forms.DateTimePicker dtpYearAndEvalTimeFinalizerStartTime;
+        private System.Windows.Forms.DateTimePicker dtpYearAndEvalTimeFinalizerEndTime;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Button btnYearAndEvalTimeCancel;
+        private System.Windows.Forms.TabPage tbpSetSupervisorAmount;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel16;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel16;
+        private System.Windows.Forms.Button btnSetSupervisorAmountCancel;
+        private System.Windows.Forms.Button btnSetSupervisorAmountSave;
+        private System.Windows.Forms.DataGridView gvSetSupervisorAmountInputField;
+        private System.Windows.Forms.TextBox txtSetSupervisorAmountMemo;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel17;
+        private System.Windows.Forms.ComboBox cbxSetSupervisorAmountYear;
+        private System.Windows.Forms.Button btnSetSupervisorAmountEdit;
     }
 }

@@ -17,6 +17,8 @@ namespace NIZING_BACKEND_Data_Config
 {
     public partial class frmAPA_Main : Form
     {
+        //2019.11.07 停止使用特評
+
         #region Frame Universal Variable
         string NZConnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
         string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
@@ -42,29 +44,40 @@ namespace NIZING_BACKEND_Data_Config
         DataTable dtQuestionSource = new DataTable();
         #endregion
 
-        #region 評核人員分配 Universal Variable
-        private FunctionMode personnelAssignmentTabMode = FunctionMode.STATIC;
-        DataTable dtPersonnelAssignmentSource = new DataTable();
-        #endregion
-
         #region 問題分配 Universal Variable
         private FunctionMode questionAssignmentTabMode = FunctionMode.STATIC;
         #endregion
 
-        #region 特評分數設定 Universal Variable
-        private FunctionMode scoreStandardTabMode = FunctionMode.STATIC;
-        decimal scoreStandardValue;
+        #region 評分權重設定 Universal Variable
+        private FunctionMode setScoreWeightTabMode = FunctionMode.STATIC;
         #endregion
 
-        #region 帳號權限 Universal Variable
-        private FunctionMode accountPriviledgeTabMode = FunctionMode.STATIC;
-        DataTable dtAccountPriviledgeSource = new DataTable();
+        #region 評核主管人數設定 Universal Variable
+        private FunctionMode setSupervisorAmountTabMode = FunctionMode.STATIC;
+        DataTable dtSetSupervisorAmountSource = new DataTable();
+        #endregion
+
+        #region 評核人員分配 Universal Variable
+        private FunctionMode personnelAssignmentTabMode = FunctionMode.STATIC;
+        DataTable dtPersonnelAssignmentSource = new DataTable();
         #endregion
 
         #region 員工應工作時數 Universal Variable
         private FunctionMode employeeWorkHourInputTabMode = FunctionMode.STATIC;
         DataTable dtEmployeeWorkhourSource = new DataTable();
         #endregion
+
+        //#region 特評分數設定 Universal Variable
+        //private FunctionMode scoreStandardTabMode = FunctionMode.STATIC;
+        //decimal scoreStandardValue;
+        //#endregion
+
+        #region 帳號權限 Universal Variable
+        private FunctionMode accountPriviledgeTabMode = FunctionMode.STATIC;
+        DataTable dtAccountPriviledgeSource = new DataTable();
+        #endregion
+
+        
 
         public frmAPA_Main(frmLogin frmLogin)
         {            
@@ -79,36 +92,68 @@ namespace NIZING_BACKEND_Data_Config
             LoadGridViewStyle(gvQuestionCategory);
             questionCategoryTabMode = FunctionMode.STATIC;
             #endregion
+
             #region 問題建立 Initializaiton
             dtQuestionSource = adapterQuestion.GetData();
             gvQuestion.DataSource = dtQuestionSource;
             LoadGridViewStyle(gvQuestion);
             questionTabMode = FunctionMode.STATIC;
             #endregion
+
+            #region 問題分配 Initialization
+            questionAssignmentTabMode = FunctionMode.STATIC;
+            #endregion
+
+            #region 評分權重設定 Initialization
+            setScoreWeightTabMode = FunctionMode.STATIC;
+            for (int i = DateTime.Now.Year; i >= 2016; i--)
+            {
+                cbxSetScoreWeightYear.Items.Add(i.ToString());
+            }
+            cbxSetScoreWeightYear.SelectedIndex = 0;
+            #endregion
+
+            #region 評核主管人數設定 Init
+            setSupervisorAmountTabMode = FunctionMode.STATIC;
+            for(int i = DateTime.Today.Year; i >= 2016; i--)
+            {
+                cbxSetSupervisorAmountYear.Items.Add(i);
+            }
+            cbxSetSupervisorAmountYear.SelectedIndex = 0;
+            #endregion
+
             #region 評核人員分配 Initialization
             for (int i = DateTime.Now.Year; i >= 2016; i--)
             {
                 cbxPersonnelAssignmentYear.Items.Add(i.ToString());
             }
-            cbxPersonnelAssignmentYear.SelectedIndex = 0;
-            dtPersonnelAssignmentSource = LoadgvPersonnelAssignment();
-            gvPersonnelAssignment.DataSource = dtPersonnelAssignmentSource;
-            LoadGridViewStyle(gvPersonnelAssignment);
+            cbxPersonnelAssignmentYear.SelectedIndex = 0;            
             personnelAssignmentTabMode = FunctionMode.STATIC;
             #endregion
-            #region 問題分配 Initialization
-            questionAssignmentTabMode = FunctionMode.STATIC;
-            #endregion
-            #region 特評分數設定 Init
-            scoreStandardTabMode = FunctionMode.STATIC;
-            LoadScoreStandard();
-            #endregion
+
+            #region 員工應工作時數 Init
+            employeeWorkHourInputTabMode = FunctionMode.STATIC;
+            for (int i = DateTime.Today.Year; i >= 2016; i--)
+            {
+                cbxEmployeeWorkhourInputYear.Items.Add(i);
+            }
+            cbxEmployeeWorkhourInputYear.Text = (DateTime.Today.Year - 1).ToString();
+            //dtEmployeeWorkhourSource = LoadgvEmployeeWorkhourInputField();
+            //gvEmployeeWorkhourInputField.DataSource = dtEmployeeWorkhourSource;
+            //LoadGridViewStyle(gvEmployeeWorkhourInputField);
+            #endregion          
+            
+            //#region 特評分數設定 Init
+            //scoreStandardTabMode = FunctionMode.STATIC;
+            //LoadScoreStandard();
+            //#endregion
+
             #region 帳號權限 Init
             dtAccountPriviledgeSource = LoadgvAccountPriviledge();
             gvAccountPriviledge.DataSource = dtAccountPriviledgeSource;
-            LoadControlStatus(tbpAccountPriviledge);
             accountPriviledgeTabMode = FunctionMode.STATIC;
             #endregion
+
             #region 報表預覽 Init
             for (int i = DateTime.Today.Year; i >= 2016; i--)
             {
@@ -119,23 +164,8 @@ namespace NIZING_BACKEND_Data_Config
             cbxReportPreviewEmployee.Enabled = false;
             cbxReportPreviewYear.Enabled = false;
             #endregion
-            #region 最終成績計算 Universal Variable
-            for (int i = DateTime.Today.Year - 1; i >= 2016; i--)
-            {
-                cbxFinalScoreYear.Items.Add(i);
-            }
-            cbxFinalScoreYear.SelectedIndex = 0;
-            cbxFinalScoreYear.Enabled = false;
-            btnFinalScoreCalculate.Enabled = false;
-            txtFinalScoreMemo.Enabled = false;
-            txtFinalScoreMemo.Text = string.Empty;
-            #endregion
+
             #region 年份及評核時間設定 Init
-            for (int i = DateTime.Today.Year - 1; i >= 2016; i--)
-            {
-                cbxYearAndEvalTimeYear.Items.Add(i);
-            }
-            cbxYearAndEvalTimeYear.SelectedIndex = 0;
             dtpYearAndEvalTimeStartTime.Format = DateTimePickerFormat.Custom;
             dtpYearAndEvalTimeStartTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             dtpYearAndEvalTimeEndTime.Format = DateTimePickerFormat.Custom;
@@ -148,95 +178,17 @@ namespace NIZING_BACKEND_Data_Config
             dtpYearAndEvalTimeSupervisorStartTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             dtpYearAndEvalTimeSupervisorEndTime.Format = DateTimePickerFormat.Custom;
             dtpYearAndEvalTimeSupervisorEndTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-            {
-                conn.Open();
-                string query = "SELECT *"
-                            + " FROM HR360_ASSESSMENTTIME";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                using (SqlDataReader dr = cmd.ExecuteReader())
-                {
-                    while (dr.Read())
-                    {
-                        if (dr.HasRows)
-                        {
-                            cbxYearAndEvalTimeYear.Text = dr.GetString(0);
-                            dtpYearAndEvalTimeStartTime.Value = dr.GetDateTime(1);
-                            dtpYearAndEvalTimeEndTime.Value = dr.GetDateTime(2);
-                            dtpYearAndEvalTimeSelfStartTime.Value = dr.GetDateTime(3);
-                            dtpYearAndEvalTimeSelfEndTime.Value = dr.GetDateTime(4);
-                            dtpYearAndEvalTimeSupervisorStartTime.Value = dr.GetDateTime(5);
-                            dtpYearAndEvalTimeSupervisorEndTime.Value = dr.GetDateTime(6);
-                        }
-                    }
-                }
-            }
-            #endregion
-            #region 員工應工作時數 Init
-            employeeWorkHourInputTabMode = FunctionMode.STATIC;
+            dtpYearAndEvalTimeFinalizerStartTime.Format = DateTimePickerFormat.Custom;
+            dtpYearAndEvalTimeFinalizerStartTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            dtpYearAndEvalTimeFinalizerEndTime.Format = DateTimePickerFormat.Custom;
+            dtpYearAndEvalTimeFinalizerEndTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             for (int i = DateTime.Today.Year; i >= 2016; i--)
             {
-                cbxEmployeeWorkhourInputYear.Items.Add(i);
+                cbxYearAndEvalTimeYear.Items.Add(i);
             }
-            cbxEmployeeWorkhourInputYear.Text = (DateTime.Today.Year - 1).ToString();
-            dtEmployeeWorkhourSource = LoadgvEmployeeWorkhourInputField();
-            gvEmployeeWorkhourInputField.DataSource = dtEmployeeWorkhourSource;
-            LoadGridViewStyle(gvEmployeeWorkhourInputField);
+            cbxYearAndEvalTimeYear.SelectedIndex = 0;
             #endregion
-        }
 
-        public frmAPA_Main()
-        {
-            InitializeComponent();
-            currentTabPage = tbcManagement.SelectedTab;
-            LoadControlStatus(currentTabPage);
-
-            #region 問題分類建立 Initialization
-            dtQuestionCategorySource = adapterQuestionCategory.GetData();
-            gvQuestionCategory.DataSource = dtQuestionCategorySource;
-            LoadGridViewStyle(gvQuestionCategory);
-            questionCategoryTabMode = FunctionMode.STATIC;
-            #endregion
-            #region 問題建立 Initializaiton
-            dtQuestionSource = adapterQuestion.GetData();
-            gvQuestion.DataSource = dtQuestionSource;
-            LoadGridViewStyle(gvQuestion);
-            questionTabMode = FunctionMode.STATIC;
-            #endregion
-            #region 評核人員分配 Initialization
-            for (int i = DateTime.Now.Year; i >= 2016; i--)
-            {
-                cbxPersonnelAssignmentYear.Items.Add(i.ToString());
-            }
-            cbxPersonnelAssignmentYear.SelectedIndex = 0;
-            dtPersonnelAssignmentSource = LoadgvPersonnelAssignment();
-            gvPersonnelAssignment.DataSource = dtPersonnelAssignmentSource;
-            LoadGridViewStyle(gvPersonnelAssignment);
-            personnelAssignmentTabMode = FunctionMode.STATIC;
-            #endregion
-            #region 問題分配 Initialization
-            questionAssignmentTabMode = FunctionMode.STATIC;
-            #endregion
-            #region 特評分數設定 Init
-            scoreStandardTabMode = FunctionMode.STATIC;
-            LoadScoreStandard();
-            #endregion
-            #region 帳號權限 Init
-            dtAccountPriviledgeSource = LoadgvAccountPriviledge();
-            gvAccountPriviledge.DataSource = dtAccountPriviledgeSource;
-            LoadControlStatus(tbpAccountPriviledge);
-            accountPriviledgeTabMode = FunctionMode.STATIC;
-            #endregion
-            #region 報表預覽 Init
-            for (int i = DateTime.Today.Year; i >= 2016; i--)
-            {
-                cbxReportPreviewYear.Items.Add(i);
-            }
-            cbxReportPreviewYear.SelectedIndex = 0;
-            btnReportPreviewPreview.Enabled = false;
-            cbxReportPreviewEmployee.Enabled = false;
-            cbxReportPreviewYear.Enabled = false;
-            #endregion
             #region 最終成績計算 Universal Variable
             for (int i = DateTime.Today.Year - 1; i >= 2016; i--)
             {
@@ -247,62 +199,107 @@ namespace NIZING_BACKEND_Data_Config
             btnFinalScoreCalculate.Enabled = false;
             txtFinalScoreMemo.Enabled = false;
             txtFinalScoreMemo.Text = string.Empty;
-            #endregion  
-            #region 年份及評核時間設定 Init
-            for (int i = DateTime.Today.Year - 1; i >= 2016; i--)
-            {
-                cbxYearAndEvalTimeYear.Items.Add(i);
-            }
-            cbxYearAndEvalTimeYear.SelectedIndex = 0;
-            dtpYearAndEvalTimeStartTime.Format = DateTimePickerFormat.Custom;
-            dtpYearAndEvalTimeStartTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            dtpYearAndEvalTimeEndTime.Format = DateTimePickerFormat.Custom;
-            dtpYearAndEvalTimeEndTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            dtpYearAndEvalTimeSelfStartTime.Format = DateTimePickerFormat.Custom;
-            dtpYearAndEvalTimeSelfStartTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            dtpYearAndEvalTimeSelfEndTime.Format = DateTimePickerFormat.Custom;
-            dtpYearAndEvalTimeSelfEndTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            dtpYearAndEvalTimeSupervisorStartTime.Format = DateTimePickerFormat.Custom;
-            dtpYearAndEvalTimeSupervisorStartTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            dtpYearAndEvalTimeSupervisorEndTime.Format = DateTimePickerFormat.Custom;
-            dtpYearAndEvalTimeSupervisorEndTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-            {
-                conn.Open();
-                string query = "SELECT *"
-                            + " FROM HR360_ASSESSMENTTIME";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                using (SqlDataReader dr = cmd.ExecuteReader())
-                {
-                    while (dr.Read())
-                    {
-                        if (dr.HasRows)
-                        {
-                            cbxYearAndEvalTimeYear.Text = dr.GetString(0);
-                            dtpYearAndEvalTimeStartTime.Value = dr.GetDateTime(1);
-                            dtpYearAndEvalTimeEndTime.Value = dr.GetDateTime(2);
-                            dtpYearAndEvalTimeSelfStartTime.Value = dr.GetDateTime(3);
-                            dtpYearAndEvalTimeSelfEndTime.Value = dr.GetDateTime(4);
-                            dtpYearAndEvalTimeSupervisorStartTime.Value = dr.GetDateTime(5);
-                            dtpYearAndEvalTimeSupervisorEndTime.Value = dr.GetDateTime(6);
-                        }
-                    }
-                }
-            }
             #endregion
-            #region 員工應工作時數 Init
-            employeeWorkHourInputTabMode = FunctionMode.STATIC;
-            for (int i = DateTime.Today.Year; i >= 2016; i--)
-            {
-                cbxEmployeeWorkhourInputYear.Items.Add(i);
-            }
-            cbxEmployeeWorkhourInputYear.Text = (DateTime.Today.Year - 1).ToString();
-            dtEmployeeWorkhourSource = LoadgvEmployeeWorkhourInputField();
-            gvEmployeeWorkhourInputField.DataSource = dtEmployeeWorkhourSource;
-            LoadGridViewStyle(gvEmployeeWorkhourInputField);
-            #endregion
+
         }
-        
+
+        //public frmAPA_Main()
+        //{
+        //    InitializeComponent();
+        //    currentTabPage = tbcManagement.SelectedTab;
+        //    LoadControlStatus(currentTabPage);
+
+        //    #region 問題分類建立 Initialization
+        //    dtQuestionCategorySource = adapterQuestionCategory.GetData();
+        //    gvQuestionCategory.DataSource = dtQuestionCategorySource;
+        //    LoadGridViewStyle(gvQuestionCategory);
+        //    questionCategoryTabMode = FunctionMode.STATIC;
+        //    #endregion
+        //    #region 問題建立 Initializaiton
+        //    dtQuestionSource = adapterQuestion.GetData();
+        //    gvQuestion.DataSource = dtQuestionSource;
+        //    LoadGridViewStyle(gvQuestion);
+        //    questionTabMode = FunctionMode.STATIC;
+        //    #endregion
+        //    #region 評核人員分配 Initialization
+        //    for (int i = DateTime.Now.Year; i >= 2016; i--)
+        //    {
+        //        cbxPersonnelAssignmentYear.Items.Add(i.ToString());
+        //    }
+        //    cbxPersonnelAssignmentYear.SelectedIndex = 0;
+        //    dtPersonnelAssignmentSource = LoadgvPersonnelAssignment();
+        //    gvPersonnelAssignment.DataSource = dtPersonnelAssignmentSource;
+        //    LoadGridViewStyle(gvPersonnelAssignment);
+        //    personnelAssignmentTabMode = FunctionMode.STATIC;
+        //    #endregion
+        //    #region 問題分配 Initialization
+        //    questionAssignmentTabMode = FunctionMode.STATIC;
+        //    #endregion
+        //    //#region 特評分數設定 Init
+        //    //scoreStandardTabMode = FunctionMode.STATIC;
+        //    //LoadScoreStandard();
+        //    //#endregion
+        //    #region 帳號權限 Init
+        //    dtAccountPriviledgeSource = LoadgvAccountPriviledge();
+        //    gvAccountPriviledge.DataSource = dtAccountPriviledgeSource;
+        //    LoadControlStatus(tbpAccountPriviledge);
+        //    accountPriviledgeTabMode = FunctionMode.STATIC;
+        //    #endregion
+        //    #region 報表預覽 Init
+        //    for (int i = DateTime.Today.Year; i >= 2016; i--)
+        //    {
+        //        cbxReportPreviewYear.Items.Add(i);
+        //    }
+        //    cbxReportPreviewYear.SelectedIndex = 0;
+        //    btnReportPreviewPreview.Enabled = false;
+        //    cbxReportPreviewEmployee.Enabled = false;
+        //    cbxReportPreviewYear.Enabled = false;
+        //    #endregion
+        //    #region 最終成績計算 Universal Variable
+        //    for (int i = DateTime.Today.Year - 1; i >= 2016; i--)
+        //    {
+        //        cbxFinalScoreYear.Items.Add(i);
+        //    }
+        //    cbxFinalScoreYear.SelectedIndex = 0;
+        //    cbxFinalScoreYear.Enabled = false;
+        //    btnFinalScoreCalculate.Enabled = false;
+        //    txtFinalScoreMemo.Enabled = false;
+        //    txtFinalScoreMemo.Text = string.Empty;
+        //    #endregion  
+        //    #region 年份及評核時間設定 Init
+        //    dtpYearAndEvalTimeStartTime.Format = DateTimePickerFormat.Custom;
+        //    dtpYearAndEvalTimeStartTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+        //    dtpYearAndEvalTimeEndTime.Format = DateTimePickerFormat.Custom;
+        //    dtpYearAndEvalTimeEndTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+        //    dtpYearAndEvalTimeSelfStartTime.Format = DateTimePickerFormat.Custom;
+        //    dtpYearAndEvalTimeSelfStartTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+        //    dtpYearAndEvalTimeSelfEndTime.Format = DateTimePickerFormat.Custom;
+        //    dtpYearAndEvalTimeSelfEndTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+        //    dtpYearAndEvalTimeSupervisorStartTime.Format = DateTimePickerFormat.Custom;
+        //    dtpYearAndEvalTimeSupervisorStartTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+        //    dtpYearAndEvalTimeSupervisorEndTime.Format = DateTimePickerFormat.Custom;
+        //    dtpYearAndEvalTimeSupervisorEndTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+        //    for (int i = DateTime.Today.Year - 1; i >= 2016; i--)
+        //    {
+        //        cbxYearAndEvalTimeYear.Items.Add(i);
+        //    }
+        //    cbxYearAndEvalTimeYear.SelectedIndex = 0;            
+
+        //    //DisplayYearAndEvalTime(Convert.ToInt32(cbxYearAndEvalTimeYear.Text));
+        //    #endregion
+        //    #region 員工應工作時數 Init
+        //    employeeWorkHourInputTabMode = FunctionMode.STATIC;
+        //    for (int i = DateTime.Today.Year; i >= 2016; i--)
+        //    {
+        //        cbxEmployeeWorkhourInputYear.Items.Add(i);
+        //    }
+        //    cbxEmployeeWorkhourInputYear.Text = (DateTime.Today.Year - 1).ToString();
+        //    dtEmployeeWorkhourSource = LoadgvEmployeeWorkhourInputField();
+        //    gvEmployeeWorkhourInputField.DataSource = dtEmployeeWorkhourSource;
+        //    LoadGridViewStyle(gvEmployeeWorkhourInputField);
+        //    #endregion
+        //}
+
         private void frmAPA_Shown(object sender, EventArgs e)
         {
             _frmLogin.LoadCbxFunctionList(this);
@@ -334,9 +331,10 @@ namespace NIZING_BACKEND_Data_Config
                 && questionTabMode == FunctionMode.STATIC
                 && personnelAssignmentTabMode == FunctionMode.STATIC
                 && questionAssignmentTabMode == FunctionMode.STATIC
-                && scoreStandardTabMode == FunctionMode.STATIC
+                //&& scoreStandardTabMode == FunctionMode.STATIC
                 && accountPriviledgeTabMode == FunctionMode.STATIC
                 && employeeWorkHourInputTabMode == FunctionMode.STATIC
+                && setScoreWeightTabMode == FunctionMode.STATIC
                 )
             {
                 currentTabPage = tbcManagement.SelectedTab;
@@ -345,56 +343,6 @@ namespace NIZING_BACKEND_Data_Config
             else
             {
                 tbcManagement.SelectedTab = currentTabPage;
-            }
-
-            if (currentTabPage.Name == "tbpReportPreview")
-            {
-                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-                {
-                    conn.Open();
-                    string query = "SELECT ERP_ID"
-                                + " FROM HR360_ASSESSMENTPRIVILEDGE"
-                                + " WHERE ERP_ID=@ID"
-                                + " AND [VIEW]=1";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@ID", UserName);
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        while (dr.Read())
-                        {
-                            if (dr.HasRows)
-                            {
-                                btnReportPreviewPreview.Enabled = true;
-                                cbxReportPreviewEmployee.Enabled = true;
-                                cbxReportPreviewYear.Enabled = true;
-                            }
-                        }
-                    }
-                }
-            }
-            if (currentTabPage.Name == "tbpFinalScoreCalculation")
-            {
-                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-                {
-                    conn.Open();
-                    string query = "SELECT ERP_ID"
-                                + " FROM HR360_ASSESSMENTPRIVILEDGE"
-                                + " WHERE ERP_ID=@ID"
-                                + " AND [CALCULATE]=1";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@ID", UserName);
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        while (dr.Read())
-                        {
-                            if (dr.HasRows)
-                            {
-                                cbxFinalScoreYear.Enabled = true;
-                                btnFinalScoreCalculate.Enabled = true;
-                            }
-                        }
-                    }
-                }
             }
         }
         private void LoadControlStatus(TabPage tab)
@@ -441,28 +389,6 @@ namespace NIZING_BACKEND_Data_Config
                             break;
                     }
                     break;
-                case "tbpPersonnelAssignment":
-                    switch (personnelAssignmentTabMode)
-                    {
-                        case FunctionMode.STATIC:
-                            btnPersonnelAssignmentEdit.Enabled = true;
-                            btnPersonnelAssignmentSave.Enabled = false;
-                            btnPersonnelAssignmentCancel.Enabled = false;
-                            cbxPersonnelAssignmentYear.Enabled = true;
-                            gvPersonnelAssignment.ReadOnly = true;
-                            gvPersonnelAssignment.ForeColor = Color.Gray;
-                            break;
-                        case FunctionMode.EDIT:
-                            btnPersonnelAssignmentEdit.Enabled = false;
-                            btnPersonnelAssignmentSave.Enabled = true;
-                            btnPersonnelAssignmentCancel.Enabled = true;
-                            cbxPersonnelAssignmentYear.Enabled = false;
-                            gvPersonnelAssignment.ReadOnly = false;
-                            gvPersonnelAssignment.ForeColor = Color.Black;
-                            LoadGridViewStyle(gvPersonnelAssignment);
-                            break;
-                    }
-                    break;
                 case "tbpQuestionAssignment":
                     switch (questionAssignmentTabMode)
                     {
@@ -474,21 +400,178 @@ namespace NIZING_BACKEND_Data_Config
                             break;
                     }
                     break;
-                case "tbpScoreStandard":    //2019.11.05 停止使用特評
-                    switch (scoreStandardTabMode)
+                case "tbpSetScoreWeight":
+                    if (isEvalDone(Convert.ToInt32(cbxSetScoreWeightYear.Text)))
                     {
-                        case FunctionMode.STATIC:
-                            btnScoreStandardEdit.Enabled = false;
-                            btnScoreStandardSave.Enabled = false;
-                            btnScoreStandardCancel.Enabled = false;
-                            txtScoreStandardStandard.Enabled = false;
-                            break;
-                        case FunctionMode.EDIT:
-                            btnScoreStandardEdit.Enabled = false;
-                            btnScoreStandardSave.Enabled = false;
-                            btnScoreStandardCancel.Enabled = false;
-                            txtScoreStandardStandard.Enabled = false;
-                            break;
+                        btnSetScoreWeightEdit.Enabled = false;
+                        cbxSetScoreWeightYear.Enabled = true;
+                        txtSetScoreWeightSelfWeight.Enabled = false;
+                        txtSetScoreWeightSupervisorWeight.Enabled = false;
+                        txtSetScoreWeightFinalizerWeight.Enabled = false;
+                        btnSetScoreWeightSave.Enabled = false;
+                        btnSetScoreWeightCancel.Enabled = false;
+                    }
+                    else
+                    {
+                        switch (setScoreWeightTabMode)
+                        {
+                            case FunctionMode.STATIC:
+                                btnSetScoreWeightEdit.Enabled = true;
+                                cbxSetScoreWeightYear.Enabled = true;
+                                txtSetScoreWeightSelfWeight.Enabled = false;
+                                txtSetScoreWeightSupervisorWeight.Enabled = false;
+                                txtSetScoreWeightFinalizerWeight.Enabled = false;
+                                btnSetScoreWeightSave.Enabled = false;
+                                btnSetScoreWeightCancel.Enabled = false;
+                                break;
+                            case FunctionMode.EDIT:
+                                btnSetScoreWeightEdit.Enabled = false;
+                                cbxSetScoreWeightYear.Enabled = true;
+                                txtSetScoreWeightSelfWeight.Enabled = true;
+                                txtSetScoreWeightSupervisorWeight.Enabled = true;
+                                txtSetScoreWeightFinalizerWeight.Enabled = true;
+                                btnSetScoreWeightSave.Enabled = true;
+                                btnSetScoreWeightCancel.Enabled = true;
+                                break;
+                        }
+
+                    }
+                    break;
+                case "tbpSetSupervisorAmount":
+                    if (isEvalDone(Convert.ToInt32(cbxSetSupervisorAmountYear.Text)))
+                    {
+                        cbxSetSupervisorAmountYear.Enabled = true;
+                        btnSetSupervisorAmountEdit.Enabled = false;
+                        gvSetSupervisorAmountInputField.ReadOnly = true;
+                        gvSetSupervisorAmountInputField.ForeColor = Color.Gray;
+                        btnSetSupervisorAmountSave.Enabled = false;
+                        btnSetSupervisorAmountCancel.Enabled = false;
+                        DisplaySetSupervisorAmountData(Convert.ToInt32(cbxSetSupervisorAmountYear.Text));
+                    }
+                    else
+                    {
+                        switch(setSupervisorAmountTabMode)
+                        {
+                            case FunctionMode.STATIC:
+                                cbxSetSupervisorAmountYear.Enabled = true;
+                                btnSetSupervisorAmountEdit.Enabled = true;
+                                gvSetSupervisorAmountInputField.ReadOnly = true;
+                                gvSetSupervisorAmountInputField.ForeColor = Color.Gray;
+                                btnSetSupervisorAmountSave.Enabled = false;
+                                btnSetSupervisorAmountCancel.Enabled = false;
+                                DisplaySetSupervisorAmountData(Convert.ToInt32(cbxSetSupervisorAmountYear.Text));
+                                break;
+                            case FunctionMode.EDIT:
+                                cbxSetSupervisorAmountYear.Enabled = false;
+                                btnSetSupervisorAmountEdit.Enabled = false;
+                                gvSetSupervisorAmountInputField.ReadOnly = false;
+                                gvSetSupervisorAmountInputField.ForeColor = Color.Black;
+                                btnSetSupervisorAmountSave.Enabled = true;
+                                btnSetSupervisorAmountCancel.Enabled = true;
+                                DisplaySetSupervisorAmountData(Convert.ToInt32(cbxSetSupervisorAmountYear.Text));
+                                break;
+                        }
+                    }
+                    break;
+                case "tbpPersonnelAssignment":
+                    if (isEvalDone(Convert.ToInt32(cbxPersonnelAssignmentYear.Text)))
+                    {
+                        btnPersonnelAssignmentEdit.Enabled = false;
+                        btnPersonnelAssignmentSave.Enabled = false;
+                        btnPersonnelAssignmentCancel.Enabled = false;
+                        cbxPersonnelAssignmentYear.Enabled = true;
+                        gvPersonnelAssignment.ReadOnly = true;
+                        gvPersonnelAssignment.ForeColor = Color.Gray;
+                        DisplayPersonnelAssignmentData(Convert.ToInt32(cbxPersonnelAssignmentYear.Text));
+                    }
+                    else
+                    {
+                        switch (personnelAssignmentTabMode)
+                        {
+                            case FunctionMode.STATIC:
+                                btnPersonnelAssignmentEdit.Enabled = true;
+                                btnPersonnelAssignmentSave.Enabled = false;
+                                btnPersonnelAssignmentCancel.Enabled = false;
+                                cbxPersonnelAssignmentYear.Enabled = true;
+                                gvPersonnelAssignment.ReadOnly = true;
+                                gvPersonnelAssignment.ForeColor = Color.Gray;
+                                DisplayPersonnelAssignmentData(Convert.ToInt32(cbxPersonnelAssignmentYear.Text));
+                                break;
+                            case FunctionMode.EDIT:
+                                btnPersonnelAssignmentEdit.Enabled = false;
+                                btnPersonnelAssignmentSave.Enabled = true;
+                                btnPersonnelAssignmentCancel.Enabled = true;
+                                cbxPersonnelAssignmentYear.Enabled = false;
+                                gvPersonnelAssignment.ReadOnly = false;
+                                gvPersonnelAssignment.ForeColor = Color.Black;
+                                DisplayPersonnelAssignmentData(Convert.ToInt32(cbxPersonnelAssignmentYear.Text));
+                                break;
+                        }
+                    }
+                    break;
+                case "tbpEmployeeWorkhourInput":
+                    if (isEvalDone(Convert.ToInt32(cbxEmployeeWorkhourInputYear.Text)))
+                    {
+                        cbxEmployeeWorkhourInputYear.Enabled = true;
+                        btnEmployeeWorkhourInputEdit.Enabled = false;
+                        btnEmployeeWorkhourInputSave.Enabled = false;
+                        btnEmployeeWorkhourInputCancel.Enabled = false;
+                        gvEmployeeWorkhourInputField.ReadOnly = true;
+                        gvEmployeeWorkhourInputField.ForeColor = Color.Gray;
+                        LoadGridViewStyle(gvEmployeeWorkhourInputField);
+                    }
+                    else
+                    {
+                        switch (employeeWorkHourInputTabMode)
+                        {
+                            case FunctionMode.STATIC:
+                                cbxEmployeeWorkhourInputYear.Enabled = true;
+                                btnEmployeeWorkhourInputEdit.Enabled = true;
+                                btnEmployeeWorkhourInputSave.Enabled = false;
+                                btnEmployeeWorkhourInputCancel.Enabled = false;
+                                gvEmployeeWorkhourInputField.ReadOnly = true;
+                                gvEmployeeWorkhourInputField.ForeColor = Color.Gray;
+                                LoadGridViewStyle(gvEmployeeWorkhourInputField);
+                                break;
+                            case FunctionMode.EDIT:
+                                cbxEmployeeWorkhourInputYear.Enabled = false;
+                                btnEmployeeWorkhourInputEdit.Enabled = false;
+                                btnEmployeeWorkhourInputSave.Enabled = true;
+                                btnEmployeeWorkhourInputCancel.Enabled = true;
+                                gvEmployeeWorkhourInputField.ReadOnly = false;
+                                gvEmployeeWorkhourInputField.ForeColor = Color.Black;
+                                LoadGridViewStyle(gvEmployeeWorkhourInputField);
+                                break;
+                        }
+                    }
+                    break;
+                
+                //case "tbpScoreStandard":    //2019.11.05 停止使用特評
+                //    switch (scoreStandardTabMode)
+                //    {
+                //        case FunctionMode.STATIC:
+                //            btnScoreStandardEdit.Enabled = false;
+                //            btnScoreStandardSave.Enabled = false;
+                //            btnScoreStandardCancel.Enabled = false;
+                //            txtScoreStandardStandard.Enabled = false;
+                //            break;
+                //        case FunctionMode.EDIT:
+                //            btnScoreStandardEdit.Enabled = false;
+                //            btnScoreStandardSave.Enabled = false;
+                //            btnScoreStandardCancel.Enabled = false;
+                //            txtScoreStandardStandard.Enabled = false;
+                //            break;
+                //    }
+                //    break;
+                
+                case "tbpYearAndEvalTime":
+                    if (isEvalDone(Convert.ToInt32(cbxYearAndEvalTimeYear.Text)))
+                    {
+                        btnYearAndEvalTimeSave.Enabled = false;
+                    }
+                    else
+                    {
+                        btnYearAndEvalTimeSave.Enabled = true;
                     }
                     break;
                 case "tbpAccountPriviledge":
@@ -512,27 +595,60 @@ namespace NIZING_BACKEND_Data_Config
                             break;
                     }
                     break;
-                case "tbpEmployeeWorkhourInput":
-                    switch (employeeWorkHourInputTabMode)
+                
+                case "tbpReportPreview":
+                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                     {
-                        case FunctionMode.STATIC:
-                            cbxEmployeeWorkhourInputYear.Enabled = true;
-                            btnEmployeeWorkhourInputEdit.Enabled = true;
-                            btnEmployeeWorkhourInputSave.Enabled = false;
-                            btnEmployeeWorkhourInputCancel.Enabled = false;
-                            gvEmployeeWorkhourInputField.ReadOnly = true;
-                            gvEmployeeWorkhourInputField.ForeColor = Color.Gray;
-                            LoadGridViewStyle(gvEmployeeWorkhourInputField);
-                            break;
-                        case FunctionMode.EDIT:
-                            cbxEmployeeWorkhourInputYear.Enabled = false;
-                            btnEmployeeWorkhourInputEdit.Enabled = false;
-                            btnEmployeeWorkhourInputSave.Enabled = true;
-                            btnEmployeeWorkhourInputCancel.Enabled = true;
-                            gvEmployeeWorkhourInputField.ReadOnly = false;
-                            gvEmployeeWorkhourInputField.ForeColor = Color.Black;
-                            LoadGridViewStyle(gvEmployeeWorkhourInputField);
-                            break;
+                        conn.Open();
+                        string query = "SELECT ERP_ID"
+                                    + " FROM HR360_ASSESSMENTPRIVILEDGE"
+                                    + " WHERE ERP_ID=@ID"
+                                    + " AND [VIEW]=1";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@ID", UserName);
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                if (dr.HasRows)
+                                {
+                                    btnReportPreviewPreview.Enabled = true;
+                                    cbxReportPreviewEmployee.Enabled = true;
+                                    cbxReportPreviewYear.Enabled = true;
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case "tbpFinalScoreCalculation":
+                    if (isEvalDone(Convert.ToInt32(cbxFinalScoreYear.Text)))
+                    {
+                        cbxFinalScoreYear.Enabled = true;
+                        btnFinalScoreCalculate.Enabled = false;
+                    }
+                    else
+                    {
+                        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                        {
+                            conn.Open();
+                            string query = "SELECT ERP_ID"
+                                        + " FROM HR360_ASSESSMENTPRIVILEDGE"
+                                        + " WHERE ERP_ID=@ID"
+                                        + " AND [CALCULATE]=1";
+                            SqlCommand cmd = new SqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@ID", UserName);
+                            using (SqlDataReader dr = cmd.ExecuteReader())
+                            {
+                                while (dr.Read())
+                                {
+                                    if (dr.HasRows)
+                                    {
+                                        cbxFinalScoreYear.Enabled = true;
+                                        btnFinalScoreCalculate.Enabled = true;
+                                    }
+                                }
+                            }
+                        }
                     }
                     break;
             }
@@ -638,12 +754,27 @@ namespace NIZING_BACKEND_Data_Config
                         row.Cells["分類"] = cbxCATEGORY_IDCell;
                     }
                     break;
+                case "gvSetSupervisorAmountInputField":
+                    gv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                    gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["評核年份"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["評核年份"].ReadOnly = true;
+                    gv.Columns["員工ID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["員工ID"].ReadOnly = true;
+                    gv.Columns["員工姓名"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["員工姓名"].ReadOnly = true;
+                    gv.Columns["評核主管人數"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["核決主管人數"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["核決主管人數"].ReadOnly = true;
+                    break;
                 case "gvPersonnelAssignment":
                     gv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
                     gv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     gv.Columns["年份"].ReadOnly = true;
                     gv.Columns["年份"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     gv.Columns["受評者"].ReadOnly = true;
+                    gv.Columns["評核順位"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    gv.Columns["評核順位"].ReadOnly = true;
                     gv.Columns["評核類型"].ReadOnly = true;
                     DataTable dtAssessorList = new DataTable();
                     using (SqlConnection conn = new SqlConnection(NZConnectionString))
@@ -673,7 +804,7 @@ namespace NIZING_BACKEND_Data_Config
                         cbxAssessorCell.DisplayMember = "NAME";
                         cbxAssessorCell.ValueMember = "NAME";
                         row.Cells["評核者"] = cbxAssessorCell;
-                        if (row.Cells["評核類型"].FormattedValue.ToString() != "2. 主管評") //僅能編輯主管評的row，其他類型評核者為auto-generate
+                        if (row.Cells["評核類型"].FormattedValue.ToString() == "1. 自評") //2019年開始，自評為唯一自動產生的分類
                         {
                             row.ReadOnly = true;
                         }
@@ -747,6 +878,20 @@ namespace NIZING_BACKEND_Data_Config
                     break;
             }
         }
+        private bool isEvalDone(int year)
+        {
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "select EVAL_DONE" +
+                    " from HR360_ASSESSMENTTIME" +
+                    " where EVAL_YEAR=@YEAR";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@YEAR", year);
+
+                return (bool?)cmd.ExecuteScalar() == null ? false : (bool)cmd.ExecuteScalar();
+            }
+        }
         private string GetErrorMessage(int errorCode)
         {
             string message = "";
@@ -763,6 +908,9 @@ namespace NIZING_BACKEND_Data_Config
                     break;
                 case 401:
                     message = "資料刪除錯誤";
+                    break;
+                case 999:
+                    message = "其他錯誤";
                     break;
                 default:
                     message = "未知錯誤";
@@ -1108,251 +1256,6 @@ namespace NIZING_BACKEND_Data_Config
         }
 
         #endregion
-        #endregion
-
-        #region 評核人員分配 Tab Methods and Events
-        /*這邊有個重點，自評的分配與調整將會自動於背景進行，以ERP中在職者為依據進行新增以及編輯(使已離職者INACTIVE)*/
-        private DataTable LoadgvPersonnelAssignment()
-        {
-            DataTable dt = new DataTable();
-            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-            {
-                conn.Open();
-                string query = ";WITH"
-                            + " ASSIGNMENT"
-                            + " AS"
-                            + " (SELECT *"
-                            + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
-                            + " WHERE [YEAR]=@YEAR"
-                            + " AND ACTIVE='1'"
-                            + " )"
-                            + " SELECT COALESCE(ASSIGN.[YEAR],@YEAR) '年份'"
-                            + " ,LTRIM(RTRIM(MV.MV001)) + ' ' + LTRIM(RTRIM(MV.MV002)) '受評者'"
-                            + " ,COALESCE(LTRIM(RTRIM(ASSIGN.ASSESSOR_ID)) + ' ' + LTRIM(RTRIM(MVASSESSOR.MV002)),'') '評核者'"
-                            + " ,COALESCE([TYPE].[ID]+'. '+[TYPE].NAME,'2. 主管評') '評核類型'"
-                            + " FROM NZ.dbo.CMSMV MV"
-                            + " LEFT JOIN ASSIGNMENT ASSIGN ON MV.MV001=ASSIGN.ASSESSED_ID"
-                            + " LEFT JOIN NZ.dbo.CMSMV MVASSESSOR ON ASSIGN.ASSESSOR_ID=MVASSESSOR.MV001"
-                            + " LEFT JOIN HR360_ASSESSMENTPERSONNEL_TYPE_A [TYPE] ON ASSIGN.ASSESS_TYPE=[TYPE].ID"
-                            + " WHERE "
-                            + " (MV.MV022=''"
-                            + " OR MV.MV022 > @YEAR+'1232')"
-                            + " AND MV.MV021 < @YEAR+'1232'"
-                            + " AND MV.MV001 NOT LIKE 'PT%'"
-                            + " AND MV.MV001<>'0000'"
-                            + " AND MV.MV001<>'0006'"
-                            + " AND MV.MV001<>'0007'"
-                            + " AND MV.MV001<>'0098'"
-                            + " ORDER BY MV.MV001,COALESCE([TYPE].[ID]+'. '+[TYPE].NAME,'2. 主管評')";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@YEAR", cbxPersonnelAssignmentYear.Text);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-            }
-            return dt;
-        }
-
-        private void cbxPersonnelAssignmentYear_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            dtPersonnelAssignmentSource = LoadgvPersonnelAssignment();
-            gvPersonnelAssignment.DataSource = dtPersonnelAssignmentSource;
-        }
-
-        private void btnPersonnelAssignmentEdit_Click(object sender, EventArgs e)
-        {
-            personnelAssignmentTabMode = FunctionMode.EDIT;
-            LoadControlStatus(currentTabPage);
-            if (gvPersonnelAssignment.Rows.Count > 0)
-            {
-                gvQuestionCategory.CurrentCell = gvQuestionCategory.Rows[0].Cells[0];
-            }
-        }
-        private void btnPersonnelAssignmentCancel_Click(object sender, EventArgs e)
-        {
-            isCancel = true;
-            dtPersonnelAssignmentSource = LoadgvPersonnelAssignment();
-            gvPersonnelAssignment.DataSource = dtPersonnelAssignmentSource;
-            personnelAssignmentTabMode = FunctionMode.STATIC;
-            LoadControlStatus(currentTabPage);
-            txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 資料更新取消" + Environment.NewLine;
-            isCancel = false;
-        }
-        private void btnPersonnelAssignmentSave_Click(object sender, EventArgs e)
-        {
-            UpdatePersonnelAssignment();
-            dtPersonnelAssignmentSource = LoadgvPersonnelAssignment();
-            gvPersonnelAssignment.DataSource = dtPersonnelAssignmentSource;
-            personnelAssignmentTabMode = FunctionMode.STATIC;
-            LoadControlStatus(currentTabPage);
-            txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;
-        }
-        private void UpdatePersonnelAssignment()
-        {
-            //DataTable dtEmployeeLeftThisYear = new DataTable();
-            //Set all records in that year to inactive
-            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-            {
-                conn.Open();
-                string query = "UPDATE HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
-                            + " SET ACTIVE='0'"
-                            + " WHERE [YEAR]=@YEAR";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@YEAR", cbxPersonnelAssignmentYear.Text);
-            }
-            //Check each row for duplicate record
-            int dataCount = 0;
-            foreach (DataGridViewRow row in gvPersonnelAssignment.Rows)
-            {
-                dataCount++;
-                txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 對比資料中...(" + dataCount.ToString() + "/" + gvPersonnelAssignment.Rows.Count + ")" + Environment.NewLine;
-                if (!String.IsNullOrWhiteSpace(row.Cells["評核者"].FormattedValue.ToString()))
-                {
-                    DataTable dtAssessedPairings = new DataTable();
-                    //Get all pairings of the assessed currently in database
-                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-                    {
-                        conn.Open();
-                        string query = "SELECT [YEAR],ASSESSOR_ID,ASSESSED_ID,ASSESS_TYPE,ACTIVE"
-                                    + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
-                                    + " WHERE [YEAR]=@YEAR"
-                                    + " AND ASSESSED_ID=@ASSESSED_ID"
-                                    + " AND ASSESS_TYPE=@ASSESS_TYPE";
-                        SqlCommand cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@YEAR", row.Cells["年份"].FormattedValue.ToString());
-                        cmd.Parameters.AddWithValue("@ASSESSED_ID", row.Cells["受評者"].FormattedValue.ToString().Substring(0, 4));
-                        cmd.Parameters.AddWithValue("@ASSESS_TYPE", row.Cells["評核類型"].FormattedValue.ToString().Substring(0, 1));
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        da.Fill(dtAssessedPairings);
-                    }
-                    if (dtAssessedPairings.Rows.Count == 1) //Each type of assessment for each assessed should only return 1 result
-                    {
-                        if (dtAssessedPairings.Rows[0]["ASSESS_TYPE"].ToString() == "2")    //主管評類型，檢查評核者是否相同
-                        {
-                            //Check if a 自評 for this 受評者 exists
-                            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-                            {
-                                conn.Open();
-                                string query = "SELECT *"
-                                            + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
-                                            + " WHERE [YEAR]=@YEAR"
-                                            + " AND ASSESSED_ID=@ASSESSED_ID"
-                                            + " AND ASSESS_TYPE='1'";
-                                SqlCommand cmd = new SqlCommand(query, conn);
-                                cmd.Parameters.AddWithValue("@YEAR", dtAssessedPairings.Rows[0]["YEAR"].ToString());
-                                cmd.Parameters.AddWithValue("@ASSESSED_ID", dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim());
-                                using (SqlDataReader dr = cmd.ExecuteReader())
-                                {
-                                    while (dr.Read())
-                                    {
-                                        if (!dr.HasRows)    //這個受評者沒有自評，須新增
-                                        {
-                                            query = "INSERT INTO HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
-                                                + " VALUES"
-                                                + " (GETDATE(),@USER,GETDATE(),@USER,@YEAR,@ASSESSED_ID,@ASSESSED_ID,'1','0','1')";
-                                            cmd = new SqlCommand(query, conn);
-                                            cmd.Parameters.AddWithValue("@USER", UserName);
-                                            cmd.Parameters.AddWithValue("@YEAR", dtAssessedPairings.Rows[0]["YEAR"].ToString());
-                                            cmd.Parameters.AddWithValue("@ASSESSED_ID", dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim());
-                                            cmd.ExecuteNonQuery();
-                                            txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 新增加" + dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim() + "自評" + Environment.NewLine;
-                                        }
-                                    }
-                                }
-                            }
-                            //Check if record in the gridview match record in database for this 受評者
-                            if (dtAssessedPairings.Rows[0]["ASSESSOR_ID"].ToString().Trim() == row.Cells["評核者"].FormattedValue.ToString().Substring(0, 4))
-                            {
-                                //Setting record to Active without changing anything else
-                                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-                                {
-                                    conn.Open();
-                                    string query = "UPDATE HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
-                                                + " SET ACTIVE='1'"
-                                                + " WHERE [YEAR]=@YEAR"
-                                                + " AND ASSESSED_ID=@ASSESSED_ID"
-                                                + " AND ASSESS_TYPE=@ASSESS_TYPE";
-                                    SqlCommand cmd = new SqlCommand(query, conn);
-                                    cmd.Parameters.AddWithValue("@YEAR", dtAssessedPairings.Rows[0]["YEAR"].ToString());
-                                    cmd.Parameters.AddWithValue("@ASSESSED_ID", dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim());
-                                    cmd.Parameters.AddWithValue("@ASSESS_TYPE", dtAssessedPairings.Rows[0]["ASSESS_TYPE"].ToString().Trim());
-                                    cmd.ExecuteNonQuery();
-                                }
-                            }
-                            else
-                            {
-                                //Modify record's Assessor and set it to Active
-                                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-                                {
-                                    conn.Open();
-                                    string query = "UPDATE HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
-                                                + " SET MODIFIEDDATE=GETDATE()"
-                                                + " ,MODIFIER=@MODIFIER"
-                                                + " ,ASSESSOR_ID=@ASSESSOR_ID"
-                                                + " ,ASSESSMENT_DONE='0'"
-                                                + " ,ACTIVE='1'"
-                                                + " WHERE [YEAR]=@YEAR"
-                                                + " AND ASSESSED_ID=@ASSESSED_ID"
-                                                + " AND ASSESS_TYPE=@ASSESS_TYPE";
-                                    SqlCommand cmd = new SqlCommand(query, conn);
-                                    cmd.Parameters.AddWithValue("@MODIFIER", UserName);
-                                    cmd.Parameters.AddWithValue("@ASSESSOR_ID", row.Cells["評核者"].FormattedValue.ToString().Substring(0, 4));
-                                    cmd.Parameters.AddWithValue("@YEAR", dtAssessedPairings.Rows[0]["YEAR"].ToString());
-                                    cmd.Parameters.AddWithValue("@ASSESSED_ID", dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim());
-                                    cmd.Parameters.AddWithValue("@ASSESS_TYPE", dtAssessedPairings.Rows[0]["ASSESS_TYPE"].ToString().Trim());
-                                    cmd.ExecuteNonQuery();
-                                }
-                                txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 更新" + dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim() + "主管評" + Environment.NewLine;
-                            }
-                        }
-                        else
-                        {
-                            //Setting record to Active without changing anything else
-                            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-                            {
-                                conn.Open();
-                                string query = "UPDATE HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
-                                            + " SET ACTIVE='1'"
-                                            + " WHERE [YEAR]=@YEAR"
-                                            + " AND ASSESSED_ID=@ASSESSED_ID"
-                                            + " AND ASSESS_TYPE=@ASSESS_TYPE";
-                                SqlCommand cmd = new SqlCommand(query, conn);
-                                cmd.Parameters.AddWithValue("@YEAR", dtAssessedPairings.Rows[0]["YEAR"].ToString());
-                                cmd.Parameters.AddWithValue("@ASSESSED_ID", dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim());
-                                cmd.Parameters.AddWithValue("@ASSESS_TYPE", dtAssessedPairings.Rows[0]["ASSESS_TYPE"].ToString().Trim());
-                                cmd.ExecuteNonQuery();
-                            }
-                        }
-                    }
-                    else if (dtAssessedPairings.Rows.Count == 0) //No pairings exist, 需新增自評與主管評
-                    {
-                        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-                        {
-                            conn.Open();
-                            string query = "INSERT INTO HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
-                                         + " VALUES"
-                                        + " (GETDATE(),@USER,GETDATE(),@USER,@YEAR,@ASSESSED_ID,@ASSESSED_ID,'1','0','1')"
-                                        + ",(GETDATE(),@USER,GETDATE(),@USER,@YEAR,@ASSESSOR_ID,@ASSESSED_ID,'2','0','1')";
-                            SqlCommand cmd = new SqlCommand(query, conn);
-                            cmd.Parameters.AddWithValue("@USER", UserName);
-                            cmd.Parameters.AddWithValue("@YEAR", row.Cells["年份"].FormattedValue.ToString());
-                            cmd.Parameters.AddWithValue("@ASSESSOR_ID", row.Cells["評核者"].FormattedValue.ToString().Substring(0, 4));
-                            cmd.Parameters.AddWithValue("@ASSESSED_ID", row.Cells["受評者"].FormattedValue.ToString().Substring(0, 4));
-                            cmd.ExecuteNonQuery();
-                        }
-                        txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 新增加" + row.Cells["受評者"].FormattedValue.ToString().Substring(0, 4) + "自評" + Environment.NewLine;
-                        txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 新增加" + row.Cells["受評者"].FormattedValue.ToString().Substring(0, 4) + "主管評" + Environment.NewLine;
-                    }
-                    else
-                    {
-                        txtPersonnelAssignmentTabMemo.Text += "Error: " + row.Cells["受評者"].FormattedValue.ToString() + "同樣的評核類型有超過兩個ACTIVE的紀錄" + Environment.NewLine;
-                    }
-                }
-                else
-                {
-                    txtPersonnelAssignmentTabMemo.Text += "Warning: " + row.Cells["受評者"].FormattedValue.ToString() + "尚未配置評核者" + Environment.NewLine;
-                }
-            }
-        }
         #endregion
 
         /*
@@ -1788,75 +1691,858 @@ namespace NIZING_BACKEND_Data_Config
         }
         #endregion
 
-        #region 特評分數設定 Tab Methods and Events
-        private void LoadScoreStandard()
+        #region 評分權重設定 Tab Methods and Events
+        private void DisplayScoreWeightData(int year)
+        {
+            DataTable dt = new DataTable();
+            dt = LoadScoreWeightData(year);
+
+            if (dt.Rows.Count > 0)
+            {
+                txtSetScoreWeightSelfWeight.Text = String.IsNullOrWhiteSpace(dt.Rows[0]["selfEvaluationWeight"].ToString()) ? "" : dt.Rows[0]["selfEvaluationWeight"].ToString();
+                txtSetScoreWeightSupervisorWeight.Text = String.IsNullOrWhiteSpace(dt.Rows[0]["supervisorEvaluationWeight"].ToString()) ? "" : dt.Rows[0]["supervisorEvaluationWeight"].ToString();
+                txtSetScoreWeightFinalizerWeight.Text = String.IsNullOrWhiteSpace(dt.Rows[0]["finalizerEvaluationWeight"].ToString()) ? "" : dt.Rows[0]["finalizerEvaluationWeight"].ToString();
+            }
+        }
+        private DataTable LoadScoreWeightData(int year)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "Select selfEvaluationWeight, supervisorEvaluationWeight, finalizerEvaluationWeight"
+                    + " From HR360_AssessmentPersonnel_ScoreWeight"
+                    + " Where assessYear = @Year";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Year", year);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            return dt;
+        }
+        private void btnSetScoreWeightEdit_Click(object sender, EventArgs e)
+        {
+            setScoreWeightTabMode = FunctionMode.EDIT;
+            LoadControlStatus(tbpSetScoreWeight);
+        }
+        private void cbxSetScoreWeightYear_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DisplayScoreWeightData(Convert.ToInt32(cbxSetScoreWeightYear.Text));
+            LoadControlStatus(tbpSetScoreWeight);
+        }
+        private void btnSetScoreWeightSave_Click(object sender, EventArgs e)
+        {
+            int temp = 0;
+            if (!Int32.TryParse(txtSetScoreWeightFinalizerWeight.Text, out temp) ||
+                !Int32.TryParse(txtSetScoreWeightSupervisorWeight.Text, out temp) ||
+                !Int32.TryParse(txtSetScoreWeightSelfWeight.Text, out temp))
+            {
+                ShowError(102);
+            }
+            else if (Int32.Parse(txtSetScoreWeightFinalizerWeight.Text) +
+                Int32.Parse(txtSetScoreWeightSupervisorWeight.Text) +
+                Int32.Parse(txtSetScoreWeightSelfWeight.Text) != 100)
+            {
+                ShowError(999);
+            }
+            else
+            {
+                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                {
+                    conn.Open();
+
+                    string query = "update HR360_AssessmentPersonnel_ScoreWeight" +
+                        " set modifiedDate=@date" +
+                        " ,modifier=@user" +
+                        " ,selfEvaluationWeight=@selfEvaluationWeight" +
+                        " ,supervisorEvaluationWeight=@supervisorEvaluationWeight" +
+                        " ,finalizerEvaluationWeight=@finalizerEvaluationWeight" +
+                        " where assessYear=@assessYear" +
+                        " if @@ROWCOUNT=0" +
+                        " insert into HR360_AssessmentPersonnel_ScoreWeight" +
+                        " values (@date,@user,@date,@user,@assessYear,@selfEvaluationWeight,@supervisorEvaluationWeight,@finalizerEvaluationWeight)";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@date", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@user", UserName);
+                    cmd.Parameters.AddWithValue("@assessYear", cbxSetScoreWeightYear.Text);
+                    cmd.Parameters.AddWithValue("@selfEvaluationWeight", txtSetScoreWeightSelfWeight.Text.Trim());
+                    cmd.Parameters.AddWithValue("@supervisorEvaluationWeight", txtSetScoreWeightSupervisorWeight.Text.Trim());
+                    cmd.Parameters.AddWithValue("@finalizerEvaluationWeight", txtSetScoreWeightFinalizerWeight.Text.Trim());
+                    cmd.ExecuteNonQuery();
+                }
+                txtSetScoreWeightMemo.Text += DateTime.Now + " " + cbxSetScoreWeightYear.Text + "年資料更新完成" + Environment.NewLine;
+                setScoreWeightTabMode = FunctionMode.STATIC;
+            }
+        }
+        private void btnSetScoreWeightCancel_Click(object sender, EventArgs e)
+        {
+            txtSetScoreWeightMemo.Text += DateTime.Now + " " + cbxSetScoreWeightYear.Text + "年資料更新取消" + Environment.NewLine;
+            setScoreWeightTabMode = FunctionMode.STATIC;
+            LoadControlStatus(tbpSetScoreWeight);
+        }
+        #endregion
+
+
+
+        #region 評核設定主管人數設定 Tab Method and Events
+        private void DisplaySetSupervisorAmountData(int year)
+        {
+            LoadSetSupervisorAmountData(year);
+            gvSetSupervisorAmountInputField.DataSource = dtSetSupervisorAmountSource;
+            LoadGridViewStyle(gvSetSupervisorAmountInputField);
+        }
+
+        private void LoadSetSupervisorAmountData(int year)
+        {
+            dtSetSupervisorAmountSource = new DataTable();
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "select COALESCE(ap.assessYear,(@year)) [評核年份]" +
+                    " ,LTRIM(RTRIM(MV.MV001)) [員工ID]" +
+                    " ,MV.MV002 [員工姓名]" +
+                    " ,COALESCE(CONVERT(NVARCHAR(10),ap.assessorSupervisorAmount), '') [評核主管人數]" +
+                    " ,COALESCE(CONVERT(NVARCHAR(10),ap.assessorFinalizerAmount), '1') [核決主管人數]" + //核決主管人數固定為1人
+                    " from HR360_AssessmentPersonnel_Assignment_B ap" +
+                    " right join NZ.dbo.CMSMV MV ON ap.assessedID=MV.MV001 and ap.assessYear=@year" +
+                    " where (MV.MV001 not like 'PT%'" +
+                    " AND MV.MV001<>'0000'" +
+                    " AND MV.MV001<>'0006'" +
+                    " AND MV.MV001<>'0007'" +
+                    " AND MV.MV001<>'0098'" +
+                    " AND ((MV.MV021<=@year+'1231' AND MV.MV022='')" +
+                    " OR (MV.MV021<=@year+'1231' AND MV.MV022>@year+'1231')))" +
+                    " OR ap.[assessYear]=@year" +
+                    " ORDER BY MV.MV001";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@year", year.ToString());
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dtSetSupervisorAmountSource);
+
+            }
+        }
+        private void cbxSetSupervisorAmountYear_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadControlStatus(tbpSetSupervisorAmount);
+        }
+
+        private void btnSetSupervisorAmountEdit_Click(object sender, EventArgs e)
+        {
+            setSupervisorAmountTabMode = FunctionMode.EDIT;
+            LoadControlStatus(tbpSetSupervisorAmount);
+        }
+
+        private void btnSetSupervisorAmountSave_Click(object sender, EventArgs e)
+        {
+            foreach(DataGridViewRow row in gvSetSupervisorAmountInputField.Rows)
+            {
+                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                {
+                    conn.Open();
+                    string query = "update HR360_AssessmentPersonnel_Assignment_B" +
+                        " set modifiedDate=@date" +
+                        " ,modifier=@user" +
+                        " ,assessorSupervisorAmount=@supervisorAmount" +
+                        " ,assessorFinalizerAmount=@finalizerAmount" +
+                        " where assessYear=@year" +
+                        " and assessedID=@assessed" +
+                        " if @@ROWCOUNT=0" +
+                        " insert into HR360_AssessmentPersonnel_Assignment_B" +
+                        " values (@date,@user,@date,@user,@year,@assessed,@supervisorAmount,@finalizerAmount)";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@date", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@user", UserName);
+                    cmd.Parameters.AddWithValue("@supervisorAmount", row.Cells["評核主管人數"].FormattedValue.ToString());
+                    cmd.Parameters.AddWithValue("@finalizerAmount", 1);
+                    cmd.Parameters.AddWithValue("@year", row.Cells["評核年份"].FormattedValue.ToString());
+                    cmd.Parameters.AddWithValue("@assessed", row.Cells["員工ID"].FormattedValue.ToString());
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            setSupervisorAmountTabMode = FunctionMode.STATIC;
+            LoadControlStatus(tbpSetSupervisorAmount);
+            txtSetSupervisorAmountMemo.Text = DateTime.Now.ToString() + " " + cbxSetSupervisorAmountYear.Text + "年資料更新完成" + Environment.NewLine;
+        }
+
+        private void btnSetSupervisorAmountCancel_Click(object sender, EventArgs e)
+        {
+            setSupervisorAmountTabMode = FunctionMode.STATIC;
+            LoadControlStatus(tbpSetSupervisorAmount);
+            txtSetSupervisorAmountMemo.Text = DateTime.Now.ToString() + " " + cbxSetSupervisorAmountYear.Text + "年資料更新取消" + Environment.NewLine;
+        }
+        #endregion
+
+
+
+        #region 評核人員分配 Tab Methods and Events
+        /*這邊有個重點，自評的分配與調整將會自動於背景進行，以ERP中在職者為依據進行新增以及編輯(使已離職者INACTIVE)*/
+        private void DisplayPersonnelAssignmentData(int year)
+        {
+            LoadgvPersonnelAssignment(year);
+            gvPersonnelAssignment.DataSource = dtPersonnelAssignmentSource;
+            LoadGridViewStyle(gvPersonnelAssignment);
+        }
+
+        private void LoadgvPersonnelAssignment(int year)
+        {
+            dtPersonnelAssignmentSource = new DataTable();
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "";
+                if (year < 2019)
+                {
+                    query = ";with assessorList as" +
+                        " (" +
+                        " SELECT COALESCE(ASSIGN.[YEAR], @YEAR) '年份'" +
+                        " , LTRIM(RTRIM(MV.MV001)) + ' ' + LTRIM(RTRIM(MV.MV002)) '受評者'" +
+                        " , COALESCE(LTRIM(RTRIM(ASSIGN.ASSESSOR_ID)) + ' ' + LTRIM(RTRIM(MVASSESSOR.MV002)), LTRIM(RTRIM(MV.MV001)) + ' ' + LTRIM(RTRIM(MV.MV002))) '評核者'" +
+                        " , 0 '評核主管數量'" +
+                        " , COALESCE([TYPE].[ID] + '. ' +[TYPE].NAME, (select[ID] + '. ' + [NAME] from HR360_ASSESSMENTPERSONNEL_TYPE_A where [ID] = '1')) '評核類型'" +
+                        " FROM NZ.dbo.CMSMV MV" +
+                        " LEFT JOIN HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A ASSIGN ON MV.MV001 = ASSIGN.ASSESSED_ID AND ASSIGN.[YEAR]=@YEAR AND ASSIGN.ACTIVE='1' AND ASSIGN.ASSESS_TYPE='1'" +
+                        " LEFT JOIN NZ.dbo.CMSMV MVASSESSOR ON ASSIGN.ASSESSOR_ID= MVASSESSOR.MV001" +
+                        " LEFT JOIN HR360_ASSESSMENTPERSONNEL_TYPE_A[TYPE] ON ASSIGN.ASSESS_TYPE=[TYPE].ID" +
+                        " LEFT JOIN HR360_AssessmentPersonnel_Assignment_B ASSIGNSUPERVISOR ON MV.MV001= ASSIGNSUPERVISOR.assessedID AND ASSIGNSUPERVISOR.assessYear= @YEAR" +
+                        " WHERE" +
+                        " (MV.MV022= ''" +
+                        " OR MV.MV022 > @YEAR+'1232')" +
+                        " AND MV.MV021<@YEAR+'1232'" +
+                        " AND MV.MV001 NOT LIKE 'PT%'" +
+                        " AND MV.MV001<>'0000'" +
+                        " AND MV.MV001<>'0006'" +
+                        " AND MV.MV001<>'0007'" +
+                        " AND MV.MV001<>'0098'" +
+                        " union all" +
+                        " SELECT COALESCE(ASSIGN.[YEAR], @YEAR) '年份'" +
+                        " , LTRIM(RTRIM(MV.MV001)) + ' ' + LTRIM(RTRIM(MV.MV002)) '受評者'" +
+                        " , COALESCE(LTRIM(RTRIM(ASSIGN.ASSESSOR_ID)) + ' ' + LTRIM(RTRIM(MVASSESSOR.MV002)), '') '評核者'" +
+                        " , COALESCE(Convert(int, ASSIGNSUPERVISOR.assessorSupervisorAmount) + Convert(int, ASSIGNSUPERVISOR.assessorFinalizerAmount), '0') '評核主管數量'" +
+                        " , COALESCE([TYPE].[ID] + '. ' +[TYPE].NAME, '') '評核類型'" +
+                        " FROM NZ.dbo.CMSMV MV" +
+                        " LEFT JOIN HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A ASSIGN ON MV.MV001 = ASSIGN.ASSESSED_ID AND ASSIGN.[YEAR]= @YEAR AND ASSIGN.ACTIVE= '1'" +
+                        " LEFT JOIN NZ.dbo.CMSMV MVASSESSOR ON ASSIGN.ASSESSOR_ID= MVASSESSOR.MV001" +
+                        " LEFT JOIN HR360_ASSESSMENTPERSONNEL_TYPE_A[TYPE] ON ASSIGN.ASSESS_TYPE=[TYPE].ID" +
+                        " LEFT JOIN HR360_AssessmentPersonnel_Assignment_B ASSIGNSUPERVISOR ON MV.MV001= ASSIGNSUPERVISOR.assessedID AND ASSIGNSUPERVISOR.assessYear= @YEAR" +
+                        " WHERE" +
+                        " (MV.MV022= ''" +
+                        " OR MV.MV022 > @YEAR+'1232')" +
+                        " AND MV.MV021<@YEAR+'1232'" +
+                        " AND MV.MV001 NOT LIKE 'PT%'" +
+                        " AND MV.MV001<>'0000'" +
+                        " AND MV.MV001<>'0006'" +
+                        " AND MV.MV001<>'0007'" +
+                        " AND MV.MV001<>'0098'" +
+                        " union all" +
+                        " select al.年份, al.受評者, al.評核者, (al.評核主管數量-1) 評核主管數量, al.評核類型" +
+                        " from assessorList al" +
+                        " where al.[評核主管數量] > 1" +
+                        " )" +
+                        " select distinct al.年份" +
+                        " , al.受評者" +
+                        " , al.評核者" +
+                        " , al.評核主管數量 '評核順位'" +
+                        " , case" +
+                        " when al.評核類型<>'' then 評核類型" +
+                        " else" +
+                        " case" +
+                        " when al.評核主管數量= 0 then 評核類型" +
+                        " when al.評核主管數量= (select MAX(assessorList.評核主管數量) from assessorList where [年份]= @YEAR and[受評者]= al.受評者) then(select[ID] + '. ' + [NAME] from HR360_ASSESSMENTPERSONNEL_TYPE_A where[ID]= '3')" +
+                        " else (select[ID] + '. ' + [NAME] from HR360_ASSESSMENTPERSONNEL_TYPE_A where[ID]='2')" +
+                        " end" +
+                        " end as 評核類型" +
+                        " from assessorList al" +
+                        " left join HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A assign on SUBSTRING(al.受評者,1,4)=assign.ASSESSED_ID and SUBSTRING(al.評核者,1,4)=assign.ASSESSOR_ID and al.年份=assign.[YEAR]" +
+                        " order by 受評者, 評核類型, 評核順位";
+                }
+                else
+                {
+                    query = ";with assessorList as" +
+" (" +
+" SELECT COALESCE(ASSIGN.[YEAR], @YEAR) '年份'" +
+" , LTRIM(RTRIM(MV.MV001)) + ' ' + LTRIM(RTRIM(MV.MV002)) '受評者'" +
+" , COALESCE(LTRIM(RTRIM(ASSIGN.ASSESSOR_ID)) + ' ' + LTRIM(RTRIM(MVASSESSOR.MV002)), LTRIM(RTRIM(MV.MV001)) + ' ' + LTRIM(RTRIM(MV.MV002))) '評核者'" +
+" , 0 '評核主管數量'" +
+" , COALESCE([TYPE].[ID] + '. ' +[TYPE].NAME, (select[ID] + '. ' + [NAME] from HR360_ASSESSMENTPERSONNEL_TYPE_A where [ID] = '1')) '評核類型'" +
+" FROM NZ.dbo.CMSMV MV" +
+" LEFT JOIN HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A ASSIGN ON MV.MV001 = ASSIGN.ASSESSED_ID AND ASSIGN.[YEAR]=@YEAR AND ASSIGN.ACTIVE='1' AND ASSIGN.ASSESS_TYPE='1'" +
+" LEFT JOIN NZ.dbo.CMSMV MVASSESSOR ON ASSIGN.ASSESSOR_ID= MVASSESSOR.MV001" +
+" LEFT JOIN HR360_ASSESSMENTPERSONNEL_TYPE_A[TYPE] ON ASSIGN.ASSESS_TYPE=[TYPE].ID" +
+" LEFT JOIN HR360_AssessmentPersonnel_Assignment_B ASSIGNSUPERVISOR ON MV.MV001= ASSIGNSUPERVISOR.assessedID AND ASSIGNSUPERVISOR.assessYear= @YEAR" +
+" WHERE" +
+" (MV.MV022= ''" +
+" OR MV.MV022 > @YEAR+'1232')" +
+" AND MV.MV021<@YEAR+'1232'" +
+" AND MV.MV001 NOT LIKE 'PT%'" +
+" AND MV.MV001<>'0000'" +
+" AND MV.MV001<>'0006'" +
+" AND MV.MV001<>'0007'" +
+" AND MV.MV001<>'0098'" +
+" union all" +
+" SELECT COALESCE(ASSIGN.[YEAR], @YEAR) '年份'" +
+" , LTRIM(RTRIM(MV.MV001)) + ' ' + LTRIM(RTRIM(MV.MV002)) '受評者'" +
+" , COALESCE(LTRIM(RTRIM(ASSIGN.ASSESSOR_ID)) + ' ' + LTRIM(RTRIM(MVASSESSOR.MV002)), '') '評核者'" +
+" , COALESCE(Convert(int, ASSIGNSUPERVISOR.assessorSupervisorAmount) + Convert(int, ASSIGNSUPERVISOR.assessorFinalizerAmount), '0') '評核主管數量'" +
+" , COALESCE([TYPE].[ID] + '. ' +[TYPE].NAME, '') '評核類型'" +
+" FROM NZ.dbo.CMSMV MV" +
+" LEFT JOIN HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A ASSIGN ON MV.MV001 = ASSIGN.ASSESSED_ID AND ASSIGN.[YEAR]= @YEAR AND ASSIGN.ACTIVE= '1' AND ASSIGN.ASSESS_TYPE= '3'" +
+" LEFT JOIN NZ.dbo.CMSMV MVASSESSOR ON ASSIGN.ASSESSOR_ID= MVASSESSOR.MV001" +
+" LEFT JOIN HR360_ASSESSMENTPERSONNEL_TYPE_A[TYPE] ON ASSIGN.ASSESS_TYPE=[TYPE].ID" +
+" LEFT JOIN HR360_AssessmentPersonnel_Assignment_B ASSIGNSUPERVISOR ON MV.MV001= ASSIGNSUPERVISOR.assessedID AND ASSIGNSUPERVISOR.assessYear= @YEAR" +
+" WHERE" +
+" (MV.MV022= ''" +
+" OR MV.MV022 > @YEAR+'1232')" +
+" AND MV.MV021<@YEAR+'1232'" +
+" AND MV.MV001 NOT LIKE 'PT%'" +
+" AND MV.MV001<>'0000'" +
+" AND MV.MV001<>'0006'" +
+" AND MV.MV001<>'0007'" +
+" AND MV.MV001<>'0098'" +
+" union all" +
+" select al.年份, al.受評者, al.評核者, (al.評核主管數量-1) 評核主管數量, al.評核類型" +
+" from assessorList al" +
+" where al.[評核主管數量] > 1" +
+" )" +
+" select distinct al.年份" +
+" , al.受評者" +
+" , al.評核者" +
+" , al.評核主管數量 '評核順位'" +
+" , case" +
+" when al.評核類型<>'' then 評核類型" +
+" else" +
+" case" +
+" when al.評核主管數量= 0 then 評核類型" +
+" when al.評核主管數量= (select MAX(assessorList.評核主管數量) from assessorList where [年份]= @YEAR and[受評者]= al.受評者) then(select[ID] + '. ' + [NAME] from HR360_ASSESSMENTPERSONNEL_TYPE_A where[ID]= '3')" +
+" else (select[ID] + '. ' + [NAME] from HR360_ASSESSMENTPERSONNEL_TYPE_A where[ID]='2')" +
+" end" +
+" end as 評核類型" +
+" from assessorList al" +
+" left join HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A assign on SUBSTRING(al.受評者,1,4)=assign.ASSESSED_ID and SUBSTRING(al.評核者,1,4)=assign.ASSESSOR_ID and al.年份=assign.[YEAR]" +
+" order by 受評者, 評核類型, 評核順位";
+                }
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@YEAR", year.ToString());
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dtPersonnelAssignmentSource);
+            }
+        }
+
+        private void cbxPersonnelAssignmentYear_SelectedIndexChanged(object sender, EventArgs e)
+        {            
+            LoadControlStatus(tbpPersonnelAssignment);
+        }
+
+        private void btnPersonnelAssignmentEdit_Click(object sender, EventArgs e)
+        {
+            personnelAssignmentTabMode = FunctionMode.EDIT;
+            LoadControlStatus(currentTabPage);
+            if (gvPersonnelAssignment.Rows.Count > 0)
+            {
+                gvQuestionCategory.CurrentCell = gvQuestionCategory.Rows[0].Cells[0];
+            }
+        }
+        private void btnPersonnelAssignmentCancel_Click(object sender, EventArgs e)
+        {
+            isCancel = true;
+            personnelAssignmentTabMode = FunctionMode.STATIC;
+            LoadControlStatus(currentTabPage);
+            txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 資料更新取消" + Environment.NewLine;
+            isCancel = false;
+        }
+        private void btnPersonnelAssignmentSave_Click(object sender, EventArgs e)
+        {
+            UpdatePersonnelAssignment();
+            personnelAssignmentTabMode = FunctionMode.STATIC;
+            LoadControlStatus(currentTabPage);
+            txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;
+        }
+        private void UpdatePersonnelAssignment()
+        {
+            //DataTable dtEmployeeLeftThisYear = new DataTable();
+            //Set all records in that year to inactive
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "UPDATE HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+                            + " SET ACTIVE='0'"
+                            + " WHERE [YEAR]=@YEAR";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@YEAR", cbxPersonnelAssignmentYear.Text);
+            }
+            //Check each row for duplicate record
+            
+            foreach(DataGridViewRow row in gvPersonnelAssignment.Rows)
+            {
+                if (!String.IsNullOrWhiteSpace(row.Cells["評核者"].FormattedValue.ToString()))
+                {
+                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                    {
+                        conn.Open();
+                        /*
+                         * 更新評核人員，如無資料，則新增
+                         */
+                        string query = "update HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A" +
+                            " set [MODIFIEDDATE]=@date" +
+                            " ,[MODIFIER]=@user" +
+                            " ,[ASSESSOR_ID]=@assessorId" +
+                            " ,[ACTIVE]=@active" +
+                            " where [YEAR]=@year" +
+                            " and [ASSESSOR_ORDER]=@assessorOrder" +
+                            " and [ASSESSED_ID]=@assessedId" +
+                            " and [ASSESS_TYPE]=@assessType" +
+                            " if @@ROWCOUNT=0" +
+                            " insert into HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A" +
+                            " values (@date,@user,@date,@user,@year,@assessorOrder,@assessorId,@assessedId,@assessType,@assessmentDone,@active)";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@date", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@user", UserName);
+                        cmd.Parameters.AddWithValue("@assessorId", row.Cells["評核者"].FormattedValue.ToString().Substring(0, 4));
+                        cmd.Parameters.AddWithValue("@active", '1');
+                        cmd.Parameters.AddWithValue("@year", row.Cells["年份"].FormattedValue.ToString());
+                        cmd.Parameters.AddWithValue("@assessorOrder", Convert.ToInt32(row.Cells["評核順位"].FormattedValue.ToString()));
+                        cmd.Parameters.AddWithValue("@assessedId", row.Cells["受評者"].FormattedValue.ToString().Substring(0, 4));
+                        cmd.Parameters.AddWithValue("@assessType", row.Cells["評核類型"].FormattedValue.ToString().Substring(0, 1));
+                        cmd.Parameters.AddWithValue("@assessmentDone", '0');
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                else
+                {
+                    txtPersonnelAssignmentTabMemo.Text += "Warning: [" + row.Cells["受評者"].FormattedValue.ToString() + "] 評核順位[" + row.Cells["評核順位"].FormattedValue.ToString() + "]尚未配置評核者" + Environment.NewLine;
+                }
+            }
+            //int dataCount = 0;
+            //foreach (DataGridViewRow row in gvPersonnelAssignment.Rows)
+            //{
+            //    dataCount++;
+            //    txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 對比資料中...(" + dataCount.ToString() + "/" + gvPersonnelAssignment.Rows.Count + ")" + Environment.NewLine;
+            //    if (!String.IsNullOrWhiteSpace(row.Cells["評核者"].FormattedValue.ToString()))
+            //    {
+            //        DataTable dtAssessedPairings = new DataTable();
+            //        //Get all pairings of the assessed currently in database
+            //        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            //        {
+            //            conn.Open();
+            //            string query = "SELECT [YEAR],ASSESSOR_ID,ASSESSED_ID,ASSESS_TYPE,ACTIVE"
+            //                        + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+            //                        + " WHERE [YEAR]=@YEAR"
+            //                        + " AND ASSESSED_ID=@ASSESSED_ID"
+            //                        + " AND ASSESS_TYPE=@ASSESS_TYPE";
+            //            SqlCommand cmd = new SqlCommand(query, conn);
+            //            cmd.Parameters.AddWithValue("@YEAR", row.Cells["年份"].FormattedValue.ToString());
+            //            cmd.Parameters.AddWithValue("@ASSESSED_ID", row.Cells["受評者"].FormattedValue.ToString().Substring(0, 4));
+            //            cmd.Parameters.AddWithValue("@ASSESS_TYPE", row.Cells["評核類型"].FormattedValue.ToString().Substring(0, 1));
+            //            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            //            da.Fill(dtAssessedPairings);
+            //        }
+            //        if (dtAssessedPairings.Rows.Count == 1) //Each type of assessment for each assessed should only return 1 result
+            //        {
+            //            if (dtAssessedPairings.Rows[0]["ASSESS_TYPE"].ToString() == "2")    //主管評類型，檢查評核者是否相同
+            //            {
+            //                //Check if a 自評 for this 受評者 exists
+            //                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            //                {
+            //                    conn.Open();
+            //                    string query = "SELECT *"
+            //                                + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+            //                                + " WHERE [YEAR]=@YEAR"
+            //                                + " AND ASSESSED_ID=@ASSESSED_ID"
+            //                                + " AND ASSESS_TYPE='1'";
+            //                    SqlCommand cmd = new SqlCommand(query, conn);
+            //                    cmd.Parameters.AddWithValue("@YEAR", dtAssessedPairings.Rows[0]["YEAR"].ToString());
+            //                    cmd.Parameters.AddWithValue("@ASSESSED_ID", dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim());
+            //                    using (SqlDataReader dr = cmd.ExecuteReader())
+            //                    {
+            //                        while (dr.Read())
+            //                        {
+            //                            if (!dr.HasRows)    //這個受評者沒有自評，須新增
+            //                            {
+            //                                query = "INSERT INTO HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+            //                                    + " VALUES"
+            //                                    + " (GETDATE(),@USER,GETDATE(),@USER,@YEAR,@ASSESSED_ID,@ASSESSED_ID,'1','0','1')";
+            //                                cmd = new SqlCommand(query, conn);
+            //                                cmd.Parameters.AddWithValue("@USER", UserName);
+            //                                cmd.Parameters.AddWithValue("@YEAR", dtAssessedPairings.Rows[0]["YEAR"].ToString());
+            //                                cmd.Parameters.AddWithValue("@ASSESSED_ID", dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim());
+            //                                cmd.ExecuteNonQuery();
+            //                                txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 新增加" + dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim() + "自評" + Environment.NewLine;
+            //                            }
+            //                        }
+            //                    }
+            //                }
+            //                //Check if record in the gridview match record in database for this 受評者
+            //                if (dtAssessedPairings.Rows[0]["ASSESSOR_ID"].ToString().Trim() == row.Cells["評核者"].FormattedValue.ToString().Substring(0, 4))
+            //                {
+            //                    //Setting record to Active without changing anything else
+            //                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            //                    {
+            //                        conn.Open();
+            //                        string query = "UPDATE HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+            //                                    + " SET ACTIVE='1'"
+            //                                    + " WHERE [YEAR]=@YEAR"
+            //                                    + " AND ASSESSED_ID=@ASSESSED_ID"
+            //                                    + " AND ASSESS_TYPE=@ASSESS_TYPE";
+            //                        SqlCommand cmd = new SqlCommand(query, conn);
+            //                        cmd.Parameters.AddWithValue("@YEAR", dtAssessedPairings.Rows[0]["YEAR"].ToString());
+            //                        cmd.Parameters.AddWithValue("@ASSESSED_ID", dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim());
+            //                        cmd.Parameters.AddWithValue("@ASSESS_TYPE", dtAssessedPairings.Rows[0]["ASSESS_TYPE"].ToString().Trim());
+            //                        cmd.ExecuteNonQuery();
+            //                    }
+            //                }
+            //                else
+            //                {
+            //                    //Modify record's Assessor and set it to Active
+            //                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            //                    {
+            //                        conn.Open();
+            //                        string query = "UPDATE HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+            //                                    + " SET MODIFIEDDATE=GETDATE()"
+            //                                    + " ,MODIFIER=@MODIFIER"
+            //                                    + " ,ASSESSOR_ID=@ASSESSOR_ID"
+            //                                    + " ,ASSESSMENT_DONE='0'"
+            //                                    + " ,ACTIVE='1'"
+            //                                    + " WHERE [YEAR]=@YEAR"
+            //                                    + " AND ASSESSED_ID=@ASSESSED_ID"
+            //                                    + " AND ASSESS_TYPE=@ASSESS_TYPE";
+            //                        SqlCommand cmd = new SqlCommand(query, conn);
+            //                        cmd.Parameters.AddWithValue("@MODIFIER", UserName);
+            //                        cmd.Parameters.AddWithValue("@ASSESSOR_ID", row.Cells["評核者"].FormattedValue.ToString().Substring(0, 4));
+            //                        cmd.Parameters.AddWithValue("@YEAR", dtAssessedPairings.Rows[0]["YEAR"].ToString());
+            //                        cmd.Parameters.AddWithValue("@ASSESSED_ID", dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim());
+            //                        cmd.Parameters.AddWithValue("@ASSESS_TYPE", dtAssessedPairings.Rows[0]["ASSESS_TYPE"].ToString().Trim());
+            //                        cmd.ExecuteNonQuery();
+            //                    }
+            //                    txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 更新" + dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim() + "主管評" + Environment.NewLine;
+            //                }
+            //            }
+            //            else
+            //            {
+            //                //Setting record to Active without changing anything else
+            //                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            //                {
+            //                    conn.Open();
+            //                    string query = "UPDATE HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+            //                                + " SET ACTIVE='1'"
+            //                                + " WHERE [YEAR]=@YEAR"
+            //                                + " AND ASSESSED_ID=@ASSESSED_ID"
+            //                                + " AND ASSESS_TYPE=@ASSESS_TYPE";
+            //                    SqlCommand cmd = new SqlCommand(query, conn);
+            //                    cmd.Parameters.AddWithValue("@YEAR", dtAssessedPairings.Rows[0]["YEAR"].ToString());
+            //                    cmd.Parameters.AddWithValue("@ASSESSED_ID", dtAssessedPairings.Rows[0]["ASSESSED_ID"].ToString().Trim());
+            //                    cmd.Parameters.AddWithValue("@ASSESS_TYPE", dtAssessedPairings.Rows[0]["ASSESS_TYPE"].ToString().Trim());
+            //                    cmd.ExecuteNonQuery();
+            //                }
+            //            }
+            //        }
+            //        else if (dtAssessedPairings.Rows.Count == 0) //No pairings exist, 需新增自評與主管評
+            //        {
+            //            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            //            {
+            //                conn.Open();
+            //                string query = "INSERT INTO HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+            //                             + " VALUES"
+            //                            + " (GETDATE(),@USER,GETDATE(),@USER,@YEAR,@ASSESSED_ID,@ASSESSED_ID,'1','0','1')"
+            //                            + ",(GETDATE(),@USER,GETDATE(),@USER,@YEAR,@ASSESSOR_ID,@ASSESSED_ID,'2','0','1')";
+            //                SqlCommand cmd = new SqlCommand(query, conn);
+            //                cmd.Parameters.AddWithValue("@USER", UserName);
+            //                cmd.Parameters.AddWithValue("@YEAR", row.Cells["年份"].FormattedValue.ToString());
+            //                cmd.Parameters.AddWithValue("@ASSESSOR_ID", row.Cells["評核者"].FormattedValue.ToString().Substring(0, 4));
+            //                cmd.Parameters.AddWithValue("@ASSESSED_ID", row.Cells["受評者"].FormattedValue.ToString().Substring(0, 4));
+            //                cmd.ExecuteNonQuery();
+            //            }
+            //            txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 新增加" + row.Cells["受評者"].FormattedValue.ToString().Substring(0, 4) + "自評" + Environment.NewLine;
+            //            txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " 新增加" + row.Cells["受評者"].FormattedValue.ToString().Substring(0, 4) + "主管評" + Environment.NewLine;
+            //        }
+            //        else
+            //        {
+            //            txtPersonnelAssignmentTabMemo.Text += "Error: " + row.Cells["受評者"].FormattedValue.ToString() + "同樣的評核類型有超過兩個ACTIVE的紀錄" + Environment.NewLine;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        txtPersonnelAssignmentTabMemo.Text += "Warning: " + row.Cells["受評者"].FormattedValue.ToString() + "尚未配置評核者" + Environment.NewLine;
+            //    }
+            //}
+        }
+        #endregion     
+
+        #region 員工應工作時數 Tab Methods and Events
+        private DataTable LoadgvEmployeeWorkhourInputField()
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT COALESCE(WH.[YEAR],(@YEAR)) [評核年份]"
+                            + " ,LTRIM(RTRIM(MV.MV001)) [員工ID]"
+                            + " ,MV.MV002 [員工姓名]"
+                            + " ,COALESCE(CONVERT(NVARCHAR(10),WH.[EXPECTED_WORK_HOUR]),'') [應工作時數]"
+                            + " FROM EMPLOYEE_EXPECTED_WORKHOUR WH"
+                            + " RIGHT JOIN NZ.dbo.CMSMV MV ON WH.EMP_ID=MV.MV001 AND WH.[YEAR]=(@YEAR)"
+                            + " WHERE (MV.MV001 NOT LIKE 'PT%'"
+                            + " AND MV.MV001<>'0000'"
+                            + " AND MV.MV001<>'0006'"
+                            + " AND MV.MV001<>'0007'"
+                            + " AND MV.MV001<>'0098'"
+                            + " AND ((MV.MV021<=@YEAR+'1231' AND MV.MV022='')"
+                            + " OR (MV.MV021<=@YEAR+'1231' AND MV.MV022>@YEAR+'1231')))"
+                            + " OR WH.[YEAR]=@YEAR"
+                            + " ORDER BY MV.MV001";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@YEAR", cbxEmployeeWorkhourInputYear.Text);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            return dt;
+        }
+
+        private void cbxEmployeeWorkhourInputYear_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dtEmployeeWorkhourSource = LoadgvEmployeeWorkhourInputField();
+            gvEmployeeWorkhourInputField.DataSource = dtEmployeeWorkhourSource;
+            LoadControlStatus(tbpEmployeeWorkhourInput);
+        }
+
+        private void btnEmployeeWorkhourInputEdit_Click(object sender, EventArgs e)
+        {
+            employeeWorkHourInputTabMode = FunctionMode.EDIT;
+            LoadControlStatus(tbpEmployeeWorkhourInput);
+        }
+
+        private void btnEmployeeWorkhourInputCancel_Click(object sender, EventArgs e)
+        {
+            employeeWorkHourInputTabMode = FunctionMode.STATIC;
+            LoadControlStatus(tbpEmployeeWorkhourInput);
+            txtEmployeeWorkhourInputTabMemo.Text += DateTime.Now.ToString() + " 資料更新取消" + Environment.NewLine;
+        }
+
+        private void btnEmployeeWorkhourInputSave_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in gvEmployeeWorkhourInputField.Rows)
+            {
+                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                {
+                    conn.Open();
+                    //Check for duplicate entry
+                    string query = "SELECT [YEAR],[EMP_ID],[EXPECTED_WORK_HOUR]"
+                                + " FROM EMPLOYEE_EXPECTED_WORKHOUR"
+                                + " WHERE [YEAR]=@YEAR"
+                                + " AND [EMP_ID]=@ID";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@YEAR", row.Cells["評核年份"].FormattedValue.ToString());
+                    cmd.Parameters.AddWithValue("@ID", row.Cells["員工ID"].FormattedValue.ToString());
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        decimal d;
+                        //Already have entry, use update
+                        if (dr.HasRows)
+                        {
+                            query = "UPDATE EMPLOYEE_EXPECTED_WORKHOUR"
+                                + " SET [EXPECTED_WORK_HOUR]=@WORKHOUR"
+                                + " WHERE [YEAR]=@YEAR"
+                                + " AND [EMP_ID]=@ID";
+                            cmd = new SqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@YEAR", row.Cells["評核年份"].FormattedValue.ToString());
+                            cmd.Parameters.AddWithValue("@ID", row.Cells["員工ID"].FormattedValue.ToString());
+                            if (decimal.TryParse(row.Cells["應工作時數"].FormattedValue.ToString(), out d))
+                            {
+                                cmd.Parameters.AddWithValue("@WORKHOUR", d);
+                            }
+                            else
+                            {
+                                cmd.Parameters.AddWithValue("@WORKHOUR", DBNull.Value);
+                            }
+                            cmd.ExecuteNonQuery();
+                        }
+                        else
+                        {
+                            query = "INSERT INTO EMPLOYEE_EXPECTED_WORKHOUR"
+                                + " VALUES (@YEAR, @ID, @WORKHOUR)";
+                            cmd = new SqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@YEAR", row.Cells["評核年份"].FormattedValue.ToString());
+                            cmd.Parameters.AddWithValue("@ID", row.Cells["員工ID"].FormattedValue.ToString());
+                            if (decimal.TryParse(row.Cells["應工作時數"].FormattedValue.ToString(), out d))
+                            {
+                                cmd.Parameters.AddWithValue("@WORKHOUR", d);
+                            }
+                            else
+                            {
+                                cmd.Parameters.AddWithValue("@WORKHOUR", DBNull.Value);
+                            }
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+            employeeWorkHourInputTabMode = FunctionMode.STATIC;
+            dtEmployeeWorkhourSource = LoadgvEmployeeWorkhourInputField();
+            gvEmployeeWorkhourInputField.DataSource = dtEmployeeWorkhourSource;
+            LoadControlStatus(tbpEmployeeWorkhourInput);
+            txtEmployeeWorkhourInputTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;
+        }
+
+        #endregion
+
+        //#region 特評分數設定 Tab Methods and Events
+        //private void LoadScoreStandard()
+        //{
+        //    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        //    {
+        //        conn.Open();
+        //        string query = "SELECT *"
+        //                    + " FROM HR360_ASSESSMENTSCORE_STANDARD";
+        //        SqlCommand cmd = new SqlCommand(query, conn);
+        //        scoreStandardValue = Convert.ToDecimal(cmd.ExecuteScalar());
+        //    }
+        //    txtScoreStandardStandard.Text = scoreStandardValue.ToString();
+        //}
+
+        //private void btnScoreStandardEdit_Click(object sender, EventArgs e)
+        //{
+        //    txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " 特評標準編輯開始" + Environment.NewLine;
+        //    scoreStandardTabMode = FunctionMode.EDIT;
+        //    LoadControlStatus(currentTabPage);
+        //}
+
+        //private void btnScoreStandardCancel_Click(object sender, EventArgs e)
+        //{
+        //    txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " 特評標準變更取消" + Environment.NewLine;
+        //    LoadScoreStandard();
+        //    scoreStandardTabMode = FunctionMode.STATIC;
+        //    LoadControlStatus(currentTabPage);
+        //}
+
+        //private void btnScoreStandardSave_Click(object sender, EventArgs e)
+        //{
+        //    bool containsError = false;
+        //    decimal d;
+
+        //    if (!decimal.TryParse(txtScoreStandardStandard.Text, out d))
+        //    {
+        //        txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " Error: 輸入格式非數字" + Environment.NewLine;
+        //        containsError = true;
+        //    }
+        //    else
+        //    {
+        //        if (d < 0 || d > 10)
+        //        {
+        //            txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " Error: 輸入數字超出範圍" + Environment.NewLine;
+        //            containsError = true;
+        //        }
+        //        if ((d * 100) % 10 != 0)
+        //        {
+        //            txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " Error: 小數點僅能一位" + Environment.NewLine;
+        //            containsError = true;
+        //        }
+        //    }
+
+        //    if (!containsError)
+        //    {
+        //        txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " 變更完成:特評標準從" + scoreStandardValue.ToString() + "變更為" + txtScoreStandardStandard.Text + Environment.NewLine;
+        //        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        //        {
+        //            conn.Open();
+        //            string query = "UPDATE HR360_ASSESSMENTSCORE_STANDARD"
+        //                        + " SET SCORE_STANDARD = @STANDARD";
+        //            SqlCommand cmd = new SqlCommand(query, conn);
+        //            cmd.Parameters.AddWithValue("@STANDARD", txtScoreStandardStandard.Text);
+        //            cmd.ExecuteNonQuery();
+        //        }
+        //        LoadScoreStandard();
+        //        scoreStandardTabMode = FunctionMode.STATIC;
+        //        LoadControlStatus(currentTabPage);
+        //    }
+        //}
+        //#endregion
+
+        #region 年份及評核時間設定 Tab Methods and Events
+        private void btnYearAndEvalTimeSave_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
-                string query = "SELECT *"
-                            + " FROM HR360_ASSESSMENTSCORE_STANDARD";
+                string query = "UPDATE HR360_ASSESSMENTTIME"
+                            + " SET EVAL_STARTTIME=@EVAL_START_TIME"
+                            + " ,EVAL_ENDTIME=@EVAL_END_TIME"
+                            + " ,EVAL_SELF_STARTTIME=@SELFSTART"
+                            + " ,EVAL_SELF_ENDTIME=@SELFEND"
+                            + " ,EVAL_SUPERVISOR_STARTTIME=@SUPERSTART"
+                            + " ,EVAL_SUPERVISOR_ENDTIME=@SUPEREND" +
+                            " ,EVAL_FINALIZER_STARTTIME=@FINALSTART" +
+                            " ,EVAL_FINALIZER_ENDTIME=@FINALEND" +
+                            " WHERE EVAL_YEAR=@EVAL_YEAR" +
+                            " IF @@ROWCOUNT=0" +
+                            " INSERT INTO HR360_ASSESSMENTTIME" +
+                            " VALUES (@EVAL_YEAR,@EVAL_START_TIME,@EVAL_END_TIME,@SELFSTART,@SELFEND,@SUPERSTART,@SUPEREND,@FINALSTART,@FINALEND,@EVAL_DONE)";
                 SqlCommand cmd = new SqlCommand(query, conn);
-                scoreStandardValue = Convert.ToDecimal(cmd.ExecuteScalar());
+                cmd.Parameters.AddWithValue("@EVAL_YEAR", cbxYearAndEvalTimeYear.Text);
+                cmd.Parameters.AddWithValue("@EVAL_START_TIME", dtpYearAndEvalTimeStartTime.Value);
+                cmd.Parameters.AddWithValue("@EVAL_END_TIME", dtpYearAndEvalTimeEndTime.Value);
+                cmd.Parameters.AddWithValue("@SELFSTART", dtpYearAndEvalTimeSelfStartTime.Value);
+                cmd.Parameters.AddWithValue("@SELFEND", dtpYearAndEvalTimeSelfEndTime.Value);
+                cmd.Parameters.AddWithValue("@SUPERSTART", dtpYearAndEvalTimeSupervisorStartTime.Value);
+                cmd.Parameters.AddWithValue("@SUPEREND", dtpYearAndEvalTimeSupervisorEndTime.Value);
+                cmd.Parameters.AddWithValue("@FINALSTART", dtpYearAndEvalTimeFinalizerStartTime.Value);
+                cmd.Parameters.AddWithValue("@FINALEND", dtpYearAndEvalTimeFinalizerEndTime.Value);
+                cmd.Parameters.AddWithValue("@EVAL_DONE", '0');
+                cmd.ExecuteNonQuery();
             }
-            txtScoreStandardStandard.Text = scoreStandardValue.ToString();
+            txtYearAndEvalTimeTabMemo.Text += DateTime.Now.ToString() + " " + cbxYearAndEvalTimeYear.Text + "年資料更新完成" + Environment.NewLine;
         }
 
-        private void btnScoreStandardEdit_Click(object sender, EventArgs e)
+        private void btnYearAndEvalTimeCancel_Click(object sender, EventArgs e)
         {
-            txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " 特評標準編輯開始" + Environment.NewLine;
-            scoreStandardTabMode = FunctionMode.EDIT;
-            LoadControlStatus(currentTabPage);
+            DisplayYearAndEvalTime(Convert.ToInt32(cbxYearAndEvalTimeYear.Text));
+            txtYearAndEvalTimeTabMemo.Text += DateTime.Now.ToString() + " " + cbxYearAndEvalTimeYear.Text + "年資料更新取消" + Environment.NewLine;
         }
 
-        private void btnScoreStandardCancel_Click(object sender, EventArgs e)
+        private void cbxYearAndEvalTimeYear_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " 特評標準變更取消" + Environment.NewLine;
-            LoadScoreStandard();
-            scoreStandardTabMode = FunctionMode.STATIC;
-            LoadControlStatus(currentTabPage);
+            DisplayYearAndEvalTime(Convert.ToInt32(cbxYearAndEvalTimeYear.Text));
+            LoadControlStatus(tbpYearAndEvalTime);
         }
 
-        private void btnScoreStandardSave_Click(object sender, EventArgs e)
+        private void DisplayYearAndEvalTime(int year)
         {
-            bool containsError = false;
-            decimal d;
+            DataTable dt = new DataTable();
+            dt = LoadYearAndEvalTimeDate(year);
 
-            if (!decimal.TryParse(txtScoreStandardStandard.Text, out d))
+            if (dt.Rows.Count > 0)
             {
-                txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " Error: 輸入格式非數字" + Environment.NewLine;
-                containsError = true;
+                dtpYearAndEvalTimeStartTime.Value = Convert.ToDateTime(dt.Rows[0]["EVAL_STARTTIME"].ToString());
+                dtpYearAndEvalTimeEndTime.Value = Convert.ToDateTime(dt.Rows[0]["EVAL_ENDTIME"].ToString());
+                dtpYearAndEvalTimeSelfStartTime.Value = Convert.ToDateTime(dt.Rows[0]["EVAL_SELF_STARTTIME"].ToString());
+                dtpYearAndEvalTimeSelfEndTime.Value = Convert.ToDateTime(dt.Rows[0]["EVAL_SELF_ENDTIME"].ToString());
+                dtpYearAndEvalTimeSupervisorStartTime.Value = Convert.ToDateTime(dt.Rows[0]["EVAL_SUPERVISOR_STARTTIME"].ToString());
+                dtpYearAndEvalTimeSupervisorEndTime.Value = Convert.ToDateTime(dt.Rows[0]["EVAL_SUPERVISOR_ENDTIME"].ToString());
+                dtpYearAndEvalTimeFinalizerStartTime.Value = Convert.ToDateTime(dt.Rows[0]["EVAL_FINALIZER_STARTTIME"].ToString());
+                dtpYearAndEvalTimeFinalizerEndTime.Value = Convert.ToDateTime(dt.Rows[0]["EVAL_FINALIZER_ENDTIME"].ToString());
             }
-            else
-            {
-                if (d < 0 || d > 10)
-                {
-                    txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " Error: 輸入數字超出範圍" + Environment.NewLine;
-                    containsError = true;
-                }
-                if ((d * 100) % 10 != 0)
-                {
-                    txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " Error: 小數點僅能一位" + Environment.NewLine;
-                    containsError = true;
-                }
-            }
+        }
 
-            if (!containsError)
+        private DataTable LoadYearAndEvalTimeDate(int year)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
-                txtScoreStandardTabMemo.Text += DateTime.Now.ToString() + " 變更完成:特評標準從" + scoreStandardValue.ToString() + "變更為" + txtScoreStandardStandard.Text + Environment.NewLine;
-                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-                {
-                    conn.Open();
-                    string query = "UPDATE HR360_ASSESSMENTSCORE_STANDARD"
-                                + " SET SCORE_STANDARD = @STANDARD";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@STANDARD", txtScoreStandardStandard.Text);
-                    cmd.ExecuteNonQuery();
-                }
-                LoadScoreStandard();
-                scoreStandardTabMode = FunctionMode.STATIC;
-                LoadControlStatus(currentTabPage);
+                conn.Open();
+                string query = "SELECT *" +
+                    " ,EVAL_STARTTIME" +
+                    " ,EVAL_ENDTIME" +
+                    " ,EVAL_SELF_STARTTIME" +
+                    " ,EVAL_SELF_ENDTIME" +
+                    " ,EVAL_SUPERVISOR_STARTTIME" +
+                    " ,EVAL_SUPERVISOR_ENDTIME" +
+                    " ,EVAL_FINALIZER_STARTTIME" +
+                    " ,EVAL_FINALIZER_ENDTIME" +
+                    " FROM HR360_ASSESSMENTTIME" +
+                    " WHERE EVAL_YEAR=@YEAR";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@YEAR", year);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
             }
+            return dt;
         }
         #endregion
 
@@ -2108,151 +2794,6 @@ namespace NIZING_BACKEND_Data_Config
         }
         #endregion
 
-        #region 年份及評核時間設定 Tab Methods and Events
-        private void btnYearAndEvalTimeSave_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-            {
-                conn.Open();
-                string query = "UPDATE HR360_ASSESSMENTTIME"
-                            + " SET EVAL_YEAR=@EVAL_YEAR"
-                            + " ,EVAL_STARTTIME=@EVAL_START_TIME"
-                            + " ,EVAL_ENDTIME=@EVAL_END_TIME"
-                            + " ,EVAL_SELF_STARTTIME=@SELFSTART"
-                            + " ,EVAL_SELF_ENDTIME=@SELFEND"
-                            + " ,EVAL_SUPERVISOR_STARTTIME=@SUPERSTART"
-                            + " ,EVAL_SUPERVISOR_ENDTIME=@SUPEREND";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@EVAL_YEAR", cbxYearAndEvalTimeYear.Text);
-                cmd.Parameters.AddWithValue("@EVAL_START_TIME", dtpYearAndEvalTimeStartTime.Value);
-                cmd.Parameters.AddWithValue("@EVAL_END_TIME", dtpYearAndEvalTimeEndTime.Value);
-                cmd.Parameters.AddWithValue("@SELFSTART", dtpYearAndEvalTimeSelfStartTime.Value);
-                cmd.Parameters.AddWithValue("@SELFEND", dtpYearAndEvalTimeSelfEndTime.Value);
-                cmd.Parameters.AddWithValue("@SUPERSTART", dtpYearAndEvalTimeSupervisorStartTime.Value);
-                cmd.Parameters.AddWithValue("@SUPEREND", dtpYearAndEvalTimeSupervisorEndTime.Value);
-                cmd.ExecuteNonQuery();
-            }
-            txtYearAndEvalTimeTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;            
-        }
-        #endregion
-
-        #region 員工應工作時數 Tab Methods and Events
-        private DataTable LoadgvEmployeeWorkhourInputField()
-        {
-            DataTable dt = new DataTable();
-            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-            {
-                conn.Open();
-                string query = "SELECT COALESCE(WH.[YEAR],(@YEAR)) [評核年份]"
-                            + " ,LTRIM(RTRIM(MV.MV001)) [員工ID]"
-                            + " ,MV.MV002 [員工姓名]"
-                            + " ,COALESCE(CONVERT(NVARCHAR(10),WH.[EXPECTED_WORK_HOUR]),'') [應工作時數]"
-                            + " FROM EMPLOYEE_EXPECTED_WORKHOUR WH"
-                            + " RIGHT JOIN NZ.dbo.CMSMV MV ON WH.EMP_ID=MV.MV001 AND WH.[YEAR]=(@YEAR)"
-                            + " WHERE (MV.MV001 NOT LIKE 'PT%'"
-                            + " AND MV.MV001<>'0000'"
-                            + " AND MV.MV001<>'0006'"
-                            + " AND MV.MV001<>'0007'"
-                            + " AND MV.MV001<>'0098'"
-                            + " AND ((MV.MV021<=@YEAR+'1231' AND MV.MV022='')"
-                            + " OR (MV.MV021<=@YEAR+'1231' AND MV.MV022>@YEAR+'1231')))"
-                            + " OR WH.[YEAR]=@YEAR"
-                            + " ORDER BY MV.MV001";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@YEAR", cbxEmployeeWorkhourInputYear.Text);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-            }            
-            return dt;
-        }
-
-        private void cbxEmployeeWorkhourInputYear_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            dtEmployeeWorkhourSource = LoadgvEmployeeWorkhourInputField();
-            gvEmployeeWorkhourInputField.DataSource = dtEmployeeWorkhourSource;
-            LoadGridViewStyle(gvEmployeeWorkhourInputField);
-        }
-
-        private void btnEmployeeWorkhourInputEdit_Click(object sender, EventArgs e)
-        {
-            employeeWorkHourInputTabMode = FunctionMode.EDIT;
-            LoadControlStatus(tbpEmployeeWorkhourInput);
-        }
-
-        private void btnEmployeeWorkhourInputCancel_Click(object sender, EventArgs e)
-        {
-            employeeWorkHourInputTabMode = FunctionMode.STATIC;
-            LoadControlStatus(tbpEmployeeWorkhourInput);
-            txtEmployeeWorkhourInputTabMemo.Text += DateTime.Now.ToString() + " 資料更新取消" + Environment.NewLine;
-        }
-
-        private void btnEmployeeWorkhourInputSave_Click(object sender, EventArgs e)
-        {
-            foreach (DataGridViewRow row in gvEmployeeWorkhourInputField.Rows)
-            {                
-                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-                {
-                    conn.Open();
-                    //Check for duplicate entry
-                    string query = "SELECT [YEAR],[EMP_ID],[EXPECTED_WORK_HOUR]"
-                                + " FROM EMPLOYEE_EXPECTED_WORKHOUR"
-                                + " WHERE [YEAR]=@YEAR"
-                                + " AND [EMP_ID]=@ID";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@YEAR", row.Cells["評核年份"].FormattedValue.ToString());
-                    cmd.Parameters.AddWithValue("@ID", row.Cells["員工ID"].FormattedValue.ToString());
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        decimal d;
-                        //Already have entry, use update
-                        if (dr.HasRows)
-                        {
-                            query = "UPDATE EMPLOYEE_EXPECTED_WORKHOUR"
-                                + " SET [EXPECTED_WORK_HOUR]=@WORKHOUR"
-                                + " WHERE [YEAR]=@YEAR"
-                                + " AND [EMP_ID]=@ID";
-                            cmd = new SqlCommand(query, conn);
-                            cmd.Parameters.AddWithValue("@YEAR", row.Cells["評核年份"].FormattedValue.ToString());
-                            cmd.Parameters.AddWithValue("@ID", row.Cells["員工ID"].FormattedValue.ToString());
-                            if (decimal.TryParse(row.Cells["應工作時數"].FormattedValue.ToString(), out d))
-                            {
-                                cmd.Parameters.AddWithValue("@WORKHOUR", d);
-                            }
-                            else
-                            {
-                                cmd.Parameters.AddWithValue("@WORKHOUR", DBNull.Value);
-                            }
-                            cmd.ExecuteNonQuery();
-                        }
-                        else
-                        {
-                            query = "INSERT INTO EMPLOYEE_EXPECTED_WORKHOUR"
-                                + " VALUES (@YEAR, @ID, @WORKHOUR)";
-                            cmd = new SqlCommand(query, conn);
-                            cmd.Parameters.AddWithValue("@YEAR", row.Cells["評核年份"].FormattedValue.ToString());
-                            cmd.Parameters.AddWithValue("@ID", row.Cells["員工ID"].FormattedValue.ToString());
-                            if (decimal.TryParse(row.Cells["應工作時數"].FormattedValue.ToString(), out d))
-                            {
-                                cmd.Parameters.AddWithValue("@WORKHOUR", d);
-                            }
-                            else
-                            {
-                                cmd.Parameters.AddWithValue("@WORKHOUR", DBNull.Value);
-                            }
-                            cmd.ExecuteNonQuery();
-                        }                        
-                    }
-                }
-            }
-            employeeWorkHourInputTabMode = FunctionMode.STATIC;
-            dtEmployeeWorkhourSource = LoadgvEmployeeWorkhourInputField();
-            gvEmployeeWorkhourInputField.DataSource = dtEmployeeWorkhourSource;
-            LoadControlStatus(tbpEmployeeWorkhourInput);
-            txtEmployeeWorkhourInputTabMemo.Text += DateTime.Now.ToString() + " 資料更新完成" + Environment.NewLine;
-        }
-
-        #endregion
-
         #region 最終成績計算 Tab Methods and Events
         private void btnFinalScoreCalculate_Click(object sender, EventArgs e)
         {
@@ -2372,9 +2913,13 @@ namespace NIZING_BACKEND_Data_Config
                 txtFinalScoreMemo.Text += DateTime.Now.ToString() + ex.Message + Environment.NewLine;
             }
         }
+        private void cbxFinalScoreYear_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadControlStatus(tbpFinalScoreCalculation);
+        }
+
+
         #endregion
-
-
 
     }
 }
