@@ -737,7 +737,7 @@
                 </div>
             </div>
         </div>
-        <div id="div0067_comment" runat="server">
+<%--        <div id="div0067_comment" runat="server">
             <div class="row">
                 <div class="col-xs-12 subtitle border">
                     吉田康森評語
@@ -753,7 +753,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>--%>
         <div id="div0007_comment" runat="server">
             <div class="row">
                 <div class="col-xs-12 subtitle border">

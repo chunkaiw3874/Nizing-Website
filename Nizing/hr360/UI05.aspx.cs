@@ -57,7 +57,7 @@ public partial class hr360_UI05 : System.Web.UI.Page
                     {
                         if (dr.HasRows)
                         {
-                            year = dr.GetString(0);
+                            year = dr.GetInt32(0).ToString();
                             evalStart = dr.GetDateTime(1);
                             evalEnd = dr.GetDateTime(2);
                             selfEvalStart = dr.GetDateTime(3);

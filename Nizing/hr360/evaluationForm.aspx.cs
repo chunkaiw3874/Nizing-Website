@@ -18,7 +18,8 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
     string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
 
     //Setup basic info for the assessment 
-    DataTable dtAssessmentQuestion = new DataTable();
+    DataTable dtAssessmentQuestion = new DataTable();    
+    List<string> assessorsWithOwnCommentSection = new List<string>();    //擁有自己獨立評語欄位的人
     protected void Page_Load(object sender, EventArgs e)
     {
         //check if session has expired
@@ -28,6 +29,10 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
         }
         else        
         {
+            assessorsWithOwnCommentSection.Add("0006");
+            assessorsWithOwnCommentSection.Add("0007");
+            assessorsWithOwnCommentSection.Add("0067");
+
             string year = "";
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
@@ -633,7 +638,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
         lblFinalRnPScore.Text = rnpSum.ToString("N2");
 
         //讀取自評評語        
-        txtSelfComment.Text = LoadComment(year, assessed, assessed);
+        txtSelfComment.Text = LoadComment(year, assessed, assessed, assessorsWithOwnCommentSection);
 
         //動態增加自評以外的評語格
         if (assessType != "1") //判斷非自評
@@ -678,7 +683,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             txt.ID = "txtCommentRow_Comment";
             txt.CssClass = "form-control no-resize autosize";
             txt.Attributes["placeholder"] = "請寫下" + lblEmpName.Text + "今年度的貢獻、表現、及給予建議";
-            txt.Text = LoadComment(year, assessor, assessed);
+            txt.Text = LoadComment(year, assessor, assessed, assessorsWithOwnCommentSection);
             txt.TextMode = TextBoxMode.MultiLine;
             txt.Wrap = true;
             innerDiv.Controls.Add(txt);
@@ -742,42 +747,76 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
     protected void saveSurveyData()
     {
         try
-        {            
+        {
+            
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
                 string query;
 
                 //寫入 評核大項
-                query = "UPDATE HR360_ASSESSMENTSCORE_ASSESSED_A" +
-                    " SET MODIFIEDDATE=@DATE" +
-                    " ,MODIFIER=@USER" +
-                    " ,ASSESS_DATE=@ASSESS_DATE" +
-                    " ,ASSESSED_RANK=@ASSESSED_RANK" +
-                    " ,ASSESSED_WORKYEAR=@ASSESSED_WORKYEAR" +
-                    " ,WEIGHTED_SCORE=@WEIGHTED_SCORE" +
-                    " ,ATTENDANCE_SCORE=@ATTENDANCE_SCORE" +
-                    " ,RNP_SCORE=@RNP_SCORE" +
-                    " ,OVERALL_COMMENT=@OVERALL_COMMENT" +
-                    " WHERE ASSESSOR_ID=@USER" +
-                    " AND ASSESS_YEAR=@ASSESS_YEAR" +
-                    " AND ASSESSED_ID=@ASSESSED_ID" +
-                    " IF @@ROWCOUNT=0" +
-                    " INSERT INTO HR360_ASSESSMENTSCORE_ASSESSED_A" +
-                    " VALUES (@DATE" +
-                    " ,@USER" +
-                    " ,@DATE" +
-                    " ,@USER" +
-                    " ,@USER" +
-                    " ,@ASSESS_DATE" +
-                    " ,@ASSESS_YEAR" +
-                    " ,@ASSESSED_ID" +
-                    " ,@ASSESSED_RANK" +
-                    " ,@ASSESSED_WORKYEAR" +
-                    " ,@WEIGHTED_SCORE" +
-                    " ,@ATTENDANCE_SCORE" +
-                    " ,@RNP_SCORE" +
-                    " ,@OVERALL_COMMENT)";
+                if (assessorsWithOwnCommentSection.Contains(Session["erp_id"].ToString().Trim()) && lblEvalType.Text.Trim() != "自評")
+                {
+                    query = "UPDATE HR360_ASSESSMENTSCORE_ASSESSED_A" +
+                        " SET MODIFIEDDATE=@DATE" +
+                        " ,MODIFIER=@USER" +
+                        " ,ASSESS_DATE=@ASSESS_DATE" +
+                        " ,ASSESSED_RANK=@ASSESSED_RANK" +
+                        " ,ASSESSED_WORKYEAR=@ASSESSED_WORKYEAR" +
+                        " ,WEIGHTED_SCORE=@WEIGHTED_SCORE" +
+                        " ,ATTENDANCE_SCORE=@ATTENDANCE_SCORE" +
+                        " ,RNP_SCORE=@RNP_SCORE" +
+                        " WHERE ASSESSOR_ID=@USER" +
+                        " AND ASSESS_YEAR=@ASSESS_YEAR" +
+                        " AND ASSESSED_ID=@ASSESSED_ID" +
+                        " IF @@ROWCOUNT=0" +
+                        " INSERT INTO HR360_ASSESSMENTSCORE_ASSESSED_A(CREATEDATE,CREATOR,MODIFIEDDATE,MODIFIER,ASSESSOR_ID,ASSESS_DATE,ASSESS_YEAR,ASSESSED_ID,ASSESSED_RANK,ASSESSED_WORKYEAR,WEIGHTED_SCORE,ATTENDANCE_SCORE,RNP_SCORE)" +
+                        " VALUES (@DATE" +
+                        " ,@USER" +
+                        " ,@DATE" +
+                        " ,@USER" +
+                        " ,@USER" +
+                        " ,@ASSESS_DATE" +
+                        " ,@ASSESS_YEAR" +
+                        " ,@ASSESSED_ID" +
+                        " ,@ASSESSED_RANK" +
+                        " ,@ASSESSED_WORKYEAR" +
+                        " ,@WEIGHTED_SCORE" +
+                        " ,@ATTENDANCE_SCORE" +
+                        " ,@RNP_SCORE)";
+                }
+                else
+                {
+                    query = "UPDATE HR360_ASSESSMENTSCORE_ASSESSED_A" +
+                        " SET MODIFIEDDATE=@DATE" +
+                        " ,MODIFIER=@USER" +
+                        " ,ASSESS_DATE=@ASSESS_DATE" +
+                        " ,ASSESSED_RANK=@ASSESSED_RANK" +
+                        " ,ASSESSED_WORKYEAR=@ASSESSED_WORKYEAR" +
+                        " ,WEIGHTED_SCORE=@WEIGHTED_SCORE" +
+                        " ,ATTENDANCE_SCORE=@ATTENDANCE_SCORE" +
+                        " ,RNP_SCORE=@RNP_SCORE" +
+                        " ,OVERALL_COMMENT=@OVERALL_COMMENT" +
+                        " WHERE ASSESSOR_ID=@USER" +
+                        " AND ASSESS_YEAR=@ASSESS_YEAR" +
+                        " AND ASSESSED_ID=@ASSESSED_ID" +
+                        " IF @@ROWCOUNT=0" +
+                        " INSERT INTO HR360_ASSESSMENTSCORE_ASSESSED_A" +
+                        " VALUES (@DATE" +
+                        " ,@USER" +
+                        " ,@DATE" +
+                        " ,@USER" +
+                        " ,@USER" +
+                        " ,@ASSESS_DATE" +
+                        " ,@ASSESS_YEAR" +
+                        " ,@ASSESSED_ID" +
+                        " ,@ASSESSED_RANK" +
+                        " ,@ASSESSED_WORKYEAR" +
+                        " ,@WEIGHTED_SCORE" +
+                        " ,@ATTENDANCE_SCORE" +
+                        " ,@RNP_SCORE" +
+                        " ,@OVERALL_COMMENT)";
+                }
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@DATE", DateTime.Now.ToString());
                 cmd.Parameters.AddWithValue("@USER", Session["erp_id"].ToString().Trim());
@@ -800,6 +839,35 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("@OVERALL_COMMENT", ((TextBox)comment.FindControl("txtCommentRow_Comment")).Text.Trim());
                 }
                 cmd.ExecuteNonQuery();
+
+                //寫入 有獨立評語欄位者的評語
+                if (assessorsWithOwnCommentSection.Contains(Session["erp_id"].ToString().Trim()) && lblEvalType.Text.Trim() != "自評")
+                {
+                    query = "UPDATE HR360_ASSESSMENTSCORE_ASSESSED_B" +
+                        " SET MODIFIEDDATE=@DATE" +
+                        " ,MODIFIER=@USER" +
+                        " ,COMMENT=@COMMENT" +
+                        " WHERE ASSESSOR_ID=@USER" +
+                        " AND ASSESSED_ID=@ASSESSED_ID" +
+                        " AND ASSESS_YEAR=@ASSESS_YEAR" +
+                        " IF @@ROWCOUNT=0" +
+                        " INSERT INTO HR360_ASSESSMENTSCORE_ASSESSED_B" +
+                        " VALUES(" +
+                        " @DATE" +
+                        " ,@USER" +
+                        " ,@DATE" +
+                        " ,@USER" +
+                        " ,@USER" +
+                        " ,@ASSESSED_ID" +
+                        " ,@ASSESS_YEAR" +
+                        " ,@COMMENT)";
+                    cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@DATE", DateTime.Now.ToString());
+                    cmd.Parameters.AddWithValue("@USER", Session["erp_id"].ToString().Trim());
+                    cmd.Parameters.AddWithValue("@ASSESS_YEAR", lblEvalYear.Text);
+                    cmd.Parameters.AddWithValue("@ASSESSED_ID", lblEmpID.Text);
+                    cmd.Parameters.AddWithValue("@COMMENT", ((TextBox)comment.FindControl("txtCommentRow_Comment")).Text.Trim());
+                }
 
                 //寫入 評核細項
                 for (int i = 0; i < dtAssessmentQuestion.Rows.Count; i++)
@@ -1332,7 +1400,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@YEAR", year);
             cmd.Parameters.AddWithValue("@ID", assessed);
-            return cmd.ExecuteScalar() == DBNull.Value ? 0 : Convert.ToDouble(cmd.ExecuteScalar().ToString());
+            return cmd.ExecuteScalar() == null ? 0 : Convert.ToDouble(cmd.ExecuteScalar().ToString());
         }
     }
 
@@ -1374,22 +1442,42 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
         return dt;
     }
 
-    //讀取自評資料
-    private string LoadComment(string year, string assessor, string assessed)
+    //讀取評語資料
+    private string LoadComment(string year, string assessor, string assessed, List<string> assessorsWithOwnCommentSection)
     {
-        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        if (assessorsWithOwnCommentSection.Contains(assessor) && lblEvalType.Text.Trim() != "自評")
         {
-            conn.Open();
-            string query = "SELECT OVERALL_COMMENT"
-            + " FROM HR360_ASSESSMENTSCORE_ASSESSED_A"
-            + " WHERE ASSESSOR_ID=@ASSESSOR_ID"
-            + " AND ASSESSED_ID=@ASSESSED_ID"
-            + " AND ASSESS_YEAR=@ASSESS_YEAR";
-            SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@ASSESSOR_ID", assessor);
-            cmd.Parameters.AddWithValue("@ASSESSED_ID", assessed);
-            cmd.Parameters.AddWithValue("@ASSESS_YEAR", year);
-            return cmd.ExecuteScalar() == DBNull.Value ? "" : cmd.ExecuteScalar().ToString();
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT COMMENT"
+                + " FROM HR360_ASSESSMENTSCORE_ASSESSED_B"
+                + " WHERE ASSESSOR_ID=@ASSESSOR_ID"
+                + " AND ASSESSED_ID=@ASSESSED_ID"
+                + " AND ASSESS_YEAR=@ASSESS_YEAR";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ASSESSOR_ID", assessor);
+                cmd.Parameters.AddWithValue("@ASSESSED_ID", assessed);
+                cmd.Parameters.AddWithValue("@ASSESS_YEAR", year);
+                return cmd.ExecuteScalar() == null ? "" : cmd.ExecuteScalar().ToString();
+            }
+        }
+        else
+        {
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT OVERALL_COMMENT"
+                + " FROM HR360_ASSESSMENTSCORE_ASSESSED_A"
+                + " WHERE ASSESSOR_ID=@ASSESSOR_ID"
+                + " AND ASSESSED_ID=@ASSESSED_ID"
+                + " AND ASSESS_YEAR=@ASSESS_YEAR";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ASSESSOR_ID", assessor);
+                cmd.Parameters.AddWithValue("@ASSESSED_ID", assessed);
+                cmd.Parameters.AddWithValue("@ASSESS_YEAR", year);
+                return cmd.ExecuteScalar() == null ? "" : cmd.ExecuteScalar().ToString();
+            }
         }
     }
 
