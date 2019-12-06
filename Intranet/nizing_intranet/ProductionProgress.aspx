@@ -5,7 +5,7 @@
     <script type="text/javascript">
     $("[src*=expand]").live("click", function () {
         $(this).closest("tr").after("<tr><td></td><td colspan = '999'>" + $(this).next().html() + "</td></tr>")
-        $(this).attr("src", "image/button/collapse.png");
+        $(this).attr("src", "image/button/collapse.png");        
     });
     $("[src*=collapse]").live("click", function () {
         $(this).attr("src", "image/button/expand.png");
@@ -73,7 +73,7 @@
                             </asp:Panel>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:BoundField DataField="製令編號" HeaderText="製令編號" >
+                    <asp:BoundField DataField="製令編號" HeaderText="製令編號">
                         <HeaderStyle Width="70px" />
                     </asp:BoundField>
                     <asp:BoundField DataField="客戶交期" HeaderText="客戶交期" >

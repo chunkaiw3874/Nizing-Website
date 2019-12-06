@@ -29,6 +29,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     string currentHREmployeeID = "0142"; //current //HR code;
     List<string> exceptionList111 = new List<string>(); //三天內請假錯誤例外清單
     List<string> exceptionList202 = new List<string>(); //剩餘假期不足錯誤例外清單
+    List<string> exceptionList107 = new List<string>(); //已當其他人代理人錯誤例外清單
 
     public class dayOffInfo
     {
@@ -51,6 +52,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         //only use when opening check exception for certain persion
         //exceptionList111.Add("0012");
         //exceptionList202.Add("0112");
+        //exceptionList107.Add("0013");
 
         if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
         {
@@ -504,8 +506,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                                     + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
                             //+ " WHERE (APPLICANT_ID=@ID OR FUNCTIONAL_SUBSTITUTE_ID=@ID)"  //2017.03.24 移除代理人只能代理一個人的限制
                                     + " WHERE (APPLICANT_ID=@ID)"  //代理人已請假
-                                    + " AND APPLICATION_STATUS_ID <> '07'"
-                                    + " AND APPLICATION_STATUS_ID <> '08'"
+                                    + " AND APPLICATION_STATUS_ID <> '98'"
+                                    + " AND APPLICATION_STATUS_ID <> '99'"
                                     + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
                                     + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
                                     + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
@@ -529,31 +531,34 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 }
                 if (test102 && test103 && test104)
                 {
-                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))  //測試錯誤 107.申請人於此時段已代理他人，不可請假
+                    if (!exceptionList107.Contains(Session["erp_id"].ToString().Trim()))
                     {
-                        conn.Open();
-                        string query = "SELECT APPLICATION_ID"
-                                    + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
-                                    + " WHERE (FUNCTIONAL_SUBSTITUTE_ID=@ID)"  //自己已經是其他人的代理人                            
-                                    + " AND APPLICATION_STATUS_ID <> '07'"
-                                    + " AND APPLICATION_STATUS_ID <> '08'"
-                                    + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
-                                    + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
-                                    + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
-                        SqlCommand cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
-                        cmd.Parameters.AddWithValue("@STARTTIME", dayOffStartTime);
-                        cmd.Parameters.AddWithValue("@ENDTIME", dayOffEndTime);
-                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))  //測試錯誤 107.申請人於此時段已代理他人，不可請假
                         {
-                            if (dr.HasRows)
+                            conn.Open();
+                            string query = "SELECT APPLICATION_ID"
+                                        + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
+                                        + " WHERE (FUNCTIONAL_SUBSTITUTE_ID=@ID)"  //自己已經是其他人的代理人                            
+                                        + " AND APPLICATION_STATUS_ID <> '98'"
+                                        + " AND APPLICATION_STATUS_ID <> '99'"
+                                        + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
+                                        + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
+                                        + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
+                            SqlCommand cmd = new SqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                            cmd.Parameters.AddWithValue("@STARTTIME", dayOffStartTime);
+                            cmd.Parameters.AddWithValue("@ENDTIME", dayOffEndTime);
+                            using (SqlDataReader dr = cmd.ExecuteReader())
                             {
-                                errorList.Add(errorCode(107));
-                                //test107 = false;
-                            }
-                            else
-                            {
-                                //test107 = true;
+                                if (dr.HasRows)
+                                {
+                                    errorList.Add(errorCode(107));
+                                    //test107 = false;
+                                }
+                                else
+                                {
+                                    //test107 = true;
+                                }
                             }
                         }
                     }
@@ -728,8 +733,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 string query = "SELECT APPLICATION_ID"
                     + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
                     + " WHERE APPLICANT_ID = @ID"
-                    + " AND APPLICATION_STATUS_ID<>'07'"
-                    + " AND APPLICATION_STATUS_ID<>'08'"
+                    + " AND APPLICATION_STATUS_ID<>'98'"
+                    + " AND APPLICATION_STATUS_ID<>'99'"
                     + " AND ((DAYOFF_START_TIME <= @STARTTIME AND DAYOFF_END_TIME > @STARTTIME)"
                     + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
                     + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
@@ -919,8 +924,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 //        + " LEFT JOIN PALMC MC ON APP.DAYOFF_ID=MC.MC001"
                 //        + " WHERE APP.APPLICANT_ID=@ID"
                 //        + " AND YEAR(APP.DAYOFF_START_TIME)=@YEAR"
-                //        + " AND APP.APPLICATION_STATUS_ID<>'06'"
                 //        + " AND APP.APPLICATION_STATUS_ID<>'07'"
+                //        + " AND APP.APPLICATION_STATUS_ID<>'98'"
                 //        + " AND APP.APPLICATION_STATUS_ID<>'08'"
                 //        + " GROUP BY APP.APPLICANT_ID,YEAR(APP.DAYOFF_START_TIME),APP.DAYOFF_ID,MC.MC004"
                 //        + " )"
@@ -1078,9 +1083,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
         decimal r = 0;
         string query = "SELECT CONVERT(DECIMAL(5,2),COALESCE(SUM(APP.DAYOFF_TOTAL_TIME),0)) 'TOTAL_DAYOFF_TIME'"
                     + " FROM HR360_DAYOFFAPPLICATION_APPLICATION APP";
-        string where = " WHERE APP.APPLICATION_STATUS_ID<>'06'"
-                    + " AND APP.APPLICATION_STATUS_ID<>'07'"
-                    + " AND APP.APPLICATION_STATUS_ID<>'08'"
+        string where = " WHERE APP.APPLICATION_STATUS_ID<>'07'"
+                    + " AND APP.APPLICATION_STATUS_ID<>'98'"
+                    + " AND APP.APPLICATION_STATUS_ID<>'99'"
                     + " AND APP.APPLICANT_ID=@ApplicantID"
                     + " AND APP.DAYOFF_ID=@DayOffID"
                     + " AND YEAR(APP.DAYOFF_START_TIME)=@Year";
@@ -1391,9 +1396,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         + " LEFT JOIN NZ.dbo.CMSMV MV ON A.FUNCTIONAL_SUBSTITUTE_ID=MV.MV001"
                         + " LEFT JOIN NZ.dbo.CMSMV MV2 ON A.NEXT_REVIEWER=MV2.MV001"
                         + " WHERE A.APPLICANT_ID=@APPLICANT"
-                        + " AND A.APPLICATION_STATUS_ID<>'06'"
                         + " AND A.APPLICATION_STATUS_ID<>'07'"
-                        + " AND A.APPLICATION_STATUS_ID<>'08'"
+                        + " AND A.APPLICATION_STATUS_ID<>'98'"
+                        + " AND A.APPLICATION_STATUS_ID<>'99'"
                         + " )"
                         + " SELECT *, CASE"
                         + " WHEN EXISTS"
@@ -1527,12 +1532,12 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         + " ,COALESCE(MV2.MV002,'N/A') 'FUNCTIONAL_SUBSTITUTE'"
                         + " ,CASE"
                         + " WHEN APP.REASON='' THEN '無'"
-                        + " ELSE '點選查看'"
+                        + " ELSE '查看原因'"
                         + " END AS 'HAS_REASON'"
                         + " ,APP.REASON"
                         + " ,SUBSTRING(ST.NAME,1,5) 'APP_STATUS'"
                         + " FROM HR360_DAYOFFAPPLICATION_APPLICATION APP"
-                        + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPLICATION_STATUS ST ON '0'+CONVERT(NVARCHAR(20),CONVERT(INT,APP.APPLICATION_STATUS_ID)+1)=ST.ID"
+                        + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPLICATION_STATUS ST ON APP.APPLICATION_STATUS_ID=ST.ID"
                         + " LEFT JOIN NZ.dbo.CMSMV MV ON APP.APPLICANT_ID=MV.MV001"
                         + " LEFT JOIN NZ.dbo.CMSMV MV2 ON APP.FUNCTIONAL_SUBSTITUTE_ID=MV2.MV001"
                         + " WHERE CONVERT(INT,APP.APPLICATION_STATUS_ID)<7"
@@ -1668,7 +1673,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             }
             else
             {
-                cell.Attributes.Add("style", "text-align:center;color:aqua;");
+                cell.Attributes.Add("style", "text-align:center;color:aqua; cursor:pointer;");
             }            
             cell.Attributes.Add("data-toggle", "popover");
             cell.Attributes.Add("data-placement", "top");
@@ -1802,21 +1807,29 @@ public partial class hr360_UI04 : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             conn.Open();
-            string query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B (APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID)"
-                        + " VALUES ("
-                        + " @APPLICATION_ID, @ACTION_TIME, @EXECUTOR_ID, @ACTION_ID"
-                        + " )";
+            string query = "SELECT APPLICATION_STATUS_ID" +
+                " FROM HR360_DAYOFFAPPLICATION_APPLICATION" +
+                " WHERE APPLICATION_ID=@APP_ID";
             SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@APP_ID", withdrawID);
+            string appStatusId = cmd.ExecuteScalar() == null ? "" : cmd.ExecuteScalar().ToString();
+
+            query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B (APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID,STATUS_ID)"
+                        + " VALUES ("
+                        + " @APPLICATION_ID, @ACTION_TIME, @EXECUTOR_ID, @ACTION_ID, @STATUS_ID"
+                        + " )";
+            cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@APPLICATION_ID", withdrawID);
             cmd.Parameters.AddWithValue("@ACTION_TIME", DateTime.Now);
             cmd.Parameters.AddWithValue("@EXECUTOR_ID", Session["erp_id"].ToString());
             cmd.Parameters.AddWithValue("@ACTION_ID", "04");
+            cmd.Parameters.AddWithValue("@STATUS_ID", (Convert.ToInt16(appStatusId)+1).ToString("D2"));
             cmd.ExecuteNonQuery();
             query = "UPDATE HR360_DAYOFFAPPLICATION_APPLICATION"
                 + " SET APPLICATION_STATUS_ID=@STATUS,NEXT_REVIEWER=''"
                 + " WHERE APPLICATION_ID=@APPLICATION";
             cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@STATUS", "07");
+            cmd.Parameters.AddWithValue("@STATUS", "98");
             cmd.Parameters.AddWithValue("@APPLICATION", withdrawID);
             cmd.ExecuteNonQuery();
         }
@@ -1858,7 +1871,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 approveID_status = dtApplicant.Rows[0][0].ToString();
                 memberOf = dtApplicant.Rows[0][1].ToString();
                 applicantID = dtApplicant.Rows[0][2].ToString().Trim();
-                if (dtApplicant.Rows[0]["FUNCTIONAL_SUBSTITUTE_ID"].ToString() == "N/A" && approveID_status == "01")
+                if (dtApplicant.Rows[0]["FUNCTIONAL_SUBSTITUTE_ID"].ToString() == "N/A" && approveID_status == "02")
                 {
                     nextReviewer = "SYSTEM";
                 }
@@ -1866,25 +1879,27 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 {
                     nextReviewer = Session["erp_id"].ToString();
                 }
+
                 do
                 {
                     using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                     {
                         conn.Open();
                         //insert approval trail to DB
-                        string query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B (APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID)"
-                                    + " VALUES(@APP_ID,GETDATE(),@EXE_ID,'02')";
+                        string query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B (APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID,STATUS_ID)"
+                                    + " VALUES(@APP_ID,GETDATE(),@EXE_ID,'02',@STATUS_ID)";
                         SqlCommand cmd = new SqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@APP_ID", approveID);                        
                         cmd.Parameters.AddWithValue("@EXE_ID", nextReviewer);
+                        cmd.Parameters.AddWithValue("@STATUS_ID", approveID_status);
                         cmd.ExecuteNonQuery();
                     }
                     //update application status to next stage
-                    if (Convert.ToInt16(approveID_status) < 6)
+                    if (Convert.ToInt16(approveID_status) < 7)
                     {
                         approveID_status = (Convert.ToInt16(approveID_status) + 1).ToString("D2");
                     }
-                    if (approveID_status == "02")  //代理人簽核通過，搜尋第一層簽核人(部門最高負責人 BELOW RANK 7)
+                    if (approveID_status == "03")  //代理人簽核通過，搜尋第一層簽核人(部門最高負責人 BELOW RANK 7)
                     {
                         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                         {
@@ -1940,7 +1955,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                             }
                         }
                     }
-                    else if (approveID_status == "03")  //第一層通過，搜尋第二層審核者(廠長/副廠長/生管主任)
+                    else if (approveID_status == "04")  //第一層通過，搜尋第二層審核者(廠長/副廠長/生管主任)
                     {
                         //產線才需要第二層(廠長)簽核，辦公室直接通過
                         if (memberOf == "產線")
@@ -1978,7 +1993,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                             nextReviewer = "SYSTEM";
                         }
                     }
-                    else if (approveID_status == "04")  //第二層通過，搜尋第三層審核者(人事主任)
+                    else if (approveID_status == "05")  //第二層通過，搜尋第三層審核者(人事主任)
                     {
                         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                         {
@@ -2009,7 +2024,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                             }
                         }
                     }
-                    else if (approveID_status == "05")  //第三層通過，搜尋第四層審核者(副總)
+                    else if (approveID_status == "06")  //第三層通過，搜尋第四層審核者(副總)
                     {
                         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                         {
@@ -2038,7 +2053,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                             }
                         }
                     }
-                    else if (approveID_status == "06")
+                    else if (approveID_status == "07")
                     {
                         nextReviewer = "";
                     }
@@ -2056,11 +2071,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         cmd.ExecuteNonQuery();
                     }
                     System.Threading.Thread.Sleep(1000);    //sleeps for 1 second before continuing so trail records can be ordered by time
-                } while (nextReviewer == "SYSTEM" && Convert.ToInt16(approveID_status) < 6); //stops when somebody is required to review the application,
-                //or when approval status reached 6, which means the application is approved by everyone necessary
+                } while (nextReviewer == "SYSTEM" && Convert.ToInt16(approveID_status) < 7); //stops when somebody is required to review the application,
+                //or when approval status reached 7, which means the application is approved by everyone necessary
                 //automatic approval should only happen on 1st and 2nd level,
                 //3rd and 4th level should always have reviewer (人事主管/副總)
-                if (approveID_status != "06")
+                if (approveID_status != "07")
                 {
                     SendEmailNotification(approveID, 1);
                 }
@@ -2103,19 +2118,27 @@ public partial class hr360_UI04 : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             conn.Open();
-            //insert deny trail to DB
-            string query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B"
-                        + " VALUES(@APP_ID,GETDATE(),@EXE_ID,'03',@MEMO)";
+            string query = "SELECT APPLICATION_STATUS_ID" +
+                " FROM HR360_DAYOFFAPPLICATION_APPLICATION" +
+                " WHERE APPLICATION_ID=@APP_ID";
             SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@APP_ID", denyID);
+            string appStatusId = cmd.ExecuteScalar() == null ? "" : cmd.ExecuteScalar().ToString();
+
+            //insert deny trail to DB
+            query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B(APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID,MEMO,STATUS_ID)"
+                        + " VALUES(@APP_ID,GETDATE(),@EXE_ID,'03',@MEMO,@STATUS_ID)";
+            cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@APP_ID", denyID);
             cmd.Parameters.AddWithValue("@EXE_ID", Session["erp_id"].ToString());
             cmd.Parameters.AddWithValue("@MEMO", hdnDenyReason.Value);
+            cmd.Parameters.AddWithValue("@STATUS_ID", (Convert.ToInt16(appStatusId)+1).ToString("D2"));
             cmd.ExecuteNonQuery();
             query = "UPDATE HR360_DAYOFFAPPLICATION_APPLICATION"
                         + " SET APPLICATION_STATUS_ID=@STATUS,NEXT_REVIEWER=@REVIEWER"
                         + " WHERE APPLICATION_ID=@APPLICATION";
             cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@STATUS", "08");
+            cmd.Parameters.AddWithValue("@STATUS", "98");
             cmd.Parameters.AddWithValue("@REVIEWER", "");
             cmd.Parameters.AddWithValue("@APPLICATION", denyID);
             cmd.ExecuteNonQuery();
@@ -2163,7 +2186,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 {                    
                     query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION"
                         + " VALUES ("
-                        + " @APPLICATION_ID,@APPLICATION_DATE,@APPLICANT_ID,@DAYOFF_ID,@DAYOFF_NAME,@DAYOFF_START_TIME,@DAYOFF_END_TIME,@DAYOFF_TOTAL_TIME,@DAYOFF_TIME_UNIT,@FUNC_SUB_ID,'01',@NEXT_REVIEWER,@REASON"
+                        + " @APPLICATION_ID,@APPLICATION_DATE,@APPLICANT_ID,@DAYOFF_ID,@DAYOFF_NAME,@DAYOFF_START_TIME,@DAYOFF_END_TIME,@DAYOFF_TOTAL_TIME,@DAYOFF_TIME_UNIT,@FUNC_SUB_ID,@STATUS_ID,@NEXT_REVIEWER,@REASON"
                         + " )";
                     cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@APPLICATION_ID", uid);
@@ -2175,6 +2198,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("@DAYOFF_END_TIME", dayoff.endTime);
                     cmd.Parameters.AddWithValue("@DAYOFF_TOTAL_TIME", dayoff.amountUsing);
                     cmd.Parameters.AddWithValue("@DAYOFF_TIME_UNIT", dayoff.unit);
+                    cmd.Parameters.AddWithValue("@STATUS_ID", "02");
                     if (dayoff.funcSub == "N/A")
                     {
                         cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub);
@@ -2187,15 +2211,16 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     }
                     cmd.Parameters.AddWithValue("@REASON", dayoff.reason);
                     cmd.ExecuteNonQuery();
-                    query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B (APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID)"
+                    query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B (APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID,STATUS_ID)"
                         + " VALUES ("
-                        + " @APPLICATION_ID, @ACTION_TIME, @EXECUTOR_ID, @ACTION_ID"
+                        + " @APPLICATION_ID, @ACTION_TIME, @EXECUTOR_ID, @ACTION_ID, @STATUS_ID"
                         + " )";
                     cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@APPLICATION_ID", uid);
                     cmd.Parameters.AddWithValue("@ACTION_TIME", DateTime.Now);
                     cmd.Parameters.AddWithValue("@EXECUTOR_ID", Session["erp_id"].ToString());
                     cmd.Parameters.AddWithValue("@ACTION_ID", "01");
+                    cmd.Parameters.AddWithValue("@STATUS_ID", "01");
                     cmd.ExecuteNonQuery();
                 }
                 catch (SqlException ex)
@@ -2204,7 +2229,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     {
                         query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION"
                         + " VALUES ("
-                        + " @APPLICATION_ID,@APPLICATION_DATE,@APPLICANT_ID,@DAYOFF_ID,@DAYOFF_NAME,@DAYOFF_START_TIME,@DAYOFF_END_TIME,@DAYOFF_TOTAL_TIME,@DAYOFF_TIME_UNIT,@FUNC_SUB_ID,'01',@NEXT_REVIEWER,@REASON"
+                        + " @APPLICATION_ID,@APPLICATION_DATE,@APPLICANT_ID,@DAYOFF_ID,@DAYOFF_NAME,@DAYOFF_START_TIME,@DAYOFF_END_TIME,@DAYOFF_TOTAL_TIME,@DAYOFF_TIME_UNIT,@FUNC_SUB_ID,@STATUS_ID,@NEXT_REVIEWER,@REASON"
                         + " )";
                         cmd = new SqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@APPLICATION_ID", (Convert.ToInt64(uid) + 1).ToString());
@@ -2216,6 +2241,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         cmd.Parameters.AddWithValue("@DAYOFF_END_TIME", dayoff.endTime);
                         cmd.Parameters.AddWithValue("@DAYOFF_TOTAL_TIME", dayoff.amountUsing);
                         cmd.Parameters.AddWithValue("@DAYOFF_TIME_UNIT", dayoff.unit);
+                        cmd.Parameters.AddWithValue("@STATUS_ID", "02");
                         if (dayoff.funcSub == "N/A")
                         {
                             cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub);
@@ -2228,15 +2254,16 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         }
                         cmd.Parameters.AddWithValue("@REASON", dayoff.reason);
                         cmd.ExecuteNonQuery();
-                        query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B (APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID)"
+                        query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B (APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID,STATUS_ID)"
                         + " VALUES ("
-                        + " @APPLICATION_ID, @ACTION_TIME, @EXECUTOR_ID, @ACTION_ID"
+                        + " @APPLICATION_ID, @ACTION_TIME, @EXECUTOR_ID, @ACTION_ID, @STATUS_ID"
                         + " )";
                         cmd = new SqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@APPLICATION_ID", uid);
                         cmd.Parameters.AddWithValue("@ACTION_TIME", DateTime.Now);
                         cmd.Parameters.AddWithValue("@EXECUTOR_ID", Session["erp_id"].ToString());
                         cmd.Parameters.AddWithValue("@ACTION_ID", "01");
+                        cmd.Parameters.AddWithValue("@STATUS_ID", "01");
                         cmd.ExecuteNonQuery();
                     }
                     else
@@ -2912,6 +2939,12 @@ public partial class hr360_UI04 : System.Web.UI.Page
             ((Label)e.Row.Cells[5].FindControl("lblDayoffEndTime")).Text = (DateTime.Parse(((Label)e.Row.Cells[5].FindControl("lblDayoffEndTime")).Text)).ToString("yyyy/MM/dd HH:mm");
             ((Label)e.Row.Cells[10].FindControl("lblApplicationTime")).Text = (DateTime.Parse(((Label)e.Row.Cells[10].FindControl("lblApplicationTime")).Text)).ToString("yyyy/MM/dd HH:mm");
             ((Label)e.Row.Cells[11].FindControl("lblLastActionTime")).Text = (DateTime.Parse(((Label)e.Row.Cells[11].FindControl("lblLastActionTime")).Text)).ToString("yyyy/MM/dd HH:mm");
+
+            //Get Application Trail Information
+            string appId = ((Label)e.Row.Cells[0].FindControl("lblAppId")).Text;
+            GridView gv = (GridView)e.Row.FindControl("gvAppTrail");
+            gv.DataSource = GetApplicationTrail(appId);
+            gv.DataBind();
         }
     }
     protected void gvSearchResult_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -2950,6 +2983,29 @@ public partial class hr360_UI04 : System.Web.UI.Page
             }
         }
         btnSearchSubmit_Click(sender, e);
+    }
+
+    private DataTable GetApplicationTrail(string s)
+    {
+        DataTable dt = new DataTable();
+
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+
+            string query = "select TrailB.APPLICATION_ID, TrailB.ACTION_TIME, actionAppStatus.NAME 'STATUS', TrailB.EXECUTOR_ID, TrailA.NAME, TrailB.MEMO" +
+                " from HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B TrailB" +
+                " left join HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_A TrailA on TrailB.ACTION_ID = TrailA.ID" +
+                " left join HR360_DAYOFFAPPLICATION_APPLICATION_STATUS actionAppStatus on TrailB.STATUS_ID = actionAppStatus.ID" +
+                " where TrailB.APPLICATION_ID = @appId" +
+                " order by TrailB.ACTION_TIME";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@appId", s);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+        }
+
+        return dt;
     }
 
 }

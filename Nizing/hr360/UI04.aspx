@@ -6,7 +6,9 @@
     <script src="../Scripts/bootstrap-datepicker.js"></script>
     <script src="../Scripts/locales/bootstrap-datepicker.zh-TW.min.js"></script>
     <script src="../Scripts/text.area.auto.adjust.js"></script>
-    <script src="../Scripts/bootstrap.js"></script>
+    
+    
+    
     <style>
         .no-resize {
             resize: none;
@@ -30,12 +32,26 @@
             -moz-user-select: none; /* Gecko (Firefox) */
             -webkit-user-select: none; /* Webkit (Safari, Chrome) */
         }
+        .pointer-cursor{
+            cursor:pointer;
+        }
     </style>
     <script type="text/javascript">
         $(function () {
             $('.autosize').autosize();
         });
-        $(document).ready(function () {
+
+        $("[alt*='expand']").live("click", function () {
+            $(this).closest("tr").after("<tr><td></td><td colspan = '999'>" + $(this).next().html() + "</td></tr>")
+            $(this).attr("alt", "collapse");
+        });
+        $("[alt*='collapse']").live("click", function () {
+            $(this).attr("alt", "expand");
+            $(this).closest("tr").next().remove();
+        });
+
+        $(document).ready(function () {            
+
             $('.datepicker').datepicker({
                 language: 'zh-TW',
                 format: 'yyyy/mm/dd',
@@ -44,7 +60,7 @@
                 todayHighlight: true
             }).on('changeDate', function () {
                 __doPostBack('txtDatePickerStart', 'TextChanged');
-            });
+            });            
 
             var isPostBack = $('#<%=hdnIsPostBack.ClientID%>').val();
             if (isPostBack == '0') {
@@ -65,6 +81,7 @@
                         $('#search_section').hide();
                     }
             };
+
             $(document).on('click', '#btnSearchVisibility', function () {
                 $('#search_section').toggle();
                 if ($('#search_section').is(":visible") == true) {
@@ -76,6 +93,7 @@
                     $('#<%=hdnIsSearchFieldVisible.ClientID%>').val('0');
                 }
             });
+
             $(document).on('click', '#btnDayOffAppVisibility', function () {
                 $('#DayOffApp').toggle();
                 if ($('#DayOffApp').is(":visible") == true) {
@@ -87,14 +105,14 @@
                     $('#<%=hdnIsDayOffAppVisible.ClientID%>').val('0');
                 }
             });
-            $("[data-toggle='popover']").popover({
-                trigger: 'click'
-            });
             
             $('.classApprovalPending tr').click(function () {
                 approvalTableSelection($(this).index());
-            }
-            );
+            });
+
+            $('[data-toggle="popover"]').popover({
+                sanitize:false,
+            })
         });
 
         var approvalPendingAnchor = 0;
@@ -144,17 +162,20 @@
             }
             else {
             }
-        }
+        };
+
         function selectBetweenItemsIntbApprovalPending(a, b) {
             for (var i = a; i <= b; i++) {                    
                 $('.classApprovalPending tr').eq(i).addClass('highlight');
             }            
-        }
+        };
+
         function clearSelectionOntbApprovalPending(){
             for(var i=1; i<= $('.classApprovalPending tr').length; i++){
                 $('.classApprovalPending tr').eq(i).removeClass('highlight');
             }
-        }
+        };
+
         function storeApprovalPendingSelectionToHiddenField() {
             var selectionList = [];
             var applicationID = "";
@@ -165,7 +186,8 @@
                 }
             }
             $('#hdnApprovalPendingSelection').val(selectionList);
-        }
+        };
+
         function confirmWithdrawal() {
             if (confirm('確定要撤銷此張假單嗎?')) {
                 return true;
@@ -174,6 +196,7 @@
                 return false;
             }
         };
+
         function confirmApprove() {
             storeApprovalPendingSelectionToHiddenField();
             if ($('#hdnApprovalPendingSelection').val().trim() != "") {
@@ -189,6 +212,7 @@
                 return false;
             }
         };
+
         function confirmDeny() {
             var reason = prompt("請輸入退回原因(必填、50字內):");
             var trimmedReason = '';
@@ -205,7 +229,9 @@
                 }
                 return false;
             }
-        }
+        };
+
+        
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="page_title" runat="Server">
@@ -213,7 +239,10 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="top_menu" runat="Server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="page_content" runat="Server">    
-    <div class="container">
+    <div class="container" style="visibility:hidden">
+        維護中，請稍後
+    </div>
+    <div class="container" style="visibility:visible">
         <%--<div id="test_section">
             <div class="row form-group">
                 測試中，請勿使用    
@@ -388,7 +417,7 @@
                                 ***如操作上有疑問，請詢問人事部
                             </div>
                             <asp:HiddenField ID="hdnApprovalPendingSelection" ClientIDMode="Static" runat="server" />
-                            <table id="tbApprovalPending" class="table col-xs-12 classApprovalPending noselect" runat="server">
+                            <table id="tbApprovalPending" class="classApprovalPending table col-xs-12 noselect" runat="server">
                                 <tr style="background-color:lightblue; color:white;">
                                     <th style="text-align:center;font-weight:bold;">假單ID</th>
 		                            <th style="text-align:center;font-weight:bold;">申請人ID</th>
@@ -414,160 +443,214 @@
         <hr />
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
-        <div class="row form-group">
-            <div class="col-xs-12">
-                <span class="label label-info" id="btnSearchVisibility" style="cursor: pointer; font-size: 20px;">查詢歷史假單</span>
-                <asp:HiddenField ID="hdnIsSearchFieldVisible" runat="server" />
-            </div>
-        </div>
-        <div id="search_section">
-            <div class="row form-group">
-                <div class="col-xs-3">
-                    <asp:DropDownList ID="ddlSearch_Parameter_ApplicantID" runat="server" CssClass="form-control"></asp:DropDownList>
+                <div class="row form-group">
+                    <div class="col-xs-12">
+                        <span class="label label-info" id="btnSearchVisibility" style="cursor: pointer; font-size: 20px;">查詢歷史假單</span>
+                        <asp:HiddenField ID="hdnIsSearchFieldVisible" runat="server" />
+                    </div>
                 </div>
-                <div class="col-xs-2">
-                    <asp:TextBox ID="txtSearch_Parameter_StartDate" runat="server" CssClass="form-control datepicker" placeholder="查詢起始日期"></asp:TextBox>
+                <div id="search_section">
+                    <div class="row form-group">
+                        <div class="col-xs-3">
+                            <asp:DropDownList ID="ddlSearch_Parameter_ApplicantID" runat="server" CssClass="form-control"></asp:DropDownList>
+                        </div>
+                        <div class="col-xs-2">
+                            <asp:TextBox ID="txtSearch_Parameter_StartDate" runat="server" CssClass="form-control datepicker" placeholder="查詢起始日期"></asp:TextBox>
+                        </div>
+                        <div class="col-xs-2">
+                            <asp:TextBox ID="txtSearch_Parameter_EndDate" runat="server" CssClass="form-control datepicker" placeholder="查詢結束日期"></asp:TextBox>
+                        </div>
+                        <div class="col-xs-3">
+                            <asp:DropDownList ID="ddlSearch_Parameter_ApplicationStatus" runat="server" CssClass="form-control"></asp:DropDownList>
+                        </div>
+                        <div class="col-xs-2">
+                            <asp:Button ID="btnSearchSubmit" runat="server" Text="查詢" CssClass="btn btn-success" OnClick="btnSearchSubmit_Click" />
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-12">
+                            <asp:GridView ID="gvSearchResult" runat="server" AutoGenerateColumns="false" CssClass="table table-striped" 
+                                OnRowDataBound="gvSearchResult_RowDataBound" OnPageIndexChanging="gvSearchResult_PageIndexChanging"                                         
+                                AllowPaging="True" PageSize="10" PagerSettings-Position="Top" PagerSettings-Mode="NumericFirstLast"
+                                PagerSettings-FirstPageText="首頁" PagerSettings-LastPageText="尾頁" OnRowCommand="gvSearchResult_RowCommand">
+                                <Columns>
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lbApplication_ID" runat="server" Text="假單單號" CommandName="Sort" CommandArgument="APPLICATION_ID"></asp:LinkButton>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblAppId" runat="server" Text='<%#Eval("APPLICATION_ID") %>' alt="expand" CssClass="pointer-cursor"></asp:Label>                                               
+                                            <asp:Panel ID="pnlAppTrail" runat="server" Style="display:none;">
+                                                <asp:GridView ID="gvAppTrail" runat="server" AutoGenerateColumns="false" CssClass="table table-striped" GridLines="Horizontal">
+                                                    <Columns>
+                                                        <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                                            <HeaderTemplate>
+                                                                <asp:Label ID="lblAppTrailId" runat="server" Text="假單單號"></asp:Label>
+                                                            </HeaderTemplate>
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblAppTrailIdContent" runat="server" Text='<%#Eval("APPLICATION_ID") %>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                                            <HeaderTemplate>
+                                                                <asp:Label ID="lblAppTrailTime" runat="server" Text="動作時間"></asp:Label>
+                                                            </HeaderTemplate>
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblAppTrailTimeContent" runat="server" Text='<%#Eval("ACTION_TIME") %>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                                            <HeaderTemplate>
+                                                                <asp:Label ID="lblStatus" runat="server" Text="申請狀態"></asp:Label>
+                                                            </HeaderTemplate>
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblStatusContent" runat="server" Text='<%#Eval("STATUS") %>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                                            <HeaderTemplate>
+                                                                <asp:Label ID="lblExecutorId" runat="server" Text="動作執行者"></asp:Label>
+                                                            </HeaderTemplate>
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblExecutorIdContent" runat="server" Text='<%#Eval("EXECUTOR_ID") %>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                                            <HeaderTemplate>
+                                                                <asp:Label ID="lblActionName" runat="server" Text="動作"></asp:Label>
+                                                            </HeaderTemplate>
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblActionNameContent" runat="server" Text='<%#Eval("NAME") %>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                                            <HeaderTemplate>
+                                                                <asp:Label ID="lblMemo" runat="server" Text="備註"></asp:Label>
+                                                            </HeaderTemplate>
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblMemoContent" runat="server" Text='<%#Eval("MEMO") %>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                    </Columns>
+                                                </asp:GridView>
+                                            </asp:Panel>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lbApplicant_ID" runat="server" Text="員工代號" CommandName="Sort" CommandArgument="APPLICANT_ID"></asp:LinkButton>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:Label ID="Label10" runat="server" Text='<%#Eval("APPLICANT_ID") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lbAPPLICANT_NAME" runat="server" Text="申請者" CommandName="Sort" CommandArgument="APPLICANT_NAME"></asp:LinkButton>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:Label ID="Label3" runat="server" Text='<%#Eval("APPLICANT_NAME") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lbDAYOFF_NAME" runat="server" Text="假別" CommandName="Sort" CommandArgument="DAYOFF_NAME"></asp:LinkButton>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:Label ID="Label4" runat="server" Text='<%#Eval("DAYOFF_NAME") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lbDAYOFF_START_TIME" runat="server" Text="請假開始時間" CommandName="Sort" CommandArgument="DAYOFF_START_TIME"></asp:LinkButton>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblDayoffStartTime" runat="server" Text='<%#Eval("DAYOFF_START_TIME") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lbDAYOFF_END_TIME" runat="server" Text="請假結束時間" CommandName="Sort" CommandArgument="DAYOFF_END_TIME"></asp:LinkButton>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblDayoffEndTime" runat="server" Text='<%#Eval("DAYOFF_END_TIME") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lbDAYOFF_TOTAL_TIME" runat="server" Text="請假總量" CommandName="Sort" CommandArgument="DAYOFF_TOTAL_TIME"></asp:LinkButton>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:Label ID="Label7" runat="server" Text='<%#Eval("DAYOFF_TOTAL_TIME") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lbFUNC_SUB_NAME" runat="server" Text="代理人" CommandName="Sort" CommandArgument="FUNC_SUB_NAME"></asp:LinkButton>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:Label ID="Label8" runat="server" Text='<%#Eval("FUNC_SUB_NAME") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lbREASON" runat="server" Text="請假原因" CommandName="Sort" CommandArgument="REASON"></asp:LinkButton>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:Label ID="Label9" runat="server" Text='<%#Eval("REASON") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lbSTATUS" runat="server" Text="假單狀態" CommandName="Sort" CommandArgument="STATUS"></asp:LinkButton>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblAppStatus" runat="server" Text='<%#Eval("STATUS") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lbNEXT_REVIEWER" runat="server" Text="下位簽核者" CommandName="Sort" CommandArgument="NEXT_REVIEWER"></asp:LinkButton>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblNextReviewer" runat="server" Text='<%#Eval("NEXT_REVIEWER") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lbApplication_Time" runat="server" Text="申請時間" CommandName="Sort" CommandArgument="APPLICATION_DATE"></asp:LinkButton>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblApplicationTime" runat="server" Text='<%#Eval("APPLICATION_DATE") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lbLAST_ACTION_TIME" runat="server" Text="最後動作時間" CommandName="Sort" CommandArgument="LAST_ACTION_TIME"></asp:LinkButton>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblLastActionTime" runat="server" Text='<%#Eval("LAST_ACTION_TIME") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="人事退回" ItemStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="btnSearch_Deny" runat="server" Text="退回" CssClass="btn btn-danger" OnClientClick="return confirmDeny();" OnClick="btnDeny_Click"></asp:LinkButton>
+                                            <%--<asp:Button ID="btnSearch_Deny" runat="server" Text="退回" CssClass="btn btn-danger" OnClientClick="return confirmDeny();" OnClick="btnDeny_Click" />--%>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                        <HeaderTemplate>
+                                            <asp:LinkButton ID="lbERP_STATUS" runat="server" Text="ERP登入狀態" CommandName="Sort" CommandArgument="ERP_STATUS"></asp:LinkButton>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblERPStatus" runat="server" Text='<%#Eval("ERP_STATUS") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-xs-2">
-                    <asp:TextBox ID="txtSearch_Parameter_EndDate" runat="server" CssClass="form-control datepicker" placeholder="查詢結束日期"></asp:TextBox>
-                </div>
-                <div class="col-xs-3">
-                    <asp:DropDownList ID="ddlSearch_Parameter_ApplicationStatus" runat="server" CssClass="form-control"></asp:DropDownList>
-                </div>
-                <div class="col-xs-2">
-                    <asp:Button ID="btnSearchSubmit" runat="server" Text="查詢" CssClass="btn btn-success" OnClick="btnSearchSubmit_Click" />
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-xs-12">
-                    <asp:GridView ID="gvSearchResult" runat="server" AutoGenerateColumns="false" CssClass="table table-striped" 
-                        OnRowDataBound="gvSearchResult_RowDataBound" OnPageIndexChanging="gvSearchResult_PageIndexChanging"                                         
-                        AllowPaging="True" PageSize="10" PagerSettings-Position="Top" PagerSettings-Mode="NumericFirstLast"
-                        PagerSettings-FirstPageText="首頁" PagerSettings-LastPageText="尾頁" OnRowCommand="gvSearchResult_RowCommand">
-                        <Columns>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
-                                <HeaderTemplate>
-                                    <asp:LinkButton ID="lbApplication_ID" runat="server" Text="假單單號" CommandName="Sort" CommandArgument="APPLICATION_ID"></asp:LinkButton>
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="lblAppId" runat="server" Text='<%#Eval("APPLICATION_ID") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
-                                <HeaderTemplate>
-                                    <asp:LinkButton ID="lbApplicant_ID" runat="server" Text="員工代號" CommandName="Sort" CommandArgument="APPLICANT_ID"></asp:LinkButton>
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="Label10" runat="server" Text='<%#Eval("APPLICANT_ID") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
-                                <HeaderTemplate>
-                                    <asp:LinkButton ID="lbAPPLICANT_NAME" runat="server" Text="申請者" CommandName="Sort" CommandArgument="APPLICANT_NAME"></asp:LinkButton>
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="Label3" runat="server" Text='<%#Eval("APPLICANT_NAME") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
-                                <HeaderTemplate>
-                                    <asp:LinkButton ID="lbDAYOFF_NAME" runat="server" Text="假別" CommandName="Sort" CommandArgument="DAYOFF_NAME"></asp:LinkButton>
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="Label4" runat="server" Text='<%#Eval("DAYOFF_NAME") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
-                                <HeaderTemplate>
-                                    <asp:LinkButton ID="lbDAYOFF_START_TIME" runat="server" Text="請假開始時間" CommandName="Sort" CommandArgument="DAYOFF_START_TIME"></asp:LinkButton>
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="lblDayoffStartTime" runat="server" Text='<%#Eval("DAYOFF_START_TIME") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
-                                <HeaderTemplate>
-                                    <asp:LinkButton ID="lbDAYOFF_END_TIME" runat="server" Text="請假結束時間" CommandName="Sort" CommandArgument="DAYOFF_END_TIME"></asp:LinkButton>
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="lblDayoffEndTime" runat="server" Text='<%#Eval("DAYOFF_END_TIME") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
-                                <HeaderTemplate>
-                                    <asp:LinkButton ID="lbDAYOFF_TOTAL_TIME" runat="server" Text="請假總量" CommandName="Sort" CommandArgument="DAYOFF_TOTAL_TIME"></asp:LinkButton>
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="Label7" runat="server" Text='<%#Eval("DAYOFF_TOTAL_TIME") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
-                                <HeaderTemplate>
-                                    <asp:LinkButton ID="lbFUNC_SUB_NAME" runat="server" Text="代理人" CommandName="Sort" CommandArgument="FUNC_SUB_NAME"></asp:LinkButton>
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="Label8" runat="server" Text='<%#Eval("FUNC_SUB_NAME") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
-                                <HeaderTemplate>
-                                    <asp:LinkButton ID="lbREASON" runat="server" Text="請假原因" CommandName="Sort" CommandArgument="REASON"></asp:LinkButton>
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="Label9" runat="server" Text='<%#Eval("REASON") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
-                                <HeaderTemplate>
-                                    <asp:LinkButton ID="lbSTATUS" runat="server" Text="假單狀態" CommandName="Sort" CommandArgument="STATUS"></asp:LinkButton>
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="lblAppStatus" runat="server" Text='<%#Eval("STATUS") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
-                                <HeaderTemplate>
-                                    <asp:LinkButton ID="lbNEXT_REVIEWER" runat="server" Text="下位簽核者" CommandName="Sort" CommandArgument="NEXT_REVIEWER"></asp:LinkButton>
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="lblNextReviewer" runat="server" Text='<%#Eval("NEXT_REVIEWER") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
-                                <HeaderTemplate>
-                                    <asp:LinkButton ID="lbApplication_Time" runat="server" Text="申請時間" CommandName="Sort" CommandArgument="APPLICATION_DATE"></asp:LinkButton>
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="lblApplicationTime" runat="server" Text='<%#Eval("APPLICATION_DATE") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
-                                <HeaderTemplate>
-                                    <asp:LinkButton ID="lbLAST_ACTION_TIME" runat="server" Text="最後動作時間" CommandName="Sort" CommandArgument="LAST_ACTION_TIME"></asp:LinkButton>
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="lblLastActionTime" runat="server" Text='<%#Eval("LAST_ACTION_TIME") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="人事退回" ItemStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="btnSearch_Deny" runat="server" Text="退回" CssClass="btn btn-danger" OnClientClick="return confirmDeny();" OnClick="btnDeny_Click"></asp:LinkButton>
-                                    <%--<asp:Button ID="btnSearch_Deny" runat="server" Text="退回" CssClass="btn btn-danger" OnClientClick="return confirmDeny();" OnClick="btnDeny_Click" />--%>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center">
-                                <HeaderTemplate>
-                                    <asp:LinkButton ID="lbERP_STATUS" runat="server" Text="ERP登入狀態" CommandName="Sort" CommandArgument="ERP_STATUS"></asp:LinkButton>
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="lblERPStatus" runat="server" Text='<%#Eval("ERP_STATUS") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        </Columns>
-                    </asp:GridView>
-                </div>
-            </div>
-        </div>
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>    
