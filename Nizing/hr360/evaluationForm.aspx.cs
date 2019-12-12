@@ -19,7 +19,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
 
     //Setup basic info for the assessment 
     DataTable dtAssessmentQuestion = new DataTable();    
-    List<string> assessorsWithOwnCommentSection = new List<string>();    //擁有自己獨立評語欄位的人
+    //List<string> assessorsWithOwnCommentSection = new List<string>();    //擁有自己獨立評語欄位的人
     protected void Page_Load(object sender, EventArgs e)
     {
         //check if session has expired
@@ -29,10 +29,6 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
         }
         else        
         {
-            assessorsWithOwnCommentSection.Add("0006");
-            assessorsWithOwnCommentSection.Add("0007");
-            assessorsWithOwnCommentSection.Add("0067");
-
             string year = "";
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
@@ -46,18 +42,18 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
 
             string assessor = Session["erp_id"].ToString().Trim();
             string assessed = "";
-            if (!IsPostBack)
-            {
-                assessed = Session["eval_id"].ToString().Trim();
-            }
-            else
-            {
-                assessed = lblEmpID.Text.Trim();
-            }
+            //if (!IsPostBack)
+            //{
+            //    assessed = Session["eval_id"].ToString().Trim();
+            //}
+            //else
+            //{
+            //    assessed = lblEmpID.Text.Trim();
+            //}
 
             //test value
-            //assessor = "0001";
-            //assessed = "0006";
+            assessor = "0001";
+            assessed = "0006";
 
 
             DataTable dtEval = new DataTable();
@@ -637,7 +633,11 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
         }
         lblFinalRnPScore.Text = rnpSum.ToString("N2");
 
-        //讀取自評評語        
+        //擷取特別評語擁有者清單
+        List<string> assessorsWithOwnCommentSection = new List<string>();
+        assessorsWithOwnCommentSection = GetSpecialCommentator(year);
+
+        //讀取自評評語
         txtSelfComment.Text = LoadComment(year, assessed, assessed, assessorsWithOwnCommentSection);
 
         //動態增加自評以外的評語格
@@ -748,7 +748,10 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
     {
         try
         {
-            
+            //擷取特別評語擁有者清單
+            List<string> assessorsWithOwnCommentSection = new List<string>();
+            assessorsWithOwnCommentSection = GetSpecialCommentator(lblEvalYear.Text);
+
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
@@ -1203,9 +1206,9 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                     " ,A.NAME 'QUESTION_CATEGORY_NAME'" +
                     " ,A.WEIGHT 'QUESTION_CATEGORY_WEIGHT'" +
                     " ,B.QUESTION"
-                    + " FROM NZ_ERP2.dbo.HR360_ASSESSMENTQUESTION_QUESTION_A B"
-                    + " LEFT JOIN NZ_ERP2.dbo.HR360_ASSESSMENTQUESTION_CATEGORY_A A ON B.CATEGORY_ID=A.ID"
-                    + " LEFT JOIN NZ_ERP2.dbo.HR360_ASSESSMENTQUESTION_ASSIGNMENT_A C ON B.ID=C.QUESTION_ID"
+                    + " FROM HR360_ASSESSMENTQUESTION_QUESTION_A B"
+                    + " LEFT JOIN HR360_ASSESSMENTQUESTION_CATEGORY_A A ON B.CATEGORY_ID=A.ID"
+                    + " LEFT JOIN HR360_ASSESSMENTQUESTION_ASSIGNMENT_A C ON B.ID=C.QUESTION_ID"
                     + " WHERE"
                     + " B.IN_USE='1'"
                     + " AND"
@@ -1213,13 +1216,13 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                     + " B.USE_BY_ALL='1'"
                     + " OR"
                     + " C.DEPT IN (SELECT CMSMV.MV004"
-                    + " FROM CMSMV"
-                    + " LEFT JOIN CMSMK ON CMSMV.MV001=CMSMK.MK002"
+                    + " FROM NZ.dbo.CMSMV"
+                    + " LEFT JOIN NZ.dbo.CMSMK ON CMSMV.MV001=CMSMK.MK002"
                     + " WHERE CMSMV.MV001=@ASSESSED_ID)"
                     + " OR"
                     + " C.EMP_ID IN (SELECT CMSMV.MV001"
-                    + " FROM CMSMV"
-                    + " LEFT JOIN CMSMK ON CMSMV.MV001=CMSMK.MK002"
+                    + " FROM NZ.dbo.CMSMV"
+                    + " LEFT JOIN NZ.dbo.CMSMK ON CMSMV.MV001=CMSMK.MK002"
                     + " WHERE CMSMV.MV001=@ASSESSED_ID)"
                     + " )"
                     + " ORDER BY A.ID";                
@@ -1445,7 +1448,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
     //讀取評語資料
     private string LoadComment(string year, string assessor, string assessed, List<string> assessorsWithOwnCommentSection)
     {
-        if (assessorsWithOwnCommentSection.Contains(assessor) && lblEvalType.Text.Trim() != "自評")
+        if (assessorsWithOwnCommentSection.Contains(assessor) && assessor != assessed)
         {
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
@@ -1513,5 +1516,31 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             da.Fill(dt);
         }
         return dt;
+    }
+
+
+    private List<string> GetSpecialCommentator(string year)
+    {
+        List<string> s = new List<string>();
+
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            string query = "select commentatorId" +
+                " from HR360_AssessmentPersonnel_SpecialCommentator" +
+                " where assessYear=@assessYear" +
+                " order by importance desc";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@assessYear", year);
+            using (SqlDataReader dr = cmd.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    s.Add(dr.GetString(0));
+                }
+            }
+        }
+
+        return s;
     }
 }

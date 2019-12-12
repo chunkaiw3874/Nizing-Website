@@ -1772,6 +1772,7 @@ namespace NIZING_BACKEND_Data_Config
                 }
                 txtSetScoreWeightMemo.Text += DateTime.Now + " " + cbxSetScoreWeightYear.Text + "年資料更新完成" + Environment.NewLine;
                 setScoreWeightTabMode = FunctionMode.STATIC;
+                LoadControlStatus(tbpSetScoreWeight);
             }
         }
         private void btnSetScoreWeightCancel_Click(object sender, EventArgs e)

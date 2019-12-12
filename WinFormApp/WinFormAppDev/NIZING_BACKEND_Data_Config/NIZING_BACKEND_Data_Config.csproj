@@ -24,7 +24,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -55,10 +55,10 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>C2EFC2AEE2CD2770DD9146FC9E58442E0132519F</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>45F3E1840C1112C56EF9DA71D544DFEB741AD903</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>NIZING_BACKEND_Data_Config_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>newKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -67,6 +67,12 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup />
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>newKey.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -247,6 +253,8 @@
     <None Include="dsOQS_ProductInfo.xss">
       <DependentUpon>dsOQS_ProductInfo.xsd</DependentUpon>
     </None>
+    <None Include="newKey.pfx" />
+    <None Include="NIZING_BACKEND_Data_Config_1_TemporaryKey.pfx" />
     <None Include="NIZING_BACKEND_Data_Config_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
