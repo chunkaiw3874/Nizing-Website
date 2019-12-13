@@ -1958,68 +1958,92 @@ namespace NIZING_BACKEND_Data_Config
                 }
                 else
                 {
-                    query = ";with assessorList as" +
-" (" +
-" SELECT COALESCE(ASSIGN.[YEAR], @YEAR) '年份'" +
-" , LTRIM(RTRIM(MV.MV001)) + ' ' + LTRIM(RTRIM(MV.MV002)) '受評者'" +
-" , COALESCE(LTRIM(RTRIM(ASSIGN.ASSESSOR_ID)) + ' ' + LTRIM(RTRIM(MVASSESSOR.MV002)), LTRIM(RTRIM(MV.MV001)) + ' ' + LTRIM(RTRIM(MV.MV002))) '評核者'" +
-" , 0 '評核主管數量'" +
-" , COALESCE([TYPE].[ID] + '. ' +[TYPE].NAME, (select[ID] + '. ' + [NAME] from HR360_ASSESSMENTPERSONNEL_TYPE_A where [ID] = '1')) '評核類型'" +
-" FROM NZ.dbo.CMSMV MV" +
-" LEFT JOIN HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A ASSIGN ON MV.MV001 = ASSIGN.ASSESSED_ID AND ASSIGN.[YEAR]=@YEAR AND ASSIGN.ACTIVE='1' AND ASSIGN.ASSESS_TYPE='1'" +
-" LEFT JOIN NZ.dbo.CMSMV MVASSESSOR ON ASSIGN.ASSESSOR_ID= MVASSESSOR.MV001" +
-" LEFT JOIN HR360_ASSESSMENTPERSONNEL_TYPE_A[TYPE] ON ASSIGN.ASSESS_TYPE=[TYPE].ID" +
-" LEFT JOIN HR360_AssessmentPersonnel_Assignment_B ASSIGNSUPERVISOR ON MV.MV001= ASSIGNSUPERVISOR.assessedID AND ASSIGNSUPERVISOR.assessYear= @YEAR" +
-" WHERE" +
-" (MV.MV022= ''" +
-" OR MV.MV022 > @YEAR+'1232')" +
-" AND MV.MV021<@YEAR+'1232'" +
-" AND MV.MV001 NOT LIKE 'PT%'" +
-" AND MV.MV001<>'0000'" +
-" AND MV.MV001<>'0006'" +
-" AND MV.MV001<>'0007'" +
-" AND MV.MV001<>'0098'" +
-" union all" +
-" SELECT COALESCE(ASSIGN.[YEAR], @YEAR) '年份'" +
-" , LTRIM(RTRIM(MV.MV001)) + ' ' + LTRIM(RTRIM(MV.MV002)) '受評者'" +
-" , COALESCE(LTRIM(RTRIM(ASSIGN.ASSESSOR_ID)) + ' ' + LTRIM(RTRIM(MVASSESSOR.MV002)), '') '評核者'" +
-" , COALESCE(Convert(int, ASSIGNSUPERVISOR.assessorSupervisorAmount) + Convert(int, ASSIGNSUPERVISOR.assessorFinalizerAmount), '0') '評核主管數量'" +
-" , COALESCE([TYPE].[ID] + '. ' +[TYPE].NAME, '') '評核類型'" +
-" FROM NZ.dbo.CMSMV MV" +
-" LEFT JOIN HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A ASSIGN ON MV.MV001 = ASSIGN.ASSESSED_ID AND ASSIGN.[YEAR]= @YEAR AND ASSIGN.ACTIVE= '1' AND ASSIGN.ASSESS_TYPE= '3'" +
-" LEFT JOIN NZ.dbo.CMSMV MVASSESSOR ON ASSIGN.ASSESSOR_ID= MVASSESSOR.MV001" +
-" LEFT JOIN HR360_ASSESSMENTPERSONNEL_TYPE_A[TYPE] ON ASSIGN.ASSESS_TYPE=[TYPE].ID" +
-" LEFT JOIN HR360_AssessmentPersonnel_Assignment_B ASSIGNSUPERVISOR ON MV.MV001= ASSIGNSUPERVISOR.assessedID AND ASSIGNSUPERVISOR.assessYear= @YEAR" +
-" WHERE" +
-" (MV.MV022= ''" +
-" OR MV.MV022 > @YEAR+'1232')" +
-" AND MV.MV021<@YEAR+'1232'" +
-" AND MV.MV001 NOT LIKE 'PT%'" +
-" AND MV.MV001<>'0000'" +
-" AND MV.MV001<>'0006'" +
-" AND MV.MV001<>'0007'" +
-" AND MV.MV001<>'0098'" +
-" union all" +
-" select al.年份, al.受評者, al.評核者, (al.評核主管數量-1) 評核主管數量, al.評核類型" +
-" from assessorList al" +
-" where al.[評核主管數量] > 1" +
-" )" +
-" select distinct al.年份" +
-" , al.受評者" +
-" , al.評核者" +
-" , al.評核主管數量 '評核順位'" +
-" , case" +
-" when al.評核類型<>'' then 評核類型" +
-" else" +
-" case" +
-" when al.評核主管數量= 0 then 評核類型" +
-" when al.評核主管數量= (select MAX(assessorList.評核主管數量) from assessorList where [年份]= @YEAR and[受評者]= al.受評者) then(select[ID] + '. ' + [NAME] from HR360_ASSESSMENTPERSONNEL_TYPE_A where[ID]= '3')" +
-" else (select[ID] + '. ' + [NAME] from HR360_ASSESSMENTPERSONNEL_TYPE_A where[ID]='2')" +
-" end" +
-" end as 評核類型" +
-" from assessorList al" +
-" left join HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A assign on SUBSTRING(al.受評者,1,4)=assign.ASSESSED_ID and SUBSTRING(al.評核者,1,4)=assign.ASSESSOR_ID and al.年份=assign.[YEAR]" +
-" order by 受評者, 評核類型, 評核順位";
+                    query = ";with floatingAssessorList as" +
+                        " (" +
+                        " SELECT COALESCE(ASSIGN.[YEAR], @YEAR) '年份'" +
+                        " , LTRIM(RTRIM(MV.MV001)) + ' ' + LTRIM(RTRIM(MV.MV002)) '受評者'" +
+                        " , COALESCE(LTRIM(RTRIM(ASSIGN.ASSESSOR_ID)) + ' ' + LTRIM(RTRIM(MVASSESSOR.MV002)), '') '評核者'" +
+                        " , COALESCE(ASSIGN.ASSESSOR_ORDER, ASSIGNSUPERVISOR.assessorSupervisorAmount) '評核主管數量'" +
+                        " , COALESCE([TYPE].[ID] + '. ' +[TYPE].NAME, '') '評核類型'" +
+                        " FROM NZ.dbo.CMSMV MV" +
+                        " LEFT JOIN HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A ASSIGN ON MV.MV001 = ASSIGN.ASSESSED_ID AND ASSIGN.[YEAR]= @YEAR AND ASSIGN.ACTIVE= '1' AND ASSIGN.ASSESS_TYPE= '2'" +
+                        " LEFT JOIN NZ.dbo.CMSMV MVASSESSOR ON ASSIGN.ASSESSOR_ID= MVASSESSOR.MV001" +
+                        " LEFT JOIN HR360_ASSESSMENTPERSONNEL_TYPE_A[TYPE] ON ASSIGN.ASSESS_TYPE=[TYPE].ID" +
+                        " LEFT JOIN HR360_AssessmentPersonnel_Assignment_B ASSIGNSUPERVISOR ON MV.MV001= ASSIGNSUPERVISOR.assessedID AND ASSIGNSUPERVISOR.assessYear= @YEAR" +
+                        " WHERE" +
+                        " (MV.MV022= ''" +
+                        " OR MV.MV022 > @YEAR+'1232')" +
+                        " AND MV.MV021<@YEAR+'1232'" +
+                        " AND MV.MV001 NOT LIKE 'PT%'" +
+                        " AND MV.MV001<>'0000'" +
+                        " AND MV.MV001<>'0006'" +
+                        " AND MV.MV001<>'0007'" +
+                        " AND MV.MV001<>'0098'" +
+                        " and COALESCE(ASSIGN.ASSESSOR_ORDER, ASSIGNSUPERVISOR.assessorSupervisorAmount)>0" +
+                        " union all" +
+                        " select al.年份, al.受評者, al.評核者, (al.評核主管數量-1) 評核主管數量, al.評核類型" +
+                        " from floatingAssessorList al" +
+                        " where al.[評核主管數量] > 1 and al.評核類型= ''" +
+                        " )," +
+                        " fixedAssessorList as" +
+                        " (SELECT COALESCE(ASSIGN.[YEAR], @YEAR) '年份'" +
+                        " , LTRIM(RTRIM(MV.MV001)) + ' ' + LTRIM(RTRIM(MV.MV002)) '受評者'" +
+                        " , COALESCE(LTRIM(RTRIM(ASSIGN.ASSESSOR_ID)) + ' ' + LTRIM(RTRIM(MVASSESSOR.MV002)), LTRIM(RTRIM(MV.MV001)) + ' ' + LTRIM(RTRIM(MV.MV002))) '評核者'" +
+                        " , 0 '評核主管數量'" +
+                        " , COALESCE([TYPE].[ID] + '. ' +[TYPE].NAME, (select[ID] + '. ' + [NAME] from HR360_ASSESSMENTPERSONNEL_TYPE_A where[ID] = '1')) '評核類型'" +
+                        " FROM NZ.dbo.CMSMV MV" +
+                        " LEFT JOIN HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A ASSIGN ON MV.MV001 = ASSIGN.ASSESSED_ID AND ASSIGN.[YEAR]= @YEAR AND ASSIGN.ACTIVE= '1' AND ASSIGN.ASSESS_TYPE= '1'" +
+                        " LEFT JOIN NZ.dbo.CMSMV MVASSESSOR ON ASSIGN.ASSESSOR_ID= MVASSESSOR.MV001" +
+                        " LEFT JOIN HR360_ASSESSMENTPERSONNEL_TYPE_A[TYPE] ON ASSIGN.ASSESS_TYPE=[TYPE].ID" +
+                        " WHERE" +
+                        " (MV.MV022= ''" +
+                        " OR MV.MV022 > @YEAR+'1232')" +
+                        " AND MV.MV021<@YEAR+'1232'" +
+                        " AND MV.MV001 NOT LIKE 'PT%'" +
+                        " AND MV.MV001<>'0000'" +
+                        " AND MV.MV001<>'0006'" +
+                        " AND MV.MV001<>'0007'" +
+                        " AND MV.MV001<>'0098'" +
+                        " union all" +
+                        " SELECT COALESCE(ASSIGN.[YEAR], @YEAR) '年份'" +
+                        " , LTRIM(RTRIM(MV.MV001)) + ' ' + LTRIM(RTRIM(MV.MV002)) '受評者'" +
+                        " , COALESCE(LTRIM(RTRIM(ASSIGN.ASSESSOR_ID)) + ' ' + LTRIM(RTRIM(MVASSESSOR.MV002)), '') '評核者'" +
+                        " , COALESCE(Convert(int, ASSIGNSUPERVISOR.assessorSupervisorAmount) + Convert(int, ASSIGNSUPERVISOR.assessorFinalizerAmount), '0') '評核主管數量'" +
+                        " , COALESCE([TYPE].[ID] + '. ' +[TYPE].NAME, (select[ID] + '. ' + [NAME] from HR360_ASSESSMENTPERSONNEL_TYPE_A where[ID] = '3')) '評核類型'" +
+                        " FROM NZ.dbo.CMSMV MV" +
+                        " LEFT JOIN HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A ASSIGN ON MV.MV001 = ASSIGN.ASSESSED_ID AND ASSIGN.[YEAR]= @YEAR AND ASSIGN.ACTIVE= '1' AND ASSIGN.ASSESS_TYPE= '3'" +
+                        " LEFT JOIN NZ.dbo.CMSMV MVASSESSOR ON ASSIGN.ASSESSOR_ID= MVASSESSOR.MV001" +
+                        " LEFT JOIN HR360_ASSESSMENTPERSONNEL_TYPE_A[TYPE] ON ASSIGN.ASSESS_TYPE=[TYPE].ID" +
+                        " LEFT JOIN HR360_AssessmentPersonnel_Assignment_B ASSIGNSUPERVISOR ON MV.MV001= ASSIGNSUPERVISOR.assessedID AND ASSIGNSUPERVISOR.assessYear= @YEAR" +
+                        " WHERE" +
+                        " (MV.MV022= ''" +
+                        " OR MV.MV022 > @YEAR+'1232')" +
+                        " AND MV.MV021<@YEAR+'1232'" +
+                        " AND MV.MV001 NOT LIKE 'PT%'" +
+                        " AND MV.MV001<>'0000'" +
+                        " AND MV.MV001<>'0006'" +
+                        " AND MV.MV001<>'0007'" +
+                        " AND MV.MV001<>'0098'" +
+                        " )," +
+                        " assessorList as" +
+                        " (" +
+                        " select*" +
+                        " from floatingAssessorList" +
+                        " union all" +
+                        " select*" +
+                        " from fixedAssessorList" +
+                        " )" +
+                        " select 年份" +
+                        " ,受評者" +
+                        " ,評核者" +
+                        " ,評核主管數量 '評核順位'" +
+                        " ,case" +
+                        " when 評核類型 = '' then(select[ID] + '. ' + [NAME] from HR360_ASSESSMENTPERSONNEL_TYPE_A where[ID]= '2')" +
+                        " else 評核類型" +
+                        " end " +
+                        " as '評核類型'" +
+                        " from assessorList" +
+                        " order by 受評者,評核主管數量";
                 }
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@YEAR", year.ToString());
