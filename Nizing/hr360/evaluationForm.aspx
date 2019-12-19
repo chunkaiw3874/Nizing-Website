@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link href="../css/bootstrap/bootstrap.css" rel="stylesheet" />
-    <%--<script src="../Scripts/bootstrap.js"></script>--%>
+    <script src="../Scripts/bootstrap.js"></script>
     <script src="../Scripts/text.area.auto.adjust.js"></script>
     <style>
         body {

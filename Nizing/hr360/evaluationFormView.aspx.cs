@@ -26,9 +26,6 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
     {
         string assessed = "";
         string year = "";
-        //assessorsWithOwnCommentSection.Add("0007");
-        //assessorsWithOwnCommentSection.Add("0006");
-        ////assessorsWithOwnCommentSection.Add("0067");
 
         if (!IsPostBack)
         {
@@ -463,7 +460,7 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
             string query = "SELECT DISTINCT A.ASSESSOR_ID" +
                     ",C.MV002 'ASSESSOR_NAME'" +
                     ",B.NAME 'TYPE_NAME'" +
-                    ",A.ASSESS_TYPE 'ASSESS_TYPE_NAME'" +
+                    ",A.ASSESS_TYPE 'ASSESS_TYPE'" +
                     ",A.ASSESSOR_ORDER" +
                     ",D.OVERALL_COMMENT" +
                     ",E.assessorSupervisorAmount" +
@@ -539,25 +536,49 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
             div = new HtmlGenericControl();
             div.TagName = "div";
             div.ID = "QuestionTitleRow_" + (5 + i).ToString();
-            div.Attributes["class"] = "border col-xs-2";
+            div.Attributes["class"] = "border col-xs-" + (6 / colCount).ToString();
             divQuestionTitleRow.Controls.Add(div);
             //add 評分 column for respective asesssor type
             TextBox txt = new TextBox();
             txt.CssClass = "form-control text-center autosize no-resize";
             txt.TextMode = TextBoxMode.MultiLine;
+
+            string name = "";
             if (i == 0) //自評column
             {
-                txt.Text = "自評" + Environment.NewLine
-                        + "(" + dtAssessorData.Rows[i]["ASSESSOR_NAME"].ToString() + ")";
+                name = "";
+                foreach (DataRow row in dtAssessorData.Rows)
+                {
+                    if (row["ASSESS_TYPE"].ToString() == "1")
+                    {
+                        name = row["ASSESSOR_NAME"].ToString();
+                    }
+                }
+                txt.Text = "自評" + Environment.NewLine + name;
             }
             else if (i == colCount - 1) //核決主管評column (last column)
             {
-                txt.Text = "核決主管評" + Environment.NewLine
-                    + "(" + dtAssessorData.Rows[i]["ASSESSOR_NAME"].ToString() + ")";
+                name = "";
+                foreach (DataRow row in dtAssessorData.Rows)
+                {
+                    if (row["ASSESS_TYPE"].ToString() == "3")
+                    {
+                        name = row["ASSESSOR_NAME"].ToString();
+                    }
+                }
+                txt.Text = "核決主管評" + Environment.NewLine + name;
             }
             else
             {
-                txt.Text = "主管評" + Environment.NewLine;
+                name = "";
+                foreach (DataRow row in dtAssessorData.Rows)
+                {
+                    if (row["ASSESS_TYPE"].ToString() == "2")
+                    {
+                        name += row["ASSESSOR_NAME"].ToString() + " ";
+                    }
+                }
+                txt.Text = "主管評" + Environment.NewLine + name;
             }
             div.Controls.Add(txt);
         }
@@ -567,7 +588,7 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
     private void CreateQuestionBodyRow(DataTable dtQuestionData, DataTable dtAssessorData, int colCount)
     {
         for (int i = 0; i < dtQuestionData.Rows.Count; i++)
-        {
+        {            
             HtmlGenericControl outerDiv = new HtmlGenericControl();
             outerDiv.TagName = "div";
             outerDiv.ID = "questionRow" + (i + 1).ToString();
@@ -631,7 +652,7 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
                 lbl.ID = "lblAssessmentScore" + (i + 1).ToString() + (j + 1).ToString();
                 lbl.CssClass = "form-control text-center col" + (i + 1) + "_" + (5 + j).ToString();
 
-                if (dtQuestionData.Columns.Count < 5)  //col數量低於5，表示沒有讀取到任何已評分的資料，表示此人尚未被任何人評核過
+                if (dtQuestionData.Columns.Count <= 5)  //col數量低於5，表示沒有讀取到任何已評分的資料，表示此人尚未被任何人評核過
                 {
                     lbl.Text = "未評核";
                 }
@@ -655,7 +676,7 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
                     else
                     {
                         //將除了自評(1st)及核決主管評(last)以外的成績加總計算平均
-                        decimal score = 0;                        
+                        decimal score = 0;
                         for (int k = 7; k < dtQuestionData.Columns.Count - 1; k++)
                         {
                             decimal r = 0;
@@ -710,20 +731,22 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
                 finalScoreRow.Controls.Add(div);
 
                 //將除了自評(1st)及核決主管評(last)以外的成績加總計算平均
-                decimal score = 0;                
+                decimal score = 0;
+                bool assessed = false;
                 for (int j = 2; j < dtWeightedScore.Columns.Count - 1; j++)
                 {
                     decimal r = 0;
                     if (decimal.TryParse(dtWeightedScore.Rows[0][j].ToString(), out r))
                     {
                         score += r;
+                        assessed = true;
                     }
                 }
                 score /= (dtWeightedScore.Columns.Count - 3);    //包含assessed_id col、自評成績col、核決主管評成績col在內，dtWeightedScore總共固定col數量為3，其餘皆是主管評成績，須作平均計算
 
                 lbl = new Label();
                 lbl.CssClass = "form-control text-center text-color-green";
-                lbl.Text = score.ToString("0.00");
+                lbl.Text = assessed == false ? "未評核" : score.ToString("0.00");
                 div.Controls.Add(lbl);
             }
         }
@@ -1024,6 +1047,7 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
                 pivotCol + 
                 " )" +
                 " ) pvt" +
+                " where QUESTION is not null" +
                 " order by[INDEX]";
         }
         else
@@ -1110,7 +1134,8 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
                 " for ASSESSOR_ID in ( " + 
                 pivotCol +
                 " )" +
-                " ) as pvt";
+                " ) as pvt" +
+                " where ASSESSED_ID is not null";
 
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@assessYear", year);

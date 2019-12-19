@@ -19,7 +19,6 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
 
     //Setup basic info for the assessment 
     DataTable dtAssessmentQuestion = new DataTable();    
-    //List<string> assessorsWithOwnCommentSection = new List<string>();    //擁有自己獨立評語欄位的人
     protected void Page_Load(object sender, EventArgs e)
     {
         //check if session has expired
@@ -42,19 +41,19 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
 
             string assessor = Session["erp_id"].ToString().Trim();
             string assessed = "";
-            //if (!IsPostBack)
-            //{
-            //    assessed = Session["eval_id"].ToString().Trim();
-            //}
-            //else
-            //{
-            //    assessed = lblEmpID.Text.Trim();
-            //}
+            if (!IsPostBack)
+            {
+                assessed = Session["eval_id"].ToString().Trim();
+            }
+            else
+            {
+                assessed = lblEmpID.Text.Trim();
+            }
 
-            //test value
-            assessor = "0001";
-            assessed = "0006";
-
+            /////////////////test value
+            //assessor = "0001";
+            //assessed = "0006";
+            ///////////////////////////
 
             DataTable dtEval = new DataTable();
             //string evaluated = isEvaluated(assessor, assessed);
@@ -66,7 +65,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             }
             else
             {
-                bool isAssessed = Convert.ToBoolean(dtEval.Rows[0]["ASSESSMENT_DONE"].ToString());
+                bool isAssessed = Convert.ToBoolean(Convert.ToInt32(dtEval.Rows[0]["ASSESSMENT_DONE"].ToString()));
 
                 LoadForm(year, assessor, assessed, dtEval.Rows[0]["ASSESS_TYPE"].ToString(), isAssessed);
             }
@@ -338,7 +337,15 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 txt = new TextBox();
                 txt.ID = "txtAssessmentScore" + (i + 1).ToString();
                 txt.CssClass = "form-control numbers-only add-number col" + (i + 1) + "_5";
-                txt.Attributes["placeholder"] = "請打分數";
+                if (isAssessed)
+                {
+                    txt.Text = dtAssessmentQuestion.Rows[i]["SELF_SCORE"].ToString();
+                }
+                else
+                {
+                    txt.Text = "";
+                    txt.Attributes["placeholder"] = "請打分數";
+                }
                 innerDiv.Controls.Add(txt);
             }
             else if (assessType == "2")
@@ -377,7 +384,15 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 txt = new TextBox();
                 txt.ID = "txtAssessmentScore" + (i + 1).ToString();
                 txt.CssClass = "form-control numbers-only add-number col" + (i + 1) + "_5";
-                txt.Attributes["placeholder"] = "請打分數";
+                if (isAssessed)
+                {
+                    txt.Text = dtAssessmentQuestion.Rows[i]["SUPER_SCORE"].ToString();
+                }
+                else
+                {
+                    txt.Text = "";
+                    txt.Attributes["placeholder"] = "請打分數";
+                }
                 innerDiv.Controls.Add(txt);
             }
             else if (assessType == "3")
@@ -416,7 +431,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 label = new Label();
                 label.ID = "lblSuperAssessmentScore" + (i + 1).ToString();
                 label.CssClass = "form-control text-center col" + (i + 1) + "_7";
-                label.Text = dtAssessmentQuestion.Rows[i]["SELF_SCORE"].ToString() ?? "未評核";
+                label.Text = dtAssessmentQuestion.Rows[i]["SUPER_SCORE"].ToString() ?? "未評核";
                 innerDiv.Controls.Add(label);
                 //column 5 分數
                 innerDiv = new HtmlGenericControl();
@@ -427,7 +442,15 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 txt = new TextBox();
                 txt.ID = "txtAssessmentScore" + (i + 1).ToString();
                 txt.CssClass = "form-control numbers-only add-number col" + (i + 1) + "_5";
-                txt.Attributes["placeholder"] = "請打分數";
+                if(isAssessed)
+                {
+                    txt.Text = dtAssessmentQuestion.Rows[i]["FINAL_SCORE"].ToString();
+                }
+                else
+                {
+                    txt.Text = "";
+                    txt.Attributes["placeholder"] = "請打分數";
+                }
                 innerDiv.Controls.Add(txt);
             }
         }
@@ -638,7 +661,10 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
         assessorsWithOwnCommentSection = GetSpecialCommentator(year);
 
         //讀取自評評語
-        txtSelfComment.Text = LoadComment(year, assessed, assessed, assessorsWithOwnCommentSection);
+        if (!IsPostBack)
+        {
+            txtSelfComment.Text = LoadComment(year, assessed, assessed, assessorsWithOwnCommentSection);
+        }
 
         //動態增加自評以外的評語格
         if (assessType != "1") //判斷非自評
@@ -821,7 +847,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                         " ,@OVERALL_COMMENT)";
                 }
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@DATE", DateTime.Now.ToString());
+                cmd.Parameters.AddWithValue("@DATE", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@USER", Session["erp_id"].ToString().Trim());
                 cmd.Parameters.AddWithValue("@ASSESS_DATE", lblEvalDate.Text);
                 cmd.Parameters.AddWithValue("@ASSESS_YEAR", lblEvalYear.Text);
@@ -865,7 +891,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                         " ,@ASSESS_YEAR" +
                         " ,@COMMENT)";
                     cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@DATE", DateTime.Now.ToString());
+                    cmd.Parameters.AddWithValue("@DATE", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                     cmd.Parameters.AddWithValue("@USER", Session["erp_id"].ToString().Trim());
                     cmd.Parameters.AddWithValue("@ASSESS_YEAR", lblEvalYear.Text);
                     cmd.Parameters.AddWithValue("@ASSESSED_ID", lblEmpID.Text);
