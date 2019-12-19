@@ -188,6 +188,8 @@
             this.cbxFunctionList = new System.Windows.Forms.ComboBox();
             this.dsAPA_Question = new NIZING_BACKEND_Data_Config.dsAPA_Question();
             this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter = new NIZING_BACKEND_Data_Config.dsAPA_QuestionTableAdapters.HR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter();
+            this.flowLayoutPanel18 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnPersonnelAssignmentClearData = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpQuestionCategory.SuspendLayout();
@@ -243,6 +245,7 @@
             this.tableLayoutPanel13.SuspendLayout();
             this.flowLayoutPanel14.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).BeginInit();
+            this.flowLayoutPanel18.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -1254,6 +1257,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel4.Controls.Add(this.cbxPersonnelAssignmentYear);
             this.flowLayoutPanel4.Controls.Add(this.btnPersonnelAssignmentEdit);
+            this.flowLayoutPanel4.Controls.Add(this.flowLayoutPanel18);
             this.flowLayoutPanel4.Location = new System.Drawing.Point(1, 1);
             this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
@@ -2183,6 +2187,26 @@
             // 
             this.hR360_ASSESSMENTQUESTION_CATEGORY_ATableAdapter.ClearBeforeFill = true;
             // 
+            // flowLayoutPanel18
+            // 
+            this.flowLayoutPanel18.Controls.Add(this.btnPersonnelAssignmentClearData);
+            this.flowLayoutPanel18.Location = new System.Drawing.Point(208, 0);
+            this.flowLayoutPanel18.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel18.Name = "flowLayoutPanel18";
+            this.flowLayoutPanel18.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.flowLayoutPanel18.Size = new System.Drawing.Size(959, 29);
+            this.flowLayoutPanel18.TabIndex = 2;
+            // 
+            // btnPersonnelAssignmentClearData
+            // 
+            this.btnPersonnelAssignmentClearData.Location = new System.Drawing.Point(801, 3);
+            this.btnPersonnelAssignmentClearData.Name = "btnPersonnelAssignmentClearData";
+            this.btnPersonnelAssignmentClearData.Size = new System.Drawing.Size(155, 23);
+            this.btnPersonnelAssignmentClearData.TabIndex = 0;
+            this.btnPersonnelAssignmentClearData.Text = "清除評核人員配置資料";
+            this.btnPersonnelAssignmentClearData.UseVisualStyleBackColor = true;
+            this.btnPersonnelAssignmentClearData.Click += new System.EventHandler(this.btnPersonnelAssignmentClearData_Click);
+            // 
             // frmAPA_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2264,6 +2288,7 @@
             this.tableLayoutPanel13.PerformLayout();
             this.flowLayoutPanel14.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dsAPA_Question)).EndInit();
+            this.flowLayoutPanel18.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2424,5 +2449,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel17;
         private System.Windows.Forms.ComboBox cbxSetSupervisorAmountYear;
         private System.Windows.Forms.Button btnSetSupervisorAmountEdit;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel18;
+        private System.Windows.Forms.Button btnPersonnelAssignmentClearData;
     }
 }

@@ -26,7 +26,7 @@ namespace NIZING_BACKEND_Data_Config
         public DataTable dtAuthorizedFunctionTable { get; set; }
         public string CurrentForm { get; set; }
         private readonly frmLogin _frmLogin;
-        private enum FunctionMode { ADD, EDIT, DELETE, SEARCH, STATIC }
+        private enum FunctionMode { ADD, EDIT, DELETE, SEARCH, STATIC, DISABLED }
         private enum TableRowStatus { DELETED, EDITED, NEW, UNCHANGED };
         TabPage currentTabPage;
         bool isCancel = false;  //Check if an event is triggered after Cancel button is hit; deactivate cell and row validation if it's true
@@ -470,6 +470,15 @@ namespace NIZING_BACKEND_Data_Config
                                 btnSetSupervisorAmountCancel.Enabled = true;
                                 DisplaySetSupervisorAmountData(Convert.ToInt32(cbxSetSupervisorAmountYear.Text));
                                 break;
+                            case FunctionMode.DISABLED:
+                                cbxSetSupervisorAmountYear.Enabled = true;
+                                btnSetSupervisorAmountEdit.Enabled = false;
+                                gvSetSupervisorAmountInputField.ReadOnly = true;
+                                gvSetSupervisorAmountInputField.ForeColor = Color.Gray;
+                                btnSetSupervisorAmountSave.Enabled = false;
+                                btnSetSupervisorAmountCancel.Enabled = false;
+                                DisplaySetSupervisorAmountData(Convert.ToInt32(cbxSetSupervisorAmountYear.Text));
+                                break;
                         }
                     }
                     break;
@@ -477,8 +486,9 @@ namespace NIZING_BACKEND_Data_Config
                     if (isEvalDone(Convert.ToInt32(cbxPersonnelAssignmentYear.Text)))
                     {
                         btnPersonnelAssignmentEdit.Enabled = false;
+                        btnPersonnelAssignmentClearData.Enabled = false;
                         btnPersonnelAssignmentSave.Enabled = false;
-                        btnPersonnelAssignmentCancel.Enabled = false;
+                        btnPersonnelAssignmentCancel.Enabled = false;                        
                         cbxPersonnelAssignmentYear.Enabled = true;
                         gvPersonnelAssignment.ReadOnly = true;
                         gvPersonnelAssignment.ForeColor = Color.Gray;
@@ -490,6 +500,7 @@ namespace NIZING_BACKEND_Data_Config
                         {
                             case FunctionMode.STATIC:
                                 btnPersonnelAssignmentEdit.Enabled = true;
+                                btnPersonnelAssignmentClearData.Enabled = true;
                                 btnPersonnelAssignmentSave.Enabled = false;
                                 btnPersonnelAssignmentCancel.Enabled = false;
                                 cbxPersonnelAssignmentYear.Enabled = true;
@@ -499,6 +510,7 @@ namespace NIZING_BACKEND_Data_Config
                                 break;
                             case FunctionMode.EDIT:
                                 btnPersonnelAssignmentEdit.Enabled = false;
+                                btnPersonnelAssignmentClearData.Enabled = false;
                                 btnPersonnelAssignmentSave.Enabled = true;
                                 btnPersonnelAssignmentCancel.Enabled = true;
                                 cbxPersonnelAssignmentYear.Enabled = false;
@@ -1824,6 +1836,14 @@ namespace NIZING_BACKEND_Data_Config
         }
         private void cbxSetSupervisorAmountYear_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (doesAssignmentExist(cbxSetSupervisorAmountYear.SelectedItem.ToString()))
+            {
+                setSupervisorAmountTabMode = FunctionMode.DISABLED;
+            }
+            else
+            {
+                setSupervisorAmountTabMode = FunctionMode.STATIC;
+            }
             LoadControlStatus(tbpSetSupervisorAmount);
         }
 
@@ -1870,6 +1890,21 @@ namespace NIZING_BACKEND_Data_Config
             setSupervisorAmountTabMode = FunctionMode.STATIC;
             LoadControlStatus(tbpSetSupervisorAmount);
             txtSetSupervisorAmountMemo.Text = DateTime.Now.ToString() + " " + cbxSetSupervisorAmountYear.Text + "年資料更新取消" + Environment.NewLine;
+        }
+
+        private bool doesAssignmentExist(string year)
+        {
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "select case" +
+                    " when exists (select top 1 * from HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A where [YEAR] = @year) then 1" +
+                    " else 0" +
+                    " end";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@year", year);
+                return Convert.ToBoolean(Convert.ToInt16(cmd.ExecuteScalar().ToString()));
+            }
         }
         #endregion
 
@@ -2027,8 +2062,10 @@ namespace NIZING_BACKEND_Data_Config
                         " )," +
                         " assessorList as" +
                         " (" +
-                        " select*" +
-                        " from floatingAssessorList" +
+                        " select fal.年份,fal.受評者,fal.評核者,fal.評核主管數量,fal.評核類型" +
+                        " from floatingAssessorList fal" +
+                        " left join HR360_AssessmentPersonnel_Assignment_B assignB on fal.年份=assignB.assessYear and substring(fal.受評者,1,4)=assignB.assessedID" +
+                        " where 評核主管數量 < Convert(int,assignB.assessorSupervisorAmount)+Convert(int,assignB.assessorFinalizerAmount)" +
                         " union all" +
                         " select*" +
                         " from fixedAssessorList" +
@@ -2066,6 +2103,27 @@ namespace NIZING_BACKEND_Data_Config
                 gvQuestionCategory.CurrentCell = gvQuestionCategory.Rows[0].Cells[0];
             }
         }
+
+        private void btnPersonnelAssignmentClearData_Click(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show("確定要刪除" + cbxPersonnelAssignmentYear.SelectedItem + "年的評核人員分配資料嗎?", "刪除確認", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                {
+                    conn.Open();
+                    string query = "delete from HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A" +
+                        " where [YEAR] = @year";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@year", cbxPersonnelAssignmentYear.SelectedItem);
+                    cmd.ExecuteNonQuery();
+                }
+                txtPersonnelAssignmentTabMemo.Text += DateTime.Now.ToString() + " " + cbxPersonnelAssignmentYear.SelectedItem + "年的評核人員分配資料已刪除" + Environment.NewLine;
+            }
+            personnelAssignmentTabMode = FunctionMode.STATIC;
+            LoadControlStatus(currentTabPage);
+        }
+
         private void btnPersonnelAssignmentCancel_Click(object sender, EventArgs e)
         {
             isCancel = true;
@@ -2945,6 +3003,5 @@ namespace NIZING_BACKEND_Data_Config
 
 
         #endregion
-
     }
 }
