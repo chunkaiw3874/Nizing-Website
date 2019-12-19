@@ -42,9 +42,9 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
                 //assessed = Session["view_id"].ToString().Trim();
                 //year = Session["view_year"].ToString().Trim();
                 //test 
-                assessed = "0013";
-                year = "2018";
-                Session["erp_id"] = "0007";
+                assessed = "0080";
+                year = "2019";
+                Session["erp_id"] = "0067";
             }
         }
         else
@@ -630,32 +630,6 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
                 lbl = new Label();
                 lbl.ID = "lblAssessmentScore" + (i + 1).ToString() + (j + 1).ToString();
                 lbl.CssClass = "form-control text-center col" + (i + 1) + "_" + (5 + j).ToString();
-                //DataTable dtScoreRecord = new DataTable();
-                ////讀取分數
-                //using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-                //{
-                //    conn.Open();
-                //    query = "SELECT SCORE"
-                //        + " FROM HR360_ASSESSMENTSCORE_SCORE_A"
-                //        + " WHERE ASSESSOR_ID=@ASSESSOR_ID"
-                //        + " AND ASSESS_YEAR=@ASSESS_YEAR"
-                //        + " AND ASSESSED_ID=@ASSESSED_ID"
-                //        + " ORDER BY [INDEX]";
-                //    SqlCommand cmd = new SqlCommand(query, conn);
-                //    cmd.Parameters.AddWithValue("@ASSESSOR_ID", dtAssessorList.Rows[i]["ASSESSOR_ID"].ToString());
-                //    cmd.Parameters.AddWithValue("@ASSESS_YEAR", year);
-                //    cmd.Parameters.AddWithValue("@ASSESSED_ID", assessed);
-                //    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                //    da.Fill(dtScoreRecord);
-                //}
-                //if (dtScoreRecord.Rows.Count == 0)
-                //{
-                //    lbl.Text = "未評核";
-                //}
-                //else
-                //{
-                //    lbl.Text = dtScoreRecord.Rows[questionRowCount]["SCORE"].ToString();
-                //}
 
                 if (dtQuestionData.Columns.Count < 5)  //col數量低於5，表示沒有讀取到任何已評分的資料，表示此人尚未被任何人評核過
                 {

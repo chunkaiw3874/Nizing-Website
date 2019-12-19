@@ -52,10 +52,9 @@
                 <li>
                     <asp:ImageButton ID="ImageButton11" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/M-1.png" PostBackUrl="~/nizing_intranet/M01.aspx" /></li>
                 <li>
-                    <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/PC-3.png" PostBackUrl="~/nizing_intranet/ProductionEfficiencyReport.aspx" /></li>
+                    <asp:ImageButton ID="ImageButton2" runat="server" Width="150px" ImageUrl="~/nizing_intranet/image/button/dept/M-2.png" PostBackUrl="~/nizing_intranet/ProductionEfficiencyReport.aspx" /></li>
                 <li>
-                    <a href="/nizing_intranet/M02.aspx">人員生產入庫明細表</a>
-                </li>
+                    <asp:ImageButton ID="ImageButton18" runat="server" Width="150px" ImageUrl="~/nizing_intranet/image/button/dept/M-3.png" PostBackUrl="~/nizing_intranet/M02.aspx" /></li>
             </ul>
         </div>
     </div>
@@ -128,7 +127,8 @@
                     <asp:ImageButton ID="ImageButton13" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/HR-4.png" PostBackUrl="~/nizing_intranet/WorkDuration.aspx" /></li>
                 <li>
                     <asp:ImageButton ID="ImageButton7" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/HR-5.png" PostBackUrl="~/nizing_intranet/HR05.aspx" /></li>
-                <li><a href="nizing_intranet/HR09.aspx">部門人力配置表</a></li>
+                <li>
+                    <asp:ImageButton ID="ImageButton19" runat="server" Width="150px" ImageUrl="~/nizing_intranet/image/button/dept/HR-8.png" PostBackUrl="~/nizing_intranet/HR09.aspx" /></li>
                 <li><a href="nizing_intranet/HR04.aspx">面試表</a></li>
                 <li><a href="nizing_intranet/HR06.aspx">考核成績表</a></li>
                 <li><a href="nizing_intranet/HR07.aspx">Annual Report</a></li>

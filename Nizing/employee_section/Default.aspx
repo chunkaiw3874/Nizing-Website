@@ -44,7 +44,7 @@
                 <li><%--<asp:ImageButton ID="ImageButton11" runat="server" ImageUrl="~/employee_section/report/image/button/dept/M-1.png" PostBackUrl="~/employee_section/report/M01.aspx" />--%></li>
                 <li><%--<asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/employee_section/report/image/button/dept/PC-3.png" PostBackUrl="~/employee_section/report/ProductionEfficiencyReport.aspx" />--%></li>
                 <li>
-                    <a href="/employee_section/report/M02.aspx">人員生產入庫明細</a>
+                    <asp:ImageButton ID="ImageButton18" runat="server" Width="150px" ImageUrl="~/employee_section/report/image/button/dept/M-3.png" PostBackUrl="~/employee_section/report/M02.aspx" />
                 </li>
             </ul>
         </div>
@@ -111,7 +111,8 @@
                     <asp:ImageButton ID="ImageButton13" runat="server" ImageUrl="~/employee_section/report/image/button/dept/HR-4.png" PostBackUrl="~/employee_section/report/WorkDuration.aspx" /></li>
                 <li>
                     <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/employee_section/report/image/button/dept/HR-5.png" PostBackUrl="~/employee_section/report/HR05.aspx" /></li>
-                <li><a href="/employee_section/report/HR09.aspx">部門人力配置表</a></li>
+                <li>
+                    <asp:ImageButton ID="ImageButton3" runat="server" Width="150px" ImageUrl="~/employee_section/report/image/button/dept/HR-8.png" PostBackUrl="~/employee_section/report/HR09.aspx" /></li>
                 <li><a href="/employee_section/report/HR04.aspx">面試表</a></li>
                 <li><a href="/employee_section/report/HR06.aspx">考核成績表</a></li>
                 <li><a href="/employee_section/report/HR07.aspx">Annual Report</a></li>
