@@ -710,25 +710,24 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
 
         for (int i = 0; i < colCount; i++)
         {
-            if (i == 0 || i == colCount - 1)
+            div = new HtmlGenericControl();
+            div.TagName = "div";
+            div.ID = "finalScoreRow_" + i.ToString();
+            div.Attributes["class"] = "border col-xs-2";
+            finalScoreRow.Controls.Add(div);
+            lbl = new Label();
+            lbl.CssClass = "form-control text-center text-color-green";
+
+            if (i == 0)
             {
-                div = new HtmlGenericControl();
-                div.TagName = "div";
-                div.ID = "finalScoreRow_" + i.ToString();
-                div.Attributes["class"] = "border col-xs-2";
-                finalScoreRow.Controls.Add(div);
-                lbl = new Label();
-                lbl.CssClass = "form-control text-center text-color-green";
                 lbl.Text = dtWeightedScore.Rows[0][i + 1].ToString();
-                div.Controls.Add(lbl);
+            }
+            else if ( i == colCount - 1)
+            {
+                lbl.Text = dtWeightedScore.Rows[0][dtWeightedScore.Columns.Count - 1].ToString();
             }
             else
             {
-                div = new HtmlGenericControl();
-                div.TagName = "div";
-                div.ID = "finalScoreRow_" + i.ToString();
-                div.Attributes["class"] = "border col-xs-2";
-                finalScoreRow.Controls.Add(div);
 
                 //將除了自評(1st)及核決主管評(last)以外的成績加總計算平均
                 decimal score = 0;
@@ -744,11 +743,12 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
                 }
                 score /= (dtWeightedScore.Columns.Count - 3);    //包含assessed_id col、自評成績col、核決主管評成績col在內，dtWeightedScore總共固定col數量為3，其餘皆是主管評成績，須作平均計算
 
-                lbl = new Label();
-                lbl.CssClass = "form-control text-center text-color-green";
+
                 lbl.Text = assessed == false ? "未評核" : score.ToString("0.00");
-                div.Controls.Add(lbl);
+                
             }
+
+            div.Controls.Add(lbl);
         }
     }
 
@@ -1207,12 +1207,14 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
                 " from HR360_ASSESSMENTSCORE_ASSESSED_A" +
                 " where ASSESS_YEAR = @assessYear" +
                 " and ASSESSED_ID = @assessed" +
+                " and OVERALL_COMMENT is not null" +
                 " union" +
                 " select ASSESSOR_ID" +
                 " ,COMMENT" +
                 " from HR360_ASSESSMENTSCORE_ASSESSED_B" +
                 " WHERE ASSESS_YEAR = @assessYear" +
                 " and ASSESSED_ID = @assessed" +
+                " and COMMENT is not null" +
                 " )" +
                 " select LTRIM(RTRIM(mv.MV001)) 'ASSESSOR_ID'" +
                 " ,mv.MV002 'ASSESSOR_NAME'" +

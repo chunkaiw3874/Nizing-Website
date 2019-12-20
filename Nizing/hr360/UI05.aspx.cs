@@ -40,8 +40,8 @@ public partial class hr360_UI05 : System.Web.UI.Page
             divPlaceholder.Visible = false;
 
             ////////test area
-            Session["user_id"] = "0080";    //test only to avoid error on loading, delete after trial            
-            Session["erp_id"] = "0080";
+            Session["user_id"] = "0007";    //test only to avoid error on loading, delete after trial            
+            Session["erp_id"] = "0007";
             year = "2019";
             evalStart = new DateTime(2019, 12, 1, 19, 0, 0);
             evalEnd = new DateTime(2020, 1, 1, 19, 0, 0); ;
@@ -296,7 +296,7 @@ public partial class hr360_UI05 : System.Web.UI.Page
                                         + " ORDER BY ASSESSED_ID", conn);
                     cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
                     cmd.Parameters.AddWithValue("@YEAR", year);
-                    cmd.Parameters.AddWithValue("@TYPE", 9);
+                    cmd.Parameters.AddWithValue("@TYPE", 3);
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
                         dtEvalFinalizer.Load(dr);

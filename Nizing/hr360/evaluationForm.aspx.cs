@@ -896,6 +896,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("@ASSESS_YEAR", lblEvalYear.Text);
                     cmd.Parameters.AddWithValue("@ASSESSED_ID", lblEmpID.Text);
                     cmd.Parameters.AddWithValue("@COMMENT", ((TextBox)comment.FindControl("txtCommentRow_Comment")).Text.Trim());
+                    cmd.ExecuteNonQuery();
                 }
 
                 //寫入 評核細項
@@ -1143,7 +1144,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                     ",QUESTION_CATEGORY_NAME" +
                     ",QUESTION_CATEGORY_WEIGHT" +
                     ",QUESTION" +
-                    ",SCORE 'SELF_SCORE'"
+                    ",CONVERT(DECIMAL(3,1),SCORE) 'SELF_SCORE'"
                     + " FROM HR360_ASSESSMENTSCORE_SCORE_A"
                     + " WHERE ASSESSOR_ID=@ASSESSOR_ID"
                     + " AND ASSESSED_ID=@ASSESSED_ID"
@@ -1166,8 +1167,8 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                     + " ,[SELF].QUESTION_CATEGORY_NAME"
                     + " ,[SELF].QUESTION_CATEGORY_WEIGHT"
                     + " ,[SELF].QUESTION"
-                    + " ,[SELF].SCORE 'SELF_SCORE'"
-                    + " ,SUPER.SCORE 'SUPER_SCORE'"
+                    + " ,CONVERT(DECIMAL(3,1), [SELF].SCORE) 'SELF_SCORE'"
+                    + " ,CONVERT(DECIMAL(3,1), SUPER.SCORE) 'SUPER_SCORE'"
                     + " FROM HR360_ASSESSMENTSCORE_SCORE_A [SELF]"
                     + " LEFT JOIN SUPER_TABLE SUPER ON SUPER.[INDEX]=[SELF].[INDEX]"
                     + " WHERE [SELF].ASSESSOR_ID=@ASSESSED_ID"
@@ -1188,7 +1189,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                     + " ,SUPER_TABLE"
                     + " AS"
                     + " ("
-                    + " SELECT A.[INDEX],AVG(CONVERT(DECIMAL,A.SCORE)) SCORE"
+                    + " SELECT A.[INDEX],AVG(CONVERT(DECIMAL(3,1),A.SCORE)) SCORE"
                     + " FROM HR360_ASSESSMENTSCORE_SCORE_A A"
                     + " LEFT JOIN ASSESS_TABLE ASSESS ON ASSESS.ASSESS_TYPE='2'"
                     + " WHERE A.ASSESSOR_ID=ASSESS.ASSESSOR_ID"
@@ -1255,7 +1256,10 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             }
             else if (assessType == "2") //load questions saved from 自評
             {
-                query = "SELECT [INDEX],QUESTION_CATEGORY_ID,QUESTION_CATEGORY_NAME,QUESTION_CATEGORY_WEIGHT,QUESTION,SCORE 'SELF_SCORE'"
+                query = "SELECT [INDEX],QUESTION_CATEGORY_ID" +
+                    " ,QUESTION_CATEGORY_NAME" +
+                    " ,QUESTION_CATEGORY_WEIGHT" +
+                    " ,QUESTION,CONVERT(DECIMAL(3,1),SCORE) 'SELF_SCORE'"
                         + " FROM HR360_ASSESSMENTSCORE_SCORE_A"
                         + " WHERE ASSESSOR_ID=@ASSESSED_ID"
                         + " AND ASSESSED_ID=@ASSESSED_ID"
@@ -1264,28 +1268,38 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             }
             else if (assessType == "3")
             {
-                query = ";WITH SUPER_TABLE"
-                                + " AS"
-                                + " ("
-                                + " SELECT [INDEX],SCORE"
-                                + " FROM HR360_ASSESSMENTSCORE_SCORE_A"
-                                + " WHERE ASSESSOR_ID=@ASSESSOR_ID"
-                                + " AND ASSESSED_ID=@ASSESSED_ID"
-                                + " AND ASSESS_YEAR=@ASSESS_YEAR"
-                                + " )"
-                                + " SELECT [SELF].[INDEX]"
-                                + " ,[SELF].QUESTION_CATEGORY_ID"
-                                + " ,[SELF].QUESTION_CATEGORY_NAME"
-                                + " ,[SELF].QUESTION_CATEGORY_WEIGHT"
-                                + " ,[SELF].QUESTION"
-                                + " ,[SELF].SCORE 'SELF_SCORE'"
-                                + " ,SUPER.SCORE 'SUPER_SCORE'"
-                                + " FROM HR360_ASSESSMENTSCORE_SCORE_A [SELF]"
-                                + " LEFT JOIN SUPER_TABLE SUPER ON SUPER.[INDEX]=[SELF].[INDEX]"
-                                + " WHERE [SELF].ASSESSOR_ID=@ASSESSED_ID"
-                                + " AND [SELF].ASSESSED_ID=@ASSESSED_ID"
-                                + " AND [SELF].ASSESS_YEAR=@ASSESS_YEAR"
-                                + " ORDER BY [INDEX]";
+                query = ";WITH ASSESS_TABLE"
+                    + " AS"
+                    + " ("
+                    + " SELECT ASSESSOR_ID,ASSESS_TYPE"
+                    + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+                    + " WHERE [YEAR]=@ASSESS_YEAR"
+                    + " AND ASSESSED_ID=@ASSESSED_ID"
+                    + " )"
+                    + " ,SUPER_TABLE"
+                    + " AS"
+                    + " ("
+                    + " SELECT A.[INDEX],AVG(CONVERT(DECIMAL(3,1),A.SCORE)) SCORE"
+                    + " FROM HR360_ASSESSMENTSCORE_SCORE_A A"
+                    + " LEFT JOIN ASSESS_TABLE ASSESS ON ASSESS.ASSESS_TYPE='2'"
+                    + " WHERE A.ASSESSOR_ID=ASSESS.ASSESSOR_ID"
+                    + " AND A.ASSESSED_ID=@ASSESSED_ID"
+                    + " AND A.ASSESS_YEAR=@ASSESS_YEAR"
+                    + " GROUP BY A.[INDEX]"
+                    + " )"
+                    + " SELECT [SELF].[INDEX]"
+                    + " ,[SELF].QUESTION_CATEGORY_ID"
+                    + " ,[SELF].QUESTION_CATEGORY_NAME"
+                    + " ,[SELF].QUESTION_CATEGORY_WEIGHT"
+                    + " ,[SELF].QUESTION"
+                    + " ,CONVERT(DECIMAL(3,1),[SELF].SCORE) 'SELF_SCORE'"
+                    + " ,CONVERT(DECIMAL(3,1),SUPER.SCORE) 'SUPER_SCORE'"
+                    + " FROM HR360_ASSESSMENTSCORE_SCORE_A [SELF]"
+                    + " LEFT JOIN SUPER_TABLE SUPER ON SUPER.[INDEX]=[SELF].[INDEX]"
+                    + " WHERE [SELF].ASSESSOR_ID=@ASSESSED_ID"
+                    + " AND [SELF].ASSESSED_ID=@ASSESSED_ID"
+                    + " AND [SELF].ASSESS_YEAR=@ASSESS_YEAR"
+                    + " ORDER BY [INDEX]";
             }
         }
 
