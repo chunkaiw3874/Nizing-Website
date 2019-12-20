@@ -190,11 +190,11 @@ namespace NIZING_BACKEND_Data_Config
             #endregion
 
             #region 最終成績計算 Universal Variable
-            for (int i = DateTime.Today.Year - 1; i >= 2016; i--)
+            for (int i = DateTime.Today.Year; i >= 2016; i--)
             {
                 cbxFinalScoreYear.Items.Add(i);
             }
-            cbxFinalScoreYear.SelectedIndex = 0;
+            cbxFinalScoreYear.SelectedIndex = 1;
             cbxFinalScoreYear.Enabled = false;
             btnFinalScoreCalculate.Enabled = false;
             txtFinalScoreMemo.Enabled = false;
@@ -2884,36 +2884,45 @@ namespace NIZING_BACKEND_Data_Config
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
-                string query = "SELECT A.[YEAR] [年度]"
-+ " ,A.ASSESSED_ID [受評者ID]"
-+ " ,B.WEIGHTED_SCORE [主管評分數]"
-+ " ,COALESCE(C.WEIGHTED_SCORE,null) [特評分數]"
-+ " ,SCORE.ATTENDANCE_SCORE [出勤成績]"
-+ " ,COALESCE(SCORE.RNP_SCORE,null) [獎懲成績]"
-+ " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
-+ " LEFT JOIN NZ.dbo.CMSMV MV ON A.ASSESSED_ID=MV.MV001"
-+ " LEFT JOIN HR360_ASSESSMENTSCORE_ASSESSED_A SCORE ON A.ASSESSOR_ID=SCORE.ASSESSOR_ID AND A.ASSESSED_ID=SCORE.ASSESSED_ID AND A.[YEAR]=SCORE.ASSESS_YEAR"
-+ " LEFT JOIN"
-+ " ("
-+ " SELECT A.ASSESSED_ID,A.ASSESSOR_ID,MV.MV002,SCORE.WEIGHTED_SCORE"
-+ " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
-+ " LEFT JOIN NZ.dbo.CMSMV MV ON A.ASSESSOR_ID=MV.MV001"
-+ " LEFT JOIN HR360_ASSESSMENTSCORE_ASSESSED_A SCORE ON A.ASSESSOR_ID=SCORE.ASSESSOR_ID AND A.ASSESSED_ID=SCORE.ASSESSED_ID AND A.[YEAR]=SCORE.ASSESS_YEAR"
-+ " WHERE A.ACTIVE='1' AND A.ASSESS_TYPE='2'"
-+ " AND A.[YEAR]=@YEAR"
-+ " ) B ON A.ASSESSOR_ID=B.ASSESSED_ID"
-+ " LEFT JOIN"
-+ " ("
-+ " SELECT A.ASSESSED_ID,A.ASSESSOR_ID,MV.MV002,SCORE.WEIGHTED_SCORE"
-+ " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
-+ " LEFT JOIN NZ.dbo.CMSMV MV ON A.ASSESSOR_ID=MV.MV001"
-+ " LEFT JOIN HR360_ASSESSMENTSCORE_ASSESSED_A SCORE ON A.ASSESSOR_ID=SCORE.ASSESSOR_ID AND A.ASSESSED_ID=SCORE.ASSESSED_ID AND A.[YEAR]=SCORE.ASSESS_YEAR"
-+ " WHERE A.ACTIVE='1' AND A.ASSESS_TYPE='9'"
-+ " AND A.[YEAR]=@YEAR"
-+ " ) C ON A.ASSESSOR_ID=C.ASSESSED_ID"
-+ " WHERE A.ACTIVE='1'"
-+ " AND A.ASSESS_TYPE='1'"
-+ " AND A.[YEAR]=@YEAR";
+                string query = "SELECT A.[YEAR] [年度]" +
+                    " ,A.ASSESSED_ID[受評者ID]" +
+                    " ,B.WEIGHTED_SCORE[自評分數]" +
+                    " ,C.WEIGHTED_SCORE[主管評分數]" +
+                    " ,D.WEIGHTED_SCORE[核決主管評分數]" +
+                    " ,SCORE.ATTENDANCE_SCORE[出勤成績]" +
+                    " ,COALESCE(SCORE.RNP_SCORE, null)[獎懲成績]" +
+                    " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A" +
+                    " LEFT JOIN NZ.dbo.CMSMV MV ON A.ASSESSED_ID = MV.MV001" +
+                    " LEFT JOIN HR360_ASSESSMENTSCORE_ASSESSED_A SCORE ON A.ASSESSOR_ID = SCORE.ASSESSOR_ID AND A.ASSESSED_ID = SCORE.ASSESSED_ID AND A.[YEAR]=SCORE.ASSESS_YEAR" +
+                    " LEFT JOIN" +
+                    " (" +
+                    " SELECT A.ASSESSED_ID, AVG(CONVERT(DECIMAL(5,2),SCORE.WEIGHTED_SCORE)) 'WEIGHTED_SCORE'" +
+                    " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A" +
+                    " LEFT JOIN HR360_ASSESSMENTSCORE_ASSESSED_A SCORE ON A.ASSESSOR_ID=SCORE.ASSESSOR_ID AND A.ASSESSED_ID=SCORE.ASSESSED_ID AND A.[YEAR]=SCORE.ASSESS_YEAR" +
+                    " WHERE A.ACTIVE='1' AND A.ASSESS_TYPE='1'" +
+                    " AND A.[YEAR]= @YEAR" +
+                    " GROUP BY A.ASSESSED_ID" +
+                    " ) B ON A.ASSESSOR_ID=B.ASSESSED_ID" +
+                    " LEFT JOIN" +
+                    " (" +
+                    " SELECT A.ASSESSED_ID, AVG(CONVERT(DECIMAL(5,2),SCORE.WEIGHTED_SCORE)) 'WEIGHTED_SCORE'" +
+                    " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A" +
+                    " LEFT JOIN HR360_ASSESSMENTSCORE_ASSESSED_A SCORE ON A.ASSESSOR_ID=SCORE.ASSESSOR_ID AND A.ASSESSED_ID=SCORE.ASSESSED_ID AND A.[YEAR]=SCORE.ASSESS_YEAR" +
+                    " WHERE A.ACTIVE='1' AND A.ASSESS_TYPE='2'" +
+                    " AND A.[YEAR]= @YEAR" +
+                    " GROUP BY A.ASSESSED_ID" +
+                    " ) C ON A.ASSESSOR_ID=C.ASSESSED_ID" +
+                    " LEFT JOIN" +
+                    " (" +
+                    " SELECT A.ASSESSED_ID, SCORE.WEIGHTED_SCORE" +
+                    " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A" +
+                    " LEFT JOIN HR360_ASSESSMENTSCORE_ASSESSED_A SCORE ON A.ASSESSOR_ID= SCORE.ASSESSOR_ID AND A.ASSESSED_ID= SCORE.ASSESSED_ID AND A.[YEAR]= SCORE.ASSESS_YEAR" +
+                    " WHERE A.ACTIVE= '1' AND A.ASSESS_TYPE= '3'" +
+                    " AND A.[YEAR]= @YEAR" +
+                    " ) D ON A.ASSESSOR_ID=D.ASSESSED_ID" +
+                    " WHERE A.ACTIVE='1'" +
+                    " AND A.ASSESS_TYPE='1'" +
+                    " AND A.[YEAR]= @YEAR";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@YEAR", cbxFinalScoreYear.SelectedItem.ToString());
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -2924,17 +2933,47 @@ namespace NIZING_BACKEND_Data_Config
         }
         protected void CalculateFinalScore(DataTable dt)
         {
+            DataTable dtScoreWeight = new DataTable();
+            dtScoreWeight = GetScoreWeight(cbxFinalScoreYear.SelectedItem.ToString());
+
             try
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     string year = dt.Rows[i]["年度"].ToString();
                     string id = dt.Rows[i]["受評者ID"].ToString();
-                    double attendanceScore = 0;
+                    double attendanceScore = 0;                    
                     double rnpScore = 0;
-                    double evalScore = 0;
+                    double selfEvalScore = 0;
+                    double superEvalScore = 0;
+                    double finalEvalScore = 0;
                     double finalScore = 0;
                     string finalGrade = "";
+                    double selfEvalWeight = Convert.ToDouble(dtScoreWeight.Rows[0]["selfEvaluationWeight"].ToString());
+                    double superEvalWeight = Convert.ToDouble(dtScoreWeight.Rows[0]["supervisorEvaluationWeight"].ToString());
+                    if (isSupervisorAssigned(year, id))
+                    {
+                        double finalEvalWeight = Convert.ToDouble(dtScoreWeight.Rows[0]["finalizerEvaluationWeight"].ToString());
+                    }
+                    else
+                    {
+                        double finalEvalWeight = Convert.ToDouble(dtScoreWeight.Rows[0]["finalizerEvaluationWeight"].ToString()) + superEvalWeight;
+                    }                    
+
+                    double evalScore = 0;
+
+                    if (!double.TryParse(dt.Rows[i]["自評分數"].ToString(), out selfEvalScore))
+                    {
+                        selfEvalScore = 0;
+                    }
+                    if (!double.TryParse(dt.Rows[i]["主管評分數"].ToString(), out superEvalScore))
+                    {
+                        superEvalScore = 0;
+                    }
+                    if (!double.TryParse(dt.Rows[i]["核決主管評分數"].ToString(), out finalEvalScore))
+                    {
+                        finalEvalScore = 0;
+                    }                    
                     if (!double.TryParse(dt.Rows[i]["出勤成績"].ToString(), out attendanceScore))
                     {
                         attendanceScore = 0;
@@ -2943,11 +2982,12 @@ namespace NIZING_BACKEND_Data_Config
                     {
                         rnpScore = 0;
                     }
-                    if (!double.TryParse(dt.Rows[i]["特評分數"].ToString(), out evalScore))
-                    {
-                        evalScore = Convert.ToDouble(dt.Rows[i]["主管評分數"]);
-                    }
-                    finalScore = evalScore * 10 * 0.8 + attendanceScore * 0.2 + rnpScore;
+                    //if (!double.TryParse(dt.Rows[i]["特評分數"].ToString(), out evalScore))
+                    //{
+                    //    evalScore = Convert.ToDouble(dt.Rows[i]["主管評分數"]);
+                    //}
+                    evalScore = (selfEvalScore * selfEvalWeight / 10) + (superEvalScore * superEvalWeight / 10) + (finalEvalScore * finalEvalWeight / 10);
+                    finalScore = evalScore * 0.8 + attendanceScore * 0.2 + rnpScore;
 
                     if (finalScore >= 90)
                     {
@@ -2983,8 +3023,8 @@ namespace NIZING_BACKEND_Data_Config
                         cmd.Parameters.AddWithValue("@AssessYear", year);
                         cmd.Parameters.AddWithValue("@EmpID", id);
                         cmd.Parameters.AddWithValue("@EvaluationScore", evalScore);
-                        cmd.Parameters.AddWithValue("@AttendanceScore", dt.Rows[i]["出勤成績"]);
-                        cmd.Parameters.AddWithValue("@RewardAndPenaltyScore", dt.Rows[i]["獎懲成績"]);
+                        cmd.Parameters.AddWithValue("@AttendanceScore", attendanceScore);
+                        cmd.Parameters.AddWithValue("@RewardAndPenaltyScore", rnpScore);
                         cmd.Parameters.AddWithValue("@FinalScore", finalScore);
                         cmd.Parameters.AddWithValue("@FinalScoreGrade", finalGrade);
                         cmd.ExecuteNonQuery();
@@ -3001,7 +3041,42 @@ namespace NIZING_BACKEND_Data_Config
             LoadControlStatus(tbpFinalScoreCalculation);
         }
 
+        private DataTable GetScoreWeight(string year)
+        {
+            DataTable dt = new DataTable();
 
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "SELECT selfEvaluationWeight" +
+                    " ,supervisorEvaluationWeight" +
+                    " ,finalizerEvaluationWeight" +
+                    " FROM HR360_AssessmentPersonnel_ScoreWeight" +
+                    " WHERE assessYear = @year";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@year", year);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+
+            return dt;
+        }
+
+        private bool isSupervisorAssigned(string year, string assessedId)
+        {
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "select assessorSupervisorAmount" +
+                    " from HR360_AssessmentPersonnel_Assignment_B" +
+                    " where assessYear = @year" +
+                    " and assessedID = @assessedId";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@year", year);
+                cmd.Parameters.AddWithValue("@assessedId", assessedId);
+                return cmd.ExecuteScalar() != null && Convert.ToInt32(cmd.ExecuteScalar()) > 0 ? true : false;
+            }
+        }
         #endregion
     }
 }
