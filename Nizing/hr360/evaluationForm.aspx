@@ -154,9 +154,9 @@
                     考核項目
                 </div>
             </div>
-            <div class="row" id="Question_Title" runat="server">
+            <div class="row" id="divQuestionTitleRow" runat="server">
             </div>
-            <div id="Load_Question" runat="server">
+            <div id="divQuestionBodyRow" runat="server">
             </div>
             <div class="row">
                 <div class="col-xs-12 subtitle border">

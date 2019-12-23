@@ -637,6 +637,7 @@ namespace NIZING_BACKEND_Data_Config
                     {
                         cbxFinalScoreYear.Enabled = true;
                         btnFinalScoreCalculate.Enabled = false;
+                        btnFinalScoreAssessmentDone.Enabled = false;
                     }
                     else
                     {
@@ -661,6 +662,7 @@ namespace NIZING_BACKEND_Data_Config
                                 }
                             }
                         }
+                        btnFinalScoreAssessmentDone.Enabled = true;
                     }
                     break;
             }
@@ -1707,31 +1709,40 @@ namespace NIZING_BACKEND_Data_Config
         private void DisplayScoreWeightData(int year)
         {
             DataTable dt = new DataTable();
-            dt = LoadScoreWeightData(year);
+            dt = GetScoreWeight(year);
 
-            if (dt.Rows.Count > 0)
+            foreach (DataRow row in dt.Rows)
             {
-                txtSetScoreWeightSelfWeight.Text = String.IsNullOrWhiteSpace(dt.Rows[0]["selfEvaluationWeight"].ToString()) ? "" : dt.Rows[0]["selfEvaluationWeight"].ToString();
-                txtSetScoreWeightSupervisorWeight.Text = String.IsNullOrWhiteSpace(dt.Rows[0]["supervisorEvaluationWeight"].ToString()) ? "" : dt.Rows[0]["supervisorEvaluationWeight"].ToString();
-                txtSetScoreWeightFinalizerWeight.Text = String.IsNullOrWhiteSpace(dt.Rows[0]["finalizerEvaluationWeight"].ToString()) ? "" : dt.Rows[0]["finalizerEvaluationWeight"].ToString();
+                if (row["assessType"].ToString() == "1")
+                {
+                    txtSetScoreWeightSelfWeight.Text = String.IsNullOrWhiteSpace(row["scoreWeight"].ToString()) ? "" : row["scoreWeight"].ToString();
+                }
+                else if (row["assessType"].ToString() == "2")
+                {
+                    txtSetScoreWeightSupervisorWeight.Text = String.IsNullOrWhiteSpace(row["scoreWeight"].ToString()) ? "" : row["scoreWeight"].ToString();
+                }
+                else if (row["assessType"].ToString() == "3")
+                {
+                    txtSetScoreWeightFinalizerWeight.Text = String.IsNullOrWhiteSpace(row["scoreWeight"].ToString()) ? "" : row["scoreWeight"].ToString();
+                }
             }
         }
-        private DataTable LoadScoreWeightData(int year)
-        {
-            DataTable dt = new DataTable();
-            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-            {
-                conn.Open();
-                string query = "Select selfEvaluationWeight, supervisorEvaluationWeight, finalizerEvaluationWeight"
-                    + " From HR360_AssessmentPersonnel_ScoreWeight"
-                    + " Where assessYear = @Year";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Year", year);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-            }
-            return dt;
-        }
+        //private DataTable LoadScoreWeightData(int year)
+        //{
+        //    DataTable dt = new DataTable();
+        //    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        //    {
+        //        conn.Open();
+        //        string query = "Select selfEvaluationWeight, supervisorEvaluationWeight, finalizerEvaluationWeight"
+        //            + " From HR360_AssessmentPersonnel_ScoreWeight"
+        //            + " Where assessYear = @Year";
+        //        SqlCommand cmd = new SqlCommand(query, conn);
+        //        cmd.Parameters.AddWithValue("@Year", year);
+        //        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        //        da.Fill(dt);
+        //    }
+        //    return dt;
+        //}
         private void btnSetScoreWeightEdit_Click(object sender, EventArgs e)
         {
             setScoreWeightTabMode = FunctionMode.EDIT;
@@ -1759,28 +1770,40 @@ namespace NIZING_BACKEND_Data_Config
             }
             else
             {
-                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                for (int i = 1; i <= 3; i++)    //評核UID 1-3 自評、主管評、評核主管評
                 {
-                    conn.Open();
+                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                    {
+                        conn.Open();
 
-                    string query = "update HR360_AssessmentPersonnel_ScoreWeight" +
-                        " set modifiedDate=@date" +
-                        " ,modifier=@user" +
-                        " ,selfEvaluationWeight=@selfEvaluationWeight" +
-                        " ,supervisorEvaluationWeight=@supervisorEvaluationWeight" +
-                        " ,finalizerEvaluationWeight=@finalizerEvaluationWeight" +
-                        " where assessYear=@assessYear" +
-                        " if @@ROWCOUNT=0" +
-                        " insert into HR360_AssessmentPersonnel_ScoreWeight" +
-                        " values (@date,@user,@date,@user,@assessYear,@selfEvaluationWeight,@supervisorEvaluationWeight,@finalizerEvaluationWeight)";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@date", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@user", UserName);
-                    cmd.Parameters.AddWithValue("@assessYear", cbxSetScoreWeightYear.Text);
-                    cmd.Parameters.AddWithValue("@selfEvaluationWeight", txtSetScoreWeightSelfWeight.Text.Trim());
-                    cmd.Parameters.AddWithValue("@supervisorEvaluationWeight", txtSetScoreWeightSupervisorWeight.Text.Trim());
-                    cmd.Parameters.AddWithValue("@finalizerEvaluationWeight", txtSetScoreWeightFinalizerWeight.Text.Trim());
-                    cmd.ExecuteNonQuery();
+                        string query = "update HR360_AssessmentCategory_CategoryWeight" +
+                            " set modifiedDate=@date" +
+                            " ,modifier=@user" +
+                            " ,scoreWeight=@scoreWeight" +
+                            " where assessYear=@assessYear" +
+                            " and assessType=@assessType" +
+                            " if @@ROWCOUNT=0" +
+                            " insert into HR360_AssessmentCategory_CategoryWeight" +
+                            " values (@date,@user,@date,@user,@assessYear,@assessType,@scoreWeight)";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@date", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@user", UserName);
+                        cmd.Parameters.AddWithValue("@assessYear", cbxSetScoreWeightYear.Text);
+                        cmd.Parameters.AddWithValue("@assessType", i.ToString());
+                        if (i == 1)
+                        {
+                            cmd.Parameters.AddWithValue("@scoreWeight", txtSetScoreWeightSelfWeight.Text.Trim());
+                        }
+                        else if (i == 2)
+                        {
+                            cmd.Parameters.AddWithValue("@scoreWeight", txtSetScoreWeightSupervisorWeight.Text.Trim());
+                        }
+                        else if (i == 3)
+                        {
+                            cmd.Parameters.AddWithValue("@scoreWeight", txtSetScoreWeightFinalizerWeight.Text.Trim());
+                        }
+                        cmd.ExecuteNonQuery();
+                    }
                 }
                 txtSetScoreWeightMemo.Text += DateTime.Now + " " + cbxSetScoreWeightYear.Text + "年資料更新完成" + Environment.NewLine;
                 setScoreWeightTabMode = FunctionMode.STATIC;
@@ -2934,7 +2957,7 @@ namespace NIZING_BACKEND_Data_Config
         protected void CalculateFinalScore(DataTable dt)
         {
             DataTable dtScoreWeight = new DataTable();
-            dtScoreWeight = GetScoreWeight(cbxFinalScoreYear.SelectedItem.ToString());
+            dtScoreWeight = GetScoreWeight(Convert.ToInt32(cbxFinalScoreYear.SelectedItem));
 
             try
             {
@@ -2949,15 +2972,12 @@ namespace NIZING_BACKEND_Data_Config
                     double finalEvalScore = 0;
                     double finalScore = 0;
                     string finalGrade = "";
-                    double selfEvalWeight = Convert.ToDouble(dtScoreWeight.Rows[0]["selfEvaluationWeight"].ToString());
-                    double superEvalWeight = Convert.ToDouble(dtScoreWeight.Rows[0]["supervisorEvaluationWeight"].ToString());
-                    if (isSupervisorAssigned(year, id))
+                    double selfEvalWeight = Convert.ToDouble(dtScoreWeight.Rows[0]["scoreWeight"].ToString());
+                    double superEvalWeight = Convert.ToDouble(dtScoreWeight.Rows[1]["scoreWeight"].ToString());
+                    double finalEvalWeight = Convert.ToDouble(dtScoreWeight.Rows[2]["scoreWeight"].ToString());
+                    if (!isSupervisorAssigned(year, id))
                     {
-                        double finalEvalWeight = Convert.ToDouble(dtScoreWeight.Rows[0]["finalizerEvaluationWeight"].ToString());
-                    }
-                    else
-                    {
-                        double finalEvalWeight = Convert.ToDouble(dtScoreWeight.Rows[0]["finalizerEvaluationWeight"].ToString()) + superEvalWeight;
+                        finalEvalWeight += superEvalWeight;
                     }                    
 
                     double evalScore = 0;
@@ -3041,18 +3061,18 @@ namespace NIZING_BACKEND_Data_Config
             LoadControlStatus(tbpFinalScoreCalculation);
         }
 
-        private DataTable GetScoreWeight(string year)
+        private DataTable GetScoreWeight(int year)
         {
             DataTable dt = new DataTable();
 
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
-                string query = "SELECT selfEvaluationWeight" +
-                    " ,supervisorEvaluationWeight" +
-                    " ,finalizerEvaluationWeight" +
-                    " FROM HR360_AssessmentPersonnel_ScoreWeight" +
-                    " WHERE assessYear = @year";
+                string query = "SELECT assessType" +
+                    " ,scoreWeight" +
+                    " FROM HR360_AssessmentCategory_CategoryWeight" +
+                    " WHERE assessYear = @year" +
+                    " order by assessType";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@year", year);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -3077,6 +3097,21 @@ namespace NIZING_BACKEND_Data_Config
                 return cmd.ExecuteScalar() != null && Convert.ToInt32(cmd.ExecuteScalar()) > 0 ? true : false;
             }
         }
+        private void btnFinalScoreAssessmentDone_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "update HR360_ASSESSMENTTIME" +
+                    " set EVAL_DONE='1'" +
+                    " where EVAL_YEAR=@assessYear";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@assessYear", Convert.ToInt32(cbxFinalScoreYear.SelectedItem));
+                cmd.ExecuteNonQuery();
+            }
+        }
         #endregion
+
+
     }
 }

@@ -20,7 +20,6 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
     //Setup basic info for the assessment     
     int rowCount = 0;
     int colCount = 0;
-    bool isAssesseda = false;
    
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -36,12 +35,14 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
             }
             else
             {
-                //assessed = Session["view_id"].ToString().Trim();
-                //year = Session["view_year"].ToString().Trim();
-                //test 
-                assessed = "0080";
-                year = "2019";
-                Session["erp_id"] = "0067";
+                assessed = Session["view_id"].ToString().Trim();
+                year = Session["view_year"].ToString().Trim();
+
+                ///////test 
+                //assessed = "0080";
+                //year = "2019";
+                //Session["erp_id"] = "0080";
+                //////////////////////////////
             }
         }
         else
@@ -231,7 +232,6 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
         #region 獎懲
         //讀取獎懲紀錄
         DataTable dtRnPRecord = new DataTable();
-
         dtRnPRecord = GetRnPData(year, assessed);
 
         decimal rnpSum = 0;
@@ -536,7 +536,7 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
             div = new HtmlGenericControl();
             div.TagName = "div";
             div.ID = "QuestionTitleRow_" + (5 + i).ToString();
-            div.Attributes["class"] = "border col-xs-" + (6 / colCount).ToString();
+            div.Attributes["class"] = "border col-xs-2";
             divQuestionTitleRow.Controls.Add(div);
             //add 評分 column for respective asesssor type
             TextBox txt = new TextBox();

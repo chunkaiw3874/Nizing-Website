@@ -70,11 +70,13 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 LoadForm(year, assessor, assessed, dtEval.Rows[0]["ASSESS_TYPE"].ToString(), isAssessed);
             }
 
+            bool supervisorAssigned = isSupervisorAssigned(year, assessed);
+
             //依照assess type動態製作表格問題欄位標題
             HtmlGenericControl headerDiv = new HtmlGenericControl();
             headerDiv.TagName = "div";
             headerDiv.Attributes["class"] = "col-xs-1 border";
-            Question_Title.Controls.Add(headerDiv);
+            divQuestionTitleRow.Controls.Add(headerDiv);
             HtmlGenericControl headerText = new HtmlGenericControl();
             headerText.TagName = "span";
             headerText.Attributes["class"] = "form-control text-center";
@@ -83,7 +85,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             headerDiv = new HtmlGenericControl();
             headerDiv.TagName = "div";
             headerDiv.Attributes["class"] = "col-xs-2 border";
-            Question_Title.Controls.Add(headerDiv);
+            divQuestionTitleRow.Controls.Add(headerDiv);
             headerText = new HtmlGenericControl();
             headerText.TagName = "span";
             headerText.Attributes["class"] = "form-control text-center";
@@ -92,7 +94,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             headerDiv = new HtmlGenericControl();
             headerDiv.TagName = "div";
             headerDiv.Attributes["class"] = "col-xs-1 border";
-            Question_Title.Controls.Add(headerDiv);
+            divQuestionTitleRow.Controls.Add(headerDiv);
             headerText = new HtmlGenericControl();
             headerText.TagName = "span";
             headerText.Attributes["class"] = "form-control text-center";
@@ -103,7 +105,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 headerDiv = new HtmlGenericControl();
                 headerDiv.TagName = "div";
                 headerDiv.Attributes["class"] = "col-xs-6 border";
-                Question_Title.Controls.Add(headerDiv);
+                divQuestionTitleRow.Controls.Add(headerDiv);
                 headerText = new HtmlGenericControl();
                 headerText.TagName = "span";
                 headerText.Attributes["class"] = "form-control text-center";
@@ -112,7 +114,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 headerDiv = new HtmlGenericControl();
                 headerDiv.TagName = "div";
                 headerDiv.Attributes["class"] = "col-xs-2 border";
-                Question_Title.Controls.Add(headerDiv);
+                divQuestionTitleRow.Controls.Add(headerDiv);
                 headerText = new HtmlGenericControl();
                 headerText.TagName = "span";
                 headerText.Attributes["class"] = "form-control text-center";
@@ -124,7 +126,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 headerDiv = new HtmlGenericControl();
                 headerDiv.TagName = "div";
                 headerDiv.Attributes["class"] = "col-xs-4 border";
-                Question_Title.Controls.Add(headerDiv);
+                divQuestionTitleRow.Controls.Add(headerDiv);
                 headerText = new HtmlGenericControl();
                 headerText.TagName = "span";
                 headerText.Attributes["class"] = "form-control text-center";
@@ -133,7 +135,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 headerDiv = new HtmlGenericControl();
                 headerDiv.TagName = "div";
                 headerDiv.Attributes["class"] = "col-xs-2 border";
-                Question_Title.Controls.Add(headerDiv);
+                divQuestionTitleRow.Controls.Add(headerDiv);
                 headerText = new HtmlGenericControl();
                 headerText.TagName = "span";
                 headerText.Attributes["class"] = "form-control text-center";
@@ -142,7 +144,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 headerDiv = new HtmlGenericControl();
                 headerDiv.TagName = "div";
                 headerDiv.Attributes["class"] = "col-xs-2 border";
-                Question_Title.Controls.Add(headerDiv);
+                divQuestionTitleRow.Controls.Add(headerDiv);
                 headerText = new HtmlGenericControl();
                 headerText.TagName = "span";
                 headerText.Attributes["class"] = "form-control text-center";
@@ -153,8 +155,15 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             {
                 headerDiv = new HtmlGenericControl();
                 headerDiv.TagName = "div";
-                headerDiv.Attributes["class"] = "col-xs-2 border";
-                Question_Title.Controls.Add(headerDiv);
+                if (supervisorAssigned)
+                {
+                    headerDiv.Attributes["class"] = "col-xs-2 border";
+                }
+                else
+                {
+                    headerDiv.Attributes["class"] = "col-xs-4 border";
+                }
+                divQuestionTitleRow.Controls.Add(headerDiv);
                 headerText = new HtmlGenericControl();
                 headerText.TagName = "span";
                 headerText.Attributes["class"] = "form-control text-center";
@@ -163,25 +172,28 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 headerDiv = new HtmlGenericControl();
                 headerDiv.TagName = "div";
                 headerDiv.Attributes["class"] = "col-xs-2 border";
-                Question_Title.Controls.Add(headerDiv);
+                divQuestionTitleRow.Controls.Add(headerDiv);
                 headerText = new HtmlGenericControl();
                 headerText.TagName = "span";
                 headerText.Attributes["class"] = "form-control text-center";
                 headerText.InnerText = "自評分數";
                 headerDiv.Controls.Add(headerText);
+                if (supervisorAssigned)
+                {
+                    headerDiv = new HtmlGenericControl();
+                    headerDiv.TagName = "div";
+                    headerDiv.Attributes["class"] = "col-xs-2 border";
+                    divQuestionTitleRow.Controls.Add(headerDiv);
+                    headerText = new HtmlGenericControl();
+                    headerText.TagName = "span";
+                    headerText.Attributes["class"] = "form-control text-center";
+                    headerText.InnerText = "主管評分數";
+                    headerDiv.Controls.Add(headerText);
+                }
                 headerDiv = new HtmlGenericControl();
                 headerDiv.TagName = "div";
                 headerDiv.Attributes["class"] = "col-xs-2 border";
-                Question_Title.Controls.Add(headerDiv);
-                headerText = new HtmlGenericControl();
-                headerText.TagName = "span";
-                headerText.Attributes["class"] = "form-control text-center";
-                headerText.InnerText = "主管評分數";
-                headerDiv.Controls.Add(headerText);
-                headerDiv = new HtmlGenericControl();
-                headerDiv.TagName = "div";
-                headerDiv.Attributes["class"] = "col-xs-2 border";
-                Question_Title.Controls.Add(headerDiv);
+                divQuestionTitleRow.Controls.Add(headerDiv);
                 headerText = new HtmlGenericControl();
                 headerText.TagName = "span";
                 headerText.Attributes["class"] = "form-control text-center";
@@ -269,6 +281,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
         //讀取評量問題
         dtAssessmentQuestion = new DataTable();
         dtAssessmentQuestion = GetQuestionData(year, assessor, assessed, assessType, isAssessed);
+        bool supervisorAssigned = isSupervisorAssigned(year, assessed);
 
         //製作問題動態div
         for (int i = 0; i < dtAssessmentQuestion.Rows.Count; i++)
@@ -278,7 +291,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             outerDiv.TagName = "div";
             outerDiv.ID = "questionRow" + (i + 1).ToString();
             outerDiv.Attributes["class"] = "row";
-            Load_Question.Controls.Add(outerDiv);
+            divQuestionBodyRow.Controls.Add(outerDiv);
             //column 1 題號
             HtmlGenericControl innerDiv = new HtmlGenericControl();
             innerDiv.TagName = "div";
@@ -401,7 +414,14 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 innerDiv = new HtmlGenericControl();
                 innerDiv.TagName = "div";
                 innerDiv.ID = outerDiv.ID + "_4";
-                innerDiv.Attributes["class"] = "col-xs-2 border";
+                if (supervisorAssigned)
+                {
+                    innerDiv.Attributes["class"] = "col-xs-2 border";
+                }
+                else
+                {
+                    innerDiv.Attributes["class"] = "col-xs-4 border";
+                }
                 outerDiv.Controls.Add(innerDiv);
                 TextBox txt = new TextBox();
                 txt.ID = "txtAssessmentQuestion" + (i + 1).ToString();
@@ -422,17 +442,20 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 label.CssClass = "form-control text-center col" + (i + 1) + "_6";
                 label.Text = dtAssessmentQuestion.Rows[i]["SELF_SCORE"].ToString() ?? "未評核";
                 innerDiv.Controls.Add(label);
-                //column 7 主管評分數
-                innerDiv = new HtmlGenericControl();
-                innerDiv.TagName = "div";
-                innerDiv.ID = outerDiv.ID + "_7";
-                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
-                outerDiv.Controls.Add(innerDiv);
-                label = new Label();
-                label.ID = "lblSuperAssessmentScore" + (i + 1).ToString();
-                label.CssClass = "form-control text-center col" + (i + 1) + "_7";
-                label.Text = dtAssessmentQuestion.Rows[i]["SUPER_SCORE"].ToString() ?? "未評核";
-                innerDiv.Controls.Add(label);
+                if (supervisorAssigned)
+                {
+                    //column 7 主管評分數
+                    innerDiv = new HtmlGenericControl();
+                    innerDiv.TagName = "div";
+                    innerDiv.ID = outerDiv.ID + "_7";
+                    innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                    outerDiv.Controls.Add(innerDiv);
+                    label = new Label();
+                    label.ID = "lblSuperAssessmentScore" + (i + 1).ToString();
+                    label.CssClass = "form-control text-center col" + (i + 1) + "_7";
+                    label.Text = dtAssessmentQuestion.Rows[i]["SUPER_SCORE"].ToString() ?? "未評核";
+                    innerDiv.Controls.Add(label);
+                }                
                 //column 5 分數
                 innerDiv = new HtmlGenericControl();
                 innerDiv.TagName = "div";
@@ -928,12 +951,12 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("@ASSESSOR_ID", Session["erp_id"].ToString().Trim());
                     cmd.Parameters.AddWithValue("@ASSESS_YEAR", lblEvalYear.Text);
                     cmd.Parameters.AddWithValue("@ASSESSED_ID", lblEmpID.Text);
-                    cmd.Parameters.AddWithValue("@INDEX", ((Label)Load_Question.FindControl("lblIndex" + (i + 1).ToString())).Text);
-                    cmd.Parameters.AddWithValue("@QUESTION_CATEGORY_ID", ((Label)Load_Question.FindControl("lblAssessmentCategory" + (i + 1).ToString())).Text.Substring(0, 2));
-                    cmd.Parameters.AddWithValue("@QUESTION_CATEGORY_NAME", ((Label)Load_Question.FindControl("lblAssessmentCategory" + (i + 1).ToString())).Text.Substring(3));
-                    cmd.Parameters.AddWithValue("@QUESTION_CATEGORY_WEIGHT", ((Label)Load_Question.FindControl("lblAssessmentCategoryWeight" + (i + 1).ToString())).Text);
-                    cmd.Parameters.AddWithValue("@QUESTION", ((TextBox)Load_Question.FindControl("txtAssessmentQuestion" + (i + 1).ToString())).Text.Trim());
-                    cmd.Parameters.AddWithValue("@SCORE", ((TextBox)Load_Question.FindControl("txtAssessmentScore" + (i + 1).ToString())).Text.Trim());
+                    cmd.Parameters.AddWithValue("@INDEX", ((Label)divQuestionBodyRow.FindControl("lblIndex" + (i + 1).ToString())).Text);
+                    cmd.Parameters.AddWithValue("@QUESTION_CATEGORY_ID", ((Label)divQuestionBodyRow.FindControl("lblAssessmentCategory" + (i + 1).ToString())).Text.Substring(0, 2));
+                    cmd.Parameters.AddWithValue("@QUESTION_CATEGORY_NAME", ((Label)divQuestionBodyRow.FindControl("lblAssessmentCategory" + (i + 1).ToString())).Text.Substring(3));
+                    cmd.Parameters.AddWithValue("@QUESTION_CATEGORY_WEIGHT", ((Label)divQuestionBodyRow.FindControl("lblAssessmentCategoryWeight" + (i + 1).ToString())).Text);
+                    cmd.Parameters.AddWithValue("@QUESTION", ((TextBox)divQuestionBodyRow.FindControl("txtAssessmentQuestion" + (i + 1).ToString())).Text.Trim());
+                    cmd.Parameters.AddWithValue("@SCORE", ((TextBox)divQuestionBodyRow.FindControl("txtAssessmentScore" + (i + 1).ToString())).Text.Trim());
                     cmd.ExecuteNonQuery();
                 }
 
@@ -1352,8 +1375,8 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
 + " FROM"
 + " ("
 + " SELECT PALTB.TB001 EMP_ID"
-+ " ,CONVERT(DECIMAL(16,2),SUM(PALTB.TB007))/60.0 遲到"
-+ " ,CONVERT(DECIMAL(16,2),SUM(PALTB.TB008))/60.0 早退"
++ " ,CONVERT(DECIMAL(16,2),SUM(PALTB.TB007)) 遲到"
++ " ,CONVERT(DECIMAL(16,2),SUM(PALTB.TB008)) 早退"
 + " FROM PALTB"
 + " WHERE PALTB.TB001=@ID AND SUBSTRING(PALTB.TB002,1,4)=@YEAR"
 + " GROUP BY PALTB.TB001"
@@ -1583,4 +1606,227 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
 
         return s;
     }
+
+    private bool isSupervisorAssigned(string year, string assessedId)
+    {
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            string query = "select assessorSupervisorAmount" +
+                " from HR360_AssessmentPersonnel_Assignment_B" +
+                " where assessYear = @year" +
+                " and assessedID = @assessedId";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@year", year);
+            cmd.Parameters.AddWithValue("@assessedId", assessedId);
+            return cmd.ExecuteScalar() != null && Convert.ToInt32(cmd.ExecuteScalar()) > 0 ? true : false;
+        }
+    }
+
+    //private void CreateQuestionTitleRow(DataTable dtAssessorData, int colCount)
+    //{
+    //    //column 1 題號
+    //    HtmlGenericControl div = new HtmlGenericControl();
+    //    div.TagName = "div";
+    //    div.ID = "QuestionTitleRow_1";
+    //    div.Attributes["class"] = "col-xs-1 border";
+    //    divQuestionTitleRow.Controls.Add(div);
+    //    Label lbl = new Label();
+    //    lbl.CssClass = "form-control text-center";
+    //    lbl.Text = "#";
+    //    div.Controls.Add(lbl);
+    //    //column 2 分類
+    //    div = new HtmlGenericControl();
+    //    div.TagName = "div";
+    //    div.ID = "QuestionTitleRow_2";
+    //    div.Attributes["class"] = "col-xs-2 border";
+    //    divQuestionTitleRow.Controls.Add(div);
+    //    lbl = new Label();
+    //    lbl.CssClass = "form-control text-center";
+    //    lbl.Text = "分類";
+    //    div.Controls.Add(lbl);
+    //    //column 3 權重
+    //    div = new HtmlGenericControl();
+    //    div.TagName = "div";
+    //    div.ID = "QuestionTitleRow_3";
+    //    div.Attributes["class"] = "col-xs-1 border";
+    //    divQuestionTitleRow.Controls.Add(div);
+    //    lbl = new Label();
+    //    lbl.CssClass = "form-control text-center";
+    //    lbl.Text = "權重";
+    //    div.Controls.Add(lbl);
+    //    //column 4 問題
+    //    div = new HtmlGenericControl();
+    //    div.TagName = "div";
+    //    div.ID = "QuestionTitleRow_4";
+    //    div.Attributes["class"] = "border col-xs-" + (8 - 2 * colCount).ToString();
+    //    divQuestionTitleRow.Controls.Add(div);
+    //    lbl = new Label();
+    //    lbl.CssClass = "form-control text-center";
+    //    lbl.Text = "問題";
+    //    div.Controls.Add(lbl);
+
+    //    for (int i = 0; i < colCount; i++)
+    //    {
+    //        div = new HtmlGenericControl();
+    //        div.TagName = "div";
+    //        div.ID = "QuestionTitleRow_" + (5 + i).ToString();
+    //        div.Attributes["class"] = "border col-xs-2";
+    //        divQuestionTitleRow.Controls.Add(div);
+    //        //add 評分 column for respective asesssor type
+    //        TextBox txt = new TextBox();
+    //        txt.CssClass = "form-control text-center autosize no-resize";
+    //        txt.TextMode = TextBoxMode.MultiLine;
+
+    //        string name = "";
+    //        if (i == 0) //自評column
+    //        {
+    //            name = "";
+    //            foreach (DataRow row in dtAssessorData.Rows)
+    //            {
+    //                if (row["ASSESS_TYPE"].ToString() == "1")
+    //                {
+    //                    name = row["ASSESSOR_NAME"].ToString();
+    //                }
+    //            }
+    //            txt.Text = "自評" + Environment.NewLine + name;
+    //        }
+    //        else if (i == colCount - 1) //核決主管評column (last column)
+    //        {
+    //            name = "";
+    //            foreach (DataRow row in dtAssessorData.Rows)
+    //            {
+    //                if (row["ASSESS_TYPE"].ToString() == "3")
+    //                {
+    //                    name = row["ASSESSOR_NAME"].ToString();
+    //                }
+    //            }
+    //            txt.Text = "核決主管評" + Environment.NewLine + name;
+    //        }
+    //        else
+    //        {
+    //            name = "";
+    //            foreach (DataRow row in dtAssessorData.Rows)
+    //            {
+    //                if (row["ASSESS_TYPE"].ToString() == "2")
+    //                {
+    //                    name += row["ASSESSOR_NAME"].ToString() + " ";
+    //                }
+    //            }
+    //            txt.Text = "主管評" + Environment.NewLine + name;
+    //        }
+    //        div.Controls.Add(txt);
+    //    }
+    //}
+
+
+    //private void CreateQuestionBodyRow(DataTable dtQuestionData, DataTable dtAssessorData, int colCount)
+    //{
+    //    for (int i = 0; i < dtQuestionData.Rows.Count; i++)
+    //    {
+    //        HtmlGenericControl outerDiv = new HtmlGenericControl();
+    //        outerDiv.TagName = "div";
+    //        outerDiv.ID = "questionRow" + (i + 1).ToString();
+    //        outerDiv.Attributes["class"] = "row";
+    //        divQuestionBodyRow.Controls.Add(outerDiv);
+    //        //column 1 題號
+    //        HtmlGenericControl div = new HtmlGenericControl();
+    //        div.TagName = "div";
+    //        div.ID = outerDiv.ID + "_1";
+    //        div.Attributes["class"] = "col-xs-1 border";
+    //        outerDiv.Controls.Add(div);
+    //        Label lbl = new Label();
+    //        lbl.ID = "lblIndex" + (i + 1).ToString();
+    //        lbl.CssClass = "form-control text-center col" + (i + 1) + "_1";
+    //        lbl.Text = dtQuestionData.Rows[i]["INDEX"].ToString();
+    //        div.Controls.Add(lbl);
+    //        //column 2 分類
+    //        div = new HtmlGenericControl();
+    //        div.TagName = "div";
+    //        div.ID = outerDiv.ID + "_2";
+    //        div.Attributes["class"] = "col-xs-2 border";
+    //        outerDiv.Controls.Add(div);
+    //        lbl = new Label();
+    //        lbl.ID = "lblAssessmentCategory" + (i + 1).ToString();
+    //        lbl.CssClass = "form-control text-center col" + (i + 1) + "_2";
+    //        lbl.Text = dtQuestionData.Rows[i]["QUESTION_CATEGORY_ID"].ToString() + "_" + dtQuestionData.Rows[i]["QUESTION_CATEGORY_NAME"].ToString();
+    //        div.Controls.Add(lbl);
+    //        //column 3 權重
+    //        div = new HtmlGenericControl();
+    //        div.TagName = "div";
+    //        div.ID = outerDiv.ID + "_3";
+    //        div.Attributes["class"] = "col-xs-1 border";
+    //        outerDiv.Controls.Add(div);
+    //        lbl = new Label();
+    //        lbl.ID = "lblAssessmentCategoryWeight" + (i + 1).ToString();
+    //        lbl.CssClass = "form-control text-center col" + (i + 1) + "_3";
+    //        lbl.Text = dtQuestionData.Rows[i]["QUESTION_CATEGORY_WEIGHT"].ToString();
+    //        div.Controls.Add(lbl);
+    //        //column 4 問題
+    //        div = new HtmlGenericControl();
+    //        div.TagName = "div";
+    //        div.ID = outerDiv.ID + "_4";
+    //        div.Attributes["class"] = "border col-xs-" + (8 - 2 * colCount).ToString();
+    //        outerDiv.Controls.Add(div);
+    //        TextBox txt = new TextBox();
+    //        txt.ID = "txtAssessmentQuestion" + (i + 1).ToString();
+    //        txt.ReadOnly = true;
+    //        txt.TextMode = TextBoxMode.MultiLine;
+    //        txt.CssClass = "form-control no-resize autosize max-height col" + (i + 1) + "_4";
+    //        txt.Text = dtQuestionData.Rows[i]["QUESTION"].ToString();
+    //        div.Controls.Add(txt);
+    //        //column 5 分數
+    //        for (int j = 0; j < colCount; j++)
+    //        {
+    //            div = new HtmlGenericControl();
+    //            div.TagName = "div";
+    //            div.ID = outerDiv.ID + "_" + (5 + j).ToString();
+    //            div.Attributes["class"] = "border col-xs-2";
+    //            outerDiv.Controls.Add(div);
+    //            lbl = new Label();
+    //            lbl.ID = "lblAssessmentScore" + (i + 1).ToString() + (j + 1).ToString();
+    //            lbl.CssClass = "form-control text-center col" + (i + 1) + "_" + (5 + j).ToString();
+
+    //            if (dtQuestionData.Columns.Count <= 5)  //col數量低於5，表示沒有讀取到任何已評分的資料，表示此人尚未被任何人評核過
+    //            {
+    //                lbl.Text = "未評核";
+    //            }
+    //            else
+    //            {
+    //                List<string> assessorList = new List<string>();
+
+    //                foreach (DataRow row in dtAssessorData.Rows)
+    //                {
+    //                    assessorList.Add(row["ASSESSOR_ID"].ToString());
+    //                }
+
+    //                if (j == 0) //自評成績column (1st column)
+    //                {
+    //                    lbl.Text = dtQuestionData.Rows[i][dtAssessorData.Rows[j]["ASSESSOR_ID"].ToString()].ToString();
+    //                }
+    //                else if (j == colCount - 1) //核決主管評成績column (last column)
+    //                {
+    //                    lbl.Text = dtQuestionData.Rows[i][dtAssessorData.Rows[dtAssessorData.Rows.Count - 1]["ASSESSOR_ID"].ToString()].ToString();
+    //                }
+    //                else
+    //                {
+    //                    //將除了自評(1st)及核決主管評(last)以外的成績加總計算平均
+    //                    decimal score = 0;
+    //                    for (int k = 7; k < dtQuestionData.Columns.Count - 1; k++)
+    //                    {
+    //                        decimal r = 0;
+    //                        if (decimal.TryParse(dtQuestionData.Rows[i][k].ToString(), out r))
+    //                        {
+    //                            score += r;
+    //                        }
+    //                    }
+    //                    score /= (dtQuestionData.Columns.Count - 8);    //包含問題col、自評成績col、核決主管評成績col在內，dtQuestionData總共固定col數量為8，其餘皆是主管評成績，須作平均計算
+
+    //                    lbl.Text = score.ToString("0.0");
+    //                }
+    //            }
+    //            div.Controls.Add(lbl);
+    //        }
+    //    }
+    //}
 }

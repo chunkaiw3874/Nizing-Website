@@ -236,51 +236,7 @@
             </div>
         </div>        
         <div id="comment" runat="server">
-            <!--非自評的話，需於code behind加上一個動態div for 評核者 comment-->
-            <div class="row">
-                <div class="col-xs-12 subtitle border">
-                    自評評語
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 border">
-                    <asp:TextBox ID="txtSelfComment" runat="server" TextMode="MultiLine" ReadOnly="true" CssClass="form-control no-resize autosize"></asp:TextBox>
-                </div>
-            </div>
-        </div>
-        <div id="div0067_comment" runat="server">
-            <div class="row">
-                <div class="col-xs-12 subtitle border">
-                    吉田評語
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 border">
-                    <div>
-                        <asp:TextBox ID="txt0067Comment" TextMode="MultiLine" CssClass="form-control no-resize autosize" runat="server" ReadOnly="true"></asp:TextBox>
-                    </div>
-                    <%--<div style="float:right;">
-                        <asp:Button ID="btnSave0067Comment" runat="server" Text="儲存評語" CssClass="btn btn-success" OnClick="btnSaveComment_Click" Visible="false"/>
-                    </div>--%>
-                </div>
-            </div>
-        </div>
-        <div id="div0007_comment" runat="server">
-            <div class="row">
-                <div class="col-xs-12 subtitle border">
-                    Chrissy評語
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 border">
-                    <div>
-                        <asp:TextBox ID="txt0007Comment" TextMode="MultiLine" CssClass="form-control no-resize autosize" runat="server" ReadOnly="true"></asp:TextBox>
-                    </div>
-                    <%--<div style="float:right;">
-                        <asp:Button ID="btnSave0007Comment" runat="server" Text="儲存評語" CssClass="btn btn-success" OnClick="btnSaveComment_Click" Visible="false"/>
-                    </div>--%>
-                </div>
-            </div>
+            <!--非自評的話，需於code behind加上一個動態div for 評核者 comment-->            
         </div>
         <div id="div0006_comment" runat="server">
             <div class="row">

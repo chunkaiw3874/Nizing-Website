@@ -40,53 +40,54 @@ public partial class hr360_UI05 : System.Web.UI.Page
             divPlaceholder.Visible = false;
 
             ////////test area
-            Session["user_id"] = "0007";    //test only to avoid error on loading, delete after trial            
-            Session["erp_id"] = "0007";
-            year = "2019";
-            evalStart = new DateTime(2019, 12, 1, 19, 0, 0);
-            evalEnd = new DateTime(2020, 1, 1, 19, 0, 0); ;
-            selfEvalStart = new DateTime(2019, 12, 1, 19, 0, 0);
-            selfEvalEnd = new DateTime(2020, 1, 1, 19, 0, 0); ;
-            superEvalStart = new DateTime(2019, 12, 1, 19, 0, 0);
-            superEvalEnd = new DateTime(2020, 1, 1, 19, 0, 0); ;
-            finalizerEvalStart = new DateTime(2019, 12, 1, 19, 0, 0);
-            finalizerEvalEnd = new DateTime(2020, 1, 1, 19, 0, 0); ;
+            //Session["user_id"] = "0006";    //test only to avoid error on loading, delete after trial            
+            //Session["erp_id"] = "0006";
+            //year = "2019";
+            //evalStart = new DateTime(2019, 12, 1, 19, 0, 0);
+            //evalEnd = new DateTime(2020, 1, 1, 19, 0, 0); ;
+            //selfEvalStart = new DateTime(2019, 12, 1, 19, 0, 0);
+            //selfEvalEnd = new DateTime(2020, 1, 1, 19, 0, 0); ;
+            //superEvalStart = new DateTime(2019, 12, 1, 19, 0, 0);
+            //superEvalEnd = new DateTime(2020, 1, 1, 19, 0, 0); ;
+            //finalizerEvalStart = new DateTime(2019, 12, 1, 19, 0, 0);
+            //finalizerEvalEnd = new DateTime(2020, 1, 1, 19, 0, 0); ;
             //////////////////////////////////////////////////////////////
 
-            //using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-            //{
-            //    conn.Open();
-            //    string query = "select EVAL_YEAR" +
-            //        ",EVAL_STARTTIME" +
-            //        ",EVAL_ENDTIME" +
-            //        ",EVAL_SELF_STARTTIME" +
-            //        ",EVAL_SELF_ENDTIME" +
-            //        ",EVAL_SUPERVISOR_STARTTIME" +
-            //        ",EVAL_SUPERVISOR_ENDTIME" +
-            //        ",EVAL_FINALIZER_STARTTIME" +
-            //        ",EVAL_FINALIZER_ENDTIME" +
-            //        " from HR360_ASSESSMENTTIME" +
-            //        " where EVAL_YEAR = (select MIN(EVAL_YEAR) from HR360_ASSESSMENTTIME where EVAL_DONE = 0)";
-            //    SqlCommand cmd = new SqlCommand(query, conn);
-            //    using (SqlDataReader dr = cmd.ExecuteReader())
-            //    {
-            //        while (dr.Read())
-            //        {
-            //            if (dr.HasRows)
-            //            {
-            //                year = dr.GetInt32(0).ToString();
-            //                evalStart = dr.GetDateTime(1);
-            //                evalEnd = dr.GetDateTime(2);
-            //                selfEvalStart = dr.GetDateTime(3);
-            //                selfEvalEnd = dr.GetDateTime(4);
-            //                superEvalStart = dr.GetDateTime(5);
-            //                superEvalEnd = dr.GetDateTime(6);
-            //                finalizerEvalStart = dr.GetDateTime(7);
-            //                finalizerEvalEnd = dr.GetDateTime(8);
-            //            }
-            //        }
-            //    }
-            //}
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "select EVAL_YEAR" +
+                    ",EVAL_STARTTIME" +
+                    ",EVAL_ENDTIME" +
+                    ",EVAL_SELF_STARTTIME" +
+                    ",EVAL_SELF_ENDTIME" +
+                    ",EVAL_SUPERVISOR_STARTTIME" +
+                    ",EVAL_SUPERVISOR_ENDTIME" +
+                    ",EVAL_FINALIZER_STARTTIME" +
+                    ",EVAL_FINALIZER_ENDTIME" +
+                    " from HR360_ASSESSMENTTIME" +
+                    " where EVAL_YEAR = (select MIN(EVAL_YEAR) from HR360_ASSESSMENTTIME where EVAL_DONE = 0)";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        if (dr.HasRows)
+                        {
+                            year = dr.GetInt32(0).ToString();
+                            evalStart = dr.GetDateTime(1);
+                            evalEnd = dr.GetDateTime(2);
+                            selfEvalStart = dr.GetDateTime(3);
+                            selfEvalEnd = dr.GetDateTime(4);
+                            superEvalStart = dr.GetDateTime(5);
+                            superEvalEnd = dr.GetDateTime(6);
+                            finalizerEvalStart = dr.GetDateTime(7);
+                            finalizerEvalEnd = dr.GetDateTime(8);
+                        }
+                    }
+                }
+            }
+
             if (DateTime.Now >= evalStart && DateTime.Now < evalEnd)
             {
                 divAssessmentList.Visible = true;

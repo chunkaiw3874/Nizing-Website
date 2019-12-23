@@ -66,6 +66,8 @@
             </ul>
             <ul>
                 <li>
+                    <asp:ImageButton ID="ImageButton20" runat="server" Width="150px" ImageUrl="~/nizing_intranet/image/button/dept/SD-7.png" PostBackUrl="~/nizing_intranet/quotation-list.aspx" /></li>
+                <li>
                     <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/SD-1.png" PostBackUrl="~/nizing_intranet/SD01.aspx" /></li>
                 <li>
                     <asp:ImageButton ID="ImageButton5" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/SD-2.png" PostBackUrl="~/nizing_intranet/SaleRecord.aspx" /></li>
