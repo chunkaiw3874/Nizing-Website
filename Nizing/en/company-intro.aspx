@@ -22,7 +22,11 @@
                     <p>Nizing Electric has a full range of products, certified with the highest standard. We continue to develop new products, and serve our customers with the utmost passion. We strive to be not just another supplier, but THE supplier that our customers can depend on and grow with.</p>
                 </div>
                 <div class="img">
-                    <asp:Image ID="Image1" runat="server" ImageUrl="~/en/images/company/company-intro4.jpg" />
+                    <%--<asp:Image ID="Image1" runat="server" ImageUrl="~/en/images/company/company-intro4.jpg" />--%>
+                    <video width="300" controls="controls">
+                        <source src="video/nizing_video5.mp4" type="video/mp4" />
+                            Your browser does not support the video tag
+                    </video>
                 </div>
             </div>
         </div>

@@ -73,7 +73,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <h2>銷售淨額報表</h2>
+                <h2>業績排名表</h2>
             </div>
         </div>
         <div id="SearchCondition" class="form-group">

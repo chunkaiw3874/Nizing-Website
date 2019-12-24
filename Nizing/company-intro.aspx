@@ -22,7 +22,12 @@
                     <p>日進電線擁有完整的產品系列，通過數種國際安規認可產品。以最熱忱的服務態度，不斷精進品質，開發新產品，和客戶共同發展、共同成長。由于您持續的支持與愛護，以前瞻性的佈局策略追求企業創新成長，進行自主技術之研究，依據市場及客戶需求開發新產品與新業務。日進電線秉持一貫對品質的嚴謹要求，以及快速整合的服務，成為客戶的最佳伙伴，在兩岸經濟發展的重要里程中，扮演關鍵的參與和推動角色，未來日進電線將在卓越製造技術與多樣化客戶基礎下持續深耕，同時積極掌握產業新興發展機會，創造企業發展的新里程。</p>
                 </div>
                 <div class="img">
-                    <asp:Image ID="Image1" runat="server" ImageUrl="~/images/company/company-intro4.jpg" />
+                    <%--<asp:Image ID="Image1" runat="server" ImageUrl="~/images/company/company-intro4.jpg" />--%>
+                    <video controls="controls" width="300">
+                        <%--<asp:Image ID="Image1" runat="server" ImageUrl="~/images/company/company-intro4.jpg" />--%>
+                        <source src="video/nizing_video5.mp4" type="video/mp4" />
+                        Your browser does not support the video tag
+                    </video>
                 </div>
             </div>
         </div>
