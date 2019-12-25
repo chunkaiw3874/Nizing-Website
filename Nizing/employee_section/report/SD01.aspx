@@ -233,7 +233,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <asp:Chart ID="Chart1" runat="server" Width="800px" Height="600px" >
+                    <asp:Chart ID="Chart1" runat="server" Width="600" Height="450" >
                         <Legends>
                            <asp:Legend Alignment="Center" Docking="Bottom" Name="Legend1">
                            </asp:Legend>
