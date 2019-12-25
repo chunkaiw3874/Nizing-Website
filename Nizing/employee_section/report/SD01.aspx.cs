@@ -1,11 +1,9 @@
-﻿using NPOI.HSSF.UserModel;
-using NPOI.HSSF.Util;
-using NPOI.SS.UserModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -80,6 +78,7 @@ public partial class SD01 : System.Web.UI.Page
             ddlMonth.Enabled = true;
             rdoYear.Enabled = true;
             rdoMonth.Enabled = true;
+            lblRdoTextWarning.Visible = false;
         }
         else
         {
@@ -89,214 +88,11 @@ public partial class SD01 : System.Web.UI.Page
             ddlMonth.Enabled = false;
             rdoYear.Enabled = false;
             rdoMonth.Enabled = false;
+            lblRdoTextWarning.Visible = true;
         }
     }
-    private string[] GetQuery()
-    {
-        string[] query = new string[2];
 
-        if (ddlPersonnel.SelectedValue.ToString() == "全部人員")
-        {
-            if (rdoText.Checked)
-            {
-                query[0] = "WITH TEMP"
-                    + " AS"
-                    + " ("
-                    + " SELECT TI.TI006, SUM(TI.TI037) R"
-                    + " FROM COPTI TI"
-                    + " LEFT JOIN CMSMV MV ON TI.TI006 = MV.MV001"
-                    + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate"
-                    + " GROUP BY MV.MV002, TI.TI006"
-                    + " )"
-                    + " SELECT ROW_NUMBER() OVER (ORDER BY SUM(TG045)-COALESCE(TI.R,0) DESC) 排名, MV002 業務名稱, TG006 業務代號, CONVERT(DECIMAL(20,2), SUM(TG045)) 銷貨金額, CONVERT(DECIMAL(20,2), COALESCE(TI.R,0)) 退貨金額, CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0)) 銷貨淨額"
-                    + " FROM COPTG TG"
-                    + " LEFT JOIN CMSMV MV ON TG.TG006 = MV.MV001"
-                    + " LEFT JOIN TEMP TI ON TG.TG006 = TI.TI006"
-                    + " WHERE TG.TG023=N'Y' AND TG.TG042 BETWEEN @StartDate AND @EndDate"
-                    + " GROUP BY MV.MV002, TG.TG006, TI.R";
-            }
-            else
-            {
-                if (rdoMonth.Checked)
-                {
-                    query[0] = "WITH TEMP"
-                            + " AS"
-                            + " ("
-                            + " SELECT TI.TI006, SUM(TI.TI037) R"
-                            + " FROM COPTI TI"
-                            + " LEFT JOIN CMSMV MV ON TI.TI006 = MV.MV001"
-                            + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate"
-                            + " GROUP BY MV.MV002, TI.TI006"
-                            + " )"
-                            + " SELECT ROW_NUMBER() OVER (ORDER BY SUM(TG045)-COALESCE(TI.R,0) DESC) 排名, MV002 業務名稱, TG006 業務代號"
-                            + " , CONVERT(DECIMAL(20,2), SUM(TG045)) 銷貨金額"
-                            + " , CONVERT(DECIMAL(20,2), COALESCE(TI.R,0)) 退貨金額"
-                            + " , CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0)) 銷貨淨額"
-                            + " , CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) 目標金額"
-                            + " , CASE "
-                            + " 	WHEN CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0))-CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) >= 0 THEN 0"
-                            + " 	ELSE CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0))-CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) "
-                            + " 	END AS 未達成金額"
-                            + " FROM COPTG TG"
-                            + " LEFT JOIN CMSMV MV ON TG.TG006 = MV.MV001"
-                            + " LEFT JOIN TEMP TI ON TG.TG006 = TI.TI006"
-                            + " LEFT JOIN NZ_ERP2.dbo.SD_SD01_A SD ON TG.TG006=SD.EMP_ID AND SD.[YEAR]=@YEAR AND SD.[MONTH]=@MONTH"
-                            + " WHERE TG.TG023=N'Y' AND TG.TG042 BETWEEN @StartDate AND @EndDate"
-                            + " GROUP BY MV.MV002, TG.TG006, TI.R, SD.[TARGET];";
-                }
-                else
-                {
-                    query[0] = "WITH TEMP"
-                            + " AS"
-                            + " ("
-                            + " SELECT TI.TI006, SUM(TI.TI037) R"
-                            + " FROM COPTI TI"
-                            + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate"
-                            + " GROUP BY TI.TI006"
-                            + " )"
-                            + " , TEMP2"
-                            + " AS"
-                            + " ("
-                            + " SELECT TG.TG006, SUM(TG.TG045) SALE"
-                            + " FROM COPTG TG"
-                            + " WHERE TG.TG023=N'Y' AND TG.TG042 BETWEEN @StartDate AND @EndDate"
-                            + " GROUP BY TG.TG006"
-                            + " )"
-                            + " SELECT ROW_NUMBER() OVER (ORDER BY TG.SALE-COALESCE(TI.R,0) DESC) 排名, MV002 業務名稱, TG006 業務代號"
-                            + " , CONVERT(DECIMAL(20,2), TG.SALE) 銷貨金額"
-                            + " , CONVERT(DECIMAL(20,2), COALESCE(TI.R,0)) 退貨金額"
-                            + " , CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0)) 銷貨淨額"
-                            + " , SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0))) 目標金額"
-                            + " , CASE "
-                            + " 	WHEN CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0))-SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0))) >= 0 THEN 0"
-                            + " 	ELSE CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0))-SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)))"
-                            + " 	END AS 未達成金額"
-                            + " FROM TEMP2 TG"
-                            + " LEFT JOIN CMSMV MV ON TG.TG006 = MV.MV001"
-                            + " LEFT JOIN TEMP TI ON TG.TG006 = TI.TI006"
-                            + " LEFT JOIN NZ_ERP2.dbo.SD_SD01_A SD ON TG.TG006=SD.EMP_ID AND SD.[YEAR]=@YEAR"
-                            + " GROUP BY MV.MV002, TG.TG006, TI.R, TG.SALE";
-                }
-            }
-            query[1] = "WITH CTE_RETURN(SALES, NUMBER)"
-                    + " AS"
-                    + " ("
-                    + " SELECT COPTI.TI006, COUNT(*)"
-                    + " FROM COPTI"
-                    + " WHERE COPTI.TI019=N'Y' AND COPTI.TI034 BETWEEN @StartDate AND @EndDate"
-                    + " GROUP BY COPTI.TI006"
-                    + " )"
-                    + " SELECT ROW_NUMBER() OVER (ORDER BY COALESCE(SUM(TI.TI037),0) DESC) 排名, MV.MV002 業務名稱, TI.TI006 業務代號, CONVERT(DECIMAL(20,2),SUM(TJ.TJ033)) 退貨金額, CTE_RETURN.NUMBER 退貨單數, COUNT(*) 退貨件數"
-                    + " FROM COPTI TI"
-                    + " LEFT JOIN COPTJ TJ ON TI.TI001 = TJ.TJ001 AND TI.TI002 = TJ.TJ002"
-                    + " LEFT JOIN CMSMV MV ON TI.TI006 = MV.MV001"
-                    + " LEFT JOIN CTE_RETURN ON TI.TI006 = CTE_RETURN.SALES"
-                    + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate"
-                    + " GROUP BY MV.MV002, TI.TI006, CTE_RETURN.NUMBER";
-        }
-        else
-        {
-            if (rdoText.Checked)
-            {
-                query[0] = "WITH TEMP"
-                       + " AS"
-                       + " ("
-                       + " SELECT TI.TI006, SUM(TI.TI037) R"
-                       + " FROM COPTI TI"
-                       + " LEFT JOIN CMSMV MV ON TI.TI006 = MV.MV001"
-                       + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate AND TI.TI006 = @ID"
-                       + " GROUP BY MV.MV002, TI.TI006"
-                       + " )"
-                       + " SELECT ROW_NUMBER() OVER (ORDER BY SUM(TG045)-COALESCE(TI.R,0) DESC) 排名, MV002 業務名稱, TG006 業務代號, CONVERT(DECIMAL(20,2), SUM(TG045)) 銷貨金額, CONVERT(DECIMAL(20,2), COALESCE(TI.R,0)) 退貨金額, CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0)) 銷貨淨額"
-                       + " FROM COPTG TG"
-                       + " LEFT JOIN CMSMV MV ON TG.TG006 = MV.MV001"
-                       + " LEFT JOIN TEMP TI ON TG.TG006 = TI.TI006"
-                       + " WHERE TG.TG023=N'Y' AND TG.TG042 BETWEEN @StartDate AND @EndDate AND TG.TG006 = @ID"
-                       + " GROUP BY MV.MV002, TG.TG006, TI.R";
-            }
-            else
-            {
-                if (rdoMonth.Checked)
-                {
-                    query[0] = "WITH TEMP"
-                            + " AS"
-                            + " ("
-                            + " SELECT TI.TI006, SUM(TI.TI037) R"
-                            + " FROM COPTI TI"
-                            + " LEFT JOIN CMSMV MV ON TI.TI006 = MV.MV001"
-                            + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate"
-                            + " GROUP BY MV.MV002, TI.TI006"
-                            + " )"
-                            + " SELECT ROW_NUMBER() OVER (ORDER BY SUM(TG045)-COALESCE(TI.R,0) DESC) 排名, MV002 業務名稱, TG006 業務代號"
-                            + " , CONVERT(DECIMAL(20,2), SUM(TG045)) 銷貨金額"
-                            + " , CONVERT(DECIMAL(20,2), COALESCE(TI.R,0)) 退貨金額"
-                            + " , CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0)) 銷貨淨額"
-                            + " , CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) 目標金額"
-                            + " , CASE "
-                            + " 	WHEN CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0))-CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) >= 0 THEN 0"
-                            + " 	ELSE CONVERT(DECIMAL(20,2), SUM(TG045)-COALESCE(TI.R,0))-CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)) "
-                            + " 	END AS 未達成金額"
-                            + " FROM COPTG TG"
-                            + " LEFT JOIN CMSMV MV ON TG.TG006 = MV.MV001"
-                            + " LEFT JOIN TEMP TI ON TG.TG006 = TI.TI006"
-                            + " LEFT JOIN NZ_ERP2.dbo.SD_SD01_A SD ON TG.TG006=SD.EMP_ID AND SD.[YEAR]=@YEAR AND SD.[MONTH]=@MONTH"
-                            + " WHERE TG.TG023=N'Y' AND TG.TG042 BETWEEN @StartDate AND @EndDate AND TG.TG006=@ID"
-                            + " GROUP BY MV.MV002, TG.TG006, TI.R, SD.[TARGET];";
-                }
-                else
-                {
-                    query[0] = "WITH TEMP"
-                            + " AS"
-                            + " ("
-                            + " SELECT TI.TI006, SUM(TI.TI037) R"
-                            + " FROM COPTI TI"
-                            + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate"
-                            + " GROUP BY TI.TI006"
-                            + " )"
-                            + " , TEMP2"
-                            + " AS"
-                            + " ("
-                            + " SELECT TG.TG006, SUM(TG.TG045) SALE"
-                            + " FROM COPTG TG"
-                            + " WHERE TG.TG023=N'Y' AND TG.TG042 BETWEEN @StartDate AND @EndDate AND TG.TG006=@ID"
-                            + " GROUP BY TG.TG006"
-                            + " )"
-                            + " SELECT ROW_NUMBER() OVER (ORDER BY TG.SALE-COALESCE(TI.R,0) DESC) 排名, MV002 業務名稱, TG006 業務代號"
-                            + " , CONVERT(DECIMAL(20,2), TG.SALE) 銷貨金額"
-                            + " , CONVERT(DECIMAL(20,2), COALESCE(TI.R,0)) 退貨金額"
-                            + " , CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0)) 銷貨淨額"
-                            + " , SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0))) 目標金額"
-                            + " , CASE "
-                            + " 	WHEN CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0))-SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0))) >= 0 THEN 0"
-                            + " 	ELSE CONVERT(DECIMAL(20,2), TG.SALE-COALESCE(TI.R,0))-SUM(CONVERT(DECIMAL(20,2), COALESCE(SD.[TARGET],0)))"
-                            + " 	END AS 未達成金額"
-                            + " FROM TEMP2 TG"
-                            + " LEFT JOIN CMSMV MV ON TG.TG006 = MV.MV001"
-                            + " LEFT JOIN TEMP TI ON TG.TG006 = TI.TI006"
-                            + " LEFT JOIN NZ_ERP2.dbo.SD_SD01_A SD ON TG.TG006=SD.EMP_ID AND SD.[YEAR]=@YEAR"
-                            + " GROUP BY MV.MV002, TG.TG006, TI.R, TG.SALE";
-                }
-            }
-            query[1] = "WITH CTE_RETURN(SALES, NUMBER)"
-                    + " AS"
-                    + " ("
-                    + " SELECT COPTI.TI006, COUNT(*)"
-                    + " FROM COPTI"
-                    + " WHERE COPTI.TI019=N'Y' AND COPTI.TI034 BETWEEN @StartDate AND @EndDate"
-                    + " GROUP BY COPTI.TI006"
-                    + " )"
-                    + " SELECT ROW_NUMBER() OVER (ORDER BY COALESCE(SUM(TI.TI037),0) DESC) 排名, MV.MV002 業務名稱, TI.TI006 業務代號, CONVERT(DECIMAL(20,2),SUM(TJ.TJ033)) 退貨金額, CTE_RETURN.NUMBER 退貨單數, COUNT(*) 退貨件數"
-                    + " FROM COPTI TI"
-                    + " LEFT JOIN COPTJ TJ ON TI.TI001 = TJ.TJ001 AND TI.TI002 = TJ.TJ002"
-                    + " LEFT JOIN CMSMV MV ON TI.TI006 = MV.MV001"
-                    + " LEFT JOIN CTE_RETURN ON TI.TI006 = CTE_RETURN.SALES"
-                    + " WHERE TI.TI019=N'Y' AND TI.TI034 BETWEEN @StartDate AND @EndDate AND TI.TI006= @ID"
-                    + " GROUP BY MV.MV002, TI.TI006, CTE_RETURN.NUMBER";
-        }
-        return query;
-    }
-
-    private void SqlSearch(string[] query)
+    private void SqlSearch()
     {
         DateTime date = new DateTime();
         bool entryCorrect = false;
@@ -304,6 +100,9 @@ public partial class SD01 : System.Web.UI.Page
         string startMonth = "";
         string endYear = "";
         string endMonth = "";
+        string personnelCondition = "";
+        string timespanCondition = "";
+        string query = "";
         if (rdoDDL.Checked)
         {
             if (rdoYear.Checked)
@@ -312,6 +111,7 @@ public partial class SD01 : System.Web.UI.Page
                 startMonth = "1226";
                 endYear = ddlYear.SelectedValue;
                 endMonth = "1225";
+                timespanCondition = "";
             }
             else
             {
@@ -327,6 +127,7 @@ public partial class SD01 : System.Web.UI.Page
                 }
                 endYear = ddlYear.SelectedValue;
                 endMonth = ddlMonth.SelectedValue + "25";
+                timespanCondition = " and saleTarget.[MONTH]=SUBSTRING(@end,5,2)";
             }
             entryCorrect = true;
         }
@@ -346,6 +147,12 @@ public partial class SD01 : System.Web.UI.Page
                 entryCorrect = true;
             }
         }
+
+        if(ddlPersonnel.SelectedValue.ToString() != "全部人員")
+        {
+            personnelCondition = " where pvt.salesId=@salesId";
+        }
+
         if (entryCorrect == true)
         {
             lblError.Text = "";
@@ -354,44 +161,129 @@ public partial class SD01 : System.Web.UI.Page
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
+                query = ";with returnAmount" +
+                    " as" +
+                    " (" +
+                    " select TI.TI006 'salesId'" +
+                    " ,COUNT(*) 'returnAmount'" +
+                    " from COPTI TI" +
+                    " left" +
+                    " join COPTJ TJ on TI.TI001 = TJ.TJ001 and TI.TI002 = TJ.TJ002" +
+                    " where TI.TI019 = N'Y'" +
+                    " and TI.TI034 between @start and @end" +
+                    " group by TI.TI006" +
+                    " )" +
+                    " ,recordTable" +
+                    " as" +
+                    " (" +
+                    " SELECT TG.TG023 'eventCode'" +
+                    " ,TG.TG042 'eventDate'" +
+                    " ,TG.TG001 'eventType'" +
+                    " ,TG.TG004 'custId'" +
+                    " ,TG.TG006 'salesId'" +
+                    " ,TG.TG045 'amount'" +
+                    " ,'sale' 'returnOrSale'" +
+                    " ,case" +
+                    " when TG.TG001 = 'A231' then 'foreign'" +
+                    " else 'domestic'" +
+                    " end as 'foreignOrDomestic'" +
+                    " FROM COPTG TG" +
+                    " UNION ALL" +
+                    " SELECT TI.TI019 'eventCode'" +
+                    " ,TI.TI034 'eventDate'" +
+                    " ,TI.TI001 'eventType'" +
+                    " ,TI.TI004" +
+                    " ,TI.TI006" +
+                    " ,TI.TI037" +
+                    " ,'return'" +
+                    " ,case" +
+                    " when TI.TI004 like 'AE%' then 'foreign'" +
+                    " else 'domestic'" +
+                    " end" +
+                    " FROM COPTI TI" +
+                    " )" +
+                    " select ROW_NUMBER() over(order by coalesce(pvt.domesticSale, 0) - coalesce(pvt.domesticReturn, 0) + coalesce(pvt.foreignSale, 0) - coalesce(pvt.foreignReturn, 0) desc) 'rank'" +
+                    " ,MV.MV002 'salesName'" +
+                    " ,pvt.salesId" +
+                    " ,convert(decimal(20, 2), coalesce(pvt.domesticSale, 0)) 'domesticSale'" +
+                    " ,convert(decimal(20, 2), coalesce(pvt.domesticReturn, 0)) 'domesticReturn'" +
+                    " ,convert(decimal(20, 2), coalesce(pvt.foreignSale, 0)) 'foreignSale'" +
+                    " ,convert(decimal(20, 2), coalesce(pvt.foreignReturn, 0)) 'foreignReturn'" +
+                    " ,convert(decimal(20, 2), coalesce(pvt.domesticSale, 0) - coalesce(domesticReturn, 0) + coalesce(foreignSale, 0) - coalesce(foreignReturn, 0)) 'netSale'" +
+                    " ,convert(decimal(20, 2), coalesce(sum(saleTarget.[TARGET]), 0)) 'saleTarget'" +
+                    " ,case" +
+                    " when(coalesce(pvt.domesticSale, 0) - coalesce(domesticReturn, 0) + coalesce(foreignSale, 0) - coalesce(foreignReturn, 0)) - coalesce(sum(saleTarget.[TARGET]), 0) > 0 then convert(decimal(10,2),0)" +
+                    " else convert(decimal(20, 2), (coalesce(pvt.domesticSale, 0) - coalesce(domesticReturn, 0) + coalesce(foreignSale, 0) - coalesce(foreignReturn, 0)) - coalesce(sum(saleTarget.[TARGET]), 0))" +
+                    " end 'targetDifference'" +
+                    " ,coalesce(ra.returnAmount,0) 'returnAmount'" +
+                    " from" +
+                    " (select salesId" +
+                    " ,case" +
+                    " when foreignOrDomestic = 'domestic' and returnOrSale = 'sale' then 'domesticSale'" +
+                    " when foreignOrDomestic = 'domestic' and returnOrSale = 'return' then 'domesticReturn'" +
+                    " when foreignOrDomestic = 'foreign' and returnOrSale = 'sale' then 'foreignSale'" +
+                    " when foreignOrDomestic = 'foreign' and returnOrSale = 'return' then 'foreignReturn'" +
+                    " end as eventType" +
+                    " , amount" +
+                    " from recordTable" +
+                    " where eventCode = 'Y'" +
+                    " and eventDate between @start and @end) as src" +
+                    " pivot" +
+                    " (sum(amount)" +
+                    " for eventType " +
+                    " in ([domesticSale],[domesticReturn],[foreignSale],[foreignReturn])" +
+                    " ) as pvt" +
+                    " left join CMSMV MV on pvt.salesId = MV.MV001" +
+                    " left join returnAmount ra on pvt.salesId=ra.salesId" +
+                    " left join NZ_ERP2.dbo.SD_SD01_A saleTarget ON pvt.salesId = saleTarget.EMP_ID and saleTarget.[YEAR]=SUBSTRING(@end,1,4)" +
+                    timespanCondition +
+                    personnelCondition +
+                    " group by" +
+                    " MV.MV002" +
+                    " ,pvt.salesId" +
+                    " ,pvt.domesticSale" +
+                    " ,pvt.domesticReturn" +
+                    " ,pvt.foreignSale" +
+                    " ,pvt.foreignReturn" +
+                    " ,ra.returnAmount";
+
                 //銷售淨額
                 //get data from database
-                SqlCommand cmd = new SqlCommand(query[0], conn);
-                cmd.Parameters.AddWithValue("@YEAR", ddlYear.SelectedValue.ToString());
-                cmd.Parameters.AddWithValue("@MONTH", ddlMonth.SelectedValue.ToString());
-                cmd.Parameters.AddWithValue("@ID", ddlPersonnel.SelectedValue.ToString());
-                cmd.Parameters.AddWithValue("@StartDate", startYear + startMonth);
-                cmd.Parameters.AddWithValue("@EndDate", endYear + endMonth);
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@salesId", ddlPersonnel.SelectedValue.ToString());
+                cmd.Parameters.AddWithValue("@start", startYear + startMonth);
+                cmd.Parameters.AddWithValue("@end", endYear + endMonth);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
                 //feed data from dataset to gridview
                 grdReport.DataSource = ds;
                 grdReport.DataBind();
-                //feed data from dataset to chart
-                Chart1.DataSource = ds;
-                Chart1.Titles.Add("銷售淨額報告" + startYear + startMonth + " ~ " + endYear + endMonth);
-                Chart1.Series[0].ChartType = SeriesChartType.Column;
-                Chart1.Series[0].XValueMember = "業務名稱";
-                Chart1.Series[0].YValueMembers = "銷貨淨額";
-                Chart1.DataBind();
 
-                //退貨金額
-                cmd = new SqlCommand(query[1], conn);
-                cmd.Parameters.AddWithValue("@ID", ddlPersonnel.SelectedValue.ToString());
-                cmd.Parameters.AddWithValue("@StartDate", startYear + startMonth);
-                cmd.Parameters.AddWithValue("@EndDate", endYear + endMonth);
-                da = new SqlDataAdapter(cmd);
-                ds = new DataSet();
-                da.Fill(ds);
-                grdReport2.DataSource = ds;
-                grdReport2.DataBind();
-                Chart2.DataSource = ds;
-                Chart2.Titles.Add("退貨金額報告" + startYear + startMonth + " ~ " + endYear + endMonth);
-                Chart2.Series[0].ChartType = SeriesChartType.Column;
-                Chart2.Series[0].XValueMember = "業務名稱";
-                Chart2.Series[0].YValueMembers = "退貨金額";
-                Chart2.DataBind();
+                //feed data from dataset to chart                
+                Chart1.ChartAreas["ChartArea1"].AxisX.Interval = 1;
+                Chart1.Series["domestic"].XValueMember = "salesName";
+                Chart1.Series["domestic"].YValueMembers = "domesticSale";
+                Chart1.Series["foreign"].YValueMembers = "foreignSale";
+                Chart1.Titles.Add("銷售淨額報告" + startYear + startMonth + " ~ " + endYear + endMonth);
+                //取掃所有的Series 將其SmartLabelStyle更改樣式
+                foreach (var series in Chart1.Series)
+                {
+                    series.SmartLabelStyle.CalloutStyle = LabelCalloutStyle.None;
+                    series.SmartLabelStyle.CalloutLineAnchorCapStyle = LineAnchorCapStyle.None;
+                    series.SmartLabelStyle.CalloutLineColor = Color.Transparent;
+                    series.SmartLabelStyle.CalloutLineWidth = 0;
+                }
+                
+                //Chart1.DataSource = ds.Tables[0].DefaultView;
+                Chart1.Series[0].Points.DataBindXY(ds.Tables[0].DefaultView, "salesName", ds.Tables[0].DefaultView, "domesticSale");
+                Chart1.Series[1].Points.DataBindXY(ds.Tables[0].DefaultView, "salesName", ds.Tables[0].DefaultView, "foreignSale");
+
+                //將 Point 數值 0給拿掉
+                foreach (var point in from series in Chart1.Series from point in series.Points from t in point.YValues where t == 0 select point)
+                {
+                    point.Label = string.Empty;
+                }
             }
         }
         else
@@ -404,7 +296,7 @@ public partial class SD01 : System.Web.UI.Page
         try
         {            
             lblError.Text = "";
-            SqlSearch(GetQuery());
+            SqlSearch();
         }
         catch (Exception ex)
         {
@@ -461,134 +353,28 @@ public partial class SD01 : System.Web.UI.Page
             endMonth = ddlMonth.SelectedValue + "25";
         }
 
-        HSSFWorkbook workbook = new HSSFWorkbook();
-        MemoryStream ms = new MemoryStream();
-        ISheet sheet1 = workbook.CreateSheet("銷售淨額報表" + startYear + startMonth + "~" + endYear + endMonth);
-        ISheet sheet2 = workbook.CreateSheet("退貨金額報表" + startYear + startMonth + "~" + endYear + endMonth);
-        IRow rowHeader1 = sheet1.CreateRow(0);
-        IRow rowHeader2 = sheet2.CreateRow(0);
-        IRow rowFooter1 = sheet1.CreateRow(grdReport.Rows.Count + 1);
-        IRow rowFooter2 = sheet2.CreateRow(grdReport2.Rows.Count + 1);
-        HSSFCellStyle headerCellStyle = (HSSFCellStyle)workbook.CreateCellStyle();
-        HSSFCellStyle oddRowCellStyle = (HSSFCellStyle)workbook.CreateCellStyle();
-        HSSFCellStyle evenRowCellStyle = (HSSFCellStyle)workbook.CreateCellStyle();
-        HSSFFont headerFont = (HSSFFont)workbook.CreateFont();
-        HSSFFont oddRowFont = (HSSFFont)workbook.CreateFont();
-        HSSFFont evenRowFont = (HSSFFont)workbook.CreateFont();
+        string filename = "業績排名表" + startYear + startMonth + "~" + endYear + endMonth;
+        string strfileext = ".xls";
+        StringWriter tw = new StringWriter();
+        HtmlTextWriter hw = new HtmlTextWriter(tw);
+        HttpContext.Current.Response.ContentType = "application/vnd.ms-excel";
+        HttpContext.Current.Response.AppendHeader("Content-Disposition", "attachment; filename=" + filename + strfileext);
+        HttpContext.Current.Response.Write("<meta http-equiv=Content-Type content=text/html;charset=utf-8>");
 
-        //set Header's Cell Style
-        SetCustomCellColor(workbook, HSSFColor.CornflowerBlue.Index, "29ABE2");
-        headerCellStyle.FillForegroundColor = HSSFColor.CornflowerBlue.Index;
-        headerCellStyle.FillPattern = FillPattern.SolidForeground;
-        headerFont.Color = HSSFColor.White.Index;
-        headerFont.Boldweight = (short)FontBoldWeight.Bold;
-        headerCellStyle.SetFont(headerFont);
-        //set Odd Row's Cell Style
-        SetCustomCellColor(workbook, HSSFColor.Grey25Percent.Index, "c3e8f4");
-        oddRowCellStyle.FillForegroundColor = HSSFColor.Grey25Percent.Index;
-        oddRowCellStyle.FillPattern = FillPattern.SolidForeground;
-        oddRowFont.Color = HSSFColor.Black.Index;
-        oddRowCellStyle.SetFont(oddRowFont);
-        //set Even Row's Cell Style
-        SetCustomCellColor(workbook, HSSFColor.PaleBlue.Index, "ffffff");
-        evenRowCellStyle.FillForegroundColor = HSSFColor.White.Index;
-        evenRowCellStyle.FillPattern = FillPattern.SolidForeground;
-        evenRowFont.Color = HSSFColor.PaleBlue.Index;
-        evenRowFont.Color = HSSFColor.Black.Index;
-        evenRowCellStyle.SetFont(evenRowFont);
+        //先把分頁關掉
+        //gvResult.AllowPaging = false;
+        //bindgv();
 
-
-        //grdReport資料匯入sheet1
-        //sheet1 Header
-        for (int i = 0, iCount = grdReport.HeaderRow.Cells.Count; i < iCount; i++)
-        {
-            ICell cell = rowHeader1.CreateCell(i);
-            cell.CellStyle = headerCellStyle;
-            cell.SetCellValue(grdReport.HeaderRow.Cells[i].Text.Replace("&nbsp;", "").Trim());
-        }
-        //sheet1 Body
-        for (int i = 0, iCount = grdReport.Rows.Count; i < iCount; i++)
-        {
-            IRow rowItem = sheet1.CreateRow(i + 1);
-            for (int j = 0, jCount = grdReport.HeaderRow.Cells.Count; j < jCount; j++)
-            {
-                ICell cell = rowItem.CreateCell(j);
-                if ((i + 1) % 2 == 1)
-                {
-                    cell.CellStyle = oddRowCellStyle;
-                }
-                else
-                {
-                    cell.CellStyle = evenRowCellStyle;
-                }
-                cell.SetCellValue(grdReport.Rows[i].Cells[j].Text.Replace("&nbsp;", "").Trim());
-                sheet1.AutoSizeColumn(j);
-            }
-            sheet1.GetRow(i).HeightInPoints = 16.5f;
-        }
-        //sheet1 footer
-        for (int i = 0; i < grdReport.FooterRow.Cells.Count; i++)
-        {
-            ICell cell = rowFooter1.CreateCell(i);
-            cell.CellStyle = headerCellStyle;
-            cell.SetCellValue(grdReport.FooterRow.Cells[i].Text.Replace("&nbsp;", "").Trim());
-        }
-
-        //grdReport2資料匯入sheet2
-        //sheet2 Header
-        for (int i = 0, iCount = grdReport2.HeaderRow.Cells.Count; i < iCount; i++)
-        {
-            ICell cell = rowHeader2.CreateCell(i);
-            cell.CellStyle = headerCellStyle;
-            cell.SetCellValue(grdReport2.HeaderRow.Cells[i].Text.Replace("&nbsp;", "").Trim());
-        }
-        //sheet1 Body
-        for (int i = 0, iCount = grdReport2.Rows.Count; i < iCount; i++)
-        {
-            IRow rowItem = sheet2.CreateRow(i + 1);
-            for (int j = 0, jCount = grdReport2.HeaderRow.Cells.Count; j < jCount; j++)
-            {
-                ICell cell = rowItem.CreateCell(j);
-                if ((i + 1) % 2 == 1)
-                {
-                    cell.CellStyle = oddRowCellStyle;
-                }
-                else
-                {
-                    cell.CellStyle = evenRowCellStyle;
-                }
-                cell.SetCellValue(((Label)grdReport2.Rows[i].Cells[j].FindControl("Label"+(j+3).ToString())).Text.Replace("&nbsp;", "").Trim());
-                sheet2.AutoSizeColumn(j);
-            }
-            sheet2.GetRow(i).HeightInPoints = 16.5f;
-        }
-        //sheet2 footer
-        for (int i = 0; i < grdReport2.FooterRow.Cells.Count; i++)
-        {
-            ICell cell = rowFooter2.CreateCell(i);
-            cell.CellStyle = headerCellStyle;
-            cell.SetCellValue(grdReport2.FooterRow.Cells[i].Text.Replace("&nbsp;", "").Trim());
-        }
-        //workbook匯出至excel
-        workbook.Write(ms);
-        string fileName = "NetSaleReport" + startYear + startMonth + "~" + endYear + endMonth;
-        Response.AddHeader("Content-Disposition", string.Format("attachment; filename=" + Server.UrlEncode(fileName) + ".xls"));
-        Response.BinaryWrite(ms.ToArray());
-        //收尾
-        workbook = null;
-        ms.Close();
-        ms.Dispose();
+        //Get the HTML for the control.
+        grdReport.RenderControl(hw);
+        HttpContext.Current.Response.Write(tw.ToString());
+        HttpContext.Current.Response.End();
     }
-    private void SetCustomCellColor(HSSFWorkbook workbook, short originalColorIndex, string alternateColor)
+
+    public override void VerifyRenderingInServerForm(Control control)
     {
-        HSSFPalette cellPalette = workbook.GetCustomPalette();
-        byte CR, CG, CB;
-        CR = Convert.ToByte("0x" + alternateColor.Substring(0, 2), 16);
-        CG = Convert.ToByte("0x" + alternateColor.Substring(2, 2), 16);
-        CB = Convert.ToByte("0x" + alternateColor.Substring(4, 2), 16);
-        cellPalette.SetColorAtIndex(originalColorIndex, CR, CG, CB);
+        //用export_excel必須要有這個override
     }
-
 
     internal void GridviewAddFooter(string _strFooterName, GridViewRowEventArgs _gd)
     {
@@ -618,6 +404,35 @@ public partial class SD01 : System.Web.UI.Page
     }
     protected void grdReport_RowCreated(object sender, GridViewRowEventArgs e)
     {
+        if (e.Row.RowType == DataControlRowType.Header)
+        {
+            GridView HeaderGrid = (GridView)sender;
+            GridViewRow HeaderGridRow = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Insert);
+            TableCell HeaderCell = new TableCell();
+            HeaderCell.Text = "";
+            HeaderCell.ColumnSpan = 3;
+            HeaderCell.CssClass = "stackedHeader-1";
+            HeaderGridRow.Cells.Add(HeaderCell);
+
+            HeaderCell = new TableCell();
+            HeaderCell.Text = "銷貨金額";
+            HeaderCell.ColumnSpan = 2;
+            HeaderCell.CssClass = "stackedHeader-1";
+            HeaderGridRow.Cells.Add(HeaderCell);
+
+            HeaderCell = new TableCell();
+            HeaderCell.Text = "退貨金額";
+            HeaderCell.ColumnSpan = 2;
+            HeaderCell.CssClass = "stackedHeader-1";
+
+            HeaderGridRow.Cells.Add(HeaderCell);
+            HeaderCell = new TableCell();
+            HeaderCell.Text = "";
+            HeaderCell.ColumnSpan = 4;
+            HeaderCell.CssClass = "stackedHeader-1";
+            HeaderGridRow.Cells.Add(HeaderCell);
+            grdReport.Controls[0].Controls.AddAt(0, HeaderGridRow);
+        }
         if (e.Row.RowType == DataControlRowType.Footer)
         {
             GridviewAddFooter("小計", e);
@@ -625,7 +440,7 @@ public partial class SD01 : System.Web.UI.Page
     }
     internal void GridViewAddFooter_sum(GridView _gd)
     {
-        int sum = 0;
+        decimal sum = 0;
         if (_gd.Rows.Count > 0)
         {
             for (int i = 3; i < _gd.Rows[0].Cells.Count; i++)
@@ -633,53 +448,20 @@ public partial class SD01 : System.Web.UI.Page
                 sum = 0;
                 for (int j = 0; j < _gd.Rows.Count; j++)
                 {
-                    sum += int.Parse(_gd.Rows[j].Cells[i].Text, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
+                    sum += decimal.Parse(((Label)_gd.Rows[j].Cells[i].FindControl("Label"+(i+1).ToString())).Text, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
                 }
-                if (i == 3)
+                if (i != 10)
                 {
                     _gd.FooterRow.Cells[i].Text = sum.ToString("C", new CultureInfo("zh-TW"));
                 }
-                else
+                    else
                 {
                     _gd.FooterRow.Cells[i].Text = sum.ToString("N0");
                 }
-            }
+        }
         }
     }
-    protected void grdReport2_DataBound(object sender, EventArgs e)
-    {
-        GridViewAddFooter2_sum(grdReport2);
-    }
-    protected void grdReport2_RowCreated(object sender, GridViewRowEventArgs e)
-    {
-        if (e.Row.RowType == DataControlRowType.Footer)
-        {
-            GridviewAddFooter("小計", e);
-        }
-    }
-    internal void GridViewAddFooter2_sum(GridView _gd)
-    {
-        int sum = 0;
-        if (_gd.Rows.Count > 0)
-        {
-            for (int i = 3; i < _gd.Rows[0].Cells.Count; i++)
-            {
-                sum = 0;
-                for (int j = 0; j < _gd.Rows.Count; j++)
-                {
-                    sum += int.Parse(((Label)_gd.Rows[j].Cells[i].FindControl("Label" + (i+3).ToString())).Text, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
-                }
-                if (i == 3)
-                {
-                    _gd.FooterRow.Cells[i].Text = sum.ToString("C", new CultureInfo("zh-TW"));
-                }
-                else
-                {
-                    _gd.FooterRow.Cells[i].Text = sum.ToString("N0");
-                }
-            }
-        }
-    }
+
     protected void btnTargetTrigger_Click(object sender, EventArgs e)
     {
         DataSet ds = new DataSet();
