@@ -205,15 +205,15 @@ public partial class SD01 : System.Web.UI.Page
                     " select ROW_NUMBER() over(order by coalesce(pvt.domesticSale, 0) - coalesce(pvt.domesticReturn, 0) + coalesce(pvt.foreignSale, 0) - coalesce(pvt.foreignReturn, 0) desc) 'rank'" +
                     " ,MV.MV002 'salesName'" +
                     " ,pvt.salesId" +
-                    " ,convert(decimal(20, 2), coalesce(pvt.domesticSale, 0)) 'domesticSale'" +
-                    " ,convert(decimal(20, 2), coalesce(pvt.domesticReturn, 0)) 'domesticReturn'" +
-                    " ,convert(decimal(20, 2), coalesce(pvt.foreignSale, 0)) 'foreignSale'" +
-                    " ,convert(decimal(20, 2), coalesce(pvt.foreignReturn, 0)) 'foreignReturn'" +
-                    " ,convert(decimal(20, 2), coalesce(pvt.domesticSale, 0) - coalesce(domesticReturn, 0) + coalesce(foreignSale, 0) - coalesce(foreignReturn, 0)) 'netSale'" +
-                    " ,convert(decimal(20, 2), coalesce(sum(saleTarget.[TARGET]), 0)) 'saleTarget'" +
+                    " ,convert(decimal(20, 0), coalesce(pvt.domesticSale, 0)) 'domesticSale'" +
+                    " ,convert(decimal(20, 0), coalesce(pvt.domesticReturn, 0)) 'domesticReturn'" +
+                    " ,convert(decimal(20, 0), coalesce(pvt.foreignSale, 0)) 'foreignSale'" +
+                    " ,convert(decimal(20, 0), coalesce(pvt.foreignReturn, 0)) 'foreignReturn'" +
+                    " ,convert(decimal(20, 0), coalesce(pvt.domesticSale, 0) - coalesce(domesticReturn, 0) + coalesce(foreignSale, 0) - coalesce(foreignReturn, 0)) 'netSale'" +
+                    " ,convert(decimal(20, 0), coalesce(sum(saleTarget.[TARGET]), 0)) 'saleTarget'" +
                     " ,case" +
                     " when(coalesce(pvt.domesticSale, 0) - coalesce(domesticReturn, 0) + coalesce(foreignSale, 0) - coalesce(foreignReturn, 0)) - coalesce(sum(saleTarget.[TARGET]), 0) > 0 then convert(decimal(10,2),0)" +
-                    " else convert(decimal(20, 2), (coalesce(pvt.domesticSale, 0) - coalesce(domesticReturn, 0) + coalesce(foreignSale, 0) - coalesce(foreignReturn, 0)) - coalesce(sum(saleTarget.[TARGET]), 0))" +
+                    " else convert(decimal(20, 0), (coalesce(pvt.domesticSale, 0) - coalesce(domesticReturn, 0) + coalesce(foreignSale, 0) - coalesce(foreignReturn, 0)) - coalesce(sum(saleTarget.[TARGET]), 0))" +
                     " end 'targetDifference'" +
                     " ,coalesce(ra.returnAmount,0) 'returnAmount'" +
                     " from" +
@@ -450,14 +450,14 @@ public partial class SD01 : System.Web.UI.Page
                 {
                     sum += decimal.Parse(((Label)_gd.Rows[j].Cells[i].FindControl("Label"+(i+1).ToString())).Text, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
                 }
-                if (i != 10)
-                {
-                    _gd.FooterRow.Cells[i].Text = sum.ToString("C", new CultureInfo("zh-TW"));
-                }
-                    else
-                {
-                    _gd.FooterRow.Cells[i].Text = sum.ToString("N0");
-                }
+                //if (i != 10)
+                //{
+                //    _gd.FooterRow.Cells[i].Text = sum.ToString("C", new CultureInfo("zh-TW"));
+                //}
+                //    else
+                //{
+                 _gd.FooterRow.Cells[i].Text = sum.ToString("N0");
+                //}
         }
         }
     }
