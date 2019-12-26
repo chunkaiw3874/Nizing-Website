@@ -42,6 +42,11 @@
     <asp:HiddenField ID="hdnQuotationDPercent" runat="server" />--%>
     <div class="printarea">
         <div class="row">
+            <div class="col-sm-12">
+                <a href="../Default.aspx">回去首頁</a>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-sm-6 h2">
                 <asp:Label ID="Label1" runat="server" Text="牌價表"></asp:Label>
                 <%--<asp:Label ID="lblQuotationListDate" runat="server" Text="2019/03"></asp:Label>--%>

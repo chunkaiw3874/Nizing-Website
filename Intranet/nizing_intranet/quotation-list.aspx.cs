@@ -21,7 +21,7 @@ public partial class oqs_quotation_list : System.Web.UI.Page
     {            
         //Setup Adm list
         adm.Add("chrissy");
-        adm.Add("kevin");
+        //adm.Add("kevin");
         
         if (!IsPostBack)
         {
@@ -134,8 +134,7 @@ public partial class oqs_quotation_list : System.Web.UI.Page
             for (int i = 0; i < gvQuotationList.Columns.Count; i++)
             {
                 if (gvQuotationList.Columns[i].HeaderText == "單位成本"
-                    || gvQuotationList.Columns[i].HeaderText == "管銷費用"
-                    || gvQuotationList.Columns[i].HeaderText == "總成本")
+                    || gvQuotationList.Columns[i].HeaderText == "管銷費用")
                 {
                     gvQuotationList.Columns[i].Visible = false;
                 }
@@ -171,7 +170,7 @@ public partial class oqs_quotation_list : System.Web.UI.Page
             string query = "SELECT DISTINCT MA.MA002 'Value',MA003 'Name'"
                         + " FROM INVMA MA"
                         + " LEFT JOIN INVMB MB ON MA.MA002=MB.MB007"
-                        + " WHERE MB.MB029='OQS'";
+                        + " WHERE MB.MB005='01'";
             SqlCommand cmd = new SqlCommand(query, conn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(category);
@@ -221,7 +220,7 @@ public partial class oqs_quotation_list : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(NZconnectionString))
         {
             conn.Open();
-            string query = "SELECT TOP 100 MA.MA003 'Category'"
+            string query = "SELECT MA.MA003 'Category'"
                         + " ,MB.MB001 'ProductID'"
                         + " ,MB.MB002 'ProductName'"
                         + " ,COALESCE(MB.MB073, 0) 'PackageSize'"
@@ -230,8 +229,8 @@ public partial class oqs_quotation_list : System.Web.UI.Page
                         + " FROM INVMB MB"
                         + " LEFT JOIN INVMA MA ON MB.MB007=MA.MA002"
                         + " LEFT JOIN INVLB LB ON MB.MB001=LB.LB001"
-                        + " WHERE MB.MB029='OQS'"
-                        + " AND LB.LB002=@YearMonth"
+                        + " WHERE LB.LB002=@YearMonth"
+                        + " AND MB.MB005='01'"
                         + condition
                         + " ORDER BY Category,LB.LB010,MB.MB001";
             SqlCommand cmd = new SqlCommand(query, conn);
