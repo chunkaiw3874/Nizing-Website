@@ -145,79 +145,181 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
             IDCondition += " AND (invAmount<>0 OR safeInv<>0)";
         }
 
-        string query = ";WITH SALESTABLE"
-+ " AS"
-+ " ("
-+ " SELECT MB.MB001 'ID'"
-+ " , CAST(COALESCE(MC.MC004,0) AS DECIMAL) 'safeInv'"
-+ " , CAST(COALESCE(SUM(MC.MC007),0) AS DECIMAL) 'invAmount'"
-+ " , SUBSTRING(TG.TG042,1,4) 'yr'"
-+ " , SUBSTRING(TG.TG042,5,2) 'mn'"
-+ " , CAST(TH.TH008 AS DECIMAL) 'saleAmount'"
-+ " FROM INVMB MB"
-+ " LEFT JOIN INVMC MC ON MB.MB001=MC.MC001 AND MC.MC002='INV-1'"
-+ " LEFT JOIN COPTH TH ON MB.MB001=TH.TH004"
-+ " LEFT JOIN COPTG TG ON TH.TH001=TG.TG001 AND TH.TH002=TG.TG002 AND TG.TG042 BETWEEN @beginDate AND @endDate"
-+ smallCategoryCondition
-+ " GROUP BY MB.MB001,MC.MC004,TH.TH008,TG.TG042,TH.TH001,TH.TH002,TH.TH003"
-+ " )"
-+ " ,"
-+ " PRODUCTIONTABLE"
-+ " AS"
-+ " ("
-+ " SELECT MB.MB001 'ID'"
-+ " , CAST(COALESCE(MC.MC004,0) AS DECIMAL) 'safeInv'"
-+ " , CAST(COALESCE(SUM(MC.MC007),0) AS DECIMAL) 'invAmount'"
-+ " , SUBSTRING(TF.TF003,1,4) 'yr'"
-+ " , SUBSTRING(TF.TF003,5,2) 'mn'"
-+ " , CAST(TG.TG011 AS DECIMAL) 'productionAmount'"
-+ " FROM INVMB MB"
-+ " LEFT JOIN INVMC MC ON MB.MB001=MC.MC001 AND MC.MC002='INV-1'"
-+ " LEFT JOIN MOCTG TG ON MB.MB001=TG.TG004"
-+ " LEFT JOIN MOCTF TF ON TF.TF001=TG.TG001 AND TF.TF002=TG.TG002 AND TF.TF003 BETWEEN @beginDate AND @endDate"
-+ smallCategoryCondition
-+ " GROUP BY MB.MB001,MC.MC004,TF003,TG011,TG.TG001,TG.TG002,TG.TG003"
-+ " )"
-+ " SELECT *"
-+ " FROM"
-+ " ("
-+ " SELECT ID"
-+ " ,COALESCE(safeInv,0) 'safeInv'"
-+ " ,COALESCE(invAmount,0) 'invAmount'"
-+ " ,'銷貨' AS 'type'"
-+ " ,COALESCE(yr,'N/A') 'yr'"
-+ " ,COALESCE(mn,'N/A') 'mn'"
-+ " ,COALESCE(saleAmount,0) 'saleAmount'"
-+ " FROM SALESTABLE"
-+ " ) AS SRC"
-+ " PIVOT"
-+ " ("
-+ " SUM(saleAmount)"
-+ " FOR mn IN ([01],[02],[03],[04],[05],[06],[07],[08],[09],[10],[11],[12])"
-+ " ) AS DS"
-+ " WHERE 1=1"
-+ IDCondition
-+ " UNION"
-+ " SELECT *"
-+ " FROM"
-+ " ("
-+ " SELECT ID"
-+ " ,COALESCE(safeInv,0) 'safeInv'"
-+ " ,COALESCE(invAmount,0) 'invAmount'"
-+ " ,'生產' 'type'"
-+ " ,COALESCE(yr,'N/A') 'yr'"
-+ " ,COALESCE(mn,'N/A') 'mn'"
-+ " ,COALESCE(productionAmount,0) 'productionAmount'"
-+ " FROM PRODUCTIONTABLE"
-+ " ) AS SRC"
-+ " PIVOT"
-+ " ("
-+ " SUM(productionAmount)"
-+ " FOR mn IN ([01],[02],[03],[04],[05],[06],[07],[08],[09],[10],[11],[12])"
-+ " ) AS DS"
-+ " WHERE 1=1"
-+ IDCondition
-+ " ORDER BY ID,yr,[type] DESC";
+        string query = ";WITH saleTable" +
+            " AS" +
+            " (" +
+            " SELECT MB.MB001 'ID'" +
+            " , CAST(COALESCE(MC.MC004, 0) AS DECIMAL) 'safeInv'" +
+            " , CAST(COALESCE(SUM(MC.MC007), 0) AS DECIMAL) 'invAmount'" +
+            " , SUBSTRING(TG.TG042, 1, 4) 'yr'" +
+            " , SUBSTRING(TG.TG042, 5, 2) 'mn'" +
+            " , CAST(TH.TH008 AS DECIMAL) 'saleAmount'" +
+            " FROM INVMB MB" +
+            " LEFT JOIN INVMC MC ON MB.MB001 = MC.MC001 AND MC.MC002 = 'INV-1'" +
+            " LEFT JOIN COPTH TH ON MB.MB001 = TH.TH004" +
+            " LEFT JOIN COPTG TG ON TH.TH001 = TG.TG001 AND TH.TH002 = TG.TG002 AND TG.TG042 BETWEEN @beginDate AND @endDate" +
+            smallCategoryCondition +
+            " GROUP BY MB.MB001, MC.MC004, TH.TH008, TG.TG042, TH.TH001, TH.TH002, TH.TH003" +
+            " )" +
+            " ,productionTable" +
+            " AS" +
+            " (" +
+            " SELECT MB.MB001 'ID'" +
+            " , CAST(COALESCE(MC.MC004, 0) AS DECIMAL) 'safeInv'" +
+            " , CAST(COALESCE(SUM(MC.MC007), 0) AS DECIMAL) 'invAmount'" +
+            " , SUBSTRING(TF.TF003, 1, 4) 'yr'" +
+            " , SUBSTRING(TF.TF003, 5, 2) 'mn'" +
+            " , CAST(TG.TG011 AS DECIMAL) 'productionAmount'" +
+            " FROM INVMB MB" +
+            " LEFT JOIN INVMC MC ON MB.MB001 = MC.MC001 AND MC.MC002 = 'INV-1'" +
+            " LEFT JOIN MOCTG TG ON MB.MB001 = TG.TG004" +
+            " LEFT JOIN MOCTF TF ON TF.TF001 = TG.TG001 AND TF.TF002 = TG.TG002 AND TF.TF003 BETWEEN @beginDate AND @endDate" +
+            smallCategoryCondition +
+            " GROUP BY MB.MB001, MC.MC004, TF003, TG011, TG.TG001, TG.TG002, TG.TG003" +
+            " )" +
+            " ,statusTable" +
+            " as" +
+            " (" +
+            " select MB.MB001 'orderID'" +
+            " ,case ta.TA011" +
+            " when '3' then 'Y'" +
+            " else 'N'" +
+            " end 'inProgress'" +
+            " from INVMB MB" +
+            " left" +
+            " join MOCTA ta on MB.MB001 = ta.TA006 and ta.TA011 = '3' and ta.TA003 between @beginDate and @endDate" +
+            smallCategoryCondition +
+            " )" +
+            " ,amountUndeliveredTable" +
+            " as" +
+            " (" +
+            " select orderID" +
+            " , inProgress" +
+            " , convert(decimal(20, 0), sum(coalesce(td.TD008, 0)) - sum(coalesce(td.TD009, 0))) 'amountUndelivered'" +
+            " from statusTable st" +
+            " left join COPTD td on st.orderID = td.TD004" +
+            " where td.TD016 = 'N'" +
+            " group by orderID,inProgress" +
+            " )" +
+            " SELECT*" +
+            " FROM" +
+            " (" +
+            " SELECT sale.ID" +
+            " , COALESCE(sale.safeInv, 0) 'safeInv'" +
+            " , COALESCE(sale.invAmount, 0) 'invAmount'" +
+            " , coalesce(aut.inProgress, 'N') 'inProgress'" +
+            " , coalesce(aut.amountUndelivered, 0) 'amountUndelivered'" +
+            " , '銷貨' AS 'type'" +
+            " , COALESCE(sale.yr, 'N/A') 'yr'" +
+            " , COALESCE(sale.mn, 'N/A') 'mn'" +
+            " , COALESCE(sale.saleAmount, 0) 'saleAmount'" +
+            " FROM saleTable sale" +
+            " left join amountUndeliveredTable aut on sale.ID = aut.orderID" +
+            " ) AS SRC" +
+            " PIVOT" +
+            " (" +
+            " SUM(saleAmount)" +
+            " FOR mn IN([01],[02],[03],[04],[05],[06],[07],[08],[09],[10],[11],[12])" +
+            " ) AS DS" +
+            " WHERE 1 = 1" +
+            IDCondition +
+            " UNION" +
+            " SELECT*" +
+            " FROM" +
+            " (" +
+            " SELECT product.ID" +
+            " , COALESCE(product.safeInv, 0) 'safeInv'" +
+            " , COALESCE(product.invAmount, 0) 'invAmount'" +
+            " , coalesce(aut.inProgress, 'N') 'inProgress'" +
+            " , coalesce(aut.amountUndelivered, 0) 'amountUndelivered'" +
+            " , '生產' 'type'" +
+            " , COALESCE(product.yr, 'N/A') 'yr'" +
+            " , COALESCE(product.mn, 'N/A') 'mn'" +
+            " , COALESCE(product.productionAmount, 0) 'productionAmount'" +
+            " FROM productionTable product" +
+            " left join amountUndeliveredTable aut on product.ID = aut.orderID" +
+            " ) AS SRC" +
+            " PIVOT" +
+            " (" +
+            " SUM(productionAmount)" +
+            " FOR mn IN([01],[02],[03],[04],[05],[06],[07],[08],[09],[10],[11],[12])" +
+            " ) AS DS" +
+            " WHERE 1 = 1" +
+            IDCondition +
+            " ORDER BY ID, yr,[type] DESC";
+//        string query = ";WITH SALESTABLE"
+//+ " AS"
+//+ " ("
+//+ " SELECT MB.MB001 'ID'"
+//+ " , CAST(COALESCE(MC.MC004,0) AS DECIMAL) 'safeInv'"
+//+ " , CAST(COALESCE(SUM(MC.MC007),0) AS DECIMAL) 'invAmount'"
+//+ " , SUBSTRING(TG.TG042,1,4) 'yr'"
+//+ " , SUBSTRING(TG.TG042,5,2) 'mn'"
+//+ " , CAST(TH.TH008 AS DECIMAL) 'saleAmount'"
+//+ " FROM INVMB MB"
+//+ " LEFT JOIN INVMC MC ON MB.MB001=MC.MC001 AND MC.MC002='INV-1'"
+//+ " LEFT JOIN COPTH TH ON MB.MB001=TH.TH004"
+//+ " LEFT JOIN COPTG TG ON TH.TH001=TG.TG001 AND TH.TH002=TG.TG002 AND TG.TG042 BETWEEN @beginDate AND @endDate"
+//+ smallCategoryCondition
+//+ " GROUP BY MB.MB001,MC.MC004,TH.TH008,TG.TG042,TH.TH001,TH.TH002,TH.TH003"
+//+ " )"
+//+ " ,"
+//+ " PRODUCTIONTABLE"
+//+ " AS"
+//+ " ("
+//+ " SELECT MB.MB001 'ID'"
+//+ " , CAST(COALESCE(MC.MC004,0) AS DECIMAL) 'safeInv'"
+//+ " , CAST(COALESCE(SUM(MC.MC007),0) AS DECIMAL) 'invAmount'"
+//+ " , SUBSTRING(TF.TF003,1,4) 'yr'"
+//+ " , SUBSTRING(TF.TF003,5,2) 'mn'"
+//+ " , CAST(TG.TG011 AS DECIMAL) 'productionAmount'"
+//+ " FROM INVMB MB"
+//+ " LEFT JOIN INVMC MC ON MB.MB001=MC.MC001 AND MC.MC002='INV-1'"
+//+ " LEFT JOIN MOCTG TG ON MB.MB001=TG.TG004"
+//+ " LEFT JOIN MOCTF TF ON TF.TF001=TG.TG001 AND TF.TF002=TG.TG002 AND TF.TF003 BETWEEN @beginDate AND @endDate"
+//+ smallCategoryCondition
+//+ " GROUP BY MB.MB001,MC.MC004,TF003,TG011,TG.TG001,TG.TG002,TG.TG003"
+//+ " )"
+//+ " SELECT *"
+//+ " FROM"
+//+ " ("
+//+ " SELECT ID"
+//+ " ,COALESCE(safeInv,0) 'safeInv'"
+//+ " ,COALESCE(invAmount,0) 'invAmount'"
+//+ " ,'銷貨' AS 'type'"
+//+ " ,COALESCE(yr,'N/A') 'yr'"
+//+ " ,COALESCE(mn,'N/A') 'mn'"
+//+ " ,COALESCE(saleAmount,0) 'saleAmount'"
+//+ " FROM SALESTABLE"
+//+ " ) AS SRC"
+//+ " PIVOT"
+//+ " ("
+//+ " SUM(saleAmount)"
+//+ " FOR mn IN ([01],[02],[03],[04],[05],[06],[07],[08],[09],[10],[11],[12])"
+//+ " ) AS DS"
+//+ " WHERE 1=1"
+//+ IDCondition
+//+ " UNION"
+//+ " SELECT *"
+//+ " FROM"
+//+ " ("
+//+ " SELECT ID"
+//+ " ,COALESCE(safeInv,0) 'safeInv'"
+//+ " ,COALESCE(invAmount,0) 'invAmount'"
+//+ " ,'生產' 'type'"
+//+ " ,COALESCE(yr,'N/A') 'yr'"
+//+ " ,COALESCE(mn,'N/A') 'mn'"
+//+ " ,COALESCE(productionAmount,0) 'productionAmount'"
+//+ " FROM PRODUCTIONTABLE"
+//+ " ) AS SRC"
+//+ " PIVOT"
+//+ " ("
+//+ " SUM(productionAmount)"
+//+ " FOR mn IN ([01],[02],[03],[04],[05],[06],[07],[08],[09],[10],[11],[12])"
+//+ " ) AS DS"
+//+ " WHERE 1=1"
+//+ IDCondition
+//+ " ORDER BY ID,yr,[type] DESC";
         return query;
     }
 
@@ -290,7 +392,7 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
         calculateMonthlySubtotal(e);
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            if (((Label)e.Row.Cells[3].FindControl("Label3")).Text == "銷貨")
+            if (((Label)e.Row.Cells[3].FindControl("Label5")).Text == "銷貨")
             {
                 for (int i = 0; i < e.Row.Cells.Count; i++)
                 {
@@ -368,56 +470,56 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
             double nov = 0;
             double dec = 0;
 
-            if (!double.TryParse(((Label)e.Row.FindControl("Label5")).Text, out jan))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label7")).Text, out jan))
             {
                 jan = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label6")).Text, out feb))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label8")).Text, out feb))
             {
                 feb = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label7")).Text, out mar))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label9")).Text, out mar))
             {
                 mar = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label8")).Text, out apr))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label10")).Text, out apr))
             {
                 apr = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label9")).Text, out may))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label11")).Text, out may))
             {
                 may = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label10")).Text, out june))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label12")).Text, out june))
             {
                 june = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label11")).Text, out july))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label13")).Text, out july))
             {
                 july = 0;
             } 
-            if (!double.TryParse(((Label)e.Row.FindControl("Label12")).Text, out aug))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label14")).Text, out aug))
             {
                 aug = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label13")).Text, out sept))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label15")).Text, out sept))
             {
                 sept = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label14")).Text, out oct))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label16")).Text, out oct))
             {
                 oct = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label15")).Text, out nov))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label17")).Text, out nov))
             {
                 nov = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label16")).Text, out dec))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label18")).Text, out dec))
             {
                 dec = 0;
             }
 
-            ((Label)e.Row.FindControl("Label17")).Text = (jan + feb + mar + apr + may + june + july + aug + sept + oct + nov + dec).ToString();
+            ((Label)e.Row.FindControl("Label19")).Text = (jan + feb + mar + apr + may + june + july + aug + sept + oct + nov + dec).ToString();
         }
     }
     protected void gvResult_RowCreated(object sender, GridViewRowEventArgs e)
@@ -428,7 +530,7 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
             GridViewRow HeaderGridRow = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Insert);
             TableCell HeaderCell = new TableCell();
             HeaderCell.Text = "";
-            HeaderCell.ColumnSpan = 5;
+            HeaderCell.ColumnSpan = 7;
             HeaderCell.CssClass = "stackedHeader-1";
             HeaderGridRow.Cells.Add(HeaderCell);
 
@@ -447,8 +549,8 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
         }
         if (e.Row.RowType == DataControlRowType.Footer)
         {
-            e.Row.Cells[3].Text = "銷售";
-            e.Row.Cells[4].Text = "小計";
+            e.Row.Cells[5].Text = "銷售";
+            e.Row.Cells[6].Text = "小計";
             //GridView FooterGrid = (GridView)sender;
             //GridViewRow FooterGridRow = new GridViewRow(0, 0, DataControlRowType.Footer, DataControlRowState.Insert);
             //TableCell FooterCell = new TableCell();
@@ -460,12 +562,12 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
         double sum = 0;
         if (_gd.Rows.Count > 0)
         {
-            for (int i = 5; i < _gd.Rows[0].Cells.Count; i++)
+            for (int i = 7; i < _gd.Rows[0].Cells.Count; i++)
             {
                 sum = 0;
                 for (int j = 1; j < _gd.Rows.Count; j++)
                 {
-                    if (((Label)_gd.Rows[j].Cells[3].FindControl("Label3")).Text == "銷貨")
+                    if (((Label)_gd.Rows[j].Cells[3].FindControl("Label5")).Text == "銷貨")
                     {
                         sum += double.Parse(((Label)_gd.Rows[j].Cells[i].FindControl("Label" + i.ToString())).Text, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
                     }
