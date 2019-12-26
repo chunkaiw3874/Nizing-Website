@@ -2,6 +2,15 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
     <title>日進電線-公司簡介</title>
+    <style>
+        .downloadLink{
+            color:#0094ff;
+        }
+        .downloadLink:hover{
+            color:#00ffff;
+            text-decoration:underline;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
@@ -28,6 +37,7 @@
                         <source src="video/nizing_video5.mp4" type="video/mp4" />
                         Your browser does not support the video tag
                     </video>
+                    <a href="pdf/日進電線公司簡介(中).pptx" class="downloadLink">下載公司簡介</a>
                 </div>
             </div>
         </div>
