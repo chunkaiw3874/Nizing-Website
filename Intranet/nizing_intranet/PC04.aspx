@@ -124,9 +124,9 @@
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-                        <div class="input-group mb-3">
-                            <asp:CheckBox ID="ckxNoDisplayWhenInvAndSafeInvIsZero" runat="server" Checked="true" Text="不顯示安全存量及在庫量為0的品項" />
-                        </div>
+                    <div class="input-group mb-3">
+                        <asp:CheckBox ID="ckxNoDisplayWhenInvAndSafeInvIsZero" runat="server" Checked="true" Text="不顯示安全存量及在庫量為0的品項" />
+                    </div>
                     <div class="btn-group btn-group-lg flex" role="group">
                         <asp:Button ID="btnSubmit" runat="server" Text="查詢" CssClass="btn btn-secondary btn-success"
                             OnClick="btnSubmit_Click" />
