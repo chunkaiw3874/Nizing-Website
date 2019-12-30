@@ -71,6 +71,11 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
+                        <span style="color:red">*總成本未扣除業外支出，且為稅前成本</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
                         <asp:GridView ID="gvQuotationList" runat="server" 
                             ShowHeaderWhenEmpty="true" AutoGenerateColumns="false" CssClass="gv-alternate-row">
                             <Columns>
@@ -128,9 +133,9 @@
                                         <asp:Label ID="lblInternalCost" runat="server" Text="" CssClass="tableright"></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="總成本">
+                                <asp:TemplateField HeaderText="總成本*">
                                     <HeaderTemplate>
-                                        <asp:Label ID="lbl7" runat="server" Text="總成本"></asp:Label>
+                                        <asp:Label ID="lbl7" runat="server" Text="總成本*"></asp:Label>
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="lblTotalCost" runat="server" Text="" CssClass="tableright"></asp:Label>

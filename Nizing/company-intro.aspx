@@ -37,7 +37,7 @@
                         <source src="video/nizing_video5.mp4" type="video/mp4" />
                         Your browser does not support the video tag
                     </video>
-                    <a href="pdf/日進電線公司簡介(中).pptx" class="downloadLink">下載公司簡介</a>
+                    <a href="pdf/日進電線公司簡介(中).pptx" class="downloadLink" style="font-size:16px">下載公司簡介</a>
                 </div>
             </div>
         </div>
