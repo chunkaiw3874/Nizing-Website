@@ -217,14 +217,14 @@
                                     <asp:Label ID="Label9" runat="server" Text='<%#Eval("saleTarget") %>'></asp:Label>
                                 </itemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="未達成金額">
+<%--                            <asp:TemplateField HeaderText="未達成金額">
                                 <itemTemplate>
                                     <asp:Label ID="Label10" runat="server" Text='<%#Eval("targetDifference") %>'></asp:Label>
                                 </itemTemplate>
-                            </asp:TemplateField>
+                            </asp:TemplateField>--%>
                             <asp:TemplateField HeaderText="退貨件數">
                                 <itemTemplate>
-                                    <asp:Label ID="Label11" runat="server" Text='<%#Eval("returnAmount") %>'></asp:Label>
+                                    <asp:Label ID="Label10" runat="server" Text='<%#Eval("returnAmount") %>'></asp:Label>
                                 </itemTemplate>
                             </asp:TemplateField>
                         </Columns>
@@ -233,7 +233,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <asp:Chart ID="Chart1" runat="server" Width="600" Height="450" >
+                    <asp:Chart ID="Chart1" runat="server" Width="400" Height="300" >
                         <Legends>
                            <asp:Legend Alignment="Center" Docking="Bottom" Name="Legend1">
                            </asp:Legend>

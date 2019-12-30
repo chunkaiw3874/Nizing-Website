@@ -450,15 +450,15 @@ public partial class SD01 : System.Web.UI.Page
                 {
                     sum += decimal.Parse(((Label)_gd.Rows[j].Cells[i].FindControl("Label"+(i+1).ToString())).Text, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
                 }
-                //if (i != 10)
-                //{
-                //    _gd.FooterRow.Cells[i].Text = sum.ToString("C", new CultureInfo("zh-TW"));
-                //}
-                //    else
-                //{
-                 _gd.FooterRow.Cells[i].Text = sum.ToString("N0");
-                //}
-        }
+                if (i == 7)
+                {
+                    _gd.FooterRow.Cells[i].Text = sum.ToString("C", new CultureInfo("zh-TW")).Substring(0, sum.ToString("C", new CultureInfo("zh-TW")).Length-3);
+                }
+                else
+                {
+                    _gd.FooterRow.Cells[i].Text = sum.ToString("N0");
+                }
+            }
         }
     }
 
