@@ -192,7 +192,7 @@
                                     <asp:Label ID="Label4" runat="server" Text='<%#Eval("domesticSale") %>'></asp:Label>
                                 </itemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="國外">
+                            <asp:TemplateField HeaderText="國外" HeaderStyle-BackColor="Orange">
                                 <itemTemplate>
                                     <asp:Label ID="Label5" runat="server" Text='<%#Eval("foreignSale") %>'></asp:Label>
                                 </itemTemplate>
@@ -202,19 +202,34 @@
                                     <asp:Label ID="Label6" runat="server" Text='<%#Eval("domesticReturn") %>'></asp:Label>
                                 </itemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="國外">
+                            <asp:TemplateField HeaderText="國外" HeaderStyle-BackColor="Orange">
                                 <itemTemplate>
                                     <asp:Label ID="Label7" runat="server" Text='<%#Eval("foreignReturn") %>'></asp:Label>
                                 </itemTemplate>
                             </asp:TemplateField>
+                            <asp:TemplateField HeaderText="國內">
+                                <itemTemplate>
+                                    <asp:Label ID="Label8" runat="server" Text='<%#Eval("domesticNetSale") %>'></asp:Label>
+                                </itemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="國外" HeaderStyle-BackColor="Orange">
+                                <itemTemplate>
+                                    <asp:Label ID="Label9" runat="server" Text='<%#Eval("foreignNetSale") %>'></asp:Label>
+                                </itemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="外銷比例">
+                                <itemTemplate>
+                                    <asp:Label ID="Label10" runat="server" Text='<%#Eval("foreignNetSalePercent") %>'></asp:Label>
+                                </itemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="銷貨淨額">
                                 <itemTemplate>
-                                    <asp:Label ID="Label8" runat="server" Text='<%#Eval("netSale") %>'></asp:Label>
+                                    <asp:Label ID="Label11" runat="server" Text='<%#Eval("netSale") %>'></asp:Label>
                                 </itemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="目標金額">
                                 <itemTemplate>
-                                    <asp:Label ID="Label9" runat="server" Text='<%#Eval("saleTarget") %>'></asp:Label>
+                                    <asp:Label ID="Label12" runat="server" Text='<%#Eval("saleTarget") %>'></asp:Label>
                                 </itemTemplate>
                             </asp:TemplateField>
 <%--                            <asp:TemplateField HeaderText="未達成金額">
@@ -224,7 +239,7 @@
                             </asp:TemplateField>--%>
                             <asp:TemplateField HeaderText="退貨件數">
                                 <itemTemplate>
-                                    <asp:Label ID="Label10" runat="server" Text='<%#Eval("returnAmount") %>'></asp:Label>
+                                    <asp:Label ID="Label13" runat="server" Text='<%#Eval("returnAmount") %>'></asp:Label>
                                 </itemTemplate>
                             </asp:TemplateField>
                         </Columns>

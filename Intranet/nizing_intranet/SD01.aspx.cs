@@ -209,7 +209,10 @@ public partial class SD01 : System.Web.UI.Page
                     " ,convert(decimal(20, 0), coalesce(pvt.domesticReturn, 0)) 'domesticReturn'" +
                     " ,convert(decimal(20, 0), coalesce(pvt.foreignSale, 0)) 'foreignSale'" +
                     " ,convert(decimal(20, 0), coalesce(pvt.foreignReturn, 0)) 'foreignReturn'" +
-                    " ,convert(decimal(20, 0), coalesce(pvt.domesticSale, 0) - coalesce(domesticReturn, 0) + coalesce(foreignSale, 0) - coalesce(foreignReturn, 0)) 'netSale'" +
+                    " ,convert(decimal(20, 0), coalesce(pvt.domesticSale, 0) - coalesce(pvt.domesticReturn, 0)) 'domesticNetSale'" +
+                    " ,convert(decimal(20, 0), coalesce(pvt.foreignSale, 0) - coalesce(pvt.foreignReturn, 0)) 'foreignNetSale'" +
+                    " ,convert(nvarchar(6), convert(decimal(5, 2), convert(decimal(20, 0), coalesce(pvt.foreignSale, 0) - coalesce(pvt.foreignReturn, 0)) * 100 /convert(decimal(20, 0), coalesce(pvt.domesticSale, 0) - coalesce(pvt.domesticReturn, 0) + coalesce(pvt.foreignSale, 0) - coalesce(pvt.foreignReturn, 0)))) + '%' 'foreignNetSalePercent'" +
+                    " ,convert(decimal(20, 0), coalesce(pvt.domesticSale, 0) - coalesce(pvt.domesticReturn, 0) + coalesce(pvt.foreignSale, 0) - coalesce(pvt.foreignReturn, 0)) 'netSale'" +
                     " ,convert(decimal(20, 0), coalesce(sum(saleTarget.[TARGET]), 0)) 'saleTarget'" +
                     " ,case" +
                     " when(coalesce(pvt.domesticSale, 0) - coalesce(domesticReturn, 0) + coalesce(foreignSale, 0) - coalesce(foreignReturn, 0)) - coalesce(sum(saleTarget.[TARGET]), 0) > 0 then convert(decimal(10,2),0)" +
@@ -391,6 +394,12 @@ public partial class SD01 : System.Web.UI.Page
                 tc1.Text = _strFooterName;
                 tc.Add(tc1);
             }
+            else if (i==4 || i==6 || i == 8)
+            {
+                tc1 = new TableCell();
+                tc1.BackColor = Color.Orange;
+                tc.Add(tc1);
+            }
             else
             {
                 tc.Add(new TableCell());
@@ -424,11 +433,17 @@ public partial class SD01 : System.Web.UI.Page
             HeaderCell.Text = "退貨金額";
             HeaderCell.ColumnSpan = 2;
             HeaderCell.CssClass = "stackedHeader-1";
-
             HeaderGridRow.Cells.Add(HeaderCell);
+
+            HeaderCell = new TableCell();
+            HeaderCell.Text = "銷售淨額";
+            HeaderCell.ColumnSpan = 3;
+            HeaderCell.CssClass = "stackedHeader-1";
+            HeaderGridRow.Cells.Add(HeaderCell);
+
             HeaderCell = new TableCell();
             HeaderCell.Text = "";
-            HeaderCell.ColumnSpan = 4;
+            HeaderCell.ColumnSpan = 3;
             HeaderCell.CssClass = "stackedHeader-1";
             HeaderGridRow.Cells.Add(HeaderCell);
             grdReport.Controls[0].Controls.AddAt(0, HeaderGridRow);
@@ -448,11 +463,18 @@ public partial class SD01 : System.Web.UI.Page
                 sum = 0;
                 for (int j = 0; j < _gd.Rows.Count; j++)
                 {
-                    sum += decimal.Parse(((Label)_gd.Rows[j].Cells[i].FindControl("Label"+(i+1).ToString())).Text, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
+                    if (i != 9) //row 9 是 %，為字串
+                    {
+                        sum += decimal.Parse(((Label)_gd.Rows[j].Cells[i].FindControl("Label" + (i + 1).ToString())).Text, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
+                    }
                 }
-                if (i == 7)
+                if (i == 10)
                 {
                     _gd.FooterRow.Cells[i].Text = sum.ToString("C", new CultureInfo("zh-TW")).Substring(0, sum.ToString("C", new CultureInfo("zh-TW")).Length-3);
+                }
+                else if (i == 9)
+                {
+                    _gd.FooterRow.Cells[i].Text = (Convert.ToDecimal(_gd.FooterRow.Cells[i - 1].Text) * 100 / (Convert.ToDecimal(_gd.FooterRow.Cells[i - 1].Text) + Convert.ToDecimal(_gd.FooterRow.Cells[i - 2].Text))).ToString("0.00") + "%";
                 }
                 else
                 {
