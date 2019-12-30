@@ -64,6 +64,10 @@
                         <td>王君凱 / Kevin</td>
                         <td><a href="mailto:kevin@nizing.com.tw">kevin@nizing.com.tw</a></td>
                     </tr>
+                    <tr>
+                        <td>王群傑 / Nick</td>
+                        <td><a href="mailto:nick.wang@nizing.com.tw">nick.wang@nizing.com.tw</a></td>
+                    </tr>
                 </table>
             </div>
             <%--<div class="right" style="display:block;">                

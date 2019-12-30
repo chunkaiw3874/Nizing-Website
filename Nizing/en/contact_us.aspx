@@ -61,6 +61,10 @@
                         <td>Kevin Wang</td>
                         <td><a href="mailto:kevin@nizing.com.tw">kevin@nizing.com.tw</a></td>
                     </tr>
+                    <tr>
+                        <td>Nick Wang</td>
+                        <td><a href="mailto:nick.wang@nizing.com.tw">nick.wang@nizing.com.tw</a></td>
+                    </tr>
                 </table>
             </div>            
             <%--<div class="right" style="display:block;">                
