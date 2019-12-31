@@ -224,7 +224,9 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-8 border"></div>
+                <div class="col-xs-8 border" style="color:red;">
+                    *請注意，請假過量會影響考績，請斟酌休假天數。
+                </div>
                 <div class="col-xs-2 border" style="text-align:right">實際出勤時數:</div>
                 <div class="col-xs-2 border" style="text-align:right">
                     <asp:Label ID="lblActualAttendance" runat="server" Text="&nbsp"></asp:Label>
