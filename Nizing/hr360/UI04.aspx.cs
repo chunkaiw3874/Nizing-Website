@@ -30,6 +30,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     List<string> exceptionList111 = new List<string>(); //三天內請假錯誤例外清單
     List<string> exceptionList202 = new List<string>(); //剩餘假期不足錯誤例外清單
     List<string> exceptionList107 = new List<string>(); //已當其他人代理人錯誤例外清單
+    List<string> exceptionList110 = new List<string>(); //請假年分限本年度例外清單
 
     public class dayOffInfo
     {
@@ -46,13 +47,14 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "0007";    //test only to avoid error on loading, delete after trial            
-        //Session["erp_id"] = "0007";        
+        //Session["user_id"] = "0067";    //test only to avoid error on loading, delete after trial            
+        //Session["erp_id"] = "0067";
 
         //only use when opening check exception for certain persion
         //exceptionList111.Add("0012");
         //exceptionList202.Add("0112");
         //exceptionList107.Add("0013");
+        exceptionList110.Add("0067");
 
         if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
         {
@@ -239,7 +241,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             test108 = true;
         }
-        if (DateTime.ParseExact(txtDatePickerStart.Text, "yyyy/MM/dd", new CultureInfo("zh-TW")).Year != DateTime.Today.Year)  //測試錯誤 110.僅能請本年度的假
+        if (DateTime.ParseExact(txtDatePickerStart.Text, "yyyy/MM/dd", new CultureInfo("zh-TW")).Year != DateTime.Today.Year
+            && !exceptionList110.Contains(Session["erp_id"].ToString()))  //測試錯誤 110.僅能請本年度的假
         {
             errorList.Add(errorCode(110));
             test110 = false;
