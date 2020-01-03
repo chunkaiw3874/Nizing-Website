@@ -28,7 +28,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
     DataTable userInfo = new DataTable();
     string currentHREmployeeID = "0142"; //current //HR code;
     List<string> exceptionList111 = new List<string>(); //三天內請假錯誤例外清單
-    List<string> exceptionList202 = new List<string>(); //剩餘假期不足錯誤例外清單
+    List<string> exceptionList202designated = new List<string>(); //剩餘假期不足錯誤例外清單(特休)
+    List<string> exceptionList202makeup = new List<string>(); //剩餘假期不足錯誤例外清單(補休)
     List<string> exceptionList107 = new List<string>(); //已當其他人代理人錯誤例外清單
     List<string> exceptionList110 = new List<string>(); //請假年分限本年度例外清單
 
@@ -52,9 +53,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
         //only use when opening check exception for certain persion
         //exceptionList111.Add("0012");
-        //exceptionList202.Add("0112");
+        //exceptionList202designated.Add("0112");
         //exceptionList107.Add("0013");
         exceptionList110.Add("0067");
+        //exceptionList202makeup.Add("0067");
+
 
         if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
         {
@@ -290,7 +293,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                             + " END '跨天'"
                             + " FROM AMSMB MB"
                             + " LEFT JOIN CMSMP MP ON MP.MP001='3' AND MP.MP004=@YYYYMMDD AND MP.MP003=" + "MB.MB0" + (Convert.ToInt16(dayOffStartTime.Day.ToString()) + 2).ToString("D2")
-                            + " LEFT JOIN PALMK MK ON MB.MB007=MK.MK001"
+                            + " LEFT JOIN PALMK MK ON MB.MB0" + (Convert.ToInt16(dayOffStartTime.Day.ToString()) + 2).ToString("D2") + "=MK.MK001"
                             + " WHERE MB.MB001=@ID"
                             + " AND MB.MB002=@YYYYMM";
                     SqlCommand cmd = new SqlCommand(query, conn);
@@ -618,25 +621,26 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         {
                             string usedAmount = tbAppSummary.Rows[i].Cells[3].ToString().Substring(0, tbAppSummary.Rows[i].Cells[3].InnerText.Length - 2);
                             r += decimal.Parse(usedAmount);
-                        }                        
+                        }
                     }
                     for (int i = 0; i < tbInProgressSummary.Rows.Count - 1; i++)
                     {
-                        if (tbInProgressSummary.Rows[i].Cells[1].InnerText == "補休" && tbInProgressSummary.Rows[i].Cells[8].InnerText=="未登入")
+                        if (tbInProgressSummary.Rows[i].Cells[1].InnerText == "補休" && tbInProgressSummary.Rows[i].Cells[8].InnerText == "未登入")
                         {
                             string usedAmount = tbInProgressSummary.Rows[i].Cells[4].InnerText.Substring(0, tbInProgressSummary.Rows[i].Cells[4].InnerText.Length - 2);
                             r += decimal.Parse(usedAmount);
                         }
                     }
-                    totalDayOffRemain = decimal.Parse(Session["makeupDayOff"].ToString()) - r;
-                    if(totalDayOffAmount > totalDayOffRemain)
+                    //totalDayOffRemain = decimal.Parse(Session["makeupDayOff"].ToString()) - r;
+                    totalDayOffRemain = decimal.Parse(lblDayOffRemainAmount.Text) - r;
+                    if (totalDayOffAmount > totalDayOffRemain && !exceptionList202makeup.Contains(Session["erp_id"].ToString().Trim()))
                     {
                         errorList.Add(errorCode(202, "於請假日期，補休時數僅剩餘" + totalDayOffRemain.ToString() + "小時"));
                     }
                 }
                 else if (ddlDayOffType.SelectedValue == "03" && !IsDataTableEmpty(dtDayOffDaysInfo))  //特休(03)用此判斷 依據請假日期會有2種可能
                 {
-                    if (exceptionList202.Contains(Session["erp_id"].ToString().Trim()))
+                    if (exceptionList202designated.Contains(Session["erp_id"].ToString().Trim()))
                     {
 
                     }
