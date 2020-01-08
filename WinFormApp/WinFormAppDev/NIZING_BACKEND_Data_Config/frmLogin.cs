@@ -27,9 +27,9 @@ namespace NIZING_BACKEND_Data_Config
         //QUICK ACCESS TO USERNAME AND PW，REMOVE AFTER DEBUG PHASE!
         private void fastLogin(object sender, EventArgs e)
         {
-            //txtUserName.Text = "0080";
-            //txtPassword.Text = "387485";
-            //cbxFunctionList.SelectedIndex = 1;
+            txtUserName.Text = "0080";
+            txtPassword.Text = "387485";
+            cbxFunctionList.SelectedIndex = 2;
         }
 
         #region public methods
@@ -73,13 +73,13 @@ namespace NIZING_BACKEND_Data_Config
                     frmAPA.Show();
                     sourceForm.Hide();
                     break;
-                case "OQS":
-                    var frmOQS = new frmOQS_Main(this);
-                    frmOQS.Location = this.Location;
-                    frmOQS.StartPosition = FormStartPosition.Manual;
-                    frmOQS.FormClosing += delegate { Application.Exit(); };
-                    frmOQS.UserName = this.UserName;
-                    frmOQS.Show();
+                case "DPR":
+                    var frmDPR = new frmDPR_Main(this);
+                    frmDPR.Location = this.Location;
+                    frmDPR.StartPosition = FormStartPosition.Manual;
+                    frmDPR.FormClosing += delegate { Application.Exit(); };
+                    frmDPR.UserName = this.UserName;
+                    frmDPR.Show();
                     sourceForm.Hide();
                     break;
                 case "HR360":
@@ -154,51 +154,6 @@ namespace NIZING_BACKEND_Data_Config
                     dtAuthorizedFunctionTable = GetAuthorizedFunctionList();
                     CurrentForm = cbxFunctionList.SelectedValue.ToString();
                     ChangeForm(this, CurrentForm);
-                    //switch (CurrentForm)
-                    //{
-                    //    case "ADMIN":                            
-                    //        var frmBackend = new frmBackend_Main(this);
-                    //        frmBackend.Location = this.Location;
-                    //        frmBackend.StartPosition = FormStartPosition.Manual;
-                    //        frmBackend.FormClosing += delegate { Application.Exit(); };
-                    //        frmBackend.UserName = this.UserName;
-                    //        frmBackend.CurrentForm = this.CurrentForm;
-                    //        frmBackend.dtAuthorizedFunctionTable = this.dtAuthorizedFunctionTable;
-                    //        frmBackend.Show();
-                    //        this.Hide();
-                    //        break;
-                    //    case "APA":
-                    //        var frmAPA = new frmAPA_Main(this);
-                    //        frmAPA.Location = this.Location;
-                    //        frmAPA.StartPosition = FormStartPosition.Manual;
-                    //        frmAPA.FormClosing += delegate { Application.Exit(); };
-                    //        frmAPA.UserName = this.UserName;
-                    //        frmAPA.CurrentForm = this.CurrentForm;
-                    //        frmAPA.dtAuthorizedFunctionTable = this.dtAuthorizedFunctionTable;
-                    //        frmAPA.Show();
-                    //        this.Hide();
-                    //        break;
-                    //    case "OQS":
-                    //        var frmOQS = new frmOQS_Main(this);
-                    //        frmOQS.Location = this.Location;
-                    //        frmOQS.StartPosition = FormStartPosition.Manual;
-                    //        frmOQS.FormClosing += delegate { Application.Exit(); };
-                    //        frmOQS.UserName = this.UserName;
-                    //        frmOQS.Show();
-                    //        this.Hide();
-                    //        break;
-                    //    case "HR360":
-                    //        var frmHR360 = new frmHR360_Main(this);
-                    //        frmHR360.Location = this.Location;
-                    //        frmHR360.StartPosition = FormStartPosition.Manual;
-                    //        frmHR360.FormClosing += delegate { Application.Exit(); };
-                    //        frmHR360.UserName = this.UserName;
-                    //        frmHR360.Show();
-                    //        this.Hide();
-                    //        break;
-                    //    default:
-                    //        break;
-                    //}
                 }
             }
 

@@ -194,7 +194,7 @@ namespace NIZING_BACKEND_Data_Config
             {
                 cbxFinalScoreYear.Items.Add(i);
             }
-            cbxFinalScoreYear.SelectedIndex = 1;
+            cbxFinalScoreYear.SelectedIndex = cbxFinalScoreYear.Items.Count - 1;
             cbxFinalScoreYear.Enabled = false;
             btnFinalScoreCalculate.Enabled = false;
             txtFinalScoreMemo.Enabled = false;
