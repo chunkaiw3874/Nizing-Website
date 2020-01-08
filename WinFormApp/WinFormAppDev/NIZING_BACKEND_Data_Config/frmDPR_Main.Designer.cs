@@ -320,7 +320,8 @@
             this.rdoDeficientRecordIndoor.AutoSize = true;
             this.rdoDeficientRecordIndoor.Location = new System.Drawing.Point(3, 3);
             this.rdoDeficientRecordIndoor.Name = "rdoDeficientRecordIndoor";
-            this.rdoDeficientRecordIndoor.Size = new System.Drawing.Size(47, 16);
+            this.rdoDeficientRecordIndoor.Padding = new System.Windows.Forms.Padding(30, 3, 0, 0);
+            this.rdoDeficientRecordIndoor.Size = new System.Drawing.Size(77, 19);
             this.rdoDeficientRecordIndoor.TabIndex = 0;
             this.rdoDeficientRecordIndoor.Text = "廠內";
             this.rdoDeficientRecordIndoor.UseVisualStyleBackColor = true;
@@ -329,9 +330,11 @@
             // 
             this.rdoDeficientRecordOutdoor.AutoSize = true;
             this.rdoDeficientRecordOutdoor.Checked = true;
-            this.rdoDeficientRecordOutdoor.Location = new System.Drawing.Point(56, 3);
+            this.rdoDeficientRecordOutdoor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rdoDeficientRecordOutdoor.Location = new System.Drawing.Point(86, 3);
             this.rdoDeficientRecordOutdoor.Name = "rdoDeficientRecordOutdoor";
-            this.rdoDeficientRecordOutdoor.Size = new System.Drawing.Size(47, 16);
+            this.rdoDeficientRecordOutdoor.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.rdoDeficientRecordOutdoor.Size = new System.Drawing.Size(47, 19);
             this.rdoDeficientRecordOutdoor.TabIndex = 1;
             this.rdoDeficientRecordOutdoor.TabStop = true;
             this.rdoDeficientRecordOutdoor.Text = "廠外";

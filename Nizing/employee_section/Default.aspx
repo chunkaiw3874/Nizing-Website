@@ -57,6 +57,8 @@
             </ul>
             <ul>
                 <li>
+                    <asp:ImageButton ID="ImageButton6" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD-7.png" PostBackUrl="~/employee_section/report/quotation-list.aspx" /></li>
+                <li>
                     <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD-1.png" PostBackUrl="~/employee_section/report/SD01.aspx" /></li>
                 <li>
                     <asp:ImageButton ID="ImageButton5" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD-2.png" PostBackUrl="~/employee_section/report/SaleRecord.aspx" /></li>

@@ -21,7 +21,7 @@ public partial class oqs_quotation_list : System.Web.UI.Page
     {            
         //Setup Adm list
         adm.Add("chrissy");
-        adm.Add("kevin");
+        //adm.Add("kevin");
         
         if (!IsPostBack)
         {
@@ -36,6 +36,7 @@ public partial class oqs_quotation_list : System.Web.UI.Page
             ddlCategory.DataBind();
             ddlCategory.Items.Insert(0, new ListItem("全部", "all"));
             ddlCategory.Items.Insert(1, new ListItem("其他", "other"));
+            ddlCategory.SelectedIndex = 2;
 
             //獲取最新成本價格
             //int subtractMonth = 0;
@@ -43,17 +44,9 @@ public partial class oqs_quotation_list : System.Web.UI.Page
             dt = new DataTable();
             try
             {
-                //do
-                //{
-                //    subtractMonth--;
-                //    dt = new DataTable();
-                //    lastUpdateTime = DateTime.Today.AddMonths(subtractMonth);
-                //    dt = GetQuotationList(lastUpdateTime);
-                //} while (dt.Rows.Count == 0);
                 lastUpdateTime = GetLastUpdateTime();
-                dt = GetQuotationList(lastUpdateTime);
 
-                BindGridviewToDatatable(gvQuotationList, dt);
+                DisplayQuotationList();
 
                 lblQuotationRefreshTime.Text = lastUpdateTime.ToString("yyyy/MM");//dd HH:mm:ss");
             }
@@ -63,10 +56,11 @@ public partial class oqs_quotation_list : System.Web.UI.Page
             }
 
             //Format gvQuotationList based on user's access level
+            //Session["ID"] = "kevin";    //test value
             string id = getId();
             Session["ID"] = id;
             FormatHeader(Session["ID"].ToString());
-            
+
             //Retrieve Percentage Information from DB
             dt = new DataTable();
             dt = GetPercentageInformation();
@@ -101,16 +95,13 @@ public partial class oqs_quotation_list : System.Web.UI.Page
 
     protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
     {
-        DataTable dt = new DataTable();
-        //int subtractMonth = 0;
-        //do
-        //{
-        //    subtractMonth--;
-        //    dt = new DataTable();
-        //    dt = GetQuotationList(DateTime.Today.AddMonths(subtractMonth));
-        //} while (dt.Rows.Count == 0);
-        dt = GetQuotationList(GetLastUpdateTime());
+        DisplayQuotationList();
+    }
 
+    protected void DisplayQuotationList()
+    {
+        DataTable dt = new DataTable();
+        dt = GetQuotationList(GetLastUpdateTime());
         BindGridviewToDatatable(gvQuotationList, dt);
         DisplayInterimSessionValueInHeaderInput();
         CalculateInternalCost();
@@ -134,8 +125,7 @@ public partial class oqs_quotation_list : System.Web.UI.Page
             for (int i = 0; i < gvQuotationList.Columns.Count; i++)
             {
                 if (gvQuotationList.Columns[i].HeaderText == "單位成本"
-                    || gvQuotationList.Columns[i].HeaderText == "管銷費用"
-                    || gvQuotationList.Columns[i].HeaderText == "總成本")
+                    || gvQuotationList.Columns[i].HeaderText == "管銷費用")
                 {
                     gvQuotationList.Columns[i].Visible = false;
                 }
@@ -171,7 +161,7 @@ public partial class oqs_quotation_list : System.Web.UI.Page
             string query = "SELECT DISTINCT MA.MA002 'Value',MA003 'Name'"
                         + " FROM INVMA MA"
                         + " LEFT JOIN INVMB MB ON MA.MA002=MB.MB007"
-                        + " WHERE MB.MB029='OQS'";
+                        + " WHERE MB.MB005='01'";
             SqlCommand cmd = new SqlCommand(query, conn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(category);
@@ -207,21 +197,44 @@ public partial class oqs_quotation_list : System.Web.UI.Page
         string condition = "";
         if (ddlCategory.SelectedValue.ToLower() == "all")
         {
-            condition = "";
+            condition += "";
         }
         else if (ddlCategory.SelectedValue == "other")
         {
-            condition = " AND MB.MB007 = ''";
+            condition += " AND MB.MB007 = ''";
         }
         else
         {
-            condition = " AND MB.MB007=@Category";
+            condition += " AND MB.MB007=@Category";
+        }
+
+        if (rdoProductId.Checked)
+        {
+            if (string.IsNullOrWhiteSpace(txtSearchParameter.Text))
+            {
+                condition += "";
+            }
+            else
+            {
+                condition += " AND MB.MB001 LIKE @id";
+            }
+        }
+        else if (rdoProductName.Checked)
+        {
+            if (string.IsNullOrWhiteSpace(txtSearchParameter.Text))
+            {
+                condition += "";
+            }
+            else
+            {
+                condition += " AND MB.MB002 LIKE @name";
+            }
         }
 
         using (SqlConnection conn = new SqlConnection(NZconnectionString))
         {
             conn.Open();
-            string query = "SELECT TOP 100 MA.MA003 'Category'"
+            string query = "SELECT MA.MA003 'Category'"
                         + " ,MB.MB001 'ProductID'"
                         + " ,MB.MB002 'ProductName'"
                         + " ,COALESCE(MB.MB073, 0) 'PackageSize'"
@@ -230,13 +243,15 @@ public partial class oqs_quotation_list : System.Web.UI.Page
                         + " FROM INVMB MB"
                         + " LEFT JOIN INVMA MA ON MB.MB007=MA.MA002"
                         + " LEFT JOIN INVLB LB ON MB.MB001=LB.LB001"
-                        + " WHERE MB.MB029='OQS'"
-                        + " AND LB.LB002=@YearMonth"
+                        + " WHERE LB.LB002=@YearMonth"
+                        + " AND MB.MB005='01'"
                         + condition
                         + " ORDER BY Category,LB.LB010,MB.MB001";
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@YearMonth", date.Year.ToString()+date.Month.ToString("D2"));
             cmd.Parameters.AddWithValue("@Category", ddlCategory.SelectedValue);
+            cmd.Parameters.AddWithValue("@id", "%" + txtSearchParameter.Text.Trim() + "%");
+            cmd.Parameters.AddWithValue("@name", "%" + txtSearchParameter.Text.Trim() + "%");
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
         }
@@ -778,5 +793,20 @@ public partial class oqs_quotation_list : System.Web.UI.Page
                 ((TextBox)ctrl).Text = Session["QuotationDPercentageResetValue"].ToString();
                 break;
         }
+    }
+
+    protected void gvQuotationList_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        e.Row.Cells[6].BackColor = System.Drawing.Color.Orange;
+    }
+
+    protected void rdoSearchParameter_CheckedChanged(object sender, EventArgs e)
+    {
+        DisplayQuotationList();
+    }
+
+    protected void txtSearchParameter_TextChanged(object sender, EventArgs e)
+    {
+        DisplayQuotationList();
     }
 }
