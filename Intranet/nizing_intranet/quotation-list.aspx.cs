@@ -21,7 +21,6 @@ public partial class oqs_quotation_list : System.Web.UI.Page
     {            
         //Setup Adm list
         adm.Add("chrissy");
-        adm.Add("chun");
         //adm.Add("kevin");
         
         if (!IsPostBack)

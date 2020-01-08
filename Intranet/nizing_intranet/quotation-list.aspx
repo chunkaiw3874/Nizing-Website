@@ -80,7 +80,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <span style="color:red">*總成本未扣除業外支出，且為稅前成本</span>
+                        <span style="color:red; font-weight:bold;">*稅前總成本未扣除業外支出</span>
                     </div>
                 </div>
                 <div class="row">
@@ -145,7 +145,7 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="總成本*" HeaderStyle-BackColor="Orange">
                                     <HeaderTemplate>
-                                        <asp:Label ID="lbl7" runat="server" Text="總成本*"></asp:Label>
+                                        <asp:Label ID="lbl7" runat="server" Text="稅前總成本*"></asp:Label>
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="lblTotalCost" runat="server" Text="" CssClass="tableright" BackColor="Orange"></asp:Label>
