@@ -80,7 +80,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <span style="color:red; font-weight:bold;">*稅前總成本未扣除業外支出</span>
+                        <span style="color:red; font-weight:bold;">*請注意!! "稅前總成本"未扣除業外支出，營業稅5%與營所稅20%，報價前請務必斟酌</span>
                     </div>
                 </div>
                 <div class="row">
