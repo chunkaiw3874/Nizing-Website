@@ -64,6 +64,15 @@
                     </div>
                 </div>
                 <div class="row form-group">
+                    <div class="col-sm-5">
+                        <asp:TextBox ID="txtSearchParameter" runat="server" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtSearchParameter_TextChanged"></asp:TextBox>
+                    </div>
+                    <div class="col-sm-2">
+                        <asp:RadioButton ID="rdoProductId" runat="server" GroupName="searchParameter" Text="品號搜尋" AutoPostBack="true" Checked="true" OnCheckedChanged="rdoSearchParameter_CheckedChanged" />
+                        <asp:RadioButton ID="rdoProductName" runat="server" GroupName="searchParameter" Text="品名搜尋" AutoPostBack="true" />
+                    </div>
+                </div>
+                <div class="row form-group">
                     <div class="col-sm-6">
                         <asp:Button ID="btnSave" runat="server" CssClass="btn btn-success" Text="Save" OnClick="btnSave_Click" />
                         <asp:Button ID="btnReset" runat="server" CssClass="btn btn-success" Text="Reset" OnClick="btnReset_Click" />
@@ -77,7 +86,8 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <asp:GridView ID="gvQuotationList" runat="server" 
-                            ShowHeaderWhenEmpty="true" AutoGenerateColumns="false" CssClass="gv-alternate-row">
+                            ShowHeaderWhenEmpty="true" AutoGenerateColumns="false" CssClass="gv-alternate-row"
+                            OnRowCreated="gvQuotationList_RowCreated">
                             <Columns>
                                 <asp:TemplateField>
                                     <HeaderTemplate>
@@ -133,12 +143,12 @@
                                         <asp:Label ID="lblInternalCost" runat="server" Text="" CssClass="tableright"></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="總成本*">
+                                <asp:TemplateField HeaderText="總成本*" HeaderStyle-BackColor="Orange">
                                     <HeaderTemplate>
                                         <asp:Label ID="lbl7" runat="server" Text="總成本*"></asp:Label>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="lblTotalCost" runat="server" Text="" CssClass="tableright"></asp:Label>
+                                        <asp:Label ID="lblTotalCost" runat="server" Text="" CssClass="tableright" BackColor="Orange"></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="報價A">

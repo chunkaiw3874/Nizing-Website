@@ -36,6 +36,7 @@ public partial class oqs_quotation_list : System.Web.UI.Page
             ddlCategory.DataBind();
             ddlCategory.Items.Insert(0, new ListItem("全部", "all"));
             ddlCategory.Items.Insert(1, new ListItem("其他", "other"));
+            ddlCategory.SelectedIndex = 2;
 
             //獲取最新成本價格
             //int subtractMonth = 0;
@@ -43,17 +44,9 @@ public partial class oqs_quotation_list : System.Web.UI.Page
             dt = new DataTable();
             try
             {
-                //do
-                //{
-                //    subtractMonth--;
-                //    dt = new DataTable();
-                //    lastUpdateTime = DateTime.Today.AddMonths(subtractMonth);
-                //    dt = GetQuotationList(lastUpdateTime);
-                //} while (dt.Rows.Count == 0);
                 lastUpdateTime = GetLastUpdateTime();
-                dt = GetQuotationList(lastUpdateTime);
 
-                BindGridviewToDatatable(gvQuotationList, dt);
+                DisplayQuotationList();
 
                 lblQuotationRefreshTime.Text = lastUpdateTime.ToString("yyyy/MM");//dd HH:mm:ss");
             }
@@ -63,10 +56,11 @@ public partial class oqs_quotation_list : System.Web.UI.Page
             }
 
             //Format gvQuotationList based on user's access level
+            //Session["ID"] = "kevin";    //test value
             string id = getId();
             Session["ID"] = id;
             FormatHeader(Session["ID"].ToString());
-            
+
             //Retrieve Percentage Information from DB
             dt = new DataTable();
             dt = GetPercentageInformation();
@@ -101,16 +95,13 @@ public partial class oqs_quotation_list : System.Web.UI.Page
 
     protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
     {
-        DataTable dt = new DataTable();
-        //int subtractMonth = 0;
-        //do
-        //{
-        //    subtractMonth--;
-        //    dt = new DataTable();
-        //    dt = GetQuotationList(DateTime.Today.AddMonths(subtractMonth));
-        //} while (dt.Rows.Count == 0);
-        dt = GetQuotationList(GetLastUpdateTime());
+        DisplayQuotationList();
+    }
 
+    protected void DisplayQuotationList()
+    {
+        DataTable dt = new DataTable();
+        dt = GetQuotationList(GetLastUpdateTime());
         BindGridviewToDatatable(gvQuotationList, dt);
         DisplayInterimSessionValueInHeaderInput();
         CalculateInternalCost();
@@ -206,15 +197,38 @@ public partial class oqs_quotation_list : System.Web.UI.Page
         string condition = "";
         if (ddlCategory.SelectedValue.ToLower() == "all")
         {
-            condition = "";
+            condition += "";
         }
         else if (ddlCategory.SelectedValue == "other")
         {
-            condition = " AND MB.MB007 = ''";
+            condition += " AND MB.MB007 = ''";
         }
         else
         {
-            condition = " AND MB.MB007=@Category";
+            condition += " AND MB.MB007=@Category";
+        }
+
+        if (rdoProductId.Checked)
+        {
+            if (string.IsNullOrWhiteSpace(txtSearchParameter.Text))
+            {
+                condition += "";
+            }
+            else
+            {
+                condition += " AND MB.MB001 LIKE @id";
+            }
+        }
+        else if (rdoProductName.Checked)
+        {
+            if (string.IsNullOrWhiteSpace(txtSearchParameter.Text))
+            {
+                condition += "";
+            }
+            else
+            {
+                condition += " AND MB.MB002 LIKE @name";
+            }
         }
 
         using (SqlConnection conn = new SqlConnection(NZconnectionString))
@@ -236,6 +250,8 @@ public partial class oqs_quotation_list : System.Web.UI.Page
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@YearMonth", date.Year.ToString()+date.Month.ToString("D2"));
             cmd.Parameters.AddWithValue("@Category", ddlCategory.SelectedValue);
+            cmd.Parameters.AddWithValue("@id", "%" + txtSearchParameter.Text.Trim() + "%");
+            cmd.Parameters.AddWithValue("@name", "%" + txtSearchParameter.Text.Trim() + "%");
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
         }
@@ -777,5 +793,20 @@ public partial class oqs_quotation_list : System.Web.UI.Page
                 ((TextBox)ctrl).Text = Session["QuotationDPercentageResetValue"].ToString();
                 break;
         }
+    }
+
+    protected void gvQuotationList_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        e.Row.Cells[6].BackColor = System.Drawing.Color.Orange;
+    }
+
+    protected void rdoSearchParameter_CheckedChanged(object sender, EventArgs e)
+    {
+        DisplayQuotationList();
+    }
+
+    protected void txtSearchParameter_TextChanged(object sender, EventArgs e)
+    {
+        DisplayQuotationList();
     }
 }
