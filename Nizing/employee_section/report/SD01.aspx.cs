@@ -17,11 +17,14 @@ public partial class SD01 : System.Web.UI.Page
 {
     string connectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
     string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
+    List<string> adm = new List<string>();
 
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
+            adm.Add("chun");
+
             for (int i = 0; i > (2011 - Convert.ToInt16(DateTime.Today.Year)); i--)
             {
                 ddlYear.Items.Add(DateTime.Today.AddYears(i).Year.ToString());
@@ -32,12 +35,20 @@ public partial class SD01 : System.Web.UI.Page
             txtEnd.Enabled = false;
 
             List<string> roleList = getRoles();
+            string id = getId();
 
-            foreach (string s in roleList)
+            if (adm.Contains(id))
             {
-                if (s == "NIZING\\管理部")
+                Admin.Visible = true;
+            }
+            else
+            {
+                foreach (string s in roleList)
                 {
-                    Admin.Visible = true;
+                    if (s == "NIZING\\管理部")
+                    {
+                        Admin.Visible = true;
+                    }
                 }
             }
         }
@@ -55,6 +66,14 @@ public partial class SD01 : System.Web.UI.Page
         }
         return role;
     }
+    protected string getId()
+    {
+        WindowsPrincipal principal = (WindowsPrincipal)User;
+        WindowsIdentity identity = (WindowsIdentity)User.Identity;
+        string[] name = identity.Name.Split('\\');
+        return name[1];
+    }
+
     protected void R1_CheckedChanged(object sender, EventArgs e)
     {
         if (rdoYear.Checked == true)
@@ -502,9 +521,10 @@ public partial class SD01 : System.Web.UI.Page
             conn.Open();
             string query = "SELECT CMSMV.MV001 EMP_ID, CMSMV.MV002 EMP_NAME"
                         + " FROM CMSMV"
-                        + " WHERE MV004='A-SD'"
+                        + " WHERE (MV004='A-SD'"
                         + " AND MV022=''"
-                        + " AND MV001<>'0098'" //黃耀南不顯示
+                        + " AND MV001<>'0098')" //黃耀南不顯示
+                        + " OR MV001='0067'"
                         + " ORDER BY CMSMV.MV001";
             SqlCommand cmd = new SqlCommand(query, conn);            
             SqlDataAdapter da = new SqlDataAdapter(cmd);
