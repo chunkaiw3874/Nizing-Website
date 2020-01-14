@@ -27,7 +27,7 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
         string year = "";
         ////////test info
         //Session["erp_id"] = "0067";
-        //Session["view_year"] = "2019";
+        //Session["view_year"] = "2018";
         //////////////////////////////
 
         if (!IsPostBack)
@@ -1010,7 +1010,7 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
             HtmlGenericControl titleDiv = new HtmlGenericControl();
             titleDiv.TagName = "div";
             titleDiv.Attributes["class"] = "col-xs-12 subtitle border";
-            titleDiv.InnerText = commentatorName.ToString() + "評語";
+            titleDiv.InnerText = commentatorName.ToString() + "建議事項";
             rowDiv.Controls.Add(titleDiv);
             rowDiv = new HtmlGenericControl();
             rowDiv.TagName = "div";

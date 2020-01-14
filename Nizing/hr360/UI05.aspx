@@ -49,8 +49,8 @@
                         <thead>
                             <tr>
                                 <th class="col-xs-3">自評</th>
-                                <th class="col-xs-3">主管評</th>
-                                <th class="col-xs-3">核決主管評</th>
+                                <th class="col-xs-3">初評</th>
+                                <th class="col-xs-3">複評</th>
                             </tr>
                         </thead>
                         <tbody id="tbFirstAssessmentBody" runat="server">
@@ -69,8 +69,8 @@
                         <thead>
                             <tr>
                                 <th class="col-xs-3">自評</th>
-                                <th class="col-xs-3">主管評</th>
-                                <th class="col-xs-3">核決主管評</th>
+                                <th class="col-xs-3">初評</th>
+                                <th class="col-xs-3">複評</th>
                             </tr>
                         </thead>
                         <tbody id="tbAssessmentEditBody" runat="server">

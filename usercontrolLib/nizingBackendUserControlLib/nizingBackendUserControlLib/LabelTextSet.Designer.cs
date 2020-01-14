@@ -39,10 +39,11 @@
             this.lblTitle.Location = new System.Drawing.Point(0, 3);
             this.lblTitle.Margin = new System.Windows.Forms.Padding(0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(0, 12);
+            this.lblTitle.Size = new System.Drawing.Size(27, 12);
             this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "label";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblTitle.SizeChanged += new System.EventHandler(this.LblTitle_SizeChanged);
+            this.lblTitle.SizeChanged += new System.EventHandler(this.SizeChanged);
             // 
             // txtContent
             // 
@@ -53,6 +54,7 @@
             this.txtContent.Name = "txtContent";
             this.txtContent.Size = new System.Drawing.Size(100, 22);
             this.txtContent.TabIndex = 1;
+            this.txtContent.SizeChanged += new System.EventHandler(this.SizeChanged);
             // 
             // LabelTextSet
             // 

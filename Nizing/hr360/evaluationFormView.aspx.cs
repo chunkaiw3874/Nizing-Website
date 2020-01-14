@@ -38,10 +38,10 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
                 assessed = Session["view_id"].ToString().Trim();
                 year = Session["view_year"].ToString().Trim();
 
-                ///////test 
-                //assessed = "0080";
+                /////////test 
+                //assessed = "0001";
                 //year = "2019";
-                //Session["erp_id"] = "0080";
+                //Session["erp_id"] = "0001";
                 //////////////////////////////
             }
         }
@@ -566,7 +566,7 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
                         name = row["ASSESSOR_NAME"].ToString();
                     }
                 }
-                txt.Text = "核決主管評" + Environment.NewLine + name;
+                txt.Text = "複評" + Environment.NewLine + name;
             }
             else
             {
@@ -578,7 +578,7 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
                         name += row["ASSESSOR_NAME"].ToString() + " ";
                     }
                 }
-                txt.Text = "主管評" + Environment.NewLine + name;
+                txt.Text = "初評" + Environment.NewLine + name;
             }
             div.Controls.Add(txt);
         }
@@ -718,34 +718,41 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
             lbl = new Label();
             lbl.CssClass = "form-control text-center text-color-green";
 
-            if (i == 0)
+            if (dtWeightedScore.Rows.Count > 0)
             {
-                lbl.Text = dtWeightedScore.Rows[0][i + 1].ToString();
-            }
-            else if ( i == colCount - 1)
-            {
-                lbl.Text = dtWeightedScore.Rows[0][dtWeightedScore.Columns.Count - 1].ToString();
+                if (i == 0)
+                {
+                    lbl.Text = dtWeightedScore.Rows[0][i + 1].ToString();
+                }
+                else if (i == colCount - 1)
+                {
+                    lbl.Text = dtWeightedScore.Rows[0][dtWeightedScore.Columns.Count - 1].ToString();
+                }
+                else
+                {
+
+                    //將除了自評(1st)及核決主管評(last)以外的成績加總計算平均
+                    decimal score = 0;
+                    bool assessed = false;
+                    for (int j = 2; j < dtWeightedScore.Columns.Count - 1; j++)
+                    {
+                        decimal r = 0;
+                        if (decimal.TryParse(dtWeightedScore.Rows[0][j].ToString(), out r))
+                        {
+                            score += r;
+                            assessed = true;
+                        }
+                    }
+                    score /= (dtWeightedScore.Columns.Count - 3);    //包含assessed_id col、自評成績col、核決主管評成績col在內，dtWeightedScore總共固定col數量為3，其餘皆是主管評成績，須作平均計算
+
+
+                    lbl.Text = assessed == false ? "未評核" : score.ToString("0.00");
+
+                }
             }
             else
             {
-
-                //將除了自評(1st)及核決主管評(last)以外的成績加總計算平均
-                decimal score = 0;
-                bool assessed = false;
-                for (int j = 2; j < dtWeightedScore.Columns.Count - 1; j++)
-                {
-                    decimal r = 0;
-                    if (decimal.TryParse(dtWeightedScore.Rows[0][j].ToString(), out r))
-                    {
-                        score += r;
-                        assessed = true;
-                    }
-                }
-                score /= (dtWeightedScore.Columns.Count - 3);    //包含assessed_id col、自評成績col、核決主管評成績col在內，dtWeightedScore總共固定col數量為3，其餘皆是主管評成績，須作平均計算
-
-
-                lbl.Text = assessed == false ? "未評核" : score.ToString("0.00");
-                
+                lbl.Text = "未評核";
             }
 
             div.Controls.Add(lbl);
@@ -772,7 +779,7 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
             HtmlGenericControl titleDiv = new HtmlGenericControl();
             titleDiv.TagName = "div";
             titleDiv.Attributes["class"] = "col-xs-12 subtitle border";
-            titleDiv.InnerText = commentatorName.ToString() + "評語";
+            titleDiv.InnerText = commentatorName.ToString() + "建議事項";
             rowDiv.Controls.Add(titleDiv);
             rowDiv = new HtmlGenericControl();
             rowDiv.TagName = "div";
@@ -818,7 +825,7 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
                     Button btn = new Button();
                     btn.ID = "btnSaveComment" + commentatorList[i];
                     btn.CssClass = "btn btn-success";
-                    btn.Text = "儲存評語";
+                    btn.Text = "儲存";
                     btn.Click += new EventHandler(btnSaveComment_Click);
                     btn.Visible = true;
                     controlDiv.Controls.Add(btn);

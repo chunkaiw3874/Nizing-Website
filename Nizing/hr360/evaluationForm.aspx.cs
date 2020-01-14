@@ -39,6 +39,11 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 year = cmd.ExecuteScalar().ToString() ?? "2016";
             }
 
+            ///////////////test value
+            //Session["erp_id"] = "0080";
+            //Session["eval_id"] = "0080";
+            ///////////////////////////
+
             string assessor = Session["erp_id"].ToString().Trim();
             string assessed = "";
             if (!IsPostBack)
@@ -50,10 +55,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 assessed = lblEmpID.Text.Trim();
             }
 
-            /////////////////test value
-            //assessor = "0001";
-            //assessed = "0006";
-            ///////////////////////////
+            
 
             DataTable dtEval = new DataTable();
             //string evaluated = isEvaluated(assessor, assessed);
@@ -148,7 +150,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 headerText = new HtmlGenericControl();
                 headerText.TagName = "span";
                 headerText.Attributes["class"] = "form-control text-center";
-                headerText.InnerText = "主管評分數";
+                headerText.InnerText = "初評分數";
                 headerDiv.Controls.Add(headerText);
             }
             else if (dtEval.Rows[0]["ASSESS_TYPE"].ToString() == "3")
@@ -187,7 +189,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                     headerText = new HtmlGenericControl();
                     headerText.TagName = "span";
                     headerText.Attributes["class"] = "form-control text-center";
-                    headerText.InnerText = "主管評分數";
+                    headerText.InnerText = "初評分數";
                     headerDiv.Controls.Add(headerText);
                 }
                 headerDiv = new HtmlGenericControl();
@@ -197,7 +199,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 headerText = new HtmlGenericControl();
                 headerText.TagName = "span";
                 headerText.Attributes["class"] = "form-control text-center";
-                headerText.InnerText = "核決主管分數";
+                headerText.InnerText = "複評分數";
                 headerDiv.Controls.Add(headerText);
             }
         }
@@ -713,7 +715,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                                             + " FROM CMSMV"
                                             + " WHERE CMSMV.MV001=@ID", conn);
                 cmd.Parameters.AddWithValue("@ID", assessor);
-                innerDiv.InnerText = cmd.ExecuteScalar().ToString() + "評語";
+                innerDiv.InnerText = cmd.ExecuteScalar().ToString() + "建議事項";
             }
             outerDiv.Controls.Add(innerDiv);
 

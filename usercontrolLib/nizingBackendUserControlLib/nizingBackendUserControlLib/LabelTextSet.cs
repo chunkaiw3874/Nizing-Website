@@ -22,8 +22,8 @@ namespace nizingBackendUserControlLib
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public string Title 
         {
-            get { return lblTitle.Text; }
-            set { lblTitle.Text = value; }
+            get => lblTitle.Text;
+            set => lblTitle.Text = value;
         }
 
         [Browsable(true)]
@@ -34,7 +34,21 @@ namespace nizingBackendUserControlLib
             set => txtContent.Text = value; 
         }
 
-        private void LblTitle_SizeChanged(object sender, EventArgs e)
+
+        [Browsable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public int ContentWidth
+        {
+            get => txtContent.Width;
+            set => txtContent.Width = value;
+        }
+
+        //private void LblTitle_SizeChanged(object sender, EventArgs e)
+        //{
+        //    this.Width = lblTitle.Width + txtContent.Width;
+        //}
+
+        private new void SizeChanged(object sender, EventArgs e)
         {
             this.Width = lblTitle.Width + txtContent.Width;
         }
