@@ -77,7 +77,7 @@
                             </asp:TemplateField>
                             <asp:TemplateField>
                                 <HeaderTemplate>
-                                    訂單
+                                    報價單
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label7" runat="server" Text='<%#Eval("報價單") %>'></asp:Label>
