@@ -35,8 +35,12 @@ public partial class nizing_intranet_ProductionProgress_Dept : System.Web.UI.Pag
                 + " ELSE N'N/A'"
                 + " END AS '母/子'"
                 + " , MOCTA.TA021 生產線別"
-                + " , MOCTA.TA006 品號, MOCTA.TA034 品名, MOCTA.TA035 規格, MOCTA.TA015 預計產量"
-                + " , MOCTA.TA007 單位, MOCTA.TA016 已領料量, MOCTA.TA017 已生產量, MOCTA.TA015-MOCTA.TA017 未生產量"
+                + " , MOCTA.TA006 品號, MOCTA.TA034 品名, MOCTA.TA035 規格" +
+                ", CONVERT(DECIMAL(20,0),MOCTA.TA015) 預計產量"
+                + " , MOCTA.TA007 單位" +
+                ", CONVERT(DECIMAL(20,0),MOCTA.TA016) 已領料量" +
+                ", CONVERT(DECIMAL(20,0),MOCTA.TA017) 已生產量" +
+                ", CONVERT(DECIMAL(20,0),MOCTA.TA015-MOCTA.TA017) 未生產量"
                 + " FROM MOCTA"
                 + " LEFT JOIN COPTC ON MOCTA.TA026 = COPTC.TC001 AND MOCTA.TA027 = COPTC.TC002"
                 + " LEFT JOIN COPMA ON COPTC.TC004 = COPMA.MA001"
@@ -144,7 +148,7 @@ public partial class nizing_intranet_ProductionProgress_Dept : System.Web.UI.Pag
                 {
                     for (int j = 0; j < _gd.Rows.Count; j++)
                     {
-                        sum += decimal.Parse(_gd.Rows[j].Cells[i].Text, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
+                        sum += decimal.Parse(((Label)_gd.Rows[j].FindControl("Label" + (i + 1).ToString())).Text, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
                     }
                     _gd.FooterRow.Cells[i].Text = sum.ToString("N3");
                 }
@@ -153,7 +157,7 @@ public partial class nizing_intranet_ProductionProgress_Dept : System.Web.UI.Pag
                     List<string> unitList = new List<string>();
                     for (int j = 0; j < _gd.Rows.Count; j++)
                     {
-                        unitList.Add(_gd.Rows[j].Cells[i].Text);
+                        unitList.Add(((Label)_gd.Rows[j].FindControl("Label" + (i + 1).ToString())).Text);
                     }
                     unitList = unitList.Distinct().ToList();
                     if (unitList.Count == 1)

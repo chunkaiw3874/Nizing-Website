@@ -39,10 +39,10 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 year = cmd.ExecuteScalar().ToString() ?? "2016";
             }
 
-            ///////////////test value
-            //Session["erp_id"] = "0080";
-            //Session["eval_id"] = "0080";
-            ///////////////////////////
+            /////////////test value
+            //Session["erp_id"] = "0007";
+            //Session["eval_id"] = "0142";
+            /////////////////////////
 
             string assessor = Session["erp_id"].ToString().Trim();
             string assessed = "";
@@ -106,7 +106,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             {
                 headerDiv = new HtmlGenericControl();
                 headerDiv.TagName = "div";
-                headerDiv.Attributes["class"] = "col-xs-6 border";
+                headerDiv.Attributes["class"] = "col-xs-7 border";
                 divQuestionTitleRow.Controls.Add(headerDiv);
                 headerText = new HtmlGenericControl();
                 headerText.TagName = "span";
@@ -115,7 +115,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 headerDiv.Controls.Add(headerText);
                 headerDiv = new HtmlGenericControl();
                 headerDiv.TagName = "div";
-                headerDiv.Attributes["class"] = "col-xs-2 border";
+                headerDiv.Attributes["class"] = "col-xs-1 border";
                 divQuestionTitleRow.Controls.Add(headerDiv);
                 headerText = new HtmlGenericControl();
                 headerText.TagName = "span";
@@ -127,7 +127,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             {
                 headerDiv = new HtmlGenericControl();
                 headerDiv.TagName = "div";
-                headerDiv.Attributes["class"] = "col-xs-4 border";
+                headerDiv.Attributes["class"] = "col-xs-6 border";
                 divQuestionTitleRow.Controls.Add(headerDiv);
                 headerText = new HtmlGenericControl();
                 headerText.TagName = "span";
@@ -136,7 +136,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 headerDiv.Controls.Add(headerText);
                 headerDiv = new HtmlGenericControl();
                 headerDiv.TagName = "div";
-                headerDiv.Attributes["class"] = "col-xs-2 border";
+                headerDiv.Attributes["class"] = "col-xs-1 border";
                 divQuestionTitleRow.Controls.Add(headerDiv);
                 headerText = new HtmlGenericControl();
                 headerText.TagName = "span";
@@ -145,7 +145,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 headerDiv.Controls.Add(headerText);
                 headerDiv = new HtmlGenericControl();
                 headerDiv.TagName = "div";
-                headerDiv.Attributes["class"] = "col-xs-2 border";
+                headerDiv.Attributes["class"] = "col-xs-1 border";
                 divQuestionTitleRow.Controls.Add(headerDiv);
                 headerText = new HtmlGenericControl();
                 headerText.TagName = "span";
@@ -159,11 +159,11 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 headerDiv.TagName = "div";
                 if (supervisorAssigned)
                 {
-                    headerDiv.Attributes["class"] = "col-xs-2 border";
+                    headerDiv.Attributes["class"] = "col-xs-5 border";
                 }
                 else
                 {
-                    headerDiv.Attributes["class"] = "col-xs-4 border";
+                    headerDiv.Attributes["class"] = "col-xs-6 border";
                 }
                 divQuestionTitleRow.Controls.Add(headerDiv);
                 headerText = new HtmlGenericControl();
@@ -173,7 +173,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 headerDiv.Controls.Add(headerText);
                 headerDiv = new HtmlGenericControl();
                 headerDiv.TagName = "div";
-                headerDiv.Attributes["class"] = "col-xs-2 border";
+                headerDiv.Attributes["class"] = "col-xs-1 border";
                 divQuestionTitleRow.Controls.Add(headerDiv);
                 headerText = new HtmlGenericControl();
                 headerText.TagName = "span";
@@ -184,7 +184,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 {
                     headerDiv = new HtmlGenericControl();
                     headerDiv.TagName = "div";
-                    headerDiv.Attributes["class"] = "col-xs-2 border";
+                    headerDiv.Attributes["class"] = "col-xs-1 border";
                     divQuestionTitleRow.Controls.Add(headerDiv);
                     headerText = new HtmlGenericControl();
                     headerText.TagName = "span";
@@ -194,7 +194,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 }
                 headerDiv = new HtmlGenericControl();
                 headerDiv.TagName = "div";
-                headerDiv.Attributes["class"] = "col-xs-2 border";
+                headerDiv.Attributes["class"] = "col-xs-1 border";
                 divQuestionTitleRow.Controls.Add(headerDiv);
                 headerText = new HtmlGenericControl();
                 headerText.TagName = "span";
@@ -333,7 +333,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 innerDiv = new HtmlGenericControl();
                 innerDiv.TagName = "div";
                 innerDiv.ID = outerDiv.ID + "_4";
-                innerDiv.Attributes["class"] = "col-xs-6 border";
+                innerDiv.Attributes["class"] = "col-xs-7 border";
                 outerDiv.Controls.Add(innerDiv);
                 TextBox txt = new TextBox();
                 txt.ID = "txtAssessmentQuestion" + (i + 1).ToString();
@@ -347,7 +347,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 innerDiv = new HtmlGenericControl();
                 innerDiv.TagName = "div";
                 innerDiv.ID = outerDiv.ID + "_5";
-                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                innerDiv.Attributes["class"] = "col-xs-1 lowmargin border text-center";
                 outerDiv.Controls.Add(innerDiv);
                 txt = new TextBox();
                 txt.ID = "txtAssessmentScore" + (i + 1).ToString();
@@ -369,7 +369,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 innerDiv = new HtmlGenericControl();
                 innerDiv.TagName = "div";
                 innerDiv.ID = outerDiv.ID + "_4";
-                innerDiv.Attributes["class"] = "col-xs-4 border";
+                innerDiv.Attributes["class"] = "col-xs-6 border";
                 outerDiv.Controls.Add(innerDiv);
                 TextBox txt = new TextBox();
                 txt.ID = "txtAssessmentQuestion" + (i + 1).ToString();
@@ -383,7 +383,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 innerDiv = new HtmlGenericControl();
                 innerDiv.TagName = "div";
                 innerDiv.ID = outerDiv.ID + "_6";
-                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                innerDiv.Attributes["class"] = "col-xs-1 border text-center";
                 outerDiv.Controls.Add(innerDiv);
                 label = new Label();
                 label.ID = "lblSelfAssessmentScore" + (i + 1).ToString();
@@ -394,11 +394,11 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 innerDiv = new HtmlGenericControl();
                 innerDiv.TagName = "div";
                 innerDiv.ID = outerDiv.ID + "_5";
-                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                innerDiv.Attributes["class"] = "col-xs-1 lowmargin border text-center";
                 outerDiv.Controls.Add(innerDiv);
                 txt = new TextBox();
                 txt.ID = "txtAssessmentScore" + (i + 1).ToString();
-                txt.CssClass = "form-control numbers-only add-number col" + (i + 1) + "_5";
+                txt.CssClass = "form-control  numbers-only add-number col" + (i + 1) + "_5";
                 if (isAssessed)
                 {
                     txt.Text = dtAssessmentQuestion.Rows[i]["SUPER_SCORE"].ToString();
@@ -418,11 +418,11 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 innerDiv.ID = outerDiv.ID + "_4";
                 if (supervisorAssigned)
                 {
-                    innerDiv.Attributes["class"] = "col-xs-2 border";
+                    innerDiv.Attributes["class"] = "col-xs-5 border";
                 }
                 else
                 {
-                    innerDiv.Attributes["class"] = "col-xs-4 border";
+                    innerDiv.Attributes["class"] = "col-xs-6 border";
                 }
                 outerDiv.Controls.Add(innerDiv);
                 TextBox txt = new TextBox();
@@ -437,7 +437,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 innerDiv = new HtmlGenericControl();
                 innerDiv.TagName = "div";
                 innerDiv.ID = outerDiv.ID + "_6";
-                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                innerDiv.Attributes["class"] = "col-xs-1 border text-center";
                 outerDiv.Controls.Add(innerDiv);
                 label = new Label();
                 label.ID = "lblSelfAssessmentScore" + (i + 1).ToString();
@@ -450,7 +450,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                     innerDiv = new HtmlGenericControl();
                     innerDiv.TagName = "div";
                     innerDiv.ID = outerDiv.ID + "_7";
-                    innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                    innerDiv.Attributes["class"] = "col-xs-1 border text-center";
                     outerDiv.Controls.Add(innerDiv);
                     label = new Label();
                     label.ID = "lblSuperAssessmentScore" + (i + 1).ToString();
@@ -462,11 +462,11 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 innerDiv = new HtmlGenericControl();
                 innerDiv.TagName = "div";
                 innerDiv.ID = outerDiv.ID + "_5";
-                innerDiv.Attributes["class"] = "col-xs-2 border text-center";
+                innerDiv.Attributes["class"] = "col-xs-1 lowmargin border text-center";
                 outerDiv.Controls.Add(innerDiv);
                 txt = new TextBox();
                 txt.ID = "txtAssessmentScore" + (i + 1).ToString();
-                txt.CssClass = "form-control numbers-only add-number col" + (i + 1) + "_5";
+                txt.CssClass = "form-control  numbers-only add-number col" + (i + 1) + "_5";
                 if(isAssessed)
                 {
                     txt.Text = dtAssessmentQuestion.Rows[i]["FINAL_SCORE"].ToString();
@@ -594,6 +594,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             lblExpectedAttendance.Text = expectedWorkHour.ToString("N2");
             lblActualAttendance.Text = (expectedWorkHour - dayOffSum).ToString("N2");
             lblAttendanceScore.Text = (100 + dayOffValue).ToString("N2");
+            lblAttendanceFailure.Text = (((expectedWorkHour - dayOffSum) / expectedWorkHour)*100 - 100).ToString("N2") + "%";
             //lblOnJobPercent.Text = (Math.Floor(100 * 100 * (1 - (dayOffSum / onJobHour))) / 100).ToString();    //2018.07.23 改成小數第二位無條件捨去
         }
         else
@@ -699,45 +700,58 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
 
             //動態製作非自評評與欄位
             //title
-            HtmlGenericControl outerDiv = new HtmlGenericControl();
-            outerDiv.TagName = "div";
-            outerDiv.ID = "commentRow1";
-            outerDiv.Attributes["class"] = "row";
-            comment.Controls.Add(outerDiv);
-            HtmlGenericControl innerDiv = new HtmlGenericControl();
-            innerDiv.TagName = "div";
-            innerDiv.ID = "commentRow_Title";
-            innerDiv.Attributes["class"] = "col-xs-12 subtitle border";
-            using (SqlConnection conn = new SqlConnection(NZconnectionString))
+            DataTable dtAssessorList = new DataTable();
+            dtAssessorList = GetAssessorList(year, assessed, assessType);
+            for (int i = 0; i < dtAssessorList.Rows.Count; i++)
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT CMSMV.MV002"
-                                            + " FROM CMSMV"
-                                            + " WHERE CMSMV.MV001=@ID", conn);
-                cmd.Parameters.AddWithValue("@ID", assessor);
-                innerDiv.InnerText = cmd.ExecuteScalar().ToString() + "建議事項";
-            }
-            outerDiv.Controls.Add(innerDiv);
+                HtmlGenericControl outerDiv = new HtmlGenericControl();
+                outerDiv.TagName = "div";
+                outerDiv.ID = "commentRow1_" + dtAssessorList.Rows[i]["ASSESSOR_ID"].ToString();
+                outerDiv.Attributes["class"] = "row";
+                comment.Controls.Add(outerDiv);
+                HtmlGenericControl innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = "commentRow_Title_" + dtAssessorList.Rows[i]["ASSESSOR_ID"].ToString();
+                innerDiv.Attributes["class"] = "col-xs-12 subtitle border";
+                using (SqlConnection conn = new SqlConnection(NZconnectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT CMSMV.MV002"
+                                                + " FROM CMSMV"
+                                                + " WHERE CMSMV.MV001=@ID", conn);
+                    cmd.Parameters.AddWithValue("@ID", dtAssessorList.Rows[i]["ASSESSOR_ID"].ToString());
+                    innerDiv.InnerText = cmd.ExecuteScalar().ToString() + "建議事項";
+                }
+                outerDiv.Controls.Add(innerDiv);
 
-            //textbox
-            outerDiv = new HtmlGenericControl();
-            outerDiv.TagName = "div";
-            outerDiv.ID = "commentRow2";
-            outerDiv.Attributes["class"] = "row";
-            comment.Controls.Add(outerDiv);
-            innerDiv = new HtmlGenericControl();
-            innerDiv.TagName = "div";
-            innerDiv.ID = "commentRow_Comment";
-            innerDiv.Attributes["class"] = "col-xs-12 border";
-            outerDiv.Controls.Add(innerDiv);
-            TextBox txt = new TextBox();
-            txt.ID = "txtCommentRow_Comment";
-            txt.CssClass = "form-control no-resize autosize";
-            txt.Attributes["placeholder"] = "請寫下" + lblEmpName.Text + "今年度的貢獻、表現、及給予建議";
-            txt.Text = LoadComment(year, assessor, assessed, assessorsWithOwnCommentSection);
-            txt.TextMode = TextBoxMode.MultiLine;
-            txt.Wrap = true;
-            innerDiv.Controls.Add(txt);
+                //textbox
+                outerDiv = new HtmlGenericControl();
+                outerDiv.TagName = "div";
+                outerDiv.ID = "commentRow2_" + dtAssessorList.Rows[i]["ASSESSOR_ID"].ToString();
+                outerDiv.Attributes["class"] = "row";
+                comment.Controls.Add(outerDiv);
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = "commentRow_Comment_" + dtAssessorList.Rows[i]["ASSESSOR_ID"].ToString();
+                innerDiv.Attributes["class"] = "col-xs-12 border";
+                outerDiv.Controls.Add(innerDiv);
+                TextBox txt = new TextBox();
+                txt.ID = "txtCommentRow_Comment_" + dtAssessorList.Rows[i]["ASSESSOR_ID"].ToString();
+                txt.CssClass = "form-control no-resize autosize";
+                txt.Attributes["placeholder"] = "請寫下" + lblEmpName.Text + "今年度的貢獻、表現、及給予建議";
+                txt.Text = LoadComment(year, dtAssessorList.Rows[i]["ASSESSOR_ID"].ToString(), assessed, assessorsWithOwnCommentSection);
+                txt.TextMode = TextBoxMode.MultiLine;
+                txt.Wrap = true;
+                if(dtAssessorList.Rows[i]["ASSESSOR_ID"].ToString() == Session["erp_id"].ToString())
+                {
+                    txt.ReadOnly = false;
+                }
+                else
+                {
+                    txt.ReadOnly = true;
+                }
+                innerDiv.Controls.Add(txt);
+            }
         }
     }
     
@@ -890,7 +904,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 else
                 {
                     //非自評
-                    cmd.Parameters.AddWithValue("@OVERALL_COMMENT", ((TextBox)comment.FindControl("txtCommentRow_Comment")).Text.Trim());
+                    cmd.Parameters.AddWithValue("@OVERALL_COMMENT", ((TextBox)comment.FindControl("txtCommentRow_Comment_" + Session["erp_id"].ToString())).Text.Trim());
                 }
                 cmd.ExecuteNonQuery();
 
@@ -920,7 +934,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("@USER", Session["erp_id"].ToString().Trim());
                     cmd.Parameters.AddWithValue("@ASSESS_YEAR", lblEvalYear.Text);
                     cmd.Parameters.AddWithValue("@ASSESSED_ID", lblEmpID.Text);
-                    cmd.Parameters.AddWithValue("@COMMENT", ((TextBox)comment.FindControl("txtCommentRow_Comment")).Text.Trim());
+                    cmd.Parameters.AddWithValue("@COMMENT", ((TextBox)comment.FindControl("txtCommentRow_Comment_" + Session["erp_id"].ToString())).Text.Trim());
                     cmd.ExecuteNonQuery();
                 }
 
@@ -1442,7 +1456,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
 + " ,Summary.DAY_OFF_UNIT"
 + " ,COALESCE(Value.[Value],null) 'Value'"
 + " ,N'分' 'ValueUnit'"
-+ " ,COALESCE(Convert(decimal(4,2),Summary.DAY_OFF_AMOUNT*Value.[Value]),null) 'Subtotal'"
++ " ,COALESCE(Convert(decimal(16,2),Summary.DAY_OFF_AMOUNT*Value.[Value]),null) 'Subtotal'"
 + " FROM DAYOFF_SUMMARY Summary"
 + " LEFT JOIN NZ_ERP2.dbo.HR360_Attendance_CategoryValue Value on Summary.DAY_OFF_ID=Value.[UID] and Value.[Year]=@YEAR"
 + " LEFT JOIN PALTK TK ON TK.TK001=@ID AND TK.TK002=@YEAR"
@@ -1507,6 +1521,31 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
         }
+        return dt;
+    }
+
+    //擷取評核者清單
+    private DataTable GetAssessorList(string year, string assessed, string assessType="3")
+    {
+        DataTable dt = new DataTable();
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            string query = "select ASSESSOR_ID" +
+                " from HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A" +
+                " where [YEAR] = @assessYear" +
+                " and ASSESSED_ID = @assessedId" +
+                " and ASSESS_TYPE<=@assessType" +
+                " and ASSESSOR_ORDER<>'0'" +
+                " order by ASSESSOR_ORDER";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@assessYear", year);
+            cmd.Parameters.AddWithValue("@assessedId", assessed);
+            cmd.Parameters.AddWithValue("@assessType", assessType);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+        }
+
         return dt;
     }
 

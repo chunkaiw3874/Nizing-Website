@@ -6,7 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Nizing", "http://localhost:50429", "{BD3539B3-52E8-4C7A-9A0C-A85788E6F9FD}"
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.7.2"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_50429"
 		Debug.AspNetCompiler.PhysicalPath = "Nizing\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50429\"
@@ -51,6 +51,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReactWebsite2.1", "ReactWeb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nizingBackendUserControlLib", "usercontrolLib\nizingBackendUserControlLib\nizingBackendUserControlLib\nizingBackendUserControlLib.csproj", "{98C88549-3A27-499E-8D69-A9E6869A32F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stockCrawler", "..\Personal Project\stockCrawler\stockCrawler.csproj", "{7702E9F7-F639-41FD-9FB7-E6541CD90A7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{98C88549-3A27-499E-8D69-A9E6869A32F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98C88549-3A27-499E-8D69-A9E6869A32F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98C88549-3A27-499E-8D69-A9E6869A32F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7702E9F7-F639-41FD-9FB7-E6541CD90A7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7702E9F7-F639-41FD-9FB7-E6541CD90A7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7702E9F7-F639-41FD-9FB7-E6541CD90A7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7702E9F7-F639-41FD-9FB7-E6541CD90A7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

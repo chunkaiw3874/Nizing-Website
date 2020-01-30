@@ -39,10 +39,10 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
                 year = Session["view_year"].ToString().Trim();
 
                 /////////test 
-                //assessed = "0001";
+                //assessed = "0142";
                 //year = "2019";
-                //Session["erp_id"] = "0001";
-                //////////////////////////////
+                //Session["erp_id"] = "0007";
+                ////////////////////////////
             }
         }
         else
@@ -219,6 +219,7 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
             lblExpectedAttendance.Text = expectedWorkHour.ToString("N2");
             lblActualAttendance.Text = (expectedWorkHour - dayOffSum).ToString("N2");
             lblAttendanceScore.Text = (100 + dayOffValue).ToString("N2");
+            lblAttendanceFailure.Text = (((expectedWorkHour - dayOffSum) / expectedWorkHour)*100 - 100).ToString("N2") + "%";
             //lblOnJobPercent.Text = (Math.Floor(100 * 100 * (1 - (dayOffSum / onJobHour))) / 100).ToString();    //2018.07.23 改成小數第二位無條件捨去
         }
         else
@@ -524,7 +525,7 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
         div = new HtmlGenericControl();
         div.TagName = "div";
         div.ID = "QuestionTitleRow_4";
-        div.Attributes["class"] = "border col-xs-" + (8 - 2 * colCount).ToString();
+        div.Attributes["class"] = "border col-xs-" + (8 - 1 * colCount).ToString();
         divQuestionTitleRow.Controls.Add(div);
         lbl = new Label();
         lbl.CssClass = "form-control text-center";
@@ -536,11 +537,11 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
             div = new HtmlGenericControl();
             div.TagName = "div";
             div.ID = "QuestionTitleRow_" + (5 + i).ToString();
-            div.Attributes["class"] = "border col-xs-2";
+            div.Attributes["class"] = "border col-xs-1";
             divQuestionTitleRow.Controls.Add(div);
             //add 評分 column for respective asesssor type
             TextBox txt = new TextBox();
-            txt.CssClass = "form-control text-center autosize no-resize";
+            txt.CssClass = "form-control text-center autosize no-resize lowmargin";
             txt.TextMode = TextBoxMode.MultiLine;
 
             string name = "";
@@ -631,7 +632,7 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
             div = new HtmlGenericControl();
             div.TagName = "div";
             div.ID = outerDiv.ID + "_4";
-            div.Attributes["class"] = "border col-xs-" + (8 - 2 * colCount).ToString();
+            div.Attributes["class"] = "border col-xs-" + (8 - 1 * colCount).ToString();
             outerDiv.Controls.Add(div);
             TextBox txt = new TextBox();
             txt.ID = "txtAssessmentQuestion" + (i + 1).ToString();
@@ -646,7 +647,7 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
                 div = new HtmlGenericControl();
                 div.TagName = "div";
                 div.ID = outerDiv.ID + "_" + (5 + j).ToString();
-                div.Attributes["class"] = "border col-xs-2";
+                div.Attributes["class"] = "border col-xs-1";
                 outerDiv.Controls.Add(div);
                 lbl = new Label();
                 lbl.ID = "lblAssessmentScore" + (i + 1).ToString() + (j + 1).ToString();
@@ -700,7 +701,7 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
         //置入各評核者所打的最終分數
         HtmlGenericControl div = new HtmlGenericControl();
         div.TagName = "div";
-        div.Attributes["class"] = "border col-xs-" + (12 - 2 * colCount).ToString();
+        div.Attributes["class"] = "border col-xs-" + (12 - 1 * colCount).ToString();
         finalScoreRow.Controls.Add(div);
         Label lbl = new Label();
         lbl.CssClass = "form-control text-right text-color-green";
@@ -713,7 +714,7 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
             div = new HtmlGenericControl();
             div.TagName = "div";
             div.ID = "finalScoreRow_" + i.ToString();
-            div.Attributes["class"] = "border col-xs-2";
+            div.Attributes["class"] = "border col-xs-1";
             finalScoreRow.Controls.Add(div);
             lbl = new Label();
             lbl.CssClass = "form-control text-center text-color-green";
@@ -934,7 +935,7 @@ public partial class hr360_evaluationFormView : System.Web.UI.Page
 + " ,Summary.DAY_OFF_UNIT"
 + " ,COALESCE(Value.[Value],null) 'Value'"
 + " ,N'分' 'ValueUnit'"
-+ " ,COALESCE(Convert(decimal(4,2),Summary.DAY_OFF_AMOUNT*Value.[Value]),null) 'Subtotal'"
++ " ,COALESCE(Convert(decimal(16,2),Summary.DAY_OFF_AMOUNT*Value.[Value]),null) 'Subtotal'"
 + " FROM DAYOFF_SUMMARY Summary"
 + " LEFT JOIN NZ_ERP2.dbo.HR360_Attendance_CategoryValue Value on Summary.DAY_OFF_ID=Value.[UID] and Value.[Year]=@YEAR"
 + " LEFT JOIN PALTK TK ON TK.TK001=@ID AND TK.TK002=@YEAR"

@@ -59,34 +59,34 @@
                                     <asp:Label ID="lbl4" runat="server" Text='<%#Eval("自評分數") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="主管ID" HeaderStyle-CssClass="text-center">
+<%--                            <asp:TemplateField HeaderText="初評者ID" HeaderStyle-CssClass="text-center">
                                 <ItemTemplate>
-                                    <asp:Label ID="lbl5" runat="server" Text='<%#Eval("主管ID") %>'></asp:Label>
+                                    <asp:Label ID="lbl5" runat="server" Text='<%#Eval("初評者ID") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>--%>
+                            <asp:TemplateField HeaderText="初評者姓名" HeaderStyle-CssClass="text-center">
+                                <ItemTemplate>
+                                    <asp:Label ID="lbl6" runat="server" Text='<%#Eval("初評者姓名") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="主管姓名" HeaderStyle-CssClass="text-center">
+                            <asp:TemplateField HeaderText="初評分數" HeaderStyle-CssClass="text-center">
                                 <ItemTemplate>
-                                    <asp:Label ID="lbl6" runat="server" Text='<%#Eval("主管姓名") %>'></asp:Label>
+                                    <asp:Label ID="lbl7" runat="server" Text='<%#Eval("初評分數") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="主管評分數" HeaderStyle-CssClass="text-center">
+<%--                            <asp:TemplateField HeaderText="複評者ID" HeaderStyle-CssClass="text-center">
                                 <ItemTemplate>
-                                    <asp:Label ID="lbl7" runat="server" Text='<%#Eval("主管評分數") %>'></asp:Label>
+                                    <asp:Label ID="lbl8" runat="server" Text='<%#Eval("複評者ID") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>--%>
+                            <asp:TemplateField HeaderText="複評者姓名" HeaderStyle-CssClass="text-center">
+                                <ItemTemplate>
+                                    <asp:Label ID="lbl9" runat="server" Text='<%#Eval("複評者姓名") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="特評者ID" HeaderStyle-CssClass="text-center">
+                            <asp:TemplateField HeaderText="複評分數" HeaderStyle-CssClass="text-center">
                                 <ItemTemplate>
-                                    <asp:Label ID="lbl8" runat="server" Text='<%#Eval("特評者ID") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="特評者姓名" HeaderStyle-CssClass="text-center">
-                                <ItemTemplate>
-                                    <asp:Label ID="lbl9" runat="server" Text='<%#Eval("特評者姓名") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="特評分數" HeaderStyle-CssClass="text-center">
-                                <ItemTemplate>
-                                    <asp:Label ID="lbl10" runat="server" Text='<%#Eval("特評分數") %>'></asp:Label>
+                                    <asp:Label ID="lbl10" runat="server" Text='<%#Eval("複評分數") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="出勤成績" HeaderStyle-CssClass="text-center">
@@ -94,14 +94,19 @@
                                     <asp:Label ID="lbl11" runat="server" Text='<%#Eval("出勤成績") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
+                            <asp:TemplateField HeaderText="獎懲分數" HeaderStyle-CssClass="text-center">
+                                <ItemTemplate>
+                                    <asp:Label ID="lbl12" runat="server" Text='<%#Eval("獎懲分數") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="考績" HeaderStyle-CssClass="text-center">
                                 <ItemTemplate>
-                                    <asp:Label ID="lbl12" runat="server" Text='<%#Eval("考績") %>'></asp:Label>
+                                    <asp:Label ID="lbl13" runat="server" Text='<%#Eval("考績") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="考績級別" HeaderStyle-CssClass="text-center">
                                 <ItemTemplate>
-                                    <asp:Label ID="lbl13" runat="server" Text='<%#Eval("考績級別") %>'></asp:Label>
+                                    <asp:Label ID="lbl14" runat="server" Text='<%#Eval("考績級別") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>

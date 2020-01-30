@@ -90,7 +90,7 @@
                                     <ItemTemplate>
                                         <tr>
                                             <td style="border-bottom:dotted 1px gray;text-wrap:normal;word-wrap:break-word;">
-                                                <span><%#Eval("CREATE_TIME") %></span><br /><br />
+                                                <embed src="image/image/new.svg"></embed><span><%#Eval("CREATE_TIME") %></span><br /><br />
                                                 <asp:TextBox ID="TextBox1" runat="server" CssClass="no-resize autosize" Width="100%" BorderStyle="None" ReadOnly="true" TextMode="MultiLine" Text='<%#Eval("BODY") %>' ></asp:TextBox><br /><br />
                                                 <%--<span style="white-space:pre"><%#Eval("BODY") %></span><br /><br />--%>
                                                 <%--<span style="font-size:6px; font-style:italic; color:gray">最後編輯: <%#Eval("LAST_EDITOR") %> <%#Eval("LAST_EDIT_TIME") %></span>--%>

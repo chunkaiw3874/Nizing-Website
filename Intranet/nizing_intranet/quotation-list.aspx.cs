@@ -177,7 +177,7 @@ public partial class oqs_quotation_list : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(NZconnectionString))
         {
             conn.Open();
-            string query = "SELECT MA.MA019+'-'+MA.MA018+'-01'"
+            string query = "SELECT SUBSTRING(MA.MA012,1,4)+'-'+SUBSTRING(MA.MA012,5,2)+'-01'"
                         + " FROM CMSMA MA";
             SqlCommand cmd = new SqlCommand(query, conn);
             time = Convert.ToDateTime(cmd.ExecuteScalar().ToString());

@@ -43,36 +43,36 @@ public partial class nizing_intranet_HR06 : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             conn.Open();
-            string query = ";WITH CTE1"  //limitation:此QUERY只能有一個特評
+            string query = ";WITH CTE1"
                         + " AS"
                         + " ("
                         + " SELECT A.[YEAR] [年度],A.ASSESSED_ID [受評者ID],SCORE.WEIGHTED_SCORE [自評分數],MV.MV002 [受評者姓名]"
-                        + " ,B.ASSESSOR_ID [主管ID],B.MV002 [主管姓名],B.WEIGHTED_SCORE [主管評分數]"
-                        + " ,COALESCE(C.ASSESSOR_ID,'-') [特評者ID],COALESCE(C.MV002,'-') [特評者姓名],COALESCE(C.WEIGHTED_SCORE,'-') [特評分數]"
+                        + " ,B.ASSESSOR_ID [初評者ID],B.MV002 [初評者姓名],B.WEIGHTED_SCORE [初評分數]"
+                        + " ,COALESCE(C.ASSESSOR_ID,'-') [複評者ID],COALESCE(C.MV002,'-') [複評者姓名],COALESCE(C.WEIGHTED_SCORE,'-') [複評分數]"
                         + " ,SCORE.ATTENDANCE_SCORE+'%' [出勤成績]"
-                        + " ,CASE "
-                        + " WHEN C.WEIGHTED_SCORE IS NULL THEN CONVERT(DECIMAL(16,2),(CONVERT(DECIMAL(16,2),B.WEIGHTED_SCORE)*10*0.9)+(CONVERT(DECIMAL(16,2),SCORE.ATTENDANCE_SCORE)*0.1))"
-                        + " ELSE CONVERT(DECIMAL(16,2),((CONVERT(DECIMAL(16,2),C.WEIGHTED_SCORE))*10*0.9)+(CONVERT(DECIMAL(16,2),SCORE.ATTENDANCE_SCORE)*0.1))"
-                        + " END AS [考績]"
+                        + " ,CONVERT(DECIMAL(10,2),SCORE.RNP_SCORE) [獎懲分數]"
+                        + " ,CONVERT(DECIMAL(10,2),(CONVERT(DECIMAL(10,2),B.WEIGHTED_SCORE)*CONVERT(DECIMAL(10,2),B.scoreWeight)/100.0+CONVERT(DECIMAL(10,2),C.WEIGHTED_SCORE)*CONVERT(DECIMAL(10,2),C.scoreWeight)/100.0)*10*0.8+CONVERT(DECIMAL(10,2),SCORE.ATTENDANCE_SCORE)*0.2+CONVERT(DECIMAL(10,2),SCORE.RNP_SCORE))[考績]"
                         + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
                         + " LEFT JOIN NZ.dbo.CMSMV MV ON A.ASSESSED_ID=MV.MV001" //姓名
                         + " LEFT JOIN HR360_ASSESSMENTSCORE_ASSESSED_A SCORE ON A.ASSESSOR_ID=SCORE.ASSESSOR_ID AND A.ASSESSED_ID=SCORE.ASSESSED_ID AND A.[YEAR]=SCORE.ASSESS_YEAR" //成績
-                        + " LEFT JOIN" //主管評清單
+                        + " LEFT JOIN" //初評清單
                         + " ("
-                        + " SELECT A.ASSESSED_ID,A.ASSESSOR_ID,MV.MV002,SCORE.WEIGHTED_SCORE"
+                        + " SELECT A.ASSESSED_ID,A.ASSESSOR_ID,MV.MV002,SCORE.WEIGHTED_SCORE,WEIGHT.scoreWeight"
                         + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
                         + " LEFT JOIN NZ.dbo.CMSMV MV ON A.ASSESSOR_ID=MV.MV001"
                         + " LEFT JOIN HR360_ASSESSMENTSCORE_ASSESSED_A SCORE ON A.ASSESSOR_ID=SCORE.ASSESSOR_ID AND A.ASSESSED_ID=SCORE.ASSESSED_ID AND A.[YEAR]=SCORE.ASSESS_YEAR"
+                        + " LEFT JOIN HR360_AssessmentCategory_CategoryWeight WEIGHT ON A.[YEAR]=WEIGHT.assessYear AND A.ASSESS_TYPE=WEIGHT.assessType"
                         + " WHERE A.ACTIVE='1' AND A.ASSESS_TYPE='2'"
                         + " AND A.[YEAR]=@YEAR"
                         + " ) B ON A.ASSESSOR_ID=B.ASSESSED_ID"
-                        + " LEFT JOIN" //特評清單
+                        + " LEFT JOIN" //複評清單
                         + " ("
-                        + " SELECT A.ASSESSED_ID,A.ASSESSOR_ID,MV.MV002,SCORE.WEIGHTED_SCORE"
+                        + " SELECT A.ASSESSED_ID,A.ASSESSOR_ID,MV.MV002,SCORE.WEIGHTED_SCORE,WEIGHT.scoreWeight"
                         + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
                         + " LEFT JOIN NZ.dbo.CMSMV MV ON A.ASSESSOR_ID=MV.MV001"
                         + " LEFT JOIN HR360_ASSESSMENTSCORE_ASSESSED_A SCORE ON A.ASSESSOR_ID=SCORE.ASSESSOR_ID AND A.ASSESSED_ID=SCORE.ASSESSED_ID AND A.[YEAR]=SCORE.ASSESS_YEAR"
-                        + " WHERE A.ACTIVE='1' AND A.ASSESS_TYPE='9'"
+                       + " LEFT JOIN HR360_AssessmentCategory_CategoryWeight WEIGHT ON A.[YEAR]=WEIGHT.assessYear AND A.ASSESS_TYPE=WEIGHT.assessType"
+                        + " WHERE A.ACTIVE='1' AND A.ASSESS_TYPE='3'"
                         + " AND A.[YEAR]=@YEAR"
                         + " ) C ON A.ASSESSOR_ID=C.ASSESSED_ID"
                         + " WHERE A.ACTIVE='1'"

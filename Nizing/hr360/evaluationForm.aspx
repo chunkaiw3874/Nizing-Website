@@ -65,6 +65,10 @@
             background-color:white;
             width:100%;
         }
+        .lowmargin{
+            margin:0px;
+            padding:5px;
+        }
     </style>
     <script>
         $(function () {
@@ -223,6 +227,42 @@
                     <asp:Label ID="lblDayOffValueSum" runat="server" Text="Label"></asp:Label>
                 </div>
             </div>
+            <div class="row">                
+                <div class="col-xs-2 border" style="text-align:center">實際出勤時數</div>
+                <div class="col-xs-2 border" style="text-align:center">
+                    <asp:Label ID="lblActualAttendance" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-8 border"></div>
+            </div>
+            <div class="row">                
+                <div class="col-xs-2 border" style="text-align:center">應出勤時數</div>
+                <div class="col-xs-2 border" style="text-align:center">
+                    <asp:Label ID="lblExpectedAttendance" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border" style="text-align:center">出勤達成率</div>
+                <div class="col-xs-2 border" style="text-align:center">
+                    <asp:Label ID="lblAttendanceFailure" ForeColor="Red" Font-Bold="true" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-2 border" style="text-align:right">出勤分數:</div>
+                <div class="col-xs-2 border" style="text-align:right">
+                    <asp:Label ID="lblAttendanceScore" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+            </div>
+        </div>
+        <%--<div id="attendanceRecordCalculation">
+            <div class="row" style="border-top: solid 1px #337ab7;">
+                <div class="col-xs-2 border" style="text-align:center;">
+                    缺勤時數小計
+                </div>
+                <div class="col-xs-2 border" style="text-align:center;">
+                    <asp:Label ID="lblDayOffSum" runat="server" Text="&nbsp"></asp:Label>
+                </div>
+                <div class="col-xs-4 border"></div>
+                <div class="col-xs-2 border" style="text-align:right">合計:</div>
+                <div class="col-xs-2 border" style="text-align:right">
+                    <asp:Label ID="lblDayOffValueSum" runat="server" Text="Label"></asp:Label>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-xs-8 border" style="color:red;">
                     *請注意，請假過量會影響考績，請斟酌休假天數。
@@ -246,7 +286,7 @@
                     <asp:Label ID="lblAttendanceScore" runat="server" Text="&nbsp"></asp:Label>
                 </div>
             </div>
-        </div>
+        </div>--%>
         <div id="RnPRecord" runat="server">
             <div class="row">
                 <div class="col-xs-12 subtitle border">
