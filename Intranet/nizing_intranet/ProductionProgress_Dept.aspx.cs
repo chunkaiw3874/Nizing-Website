@@ -150,7 +150,7 @@ public partial class nizing_intranet_ProductionProgress_Dept : System.Web.UI.Pag
                     {
                         sum += decimal.Parse(((Label)_gd.Rows[j].FindControl("Label" + (i + 1).ToString())).Text, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
                     }
-                    _gd.FooterRow.Cells[i].Text = sum.ToString("N3");
+                    _gd.FooterRow.Cells[i].Text = sum.ToString("N0");
                 }
                 else if (i == 11)
                 {
