@@ -372,13 +372,13 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
     
     protected void ckxID_CheckedChanged(object sender, EventArgs e)
     {
-        keepCkxSmallCateogyrInCheck();
+        keepCkxSmallCateogryInCheck();
     }
     protected void ckxSmallCategory_CheckedChanged(object sender, EventArgs e)
     {
-        keepCkxSmallCateogyrInCheck();
+        keepCkxSmallCateogryInCheck();
     }
-    protected void keepCkxSmallCateogyrInCheck()
+    protected void keepCkxSmallCateogryInCheck()
     {
         if (!ckxID.Checked)
         {
