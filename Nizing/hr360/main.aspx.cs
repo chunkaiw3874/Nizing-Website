@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Svg;
 
@@ -17,6 +18,8 @@ public partial class main : System.Web.UI.Page
 {
     string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
     string ERP2connectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
+
+    DateTime lastLoginTime = new DateTime();
 
     #region Announcement Repeater Pagination Variable
     readonly PagedDataSource _pgsource = new PagedDataSource();
@@ -70,6 +73,8 @@ public partial class main : System.Web.UI.Page
                 #region 公司公告 variable
                 DataTable dtCompanyAnnouncement = new DataTable();
                 #endregion
+
+                lastLoginTime = GetLastLoginTime(Session["erp_id"].ToString());
 
                 using (SqlConnection conn = new SqlConnection(ERP2connectionString))
                 {
@@ -298,6 +303,32 @@ public partial class main : System.Web.UI.Page
         }
     }
 
+    /// <summary>
+    /// Returns last login time
+    /// if no previous login record, then returns the date 1900-01-01
+    /// </summary>
+    /// <param name="userId"></param>
+    /// <returns></returns>
+    private DateTime GetLastLoginTime(string userId)
+    {
+        using (SqlConnection conn = new SqlConnection(ERP2connectionString))
+        {
+            conn.Open();
+            string query = "select src.LoginAttemptTime" +
+                " from" +
+                " (" +
+                " select ROW_NUMBER() over(order by LoginAttemptTime desc) as rowNumber" +
+                " , LoginAttemptTime" +
+                " from HR360_LoginLog" +
+                " where [ID] = @userId" +
+                " and LoginSuccessful = '1'" +
+                " ) as src" +
+                " where rowNumber = 2";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@userId", userId);
+            return cmd.ExecuteScalar() == null ? new DateTime(1900, 01, 01) : DateTime.Parse(cmd.ExecuteScalar().ToString());
+        }
+    }
     #region Company Announcement Databinding and Repeater Pagination
     private DataTable GetCompanyAnnouncementData()
     {
@@ -371,6 +402,22 @@ public partial class main : System.Web.UI.Page
 
         rptCompanyAnnouncement.DataSource = _pgsource;
         rptCompanyAnnouncement.DataBind();
+
+        //Display "new" announcement indicator if announcement less than 7 days old, or is posted AFTER user's last login
+        foreach(RepeaterItem item in rptCompanyAnnouncement.Items)
+        {
+            HtmlGenericControl div = (HtmlGenericControl)item.FindControl("newIcon");
+            HiddenField hdn = (HiddenField)item.FindControl("hdnLastEdit");
+
+            if(DateTime.Parse(hdn.Value) >= lastLoginTime || DateTime.Parse(hdn.Value) >= DateTime.Today.AddDays(-7))
+            {
+                div.Visible = true;
+            }
+            else
+            {
+                div.Visible = false;
+            }
+        }
 
         HandlePaging();
     }

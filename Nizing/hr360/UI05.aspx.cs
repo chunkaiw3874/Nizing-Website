@@ -482,7 +482,12 @@ public partial class hr360_UI05 : System.Web.UI.Page
     {
         LinkButton lb = (LinkButton)sender;
         Session["eval_id"] = lb.ID;
-        ScriptManager.RegisterStartupScript(this, GetType(), "open_form", "window.open('/hr360/evaluationForm.aspx');", true);
+        //ScriptManager.RegisterStartupScript(this, GetType(), "open_form", "window.open('/hr360/evaluationForm.aspx');", true);
+        /*
+         * test below method for opening new page without being blocked by browser
+         */
+        string redirect = "<script>window.open('/hr360/evaluationForm.aspx');</script>";
+        Response.Write(redirect);
     }
     protected void btnSearch_Click(object sender, EventArgs e)
     {

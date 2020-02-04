@@ -90,9 +90,14 @@
                                 <asp:Label ID="Label13" runat="server" Text='<%#Eval("已領料量")%>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="製令編號">
+                        <asp:TemplateField HeaderText="已生產量">
                             <ItemTemplate>
                                 <asp:Label ID="Label14" runat="server" Text='<%#Eval("已生產量")%>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="未生產量">
+                            <ItemTemplate>
+                                <asp:Label ID="Label15" runat="server" Text='<%#Eval("未生產量")%>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

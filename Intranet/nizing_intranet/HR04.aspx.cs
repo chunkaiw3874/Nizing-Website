@@ -64,6 +64,7 @@ public partial class nizing_intranet_HR04 : System.Web.UI.Page
                     + " LEFT JOIN CMSMV ON PALTI.TI001=CMSMV.MV001"
                     + " LEFT JOIN CMSME ON CMSMV.MV004=CMSME.ME001"
                     + " WHERE SUBSTRING(PALTI.TI002,1,4)=@YEAR"
+                    + " AND PALTI.TI001 <> '0098'"
                     + deptCondition
                     + " )"
                     + " AS SALARY"
@@ -85,6 +86,7 @@ public partial class nizing_intranet_HR04 : System.Web.UI.Page
                     + " LEFT JOIN CMSMV ON PALTI.TI001=CMSMV.MV001"
                     + " LEFT JOIN CMSME ON CMSMV.MV004=CMSME.ME001"
                     + " WHERE SUBSTRING(PALTI.TI002,1,4)=@YEAR"
+                    + " AND PALTI.TI001 <> '0098'"
                     + deptCondition
                     + " )"
                     + " AS SALARY"

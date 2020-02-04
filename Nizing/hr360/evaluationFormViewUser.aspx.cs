@@ -26,8 +26,8 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
         string assessed = "";
         string year = "";
         ////////test info
-        Session["erp_id"] = "0080";
-        Session["view_year"] = "2019";
+        //Session["erp_id"] = "0080";
+        //Session["view_year"] = "2019";
         //////////////////////////////
 
         if (!IsPostBack)
