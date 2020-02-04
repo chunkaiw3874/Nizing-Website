@@ -87,7 +87,10 @@
             </ul>
             <ul>
                 <li>
-                    <asp:ImageButton ID="ImageButton3" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/PD-1.png" PostBackUrl="~/nizing_intranet/PurchaseReport.aspx" /></li>
+                    <asp:ImageButton ID="ImageButton3" runat="server" Width="150px" ImageUrl="~/nizing_intranet/image/button/dept/PD-1.png" PostBackUrl="~/nizing_intranet/PurchaseReport.aspx" /></li>
+                
+                <li>
+                    <asp:ImageButton ID="ImageButton21" runat="server" Width="150px" ImageUrl="~/nizing_intranet/image/button/dept/PD-3.png" PostBackUrl="~/nizing_intranet/PD03_RawMatsUsage.aspx" /></li>
                 <li>
                     <a href="nizing_intranet/PD02_NetSpending.aspx">廠商進貨金額表</a>
                 </li>
