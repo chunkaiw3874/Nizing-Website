@@ -139,8 +139,11 @@
       <submenuitem url="~/ul5048.aspx" enTitle="UL5048 Anti-Refrigerant PETP Insulation Wire" cnTitle="UL5048 冷媒線" />
     </menuitem>
     <menuitem url="~/military-grade-series.aspx" enTitle="Military Grade Series" cnTitle="軍規線系列">
-      <submenuitem url="~/mil-c-24643-23-08.aspx" enTitle="MIL-C-24643/23-08 Low Smoke Shipboard Cable" cnTitle="MIL-C-24643/23-08 軍規船用電纜" />
-      <submenuitem url="~/mil-w-22759-7.aspx" enTitle="MIL-W-22575/7 Teflon Electrical Wire" cnTitle="MIL-W-22575/7 軍規鐵氟龍電子線" />
+      <submenuitem url="~/m16878.aspx" enTitle="M16878 Military Grade Wire" cnTitle="M16878 軍規電線" />
+      <submenuitem url="~/m22759.aspx" enTitle="M22759 Military Grade Wire" cnTitle="M22759 軍規電線" />
+      <submenuitem url="~/m24643.aspx" enTitle="M24643 Military Grade Shipboard Cable" cnTitle="M24643 軍規船用電纜" />
+      <submenuitem url="~/m27500.aspx" enTitle="M27500 Military Grade Cable" cnTitle="M27500 軍規電纜" />
+      <submenuitem url="~/m81822.aspx" enTitle="M81822 Military Grade Wire" cnTitle="M81822 軍規電線" />
     </menuitem>
   </mainmenuitem>  
 </menu>

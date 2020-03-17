@@ -692,7 +692,27 @@
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>http://www.nizing.com.tw/mil-c-24643-23-08.aspx</loc>
+    <loc>http://www.nizing.com.tw/m16878.aspx</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.64</priority>
+  </url>
+  <url>
+    <loc>http://www.nizing.com.tw/m22759.aspx</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.64</priority>
+  </url>
+  <url>
+    <loc>http://www.nizing.com.tw/m24643.aspx</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.64</priority>
+  </url>
+  <url>
+    <loc>http://www.nizing.com.tw/m27500.aspx</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.64</priority>
+  </url>
+  <url>
+    <loc>http://www.nizing.com.tw/m81822.aspx</loc>
     <changefreq>monthly</changefreq>
     <priority>0.64</priority>
   </url>

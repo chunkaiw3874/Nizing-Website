@@ -38,6 +38,7 @@ namespace NIZING_BACKEND_Data_Config
 
         #region 公司公告 Universal Variable
         private FunctionMode companyAccouncementTabMode = FunctionMode.NORECORD;
+        string companyAnnouncementAttachmentFilePath = "";
         #endregion
 
         public frmHR360_Main(frmLogin frmLogin)
@@ -155,9 +156,16 @@ namespace NIZING_BACKEND_Data_Config
                         errorList.Add("內容不可為空白");
                     }
                 }
+                else if (mode == FunctionMode.HASRECORD)
+                {
+                    
+                }
                 else if (mode == FunctionMode.DELETE)
                 {
-
+                    if (Directory.GetFiles(companyAnnouncementAttachmentFilePath, "*", SearchOption.AllDirectories).Length > 0)
+                    {
+                        errorList.Add("請先刪除所有附件，再刪除公告");
+                    }
                 }
             }
             return errorList;
@@ -344,7 +352,10 @@ namespace NIZING_BACKEND_Data_Config
                     btnCompanyAnnouncementEdit.Enabled = false;
                     btnCompanyAnnouncementDelete.Enabled = false;
                     btnCompanyAnnouncementSearch.Enabled = false;
-                    btnCompanyAnnoucementConfirm.Enabled = true;
+                    btnCompanyAnnouncementAddAttachment.Enabled = false;
+                    btnCompanyAnnouncementRemoveAttachment.Enabled = false;
+                    lbtnCompanyAnnouncementAttachmentSelection.Enabled = false;
+                    btnCompanyAnnouncementConfirm.Enabled = true;
                     btnCompanyAnnouncementCancel.Enabled = true;
                     ckxCompanyAnnouncementVisible.Enabled = true;
                     ckxCompanyAnnouncementVisible.Checked = true;
@@ -360,7 +371,10 @@ namespace NIZING_BACKEND_Data_Config
                     btnCompanyAnnouncementEdit.Enabled = false;
                     btnCompanyAnnouncementDelete.Enabled = false;
                     btnCompanyAnnouncementSearch.Enabled = false;
-                    btnCompanyAnnoucementConfirm.Enabled = true;
+                    btnCompanyAnnouncementAddAttachment.Enabled = true;
+                    btnCompanyAnnouncementRemoveAttachment.Enabled = true;
+                    lbtnCompanyAnnouncementAttachmentSelection.Enabled = true;
+                    btnCompanyAnnouncementConfirm.Enabled = true;
                     btnCompanyAnnouncementCancel.Enabled = true;
                     ckxCompanyAnnouncementVisible.Enabled = true;
                     ckxCompanyAnnouncementOnTop.Enabled = true;
@@ -377,7 +391,10 @@ namespace NIZING_BACKEND_Data_Config
                     btnCompanyAnnouncementEdit.Enabled = false;
                     btnCompanyAnnouncementDelete.Enabled = false;
                     btnCompanyAnnouncementSearch.Enabled = false;
-                    btnCompanyAnnoucementConfirm.Enabled = false;
+                    btnCompanyAnnouncementAddAttachment.Enabled = false;
+                    btnCompanyAnnouncementRemoveAttachment.Enabled = false;
+                    lbtnCompanyAnnouncementAttachmentSelection.Enabled = false;
+                    btnCompanyAnnouncementConfirm.Enabled = false;
                     btnCompanyAnnouncementCancel.Enabled = false;
                     ckxCompanyAnnouncementVisible.Enabled = false;
                     ckxCompanyAnnouncementOnTop.Enabled = false;
@@ -390,7 +407,10 @@ namespace NIZING_BACKEND_Data_Config
                     btnCompanyAnnouncementEdit.Enabled = true;
                     btnCompanyAnnouncementDelete.Enabled = true;
                     btnCompanyAnnouncementSearch.Enabled = true;
-                    btnCompanyAnnoucementConfirm.Enabled = false;
+                    btnCompanyAnnouncementAddAttachment.Enabled = true;
+                    btnCompanyAnnouncementRemoveAttachment.Enabled = true;
+                    lbtnCompanyAnnouncementAttachmentSelection.Enabled = true;
+                    btnCompanyAnnouncementConfirm.Enabled = false;
                     btnCompanyAnnouncementCancel.Enabled = false;
                     ckxCompanyAnnouncementVisible.Enabled = false;
                     ckxCompanyAnnouncementOnTop.Enabled = false;
@@ -403,7 +423,10 @@ namespace NIZING_BACKEND_Data_Config
                     btnCompanyAnnouncementEdit.Enabled = false;
                     btnCompanyAnnouncementDelete.Enabled = false;
                     btnCompanyAnnouncementSearch.Enabled = true;
-                    btnCompanyAnnoucementConfirm.Enabled = false;
+                    btnCompanyAnnouncementAddAttachment.Enabled = false;
+                    btnCompanyAnnouncementRemoveAttachment.Enabled = false;
+                    lbtnCompanyAnnouncementAttachmentSelection.Enabled = false;
+                    btnCompanyAnnouncementConfirm.Enabled = false;
                     btnCompanyAnnouncementCancel.Enabled = false;
                     ckxCompanyAnnouncementVisible.Enabled = false;
                     ckxCompanyAnnouncementOnTop.Enabled = false;
@@ -486,6 +509,18 @@ namespace NIZING_BACKEND_Data_Config
                 ckxCompanyAnnouncementVisible.Checked = (bool)gv.SelectedRows[0].Cells["VISIBLE"].Value;
                 ckxCompanyAnnouncementOnTop.Checked = (bool)gv.SelectedRows[0].Cells["ON_TOP"].Value;
                 txtCompanyAnnouncementBody.Text = gv.SelectedRows[0].Cells["BODY"].Value.ToString();
+                companyAnnouncementAttachmentFilePath = Path.Combine(Application.StartupPath, @"..\..\attachment\company_announcement\" + lblCompanyAnnouncementID.Text + @"\");
+                if (Directory.Exists(companyAnnouncementAttachmentFilePath))
+                {
+                    foreach(string fName in Directory.GetFiles(companyAnnouncementAttachmentFilePath))
+                    {
+                        clbCompanyAnnouncementAttachmentList.Items.Add(Path.GetFileName(fName));
+                    }
+                }
+                else
+                {
+                    clbCompanyAnnouncementAttachmentList.Items.Clear();
+                }
             }
 
         }
@@ -1029,6 +1064,7 @@ namespace NIZING_BACKEND_Data_Config
                         cmd.ExecuteNonQuery();
                     }
                     gvCompanyAnnouncementSearch_Result.DataSource = null;
+                    
                     txtCompanyAnnouncementMemo.Text += DateTime.Now.ToString() + ":資料已刪除" + Environment.NewLine;
                     btnCompanyAnnouncementSearch_Click(sender, e);
 
@@ -1070,7 +1106,7 @@ namespace NIZING_BACKEND_Data_Config
             }
         }
 
-        private void btnCompanyAnnoucementConfirm_Click(object sender, EventArgs e)
+        private void btnCompanyAnnouncementConfirm_Click(object sender, EventArgs e)
         {
             List<string> errorList = CheckConfirmError(companyAccouncementTabMode);
 
@@ -1101,7 +1137,7 @@ namespace NIZING_BACKEND_Data_Config
                         if (ex.Number == 2627)
                         {
                             lblCompanyAnnouncementID.Text = GetNewCompanyAnnouncementID().ToString();
-                            btnCompanyAnnoucementConfirm_Click(sender, e);
+                            btnCompanyAnnouncementConfirm_Click(sender, e);
                         }
                         else
                         {
@@ -1201,8 +1237,98 @@ namespace NIZING_BACKEND_Data_Config
 
             return newID;
         }
-        
-        #endregion
 
+        private void btnCompanyAnnouncementAddAttachment_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrWhiteSpace(lblCompanyAnnouncementID.Text))
+            {
+                using (OpenFileDialog ofg = new OpenFileDialog())
+                {
+                    ofg.Filter = "All files (*.*)|*.*|Image Files (*.gif;*.jpg;*.png)|*.gif;*.jpg;*.png|PDF Files (*.pdf)|*.pdf";
+                    ofg.FilterIndex = 1;
+                    ofg.Multiselect = true;
+                    if (ofg.ShowDialog() == DialogResult.OK)
+                    {
+                        string destination = Path.Combine(Application.StartupPath, @"..\..\attachment\company_announcement\" + lblCompanyAnnouncementID.Text + @"\");
+                        System.IO.Directory.CreateDirectory(destination);
+                        foreach(string srcFileName in ofg.FileNames)
+                        {
+                            string fName = Path.GetFileName(srcFileName);
+                            File.Copy(srcFileName, destination + fName, true);
+                            if (!clbCompanyAnnouncementAttachmentList.Items.Contains(fName))
+                            {                                
+                                clbCompanyAnnouncementAttachmentList.Items.Add(fName);
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("尚未有公告ID", "錯誤");
+            }
+        }
+
+        private void btnCompanyAnnouncementRemoveAttachment_Click(object sender, EventArgs e)
+        {
+            for (int i = clbCompanyAnnouncementAttachmentList.Items.Count; i > 0; i--)
+            {
+                if (clbCompanyAnnouncementAttachmentList.CheckedItems.Contains(clbCompanyAnnouncementAttachmentList.Items[i - 1]))
+                {
+                    string fullFileName = companyAnnouncementAttachmentFilePath + clbCompanyAnnouncementAttachmentList.Items[i - 1].ToString();
+                    if (File.Exists(fullFileName))
+                    {
+                        File.Delete(fullFileName);
+                    }
+                    clbCompanyAnnouncementAttachmentList.Items.RemoveAt(i - 1);
+                }
+            }
+
+            //foreach(object item in clbCompanyAnnouncementAttachmentList.CheckedItems)
+            //{
+            //    string fullFileName = companyAnnouncementAttachmentFilePath + item.ToString();
+            //    if (File.Exists(fullFileName))
+            //    {
+            //        File.Delete(fullFileName);
+            //    }
+            //    clbCompanyAnnouncementAttachmentList.Items.Remove(item);
+            //}
+        }
+
+        private void lbtnCompanyAnnouncementAttachmentSelection_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (lbtnCompanyAnnouncementAttachmentSelection.Text == "全選")
+            {
+                for (int i = 0; i < clbCompanyAnnouncementAttachmentList.Items.Count; i++)
+                {
+                    clbCompanyAnnouncementAttachmentList.SetItemChecked(i, true);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < clbCompanyAnnouncementAttachmentList.Items.Count; i++)
+                {
+                    clbCompanyAnnouncementAttachmentList.SetItemChecked(i, false);
+                }
+            }
+        }
+
+        private void clbCompanyAnnouncementAttachmentList_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.NewValue == CheckState.Checked)
+            {
+                if (clbCompanyAnnouncementAttachmentList.CheckedItems.Count == clbCompanyAnnouncementAttachmentList.Items.Count-1)
+                {
+                    lbtnCompanyAnnouncementAttachmentSelection.Text = "反選";
+                }
+            }
+            else
+            {
+                lbtnCompanyAnnouncementAttachmentSelection.Text = "全選";
+            }
+        }
+
+        #endregion
     }
 }

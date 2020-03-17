@@ -16,6 +16,7 @@
             color:#ffffff;
             font-weight:bold;
         }
+
     </style>
     <script>
         $(document).ready(function () {
@@ -247,7 +248,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-6">
                     <asp:Chart ID="Chart1" runat="server" Width="400" Height="300" >
                         <Legends>
                            <asp:Legend Alignment="Center" Docking="Bottom" Name="Legend1">
@@ -261,6 +262,36 @@
                             <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
                         </ChartAreas>
                     </asp:Chart>
+                </div>
+                <div class="col-xs-6">
+                    <asp:GridView ID="grdTopCustomer" runat="server" 
+                        AutoGenerateColumns="false"
+                        OnRowCreated="grdTopCustomer_RowCreated"
+                        OnDataBound="grdTopCustomer_DataBound"
+                        ShowFooter="True" CssClass="grdResultWithFooter" HorizontalAlign="Center">           
+                        <Columns>
+                            <asp:TemplateField HeaderText="客戶代號">
+                                <itemTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text='<%#Eval("custId") %>'></asp:Label>
+                                </itemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="客戶名稱">
+                                <itemTemplate>
+                                    <asp:Label ID="Label2" runat="server" Text='<%#Eval("custName") %>'></asp:Label>
+                                </itemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="業務名稱">
+                                <itemTemplate>
+                                    <asp:Label ID="Label3" runat="server" Text='<%#Eval("salesName") %>'></asp:Label>
+                                </itemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="出貨金額">
+                                <itemTemplate>
+                                    <asp:Label ID="Label4" runat="server" Text='<%#Eval("totalSale") %>'></asp:Label>
+                                </itemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
                 </div>
             </div>           
         </div>

@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <style>
         .grdResultWithFooter{
-        min-width:100%;
+            min-width:100%;
         }
         .grdResultWithFooter tr th{
             padding:4px;

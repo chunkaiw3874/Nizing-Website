@@ -89,7 +89,7 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.label12 = new System.Windows.Forms.Label();
             this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnCompanyAnnoucementConfirm = new System.Windows.Forms.Button();
+            this.btnCompanyAnnouncementConfirm = new System.Windows.Forms.Button();
             this.btnCompanyAnnouncementCancel = new System.Windows.Forms.Button();
             this.txtCompanyAnnouncementMemo = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -98,10 +98,17 @@
             this.lblCompanyAnnouncementID = new System.Windows.Forms.Label();
             this.ckxCompanyAnnouncementVisible = new System.Windows.Forms.CheckBox();
             this.ckxCompanyAnnouncementOnTop = new System.Windows.Forms.CheckBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnCompanyAnnouncementAddAttachment = new System.Windows.Forms.Button();
+            this.btnCompanyAnnouncementRemoveAttachment = new System.Windows.Forms.Button();
+            this.lbtnCompanyAnnouncementAttachmentSelection = new System.Windows.Forms.LinkLabel();
             this.gvCompanyAnnouncementSearch_Result = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel11 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnLogout = new System.Windows.Forms.Button();
             this.cbxFunctionList = new System.Windows.Forms.ComboBox();
+            this.clbCompanyAnnouncementAttachmentList = new System.Windows.Forms.CheckedListBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpAccountManagement.SuspendLayout();
@@ -124,6 +131,8 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel8.SuspendLayout();
             this.flpCompanyAnnouncementID.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvCompanyAnnouncementSearch_Result)).BeginInit();
             this.flowLayoutPanel11.SuspendLayout();
             this.SuspendLayout();
@@ -788,7 +797,7 @@
             this.btnCompanyAnnouncementSearch.Location = new System.Drawing.Point(1091, 4);
             this.btnCompanyAnnouncementSearch.Name = "btnCompanyAnnouncementSearch";
             this.btnCompanyAnnouncementSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnCompanyAnnouncementSearch.TabIndex = 0;
+            this.btnCompanyAnnouncementSearch.TabIndex = 2;
             this.btnCompanyAnnouncementSearch.Text = "查詢";
             this.btnCompanyAnnouncementSearch.UseVisualStyleBackColor = true;
             this.btnCompanyAnnouncementSearch.Click += new System.EventHandler(this.btnCompanyAnnouncementSearch_Click);
@@ -799,29 +808,31 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.04884F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 83.95116F));
             this.tableLayoutPanel4.Controls.Add(this.label12, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.flowLayoutPanel8, 1, 2);
-            this.tableLayoutPanel4.Controls.Add(this.txtCompanyAnnouncementMemo, 1, 3);
+            this.tableLayoutPanel4.Controls.Add(this.flowLayoutPanel8, 1, 3);
+            this.tableLayoutPanel4.Controls.Add(this.txtCompanyAnnouncementMemo, 1, 4);
             this.tableLayoutPanel4.Controls.Add(this.label13, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.txtCompanyAnnouncementBody, 1, 1);
             this.tableLayoutPanel4.Controls.Add(this.flpCompanyAnnouncementID, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label14, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 1, 2);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(1, 58);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 4;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 57F));
+            this.tableLayoutPanel4.RowCount = 5;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(460, 465);
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(460, 745);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
             // label12
             // 
             this.label12.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(50, 17);
+            this.label12.Location = new System.Drawing.Point(50, 7);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(20, 12);
             this.label12.TabIndex = 0;
@@ -829,25 +840,25 @@
             // 
             // flowLayoutPanel8
             // 
-            this.flowLayoutPanel8.Controls.Add(this.btnCompanyAnnoucementConfirm);
+            this.flowLayoutPanel8.Controls.Add(this.btnCompanyAnnouncementConfirm);
             this.flowLayoutPanel8.Controls.Add(this.btnCompanyAnnouncementCancel);
             this.flowLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel8.Location = new System.Drawing.Point(73, 294);
+            this.flowLayoutPanel8.Location = new System.Drawing.Point(73, 576);
             this.flowLayoutPanel8.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel8.Name = "flowLayoutPanel8";
             this.flowLayoutPanel8.Size = new System.Drawing.Size(387, 30);
             this.flowLayoutPanel8.TabIndex = 3;
             // 
-            // btnCompanyAnnoucementConfirm
+            // btnCompanyAnnouncementConfirm
             // 
-            this.btnCompanyAnnoucementConfirm.Location = new System.Drawing.Point(0, 3);
-            this.btnCompanyAnnoucementConfirm.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
-            this.btnCompanyAnnoucementConfirm.Name = "btnCompanyAnnoucementConfirm";
-            this.btnCompanyAnnoucementConfirm.Size = new System.Drawing.Size(75, 23);
-            this.btnCompanyAnnoucementConfirm.TabIndex = 0;
-            this.btnCompanyAnnoucementConfirm.Text = "確認";
-            this.btnCompanyAnnoucementConfirm.UseVisualStyleBackColor = true;
-            this.btnCompanyAnnoucementConfirm.Click += new System.EventHandler(this.btnCompanyAnnoucementConfirm_Click);
+            this.btnCompanyAnnouncementConfirm.Location = new System.Drawing.Point(0, 3);
+            this.btnCompanyAnnouncementConfirm.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.btnCompanyAnnouncementConfirm.Name = "btnCompanyAnnouncementConfirm";
+            this.btnCompanyAnnouncementConfirm.Size = new System.Drawing.Size(75, 23);
+            this.btnCompanyAnnouncementConfirm.TabIndex = 0;
+            this.btnCompanyAnnouncementConfirm.Text = "確認";
+            this.btnCompanyAnnouncementConfirm.UseVisualStyleBackColor = true;
+            this.btnCompanyAnnouncementConfirm.Click += new System.EventHandler(this.btnCompanyAnnouncementConfirm_Click);
             // 
             // btnCompanyAnnouncementCancel
             // 
@@ -864,32 +875,32 @@
             this.txtCompanyAnnouncementMemo.BackColor = System.Drawing.Color.White;
             this.txtCompanyAnnouncementMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCompanyAnnouncementMemo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtCompanyAnnouncementMemo.Location = new System.Drawing.Point(73, 324);
+            this.txtCompanyAnnouncementMemo.Location = new System.Drawing.Point(73, 606);
             this.txtCompanyAnnouncementMemo.Margin = new System.Windows.Forms.Padding(0);
             this.txtCompanyAnnouncementMemo.Multiline = true;
             this.txtCompanyAnnouncementMemo.Name = "txtCompanyAnnouncementMemo";
             this.txtCompanyAnnouncementMemo.ReadOnly = true;
-            this.txtCompanyAnnouncementMemo.Size = new System.Drawing.Size(387, 141);
-            this.txtCompanyAnnouncementMemo.TabIndex = 0;
+            this.txtCompanyAnnouncementMemo.Size = new System.Drawing.Size(387, 139);
+            this.txtCompanyAnnouncementMemo.TabIndex = 4;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label13.Location = new System.Drawing.Point(38, 47);
+            this.label13.Location = new System.Drawing.Point(38, 26);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(32, 247);
+            this.label13.Size = new System.Drawing.Size(32, 378);
             this.label13.TabIndex = 5;
             this.label13.Text = "內容:";
             // 
             // txtCompanyAnnouncementBody
             // 
             this.txtCompanyAnnouncementBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtCompanyAnnouncementBody.Location = new System.Drawing.Point(76, 50);
+            this.txtCompanyAnnouncementBody.Location = new System.Drawing.Point(76, 29);
             this.txtCompanyAnnouncementBody.Multiline = true;
             this.txtCompanyAnnouncementBody.Name = "txtCompanyAnnouncementBody";
-            this.txtCompanyAnnouncementBody.Size = new System.Drawing.Size(381, 241);
-            this.txtCompanyAnnouncementBody.TabIndex = 2;
+            this.txtCompanyAnnouncementBody.Size = new System.Drawing.Size(381, 372);
+            this.txtCompanyAnnouncementBody.TabIndex = 1;
             // 
             // flpCompanyAnnouncementID
             // 
@@ -900,8 +911,8 @@
             this.flpCompanyAnnouncementID.Location = new System.Drawing.Point(73, 0);
             this.flpCompanyAnnouncementID.Margin = new System.Windows.Forms.Padding(0);
             this.flpCompanyAnnouncementID.Name = "flpCompanyAnnouncementID";
-            this.flpCompanyAnnouncementID.Size = new System.Drawing.Size(387, 47);
-            this.flpCompanyAnnouncementID.TabIndex = 1;
+            this.flpCompanyAnnouncementID.Size = new System.Drawing.Size(387, 26);
+            this.flpCompanyAnnouncementID.TabIndex = 0;
             // 
             // lblCompanyAnnouncementID
             // 
@@ -909,30 +920,105 @@
             this.lblCompanyAnnouncementID.AutoSize = true;
             this.lblCompanyAnnouncementID.Location = new System.Drawing.Point(3, 5);
             this.lblCompanyAnnouncementID.Name = "lblCompanyAnnouncementID";
-            this.lblCompanyAnnouncementID.Size = new System.Drawing.Size(24, 12);
-            this.lblCompanyAnnouncementID.TabIndex = 1;
-            this.lblCompanyAnnouncementID.Text = "N/A";
+            this.lblCompanyAnnouncementID.Size = new System.Drawing.Size(0, 12);
+            this.lblCompanyAnnouncementID.TabIndex = 0;
             // 
             // ckxCompanyAnnouncementVisible
             // 
             this.ckxCompanyAnnouncementVisible.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.ckxCompanyAnnouncementVisible.AutoSize = true;
-            this.ckxCompanyAnnouncementVisible.Location = new System.Drawing.Point(33, 3);
+            this.ckxCompanyAnnouncementVisible.Location = new System.Drawing.Point(9, 3);
             this.ckxCompanyAnnouncementVisible.Name = "ckxCompanyAnnouncementVisible";
             this.ckxCompanyAnnouncementVisible.Size = new System.Drawing.Size(72, 16);
-            this.ckxCompanyAnnouncementVisible.TabIndex = 0;
+            this.ckxCompanyAnnouncementVisible.TabIndex = 1;
             this.ckxCompanyAnnouncementVisible.Text = "是否顯示";
             this.ckxCompanyAnnouncementVisible.UseVisualStyleBackColor = true;
             // 
             // ckxCompanyAnnouncementOnTop
             // 
             this.ckxCompanyAnnouncementOnTop.AutoSize = true;
-            this.ckxCompanyAnnouncementOnTop.Location = new System.Drawing.Point(111, 3);
+            this.ckxCompanyAnnouncementOnTop.Location = new System.Drawing.Point(87, 3);
             this.ckxCompanyAnnouncementOnTop.Name = "ckxCompanyAnnouncementOnTop";
             this.ckxCompanyAnnouncementOnTop.Size = new System.Drawing.Size(72, 16);
-            this.ckxCompanyAnnouncementOnTop.TabIndex = 1;
+            this.ckxCompanyAnnouncementOnTop.TabIndex = 2;
             this.ckxCompanyAnnouncementOnTop.Text = "是否置頂";
             this.ckxCompanyAnnouncementOnTop.UseVisualStyleBackColor = true;
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(38, 404);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(32, 12);
+            this.label14.TabIndex = 6;
+            this.label14.Text = "附件:";
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 1;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel6, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.clbCompanyAnnouncementAttachmentList, 0, 1);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(73, 404);
+            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 2;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(387, 172);
+            this.tableLayoutPanel5.TabIndex = 2;
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 3;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Controls.Add(this.btnCompanyAnnouncementAddAttachment, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.btnCompanyAnnouncementRemoveAttachment, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.lbtnCompanyAnnouncementAttachmentSelection, 2, 0);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 1;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(387, 30);
+            this.tableLayoutPanel6.TabIndex = 0;
+            // 
+            // btnCompanyAnnouncementAddAttachment
+            // 
+            this.btnCompanyAnnouncementAddAttachment.Location = new System.Drawing.Point(3, 3);
+            this.btnCompanyAnnouncementAddAttachment.Name = "btnCompanyAnnouncementAddAttachment";
+            this.btnCompanyAnnouncementAddAttachment.Size = new System.Drawing.Size(75, 23);
+            this.btnCompanyAnnouncementAddAttachment.TabIndex = 0;
+            this.btnCompanyAnnouncementAddAttachment.Text = "新增附件";
+            this.btnCompanyAnnouncementAddAttachment.UseVisualStyleBackColor = true;
+            this.btnCompanyAnnouncementAddAttachment.Click += new System.EventHandler(this.btnCompanyAnnouncementAddAttachment_Click);
+            // 
+            // btnCompanyAnnouncementRemoveAttachment
+            // 
+            this.btnCompanyAnnouncementRemoveAttachment.Location = new System.Drawing.Point(84, 3);
+            this.btnCompanyAnnouncementRemoveAttachment.Name = "btnCompanyAnnouncementRemoveAttachment";
+            this.btnCompanyAnnouncementRemoveAttachment.Size = new System.Drawing.Size(75, 23);
+            this.btnCompanyAnnouncementRemoveAttachment.TabIndex = 1;
+            this.btnCompanyAnnouncementRemoveAttachment.Text = "移除附件";
+            this.btnCompanyAnnouncementRemoveAttachment.UseVisualStyleBackColor = true;
+            this.btnCompanyAnnouncementRemoveAttachment.Click += new System.EventHandler(this.btnCompanyAnnouncementRemoveAttachment_Click);
+            // 
+            // lbtnCompanyAnnouncementAttachmentSelection
+            // 
+            this.lbtnCompanyAnnouncementAttachmentSelection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbtnCompanyAnnouncementAttachmentSelection.AutoSize = true;
+            this.lbtnCompanyAnnouncementAttachmentSelection.Location = new System.Drawing.Point(355, 18);
+            this.lbtnCompanyAnnouncementAttachmentSelection.Name = "lbtnCompanyAnnouncementAttachmentSelection";
+            this.lbtnCompanyAnnouncementAttachmentSelection.Size = new System.Drawing.Size(29, 12);
+            this.lbtnCompanyAnnouncementAttachmentSelection.TabIndex = 2;
+            this.lbtnCompanyAnnouncementAttachmentSelection.TabStop = true;
+            this.lbtnCompanyAnnouncementAttachmentSelection.Text = "全選";
+            this.lbtnCompanyAnnouncementAttachmentSelection.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbtnCompanyAnnouncementAttachmentSelection_LinkClicked);
             // 
             // gvCompanyAnnouncementSearch_Result
             // 
@@ -992,6 +1078,16 @@
             this.cbxFunctionList.ValueMember = "ID";
             this.cbxFunctionList.SelectionChangeCommitted += new System.EventHandler(this.cbxFunctionList_SelectionChangeCommitted);
             // 
+            // clbCompanyAnnouncementAttachmentList
+            // 
+            this.clbCompanyAnnouncementAttachmentList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clbCompanyAnnouncementAttachmentList.FormattingEnabled = true;
+            this.clbCompanyAnnouncementAttachmentList.Location = new System.Drawing.Point(3, 33);
+            this.clbCompanyAnnouncementAttachmentList.Name = "clbCompanyAnnouncementAttachmentList";
+            this.clbCompanyAnnouncementAttachmentList.Size = new System.Drawing.Size(381, 136);
+            this.clbCompanyAnnouncementAttachmentList.TabIndex = 1;
+            this.clbCompanyAnnouncementAttachmentList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.clbCompanyAnnouncementAttachmentList_ItemCheck);
+            // 
             // frmHR360_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1034,6 +1130,9 @@
             this.flowLayoutPanel8.ResumeLayout(false);
             this.flpCompanyAnnouncementID.ResumeLayout(false);
             this.flpCompanyAnnouncementID.PerformLayout();
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvCompanyAnnouncementSearch_Result)).EndInit();
             this.flowLayoutPanel11.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -1096,7 +1195,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel8;
-        private System.Windows.Forms.Button btnCompanyAnnoucementConfirm;
+        private System.Windows.Forms.Button btnCompanyAnnouncementConfirm;
         private System.Windows.Forms.Button btnCompanyAnnouncementCancel;
         private System.Windows.Forms.TextBox txtCompanyAnnouncementMemo;
         private System.Windows.Forms.Label label13;
@@ -1116,5 +1215,12 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel11;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.ComboBox cbxFunctionList;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.Button btnCompanyAnnouncementAddAttachment;
+        private System.Windows.Forms.Button btnCompanyAnnouncementRemoveAttachment;
+        private System.Windows.Forms.LinkLabel lbtnCompanyAnnouncementAttachmentSelection;
+        private System.Windows.Forms.CheckedListBox clbCompanyAnnouncementAttachmentList;
     }
 }

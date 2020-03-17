@@ -12,74 +12,54 @@
         <div class="content-row">
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/images/product_pic/mil-c-24643-23-08-menu.jpg" Text="MIL-C-24643/23-08軍規低煙無毒電纜" NavigateUrl="~/mil-c-24643-23-08.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/images/product_pic/m16878-1500x860.jpg" ImageWidth="215" Text="M16878 軍規電線" NavigateUrl="~/m16878.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
-                    MIL-C-24643/23-08<br />
-                    軍規低煙無毒電纜<br />
-                    船用電纜
-                </div>
-                <div class="data">
-                    <table>
-                        <tr>
-                            <td>額定電壓:</td>
-                            <td>300V AC</td>
-                        </tr>
-                        <tr>
-                            <td>溫度範圍:</td>
-                            <td>200°C</td>
-                        </tr>
-                        <tr>
-                            <td>導體:</td>
-                            <td>鍍錫銅線</td>
-                        </tr>
-                        <tr>
-                            <td>填充:</td>
-                            <td>玻璃纖維</td>
-                        </tr>
-                        <tr>
-                            <td>絕緣體:</td>
-                            <td>矽橡膠</td>
-                        </tr>
-                        <tr>
-                            <td>隔離層:</td>
-                            <td>鋁箔</td>
-                        </tr>
-                        <tr>
-                            <td>外被:</td>
-                            <td>矽橡膠、SUS304</td>
-                        </tr>
-                    </table>
+                    M16878<br />
+                    軍規電線<br />
+                    電子線
                 </div>
             </div>
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/images/product_pic/mil-w-22759-7-menu.jpg" Text="MIL-W-22575/7 軍規鐵氟龍電子線" NavigateUrl="~/mil-w-22759-7.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/images/product_pic/m22759-1500x860.jpg" ImageWidth="215" Text="M22575 軍規電線" NavigateUrl="~/m22759.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
-                    MIL-W-22759/7<br />
-                    軍規鐵氟龍電子線<br />
+                    M22759<br />
+                    軍規電線<br />
                     電子線
                 </div>
-                <div class="data">
-                    <table>
-                        <tr>
-                            <td>額定電壓:</td>
-                            <td>600V AC</td>
-                        </tr>
-                        <tr>
-                            <td>溫度範圍:</td>
-                            <td>200°C</td>
-                        </tr>
-                        <tr>
-                            <td>導體:</td>
-                            <td>鍍銀銅線</td>
-                        </tr>
-                        <tr>
-                            <td>絕緣體:</td>
-                            <td>鐵氟龍TFE</td>
-                        </tr>
-                    </table>
+            </div>
+            <div class="content-column">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/images/product_pic/m24643-720x412.png" ImageWidth="215" Text="M24643軍規電纜" NavigateUrl="~/m24643.aspx"></asp:HyperLink>
+                </div>
+                <div class="title">
+                    M24643<br />
+                    軍規電纜<br />
+                    船用電纜
+                </div>
+            </div>
+        </div>
+        <div class="content-row">
+            <div class="content-column">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink5" runat="server" ImageUrl="~/images/product_pic/m27500-1750x1000.jpg" ImageWidth="215" Text="M27500 軍規電線" NavigateUrl="~/m27500.aspx"></asp:HyperLink>
+                </div>
+                <div class="title">
+                    M27500<br />
+                    軍規電線<br />
+                    電子線
+                </div>
+            </div>
+            <div class="content-column">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/images/product_pic/m81822-1500x860.jpg" ImageWidth="215" Text="M81822 軍規電線" NavigateUrl="~/m81822.aspx"></asp:HyperLink>
+                </div>
+                <div class="title">
+                    M81822<br />
+                    軍規電線<br />
+                    電子線
                 </div>
             </div>
         </div>

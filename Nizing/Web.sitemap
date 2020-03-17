@@ -147,8 +147,11 @@
         <siteMapNode url="ul5048.aspx" title="UL5048 Anti-Refrigerant PETP Insulation Wire" description="UL5048 冷媒線" />
       </siteMapNode>
       <siteMapNode url="military-grade-series.aspx" title="Military Grade Series" description="軍規線系列">
-        <siteMapNode url="mil-c-24643-23-08.aspx" title="MIL-C-24643/23-08 Low Smoke Shipboard Cable" description="MIL-C-24643/23-08 軍規船用電纜" />
-        <siteMapNode url="~/mil-w-22759-7.aspx" title="MIL-W-22575/7 Teflon Electrical Wire" description="MIL-W-22575/7 軍規鐵氟龍電子線" />
+        <siteMapNode url="~/m16878.aspx" title="M16878 Military Grade Wire" description="M16878 軍規電線" />
+        <siteMapNode url="~/m22759.aspx" title="M22759 Military Grade Wire" description="M22759 軍規電線" />
+        <siteMapNode url="~/m24643.aspx" title="M24643 Military Grade Shipboard Cable" description="M24643 軍規船用電纜" />
+        <siteMapNode url="~/m27500.aspx" title="M27500 Military Grade Cable" description="M27500 軍規電纜" />
+        <siteMapNode url="~/m81822.aspx" title="M81822 Military Grade Wire" description="M81822 軍規電線" />
       </siteMapNode>
     </siteMapNode>
     <siteMapNode url="application.aspx" title="Application" description="應用產業">

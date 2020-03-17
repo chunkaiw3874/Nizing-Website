@@ -110,6 +110,11 @@ public partial class SD01 : System.Web.UI.Page
             rdoMonth.Enabled = false;
             lblRdoTextWarning.Visible = true;
         }
+
+        grdReport.DataSource = null;
+        grdReport.DataBind();
+        grdTopCustomer.DataSource = null;
+        grdTopCustomer.DataBind();
     }
 
     private void SqlSearch()
@@ -307,6 +312,38 @@ public partial class SD01 : System.Web.UI.Page
                 {
                     point.Label = string.Empty;
                 }
+
+                //查詢期間內前五大客戶
+                if (ddlPersonnel.SelectedValue.ToString() != "全部人員")
+                {
+                    personnelCondition = " and TG.TG006=@salesId";
+                }
+                else
+                {
+                    personnelCondition = "";
+                }
+
+                query = "select TOP 5 TG.TG004 'custId'"
+                    + " ,MA.MA002 'custName'"
+                    + " ,TG.TG006 'salesId'"
+                    + " ,MV.MV002 'salesName'"
+                    + " ,CONVERT(DECIMAL(20,0),SUM(COALESCE(TG.TG045, 0))) 'totalSale'"
+                    + " from COPTG TG"
+                    + " LEFT JOIN COPMA MA ON TG.TG004 = MA.MA001"
+                    + " LEFT JOIN CMSMV MV ON TG.TG006 = MV.MV001"
+                    + " WHERE TG.TG042 BETWEEN @start AND @end"
+                    + personnelCondition
+                    + " group by TG.TG004,MA.MA002,TG.TG006,MV.MV002"
+                    + " order by SUM(COALESCE(TG.TG045,0)) DESC";
+                cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@salesId", ddlPersonnel.SelectedValue.ToString());
+                cmd.Parameters.AddWithValue("@start", startYear + startMonth);
+                cmd.Parameters.AddWithValue("@end", endYear + endMonth);
+                DataTable dt = new DataTable();
+                da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                grdTopCustomer.DataSource = dt;
+                grdTopCustomer.DataBind();
             }
         }
         else
@@ -504,6 +541,35 @@ public partial class SD01 : System.Web.UI.Page
         }
     }
 
+    protected void grdTopCustomer_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.Header)
+        {
+            GridView HeaderGrid = (GridView)sender;
+            GridViewRow HeaderGridRow = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Insert);
+            TableCell HeaderCell = new TableCell();
+            HeaderCell.Text = "前五大成交客戶";
+            HeaderCell.ColumnSpan = 4;
+            HeaderCell.CssClass = "stackedHeader-1";
+            HeaderGridRow.Cells.Add(HeaderCell);
+            grdTopCustomer.Controls[0].Controls.AddAt(0, HeaderGridRow);
+        }
+    }
+
+
+    protected void grdTopCustomer_DataBound(object sender, EventArgs e)
+    {
+        if (grdTopCustomer.Rows.Count > 0)
+        {
+            for (int i = 0; i < grdTopCustomer.Rows.Count; i++)
+            {
+                Label cell = new Label();
+                cell = (Label)grdTopCustomer.Rows[i].Cells[3].FindControl("Label4");
+                cell.Text = Convert.ToInt32(cell.Text).ToString("C", new CultureInfo("zh-TW")).Substring(0, Convert.ToInt32(cell.Text).ToString("C", new CultureInfo("zh-TW")).Length - 3);           
+            }
+        }
+    }
+
     protected void btnTargetTrigger_Click(object sender, EventArgs e)
     {
         DataSet ds = new DataSet();
@@ -655,4 +721,7 @@ public partial class SD01 : System.Web.UI.Page
         ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('目標金額已刪除');", true);
         btnTargetDelete.Enabled = false;
     }
+
+
+
 }

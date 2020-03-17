@@ -27,9 +27,9 @@ namespace NIZING_BACKEND_Data_Config
         //QUICK ACCESS TO USERNAME AND PW，REMOVE AFTER DEBUG PHASE!
         private void fastLogin(object sender, EventArgs e)
         {
-            txtUserName.Text = "0080";
-            txtPassword.Text = "387485";
-            cbxFunctionList.SelectedIndex = 2;
+            //txtUserName.Text = "0080";
+            //txtPassword.Text = "387485";
+            //cbxFunctionList.SelectedIndex = 3;
         }
 
         #region public methods
