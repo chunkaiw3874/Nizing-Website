@@ -45,8 +45,8 @@ public partial class main : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //test area
-        //Session["erp_id"] = "0133";
-        //Session["user_id"] = "0133";
+        Session["erp_id"] = "0080";
+        Session["user_id"] = "0080";
 
         //if(false)
         if (!((masterPage_HR360_Master)this.Master.Master).CheckAuthentication())        
@@ -403,13 +403,14 @@ public partial class main : System.Web.UI.Page
         rptCompanyAnnouncement.DataSource = _pgsource;
         rptCompanyAnnouncement.DataBind();
 
-        //Display "new" announcement indicator if announcement less than 7 days old, or is posted AFTER user's last login
+        
         foreach(RepeaterItem item in rptCompanyAnnouncement.Items)
         {
+            //Display "new" announcement indicator if announcement less than 7 days old, or is posted AFTER user's last login
             HtmlGenericControl div = (HtmlGenericControl)item.FindControl("newIcon");
-            HiddenField hdn = (HiddenField)item.FindControl("hdnLastEdit");
+            HiddenField hdnLastEdit = (HiddenField)item.FindControl("hdnLastEdit");
 
-            if(DateTime.Parse(hdn.Value) >= lastLoginTime || DateTime.Parse(hdn.Value) >= DateTime.Today.AddDays(-7))
+            if(DateTime.Parse(hdnLastEdit.Value) >= lastLoginTime || DateTime.Parse(hdnLastEdit.Value) >= DateTime.Today.AddDays(-7))
             {
                 div.Visible = true;
             }
@@ -417,7 +418,15 @@ public partial class main : System.Web.UI.Page
             {
                 div.Visible = false;
             }
+
+            //Get attachment for each announcement
+            HiddenField hdnAnnouncementId = (HiddenField)item.FindControl("hdnAnnouncementId");
+            //string attachmentFilePath = Path.Combine(Application.StartupPath, @"..\..\attachment\company_announcement\" + hdnAnnouncementId.Value + @"\");
+
         }
+
+
+
 
         HandlePaging();
     }

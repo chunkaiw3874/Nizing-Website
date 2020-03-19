@@ -512,7 +512,8 @@ namespace NIZING_BACKEND_Data_Config
                 companyAnnouncementAttachmentFilePath = Path.Combine(Application.StartupPath, @"..\..\attachment\company_announcement\" + lblCompanyAnnouncementID.Text + @"\");
                 if (Directory.Exists(companyAnnouncementAttachmentFilePath))
                 {
-                    foreach(string fName in Directory.GetFiles(companyAnnouncementAttachmentFilePath))
+                    MessageBox.Show(companyAnnouncementAttachmentFilePath);
+                    foreach (string fName in Directory.GetFiles(companyAnnouncementAttachmentFilePath))
                     {
                         clbCompanyAnnouncementAttachmentList.Items.Add(Path.GetFileName(fName));
                     }
