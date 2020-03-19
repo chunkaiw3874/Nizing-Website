@@ -61,7 +61,7 @@
         </tr>
         <tr>
             <td>Insulation:</td>
-            <td>Cross-Linked Polyethylene</td>
+            <td>XLPVC</td>
         </tr>
         <tr>
             <td>Color:</td>
@@ -76,12 +76,13 @@
     <div class="content">
     <table>
           <tr>
-            <td colspan="2">導體<br />
+            <td colspan="3">導體<br />
               Conductor</td>
             <td colspan="2">絕緣體 <br />
               Insulator</td>
             <td rowspan="2">導體電阻<br />
-              Maximum Resistance<br />at 20°C ohm/kft</td>
+              Maximum Resistance<br />
+                at 20°C ohm/km</td>
             <td>包裝<br />
               Packing</td>
           </tr>
@@ -91,6 +92,11 @@
             <td>導體結構<br />
               Composition <br />
               No. x mm</td>
+            <td>
+                直徑<br />
+                Diameter<br />
+                mm
+            </td>
             <td>絕緣厚度<br />
               Insulator Thickness<br />
               mm</td>
@@ -101,52 +107,67 @@
               Meters/ Coil</td>
           </tr>
           <tr>
+            <td>28</td>
+            <td>0.12 x 7</td>
+            <td>0.37</td>
+            <td>0.42</td>
+            <td>1.20</td>
+            <td>248</td>
+            <td>610</td>
+          </tr>
+          <tr>
             <td>26</td>
-            <td>7 x 0.160</td>
-            <td>0.41</td>
-            <td>1.32</td>
-            <td>45.20</td>
+            <td>0.16 x 7</td>
+            <td>0.49</td>
+            <td>0.42</td>
+            <td>1.30</td>
+            <td>152</td>
             <td>610</td>
           </tr>
           <tr>
             <td>24</td>
-            <td>11 x 0.160</td>
-            <td>0.41</td>
-            <td>1.40</td>
-            <td>29.30</td>
+            <td>0.16 x 11</td>
+            <td>0.61</td>
+            <td>0.42</td>
+            <td>1.45</td>
+            <td>89.3</td>
             <td>610</td>
           </tr>
           <tr>
             <td>22</td>
-            <td>17 x 0.160</td>
-            <td>0.41</td>
-            <td>1.55</td>
-            <td>16.70</td>
+            <td>0.16 x 17</td>
+            <td>0.76</td>
+            <td>0.42</td>
+            <td>1.60</td>
+            <td>62.5</td>
             <td>610</td>
           </tr>
           <tr>
             <td>20</td>
-            <td>21 x 0.180</td>
-            <td>0.41</td>
-            <td>1.80</td>
-            <td>10.50</td>
+            <td>0.18 x 21</td>
+            <td>0.95</td>
+            <td>0.45</td>
+            <td>1.85</td>
+            <td>39.5</td>
             <td>610</td>
           </tr>
           <tr>
             <td>18</td>
-            <td>34 x 0.180</td>
-            <td>0.41</td>
+            <td>0.18 x 34</td>
+            <td>1.20</td>
+            <td>0.45</td>
             <td>2.10</td>
-            <td>6.64</td>
+            <td>24.4</td>
             <td>610</td>
           </tr>
           <tr>
             <td>16</td>
-            <td>26 x 0.254</td>
-            <td>0.41 </td>
-            <td>2.30</td>
-            <td>4.18</td>
-            <td>610</td>
+            <td>0.254 x 26</td>
+            <td>1.50</td>
+            <td>0.45 </td>
+            <td>2.40</td>
+            <td>15.6</td>
+            <td>305</td>
           </tr>
         </table>
     </div>

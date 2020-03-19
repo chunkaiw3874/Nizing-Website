@@ -88,8 +88,9 @@
       <submenuitem url="~/en/e-type.aspx" enTitle="Thermocouple E-Type" cnTitle="補償導線 E-Type" />
     </menuitem>
     <menuitem url="~/en/heating-wire-series.aspx" enTitle="Heating Wire Series" cnTitle="發熱線系列">
-      <submenuitem url="~/en/ul3589.aspx" enTitle="UL3589 Heating Wire" cnTitle="UL3589發熱線" />
+      <submenuitem url="~/en/ul3589.aspx" enTitle="UL3589/UL3323 Heating Wire" cnTitle="UL3589/UL3323發熱線" />
       <submenuitem url="~/en/phc.aspx" enTitle="Parallel Heating Cable" cnTitle="並聯式電熱帶" />
+      <submenuitem url="~/en/respiration-pipe-heating-wire.aspx" enTitle="Respiration Pipe Heating Wire" cnTitle="醫療用呼吸加熱管" />
     </menuitem>
     <menuitem url="~/en/automotive-wire-series.aspx" enTitle="Automobile Wire Series" cnTitle="汽車花線系列">
       <submenuitem url="~/en/automotive-wire-standard-jaso.aspx" enTitle="JASO Standard" cnTitle="日規汽車花線">

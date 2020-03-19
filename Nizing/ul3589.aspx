@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
     <title>UL3589 發熱線-日進電線</title>
-    <meta name="description" content="UL3589發熱線適用於各種發熱、電毯、保暖物品及醫療呼吸管件內之發熱線。詳細的UL3589發熱線的產品規格以及使用範圍值">
+    <meta name="description" content="UL3589/UL3323發熱線適用於各種發熱、電毯、保暖物品及醫療呼吸管件內之發熱線。詳細的UL3589發熱線的產品規格以及使用範圍值">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
@@ -22,7 +22,7 @@
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="prdTitle" Runat="Server">
     發熱線<br />
-    UL3589
+    UL3589/UL3323
 </asp:Content>
 <asp:Content ID="Content8" ContentPlaceHolderID="titleRowLink" Runat="Server">
     <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/pdf/ul3589.pdf" ImageUrl="~/images/button/download_pdf_button2.jpg" Target="_blank"></asp:HyperLink>
@@ -33,13 +33,13 @@
     </div>
     <table>
         <tr>
-            <td>UL3589 發熱線適用於各種發熱、電毯、保暖物品及醫療呼吸管件內之發熱線</td>
+            <td>UL3589/UL3323 發熱線適用於各種發熱、電毯、保暖物品及醫療呼吸管件內之發熱線</td>
         </tr>
     </table>
 </asp:Content>
 <asp:Content ID="Content10" ContentPlaceHolderID="detailDescription" Runat="Server">
     <div class="subtitle">
-        發熱線 UL3589 產品規格表
+        發熱線 UL3589/UL3323 產品規格表
     </div>
     <div class="content">
         <table>
@@ -52,62 +52,55 @@
             Total Outside Diameter</td>
           <td>電阻值 (歐姆)<br />
             Electric resistance value (Ω)</td>
-        </tr>
-        <tr>
-          <td>聚丙烯<br />
-            PP</td>
-          <td>60°C</td>
-          <td>1.80mm</td>
-          <td>可訂製,    從 0.5Ω~5000Ω<br />
-Can be custom made, starting from 0.5Ω~5000Ω</td>
-        </tr>
-        <tr>
-          <td>聚氯乙烯<br />
-            PVC</td>
-          <td>80°C</td>
-          <td>2.80mm</td>
-          <td>可訂製,    從 0.5Ω~5000Ω<br />
-            Can be custom made, starting from 0.5Ω~5000Ω</td>
-        </tr>
-        <tr>
-          <td>交連聚乙烯<br />
-            XLPE</td>
-          <td>125°C</td>
-          <td>2.00mm</td>
-          <td>可訂製,    從 0.5Ω~5000Ω<br />
-Can be custom made, starting from 0.5Ω~5000Ω</td>
         </tr>                
         <tr>
           <td>矽橡膠<br />
             Silicone</td>
           <td>200°C</td>
-          <td>2.80mm</td>
-          <td>可訂製,    從 0.5Ω~5000Ω<br />
-Can be custom made, starting from 0.5Ω~5000Ω</td>
+          <td>2.50mm</td>
+          <td>0.5Ω~5000Ω</td>
+        </tr>
+        <tr>
+          <td>聚丙烯<br />
+            PP</td>
+          <td>110°C</td>
+          <td>1.60mm</td>
+          <td>0.5Ω~5000Ω</td>
+        </tr>
+        <tr>
+          <td>聚氯乙烯<br />
+            PVC</td>
+          <td>105°C</td>
+          <td>訂製</td>
+          <td>0.5Ω~5000Ω</td>
+        </tr>
+        <tr>
+          <td>交連聚乙烯<br />
+            XLPE</td>
+          <td>125°C</td>
+          <td>訂製</td>
+          <td>0.5Ω~5000Ω</td>
         </tr>
         <tr>
           <td>玻璃纖維<br />
             Fiberglass</td>
-          <td>300°C</td>
-          <td>1.75mm</td>
-          <td>可訂製,    從 0.5Ω~5000Ω<br />
-Can be custom made, starting from 0.5Ω~5000Ω</td>
+          <td>200°C</td>
+          <td>1.70~2.10mm</td>
+          <td>0.5Ω~5000Ω</td>
         </tr>
         <tr>
           <td>高溫纖維<br />
             Silica Fiber</td>
           <td>500°C</td>
-          <td>2.00mm</td>
-          <td>可訂製,    從 0.5Ω~5000Ω<br />
-Can be custom made, starting from 0.5Ω~5000Ω</td>
+          <td>訂製</td>
+          <td>0.5Ω~5000Ω</td>
         </tr>
         <tr>
           <td>石英纖維<br />
             Quartz Fiber</td>
           <td>1000°C</td>
-          <td>2.00mm</td>
-          <td>可訂製,    從 0.5Ω~5000Ω<br />
-Can be custom made, starting from 0.5Ω~5000Ω</td>
+          <td>訂製</td>
+          <td>0.5Ω~5000Ω</td>
         </tr>        
         </table>
     </div>

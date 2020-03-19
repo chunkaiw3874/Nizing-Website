@@ -15,23 +15,25 @@
                     <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/images/product_pic/ul3589-menu.jpg" Text="UL3589發熱線" NavigateUrl="~/ul3589.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
-                    UL3589<br />
+                    UL3589/UL3323<br />
                     發熱線<br />
                     醫療呼吸管、電毯、保暖物品
                 </div>
                 <div class="data">
                     <table>
                         <tr>
-                            <td>導電電阻:</td>
-                            <td>1~2000 Ohm</td>
+                            <td>電阻值:</td>
+                            <td>0.5~5000 Ohm</td>
                         </tr>
                         <tr>
                             <td>溫度範圍:</td>
-                            <td>-60°C~ +200°C FT-1</td>
+                            <td>-60°C~ +200°C</td>
                         </tr>
                         <tr>
                             <td>額定電壓:</td>
-                            <td>300V/600V</td>
+                            <td>UL3589:600V<br />
+                                UL3323:300V
+                            </td>
                         </tr>
                         <tr>
                             <td>導體:</td>

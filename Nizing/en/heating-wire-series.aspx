@@ -14,7 +14,7 @@
                     <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/en/images/product_pic/ul3589-menu.jpg" alt="UL3589 Heating Wire" NavigateUrl="ul3589.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
-                    UL3589<br />
+                    UL3589/UL3323<br />
                     Heating Wire<br />
                     Medical Breathing Circuit, Electric Blanket
                 </div>
@@ -22,15 +22,17 @@
                     <table>
                         <tr>
                             <td>Electrical Resistance:</td>
-                            <td>1~2000 Ohm</td>
+                            <td>0.5~5000 Ohm</td>
                         </tr>
                         <tr>
                             <td>Nominal Temperature:</td>
-                            <td>-60°C~ +200°C FT-1</td>
+                            <td>-60°C~ +200°C</td>
                         </tr>
                         <tr>
                             <td>Nominal Voltage:</td>
-                            <td>300V/600V</td>
+                            <td>UL3589:600V<br />
+                                UL3323:300V
+                            </td>
                         </tr>
                         <tr>
                             <td>Conductor:</td>
