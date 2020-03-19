@@ -61,6 +61,21 @@
           <td>0.5Ω~5000Ω</td>
         </tr>
         <tr>
+            <td colspan="4" style="background-color:#77c5f5; color:#ffffff;">
+                其他材質發熱線(Other Insulation Material Heating Wire)
+            </td>
+        </tr>
+        <tr>
+          <td>材質<br />
+            Material</td>
+          <td>耐溫<br />
+            Temperature-resistance (in °C)</td>
+          <td>總外徑<br />
+            Total Outside Diameter</td>
+          <td>電阻值 (歐姆)<br />
+            Electric resistance value (Ω)</td>
+        </tr>
+        <tr>
           <td>聚丙烯<br />
             PP</td>
           <td>110°C</td>
