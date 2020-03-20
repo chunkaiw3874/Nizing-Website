@@ -48,8 +48,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "0067";    //test only to avoid error on loading, delete after trial            
-        //Session["erp_id"] = "0067";
+        //Session["user_id"] = "0080";    //test only to avoid error on loading, delete after trial            
+        //Session["erp_id"] = "0080";
 
         //only use when opening check exception for certain persion
         //exceptionList111.Add("0012");
@@ -2213,8 +2213,13 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     }
                     else
                     {
-                        cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub.Substring(0, 4));
-                        cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.funcSub.Substring(0, 4));
+                        int pos = 2;    //get the index of the first char after the first 2 chars that is not number (正式員工編碼為xxxx, PT員工編碼為PTxxxx, 需要用此方法抓出完整員編)
+                        while (!Char.IsLetter(dayoff.funcSub[pos]))
+                        {
+                            ++pos;
+                        }
+                        cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub.Substring(0, pos));
+                        cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.funcSub.Substring(0, pos));
                     }
                     cmd.Parameters.AddWithValue("@REASON", dayoff.reason);
                     cmd.ExecuteNonQuery();
@@ -2256,8 +2261,13 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         }
                         else
                         {
-                            cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub.Substring(0, 4));
-                            cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.funcSub.Substring(0, 4));
+                            int pos = 2;    //get the index of the first char after the first 2 chars that is not number (正式員工編碼為xxxx, PT員工編碼為PTxxxx, 需要用此方法抓出完整員編)
+                            while (!Char.IsLetter(dayoff.funcSub[pos]))
+                            {
+                                ++pos;
+                            }
+                            cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.funcSub.Substring(0, pos));
+                            cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.funcSub.Substring(0, pos));
                         }
                         cmd.Parameters.AddWithValue("@REASON", dayoff.reason);
                         cmd.ExecuteNonQuery();
@@ -2685,8 +2695,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
                             + " WHERE MV.MV001=@RECIPIENT_ID";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@RECIPIENT_ID", recipient);
-                
-                recipientEmailList.Add(cmd.ExecuteScalar().ToString());
+
+                if (cmd.ExecuteScalar() != null && !string.IsNullOrEmpty(cmd.ExecuteScalar().ToString()))
+                {
+                    recipientEmailList.Add(cmd.ExecuteScalar().ToString());
+                }
             }
         }
         //拼湊收件人郵箱
