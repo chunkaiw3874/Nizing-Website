@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
     <title>UL3074矽膠編織耐熱線-日進電線</title>
-    <meta name="description" content="UL3074矽膠編織耐熱線，適用於各種家用電器、照明燈具、工業機器、電熱製品、原料熔爐等高溫場所之配線。通過UL VW-1垂直燃燒測試以及多項IEC測試，證實為低煙、無鹵、耐燃之產品。詳細的產品資訊，包括UL3074矽膠編織耐熱線的產品規格以及使用範圍值">	
+    <meta name="description" content="UL3074矽膠編織耐熱線，適用於各種家用電器、照明燈具、工業機器、電熱製品、原料熔爐等高溫場所之配線。">	
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
@@ -16,7 +16,7 @@
     <asp:Image ID="Image3" runat="server" ImageUrl="~/images/product_pic/ul3074-3.jpg" AlternateText="UL3074 矽膠編織耐熱線" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="largePicArea2" Runat="Server">
-    <asp:Image ID="Image4" runat="server" ImageUrl="~/images/product_pic/certificate-2.svg" AlternateText="UL3074 矽膠編織耐熱線" />
+    <asp:Image ID="Image4" runat="server" ImageUrl="~/images/product_pic/certificate-1.svg" AlternateText="UL3074 矽膠編織耐熱線" />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
     <%--<asp:Image ID="Image5" runat="server" ImageUrl="~/images/product_pic/lshf.jpg" AlternateText="UL3074 矽膠編織耐熱線" />--%>
@@ -113,7 +113,7 @@
             <td>導體電阻<br />
               Maximum Resistance at 20°C ohm/km</td>
             <td>電流量<br />
-              Max. Current at 20°C-AMP</td>
+              Max. Current at 170°C-AMP</td>
             <td>米/卷<br />
               Meters/ Coil</td>
           </tr>
@@ -127,7 +127,7 @@
             <td>0.20</td>
             <td>4.42</td>
             <td>5.38</td>
-            <td>88.4</td>
+            <td>21</td>
             <td>305</td>
           </tr>
         </table>

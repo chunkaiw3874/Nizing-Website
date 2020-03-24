@@ -318,7 +318,44 @@
                         </tr>
                     </table>
                 </div>
-            </div>            
+            </div>
+
+        </div>
+        <div class="content-row">
+            <div class="content-column">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink10" runat="server" ImageUrl="~/en/images/product_pic/tm3320-menu.jpg" alt="TM3320 Silicone Fiberglass Wire" NavigateUrl="tm3320.aspx"></asp:HyperLink>
+                </div>
+                <div class="title">
+                    TM3320<br />
+                    Silicone Fiberglass Wire<br />
+                    Electric Cloth, Dryer, Home Appliances
+                </div>
+                <div class="data">
+                    <table>
+                        <tr>
+                            <td>Nominal Voltage:</td>
+                            <td>300V</td>
+                        </tr>
+                        <tr>
+                            <td>Nominal Temperature:</td>
+                            <td>-60°C~ +200°C</td>
+                        </tr>
+                        <tr>
+                            <td>Conductor:</td>
+                            <td>Tinned Copper</td>
+                        </tr>
+                        <tr>
+                            <td>Insulation:</td>
+                            <td>Silicone Rubber</td>
+                        </tr>
+                        <tr>
+                            <td>Braid:</td>
+                            <td>Fiberglass, Silicone Resin</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>     
         </div>
     </div>
 </asp:Content>

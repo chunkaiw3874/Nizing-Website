@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/product-detail.master" AutoEventWireup="true" CodeFile="ul3075.aspx.cs" Inherits="ul3075" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/en/master/product-detail.master" AutoEventWireup="true" CodeFile="ul3075.aspx.cs" Inherits="ul3075" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
     <title>UL3075 Silicone Fiberglass Wire - Nizing Electric Wire & Cable</title>
-    <meta name="description" content="UL3075 Silicone Fiberglass Wire, suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces. Passed UL VW-1 Vertical fire test and multiple IEC tests, proven to be low smoke density, halogen free, and flame retardant. Product information, specification, scope, and visual presentation">	
+    <meta name="description" content="UL3075 Silicone Fiberglass Wire, suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces.">	
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
@@ -16,7 +16,7 @@
         <asp:Image ID="Image3" runat="server" ImageUrl="~/en/images/product_pic/ul3075-3.jpg" AlternateText="UL3075 Silicone Fiberglass Wire" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="largePicArea2" Runat="Server">
-        <asp:Image ID="Image4" runat="server" ImageUrl="~/en/images/product_pic/certificate-2.svg" AlternateText="UL3075 Silicone Fiberglass Wire" />
+        <asp:Image ID="Image4" runat="server" ImageUrl="~/en/images/product_pic/certificate-1.svg" AlternateText="UL3075 Silicone Fiberglass Wire" />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
         <%--<asp:Image ID="Image5" runat="server" ImageUrl="~/en/images/product_pic/lshf.jpg" AlternateText="UL3075 Silicone Fiberglass Wire" />--%>
@@ -113,21 +113,21 @@
             <td>導體電阻<br />
               Maximum Resistance at 20°C ohm/km</td>
             <td>電流量<br />
-              Max. Current at 20°C-AMP</td>
+              Max. Current at 170°C-AMP</td>
             <td>米/卷<br />
               Meters/ Coil</td>
           </tr>
           <tr>
             <td>10</td>
-            <td>35 x 0.45</td>
-            <td>5.57</td>
+            <td>34 x 0.452</td>
+            <td>5.46</td>
             <td>3.08</td>
             <td>0.76</td>
             <td>4.60</td>
             <td>0.25</td>
             <td>5.10</td>
             <td>3.5</td>
-            <td>140.76</td>
+            <td>28</td>
             <td>305</td>
           </tr>
         </table>

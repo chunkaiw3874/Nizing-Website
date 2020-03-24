@@ -321,6 +321,42 @@
                 </div>
             </div>            
         </div>
+        <div class="content-row">
+            <div class="content-column">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink10" runat="server" ImageUrl="~/images/product_pic/tm3320-menu.jpg" Text="TM3320矽膠編織耐熱線" NavigateUrl="~/tm3320.aspx"></asp:HyperLink>
+                </div>
+                <div class="title">
+                    TM3320<br />
+                    矽膠編織耐熱電線<br />
+                    發電衣、烘乾機
+                </div>
+                <div class="data">
+                    <table>
+                        <tr>
+                            <td>額定電壓:</td>
+                            <td>300V</td>
+                        </tr>
+                        <tr>
+                            <td>溫度範圍:</td>
+                            <td>-60°C~ +200°C</td>
+                        </tr>
+                        <tr>
+                            <td>導體:</td>
+                            <td>鍍錫銅線</td>
+                        </tr>
+                        <tr>
+                            <td>絕緣體:</td>
+                            <td>矽橡膠</td>
+                        </tr>
+                        <tr>
+                            <td>外被編織:</td>
+                            <td>玻璃纖維+矽樹脂</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </asp:Content>
 

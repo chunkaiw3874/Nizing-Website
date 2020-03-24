@@ -18,6 +18,7 @@
       <submenuitem url="~/ul3304.aspx" enTitle="UL3304 High Voltage Silicone Fiberglass Wire" cnTitle="UL3304 高壓線" />
       <submenuitem url="~/ul3512.aspx" enTitle="UL3512 Silicone Fiberglass Wire" cnTitle="UL3512" />
       <submenuitem url="~/vde-h05sj-k.aspx" enTitle="VDE-H05SJ-K Silicone Fiberglass Wire" cnTitle="VDE-H05SJ-K" />
+      <submenuitem url="~/tm3320.aspx" enTitle="TM3320 Silicone Fiberglass Wire" cnTitle="TM3320" />
     </menuitem>
     <menuitem url="~/high-temperature-resistance-series.aspx" enTitle="High Temperature-Resistance Series" cnTitle="高溫線系列">
       <submenuitem url="~/tggt-5256.aspx" enTitle="TGGT-5256 250°C High Temperature-Resistance Wire" cnTitle="TGGT-5256 250°C" />

@@ -84,12 +84,8 @@
           <tr>
             <td colspan="3">導體<br />
               Conductor</td>
-            <td colspan="3">絕緣體 <br />
-              Insulator</td>
-            <td rowspan="2">完成外徑<br />
-            Overall<br />
-            Diameter<br />
-            mm</td>
+            <td colspan="4">絕緣體 <br />
+              Insulator</td>            
             <td colspan="2">電氣特性<br />
               Electrical Characteristic</td>
             <td>包裝<br />
@@ -97,7 +93,7 @@
           </tr>
           <tr>
             <td>截面積<br />
-              Section <br />
+              Cross Section Area<br />
               mm²</td>
             <td>導體結構<br />
               Composition<br />
@@ -109,13 +105,18 @@
               Insulator Thickness<br />
               mm</td>
             <td>矽膠外徑<br />
-              Silicone <br />
-              Insulation<br />
+              Silicone Insulation OD<br />
               mm</td>
             <td>編織厚度<br />
             Braid<br />
             Thickness<br />
             mm</td>
+            <td>
+                完成外徑<br />
+                Overall<br />
+                Diameter<br />
+                mm
+            </td>
             <td>導體電阻<br />
               Maximum Resistance at 20°C ohm/km</td>
             <td>電流量<br />
@@ -133,18 +134,18 @@
             <td>2.34</td>
             <td>35.91</td>
             <td>5</td>
-            <td>400</td>
+            <td>500</td>
           </tr>
           <tr>
             <td>0.75</td>
             <td>30 x 0.18</td>
-            <td>1.13</td>
+            <td>1.11</td>
             <td>0.55</td>
             <td>2.21</td>
             <td>0.16</td>
             <td>2.53</td>
             <td>23.93</td>
-            <td>7</td>
+            <td>8</td>
             <td>400</td>
           </tr>
           <tr>
@@ -157,7 +158,7 @@
             <td>2.73</td>
             <td>17.89</td>
             <td>9.5</td>
-            <td>400</td>
+            <td>200</td>
           </tr>
           <tr>
             <td>1.25</td>
@@ -168,19 +169,19 @@
             <td>0.16</td>
             <td>3.12</td>
             <td>15.30</td>
-            <td>12</td>
+            <td>11</td>
             <td>200</td>
           </tr>
           <tr>
             <td>1.5</td>
-            <td>30 x 0.254</td>
+            <td>28 x 0.26</td>
             <td>1.61</td>
             <td>0.65</td>
             <td>2.91</td>
             <td>0.16</td>
             <td>3.23</td>
             <td>11.99</td>
-            <td>14.5</td>
+            <td>12</td>
             <td>200</td>
           </tr>
           <tr>
@@ -192,8 +193,8 @@
             <td>0.16</td>
             <td>3.78</td>
             <td>7.17</td>
-            <td>20</td>
-            <td>100</td>
+            <td>17</td>
+            <td>200</td>
           </tr>
         </table>
     </div>

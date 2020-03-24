@@ -84,10 +84,8 @@
           <tr>
             <td colspan="4">導體<br />
               Conductor</td>
-            <td colspan="3">絕緣體 <br />
+            <td colspan="4">絕緣體 <br />
               Insulator</td>
-              <td rowspan="2">完成外徑<br />
-                Overall Diameter mm</td>                
             <td colspan="2">電器特性<br />
               Electrical Characteristic</td>
             <td>包裝<br />
@@ -111,6 +109,8 @@
               mm</td>
             <td>編織厚度<br />
               Braid Thickness mm</td>
+            <td>完成外徑<br />
+            Overall Diameter mm</td>                
             <td>導體電阻<br />
               Maximum Resistance at 20°C ohm/km</td>
             <td>電流量<br />
@@ -120,63 +120,63 @@
           </tr>
           <tr>
             <td>22</td>
-            <td>7    x 0.254<br />
+            <td>7 x 0.254<br />
               12 x 0.18</td>
             <td>0.35</td>
-            <td>0.80</td>
-            <td>0.75</td>
-            <td>2.30</td>
+            <td>0.72</td>
+            <td>0.76</td>
+            <td>2.24</td>
             <td>0.16</td>
-            <td>2.62</td>
+            <td>2.56</td>
             <td>57.50</td>
             <td>3.0</td>
             <td>610</td>
           </tr>
           <tr>
             <td>20</td>
-            <td>7    x 0.30<br />
+            <td>7 x 0.30<br />
               20 x 0.18</td>
             <td>0.55</td>
             <td>0.92</td>
-            <td>0.75</td>
-            <td>2.42</td>
+            <td>0.76</td>
+            <td>2.44</td>
             <td>0.16</td>
-            <td>2.74</td>
+            <td>2.76</td>
             <td>35.20</td>
             <td>5.0</td>
             <td>305</td>
           </tr>
           <tr>
             <td>18</td>
-            <td>7    x 0.40<br />
-              30 x 0.18</td>
+            <td>7 x 0.40<br />
+              34 x 0.18</td>
             <td>0.84</td>
-            <td>1.19</td>
-            <td>0.75</td>
-            <td>2.69</td>
+            <td>1.20</td>
+            <td>0.76</td>
+            <td>2.72</td>
             <td>0.16</td>
-            <td>3.01</td>
+            <td>3.04</td>
             <td>23.30</td>
-            <td>7.0</td>
+            <td>8.0</td>
             <td>305</td>
           </tr>
           <tr>
             <td>16</td>
-            <td>7    x 0.50<br />
+            <td>7 x 0.50<br />
               50 x 0.18</td>
             <td>1.35</td>
-            <td>1.53</td>
-            <td>0.75</td>
-            <td>3.03</td>
+            <td>1.50</td>
+            <td>0.76</td>
+            <td>3.02</td>
             <td>0.16</td>
-            <td>3.35</td>
+            <td>3.34</td>
             <td>15.10</td>
-            <td>12.0</td>
+            <td>11.0</td>
             <td>305</td>
           </tr>
           <tr>
             <td>14</td>
-            <td>37    x 0.254</td>
+            <td>37 x 0.254</td>
             <td>2.00</td>
             <td>1.80</td>
             <td>0.78</td>
@@ -184,7 +184,7 @@
             <td>0.16</td>
             <td>3.68</td>
             <td>9.20</td>
-            <td>17.0</td>
+            <td>15.0</td>
             <td>200</td>
           </tr>
           <tr>
@@ -197,20 +197,20 @@
             <td>0.16</td>
             <td>4.80</td>
             <td>5.40</td>
-            <td>23.0</td>
+            <td>21.0</td>
             <td>100</td>
           </tr>
           <tr>
             <td>10</td>
             <td>34 x 0.45</td>
-            <td>5.41</td>
-            <td>3.03</td>
-            <td>1.10</td>
-            <td>5.23</td>
+            <td>5.50</td>
+            <td>3.12</td>
+            <td>1.15</td>
+            <td>5.42</td>
             <td>0.16</td>
-            <td>5.55</td>
+            <td>5.74</td>
             <td>3.46</td>
-            <td>35.0</td>
+            <td>28.0</td>
             <td>100</td>
           </tr>
           <tr>
@@ -218,25 +218,25 @@
             <td>50 x 0.45</td>
             <td>8.00</td>
             <td>3.70</td>
-            <td>1.10</td>
-            <td>5.90</td>
-            <td>0.30</td>
-            <td>6.50</td>
+            <td>1.15</td>
+            <td>6.00</td>
+            <td>0.20</td>
+            <td>6.40</td>
             <td>2.45</td>
-            <td>55.0</td>
+            <td>35.0</td>
             <td>100</td>
           </tr>
           <tr>
             <td>6</td>
             <td>85 x 0.45</td>
             <td>14.00</td>
-            <td>4.90</td>
-            <td>1.40</td>
-            <td>7.70</td>
-            <td>0.45</td>
+            <td>5.20</td>
+            <td>1.50</td>
+            <td>8.20</td>
+            <td>0.20</td>
             <td>8.60</td>
             <td>1.39</td>
-            <td>93.0</td>
+            <td>88.0</td>
             <td>100</td>
           </tr>
           <tr>
@@ -244,12 +244,12 @@
             <td>135 x 0.45</td>
             <td>22.00</td>
             <td>7.00</td>
-            <td>1.40</td>
-            <td>9.80</td>
+            <td>1.50</td>
+            <td>10.00</td>
             <td>0.50</td>
-            <td>10.80</td>
+            <td>11.00</td>
             <td>0.89</td>
-            <td>119.0</td>
+            <td>115.0</td>
             <td>100</td>
           </tr>
           <tr>
@@ -257,25 +257,25 @@
             <td>7 x 34 x 0.45</td>
             <td>38.00</td>
             <td>9.20</td>
-            <td>1.40</td>
-            <td>12.00</td>
+            <td>2.00</td>
+            <td>13.20</td>
             <td>0.50</td>
-            <td>13.00</td>
+            <td>14.20</td>
             <td>0.53</td>
-            <td>166.0</td>
+            <td>162.0</td>
             <td>100</td>
           </tr>
           <tr>
             <td>1/0</td>
-            <td>19 x 16 x 0.45</td>
+            <td>7 x 43 x 0.45</td>
             <td>50.00</td>
             <td>10.50</td>
-            <td>1.90</td>
-            <td>14.30</td>
+            <td>2.00</td>
+            <td>14.50</td>
             <td>0.60</td>
-            <td>15.50</td>
+            <td>15.70</td>
             <td>0.32</td>
-            <td>255.0</td>
+            <td>192.0</td>
             <td>100</td>
           </tr>
           <tr>
@@ -288,7 +288,7 @@
             <td>0.60</td>
             <td>21.10</td>
             <td>0.18</td>
-            <td>401.0</td>
+            <td>298.0</td>
             <td>100</td>
           </tr>
         </table>

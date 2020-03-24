@@ -16,7 +16,7 @@
         <asp:Image ID="Image3" runat="server" ImageUrl="~/en/images/product_pic/ul3304-3.jpg" AlternateText="UL3304 High Voltage Silicone Fiberglass Wire" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="largePicArea2" Runat="Server">
-        <asp:Image ID="Image4" runat="server" ImageUrl="~/en/images/product_pic/certificate-2.svg" AlternateText="UL3304 High Voltage Silicone Fiberglass Wire" />
+        <asp:Image ID="Image4" runat="server" ImageUrl="~/en/images/product_pic/certificate-1.svg" AlternateText="UL3304 High Voltage Silicone Fiberglass Wire" />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
         <%--<asp:Image ID="Image5" runat="server" ImageUrl="~/en/images/product_pic/lshf.jpg" AlternateText="UL3304 High Voltage Silicone Fiberglass Wire" />--%>
@@ -100,17 +100,17 @@
               Composition <br />
               NO. x mm</td>
             <td>內徑<br />
-              Inside Diameter mm</td>
+              Inner Diameter mm</td>
             <td>絕緣厚度<br />
               Insulator<br />
               Thickness<br />
 			  mm</td>
             <td>矽膠外俓<br />
-              Silicone <br />
-              Insulation<br />
+              Silicone Insulation OD<br />
               mm</td>
             <td>編織厚度<br />
-              Braid Thickness mm</td>
+              Braid Thickness<br />
+               mm</td>
             <td>導體電阻<br />
               Maximum<br />
 			  Resistance at 20°C <br />
@@ -122,64 +122,66 @@
           </tr>
           <tr>
             <td>22</td>
-            <td>7    x 0.26<br />
+            <td>7 x 0.254<br />
               12 x 0.18</td>
-            <td>0.77</td>
+            <td>0.72</td>
             <td>1.02</td>
-            <td>2.81</td>
+            <td>2.76</td>
             <td>0.16</td>
-            <td>3.13</td>
+            <td>3.08</td>
             <td>62.50</td>
             <td>3.0</td>
             <td>305</td>
           </tr>
           <tr>
             <td>20</td>
-            <td>7    x 0.30<br />
+            <td>7 x 0.30<br />
               20 x 0.18</td>
-            <td>0.97</td>
+            <td>1.00</td>
             <td>1.02</td>
-            <td>3.01</td>
+            <td>3.04</td>
             <td>0.16</td>
-            <td>3.33</td>
+            <td>3.36</td>
             <td>39.50</td>
             <td>5.0</td>
             <td>305</td>
           </tr>
           <tr>
             <td>18</td>
-            <td>7 x 0.40</td>
-            <td>1.19</td>
+            <td>7 x 0.39</td>
+            <td>1.20</td>
             <td>1.02</td>
             <td>3.23</td>
             <td>0.16</td>
-            <td>3.55</td>
+            <td>3.56</td>
             <td>24.40</td>
-            <td>7.0</td>
+            <td>8.0</td>
             <td>305</td>
           </tr>
           <tr>
             <td>16</td>
-            <td>7    x 0.50</td>
-            <td>1.53</td>
+            <td>7 x 0.50<br />
+                50 x 0.18
+            </td>
+            <td>1.50</td>
             <td>1.02</td>
-            <td>3.57</td>
+            <td>3.54</td>
             <td>0.16</td>
-            <td>3.89</td>
+            <td>3.86</td>
             <td>15.60</td>
-            <td>12.0</td>
+            <td>11.0</td>
             <td>305</td>
           </tr>
           <tr>
             <td>14</td>
-            <td><p>37    x 0.26</p></td>
-            <td>1.85</td>
+            <td>37 x 0.254</td>
+            <td>1.80</td>
             <td>1.02</td>
-            <td>3.89</td>
+            <td>3.84</td>
             <td>0.16</td>
-            <td>4.21</td>
+            <td>4.16</td>
             <td>9.08</td>
-            <td>17.0</td>
+            <td>15.0</td>
             <td>200</td>
           </tr>
           <tr>
@@ -191,7 +193,7 @@
             <td>0.16</td>
             <td>4.84</td>
             <td>6.30</td>
-            <td>23.0</td>
+            <td>21.0</td>
             <td>100</td>
           </tr>
         </table>

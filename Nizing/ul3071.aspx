@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
     <title>UL3071矽膠編織耐熱線-日進電線</title>
-    <meta name="description" content="UL3071矽膠編織耐熱線，適用於各種家用電器、照明燈具、工業機器、電熱製品、原料熔爐等高溫場所之配線。通過UL VW-1垂直燃燒測試以及多項IEC測試，證實為低煙、無鹵、耐燃之產品。詳細的產品資訊，包括UL3071矽膠編織耐熱線的產品規格以及使用範圍值">	
+    <meta name="description" content="UL3071矽膠編織耐熱線，適用於各種家用電器、照明燈具、工業機器、電熱製品、原料熔爐等高溫場所之配線。">	
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
@@ -16,7 +16,7 @@
     <asp:Image ID="Image3" runat="server" ImageUrl="~/images/product_pic/ul3071-3.jpg" AlternateText="UL3071 矽膠編織耐熱線" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="largePicArea2" Runat="Server">
-    <asp:Image ID="Image4" runat="server" ImageUrl="~/images/product_pic/certificate-2.svg" AlternateText="UL3071 矽膠編織耐熱線" />
+    <asp:Image ID="Image4" runat="server" ImageUrl="~/images/product_pic/certificate-1.svg" AlternateText="UL3071 矽膠編織耐熱線" />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
     <%--<asp:Image ID="Image5" runat="server" ImageUrl="~/images/product_pic/lshf.jpg" AlternateText="UL3071 矽膠編織耐熱線" />--%>
@@ -83,10 +83,8 @@
             <tr>
               <td colspan="4">導體<br />
                 Conductor</td>
-              <td colspan="3">絕緣體 <br />
-                Insulator</td>
-              <td rowspan="2">完成外徑<br />
-                Overall Diameter mm</td>                
+              <td colspan="4">絕緣體 <br />
+                Insulator</td>             
               <td colspan="2">電器特性<br />
                 Electrical Characteristic</td>
               <td>包裝<br />
@@ -106,20 +104,22 @@
                 Jacket Thickness mm</td>
               <td>矽膠外俓<br />
                 Silicone <br />
-                Insulation<br />
+                Insulation OD<br />
                 mm</td>
               <td>編織厚度<br />
                 Braid Thickness mm</td>
+              <td>完成外徑<br />
+                Overall Diameter mm</td>   
               <td>導體電阻<br />
                 Maximum Resistance at 20°C ohm/km</td>
               <td>電流量<br />
-                Max. Current at 20°C-AMP</td>
+                Max. Current at 170°C-AMP</td>
               <td>米/卷<br />
                 Meters/ Coil</td>
             </tr>
             <tr>
               <td>18</td>
-              <td>7    x 0.40</td>
+              <td>7 x 0.39</td>
               <td>0.88</td>
               <td>1.22</td>
               <td>0.76</td>
@@ -127,12 +127,12 @@
               <td>0.20</td>
               <td>3.14</td>
               <td>23.30</td>
-              <td>22.02</td>
+              <td>8</td>
               <td>610</td>
             </tr>
             <tr>
               <td>16</td>
-              <td>7    x 0.50</td>
+              <td>7 x 0.50</td>
               <td>1.37</td>
               <td>1.53</td>
               <td>0.76</td>
@@ -140,12 +140,12 @@
               <td>0.20</td>
               <td>3.45</td>
               <td>14.60</td>
-              <td>35.04</td>
+              <td>11</td>
               <td>305</td>
             </tr>
             <tr>
               <td>14</td>
-              <td>37    x 0.254</td>
+              <td>37 x 0.254</td>
               <td>1.87</td>
               <td>1.79</td>
               <td>0.76</td>
@@ -153,7 +153,7 @@
               <td>0.20</td>
               <td>3.79</td>
               <td>9.90</td>
-              <td>55.68</td>
+              <td>15</td>
               <td>305</td>
             </tr>
           </table>
