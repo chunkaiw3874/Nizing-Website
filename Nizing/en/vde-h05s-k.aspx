@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
     <title>VDE H05S-K Silicone Wire - Nizing Electric Wire & Cable</title>
-    <meta name="description" content="VDE H05S-K Silicone Wire, suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces. Passed UL VW-1 Vertical fire test and multiple IEC tests, proven to be low smoke density, halogen free, and flame retardant. Product information, specification, scope, and visual presentation">	
+    <meta name="description" content="VDE H05S-K Silicone Wire, suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces.">	
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
@@ -89,7 +89,7 @@
           </tr>
           <tr>
             <td>截面積<br />
-              Section <br />
+              Cross Section<br />
               mm²</td>
             <td>導體結構<br />
               Composition<br />
@@ -98,17 +98,17 @@
               Diameter <br />
               mm</td>
             <td>絕緣厚度<br />
-              Insulator <br />
-              Thickness<br />
+              Insulator Thickness<br />
               mm</td>
             <td>完成外徑<br />
-              Overall <br />
-              Diameter<br />
+              Overall Diameter<br />
               mm</td>
             <td>導體電阻<br />
-              Maximum Resistance at 20°C ohm/km</td>
+              Maximum Resistance at 20°C<br />
+                ohm/km</td>
             <td>電流量<br />
-              Intens. Max 1.maxa 170°C-AMP</td>
+              Current Capacity at 170°C<br />
+                AMP</td>
             <td>米/卷<br />
               Meters/ Coil</td>
           </tr>
@@ -118,18 +118,18 @@
             <td>0.92</td>
             <td>0.6</td>
             <td>2.12 </td>
-            <td>35.91</td>
+            <td>38.7</td>
             <td>5</td>
             <td>500</td>
           </tr>
           <tr>
             <td>0.75</td>
             <td>30 x 0.18</td>
-            <td>1.20</td>
+            <td>1.2</td>
             <td>0.6</td>
-            <td>2.40 </td>
-            <td>23.93</td>
-            <td>7</td>
+            <td>2.4 </td>
+            <td>25.8</td>
+            <td>8</td>
             <td>400</td>
           </tr>
           <tr>
@@ -138,38 +138,38 @@
             <td>1.31</td>
             <td>0.6</td>
             <td>2.51 </td>
-            <td>17.89</td>
+            <td>20</td>
             <td>9.5</td>
             <td>400</td>
           </tr>
           <tr>
             <td>1.25</td>
             <td>50 x 0.18</td>
-            <td>1.37</td>
+            <td>1.4</td>
             <td>0.7</td>
-            <td>2.80 </td>
-            <td>15.6</td>
-            <td>12</td>
+            <td>2.8 </td>
+            <td>15.5</td>
+            <td>11</td>
             <td>200</td>
           </tr>
           <tr>
             <td>1.5</td>
-            <td>30 x 0.254</td>
+            <td>28 x 0.254</td>
             <td>1.61</td>
             <td>0.7</td>
             <td>3.01 </td>
-            <td>11.99</td>
-            <td>14.5</td>
+            <td>13.1</td>
+            <td>12</td>
             <td>200</td>
           </tr>
           <tr>
             <td>2.5</td>
-            <td>47 x 0.26</td>
+            <td>47 x 0.254</td>
             <td>2.09</td>
             <td>0.7</td>
             <td>3.49 </td>
-            <td>7.17</td>
-            <td>20</td>
+            <td>9.5</td>
+            <td>17</td>
             <td>100</td>
           </tr>
         </table>

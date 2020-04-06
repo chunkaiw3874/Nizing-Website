@@ -1,26 +1,27 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/product-detail.master" AutoEventWireup="true" CodeFile="mg-5107.aspx.cs" Inherits="mg_5107" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
-    <title>MG-5107 550°C高溫雲母編織線-日進電線</title>
-    <meta name="description" content="MG-5107 550°C高溫線，適用於各種家用電器、照明燈具、工業機器、電熱製品、原料熔爐等高溫場所之配線。詳細的MG-5107 550°C高溫線的產品規格以及使用範圍值">	
+    <title>MG-5107 450°C高溫雲母編織線-日進電線</title>
+    <meta name="description" content="MG-5107 450°C高溫線，適用於各種家用電器、照明燈具、工業機器、電熱製品、原料熔爐等高溫場所之配線。詳細的MG-5107 450°C高溫線的產品規格以及使用範圍值">	
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="smallPicArea" Runat="Server">
     <div class="content-row">
-        <asp:Image ID="Image1" runat="server" ImageUrl="~/images/product_pic/mg5107-1.jpg" AlternateText="MG-5107 550°C高溫雲母編織線" />
-        <asp:Image ID="Image2" runat="server" ImageUrl="~/images/product_pic/mg5107-2.jpg" AlternateText="MG-5107 550°C高溫雲母編織線" />        
+        <asp:Image ID="Image1" runat="server" ImageUrl="~/images/product_pic/mg5107-1.jpg" AlternateText="MG-5107 450°C高溫雲母編織線" />
+        <asp:Image ID="Image2" runat="server" ImageUrl="~/images/product_pic/mg5107-2.jpg" AlternateText="MG-5107 450°C高溫雲母編織線" />        
     </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="largePicArea1" Runat="Server">
-    <asp:Image ID="Image3" runat="server" ImageUrl="~/images/product_pic/mg5107-3.jpg" AlternateText="MG-5107 550°C高溫雲母編織線" />
+    <asp:Image ID="Image3" runat="server" ImageUrl="~/images/product_pic/mg5107-3.jpg" AlternateText="MG-5107 450°C高溫雲母編織線" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="largePicArea2" Runat="Server">
+    <asp:Image ID="Image4" runat="server" ImageUrl="~/images/product_pic/certificate-19.svg" AlternateText="MG-5107 450°C高溫雲母編織線" />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content7" ContentPlaceHolderID="prdTitle" runat="server">
-    550°C高溫雲母編織線<br />
+    450°C高溫雲母編織線<br />
     MG-5107
 </asp:Content>
 <asp:Content ID="Content8" ContentPlaceHolderID="titleRowLink" runat="server">
@@ -32,7 +33,7 @@
     </div>
     <table>
         <tr>
-            <td>MG-5107 550°C高溫雲母編織線適用於各種家用電器、照明燈具、工業機器、電熱製品、原料熔爐等高溫場所之配線</td>
+            <td>MG-5107 450°C高溫雲母編織線適用於各種家用電器、照明燈具、工業機器、電熱製品、原料熔爐等高溫場所之配線</td>
         </tr>
     </table>
     <div class="subtitle">
@@ -45,7 +46,7 @@
         </tr>
         <tr>
             <td>溫度範圍:</td>
-            <td>-100°C~+550°C</td>
+            <td>-100°C~+450°C</td>
         </tr>
         <tr>
             <td>外徑容差:</td>
@@ -71,7 +72,7 @@
 </asp:Content>
 <asp:Content ID="Content10" ContentPlaceHolderID="detailDescription" Runat="Server">
     <div class="subtitle">
-        MG-5107 550°C高溫雲母編織線 產品規格表
+        MG-5107 450°C高溫雲母編織線 產品規格表
     </div>
     <div class="content">
         <table>
@@ -81,9 +82,7 @@
             <td colspan="2">絕緣體<br />
               Insulator</td>
             <td rowspan="2">完成外徑<br />
-              Standard<br />
-              Overall<br />
-              Diameter<br />
+              Standard Overall Diameter<br />
               mm</td>
             <td>電氣特性<br />
               Electrical characteristic</td>
@@ -92,26 +91,23 @@
             <td>線號<br />
               AWG</td>
             <td>截面積<br />
-              Nominal cross section<br />
-              Area mm²</td>
+              Nominal cross section Area<br />
+                mm²</td>
             <td>導體結構<br />
               Composition<br />
               No. x mm</td>
             <td>內徑<br />
-              Inside Diameter mm</td>
+              Inner Diameter<br />
+                mm</td>
             <td>雲母絕緣厚度<br />
-              Thickness of insulation<br />
+              Mica Thickness<br />
               mm</td>
-            <td>玻璃纖維<br />
-              厚度<br />
-              Thickness of Fiberglass<br />
+            <td>玻璃纖維厚度<br />
+              Fiberglass Thickness<br />
               mm</td>
             <td>導體電阻<br />
               最大值<br />
-              Maximum<br />
-              Conductor<br />
-              Resistance at <br />
-              20°C/ohm/km</td>
+              Maximum Conductor Resistance at 20°C/ohm/km</td>
           </tr>
           <tr>
             <td>14</td>
@@ -121,7 +117,7 @@
             <td>0.40</td>
             <td>1.00</td>
             <td>4.60</td>
-            <td>9.91</td>
+            <td>14.20</td>
           </tr>
           <tr>
             <td>12</td>
@@ -131,7 +127,7 @@
             <td>0.40</td>
             <td>1.00</td>
             <td>5.30</td>
-            <td>5.38</td>
+            <td>8.01</td>
           </tr>
           <tr>
             <td>10</td>
@@ -141,7 +137,7 @@
             <td>0.40</td>
             <td>1.00</td>
             <td>5.90</td>
-            <td>3.50</td>
+            <td>5.03</td>
           </tr>
           <tr>
             <td>8</td>
@@ -151,7 +147,7 @@
             <td>0.40</td>
             <td>1.00</td>
             <td>6.70</td>
-            <td>2.45</td>
+            <td>3.52</td>
           </tr>
         </table>
     </div>

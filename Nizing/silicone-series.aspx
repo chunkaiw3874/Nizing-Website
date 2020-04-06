@@ -164,6 +164,68 @@
             </div>
             <div class="content-column">
                 <div class="button">
+                    <asp:HyperLink ID="HyperLink11" runat="server" ImageUrl="~/images/product_pic/ul4330-menu.jpg" Text="UL4330矽膠多芯線" NavigateUrl="~/ul4330.aspx"></asp:HyperLink>
+                </div>
+                <div class="title">
+                    UL4330<br />
+                    矽膠多芯線<br />
+                    電熱馬達、高溫家用電器配線
+                </div>
+                <div class="data">
+                    <table>
+                        <tr>
+                            <td>額定電壓:</td>
+                            <td>300V AC</td>
+                        </tr>
+                        <tr>
+                            <td>溫度範圍:</td>
+                            <td>-60°C~ +150°C</td>
+                        </tr>
+                        <tr>
+                            <td>導體:</td>
+                            <td>鍍錫銅線</td>
+                        </tr>
+                        <tr>
+                            <td>絕緣體:</td>
+                            <td>矽橡膠</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="content-row">
+            <div class="content-column">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink12" runat="server" ImageUrl="~/images/product_pic/ul4476-menu.jpg" Text="UL4476矽膠高壓多芯線" NavigateUrl="~/ul4476.aspx"></asp:HyperLink>
+                </div>
+                <div class="title">
+                    UL4476<br />
+                    矽膠高壓多芯線<br />
+                    電熱馬達、高溫家用電器配線
+                </div>
+                <div class="data">
+                    <table>
+                        <tr>
+                            <td>額定電壓:</td>
+                            <td>1KV AC</td>
+                        </tr>
+                        <tr>
+                            <td>溫度範圍:</td>
+                            <td>-60°C~ +200°C</td>
+                        </tr>
+                        <tr>
+                            <td>導體:</td>
+                            <td>鍍錫銅線</td>
+                        </tr>
+                        <tr>
+                            <td>絕緣體:</td>
+                            <td>矽橡膠</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="content-column">
+                <div class="button">
                     <asp:HyperLink ID="HyperLink6" runat="server" ImageUrl="~/images/product_pic/vde_h05s-k-menu.jpg" Text="VDE H05S-K矽膠耐熱電線" NavigateUrl="~/vde-h05s-k.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
@@ -192,8 +254,6 @@
                     </table>
                 </div>
             </div>
-        </div>
-        <div class="content-row">
             <div class="content-column">
                 <div class="button">
                     <asp:HyperLink ID="HyperLink7" runat="server" ImageUrl="~/images/product_pic/vde_reg-nr103874-menu.jpg" Text="VDE REG-NR:103874醫療矽膠並排線" NavigateUrl="~/vde-reg-nr103874.aspx"></asp:HyperLink>
@@ -224,6 +284,8 @@
                     </table>
                 </div>
             </div>
+        </div>
+        <div class="content-row">            
             <div class="content-column">
                 <div class="button">
                     <asp:HyperLink ID="HyperLink8" runat="server" ImageUrl="~/images/product_pic/vde_h05ss-f-menu.jpg" Text="VDE H05SS-F矽膠多芯線" NavigateUrl="~/vde-h05ss-f.aspx"></asp:HyperLink>
@@ -288,9 +350,7 @@
                     </table>
                 </div>
             </div>
-        </div>
-        <div class="content-row">
-            <%--<div class="content-column">
+            <div class="content-column">
                 <div class="button">
                     <asp:HyperLink ID="HyperLink10" runat="server" ImageUrl="~/images/product_pic/pse3323-menu.jpg" Text="PSE3323矽膠耐熱電線" NavigateUrl="~/pse-3323.aspx"></asp:HyperLink>
                 </div>
@@ -319,7 +379,7 @@
                         </tr>
                     </table>
                 </div>
-            </div>--%>                     
+            </div>                     
         </div>           
     </div>
 </asp:Content>

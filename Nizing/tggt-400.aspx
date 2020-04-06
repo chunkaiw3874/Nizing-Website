@@ -16,6 +16,7 @@
     <asp:Image ID="Image3" runat="server" ImageUrl="~/images/product_pic/tggt400-3.jpg" AlternateText="TGGT-400 400°C高溫線" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="largePicArea2" Runat="Server">
+    <asp:Image ID="Image4" runat="server" ImageUrl="~/images/product_pic/certificate-19.svg" AlternateText="TGGT-400 400°C高溫線" />
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="largePicArea3" Runat="Server">
 </asp:Content>
@@ -49,7 +50,7 @@
         </tr>
         <tr>
             <td>外徑容差:</td>
-            <td>±0.1mm~±0.5mm</td>
+            <td>±0.1mm~±1.0mm</td>
         </tr>
         <tr>
             <td>試驗電壓:</td>
@@ -95,10 +96,10 @@
               Composition  <br />
               No. x mm</td>
             <td>內徑<br />
-              Inside Diameter mm</td>
+              Inner Diameter<br />
+                mm</td>
             <td>玻璃纖維厚度<br />
-              Thickness of<br />
-			  Fiberglass <br />
+              Fiberglass Thickness<br />
               mm</td>
             <td>導體電阻<br />
               Maximum Resistance at 20°C ohm/km</td>
@@ -134,7 +135,7 @@
             <td>0.75</td>
             <td>2.70 </td>
             <td>25.8</td>
-            <td>7</td>
+            <td>8</td>
             <td>100</td>
           </tr>
           <tr>
@@ -154,7 +155,7 @@
             <td>0.75</td>
             <td>3.00</td>
             <td>15.5</td>
-            <td>12</td>
+            <td>11</td>
             <td>100</td>
           </tr>
           <tr>
@@ -164,7 +165,7 @@
             <td>0.75</td>
             <td>3.10</td>
             <td>13.1</td>
-            <td>14.5</td>
+            <td>12</td>
             <td>100</td>
           </tr>
           <tr>
@@ -174,7 +175,7 @@
             <td>0.75</td>
             <td>3.30</td>
             <td>9.91</td>
-            <td>17</td>
+            <td>15</td>
             <td>100</td>
           </tr>
           <tr>
@@ -184,7 +185,7 @@
             <td>0.75</td>
             <td>3.50</td>
             <td>9.5</td>
-            <td>20</td>
+            <td>17</td>
             <td>100</td>
           </tr>
           <tr>
@@ -194,77 +195,87 @@
             <td>0.75</td>
             <td>3.70</td>
             <td>7.44</td>
-            <td>21.5</td>
+            <td>19</td>
             <td>100</td>
           </tr>
           <tr>
             <td>3.5</td>
-            <td>43 x 0.322</td>
+            <td>43 x 0.32</td>
             <td>2.5</td>
             <td>0.75</td>
             <td>4.00</td>
             <td>5.38</td>
-            <td>23</td>
+            <td>21</td>
             <td>100</td>
           </tr>
           <tr>
             <td>5.5</td>
-            <td>34 x 0.452</td>
+            <td>34 x 0.45</td>
             <td>3.1</td>
-            <td>0.90</td>
-            <td>4.90</td>
+            <td>1.00</td>
+            <td>5.10</td>
             <td>3.5</td>
-            <td>35</td>
+            <td>28</td>
             <td>100</td>
           </tr>
           <tr>
             <td>8</td>
             <td>50 x 0.45</td>
             <td>3.7</td>
-            <td>0.90</td>
-            <td>5.50</td>
+            <td>1.30</td>
+            <td>6.30</td>
             <td>2.45</td>
-            <td>55</td>
+            <td>35</td>
             <td>100</td>
           </tr>
           <tr>
             <td>14</td>
             <td>85 x 0.45</td>
             <td>4.9</td>
-            <td>0.90</td>
-            <td>6.70</td>
+            <td>1.30</td>
+            <td>7.50</td>
             <td>1.39</td>
-            <td>93</td>
+            <td>88</td>
             <td>100</td>
           </tr>
           <tr>
             <td>22</td>
             <td>135 x 0.45</td>
             <td>7</td>
-            <td>0.90</td>
-            <td>8.80</td>
+            <td>1.40</td>
+            <td>9.80</td>
             <td>0.892</td>
-            <td>119</td>
+            <td>115</td>
             <td>100</td>
           </tr>
           <tr>
             <td>25</td>
-            <td>7 x 23 x 0.45</td>
+            <td>150 x 0.45</td>
             <td>7.5</td>
-            <td>0.90</td>
-            <td>9.30</td>
-            <td>0.850</td>
-            <td>126</td>
+            <td>1.40</td>
+            <td>10.30</td>
+            <td>0.85</td>
+            <td>124</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td>35</td>
+            <td>230 x 0.45</td>
+            <td>8.9</td>
+            <td>1.40</td>
+            <td>11.70</td>
+            <td>0.561</td>
+            <td>153</td>
             <td>100</td>
           </tr>
           <tr>
             <td>38</td>
-            <td>7 x 34 x 0.45</td>
+            <td>235 x 0.45</td>
             <td>9.2</td>
-            <td>1.20</td>
-            <td>11.60</td>
+            <td>1.40</td>
+            <td>12</td>
             <td>0.525</td>
-            <td>166</td>
+            <td>162</td>
             <td>100</td>
           </tr>
         </table>

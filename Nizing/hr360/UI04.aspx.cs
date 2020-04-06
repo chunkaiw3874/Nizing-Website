@@ -48,8 +48,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "0080";    //test only to avoid error on loading, delete after trial            
-        //Session["erp_id"] = "0080";
+        //Session["user_id"] = "0015";    //test only to avoid error on loading, delete after trial            
+        //Session["erp_id"] = "0015";
 
         //only use when opening check exception for certain persion
         //exceptionList111.Add("0012");
@@ -165,6 +165,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         bool test108 = false;
         bool test110 = false;
         bool test111 = false;
+        bool test112 = false;
         bool test204 = false;
         DataTable dtDayOffDaysInfo = new DataTable();
         decimal totalDayOffAmount = 0;     
@@ -383,9 +384,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         if (timeDifference.Hours != 0 || timeDifference.Minutes != 0)
                         {   
                             //判斷假期開始時間是否合理
-                            if ((hdnOfficeOrProduction.Value == "production" && !typhoonDay)  //除非是颱風假，線廠人員僅能以上、下午為單位請假
-                                || ddlDayOffType.SelectedValue=="08"
-                                )  //產假，無論人員身分，僅能以上、下午為單位請假
+                            if (hdnOfficeOrProduction.Value == "production" && !typhoonDay)  //除非是颱風假，線廠人員僅能以上、下午為單位請假                                
                             {
                                 if ((!(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(3, 2))     //開始放假時間(hhmm)!=開始上班時間
                                     && !(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(3, 2))  //開始放假時間(hhmm)!=休息開始時間
@@ -426,9 +425,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         if (timeDifference.Hours != 0 || timeDifference.Minutes != 0)
                         {
                             //判斷假期開始時間是否合理
-                            if ((hdnOfficeOrProduction.Value == "production" && !typhoonDay)  //除非是颱風假，線廠人員僅能以上、下午為單位請假
-                                ||  ddlDayOffType.SelectedValue == "08"
-                                )  //產假，無論人員身分，僅能以上、下午為單位請假
+                            if (hdnOfficeOrProduction.Value == "production" && !typhoonDay)  //除非是颱風假，線廠人員僅能以上、下午為單位請假                                
                             {
                                 if ((!(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(3, 2))     //開始放假時間(hhmm)!=開始上班時間
                                     && !(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(3, 2))  //開始放假時間(hhmm)!=休息開始時間
@@ -756,6 +753,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         errorList.Add(errorCode(205));
                     }
                 }
+            }
+
+            if (ddlDayOffType.SelectedValue == "08" && totalDayOffAmount != Convert.ToDecimal(hdnNormalWorkHour.Value)) //208. 產假須為整天
+            {
+                errorList.Add(errorCode(208));
             }
         }
 
@@ -1257,6 +1259,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
         else if (errorID == 207)
         {
             error += "班別尚未建立，請與人事部確認";
+        }
+        else if (errorID == 208)
+        {
+            error += "產假需為整天";
         }
         else if (errorID == 999)
         {

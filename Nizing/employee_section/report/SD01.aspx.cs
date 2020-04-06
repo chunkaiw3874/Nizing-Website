@@ -190,6 +190,7 @@ public partial class SD01 : System.Web.UI.Page
                     " join COPTJ TJ on TI.TI001 = TJ.TJ001 and TI.TI002 = TJ.TJ002" +
                     " where TI.TI019 = N'Y'" +
                     " and TI.TI034 between @start and @end" +
+                    " and TI.TI004<>'AA2446'" +
                     " group by TI.TI006" +
                     " )" +
                     " ,recordTable" +
@@ -207,6 +208,7 @@ public partial class SD01 : System.Web.UI.Page
                     " else 'domestic'" +
                     " end as 'foreignOrDomestic'" +
                     " FROM COPTG TG" +
+                    " where TG.TG004<>'AA2446'" +
                     " UNION ALL" +
                     " SELECT TI.TI019 'eventCode'" +
                     " ,TI.TI034 'eventDate'" +
@@ -220,6 +222,7 @@ public partial class SD01 : System.Web.UI.Page
                     " else 'domestic'" +
                     " end" +
                     " FROM COPTI TI" +
+                    " where TI.TI004<>'AA2446'" +
                     " )" +
                     " select ROW_NUMBER() over(order by coalesce(pvt.domesticSale, 0) - coalesce(pvt.domesticReturn, 0) + coalesce(pvt.foreignSale, 0) - coalesce(pvt.foreignReturn, 0) desc) 'rank'" +
                     " ,MV.MV002 'salesName'" +

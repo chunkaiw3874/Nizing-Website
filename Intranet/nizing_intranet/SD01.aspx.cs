@@ -192,10 +192,10 @@ public partial class SD01 : System.Web.UI.Page
                     " select TI.TI006 'salesId'" +
                     " ,COUNT(*) 'returnAmount'" +
                     " from COPTI TI" +
-                    " left" +
-                    " join COPTJ TJ on TI.TI001 = TJ.TJ001 and TI.TI002 = TJ.TJ002" +
+                    " left join COPTJ TJ on TI.TI001 = TJ.TJ001 and TI.TI002 = TJ.TJ002" +
                     " where TI.TI019 = N'Y'" +
                     " and TI.TI034 between @start and @end" +
+                    " and TI.TI004 <> 'AA2446'" +
                     " group by TI.TI006" +
                     " )" +
                     " ,recordTable" +
@@ -213,6 +213,7 @@ public partial class SD01 : System.Web.UI.Page
                     " else 'domestic'" +
                     " end as 'foreignOrDomestic'" +
                     " FROM COPTG TG" +
+                    " where TG.TG004<>'AA2446'" +
                     " UNION ALL" +
                     " SELECT TI.TI019 'eventCode'" +
                     " ,TI.TI034 'eventDate'" +
@@ -226,6 +227,7 @@ public partial class SD01 : System.Web.UI.Page
                     " else 'domestic'" +
                     " end" +
                     " FROM COPTI TI" +
+                    " where TI.TI004<>'AA2446'" +
                     " )" +
                     " select ROW_NUMBER() over(order by coalesce(pvt.domesticSale, 0) - coalesce(pvt.domesticReturn, 0) + coalesce(pvt.foreignSale, 0) - coalesce(pvt.foreignReturn, 0) desc) 'rank'" +
                     " ,MV.MV002 'salesName'" +
@@ -331,7 +333,8 @@ public partial class SD01 : System.Web.UI.Page
                     + " from COPTG TG"
                     + " LEFT JOIN COPMA MA ON TG.TG004 = MA.MA001"
                     + " LEFT JOIN CMSMV MV ON TG.TG006 = MV.MV001"
-                    + " WHERE TG.TG042 BETWEEN @start AND @end"
+                    + " WHERE TG.TG042 BETWEEN @start AND @end" +
+                    " and TG.TG004<>'AA2446'"
                     + personnelCondition
                     + " group by TG.TG004,MA.MA002,TG.TG006,MV.MV002"
                     + " order by SUM(COALESCE(TG.TG045,0)) DESC";

@@ -88,9 +88,10 @@
           </tr>
           <tr>
             <td>截面積<br />
-              Section mm²</td>
+              Section<br />
+                mm²</td>
             <td>導體結構<br />
-              Composition No/Diameter of component Wire<br />
+              Composition<br />
               NO. x  mm</td>
             <td>直徑<br />
               Diameter <br />
@@ -99,13 +100,15 @@
               Jacket Thickness<br />
               mm</td>
             <td>完成外徑<br />
-              Overall<br />
-              Diameter<br />
+              Overall Diameter<br />
               mm</td>
             <td>導體電阻<br />
-              Maximum Resistance at 20°C ohm/km</td>
+              Maximum Resistance at 20°C<br />
+                ohm/km</td>
             <td>電流量<br />
-              Intens. Max 1.maxa 170°C-AMP</td>
+              Current Capacity at 170°C<br />
+                amp
+            </td>
             <td>米/卷<br />
               Meters/ Coil</td>
           </tr>
@@ -115,18 +118,18 @@
             <td>0.46</td>
             <td>0.6</td>
             <td>2.4 x 5.0</td>
-            <td>152.00</td>
-            <td>1.50</td>
+            <td>152</td>
+            <td>1.5</td>
             <td>400</td>
           </tr>
           <tr>
             <td>0.20 x 2C</td>
             <td>8 x 0.18</td>
-            <td>0.60</td>
+            <td>0.6</td>
             <td>0.6</td>
             <td>2.4 x 5.0</td>
-            <td>88.60</td>
-            <td>2.00</td>
+            <td>88.6</td>
+            <td>2</td>
             <td>400</td>
           </tr>
           <tr>
@@ -135,8 +138,8 @@
             <td>0.76</td>
             <td>0.6</td>
             <td>2.4 x 5.0</td>
-            <td>62.50</td>
-            <td>3.00</td>
+            <td>62.5</td>
+            <td>3</td>
             <td>400</td>
           </tr>
           <tr>
@@ -145,8 +148,8 @@
             <td>0.92</td>
             <td>0.6</td>
             <td>2.4 x 5.0</td>
-            <td>39.50</td>
-            <td>5.00</td>
+            <td>39.5</td>
+            <td>5</td>
             <td>400</td>
           </tr>
           <tr>
@@ -155,18 +158,18 @@
             <td>1.13</td>
             <td>0.6</td>
             <td>2.4 x 5.0</td>
-            <td>22.80</td>
-            <td>7.00</td>
+            <td>22.8</td>
+            <td>8</td>
             <td>400</td>
           </tr>
           <tr>
             <td>1.00 x 2C</td>
             <td>40 x 0.18</td>
-            <td>1.30</td>
+            <td>1.3</td>
             <td>0.6</td>
             <td>2.4 x 5.0</td>
-            <td>20.60</td>
-            <td>9.50</td>
+            <td>20.6</td>
+            <td>9.5</td>
             <td>400</td>
           </tr>
         </table>

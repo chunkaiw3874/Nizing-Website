@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
     <title>VDE H05SS-F Silicone Multi-Core Wire - Nizing Electric Wire & Cable</title>
-    <meta name="description" content="VDE H05SS-F Silicone Multi-Core Wire, suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces. Passed UL VW-1 Vertical fire test and multiple IEC tests, proven to be low smoke density, halogen free, and flame retardant. Product information, specification, scope, and visual presentation">
+    <meta name="description" content="VDE H05SS-F Silicone Multi-Core Wire, suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces.">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
@@ -33,7 +33,7 @@
     </div>
     <table>
         <tr>
-            <td>VDE H05SS-FSilicone Multi-Core Wire is suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces.</td>
+            <td>VDE H05SS-F Silicone Multi-Core Wire is suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces.</td>
         </tr>
     </table>
     <div class="subtitle">
@@ -75,327 +75,202 @@
         VDE H05SS-F Silicone Multi-Core Wire Spec
     </div>
     <div class="content">
-<table>
+        <table>
           <tr>
-              <td rowspan="2">
-                  芯線數<br />
-                  No. of Cores
-              </td>
+            <td rowspan="2">
+                芯線數<br />
+                No. of Cores
+            </td>
             <td colspan="3">導體<br />
               Conductor</td>
-            <td colspan="3">絕緣體 <br />
+            <td colspan="4">絕緣體 <br />
               Insulator</td>
             <td colspan="2">電氣特性<br />
               Electrical Characteristic</td>
+            <td rowspan="2">包裝<br />
+                Packing<br />
+                Meter
+            </td>
           </tr>
           <tr>
             <td>截面積<br />
-              Section mm²</td>
+              Cross Section<br />
+                mm²</td>
             <td>導體結構<br />
               Composition<br />
               NO. x mm</td>
             <td>直徑<br />
               Diameter<br />
               mm</td>
-            <td>芯線絕緣<br />
-              外俓<br />
-              OD of Core wire</td>
-            <td>外層絕緣<br />
-              厚度<br />
-              Thickness of Sheath</td>
+            <td>芯線絕緣外俓<br />
+              OD of Core wire<br />
+                mm
+            </td>
+            <td>外層絕緣厚度<br />
+              Thickness of Sheath<br />
+                mm
+            </td>
+            <td>芯線絞線外徑<br />
+                OD of Stranded Core Wire<br />
+                mm
+            </td>
             <td>完成外徑<br />
               Overall Diameter<br />
               mm</td>
             <td>導體電阻<br />
-              Maximum Resistance<br />
-                at 20°C ohm/km</td>
+              Maximum Resistance at 20°C<br />
+                ohm/km</td>
             <td>電流量<br />
-              Intens. Max 1.maxa 170°C-AMP</td>
+              Current Capacity at 170°C<br />
+                amp
+            </td>
           </tr>
           <tr>
-              <td rowspan="6">2</td>
+            <td rowspan="6">2</td>
             <td>0.75</td>
             <td>30 x 0.18</td>
-            <td>1.20</td>
-            <td>2.20</td>
-            <td>1.00</td>
-            <td>6.40</td>
-            <td>22.80</td>
-            <td>7.50</td>
+            <td>1.2</td>
+            <td>2.2</td>
+            <td>1</td>
+            <td>4.4</td>
+            <td>6.4</td>
+            <td>25.8</td>
+            <td>8</td>
+            <td>200</td>
           </tr>
           <tr>
-            <td>1.00</td>
-            <td> 40 x 0.18</td>
-            <td>1.31</td>
-            <td>2.50</td>
-            <td>1.00</td>
-            <td>7.00</td>
-            <td>20.60</td>
-            <td>10.00</td>
+            <td>1</td>
+            <td>40 x 0.18</td>
+            <td>1.3</td>
+            <td>2.5</td>
+            <td>1</td>
+            <td>5</td>
+            <td>7</td>
+            <td>20</td>
+            <td>9.5</td>
+            <td>200</td>
           </tr>
           <tr>
             <td>1.25</td>
             <td>50 x 0.18</td>
-            <td>1.37</td>
-            <td>2.50</td>
-            <td>1.00</td>
-            <td>7.60</td>
-            <td>15.60</td>
-            <td>13.00</td>
+            <td>1.5</td>
+            <td>2.8</td>
+            <td>1</td>
+            <td>5.6</td>
+            <td>7.6</td>
+            <td>15.5</td>
+            <td>11</td>
+            <td>100</td>
           </tr>
           <tr>
-            <td>1.50</td>
+            <td>1.5</td>
             <td>28 x 0.254</td>
-            <td>1.60</td>
-            <td>2.90</td>
-            <td>1.00</td>
-            <td>7.80</td>
-            <td>13.50</td>
-            <td>16.00</td>
+            <td>1.6</td>
+            <td>2.9</td>
+            <td>1</td>
+            <td>5.8</td>
+            <td>7.8</td>
+            <td>13.1</td>
+            <td>12</td>
+            <td>100</td>
           </tr>
           <tr>
-            <td>2.00</td>
+            <td>2</td>
             <td>37 x 0.254</td>
-            <td>1.80</td>
-            <td>3.20</td>
-            <td>1.00</td>
-            <td>8.40</td>
-            <td>9.80</td>
-            <td>18.50</td>
+            <td>1.8</td>
+            <td>3.2</td>
+            <td>1</td>
+            <td>6.4</td>
+            <td>8.4</td>
+            <td>9.9</td>
+            <td>15</td>
+            <td>100</td>
           </tr>
           <tr>
             <td>2.5</td>
             <td>47 x 0.254</td>
-            <td>2.07</td>
-            <td>3.50</td>
-            <td>1.10</td>
-            <td>9.20</td>
-            <td>8.10</td>
-            <td>22.00</td>
+            <td>2</td>
+            <td>3.5</td>
+            <td>1.1</td>
+            <td>7</td>
+            <td>9.2</td>
+            <td>9.5</td>
+            <td>17</td>
+            <td>100</td>
           </tr>
           <tr>
-              <td rowspan="8">3</td>
+            <td rowspan="6">3</td>
             <td>0.75</td>
             <td>30 x 0.18</td>
-            <td>1.20</td>
-            <td>2.20</td>
-            <td>1.00</td>
+            <td>1.2</td>
+            <td>2.2</td>
+            <td>1</td>
+            <td>4.74</td>
             <td>6.74</td>
-            <td>22.80</td>
-            <td>7.50</td>
+            <td>25.8</td>
+            <td>8</td>
+            <td>200</td>
           </tr>
           <tr>
-            <td>1.0</td>
+            <td>1</td>
             <td>40 x 0.18</td>
-            <td>1.31</td>
-            <td>2.50</td>
-            <td>1.00</td>
+            <td>1.3</td>
+            <td>2.5</td>
+            <td>1</td>
+            <td>5.38</td>
             <td>7.38</td>
-            <td>20.60</td>
-            <td>10.00</td>
+            <td>20</td>
+            <td>9.5</td>
+            <td>200</td>
           </tr>
           <tr>
             <td>1.25</td>
             <td>50 x 0.18</td>
-            <td>1.37</td>
-            <td>2.80</td>
-            <td>1.00</td>
-            <td>8.00</td>
-            <td>15.60</td>
-            <td>13.00</td>
+            <td>1.5</td>
+            <td>2.8</td>
+            <td>1</td>
+            <td>6</td>
+            <td>8</td>
+            <td>15.5</td>
+            <td>11</td>
+            <td>100</td>
           </tr>
           <tr>
             <td>1.5</td>
             <td>28 x 0.254</td>
-            <td>1.60</td>
-            <td>2.90</td>
-            <td>1.00</td>
+            <td>1.6</td>
+            <td>2.9</td>
+            <td>1</td>
+            <td>6.25</td>
             <td>8.25</td>
-            <td>13.50</td>
-            <td>16.00</td>
+            <td>13.1</td>
+            <td>12</td>
+            <td>100</td>
           </tr>
           <tr>
-            <td>2.0</td>
+            <td>2</td>
             <td>37 x 0.254</td>
-            <td>1.80</td>
-            <td>3.20</td>
-            <td>1.00</td>
-            <td>8.89</td>
-            <td>9.80</td>
-            <td>18.50</td>
+            <td>1.8</td>
+            <td>3.2</td>
+            <td>1</td>
+            <td>6.9</td>
+            <td>8.9</td>
+            <td>9.9</td>
+            <td>15</td>
+            <td>100</td>
           </tr>
           <tr>
             <td>2.5</td>
             <td>47 x 0.254</td>
-            <td>2.07</td>
-            <td>3.50</td>
-            <td>1.10</td>
+            <td>2</td>
+            <td>3.5</td>
+            <td>1.1</td>
+            <td>7.54</td>
             <td>9.74</td>
-            <td>8.10</td>
-            <td>20.00</td>
-          </tr>
-          <tr>
-            <td>4.0</td>
-            <td>50 x 0.322</td>
-            <td>2.60</td>
-            <td>4.60</td>
-            <td>1.30</td>
-              <td>13.20</td>
-            <td>4.48</td>
-            <td>35.00</td>
-          </tr>
-          <tr>
-            <td>6.0</td>
-            <td>37 x 0.452</td>
-            <td>3.30</td>
-            <td>5.30</td>
-            <td>1.40</td>
-            <td>14.20</td>
-            <td>2.84</td>
-            <td>40.00</td>
-          </tr>
-          <tr>
-              <td rowspan="8">4</td>
-            <td>0.75</td>
-            <td>30 x 0.18</td>
-            <td>1.20</td>
-            <td>2.20</td>
-            <td>1.00</td>
-            <td>7.00</td>
-            <td>22.80</td>
-            <td>7.50</td>
-          </tr>
-          <tr>
-            <td>1.0</td>
-            <td>40 x 0.18</td>
-            <td>1.31</td>
-            <td>2.50</td>
-            <td>1.00</td>
-            <td>7.80</td>
-            <td>20.60</td>
-            <td>10.00</td>
-          </tr>
-          <tr>
-            <td>1.25</td>
-            <td>50 x 0.18</td>
-            <td>1.37</td>
-            <td>2.80</td>
-            <td>1.00</td>
-            <td>8.50</td>
-            <td>15.60</td>
-            <td>13.00</td>
-          </tr>
-          <tr>
-            <td>1.5</td>
-            <td>28 x 0.254</td>
-            <td>1.60</td>
-            <td>2.90</td>
-            <td>1.00</td>
-            <td>8.70</td>
-            <td>13.50</td>
-            <td>16.00</td>
-          </tr>
-          <tr>
-            <td>2.0</td>
-            <td>37 x 0.254</td>
-            <td>1.80</td>
-            <td>3.20</td>
-            <td>1.10</td>
-            <td>9.60</td>
-            <td>9.80</td>
-            <td>18.50</td>
-          </tr>
-          <tr>
-            <td>2.5</td>
-            <td>47 x 0.254</td>
-            <td>2.07</td>
-            <td>3.50</td>
-            <td>1.20</td>
-            <td>10.40</td>
-            <td>8.10</td>
-            <td>21.50</td>
-          </tr>
-          <tr>
-            <td>4.0</td>
-            <td>50 x 0.322</td>
-            <td>2.60</td>
-            <td>4.60</td>
-            <td>1.30</td>
-            <td>13.20</td>
-            <td>4.48</td>
-            <td>35.00</td>
-          </tr>
-          <tr>
-            <td>6.0</td>
-            <td>37 x 0.452</td>
-            <td>3.30</td>
-            <td>5.30</td>
-            <td>1.50</td>
-            <td>15.25</td>
-            <td>2.84</td>
-            <td>40.00</td>
-          </tr>
-          <tr>
-              <td rowspan="6">5</td>
-            <td>0.75</td>
-            <td>30 x 0.18</td>
-            <td>1.20</td>
-            <td>2.20</td>
-            <td>1.00</td>
-            <td>7.60</td>
-            <td>22.80</td>
-            <td>7.50</td>
-          </tr>
-          <tr>
-            <td>1.0</td>
-            <td>40 x 0.18</td>
-            <td>1.31</td>
-            <td>2.50</td>
-            <td>1.00</td>
-            <td>8.45</td>
-            <td>20.60</td>
-            <td>10.00</td>
-          </tr>
-          <tr>
-            <td>1.25</td>
-            <td>50 x 0.18</td>
-            <td>1.37</td>
-            <td>2.80</td>
-            <td>1.10</td>
-            <td>9.40</td>
-            <td>15.60</td>
-            <td>13.00</td>
-          </tr>
-          <tr>
-            <td>1.5</td>
-            <td>28 x 0.254</td>
-            <td>1.60</td>
-            <td>2.90</td>
-            <td>1.10</td>
-            <td>9.70</td>
-            <td>13.50</td>
-            <td>16.00</td>
-          </tr>
-          <tr>
-            <td>2.0</td>
-            <td>37 x 0.254</td>
-            <td>1.80</td>
-            <td>3.20</td>
-            <td>1.20</td>
-            <td>10.66</td>
-            <td>9.80</td>
-            <td>18.50</td>
-          </tr>
-          <tr>
-            <td>2.5</td>
-            <td>47 x 0.254</td>
-            <td>2.07</td>
-            <td>3.50</td>
-            <td>1.40</td>
-            <td>11.80</td>
-            <td>8.10</td>
-            <td>21.50</td>
-          </tr>
+            <td>9.5</td>
+            <td>17</td>
+            <td>100</td>
+          </tr>          
         </table>
     </div>
 </asp:Content>

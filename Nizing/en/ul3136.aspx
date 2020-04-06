@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
     <title>UL3136 Silicone Wire - Nizing Electric Wire & Cable</title>
-    <meta name="description" content="UL3136 Silicone Wire, suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces. Passed UL VW-1 Vertical fire test and multiple IEC tests, proven to be low smoke density, halogen free, and flame retardant. Product information, specification, scope, and visual presentation">	
+    <meta name="description" content="UL3136 Silicone Wire, suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces.">	
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
@@ -77,11 +77,11 @@
     <div class="content">
         <table>
           <tr>
-            <td colspan="4">導體<br />
+            <td colspan="3">導體<br />
               Conductor</td>
             <td colspan="2">絕緣體 <br />
               Insulator</td>
-            <td>電氣特性<br />
+            <td colspan="2">電氣特性<br />
               Electrical Characteristic</td>
             <td>包裝<br />
               Packing</td>
@@ -92,10 +92,9 @@
             <td>導體結構<br />
               Composition <br />
               NO. x mm</td>
-            <td>截面積<br />
-              Cross section area mm²</td>
-            <td>直徑<br />
-              Diameter mm</td>
+            <td>內徑<br />
+              Inner Diameter<br />
+                mm</td>
             <td>被覆厚度<br />
               Jacket Thickness <br />
               mm</td>
@@ -103,87 +102,67 @@
               Overall Diameter<br />
 			  mm</td>
             <td>導體電阻<br />
-              Maximum Resistance <br />
-				at 20°C<br />
+              Maximum Resistance at 20°C<br />
 				ohm/km</td>
+            <td>
+                電流容量<br />
+                Current Capacity at 130°C<br />
+                AMP
+            </td>
             <td>米/卷<br />
               Meters/ Coil</td>
           </tr>
           <tr>
             <td rowspan="2">26</td>
-            <td>7 x 0.15</td>
-            <td>0.124</td>
-            <td>0.46</td>
-            <td>1.14</td>
-            <td>2.74</td>
-            <td>150</td>
-            <td>610</td>
+            <td>7 x 0.16</td>
+            <td rowspan="2">0.48</td>
+            <td rowspan="2">1.14</td>
+            <td rowspan="2">2.76</td>
+            <td rowspan="2">139</td>
+            <td rowspan="2">2</td>
+            <td rowspan="2">610</td>
           </tr>
           <tr>
             <td>19 x 0.10</td>
-            <td>0.149</td>
-            <td>0.50</td>
-            <td>1.14</td>
-            <td>2.78</td>
-            <td>150</td>
-            <td>610</td>
           </tr>
           <tr>
             <td rowspan="2">24</td>
             <td>7 x 0.20</td>
-            <td>0.220</td>
-            <td>0.61</td>
-            <td>1.14</td>
-            <td>2.89</td>
-            <td>94.2</td>
-            <td>610</td>
+            <td rowspan="2">0.6</td>
+            <td rowspan="2">1.14</td>
+            <td rowspan="2">2.88</td>
+            <td rowspan="2">88.9</td>
+            <td rowspan="2">3</td>
+            <td rowspan="2">610</td>
           </tr>
           <tr>
             <td>19 x 0.12</td>
-            <td>0.215</td>
-            <td>0.60</td>
-            <td>1.14</td>
-            <td>2.88</td>
-            <td>94.2</td>
-            <td>610</td>
           </tr>
           <tr>
             <td rowspan="2">22</td>
-            <td>7 x 0.25</td>
-            <td>0.344</td>
-            <td>0.76</td>
-            <td>1.14</td>
-            <td>3.04</td>
-            <td>59.4</td>
-            <td>610</td>
+            <td>7 x 0.254</td>
+            <td rowspan="2">0.76</td>
+            <td rowspan="2">1.14</td>
+            <td rowspan="2">3.04</td>
+            <td rowspan="2">57.5</td>
+            <td rowspan="2">4</td>
+            <td rowspan="2">610</td>
           </tr>
           <tr>
-            <td>19 x 0.15</td>
-            <td>0.336</td>
-            <td>0.76</td>
-            <td>1.14</td>
-            <td>3.04</td>
-            <td>59.4</td>
-            <td>610</td>
+            <td>19 x 0.16</td>
           </tr>
           <tr>
             <td rowspan="2">20</td>
-            <td>7 x 0.31</td>
-            <td>0.528</td>
-            <td>0.95</td>
-            <td>1.14</td>
-            <td>3.23</td>
-            <td>36.7</td>
-            <td>610</td>
+            <td>7 x 0.32</td>
+            <td rowspan="2">0.96</td>
+            <td rowspan="2">1.14</td>
+            <td rowspan="2">3.24</td>
+            <td rowspan="2">35.2</td>
+            <td rowspan="2">5</td>
+            <td rowspan="2">610</td>
           </tr>
           <tr>
             <td>19 x 0.19</td>
-            <td>0.539</td>
-            <td>0.96</td>
-            <td>1.14</td>
-            <td>3.24</td>
-            <td>36.7</td>
-            <td>610</td>
           </tr>
         </table>
     </div>

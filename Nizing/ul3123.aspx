@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
     <title>UL3123矽膠耐熱線-日進電線</title>
-    <meta name="description" content="UL3123矽膠耐熱線，適用於各種家用電器、照明燈具、工業機器、電熱製品、原料熔爐等高溫場所之配線。通過UL VW-1垂直燃燒測試以及多項IEC測試，證實為低煙、無鹵、耐燃之產品。詳細的產品資訊，包括UL3123矽膠耐熱線的產品規格以及使用範圍值">	
+    <meta name="description" content="UL3123矽膠耐熱線，適用於各種家用電器、照明燈具、工業機器、電熱製品、原料熔爐等高溫場所之配線。">	
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
@@ -77,7 +77,7 @@
     <div class="content">
         <table>
           <tr>
-            <td colspan="4">導體<br />
+            <td colspan="3">導體<br />
               Conductor</td>
             <td colspan="2">絕緣體 <br />
               Insulator</td>
@@ -92,10 +92,9 @@
             <td>導體結構<br />
               Composition <br />
               NO. x mm</td>
-            <td>截面積<br />
-              Cross section area mm²</td>
             <td>直徑<br />
-              Diameter mm</td>
+              Diameter<br />
+                mm</td>
             <td>被覆厚度<br />
               Jacket Thickness <br />
               mm</td>
@@ -103,99 +102,93 @@
               Overall Diameter<br />
 			  mm</td>
             <td>導體電阻<br />
-              Maximum Resistance at 20°C ohm/km</td>
+              Maximum Resistance at 20°C<br />
+                ohm/km</td>
             <td>電流量<br />
-              Intens. Max 1. maxa 20°C-AMP</td>
+              Current Capacity at 130°C<br />
+                AMP</td>
             <td>米/卷<br />
               Meters/ Coil</td>
           </tr>
           <tr>
             <td>30</td>
-            <td>7 x 0.10</td>
-            <td>0.055</td>
-            <td>0.31</td>
+            <td>7 x 0.1</td>
+            <td>0.3</td>
             <td>0.78</td>
-            <td>1.87</td>
-            <td>364</td>
-            <td>1.27</td>
+            <td>1.86</td>
+            <td>354</td>
+            <td>1</td>
             <td>610</td>
           </tr>
           <tr>
             <td>28</td>
             <td>7 x 0.12</td>
-            <td>0.079</td>
             <td>0.37</td>
             <td>0.78</td>
             <td>1.93</td>
-            <td>252</td>
-            <td>2.02</td>
+            <td>223</td>
+            <td>1.5</td>
             <td>610</td>
           </tr>
           <tr>
             <td>26</td>
             <td>7 x 0.16</td>
-            <td>0.141</td>
-            <td>0.49</td>
+            <td>0.5</td>
             <td>0.78</td>
-            <td>2.05</td>
-            <td>143</td>
-            <td>3.22</td>
+            <td>2.06</td>
+            <td>139</td>
+            <td>2</td>
             <td>610</td>
           </tr>
           <tr>
             <td>24</td>
-            <td>7 x 0.20</td>
-            <td>0.220</td>
-            <td>0.61</td>
+            <td>7 x 0.2</td>
+            <td>0.6</td>
             <td>0.78</td>
-            <td>2.17</td>
-            <td>92</td>
-            <td>5.15</td>
+            <td>2.16</td>
+            <td>88.9</td>
+            <td>3</td>
             <td>610</td>
           </tr>
           <tr>
             <td>22</td>
-            <td>7 x 0.25</td>
-            <td>0.344</td>
+            <td>7 x 0.254</td>
             <td>0.76</td>
             <td>0.78</td>
             <td>2.32</td>
-            <td>56.8</td>
-            <td>8.73</td>
+            <td>57.5</td>
+            <td>4</td>
             <td>610</td>
           </tr>
           <tr>
             <td>20</td>
-            <td>7 x 0.31</td>
-            <td>0.528</td>
-            <td>0.95</td>
+            <td>7 x 0.32</td>
+            <td>0.96</td>
             <td>0.78</td>
-            <td>2.51</td>
-            <td>40.1</td>
-            <td>13.87</td>
+            <td>2.52</td>
+            <td>35.2</td>
+            <td>5</td>
             <td>610</td>
           </tr>
           <tr>
             <td>18</td>
-            <td>7 x 0.395</td>
-            <td>0.858</td>
-            <td>1.21</td>
+            <td>7 x 0.39</td>
+            <td>1.2</td>
             <td>0.78</td>
-            <td>2.77</td>
-            <td>23</td>
-            <td>22.02</td>
+            <td>2.76</td>
+            <td>23.3</td>
+            <td>7</td>
             <td>610</td>
           </tr>
           <tr>
             <td>16</td>
-            <td>7 x 0.495</td>
-            <td>1.347</td>
-            <td>1.51</td>
+            <td>7 x 0.5</td>
+            <td>1.5</td>
             <td>0.78</td>
-            <td>3.07</td>
-            <td>14.6</td>
-            <td>35.04</td>
-            <td>305</td>
+            <td>3.06</td>
+            <td>15.1</td>
+            <td>9</td>
+            <td>100</td>
           </tr>
         </table>
     </div>

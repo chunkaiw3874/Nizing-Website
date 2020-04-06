@@ -163,6 +163,68 @@
             </div>
             <div class="content-column">
                 <div class="button">
+                    <asp:HyperLink ID="HyperLink11" runat="server" ImageUrl="~/en/images/product_pic/ul4330-menu.jpg" alt="UL4330 Silicone Multi-Core Wire" NavigateUrl="ul4330.aspx"></asp:HyperLink>
+                </div>
+                <div class="title">
+                    UL4330<br />
+                    Silicone Multi-Core Wire<br />
+                    Home Appliances Wiring
+                </div>
+                <div class="data">
+                    <table>
+                        <tr>
+                            <td>Nominal Voltage:</td>
+                            <td>300V AC</td>
+                        </tr>
+                        <tr>
+                            <td>Nominal Temperature:</td>
+                            <td>-60°C~ +150°C</td>
+                        </tr>
+                        <tr>
+                            <td>Conductor:</td>
+                            <td>Tinned Copper</td>
+                        </tr>
+                        <tr>
+                            <td>Insulation:</td>
+                            <td>Silicone Rubber</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="content-row">
+            <div class="content-column">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink12" runat="server" ImageUrl="~/en/images/product_pic/ul4476-menu.jpg" alt="UL4476 High Voltage Silicone Multi-Core Wire" NavigateUrl="ul4476.aspx"></asp:HyperLink>
+                </div>
+                <div class="title">
+                    UL4476<br />
+                    High Voltage Silicone Multi-Core Wire<br />
+                    Home Appliances Wiring
+                </div>
+                <div class="data">
+                    <table>
+                        <tr>
+                            <td>Nominal Voltage:</td>
+                            <td>1KV AC</td>
+                        </tr>
+                        <tr>
+                            <td>Nominal Temperature:</td>
+                            <td>-60°C~ +200°C</td>
+                        </tr>
+                        <tr>
+                            <td>Conductor:</td>
+                            <td>Tinned Copper</td>
+                        </tr>
+                        <tr>
+                            <td>Insulation:</td>
+                            <td>Silicone Rubber</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="content-column">
+                <div class="button">
                     <asp:HyperLink ID="HyperLink6" runat="server" ImageUrl="~/en/images/product_pic/vde_h05s-k-menu.jpg" alt="VDE H05S-K Silicone Wire" NavigateUrl="vde-h05s-k.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
@@ -191,8 +253,6 @@
                     </table>
                 </div>
             </div>
-        </div>
-        <div class="content-row">
             <div class="content-column">
                 <div class="button">
                     <asp:HyperLink ID="HyperLink7" runat="server" ImageUrl="~/en/images/product_pic/vde_reg-nr103874-menu.jpg" alt="VDE REG-NR:103874 Medical Parallel Silicone Cable" NavigateUrl="vde-reg-nr103874.aspx"></asp:HyperLink>
@@ -223,6 +283,8 @@
                     </table>
                 </div>
             </div>
+        </div>
+        <div class="content-row">
             <div class="content-column">
                 <div class="button">
                     <asp:HyperLink ID="HyperLink8" runat="server" ImageUrl="~/en/images/product_pic/vde_h05ss-f-menu.jpg" alt="VDE H05SS-F Silicone Multi-Core Wire" NavigateUrl="vde-h05ss-f.aspx"></asp:HyperLink>
@@ -287,9 +349,7 @@
                     </table>
                 </div>
             </div>
-        </div>
-        <div class="content-row">
-            <%--<div class="content-column">
+            <div class="content-column">
                 <div class="button">
                     <asp:HyperLink ID="HyperLink10" runat="server" ImageUrl="~/en/images/product_pic/pse3323-menu.jpg" alt="PSE3323 Silicone Wire" NavigateUrl="pse-3323.aspx"></asp:HyperLink>
                 </div>
@@ -318,7 +378,7 @@
                         </tr>
                     </table>
                 </div>
-            </div>--%>                     
+            </div>                     
         </div>           
     </div>
 </asp:Content>

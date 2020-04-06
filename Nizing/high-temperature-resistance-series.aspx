@@ -76,11 +76,11 @@
             </div>
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/images/product_pic/mg5107-menu.jpg" Text="MG-5107 550°C耐熱電線" NavigateUrl="~/mg-5107.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/images/product_pic/mg5107-menu.jpg" Text="MG-5107 450°C耐熱電線" NavigateUrl="~/mg-5107.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     MG-5107<br />
-                    550°C高溫雲母編織耐熱電線<br />
+                    450°C高溫雲母編織耐熱電線<br />
                     電熱馬達、高溫家用電器配線
                 </div>
                 <div class="data">
@@ -91,7 +91,7 @@
                         </tr>
                         <tr>
                             <td>溫度範圍:</td>
-                            <td>-100°C~ +550°C</td>
+                            <td>-100°C~ +450°C</td>
                         </tr>
                         <tr>
                             <td>導體:</td>

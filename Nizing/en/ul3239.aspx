@@ -98,40 +98,30 @@
               Cross Section Area <br />
               mm²</td>
             <td> 內徑<br />
-              Inside<br />
-              Diameter mm</td>
-            <td>被覆<br />
-              厚度<br />
-              Jacket Thickness mm</td>
-            <td>完成<br />
-              外徑<br />
+              Inner Diameter<br />
+                mm</td>
+            <td>被覆厚度<br />
+              Jacket Thickness<br />
+                mm</td>
+            <td>完成外徑<br />
               Overall Diameter <br />
               mm</td>
-            <td>被覆<br />
-              厚度<br />
-              Jacket <br />
-              Thickness <br />
+            <td>被覆厚度<br />
+              Jacket Thickness <br />
               mm</td>
-            <td>完成<br />
-              外徑<br />
+            <td>完成外徑<br />
               Overall Diameter <br />
               mm</td>
-            <td>被覆<br />
-              厚度<br />
-              Jacket <br />
-              Thickness <br />
+            <td>被覆厚度<br />
+              Jacket Thickness <br />
               mm</td>
-            <td>完成<br />
-              外徑<br />
+            <td>完成外徑<br />
               Overall Diameter <br />
               mm</td>
-            <td>被覆<br />
-              厚度<br />
-              Jacket <br />
-              Thickness <br />
+            <td>被覆厚度<br />
+              Jacket Thickness <br />
               mm</td>
-            <td>完成<br />
-              外徑<br />
+            <td>完成外徑<br />
               Overall Diameter <br />
               mm</td>
           </tr>
@@ -179,7 +169,7 @@
           </tr>
           <tr>
             <td>18</td>
-            <td>30 x 0.18</td>
+            <td>34 x 0.18</td>
             <td>0.80</td>
             <td>1.20</td>
             <td>0.50</td>
@@ -245,7 +235,7 @@
             <td>1.30</td>
             <td>5.70</td>
             <td>1.60</td>
-            <td >6.30</td>
+            <td>6.30</td>
           </tr>
         </table>
         <table>          
@@ -261,10 +251,11 @@
             <td colspan="2">40000V</td>
             <td rowspan="2">導體<br />
               電阻<br />
-              Max.<br />
-              Resistance at 20°C ohm/km</td>
-            <td rowspan="2">電流量<br />
-              Intens. Max 1. max 170°C-AMP</td>
+              Max Resistance at 20°C<br />
+              ohm/km</td>
+            <td rowspan="2">電流容量<br />
+              Current Capacity at 130°C<br />
+                AMP</td>
           </tr>
           <tr>
             <td>線號<br />
@@ -276,24 +267,18 @@
               Cross Section Area <br />
               mm²</td>
             <td> 內徑<br />
-              Inside<br />
-              Diameter mm</td>
-            <td>被覆<br />
-              厚度<br />
-              Jacket <br />
-              Thickness <br />
+              Inner Diameter<br />
+                mm</td>
+            <td>被覆厚度<br />
+              Jacket Thickness <br />
               mm</td>
-            <td>完成<br />
-              外徑<br />
+            <td>完成外徑<br />
               Overall Diameter <br />
               mm</td>
-            <td>被覆<br />
-              厚度<br />
-              Jacket <br />
-              Thickness <br />
+            <td>被覆厚度<br />
+              Jacket Thickness <br />
               mm</td>
-            <td>完成<br />
-              外徑<br />
+            <td>完成外徑<br />
               Overall Diameter <br />
               mm</td>
           </tr>
@@ -323,7 +308,7 @@
           </tr>
           <tr>
             <td>20</td>
-            <td> 20 x 0.18</td>
+            <td>20 x 0.18</td>
             <td>0.49</td>
             <td>0.91</td>
             <td>1.70</td>
@@ -335,7 +320,7 @@
           </tr>
           <tr>
             <td>18</td>
-            <td>30 x 0.18</td>
+            <td>34 x 0.18</td>
             <td>0.80</td>
             <td>1.20</td>
             <td>1.70</td>
@@ -343,7 +328,7 @@
             <td>2.00</td>
             <td>5.20</td>
             <td>24.4</td>
-            <td>7.0</td>
+            <td>8.0</td>
           </tr>
           <tr>
             <td>16</td>
@@ -355,7 +340,7 @@
             <td>2.00</td>
             <td>5.50</td>
             <td>15.5</td>
-            <td>12.0</td>
+            <td>11.0</td>
           </tr>
           <tr>
             <td>14</td>
@@ -367,7 +352,7 @@
             <td>2.50</td>
             <td>6.83</td>
             <td>9.8</td>
-            <td>21.5</td>
+            <td>15.0</td>
           </tr>
           <tr>
             <td>12</td>
@@ -378,8 +363,8 @@
             <td>6.60</td>
             <td>2.55</td>
             <td>7.60</td>
-            <td>5.38</td>
-            <td>23.0</td>
+            <td>5.40</td>
+            <td>21.0</td>
           </tr>
           <tr>
             <td>10</td>
@@ -391,7 +376,7 @@
             <td>2.60</td>
             <td>8.30</td>
             <td>3.50</td>
-            <td>35.0</td>
+            <td>28.0</td>
           </tr>
           <tr>
             <td colspan="10"><a href="mailto:kelven33033@nizing.com.tw, aris@nizing.com.tw&amp;subject=UL3239 Inquiry">Please contact us directly for the specifications of other High Voltage Silicone Wires</a></td>

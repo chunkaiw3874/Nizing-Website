@@ -75,11 +75,11 @@
             </div>
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/en/images/product_pic/mg5107-menu.jpg" alt="MG-5107 550°C Heat Resistant Wire" NavigateUrl="mg-5107.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/en/images/product_pic/mg5107-menu.jpg" alt="MG-5107 450°C Heat Resistant Wire" NavigateUrl="mg-5107.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     MG-5107<br />
-                    550°C Mica Braided Wire<br />
+                    450°C Mica Braided Wire<br />
                     Home Appliance Wiring
                 </div>
                 <div class="data">
@@ -90,7 +90,7 @@
                         </tr>
                         <tr>
                             <td>Nominal Temperature:</td>
-                            <td>-100°C~ +550°C</td>
+                            <td>-100°C~ +450°C</td>
                         </tr>
                         <tr>
                             <td>Conductor:</td>

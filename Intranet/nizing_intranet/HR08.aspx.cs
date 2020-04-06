@@ -89,7 +89,8 @@ public partial class nizing_intranet_HR08 : System.Web.UI.Page
                                 + " LEFT JOIN CMSME ON CMSMV.MV004=CMSME.ME001"
                                 + " WHERE SUBSTRING(PALTF.TF002,1,4)=@YEAR"
                                 + " AND SUBSTRING(PALTF.TF002,5,2)=@MONTH"
-                                + " AND CMSMV.MV004=@DEPT"
+                                + " AND CMSMV.MV004=@DEPT" +
+                                " AND PALTF.TF004 <> '21'"
                                 + " ORDER BY PALTF.TF002,PALTF.TF001";
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@YEAR", ddlYear.SelectedValue);
@@ -121,7 +122,7 @@ public partial class nizing_intranet_HR08 : System.Web.UI.Page
                     bodyCell.Attributes.Add("style", "text-align:center;");
                     bodyRow.Controls.Add(bodyCell);
                     bodyCell = new HtmlTableCell();
-                    bodyCell.InnerText = (Convert.ToDecimal(dtDayOffInfo.Rows[k]["TIME_ELAPSED"].ToString().Substring(0, 2)) + (Convert.ToDecimal(dtDayOffInfo.Rows[k]["TIME_ELAPSED"].ToString().Substring(2, 2)) / 60)).ToString() + "hr";
+                    bodyCell.InnerText = Math.Round((Convert.ToDecimal(dtDayOffInfo.Rows[k]["TIME_ELAPSED"].ToString().Substring(0, 2)) + (Convert.ToDecimal(dtDayOffInfo.Rows[k]["TIME_ELAPSED"].ToString().Substring(2, 2)) / 60)), 2).ToString() + "hr";
                     bodyCell.Attributes.Add("style", "text-align:center;");
                     bodyRow.Controls.Add(bodyCell);
                     bodyCell = new HtmlTableCell();
