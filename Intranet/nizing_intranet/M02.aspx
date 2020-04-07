@@ -109,7 +109,7 @@
                         AutoGenerateColumns="false" CssClass="grdResult" OnRowCommand="grdReport_RowCommand"
                         ShowFooter="true" OnDataBound="grdReport_DataBound" OnRowCreated="grdReport_RowCreated" >
                         <Columns>
-                            <asp:TemplateField>
+                            <asp:TemplateField HeaderStyle-Width="50px">
                                 <HeaderTemplate>
                                     <asp:LinkButton ID="lb1" runat="server" Text="生產線別" CommandName="Sort" CommandArgument="生產線別" ForeColor="White"></asp:LinkButton>
                                 </HeaderTemplate>
@@ -117,7 +117,7 @@
                                     <asp:Label ID="Label3" runat="server" Text='<%#Eval("生產線別") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderStyle-Width="100px">
+                            <asp:TemplateField HeaderStyle-Width="60px">
                                 <HeaderTemplate>
                                     <asp:LinkButton ID="lb2" runat="server" Text="生產人員" CommandName="Sort" CommandArgument="生產人員" ForeColor="White"></asp:LinkButton>
                                 </HeaderTemplate>
@@ -133,7 +133,7 @@
                                     <asp:Label ID="Label5" runat="server" Text='<%#Eval("單據日期") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderStyle-Width="100px">
+                            <asp:TemplateField>
                                 <HeaderTemplate>
                                     <asp:LinkButton ID="lb4" runat="server" Text="品號" CommandName="Sort" CommandArgument="品號" ForeColor="White"></asp:LinkButton>
                                 </HeaderTemplate>
@@ -161,7 +161,7 @@
                                     <asp:Label ID="Label10" runat="server" Text='<%#Eval("單位") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderStyle-Width="100px">
+                            <asp:TemplateField HeaderStyle-Width="50px">
                                 <HeaderTemplate>
                                     <asp:LinkButton ID="lb11" runat="server" Text="庫別" CommandName="Sort" CommandArgument="庫別" ForeColor="White"></asp:LinkButton>
                                 </HeaderTemplate>
@@ -169,7 +169,7 @@
                                     <asp:Label ID="Label11" runat="server" Text='<%#Eval("庫別") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="庫別名稱" HeaderStyle-Width="100px">
+                            <asp:TemplateField HeaderText="庫別名稱" HeaderStyle-Width="70px">
                                 <ItemTemplate>
                                     <asp:Label ID="Label12" runat="server" Text='<%#Eval("庫別名稱") %>'></asp:Label>
                                 </ItemTemplate>
