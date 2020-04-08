@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
     <title>UL1726 PFA鐵氟龍線-日進電線</title>
-    <meta name="description" content="UL1726 PFA鐵氟龍線，適用於各種家用電器、照明燈具、工業機器、電熱製品、原料熔爐等高溫場所之配線。通過UL VW-1垂直燃燒測試以及多項IEC測試，證實為低煙、無鹵、耐燃之產品。詳細的UL1726 PFA鐵氟龍線的產品規格以及使用範圍值">
+    <meta name="description" content="UL1726 PFA鐵氟龍線，適用於各種家用電器、照明燈具、工業機器、電熱製品、原料熔爐等高溫場所之配線。">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
@@ -34,7 +34,7 @@
     </div>
     <table>
         <tr>
-            <td>UL1726 PFA鐵氟龍線適用於各種家用電器、照明燈具、工業機器、電熱製品、原料熔爐等高溫場所之配線。通過UL VW-1垂直燃燒測試以及多項IEC測試，證實為低煙、無鹵、耐燃之產品。</td>
+            <td>UL1726 PFA鐵氟龍線適用於各種家用電器、照明燈具、工業機器、電熱製品、原料熔爐等高溫場所之配線。</td>
         </tr>
     </table>
     <div class="subtitle">
@@ -103,90 +103,92 @@
               Overall Diameter<br />
               mm</td>
             <td>導體電阻<br />
-              Maximum Resistance at 20°C ohm/km</td>
+              Maximum Resistance at 20°C<br />
+                ohm/km</td>
             <td>電流量<br />
-              Intens. Max 1.maxa 170°C-AMP</td>
+              Current Capacity at 170°C<br />
+                amp</td>
             <td>米/卷<br />
               Meters/ Coil</td>
           </tr>
           <tr>
             <td>28</td>
-            <td>7 x 0.12</td>
+            <td>0.12 x 7</td>
             <td>0.37</td>
             <td>0.33</td>
             <td>1.03</td>
             <td>223</td>
-            <td>1.0 </td>
+            <td>1</td>
             <td>610</td>
           </tr>
           <tr>
             <td>26</td>
-            <td>7    x 0.16</td>
-            <td>0.50</td>
+            <td>0.16 x 7</td>
+            <td>0.5</td>
             <td>0.33</td>
             <td>1.16</td>
             <td>139</td>
-            <td>1.5 </td>
+            <td>1.5</td>
             <td>610</td>
           </tr>
           <tr>
             <td>24</td>
-            <td>19    x 0.12</td>
-            <td>0.60</td>
+            <td>0.12 x 19</td>
+            <td>0.6</td>
             <td>0.33</td>
             <td>1.26</td>
             <td>88.9</td>
-            <td>2.0 </td>
+            <td>2</td>
             <td>610</td>
           </tr>
           <tr>
             <td>22</td>
-            <td>19    x 0.16</td>
+            <td>0.16 x 19</td>
             <td>0.76</td>
             <td>0.33</td>
             <td>1.42</td>
             <td>57.5</td>
-            <td>3.0 </td>
+            <td>3</td>
             <td>610</td>
           </tr>
           <tr>
             <td>20</td>
-            <td>19    x 0.19</td>
+            <td>0.19 x 19</td>
             <td>0.96</td>
             <td>0.33</td>
             <td>1.62</td>
             <td>35.2</td>
-            <td>5.0 </td>
+            <td>5</td>
             <td>610</td>
           </tr>
           <tr>
             <td>18</td>
-            <td>19 x 0.238</td>
+            <td>0.235 x 19</td>
             <td>1.18</td>
             <td>0.33</td>
             <td>1.84</td>
             <td>23.3</td>
-            <td>7.0 </td>
+            <td>8</td>
             <td>610</td>
           </tr>
           <tr>
             <td>16</td>
-            <td>19    x 0.29</td>
+            <td>0.29 x 19</td>
             <td>1.51</td>
             <td>0.33</td>
             <td>2.17</td>
             <td>15.1</td>
-            <td>12.0 </td>
+            <td>11</td>
             <td>305</td>
           </tr>
           <tr>
             <td>14</td>
-            <td>19 x 0.37</td>
+            <td>0.37 x 19</td>
             <td>1.81</td>
             <td>0.33</td>
             <td>2.47</td>
             <td>9.8</td>
-            <td>17.0 </td>
+            <td>15</td>
             <td>305</td>
           </tr>
         </table>

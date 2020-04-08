@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
     <title>Teflon Silicone Medical Wire - Nizing Electric Wire & Cable</title>
-    <meta name="description" content="Teflon Silicone Medical Wire, suitable for the electrical wiring of medical equipment. Passed UL VW-1 Vertical fire test and multiple IEC tests, proven to be low smoke density, halogen free, and flame retardant. Product information, specification, scope, and visual presentation">
+    <meta name="description" content="Teflon Silicone Medical Wire, suitable for the electrical wiring of medical equipment.">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
@@ -33,7 +33,7 @@
     </div>
     <table>
         <tr>
-            <td>FEP Silicone Medical Wire is suitable for the electrical wiring of medical equipment. Passed UL VW-1 Vertical fire test and multiple IEC tests, proven to be low smoke density, halogen free, and flame retardant.</td>
+            <td>FEP Silicone Medical Wire is suitable for the electrical wiring of medical equipment.</td>
         </tr>
     </table>
     <div class="subtitle">
@@ -89,7 +89,8 @@
               Overall Diameter<br />
               mm</td>
             <td rowspan="2">導體電阻<br />
-              Maximum Resistance at 20°C ohm/km</td>
+              Maximum Resistance at 20°C<br />
+                ohm/km</td>
             <td>包裝<br />
               Packing</td>
           </tr>
@@ -103,33 +104,33 @@
               Diameter <br />
               mm</td>
             <td>絕緣厚度<br />
-              Insulator <br />
-              Thickness<br />
+              Insulator Thickness<br />
               mm</td>
             <td>芯線外徑<br />
-              Diameter <br />
+              Diameter<br />
               mm</td>
             <td>被覆厚度<br />
-              Jacket Thickness mm</td>
+              Jacket Thickness<br />
+                mm</td>
             <td>米/卷<br />
               Meters/ Coil</td>
           </tr>
           <tr>
             <td>20 x 2C</td>
-            <td>19 x 0.19</td>
+            <td>0.19 x 19</td>
             <td>0.95</td>
-            <td>0.30 </td>
+            <td>0.3 </td>
             <td>1.55 </td>
             <td>0.75</td>
-            <td>4.60</td>
+            <td>4.6</td>
             <td>35.2</td>
             <td>500</td>
           </tr>
           <tr>
             <td>18 x 2C</td>
-            <td>19 x 0.238</td>
+            <td>0.235 x 19</td>
             <td>1.16</td>
-            <td>0.30 </td>
+            <td>0.3</td>
             <td>1.76 </td>
             <td>0.75</td>
             <td>5.02</td>
@@ -138,10 +139,10 @@
           </tr>
           <tr>
             <td>16 x 2C</td>
-            <td>19 x 0.30</td>
+            <td>0.3 x 19</td>
             <td>1.46</td>
-            <td>0.35 </td>
-            <td>2.16 </td>
+            <td>0.35</td>
+            <td>2.16</td>
             <td>0.75</td>
             <td>5.82</td>
             <td>15.1</td>
@@ -149,21 +150,21 @@
           </tr>
           <tr>
             <td>20 x 3C</td>
-            <td>19 x 0.19</td>
+            <td>0.19 x 19</td>
             <td>0.95</td>
-            <td>0.30 </td>
-            <td>1.55 </td>
+            <td>0.3</td>
+            <td>1.55</td>
             <td>0.85</td>
-            <td>4.80 </td>
+            <td>4.8</td>
             <td>35.2</td>
             <td>200</td>
           </tr>
           <tr>
             <td>18 x 3C</td>
-            <td>19 x 0.238</td>
+            <td>0.235 x 19</td>
             <td>1.16</td>
-            <td>0.30 </td>
-            <td>1.76 </td>
+            <td>0.3</td>
+            <td>1.76</td>
             <td>0.85</td>
             <td>5.22</td>
             <td>23.3</td>
@@ -171,10 +172,10 @@
           </tr>
           <tr>
             <td>16 x 3C</td>
-            <td>19 x 0.30</td>
+            <td>0.3 x 19</td>
             <td>1.46</td>
-            <td>0.35 </td>
-            <td>2.16 </td>
+            <td>0.35</td>
+            <td>2.16</td>
             <td>0.85</td>
             <td>6.02</td>
             <td>15.1</td>

@@ -34,7 +34,7 @@
     </div>
     <table>
         <tr>
-            <td>UL1199 PTFE Teflon Wire is suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces. Passed UL VW-1 Vertical fire test and multiple IEC tests, proven to be low smoke density, halogen free, and flame retardant.</td>
+            <td>UL1199 PTFE Teflon Wire is suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces.</td>
         </tr>
     </table>
     <div class="subtitle">
@@ -129,7 +129,7 @@
             <td>0.51</td>
             <td>1.39</td>
             <td>223</td>
-            <td>1 </td>
+            <td>1</td>
             <td>610</td>
           </tr>
           <tr>
@@ -139,7 +139,7 @@
             <td>0.51</td>
             <td>1.52</td>
             <td>139</td>
-            <td>1.5 </td>
+            <td>1.5</td>
             <td>610</td>
           </tr>
           <tr>
@@ -149,7 +149,7 @@
             <td>0.51</td>
             <td>1.62</td>
             <td>88.9</td>
-            <td>2 </td>
+            <td>2</td>
             <td>610</td>
           </tr>
           <tr>
@@ -177,14 +177,14 @@
             <td>0.235 x 19</td>
             <td>1.18</td>
             <td>0.51</td>
-            <td>2.20</td>
+            <td>2.2</td>
             <td>23.3</td>
             <td>8</td>
             <td>610</td>
           </tr>
           <tr>
             <td>16</td>
-            <td>0.30 x 19</td>
+            <td>0.3 x 19</td>
             <td>1.51</td>
             <td>0.51</td>
             <td>2.53</td>
@@ -214,7 +214,7 @@
           </tr>
           <tr>
             <td>10</td>
-            <td>0.60 x 19</td>
+            <td>0.6 x 19</td>
             <td>3.02</td>
             <td>0.51</td>
             <td>4.04</td>

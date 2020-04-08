@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
     <title>VDE REG-NR8295 Duo-Layer FEP Teflon Wire - Nizing Electric Wire & Cable</title>
-    <meta name="description" content="VDE REG-NR8295 Duo-Layer FEP Teflon Wire, suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces. Passed UL VW-1 Vertical fire test and multiple IEC tests, proven to be low smoke density, halogen free, and flame retardant. Product information, specification, scope, and visual presentation">
+    <meta name="description" content="VDE REG-NR8295 Duo-Layer FEP Teflon Wire, suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces.">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
@@ -34,7 +34,7 @@
     </div>
     <table>
         <tr>
-            <td>VDE REG-NR8295 Duo-Layer FEP Teflon Wire is suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces. Passed UL VW-1 Vertical fire test and multiple IEC tests, proven to be low smoke density, halogen free, and flame retardant.</td>
+            <td>VDE REG-NR8295 Duo-Layer FEP Teflon Wire is suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces.</td>
         </tr>
     </table>
     <div class="subtitle">
@@ -87,13 +87,15 @@
             <td colspan="2">絕緣體<br />
               Insulator</td>
             <td rowspan="2">導體電阻<br />
-              Maximum Resistance at 20°C ohm/km</td>
+              Maximum Resistance at 20°C<br />
+                ohm/km</td>
             <td>包裝<br />
               Packing</td>
           </tr>
           <tr>
             <td>截面積<br />
-              Section mm²</td>
+              Section<br />
+                mm²</td>
             <td>導體結構<br />
               Composition <br />
               No. x mm</td>
@@ -111,170 +113,170 @@
           </tr>
           <tr>
             <td rowspan="3">0.13</td>
-            <td>1 x 0.40</td>
-            <td>0.40 </td>
-            <td>0.30 </td>
-            <td>1.60 </td>
-            <td>139.0 </td>
+            <td>0.4 x 1</td>
+            <td>0.4</td>
+            <td>0.3</td>
+            <td>1.6</td>
+            <td>139</td>
             <td>400</td>
           </tr>
           <tr>
-            <td>7 x 0.16</td>
-            <td>0.50 </td>
-            <td>0.30 </td>
-            <td>1.70 </td>
-            <td>139.0 </td>
+            <td>0.16 x 7</td>
+            <td>0.5</td>
+            <td>0.3</td>
+            <td>1.7</td>
+            <td>139</td>
             <td>400</td>
           </tr>
           <tr>
-            <td>19 x 0.10</td>
-            <td>0.50 </td>
-            <td>0.30 </td>
-            <td>1.70 </td>
-            <td>139.0 </td>
+            <td>0.1 x 19</td>
+            <td>0.5</td>
+            <td>0.3</td>
+            <td>1.7</td>
+            <td>139</td>
             <td>400</td>
           </tr>
           <tr>
             <td rowspan="3">0.2</td>
-            <td>1 x 0.50</td>
-            <td>0.50 </td>
-            <td>0.30 </td>
-            <td>1.70 </td>
-            <td>88.9 </td>
+            <td>0.5 x 1</td>
+            <td>0.5</td>
+            <td>0.3</td>
+            <td>1.7</td>
+            <td>88.9</td>
             <td>400</td>
           </tr>
           <tr>
-            <td>7 x 0.20</td>
-            <td>0.60 </td>
-            <td>0.30 </td>
-            <td>1.80 </td>
-            <td>88.9 </td>
+            <td>0.2 x 7</td>
+            <td>0.6</td>
+            <td>0.3</td>
+            <td>1.8</td>
+            <td>88.9</td>
             <td>400</td>
           </tr>
           <tr>
-            <td>19 x 0.12</td>
-            <td>0.60 </td>
-            <td>0.30 </td>
-            <td>1.80 </td>
-            <td>88.9 </td>
+            <td>0.12 x 19</td>
+            <td>0.6</td>
+            <td>0.3</td>
+            <td>1.8</td>
+            <td>88.9</td>
             <td>400</td>
           </tr>
           <tr>
             <td rowspan="3">0.3</td>
-            <td>1 x 0.65</td>
-            <td>0.65 </td>
-            <td>0.30 </td>
-            <td>1.85 </td>
-            <td>57.5 </td>
+            <td>0.65 x 1</td>
+            <td>0.65</td>
+            <td>0.3</td>
+            <td>1.85</td>
+            <td>57.5</td>
             <td>400</td>
           </tr>
           <tr>
-            <td>7 x 0.25</td>
-            <td>0.79 </td>
-            <td>0.30 </td>
-            <td>1.99 </td>
-            <td>57.5 </td>
+            <td>0.25 x 7</td>
+            <td>0.79</td>
+            <td>0.3</td>
+            <td>1.99</td>
+            <td>57.5</td>
             <td>400</td>
           </tr>
           <tr>
-            <td>19 x 0.16</td>
-            <td>0.75 </td>
-            <td>0.30 </td>
-            <td>1.95 </td>
-            <td>57.5 </td>
+            <td>0.16 x 19</td>
+            <td>0.75</td>
+            <td>0.3</td>
+            <td>1.95</td>
+            <td>57.5</td>
             <td>400</td>
           </tr>
           <tr>
             <td rowspan="3">0.5</td>
-            <td>1 x 0.80</td>
-            <td>0.80 </td>
-            <td>0.30 </td>
-            <td>2.00 </td>
-            <td>35.2 </td>
+            <td>0.8 x 1</td>
+            <td>0.8</td>
+            <td>0.3</td>
+            <td>2</td>
+            <td>35.2</td>
             <td>400</td>
           </tr>
           <tr>
-            <td>7 x 0.30</td>
-            <td>0.97 </td>
-            <td>0.30 </td>
-            <td>2.17 </td>
-            <td>35.2 </td>
+            <td>0.32 x 7</td>
+            <td>0.97</td>
+            <td>0.3</td>
+            <td>2.17</td>
+            <td>35.2</td>
             <td>400</td>
           </tr>
           <tr>
-            <td>19 x 0.19</td>
-            <td>0.95 </td>
-            <td>0.30 </td>
-            <td>2.15 </td>
-            <td>35.2 </td>
+            <td>0.19 x 19</td>
+            <td>0.95</td>
+            <td>0.3</td>
+            <td>2.15</td>
+            <td>35.2</td>
             <td>400</td>
           </tr>
           <tr>
             <td rowspan="2">0.75</td>
-            <td>1 x 1.02</td>
-            <td>1.02 </td>
-            <td>0.30 </td>
-            <td>2.22 </td>
-            <td>23.3 </td>
+            <td>1.02 x 1</td>
+            <td>1.02</td>
+            <td>0.3</td>
+            <td>2.22</td>
+            <td>23.3</td>
             <td>400</td>
           </tr>
           <tr>
-            <td>19 x 0.238</td>
-            <td>1.18 </td>
-            <td>0.30 </td>
-            <td>2.38 </td>
-            <td>23.3 </td>
+            <td>0.235 x 19</td>
+            <td>1.18</td>
+            <td>0.3</td>
+            <td>2.38</td>
+            <td>23.3</td>
             <td>400</td>
           </tr>
           <tr>
             <td rowspan="2">1.25</td>
-            <td>1 x 1.29</td>
-            <td>1.29 </td>
-            <td>0.30 </td>
-            <td>2.49 </td>
-            <td>15.1 </td>
+            <td>1.29 x 1</td>
+            <td>1.29</td>
+            <td>0.3</td>
+            <td>2.49</td>
+            <td>15.1</td>
             <td>200</td>
           </tr>
           <tr>
-            <td>19 x 0.30</td>
-            <td>1.51 </td>
-            <td>0.30 </td>
-            <td>2.71 </td>
-            <td>15.1 </td>
+            <td>0.3 x 19</td>
+            <td>1.51</td>
+            <td>0.3</td>
+            <td>2.71</td>
+            <td>15.1</td>
             <td>200</td>
           </tr>
           <tr>
             <td rowspan="2">2</td>
-            <td>1 x 1.63</td>
-            <td>1.63 </td>
-            <td>0.35 </td>
-            <td>3.03 </td>
-            <td>9.8 </td>
+            <td>1.63 x 1</td>
+            <td>1.63</td>
+            <td>0.35</td>
+            <td>3.03</td>
+            <td>9.8</td>
             <td>200</td>
           </tr>
           <tr>
-            <td>19 x 0.37</td>
-            <td>1.81 </td>
-            <td>0.35 </td>
-            <td>3.21 </td>
-            <td>9.8 </td>
+            <td>0.37 x 19</td>
+            <td>1.81</td>
+            <td>0.35</td>
+            <td>3.21</td>
+            <td>9.8</td>
             <td>200</td>
           </tr>
           <tr>
             <td rowspan="2">3.5</td>
-            <td>1 x 2.05</td>
-            <td>2.05 </td>
-            <td>0.40 </td>
-            <td>3.65 </td>
-            <td>5.4 </td>
+            <td>2.05 x 1</td>
+            <td>2.05</td>
+            <td>0.4</td>
+            <td>3.65</td>
+            <td>5.4</td>
             <td>200</td>
           </tr>
           <tr>
-            <td>19 x 0.46</td>
-            <td>2.40 </td>
-            <td>0.40 </td>
-            <td>4.00 </td>
-            <td>5.4 </td>
+            <td>0.45 x 19</td>
+            <td>2.4</td>
+            <td>0.4</td>
+            <td>4</td>
+            <td>5.4</td>
             <td>200</td>
           </tr>
         </table>

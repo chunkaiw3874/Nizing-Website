@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
     <title>UL10362 PFA Teflon Wire - Nizing Electric Wire & Cable</title>
-    <meta name="description" content="UL10362 PFA Teflon Wire, suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces. Passed UL VW-1 Vertical fire test and multiple IEC tests, proven to be low smoke density, halogen free, and flame retardant. Product information, specification, scope, and visual presentation">
+    <meta name="description" content="UL10362 PFA Teflon Wire, suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces.">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
@@ -34,7 +34,7 @@
     </div>
     <table>
         <tr>
-            <td>UL10362 PFA Teflon Wire is suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces. Passed UL VW-1 Vertical fire test and multiple IEC tests, proven to be low smoke density, halogen free, and flame retardant.</td>
+            <td>UL10362 PFA Teflon Wire is suitable for fields that require high temperature endurance. Application ranges from household appliances, lighting devices, to industrial machines, and high-temperature furnaces.</td>
         </tr>
     </table>
     <div class="subtitle">
@@ -103,90 +103,92 @@
               Overall Diameter<br />
               mm</td>
             <td>導體電阻<br />
-              Maximum Resistance at 20°C ohm/km</td>
+              Maximum Resistance at 20°C<br />
+                ohm/km</td>
             <td>電流量<br />
-              Intens. Max 1.maxa 170°C-AMP</td>
+              Current Capacity at 170°C<br />
+                amp</td>
             <td>米/卷<br />
               Meters/ Coil</td>
           </tr>
           <tr>
             <td>28</td>
-            <td>7    x 0.12</td>
+            <td>0.12 x 7</td>
             <td>0.37</td>
             <td>0.25 </td>
             <td>0.87 </td>
             <td>223</td>
-            <td>1.0 </td>
+            <td>1</td>
             <td>610</td>
           </tr>
           <tr>
             <td>26</td>
-            <td>7    x 0.16</td>
-            <td>0.50</td>
+            <td>0.16 x 7</td>
+            <td>0.48</td>
             <td>0.25 </td>
-            <td>1.00 </td>
+            <td>1</td>
             <td>139</td>
-            <td>1.5 </td>
+            <td>1.5</td>
             <td>610</td>
           </tr>
           <tr>
             <td>24</td>
-            <td>19    x 0.12</td>
-            <td>0.60</td>
-            <td>0.25 </td>
-            <td>1.10 </td>
+            <td>0.12 x 19</td>
+            <td>0.6</td>
+            <td>0.25</td>
+            <td>1.1</td>
             <td>88.9</td>
-            <td>2.0 </td>
+            <td>2</td>
             <td>610</td>
           </tr>
           <tr>
             <td>22</td>
-            <td>19    x 0.16</td>
+            <td>0.16 x 19</td>
             <td>0.76</td>
-            <td>0.25 </td>
+            <td>0.25</td>
             <td>1.26 </td>
             <td>57.5</td>
-            <td>3.0 </td>
+            <td>3</td>
             <td>610</td>
           </tr>
           <tr>
             <td>20</td>
-            <td>19    x 0.19</td>
+            <td>0.19 x 19</td>
             <td>0.96</td>
-            <td>0.25 </td>
-            <td>1.46 </td>
+            <td>0.25</td>
+            <td>1.46</td>
             <td>35.2</td>
-            <td>5.0 </td>
+            <td>5</td>
             <td>610</td>
           </tr>
           <tr>
             <td>18</td>
-            <td>19    x 0.238</td>
+            <td>0.235 x 19</td>
             <td>1.18</td>
-            <td>0.25 </td>
-            <td>1.68 </td>
+            <td>0.25</td>
+            <td>1.7</td>
             <td>23.3</td>
-            <td>7.0 </td>
+            <td>8</td>
             <td>610</td>
           </tr>
           <tr>
             <td>16</td>
-            <td>19    x 0.30</td>
-            <td>1.51</td>
-            <td>0.25 </td>
-            <td>2.01 </td>
+            <td>0.3 x 19</td>
+            <td>1.5</td>
+            <td>0.25</td>
+            <td>2</td>
             <td>15.1</td>
-            <td>12.0 </td>
+            <td>11</td>
             <td>305</td>
           </tr>
           <tr>
             <td>14</td>
-            <td>19 x 0.37</td>
+            <td>0.37 x 19</td>
             <td>1.81</td>
-            <td>0.25 </td>
-            <td>2.31 </td>
+            <td>0.25</td>
+            <td>2.31</td>
             <td>9.8</td>
-            <td>17.0 </td>
+            <td>15</td>
             <td>305</td>
           </tr>
         </table>

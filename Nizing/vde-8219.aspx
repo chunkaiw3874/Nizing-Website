@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
     <title>VDE8219 FEP鐵氟龍線-日進電線</title>
-    <meta name="description" content="VDE8219 FEP鐵氟龍線，適用於各種家用電器、照明燈具、工業機器、電熱製品、原料熔爐等高溫場所之配線。通過UL VW-1垂直燃燒測試以及多項IEC測試，證實為低煙、無鹵、耐燃之產品。詳細的VDE8219 FEP鐵氟龍線的產品規格以及使用範圍值">
+    <meta name="description" content="VDE8219 FEP鐵氟龍線，適用於各種家用電器、照明燈具、工業機器、電熱製品、原料熔爐等高溫場所之配線。">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
@@ -34,7 +34,7 @@
     </div>
     <table>
         <tr>
-            <td>VDE8219 FEP鐵氟龍線適用於各種家用電器、照明燈具、工業機器、電熱製品、原料熔爐等高溫場所之配線。通過UL VW-1垂直燃燒測試以及多項IEC測試，證實為低煙、無鹵、耐燃之產品。</td>
+            <td>VDE8219 FEP鐵氟龍線適用於各種家用電器、照明燈具、工業機器、電熱製品、原料熔爐等高溫場所之配線。</td>
         </tr>
     </table>
     <div class="subtitle">
@@ -83,7 +83,8 @@
             <td colspan="2">絕緣體 <br />
               Insulator</td>
             <td rowspan="2">導體電阻<br />
-              Maximum Resistance at 20°C ohm/km</td>
+              Maximum Resistance at 20°C<br />
+                ohm/km</td>
             <td>包裝<br />
               Packing</td>
           </tr>
@@ -107,116 +108,85 @@
           </tr>
           <tr>
             <td rowspan="2">0.3</td>
-            <td>7 x 0.25</td>
-            <td>0.76</td>
-            <td>0.30 </td>
-            <td>1.36</td>
-            <td>57.50 </td>
-            <td>400</td>
+            <td>0.254 x 7</td>
+            <td rowspan="2">0.76</td>
+            <td rowspan="2">0.3 </td>
+            <td rowspan="2">1.36</td>
+            <td rowspan="2">57.5 </td>
+            <td rowspan="2">400</td>
           </tr>
           <tr>
-            <td>19 x 0.16</td>
-            <td>0.76</td>
-            <td>0.30 </td>
-            <td>1.36</td>
-            <td>57.50 </td>
-            <td>400</td>
+            <td>0.16 x 19</td>
           </tr>
           <tr>
             <td rowspan="2">0.5</td>
-            <td>7    x 0.32</td>
-            <td>0.95</td>
-            <td>0.30 </td>
-            <td>1.55</td>
-            <td>35.20 </td>
-            <td>400</td>
+            <td>0.32 x 7</td>
+            <td rowspan="2">0.95</td>
+            <td rowspan="2">0.3 </td>
+            <td rowspan="2">1.55</td>
+            <td rowspan="2">35.2</td>
+            <td rowspan="2">400</td>
           </tr>
           <tr>
-            <td>19 x 0.30</td>
-            <td>0.95</td>
-            <td>0.30 </td>
-            <td>1.55</td>
-            <td>35.20 </td>
-            <td>400</td>
+            <td>0.19 x 19</td>
           </tr>
           <tr>
             <td rowspan="2">0.75</td>
-            <td>7    x 0.40</td>
+            <td>0.39 x 7</td>
             <td>1.19</td>
-            <td>0.30 </td>
+            <td rowspan="2">0.3</td>
             <td>1.79</td>
-            <td>23.30 </td>
-            <td>400</td>
+            <td rowspan="2">23.3</td>
+            <td rowspan="2">400</td>
           </tr>
           <tr>
-            <td>19 x 0.238</td>
+            <td>0.235 x 19</td>
             <td>1.18</td>
-            <td>0.30 </td>
             <td>1.78</td>
-            <td>23.30 </td>
-            <td>400</td>
           </tr>
           <tr>
             <td>1</td>
-            <td>19    x 0.26</td>
+            <td>0.254 x 19</td>
             <td>1.31</td>
-            <td>0.30 </td>
+            <td>0.3</td>
             <td>1.91</td>
-            <td>17.98 </td>
+            <td>17.98</td>
             <td>400</td>
           </tr>
           <tr>
             <td>1.5</td>
-            <td>19 x 0.32</td>
+            <td>0.32 x 19</td>
             <td>1.61</td>
-            <td>0.30 </td>
+            <td>0.3</td>
             <td>2.21</td>
-            <td>12.70 </td>
+            <td>12.7</td>
             <td>400</td>
           </tr>
           <tr>
             <td>2</td>
-            <td>19    x 0.37</td>
+            <td>0.37 x 19</td>
             <td>1.81</td>
-            <td>0.35 </td>
+            <td>0.35</td>
             <td>2.51</td>
-            <td>9.80 </td>
+            <td>9.8</td>
             <td>200</td>
           </tr>
           <tr>
             <td>2.5</td>
-            <td>19    x 0.40</td>
+            <td>0.42 x 19</td>
             <td>2.06</td>
-            <td>0.35 </td>
+            <td>0.35</td>
             <td>2.76</td>
-            <td>9.10 </td>
+            <td>9.1</td>
             <td>200</td>
           </tr>
           <tr>
             <td>3</td>
-            <td>19 x 0.45</td>
+            <td>0.45 x 19</td>
             <td>2.26</td>
-            <td>0.40 </td>
+            <td>0.4</td>
             <td>3.06</td>
-            <td>5.40 </td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>37 x 0.38</td>
-            <td>2.67</td>
-            <td>0.40 </td>
-            <td>3.47</td>
-            <td>4.75 </td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>19 x 0.60</td>
-            <td>3.23</td>
-            <td>0.40 </td>
-            <td>4.03</td>
-            <td>4.10 </td>
+            <td>5.4 </td>
             <td>200</td>
           </tr>
         </table>
