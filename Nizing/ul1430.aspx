@@ -74,15 +74,15 @@
         UL1430 XLPVC交連照射線 產品規格表
     </div>
     <div class="content">
-    <table>
+        <table>
           <tr>
             <td colspan="3">導體<br />
               Conductor</td>
             <td colspan="2">絕緣體 <br />
               Insulator</td>
             <td rowspan="2">導體電阻<br />
-              Maximum Resistance<br />
-                at 20°C ohm/km</td>
+              Maximum Resistance at 20°C<br />
+                ohm/km</td>
             <td>包裝<br />
               Packing</td>
           </tr>
@@ -111,7 +111,7 @@
             <td>0.12 x 7</td>
             <td>0.37</td>
             <td>0.42</td>
-            <td>1.20</td>
+            <td>1.2</td>
             <td>248</td>
             <td>610</td>
           </tr>
@@ -120,7 +120,7 @@
             <td>0.16 x 7</td>
             <td>0.49</td>
             <td>0.42</td>
-            <td>1.30</td>
+            <td>1.3</td>
             <td>152</td>
             <td>610</td>
           </tr>
@@ -138,7 +138,7 @@
             <td>0.16 x 17</td>
             <td>0.76</td>
             <td>0.42</td>
-            <td>1.60</td>
+            <td>1.6</td>
             <td>62.5</td>
             <td>610</td>
           </tr>
@@ -154,18 +154,18 @@
           <tr>
             <td>18</td>
             <td>0.18 x 34</td>
-            <td>1.20</td>
+            <td>1.2</td>
             <td>0.45</td>
-            <td>2.10</td>
+            <td>2.1</td>
             <td>24.4</td>
             <td>610</td>
           </tr>
           <tr>
             <td>16</td>
             <td>0.254 x 26</td>
-            <td>1.50</td>
+            <td>1.5</td>
             <td>0.45 </td>
-            <td>2.40</td>
+            <td>2.4</td>
             <td>15.6</td>
             <td>305</td>
           </tr>

@@ -64,11 +64,16 @@
     <menuitem url="~/en/xlpe-series.aspx" enTitle="XLPE Series" cnTitle="交連照射線系列">
       <submenuitem url="~/en/ul1430.aspx" enTitle="UL1430 XLPE Wire" cnTitle="UL1430" />
       <submenuitem url="~/en/ul3173.aspx" enTitle="UL3173 XLPE Wire" cnTitle="UL3173" />
+      <submenuitem url="~/en/ul3265.aspx" enTitle="UL3265 XLPE Wire" cnTitle="UL3265" />
       <submenuitem url="~/en/ul3266.aspx" enTitle="UL3266 XLPE Wire" cnTitle="UL3266" />
+      <submenuitem url="~/en/ul3271.aspx" enTitle="UL3271 XLPE Wire" cnTitle="UL3271" />
       <submenuitem url="~/en/ul3272.aspx" enTitle="UL3272 XLPE Wire" cnTitle="UL3272" />
       <submenuitem url="~/en/ul3290.aspx" enTitle="UL3290 XLPE Wire" cnTitle="UL3290" />
+      <submenuitem url="~/en/ul3302.aspx" enTitle="UL3302 XLPE Wire" cnTitle="UL3302" />
       <submenuitem url="~/en/ul3320.aspx" enTitle="UL3320 XLPE Wire" cnTitle="UL3320" />
       <submenuitem url="~/en/ul3321.aspx" enTitle="UL3321 XLPE Wire" cnTitle="UL3321" />
+      <submenuitem url="~/en/ul3385.aspx" enTitle="UL3385 XLPE Wire" cnTitle="UL3385" />
+      <submenuitem url="~/en/ul3386.aspx" enTitle="UL3386 XLPE Wire" cnTitle="UL3386" />
       <submenuitem url="~/en/ul3613.aspx" enTitle="UL3613 XLPE Wire" cnTitle="UL3613" />
       <submenuitem url="~/en/ul3688.aspx" enTitle="UL3688 Double Layer XLPE Wire" cnTitle="UL3688 雙層XLPE交連照射線" />
       <submenuitem url="~/en/ul10368.aspx" enTitle="UL10368 XLPE Wire" cnTitle="UL10368" />

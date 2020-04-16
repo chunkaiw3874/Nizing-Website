@@ -79,14 +79,15 @@
         UL3688 雙層XLPE交連照射線 產品規格表
     </div>
     <div class="content">
-    <table>
+        <table>
           <tr>
             <td colspan="3">導體<br />
               Conductor</td>
             <td colspan="3">絕緣體 <br />
               Insulator</td>
             <td rowspan="2">導體電阻<br />
-              Maximum Resistance at 20°C ohm/km</td>
+              Maximum Resistance at 20°C<br />
+                ohm/km</td>
             <td>包裝<br />
               Packing</td>
           </tr>
@@ -110,7 +111,7 @@
           </tr>
           <tr>
             <td>30</td>
-            <td>7 x 0.10</td>
+            <td>0.1 x 7</td>
             <td>0.31</td>
             <td>0.3</td>
             <td>0.1</td>
@@ -120,7 +121,7 @@
           </tr>
           <tr>
             <td>28</td>
-            <td>7 x 0.12</td>
+            <td>0.12 x 7</td>
             <td>0.37</td>
             <td>0.3</td>
             <td>0.1</td>
@@ -130,7 +131,7 @@
           </tr>
           <tr>
             <td>26</td>
-            <td>7 x 0.16</td>
+            <td>0.16 x 7</td>
             <td>0.49</td>
             <td>0.3</td>
             <td>0.1</td>
@@ -140,7 +141,7 @@
           </tr>
           <tr>
             <td>24</td>
-            <td>11 x 0.16</td>
+            <td>0.16 x 11</td>
             <td>0.61</td>
             <td>0.3</td>
             <td>0.1</td>
@@ -150,7 +151,7 @@
           </tr>
           <tr>
             <td>22</td>
-            <td>17 x 0.16</td>
+            <td>0.16 x 17 x 0.16</td>
             <td>0.76</td>
             <td>0.3</td>
             <td>0.1</td>
@@ -160,7 +161,7 @@
           </tr>
           <tr>
             <td>20</td>
-            <td>21 x 0.18</td>
+            <td>0.18 x 21</td>
             <td>0.95</td>
             <td>0.3</td>
             <td>0.1</td>
@@ -170,7 +171,7 @@
           </tr>
           <tr>
             <td rowspan="2">18</td>
-            <td>34 x 0.18</td>
+            <td>0.18 x 34</td>
             <td rowspan="2">1.17</td>
             <td rowspan="2">0.4</td>
             <td rowspan="2">0.1</td>
@@ -179,31 +180,31 @@
             <td rowspan="2">610</td>
           </tr>
           <tr>
-          <td>16 x 0.254</td>
+            <td>0.254 x 16</td>
           </tr>
           <tr>
             <td>16</td>
-            <td>26 x 0.254</td>
-            <td>1.50</td>
+            <td>0.254 x 26</td>
+            <td>1.5</td>
             <td>0.4</td>
             <td>0.1</td>
-            <td>2.50</td>
-            <td>14.0</td>
+            <td>2.5</td>
+            <td>14</td>
             <td>305</td>
           </tr>
           <tr>
             <td>14</td>
-            <td>42 x 0.254</td>
-            <td>1.90</td>
+            <td>0.254 x 41</td>
+            <td>1.9</td>
             <td>0.4</td>
             <td>0.1</td>
-            <td>2.90</td>
-            <td>8.80</td>
+            <td>2.9</td>
+            <td>8.8</td>
             <td>305</td>
           </tr>
           <tr>
             <td>12</td>
-            <td>65    x 0.254</td>
+            <td>0.254 x 65</td>
             <td>2.37</td>
             <td>0.4</td>
             <td>0.1</td>
@@ -213,12 +214,12 @@
           </tr>
           <tr>
             <td>10</td>
-            <td>105 x 0.254</td>
+            <td>0.254 x 105</td>
             <td>3.01</td>
             <td>0.4</td>
             <td>0.1</td>
             <td>4.01</td>
-            <td>3.50</td>
+            <td>3.5</td>
             <td>100</td>
           </tr>
         </table>

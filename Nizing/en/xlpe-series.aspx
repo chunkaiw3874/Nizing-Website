@@ -26,7 +26,7 @@
                         </tr>
                         <tr>
                             <td>Nominal Temperature:</td>
-                            <td>-40°C~ +105°C</td>
+                            <td>105°C</td>
                         </tr>
                         <tr>
                             <td>Conductor:</td>
@@ -56,7 +56,7 @@
                         </tr>
                         <tr>
                             <td>Nominal Temperature:</td>
-                            <td>-40°C~ +125°C</td>
+                            <td>125°C</td>
                         </tr>
                         <tr>
                             <td>Conductor:</td>
@@ -69,6 +69,38 @@
                     </table>
                 </div>
             </div>
+            <div class="content-column">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink11" runat="server" ImageUrl="~/en/images/product_pic/ul3265-menu.jpg" alt="UL3265 XLPE Wire" NavigateUrl="ul3265.aspx"></asp:HyperLink>
+                </div>
+                <div class="title">
+                    UL3265<br />
+                    XLPE Wire<br />
+                    Home Appliances Wiring
+                </div>
+                <div class="data">
+                    <table>
+                        <tr>
+                            <td>Nominal Voltage:</td>
+                            <td>150V</td>
+                        </tr>
+                        <tr>
+                            <td>Nominal Temperature:</td>
+                            <td>125°C</td>
+                        </tr>
+                        <tr>
+                            <td>Conductor:</td>
+                            <td>Tinned Copper</td>
+                        </tr>
+                        <tr>
+                            <td>Insulation:</td>
+                            <td>Cross-Linked Polyethylene</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>            
+        </div>
+        <div class="content-row">
             <div class="content-column">
                 <div class="button">
                     <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/en/images/product_pic/ul3266-menu.jpg" alt="UL3266 XLPE Wire" NavigateUrl="ul3266.aspx"></asp:HyperLink>
@@ -86,7 +118,7 @@
                         </tr>
                         <tr>
                             <td>Nominal Temperature:</td>
-                            <td>-40°C~ +125°C</td>
+                            <td>125°C</td>
                         </tr>
                         <tr>
                             <td>Conductor:</td>
@@ -99,8 +131,36 @@
                     </table>
                 </div>
             </div>
-        </div>
-        <div class="content-row">
+            <div class="content-column">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink12" runat="server" ImageUrl="~/en/images/product_pic/ul3271-menu.jpg" alt="UL3271 XLPE Wire" NavigateUrl="ul3271.aspx"></asp:HyperLink>
+                </div>
+                <div class="title">
+                    UL3271<br />
+                    XLPE Wire<br />
+                    Home Appliances Wiring
+                </div>
+                <div class="data">
+                    <table>
+                        <tr>
+                            <td>Nominal Voltage:</td>
+                            <td>600V</td>
+                        </tr>
+                        <tr>
+                            <td>Nominal Temperature:</td>
+                            <td>125°C</td>
+                        </tr>
+                        <tr>
+                            <td>Conductor:</td>
+                            <td>Tinned Copper</td>
+                        </tr>
+                        <tr>
+                            <td>Insulation:</td>
+                            <td>Cross-Linked Polyethylene</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
             <div class="content-column">
                 <div class="button">
                     <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/en/images/product_pic/ul3272-menu.jpg" alt="UL3272 XLPE Wire" NavigateUrl="ul3272.aspx"></asp:HyperLink>
@@ -118,7 +178,7 @@
                         </tr>
                         <tr>
                             <td>Nominal Temperature:</td>
-                            <td>-40°C~ +125°C</td>
+                            <td>125°C</td>
                         </tr>
                         <tr>
                             <td>Conductor:</td>
@@ -131,6 +191,8 @@
                     </table>
                 </div>
             </div>
+        </div>
+        <div class="content-row">
             <div class="content-column">
                 <div class="button">
                     <asp:HyperLink ID="HyperLink5" runat="server" ImageUrl="~/en/images/product_pic/ul3290-menu.jpg" alt="UL3290 XLPE Wire" NavigateUrl="ul3290.aspx"></asp:HyperLink>
@@ -148,7 +210,37 @@
                         </tr>
                         <tr>
                             <td>Nominal Temperature:</td>
-                            <td>-40°C~ +125°C</td>
+                            <td>125°C</td>
+                        </tr>
+                        <tr>
+                            <td>Conductor:</td>
+                            <td>Tinned Copper</td>
+                        </tr>
+                        <tr>
+                            <td>Insulation:</td>
+                            <td>Cross-Linked Polyethylene</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="content-column">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink13" runat="server" ImageUrl="~/en/images/product_pic/ul3302-menu.jpg" alt="UL3302 XLPE Wire" NavigateUrl="ul3302.aspx"></asp:HyperLink>
+                </div>
+                <div class="title">
+                    UL3302<br />
+                    XLPE Wire<br />
+                    Home Appliances Wiring
+                </div>
+                <div class="data">
+                    <table>
+                        <tr>
+                            <td>Nominal Voltage:</td>
+                            <td>30V</td>
+                        </tr>
+                        <tr>
+                            <td>Nominal Temperature:</td>
+                            <td>105°C</td>
                         </tr>
                         <tr>
                             <td>Conductor:</td>
@@ -178,7 +270,7 @@
                         </tr>
                         <tr>
                             <td>Nominal Temperature:</td>
-                            <td>-40°C~ +90°C</td>
+                            <td>90°C</td>
                         </tr>
                         <tr>
                             <td>Conductor:</td>
@@ -210,7 +302,7 @@
                         </tr>
                         <tr>
                             <td>Nominal Temperature:</td>
-                            <td>-40°C~ +150°C</td>
+                            <td>150°C</td>
                         </tr>
                         <tr>
                             <td>Conductor:</td>
@@ -223,6 +315,68 @@
                     </table>
                 </div>
             </div>
+            <div class="content-column">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink14" runat="server" ImageUrl="~/en/images/product_pic/ul3385-menu.jpg" alt="UL3385 XLPE Wire" NavigateUrl="ul3385.aspx"></asp:HyperLink>
+                </div>
+                <div class="title">
+                    UL3385<br />
+                    XLPE Wire<br />
+                    Home Appliances Wiring
+                </div>
+                <div class="data">
+                    <table>
+                        <tr>
+                            <td>Nominal Voltage:</td>
+                            <td>300V</td>
+                        </tr>
+                        <tr>
+                            <td>Nominal Temperature:</td>
+                            <td>105°C</td>
+                        </tr>
+                        <tr>
+                            <td>Conductor:</td>
+                            <td>Tinned Copper</td>
+                        </tr>
+                        <tr>
+                            <td>Insulation:</td>
+                            <td>Cross-Linked Polyethylene</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="content-column">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink15" runat="server" ImageUrl="~/en/images/product_pic/ul3386-menu.jpg" alt="UL3386 XLPE Wire" NavigateUrl="ul3386.aspx"></asp:HyperLink>
+                </div>
+                <div class="title">
+                    UL3386<br />
+                    XLPE Wire<br />
+                    Home Appliances Wiring
+                </div>
+                <div class="data">
+                    <table>
+                        <tr>
+                            <td>Nominal Voltage:</td>
+                            <td>600V</td>
+                        </tr>
+                        <tr>
+                            <td>Nominal Temperature:</td>
+                            <td>105°C</td>
+                        </tr>
+                        <tr>
+                            <td>Conductor:</td>
+                            <td>Tinned Copper</td>
+                        </tr>
+                        <tr>
+                            <td>Insulation:</td>
+                            <td>Cross-Linked Polyethylene</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="content-row">
             <div class="content-column">
                 <div class="button">
                     <asp:HyperLink ID="HyperLink8" runat="server" ImageUrl="~/en/images/product_pic/ul3613-menu.jpg" alt="UL3613 XLPE Wire" NavigateUrl="ul3613.aspx"></asp:HyperLink>
@@ -240,7 +394,7 @@
                         </tr>
                         <tr>
                             <td>Nominal Temperature:</td>
-                            <td>-40°C~ +150°C</td>
+                            <td>150°C</td>
                         </tr>
                         <tr>
                             <td>Conductor:</td>
@@ -255,7 +409,7 @@
             </div>
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink9" runat="server" ImageUrl="~/en/images/product_pic/ul3688-menu.jpg" alt="UL3688 雙InsulationXLPE Wire" NavigateUrl="ul3688.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink9" runat="server" ImageUrl="~/en/images/product_pic/ul3688-menu.jpg" alt="UL3688 Double Insulation XLPE Wire" NavigateUrl="ul3688.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     UL3688<br />
@@ -270,7 +424,7 @@
                         </tr>
                         <tr>
                             <td>Nominal Temperature:</td>
-                            <td>-40°C~ +105°C</td>
+                            <td>105°C</td>
                         </tr>
                         <tr>
                             <td>Conductor:</td>
@@ -287,8 +441,6 @@
                     </table>
                 </div>
             </div>
-        </div>
-        <div class="content-row">
             <div class="content-column">
                 <div class="button">
                     <asp:HyperLink ID="HyperLink10" runat="server" ImageUrl="~/en/images/product_pic/ul10368-menu.jpg" alt="UL10368 XLPE Wire" NavigateUrl="ul10368.aspx"></asp:HyperLink>
@@ -306,7 +458,7 @@
                         </tr>
                         <tr>
                             <td>Nominal Temperature:</td>
-                            <td>-40°C~ +105°C</td>
+                            <td>105°C</td>
                         </tr>
                         <tr>
                             <td>Conductor:</td>

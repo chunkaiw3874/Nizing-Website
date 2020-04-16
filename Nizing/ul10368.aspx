@@ -75,14 +75,15 @@
         UL10368 XLPE交連照射線 產品規格表
     </div>
     <div class="content">
-    <table>
+        <table>
           <tr>
             <td colspan="3">導體<br />
               Conductor</td>
             <td colspan="2">XLPE 絕緣體 <br />
               Insulator</td>
             <td rowspan="2">導體電阻<br />
-              Maximum Resistance at 20°C ohm/km</td>
+              Maximum Resistance at 20°C<br />
+                ohm/km</td>
             <td>包裝<br />
               Packing</td>
           </tr>
@@ -106,7 +107,7 @@
           </tr>
           <tr>
             <td>32</td>
-            <td>7 x 0.08</td>
+            <td>0.08 x 7</td>
             <td>0.24</td>
             <td>0.27</td>
             <td>0.78</td>
@@ -115,7 +116,7 @@
           </tr>
           <tr>
             <td>30</td>
-            <td>7 x 0.10</td>
+            <td>0.1 x 7</td>
             <td>0.31</td>
             <td>0.27</td>
             <td>0.85</td>
@@ -124,7 +125,7 @@
           </tr>
           <tr>
             <td>28</td>
-            <td>7 x 0.12</td>
+            <td>0.12 x 7</td>
             <td>0.37</td>
             <td>0.27</td>
             <td>0.91</td>
@@ -133,7 +134,7 @@
           </tr>
           <tr>
             <td>26</td>
-            <td>7 x 0.16</td>
+            <td>0.16 x 7</td>
             <td>0.49</td>
             <td>0.27</td>
             <td>1.03</td>
@@ -141,29 +142,34 @@
             <td>610</td>
           </tr>
           <tr>
-            <td>24</td>
-            <td>7 x 0.203</td>
-            <td>0.61</td>
-            <td>0.27</td>
-            <td>1.15</td>
-            <td>89.3</td>
-            <td>610</td>
+            <td rowspan="2">24</td>
+            <td>0.203 x 7</td>
+            <td rowspan="2">0.61</td>
+            <td rowspan="2">0.27</td>
+            <td rowspan="2">1.15</td>
+            <td rowspan="2">89.3</td>
+            <td rowspan="2">610</td>
+          </tr>
+          <tr>
+              <td>
+                  0.16 x 11
+              </td>
           </tr>
           <tr>
             <td rowspan="2">22</td>
-            <td>7 x 0.254</td>
+            <td>0.254 x 7</td>
             <td rowspan="2">0.76</td>
             <td rowspan="2">0.27</td>
-            <td rowspan="2">1.30</td>
+            <td rowspan="2">1.3</td>
             <td rowspan="2">56.4</td>
             <td rowspan="2">610</td>
           </tr>
           <tr>
-            <td>17 x 0.16</td>
-            </tr>
+            <td>0.16 x 17</td>
+          </tr>
           <tr>
             <td>20</td>
-            <td>21 x 0.18</td>
+            <td>0.18 x 21</td>
             <td>0.95</td>
             <td>0.27</td>
             <td>1.49</td>
@@ -171,51 +177,48 @@
             <td>610</td>
           </tr>
           <tr>
-            <td rowspan="2">18</td>
-            <td>34 x 0.18</td>
-            <td rowspan="2">1.17</td>
-            <td rowspan="2">0.30</td>
-            <td rowspan="2">1.77</td>
-            <td rowspan="2">22.2</td>
-            <td rowspan="2">610</td>
-          </tr>
-          <tr>
-          <td>16 x 0.254</td>
+            <td>18</td>
+            <td>0.254 x 16</td>
+            <td>1.17</td>
+            <td>0.3</td>
+            <td>1.77</td>
+            <td>22.2</td>
+            <td>610</td>
           </tr>
           <tr>
             <td>16</td>
-            <td>26 x 0.254</td>
-            <td>1.50</td>
+            <td>0.254 x 26</td>
+            <td>1.5</td>
             <td>0.38</td>
             <td>2.31</td>
-            <td>14.0</td>
+            <td>14</td>
             <td>305</td>
           </tr>
           <tr>
             <td>14</td>
-            <td>42 x 0.254</td>
-            <td>1.90</td>
-            <td>0.50</td>
-            <td>2.90</td>
-            <td>8.80</td>
+            <td>0.254 x 41</td>
+            <td>1.9</td>
+            <td>0.5</td>
+            <td>2.9</td>
+            <td>8.8</td>
             <td>305</td>
           </tr>
           <tr>
             <td>12</td>
-            <td>65    x 0.254</td>
+            <td>0.254 x 65</td>
             <td>2.37</td>
-            <td>0.50</td>
+            <td>0.5</td>
             <td>3.37</td>
             <td>5.53</td>
             <td>200</td>
           </tr>
           <tr>
             <td>10</td>
-            <td>105 x 0.254</td>
+            <td>0.254 x 105</td>
             <td>3.01</td>
-            <td>0.50</td>
+            <td>0.5</td>
             <td>4.01</td>
-            <td>3.50</td>
+            <td>3.5</td>
             <td>100</td>
           </tr>
         </table>
