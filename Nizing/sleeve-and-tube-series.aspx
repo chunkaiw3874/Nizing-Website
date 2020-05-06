@@ -75,7 +75,7 @@
                     <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/images/product_pic/ulsrg-menu.jpg" Text="UL SRG 單層玻纖套管" NavigateUrl="~/ulsrg.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
-                    UL SRG<br />
+                    UL SSG/SRG<br />
                     單層玻纖套管<br />
                     工業機器，電熱製品絕緣保護
                 </div>

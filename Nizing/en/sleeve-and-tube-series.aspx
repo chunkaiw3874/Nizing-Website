@@ -74,7 +74,7 @@
                     <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/en/images/product_pic/ulsrg-menu.jpg" alt="UL SRG Fiberglass Sleeve" NavigateUrl="ulsrg.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
-                    UL SRG<br />
+                    UL SSG/SRG<br />
                     Fiberglass Sleeve<br />
                     Insulation Protection for Industrial Machines
                 </div>

@@ -70,96 +70,144 @@
         UL FRS Fiberglass Silicone Sleeve Spec
     </div>
     <div class="content">
-    <table>
+        <table>
           <tr>
-            <td colspan="2">規格<br />
+            <td>規格<br />
               Specificetion<br />
-              (ID mm)</td>
-            <td colspan="2">平均壁厚<br />
+              (內徑mm)</td>
+            <td>平均壁厚<br />
               Average Thickness<br />
-              (mm)/ 4000V</td>
-            <td colspan="2">每卷長度<br />
+              (mm)/ 4KV</td>
+            <td>每卷長度<br />
               Meters/ Coil</td>
-            <td colspan="2">規格<br />
+            <td>規格<br />
               Specificetion<br />
-              (ID mm)</td>
-            <td colspan="2">平均壁厚<br />
+              (內徑mm)</td>
+            <td>平均壁厚<br />
               Average Thickness<br />
-              (mm)/ 4000V</td>
-            <td colspan="2">每卷長度<br />
+              (mm)/ 4kV</td>
+            <td>每卷長度<br />
               Meters/ Coils</td>
           </tr>
           <tr>
-            <td colspan="2">1</td>
-            <td colspan="2">0.43</td>
-            <td colspan="2">200</td>
-            <td colspan="2">10</td>
-            <td colspan="2">0.55</td>
-            <td colspan="2">100</td>
+            <td>0.5</td>
+            <td>0.45</td>
+            <td>200</td>
+            <td>10</td>
+            <td>0.65</td>
+            <td>50</td>
           </tr>
           <tr>
-            <td colspan="2">2</td>
-            <td colspan="2">0.43</td>
-            <td colspan="2">200</td>
-            <td colspan="2">11</td>
-            <td colspan="2">0.55</td>
-            <td colspan="2">50</td>
+            <td>0.8</td>
+            <td>0.45</td>
+            <td>200</td>
+            <td>12</td>
+            <td>0.65</td>
+            <td>50</td>
           </tr>
           <tr>
-            <td colspan="2">3</td>
-            <td colspan="2">0.43</td>
-            <td colspan="2">200</td>
-            <td colspan="2">12</td>
-            <td colspan="2">0.55</td>
-            <td colspan="2">50</td>
+            <td>1</td>
+            <td>0.5</td>
+            <td>200</td>
+            <td>14</td>
+            <td>0.65</td>
+            <td>50</td>
           </tr>
           <tr>
-            <td colspan="2">4</td>
-            <td colspan="2">0.43</td>
-            <td colspan="2">100</td>
-            <td colspan="2">13</td>
-            <td colspan="2">0.66</td>
-            <td colspan="2">50</td>
+            <td>1.5</td>
+            <td>0.5</td>
+            <td>200</td>
+            <td>16</td>
+            <td>0.65</td>
+            <td>50</td>
           </tr>
           <tr>
-            <td colspan="2">5</td>
-            <td colspan="2">0.55</td>
-            <td colspan="2">100</td>
-            <td colspan="2">14</td>
-            <td colspan="2">0.66</td>
-            <td colspan="2">50</td>
+            <td>2</td>
+            <td>0.5</td>
+            <td>200</td>
+            <td>18</td>
+            <td>0.7</td>
+            <td>50</td>
           </tr>
           <tr>
-            <td colspan="2">6</td>
-            <td colspan="2">0.55</td>
-            <td colspan="2">100</td>
-            <td colspan="2">15</td>
-            <td colspan="2">0.66</td>
-            <td colspan="2">1</td>
+            <td>2.5</td>
+            <td>0.5</td>
+            <td>100</td>
+            <td>20</td>
+            <td>0.7</td>
+            <td>50</td>
           </tr>
           <tr>
-            <td colspan="2">7</td>
-            <td colspan="2">0.55</td>
-            <td colspan="2">100</td>
-            <td colspan="2">16</td>
-            <td colspan="2">0.66</td>
-            <td colspan="2">1</td>
+            <td>3</td>
+            <td>0.52</td>
+            <td>100</td>
+            <td>22</td>
+            <td>0.7</td>
+            <td>50</td>
           </tr>
           <tr>
-            <td colspan="2">8</td>
-            <td colspan="2">0.55</td>
-            <td colspan="2">100</td>
-            <td colspan="2">17</td>
-            <td colspan="2">0.66</td>
-            <td colspan="2">1</td>
+            <td>3.5</td>
+            <td>0.52</td>
+            <td>100</td>
+            <td>24</td>
+            <td>0.7</td>
+            <td>50</td>
           </tr>
           <tr>
-            <td colspan="2">9</td>
-            <td colspan="2">0.55</td>
-            <td colspan="2">100</td>
-            <td colspan="2">　</td>
-            <td colspan="2">　</td>
-            <td colspan="2">　</td>
+            <td>4</td>
+            <td>0.52</td>
+            <td>100</td>
+            <td>25</td>
+            <td>0.7</td>
+            <td>50</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>0.58</td>
+            <td>100</td>
+            <td>26</td>
+            <td>0.7</td>
+            <td>50</td>
+          </tr>
+          <tr>
+            <td>5.5</td>
+            <td>0.58</td>
+            <td>100</td>
+            <td>28</td>
+            <td>0.7</td>
+            <td>50</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>0.58</td>
+            <td>100</td>
+            <td>30</td>
+            <td>0.7</td>
+            <td>50</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>0.58</td>
+            <td>100</td>
+            <td>32</td>
+            <td>1.3</td>
+            <td>50</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>0.58</td>
+            <td>100</td>
+            <td>40</td>
+            <td>1.3</td>
+            <td>50</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>0.58</td>
+            <td>50</td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
         </table>
     </div>

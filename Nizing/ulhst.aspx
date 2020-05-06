@@ -75,102 +75,126 @@
         UL HST 內膠外纖耐熱套管 產品規格表
     </div>
     <div class="content">
-    <table>
+        <table>
           <tr>
             <td>規格<br />
               Specificetion<br />
-              (內徑mm)</td>
-            <td>最低壁厚<br />
-              Minimum Wall Thickness<br />
+              (ID mm)</td>
+            <td>低壁厚<br />
+               Wall Thickness<br />
               (mm)</td>
-            <td>平均壁厚<br />
-              Average Thickness<br />
+            <td>外徑<br />
+              OD<br />
               (mm)</td>
             <td>包裝長度<br />
               Meters/ Coil</td>
           </tr>
           <tr>
             <td>1</td>
-            <td>0.45</td>
-            <td>0.55</td>
+            <td>0.6</td>
+            <td>2.2</td>
+            <td>200</td>
+          </tr>
+          <tr>
+            <td>1.2</td>
+            <td>0.6</td>
+            <td>2.4</td>
+            <td>200</td>
+          </tr>
+          <tr>
+            <td>1.5</td>
+            <td>0.6</td>
+            <td>2.7</td>
             <td>200</td>
           </tr>
           <tr>
             <td>2</td>
-            <td>0.45</td>
-            <td>0.55</td>
+            <td>0.6</td>
+            <td>3.2</td>
             <td>200</td>
           </tr>
           <tr>
             <td>2.5</td>
-            <td>0.45</td>
-            <td>0.7</td>
+            <td>0.6</td>
+            <td>3.7</td>
             <td>100</td>
           </tr>
           <tr>
             <td>3</td>
-            <td>0.5</td>
             <td>0.7</td>
+            <td>4.4</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td>3.5</td>
+            <td>0.7</td>
+            <td>4.9</td>
             <td>100</td>
           </tr>
           <tr>
             <td>4</td>
-            <td>0.5</td>
-            <td>0.8</td>
-            <td>100</td>
-          </tr>
-          <tr>
-            <td>4.2</td>
-            <td>0.5</td>
-            <td>0.8</td>
+            <td>0.7</td>
+            <td>5.4</td>
             <td>100</td>
           </tr>
           <tr>
             <td>4.5</td>
-            <td>0.5</td>
-            <td>0.8</td>
+            <td>0.7</td>
+            <td>5.9</td>
             <td>100</td>
           </tr>
           <tr>
             <td>5</td>
             <td>0.7</td>
-            <td>0.8</td>
+            <td>6.4</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td>5.5</td>
+            <td>0.7</td>
+            <td>6.9</td>
             <td>100</td>
           </tr>
           <tr>
             <td>6</td>
             <td>0.8</td>
-            <td>0.9</td>
+            <td>7.6</td>
             <td>100</td>
           </tr>
           <tr>
             <td>7</td>
             <td>0.8</td>
-            <td>0.9</td>
-            <td>50</td>
+            <td>8.6</td>
+            <td>100</td>
           </tr>
           <tr>
             <td>8</td>
             <td>0.8</td>
-            <td>0.9</td>
-            <td>50</td>
+            <td>9.6</td>
+            <td>100</td>
           </tr>
           <tr>
             <td>9</td>
-            <td>1</td>
-            <td>1.2</td>
+            <td>0.8</td>
+            <td>10.6</td>
             <td>50</td>
           </tr>
           <tr>
             <td>10</td>
-            <td>1</td>
-            <td>1.2</td>
+            <td>0.8</td>
+            <td>11.6</td>
             <td>50</td>
           </tr>
           <tr>
-            <td>MAX x 20.00</td>
-            <td>1.6</td>
-            <td>2</td>
+            <td>11</td>
+            <td>0.8</td>
+            <td>12.6</td>
+            <td>50</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td>0.8</td>
+            <td>13.6</td>
             <td>50</td>
           </tr>
         </table>
