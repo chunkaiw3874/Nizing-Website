@@ -1,12 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/en/master/product.master" AutoEventWireup="true" CodeFile="automotive-wire-standard-jaso.aspx.cs" Inherits="automotive_wire_standard_jaso" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" runat="Server">
     <title>JASO Japan Standard Automobile Wire - Nizing Electric Wire & Cable</title>
     <meta name="description" content="JASO Japan Standard Automobile Wire">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" runat="Server">
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div id="product-submenu">
         <div class="content-row">
             <div class="content-column">
@@ -364,7 +364,7 @@
                     JASO Spiral Shielding Cable<br />
                     Automobile Wire
                 </div>
-                <div class="data">
+<%--                <div class="data">
                     <table>
                         <tr>
                             <td>Nominal Temperature:</td>
@@ -379,7 +379,7 @@
                             <td>XLPE</td>
                         </tr>
                     </table>
-                </div>
+                </div>--%>
             </div>
             <div class="content-column">
                 <div class="button">
@@ -390,7 +390,7 @@
                     JASO Aluminum Shielding Cable<br />
                     Automobile Wire
                 </div>
-                <div class="data">
+                <%--<div class="data">
                     <table>
                         <tr>
                             <td>Nominal Temperature:</td>
@@ -405,7 +405,7 @@
                             <td>XLPE</td>
                         </tr>
                     </table>
-                </div>
+                </div>--%>
             </div>
         </div>
     </div>

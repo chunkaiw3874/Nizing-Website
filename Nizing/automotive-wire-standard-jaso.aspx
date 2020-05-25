@@ -364,7 +364,7 @@
                     日規橫捲隔離線<br />
                     汽車花線
                 </div>
-                <div class="data">
+<%--                <div class="data">
                     <table>
                         <tr>
                             <td>溫度範圍:</td>
@@ -379,7 +379,7 @@
                             <td>XLPE</td>
                         </tr>
                     </table>
-                </div>
+                </div>--%>
             </div>
             <div class="content-column">
                 <div class="button">
@@ -390,7 +390,7 @@
                     日規金屬箔隔離線<br />
                     汽車花線
                 </div>
-                <div class="data">
+<%--                <div class="data">
                     <table>
                         <tr>
                             <td>溫度範圍:</td>
@@ -405,7 +405,7 @@
                             <td>XLPE</td>
                         </tr>
                     </table>
-                </div>
+                </div>--%>
             </div>
         </div>
     </div>
