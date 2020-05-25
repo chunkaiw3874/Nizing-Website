@@ -43,397 +43,398 @@
     </div>
     <div class="content">
         <table>
-          <tr>
-            <td rowspan="2">代號<br />
-              Wire Code</td>
-            <td rowspan="2">規格<br />
-              Specification</td>
-            <td colspan="2">線徑<br />
-              Dimension</td>
-            <td rowspan="2">絕緣材質<br />
-              Insulation Material</td>
-            <td colspan="2">導體材質<br />
-              Conductor Material</td>
-            <td rowspan="2">環境溫度<br />
-              Temperature Range (°C)</td>
-            <td rowspan="2">米/卷<br />
-              Meters/ Coil</td>
-          </tr>
-          <tr>
-            <td>ID (mm)</td>
-            <td>OD (mm)<br />
-			  H x L</td>
-            <td>正極    (+)</td>
-            <td>負極    (-)</td>
-          </tr>
-          <tr>
-            <td>KC-PP-22S</td>
-            <td>0.3/4    x 2 (22 AWG)</td>
-            <td>1.45</td>
-            <td>2.50    x 3.80</td>
-            <td>PVC</td>
-            <td>OFC</td>
-            <td>Ni-Copper</td>
-            <td>0 ~ 105</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KC-PP-20S</td>
-            <td>0.3/7    x 2 (20 AWG)</td>
-            <td>1.50</td>
-            <td>2.50    x 3.80</td>
-            <td>PVC</td>
-            <td>OFC</td>
-            <td>Ni-Copper</td>
-            <td>0 ~ 105</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KC-PP-16S</td>
-            <td>0.6/4    x 2 (16 AWG)</td>
-            <td>2.45</td>
-            <td>4.50    x 7.00</td>
-            <td>PVC</td>
-            <td>OFC</td>
-            <td>Ni-Copper</td>
-            <td>0 ~ 105</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KC-PP-14S</td>
-            <td>0.6/7    x 2 (14 AWG)</td>
-            <td>2.80</td>
-            <td>4.50    x 7.20</td>
-            <td>PVC</td>
-            <td>OFC</td>
-            <td>Ni-Copper</td>
-            <td>0 ~ 105</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KC-P1P-14S</td>
-            <td>0.6/7    x 2 (14 AWG)</td>
-            <td>2.80</td>
-            <td>4.90    x 7.60</td>
-            <td>PVC-SUS304</td>
-            <td>OFC</td>
-            <td>Ni-Copper</td>
-            <td>0 ~ 105</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KC-1PP-14S</td>
-            <td>0.6/7    x 2 (14 AWG)</td>
-            <td>2.80</td>
-            <td>5.80    x 8.00</td>
-            <td>PVC-SUS304</td>
-            <td>OFC</td>
-            <td>Ni-Copper</td>
-            <td>0 ~ 105</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KX-GG-28N</td>
-            <td>0.3    x 2 (28 AWG)</td>
-            <td>0.75</td>
-            <td>1.40    x 2.50</td>
-            <td>玻璃纖維<br />
-              Fiberglass</td>
-            <td>Chromel<br />
-              Ni-Cr</td>
-            <td>Alumel<br />
-              Ni-Al</td>
-            <td>0 ~ 200</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KX-GG-22N</td>
-            <td>0.6    x 2 (22 AWG)</td>
-            <td>1.10</td>
-            <td>2.00    x 3.20</td>
-            <td>玻璃纖維<br />
-              Fiberglass</td>
-            <td>Chromel<br />
-              Ni-Cr</td>
-            <td>Alumel<br />
-              Ni-Al</td>
-            <td>0 ~ 200</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KC-GG-22S</td>
-            <td>0.3/4    x 2 (22 AWG)</td>
-            <td>1.20</td>
-            <td>2.05    x 3.30</td>
-            <td>玻璃纖維<br />
-              Fiberglass</td>
-            <td>OFC</td>
-            <td>Ni-Copper</td>
-            <td>0 ~ 200</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KC-GG-20S</td>
-            <td>0.3/7    x 2 (20 AWG)</td>
-            <td>1.50</td>
-            <td>2.00    x 3.50</td>
-            <td>玻璃纖維<br />
-              Fiberglass</td>
-            <td>OFC</td>
-            <td>Ni-Copper</td>
-            <td>0 ~ 200</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KC-GG-16S</td>
-            <td>0.6/4    x 2 (16 AWG)</td>           
-            <td>2.15</td>
-            <td>2.90 x 4.60</td>
-            <td>玻璃纖維<br />
-              Fiberglass</td>
-            <td>OFC</td>
-            <td>Ni-Copper</td>
-            <td>0 ~ 200</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KC-GG-14S</td>
-            <td>0.6/7    x 2 (14 AWG)</td>
-            <td>2.40</td>
-            <td>3.30    x 5.20</td>
-            <td>玻璃纖維<br />
-              Fiberglass</td>
-            <td>OFC</td>
-            <td>Ni-Copper</td>
-            <td>0 ~ 200</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KX-1GG-24N</td>
-            <td>0.5    x 2 (24 AWG)</td>
-            <td>1.00</td>
-            <td>1.65    x 2.85</td>
-            <td>玻璃纖維-不鏽鋼網<br />
-              Fiberglass-SUS304</td>
-            <td>Chromel<br />
-              Ni-Cr</td>
-            <td>Alumel<br />
-              Ni-Al</td>
-            <td>0 ~ 200</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KX-1GG-22N</td>
-            <td>0.6    x 2 (22 AWG)</td>
-            <td>1.10</td>
-            <td>1.75    x 2.95</td>
-            <td>玻璃纖維-不鏽鋼網<br />
-              Fiberglass-SUS305</td>
-            <td>Chromel<br />
-              Ni-Cr</td>
-            <td>Alumel<br />
-              Ni-Al</td>
-            <td>0 ~ 200</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KX-1GG-22S</td>
-            <td>0.3/4    x 2 (22 AWG)</td>
-            <td>1.20</td>
-            <td>1.80    x 3.05</td>
-            <td>玻璃纖維-不鏽鋼網<br />
-              Fiberglass-SUS306</td>
-            <td>Chromel<br />
-              Ni-Cr</td>
-            <td>Alumel<br />
-              Ni-Al</td>
-            <td>0 ~ 200</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KX-HH-36N</td>
-            <td>0.127    x 2 (36 AWG)</td>
-            <td>0.50</td>
-            <td>0.95    x 1.45</td>
-            <td>二氧化矽玻璃纖維<br />
-              Silica Fiber</td>
-            <td>Chromel<br />
-              Ni-Cr</td>
-            <td>Alumel<br />
-              Ni-Al</td>
-            <td>0 ~ 710</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KX-HH-30N</td>
-            <td>0.254    x 2 (30 AWG)</td>
-            <td>0.65</td>
-            <td>1.10    x 1.55</td>
-            <td>二氧化矽玻璃纖維<br />
-              Silica Fiber</td>
-            <td>Chromel<br />
-              Ni-Cr</td>
-            <td>Alumel<br />
-              Ni-Al</td>
-            <td>0 ~ 710</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KX-HH-24N</td>
-            <td>0.5    x 2 (24 AWG)</td>
-            <td>1.00</td>
-            <td>1.20    x 1.90</td>
-            <td>二氧化矽玻璃纖維<br />
-              Silica Fiber</td>
-            <td>Chromel<br />
-              Ni-Cr</td>
-            <td>Alumel<br />
-              Ni-Al</td>
-            <td>0 ~ 710</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KX-HH-22N</td>
-            <td>0.6    x 2 (22 AWG)</td>
-            <td>1.10</td>
-            <td>1.70    x 2.70</td>
-            <td>二氧化矽玻璃纖維<br />
-              Silica Fiber</td>
-            <td>Chromel<br />
-              Ni-Cr</td>
-            <td>Alumel<br />
-              Ni-Al</td>
-            <td>0 ~ 710</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KX-HH-20N</td>
-            <td>0.8    x 2 (20 AWG)</td>
-            <td>1.30</td>
-            <td>1.75    x 2.75</td>
-            <td>二氧化矽玻璃纖維<br />
-              Silica Fiber</td>
-            <td>Chromel<br />
-              Ni-Cr</td>
-            <td>Alumel<br />
-              Ni-Al</td>
-            <td>0 ~ 710</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KX-CC-24N</td>
-            <td>0.5 x 2 (24 AWG)</td>
-            <td>1.00</td>
-            <td>1.20 x 1.90</td>
-            <td>陶瓷纖維<br />
-              Ceramics Fiber</td>
-            <td>Chromel<br />
-              Ni-Cr</td>
-            <td>Alumel<br />
-              Ni-Al</td>
-            <td>0 ~ 1200</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KX-CC-20N</td>
-            <td>0.8 x 2 (20 AWG)</td>
-            <td>1.30</td>
-            <td>1.75 x 2.75</td>
-            <td>陶瓷纖維<br />
-              Ceramics Fiber</td>
-            <td>Chromel<br />
-              Ni-Cr</td>
-            <td>Alumel<br />
-              Ni-Al</td>
-            <td>0 ~ 1200</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KX-TT-36N</td>
-            <td>0.127    x 2 (36 AWG)</td>
-            <td>0.29</td>
-            <td>0.42 x 0.75</td>
-            <td>聚合氟化物<br />
-              Fluoropolymer</td>
-            <td>Chromel<br />
-              Ni-Cr</td>
-            <td>Alumel<br />
-              Ni-Al</td>
-            <td>0 ~ 200</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KX-TT-28N</td>
-            <td>0.3    x 2 (28 AWG)</td>
-            <td>0.65</td>
-            <td>1.20    x 1.80</td>
-            <td>聚合氟化物<br />
-              Fluoropolymer</td>
-            <td>Chromel<br />
-              Ni-Cr</td>
-            <td>Alumel<br />
-              Ni-Al</td>
-            <td>0 ~ 200</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KX-TT-24N</td>
-            <td>0.5    x 2 (24 AWG)</td>
-            <td>0.85</td>
-            <td>1.20    x 1.85</td>
-            <td>聚合氟化物<br />
-              Fluoropolymer</td>
-            <td>Chromel<br />
-              Ni-Cr</td>
-            <td>Alumel<br />
-              Ni-Al</td>
-            <td>0 ~ 200</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KX-TT-22N</td>
-            <td>0.6    x 2 (22 AWG)</td>
-            <td>1.05</td>
-            <td>1.50    x 2.50</td>
-            <td>聚合氟化物<br />
-              Fluoropolymer</td>
-            <td>Chromel<br />
-              Ni-Cr</td>
-            <td>Alumel<br />
-              Ni-Al</td>
-            <td>0 ~ 200</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>KX-KK-24N</td>
-            <td>0.5    x 2 (24 AWG)</td>
-            <td rowspan="2">1.00</td>
-            <td rowspan="2">1.20    x 2.20</td>
-            <td rowspan="2">KAPTON</td>
-            <td rowspan="2">Chromel<br />
-              Ni-Cr</td>
-            <td rowspan="2">Alumel<br />
-              Ni-Al</td>
-            <td rowspan="2">0 ~ 316</td>
-            <td rowspan="2">200</td>
-          </tr>
-          <tr>
-            <td>KX-KK-24S</td>
-            <td>0.2/7 x 2 (24 AWG)</td>
-          </tr>
-          <tr>
-            <td>KX-KK-20N</td>
-            <td>0.8    x 2 (20 AWG)</td>
-            <td>1.30</td>
-            <td>2.00    x 3.00</td>
-            <td>KAPTON</td>
-            <td>Chromel<br />
-              Ni-Cr</td>
-            <td>Alumel<br />
-              Ni-Al</td>
-            <td>0 ~ 316</td>
-            <td>200</td>
-          </tr>
+            <tr>
+                <td rowspan="2">代號<br />
+                    Wire Code</td>
+                <td rowspan="2">規格<br />
+                    Specification</td>
+                <td colspan="2">線徑<br />
+                    Dimension</td>
+                <td rowspan="2">絕緣材質<br />
+                    Insulation Material</td>
+                <td colspan="2">導體材質<br />
+                    Conductor Material</td>
+                <td rowspan="2">環境溫度<br />
+                    Temperature Range (°C)</td>
+                <td rowspan="2">米/卷<br />
+                    Meters/ Coil</td>
+            </tr>
+            <tr>
+                <td>ID (mm)</td>
+                <td>OD (mm)<br />
+                    H x L</td>
+                <td>+</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>KC-PP-22</td>
+                <td>0.3/4 x 2 (22 AWG)</td>
+                <td>1.45</td>
+                <td>2.4 x 3.75</td>
+                <td>PVC</td>
+                <td>OFC</td>
+                <td>Ni-Cu</td>
+                <td>0 ~ 105</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KC-PP-20</td>
+                <td>0.3/7 x 2 (20 AWG)</td>
+                <td>1.5</td>
+                <td>2.4 x 3.75</td>
+                <td>PVC</td>
+                <td>OFC</td>
+                <td>Ni-Cu</td>
+                <td>0 ~ 105</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KC-PP-16</td>
+                <td>0.6/4 x 2 (16 AWG)</td>
+                <td>2.45</td>
+                <td>4.5 x 7</td>
+                <td>PVC</td>
+                <td>OFC</td>
+                <td>Ni-Cu</td>
+                <td>0 ~ 105</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KC-PP-14</td>
+                <td>0.6/7 x 2 (14 AWG)</td>
+                <td>2.8</td>
+                <td>4.5 x 7.2</td>
+                <td>PVC</td>
+                <td>OFC</td>
+                <td>Ni-Cu</td>
+                <td>0 ~ 105</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KC-P1P-14</td>
+                <td>0.6/7 x 2 (14 AWG)</td>
+                <td>2.8</td>
+                <td>5.2 x 7.5</td>
+                <td>PVC-SUS304</td>
+                <td>OFC</td>
+                <td>Ni-Cu</td>
+                <td>0 ~ 105</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KC-1PP-14</td>
+                <td>0.6/7 x 2 (14 AWG)</td>
+                <td>2.8</td>
+                <td>4.95 x 7.65</td>
+                <td>PVC-SUS304</td>
+                <td>OFC</td>
+                <td>Ni-Cu</td>
+                <td>0 ~ 105</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KX-GG-28N</td>
+                <td>0.3 x 2 (28 AWG)</td>
+                <td>0.7</td>
+                <td>1.2 x 1.8</td>
+                <td>玻璃纖維<br />
+                    Fiberglass</td>
+                <td>Chromel<br />
+                    Ni-Cr</td>
+                <td>Alumel<br />
+                    Ni-Al</td>
+                <td>0 ~ 200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KX-GG-22N</td>
+                <td>0.6 x 2 (22 AWG)</td>
+                <td>1.1</td>
+                <td>2 x 3.2</td>
+                <td>玻璃纖維<br />
+                    Fiberglass</td>
+                <td>Chromel<br />
+                    Ni-Cr</td>
+                <td>Alumel<br />
+                    Ni-Al</td>
+                <td>0 ~ 200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KC-GG-22</td>
+                <td>0.3/4 x 2 (22 AWG)</td>
+                <td>1.6</td>
+                <td>2.3 x 3.6</td>
+                <td>玻璃纖維<br />
+                    Fiberglass</td>
+                <td>OFC</td>
+                <td>Ni-Cu</td>
+                <td>0 ~ 200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KC-GG-20</td>
+                <td>0.3/7 x 2 (20 AWG)</td>
+                <td>1.7</td>
+                <td>2.4 x 3.8</td>
+                <td>玻璃纖維<br />
+                    Fiberglass</td>
+                <td>OFC</td>
+                <td>Ni-Cu</td>
+                <td>0 ~ 200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KC-GG-16</td>
+                <td>0.6/4 x 2 (16 AWG)</td>
+                <td>2.05</td>
+                <td>2.8 x 4.9</td>
+                <td>玻璃纖維<br />
+                    Fiberglass</td>
+                <td>OFC</td>
+                <td>Ni-Cu</td>
+                <td>0 ~ 200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KC-GG-14</td>
+                <td>0.6/7 x 2 (14 AWG)</td>
+                <td>2.4</td>
+                <td>3.3 x 5.2</td>
+                <td>玻璃纖維<br />
+                    Fiberglass</td>
+                <td>OFC</td>
+                <td>Ni-Cu</td>
+                <td>0 ~ 200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KX-1G-24N</td>
+                <td>0.5 x 2 (24 AWG)</td>
+                <td>0.95</td>
+                <td>1.6 x 2.3</td>
+                <td>玻璃纖維-不鏽鋼網<br />
+                    Fiberglass-SUS304</td>
+                <td>Chromel<br />
+                    Ni-Cr</td>
+                <td>Alumel<br />
+                    Ni-Al</td>
+                <td>0 ~ 200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KX-1GG-22N</td>
+                <td>0.6 x 2 (22 AWG)</td>
+                <td>1.1</td>
+                <td>1.8 x 2.7</td>
+                <td>玻璃纖維-不鏽鋼網<br />
+                    Fiberglass-SUS305</td>
+                <td>Chromel<br />
+                    Ni-Cr</td>
+                <td>Alumel<br />
+                    Ni-Al</td>
+                <td>0 ~ 200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KX-1G-22</td>
+                <td>0.3/4 x 2 (22 AWG)</td>
+                <td>1.2</td>
+                <td>1.8 x 2.7</td>
+                <td>玻璃纖維-不鏽鋼網<br />
+                    Fiberglass-SUS306</td>
+                <td>Chromel<br />
+                    Ni-Cr</td>
+                <td>Alumel<br />
+                    Ni-Al</td>
+                <td>0 ~ 200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KX-HH-30N</td>
+                <td>0.254 x 2 (30 AWG)</td>
+                <td>0.7</td>
+                <td>1.4 x 2.05</td>
+                <td>二氧化矽玻璃纖維<br />
+                    Silica Fiber</td>
+                <td>Chromel<br />
+                    Ni-Cr</td>
+                <td>Alumel<br />
+                    Ni-Al</td>
+                <td>0 ~ 710</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KX-HH-24N</td>
+                <td>0.5 x 2 (24 AWG)</td>
+                <td>0.9</td>
+                <td>1.6 x 2.3</td>
+                <td>二氧化矽玻璃纖維<br />
+                    Silica Fiber</td>
+                <td>Chromel<br />
+                    Ni-Cr</td>
+                <td>Alumel<br />
+                    Ni-Al</td>
+                <td>0 ~ 710</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KX-HH-22N</td>
+                <td>0.6 x 2 (22 AWG)</td>
+                <td>1.2</td>
+                <td>1.6 x 2.55</td>
+                <td>二氧化矽玻璃纖維<br />
+                    Silica Fiber</td>
+                <td>Chromel<br />
+                    Ni-Cr</td>
+                <td>Alumel<br />
+                    Ni-Al</td>
+                <td>0 ~ 710</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KX-HH-20N</td>
+                <td>0.8 x 2 (20 AWG)</td>
+                <td>1.3</td>
+                <td>1.7 x 2.8</td>
+                <td>二氧化矽玻璃纖維<br />
+                    Silica Fiber</td>
+                <td>Chromel<br />
+                    Ni-Cr</td>
+                <td>Alumel<br />
+                    Ni-Al</td>
+                <td>0 ~ 710</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KX-CC-24N</td>
+                <td>0.5 x 2 (24 AWG)</td>
+                <td>0.9</td>
+                <td>1.6 x 2.3</td>
+                <td>陶瓷纖維<br />
+                    Ceramics Fiber</td>
+                <td>Chromel<br />
+                    Ni-Cr</td>
+                <td>Alumel<br />
+                    Ni-Al</td>
+                <td>0 ~ 1200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KX-CC-20N</td>
+                <td>0.8 x 2 (20 AWG)</td>
+                <td>1.3</td>
+                <td>1.7 x 2.8</td>
+                <td>陶瓷纖維<br />
+                    Ceramics Fiber</td>
+                <td>Chromel<br />
+                    Ni-Cr</td>
+                <td>Alumel<br />
+                    Ni-Al</td>
+                <td>0 ~ 1200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td rowspan="2">KX-TT-36N</td>
+                <td rowspan="2">0.127 x 2 (36 AWG)</td>
+                <td>0.35</td>
+                <td>0.45 x 0.8</td>
+                <td rowspan="2">鐵氟龍<br />
+                    Teflon</td>
+                <td rowspan="2">Chromel<br />
+                    Ni-Cr</td>
+                <td rowspan="2">Alumel<br />
+                    Ni-Al</td>
+                <td rowspan="2">0 ~ 200</td>
+                <td rowspan="2">200</td>
+            </tr>
+            <tr>
+                <td>
+                    0.4
+                </td>
+                <td>0.65 x 1.05</td>
+            </tr>
+            <tr>
+                <td>KX-TT-28N</td>
+                <td>0.3 x 2 (28 AWG)</td>
+                <td>0.65</td>
+                <td>1.2 x 1.8</td>
+                <td>鐵氟龍<br />
+                    Teflon</td>
+                <td>Chromel<br />
+                    Ni-Cr</td>
+                <td>Alumel<br />
+                    Ni-Al</td>
+                <td>0 ~ 200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KX-TT-24N</td>
+                <td>0.5 x 2 (24 AWG)</td>
+                <td>0.9</td>
+                <td>1.4 x 2.3</td>
+                <td>鐵氟龍<br />
+                    Teflon</td>
+                <td>Chromel<br />
+                    Ni-Cr</td>
+                <td>Alumel<br />
+                    Ni-Al</td>
+                <td>0 ~ 200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KX-TT-22N</td>
+                <td>0.6 x 2 (22 AWG)</td>
+                <td>1.05</td>
+                <td>1.75 x 2.75</td>
+                <td>鐵氟龍<br />
+                    Teflon</td>
+                <td>Chromel<br />
+                    Ni-Cr</td>
+                <td>Alumel<br />
+                    Ni-Al</td>
+                <td>0 ~ 200</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KX-KK-24N</td>
+                <td>0.5 x 2 (24 AWG)</td>
+                <td>0.6</td>
+                <td>0.75 x 1.3</td>
+                <td>KAPTON</td>
+                <td>Chromel<br />
+                    Ni-Cr</td>
+                <td>Alumel<br />
+                    Ni-Al</td>
+                <td>0 ~ 400</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KX-KK-24</td>
+                <td>0.2/7 x 2 (24 AWG)</td>
+                <td>0.7</td>
+                <td>0.8 x 1.5</td>
+                <td>KAPTON</td>
+                <td>Chromel<br />
+                    Ni-Cr</td>
+                <td>Alumel<br />
+                    Ni-Al</td>
+                <td>0 ~ 400</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>KX-KK-20N</td>
+                <td>0.8 x 2 (20 AWG)</td>
+                <td>0.9</td>
+                <td>1 x 1.9</td>
+                <td>KAPTON</td>
+                <td>Chromel<br />
+                    Ni-Cr</td>
+                <td>Alumel<br />
+                    Ni-Al</td>
+                <td>0 ~ 400</td>
+                <td>200</td>
+            </tr>
         </table>
     </div>
     <div class="subtitle">

@@ -1,12 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/en/master/product.master" AutoEventWireup="true" CodeFile="automotive-wire-standard-iso.aspx.cs" Inherits="automotive_wire_standard_iso" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" runat="Server">
     <title>ISO Euro Standard Automobile Wire - Nizing Electric Wire & Cable</title>
     <meta name="description" content="ISO Euro Standard Automobile Wire">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" runat="Server">
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div id="product-submenu">
         <div class="content-row">
             <div class="content-column">
@@ -270,7 +270,7 @@
                     <table>
                         <tr>
                             <td>Nominal Temperature:</td>
-                            <td>-40°C~+125°C</td>
+                            <td>-40°C~+105°C</td>
                         </tr>
                         <tr>
                             <td>Conductor:</td>
@@ -278,7 +278,11 @@
                         </tr>
                         <tr>
                             <td>Insulation:</td>
-                            <td>XLPE</td>
+                            <td>PVC</td>
+                        </tr>
+                        <tr>
+                            <td>Jacket:</td>
+                            <td>PVC</td>
                         </tr>
                     </table>
                 </div>

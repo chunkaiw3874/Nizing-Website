@@ -278,7 +278,11 @@
                         </tr>
                         <tr>
                             <td>絕緣:</td>
-                            <td>XLPE</td>
+                            <td>PVC</td>
+                        </tr>
+                        <tr>
+                            <td>披覆:</td>
+                            <td>PVC</td>
                         </tr>
                     </table>
                 </div>

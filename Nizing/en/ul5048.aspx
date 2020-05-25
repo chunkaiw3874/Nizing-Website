@@ -79,14 +79,21 @@
         UL5048 Anti-Refrigerant PETP Insulation Wire Spec
     </div>
     <div class="content">
-    <table>
+        <table>
         <tr>
           <td colspan="3">導體<br />
             Conductor</td>
-          <td colspan="4">特多龍纖維編織外覆<br />
-            PETP Jacket</td>
-          <td colspan="3">電氣特性<br />
-            Electrical Characteristic</td>
+          <td colspan="4">聚酯纖維絕緣<br />
+            Polyester Film and Braid</td>
+          <td rowspan="2">完成外徑<br />
+            Outside Diameter<br />
+            mm</td>
+          <td rowspan="2">導體電阻<br />
+            Maximum Resistance at 20°C<br />
+              ohm/km</td>
+          <td rowspan="2">電流量<br />
+            Current Capacity at 170°C<br />
+              AMP</td>
         </tr>
         <tr>
           <td>截面積<br />
@@ -95,108 +102,139 @@
             Composition <br />
             No. x mm</td>
           <td>內徑<br />
-            Inside<br />
-            Diameter <br />
+            Inside Diameter <br />
 			mm</td>
-          <td>內層結購<br />
-            Comp. of Inner Layer</td>
-          <td>內層厚度<br />
-            Thickness of Inner Layer</td>
-          <td>外層結構<br />
-            Comp. of Inner Layer</td>
-          <td>外層厚度<br />
-            Thickness of Outer Layer</td>
-          <td>完成外徑<br />
-            Outside Diameter<br />
-            mm</td>
-          <td>導體電阻<br />
-            Maximum Resistance at 20°C ohm/km</td>
-          <td>電流量<br />
-            Intens. Max 1.maxa 170°C-AMP</td>
+          <td>內編織厚度<br />
+            Thickness of Inner Braid</td>
+          <td>內隔離厚度<br />
+            Thickness of Inner Insulation</td>
+          <td>外隔離厚度<br />
+            Comp. of Outer Insulation</td>
+          <td>外編織厚度<br />
+            Thickness of Outer Braid</td>
         </tr>
         <tr>
           <td>0.75</td>
           <td>0.12/9 x 7</td>
           <td>1.1</td>
-          <td>3 x 20</td>
-          <td>0.30 </td>
-          <td>4 x 20</td>
-          <td>0.30 </td>
-          <td>2.50 </td>
+          <td>0.2</td>
+          <td>0.025</td>
+          <td>0.025</td>
+          <td>0.2</td>
+          <td>2</td>
           <td>25.8</td>
-          <td>7</td>
+          <td>8</td>
         </tr>
         <tr>
           <td>1.25</td>
           <td>0.12/16 x 7</td>
           <td>1.4</td>
-          <td>3 x 20</td>
-          <td>0.30 </td>
-          <td>4 x 20</td>
-          <td>0.30 </td>
-          <td>2.80</td>
+          <td>0.2</td>
+          <td>0.025 </td>
+          <td>0.025</td>
+          <td>0.2</td>
+          <td>2.3</td>
           <td>15.5</td>
-          <td>12 </td>
+          <td>11</td>
         </tr>
         <tr>
-          <td>2.0</td>
+          <td>2</td>
           <td>0.12/25 x 7</td>
           <td>2.1</td>
-          <td>3 x 20</td>
-          <td>0.30 </td>
-          <td>4 x 20</td>
-          <td>0.30 </td>
-          <td>3.00</td>
+          <td>0.2</td>
+          <td>0.025</td>
+          <td>0.025</td>
+          <td>0.2</td>
+          <td>3</td>
           <td>9.91</td>
-          <td>17</td>
+          <td>15</td>
         </tr>
         <tr>
-          <td>3.0</td>
+          <td>3</td>
           <td>0.12/37 x 7</td>
           <td>2.4</td>
-          <td>3 x 20</td>
-          <td>0.30 </td>
-          <td>4 x 20</td>
-          <td>0.30 </td>
-          <td>3.30</td>
+          <td>0.2</td>
+          <td>0.025</td>
+          <td>0.025</td>
+          <td>0.2</td>
+          <td>3.3</td>
           <td>8.83</td>
-          <td>21.5</td>
+          <td>19</td>
         </tr>
         <tr>
           <td>3.5</td>
           <td>0.12/40 x 7</td>
           <td>2.7</td>
-          <td>3 x 20</td>
-          <td>0.30 </td>
-          <td>4 x 20</td>
-          <td>0.30 </td>
-          <td>3.50</td>
+          <td>0.2</td>
+          <td>0.025</td>
+          <td>0.025</td>
+          <td>0.2</td>
+          <td>3.6</td>
           <td>5.38</td>
-          <td>23</td>
+          <td>21</td>
         </tr>
         <tr>
           <td>4.5</td>
           <td>0.12/57 x 7</td>
-          <td>3.1</td>
-          <td>3 x 20</td>
-          <td>0.30 </td>
-          <td>4 x 20</td>
-          <td>0.30 </td>
-          <td>3.80</td>
-          <td>6.40</td>
-          <td>30</td>
+          <td>3</td>
+          <td>0.2</td>
+          <td>0.025</td>
+          <td>0.025</td>
+          <td>0.2</td>
+          <td>3.9</td>
+          <td>6.4</td>
+          <td>24.5</td>
         </tr>
         <tr>
           <td>5.5</td>
           <td>0.12/70 x 7</td>
+          <td>3.2</td>
+          <td>0.2</td>
+          <td>0.025</td>
+          <td>0.025</td>
+          <td>0.2</td>
+          <td>4.1</td>
           <td>3.5</td>
-          <td>3 x 20</td>
-          <td>0.30 </td>
-          <td>4 x 20</td>
-          <td>0.30 </td>
-          <td>4.10</td>
-          <td>3.50</td>
+          <td>28</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>0.16/57 x 7</td>
+          <td>4.3</td>
+          <td>0.25</td>
+          <td>0.025</td>
+          <td>0.025</td>
+          <td>0.25</td>
+          <td>5.4</td>
+          <td>2.45</td>
           <td>35</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td>0.16/35 x 19</td>
+          <td>5.6</td>
+          <td>0.25</td>
+          <td>0.025</td>
+          <td>0.025</td>
+          <td>0.25</td>
+          <td>6.8</td>
+          <td>1.39</td>
+          <td>88</td>
+        </tr>
+        <tr>
+          <td rowspan="2">22</td>
+          <td>0.16/57 x 19</td>
+          <td rowspan="2">7</td>
+          <td rowspan="2">0.25</td>
+          <td rowspan="2">0.025</td>
+          <td rowspan="2">0.025</td>
+          <td rowspan="2">0.25</td>
+          <td rowspan="2">8.2</td>
+          <td rowspan="2">0.892</td>
+          <td rowspan="2">115</td>
+        </tr>
+        <tr>
+            <td>0.12/102 x 19</td>
         </tr>
         </table>
     </div>
