@@ -25,7 +25,7 @@
     UL2464/UL2517
 </asp:Content>
 <asp:Content ID="Content8" ContentPlaceHolderID="titleRowLink" Runat="Server">
-    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/en/pdf/ul2464_ul2517.pdf" ImageUrl="~/en/images/button/download_pdf_button2.jpg" Target="_blank"></asp:HyperLink>
+    <%--<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/en/pdf/ul2464_ul2517.pdf" ImageUrl="~/en/images/button/download_pdf_button2.jpg" Target="_blank"></asp:HyperLink>--%>
 </asp:Content>
 <asp:Content ID="Content9" ContentPlaceHolderID="briefDescription" Runat="Server">
     <div class="subtitle">

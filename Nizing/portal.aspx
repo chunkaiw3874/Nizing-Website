@@ -16,8 +16,11 @@
             <div style="margin-right:50px;">
                 <a href="revivify_employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/RVI.png" /></a>
             </div>
-            <div>
+            <div style="margin-right:50px;">
                 <a href="neo_employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/NEO.png" /></a>
+            </div>
+            <div>
+                <a href="sunrise_employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/SUNRISE.png" width="146" height="146" /></a>
             </div>
             <div>
                 <%--<a href="oqs/quotation-list.aspx" target="_blank">oqs</a>--%>

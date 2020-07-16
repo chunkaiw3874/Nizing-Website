@@ -45,8 +45,8 @@ public partial class main : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //test area
-        Session["erp_id"] = "0080";
-        Session["user_id"] = "0080";
+        Session["erp_id"] = "0159";
+        Session["user_id"] = "0159";
 
         //if(false)
         if (!((masterPage_HR360_Master)this.Master.Master).CheckAuthentication())        
@@ -210,8 +210,16 @@ public partial class main : System.Web.UI.Page
                     }                    
                     Session["firstPartDayOff"] = doubleFirstPartFinal;
                     Session["secondPartDayOff"] = doubleSecondPartFinal;
-                    Session["startYear"] = dtUserInfo.Rows[0]["START_YEAR"].ToString();
-                    Session["startDate"] = dtUserInfo.Rows[0]["START_MONTH"].ToString() + dtUserInfo.Rows[0]["START_DAY"].ToString();
+                    //if (Session["erp_id"].ToString() == "0159" || Session["erp_id"].ToString() == "0160")
+                    //{
+                    //    Session["startYear"] = "2019";
+                    //    Session["startDate"] = "0530";
+                    //}
+                    //else
+                    //{
+                        Session["startYear"] = dtUserInfo.Rows[0]["START_YEAR"].ToString();
+                        Session["startDate"] = dtUserInfo.Rows[0]["START_MONTH"].ToString() + dtUserInfo.Rows[0]["START_DAY"].ToString();
+                    //}
                     //顯示剩餘特休
                     if (dtUserInfo.Rows.Count > 0)
                     {

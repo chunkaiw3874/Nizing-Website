@@ -25,7 +25,7 @@
     E-Type
 </asp:Content>
 <asp:Content ID="Content8" ContentPlaceHolderID="titleRowLink" runat="Server">
-    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/en/pdf/e-type.pdf" ImageUrl="~/en/images/button/download_pdf_button2.jpg" Target="_blank"></asp:HyperLink>
+    <%--<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/en/pdf/e-type.pdf" ImageUrl="~/en/images/button/download_pdf_button2.jpg" Target="_blank"></asp:HyperLink>--%>
 </asp:Content>
 <asp:Content ID="Content9" ContentPlaceHolderID="briefDescription" runat="Server">
     <div class="subtitle">

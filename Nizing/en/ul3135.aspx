@@ -26,7 +26,7 @@
     UL3135
 </asp:Content>
 <asp:Content ID="Content8" ContentPlaceHolderID="titleRowLink" runat="server">
-    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/en/pdf/ul3135.pdf" ImageUrl="~/en/images/button/download_pdf_button2.jpg" Target="_blank"></asp:HyperLink>
+    <%--<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/en/pdf/ul3135.pdf" ImageUrl="~/en/images/button/download_pdf_button2.jpg" Target="_blank"></asp:HyperLink>--%>
 </asp:Content>
 <asp:Content ID="Content9" ContentPlaceHolderID="briefDescription" Runat="Server">
     <div class="subtitle">
@@ -117,7 +117,7 @@
           <tr>
             <td>26</td>
             <td>7 x 0.16</td>
-            <td>0.18</td>
+            <td>0.14</td>
             <td>0.55</td>
             <td>0.75 </td>
             <td>2.05</td>
