@@ -14,6 +14,16 @@
                     <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD-1.png" PostBackUrl="~/sunrise_employee_section/report/SD01.aspx" /></li>
                 <li>
             </ul>
+        </div>        
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <ul>
+                <li>
+                    <asp:Image ID="Image2" runat="server" ImageUrl="~/employee_section/report/image/button/dept/IC.png" /></li>
+            </ul>
+            <ul>
+                <li>
+                    <asp:ImageButton ID="btnInvCheck" runat="server" ImageUrl="~/employee_section/report/image/button/dept/inventory.png" PostBackUrl="~/sunrise_employee_section/report/InventorySearch.aspx" /></li>
+            </ul>
         </div>
     </div>
 </asp:Content>
