@@ -94,6 +94,9 @@
                 <li>
                     <a href="nizing_intranet/PD02_NetSpending.aspx">廠商進貨金額表</a>
                 </li>
+                <li>
+                    <a href="nizing_intranet/PD_PurchaseInProgress.aspx">採購未交單</a>
+                </li>
             </ul>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">

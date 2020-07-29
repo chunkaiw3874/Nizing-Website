@@ -69,7 +69,7 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <asp:CheckBox ID="chkInvShowZero" runat="server" Text="顯示實際在庫量為0的項目" Checked="true" />
+                            <asp:CheckBox ID="chkInvShowZero" runat="server" Text="顯示實際在庫量為0的項目" Checked="false" />
                         </td>
                         <td></td>
 <%--                        <td>
