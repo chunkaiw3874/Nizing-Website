@@ -20,7 +20,6 @@
                 <li>
                     <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/employee_section/report/image/button/dept/OrderInProgress.png" PostBackUrl="~/sunrise_employee_section/report/SD03_OrderInProgress.aspx" />
                 </li>
-                採購未進貨明細表
             </ul>
         </div>        
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
