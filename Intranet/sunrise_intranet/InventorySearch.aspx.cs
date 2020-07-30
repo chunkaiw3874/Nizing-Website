@@ -56,7 +56,9 @@ public partial class InventorySearch : System.Web.UI.Page
     {
         string query = "SELECT COALESCE(INVMB.MB001, '') [ITEM_ID]"
                     + " , COALESCE(INVMB.MB002, '') [ITEM_NAME]"
-                    + " , COALESCE(INVMB.MB003, '') [ITEM_SPEC]"
+                    + " , COALESCE(INVMB.MB003, '') [ITEM_SPEC]"                    
+                    + " , CONVERT(DECIMAL(20,2),COALESCE(INVMB.MB049,0)) [LAST_PURCHASE_PRICE]"
+                    + " , COALESCE(INVMB.MB048,'') [LAST_PURCHASE_CURRENCY]"
                     + " , CONVERT(DECIMAL(20,0),COALESCE(INVMC.MC007, 0)) [AMOUNT_IN_INV]"
                     + " , COALESCE(INVMB.MB004, '') [UNIT]"
                     + " , COALESCE(CMSMC.MC001,'') [INV_ID]"
