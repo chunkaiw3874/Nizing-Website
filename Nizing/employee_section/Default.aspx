@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/report/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style>
+        .list-body li input {
+            width: 150px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="row">
@@ -21,7 +26,8 @@
                     <asp:Image ID="Image6" runat="server" ImageUrl="~/employee_section/report/image/button/dept/PC.png" /></li>
             </ul>
             <ul>
-                <li><asp:ImageButton ID="ImageButton8" runat="server" Width="150px" Height="30px" ImageUrl="~/employee_section/report/image/button/dept/PC-4.png" PostBackUrl="~/employee_section/report/PC04.aspx" /></li>
+                <li>
+                    <asp:ImageButton ID="ImageButton8" runat="server" Width="150px" Height="30px" ImageUrl="~/employee_section/report/image/button/dept/PC-4.png" PostBackUrl="~/employee_section/report/PC04.aspx" /></li>
                 <li><%--<asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/employee_section/report/image/button/dept/PC-2.png" PostBackUrl="~/employee_section/report/ProductionControlReport.aspx" />--%></li>
             </ul>
         </div>
@@ -72,8 +78,10 @@
                 <li>
                     <asp:Image ID="Image4" runat="server" ImageUrl="~/employee_section/report/image/button/dept/PD.png" /></li>
             </ul>
-            <ul>
-                <li><a href="/employee_section/report/PD_PurchaseInProgress.aspx">採購未交單</a>
+            <ul class="list-body">
+                <li>
+                    <%--<a href="/employee_section/report/PD_PurchaseInProgress.aspx">採購未交單</a>--%>
+                    <asp:ImageButton ID="ImageButton7" runat="server" ImageUrl="~/employee_section/report/image/button/dept/PD_PurchaseInProgress.png" PostBackUrl="~/employee_section/report/PD_PurchaseInProgress.aspx" />
                     <%--<asp:ImageButton ID="ImageButton3" runat="server" ImageUrl="~/employee_section/report/image/button/dept/PD-1.png" PostBackUrl="~/employee_section/report/PurchaseReport.aspx" />--%>
 
                 </li>

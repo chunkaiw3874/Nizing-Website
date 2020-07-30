@@ -3,6 +3,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
+    <style>
+        .inline-div a img{
+            width:146px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class="main-content">
@@ -11,7 +16,7 @@
                 <a href="hr360/login.aspx" target="_blank"><img src="images/employee_section/portal/HR360.png" /></a>
             </div>
             <div style="margin-right:50px;">
-                <a href="employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/NEW.png" /></a>
+                <a href="employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/NEW-new.png" /></a>
             </div>
             <div style="margin-right:50px;">
                 <a href="revivify_employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/RVI.png" /></a>

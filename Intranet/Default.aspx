@@ -1,6 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/masterPage/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/masterPage/portal-master.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style>
+        .list-body li input {
+            width: 150px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="row">
@@ -85,17 +90,18 @@
                 <li>
                     <asp:Image ID="Image4" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/PD.png" /></li>
             </ul>
-            <ul>
+            <ul class="list-body">
                 <li>
                     <asp:ImageButton ID="ImageButton3" runat="server" Width="150px" ImageUrl="~/nizing_intranet/image/button/dept/PD-1.png" PostBackUrl="~/nizing_intranet/PurchaseReport.aspx" /></li>
-                
+
                 <li>
                     <asp:ImageButton ID="ImageButton21" runat="server" Width="150px" ImageUrl="~/nizing_intranet/image/button/dept/PD-3.png" PostBackUrl="~/nizing_intranet/PD03_RawMatsUsage.aspx" /></li>
                 <li>
                     <a href="nizing_intranet/PD02_NetSpending.aspx">廠商進貨金額表</a>
                 </li>
                 <li>
-                    <a href="nizing_intranet/PD_PurchaseInProgress.aspx">採購未交單</a>
+                    <%--<a href="nizing_intranet/PD_PurchaseInProgress.aspx">採購未交單</a>--%>
+                    <asp:ImageButton ID="ImageButton22" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/PD_PurchaseInProgress.png" PostBackUrl="~/nizing_intranet/PD_PurchaseInProgress.aspx" />
                 </li>
             </ul>
         </div>

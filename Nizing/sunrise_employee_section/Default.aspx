@@ -29,8 +29,8 @@
             </ul>
             <ul class="list-body">
                 <li>
-                    <a href="/sunrise_employee_section/report/PD_PurchaseInProgress.aspx">採購未交單</a>
-                    <%--<asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/employee_section/report/image/button/dept/inventory.png" PostBackUrl="~/sunrise_employee_section/report/InventorySearch.aspx" />--%>
+                    <%--<a href="/sunrise_employee_section/report/PD_PurchaseInProgress.aspx">採購未交單</a>--%>
+                    <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/employee_section/report/image/button/dept/PD_PurchaseInProgress.png" PostBackUrl="~/sunrise_employee_section/report/PD_PurchaseInProgress.aspx" />
                 </li>
             </ul>
         </div>        

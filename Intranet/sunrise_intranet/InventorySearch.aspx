@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/master/report/sunrise-master.master" CodeFile="InventorySearch.aspx.cs" Inherits="InventorySearch" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/masterPage/sunrise-master.master" CodeFile="InventorySearch.aspx.cs" Inherits="InventorySearch" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -88,7 +88,7 @@
                             <asp:Button ID="btnCategory_Small_Select" runat="server" Text="..." PostBackUrl="#small_search_window" OnClick="btnCategory_Small_Select_Click" />
                         </td>--%>
                             <td>
-                                <asp:ImageButton ID="btnSearch" runat="server" ImageUrl="~/employee_section/report/image/button/Search_Button.png" OnClick="btnSearch_Click" />
+                                <asp:ImageButton ID="btnSearch" runat="server" ImageUrl="~/nizing_intranet/image/button/Search_Button.png" OnClick="btnSearch_Click" />
                             </td>
                         </tr>
                         <%--<tr>
