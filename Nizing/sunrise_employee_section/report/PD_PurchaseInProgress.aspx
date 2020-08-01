@@ -24,7 +24,7 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01">產品分類選擇</label>
                     </div>
-                    <asp:DropDownList ID="ddlCategoryOne" runat="server" CssClass="custom-select" AutoPostBack="true" OnSelectedIndexChanged="ddlCategoryOne_SelectedIndexChanged"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlCategoryOne" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlCategoryOne_SelectedIndexChanged"></asp:DropDownList>
                     <%--<div class="input-group-append">
                                 <asp:Button ID="btnSubmit" runat="server" Text="查詢" CssClass="btn btn-outline-success" />
                             </div>--%>
