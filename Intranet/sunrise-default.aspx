@@ -20,6 +20,9 @@
                 <li>
                     <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/OrderInProgress.png" PostBackUrl="~/sunrise_intranet/SD03_OrderInProgress.aspx" />
                 </li>
+                <li>
+                    <a href="sunrise_intranet/SD_PastCostsAndPrices.aspx">業務報價系統</a>
+                </li>
             </ul>
         </div>        
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
