@@ -1,6 +1,13 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/master/report/sunrise-master.master" CodeFile="InventorySearch.aspx.cs" Inherits="InventorySearch" %>
 
+<asp:Content ID="Content2" ContentPlaceHolderID="head" runat="Server">
+    <style>
+        #inventory #search-result .grdResult tr td:nth-child(-n+3){
+            text-align:left;
+        }
+    </style>
 
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:Panel ID="Panel1" runat="server" DefaultButton="btnSearch">
@@ -108,7 +115,7 @@
             <div id="search-result">
                 <asp:GridView ID="grdResult" runat="server" AutoGenerateColumns="false" CssClass="grdResult">
                     <Columns>
-                        <asp:TemplateField HeaderText="品號" HeaderStyle-Width="200">
+                        <asp:TemplateField HeaderText="品號" HeaderStyle-Width="160">
                             <ItemTemplate>
                                 <asp:Label ID="label" runat="server" Text='<%#Eval("ITEM_ID") %>'></asp:Label>
                             </ItemTemplate>
@@ -118,7 +125,7 @@
                                 <asp:Label ID="label" runat="server" Text='<%#Eval("ITEM_NAME") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="規格">
+                        <asp:TemplateField HeaderText="規格" HeaderStyle-Width="100">
                             <ItemTemplate>
                                 <asp:Label ID="label" runat="server" Text='<%#Eval("ITEM_SPEC") %>'></asp:Label>
                             </ItemTemplate>
@@ -128,12 +135,12 @@
                                 <asp:Label ID="label" runat="server" Text='<%#Eval("LAST_PURCHASE_PRICE") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="幣別" HeaderStyle-Width="70">
+                        <asp:TemplateField HeaderText="幣別" HeaderStyle-Width="50">
                             <ItemTemplate>
                                 <asp:Label ID="label" runat="server" Text='<%#Eval("LAST_PURCHASE_CURRENCY") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="在庫量" HeaderStyle-Width="80">
+                        <asp:TemplateField HeaderText="在庫量" HeaderStyle-Width="60">
                             <ItemTemplate>
                                 <asp:Label ID="label" runat="server" Text='<%#Eval("AMOUNT_IN_INV") %>'></asp:Label>
                             </ItemTemplate>
@@ -148,7 +155,7 @@
                                 <asp:Label ID="label" runat="server" Text='<%#Eval("INV_ID") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="庫別名稱">
+                        <asp:TemplateField HeaderText="庫別名稱" HeaderStyle-Width="70">
                             <ItemTemplate>
                                 <asp:Label ID="label" runat="server" Text='<%#Eval("INV_NAME") %>'></asp:Label>
                             </ItemTemplate>

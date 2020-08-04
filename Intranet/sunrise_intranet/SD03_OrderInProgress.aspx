@@ -8,6 +8,9 @@
         .custom-select {
             height: 30px;
         }
+        th {
+            text-align:center;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
