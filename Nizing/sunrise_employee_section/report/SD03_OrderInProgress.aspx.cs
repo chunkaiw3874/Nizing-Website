@@ -72,13 +72,15 @@ public partial class sunrise_employee_section_report_SD03_OrderInProgress : Syst
                 " ,TC.TC008 '幣別'" +
                 " ,CONVERT(DECIMAL(20,0),TD.TD008-TD.TD009) '未交量'" +
                 " ,CONVERT(DECIMAL(20,0),MB.MB064) '庫存數量'" +
-                " ,TD.TD007 '庫別'" +
+                //" ,TD.TD007 '庫別'" +
+                " ,MC.MC003 '儲位'" +
                 " ,TD.TD020 '備註'" +
                 " from COPTC TC" +
                 " LEFT JOIN COPTD TD ON TC.TC001 = TD.TD001 AND TC.TC002 = TD.TD002" +
                 " LEFT JOIN COPMA MA ON TC.TC004 = MA.MA001" +
                 " LEFT JOIN INVMB MB ON TD.TD004 = MB.MB001" +
-                " LEFT JOIN CMSMV MV ON TC.TC006 = MV.MV001" + 
+                " LEFT JOIN CMSMV MV ON TC.TC006 = MV.MV001" +
+                " LEFT JOIN INVMC MC ON MB.MB001 = MC.MC001 AND MC.MC002='NZ-3F'" + 
                 " where TD.TD016='N'" +
                 GetQueryCondition() +
                 " order by TD.TD013,TC.TC004";

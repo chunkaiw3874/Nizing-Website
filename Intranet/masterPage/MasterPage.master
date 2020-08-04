@@ -35,7 +35,7 @@
                 <div class="col-xs-12">
                     <div id="banner">
                         <div class="banner-button">
-                            <asp:ImageButton ID="btnHome" runat="server" ImageUrl="~/nizing_intranet/image/button/home1.png" Height="80" ToolTip="首頁" PostBackUrl="~/Default.aspx" onmouseover="this.src='/nizing_intranet/image/button/home2.png'" onmouseout="this.src='/nizing_intranet/image/button/home1.png'" />
+                            <asp:ImageButton ID="btnHome" runat="server" ImageUrl="~/nizing_intranet/image/button/home1.png" Height="80" ToolTip="首頁" PostBackUrl="~/nizing-default.aspx" onmouseover="this.src='/nizing_intranet/image/button/home2.png'" onmouseout="this.src='/nizing_intranet/image/button/home1.png'" />
                         </div>
                     </div>
                 </div>
