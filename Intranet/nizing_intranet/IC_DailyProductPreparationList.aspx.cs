@@ -66,7 +66,7 @@ public partial class nizing_intranet_IC_DailyProductPreparationList : System.Web
                 " when TG.TG009= '' then TG.TG008" +
                 " else TG.TG009" +
                 " end '送貨地址'" +
-                " ,MA.MA001" +
+                " ,MA.MA001 '客戶代號'" +
                 " ,TH.TH001 '單別'" +
                 " ,TH.TH002 '單號'" +
                 " ,TH.TH003 '序號'" +
@@ -94,16 +94,18 @@ public partial class nizing_intranet_IC_DailyProductPreparationList : System.Web
     }
 
     private void DisplaySalesRecordData(DataTable dt)
-    {        
+    {
         gvSalesRecordData.DataSource = dt;
         gvSalesRecordData.DataBind();
     }
 
     protected void gvSalesRecordData_SelectedIndexChanged(object sender, EventArgs e)
     {
-        lblModalRecordType.Text = ((HiddenField)gvSalesRecordData.SelectedRow.FindControl("lblSalesRecordType")).Value.Trim();
-        lblModalRecordId.Text = ((HiddenField)gvSalesRecordData.SelectedRow.FindControl("lblSalesRecordId")).Value.Trim();
-        lblModalItemNumber.Text = ((HiddenField)gvSalesRecordData.SelectedRow.FindControl("lblSalesRecordItemNumber")).Value.Trim();
+        lblModalRecordFullId.Text = ((HiddenField)gvSalesRecordData.SelectedRow.FindControl("lblSalesRecordType")).Value.Trim() + "-"
+            + ((HiddenField)gvSalesRecordData.SelectedRow.FindControl("lblSalesRecordId")).Value.Trim() + "-"
+            + ((HiddenField)gvSalesRecordData.SelectedRow.FindControl("lblSalesRecordItemNumber")).Value.Trim();
+        lblModalCustomerName.Text = ((Label)gvSalesRecordData.SelectedRow.FindControl("lblCustomerName")).Text.Trim();
+        lblModalProductId.Text = ((Label)gvSalesRecordData.SelectedRow.FindControl("lblProductId")).Text.Trim();
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         sb.Append(@"<script type='text/javascript'>");
         sb.Append("$('#recordDetail').modal('show');");

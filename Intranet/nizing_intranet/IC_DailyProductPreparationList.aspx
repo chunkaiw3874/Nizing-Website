@@ -69,7 +69,17 @@
             $('[id*=hdnSalesRecordId]').val($('.popover .form-control').val());
             $('.popover').popover('hide');
         }
-    </script>
+
+<%--        function showDetailModal(btn) {
+            var row = btn.parentNode.parentNode;
+            var rowIndex = row.rowIndex - 1;
+            console.log('row: ' + rowIndex);
+            console.log(row.cells[0].getElementsByTagName('input')[1].value);
+            document.getElementById('<%=lblModalRecordId.ClientID%>').value = row.cells[0].getElementsByTagName('input')[1].value;
+
+            $('#recordDetail').modal('show');
+        }--%>
+</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
@@ -77,6 +87,7 @@
         </Services>
     </asp:ScriptManager>
     <asp:HiddenField ID="hdnSalesRecordId" runat="server" />
+
 
     <div id="popover-content" class="d-none">
         <div class="input-group">
@@ -89,45 +100,65 @@
         </div>
     </div>
 
-    <div id="recordDetail" class="modal fade" data-backdrop="static" aria-labelledby="recordDetail" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">ADD NEW BANQUET</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">單別</span>
+    <asp:UpdatePanel ID="upDetail" runat="server">
+        <ContentTemplate>
+            <div id="recordDetail" class="modal fade" data-backdrop="static" aria-labelledby="recordDetail" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">ADD NEW BANQUET</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
-                        <asp:Label ID="lblModalRecordType" runat="server" CssClass="form-control" Text="Label"></asp:Label>
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">單號</span>
+                        <div class="modal-body">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">單別</span>
+                                </div>
+                                <asp:Label ID="lblModalRecordFullId" runat="server" CssClass="form-control" Text="Label"></asp:Label>
+                            </div>
+                            <%--<div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">單號</span>
+                                </div>
+                                <asp:Label ID="lblModalRecordId" runat="server" CssClass="form-control" Text="Label"></asp:Label>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">序號</span>
+                                </div>
+                                <asp:Label ID="lblModalItemNumber" runat="server" CssClass="form-control" Text="Label"></asp:Label>
+                            </div>--%>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">客戶</span>
+                                </div>
+                                <asp:Label ID="lblModalCustomerName" runat="server" CssClass="form-control" Text="Label"></asp:Label>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">品號</span>
+                                </div>
+                                <asp:Label ID="lblModalProductId" runat="server" CssClass="form-control" Text="Label"></asp:Label>
+                            </div>
+
                         </div>
-                        <asp:Label ID="lblModalRecordId" runat="server" CssClass="form-control" Text="Label"></asp:Label>
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">序號</span>
+                        <div class="modal-footer">
+                            <div class="btn-group full-width" role="group">
+                                <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-secondary" Text="取消"
+                                    data-dismiss="modal" />
+                                <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click"
+                                    CssClass="btn btn-success" Text="儲存" UseSubmitBehavior="false"
+                                    data-dismiss="modal" />
+                            </div>
                         </div>
-                        <asp:Label ID="lblModalItemNumber" runat="server" CssClass="form-control" Text="Label"></asp:Label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="btn-group full-width" role="group">
-                        <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-secondary" Text="取消"
-                            data-dismiss="modal" />
-                        <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click"
-                            CssClass="btn btn-success btn-lg btn-block" Text="儲存" UseSubmitBehavior="false"
-                            data-dismiss="modal" />
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="gvSalesRecordData" />
+        </Triggers>
+    </asp:UpdatePanel>
 
     <div class="container">
         <div class="form-group">
@@ -169,10 +200,11 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="客戶">
                                 <ItemTemplate>
+                                    <asp:Label ID="lblCustomerName" runat="server" Text='<%#Eval("客戶簡稱") %>'></asp:Label>
+                                    <asp:HiddenField ID="lblCustomerId" Value='<%#Eval("客戶代號") %>' runat="server" />
                                     <asp:HiddenField ID="lblSalesRecordType" Value='<%#Eval("單別") %>' runat="server" />
                                     <asp:HiddenField ID="lblSalesRecordId" Value='<%#Eval("單號") %>' runat="server" />
                                     <asp:HiddenField ID="lblSalesRecordItemNumber" Value='<%#Eval("序號") %>' runat="server" />
-                                    <asp:Label ID="lblCustomerName" runat="server" Text='<%#Eval("客戶簡稱") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="品號">

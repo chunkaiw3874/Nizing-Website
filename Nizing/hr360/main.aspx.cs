@@ -45,8 +45,8 @@ public partial class main : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //test area
-        //Session["erp_id"] = "0156";
-        //Session["user_id"] = "0156";
+        //Session["erp_id"] = "0113";
+        //Session["user_id"] = "0113";
 
         //if(false)
         if (!((masterPage_HR360_Master)this.Master.Master).CheckAuthentication())        
@@ -151,58 +151,66 @@ public partial class main : System.Web.UI.Page
                         //為0010特別做計算，因為0010一天是8.5小時，其他人一天為8小時
                         if (Session["erp_id"].ToString() == "0010")
                         {
-                            string query = "SELECT COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)"
-                                        + " FROM PALTL"
-                                        + " WHERE PALTL.TL001=@ID"
-                                        + " AND PALTL.TL002=YEAR(GETDATE())"
-                                        + " AND PALTL.TL003 BETWEEN '01' AND @MONTH"
-                                        + " AND PALTL.TL004='03'";
+                            //string query = "SELECT COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)"
+                            //            + " FROM PALTL"
+                            //            + " WHERE PALTL.TL001=@ID"
+                            //            + " AND PALTL.TL002=YEAR(GETDATE())"
+                            //            + " AND PALTL.TL003 BETWEEN '01' AND @MONTH"
+                            //            + " AND PALTL.TL004='03'";
+                            string query = "select COALESCESUM(COALESCE(TF.TF008,0)),0)" +
+                                " from PALTF TF" +
+                                " where TF.TF001 = @ID" +
+                                " and TF.TF002 between convert(nvarchar(4),YEAR(GETDATE()))+'0101' and convert(nvarchar(4), YEAR(GETDATE())) + @date" +
+                                " and TF.TF004 = '03'";
                             SqlCommand cmdSelect = new SqlCommand(query, conn);
                             cmdSelect.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
-                            cmdSelect.Parameters.AddWithValue("@MONTH", (Convert.ToInt16(dtUserInfo.Rows[0]["START_MONTH"].ToString()) - 1).ToString("D2"));
+                            cmdSelect.Parameters.AddWithValue("@date", dtUserInfo.Rows[0]["START_MONTH"].ToString()+ dtUserInfo.Rows[0]["START_DAY"].ToString());
                             doubleFirstPartDayOffUsed = Convert.ToDouble(cmdSelect.ExecuteScalar());
                             doubleFirstPartFinal = doubleFirstPartDayOff * 8.5 - doubleFirstPartDayOffUsed;
                             strFirstPartDayOff = doubleFirstPartFinal.ToString();
                             //lblFirstPartDayOff.Text = cmdSelect.ExecuteScalar().ToString();
 
-                            query = "SELECT COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)"
-                                        + " FROM PALTL"
-                                        + " WHERE PALTL.TL001=@ID"
-                                        + " AND PALTL.TL002=YEAR(GETDATE())"
-                                        + " AND PALTL.TL003 BETWEEN @MONTH AND '12'"
-                                        + " AND PALTL.TL004='03'";
+                            //query = "SELECT COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)"
+                            //            + " FROM PALTL"
+                            //            + " WHERE PALTL.TL001=@ID"
+                            //            + " AND PALTL.TL002=YEAR(GETDATE())"
+                            //            + " AND PALTL.TL003 BETWEEN @MONTH AND '12'"
+                            //            + " AND PALTL.TL004='03'";
+                            query = "select COALESCE(SUM(COALESCE(TF.TF008,0)),0)" +
+                                " from PALTF TF" +
+                                " where TF.TF001 = @ID" +
+                                " and TF.TF002 between convert(nvarchar(4), YEAR(GETDATE())) + @date and convert(nvarchar(4),YEAR(GETDATE()))+'1231'" +
+                                " and TF.TF004 = '03'";
                             cmdSelect = new SqlCommand(query, conn);
                             cmdSelect.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
-                            cmdSelect.Parameters.AddWithValue("@MONTH", dtUserInfo.Rows[0]["START_MONTH"].ToString());
+                            cmdSelect.Parameters.AddWithValue("@date", dtUserInfo.Rows[0]["START_MONTH"].ToString() + (Convert.ToInt32(dtUserInfo.Rows[0]["START_DAY"].ToString())+1).ToString("D2"));
                             doubleSecondPartDayOffUsed = Convert.ToDouble(cmdSelect.ExecuteScalar());
                             doubleSecondPartFinal = doubleSecondPartDayOff * 8.5 - doubleSecondPartDayOffUsed;
                             strSecondPartDayOff = doubleSecondPartFinal.ToString();
                         }
                         else
                         {
-                            string query = "SELECT COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)"
-                                        + " FROM PALTL"
-                                        + " WHERE PALTL.TL001=@ID"
-                                        + " AND PALTL.TL002=YEAR(GETDATE())"
-                                        + " AND PALTL.TL003 BETWEEN '01' AND @MONTH"
-                                        + " AND PALTL.TL004='03'";
+                            string query = "select COALESCE(SUM(COALESCE(TF.TF008,0)),0)" +
+                                " from PALTF TF" +
+                                " where TF.TF001 = @ID" +
+                                " and TF.TF002 between convert(nvarchar(4),YEAR(GETDATE()))+'0101' and convert(nvarchar(4), YEAR(GETDATE())) + @date" +
+                                " and TF.TF004 = '03'";
                             SqlCommand cmdSelect = new SqlCommand(query, conn);
                             cmdSelect.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
-                            cmdSelect.Parameters.AddWithValue("@MONTH", (Convert.ToInt16(dtUserInfo.Rows[0]["START_MONTH"].ToString()) - 1).ToString("D2"));
+                            cmdSelect.Parameters.AddWithValue("@date", dtUserInfo.Rows[0]["START_MONTH"].ToString() + dtUserInfo.Rows[0]["START_DAY"].ToString());
                             doubleFirstPartDayOffUsed = Convert.ToDouble(cmdSelect.ExecuteScalar());
                             doubleFirstPartFinal = doubleFirstPartDayOff * 8 - doubleFirstPartDayOffUsed;
                             strFirstPartDayOff = doubleFirstPartFinal.ToString();
                             //lblFirstPartDayOff.Text = cmdSelect.ExecuteScalar().ToString();
 
-                            query = "SELECT COALESCE(SUM(COALESCE(PALTL.TL006,0))+SUM(COALESCE(PALTL.TL007,0)),0)"
-                                        + " FROM PALTL"
-                                        + " WHERE PALTL.TL001=@ID"
-                                        + " AND PALTL.TL002=YEAR(GETDATE())"
-                                        + " AND PALTL.TL003 BETWEEN @MONTH AND '12'"
-                                        + " AND PALTL.TL004='03'";
+                            query = "select COALESCE(SUM(COALESCE(TF.TF008,0)),0)" +
+                                " from PALTF TF" +
+                                " where TF.TF001 = @ID" +
+                                " and TF.TF002 between convert(nvarchar(4), YEAR(GETDATE())) + @date and convert(nvarchar(4),YEAR(GETDATE()))+'1231'" +
+                                " and TF.TF004 = '03'";
                             cmdSelect = new SqlCommand(query, conn);
                             cmdSelect.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
-                            cmdSelect.Parameters.AddWithValue("@MONTH", dtUserInfo.Rows[0]["START_MONTH"].ToString());
+                            cmdSelect.Parameters.AddWithValue("@date", dtUserInfo.Rows[0]["START_MONTH"].ToString() + (Convert.ToInt32(dtUserInfo.Rows[0]["START_DAY"].ToString()) + 1).ToString("D2"));
                             doubleSecondPartDayOffUsed = Convert.ToDouble(cmdSelect.ExecuteScalar());
                             doubleSecondPartFinal = doubleSecondPartDayOff * 8 - doubleSecondPartDayOffUsed;
                             strSecondPartDayOff = doubleSecondPartFinal.ToString();
