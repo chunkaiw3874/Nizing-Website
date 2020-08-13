@@ -45,8 +45,8 @@ public partial class main : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //test area
-        Session["erp_id"] = "0159";
-        Session["user_id"] = "0159";
+        //Session["erp_id"] = "0156";
+        //Session["user_id"] = "0156";
 
         //if(false)
         if (!((masterPage_HR360_Master)this.Master.Master).CheckAuthentication())        
@@ -227,6 +227,7 @@ public partial class main : System.Web.UI.Page
                         {
                             lblFirstPartDayOff.Visible = false;
                             lblDayOffMemo.Visible = false;
+                            lblSecondPartDayOff.Text = "01/01-12/31 剩餘: " + strSecondPartDayOff + "小時";
                         }
                         else
                         {

@@ -16,12 +16,13 @@
             </ul>
             <ul class="list-body">
                 <li>
+                    <%--<a href="report/SD_PastCostsAndPrices.aspx">業務報價系統</a>--%>
+                    <asp:ImageButton ID="ImageButton3" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD_PastCostsAndPrices.png" PostBackUrl="~/sunrise_employee_section/report/SD_PastCostsAndPrices.aspx" /></li>
+                </li>
+                <li>
                     <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD-1.png" PostBackUrl="~/sunrise_employee_section/report/SD01.aspx" /></li>
                 <li>
                     <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/employee_section/report/image/button/dept/OrderInProgress.png" PostBackUrl="~/sunrise_employee_section/report/SD03_OrderInProgress.aspx" />
-                </li>
-                <li>
-                    <a href="report/SD_PastCostsAndPrices.aspx">業務報價系統</a>
                 </li>
             </ul>
         </div>        

@@ -17,7 +17,7 @@ using System.Web.UI.WebControls;
 
 public partial class SD01 : System.Web.UI.Page
 {
-    string connectionString = ConfigurationManager.ConnectionStrings["SunriseConnectionString"].ConnectionString;
+    string connectionString = ConfigurationManager.ConnectionStrings["SunrizeConnectionString"].ConnectionString;
 
     protected void Page_Load(object sender, EventArgs e)
     {

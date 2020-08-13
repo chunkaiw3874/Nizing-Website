@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 
 public partial class sunrise_employee_section_report_SD03_OrderInProgress : System.Web.UI.Page
 {
-    string connectionString = ConfigurationManager.ConnectionStrings["SunriseConnectionString"].ConnectionString;
+    string connectionString = ConfigurationManager.ConnectionStrings["SunrizeConnectionString"].ConnectionString;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)

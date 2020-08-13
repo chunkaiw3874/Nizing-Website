@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 public partial class sunrise_employee_section_report_SD_PastCostsAndPrices : System.Web.UI.Page
 {
-    string connectionString = ConfigurationManager.ConnectionStrings["SunriseConnectionString"].ConnectionString;
+    string connectionString = ConfigurationManager.ConnectionStrings["SunrizeConnectionString"].ConnectionString;
     string itemListQueryString = "select ROW_NUMBER() OVER (ORDER BY MB.MB001) 'no'" +
             " ,MB.MB001 'itemId'" +
             " ,MB.MB002 'itemName'" +

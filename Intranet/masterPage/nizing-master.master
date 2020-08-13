@@ -1,0 +1,43 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="nizing-master.master.cs" Inherits="masterPage_nizing_master" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">        
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/32e9a84b4a.js" crossorigin="anonymous"></script>
+    <style>
+        .jumbotron {
+            /*width: 100%;*/
+            height: 300px;
+            background: url(../nizing_intranet/image/banner/banner.png) no-repeat center;
+            background-color: #ff9595;
+            /*margin-bottom: 20px;*/
+        }
+
+            .jumbotron .btn {
+                float: right;
+                height: 80px;
+                margin-top: 180px;
+            }
+    </style>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container-fluid p-0">
+            <div class="jumbotron jumbotro-fluid">
+                <asp:ImageButton ID="btnHome" runat="server" CssClass="btn" ImageUrl="~/nizing_intranet/image/button/home1.png" ToolTip="首頁" PostBackUrl="~/nizing-default.aspx" onmouseover="this.src='/nizing_intranet/image/button/home2.png'" onmouseout="this.src='/nizing_intranet/image/button/home1.png'" />
+            </div>
+        </div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>

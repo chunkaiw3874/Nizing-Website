@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 public partial class InventorySearch : System.Web.UI.Page
 {
-    string connectionString = ConfigurationManager.ConnectionStrings["SunriseConnectionString"].ConnectionString;
+    string connectionString = ConfigurationManager.ConnectionStrings["SunrizeConnectionString"].ConnectionString;
     
     protected override void Render(System.Web.UI.HtmlTextWriter writer)
     {
