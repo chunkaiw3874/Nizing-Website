@@ -45,8 +45,8 @@ public partial class main : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //test area
-        //Session["erp_id"] = "0113";
-        //Session["user_id"] = "0113";
+        //Session["erp_id"] = "0010";
+        //Session["user_id"] = "0010";
 
         //if(false)
         if (!((masterPage_HR360_Master)this.Master.Master).CheckAuthentication())        
@@ -157,7 +157,7 @@ public partial class main : System.Web.UI.Page
                             //            + " AND PALTL.TL002=YEAR(GETDATE())"
                             //            + " AND PALTL.TL003 BETWEEN '01' AND @MONTH"
                             //            + " AND PALTL.TL004='03'";
-                            string query = "select COALESCESUM(COALESCE(TF.TF008,0)),0)" +
+                            string query = "select COALESCE(SUM(COALESCE(TF.TF008,0)),0)" +
                                 " from PALTF TF" +
                                 " where TF.TF001 = @ID" +
                                 " and TF.TF002 between convert(nvarchar(4),YEAR(GETDATE()))+'0101' and convert(nvarchar(4), YEAR(GETDATE())) + @date" +

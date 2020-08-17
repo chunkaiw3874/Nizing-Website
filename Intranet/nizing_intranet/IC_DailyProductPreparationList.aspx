@@ -2,6 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style>
+        body{
+            font-size:0.5rem;
+        }
         th {
             text-align: center;
         }
@@ -34,21 +37,23 @@
             flex: 1
         }
 
-        .popover .btn-search a {
-            padding-top: 7px;
+        .form-check input {
+            height: 14px;
+            width: 14px;
+            margin-bottom: 5px;
         }
 
-        .overlay {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            transition: opacity 500ms;
-            visibility: hidden;
-            opacity: 0;
+        textarea {
+            resize: none;
         }
+
+        .popover {
+            z-index: 0;
+        }
+
+            .popover .btn-search a {
+                padding-top: 7px;
+            }
     </style>
     <script type="text/javascript">
         $(function () {
@@ -70,16 +75,7 @@
             $('.popover').popover('hide');
         }
 
-<%--        function showDetailModal(btn) {
-            var row = btn.parentNode.parentNode;
-            var rowIndex = row.rowIndex - 1;
-            console.log('row: ' + rowIndex);
-            console.log(row.cells[0].getElementsByTagName('input')[1].value);
-            document.getElementById('<%=lblModalRecordId.ClientID%>').value = row.cells[0].getElementsByTagName('input')[1].value;
-
-            $('#recordDetail').modal('show');
-        }--%>
-</script>
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
@@ -106,28 +102,24 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">ADD NEW BANQUET</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">備貨資料</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            
                         </div>
-                        <div class="modal-body">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">單別</span>
-                                </div>
-                                <asp:Label ID="lblModalRecordFullId" runat="server" CssClass="form-control" Text="Label"></asp:Label>
+                        <div class="modal-body">                            
+                            <div class="text-right text-black-50 font-weight-light">
+                                <asp:Label ID="txtModalEditTime" runat="server"></asp:Label>
                             </div>
-                            <%--<div class="input-group mb-3">
+                            <asp:HiddenField ID="hdnModalCustomerId" runat="server" />
+                            <asp:HiddenField ID="hdnModalProductAmount" runat="server" />
+                            <asp:HiddenField ID="hdnModalProductPrice" runat="server" />
+                            <asp:HiddenField ID="hdnModalProductInv" runat="server" />
+                            <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">單號</span>
                                 </div>
-                                <asp:Label ID="lblModalRecordId" runat="server" CssClass="form-control" Text="Label"></asp:Label>
+                                <asp:Label ID="lblModalRecordFullId" runat="server" CssClass="form-control" Text="Label"></asp:Label>
                             </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">序號</span>
-                                </div>
-                                <asp:Label ID="lblModalItemNumber" runat="server" CssClass="form-control" Text="Label"></asp:Label>
-                            </div>--%>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">客戶</span>
@@ -140,13 +132,38 @@
                                 </div>
                                 <asp:Label ID="lblModalProductId" runat="server" CssClass="form-control" Text="Label"></asp:Label>
                             </div>
-
+                            <hr />
+                            <h6>辦公室填寫:</h6>
+                            <div class="form-check form-check-inline">
+                                <asp:CheckBox ID="ckxModalAttachUl" runat="server" Text="附UL" />
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <asp:CheckBox ID="ckxModalNoReceipt" runat="server" Text="不附單據" />
+                            </div>
+                            <div class="form-group">
+                                <label for="txtItemMemo">包裝注意事項:</label>
+                                <asp:TextBox ID="txtModalItemMemo" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
+                            </div>
+                            <hr />
+                            <h6>倉管填寫:</h6>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">包裝數量</span>
+                                </div>
+                                <asp:TextBox ID="txtModalPackingAmount" runat="server" CssClass="form-control"></asp:TextBox>
+                                <div class="input-group-append">
+                                    <asp:DropDownList ID="ddlModalPackingUnit" runat="server" CssClass="custom-select">
+                                        <asp:ListItem>箱</asp:ListItem>
+                                        <asp:ListItem>公斤</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <div class="btn-group full-width" role="group">
                                 <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-secondary" Text="取消"
                                     data-dismiss="modal" />
-                                <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click"
+                                <asp:Button ID="btnSaveDetail" runat="server" OnClick="btnSaveDetail_Click"
                                     CssClass="btn btn-success" Text="儲存" UseSubmitBehavior="false"
                                     data-dismiss="modal" />
                             </div>
@@ -193,9 +210,9 @@
                         AutoGenerateColumns="false"
                         OnSelectedIndexChanged="gvSalesRecordData_SelectedIndexChanged">
                         <Columns>
-                            <asp:TemplateField HeaderText="箱數">
+                            <asp:TemplateField HeaderText="包裝">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblBoxAmount" runat="server" Text=""></asp:Label>
+                                    <asp:Label ID="lblBoxAmount" runat="server" Text='<%#Eval("包裝")%>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="客戶">
@@ -205,6 +222,7 @@
                                     <asp:HiddenField ID="lblSalesRecordType" Value='<%#Eval("單別") %>' runat="server" />
                                     <asp:HiddenField ID="lblSalesRecordId" Value='<%#Eval("單號") %>' runat="server" />
                                     <asp:HiddenField ID="lblSalesRecordItemNumber" Value='<%#Eval("序號") %>' runat="server" />
+                                    <asp:HiddenField ID="lblProductPrice" Value='<%#Eval("單價") %>' runat="server" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="品號">
@@ -247,12 +265,35 @@
                                     <asp:Label ID="lblCustomerDeliverAddress" runat="server" Text='<%#Eval("送貨地址") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
+                            <asp:TemplateField HeaderText="附UL">
+                                <ItemTemplate>
+                                    <asp:CheckBox ID="ckxAttachUl" runat="server" />
+                                    <%--<asp:Label ID="lblAttachUl" runat="server" Text='<%#Eval("附UL") %>'></asp:Label>--%>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="不附單據">
+                                <ItemTemplate>
+                                    <asp:CheckBox ID="ckxNoReceipt" runat="server" />
+                                    <%--<asp:Label ID="lblNoReceipt" runat="server" Text='<%#Eval("不附單據") %>'></asp:Label>--%>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="注意事項">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblMemo" runat="server" Text='<%#Eval("注意事項") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="最後更新時間">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblLastEditTime" runat="server" Text='<%#Eval("最後編輯時間") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </div>
             </ContentTemplate>
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="btnSalesRecordDataSearch" />
+                <asp:AsyncPostBackTrigger ControlID="btnSaveDetail" />
             </Triggers>
         </asp:UpdatePanel>
     </div>
