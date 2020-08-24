@@ -32,6 +32,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     List<string> exceptionList202makeup = new List<string>(); //剩餘假期不足錯誤例外清單(補休)
     List<string> exceptionList107 = new List<string>(); //已當其他人代理人錯誤例外清單
     List<string> exceptionList110 = new List<string>(); //請假年分限本年度例外清單
+    List<string> exceptionListHourForProduction = new List<string>();   //例外清單:可用小時計假的線廠人員(阿豪0160)
 
     public class dayOffInfo
     {
@@ -57,6 +58,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         //exceptionList107.Add("0013");
         exceptionList110.Add("0067");
         //exceptionList202makeup.Add("0067");
+        exceptionListHourForProduction.Add("0160"); //阿豪
 
 
         if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
@@ -384,7 +386,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         if (timeDifference.Hours != 0 || timeDifference.Minutes != 0)
                         {   
                             //判斷假期開始時間是否合理
-                            if (hdnOfficeOrProduction.Value == "production" && !typhoonDay)  //除非是颱風假，線廠人員僅能以上、下午為單位請假                                
+                            if (hdnOfficeOrProduction.Value == "production" && !typhoonDay && !exceptionListHourForProduction.Contains(Session["erp_id"].ToString()))  //除非是颱風假，線廠人員僅能以上、下午為單位請假                                
                             {
                                 if ((!(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(3, 2))     //開始放假時間(hhmm)!=開始上班時間
                                     && !(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(3, 2))  //開始放假時間(hhmm)!=休息開始時間
@@ -425,7 +427,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         if (timeDifference.Hours != 0 || timeDifference.Minutes != 0)
                         {
                             //判斷假期開始時間是否合理
-                            if (hdnOfficeOrProduction.Value == "production" && !typhoonDay)  //除非是颱風假，線廠人員僅能以上、下午為單位請假                                
+                            if (hdnOfficeOrProduction.Value == "production" && !typhoonDay && !exceptionListHourForProduction.Contains(Session["erp_id"].ToString()))  //除非是颱風假，線廠人員僅能以上、下午為單位請假                                
                             {
                                 if ((!(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(3, 2))     //開始放假時間(hhmm)!=開始上班時間
                                     && !(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(3, 2))  //開始放假時間(hhmm)!=休息開始時間
@@ -2549,8 +2551,16 @@ public partial class hr360_UI04 : System.Web.UI.Page
             || userInfo.Rows[0][1].ToString() == "B-T"  //鐵氟龍部
             )
         {
-            hdnDayOffTimeRestraint.Value = "4";
-            hdnOfficeOrProduction.Value = "production";
+            if (!exceptionListHourForProduction.Contains(Session["erp_id"].ToString()))
+            {
+                hdnDayOffTimeRestraint.Value = "4";
+                hdnOfficeOrProduction.Value = "production";
+            }
+            else
+            {
+                hdnDayOffTimeRestraint.Value = "0.5";
+                hdnOfficeOrProduction.Value = "production";
+            }
         }
         else
         {

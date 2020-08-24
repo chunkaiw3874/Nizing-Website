@@ -33,9 +33,9 @@
                     <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/PC-2.png" PostBackUrl="~/nizing_intranet/ProductionControlReport.aspx" /></li>
                 <li>
                     <asp:ImageButton ID="ImageButton17" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/PC-4.png" Width="150px" Height="30px" PostBackUrl="~/nizing_intranet/PC04.aspx" /></li>
-                <li>
+<%--                <li>
                     <a href="/nizing_intranet/PC03.aspx">RSGE/3122預計出貨報表</a>
-                </li>
+                </li>--%>
             </ul>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
@@ -46,7 +46,10 @@
             <ul>
                 <li>
                     <asp:ImageButton ID="btnInvCheck" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/inventory.png" PostBackUrl="~/nizing_intranet/InventorySearch.aspx" /></li>
-            </ul>
+                <li>
+                    <a href="nizing_intranet/IC_DailyProductPreparationList.aspx">每日備貨明細表</a>
+                </li>
+            </ul>            
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
             <ul>
