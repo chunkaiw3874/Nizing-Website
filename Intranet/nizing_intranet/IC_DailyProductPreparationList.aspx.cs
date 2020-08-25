@@ -113,8 +113,9 @@ public partial class nizing_intranet_IC_DailyProductPreparationList : Page
                 " where(TG.TG001 = 'A230'" +
                 " or TG.TG001 = 'A233')" +
                 " and SUBSTRING(TG.TG002,1,8)= @date" +
-                " and (TG.TG020 not like '%自取%'" +
-                " or TG.TG020 not like '%自送%')" +
+                " and TG.TG020 not like '%自取%'" +
+                " and TG.TG020 not like '%自送%'" +
+                " and TG.TG020 not like '%暫放%'" +
                 " order by" +
                 " (case" +
                 " when TG.TG009= '' then TG.TG008" +
