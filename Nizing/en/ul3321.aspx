@@ -166,7 +166,7 @@
             <td rowspan="2">610</td>
           </tr>
           <tr>
-              <td>0.18 x 20</td>
+              <td>0.18 x 21</td>
           </tr>
           <tr>
             <td rowspan="2">18</td>

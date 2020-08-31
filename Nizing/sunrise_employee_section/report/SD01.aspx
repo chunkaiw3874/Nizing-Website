@@ -11,6 +11,14 @@
         .valid-class {
             /*color:#00CC00;*/ /* green */
         }
+
+        th{
+            text-align:center;
+        }
+
+        text-left{
+            text-align:left;
+        }
     </style>
     <script>
         $(document).ready(function () {
@@ -164,11 +172,13 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="品號">
+                                <ItemStyle CssClass="text-left" />
                                 <ItemTemplate>
                                     <asp:Label ID="Label5" runat="server" Text='<%#Eval("品號") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="品名">
+                                <ItemStyle CssClass="text-left" />
                                 <ItemTemplate>
                                     <asp:Label ID="Label6" runat="server" Text='<%#Eval("品名") %>'></asp:Label>
                                 </ItemTemplate>

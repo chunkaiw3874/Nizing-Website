@@ -116,7 +116,8 @@
             </div>
 
             <div id="search-result">
-                <asp:GridView ID="grdResult" runat="server" AutoGenerateColumns="false" CssClass="grdResult">
+                <asp:GridView ID="grdResult" runat="server" AutoGenerateColumns="false" CssClass="grdResult"
+                    OnPreRender="grdResult_PreRender">
                     <Columns>
                         <asp:TemplateField HeaderText="在庫量" HeaderStyle-Width="60">
                             <ItemTemplate>
@@ -143,14 +144,19 @@
                                 <asp:Label ID="label" runat="server" Text='<%#Eval("ITEM_SPEC") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="最後進貨價格" HeaderStyle-Width="100">
+                        <asp:TemplateField HeaderText="單位成本未稅">
+                            <ItemTemplate>
+                                <asp:Label ID="label" runat="server" Text='<%#Eval("INV_AVG_COST") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <%--<asp:TemplateField HeaderText="最後進貨價格">
                             <ItemTemplate>
                                 <asp:Label ID="label" runat="server" Text='<%#Eval("LAST_PURCHASE_PRICE") %>'></asp:Label>
                             </ItemTemplate>
-                        </asp:TemplateField>
+                        </asp:TemplateField>--%>
                         <asp:TemplateField HeaderText="幣別" HeaderStyle-Width="50">
                             <ItemTemplate>
-                                <asp:Label ID="label" runat="server" Text='<%#Eval("LAST_PURCHASE_CURRENCY") %>'></asp:Label>
+                                <asp:Label ID="label" runat="server" Text="NTD"></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="單位" HeaderStyle-Width="50">

@@ -18,6 +18,7 @@ using System.Web.UI.WebControls;
 public partial class SD01 : System.Web.UI.Page
 {
     string connectionString = ConfigurationManager.ConnectionStrings["SunrizeConnectionString"].ConnectionString;
+    List<string> limitedClientViewList = new List<string>();
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -31,7 +32,33 @@ public partial class SD01 : System.Web.UI.Page
             ddlMonth.SelectedValue = DateTime.Today.Month.ToString("D2");
             txtStart.Enabled = false;
             txtEnd.Enabled = false;
+
+            Session["user"] = getId();
+            Session["erpId"] = getErp(Session["user"].ToString());
         }
+    }
+    protected string getErp(string s)
+    {
+        string r = "";
+        using (SqlConnection conn = new SqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = "select MV001" +
+                " from CMSMV" +
+                " where MV046=@id";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@id", s);
+            r = cmd.ExecuteScalar() == DBNull.Value || cmd.ExecuteScalar() == null ? "" : cmd.ExecuteScalar().ToString().Trim();
+        }
+        return r;
+    }
+
+    protected string getId()
+    {
+        WindowsPrincipal principal = (WindowsPrincipal)User;
+        WindowsIdentity identity = (WindowsIdentity)User.Identity;
+        string[] name = identity.Name.Split('\\');
+        return name[1];
     }
     //protected List<string> getRoles()
     //{
@@ -83,6 +110,19 @@ public partial class SD01 : System.Web.UI.Page
     private string[] GetQuery()
     {
         string[] query = new string[3];
+        string condition = "";
+
+        if (limitedClientViewList.Contains(Session["user"].ToString()))
+        {
+            condition = " and TG.TG006=@erpId";
+        }
+        else
+        {
+            if(ddlPersonnel.SelectedValue.ToString() != "全部人員")
+            {
+                condition = " and TG.TG006=@ID";
+            }
+        }
 
         if (ddlPersonnel.SelectedValue.ToString() == "全部人員")
         {
@@ -193,6 +233,7 @@ public partial class SD01 : System.Web.UI.Page
                     + " LEFT JOIN CMSMV MV ON TG.TG006=MV.MV001"
                     + " WHERE TG.TG042 BETWEEN @StartDate AND @EndDate"
                     + " AND TG.TG023=N'Y'"
+                    + condition
                     + " ORDER BY TG.TG042, TG.TG004,TH.TH035";
         }
         else
@@ -304,7 +345,7 @@ public partial class SD01 : System.Web.UI.Page
                     + " LEFT JOIN CMSMV MV ON TG.TG006=MV.MV001"
                     + " WHERE TG.TG042 BETWEEN @StartDate AND @EndDate"
                     + " AND TG.TG023=N'Y'"
-                    + " AND TG.TG006=@ID"
+                    + condition
                     + " ORDER BY TG.TG042, TG.TG004,TH.TH035";
         }
         return query;
@@ -399,6 +440,7 @@ public partial class SD01 : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@ID", ddlPersonnel.SelectedValue.ToString());
                 cmd.Parameters.AddWithValue("@StartDate", startYear + startMonth);
                 cmd.Parameters.AddWithValue("@EndDate", endYear + endMonth);
+                cmd.Parameters.AddWithValue("@erpId", Session["erpId"].ToString());
                 da = new SqlDataAdapter(cmd);
                 ds = new DataSet();
                 da.Fill(ds);

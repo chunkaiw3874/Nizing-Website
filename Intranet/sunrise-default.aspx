@@ -18,7 +18,6 @@
                 <li>
                     <%--<a href="sunrise_intranet/SD_PastCostsAndPrices.aspx">業務報價系統</a>--%>
                     <asp:ImageButton ID="ImageButton3" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/SD_PastCostsAndPrices.png" PostBackUrl="~/sunrise_intranet/SD_PastCostsAndPrices.aspx" /></li>
-                </li>
                 <li>
                     <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/SD-1.png" PostBackUrl="~/sunrise_intranet/SD01.aspx" /></li>
                 <li>
@@ -35,6 +34,9 @@
                 <li>
                     <%--<a href="/sunrise_employee_section/report/PD_PurchaseInProgress.aspx">採購未交單</a>--%>
                     <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/PD_PurchaseInProgress.png" PostBackUrl="~/sunrise_intranet/PD_PurchaseInProgress.aspx" />
+                </li>
+                <li>
+                    <a href="sunrise_intranet/PD_PurchaseCostCalculator.aspx">採購單費用計算機</a>
                 </li>
             </ul>
         </div>        

@@ -81,12 +81,10 @@
     <div class="content">
         <table>
           <tr>
-            <td colspan="4">導體<br />
+            <td colspan="3">導體<br />
               Conductor</td>
-            <td colspan="3">絕緣體 <br />
-              Insulator</td>
-            <td rowspan="2">完成外徑<br />
-                Overall Diameter mm</td>                
+            <td colspan="4">絕緣體 <br />
+              Insulator</td>             
             <td colspan="2">電器特性<br />
               Electrical Characteristic</td>
             <td>包裝<br />
@@ -98,8 +96,6 @@
             <td>導體結構<br />
               Composition <br />
               NO. x mm</td>
-            <td>截面積<br />
-              Cross section area mm²</td>
             <td>內徑<br />
               Inside Diameter mm</td>
             <td>被覆厚度<br />
@@ -110,6 +106,8 @@
               mm</td>
             <td>編織厚度<br />
               Braid Thickness mm</td>
+            <td>完成外徑<br />
+                Overall Diameter mm</td>   
             <td>導體電阻<br />
               Maximum Resistance at 20°C ohm/km</td>
             <td>電流量<br />
@@ -119,13 +117,12 @@
           </tr>
           <tr>
             <td>12</td>
-            <td>19 x 0.50</td>
-            <td>3.73</td>
-            <td>2.52</td>
+            <td>19 x 0.47</td>
+            <td>2.37</td>
             <td>0.75</td>
-            <td>4.02</td>
+            <td>3.87</td>
             <td>0.20</td>
-            <td>4.42</td>
+            <td>4.27</td>
             <td>5.38</td>
             <td>21</td>
             <td>305</td>

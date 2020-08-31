@@ -36,9 +36,21 @@
             width:100%;
         }
     </style>
+    
+    <script type="text/javascript">
+
+        function DisableEnterKey() {
+            if (event.keyCode == 13) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+    </script>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" onkeydown="return DisableEnterKey()">
         <div class="container-fluid">
             <div class="row">
                 <div class="full-width">

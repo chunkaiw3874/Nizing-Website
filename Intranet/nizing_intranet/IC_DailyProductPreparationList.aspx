@@ -307,7 +307,6 @@
                     <div class="printarea">
                         <div class="caption">
                             <asp:Label ID="lblgvSalesRecordDataCaption" runat="server" Text="caption here"></asp:Label>
-
                         </div>
                         <div style="display: inline;">
                             <asp:Label ID="lblTotalPackedBoxes" runat="server" Text="Label"></asp:Label>
@@ -413,9 +412,9 @@
                     </div>
                 </ContentTemplate>
                 <Triggers>
-                    <asp:AsyncPostBackTrigger ControlID="btnSalesRecordDataSearch" />
-                    <asp:AsyncPostBackTrigger ControlID="btnSaveDetail" />
-                    <asp:AsyncPostBackTrigger ControlID="btnSalesRecordRefresh" />
+                    <asp:AsyncPostBackTrigger ControlID="btnSalesRecordDataSearch" EventName="Click" />
+                    <asp:AsyncPostBackTrigger ControlID="btnSaveDetail" EventName="Click" />
+                    <asp:AsyncPostBackTrigger ControlID="btnSalesRecordRefresh" EventName="Click" />
                 </Triggers>
             </asp:UpdatePanel>
         </div>

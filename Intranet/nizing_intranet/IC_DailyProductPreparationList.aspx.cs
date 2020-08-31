@@ -26,8 +26,14 @@ public partial class nizing_intranet_IC_DailyProductPreparationList : Page
             lblSalesRecordId.Text = DateTime.Today.ToString("yyyyMMdd");
             lblgvSalesRecordDataCaption.Text = lblSalesRecordId.Text;
         }
-        //Form.DefaultButton = btnSalesRecordDataSearch.UniqueID;
         DisplaySalesRecordData(GetSalesRecordTable(lblSalesRecordId.Text));
+
+
+        //debug only
+        //if (Session["user"] == null)
+        //{
+        //    Session["user"] = "kevin";
+        //}
     }
 
     /// <summary>
@@ -46,10 +52,10 @@ public partial class nizing_intranet_IC_DailyProductPreparationList : Page
         //Uncomment to disable edit function for past records
         //if (DateTime.ParseExact(lblSalesRecordId.Text, "yyyyMMdd", CultureInfo.InvariantCulture) >= DateTime.Today)
         //{
-            foreach (GridViewRow row in gv.Rows)
-            {
-                row.Attributes.Add("onclick", Page.ClientScript.GetPostBackEventReference(gv, "Select$" + row.RowIndex.ToString(), true));
-            }
+        foreach (GridViewRow row in gv.Rows)
+        {
+            row.Attributes.Add("onclick", Page.ClientScript.GetPostBackEventReference(gv, "Select$" + row.RowIndex.ToString(), true));
+        }
         //}
     }
     protected override void Render(HtmlTextWriter writer)
@@ -209,6 +215,7 @@ public partial class nizing_intranet_IC_DailyProductPreparationList : Page
         sb.Append("$('#recordDetail').modal('show');");
         sb.Append(@"</script>");
         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "initModal", sb.ToString(), false);
+        //upData.Update();
     }
 
     protected void btnSaveDetail_Click(object sender, EventArgs e)
@@ -296,19 +303,19 @@ public partial class nizing_intranet_IC_DailyProductPreparationList : Page
             cmd.ExecuteNonQuery();
         }
         DisplaySalesRecordData(GetSalesRecordTable(lblSalesRecordId.Text));
-        upData.Update();
     }
 
     protected void gridView_PreRender(object sender, EventArgs e)
     {
         GridDecorator.MergeRows(gvSalesRecordData);
-        
+
+
         //gridview format完成後，計算總箱數
         decimal sum = 0;
 
         for (int i = 0; i < gvSalesRecordData.Rows.Count; i++)
         {
-            if(((HiddenField)gvSalesRecordData.Rows[i].FindControl("lblPackageUnit")).Value.Trim() == "箱" && gvSalesRecordData.Rows[i].Cells[0].Visible == true)
+            if (((HiddenField)gvSalesRecordData.Rows[i].FindControl("lblPackageUnit")).Value.Trim() == "箱" && gvSalesRecordData.Rows[i].Cells[0].Visible == true)
             {
                 sum += Convert.ToDecimal(((HiddenField)gvSalesRecordData.Rows[i].FindControl("lblPackageAmount")).Value.Trim());
             }
@@ -362,7 +369,7 @@ public partial class nizing_intranet_IC_DailyProductPreparationList : Page
 
                     //不可有接頭 Merge Condition:
                     //同銷貨單
-                    if((((HiddenField)row.FindControl("lblSalesRecordType")).Value.Trim() == ((HiddenField)previousRow.FindControl("lblSalesRecordType")).Value.Trim()
+                    if ((((HiddenField)row.FindControl("lblSalesRecordType")).Value.Trim() == ((HiddenField)previousRow.FindControl("lblSalesRecordType")).Value.Trim()
                         && ((HiddenField)row.FindControl("lblSalesRecordId")).Value.Trim() == ((HiddenField)previousRow.FindControl("lblSalesRecordId")).Value.Trim()))
                     {
                         row.Cells[11].RowSpan = previousRow.Cells[11].RowSpan < 2 ? 2 :

@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -11,7 +12,22 @@ using System.Web.UI.WebControls;
 public partial class InventorySearch : System.Web.UI.Page
 {
     string connectionString = ConfigurationManager.ConnectionStrings["SunrizeConnectionString"].ConnectionString;
-    
+
+    List<string> noVisibleCostColumnList = new List<string>();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        noVisibleCostColumnList.Add("dakai");
+        
+        if (!IsPostBack)
+        {
+            Session["user"] = getId();
+
+            //debug only
+            //Session["user"] = "dakai";
+        }
+
+    }
+
     protected override void Render(System.Web.UI.HtmlTextWriter writer)
     {
         AddRowSelectToGridView(grdAcct);
@@ -21,6 +37,15 @@ public partial class InventorySearch : System.Web.UI.Page
 
         base.Render(writer);
     }
+
+    protected string getId()
+    {
+        WindowsPrincipal principal = (WindowsPrincipal)User;
+        WindowsIdentity identity = (WindowsIdentity)User.Identity;
+        string[] name = identity.Name.Split('\\');
+        return name[1];
+    }
+
     private void AddRowSelectToGridView(GridView gv)
     {
         foreach (GridViewRow row in gv.Rows)
@@ -35,10 +60,7 @@ public partial class InventorySearch : System.Web.UI.Page
         }
     }
 
-    protected void Page_Load(object sender, EventArgs e)
-    {
 
-    }
 
     //protected void btnSearch_Click(object sender, EventArgs e)
     //{
@@ -57,7 +79,11 @@ public partial class InventorySearch : System.Web.UI.Page
         string query = "SELECT COALESCE(INVMB.MB001, '') [ITEM_ID]"
                     + " , COALESCE(INVMB.MB002, '') [ITEM_NAME]"
                     + " , COALESCE(INVMB.MB003, '') [ITEM_SPEC]"                    
-                    + " , CONVERT(DECIMAL(20,2),COALESCE(INVMB.MB049,0)) [LAST_PURCHASE_PRICE]"
+                    //+ " , CONVERT(DECIMAL(20,2),COALESCE(INVMB.MB049,0)) [LAST_PURCHASE_PRICE]"
+                    + " , CASE"
+                    + " WHEN INVMB.MB064=0 THEN 0" +
+                    " ELSE CONVERT(DECIMAL(20,4),INVMB.MB065/INVMB.MB064)" +
+                    " END [INV_AVG_COST]"
                     + " , COALESCE(INVMB.MB048,'') [LAST_PURCHASE_CURRENCY]"
                     + " , CONVERT(DECIMAL(20,0),COALESCE(INVMC.MC007, 0)) [AMOUNT_IN_INV]"
                     + " , COALESCE(INVMB.MB004, '') [UNIT]"
@@ -425,4 +451,12 @@ public partial class InventorySearch : System.Web.UI.Page
     //{
     //    txtCategory_Large.Text = grdLarge.SelectedRow.Cells[0].Text;
     //}
+
+    protected void grdResult_PreRender(object sender, EventArgs e)
+    {
+        if (noVisibleCostColumnList.Contains(Session["user"].ToString()))
+        {
+            grdResult.Columns[5].Visible = false;
+        }
+    }
 }

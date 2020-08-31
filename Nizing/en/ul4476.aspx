@@ -77,7 +77,7 @@
     <div class="content">
         <table>
           <tr>
-            <td colspan="4">導體<br />
+            <td colspan="3">導體<br />
               Conductor</td>
             <td colspan="4">絕緣體 <br />
               Insulator</td>
@@ -86,11 +86,9 @@
           </tr>
           <tr>
             <td>
-                芯數<br />
-                No. of Cores
+                線號 x 芯數<br />
+                AWG x Cores
             </td>
-            <td>線號<br />
-              AWG</td>
             <td>導體結構<br />
               Composition <br />
               No. x mm</td>
@@ -119,75 +117,117 @@
               Maximum Resistance at 20°C<br />
                 ohm/km</td>
             <td>電流量<br />
-              Current Capacity at 170°C<br />
+              Current Capacity at 130°C<br />
                 amp
             </td>
           </tr>
           <tr>
-            <td rowspan="3">2</td>
-            <td>22</td>
+            <td>24 x 2C</td>
+            <td>0.14 x 14</td>
+            <td>0.6</td>
+            <td>2.2</td>
+            <td>1.15</td>
+            <td>4.4</td>
+            <td>6.7</td>
+            <td>88.6</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>22 x 2C</td>
             <td>0.14 x 22</td>
-            <td>0.76</td>
-            <td>1.56</td>
-            <td>1</td>
-            <td>3.2</td>
-            <td>5.2</td>
+            <td>0.75</td>
+            <td>2.35</td>
+            <td>1.15</td>
+            <td>4.7</td>
+            <td>7</td>
             <td>62.5</td>
             <td>3</td>
           </tr>
           <tr>
-            <td>18</td>
+            <td>20 x 2C</td>
+            <td>0.18 x 21</td>
+            <td>0.91</td>
+            <td>2.5</td>
+            <td>1.15</td>
+            <td>5</td>
+            <td>7.3</td>
+            <td>39.5</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td>18 x 2C</td>
             <td>0.18 x 34</td>
             <td>1.2</td>
-            <td>2</td>
-            <td>1</td>
-            <td>4</td>
-            <td>6</td>
-            <td>25.8</td>
+            <td>2.8</td>
+            <td>1.15</td>
+            <td>5.6</td>
+            <td>7.9</td>
+            <td>24.4</td>
             <td>8</td>
           </tr>
           <tr>
-            <td>16</td>
-            <td>0.5 x 7</td>
+            <td>16 x 2C</td>
+            <td>0.18 x 51</td>
             <td>1.5</td>
-            <td>2.3</td>
-            <td>1</td>
-            <td>4.6</td>
-            <td>6.6</td>
+            <td>3.1</td>
+            <td>1.15</td>
+            <td>6.2</td>
+            <td>8.5</td>
             <td>15.5</td>
             <td>11</td>
           </tr>
           <tr>
-            <td rowspan="3">3</td>
-            <td>22</td>
+            <td>24 x 3C</td>
+            <td>0.14 x 14</td>
+            <td>0.6</td>
+            <td>2.2</td>
+            <td>1.15</td>
+            <td>4.8</td>
+            <td>7.1</td>
+            <td>88.6</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>22 x 3C</td>
             <td>0.14 x 22</td>
-            <td>0.76</td>
-            <td>1.56</td>
-            <td>1</td>
-            <td>3.5</td>
-            <td>5.5</td>
+            <td>0.75</td>
+            <td>2.35</td>
+            <td>1.15</td>
+            <td>5.2</td>
+            <td>7.5</td>
             <td>62.5</td>
             <td>3</td>
           </tr>
           <tr>
-            <td>18</td>
+            <td>20 x 3C</td>
+            <td>0.18 x 21</td>
+            <td>0.91</td>
+            <td>2.5</td>
+            <td>1.15</td>
+            <td>5.5</td>
+            <td>7.8</td>
+            <td>39.5</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td>18 x 3C</td>
             <td>0.18 x 34</td>
             <td>1.2</td>
-            <td>2</td>
-            <td>1</td>
-            <td>4.4</td>
-            <td>6.4</td>
-            <td>25.8</td>
+            <td>2.8</td>
+            <td>1.15</td>
+            <td>6.1</td>
+            <td>8.4</td>
+            <td>24.4</td>
             <td>8</td>
           </tr>
           <tr>
-            <td>16</td>
-            <td>0.5 x 7</td>
+            <td>16 x 3C</td>
+            <td>0.18 x 51</td>
             <td>1.5</td>
-            <td>2.3</td>
-            <td>1</td>
-            <td>5</td>
-            <td>7</td>
+            <td>3.1</td>
+            <td>1.15</td>
+            <td>6.8</td>
+            <td>9.1</td>
             <td>15.5</td>
             <td>11</td>
           </tr>
