@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <style>
         .list-body li input{
-            width:150px;
+            height:30px;
         }
     </style>
 </asp:Content>
@@ -35,9 +35,6 @@
                     <%--<a href="/sunrise_employee_section/report/PD_PurchaseInProgress.aspx">採購未交單</a>--%>
                     <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/PD_PurchaseInProgress.png" PostBackUrl="~/sunrise_intranet/PD_PurchaseInProgress.aspx" />
                 </li>
-                <li>
-                    <a href="sunrise_intranet/PD_PurchaseCostCalculator.aspx">採購單費用計算機</a>
-                </li>
             </ul>
         </div>        
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
@@ -48,6 +45,16 @@
             <ul class="list-body">
                 <li>
                     <asp:ImageButton ID="btnInvCheck" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/inventory.png" PostBackUrl="~/sunrise_intranet/InventorySearch.aspx" /></li>
+            </ul>
+        </div>        
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <ul>
+                <li>
+                    <asp:Image ID="Image4" runat="server" Width="200" ImageUrl="~/nizing_intranet/image/button/dept/INT.png" /></li>
+            </ul>
+            <ul class="list-body">
+                <li>
+                    <asp:ImageButton ID="ImageButton5" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/INT-1.png" PostBackUrl="~/sunrise_intranet/PD_PurchaseCostCalculator.aspx" /></li>
             </ul>
         </div>
     </div>

@@ -50,13 +50,13 @@ public partial class nizing_intranet_IC_DailyProductPreparationList : Page
     private void AddRowSelectToGridView(GridView gv)
     {
         //Uncomment to disable edit function for past records
-        //if (DateTime.ParseExact(lblSalesRecordId.Text, "yyyyMMdd", CultureInfo.InvariantCulture) >= DateTime.Today)
-        //{
-        foreach (GridViewRow row in gv.Rows)
+        if (DateTime.ParseExact(lblSalesRecordId.Text, "yyyyMMdd", CultureInfo.InvariantCulture) >= DateTime.Today)
         {
-            row.Attributes.Add("onclick", Page.ClientScript.GetPostBackEventReference(gv, "Select$" + row.RowIndex.ToString(), true));
+            foreach (GridViewRow row in gv.Rows)
+            {
+                row.Attributes.Add("onclick", Page.ClientScript.GetPostBackEventReference(gv, "Select$" + row.RowIndex.ToString(), true));
+            }
         }
-        //}
     }
     protected override void Render(HtmlTextWriter writer)
     {
