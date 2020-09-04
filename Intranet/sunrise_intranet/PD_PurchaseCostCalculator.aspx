@@ -25,27 +25,36 @@
         <div class="form-group">
             <h2>採購單費用計算機</h2>
         </div>
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">採購單號</span>
+        <asp:UpdatePanel ID="upFormSearch" runat="server">
+            <ContentTemplate>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">採購單號</span>
+                        </div>
+                        <asp:TextBox ID="txtPurchaseFormType" CssClass="form-control" runat="server" Text="A332" ReadOnly="true"></asp:TextBox>
+                        <asp:DropDownList ID="ddlPurchaseFormId" CssClass="custom-select" runat="server" AutoPostBack="true"
+                            OnSelectedIndexChanged="ddlPurchaseFormId_SelectedIndexChanged">
+                        </asp:DropDownList>
+                        <%--<asp:TextBox ID="txtPurchaseFormId" CssClass="form-control" runat="server"></asp:TextBox>--%>
+                        <div class="input-group-append">
+                            <asp:Button ID="btnSearchPurchaseForm" runat="server" CssClass="btn btn-success" Text="查詢單號"
+                                OnClick="btnSearchPurchaseForm_Click" />
+                        </div>
+                    </div>
                 </div>
-                <asp:TextBox ID="txtPurchaseFormType" runat="server" Text="A332" ReadOnly="true"></asp:TextBox>
-                <%--<asp:DropDownList ID="ddlPurchaseFormType" CssClass="custom-select" runat="server"></asp:DropDownList>--%>
-                <asp:TextBox ID="txtPurchaseFormId" CssClass="form-control" runat="server"></asp:TextBox>
-                <div class="input-group-append">
-                    <asp:Button ID="btnSearchPurchaseForm" runat="server" CssClass="btn btn-success" Text="查詢單號"
-                        OnClick="btnSearchPurchaseForm_Click" />
-                </div>
-            </div>
-        </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
         <hr />
+
         <asp:UpdatePanel ID="upCalculationParameter" runat="server" UpdateMode="Conditional">
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="btnSearchPurchaseForm" />
                 <asp:AsyncPostBackTrigger ControlID="btnCalculateTotalCost" />
+                <asp:AsyncPostBackTrigger ControlID="ddlPurchaseFormId" />
             </Triggers>
             <ContentTemplate>
+                <asp:HiddenField ID="hdnPurchaseFormTotalCost" runat="server" />
                 <div class="form-group">
                     <div class="row mb-2">
                         <div class="col-lg-6">
@@ -55,23 +64,15 @@
                                     <asp:Label ID="lblPurchaseFormCurrency" runat="server" CssClass="input-group-text" Text=""></asp:Label>
                                 </div>
                                 <asp:TextBox ID="txtPurchaseFormExchangeRate" runat="server" CssClass="form-control text-enabled" ReadOnly="true"></asp:TextBox>
+                                <%--<asp:HiddenField ID="hdnImportFormExchangeRate" runat="server" Value="" />--%>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">報關單匯率</span>
-                                    <asp:Label ID="lblImportFormCurrency" runat="server" CssClass="input-group-text" Text=""></asp:Label>
-                                </div>
-                                <asp:TextBox ID="txtImportFormExchangeRate" runat="server" CssClass="form-control"></asp:TextBox>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-lg-3">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
                                     <span class="input-group-text">運費</span>
+                                    <asp:DropDownList ID="ddlTransportationCostCurrency" runat="server" CssClass="custom-select"></asp:DropDownList>
+                                    <%--<asp:Label ID="lblTransportationCostCurrency" runat="server" CssClass="input-group-text" Text=""></asp:Label>--%>
                                 </div>
                                 <asp:TextBox ID="txtTransportCost" runat="server" CssClass="form-control"></asp:TextBox>
                                 <div class="input-group-append">
@@ -79,10 +80,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">推廣貿易費</span>
+                                    <span class="input-group-text">NTD</span>
                                 </div>
                                 <asp:TextBox ID="txtPromotionCost" runat="server" CssClass="form-control"></asp:TextBox>
                                 <div class="input-group-append">
@@ -90,10 +94,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">關稅</span>
+                                    <span class="input-group-text">NTD</span>
                                 </div>
                                 <asp:TextBox ID="txtImportTax" runat="server" CssClass="form-control"></asp:TextBox>
                                 <div class="input-group-append">
@@ -101,10 +106,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">其他費用</span>
+                                    <span class="input-group-text">NTD</span>
                                 </div>
                                 <asp:TextBox ID="txtOtherCost" runat="server" CssClass="form-control"></asp:TextBox>
                                 <div class="input-group-append">
@@ -133,6 +139,7 @@
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="btnSearchPurchaseForm" />
                     <asp:AsyncPostBackTrigger ControlID="btnCalculateTotalCost" />
+                    <asp:AsyncPostBackTrigger ControlID="ddlPurchaseFormId" />
                 </Triggers>
                 <ContentTemplate>
                     <asp:GridView ID="gvPurchaseForm" runat="server"
@@ -149,7 +156,7 @@
                                 <ItemStyle HorizontalAlign="Center" />
                                 <ItemTemplate>
                                     <asp:Label ID="lblItemNo" runat="server" Text='<%#Eval("序號") %>'></asp:Label>
-                                    <asp:HiddenField ID="hdnTotalMaterialCostBeforeTax" runat="server" Value='<%#Eval("未稅採購金額") %>' />
+                                    <%--<asp:HiddenField ID="hdnTotalMaterialCostBeforeTax" runat="server" Value='<%#Eval("未稅採購金額") %>' />--%>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="品號">

@@ -25,9 +25,9 @@ public partial class SD01 : System.Web.UI.Page
         {
             adm.Add("chun");
 
-            for (int i = 0; i > (2011 - Convert.ToInt16(DateTime.Today.Year)); i--)
+            for (int i = DateTime.Today.Year; i > 2011; i--)
             {
-                ddlYear.Items.Add(DateTime.Today.AddYears(i).Year.ToString());
+                ddlYear.Items.Add(i.ToString());
             }
             ddlYear.SelectedValue = DateTime.Today.Year.ToString();
             ddlMonth.SelectedValue = DateTime.Today.Month.ToString("D2");
@@ -510,7 +510,7 @@ public partial class SD01 : System.Web.UI.Page
     {
         DataSet ds = new DataSet();
         SetTargetContent.Visible = true;
-        for (int i = 2017; i <= DateTime.Now.Year + 1; i++)
+        for (int i = DateTime.Today.Year; i >= 2017; i--)
         {
             ddlTargetYear.Items.Add(i.ToString());
         }
@@ -518,6 +518,8 @@ public partial class SD01 : System.Web.UI.Page
         {
             ddlTargetMonth.Items.Add(i.ToString("D2"));
         }
+        ddlTargetYear.SelectedValue = DateTime.Today.Year.ToString();
+        ddlTargetMonth.SelectedValue = DateTime.Today.Month.ToString("D2");
         ddlTargetEmp.Items.Clear();
         using (SqlConnection conn = new SqlConnection(connectionString))
         {

@@ -27,12 +27,17 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <%--<link href="~/QC/scrap/css/scrap.css" rel="stylesheet" type="text/css" />--%>
+    <style>
+        .full-width{
+            width:100%;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-12">
+                <div class="full-width">
                     <div id="banner">
                         <div class="banner-button">
                             <asp:ImageButton ID="btnHome" runat="server" ImageUrl="~/nizing_intranet/image/button/home1.png" Height="80" ToolTip="首頁" PostBackUrl="~/nizing-default.aspx" onmouseover="this.src='/nizing_intranet/image/button/home2.png'" onmouseout="this.src='/nizing_intranet/image/button/home1.png'" />

@@ -15,18 +15,15 @@ public partial class sunrise_intranet_PD_PurchaseCostCalculator : System.Web.UI.
     {
         if (!IsPostBack)
         {
-            //DataTable dt = new DataTable();
-            //dt = GetPurchaseFormType();
+            DataTable dt = new DataTable();
+            dt = GetPurchaseFormId();
 
-            //for (int i = 0; i < dt.Rows.Count; i++)
-            //{
-            //    ddlPurchaseFormType.Items.Add(dt.Rows[i]["單別"].ToString().Trim());
-            //}
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                ddlPurchaseFormId.Items.Add(dt.Rows[i]["單號"].ToString().Trim());
+            }
 
-            //if (ddlPurchaseFormType.Items.Count > 0)
-            //{
-            //    ddlPurchaseFormType.SelectedValue = "A332";
-            //}
+            ddlPurchaseFormId.SelectedIndex = 0;
         }
 
         if (gvPurchaseForm.Rows.Count == 0)
@@ -35,17 +32,17 @@ public partial class sunrise_intranet_PD_PurchaseCostCalculator : System.Web.UI.
         }
     }
 
-    private DataTable GetPurchaseFormType()
+    private DataTable GetPurchaseFormId()
     {
         DataTable dt = new DataTable();
         using (SqlConnection conn = new SqlConnection(connectionString))
         {
             conn.Open();
 
-            string query = "select mq.MQ001 '單別'" +
-                " from CMSMQ mq" +
-                " where mq.MQ003='33'" +
-                " order by mq.MQ001";
+            string query = "select tc.TC002 '單號'" +
+                " from PURTC tc" +
+                " where tc.TC001='A332'" +
+                " order by tc.TC002 desc";
 
             SqlCommand cmd = new SqlCommand(query, conn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -102,10 +99,9 @@ public partial class sunrise_intranet_PD_PurchaseCostCalculator : System.Web.UI.
     private void ResetCalculationParameter()
     {
         btnCalculateTotalCost.Enabled = false;
-        txtImportFormExchangeRate.Text = string.Empty;
         txtPurchaseFormExchangeRate.Text = string.Empty;
-        lblImportFormCurrency.Text = string.Empty;
         lblPurchaseFormCurrency.Text = string.Empty;
+        ddlTransportationCostCurrency.Items.Clear();
         txtTransportCost.Text = string.Empty;
         lblTransportCostPercent.Text = string.Empty;
         txtPromotionCost.Text = string.Empty;
@@ -119,13 +115,19 @@ public partial class sunrise_intranet_PD_PurchaseCostCalculator : System.Web.UI.
     protected void btnSearchPurchaseForm_Click(object sender, EventArgs e)
     {
         DataTable dt = new DataTable();
-        dt = GetPurchaseFormData(txtPurchaseFormType.Text, txtPurchaseFormId.Text);
+        dt = GetPurchaseFormData(txtPurchaseFormType.Text, ddlPurchaseFormId.SelectedValue);
         if (dt.Rows.Count > 0)
         {
             DisplayGridview(gvPurchaseForm, dt);
             lblPurchaseFormCurrency.Text = dt.Rows[0]["幣別"].ToString().Trim();
             txtPurchaseFormExchangeRate.Text = dt.Rows[0]["匯率"].ToString().Trim();
-            lblImportFormCurrency.Text = lblPurchaseFormCurrency.Text;
+            ddlTransportationCostCurrency.Items.Add(lblPurchaseFormCurrency.Text);
+            if (lblPurchaseFormCurrency.Text != "NTD")
+            {
+                ddlTransportationCostCurrency.Items.Add("NTD");
+            }
+            ddlTransportationCostCurrency.SelectedValue = lblPurchaseFormCurrency.Text;
+            hdnPurchaseFormTotalCost.Value = dt.Rows[0]["未稅採購金額"].ToString().Trim();
             btnCalculateTotalCost.Enabled = true;
         }
         else
@@ -170,10 +172,10 @@ public partial class sunrise_intranet_PD_PurchaseCostCalculator : System.Web.UI.
 
     protected void btnCalculateTotalCost_Click(object sender, EventArgs e)
     {
-        if (string.IsNullOrEmpty(txtImportFormExchangeRate.Text))
-        {
-            txtImportFormExchangeRate.Text = txtPurchaseFormExchangeRate.Text;
-        }
+        //if (string.IsNullOrEmpty(hdnImportFormExchangeRate.Value))
+        //{
+        //    hdnImportFormExchangeRate.Value = txtPurchaseFormExchangeRate.Text;
+        //}
         if (string.IsNullOrWhiteSpace(txtTransportCost.Text))
         {
             txtTransportCost.Text = "0";
@@ -191,8 +193,10 @@ public partial class sunrise_intranet_PD_PurchaseCostCalculator : System.Web.UI.
             txtOtherCost.Text = "0";
         }
 
-        decimal totalMaterialCost = Convert.ToDecimal(((HiddenField)gvPurchaseForm.Rows[1].FindControl("hdnTotalMaterialCostBeforeTax")).Value) * Convert.ToDecimal(txtImportFormExchangeRate.Text);
-        decimal transportPercent = Math.Round(Convert.ToDecimal(txtTransportCost.Text) * 100 / totalMaterialCost, 2);
+        decimal totalMaterialCost = Convert.ToDecimal(hdnPurchaseFormTotalCost.Value) * Convert.ToDecimal(txtPurchaseFormExchangeRate.Text);
+        decimal transportPercent = ddlTransportationCostCurrency.SelectedValue == "NTD" ?
+            Math.Round(Convert.ToDecimal(txtTransportCost.Text) * 100 / totalMaterialCost, 2)
+            : Math.Round(Convert.ToDecimal(txtTransportCost.Text) * Convert.ToDecimal(txtPurchaseFormExchangeRate.Text) * 100 / totalMaterialCost, 2);
         decimal promotionPercent = Math.Round(Convert.ToDecimal(txtPromotionCost.Text) * 100 / totalMaterialCost, 2);
         decimal taxPercent = Math.Round(Convert.ToDecimal(txtImportTax.Text) * 100 / totalMaterialCost, 2);
         decimal otherPercent = Math.Round(Convert.ToDecimal(txtOtherCost.Text) * 100 / totalMaterialCost, 2);
@@ -201,15 +205,22 @@ public partial class sunrise_intranet_PD_PurchaseCostCalculator : System.Web.UI.
         lblPromotionCostPercent.Text = promotionPercent.ToString() + "%";
         lblImportTaxPercent.Text = taxPercent.ToString() + "%";
         lblOtherCostPercent.Text = otherPercent.ToString() + "%";
+        lblTotalNonMaterialCost.Text = Math.Round(
+            (ddlTransportationCostCurrency.SelectedValue == "NTD" ? Convert.ToDecimal(txtTransportCost.Text) : Convert.ToDecimal(txtTransportCost.Text) * Convert.ToDecimal(txtPurchaseFormExchangeRate.Text))
+            + Convert.ToDecimal(txtPromotionCost.Text)
+            + Convert.ToDecimal(txtImportTax.Text)
+            + Convert.ToDecimal(txtOtherCost.Text)
+            , 0).ToString();
     }
 
     protected void gvPurchaseForm_PreRender(object sender, EventArgs e)
     {
         GridView gv = (GridView)sender;
-        decimal sum = 0;
+        //decimal sum = 0;
+
         for (int i = 0; i < gvPurchaseForm.Rows.Count; i++)
         {
-            decimal totalMaterialCost = Convert.ToDecimal(((HiddenField)gv.Rows[i].FindControl("hdnTotalMaterialCostBeforeTax")).Value);
+            decimal totalMaterialCost = Convert.ToDecimal(hdnPurchaseFormTotalCost.Value);
             decimal materialCost = Convert.ToDecimal(((Label)gv.Rows[i].FindControl("lblItemTotalCost")).Text);
             decimal materialPercent = materialCost / totalMaterialCost;
 
@@ -223,20 +234,27 @@ public partial class sunrise_intranet_PD_PurchaseCostCalculator : System.Web.UI.
                 && decimal.TryParse(txtImportTax.Text, out taxCost)
                 && decimal.TryParse(txtOtherCost.Text, out otherCost))
             {
-                decimal total = transportCost * materialPercent +
+                decimal total =
+                    (ddlTransportationCostCurrency.SelectedValue == "NTD" ? transportCost * materialPercent : transportCost * Convert.ToDecimal(txtPurchaseFormExchangeRate.Text) * materialPercent) +
                     promotionCost * materialPercent +
                     taxCost * materialPercent +
                     otherCost * materialPercent;
 
-                ((Label)gv.Rows[i].FindControl("lblCostExcludeMaterial")).Text = Math.Round(total,0).ToString();
+                ((Label)gv.Rows[i].FindControl("lblCostExcludeMaterial")).Text = Math.Round(total, 0).ToString();
 
-                sum += total;
+                //sum += total;
             }
             else
             {
                 ((Label)gv.Rows[i].FindControl("lblCostExcludeMaterial")).Text = "";
             }
         }
-        lblTotalNonMaterialCost.Text = Math.Round(sum, 0).ToString();
+        //lblTotalNonMaterialCost.Text = Math.Round(sum, 0).ToString();
+    }
+
+    protected void ddlPurchaseFormId_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        ClearGridview(gvPurchaseForm);
+        ResetCalculationParameter();
     }
 }
