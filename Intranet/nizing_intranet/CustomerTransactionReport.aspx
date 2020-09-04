@@ -1,8 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/masterPage/MasterPage.master" AutoEventWireup="true" CodeFile="CustomerTransactionReport.aspx.cs" Inherits="CustomerTransactionReport" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style>
+        .btn-group.flex {
+            display: flex;
+        }
+
+        .flex .btn {
+            flex: 1;
+        }
+    </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -13,57 +22,57 @@
             <div class="input-group">
                 <div class="input-group-prepend">
                     <label class="input-group-text">起始年月</label>
-                    <asp:DropDownList ID="ddlStartYear" runat="server" CssClass="custom-select"></asp:DropDownList>
-                    <asp:DropDownList ID="ddlStartMonth" runat="server" CssClass="custom-select">
-                        <asp:ListItem Value="1226">01</asp:ListItem>
-                        <asp:ListItem Value="0126">02</asp:ListItem>
-                        <asp:ListItem Value="0226">03</asp:ListItem>
-                        <asp:ListItem Value="0326">04</asp:ListItem>
-                        <asp:ListItem Value="0426">05</asp:ListItem>
-                        <asp:ListItem Value="0526">06</asp:ListItem>
-                        <asp:ListItem Value="0626">07</asp:ListItem>
-                        <asp:ListItem Value="0726">08</asp:ListItem>
-                        <asp:ListItem Value="0826">09</asp:ListItem>
-                        <asp:ListItem Value="0926">10</asp:ListItem>
-                        <asp:ListItem Value="1026">11</asp:ListItem>
-                        <asp:ListItem Value="1126">12</asp:ListItem>
-                    </asp:DropDownList>
                 </div>
+                <asp:DropDownList ID="ddlStartYear" runat="server" CssClass="custom-select"></asp:DropDownList>
+                <asp:DropDownList ID="ddlStartMonth" runat="server" CssClass="custom-select">
+                    <asp:ListItem Value="1226">01</asp:ListItem>
+                    <asp:ListItem Value="0126">02</asp:ListItem>
+                    <asp:ListItem Value="0226">03</asp:ListItem>
+                    <asp:ListItem Value="0326">04</asp:ListItem>
+                    <asp:ListItem Value="0426">05</asp:ListItem>
+                    <asp:ListItem Value="0526">06</asp:ListItem>
+                    <asp:ListItem Value="0626">07</asp:ListItem>
+                    <asp:ListItem Value="0726">08</asp:ListItem>
+                    <asp:ListItem Value="0826">09</asp:ListItem>
+                    <asp:ListItem Value="0926">10</asp:ListItem>
+                    <asp:ListItem Value="1026">11</asp:ListItem>
+                    <asp:ListItem Value="1126">12</asp:ListItem>
+                </asp:DropDownList>
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <label class="input-group-text">結束年月</label>
-                    <asp:DropDownList ID="ddlEndYear" runat="server" CssClass="custom-select"></asp:DropDownList>
-                    <asp:DropDownList ID="ddlEndMonth" runat="server" CssClass="custom-select">
-                        <asp:ListItem Value="0125">01</asp:ListItem>
-                        <asp:ListItem Value="0225">02</asp:ListItem>
-                        <asp:ListItem Value="0325">03</asp:ListItem>
-                        <asp:ListItem Value="0425">04</asp:ListItem>
-                        <asp:ListItem Value="0525">05</asp:ListItem>
-                        <asp:ListItem Value="0625">06</asp:ListItem>
-                        <asp:ListItem Value="0725">07</asp:ListItem>
-                        <asp:ListItem Value="0825">08</asp:ListItem>
-                        <asp:ListItem Value="0925">09</asp:ListItem>
-                        <asp:ListItem Value="1025">10</asp:ListItem>
-                        <asp:ListItem Value="1125">11</asp:ListItem>
-                        <asp:ListItem Value="1225">12</asp:ListItem>
-                    </asp:DropDownList>
                 </div>
+                <asp:DropDownList ID="ddlEndYear" runat="server" CssClass="custom-select"></asp:DropDownList>
+                <asp:DropDownList ID="ddlEndMonth" runat="server" CssClass="custom-select">
+                    <asp:ListItem Value="0125">01</asp:ListItem>
+                    <asp:ListItem Value="0225">02</asp:ListItem>
+                    <asp:ListItem Value="0325">03</asp:ListItem>
+                    <asp:ListItem Value="0425">04</asp:ListItem>
+                    <asp:ListItem Value="0525">05</asp:ListItem>
+                    <asp:ListItem Value="0625">06</asp:ListItem>
+                    <asp:ListItem Value="0725">07</asp:ListItem>
+                    <asp:ListItem Value="0825">08</asp:ListItem>
+                    <asp:ListItem Value="0925">09</asp:ListItem>
+                    <asp:ListItem Value="1025">10</asp:ListItem>
+                    <asp:ListItem Value="1125">11</asp:ListItem>
+                    <asp:ListItem Value="1225">12</asp:ListItem>
+                </asp:DropDownList>
             </div>
             <div class="input-group">
                 <div class="input-group-prepend">
-                <label class="input-group-text">查詢業務</label>
+                    <label class="input-group-text">查詢業務</label>
+                </div>
                 <asp:DropDownList ID="ddlPersonnel" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource1" DataTextField="MV002" DataValueField="TG006" CssClass="custom-select">
-                <asp:ListItem Selected="True">全部人員</asp:ListItem>
+                    <asp:ListItem Selected="True">全部人員</asp:ListItem>
                 </asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:NZConnectionString %>" SelectCommand="SELECT DISTINCT TG006, MV002
                 FROM COPTG
 	            LEFT JOIN CMSMV MV ON TG006 = MV001
                 WHERE TG006 &lt;&gt; ''
-                ORDER BY TG006"></asp:SqlDataSource>  
-                </div>
+                ORDER BY TG006"></asp:SqlDataSource>
             </div>
-            <div class="row form-group">
+            <div class="row mt-1">
                 <div class="col-sm-12">
                     <asp:CheckBox ID="ckxIncludeNoSaleRecord" runat="server" Checked="false" Text="包含沒銷貨的客戶" />
                 </div>
@@ -73,10 +82,10 @@
                     <asp:Label ID="lblError" runat="server" CssClass="error-message"></asp:Label>
                 </div>
             </div>
-        </div>
-        <div class="form-group btn-group">
+            <div class="btn-group flex">
                 <asp:Button ID="btnReport" runat="server" Text="查詢" OnClick="btnReport_Click" CssClass="btn btn-success" />
                 <asp:Button ID="btnExport" runat="server" Text="匯出至Excel" OnClick="btnExport_Click" CssClass="btn btn-success" />
+            </div>
         </div>
         <div id="report">
             <asp:GridView ID="grdReport" runat="server" CellPadding="4" ForeColor="#333333" AutoGenerateColumns="false" CssClass="grdResult" OnDataBound="grdReport_DataBound" AllowSorting="true" OnSorting="grdReport_Sorting">

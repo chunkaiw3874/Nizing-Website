@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/masterPage/MasterPage.master" AutoEventWireup="true" CodeFile="M01.aspx.cs" Inherits="nizing_intranet_M01" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script type="text/javascript">
         $(document).ready(function () {
             var isPostBack = $('#<%=hdnIsPostBack.ClientID%>').val();
@@ -28,25 +28,33 @@
             });
         })
     </script>
+    <style>
+        .btn-group.flex {
+            display: flex;
+        }
+
+        .flex .btn {
+            flex: 1;
+        }
+    </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div id="M01" class="container">
         <div id="Admin" runat="server" visible="false" class="form-group">
             <div class="row">
                 <div class="col-sm-12 form-group">
-                    <span class="label label-info" id="btnShowTargetSetter" style="cursor: pointer; font-size: 20px;">設定生產目標</span>
+                    <span class="label label-info" id="btnShowTargetSetter" style="cursor: pointer; font-size: 20px; color: aqua;">設定生產目標</span>
                     <asp:HiddenField ID="hdnIsPostBack" runat="server" />
                     <asp:HiddenField ID="hdnIsbtnShowTargetSetterTrue" runat="server" />
                 </div>
             </div>
             <div id="TargetSetter">
-                <div class="input-group-sm">
-                    <div class="input-group-prepend">
-                        <asp:DropDownList ID="ddlTargetYear" runat="server" CssClass="custom-select"></asp:DropDownList>
-                        <asp:DropDownList ID="ddlTargetProductionLine" runat="server" CssClass="custom-select"></asp:DropDownList>
-                        <asp:Button ID="btnTargetSubmit" runat="server" Text="搜尋" CssClass="btn btn-success" OnClick="btnTargetSubmit_Click" />    
+                <div class="input-group">
+                    <asp:DropDownList ID="ddlTargetYear" runat="server" CssClass="custom-select"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlTargetProductionLine" runat="server" CssClass="custom-select"></asp:DropDownList>
+                    <div class="input-group-append">
+                        <asp:Button ID="btnTargetSubmit" runat="server" Text="搜尋" CssClass="btn btn-success" OnClick="btnTargetSubmit_Click" />
                     </div>
-                    
                 </div>
                 <div class="row form-group">
                     <div class="col-sm-12">
@@ -126,7 +134,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-2">
-                        <asp:Button ID="btnSaveTarget" runat="server" Text="儲存" CssClass="btn-success btn" Visible="false" OnClick="btnSaveTarget_Click"/>
+                        <asp:Button ID="btnSaveTarget" runat="server" Text="儲存" CssClass="btn-success btn" Visible="false" OnClick="btnSaveTarget_Click" />
                     </div>
                 </div>
                 <div class="row">
@@ -144,24 +152,22 @@
         <div class="form-group">
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <asp:Label ID="Label2" runat="server" CssClass="input-group-text" Text="開始查詢年份"></asp:Label>                           
-                    <asp:DropDownList ID="ddlStartYear" runat="server" CssClass="custom-select">
-                    </asp:DropDownList>
+                    <asp:Label ID="Label2" runat="server" CssClass="input-group-text" Text="開始查詢年份"></asp:Label>
                 </div>
+                <asp:DropDownList ID="ddlStartYear" runat="server" CssClass="custom-select">
+                </asp:DropDownList>
             </div>
             <div class="input-group">
                 <div class="input-group-prepend">
                     <asp:Label ID="Label3" runat="server" CssClass="input-group-text" Text="結束查詢年份"></asp:Label>
-                    <asp:DropDownList ID="ddlEndYear" runat="server" CssClass="custom-select">
-                    </asp:DropDownList>
                 </div>
+                <asp:DropDownList ID="ddlEndYear" runat="server" CssClass="custom-select">
+                </asp:DropDownList>
             </div>
         </div>
-        <div class="form-group row">
-            <div class="col-sm-12 btn-group">
-                <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="查詢" CssClass="btn btn-success" />
-                <asp:Button ID="btnExport" runat="server" Text="匯出至Excel" OnClick="btnExport_Click" CssClass="btn btn-success" />
-            </div>
+        <div class="btn-group flex">
+            <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="查詢" CssClass="btn btn-success" />
+            <asp:Button ID="btnExport" runat="server" Text="匯出至Excel" OnClick="btnExport_Click" CssClass="btn btn-success" />
         </div>
         <div class="form-group row">
             <div class="col-sm-12">
@@ -264,7 +270,7 @@
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
-            </div>            
+            </div>
         </div>
     </div>
 </asp:Content>

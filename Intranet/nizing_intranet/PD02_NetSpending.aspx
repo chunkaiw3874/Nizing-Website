@@ -1,16 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/masterPage/MasterPage.master" AutoEventWireup="true" CodeFile="PD02_NetSpending.aspx.cs" Inherits="nizing_intranet_PD02_NetSpending" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style>
-        .btn-group.flex{
+        .btn-group.flex {
             display: flex;
         }
-        .flex .btn{
+
+        .flex .btn {
             flex: 1;
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container">
         <div id="formTitle" class="form-group">
             <div class="row">
@@ -19,17 +20,15 @@
                 </div>
             </div>
         </div>
-        <div id="searchField" class="pb-3" style="border-bottom:solid 1px #cccccc">
+        <div id="searchField" class="pb-3" style="border-bottom: solid 1px #cccccc">
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">
-                            查詢年分
-                        </span>                                    
-                        <asp:DropDownList ID="ddlSearchYear" runat="server" CssClass="custom-select"/>
+                        <span class="input-group-text">查詢年分</span>
                     </div>
+                    <asp:DropDownList ID="ddlSearchYear" runat="server" CssClass="custom-select" />
                 </div>
-                <div class="btn-group btn-group-lg flex mt-3" role="group">
+                <div class="btn-group flex mt-3" role="group">
                     <asp:Button ID="btnSubmit" runat="server" Text="查詢" CssClass="btn btn-secondary btn-success"
                         OnClick="btnSubmit_Click" />
                     <asp:Button ID="btnExportToExcel" runat="server" Text="匯出" CssClass="btn btn-secondary btn-success"

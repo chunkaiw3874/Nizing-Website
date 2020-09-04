@@ -1,63 +1,69 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/masterPage/MasterPage.master" AutoEventWireup="true" CodeFile="ProductionControlReport.aspx.cs" Inherits="ProductionControlReport" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style>
+        .btn-group.flex {
+            display: flex;
+        }
+
+        .flex .btn {
+            flex: 1;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-sm-12">
                 <h2>交期達成率報告</h2>
             </div>
         </div>
-        <div class="row form-group">
-            <label class="control-label col-xs-1">開始查詢</label>
-            <div class="col-xs-2">
-                <asp:DropDownList ID="ddlBeginYear" runat="server" CssClass="form-control">
-                </asp:DropDownList>
+        <div class="input-group mb-1">
+            <div class="input-group-prepend">
+                <label class="input-group-text">開始查詢</label>
             </div>
-            <div class="col-xs-1">
-                <asp:DropDownList ID="ddlBeginMonth" runat="server" CssClass="form-control">
-                    <asp:ListItem Value="1226">01</asp:ListItem>
-                    <asp:ListItem Value="0126">02</asp:ListItem>
-                    <asp:ListItem Value="0226">03</asp:ListItem>
-                    <asp:ListItem Value="0326">04</asp:ListItem>
-                    <asp:ListItem Value="0426">05</asp:ListItem>
-                    <asp:ListItem Value="0526">06</asp:ListItem>
-                    <asp:ListItem Value="0626">07</asp:ListItem>
-                    <asp:ListItem Value="0726">08</asp:ListItem>
-                    <asp:ListItem Value="0826">09</asp:ListItem>
-                    <asp:ListItem Value="0926">10</asp:ListItem>
-                    <asp:ListItem Value="1026">11</asp:ListItem>
-                    <asp:ListItem Value="1126">12</asp:ListItem>
-                </asp:DropDownList>
-            </div>
+            <asp:DropDownList ID="ddlBeginYear" runat="server" CssClass="custom-select">
+            </asp:DropDownList>
+            <asp:DropDownList ID="ddlBeginMonth" runat="server" CssClass="custom-select">
+                <asp:ListItem Value="1226">01</asp:ListItem>
+                <asp:ListItem Value="0126">02</asp:ListItem>
+                <asp:ListItem Value="0226">03</asp:ListItem>
+                <asp:ListItem Value="0326">04</asp:ListItem>
+                <asp:ListItem Value="0426">05</asp:ListItem>
+                <asp:ListItem Value="0526">06</asp:ListItem>
+                <asp:ListItem Value="0626">07</asp:ListItem>
+                <asp:ListItem Value="0726">08</asp:ListItem>
+                <asp:ListItem Value="0826">09</asp:ListItem>
+                <asp:ListItem Value="0926">10</asp:ListItem>
+                <asp:ListItem Value="1026">11</asp:ListItem>
+                <asp:ListItem Value="1126">12</asp:ListItem>
+            </asp:DropDownList>
         </div>
-        <div class="row">
-            <label class="control-label col-xs-1">結束查詢</label>
-            <div class="col-xs-2">
-                <asp:DropDownList ID="ddlEndYear" runat="server" CssClass="form-control">
-                </asp:DropDownList>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <label class="input-group-text">結束查詢</label>
             </div>
-            <div class="col-xs-1">
-                <asp:DropDownList ID="ddlEndMonth" runat="server" CssClass="form-control">
-                    <asp:ListItem Value="0125">01</asp:ListItem>
-                    <asp:ListItem Value="0225">02</asp:ListItem>
-                    <asp:ListItem Value="0325">03</asp:ListItem>
-                    <asp:ListItem Value="0425">04</asp:ListItem>
-                    <asp:ListItem Value="0525">05</asp:ListItem>
-                    <asp:ListItem Value="0625">06</asp:ListItem>
-                    <asp:ListItem Value="0725">07</asp:ListItem>
-                    <asp:ListItem Value="0825">08</asp:ListItem>
-                    <asp:ListItem Value="0925">09</asp:ListItem>
-                    <asp:ListItem Value="1025">10</asp:ListItem>
-                    <asp:ListItem Value="1125">11</asp:ListItem>
-                    <asp:ListItem Value="1225">12</asp:ListItem>
-                </asp:DropDownList>
-            </div>
+            <asp:DropDownList ID="ddlEndYear" runat="server" CssClass="custom-select">
+            </asp:DropDownList>
+            <asp:DropDownList ID="ddlEndMonth" runat="server" CssClass="custom-select">
+                <asp:ListItem Value="0125">01</asp:ListItem>
+                <asp:ListItem Value="0225">02</asp:ListItem>
+                <asp:ListItem Value="0325">03</asp:ListItem>
+                <asp:ListItem Value="0425">04</asp:ListItem>
+                <asp:ListItem Value="0525">05</asp:ListItem>
+                <asp:ListItem Value="0625">06</asp:ListItem>
+                <asp:ListItem Value="0725">07</asp:ListItem>
+                <asp:ListItem Value="0825">08</asp:ListItem>
+                <asp:ListItem Value="0925">09</asp:ListItem>
+                <asp:ListItem Value="1025">10</asp:ListItem>
+                <asp:ListItem Value="1125">11</asp:ListItem>
+                <asp:ListItem Value="1225">12</asp:ListItem>
+            </asp:DropDownList>
         </div>
-        <br />
-        <asp:Button ID="btnReport" runat="server" Text="產生報表" OnClick="btnReport_Click" CssClass="btn btn-lg btn-success" />
-        <asp:Button ID="btnExport" runat="server" Text="匯出至Excel" OnClick="btnExport_Click" Enabled="False" CssClass="btn btn-lg btn-success" />
+        <div class="btn-group flex">
+            <asp:Button ID="btnReport" runat="server" Text="產生報表" OnClick="btnReport_Click" CssClass="btn btn-success" />
+            <asp:Button ID="btnExport" runat="server" Text="匯出至Excel" OnClick="btnExport_Click" Enabled="False" CssClass="btn btn-success" />
+        </div>
         <br />
         <asp:HiddenField ID="Begin" runat="server" Value="0" />
         <asp:HiddenField ID="End" runat="server" Value="0" />
@@ -71,7 +77,7 @@
                 <asp:BoundField DataField="客戶簡稱" HeaderText="客戶簡稱" SortExpression="客戶簡稱"></asp:BoundField>
                 <asp:BoundField DataField="業務員" HeaderText="業務員" SortExpression="業務員"></asp:BoundField>
                 <asp:BoundField DataField="訂單號碼" HeaderText="訂單號碼" SortExpression="訂單號碼" ReadOnly="True"></asp:BoundField>
-                <asp:BoundField DataField="銷貨編號" HeaderText="銷貨編號" SortExpression="銷貨編號" ReadOnly="True"></asp:BoundField>                
+                <asp:BoundField DataField="銷貨編號" HeaderText="銷貨編號" SortExpression="銷貨編號" ReadOnly="True"></asp:BoundField>
                 <asp:BoundField DataField="品號" HeaderText="品號" SortExpression="品號"></asp:BoundField>
                 <asp:BoundField DataField="品名" HeaderText="品名" SortExpression="品名"></asp:BoundField>
                 <asp:BoundField DataField="規格" HeaderText="規格" SortExpression="規格"></asp:BoundField>
