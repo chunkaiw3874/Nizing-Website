@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-/*
- *  如果gridview有增加column,搜尋"cells",找到所有cells[int]做為reference的item,and change the column number accordingly
- */
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
@@ -12,6 +9,10 @@ using System.Security.Principal;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+
+/*
+ *  如果gridview有增加column,搜尋"cells",找到所有cells[int]做為reference的item,and change the column number accordingly
+ */
 
 public partial class nizing_intranet_IC_DailyProductPreparationList : Page
 {
@@ -25,6 +26,7 @@ public partial class nizing_intranet_IC_DailyProductPreparationList : Page
             Session["user"] = getId();
             lblSalesRecordId.Text = DateTime.Today.ToString("yyyyMMdd");
             lblgvSalesRecordDataCaption.Text = lblSalesRecordId.Text;
+            txtKeywords.Text = GetExceptionKeyWords();
         }
         DisplaySalesRecordData(GetSalesRecordTable(lblSalesRecordId.Text));
 
@@ -74,9 +76,34 @@ public partial class nizing_intranet_IC_DailyProductPreparationList : Page
         lblgvSalesRecordDataCaption.Text = lblSalesRecordId.Text;
     }
 
+    private string GetExceptionKeyWords()
+    {
+        using (SqlConnection conn = new SqlConnection(erp2ConnectionString))
+        {
+            conn.Open();
+            string query = "select keyword" +
+                " from IC_DailyProductionPreparationList_ExceptionKeywords";
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+            string s = cmd.ExecuteScalar() == DBNull.Value || cmd.ExecuteScalar() == null ? "" : cmd.ExecuteScalar().ToString().Trim();
+
+            return s;
+        }
+    }
     private DataTable GetSalesRecordTable(string date, params string[] condition)
     {
         DataTable dt = new DataTable();
+        string[] keywords = GetExceptionKeyWords().Split(',');
+        string exceptionString = "";
+
+        foreach(string s in keywords)
+        {
+            if (!string.IsNullOrWhiteSpace(s))
+            {
+                exceptionString += " and TG.TG020 not like '%" + s + "%'";
+            }
+        }
+
 
         using (SqlConnection conn = new SqlConnection(connectionString))
         {
@@ -119,9 +146,7 @@ public partial class nizing_intranet_IC_DailyProductPreparationList : Page
                 " where(TG.TG001 = 'A230'" +
                 " or TG.TG001 = 'A233')" +
                 " and SUBSTRING(TG.TG002,1,8)= @date" +
-                " and TG.TG020 not like '%自取%'" +
-                " and TG.TG020 not like '%自送%'" +
-                " and TG.TG020 not like '%暫放%'" +
+                exceptionString +
                 " order by" +
                 " (case" +
                 " when TG.TG009= '' then TG.TG008" +
@@ -380,5 +405,21 @@ public partial class nizing_intranet_IC_DailyProductPreparationList : Page
                 }
             }
         }
+    }
+
+    protected void btnSaveKeywords_Click(object sender, EventArgs e)
+    {
+        using (SqlConnection conn = new SqlConnection(erp2ConnectionString))
+        {
+            conn.Open();
+            string query = " delete IC_DailyProductionPreparationList_ExceptionKeywords" +
+                " insert into IC_DailyProductionPreparationList_ExceptionKeywords" +
+                " values (@keywords)";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@keywords", txtKeywords.Text.Trim());
+            cmd.ExecuteNonQuery();
+        }
+
+        DisplaySalesRecordData(GetSalesRecordTable(lblSalesRecordId.Text));
     }
 }

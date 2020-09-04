@@ -219,7 +219,7 @@
                             </asp:TemplateField>
                         </Columns>
                         <Columns>
-                            <asp:TemplateField HeaderText="客戶">
+                            <asp:TemplateField HeaderText="廠商">
                                 <ItemStyle CssClass="text-center" />
                                 <ItemTemplate>
                                     <asp:Label ID="Label1" runat="server" Text='<%#Eval("supplierName") %>'></asp:Label>

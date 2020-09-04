@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/masterPage/nizing-master.master" AutoEventWireup="true" CodeFile="IC_DailyProductPreparationList.aspx.cs" Inherits="nizing_intranet_IC_DailyProductPreparationList" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/masterPage/nizing-master.master" AutoEventWireup="true" CodeFile="IC_DailyProductPreparationList.aspx.cs" Inherits="nizing_intranet_IC_DailyProductPreparationList"
+    EnableEventValidation="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style>
@@ -266,6 +267,16 @@
         <div class="form-group">
             <span class="h2">倉管備貨明細表</span>
         </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">列外字清單</span>
+            </div>
+            <asp:TextBox ID="txtKeywords" runat="server" CssClass="form-control" placeholder="每個單詞請用','做區隔(例:'自取,郵寄,...,...')"></asp:TextBox>
+            <div class="input-group-append">
+                <asp:Button ID="btnSaveKeywords" runat="server" CssClass="btn btn-success" Text="儲存"
+                    OnClick="btnSaveKeywords_Click"/>
+            </div>
+        </div>
         <div class="row form-group">
             <div class="col-sm-12 btn-search mr-2">
                 <a class="btn btn-lg btn-primary"
@@ -415,6 +426,7 @@
                     <asp:AsyncPostBackTrigger ControlID="btnSalesRecordDataSearch" EventName="Click" />
                     <asp:AsyncPostBackTrigger ControlID="btnSaveDetail" EventName="Click" />
                     <asp:AsyncPostBackTrigger ControlID="btnSalesRecordRefresh" EventName="Click" />
+                    <asp:AsyncPostBackTrigger ControlID="btnSaveKeywords" EventName="Click" />
                 </Triggers>
             </asp:UpdatePanel>
         </div>

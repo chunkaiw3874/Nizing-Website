@@ -15,18 +15,18 @@ public partial class sunrise_intranet_PD_PurchaseCostCalculator : System.Web.UI.
     {
         if (!IsPostBack)
         {
-            DataTable dt = new DataTable();
-            dt = GetPurchaseFormType();
+            //DataTable dt = new DataTable();
+            //dt = GetPurchaseFormType();
 
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                ddlPurchaseFormType.Items.Add(dt.Rows[i]["單別"].ToString().Trim());
-            }
+            //for (int i = 0; i < dt.Rows.Count; i++)
+            //{
+            //    ddlPurchaseFormType.Items.Add(dt.Rows[i]["單別"].ToString().Trim());
+            //}
 
-            if (ddlPurchaseFormType.Items.Count > 0)
-            {
-                ddlPurchaseFormType.SelectedValue = "A332";
-            }
+            //if (ddlPurchaseFormType.Items.Count > 0)
+            //{
+            //    ddlPurchaseFormType.SelectedValue = "A332";
+            //}
         }
 
         if (gvPurchaseForm.Rows.Count == 0)
@@ -119,7 +119,7 @@ public partial class sunrise_intranet_PD_PurchaseCostCalculator : System.Web.UI.
     protected void btnSearchPurchaseForm_Click(object sender, EventArgs e)
     {
         DataTable dt = new DataTable();
-        dt = GetPurchaseFormData(ddlPurchaseFormType.SelectedValue, txtPurchaseFormId.Text);
+        dt = GetPurchaseFormData(txtPurchaseFormType.Text, txtPurchaseFormId.Text);
         if (dt.Rows.Count > 0)
         {
             DisplayGridview(gvPurchaseForm, dt);

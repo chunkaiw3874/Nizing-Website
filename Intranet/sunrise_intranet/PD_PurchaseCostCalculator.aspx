@@ -30,7 +30,8 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">採購單號</span>
                 </div>
-                <asp:DropDownList ID="ddlPurchaseFormType" CssClass="custom-select" runat="server"></asp:DropDownList>
+                <asp:TextBox ID="txtPurchaseFormType" runat="server" Text="A332" ReadOnly="true"></asp:TextBox>
+                <%--<asp:DropDownList ID="ddlPurchaseFormType" CssClass="custom-select" runat="server"></asp:DropDownList>--%>
                 <asp:TextBox ID="txtPurchaseFormId" CssClass="form-control" runat="server"></asp:TextBox>
                 <div class="input-group-append">
                     <asp:Button ID="btnSearchPurchaseForm" runat="server" CssClass="btn btn-success" Text="查詢單號"
@@ -139,6 +140,11 @@
                         AutoGenerateColumns="false"
                         OnPreRender="gvPurchaseForm_PreRender">
                         <Columns>
+                            <asp:TemplateField HeaderText="費用<br/>(NTD)">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblCostExcludeMaterial" runat="server" Text=""></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="#">
                                 <ItemStyle HorizontalAlign="Center" />
                                 <ItemTemplate>
@@ -174,11 +180,6 @@
                             <asp:TemplateField HeaderText="總價">
                                 <ItemTemplate>
                                     <asp:Label ID="lblItemTotalCost" runat="server" Text='<%#Eval("總價") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="費用<br/>(NTD)">
-                                <ItemTemplate>
-                                    <asp:Label ID="lblCostExcludeMaterial" runat="server" Text=""></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
