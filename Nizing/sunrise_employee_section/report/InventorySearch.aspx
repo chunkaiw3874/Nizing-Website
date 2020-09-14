@@ -2,324 +2,268 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="Server">
     <style>
-        #inventory #search-result .grdResult tr td:nth-child(n+3):nth-child(-n+5){
-            text-align:left;
+        /*#inventory #search-result .grdResult tr td:nth-child(n+3):nth-child(-n+5) {
+            text-align: left;
+        }*/
+        div {
+            display: block;
         }
-        #Panel1{
-            margin-bottom:20px;
+
+        table th, td {
+            text-align: center;
+            /*font-size:12px;*/
+        }
+
+            table th:hover {
+                cursor: context-menu;
+            }
+
+        table tr td:nth-child(n+4):nth-child(-n+6) {
+            text-align: left;
+        }
+
+        table td:hover {
+            cursor: pointer;
+        }
+
+        .scrollable {
+            max-height: 500px;
+            overflow: auto;
+        }
+
+        /*.modal{
+            width:500px;
+        }*/
+
+        .imagepreview{
+            width:100%;
         }
     </style>
+    <script>
+        function uploadStart(sender, args) {
+            var fileName = args.get_fileName();
+            var dotIndex = fileName.lastIndexOf('.');
+            var fileNameNoExt = fileName.substr(0, dotIndex);
+            var fileNameExt = fileName.substr(dotIndex + 1);
 
+        }
+        function uploadComplete(sender, args) {
+            alert("upload complete: " + args.get_fileName() + '-' + (new Date()).toISOString().replace(/[^0-9]/g, "").slice(0, -3));
+        }
+        //function showImage() {
+        //    alert('image clicked');
+        //    $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+        //    $('#imagemodal').modal('show');
+        //};
+    </script>
 </asp:Content>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:Panel ID="Panel1" runat="server" DefaultButton="btnSearch">
-        <div id="inventory">
-            <div id="search-field">
-                <h2>庫存查詢系統</h2>
-                <asp:Label ID="lblErrorMessage" runat="server" ForeColor="Red"></asp:Label>
+        <asp:UpdatePanel ID="upParameterField" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="btnClear" />
+            </Triggers>
+            <ContentTemplate>
                 <div>
-                    <table id="search-table">
-                        <tr>
-                            <td>
-                                <asp:CheckBox ID="chkId" runat="server" Text="品號查詢" Checked="true" />
-                            </td>
-                            <td>開頭為
-                            </td>
-                            <td>
-                                <asp:TextBox ID="txtId_Start" runat="server" Width="200"></asp:TextBox>
-                            </td>
-                            <td>
-                                <asp:CheckBox ID="chkName" runat="server" Text="品名查詢" />
-                            </td>
-                            <td>開頭為
-                            </td>
-                            <td colspan="2">
-                                <asp:TextBox ID="txtName_Start" runat="server" Width="200"></asp:TextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>包含有
-                            </td>
-                            <td>
-                                <asp:TextBox ID="txtId_Middle" runat="server" Width="200"></asp:TextBox>
-                            </td>
-                            <td></td>
-                            <td>包含有
-                            </td>
-                            <td colspan="2">
-                                <asp:TextBox ID="txtName_Middle" runat="server" Width="200"></asp:TextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>結尾為
-                            </td>
-                            <td>
-                                <asp:TextBox ID="txtId_End" runat="server" Width="200"></asp:TextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"></td>
-                            <td>
-                                <asp:CheckBox ID="chkCategory" runat="server" Text="分類查詢" />
-                            </td>
-                            <td>會計分類
-                            </td>
-                            <td>
-                                <asp:TextBox ID="txtCategory_Acct" runat="server"></asp:TextBox>
-                                <asp:Button ID="btnCategory_Acct_Select" runat="server" Text="..." PostBackUrl="#acct_search_window" OnClick="btnCategory_Acct_Select_Click" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-                                <asp:CheckBox ID="chkInvShowZero" runat="server" Text="顯示實際在庫量為0的項目" Checked="false" />
-                            </td>
-                            <td></td>
-                            <%--                        <td>
-                            原物半分類
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtCategory_Raw" runat="server"></asp:TextBox>
-                            <asp:Button ID="btnCategory_Raw_Select" runat="server" Text="..." PostBackUrl="#raw_search_window" OnClick="btnCategory_Raw_Select_Click" />
-                        </td>  --%>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-                                <asp:CheckBox ID="chkSafetyShowZero" runat="server" Text="顯示預估安全存量為0的項目" Checked="true" />
-                            </td>
-                            <td></td>
-                            <%--                        <td>
-                            小成品分類
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtCategory_Small" runat="server"></asp:TextBox>
-                            <asp:Button ID="btnCategory_Small_Select" runat="server" Text="..." PostBackUrl="#small_search_window" OnClick="btnCategory_Small_Select_Click" />
-                        </td>--%>
-                            <td>
-                                <asp:ImageButton ID="btnSearch" runat="server" ImageUrl="~/employee_section/report/image/button/Search_Button.png" OnClick="btnSearch_Click" />
-                            </td>
-                        </tr>
-                        <%--<tr>
-                        <td colspan="4"></td>
-                        <td>
-                            大成品分類
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtCategory_Large" runat="server"></asp:TextBox>
-                            <asp:Button ID="btnCategory_Large_Select" runat="server" Text="..." PostBackUrl="#large_search_window" OnClick="btnCategory_Large_Select_Click" />
-                        </td>
-                    </tr>--%>
-                    </table>
+                    <h2>庫存查詢系統</h2>
+                    <asp:Label ID="lblErrorMessage" runat="server" ForeColor="Red"></asp:Label>
+                    <div>
+                        <div class="input-group mb-1">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <asp:CheckBox ID="chkId" runat="server" Checked="true" />
+                                </div>
+                                <span class="input-group-text">品號查詢</span>
+                            </div>
+                            <%--<asp:TextBox ID="txtId_Start" runat="server" CssClass="form-control" placeholder="開頭為..." ToolTip="品號開頭為..."></asp:TextBox>--%>
+                            <asp:TextBox ID="txtId_Middle" runat="server" CssClass="form-control" placeholder="包含有..." ToolTip="品號包含有..."></asp:TextBox>
+                            <%--<asp:TextBox ID="txtId_End" runat="server" CssClass="form-control" placeholder="結尾為..." ToolTip="品號結尾為..."></asp:TextBox>--%>
+                        </div>
+                        <div class="input-group mb-1">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <asp:CheckBox ID="chkName" runat="server" />
+                                </div>
+                                <span class="input-group-text">品名查詢</span>
+                            </div>
+                            <%--<asp:TextBox ID="txtName_Start" runat="server" CssClass="form-control" placeholder="開頭為..." ToolTip="品名開頭為..."></asp:TextBox>--%>
+                            <asp:TextBox ID="txtName_Middle" runat="server" CssClass="form-control" placeholder="包含有..." ToolTip="品名包含有..."></asp:TextBox>
+                            <%--<asp:TextBox ID="txtName_End" runat="server" CssClass="form-control" placeholder="結尾為..." ToolTip="品名結尾為..."></asp:TextBox>--%>
+                        </div>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <asp:CheckBox ID="chkCategory" runat="server" />
+                                </div>
+                                <span class="input-group-text">分類查詢</span>
+                            </div>
+                            <asp:DropDownList ID="ddlCategory_Acct" runat="server" CssClass="custom-select"></asp:DropDownList>
+                        </div>
+                        <div>
+                            <asp:CheckBox ID="chkInvShowZero" runat="server" Text="顯示實際在庫量為0的項目" Checked="false" />
+                        </div>
+                        <div>
+                            <asp:CheckBox ID="chkSafetyShowZero" runat="server" Text="顯示預估安全存量為0的項目" Checked="true" />
+                        </div>
+                        <div class="input-group full-width">
+                            <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-success form-control" Text="查詢" OnClick="btnSearch_Click" />
+                            <asp:Button ID="btnClear" runat="server" CssClass="btn btn-danger form-control" Text="清除查詢條件" OnClick="btnClear_Click" />
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+        <hr />
+        <asp:UpdatePanel ID="upData" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="btnSearch" />
+                <asp:AsyncPostBackTrigger ControlID="gvItemList" EventName="PageIndexChanging" />
+            </Triggers>
+            <ContentTemplate>
+                <div class="scrollable mb-5">
+                    <asp:GridView ID="gvItemList" runat="server" AutoGenerateColumns="false" CssClass="table table-striped table-hover table-white"
+                        EmptyDataText="查無資料"
+                        AllowPaging="true" PageSize="10"
+                        OnPageIndexChanging="gvItemList_PageIndexChanging"
+                        OnSelectedIndexChanged="gvItemList_SelectedIndexChanged"
+                        OnPreRender="gvItemList_PreRender">
+                        <Columns>
+                            <asp:TemplateField HeaderText="品項封面" HeaderStyle-Width="150">
+                                <ItemTemplate>
+                                    <asp:Image ID="imgItemCover" runat="server" CssClass="pop" Width="150" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="在庫量" HeaderStyle-Width="60">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblAmountInInv" runat="server" Text='<%#Eval("AMOUNT_IN_INV") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="儲位" HeaderStyle-Width="70">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblInvLocation" runat="server" Text='<%#Eval("INV_LOCATION") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="品號" HeaderStyle-Width="160">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblItemId" runat="server" Text='<%#Eval("ITEM_ID") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="品名" HeaderStyle-Width="200">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblItemName" runat="server" Text='<%#Eval("ITEM_NAME") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="規格" HeaderStyle-Width="100">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblItemSpec" runat="server" Text='<%#Eval("ITEM_SPEC") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="單位成本未稅">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblInvAvgCost" runat="server" Text='<%#Eval("INV_AVG_COST") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="幣別" HeaderStyle-Width="50">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblCurrency" runat="server" Text="NTD"></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="單位" HeaderStyle-Width="50">
+                                <ItemTemplate>
+                                    <asp:Label ID="label" runat="server" Text='<%#Eval("UNIT") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="庫別" HeaderStyle-Width="70">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblInvId" runat="server" Text='<%#Eval("INV_ID") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="庫別名稱" HeaderStyle-Width="70">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblInvName" runat="server" Text='<%#Eval("INV_NAME") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="安全庫存量">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblSafeInv" runat="server" Text='<%#Eval("AMOUNT_SAFETY") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </asp:Panel>
 
-            <div id="search-result">
-                <asp:GridView ID="grdResult" runat="server" AutoGenerateColumns="false" CssClass="grdResult"
-                    OnPreRender="grdResult_PreRender">
-                    <Columns>
-                        <asp:TemplateField HeaderText="在庫量" HeaderStyle-Width="60">
-                            <ItemTemplate>
-                                <asp:Label ID="label" runat="server" Text='<%#Eval("AMOUNT_IN_INV") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="儲位" HeaderStyle-Width="70">
-                            <ItemTemplate>
-                                <asp:Label ID="label" runat="server" Text='<%#Eval("INV_LOCATION") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="品號" HeaderStyle-Width="160">
-                            <ItemTemplate>
-                                <asp:Label ID="label" runat="server" Text='<%#Eval("ITEM_ID") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="品名" HeaderStyle-Width="200">
-                            <ItemTemplate>
-                                <asp:Label ID="label" runat="server" Text='<%#Eval("ITEM_NAME") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="規格" HeaderStyle-Width="100">
-                            <ItemTemplate>
-                                <asp:Label ID="label" runat="server" Text='<%#Eval("ITEM_SPEC") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="單位成本未稅">
-                            <ItemTemplate>
-                                <asp:Label ID="label" runat="server" Text='<%#Eval("INV_AVG_COST") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <%--<asp:TemplateField HeaderText="最後進貨價格">
-                            <ItemTemplate>
-                                <asp:Label ID="label" runat="server" Text='<%#Eval("LAST_PURCHASE_PRICE") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>--%>
-                        <asp:TemplateField HeaderText="幣別" HeaderStyle-Width="50">
-                            <ItemTemplate>
-                                <asp:Label ID="label" runat="server" Text="NTD"></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="單位" HeaderStyle-Width="50">
-                            <ItemTemplate>
-                                <asp:Label ID="label" runat="server" Text='<%#Eval("UNIT") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="庫別" HeaderStyle-Width="70">
-                            <ItemTemplate>
-                                <asp:Label ID="label" runat="server" Text='<%#Eval("INV_ID") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="庫別名稱" HeaderStyle-Width="70">
-                            <ItemTemplate>
-                                <asp:Label ID="label" runat="server" Text='<%#Eval("INV_NAME") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="安全庫存量" HeaderStyle-Width="70">
-                            <ItemTemplate>
-                                <asp:Label ID="label" runat="server" Text='<%#Eval("AMOUNT_SAFETY") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <%--<asp:TemplateField HeaderText="原物半分類">
-                        <ItemStyle Width="100" />
-                        <ItemTemplate>
-                            <asp:Label ID="label" runat="server" Text='<%#Eval("CATEGORY_RAW") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="小成品分類">
-                        <ItemStyle Width="100" />
-                        <ItemTemplate>
-                            <asp:Label ID="label" runat="server" Text='<%#Eval("CATEGORY_SMALL") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="大成品分類">
-                        <ItemStyle Width="100" />
-                        <ItemTemplate>
-                            <asp:Label ID="label" runat="server" Text='<%#Eval("CATEGORY_LARGE") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>--%>
-                    </Columns>
-                </asp:GridView>
-            </div>
-        </div>
-        <div id="acct_search_window" class="overlay">
-            <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                <ContentTemplate>
-                    <div class="popup">
-                        <h2>會計分類</h2>
-                        <a class="close" href="#">×</a>
-                        <div class="content">
-                            <div class="search-result">
-                                <asp:GridView ID="grdAcct" runat="server" CellPadding="4" ForeColor="#333333" GridLines="Both" OnSelectedIndexChanged="grdAcct_SelectedIndexChanged">
-                                    <AlternatingRowStyle BackColor="White" ForeColor="#284775"></AlternatingRowStyle>
-                                    <EditRowStyle BackColor="#999999"></EditRowStyle>
-                                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></FooterStyle>
-                                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></HeaderStyle>
-                                    <PagerStyle HorizontalAlign="Center" BackColor="#284775" ForeColor="White"></PagerStyle>
-                                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333"></RowStyle>
-                                    <SelectedRowStyle BackColor="#FF9933" Font-Bold="True" ForeColor="#333333"></SelectedRowStyle>
-                                    <SortedAscendingCellStyle BackColor="#E9E7E2"></SortedAscendingCellStyle>
-                                    <SortedAscendingHeaderStyle BackColor="#506C8C"></SortedAscendingHeaderStyle>
-                                    <SortedDescendingCellStyle BackColor="#FFFDF8"></SortedDescendingCellStyle>
-                                    <SortedDescendingHeaderStyle BackColor="#6F8DAE"></SortedDescendingHeaderStyle>
-                                </asp:GridView>
+    <asp:UpdatePanel ID="upDetail" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="gvItemList" />
+            <asp:AsyncPostBackTrigger ControlID="afuCover" />
+        </Triggers>
+        <ContentTemplate>
+            <asp:HiddenField ID="hdnRecentUploadFilePath" runat="server" />
+            <asp:HiddenField ID="hdnRecentUploadFileName" runat="server" />
+            <div id="itemDetail" class="modal fade scrollable-modal" data-backdrop="static" aria-labelledby="recordDetail" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <asp:Label ID="lblModalItemId" runat="server" CssClass="modal-title"></asp:Label>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <asp:Label ID="lblModalItemName" runat="server" Text="Label"></asp:Label>
+                            </div>
+                            <hr />
+                            <%--<asp:FileUpload ID="fuCover" runat="server" />--%>
+                            <ajaxToolkit:AsyncFileUpload ID="afuCover" runat="server" CssClass="afuCover"
+                                OnClientUploadStarted="uploadStart"
+                                OnClientUploadComplete="uploadComplete"
+                                OnUploadedComplete="btnCoverUpload_Click" />
+                            <asp:Image ID="imgCover" runat="server" CssClass="imgCover" />
+                            <%--                            <asp:Button ID="btnCoverUpload" runat="server" Text="上傳"
+                                UseSubmitBehavior="false"
+                                OnClick="btnCoverUpload_Click" />--%>
+                            <%--<i class="fas fa-cloud-upload-alt"></i>--%>
+                            <%--</asp:Button>--%>
+                            <asp:Label ID="lblTest" runat="server" Text="No cover image source info"></asp:Label>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="btn-group full-width" role="group">
+                                <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-secondary" Text="取消"
+                                    data-dismiss="modal" />
+                                <%--<asp:Button ID="btnSaveDetail" runat="server" OnClick="btnSaveDetail_Click"
+                                    CssClass="btn btn-success" Text="儲存" UseSubmitBehavior="false"
+                                    data-dismiss="modal" />--%>
                             </div>
                         </div>
                     </div>
-                </ContentTemplate>
-                <Triggers>
-                    <asp:PostBackTrigger ControlID="grdAcct" />
-                </Triggers>
-            </asp:UpdatePanel>
-        </div>
-        <%--    <div id="raw_search_window" class="overlay">
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-            <ContentTemplate>            
-	            <div class="popup">
-		            <h2>原物料半分類</h2>
-		            <a class="close" href="#">×</a>
-		            <div class="content">
-                        <div class="search-result">
-                            <asp:GridView ID="grdRaw" runat="server" CellPadding="4" ForeColor="#333333" GridLines="Both" OnSelectedIndexChanged="grdRaw_SelectedIndexChanged">
-                                <AlternatingRowStyle BackColor="White" ForeColor="#284775"></AlternatingRowStyle>                                        
-                                <EditRowStyle BackColor="#999999"></EditRowStyle>
-                                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></FooterStyle>
-                                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></HeaderStyle>
-                                <PagerStyle HorizontalAlign="Center" BackColor="#284775" ForeColor="White"></PagerStyle>
-                                <RowStyle BackColor="#F7F6F3" ForeColor="#333333"></RowStyle>
-                                <SelectedRowStyle BackColor="#FF9933" Font-Bold="True" ForeColor="#333333"></SelectedRowStyle>
-                                <SortedAscendingCellStyle BackColor="#E9E7E2"></SortedAscendingCellStyle>
-                                <SortedAscendingHeaderStyle BackColor="#506C8C"></SortedAscendingHeaderStyle>
-                                <SortedDescendingCellStyle BackColor="#FFFDF8"></SortedDescendingCellStyle>
-                                <SortedDescendingHeaderStyle BackColor="#6F8DAE"></SortedDescendingHeaderStyle>
-                            </asp:GridView>
+                </div>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
+    <asp:UpdatePanel ID="upCoverImageView" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="gvItemList" />
+        </Triggers>
+        <ContentTemplate>
+            <div class="modal fade" id="imagemodal" role="dialog" aria-labelledby="CoverImageView" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <asp:Label ID="lblCoverImageTitle" runat="server" CssClass="modal-title"></asp:Label>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
-	    	        </div>
-	            </div>            
-            </ContentTemplate>            
-            <Triggers>
-                <asp:PostBackTrigger ControlID="grdRaw" />
-            </Triggers>
-        </asp:UpdatePanel>
-    </div>
-    <div id="small_search_window" class="overlay">
-        <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-            <ContentTemplate>            
-	            <div class="popup">
-		            <h2>小成品分類</h2>
-		            <a class="close" href="#">×</a>
-		            <div class="content">
-                        <div class="search-result">
-                            <asp:GridView ID="grdSmall" runat="server" CellPadding="4" ForeColor="#333333" GridLines="Both" OnSelectedIndexChanged="grdSmall_SelectedIndexChanged">
-                                <AlternatingRowStyle BackColor="White" ForeColor="#284775"></AlternatingRowStyle>                                        
-                                <EditRowStyle BackColor="#999999"></EditRowStyle>
-                                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></FooterStyle>
-                                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></HeaderStyle>
-                                <PagerStyle HorizontalAlign="Center" BackColor="#284775" ForeColor="White"></PagerStyle>
-                                <RowStyle BackColor="#F7F6F3" ForeColor="#333333"></RowStyle>
-                                <SelectedRowStyle BackColor="#FF9933" Font-Bold="True" ForeColor="#333333"></SelectedRowStyle>
-                                <SortedAscendingCellStyle BackColor="#E9E7E2"></SortedAscendingCellStyle>
-                                <SortedAscendingHeaderStyle BackColor="#506C8C"></SortedAscendingHeaderStyle>
-                                <SortedDescendingCellStyle BackColor="#FFFDF8"></SortedDescendingCellStyle>
-                                <SortedDescendingHeaderStyle BackColor="#6F8DAE"></SortedDescendingHeaderStyle>
-                            </asp:GridView>
+                        <div class="modal-body">
+                            <asp:Image ID="imgCoverImage" runat="server" CssClass="imagepreview img-fluid" />
+                            <%--<img class="imagepreview" style="width: 100%;">--%>
                         </div>
-	    	        </div>
-	            </div>            
-            </ContentTemplate>            
-            <Triggers>
-                <asp:PostBackTrigger ControlID="grdSmall" />
-            </Triggers>
-        </asp:UpdatePanel>
-    </div>
-    <div id="large_search_window" class="overlay">
-        <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-            <ContentTemplate>            
-	            <div class="popup">
-		            <h2>大成品分類</h2>
-		            <a class="close" href="#">×</a>
-		            <div class="content">
-                        <div class="search-result">
-                            <asp:GridView ID="grdLarge" runat="server" CellPadding="4" ForeColor="#333333" GridLines="Both" OnSelectedIndexChanged="grdLarge_SelectedIndexChanged">
-                                <AlternatingRowStyle BackColor="White" ForeColor="#284775"></AlternatingRowStyle>                                        
-                                <EditRowStyle BackColor="#999999"></EditRowStyle>
-                                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></FooterStyle>
-                                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></HeaderStyle>
-                                <PagerStyle HorizontalAlign="Center" BackColor="#284775" ForeColor="White"></PagerStyle>
-                                <RowStyle BackColor="#F7F6F3" ForeColor="#333333"></RowStyle>
-                                <SelectedRowStyle BackColor="#FF9933" Font-Bold="True" ForeColor="#333333"></SelectedRowStyle>
-                                <SortedAscendingCellStyle BackColor="#E9E7E2"></SortedAscendingCellStyle>
-                                <SortedAscendingHeaderStyle BackColor="#506C8C"></SortedAscendingHeaderStyle>
-                                <SortedDescendingCellStyle BackColor="#FFFDF8"></SortedDescendingCellStyle>
-                                <SortedDescendingHeaderStyle BackColor="#6F8DAE"></SortedDescendingHeaderStyle>
-                            </asp:GridView>
-                        </div>
-	    	        </div>
-	            </div>            
-            </ContentTemplate>            
-            <Triggers>
-                <asp:PostBackTrigger ControlID="grdLarge" />
-            </Triggers>
-        </asp:UpdatePanel>
-    </div>--%>
-    </asp:Panel>
+                    </div>
+                </div>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 </asp:Content>

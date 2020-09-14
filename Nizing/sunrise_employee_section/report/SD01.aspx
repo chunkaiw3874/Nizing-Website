@@ -106,7 +106,7 @@
                     <asp:DropDownList ID="ddlPersonnel" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSource1" DataTextField="MV002" DataValueField="TG006" CssClass="form-control">
                         <asp:ListItem Selected="True">全部人員</asp:ListItem>
                     </asp:DropDownList>
-                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SunriseConnectionString %>" SelectCommand="SELECT DISTINCT TG006, TG006+' '+MV002 MV002
+                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SunrizeConnectionString %>" SelectCommand="SELECT DISTINCT TG006, TG006+' '+MV002 MV002
                     FROM COPTG
 	                    LEFT JOIN CMSMV MV ON TG006 = MV001
                     WHERE TG006 &lt;&gt; ''

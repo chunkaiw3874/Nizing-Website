@@ -71,6 +71,9 @@
                 <%--<li><asp:ImageButton ID="ImageButton6" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD-3.png" PostBackUrl="~/employee_section/report/NewClientReport.aspx" /></li>--%>
                 <%--<li><asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD-4.png" PostBackUrl="~/employee_section/report/CustomerTransactionReport.aspx" /></li>--%>
                 <%--<li><asp:ImageButton ID="ImageButton10" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD-5.png" PostBackUrl="~/employee_section/report/ABC_Comparison.aspx" /></li>--%>
+                <li>
+                    <a href="report/SD_ProfitMarginByProductReport.aspx">業務員利潤明細表</a>
+                </li>
             </ul>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
@@ -129,6 +132,7 @@
                 <li><a href="/employee_section/report/HR04.aspx">面試表</a></li>
                 <li><a href="/employee_section/report/HR06.aspx">考核成績表</a></li>
                 <li><a href="/employee_section/report/HR07.aspx">Annual Report</a></li>
+                <li><a href="report/SD_SalesBonusCalculator.aspx">Chrissy測試</a></li>
             </ul>
         </div>
     </div>

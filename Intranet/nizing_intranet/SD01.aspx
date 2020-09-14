@@ -17,6 +17,10 @@
             color: #ffffff;
             font-weight: bold;
         }
+
+        td, th{
+            font-size: 16px;
+        }
     </style>
     <script>
         $(document).ready(function () {
