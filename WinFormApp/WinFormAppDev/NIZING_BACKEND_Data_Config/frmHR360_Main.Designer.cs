@@ -75,6 +75,8 @@
             this.flowLayoutPanel10 = new System.Windows.Forms.FlowLayoutPanel();
             this.picAccountAvatar = new System.Windows.Forms.PictureBox();
             this.lblAccountAvatarFileName = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.ddlCompanyId = new System.Windows.Forms.ComboBox();
             this.gvAccountSearch_Result = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnAccountSearch = new System.Windows.Forms.Button();
@@ -104,11 +106,11 @@
             this.btnCompanyAnnouncementAddAttachment = new System.Windows.Forms.Button();
             this.btnCompanyAnnouncementRemoveAttachment = new System.Windows.Forms.Button();
             this.lbtnCompanyAnnouncementAttachmentSelection = new System.Windows.Forms.LinkLabel();
+            this.clbCompanyAnnouncementAttachmentList = new System.Windows.Forms.CheckedListBox();
             this.gvCompanyAnnouncementSearch_Result = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel11 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnLogout = new System.Windows.Forms.Button();
             this.cbxFunctionList = new System.Windows.Forms.ComboBox();
-            this.clbCompanyAnnouncementAttachmentList = new System.Windows.Forms.CheckedListBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpAccountManagement.SuspendLayout();
@@ -246,34 +248,37 @@
             this.tlpAccountInputField.ColumnCount = 2;
             this.tlpAccountInputField.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tlpAccountInputField.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tlpAccountInputField.Controls.Add(this.flowLayoutPanel6, 1, 9);
-            this.tlpAccountInputField.Controls.Add(this.label11, 0, 9);
-            this.tlpAccountInputField.Controls.Add(this.flowLayoutPanel4, 1, 8);
-            this.tlpAccountInputField.Controls.Add(this.txtAccountLineId, 1, 7);
-            this.tlpAccountInputField.Controls.Add(this.txtAccountEmail, 1, 6);
-            this.tlpAccountInputField.Controls.Add(this.label6, 0, 6);
-            this.tlpAccountInputField.Controls.Add(this.label5, 0, 5);
-            this.tlpAccountInputField.Controls.Add(this.label4, 0, 4);
-            this.tlpAccountInputField.Controls.Add(this.flpAccountId, 1, 1);
-            this.tlpAccountInputField.Controls.Add(this.flowLayoutPanel2, 1, 10);
-            this.tlpAccountInputField.Controls.Add(this.txtAccountManagementMemo, 1, 11);
-            this.tlpAccountInputField.Controls.Add(this.label1, 0, 1);
-            this.tlpAccountInputField.Controls.Add(this.label2, 0, 2);
-            this.tlpAccountInputField.Controls.Add(this.txtAccountPassword, 1, 2);
-            this.tlpAccountInputField.Controls.Add(this.label3, 0, 3);
-            this.tlpAccountInputField.Controls.Add(this.txtAccountConfirmPassword, 1, 3);
-            this.tlpAccountInputField.Controls.Add(this.flowLayoutPanel3, 1, 4);
-            this.tlpAccountInputField.Controls.Add(this.label7, 0, 7);
-            this.tlpAccountInputField.Controls.Add(this.flowLayoutPanel5, 1, 5);
-            this.tlpAccountInputField.Controls.Add(this.label8, 0, 10);
-            this.tlpAccountInputField.Controls.Add(this.label10, 0, 8);
+            this.tlpAccountInputField.Controls.Add(this.flowLayoutPanel6, 1, 10);
+            this.tlpAccountInputField.Controls.Add(this.label11, 0, 10);
+            this.tlpAccountInputField.Controls.Add(this.flowLayoutPanel4, 1, 9);
+            this.tlpAccountInputField.Controls.Add(this.txtAccountLineId, 1, 8);
+            this.tlpAccountInputField.Controls.Add(this.txtAccountEmail, 1, 7);
+            this.tlpAccountInputField.Controls.Add(this.label6, 0, 7);
+            this.tlpAccountInputField.Controls.Add(this.label5, 0, 6);
+            this.tlpAccountInputField.Controls.Add(this.label4, 0, 5);
+            this.tlpAccountInputField.Controls.Add(this.flpAccountId, 1, 2);
+            this.tlpAccountInputField.Controls.Add(this.flowLayoutPanel2, 1, 11);
+            this.tlpAccountInputField.Controls.Add(this.txtAccountManagementMemo, 1, 12);
+            this.tlpAccountInputField.Controls.Add(this.label1, 0, 2);
+            this.tlpAccountInputField.Controls.Add(this.label2, 0, 3);
+            this.tlpAccountInputField.Controls.Add(this.txtAccountPassword, 1, 3);
+            this.tlpAccountInputField.Controls.Add(this.label3, 0, 4);
+            this.tlpAccountInputField.Controls.Add(this.txtAccountConfirmPassword, 1, 4);
+            this.tlpAccountInputField.Controls.Add(this.flowLayoutPanel3, 1, 5);
+            this.tlpAccountInputField.Controls.Add(this.label7, 0, 8);
+            this.tlpAccountInputField.Controls.Add(this.flowLayoutPanel5, 1, 6);
+            this.tlpAccountInputField.Controls.Add(this.label8, 0, 11);
+            this.tlpAccountInputField.Controls.Add(this.label10, 0, 9);
             this.tlpAccountInputField.Controls.Add(this.flowLayoutPanel10, 1, 0);
+            this.tlpAccountInputField.Controls.Add(this.label15, 0, 1);
+            this.tlpAccountInputField.Controls.Add(this.ddlCompanyId, 1, 1);
             this.tlpAccountInputField.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpAccountInputField.Location = new System.Drawing.Point(1, 58);
             this.tlpAccountInputField.Margin = new System.Windows.Forms.Padding(0);
             this.tlpAccountInputField.Name = "tlpAccountInputField";
-            this.tlpAccountInputField.RowCount = 12;
+            this.tlpAccountInputField.RowCount = 13;
             this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.tlpAccountInputField.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
@@ -293,7 +298,7 @@
             this.flowLayoutPanel6.Controls.Add(this.txtAccountAvatarImageFilePath);
             this.flowLayoutPanel6.Controls.Add(this.btnAccountAvatarImageFilePathSearch);
             this.flowLayoutPanel6.Controls.Add(this.btnAccountClearAvatarPath);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(92, 374);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(92, 402);
             this.flowLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
             this.flowLayoutPanel6.Size = new System.Drawing.Size(368, 28);
@@ -332,7 +337,7 @@
             // 
             this.label11.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(33, 382);
+            this.label11.Location = new System.Drawing.Point(33, 410);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(56, 12);
             this.label11.TabIndex = 15;
@@ -342,7 +347,7 @@
             // 
             this.flowLayoutPanel4.Controls.Add(this.txtAccountDisabledDate);
             this.flowLayoutPanel4.Controls.Add(this.ckxAccountDisable);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(92, 346);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(92, 374);
             this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(368, 28);
@@ -369,14 +374,14 @@
             // 
             // txtAccountLineId
             // 
-            this.txtAccountLineId.Location = new System.Drawing.Point(95, 321);
+            this.txtAccountLineId.Location = new System.Drawing.Point(95, 349);
             this.txtAccountLineId.Name = "txtAccountLineId";
             this.txtAccountLineId.Size = new System.Drawing.Size(150, 22);
             this.txtAccountLineId.TabIndex = 12;
             // 
             // txtAccountEmail
             // 
-            this.txtAccountEmail.Location = new System.Drawing.Point(95, 293);
+            this.txtAccountEmail.Location = new System.Drawing.Point(95, 321);
             this.txtAccountEmail.Name = "txtAccountEmail";
             this.txtAccountEmail.Size = new System.Drawing.Size(150, 22);
             this.txtAccountEmail.TabIndex = 10;
@@ -385,7 +390,7 @@
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(45, 298);
+            this.label6.Location = new System.Drawing.Point(45, 326);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(44, 12);
             this.label6.TabIndex = 9;
@@ -395,7 +400,7 @@
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(21, 270);
+            this.label5.Location = new System.Drawing.Point(21, 298);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(68, 12);
             this.label5.TabIndex = 7;
@@ -405,7 +410,7 @@
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 242);
+            this.label4.Location = new System.Drawing.Point(12, 270);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 12);
             this.label4.TabIndex = 5;
@@ -415,7 +420,7 @@
             // 
             this.flpAccountId.Controls.Add(this.txtAccountId);
             this.flpAccountId.Controls.Add(this.ckxAccountSuperUser);
-            this.flpAccountId.Location = new System.Drawing.Point(92, 150);
+            this.flpAccountId.Location = new System.Drawing.Point(92, 178);
             this.flpAccountId.Margin = new System.Windows.Forms.Padding(0);
             this.flpAccountId.Name = "flpAccountId";
             this.flpAccountId.Size = new System.Drawing.Size(368, 28);
@@ -444,7 +449,7 @@
             this.flowLayoutPanel2.Controls.Add(this.btnAccountConfirm);
             this.flowLayoutPanel2.Controls.Add(this.btnAccountCancel);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(92, 402);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(92, 430);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(368, 28);
@@ -476,12 +481,12 @@
             this.txtAccountManagementMemo.BackColor = System.Drawing.Color.White;
             this.txtAccountManagementMemo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtAccountManagementMemo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtAccountManagementMemo.Location = new System.Drawing.Point(92, 430);
+            this.txtAccountManagementMemo.Location = new System.Drawing.Point(92, 458);
             this.txtAccountManagementMemo.Margin = new System.Windows.Forms.Padding(0);
             this.txtAccountManagementMemo.Multiline = true;
             this.txtAccountManagementMemo.Name = "txtAccountManagementMemo";
             this.txtAccountManagementMemo.ReadOnly = true;
-            this.txtAccountManagementMemo.Size = new System.Drawing.Size(368, 315);
+            this.txtAccountManagementMemo.Size = new System.Drawing.Size(368, 287);
             this.txtAccountManagementMemo.TabIndex = 18;
             this.txtAccountManagementMemo.TabStop = false;
             // 
@@ -489,7 +494,7 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 158);
+            this.label1.Location = new System.Drawing.Point(21, 186);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 12);
             this.label1.TabIndex = 0;
@@ -499,7 +504,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(57, 186);
+            this.label2.Location = new System.Drawing.Point(57, 214);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 12);
             this.label2.TabIndex = 1;
@@ -508,7 +513,7 @@
             // txtAccountPassword
             // 
             this.txtAccountPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtAccountPassword.Location = new System.Drawing.Point(95, 181);
+            this.txtAccountPassword.Location = new System.Drawing.Point(95, 209);
             this.txtAccountPassword.Name = "txtAccountPassword";
             this.txtAccountPassword.Size = new System.Drawing.Size(150, 22);
             this.txtAccountPassword.TabIndex = 2;
@@ -518,7 +523,7 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 214);
+            this.label3.Location = new System.Drawing.Point(33, 242);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 12);
             this.label3.TabIndex = 3;
@@ -527,7 +532,7 @@
             // txtAccountConfirmPassword
             // 
             this.txtAccountConfirmPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtAccountConfirmPassword.Location = new System.Drawing.Point(95, 209);
+            this.txtAccountConfirmPassword.Location = new System.Drawing.Point(95, 237);
             this.txtAccountConfirmPassword.Name = "txtAccountConfirmPassword";
             this.txtAccountConfirmPassword.Size = new System.Drawing.Size(150, 22);
             this.txtAccountConfirmPassword.TabIndex = 4;
@@ -539,7 +544,7 @@
             this.flowLayoutPanel3.Controls.Add(this.btnAccountSearchERPID);
             this.flowLayoutPanel3.Controls.Add(this.btnAccountClearERPID);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(92, 234);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(92, 262);
             this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(368, 28);
@@ -576,7 +581,7 @@
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(40, 326);
+            this.label7.Location = new System.Drawing.Point(40, 354);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(49, 12);
             this.label7.TabIndex = 11;
@@ -587,7 +592,7 @@
             this.flowLayoutPanel5.Controls.Add(this.txtAccountName);
             this.flowLayoutPanel5.Controls.Add(this.label9);
             this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(92, 262);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(92, 290);
             this.flowLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
             this.flowLayoutPanel5.Size = new System.Drawing.Size(368, 28);
@@ -617,7 +622,7 @@
             // 
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(89, 410);
+            this.label8.Location = new System.Drawing.Point(89, 438);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(0, 12);
             this.label8.TabIndex = 21;
@@ -626,7 +631,7 @@
             // 
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(33, 354);
+            this.label10.Location = new System.Drawing.Point(33, 382);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(56, 12);
             this.label10.TabIndex = 13;
@@ -662,6 +667,30 @@
             this.lblAccountAvatarFileName.Name = "lblAccountAvatarFileName";
             this.lblAccountAvatarFileName.Size = new System.Drawing.Size(0, 12);
             this.lblAccountAvatarFileName.TabIndex = 1;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label15.Location = new System.Drawing.Point(45, 150);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(44, 28);
+            this.label15.TabIndex = 23;
+            this.label15.Text = "公司別:";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ddlCompanyId
+            // 
+            this.ddlCompanyId.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlCompanyId.FormattingEnabled = true;
+            this.ddlCompanyId.Items.AddRange(new object[] {
+            "日進電線",
+            "日出國際"});
+            this.ddlCompanyId.Location = new System.Drawing.Point(95, 153);
+            this.ddlCompanyId.Name = "ddlCompanyId";
+            this.ddlCompanyId.Size = new System.Drawing.Size(150, 20);
+            this.ddlCompanyId.TabIndex = 0;
+            this.ddlCompanyId.SelectedIndexChanged += new System.EventHandler(this.ddlCompanyId_SelectedIndexChanged);
             // 
             // gvAccountSearch_Result
             // 
@@ -1020,6 +1049,16 @@
             this.lbtnCompanyAnnouncementAttachmentSelection.Text = "全選";
             this.lbtnCompanyAnnouncementAttachmentSelection.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbtnCompanyAnnouncementAttachmentSelection_LinkClicked);
             // 
+            // clbCompanyAnnouncementAttachmentList
+            // 
+            this.clbCompanyAnnouncementAttachmentList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clbCompanyAnnouncementAttachmentList.FormattingEnabled = true;
+            this.clbCompanyAnnouncementAttachmentList.Location = new System.Drawing.Point(3, 33);
+            this.clbCompanyAnnouncementAttachmentList.Name = "clbCompanyAnnouncementAttachmentList";
+            this.clbCompanyAnnouncementAttachmentList.Size = new System.Drawing.Size(381, 136);
+            this.clbCompanyAnnouncementAttachmentList.TabIndex = 1;
+            this.clbCompanyAnnouncementAttachmentList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.clbCompanyAnnouncementAttachmentList_ItemCheck);
+            // 
             // gvCompanyAnnouncementSearch_Result
             // 
             this.gvCompanyAnnouncementSearch_Result.AllowUserToAddRows = false;
@@ -1077,16 +1116,6 @@
             this.cbxFunctionList.TabIndex = 6;
             this.cbxFunctionList.ValueMember = "ID";
             this.cbxFunctionList.SelectionChangeCommitted += new System.EventHandler(this.cbxFunctionList_SelectionChangeCommitted);
-            // 
-            // clbCompanyAnnouncementAttachmentList
-            // 
-            this.clbCompanyAnnouncementAttachmentList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clbCompanyAnnouncementAttachmentList.FormattingEnabled = true;
-            this.clbCompanyAnnouncementAttachmentList.Location = new System.Drawing.Point(3, 33);
-            this.clbCompanyAnnouncementAttachmentList.Name = "clbCompanyAnnouncementAttachmentList";
-            this.clbCompanyAnnouncementAttachmentList.Size = new System.Drawing.Size(381, 136);
-            this.clbCompanyAnnouncementAttachmentList.TabIndex = 1;
-            this.clbCompanyAnnouncementAttachmentList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.clbCompanyAnnouncementAttachmentList_ItemCheck);
             // 
             // frmHR360_Main
             // 
@@ -1222,5 +1251,7 @@
         private System.Windows.Forms.Button btnCompanyAnnouncementRemoveAttachment;
         private System.Windows.Forms.LinkLabel lbtnCompanyAnnouncementAttachmentSelection;
         private System.Windows.Forms.CheckedListBox clbCompanyAnnouncementAttachmentList;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox ddlCompanyId;
     }
 }

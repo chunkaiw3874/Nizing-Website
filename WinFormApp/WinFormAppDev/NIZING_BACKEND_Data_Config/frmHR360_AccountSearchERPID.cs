@@ -15,18 +15,28 @@ namespace NIZING_BACKEND_Data_Config
     {
         string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
         string NZConnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
+        string SunrizeConnectionString = ConfigurationManager.ConnectionStrings["SunrizeConnectionString"].ConnectionString;
+        string defaultConnectionString;
         public event searchForm_Close loadButtonEvent;
         public event searchForm_Select loadSelectionEvent;
         private bool selectionMade { get; set; }
         DataSet ds = new DataSet();
 
-        public frmHR360_AccountSearchERPID()
+        public frmHR360_AccountSearchERPID(string company)
         {
             InitializeComponent();
-            using (SqlConnection conn = new SqlConnection(NZConnectionString))
+            if (company == "日進電線")
+            {
+                defaultConnectionString = NZConnectionString;
+            }
+            else
+            {
+                defaultConnectionString = SunrizeConnectionString;
+            }
+            using (SqlConnection conn = new SqlConnection(defaultConnectionString))
             {
                 conn.Open();
-                string query = "SELECT MV.MV001 '員工代號', MV.MV002 '員工姓名'"
+                string query = "SELECT LTRIM(RTRIM(MV.MV001)) '員工代號', LTRIM(RTRIM(MV.MV002)) '員工姓名'"
                             + " FROM CMSMV MV"
                             + " WHERE MV.MV001 NOT LIKE 'PT%'"
                             + " AND LTRIM(RTRIM(MV.MV022)) = ''"
@@ -61,7 +71,7 @@ namespace NIZING_BACKEND_Data_Config
         {            
             if (loadSelectionEvent != null)
             {
-                loadSelectionEvent(ds.Tables["ERPIDList"].Select("員工代號 = " + gvERPIDList.SelectedRows[0].Cells["員工代號"].Value));
+                loadSelectionEvent(ds.Tables["ERPIDList"].Select("員工代號 = '" + gvERPIDList.SelectedRows[0].Cells["員工代號"].Value+"'"));
             }
             selectionMade = true;
             this.Close();

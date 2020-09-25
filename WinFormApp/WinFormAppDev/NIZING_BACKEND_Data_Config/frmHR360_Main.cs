@@ -33,7 +33,7 @@ namespace NIZING_BACKEND_Data_Config
         private FunctionMode tabModeTempStorage;
 
         #region 帳號管理 Universal Variable
-        string avatarFilePath = @"\\192.168.10.222\Web\Nizing\hr360\image\employee_profile\";
+        //string avatarFilePath = @"\\192.168.10.222\Web\Nizing\hr360\image\employee_profile\";
         #endregion
 
         #region 公司公告 Universal Variable
@@ -49,6 +49,7 @@ namespace NIZING_BACKEND_Data_Config
             currentTabPage = tbcManagement.SelectedTab;
             LoadControlStatus(currentTabPage);
             txtAccountManagementMemo.Text = String.Empty;
+            ddlCompanyId.SelectedIndex = 0;
 
             #region 公司公告 Init
             companyAccouncementTabMode = FunctionMode.NORECORD;
@@ -116,12 +117,23 @@ namespace NIZING_BACKEND_Data_Config
                     }
                     using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                     {
+                        string company;
+                        if (ddlCompanyId.SelectedItem.ToString() == "日進電線")
+                        {
+                            company = "NIZING";
+                        }
+                        else
+                        {
+                            company = "SUNRIZE";
+                        }
                         conn.Open();
                         string query = "SELECT [ID]"
                                     +" FROM HR360_BI01_A"
-                                    +" WHERE [ID]=@ID";
+                                    +" WHERE [ID]=@ID" +
+                                    " and [COMPANY]=@company";
                         SqlCommand cmd = new SqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@ID", txtAccountId.Text.Trim());
+                        cmd.Parameters.AddWithValue("@company", company);
                         object result = cmd.ExecuteScalar();
                         if (result != null)
                         {
@@ -183,6 +195,7 @@ namespace NIZING_BACKEND_Data_Config
                     btnAccountSearch.Enabled = false;
                     btnAccountConfirm.Enabled = true;
                     btnAccountCancel.Enabled = true;
+                    ddlCompanyId.Enabled = true;
                     txtAccountId.Enabled = true;
                     txtAccountId.Text = String.Empty;
                     ckxAccountSuperUser.Enabled = true;
@@ -224,6 +237,7 @@ namespace NIZING_BACKEND_Data_Config
                     btnAccountSearch.Enabled = false;
                     btnAccountConfirm.Enabled = true;
                     btnAccountCancel.Enabled = true;
+                    ddlCompanyId.Enabled = false;
                     txtAccountId.Enabled = false;
                     ckxAccountSuperUser.Enabled = true;
                     txtAccountPassword.Enabled = true;
@@ -262,6 +276,7 @@ namespace NIZING_BACKEND_Data_Config
                     btnAccountSearch.Enabled = false;
                     btnAccountConfirm.Enabled = false;
                     btnAccountCancel.Enabled = false;
+                    ddlCompanyId.Enabled = false;
                     txtAccountId.Enabled = false;
                     ckxAccountSuperUser.Enabled = false;
                     txtAccountPassword.Enabled = false;
@@ -287,6 +302,7 @@ namespace NIZING_BACKEND_Data_Config
                     btnAccountSearch.Enabled = true;
                     btnAccountConfirm.Enabled = false;
                     btnAccountCancel.Enabled = false;
+                    ddlCompanyId.Enabled = false;
                     txtAccountId.Enabled = false;
                     ckxAccountSuperUser.Enabled = false;
                     txtAccountPassword.Enabled = false;
@@ -314,6 +330,7 @@ namespace NIZING_BACKEND_Data_Config
                     btnAccountSearch.Enabled = true;
                     btnAccountConfirm.Enabled = false;
                     btnAccountCancel.Enabled = false;
+                    ddlCompanyId.Enabled = false;
                     txtAccountId.Enabled = false;
                     txtAccountId.Text = string.Empty;
                     ckxAccountSuperUser.Enabled = false;
@@ -492,15 +509,15 @@ namespace NIZING_BACKEND_Data_Config
                 }
                 txtAccountDisabledDate.Text = gvAccountSearch_Result.SelectedRows[0].Cells["DISABLEDDATE"].Value.ToString();
                 //load image for selection change
-                if (File.Exists(avatarFilePath + txtAccountId.Text.Trim() + ".jpg"))
-                {
-                    LoadAvatarFile(avatarFilePath + txtAccountId.Text.Trim() + @".jpg");
-                }
-                else
-                {
-                    txtAccountAvatarImageFilePath.Clear();
-                    ClearPicAccountAvatar();
-                }
+                //if (File.Exists(avatarFilePath + txtAccountId.Text.Trim() + ".jpg"))
+                //{
+                //    LoadAvatarFile(avatarFilePath + txtAccountId.Text.Trim() + @".jpg");
+                //}
+                //else
+                //{
+                //    txtAccountAvatarImageFilePath.Clear();
+                //    ClearPicAccountAvatar();
+                //}
 
             }
             else if (gv.Name == "gvCompanyAnnouncementSearch_Result")
@@ -578,12 +595,14 @@ namespace NIZING_BACKEND_Data_Config
             accountTabMode = FunctionMode.ADD;
             ClearContent();
             LoadControlStatus(currentTabPage);
+            txtAccountId.Focus();
         }
 
         private void btnAccountEdit_Click(object sender, EventArgs e)
         {
             accountTabMode = FunctionMode.EDIT;
             LoadControlStatus(currentTabPage);
+
         }
 
         private void btnAccountDelete_Click(object sender, EventArgs e)
@@ -591,13 +610,24 @@ namespace NIZING_BACKEND_Data_Config
             var confirmResult = MessageBox.Show("確定要刪除" + txtAccountId.Text.Trim() + "的資料嗎?", "刪除確認", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
             {
+                string company;
+                if (ddlCompanyId.SelectedItem.ToString() == "日進電線")
+                {
+                    company = "NIZING";
+                }
+                else
+                {
+                    company = "SUNRIZE";
+                }
                 DataTable dt = new DataTable();
                 using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                 {
                     conn.Open();   
-                    string query = "SELECT [ID], [NO_DELETE] FROM [HR360_BI01_A] WHERE [ID] = @ID";
+                    string query = "SELECT [ID], [NO_DELETE] FROM [HR360_BI01_A] WHERE [ID] = @ID" +
+                        " AND [COMPANY]=@COMPANY";
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@ID", txtAccountId.Text.Trim());
+                    cmd.Parameters.AddWithValue("@COMPANY", company);
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     da.Fill(dt);
                 }
@@ -612,9 +642,11 @@ namespace NIZING_BACKEND_Data_Config
                         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                         {
                             conn.Open();
-                            string query = "DELETE FROM [HR360_BI01_A] WHERE [ID] = @ID";
+                            string query = "DELETE FROM [HR360_BI01_A] WHERE [ID] = @ID" +
+                        " AND [COMPANY]=@COMPANY"; ;
                             SqlCommand cmd = new SqlCommand(query, conn);
                             cmd.Parameters.AddWithValue("@ID", txtAccountId.Text.Trim());
+                            cmd.Parameters.AddWithValue("@COMPANY", company);
                             cmd.ExecuteNonQuery();
                         }
                         txtAccountManagementMemo.Text += DateTime.Now.ToString() + ":" + txtAccountId.Text.Trim() + "資料已刪除" + Environment.NewLine;
@@ -640,11 +672,11 @@ namespace NIZING_BACKEND_Data_Config
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
-                string query = "SELECT [ID],[ERP_ID],[NAME],[EMAIL],[LINE_ID],[DISABLED],[DISABLEDDATE],[SUPER_USER],[PASSWORD]"
+                string query = "SELECT [COMPANY], [ID],[ERP_ID],[NAME],[EMAIL],[LINE_ID],[DISABLED],[DISABLEDDATE],[SUPER_USER],[PASSWORD]"
                             + " FROM HR360_BI01_A"
                             + " WHERE [ID]<>'ADMIN'"
                             + condition
-                            + " ORDER BY [ID]";
+                            + " ORDER BY [COMPANY],[ID]";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -672,7 +704,7 @@ namespace NIZING_BACKEND_Data_Config
             accountTabMode = FunctionMode.SEARCH;
             LoadControlStatus(currentTabPage);
 
-            var frm = new frmHR360_AccountSearchERPID();
+            var frm = new frmHR360_AccountSearchERPID(ddlCompanyId.SelectedItem.ToString());
             frm.Location = new Point(this.Location.X + (this.Width / 2), this.Location.Y + (this.Height / 4));
             frm.StartPosition = FormStartPosition.Manual;
             frm.FormClosing += delegate { frm.Hide(); };
@@ -733,6 +765,16 @@ namespace NIZING_BACKEND_Data_Config
         private void btnAccountConfirm_Click(object sender, EventArgs e)
         {
             List<string> errorMsg = new List<string>();
+            string company;
+            if (ddlCompanyId.SelectedItem.ToString() == "日進電線")
+            {
+                company = "NIZING";
+            }
+            else
+            {
+                company = "SUNRIZE";
+            }
+
             if (accountTabMode == FunctionMode.ADD)
             {
                 //新增模式下執行確認的動作
@@ -743,10 +785,11 @@ namespace NIZING_BACKEND_Data_Config
                     {
                         conn.Open();
                         string query = "INSERT INTO HR360_BI01_A"
-                                    + " VALUES (GETDATE(),@CREATOR,GETDATE(),@MODIFIER,@ID,@ERP_ID,@NAME,@PASSWORD,@EMAIL,@LINE_ID,@NO_DELETE,@DISABLED,@DISABLEDDATE,@SUPER_USER)";
+                                    + " VALUES (GETDATE(),@CREATOR,GETDATE(),@MODIFIER,@COMPANY,@ID,@ERP_ID,@NAME,@PASSWORD,@EMAIL,@LINE_ID,@NO_DELETE,@DISABLED,@DISABLEDDATE,@SUPER_USER)";
                         SqlCommand cmd = new SqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@CREATOR", UserName);
                         cmd.Parameters.AddWithValue("@MODIFIER", UserName);
+                        cmd.Parameters.AddWithValue("@COMPANY", company);
                         cmd.Parameters.AddWithValue("@ID", txtAccountId.Text.Trim());
                         cmd.Parameters.AddWithValue("@ERP_ID", txtAccountERPID.Text.Trim());
                         cmd.Parameters.AddWithValue("@NAME", txtAccountName.Text.Trim());
@@ -812,9 +855,11 @@ namespace NIZING_BACKEND_Data_Config
                                     + " ,EMAIL=@EMAIL"
                                     + " ,LINE_ID=@LINE_ID"
                                     + passwordChange
-                                    + " WHERE [ID]=@ID";
+                                    + " WHERE [ID]=@ID" +
+                                    " AND COMPANY=@COMPANY";
                         SqlCommand cmd = new SqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@ID", txtAccountId.Text.Trim());
+                        cmd.Parameters.AddWithValue("@COMPANY", company);
                         cmd.Parameters.AddWithValue("@MODIFIER", UserName);
                         cmd.Parameters.AddWithValue("@PASSWORD", Encrypt(txtAccountPassword.Text.Trim()));
                         cmd.Parameters.AddWithValue("@EMAIL", txtAccountEmail.Text.Trim());
@@ -907,45 +952,45 @@ namespace NIZING_BACKEND_Data_Config
 
         private bool SaveAvatarFile()
         {
-            //Using webclient to upload file  (Works, but no prompt for overwrite or other controls)
-            WebClient myWebClient = new WebClient();
-            string originalFileName = txtAccountAvatarImageFilePath.Text.Trim();
-            string destinationFileName = avatarFilePath + txtAccountId.Text.Trim();
+            ////Using webclient to upload file  (Works, but no prompt for overwrite or other controls)
+            //WebClient myWebClient = new WebClient();
+            //string originalFileName = txtAccountAvatarImageFilePath.Text.Trim();
+            //string destinationFileName = avatarFilePath + txtAccountId.Text.Trim();
 
-            if (File.Exists(destinationFileName + Path.GetExtension(txtAccountAvatarImageFilePath.Text.Trim())))
-            {
-                var confirmFileName = MessageBox.Show(@"檔案已存在，請問要覆蓋嗎? (OK:覆蓋/Cancel:取消)", "檔案名稱重複", MessageBoxButtons.OKCancel);
-                if (confirmFileName == DialogResult.OK)
-                {
-                    destinationFileName += Path.GetExtension(txtAccountAvatarImageFilePath.Text.Trim());
-                    myWebClient.UploadFile(destinationFileName, originalFileName);
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-                //else if (confirmFileName == DialogResult.No)
-                //{
-                //    int i = 0;
-                //    string temp;
-                //    temp = destinationFileName;
-                //    while (File.Exists(destinationFileName + Path.GetExtension(txtAccountAvatarImageFilePath.Text.Trim())))
-                //    {
-                //        i += 1;
-                //        destinationFileName = temp + "-" + i.ToString();
-                //    }
-                //    destinationFileName += Path.GetExtension(txtAccountAvatarImageFilePath.Text.Trim());
-                //    myWebClient.UploadFile(destinationFileName, originalFileName);
-                //    txtAccountManagementMemo.Text += "檔案名稱:" + Path.GetFileName(destinationFileName) + "已存檔" + Environment.NewLine;
-                //}
-            }
-            else
-            {
-                destinationFileName += Path.GetExtension(txtAccountAvatarImageFilePath.Text.Trim());
-                myWebClient.UploadFile(destinationFileName, originalFileName);
-                return true;
-            }
+            //if (File.Exists(destinationFileName + Path.GetExtension(txtAccountAvatarImageFilePath.Text.Trim())))
+            //{
+            //    var confirmFileName = MessageBox.Show(@"檔案已存在，請問要覆蓋嗎? (OK:覆蓋/Cancel:取消)", "檔案名稱重複", MessageBoxButtons.OKCancel);
+            //    if (confirmFileName == DialogResult.OK)
+            //    {
+            //        destinationFileName += Path.GetExtension(txtAccountAvatarImageFilePath.Text.Trim());
+            //        myWebClient.UploadFile(destinationFileName, originalFileName);
+            //        return true;
+            //    }
+            //    else
+            //    {
+            //        return false;
+            //    }
+            //    //else if (confirmFileName == DialogResult.No)
+            //    //{
+            //    //    int i = 0;
+            //    //    string temp;
+            //    //    temp = destinationFileName;
+            //    //    while (File.Exists(destinationFileName + Path.GetExtension(txtAccountAvatarImageFilePath.Text.Trim())))
+            //    //    {
+            //    //        i += 1;
+            //    //        destinationFileName = temp + "-" + i.ToString();
+            //    //    }
+            //    //    destinationFileName += Path.GetExtension(txtAccountAvatarImageFilePath.Text.Trim());
+            //    //    myWebClient.UploadFile(destinationFileName, originalFileName);
+            //    //    txtAccountManagementMemo.Text += "檔案名稱:" + Path.GetFileName(destinationFileName) + "已存檔" + Environment.NewLine;
+            //    //}
+            //}
+            //else
+            //{
+            //    destinationFileName += Path.GetExtension(txtAccountAvatarImageFilePath.Text.Trim());
+            //    myWebClient.UploadFile(destinationFileName, originalFileName);
+            return true;
+            //}
 
         }
 
@@ -965,6 +1010,12 @@ namespace NIZING_BACKEND_Data_Config
         {
             picAccountAvatar.Image = null;
             lblAccountAvatarFileName.Text = string.Empty;
+        }
+
+        private void ddlCompanyId_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtAccountERPID.Text = string.Empty;
+            txtAccountName.Text = string.Empty;
         }
 
         #endregion
@@ -1331,5 +1382,6 @@ namespace NIZING_BACKEND_Data_Config
         }
 
         #endregion
+
     }
 }
