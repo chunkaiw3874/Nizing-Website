@@ -13,7 +13,7 @@
     <div class="main-content">
         <div class="inline-div">
             <div style="margin-right:50px;">
-                <a href="hr360/login.aspx" target="_blank"><img src="images/employee_section/portal/HR360.png" /></a>
+                <a href="hr360/mobile/login.aspx" target="_blank"><img src="images/employee_section/portal/HR360.png" /></a>
             </div>
             <div style="margin-right:50px;">
                 <a href="employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/NEW-new.png" /></a>
