@@ -8,7 +8,7 @@
         .custom-select {
             height: 30px;
         }
-        th{
+        th {
             text-align:center;
         }
     </style>
@@ -39,11 +39,13 @@
             <div id="search-result">
                 <div class="row">
                     <div class="col-md-12">
-                        <asp:GridView ID="gvReport" runat="server" CssClass="grdResult" HorizontalAlign="Center" AutoGenerateColumns="false">
+                        <asp:GridView ID="gvReport" runat="server" CssClass="grdResultWithFooter" HorizontalAlign="Center" AutoGenerateColumns="false"
+                            ShowFooter="true"
+                            OnPreRender="gvReport_PreRender">
                             <Columns>
                                 <asp:TemplateField HeaderText="單據日期">
                                     <ItemTemplate>
-                                        <asp:Label ID="Label2" runat="server" Text='<%#Eval("單據日期") %>'></asp:Label>
+                                        <asp:Label ID="lblDate" runat="server" Text='<%#Eval("單據日期") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <%--<asp:TemplateField HeaderText="預交日期">
@@ -53,67 +55,67 @@
                                 </asp:TemplateField>--%>
                                 <asp:TemplateField HeaderText="客戶代號">
                                     <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" Text='<%#Eval("客戶代號") %>'></asp:Label>
+                                        <asp:Label ID="lblCustId" runat="server" Text='<%#Eval("客戶代號") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="客戶名稱">
                                     <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" Text='<%#Eval("客戶名稱") %>'></asp:Label>
+                                        <asp:Label ID="lblCustName" runat="server" Text='<%#Eval("客戶名稱") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="品號">
                                     <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" Text='<%#Eval("品號") %>'></asp:Label>
+                                        <asp:Label ID="lblItemId" runat="server" Text='<%#Eval("品號") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="品名">
                                     <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" Text='<%#Eval("品名") %>'></asp:Label>
+                                        <asp:Label ID="lblItemName" runat="server" Text='<%#Eval("品名") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="規格">
                                     <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" Text='<%#Eval("規格") %>'></asp:Label>
+                                        <asp:Label ID="lblItemSpec" runat="server" Text='<%#Eval("規格") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="單價">
                                     <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" Text='<%#Eval("單價") %>'></asp:Label>
+                                        <asp:Label ID="lblUnitPrice" runat="server" Text='<%#Eval("單價") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="數量">
                                     <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" Text='<%#Eval("數量") %>'></asp:Label>
+                                        <asp:Label ID="lblItemAmount" runat="server" Text='<%#Eval("數量") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="金額">
+                                <asp:TemplateField HeaderText="金額<br/>(NTD)">
                                     <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" Text='<%#Eval("金額") %>'></asp:Label>
+                                        <asp:Label ID="lblTotalPrice" runat="server" Text='<%#Eval("金額") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="幣別">
+                            <%--    <asp:TemplateField HeaderText="幣別">
                                     <ItemTemplate>
                                         <asp:Label ID="Label1" runat="server" Text='<%#Eval("幣別") %>'></asp:Label>
                                     </ItemTemplate>
-                                </asp:TemplateField>
+                                </asp:TemplateField>--%>
                                 <asp:TemplateField HeaderText="未交量">
                                     <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" Text='<%#Eval("未交量") %>'></asp:Label>
+                                        <asp:Label ID="lblItemUndelivered" runat="server" Text='<%#Eval("未交量") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="庫存數量">
                                     <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" Text='<%#Eval("庫存數量") %>'></asp:Label>
+                                        <asp:Label ID="lblItemInStock" runat="server" Text='<%#Eval("庫存數量") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="儲位">
                                     <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" Text='<%#Eval("儲位") %>'></asp:Label>
+                                        <asp:Label ID="lblItemStorage" runat="server" Text='<%#Eval("儲位") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="業務名稱">
                                     <ItemTemplate>
-                                        <asp:Label ID="Label1" runat="server" Text='<%#Eval("業務名稱") %>'></asp:Label>
+                                        <asp:Label ID="lblSalesName" runat="server" Text='<%#Eval("業務名稱") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                <%-- <asp:TemplateField HeaderText="備註">

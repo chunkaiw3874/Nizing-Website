@@ -59,11 +59,11 @@ public partial class masterPage_HR360_Child_user : masterPage_HR360_Master
     protected void btnLogout_Click(object sender, ImageClickEventArgs e)
     {
         Session.Clear();
-        Response.Redirect("~/hr360/login.aspx");
+        Response.Redirect("~/hr360/mobile/login.aspx");
     }
     protected void btnHome_Click(object sender, ImageClickEventArgs e)
     {
-        Response.Redirect("~/hr360/main.aspx");
+        Response.Redirect("~/hr360/mobile/main.aspx");
     }
 
     protected void btnAdminPage_Click(object sender, ImageClickEventArgs e)

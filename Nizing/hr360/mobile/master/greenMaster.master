@@ -4,52 +4,62 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>      
-    <meta name="viewport" content="width=device-width, initial-scale=1">  
-    <script src="../../../Scripts/jquery-2.1.4.min.js"></script>
-    <script src="../../../Scripts/bootstrap.js"></script>
-    <script src="../../../Scripts/bootstrap-datepicker.min.js"></script>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../Scripts/jquery-3.5.0.min.js"></script>
     <script src="../../../Scripts/text.area.auto.adjust.js"></script>
     <script src="../../../Scripts/autosize.min.js"></script>
-    <link href="../../../css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/32e9a84b4a.js" crossorigin="anonymous"></script>
     <style>
         body {
-            padding-top:70px;
+            padding-top: 70px;
         }
         /* navbar */
-        .navbar-default {
+        .nav-link {
+            font-weight: bolder;
+        }
+        /*.navbar-default {
             background-color: #01C82D;
             border-color: #E7E7E7;
-        }
+        }*/
         /* Title */
-        .navbar-default .navbar-brand {
-            color: #ffffff;
-        }
-        .navbar-default .navbar-brand:hover,
-        .navbar-default .navbar-brand:focus {
-            color: #5e5e5e;
-        }
+        /*.navbar-default .navbar-brand {
+                color: #ffffff;
+            }
+
+                .navbar-default .navbar-brand:hover,
+                .navbar-default .navbar-brand:focus {
+                    color: #5e5e5e;
+                }*/
         /* Link */
-        .navbar-default .navbar-nav > li > a {
-            color: #ffffff;
-            font-weight:bold;
-        }
-        .navbar-default .navbar-nav > li > a:hover,
-        .navbar-default .navbar-nav > li > a:focus {
-            color: #5e5e5e;
-        }
-        .navbar-default .navbar-nav > .active > a,
-        .navbar-default .navbar-nav > .active > a:hover,
-        .navbar-default .navbar-nav > .active > a:focus {
-            color: #01C82D;
-            background-color: #E7E7E7;
-        }
-        .navbar-default .navbar-nav > .open > a,
-        .navbar-default .navbar-nav > .open > a:hover,
-        .navbar-default .navbar-nav > .open > a:focus {
-            color: #333;
-            background-color: #D5D5D5;
-        }
+        /*.navbar-default .navbar-nav > li > a {
+                color: #ffffff;
+                font-weight: bold;
+            }
+
+                .navbar-default .navbar-nav > li > a:hover,
+                .navbar-default .navbar-nav > li > a:focus {
+                    color: #5e5e5e;
+                }
+
+            .navbar-default .navbar-nav > .active > a,
+            .navbar-default .navbar-nav > .active > a:hover,
+            .navbar-default .navbar-nav > .active > a:focus {
+                color: #01C82D;
+                background-color: #E7E7E7;
+            }
+
+            .navbar-default .navbar-nav > .open > a,
+            .navbar-default .navbar-nav > .open > a:hover,
+            .navbar-default .navbar-nav > .open > a:focus {
+                color: #333;
+                background-color: #D5D5D5;
+            }*/
         /* Caret */
         /*.navbar-default .navbar-nav > .dropdown > a .caret {
             border-top-color: #777;
@@ -67,7 +77,7 @@
             border-bottom-color: #555;
         }*/
         /* Mobile version */
-        .navbar-default .navbar-toggle {
+        /*.navbar-default .navbar-toggle {
             border-color: #01C82D;
         }
         .navbar-default .navbar-toggle:hover,
@@ -76,7 +86,7 @@
         }
         .navbar-default .navbar-toggle .icon-bar {
             background-color: #ffffff;
-        }
+        }*/
         /*@media (max-width: 767px) {
             .navbar-default .navbar-nav .open .dropdown-menu > li > a {
                 color: #777;
@@ -87,41 +97,50 @@
             }
         }*/
     </style>
-    <asp:ContentPlaceHolder id="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <div class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="main.aspx">nz</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="basicInformation.aspx">基本資料</a></li>
-                        <li><a href="#">教育訓練</a></li>
-                        <li><a href="#">填寫加班單</a></li>
-                        <li><a href="#">我要請假</a></li>
-                        <li><a href="#">我的考績系統</a></li>
-                        <li><a href="#">我的薪資明細</a></li>
-                        <li><asp:LinkButton ID="lbLogout" runat="server" OnClick="lbLogout_Click">登出</asp:LinkButton></li>
-
-                    </ul>
-                </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+            <a class="navbar-brand" href="main.aspx">nz</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/hr360/UI01.aspx">基本資料</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/hr360/UI02.aspx">教育訓練</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/hr360/UI03.aspx">填寫加班單</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/hr360/UI04.aspx">我要請假</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/hr360/UI05.aspx">我的考績系統</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/hr360/UI06.aspx">我的薪資明細</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <asp:LinkButton ID="lbLogout" runat="server" class="nav-link"
+                            OnClick="lbLogout_Click">
+                            登出
+                            <i class="fas fa-sign-out-alt"></i>
+                        </asp:LinkButton>
+                    </li>
+                </ul>
             </div>
-        </div>
-    <div>
-        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
-        
+        </nav>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>
-    </div>
     </form>
 </body>
 </html>

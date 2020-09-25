@@ -2,13 +2,33 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style>
-        .table td{
-            vertical-align:middle;
-            text-align:center;
+        .table td {
+            vertical-align: middle;
+            text-align: center;
         }
-        table td:first-child{
-            text-align:center;
-            vertical-align:middle;
+
+        table td:first-child {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        th {
+            background-color: #29ABE2;
+            color: #FFFFFF
+        }
+
+        td {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        tr:nth-child(2n) td {
+            background-color: #c3e8f4;
+            color: #000000;
+        }
+
+        tr:last-child td {
+            background-color: yellow;
         }
     </style>
 </asp:Content>
@@ -73,11 +93,12 @@
             <asp:HiddenField ID="hdnDataMonth" runat="server" />
             <asp:HiddenField ID="hdnBonusType" runat="server" />
             <div class="d-flex justify-content-between mb-2">
-                <h5><asp:Label ID="lblBonusType" runat="server" Text=""></asp:Label></h5>
+                <h5>
+                    <asp:Label ID="lblBonusType" runat="server" Text=""></asp:Label></h5>
                 <asp:Button ID="btnUpdateBonusData" runat="server" CssClass="btn btn-success" Text="更新獎金資料" Visible="false" Enabled="false"
-                    OnClick="btnUpdateBonusData_Click"/>
+                    OnClick="btnUpdateBonusData_Click" />
             </div>
-            <div class="mb-5">
+            <div class="mb-2">
                 <asp:GridView ID="gvData" runat="server" CssClass="table table-striped table-hover table-white"
                     AutoGenerateColumns="false" ShowFooter="true"
                     EmptyDataText="查無資料"
@@ -109,6 +130,11 @@
                                 <asp:Label ID="lblOperationCost" runat="server" Text=""></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                        <asp:TemplateField HeaderText="淨利">
+                            <ItemTemplate>
+                                <asp:Label ID="lblNetProfit" runat="server" Text='<%#Eval("淨利") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="獎金成數<br/>%" HeaderStyle-Width="100">
                             <ItemTemplate>
                                 <div class="input-group">
@@ -120,9 +146,19 @@
                             <ItemTemplate>
                                 <asp:Label ID="lblBonus" runat="server" Text=""></asp:Label>
                             </ItemTemplate>
-                        </asp:TemplateField>                        
+                        </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
+            </div>
+            <div class="mb-5">
+                <asp:Chart ID="Chart1" runat="server" Width="400" Height="300">
+                    <Series>
+                        <asp:Series Name="Series1" IsValueShownAsLabel="True"></asp:Series>
+                    </Series>
+                    <ChartAreas>
+                        <asp:ChartArea Name="ChartArea1"></asp:ChartArea>
+                    </ChartAreas>
+                </asp:Chart>
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>

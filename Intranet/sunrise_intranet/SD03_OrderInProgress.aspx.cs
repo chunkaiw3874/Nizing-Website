@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -68,7 +69,7 @@ public partial class sunrise_employee_section_report_SD03_OrderInProgress : Syst
                 " ,TD.TD006 '規格'" +
                 " ,CONVERT(DECIMAL(20,2),TD.TD011) '單價'" +
                 " ,CONVERT(DECIMAL(20,0),TD.TD008) '數量'" +
-                " ,CONVERT(DECIMAL(20,2),TD.TD012) '金額'" +
+                " ,CONVERT(DECIMAL(20,2),TD.TD012*TC.TC009) '金額'" +
                 " ,TC.TC008 '幣別'" +
                 " ,CONVERT(DECIMAL(20,0),TD.TD008-TD.TD009) '未交量'" +
                 " ,CONVERT(DECIMAL(20,0),MB.MB064) '庫存數量'" +
@@ -116,5 +117,23 @@ public partial class sunrise_employee_section_report_SD03_OrderInProgress : Syst
         DataTable dt = new DataTable();
         dt = GetQueryTable();
         DisplayQueryTable(dt);
+    }
+
+    protected void gvReport_PreRender(object sender, EventArgs e)
+    {
+        decimal totalSum = 0;
+        decimal undeliveredSum = 0;
+        decimal amountOrdered = 0;
+        foreach(GridViewRow row in gvReport.Rows)
+        {
+            totalSum += Convert.ToDecimal(((Label)row.FindControl("lblTotalPrice")).Text);
+            undeliveredSum += Convert.ToDecimal(((Label)row.FindControl("lblItemUndelivered")).Text);
+            amountOrdered += Convert.ToDecimal(((Label)row.FindControl("lblItemUndelivered")).Text);
+        }
+
+        gvReport.FooterRow.Cells[6].Text = "小記";
+        gvReport.FooterRow.Cells[7].Text = amountOrdered.ToString("0");
+        gvReport.FooterRow.Cells[8].Text = totalSum.ToString("0.00");
+        gvReport.FooterRow.Cells[9].Text = undeliveredSum.ToString("0");
     }
 }

@@ -2,12 +2,16 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="Server">
     <style>
+        /*#inventory #search-result .grdResult tr td:nth-child(n+3):nth-child(-n+5) {
+            text-align: left;
+        }*/
         div {
             display: block;
         }
 
         table th, td {
             text-align: center;
+            /*font-size:12px;*/
         }
 
             table th:hover {
@@ -18,7 +22,7 @@
             text-align: left;
         }
 
-        table td:hover {
+        table td img:hover {
             cursor: pointer;
         }
 
@@ -31,8 +35,8 @@
             width:500px;
         }*/
 
-        .imagepreview{
-            width:100%;
+        .imagepreview {
+            width: 100%;
         }
     </style>
     <script>
@@ -41,12 +45,16 @@
             var dotIndex = fileName.lastIndexOf('.');
             var fileNameNoExt = fileName.substr(0, dotIndex);
             var fileNameExt = fileName.substr(dotIndex + 1);
-            console.log('upload begins: ' + fileNameNoExt + '-' + (new Date()).toISOString().replace(/[^0-9]/g, "").slice(0, -3) + fileNameExt)
 
         }
         function uploadComplete(sender, args) {
-            console.log("upload complete: " + args.get_fileName());
+            alert("upload complete: " + args.get_fileName() + '-' + (new Date()).toISOString().replace(/[^0-9]/g, "").slice(0, -3));
         }
+        //function showImage() {
+        //    alert('image clicked');
+        //    $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+        //    $('#imagemodal').modal('show');
+        //};
     </script>
 </asp:Content>
 
@@ -69,9 +77,9 @@
                                 </div>
                                 <span class="input-group-text">品號查詢</span>
                             </div>
-                            <asp:TextBox ID="txtId_Start" runat="server" CssClass="form-control" placeholder="開頭為..." ToolTip="品號開頭為..."></asp:TextBox>
+                            <%--<asp:TextBox ID="txtId_Start" runat="server" CssClass="form-control" placeholder="開頭為..." ToolTip="品號開頭為..."></asp:TextBox>--%>
                             <asp:TextBox ID="txtId_Middle" runat="server" CssClass="form-control" placeholder="包含有..." ToolTip="品號包含有..."></asp:TextBox>
-                            <asp:TextBox ID="txtId_End" runat="server" CssClass="form-control" placeholder="結尾為..." ToolTip="品號結尾為..."></asp:TextBox>
+                            <%--<asp:TextBox ID="txtId_End" runat="server" CssClass="form-control" placeholder="結尾為..." ToolTip="品號結尾為..."></asp:TextBox>--%>
                         </div>
                         <div class="input-group mb-1">
                             <div class="input-group-prepend">
@@ -80,9 +88,9 @@
                                 </div>
                                 <span class="input-group-text">品名查詢</span>
                             </div>
-                            <asp:TextBox ID="txtName_Start" runat="server" CssClass="form-control" placeholder="開頭為..." ToolTip="品名開頭為..."></asp:TextBox>
+                            <%--<asp:TextBox ID="txtName_Start" runat="server" CssClass="form-control" placeholder="開頭為..." ToolTip="品名開頭為..."></asp:TextBox>--%>
                             <asp:TextBox ID="txtName_Middle" runat="server" CssClass="form-control" placeholder="包含有..." ToolTip="品名包含有..."></asp:TextBox>
-                            <asp:TextBox ID="txtName_End" runat="server" CssClass="form-control" placeholder="結尾為..." ToolTip="品名結尾為..."></asp:TextBox>
+                            <%--<asp:TextBox ID="txtName_End" runat="server" CssClass="form-control" placeholder="結尾為..." ToolTip="品名結尾為..."></asp:TextBox>--%>
                         </div>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
@@ -108,9 +116,19 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         <hr />
+        <asp:UpdateProgress ID="upGvItemList" runat="server">
+            <ProgressTemplate>
+                <div class="d-flex justify-content-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                    </div>
+            </ProgressTemplate>
+        </asp:UpdateProgress>
         <asp:UpdatePanel ID="upData" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="btnSearch" />
+                <asp:AsyncPostBackTrigger ControlID="gvItemList" EventName="PageIndexChanging" />
             </Triggers>
             <ContentTemplate>
                 <div class="scrollable mb-5">
@@ -118,12 +136,13 @@
                         EmptyDataText="查無資料"
                         AllowPaging="true" PageSize="10"
                         OnPageIndexChanging="gvItemList_PageIndexChanging"
-                        OnSelectedIndexChanged="gvItemList_SelectedIndexChanged"
                         OnPreRender="gvItemList_PreRender">
                         <Columns>
                             <asp:TemplateField HeaderText="品項封面" HeaderStyle-Width="150">
                                 <ItemTemplate>
-                                    <asp:Image ID="imgItemCover" runat="server" CssClass="pop" Width="150" />
+                                    <asp:ImageButton ID="imgItemCover" runat="server" Width="150"
+                                        OnClick="imgItemCover_Click"/>
+                                    <%--<asp:Image ID="imgItemCover" runat="server" CssClass="pop" Width="150" />--%>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="在庫量" HeaderStyle-Width="60">
@@ -188,55 +207,7 @@
         </asp:UpdatePanel>
     </asp:Panel>
 
-    <asp:UpdatePanel ID="upDetail" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
-        <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="gvItemList" />
-            <asp:AsyncPostBackTrigger ControlID="afuCover" />
-        </Triggers>
-        <ContentTemplate>
-            <asp:HiddenField ID="hdnRecentUploadFilePath" runat="server" />
-            <asp:HiddenField ID="hdnRecentUploadFileName" runat="server" />
-            <div id="itemDetail" class="modal fade scrollable-modal" data-backdrop="static" aria-labelledby="recordDetail" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <asp:Label ID="lblModalItemId" runat="server" CssClass="modal-title"></asp:Label>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <asp:Label ID="lblModalItemName" runat="server" Text="Label"></asp:Label>
-                            </div>
-                            <hr />
-                            <%--<asp:FileUpload ID="fuCover" runat="server" />--%>
-                            <ajaxToolkit:AsyncFileUpload ID="afuCover" runat="server" CssClass="afuCover"
-                                OnClientUploadStarted="uploadStart"
-                                OnClientUploadComplete="uploadComplete"
-                                OnUploadedComplete="btnCoverUpload_Click" />
-                            <asp:Image ID="imgCover" runat="server" CssClass="imgCover" />
-                            <%--                            <asp:Button ID="btnCoverUpload" runat="server" Text="上傳"
-                                UseSubmitBehavior="false"
-                                OnClick="btnCoverUpload_Click" />--%>
-                            <%--<i class="fas fa-cloud-upload-alt"></i>--%>
-                            <%--</asp:Button>--%>
-                            <asp:Label ID="lblTest" runat="server" Text="No cover image source info"></asp:Label>
-                        </div>
-                        <div class="modal-footer">
-                            <div class="btn-group full-width" role="group">
-                                <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-secondary" Text="取消"
-                                    data-dismiss="modal" />
-                                <%--<asp:Button ID="btnSaveDetail" runat="server" OnClick="btnSaveDetail_Click"
-                                    CssClass="btn btn-success" Text="儲存" UseSubmitBehavior="false"
-                                    data-dismiss="modal" />--%>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </ContentTemplate>
-    </asp:UpdatePanel>
-
-<%--    <asp:UpdatePanel ID="upCoverImageView" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
+    <asp:UpdatePanel ID="upCoverImageView" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="gvItemList" />
         </Triggers>
@@ -250,10 +221,11 @@
                         </div>
                         <div class="modal-body">
                             <asp:Image ID="imgCoverImage" runat="server" CssClass="imagepreview img-fluid" />
+                            <%--<img class="imagepreview" style="width: 100%;">--%>
                         </div>
                     </div>
                 </div>
             </div>
         </ContentTemplate>
-    </asp:UpdatePanel>--%>
+    </asp:UpdatePanel>
 </asp:Content>

@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -352,12 +353,45 @@ public partial class employee_section_report_SD_ProfitMarginByProductReport : Sy
                 "0.00%";
             gvData.FooterRow.Cells[12].Text = (decimal.Parse((gvData.FooterRow.Cells[10].Text.Split('%'))[0])
                 - decimal.Parse((gvData.FooterRow.Cells[11].Text.Split('%'))[0])).ToString("0.00") + "%";
-            gvData.FooterRow.BackColor = Color.Yellow;
         }
     }
 
     protected void TimeFrameChanged(object sender, EventArgs e)
     {
         txtOperationCost.Text = GetOperationCost().ToString("0.00");
+    }
+
+    protected void btnExport_Click(object sender, EventArgs e)
+    {
+        if (gvData.Rows.Count > 0)
+        {
+            ExportToExcel(gvData);
+        }
+    }
+
+    private void ExportToExcel(GridView gv)
+    {
+        HttpContext.Current.Response.Clear();
+        string filename = ddlParameterSales.SelectedItem.Text.Replace(" ","")+ "利潤明細表" + lblDateRange.Text.Replace(" ", "");
+        string strfileext = ".xls";
+        StringWriter tw = new StringWriter();
+        HtmlTextWriter hw = new HtmlTextWriter(tw);
+        HttpContext.Current.Response.ContentType = "application/vnd.ms-excel";
+        HttpContext.Current.Response.AppendHeader("Content-Disposition", "attachment; filename=" + filename + strfileext);
+        HttpContext.Current.Response.Write("<meta http-equiv=Content-Type content=text/html;charset=utf-8>");
+
+        //先把分頁關掉
+        //gvResult.AllowPaging = false;
+        //bindgv();
+
+        //Get the HTML for the control.
+        gv.RenderControl(hw);
+        HttpContext.Current.Response.Write(tw.ToString());
+        HttpContext.Current.Response.End();
+    }
+
+    public override void VerifyRenderingInServerForm(Control control)
+    {
+        //用export_excel必須要有這個override
     }
 }

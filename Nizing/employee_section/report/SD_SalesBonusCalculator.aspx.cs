@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.DataVisualization.Charting;
 using System.Web.UI.WebControls;
 
 public partial class employee_section_report_SD_SalesBonusCalculator : System.Web.UI.Page
@@ -99,15 +100,18 @@ public partial class employee_section_report_SD_SalesBonusCalculator : System.We
 
         string startDate = start.ToString("yyyyMMdd");
         string endDate = end.ToString("yyyyMMdd");
-        string timeframeCondition = "";
+        string bonusTimeframeCondition;
+        string operationCostTimeframeCondition;
 
         if (rdoMonth.Checked)
         {
-            timeframeCondition = " and sbp.bonusType='月獎金' and sbp.bonusMonth=@month";
+            bonusTimeframeCondition = " and sbp.bonusType='月獎金' and sbp.bonusMonth=@month";
+            operationCostTimeframeCondition = " left join NZ_ERP2.dbo.NizingOperationCostByMonth oc on oc.year=@year and oc.month=@month";
         }
         else
         {
-            timeframeCondition = " and sbp.bonusType='年終獎金'";
+            bonusTimeframeCondition = " and sbp.bonusType='年終獎金'";
+            operationCostTimeframeCondition = " left join NZ_ERP2.dbo.NizingOperationCostByYear oc on oc.year=@year";
         }
 
         using (SqlConnection conn = new SqlConnection(connectionString))
@@ -165,16 +169,28 @@ public partial class employee_section_report_SD_SalesBonusCalculator : System.We
                 " when SUM(d.金額)= 0 then '0.00'" +
                 " else coalesce(CONVERT(NVARCHAR, (CONVERT(DECIMAL(5, 2), (SUM(d.金額) - SUM(d.銷貨成本)) * 100 / SUM(d.金額)))), '0.00') + '%'" +
                 " end as '毛利率'" +
+                " ,case" +
+                //" when SUM(d.數量)= 0 then '0.00'" +
+                " when SUM(d.金額)= 0 then '0.00'" +
+                " else coalesce(CONVERT(DECIMAL(20, 2), (convert(decimal(6,4),((SUM(d.金額) - SUM(d.銷貨成本)) / SUM(d.金額)))-convert(decimal(6,4),coalesce(oc.operationCostPercent,0.0))/100.0)*SUM(d.金額)), '0.00')" +
+                " end as '淨利'" +
                 " ,coalesce(sbp.bonusPercent, 0) '獎金成數'" +
                 " from data d" +
                 " left join CMSMV mv on d.業務 = mv.MV001" +
                 " left join NZ_ERP2.dbo.NizingSalesBonusParameter sbp on d.業務=sbp.salesId and sbp.bonusYear=@year" +
-                timeframeCondition +
+                bonusTimeframeCondition +
+                operationCostTimeframeCondition +
                 " group by" +
                 " d.業務" +
                 " ,mv.MV002" +
                 " ,sbp.bonusPercent" +
-                " order by d.業務";
+                " ,oc.operationCostPercent" +
+                " order by case" +
+                " when SUM(d.數量)= 0 then '0.00'" +
+                " when SUM(d.金額)= 0 then '0.00'" +
+                " else coalesce(CONVERT(DECIMAL(20, 2), (convert(decimal(6,4),((SUM(d.金額) - SUM(d.銷貨成本)) / SUM(d.金額)))-convert(decimal(6,4),coalesce(oc.operationCostPercent,0.0))/100.0)*SUM(d.金額)), '0.00')" +
+                " end desc" +
+                " ,d.業務";
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@startDate", startDate);
             cmd.Parameters.AddWithValue("@endDate", endDate);
@@ -186,7 +202,14 @@ public partial class employee_section_report_SD_SalesBonusCalculator : System.We
 
             gvData.DataSource = dt;
             gvData.DataBind();
-        }
+
+            //feed data from dataset to chart                
+            Chart1.Series[0].ChartType = SeriesChartType.Column;
+            Chart1.Series[0].XValueMember = "業務名稱";
+            Chart1.Series[0].YValueMembers = "淨利";
+            Chart1.Legends.Clear();
+            Chart1.DataSource = dt.DefaultView;
+        }        
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
@@ -294,7 +317,6 @@ public partial class employee_section_report_SD_SalesBonusCalculator : System.We
         if (gvData.Rows.Count > 0)
         {
             CalculateBonus();
-            gvData.FooterRow.BackColor = Color.Yellow;
         }
     }
 
@@ -302,18 +324,21 @@ public partial class employee_section_report_SD_SalesBonusCalculator : System.We
     {
         decimal saleValueSum = 0;
         decimal bonusSum = 0;
+        decimal netProfitSum = 0;
 
         foreach (GridViewRow row in gvData.Rows)
         {
             decimal saleAmount = Convert.ToDecimal(((Label)row.FindControl("lblNetSaleValue")).Text);
             decimal grossProfit = Convert.ToDecimal((((Label)row.FindControl("lblGrossProfitPercent")).Text.Split('%'))[0]);
             decimal operationCost = Convert.ToDecimal((((Label)row.FindControl("lblOperationCost")).Text.Split('%'))[0]);
+            decimal netProfit = Convert.ToDecimal(((Label)row.FindControl("lblNetProfit")).Text);
             decimal bonusPercent = Convert.ToDecimal((((TextBox)row.FindControl("txtBonusPercent")).Text.Split('%'))[0]);
-            decimal bonus = Math.Round(saleAmount * (grossProfit - operationCost) / 100 * bonusPercent / 100, 0);
+            decimal bonus = Math.Round(netProfit * bonusPercent / 100, 0);
 
             ((Label)row.FindControl("lblBonus")).Text = bonus.ToString("0.00");
 
             saleValueSum += saleAmount;
+            netProfitSum += netProfit;
             bonusSum += bonus;
         }
 
@@ -321,9 +346,10 @@ public partial class employee_section_report_SD_SalesBonusCalculator : System.We
         gvData.FooterRow.Cells[1].HorizontalAlign = HorizontalAlign.Right;
         gvData.FooterRow.Cells[2].Text = saleValueSum.ToString("C", CultureInfo.CreateSpecificCulture("zh-TW"));
         gvData.FooterRow.Cells[4].Text = "獎金概述";
-        gvData.FooterRow.Cells[6].Text = bonusSum.ToString("C", CultureInfo.CreateSpecificCulture("zh-TW"));
-        gvData.FooterRow.Cells[5].Text = saleValueSum == 0 ? "0.00%"
-            : (bonusSum * 100 / saleValueSum).ToString("0.00") + "%";
+        gvData.FooterRow.Cells[5].Text = netProfitSum.ToString("C", CultureInfo.CreateSpecificCulture("zh-TW"));
+        gvData.FooterRow.Cells[7].Text = bonusSum.ToString("C", CultureInfo.CreateSpecificCulture("zh-TW"));
+        gvData.FooterRow.Cells[6].Text = saleValueSum == 0 ? "0.00%"
+            : (bonusSum * 100 / netProfitSum).ToString("0.00") + "%";
     }
 
     protected void btnUpdateBonusData_Click(object sender, EventArgs e)

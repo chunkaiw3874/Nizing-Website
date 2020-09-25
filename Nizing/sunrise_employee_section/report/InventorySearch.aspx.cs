@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Security.Principal;
+using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -13,7 +14,6 @@ using System.Web.UI.WebControls;
 public partial class InventorySearch : System.Web.UI.Page
 {
     string connectionString = ConfigurationManager.ConnectionStrings["SunrizeConnectionString"].ConnectionString;
-    string sunrizeCustomConnectionString = ConfigurationManager.ConnectionStrings["SunrizeCustomConnectionString"].ConnectionString;
 
     List<string> noVisibleCostColumnList = new List<string>();
     protected void Page_Load(object sender, EventArgs e)
@@ -37,12 +37,12 @@ public partial class InventorySearch : System.Web.UI.Page
 
     }
 
-    protected override void Render(HtmlTextWriter writer)
-    {
-        AddRowSelectToGridView(gvItemList);
+    //protected override void Render(HtmlTextWriter writer)
+    //{
+    //    AddRowSelectToGridView(gvItemList);
 
-        base.Render(writer);
-    }
+    //    base.Render(writer);
+    //}
 
     private DataTable GetAccountCategory()
     {
@@ -66,14 +66,13 @@ public partial class InventorySearch : System.Web.UI.Page
         return name[1];
     }
 
-    private void AddRowSelectToGridView(GridView gv)
-    {
-        foreach (GridViewRow row in gv.Rows)
-        {
-            row.Attributes.Add("onclick", Page.ClientScript.GetPostBackEventReference(gv, "Select$" + row.RowIndex.ToString(), true));
-        }
-    }
-
+    //private void AddRowSelectToGridView(GridView gv)
+    //{
+    //    foreach (GridViewRow row in gv.Rows)
+    //    {
+    //        row.Cells[0].Controls[0].Attributes.Add("onclick", Page.ClientScript.GetPostBackEventReference(gv, "Select$" + row.RowIndex.ToString(), true));
+    //    }
+    //}
     private string GetQueryString()
     {
         string query = "SELECT COALESCE(INVMB.MB001, '') [ITEM_ID]"
@@ -248,112 +247,19 @@ public partial class InventorySearch : System.Web.UI.Page
 
     protected void gvItemList_SelectedIndexChanged(object sender, EventArgs e)
     {
-        System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        sb.Append(@"<script type='text/javascript'>");
-        sb.Append("$('#imagemodal').modal('show');");
-        sb.Append(@"</script>");
-
-        //lblModalItemId.Text = ((Label)gvItemList.SelectedRow.FindControl("lblItemId")).Text.Trim();
-        //lblModalItemName.Text = ((Label)gvItemList.SelectedRow.FindControl("lblItemName")).Text.Trim();
         //System.Text.StringBuilder sb = new System.Text.StringBuilder();
         //sb.Append(@"<script type='text/javascript'>");
-        //sb.Append("$('#itemDetail').modal('show');");
+        //sb.Append("$('#imagemodal').modal('show');");
         //sb.Append(@"</script>");
-        //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "initModal", sb.ToString(), false);
 
-        lblCoverImageTitle.Text = ((Label)gvItemList.SelectedRow.FindControl("lblItemId")).Text.Trim();
-        imgCoverImage.ImageUrl = ((Image)gvItemList.SelectedRow.FindControl("imgItemCover")).ImageUrl;
+
+        //lblCoverImageTitle.Text = ((Label)gvItemList.SelectedRow.FindControl("lblItemId")).Text.Trim();
+        //imgCoverImage.ImageUrl = ((Image)gvItemList.SelectedRow.FindControl("imgItemCover")).ImageUrl;
         
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "initModal", sb.ToString(), false);
+        //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "initModal", sb.ToString(), false);
     }
 
-    protected void btnCoverUpload_Click(object sender, EventArgs e)
-    {
-        string folderPath = Server.MapPath("~/sunrise_employee_section/image/inventory_search/");
-        UploadFile(folderPath, true);
-        upDetail.Update();
-    }
 
-    private void UploadFile(string folderPath, bool isCover)
-    {
-        try
-        {
-            if (!Directory.Exists(folderPath))
-            {
-                Directory.CreateDirectory(folderPath);
-            }
-
-            if (afuCover.HasFile)
-            {
-                string uid = Path.GetFileNameWithoutExtension(afuCover.FileName) + '-' + DateTime.Now.ToString("yyyyMMddHHmmss").Replace("/", "").Replace(":", "").Replace("-", "").Replace(" ", "") + Path.GetExtension(afuCover.FileName);
-                afuCover.SaveAs(folderPath + uid);
-                lblTest.Text = folderPath + uid;
-                lblErrorMessage.Text = folderPath + uid;
-                imgCover.ImageUrl = folderPath + uid;
-                //WriteFileInfo(uid, folderPath, isCover);
-                //DataTable dt = GetImageList();
-                //LoadImage(dt, isCover);
-            }
-        }
-        catch
-        {
-
-        }
-    }
-
-    private void WriteFileInfo(string uid, string folderPath, bool isCover)
-    {
-        using (SqlConnection conn = new SqlConnection(sunrizeCustomConnectionString))
-        {
-            conn.Open();
-            string query = " insert into itemImageData" +
-                " values (@itemId, @imageId, @imagePath, @isCover)";
-
-            if (isCover == true)
-            {
-                query = query.Insert(0,
-                    "update itemImageData" +
-                    " set isCover='0'" +
-                    " where itemId=@itemId");
-            }
-
-            SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@itemId", lblModalItemId.Text.Trim());
-            cmd.Parameters.AddWithValue("@imageId", uid);
-            cmd.Parameters.AddWithValue("@imagePath", folderPath);
-            cmd.Parameters.AddWithValue("@isCover", isCover);
-            cmd.ExecuteNonQuery();
-        }
-    }
-
-    private DataTable GetImageList()
-    {
-        DataTable dt = new DataTable();
-        using (SqlConnection conn = new SqlConnection(sunrizeCustomConnectionString))
-        {
-            conn.Open();
-            string query = "select imageId" +
-                " ,imagePath" +
-                " ,isCover" +
-                " from itemImageData" +
-                " where itemId=@itemId" +
-                " order by isCover desc, imageId";
-            SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@itemId", lblModalItemId.Text.Trim());
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            da.Fill(dt);
-        }
-        return dt;
-    }
-
-    private void LoadImage(DataTable imageList, bool isCover)
-    {
-        if (isCover == true)
-        {
-            lblTest.Text = imageList.Rows[0]["imagePath"].ToString() + imageList.Rows[0]["imageId"].ToString();
-            imgCover.ImageUrl = imageList.Rows[0]["imagePath"].ToString() + imageList.Rows[0]["imageId"].ToString();
-        }
-    }
 
 
     protected void gvItemList_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -376,4 +282,29 @@ public partial class InventorySearch : System.Web.UI.Page
         txtName_Middle.Text = string.Empty;
         //txtName_End.Text = string.Empty;
     }
+
+    protected void imgItemCover_Click(object sender, ImageClickEventArgs e)
+    {
+        GridViewRow row = (GridViewRow)((ImageButton)sender).NamingContainer;
+        ((GridView)row.NamingContainer).SelectedIndex = row.RowIndex;
+
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        sb.Append(@"<script type='text/javascript'>");
+        sb.Append("$('#imagemodal').modal('show');");
+        sb.Append(@"</script>");
+
+        //lblModalItemId.Text = ((Label)gvItemList.SelectedRow.FindControl("lblItemId")).Text.Trim();
+        //lblModalItemName.Text = ((Label)gvItemList.SelectedRow.FindControl("lblItemName")).Text.Trim();
+        //System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        //sb.Append(@"<script type='text/javascript'>");
+        //sb.Append("$('#itemDetail').modal('show');");
+        //sb.Append(@"</script>");
+        //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "initModal", sb.ToString(), false);
+
+        lblCoverImageTitle.Text = ((Label)gvItemList.SelectedRow.FindControl("lblItemId")).Text.Trim();
+        imgCoverImage.ImageUrl = ((Image)gvItemList.SelectedRow.FindControl("imgItemCover")).ImageUrl;
+
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "initModal", sb.ToString(), false);
+    }
+
 }

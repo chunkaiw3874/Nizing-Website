@@ -6,6 +6,25 @@
             max-height: 500px;
             overflow: auto;
         }
+
+        th {
+            background-color: #29ABE2;
+            color: #FFFFFF
+        }
+
+        td {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        tr:nth-child(2n) td {
+            background-color: #c3e8f4;
+            color: #000000;
+        }
+
+        tr:last-child td{
+            background-color: yellow;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -29,10 +48,12 @@
                 <div class="input-group-append">
                     <span class="input-group-text">查詢時段</span>
                 </div>
-                <asp:DropDownList ID="ddlParameterYear" runat="server" CssClass="custom-select" AutoPostBack="true" 
-                    OnSelectedIndexChanged="TimeFrameChanged"></asp:DropDownList>
+                <asp:DropDownList ID="ddlParameterYear" runat="server" CssClass="custom-select" AutoPostBack="true"
+                    OnSelectedIndexChanged="TimeFrameChanged">
+                </asp:DropDownList>
                 <asp:DropDownList ID="ddlParameterMonth" runat="server" CssClass="custom-select" AutoPostBack="true"
-                    OnSelectedIndexChanged="TimeFrameChanged"></asp:DropDownList>
+                    OnSelectedIndexChanged="TimeFrameChanged">
+                </asp:DropDownList>
             </div>
             <div class="input-group mb-2">
                 <div class="input-group-append">
@@ -50,6 +71,8 @@
             <div class="btn-group full-width">
                 <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-success form-control" Text="送出"
                     OnClick="btnSubmit_Click" />
+                <asp:Button ID="btnExport" runat="server" CssClass="btn btn-warning form-control" Text="匯出Excel"
+                    OnClick="btnExport_Click"/>
                 <asp:Button ID="btnResetParameter" runat="server" CssClass="btn btn-danger form-control" Text="清除"
                     OnClick="btnResetParameter_Click" />
             </div>
@@ -61,10 +84,11 @@
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="btnSubmit" />
             <asp:AsyncPostBackTrigger ControlID="btnResetParameter" />
+            <asp:PostBackTrigger ControlID="btnExport" />
         </Triggers>
         <ContentTemplate>
             <asp:Label ID="lblDateRange" runat="server" Text=""></asp:Label>
-            <div class="scrollable mb-5">
+            <div class="mb-5">
                 <asp:GridView ID="gvData" runat="server" CssClass="table table-striped table-hover table-white"
                     AutoGenerateColumns="false" ShowFooter="true"
                     EmptyDataText="查無資料"

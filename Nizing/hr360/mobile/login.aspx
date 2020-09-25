@@ -6,10 +6,15 @@
 <head runat="server">
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="../../Scripts/jquery-2.1.4.min.js"></script>
-    <script src="../../Scripts/bootstrap.js"></script>
-    <script src="../../Scripts/bootstrap-datepicker.min.js"></script>
-    <link href="../../css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <script src="../../../Scripts/jquery-3.5.0.min.js"></script>
+    <script src="../../../Scripts/text.area.auto.adjust.js"></script>
+    <script src="../../../Scripts/autosize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/32e9a84b4a.js" crossorigin="anonymous"></script>
     <style>
         body {
             font-family: 'Adobe Fan Heiti Std';
@@ -34,27 +39,28 @@
 <body>
     <form id="form1" runat="server" defaultfocus="txtUsername" defaultbutton="btnLogin">
         <div class="jumbotron green">
-            <div class="container">
-                <h1>歡迎來到日進HR360系統</h1>
-                <asp:Button ID="btnNizingWebsite" runat="server" Text="回到日進網站" CssClass="btn btn-primary btn-lg green" />
-            </div>
+            <h1>歡迎來到日進HR360系統</h1>
+            <asp:Button ID="btnNizingWebsite" runat="server" Text="回到日進網站" CssClass="btn btn-primary btn-lg green"
+                OnClick="btnNizingWebsite_Click" />
         </div>
         <div class="container">
             <div class="row form-group">
-                <div class="col-sm-5"></div>
-                <div class="col-sm-3">
+                <div class="col-sm-3 offset-sm-5">
                     <asp:TextBox ID="txtUsername" runat="server" placeholder="登入名稱" CssClass="form-control"></asp:TextBox>
                 </div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-5"></div>
-                <div class="col-sm-3">
+                <div class="col-sm-3 offset-sm-5">
                     <asp:TextBox ID="txtPassword" runat="server" placeholder="密碼" CssClass="form-control" TextMode="Password"></asp:TextBox>
                 </div>
             </div>
+            <div class="row form-group">
+                <div class="col-sm-3 offset-sm-5">
+                    <asp:DropDownList ID="ddlCompany" runat="server" CssClass="custom-select"></asp:DropDownList>
+                </div>
+            </div>
             <div class="row">
-                <div class="col-sm-5"></div>
-                <div class="col-sm-3">
+                <div class="col-sm-3 offset-sm-5">
                     <asp:Button ID="btnLogin" runat="server" Text="登入" CssClass="btn btn-primary" OnClick="btnLogin_Click" />
                 </div>
             </div>

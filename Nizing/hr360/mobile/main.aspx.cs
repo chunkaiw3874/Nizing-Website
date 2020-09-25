@@ -16,13 +16,24 @@ public partial class hr360_mobile_main : System.Web.UI.Page
 {
     //need to figure out how to call non-static method in static method for jquery to call static webmethod which contains non-static method
 
-    string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
-    string ERP2connectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
+    string NzConnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
+    string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
+    string SunrizeConnectionString = ConfigurationManager.ConnectionStrings["SunrizeConnectionString"].ConnectionString;
+    
     public DataTable dtAnnouncementData = new DataTable();
     public string jsonAnnouncementData;
     public byte[] blob;
+    public string defaultERPDbConnectionString;
     protected void Page_Load(object sender, EventArgs e)
     {
+        if(Session["company"].ToString() == "NIZING")
+        {
+            defaultERPDbConnectionString = NzConnectionString;
+        }
+        else
+        {
+            defaultERPDbConnectionString = SunrizeConnectionString;
+        }
         
         LoadNewsFromDB();
         jsonAnnouncementData = ConvertDtToString(dtAnnouncementData);
@@ -38,15 +49,17 @@ public partial class hr360_mobile_main : System.Web.UI.Page
         string strFirstPartDayOff = "";
         string strSecondPartDayOff = "";
 
-        using (SqlConnection conn = new SqlConnection(ERP2connectionString))
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             conn.Open();
             SqlCommand cmdSelect = new SqlCommand("SELECT NAME"
                                                 + " FROM HR360_BI01_A"
-                                                + " WHERE ID=@ID", conn);
+                                                + " WHERE ID=@ID" +
+                                                " and COMPANY=@COMPANY", conn);
             try
             {
                 cmdSelect.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                cmdSelect.Parameters.AddWithValue("@COMPANY", Session["company"].ToString());
             }
             catch
             {
@@ -57,7 +70,7 @@ public partial class hr360_mobile_main : System.Web.UI.Page
             lblName.Text = (string)cmdSelect.ExecuteScalar();
         }
         //Get user's Year of Service, and the Month of when the user started                
-        using (SqlConnection conn = new SqlConnection(NZconnectionString))
+        using (SqlConnection conn = new SqlConnection(defaultERPDbConnectionString))
         {
             conn.Open();
             string query = "SELECT YEAR(GETDATE())-SUBSTRING(MV.MV021,1,4) 'YEAR_IN_SERVICE', SUBSTRING(MV.MV021,5,2) 'START_MONTH', SUBSTRING(MV.MV021,7,2) 'START_DAY'"
@@ -69,7 +82,7 @@ public partial class hr360_mobile_main : System.Web.UI.Page
             da.Fill(dtUserInfo);
         }
         //Map User's annual leave days from _HR360_ANNUAL_LEAVE_TABLE with data in dtUserInfo
-        using (SqlConnection conn = new SqlConnection(ERP2connectionString))
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             if (dtUserInfo.Rows.Count > 0)
             {
@@ -94,7 +107,7 @@ public partial class hr360_mobile_main : System.Web.UI.Page
                 doubleSecondPartDayOff = Convert.ToDouble(tempStringArray[1]);
             }
         }
-        using (SqlConnection conn = new SqlConnection(NZconnectionString))
+        using (SqlConnection conn = new SqlConnection(defaultERPDbConnectionString))
         {
             conn.Open();
             if (dtUserInfo.Rows.Count > 0)
@@ -220,7 +233,7 @@ public partial class hr360_mobile_main : System.Web.UI.Page
                                                 + " FROM PALTL"
                                                 + " WHERE PALTL.TL001=@ID AND PALTL.TL002=YEAR(GETDATE()) AND PALTL.TL004='02'", conn);
             cmdSelectMakeupDayOff.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
-            lblMakeupDayOff.Text = "剩餘: " + (string)cmdSelectMakeupDayOff.ExecuteScalar() + "小時";
+            lblMakeupDayOff.Text = "剩餘: " + (Convert.ToDecimal(cmdSelectMakeupDayOff.ExecuteScalar())).ToString("0.00") + "小時";
 
             //調薪通知
             SqlCommand cmdSalaryAdj = new SqlCommand("SELECT PALTD.TD001"
@@ -242,7 +255,7 @@ public partial class hr360_mobile_main : System.Web.UI.Page
     }
     private void LoadBlob()
     {
-        using (SqlConnection conn = new SqlConnection(ERP2connectionString))
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             conn.Open();
             string query = "SELECT [DATA] FROM HR360_FILE_STORAGE";
@@ -257,7 +270,7 @@ public partial class hr360_mobile_main : System.Web.UI.Page
     }
     private DataTable LoadNewsFromDB()
     {
-        using (SqlConnection conn = new SqlConnection(ERP2connectionString))
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             conn.Open();
             string query = "SELECT ROW_NUMBER() OVER (ORDER BY [CREATE_TIME] DESC, [ID] DESC) [ROW]"

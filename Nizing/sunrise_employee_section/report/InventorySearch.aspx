@@ -22,7 +22,7 @@
             text-align: left;
         }
 
-        table td:hover {
+        table td img:hover {
             cursor: pointer;
         }
 
@@ -35,8 +35,8 @@
             width:500px;
         }*/
 
-        .imagepreview{
-            width:100%;
+        .imagepreview {
+            width: 100%;
         }
     </style>
     <script>
@@ -116,6 +116,15 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         <hr />
+        <asp:UpdateProgress ID="upGvItemList" runat="server">
+            <ProgressTemplate>
+                <div class="d-flex justify-content-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                    </div>
+            </ProgressTemplate>
+        </asp:UpdateProgress>
         <asp:UpdatePanel ID="upData" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="btnSearch" />
@@ -127,12 +136,13 @@
                         EmptyDataText="查無資料"
                         AllowPaging="true" PageSize="10"
                         OnPageIndexChanging="gvItemList_PageIndexChanging"
-                        OnSelectedIndexChanged="gvItemList_SelectedIndexChanged"
                         OnPreRender="gvItemList_PreRender">
                         <Columns>
                             <asp:TemplateField HeaderText="品項封面" HeaderStyle-Width="150">
                                 <ItemTemplate>
-                                    <asp:Image ID="imgItemCover" runat="server" CssClass="pop" Width="150" />
+                                    <asp:ImageButton ID="imgItemCover" runat="server" Width="150"
+                                        OnClick="imgItemCover_Click"/>
+                                    <%--<asp:Image ID="imgItemCover" runat="server" CssClass="pop" Width="150" />--%>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="在庫量" HeaderStyle-Width="60">
@@ -196,54 +206,6 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </asp:Panel>
-
-    <asp:UpdatePanel ID="upDetail" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
-        <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="gvItemList" />
-            <asp:AsyncPostBackTrigger ControlID="afuCover" />
-        </Triggers>
-        <ContentTemplate>
-            <asp:HiddenField ID="hdnRecentUploadFilePath" runat="server" />
-            <asp:HiddenField ID="hdnRecentUploadFileName" runat="server" />
-            <div id="itemDetail" class="modal fade scrollable-modal" data-backdrop="static" aria-labelledby="recordDetail" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <asp:Label ID="lblModalItemId" runat="server" CssClass="modal-title"></asp:Label>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <asp:Label ID="lblModalItemName" runat="server" Text="Label"></asp:Label>
-                            </div>
-                            <hr />
-                            <%--<asp:FileUpload ID="fuCover" runat="server" />--%>
-                            <ajaxToolkit:AsyncFileUpload ID="afuCover" runat="server" CssClass="afuCover"
-                                OnClientUploadStarted="uploadStart"
-                                OnClientUploadComplete="uploadComplete"
-                                OnUploadedComplete="btnCoverUpload_Click" />
-                            <asp:Image ID="imgCover" runat="server" CssClass="imgCover" />
-                            <%--                            <asp:Button ID="btnCoverUpload" runat="server" Text="上傳"
-                                UseSubmitBehavior="false"
-                                OnClick="btnCoverUpload_Click" />--%>
-                            <%--<i class="fas fa-cloud-upload-alt"></i>--%>
-                            <%--</asp:Button>--%>
-                            <asp:Label ID="lblTest" runat="server" Text="No cover image source info"></asp:Label>
-                        </div>
-                        <div class="modal-footer">
-                            <div class="btn-group full-width" role="group">
-                                <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-secondary" Text="取消"
-                                    data-dismiss="modal" />
-                                <%--<asp:Button ID="btnSaveDetail" runat="server" OnClick="btnSaveDetail_Click"
-                                    CssClass="btn btn-success" Text="儲存" UseSubmitBehavior="false"
-                                    data-dismiss="modal" />--%>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </ContentTemplate>
-    </asp:UpdatePanel>
 
     <asp:UpdatePanel ID="upCoverImageView" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
         <Triggers>

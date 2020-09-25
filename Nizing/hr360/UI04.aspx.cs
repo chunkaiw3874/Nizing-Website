@@ -49,8 +49,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "0015";    //test only to avoid error on loading, delete after trial            
-        //Session["erp_id"] = "0015";
+        //Session["user_id"] = "chrissy";    //test only to avoid error on loading, delete after trial            
+        //Session["erp_id"] = "0007";
 
         //only use when opening check exception for certain persion
         //exceptionList111.Add("0012");
@@ -1858,6 +1858,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// <param name="e"></param>
     protected void btnApprove_Click(object sender, EventArgs e)
     {
+        string nextReviewer;
+        string erpId = Session["erp_id"].ToString();
         string[] list = hdnApprovalPendingSelection.Value.ToString().Split(',');
         if (list.Count() > 0)
         {
@@ -1867,7 +1869,6 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 string approveID_status = "";
                 string applicantID = "";
                 string memberOf = "";
-                string nextReviewer = "";
                 DataTable dtApplicant = new DataTable();
                 using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                 {
@@ -1892,7 +1893,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 }
                 else
                 {
-                    nextReviewer = Session["erp_id"].ToString();
+                    nextReviewer = erpId;
                 }
 
                 do
@@ -2175,7 +2176,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         //assign unique ID (yyyymmdd+流水號) to each application
         string uid = "";
-        string query = "";
+        string query;
         foreach (dayOffInfo dayoff in lstDayOffAppSummary)
         {
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))

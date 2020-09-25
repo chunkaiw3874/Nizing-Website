@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/HR360_Child_user.master" AutoEventWireup="true" CodeFile="UI04.aspx.cs" Inherits="hr360_UI04" %>
+﻿<%@ Page Title="" Language="C#" Debug="true" MasterPageFile="~/master/HR360_Child_user.master" AutoEventWireup="true" CodeFile="UI04.aspx.cs" Inherits="hr360_UI04" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="javascript_section" runat="Server">
     <link href="../Content/bootstrap-datepicker.css" rel="stylesheet" />
@@ -261,7 +261,7 @@
                 *本次版更內容: 一張假單僅能請一天假，如需多天請假需登打多張假單
             </div>
             <div class="row form-group" style="margin-top: 10px;">
-                <div class="col-xs-12">
+                <div class="col-sm-12">
                     <span class="label label-info" id="btnDayOffAppVisibility" style="cursor: pointer; font-size: 20px;">我要請假</span>
                     <asp:HiddenField ID="hdnIsPostBack" runat="server" />
                     <asp:HiddenField ID="hdnIsDayOffAppVisible" runat="server" />
@@ -278,76 +278,76 @@
             </div>
             <div id="DayOffApp">                
                 <div class="row">
-                    <div class="col-xs-2">
+                    <div class="col-sm-2">
                         <span class="label label-default" style="font-size: 16px;">假別</span>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <span class="label label-default" style="font-size: 16px;">請假起始時間</span>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <span class="label label-default" style="font-size: 16px;">請假結束時間</span>
                     </div>
-                    <div class="col-xs-2">
+                    <div class="col-sm-2">
                         <span class="label label-default" style="font-size: 16px;">代理人</span>
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-xs-2">
+                    <div class="col-sm-2">
                         <asp:DropDownList ID="ddlDayOffType" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlDayOffType_SelectedIndexChanged">
                         </asp:DropDownList>
                     </div>
-                    <div class="col-xs-2" style="display: inline; padding-right: 0px;">
+                    <div class="col-sm-2" style="display: inline; padding-right: 0px;">
                         <asp:TextBox ID="txtDatePickerStart" runat="server" CssClass="form-control datepicker" placeholder="請假起始日期" OnTextChanged="txtDatePickerStart_TextChanged"></asp:TextBox>
                     </div>
-                    <div class="col-xs-1" style="display: inline; padding: 0px;">
+                    <div class="col-sm-1" style="display: inline; padding: 0px;">
                         <asp:DropDownList ID="ddlDayOffStartHour" runat="server" CssClass="form-control"></asp:DropDownList>
                     </div>
-                    <div class="col-xs-1" style="display: inline; padding-left: 0px;">
+                    <div class="col-sm-1" style="display: inline; padding-left: 0px;">
                         <asp:DropDownList ID="ddlDayOffStartMin" runat="server" CssClass="form-control"></asp:DropDownList>
                     </div>
-                    <div class="col-xs-2" style="display: inline; padding-right: 0px;">
+                    <div class="col-sm-2" style="display: inline; padding-right: 0px;">
                         <asp:TextBox ID="txtDatePickerEnd" runat="server" CssClass="form-control datepicker" placeholder="請假結束日期"></asp:TextBox>
                     </div>
-                    <div class="col-xs-1" style="display: inline; padding: 0px;">
+                    <div class="col-sm-1" style="display: inline; padding: 0px;">
                         <asp:DropDownList ID="ddlDayOffEndHour" runat="server" CssClass="form-control"></asp:DropDownList>
                     </div>
-                    <div class="col-xs-1" style="display: inline; padding-left: 0px;">
+                    <div class="col-sm-1" style="display: inline; padding-left: 0px;">
                         <asp:DropDownList ID="ddlDayOffEndMin" runat="server" CssClass="form-control"></asp:DropDownList>
                     </div>
-                    <div class="col-xs-2" style="display: inline;">
+                    <div class="col-sm-2" style="display: inline;">
                         <asp:DropDownList ID="ddlDayOffFuncSub" runat="server" CssClass="form-control"></asp:DropDownList>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-2">
+                    <div class="col-sm-2">
                         <asp:Label ID="lblDayOffRemainType" runat="server" Text=""></asp:Label>
                         <asp:Label ID="lblDayOffRemainAmount" runat="server" Text=""></asp:Label>
                         <asp:Label ID="lblDayOffRemainUnit" runat="server" Text=""></asp:Label>
                     </div>
-                    <div class="col-xs-2 col-xs-offset-8">
+                    <div class="col-sm-2 col-sm-offset-8">
                         <asp:CheckBox ID="ckbTyphoonDayNoSub" runat="server" CssClass="checkbox-inline" Checked="false" Text="此假用在颱風天，無須代理人" />
                     </div>
                 </div>
                 <div class="row">                    
-                    <div class="col-xs-12">
+                    <div class="col-sm-12">
                         <span class="label label-default" style="font-size: 16px;">請假原因</span>
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-xs-12" style="display: inline;">
+                    <div class="col-sm-12" style="display: inline;">
                         <asp:TextBox ID="txtReason" runat="server" CssClass="form-control" MaxLength="100" placeholder="事假必填(100字內)"></asp:TextBox>
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-xs-1 col-xs-offset-5">
+                    <div class="col-sm-1 col-sm-offset-5">
                         <asp:ImageButton ID="btnDayOffAdd" runat="server" ImageUrl="~/hr360/image/icon/green-arrow-down.png" Width="40" OnClick="btnDayOffAdd_Click" />
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-sm-6">
                         <asp:TextBox ID="txtErrorMessage" runat="server" TextMode="MultiLine" CssClass="autosize no-resize error-message" Width="400" BorderStyle="none" Wrap="false" ReadOnly="true"></asp:TextBox>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12">
+                    <div class="col-sm-12">
                         <div class="panel panel-info">
                             <div class="panel-heading">
                                 本次請假內容                      
@@ -365,7 +365,7 @@
                                     *連續請假超過5日(含)者，須至少提前兩周告知，以利人力安排<br />
                                     *補單者須三日內完成補單動作(例:1/8臨時請假，最晚須於1/10補單)
                                 </div>
-                                <table id="tbAppSummary" class="table col-xs-12" runat="server">
+                                <table id="tbAppSummary" class="table col-sm-12" runat="server">
                                 </table>
                             </div>
                             <div class="panel-footer" style="text-align: right;">
@@ -379,18 +379,18 @@
         <hr />
         <div id="in-progress_section">
             <div class="row form-group">
-                <div class="col-xs-12">
+                <div class="col-sm-12">
                     <h2>申請中</h2>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-sm-12">
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             申請中假單                       
                         </div>
                         <div class="panel-body">
-                            <table id="tbInProgressSummary" class="table col-xs-12" runat="server">
+                            <table id="tbInProgressSummary" class="table col-sm-12" runat="server">
                             </table>
                         </div>
                     </div>
@@ -400,12 +400,12 @@
         <hr />
         <div id="approval_section">
             <div class="row form-group">
-                <div class="col-xs-12">
+                <div class="col-sm-12">
                     <h2>待簽核</h2>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-sm-12">
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             待簽核假單                       
@@ -417,7 +417,7 @@
                                 ***如操作上有疑問，請詢問人事部
                             </div>
                             <asp:HiddenField ID="hdnApprovalPendingSelection" ClientIDMode="Static" runat="server" />
-                            <table id="tbApprovalPending" class="classApprovalPending table col-xs-12 noselect" runat="server">
+                            <table id="tbApprovalPending" class="classApprovalPending table col-sm-12 noselect" runat="server">
                                 <tr style="background-color:lightblue; color:white;">
                                     <th style="text-align:center;font-weight:bold;">假單ID</th>
 		                            <th style="text-align:center;font-weight:bold;">申請人ID</th>
@@ -444,31 +444,31 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <div class="row form-group">
-                    <div class="col-xs-12">
+                    <div class="col-sm-12">
                         <span class="label label-info" id="btnSearchVisibility" style="cursor: pointer; font-size: 20px;">查詢歷史假單</span>
                         <asp:HiddenField ID="hdnIsSearchFieldVisible" runat="server" />
                     </div>
                 </div>
                 <div id="search_section">
                     <div class="row form-group">
-                        <div class="col-xs-3">
-                            <asp:DropDownList ID="ddlSearch_Parameter_ApplicantID" runat="server" CssClass="form-control"></asp:DropDownList>
+                        <div class="col-sm-3">
+                            <asp:DropDownList ID="ddlSearch_Parameter_ApplicantID" runat="server" CssClass="form-control form-control-lg"></asp:DropDownList>
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-sm-2">
                             <asp:TextBox ID="txtSearch_Parameter_StartDate" runat="server" CssClass="form-control datepicker" placeholder="查詢起始日期"></asp:TextBox>
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-sm-2">
                             <asp:TextBox ID="txtSearch_Parameter_EndDate" runat="server" CssClass="form-control datepicker" placeholder="查詢結束日期"></asp:TextBox>
                         </div>
-                        <div class="col-xs-3">
-                            <asp:DropDownList ID="ddlSearch_Parameter_ApplicationStatus" runat="server" CssClass="form-control"></asp:DropDownList>
+                        <div class="col-sm-3">
+                            <asp:DropDownList ID="ddlSearch_Parameter_ApplicationStatus" runat="server" CssClass="form-control form-control-lg"></asp:DropDownList>
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-sm-2">
                             <asp:Button ID="btnSearchSubmit" runat="server" Text="查詢" CssClass="btn btn-success" OnClick="btnSearchSubmit_Click" />
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-xs-12">
+                        <div class="col-sm-12">
                             <asp:GridView ID="gvSearchResult" runat="server" AutoGenerateColumns="false" CssClass="table table-striped" 
                                 OnRowDataBound="gvSearchResult_RowDataBound" OnPageIndexChanging="gvSearchResult_PageIndexChanging"                                         
                                 AllowPaging="True" PageSize="10" PagerSettings-Position="Top" PagerSettings-Mode="NumericFirstLast"
