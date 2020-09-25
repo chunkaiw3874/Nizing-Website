@@ -14,6 +14,6 @@ public partial class no_permission : System.Web.UI.Page
     protected void LinkButton1_Click(object sender, EventArgs e)
     {
         Session.Clear();
-        Response.Redirect("~/hr360/login.aspx");
+        Response.Redirect("~/hr360/mobile/login.aspx");
     }
 }
