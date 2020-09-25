@@ -293,7 +293,7 @@
                 </div>
                 <div class="row form-group">
                     <div class="col-sm-2">
-                        <asp:DropDownList ID="ddlDayOffType" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlDayOffType_SelectedIndexChanged">
+                        <asp:DropDownList ID="ddlDayOffType" runat="server" CssClass="form-control-lg" AutoPostBack="true" OnSelectedIndexChanged="ddlDayOffType_SelectedIndexChanged">
                         </asp:DropDownList>
                     </div>
                     <div class="col-sm-2" style="display: inline; padding-right: 0px;">
@@ -315,7 +315,7 @@
                         <asp:DropDownList ID="ddlDayOffEndMin" runat="server" CssClass="form-control"></asp:DropDownList>
                     </div>
                     <div class="col-sm-2" style="display: inline;">
-                        <asp:DropDownList ID="ddlDayOffFuncSub" runat="server" CssClass="form-control"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlDayOffFuncSub" runat="server" CssClass="form-control-lg"></asp:DropDownList>
                     </div>
                 </div>
                 <div class="row">
