@@ -170,14 +170,44 @@ public partial class InventorySearch : System.Web.UI.Page
         {
             for (int i = 0; i < ID.Count; i++)
             {
-                condition += " AND LTRIM(RTRIM(INVMB.MB001)) LIKE N'" + ID[i] + "'";
+                if (i == 0)
+                {
+                    condition += " AND (LTRIM(RTRIM(INVMB.MB001)) LIKE N'" + ID[i] + "'";
+                    if (ID.Count == 1)
+                    {
+                        condition += ")";
+                    }
+                }
+                else if (i == ID.Count - 1)
+                {
+                    condition += " OR LTRIM(RTRIM(INVMB.MB001)) LIKE N'" + ID[i] + "')";
+                }
+                else
+                {
+                    condition += " OR LTRIM(RTRIM(INVMB.MB001)) LIKE N'" + ID[i] + "'";
+                }
             }
         }
         if (Name.Count != 0)
         {
             for (int i = 0; i < Name.Count; i++)
             {
-                condition += " AND LTRIM(RTRIM(INVMB.MB002)) LIKE N'" + Name[i] + "'";
+                if (i == 0)
+                {
+                    condition += " AND (LTRIM(RTRIM(INVMB.MB002)) LIKE N'" + Name[i] + "'";
+                    if (Name.Count == 1)
+                    {
+                        condition += ")";
+                    }
+                }
+                else if (i == Name.Count - 1)
+                {
+                    condition += " OR LTRIM(RTRIM(INVMB.MB002)) LIKE N'" + Name[i] + "')";
+                }
+                else
+                {
+                    condition += " OR LTRIM(RTRIM(INVMB.MB002)) LIKE N'" + Name[i] + "'";
+                }
             }
         }
 
@@ -255,7 +285,7 @@ public partial class InventorySearch : System.Web.UI.Page
 
         //lblCoverImageTitle.Text = ((Label)gvItemList.SelectedRow.FindControl("lblItemId")).Text.Trim();
         //imgCoverImage.ImageUrl = ((Image)gvItemList.SelectedRow.FindControl("imgItemCover")).ImageUrl;
-        
+
         //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "initModal", sb.ToString(), false);
     }
 
