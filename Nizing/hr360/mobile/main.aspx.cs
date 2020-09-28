@@ -73,8 +73,11 @@ public partial class hr360_mobile_main : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(defaultERPDbConnectionString))
         {
             conn.Open();
-            string query = "SELECT YEAR(GETDATE())-SUBSTRING(MV.MV021,1,4) 'YEAR_IN_SERVICE', SUBSTRING(MV.MV021,5,2) 'START_MONTH', SUBSTRING(MV.MV021,7,2) 'START_DAY'"
-                        +" FROM CMSMV MV"
+            string query = "SELECT YEAR(GETDATE())-SUBSTRING(MV.MV021,1,4) 'YEAR_IN_SERVICE'" +
+                " , SUBSTRING(MV.MV021,1,4) 'START_YEAR'" +
+                " , SUBSTRING(MV.MV021,5,2) 'START_MONTH'" +
+                " , SUBSTRING(MV.MV021,7,2) 'START_DAY'"
+                        + " FROM CMSMV MV"
                         +" WHERE MV.MV001=@ID";
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
@@ -225,6 +228,11 @@ public partial class hr360_mobile_main : System.Web.UI.Page
                 lblSecondPartDayOff.Visible = true;
                 lblSecondPartDayOff.Text = "N/A";
             }
+
+            Session["firstPartDayOff"] = doubleFirstPartFinal;
+            Session["secondPartDayOff"] = doubleSecondPartFinal;
+            Session["startYear"] = dtUserInfo.Rows[0]["START_YEAR"].ToString();
+            Session["startDate"] = dtUserInfo.Rows[0]["START_MONTH"].ToString() + dtUserInfo.Rows[0]["START_DAY"].ToString();
 
             //抓取剩餘補休時數(不需要為小倩(0010)特別做計算，因為使用的單位皆為小時)
             SqlCommand cmdSelectMakeupDayOff = new SqlCommand("SELECT"
