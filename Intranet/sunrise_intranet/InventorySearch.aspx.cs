@@ -18,7 +18,7 @@ public partial class InventorySearch : System.Web.UI.Page
     List<string> noVisibleCostColumnList = new List<string>();
     protected void Page_Load(object sender, EventArgs e)
     {
-        noVisibleCostColumnList.Add("dakai");
+        //noVisibleCostColumnList.Add("dakai");
 
         if (!IsPostBack)
         {
