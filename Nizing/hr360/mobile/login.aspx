@@ -45,28 +45,27 @@
         </div>
         <div class="container">
             <div class="row form-group">
-                <div class="col-sm-3 offset-sm-5">
+                <div class="col-sm-6 offset-sm-3">
                     <asp:TextBox ID="txtUsername" runat="server" placeholder="登入名稱" CssClass="form-control"></asp:TextBox>
                 </div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-3 offset-sm-5">
+                <div class="col-sm-6 offset-sm-3">
                     <asp:TextBox ID="txtPassword" runat="server" placeholder="密碼" CssClass="form-control" TextMode="Password"></asp:TextBox>
                 </div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-3 offset-sm-5">
+                <div class="col-sm-6 offset-sm-3">
                     <asp:DropDownList ID="ddlCompany" runat="server" CssClass="custom-select"></asp:DropDownList>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-3 offset-sm-5">
-                    <asp:Button ID="btnLogin" runat="server" Text="登入" CssClass="btn btn-primary" OnClick="btnLogin_Click" />
+                <div class="col-sm-6 offset-sm-3">
+                    <asp:Button ID="btnLogin" runat="server" Text="登入" CssClass="btn btn-primary w-100" OnClick="btnLogin_Click" />
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-5"></div>
-                <div class="col-sm-3">
+                <div class="col-sm-6 offset-sm-3">
                     <asp:Label ID="lblLoginMessage" runat="server" Text=""></asp:Label>
                 </div>
             </div>
