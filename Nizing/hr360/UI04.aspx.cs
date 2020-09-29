@@ -54,9 +54,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
         //Session["company"] = "NIZING";
 
         //only use when opening check exception for certain persion
-        //exceptionList111.Add("0012");
+        //exceptionList111.Add("0162");
         //exceptionList202designated.Add("0112");
-        //exceptionList107.Add("0013");
+        //exceptionList107.Add("0162");
         exceptionList110.Add("0067");
         //exceptionList202makeup.Add("0067");
         exceptionListHourForProduction.Add("0160"); //阿豪
