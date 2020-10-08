@@ -1,9 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/hr360/mobile/master/greenMaster.master" AutoEventWireup="true" CodeFile="GoOutForm.aspx.cs" Inherits="hr360_mobile_GoOutForm" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <%-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.zh-TW.min.js" integrity="sha512-0f3PeNxyzEd6Rz2tRTRa4ibD2y85wb35+CbpoTVLWBJggW4twGgeVXtEJKVKhkGjjcTMZPIofxbCNyO9pUg47w==" crossorigin="anonymous"></script>--%>
     <script src="../../Scripts/moment-with-locales.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
@@ -39,6 +36,11 @@
         .btn-list {
             font-size: 1.5rem;
         }
+
+        .whitespace-nowrap{
+            /*white-space:nowrap;*/
+            word-break:keep-all;
+        }
     </style>
     <script type="text/javascript">
         function pageLoad(sender, args) {
@@ -57,6 +59,8 @@
             $(".datetimepicker-input").keydown(function (e) {
                 return false;
             });
+
+            autosize($('.autosize'));
         }
         function confirmChoice(s) {
             if (confirm(s)) {
@@ -175,19 +179,45 @@
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
-        <h5><asp:Label ID="lblUserName" runat="server" Text="Label"></asp:Label>的預約單</h5>
-        <asp:LinkButton ID="btnAddReservation" runat="server" CssClass="text-decoration-none"
-            OnClick="btnAddReservation_Click">
-                        <i class="far fa-calendar-plus"></i> 新增預約單
-        </asp:LinkButton>
-        <div class="table-responsive">
-            <asp:UpdatePanel ID="upReservationList" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
-                <Triggers>
-                    <asp:AsyncPostBackTrigger ControlID="btnSaveReservationForm" />
-                    <asp:AsyncPostBackTrigger ControlID="gvReservationList" />
-                    <asp:AsyncPostBackTrigger ControlID="gvInProgressList" />
-                </Triggers>
-                <ContentTemplate>
+
+        <h5>
+            <asp:Label ID="lblUserName" runat="server" Text="Label"></asp:Label>的預約單
+        </h5>
+
+        <asp:UpdatePanel ID="upReservationList" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="btnSaveReservationForm" />
+                <asp:AsyncPostBackTrigger ControlID="gvReservationList" />
+                <asp:AsyncPostBackTrigger ControlID="gvInProgressList" />
+                <asp:AsyncPostBackTrigger ControlID="btnDisplayFormDetail" />
+                <asp:AsyncPostBackTrigger ControlID="btnHideFormDetail" />
+            </Triggers>
+            <ContentTemplate>
+
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <asp:LinkButton ID="btnAddReservation" runat="server" CssClass="text-decoration-none"
+                            OnClick="btnAddReservation_Click">
+                        <i class="far fa-calendar-plus"></i> 新增
+                        </asp:LinkButton>
+                        <asp:LinkButton ID="btnViewAllActiveReservation" runat="server" CssClass="text-decoration-none"
+                            OnClick="btnViewAllActiveReservation_Click">
+                            <i class="fas fa-search"></i> 查看
+                        </asp:LinkButton>
+                    </div>
+                    <div>
+                        <asp:LinkButton ID="btnDisplayFormDetail" runat="server" CssClass="text-decoration-none"
+                            OnClick="btnDisplayFormDetail_Click">
+                <i class="fas fa-plus"></i> 顯示詳細資訊
+                        </asp:LinkButton>
+                        <asp:LinkButton ID="btnHideFormDetail" runat="server" CssClass="text-decoration-none"
+                            OnClick="btnHideFormDetail_Click" Visible="false">
+                <i class="fas fa-minus"></i> 隱藏詳細資訊
+                        </asp:LinkButton>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
                     <asp:GridView ID="gvReservationList" runat="server" BorderWidth="0" CssClass="table table-sm table-light"
                         AutoGenerateColumns="false"
                         EmptyDataText="您沒有未完成的行程"
@@ -224,16 +254,16 @@
                                     <asp:HiddenField ID="hdnScheduledStartTime" runat="server" Value='<%#Eval("EstimateStartTime","{0:yyyy/MM/dd HH:mm}") %>'></asp:HiddenField>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="預定使用時間" Visible="false">
+                            <asp:TemplateField HeaderText="使用時間" Visible="false">
                                 <ItemTemplate>
                                     <asp:Label ID="lblScheduleTimeUsed" runat="server" Text='<%#Eval("EstimateTimeUsed") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                                <asp:TemplateField HeaderText="實際出發時間" Visible="false">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblTripStartTime" runat="server" Text='<%#Eval("ActualStartTime","{0:MM/dd HH:mm:ss}") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
+                            <asp:TemplateField HeaderText="實際出發時間" Visible="false">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblTripStartTime" runat="server" Text='<%#Eval("ActualStartTime","{0:MM/dd HH:mm:ss}") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="目的地">
                                 <ItemTemplate>
                                     <asp:Label ID="lblScheduledDestination" runat="server" Text='<%#Eval("Destination") %>'></asp:Label>
@@ -246,7 +276,8 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="備註" Visible="false">
                                 <ItemTemplate>
-                                    <asp:TextBox ID="txtScheduleMemo" runat="server" CssClass="form-control" TextMode="MultiLine" ReadOnly="true"
+                                    <asp:TextBox ID="txtScheduleMemo" runat="server" TextMode="MultiLine" ReadOnly="true"
+                                        CssClass="form-control bg-transparent border-0 p-0 autosize w-auto"
                                         Text='<%#Eval("Memo") %>'></asp:TextBox>
                                 </ItemTemplate>
                             </asp:TemplateField>
@@ -267,11 +298,10 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
-
                     </asp:GridView>
-                </ContentTemplate>
-            </asp:UpdatePanel>
-        </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
     </div>
 
     <asp:UpdatePanel ID="upReservationForm" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">

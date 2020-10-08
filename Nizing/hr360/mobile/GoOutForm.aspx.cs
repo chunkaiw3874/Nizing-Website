@@ -425,4 +425,49 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
             }
         }
     }
+
+    protected void btnDisplayFormDetail_Click(object sender, EventArgs e)
+    {
+        int[] columnsToBeHidden = { 2 };
+        for(int i = 0; i < gvReservationList.Columns.Count; i++)
+        {
+            if (columnsToBeHidden.Contains(i))
+            {
+                gvReservationList.Columns[i].Visible = false;
+            }
+            else
+            {
+                gvReservationList.Columns[i].Visible = true;
+                gvReservationList.Columns[i].HeaderStyle.CssClass = "text-nowrap";
+                gvReservationList.Columns[i].ItemStyle.CssClass = "text-nowrap";
+            }
+        }
+        btnDisplayFormDetail.Visible = false;
+        btnHideFormDetail.Visible = true;
+    }
+
+    protected void btnHideFormDetail_Click(object sender, EventArgs e)
+    {
+        int[] columnsToBeVisible = { 0, 1, 3, 6, 9, 10 };
+        for(int i = 0; i < gvReservationList.Columns.Count; i++)
+        {
+            if (columnsToBeVisible.Contains(i))
+            {
+                gvReservationList.Columns[i].Visible = true;
+                gvReservationList.Columns[i].HeaderStyle.CssClass = "";
+                gvReservationList.Columns[i].ItemStyle.CssClass = "";
+            }
+            else
+            {
+                gvReservationList.Columns[i].Visible = false;
+            }
+        }
+        btnDisplayFormDetail.Visible = true;
+        btnHideFormDetail.Visible = false;
+    }
+
+    protected void btnViewAllActiveReservation_Click(object sender, EventArgs e)
+    {
+
+    }
 }
