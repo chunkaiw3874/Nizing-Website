@@ -26,7 +26,7 @@ public partial class hr360_mobile_main : System.Web.UI.Page
     public string defaultERPDbConnectionString;
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(Session["company"].ToString() == "NIZING")
+        if (Session["company"].ToString() == "NIZING")
         {
             defaultERPDbConnectionString = NzConnectionString;
         }
@@ -68,6 +68,7 @@ public partial class hr360_mobile_main : System.Web.UI.Page
                 //ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('連線已逾時，將會回到登入頁面');window.location='login.aspx'", true);
             }
             lblName.Text = (string)cmdSelect.ExecuteScalar();
+            Session["name"] = lblName.Text;
         }
         //Get user's Year of Service, and the Month of when the user started                
         using (SqlConnection conn = new SqlConnection(defaultERPDbConnectionString))

@@ -11,7 +11,8 @@ public partial class hr360_mobile_MasterPage : System.Web.UI.MasterPage
     {
         if (!CheckAuthentication())
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('連線已逾時，將會回到登入頁面');window.location='login.aspx'", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('連線已逾時，將會回到登入頁面');", true);
+            Response.Redirect("login.aspx");
         }
     }
     protected void Page_Load(object sender, EventArgs e)
@@ -21,20 +22,37 @@ public partial class hr360_mobile_MasterPage : System.Web.UI.MasterPage
 
     public bool CheckAuthentication()
     {
-        if (Session["user_id"] == null)
-        {            
+        //if (Session["user_id"] == null)
+        //{            
+        //    return false;
+        //}
+        //else
+        //{
+        //    return true;
+        //}
+        if (Session.Keys.Count == 0)
+        {
             return false;
         }
         else
         {
-            return true;
+            foreach (string key in Session.Keys)
+            {
+                if (Session[key] == null)
+                {
+                    return false;
+                }
+            }
         }
+
+        return true;
     }
 
     protected void Logout()
     {
         Session["user_id"] = null;
         Session["erp_id"] = null;
+        Session["company"] = null;
         Response.Redirect("login.aspx");
     }
     protected void lbLogout_Click(object sender, EventArgs e)

@@ -16,7 +16,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/32e9a84b4a.js" crossorigin="anonymous"></script>
     <style>
-        body {
+        body, .modal {
             padding-top: 70px;
         }
         /* navbar */
@@ -127,6 +127,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/hr360/UI06.aspx">我的薪資明細</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/hr360/mobile/GoOutForm.aspx">外出預約單</a>
+                    </li>                    
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">

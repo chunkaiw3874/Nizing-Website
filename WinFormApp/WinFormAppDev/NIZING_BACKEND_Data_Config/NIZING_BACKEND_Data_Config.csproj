@@ -265,6 +265,7 @@
     <None Include="newKey.pfx" />
     <None Include="NIZING_BACKEND_Data_Config_1_TemporaryKey.pfx" />
     <None Include="NIZING_BACKEND_Data_Config_TemporaryKey.pfx" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -274,6 +275,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Scripts\moment-with-locales.min.js.map" />
+    <None Include="Scripts\moment.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -305,6 +308,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="attachment\company_announcement\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
