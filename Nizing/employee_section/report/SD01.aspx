@@ -174,8 +174,7 @@
                         <asp:Label ID="lblRange" runat="server"></asp:Label>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12">
+                    <div class="table-responsive">
                         <asp:GridView ID="grdReport" runat="server"
                             OnDataBound="grdReport_DataBound"
                             OnRowCreated="grdReport_RowCreated"
@@ -255,10 +254,7 @@
                             </Columns>
                         </asp:GridView>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <asp:Chart ID="Chart1" runat="server" Width="400" Height="300">
+                        <asp:Chart ID="Chart1" runat="server" Width="400" Height="300" CssClass="img-fluid">
                             <Legends>
                                 <asp:Legend Alignment="Center" Docking="Bottom" Name="Legend1">
                                 </asp:Legend>
@@ -272,8 +268,6 @@
                             </ChartAreas>
                         </asp:Chart>
                     </div>
-                </div>
-            </div>
         </div>
     </div>
 </asp:Content>
