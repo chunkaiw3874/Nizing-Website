@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -53,7 +54,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
         }
         txtReservationMemo.Text = string.Empty;
 
-        ShowReservationForm();
+        ShowModal("ReservationForm");
     }
 
     private string GetReservationId()
@@ -78,7 +79,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
         if (!CheckReservationFormInput())
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('送出失敗，請檢察單據內容');", true);
-            ShowReservationForm();
+            ShowModal("ReservationForm");
         }
         else
         {
@@ -107,11 +108,11 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
         }
     }
 
-    private void ShowReservationForm()
+    private void ShowModal(string modalId)
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         sb.Append(@"<script type='text/javascript'>");
-        sb.Append("$('#ReservationForm').modal('show');");
+        sb.Append("$('#" + modalId + "').modal('show');");
         sb.Append(@"</script>");
 
         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "initModal", sb.ToString(), false);
@@ -120,7 +121,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
     private void SaveReservationForm()
     {
         //Reconstruct company and destination selections into desired format
-        char[] delimiter = { ',','，','、' };
+        char[] delimiter = { ',', '，', '、' };
         string[] destinationArray = txtReservationDestination.Text.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
         string destination = "";
         for (int i = 0; i < destinationArray.Length; i++)
@@ -240,10 +241,10 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
             }
         }
         if (gv.ID == "gvReservationList")
-        {   
-            
+        {
+
         }
-        ShowReservationForm();
+        ShowModal("ReservationForm");
     }
 
     private void LoadReservationList(string userId, string company)
@@ -274,6 +275,43 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
         }
     }
 
+    private void LoadReservationList()
+    {
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            string query = "select form.FormId" +
+                " ,form.UserId" +
+                " ,coalesce(nzMV.MV002, szMV.MV002) 'UserName'" +
+                " ,form.EstimateStartTime" +
+                " ,form.EstimateTimeUsed" +
+                " ,form.ActualStartTime" +
+                " ,form.Destination" +
+                " ,form.ForWhichCompany" +
+                " ,form.Memo" +
+                " ,form.[Status] 'StatusCode'" +
+                " ,code.Name 'Status'" +
+                " from GoOutForm form" +
+                " left join GoOutForm_StatusCode code on form.[Status] = code.Code" +
+                " left join SUNRIZE.dbo.CMSMV szMV on form.UserId = szMV.MV001 and form.UserCompany = 'SUNRIZE'" +
+                " left join NZ.dbo.CMSMV nzMV on form.UserId = nzMV.MV001 and form.UserCompany = 'NIZING'" +
+                " where form.Status<>@status1" +
+                " and form.Status<>@status2" +
+                " order by form.Status desc" +
+                " ,form.EstimateStartTime" +
+                " ,form.UserId";
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@status1", 3);
+            cmd.Parameters.AddWithValue("@status2", 99);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+
+            BindGridview(gvActiveFormList, dt);
+        }
+    }
+
     private void LoadInProgressList(string userId, string company)
     {
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
@@ -299,7 +337,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
             BindGridview(gvInProgressList, dt);
         }
 
-        if(gvInProgressList.Rows.Count > 0)
+        if (gvInProgressList.Rows.Count > 0)
         {
             divInProgress.Visible = true;
         }
@@ -323,7 +361,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
 
 
         string formId = ((Label)gv.SelectedRow.FindControl("lblScheduleFormId")).Text;
-        
+
         //update record: record actual start time and set status
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
@@ -350,7 +388,11 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
             //Change background color based on status
             if (((HiddenField)e.Row.FindControl("hdnScheduleStatusCode")).Value == "2")
             {
-                e.Row.BackColor = System.Drawing.Color.Azure;
+                e.Row.BackColor = Color.Aquamarine;
+                foreach (TableCell cell in e.Row.Cells)
+                {
+                    cell.BorderColor = Color.Aquamarine;
+                }
                 ((LinkButton)e.Row.FindControl("btnCancelReservation")).Enabled = false;
                 ((LinkButton)e.Row.FindControl("btnCancelReservation")).OnClientClick = null;
             }
@@ -364,11 +406,11 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
 
     protected void gvReservationList_PreRender(object sender, EventArgs e)
     {
-        if(gvReservationList.Rows.Count > 0)
+        if (gvReservationList.Rows.Count > 0)
         {
-            if(((HiddenField)gvReservationList.Rows[0].FindControl("hdnScheduleStatusCode")).Value == "2")
+            if (((HiddenField)gvReservationList.Rows[0].FindControl("hdnScheduleStatusCode")).Value == "2")
             {
-                foreach(GridViewRow row in gvReservationList.Rows)
+                foreach (GridViewRow row in gvReservationList.Rows)
                 {
                     ((LinkButton)row.FindControl("btnStartTrip")).Enabled = false;
                     ((LinkButton)row.FindControl("btnStartTrip")).OnClientClick = null;
@@ -429,45 +471,91 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
     protected void btnDisplayFormDetail_Click(object sender, EventArgs e)
     {
         int[] columnsToBeHidden = { 2 };
-        for(int i = 0; i < gvReservationList.Columns.Count; i++)
-        {
-            if (columnsToBeHidden.Contains(i))
-            {
-                gvReservationList.Columns[i].Visible = false;
-            }
-            else
-            {
-                gvReservationList.Columns[i].Visible = true;
-                gvReservationList.Columns[i].HeaderStyle.CssClass = "text-nowrap";
-                gvReservationList.Columns[i].ItemStyle.CssClass = "text-nowrap";
-            }
-        }
+        ShowGridViewDetail(gvReservationList, columnsToBeHidden, true);
         btnDisplayFormDetail.Visible = false;
         btnHideFormDetail.Visible = true;
+    }
+
+    private void ShowGridViewDetail(GridView gv, int[] columnIndex, bool show)
+    {
+        if (show)
+        {
+            for (int i = 0; i < gv.Columns.Count; i++)
+            {
+                if (columnIndex.Contains(i))
+                {
+                    gv.Columns[i].Visible = false;
+                }
+                else
+                {
+                    gv.Columns[i].Visible = true;
+                    gv.Columns[i].HeaderStyle.CssClass = "text-nowrap";
+                    gv.Columns[i].ItemStyle.CssClass = "text-nowrap";
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < gv.Columns.Count; i++)
+            {
+                if (columnIndex.Contains(i))
+                {
+                    gv.Columns[i].Visible = true;
+                    gv.Columns[i].HeaderStyle.CssClass = "";
+                    gv.Columns[i].ItemStyle.CssClass = "";
+                }
+                else
+                {
+                    gv.Columns[i].Visible = false;
+                }
+            }
+        }
     }
 
     protected void btnHideFormDetail_Click(object sender, EventArgs e)
     {
         int[] columnsToBeVisible = { 0, 1, 3, 6, 9, 10 };
-        for(int i = 0; i < gvReservationList.Columns.Count; i++)
-        {
-            if (columnsToBeVisible.Contains(i))
-            {
-                gvReservationList.Columns[i].Visible = true;
-                gvReservationList.Columns[i].HeaderStyle.CssClass = "";
-                gvReservationList.Columns[i].ItemStyle.CssClass = "";
-            }
-            else
-            {
-                gvReservationList.Columns[i].Visible = false;
-            }
-        }
+        ShowGridViewDetail(gvReservationList, columnsToBeVisible, false);
         btnDisplayFormDetail.Visible = true;
         btnHideFormDetail.Visible = false;
     }
 
     protected void btnViewAllActiveReservation_Click(object sender, EventArgs e)
     {
-
+        LoadReservationList();
+        ShowModal("ActiveFormList");
     }
+
+    protected void gvActiveFormList_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            //Change background color based on status
+            if (((HiddenField)e.Row.FindControl("hdnActiveFormListStatusCode")).Value == "2")
+            {
+                e.Row.BackColor = Color.Aquamarine;
+                foreach(TableCell cell in e.Row.Cells)
+                {
+                    cell.BorderColor = Color.Aquamarine;
+                }
+            }
+        }
+    }
+
+    protected void btnActiveFormListDisplayFormDetail_Click(object sender, EventArgs e)
+    {
+        //int[] hiddenColumns = { };
+        //ShowGridViewDetail(gvActiveFormList, hiddenColumns, true);
+        //btnActiveFormListDisplayFormDetail.Visible = false;
+        //btnActiveFormListHideFormDetail.Visible = true;
+    }
+
+    protected void btnActiveFormListHideFormDetail_Click(object sender, EventArgs e)
+    {
+        //int[] visibleColumns = { 1, 2, 3, 4, 5 };
+        //ShowGridViewDetail(gvActiveFormList, visibleColumns, false);
+        //btnActiveFormListDisplayFormDetail.Visible = true;
+        //btnActiveFormListHideFormDetail.Visible = false;
+    }
+
 }

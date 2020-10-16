@@ -37,9 +37,23 @@
             font-size: 1.5rem;
         }
 
-        .whitespace-nowrap{
-            /*white-space:nowrap;*/
-            word-break:keep-all;
+        .color-box-wrapper {
+            display: inline-flex;
+            align-content: start;
+            margin-right: 5px;
+        }
+
+        .color-box {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 3px;
+        }
+
+        .color-box-text {
+            display: inline-block;
+            line-height: 12px;
         }
     </style>
     <script type="text/javascript">
@@ -144,7 +158,7 @@
                                         <asp:Label ID="lblScheduledDestination" runat="server" Text='<%#Eval("Destination") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="公司別" Visible="false">
+                                <asp:TemplateField HeaderText="分攤公司" Visible="false">
                                     <ItemTemplate>
                                         <asp:Label ID="lblScheduleForWhichCompany" runat="server" Text='<%#Eval("ForWhichCompany") %>'></asp:Label>
                                     </ItemTemplate>
@@ -193,7 +207,6 @@
                 <asp:AsyncPostBackTrigger ControlID="btnHideFormDetail" />
             </Triggers>
             <ContentTemplate>
-
                 <div class="d-flex justify-content-between">
                     <div>
                         <asp:LinkButton ID="btnAddReservation" runat="server" CssClass="text-decoration-none"
@@ -208,11 +221,11 @@
                     <div>
                         <asp:LinkButton ID="btnDisplayFormDetail" runat="server" CssClass="text-decoration-none"
                             OnClick="btnDisplayFormDetail_Click">
-                <i class="fas fa-plus"></i> 顯示詳細資訊
+                            <i class="fas fa-plus"></i> 顯示詳細資訊
                         </asp:LinkButton>
                         <asp:LinkButton ID="btnHideFormDetail" runat="server" CssClass="text-decoration-none"
                             OnClick="btnHideFormDetail_Click" Visible="false">
-                <i class="fas fa-minus"></i> 隱藏詳細資訊
+                            <i class="fas fa-minus"></i> 隱藏詳細資訊
                         </asp:LinkButton>
                     </div>
                 </div>
@@ -269,7 +282,7 @@
                                     <asp:Label ID="lblScheduledDestination" runat="server" Text='<%#Eval("Destination") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="公司別" Visible="false">
+                            <asp:TemplateField HeaderText="分攤公司" Visible="false">
                                 <ItemTemplate>
                                     <asp:Label ID="lblScheduleForWhichCompany" runat="server" Text='<%#Eval("ForWhichCompany") %>'></asp:Label>
                                 </ItemTemplate>
@@ -388,6 +401,93 @@
                                 UseSubmitBehavior="false"
                                 data-dismiss="modal"
                                 OnClick="btnSaveReservationForm_Click" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
+    <asp:UpdatePanel ID="upActiveFormList" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="btnViewAllActiveReservation" />
+            <%--<asp:AsyncPostBackTrigger ControlID="btnActiveFormListDisplayFormDetail" />
+            <asp:AsyncPostBackTrigger ControlID="btnActiveFormListHideFormDetail" />--%>
+        </Triggers>
+        <ContentTemplate>
+            <div class="modal fade" id="ActiveFormList" data-backdrop="static" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content bg-info">
+                        <div class="modal-header text-white">
+                            <asp:Label ID="lblModalActiveFormListTitle" runat="server" Text="有效預約單狀態"></asp:Label>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-flex justify-content-start">
+                                <div class="color-box-wrapper mb-2">
+                                    <div class="color-box" style="background-color: aquamarine"></div>
+                                    <div class="color-box-text text-white">已出發</div>
+                                </div>
+                                <%--                       <asp:Button ID="btnActiveFormListDisplayFormDetail" runat="server" Text="顯示詳細資訊"
+                                    UseSubmitBehavior="false"
+                                    OnClick="btnActiveFormListDisplayFormDetail_Click" />
+                                <asp:Button ID="btnActiveFormListHideFormDetail" runat="server" Text="隱藏詳細資訊"
+                                    UseSubmitBehavior="false"
+                                    Visible="false"
+                                    OnClick="btnActiveFormListHideFormDetail_Click" />--%>
+                            </div>
+                            <div class="table-responsive">
+                                <asp:GridView ID="gvActiveFormList" runat="server" CssClass="table table-sm table-light"
+                                    AutoGenerateColumns="false"
+                                    EmptyDataText="無有效預約單"
+                                    OnRowDataBound="gvActiveFormList_RowDataBound">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="狀態" Visible="false">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblActiveFormListStatus" runat="server" CssClass="text-wrap" Text='<%#Eval("Status") %>'></asp:Label>
+                                                <asp:HiddenField ID="hdnActiveFormListStatusCode" runat="server" Value='<%#Eval("StatusCode") %>' />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="使用者">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblActiveFormListUserName" runat="server" Text='<%#Eval("UserName") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="預約時間">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblActiveFormListEstimateStartTime" runat="server" Text='<%#Eval("EstimateStartTime","{0:yyyy/MM/dd HH:mm}") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="使用時間(HR)">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblActiveFormListEstimateTimeUsed" runat="server" Text='<%#Eval("EstimateTimeUsed") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="出發時間">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblActiveFormListActualStartTime" runat="server" Text='<%#Eval("ActualStartTime","{0:yyyy/MM/dd HH:mm}") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="目的地">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblActiveFormListDestination" runat="server" Text='<%#Eval("Destination") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="分攤公司" Visible="false">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblActiveFormListForWhichCompany" runat="server" Text='<%#Eval("ForWhichCompany") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="事由" Visible="false">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblActiveFormListMemo" runat="server" Text='<%#Eval("Memo") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
                         </div>
                     </div>
                 </div>
