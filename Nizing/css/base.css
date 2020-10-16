@@ -24,7 +24,7 @@ body {
     width:1000px;
     margin:auto;
     font-family:Arial;
-    font-size:0px;
+    /*font-size:12px;*/
 }
 
 .button{
