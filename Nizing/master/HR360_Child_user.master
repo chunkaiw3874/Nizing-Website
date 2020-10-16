@@ -28,6 +28,7 @@
                     <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/hr360/image/icon/button_menu/UI04-1.png" PostBackUrl="~/hr360/UI04.aspx" />
                     <asp:ImageButton ID="imgbtnUI05" runat="server" ImageUrl="~/hr360/image/icon/button_menu/UI05-1.png" PostBackUrl="~/hr360/UI05.aspx" />
                     <asp:ImageButton ID="ImageButton6" runat="server" ImageUrl="~/hr360/image/icon/button_menu/UI06-1.png" PostBackUrl="~/hr360/UI06.aspx" />
+                    <asp:Button ID="Button1" runat="server" Width="187.5" Height="50" Text="外出預約單" PostBackUrl="~/hr360/mobile/GoOutForm.aspx" />
                 </div>
             </div>
             <div class="right">

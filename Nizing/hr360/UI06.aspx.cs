@@ -18,30 +18,24 @@ public partial class hr360_UI06 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!((masterPage_HR360_Master)this.Master).CheckAuthentication())
+
+        if (!IsPostBack)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('連線已逾時，將會回到登入頁面');window.location='login.aspx'", true);
-        }
-        else
-        {
-            if (!IsPostBack)
+            for (int i = DateTime.Today.Year; i > DateTime.Today.Year - 2; i--)
             {
-                for (int i = DateTime.Today.Year; i > DateTime.Today.Year - 2; i--)
-                {
-                    ddlYear.Items.Add(i.ToString());
-                }
-                ddlYear.SelectedIndex = 0;
-                ddlMonth.SelectedIndex = Convert.ToInt16(DateTime.Today.Month) - 2;
-                //using (SqlConnection conn = new SqlConnection(ERP2connectionString))
-                //{
-                //    conn.Open();
-                //    SqlCommand cmdSelect = new SqlCommand("SELECT ERP_ID"
-                //                                        +" FROM HR360_BI01_A"
-                //                                        +" WHERE [ID]=@ID", conn);
-                //    cmdSelect.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
-                //    Session["erp_id"] = (string)cmdSelect.ExecuteScalar();            
-                //}
+                ddlYear.Items.Add(i.ToString());
             }
+            ddlYear.SelectedIndex = 0;
+            ddlMonth.SelectedIndex = Convert.ToInt16(DateTime.Today.Month) - 2;
+            //using (SqlConnection conn = new SqlConnection(ERP2connectionString))
+            //{
+            //    conn.Open();
+            //    SqlCommand cmdSelect = new SqlCommand("SELECT ERP_ID"
+            //                                        +" FROM HR360_BI01_A"
+            //                                        +" WHERE [ID]=@ID", conn);
+            //    cmdSelect.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
+            //    Session["erp_id"] = (string)cmdSelect.ExecuteScalar();            
+            //}
         }
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
