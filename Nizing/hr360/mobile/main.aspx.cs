@@ -19,7 +19,7 @@ public partial class hr360_mobile_main : System.Web.UI.Page
     string NzConnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
     string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
     string SunrizeConnectionString = ConfigurationManager.ConnectionStrings["SunrizeConnectionString"].ConnectionString;
-    
+
     public DataTable dtAnnouncementData = new DataTable();
     public string jsonAnnouncementData;
     public byte[] blob;
@@ -34,7 +34,7 @@ public partial class hr360_mobile_main : System.Web.UI.Page
         {
             defaultERPDbConnectionString = SunrizeConnectionString;
         }
-        
+
         LoadNewsFromDB();
         jsonAnnouncementData = ConvertDtToString(dtAnnouncementData);
         LoadBlob();
@@ -63,7 +63,7 @@ public partial class hr360_mobile_main : System.Web.UI.Page
             }
             catch
             {
-                
+
                 Response.Redirect("login.aspx");
                 //ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('連線已逾時，將會回到登入頁面');window.location='login.aspx'", true);
             }
@@ -79,7 +79,7 @@ public partial class hr360_mobile_main : System.Web.UI.Page
                 " , SUBSTRING(MV.MV021,5,2) 'START_MONTH'" +
                 " , SUBSTRING(MV.MV021,7,2) 'START_DAY'"
                         + " FROM CMSMV MV"
-                        +" WHERE MV.MV001=@ID";
+                        + " WHERE MV.MV001=@ID";
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -242,7 +242,9 @@ public partial class hr360_mobile_main : System.Web.UI.Page
                                                 + " FROM PALTL"
                                                 + " WHERE PALTL.TL001=@ID AND PALTL.TL002=YEAR(GETDATE()) AND PALTL.TL004='02'", conn);
             cmdSelectMakeupDayOff.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
-            lblMakeupDayOff.Text = "剩餘: " + (Convert.ToDecimal(cmdSelectMakeupDayOff.ExecuteScalar())).ToString("0.00") + "小時";
+            lblMakeupDayOff.Text = cmdSelectMakeupDayOff.ExecuteScalar().ToString() == "N/A"?
+                "" :
+                "剩餘: " + (Convert.ToDecimal(cmdSelectMakeupDayOff.ExecuteScalar())).ToString("0.00") + "小時";
 
             //調薪通知
             SqlCommand cmdSalaryAdj = new SqlCommand("SELECT PALTD.TD001"
@@ -293,7 +295,7 @@ public partial class hr360_mobile_main : System.Web.UI.Page
                         + " ,ANNOUNCE.[BODY]"
                         + " FROM HR360_COMPANYANNOUNCEMENT ANNOUNCE"
                         + " LEFT JOIN NZ.dbo.CMSMV MVCREATOR ON ANNOUNCE.[CREATOR] = MVCREATOR.MV001"
-                        + " LEFT JOIN NZ.dbo.CMSMV MVEDITOR ON ANNOUNCE.LAST_EDITOR = MVEDITOR.MV001";            
+                        + " LEFT JOIN NZ.dbo.CMSMV MVEDITOR ON ANNOUNCE.LAST_EDITOR = MVEDITOR.MV001";
             SqlCommand cmd = new SqlCommand(query, conn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dtAnnouncementData);
@@ -328,7 +330,7 @@ public partial class hr360_mobile_main : System.Web.UI.Page
     private DataTable LoadDayoffFromDB()
     {
         DataTable dt = new DataTable();
-        
+
         return dt;
     }
 }

@@ -8,9 +8,11 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-        Error
-    </div>
+        <div>
+            Error Occured
+        
+        </div>
+        <a href="default.aspx">回到網站</a>
     </form>
 </body>
 </html>
