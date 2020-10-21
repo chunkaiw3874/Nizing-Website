@@ -148,6 +148,9 @@
                 <li>
                     <asp:ImageButton ID="ImageButton10" runat="server" ImageUrl="~/employee_section/report/image/button/dept/ADM-02.png" PostBackUrl="~/employee_section/report/SD_ProfitMarginByProductReport.aspx" />
                 </li>
+                <li>
+                    <a href="report/GoOutReport.aspx">外出報告</a>
+                </li>
             </ul>
         </div>
     </div>
