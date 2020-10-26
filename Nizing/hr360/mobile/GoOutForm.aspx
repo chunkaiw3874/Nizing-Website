@@ -333,12 +333,13 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
-                            <div class="input-group mb-1">
+                            <asp:HiddenField ID="hdnReservationId" runat="server" />
+                            <%--<div class="input-group mb-1">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">預約單號</span>
                                 </div>
                                 <asp:Label ID="lblReservationId" runat="server" CssClass="form-control" Text=""></asp:Label>
-                            </div>
+                            </div>--%>
                             <%--                            <div class="input-group mb-1">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">使用者</span>

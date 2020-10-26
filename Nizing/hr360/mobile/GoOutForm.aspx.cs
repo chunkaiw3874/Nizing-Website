@@ -17,6 +17,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
     string NzConnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
     string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
     string defaultConnectionString;
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -44,8 +45,8 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
     protected void btnAddReservation_Click(object sender, EventArgs e)
     {
         lblReservationFormTitle.Text = "新增預約單";
-        lblReservationId.Text = GetReservationId();
         txtEstimatedStartTime.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm");
+        hdnReservationId.Value = GetReservationId();
         ddlReservationDuration.SelectedIndex = 0;
         txtReservationDestination.Text = string.Empty;
         foreach (ListItem item in cblGoOutFor.Items)
@@ -62,7 +63,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
         string uid;
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
-            string defaultUid = DateTime.Today.ToString("yyyyMMdd") + "001";
+            string defaultUid = DateTime.Parse(txtEstimatedStartTime.Text).ToString("yyyyMMdd") + "001";
             conn.Open();
             string query = "select max(FormId)" +
                 " from GoOutForm" +
@@ -168,7 +169,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
                 " values (@formId,@userId,@userCompany,@estimateStartTime,@estimateTimeUsed,@destination,@forWhichCompany,@memo,@status)";
 
             SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@formId", lblReservationId.Text);
+            cmd.Parameters.AddWithValue("@formId", hdnReservationId.Value);
             cmd.Parameters.AddWithValue("@userId", Session["erp_id"].ToString());
             cmd.Parameters.AddWithValue("@userCompany", Session["company"].ToString());
             cmd.Parameters.AddWithValue("@estimateStartTime", txtEstimatedStartTime.Text);
@@ -224,7 +225,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
         gv.SelectedIndex = row.RowIndex;
 
         lblReservationFormTitle.Text = "更新預約單";
-        lblReservationId.Text = ((Label)gv.SelectedRow.FindControl("lblScheduleFormId")).Text;
+        hdnReservationId.Value = ((Label)gv.SelectedRow.FindControl("lblScheduleFormId")).Text;
         txtEstimatedStartTime.Text = (DateTime.Parse(((HiddenField)gv.SelectedRow.FindControl("hdnScheduledStartTime")).Value)).ToString("yyyy/MM/dd HH:mm");
         ddlReservationDuration.SelectedItem.Text = ((Label)gv.SelectedRow.FindControl("lblScheduleTimeUsed")).Text;
         txtReservationDestination.Text = ((Label)gv.SelectedRow.FindControl("lblScheduledDestination")).Text;
@@ -534,7 +535,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
             if (((HiddenField)e.Row.FindControl("hdnActiveFormListStatusCode")).Value == "2")
             {
                 e.Row.BackColor = Color.Aquamarine;
-                foreach(TableCell cell in e.Row.Cells)
+                foreach (TableCell cell in e.Row.Cells)
                 {
                     cell.BorderColor = Color.Aquamarine;
                 }
@@ -557,5 +558,4 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
         //btnActiveFormListDisplayFormDetail.Visible = true;
         //btnActiveFormListHideFormDetail.Visible = false;
     }
-
 }
