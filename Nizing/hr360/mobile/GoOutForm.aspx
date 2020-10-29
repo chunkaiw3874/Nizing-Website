@@ -70,6 +70,28 @@
                 //minDate: new moment().minutes(0)
             });
 
+            $('#endTripDatetimepickerBegin').datetimepicker({
+                ignoreReadonly: true,
+                locale: 'zh-tw',
+                buttons: {
+                    showToday: true
+                },
+                format: "YYYY/MM/DD HH:mm",
+                stepping: 15,
+                toolbarPlacement: 'top'
+            });
+
+            $('#endTripDatetimepickerEnd').datetimepicker({
+                ignoreReadonly: true,
+                locale: 'zh-tw',
+                buttons: {
+                    showToday: true
+                },
+                format: "YYYY/MM/DD HH:mm",
+                stepping: 15,
+                toolbarPlacement: 'top'
+            });
+
             $(".datetimepicker-input").keydown(function (e) {
                 return false;
             });
@@ -205,6 +227,7 @@
                 <asp:AsyncPostBackTrigger ControlID="gvInProgressList" />
                 <asp:AsyncPostBackTrigger ControlID="btnDisplayFormDetail" />
                 <asp:AsyncPostBackTrigger ControlID="btnHideFormDetail" />
+                <asp:AsyncPostBackTrigger ControlID="btnManualEndTripSubmit" />
             </Triggers>
             <ContentTemplate>
                 <div class="d-flex justify-content-between">
@@ -237,6 +260,15 @@
                         OnRowDataBound="gvReservationList_RowDataBound"
                         OnPreRender="gvReservationList_PreRender">
                         <Columns>
+                            <asp:TemplateField Visible="false">
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="btnManualEndTrip" runat="server" CssClass="btn-list text-decoration-none"
+                                        ToolTip="指定結案"
+                                        OnClick="btnManualEndTrip_Click">
+                                        <i class="far fa-check-square"></i>
+                                    </asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField>
                                 <ItemTemplate>
                                     <asp:LinkButton ID="btnCancelReservation" runat="server" CssClass="btn-list text-decoration-none"
@@ -267,7 +299,7 @@
                                     <asp:HiddenField ID="hdnScheduledStartTime" runat="server" Value='<%#Eval("EstimateStartTime","{0:yyyy/MM/dd HH:mm}") %>'></asp:HiddenField>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="使用時間" Visible="false">
+                            <asp:TemplateField HeaderText="使用時間(HR)">
                                 <ItemTemplate>
                                     <asp:Label ID="lblScheduleTimeUsed" runat="server" Text='<%#Eval("EstimateTimeUsed") %>'></asp:Label>
                                 </ItemTemplate>
@@ -489,6 +521,56 @@
                             </div>
                         </div>
                         <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
+    <asp:UpdatePanel ID="upManualEndTripForm" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="gvReservationList" />
+            <asp:AsyncPostBackTrigger ControlID="btnManualEndTripSubmit" />
+        </Triggers>
+        <ContentTemplate>
+            <div class="modal fade" id="ManualEndTripForm" data-backdrop="static" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <asp:Label ID="Label1" runat="server" Text="指定結案"></asp:Label>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <asp:HiddenField ID="hdnManualEndTripFormId" runat="server" />
+                            <div class="input-group mb-1 date" id="endTripDatetimepickerBegin" data-target-input="nearest">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">出發時間</span>
+                                </div>
+                                <asp:TextBox ID="txtManualEndTripBegin" runat="server"
+                                    CssClass="form-control datetimepicker-input"
+                                    data-target="#endTripDatetimepickerBegin"></asp:TextBox>
+                                <div class="input-group-append" data-target="#endTripDatetimepickerBegin" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-1 date" id="endTripDatetimepickerEnd" data-target-input="nearest">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">回程時間</span>
+                                </div>
+                                <asp:TextBox ID="txtManualEndTripEnd" runat="server"
+                                    CssClass="form-control datetimepicker-input"
+                                    data-target="#endTripDatetimepickerEnd"></asp:TextBox>
+                                <div class="input-group-append" data-target="#endTripDatetimepickerEnd" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="btnManualEndTripSubmit" runat="server" CssClass="btn btn-success w-100" Text="指定結案"
+                                UseSubmitBehavior="false"
+                                data-dismiss="modal"
+                                OnClick="btnManualEndTripSubmit_Click"/>
                         </div>
                     </div>
                 </div>

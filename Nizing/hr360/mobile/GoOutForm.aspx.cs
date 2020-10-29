@@ -156,7 +156,10 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
         {
             conn.Open();
             string query = "update GoOutForm" +
-                " set EstimateStartTime=@estimateStartTime" +
+                " set EditorId=@userId" +
+                " ,EditorCompany=@userCompany" +
+                " ,EditTime=getdate()" +
+                " ,EstimateStartTime=@estimateStartTime" +
                 " ,EstimateTimeUsed=@estimateTimeUsed" +
                 " ,Destination=@destination" +
                 " ,ForWhichCompany=@forWhichCompany" +
@@ -165,8 +168,8 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
                 " and UserId=@userId" +
                 " and UserCompany=@userCompany" +
                 " if @@ROWCOUNT=0" +
-                " insert into GoOutForm(FormId,UserId,UserCompany,EstimateStartTime,EstimateTimeUsed,Destination,ForWhichCompany,Memo,Status)" +
-                " values (@formId,@userId,@userCompany,@estimateStartTime,@estimateTimeUsed,@destination,@forWhichCompany,@memo,@status)";
+                " insert into GoOutForm(EditorId,EditorCompany,EditTime,FormId,UserId,UserCompany,EstimateStartTime,EstimateTimeUsed,Destination,ForWhichCompany,Memo,Status)" +
+                " values (@userId,@userCompany,getdate(),@formId,@userId,@userCompany,@estimateStartTime,@estimateTimeUsed,@destination,@forWhichCompany,@memo,@status)";
 
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@formId", hdnReservationId.Value);
@@ -180,7 +183,9 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@status", 1);
             try
             {
+                txtEstimatedStartTime.ReadOnly = false;
                 cmd.ExecuteNonQuery();
+                txtEstimatedStartTime.ReadOnly = false;
             }
             catch (SqlException ex)
             {
@@ -258,16 +263,14 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
                 " left join GoOutForm_StatusCode sCode on form.Status=sCode.Code" +
                 " where form.UserId=@userId" +
                 " and form.UserCompany=@userCompany" +
-                " and form.Status<>@status1" +
-                " and form.Status<>@status2" +
+                " and form.Status<@status" +
                 " order by Status desc" +
                 " ,EstimateStartTime";
 
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@userId", userId);
             cmd.Parameters.AddWithValue("@userCompany", company);
-            cmd.Parameters.AddWithValue("@status1", 3);
-            cmd.Parameters.AddWithValue("@status2", 99);
+            cmd.Parameters.AddWithValue("@status", 3);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
@@ -296,15 +299,13 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
                 " left join GoOutForm_StatusCode code on form.[Status] = code.Code" +
                 " left join SUNRIZE.dbo.CMSMV szMV on form.UserId = szMV.MV001 and form.UserCompany = 'SUNRIZE'" +
                 " left join NZ.dbo.CMSMV nzMV on form.UserId = nzMV.MV001 and form.UserCompany = 'NIZING'" +
-                " where form.Status<>@status1" +
-                " and form.Status<>@status2" +
+                " where form.Status<@status" +
                 " order by form.Status desc" +
                 " ,form.EstimateStartTime" +
                 " ,form.UserId";
 
             SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@status1", 3);
-            cmd.Parameters.AddWithValue("@status2", 99);
+            cmd.Parameters.AddWithValue("@status", 3);
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
@@ -471,7 +472,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
 
     protected void btnDisplayFormDetail_Click(object sender, EventArgs e)
     {
-        int[] columnsToBeHidden = { 2 };
+        int[] columnsToBeHidden = { 0,3 };
         ShowGridViewDetail(gvReservationList, columnsToBeHidden, true);
         btnDisplayFormDetail.Visible = false;
         btnHideFormDetail.Visible = true;
@@ -515,7 +516,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
 
     protected void btnHideFormDetail_Click(object sender, EventArgs e)
     {
-        int[] columnsToBeVisible = { 0, 1, 3, 6, 9, 10 };
+        int[] columnsToBeVisible = { 1, 2, 4, 5, 7, 10, 11 };
         ShowGridViewDetail(gvReservationList, columnsToBeVisible, false);
         btnDisplayFormDetail.Visible = true;
         btnHideFormDetail.Visible = false;
@@ -557,5 +558,54 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
         //ShowGridViewDetail(gvActiveFormList, visibleColumns, false);
         //btnActiveFormListDisplayFormDetail.Visible = true;
         //btnActiveFormListHideFormDetail.Visible = false;
+    }
+
+    protected void btnManualEndTrip_Click(object sender, EventArgs e)
+    {
+        GridViewRow row = (GridViewRow)((LinkButton)sender).NamingContainer;
+        GridView gv = (GridView)row.NamingContainer;
+        gv.SelectedIndex = row.RowIndex;
+
+        hdnManualEndTripFormId.Value = ((Label)gv.SelectedRow.FindControl("lblScheduleFormId")).Text;
+        txtManualEndTripBegin.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm");
+        txtManualEndTripEnd.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm");
+
+        ShowModal("ManualEndTripForm");
+    }
+
+    protected void btnManualEndTripSubmit_Click(object sender, EventArgs e)
+    {   
+        if (DateTime.Parse(txtManualEndTripBegin.Text) > DateTime.Parse(txtManualEndTripEnd.Text))
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('回程時間不可小於出發時間');", true);
+            ShowModal("ManualEndTripForm");
+        }
+        else
+        {
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "update GoOutForm" +
+                    " set EditorId=@userId" +
+                    " ,EditorCompany=@userCompany" +
+                    " ,EditTime=getdate()" +
+                    " ,ActualStartTime=@actualStartTime" +
+                    " ,ActualEndTime=@actualEndTime" +
+                    " ,[Status]=@status" +
+                    " where FormId=@formId";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@userId", Session["erp_id"].ToString());
+                cmd.Parameters.AddWithValue("@userCompany", Session["company"].ToString());
+                cmd.Parameters.AddWithValue("@actualStartTime", txtManualEndTripBegin.Text);
+                cmd.Parameters.AddWithValue("@actualEndTime", txtManualEndTripEnd.Text);
+                cmd.Parameters.AddWithValue("@status", 98);
+                cmd.Parameters.AddWithValue("@formId", hdnManualEndTripFormId.Value);
+
+                cmd.ExecuteNonQuery();
+            }
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('" + hdnManualEndTripFormId.Value + "指定結案完成');", true);
+            LoadReservationList(Session["erp_id"].ToString(), Session["company"].ToString());
+
+        }
     }
 }
