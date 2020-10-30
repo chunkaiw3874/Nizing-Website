@@ -20,7 +20,8 @@ public partial class sunrise_intranet_PD_PurchaseCostCalculator : System.Web.UI.
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                ddlPurchaseFormId.Items.Add(dt.Rows[i]["單號"].ToString().Trim());
+                ddlPurchaseFormId.Items.Add(new ListItem(dt.Rows[i]["單號"].ToString() + "-" + dt.Rows[i]["廠商名稱"].ToString()
+                    , dt.Rows[i]["單號"].ToString().Trim()));
             }
 
             ddlPurchaseFormId.SelectedIndex = 0;
@@ -40,7 +41,9 @@ public partial class sunrise_intranet_PD_PurchaseCostCalculator : System.Web.UI.
             conn.Open();
 
             string query = "select tc.TC002 '單號'" +
+                " ,ma.MA002 '廠商名稱'" +
                 " from PURTC tc" +
+                " left join PURMA ma on tc.TC004=ma.MA001" +
                 " where tc.TC001='A332'" +
                 " order by tc.TC002 desc";
 
@@ -222,6 +225,7 @@ public partial class sunrise_intranet_PD_PurchaseCostCalculator : System.Web.UI.
         {
             decimal totalMaterialCost = Convert.ToDecimal(hdnPurchaseFormTotalCost.Value);
             decimal materialCost = Convert.ToDecimal(((Label)gv.Rows[i].FindControl("lblItemTotalCost")).Text);
+            decimal numberOfUnit = Convert.ToDecimal(((Label)gv.Rows[i].FindControl("lblPurchasedAmount")).Text);
             decimal materialPercent = materialCost / totalMaterialCost;
 
             decimal transportCost;
@@ -240,13 +244,16 @@ public partial class sunrise_intranet_PD_PurchaseCostCalculator : System.Web.UI.
                     taxCost * materialPercent +
                     otherCost * materialPercent;
 
-                ((Label)gv.Rows[i].FindControl("lblCostExcludeMaterial")).Text = Math.Round(total, 0).ToString();
+                decimal itemUnitCost = (materialCost* Convert.ToDecimal(txtPurchaseFormExchangeRate.Text) + total) / numberOfUnit;
 
+                ((Label)gv.Rows[i].FindControl("lblCostExcludeMaterial")).Text = Math.Round(total, 0).ToString();
+                ((Label)gv.Rows[i].FindControl("lblUnitCostIncludingImportCost")).Text = Math.Round(itemUnitCost, 0).ToString();
                 //sum += total;
             }
             else
             {
                 ((Label)gv.Rows[i].FindControl("lblCostExcludeMaterial")).Text = "";
+                ((Label)gv.Rows[i].FindControl("lblUnitCostIncludingImportCost")).Text = "";                
             }
         }
         //lblTotalNonMaterialCost.Text = Math.Round(sum, 0).ToString();

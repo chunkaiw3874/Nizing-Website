@@ -120,7 +120,7 @@
                         </div>
                     </div>
                     <div class="input-group">
-                        <asp:Button ID="btnCalculateTotalCost" runat="server" CssClass="btn btn-success form-control" Text="計算費用"
+                        <asp:Button ID="btnCalculateTotalCost" runat="server" CssClass="btn btn-success form-control" Text="計算進口費用"
                             OnClick="btnCalculateTotalCost_Click" />
                     </div>
                 </div>
@@ -147,7 +147,12 @@
                         AutoGenerateColumns="false"
                         OnPreRender="gvPurchaseForm_PreRender">
                         <Columns>
-                            <asp:TemplateField HeaderText="費用<br/>(NTD)">
+                            <asp:TemplateField HeaderText="產品單價-含進口費用<br/>(NTD)">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblUnitCostIncludingImportCost" runat="server" Text=""></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="進口費用分攤金額<br/>(NTD)">
                                 <ItemTemplate>
                                     <asp:Label ID="lblCostExcludeMaterial" runat="server" Text=""></asp:Label>
                                 </ItemTemplate>
