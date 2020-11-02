@@ -2,6 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <style>
+        .list-title li img {
+            width: 200px;
+        }
         .list-body li input{
             height:30px;
         }
@@ -55,6 +58,20 @@
             <ul class="list-body">
                 <li>
                     <asp:ImageButton ID="ImageButton5" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/INT-1.png" PostBackUrl="~/sunrise_intranet/PD_PurchaseCostCalculator.aspx" /></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <ul class="list-title">
+                <li>
+                    <asp:Image ID="Image10" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/ADM.png" />
+                </li>
+            </ul>
+            <ul class="list-body">            
+                <li>
+                    <a href="sunrise_intranet/HR04.aspx">面試表</a>
+                </li>
             </ul>
         </div>
     </div>
