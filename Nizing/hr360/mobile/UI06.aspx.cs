@@ -41,7 +41,7 @@ public partial class hr360_UI06 : System.Web.UI.Page
             else
             {
                 ViewState["connectionString"] = SSconnectionString;
-                imgCompanyLogo.ImageUrl = "";
+                imgCompanyLogo.ImageUrl = "~/hr360/image/image/sunrize_logo.png";
             }            
         }
     }
