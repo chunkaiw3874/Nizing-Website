@@ -8,7 +8,7 @@
         }
 
         .table td, .table th{
-            border:initial;
+            /*border:initial;*/
         }
 
         th {

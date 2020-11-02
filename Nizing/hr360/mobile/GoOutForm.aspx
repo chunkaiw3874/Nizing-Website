@@ -543,6 +543,7 @@
                         </div>
                         <div class="modal-body">
                             <asp:HiddenField ID="hdnManualEndTripFormId" runat="server" />
+                            <asp:HiddenField ID="hdnEstimatedStartTime" runat="server" />
                             <div class="input-group mb-1 date" id="endTripDatetimepickerBegin" data-target-input="nearest">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">出發時間</span>

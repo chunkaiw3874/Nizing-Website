@@ -232,7 +232,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
         lblReservationFormTitle.Text = "更新預約單";
         hdnReservationId.Value = ((Label)gv.SelectedRow.FindControl("lblScheduleFormId")).Text;
         txtEstimatedStartTime.Text = (DateTime.Parse(((HiddenField)gv.SelectedRow.FindControl("hdnScheduledStartTime")).Value)).ToString("yyyy/MM/dd HH:mm");
-        ddlReservationDuration.SelectedItem.Text = ((Label)gv.SelectedRow.FindControl("lblScheduleTimeUsed")).Text;
+        ddlReservationDuration.SelectedValue = ((Label)gv.SelectedRow.FindControl("lblScheduleTimeUsed")).Text;
         txtReservationDestination.Text = ((Label)gv.SelectedRow.FindControl("lblScheduledDestination")).Text;
         txtReservationMemo.Text = ((TextBox)gv.SelectedRow.FindControl("txtScheduleMemo")).Text;
 
@@ -472,7 +472,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
 
     protected void btnDisplayFormDetail_Click(object sender, EventArgs e)
     {
-        int[] columnsToBeHidden = { 0,3 };
+        int[] columnsToBeHidden = { 0, 3 };    //column 0 為指定結案(目前不使用)
         ShowGridViewDetail(gvReservationList, columnsToBeHidden, true);
         btnDisplayFormDetail.Visible = false;
         btnHideFormDetail.Visible = true;
@@ -567,8 +567,9 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
         gv.SelectedIndex = row.RowIndex;
 
         hdnManualEndTripFormId.Value = ((Label)gv.SelectedRow.FindControl("lblScheduleFormId")).Text;
-        txtManualEndTripBegin.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm");
-        txtManualEndTripEnd.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm");
+        txtManualEndTripBegin.Text = ((HiddenField)gv.SelectedRow.FindControl("hdnScheduledStartTime")).Value;
+        double timeUsed = Convert.ToDouble(((Label)gv.SelectedRow.FindControl("lblScheduleTimeUsed")).Text);
+        txtManualEndTripEnd.Text = (DateTime.Parse(txtManualEndTripBegin.Text).AddHours(timeUsed)).ToString("yyyy/MM/dd HH:mm");
 
         ShowModal("ManualEndTripForm");
     }
