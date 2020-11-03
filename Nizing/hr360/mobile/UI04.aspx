@@ -105,10 +105,18 @@
                 buttons: {
                     showToday: true
                 },
-                format: "YYYY/MM/DD",
+                format: "YYYY/MM/DD HH:mm",
                 stepping: 30,
                 toolbarPlacement: 'top',
                 //minDate: new moment().minutes(0)
+            });
+
+            $('#timepickerend').datetimepicker({
+                ignoreReadonly: true,
+                locale: 'zh-tw',
+                format: "HH:mm",
+                stepping: 30,
+                toolbarPlacement: 'top'
             });
 
             $('.datetimepicker-input').keydown(function (e) {
@@ -235,8 +243,6 @@
                 return false;
             }
         };
-
-
     </script>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -371,7 +377,7 @@
                                             <asp:DropDownList ID="ddlDayOffType" runat="server" CssClass="custom-select" AutoPostBack="true" OnSelectedIndexChanged="ddlDayOffType_SelectedIndexChanged">
                                             </asp:DropDownList>
                                         </div>
-                                        <div class="input-group mb-1 date datetimepicker" id="datetimepicker" data-target-input="nearest">
+                                        <div class="input-group mb-1" id="datetimepicker" data-target-input="nearest">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">請假日期</span>
                                             </div>
@@ -382,13 +388,15 @@
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                             </div>
                                         </div>
-                                        <div class="input-group mb-1">
+                                        <div class="input-group mb-1" id="timepickerend" data-target-input="nearest">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text">使用時間</span>
-                                            </div>
-                                            <asp:DropDownList ID="ddlReservationDuration" runat="server" CssClass="custom-select"></asp:DropDownList>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">小時</span>
+                                                <span class="input-group-text">結束時間</span>
+                                            </div>                                            
+                                            <asp:TextBox ID="txtDayOffTimeEnd" runat="server"
+                                                CssClass="form-control datetimepicker-input"
+                                                data-target="#timepickerend"></asp:TextBox>
+                                            <div class="input-group-append" data-target="#timepickerend" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="far fa-clock"></i></div>
                                             </div>
                                         </div>
                                         <div class="input-group mb-1">
