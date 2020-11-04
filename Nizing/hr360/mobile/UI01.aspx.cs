@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -13,15 +14,24 @@ using System.Web.UI.WebControls;
 public partial class hr360_UI01 : System.Web.UI.Page
 {
     string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
+    string SSconnectionString = ConfigurationManager.ConnectionStrings["SunriseConnectionString"].ConnectionString;
     string ERP2connectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
 
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
+            if (Session["company"].ToString() == "NIZING")
+            {
+                ViewState["connectionString"] = NZconnectionString;
+            }
+            else
+            {
+                ViewState["connectionString"] = SSconnectionString;
+            }
             DataTable dt = new DataTable();
             imgAvatar.ImageUrl = "~\\hr360\\image\\employee_profile\\" + Session["erp_id"].ToString() + ".jpg";
-            using (SqlConnection conn = new SqlConnection(NZconnectionString))
+            using (SqlConnection conn = new SqlConnection(ViewState["connectionString"].ToString()))
             {
                 conn.Open();
                 SqlCommand cmdSelect = new SqlCommand("SELECT CMSMV.MV001"// 員工代號
@@ -76,6 +86,99 @@ public partial class hr360_UI01 : System.Web.UI.Page
 
     protected void btnChangePassword_Click(object sender, EventArgs e)
     {
-        
+        //if (ChangePasswordForm.Visible)
+        //{
+        //    ChangePasswordForm.Visible = false;
+        //}
+        //else
+        //{
+        //    ChangePasswordForm.Visible = true;
+        //}
+        ShowModal("ChangePasswordForm");
+    }
+
+    private void ShowModal(string modalId)
+    {
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        sb.Append(@"<script type='text/javascript'>");
+        sb.Append("$('#" + modalId + "').modal('show');");
+        sb.Append(@"</script>");
+
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "showmodal", sb.ToString(), false);
+    }
+
+    protected void btnChangePasswordSubmit_Click(object sender, EventArgs e)
+    {
+        string regex = @"^[_A-z0-9]*((-|\s)*[_A-z0-9])*$";
+        if (string.IsNullOrWhiteSpace(txtOldPassword.Text) || string.IsNullOrWhiteSpace(txtNewPassword.Text))
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('密碼欄位為空白');", true);
+            ShowModal("ChangePasswordForm");
+        }
+        else if (!(Regex.Match(txtNewPassword.Text, regex)).Success)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('不可使用特殊符號');", true);
+        }
+        else
+        {
+            if (isCredentialValid())
+            {
+                UpdatePassword();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('密碼變更完成');", true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('密碼錯誤');", true);
+                ShowModal("ChangePasswordForm");
+            }
+        }
+    }
+
+    private bool isCredentialValid()
+    {
+        bool match = false;
+        string companyCondition = " and COMPANY=@company";
+        string container;
+        using (SqlConnection conn = new SqlConnection(ERP2connectionString))
+        {
+            conn.Open();
+            string query = "SELECT [PASSWORD]"
+                        + " FROM HR360_BI01_A"
+                        + " WHERE [ID]=@ID"
+                        + companyCondition;
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@ID", Session["user_id"].ToString());
+            cmd.Parameters.AddWithValue("@company", Session["company"].ToString());
+            container = cmd.ExecuteScalar() == null ? "" : cmd.ExecuteScalar().ToString();
+        }
+        if (SiteUtils.Decrypt(container) != txtOldPassword.Text)
+        {
+            match = false;
+        }
+        else if (SiteUtils.Decrypt(container) == txtOldPassword.Text)
+        {
+            match = true;
+        }
+        return match;
+    }
+
+    private void UpdatePassword()
+    {
+        using (SqlConnection conn = new SqlConnection(ERP2connectionString))
+        {
+            conn.Open();
+            string query = "update HR360_BI01_A" +
+                " set PASSWORD=@password" +
+                " ,MODIFIEDDATE=getdate()" +
+                " ,MODIFIER=@id" +
+                " where [ID]=@id" +
+                " and [COMPANY]=@company";
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@password", SiteUtils.Encrypt(txtNewPassword.Text.Trim()));
+            cmd.Parameters.AddWithValue("@id", Session["user_id"].ToString());
+            cmd.Parameters.AddWithValue("@company", Session["company"].ToString());
+            cmd.ExecuteNonQuery();
+        }
     }
 }
