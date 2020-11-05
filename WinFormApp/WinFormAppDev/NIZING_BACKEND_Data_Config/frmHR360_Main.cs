@@ -778,7 +778,7 @@ namespace NIZING_BACKEND_Data_Config
             if (accountTabMode == FunctionMode.ADD)
             {
                 //新增模式下執行確認的動作
-                errorMsg = CheckConfirmError(FunctionMode.ADD);
+                errorMsg = CheckConfirmError(accountTabMode);
                 if (errorMsg.Count == 0)
                 {
                     using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
@@ -834,7 +834,7 @@ namespace NIZING_BACKEND_Data_Config
             else if (accountTabMode == FunctionMode.EDIT)
             {
                 //編輯模式下執行確認的動作
-                errorMsg = CheckConfirmError(FunctionMode.EDIT);
+                errorMsg = CheckConfirmError(accountTabMode);
                 if (errorMsg.Count == 0)
                 {
                     string passwordChange = "";
