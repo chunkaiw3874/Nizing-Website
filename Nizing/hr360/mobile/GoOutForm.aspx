@@ -156,13 +156,13 @@
                                 <asp:TemplateField HeaderText="預定出發時間" Visible="false">
                                     <ItemTemplate>
                                         <asp:Label ID="lblScheduledStartTime" runat="server" Text='<%#Eval("EstimateStartTime","{0:MM/dd HH:mm}") %>'></asp:Label>
-                                        <asp:HiddenField ID="hdnScheduledStartTime" runat="server" Value='<%#Eval("EstimateStartTime","{0:yyyy/MM/dd HH:mm}") %>'></asp:HiddenField>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="出發時間">
                                     <ItemTemplate>
                                         <asp:Label ID="lblTripStartTime" runat="server" Text='<%#Eval("ActualStartTime","{0:MM/dd HH:mm:ss}") %>'></asp:Label>
                                         <asp:HiddenField ID="hdnTripStartTime" runat="server" Value='<%#Eval("ActualStartTime","{0:yyyy/MM/dd HH:mm:ss}") %>'></asp:HiddenField>
+                                        <asp:HiddenField ID="hdnScheduledStartTime" runat="server" Value='<%#Eval("EstimateStartTime","{0:yyyy/MM/dd HH:mm}") %>'></asp:HiddenField>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="經過時間">

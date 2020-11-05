@@ -61,7 +61,7 @@ public partial class hr360_mobile_login : System.Web.UI.Page
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
         }
-        if (dt.Rows.Count == 0 || Utils.Decrypt(dt.Rows[0]["PASSWORD"].ToString()) != txtPassword.Text)
+        if (dt.Rows.Count == 0 || SiteUtils.Decrypt(dt.Rows[0]["PASSWORD"].ToString()) != txtPassword.Text)
         {
             lblLoginMessage.Text = "帳號或密碼錯誤，請重新輸入";
             txtPassword.Text = "";
@@ -77,7 +77,7 @@ public partial class hr360_mobile_login : System.Web.UI.Page
             txtUsername.Focus();
             match = false;
         }
-        else if (Utils.Decrypt(dt.Rows[0]["PASSWORD"].ToString()) == txtPassword.Text)
+        else if (SiteUtils.Decrypt(dt.Rows[0]["PASSWORD"].ToString()) == txtPassword.Text)
         {
             match = true;
             Session["user_id"] = dt.Rows[0]["ID"].ToString();
