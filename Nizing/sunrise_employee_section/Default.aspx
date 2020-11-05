@@ -64,6 +64,9 @@
                 <li>
                     <a href="report/HR04.aspx">面試表</a>
                 </li>
+                <li>
+                    <a href="../employee_section/report/GoOutReport.aspx">外出報告</a>
+                </li>
             </ul>
         </div>
     </div>
