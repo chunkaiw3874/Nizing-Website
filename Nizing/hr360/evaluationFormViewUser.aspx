@@ -146,7 +146,7 @@
                     時數
                 </div>
                 <div class="col-xs-2 border" style="text-align:center;">
-                    未修完時數
+                    未休完時數
                 </div>
                 <div class="col-xs-2 border" style="text-align:center;">
                     加扣基底
