@@ -294,7 +294,7 @@
                         </asp:DropDownList>--%>
                     </div>
                     <div class="col-sm-2" style="display: inline; padding-right: 0px;">
-                        <%--<asp:TextBox ID="txtDatePickerStart" runat="server" CssClass="form-control datepicker" placeholder="請假起始日期" OnTextChanged="txtDatePickerStart_TextChanged"></asp:TextBox>--%>
+                        <asp:TextBox ID="txtDatePickerStart" runat="server" CssClass="form-control datepicker" placeholder="請假起始日期"></asp:TextBox>
                     </div>
                     <div class="col-sm-1" style="display: inline; padding: 0px;">
                         <asp:DropDownList ID="ddlDayOffStartHour" runat="server" CssClass="form-control"></asp:DropDownList>
@@ -312,7 +312,7 @@
                         <asp:DropDownList ID="ddlDayOffEndMin" runat="server" CssClass="form-control"></asp:DropDownList>
                     </div>
                     <div class="col-sm-2" style="display: inline;">
-                        <asp:DropDownList ID="ddlDayOffFuncSub" runat="server" CssClass="form-control-lg"></asp:DropDownList>
+                        <%--<asp:DropDownList ID="ddlDayOffFuncSub" runat="server" CssClass="form-control-lg"></asp:DropDownList>--%>
                     </div>
                 </div>
                 <div class="row">
@@ -401,9 +401,9 @@
                                         </div>
                                         <div class="input-group mb-1">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text">目的地</span>
+                                                <span class="input-group-text">代理人</span>
                                             </div>
-                                            <asp:TextBox ID="txtReservationDestination" runat="server" CssClass="form-control"></asp:TextBox>
+                                            <asp:DropDownList ID="ddlDayOffFuncSub" runat="server" CssClass="custom-select"></asp:DropDownList>
                                         </div>
                                         <div class="row">
                                             <span class="col-12 text-danger">複數目的地請以逗號(,)做分隔</span>

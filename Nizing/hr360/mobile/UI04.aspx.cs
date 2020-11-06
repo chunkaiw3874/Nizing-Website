@@ -138,6 +138,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
     //}    
     //#endregion
 
+    private void ValidateSubmission()
+    {
+        List<string> errors = new List<string>();
+
+    }
     protected void btnDayOffAdd_Click(object sender, ImageClickEventArgs e)
     {
         List<string> errorList = new List<string>();
