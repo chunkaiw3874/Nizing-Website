@@ -141,10 +141,11 @@
                             <Columns>
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="btnEditReservation" runat="server" CssClass="btn-list text-decoration-none"
-                                            ToolTip="編輯行程"
-                                            OnClick="btnEditReservation_Click">
-                                        <i class="far fa-edit"></i>
+                                        <asp:LinkButton ID="btnEndTrip" runat="server" CssClass="btn-list text-decoration-none"
+                                            ToolTip="結束行程"
+                                            OnClientClick="javascript: return confirmChoice('結束行程?');"
+                                            OnClick="btnEndTrip_Click">
+                                        <i class="fas fa-stop-circle"></i>
                                         </asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
@@ -199,11 +200,10 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="btnEndTrip" runat="server" CssClass="btn-list text-decoration-none"
-                                            ToolTip="結束行程"
-                                            OnClientClick="javascript: return confirmChoice('結束行程?');"
-                                            OnClick="btnEndTrip_Click">
-                                        <i class="fas fa-stop-circle"></i>
+                                        <asp:LinkButton ID="btnEditReservation" runat="server" CssClass="btn-list text-decoration-none"
+                                            ToolTip="編輯行程"
+                                            OnClick="btnEditReservation_Click">
+                                        <i class="far fa-edit"></i>
                                         </asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
@@ -260,34 +260,16 @@
                         OnRowDataBound="gvReservationList_RowDataBound"
                         OnPreRender="gvReservationList_PreRender">
                         <Columns>
-                            <asp:TemplateField Visible="false">
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="btnManualEndTrip" runat="server" CssClass="btn-list text-decoration-none"
-                                        ToolTip="指定結案"
-                                        OnClick="btnManualEndTrip_Click">
-                                        <i class="far fa-check-square"></i>
-                                    </asp:LinkButton>
-                                </ItemTemplate>
-                            </asp:TemplateField>
                             <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="btnCancelReservation" runat="server" CssClass="btn-list text-decoration-none"
-                                        ToolTip="取消行程"
-                                        OnClientClick="javascript: return confirmChoice('確定取消預約單?');"
-                                        OnClick="btnCancelReservation_Click">
-                                        <i class="far fa-calendar-minus"></i>
+                                    <asp:LinkButton ID="btnStartTrip" runat="server" CssClass="btn-list text-decoration-none"
+                                        ToolTip="出發"
+                                        OnClientClick="javascript: return confirmChoice('確定出發?');"
+                                        OnClick="btnStartTrip_Click">
+                                        <i class="fas fa-play-circle"></i>
                                     </asp:LinkButton>
                                 </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField>
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="btnEditReservation" runat="server" CssClass="btn-list text-decoration-none"
-                                        ToolTip="編輯行程"
-                                        OnClick="btnEditReservation_Click">
-                                        <i class="far fa-edit"></i>
-                                    </asp:LinkButton>
-                                </ItemTemplate>
-                            </asp:TemplateField>
+                            </asp:TemplateField>                            
                             <asp:TemplateField HeaderText="單號" Visible="false">
                                 <ItemTemplate>
                                     <asp:Label ID="lblScheduleFormId" runat="server" Text='<%#Eval("FormId") %>'></asp:Label>
@@ -334,11 +316,29 @@
                             </asp:TemplateField>
                             <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="btnStartTrip" runat="server" CssClass="btn-list text-decoration-none"
-                                        ToolTip="出發"
-                                        OnClientClick="javascript: return confirmChoice('確定出發?');"
-                                        OnClick="btnStartTrip_Click">
-                                        <i class="fas fa-play-circle"></i>
+                                    <asp:LinkButton ID="btnEditReservation" runat="server" CssClass="btn-list text-decoration-none"
+                                        ToolTip="編輯行程"
+                                        OnClick="btnEditReservation_Click">
+                                        <i class="far fa-edit"></i>
+                                    </asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="btnCancelReservation" runat="server" CssClass="btn-list text-decoration-none"
+                                        ToolTip="取消行程"
+                                        OnClientClick="javascript: return confirmChoice('確定取消預約單?');"
+                                        OnClick="btnCancelReservation_Click">
+                                        <i class="far fa-calendar-minus"></i>
+                                    </asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField Visible="false">
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="btnManualEndTrip" runat="server" CssClass="btn-list text-decoration-none"
+                                        ToolTip="指定結案"
+                                        OnClick="btnManualEndTrip_Click">
+                                        <i class="far fa-check-square"></i>
                                     </asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>

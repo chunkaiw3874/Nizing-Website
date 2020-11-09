@@ -472,7 +472,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
 
     protected void btnDisplayFormDetail_Click(object sender, EventArgs e)
     {
-        int[] columnsToBeHidden = { 0, 3 };    //column 0 為指定結案(目前不使用)
+        int[] columnsToBeHidden = { 1, gvReservationList.Columns.Count - 1 };    //column 0 為指定結案(目前不使用)
         ShowGridViewDetail(gvReservationList, columnsToBeHidden, true);
         btnDisplayFormDetail.Visible = false;
         btnHideFormDetail.Visible = true;
@@ -516,7 +516,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
 
     protected void btnHideFormDetail_Click(object sender, EventArgs e)
     {
-        int[] columnsToBeVisible = { 1, 2, 4, 5, 7, 10, 11 };
+        int[] columnsToBeVisible = { 0, 4, 5, 7, 8, 10, 13, 14 };
         ShowGridViewDetail(gvReservationList, columnsToBeVisible, false);
         btnDisplayFormDetail.Visible = true;
         btnHideFormDetail.Visible = false;
