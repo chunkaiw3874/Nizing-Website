@@ -143,7 +143,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         List<string> errors = new List<string>();
 
     }
-    protected void btnDayOffAdd_Click(object sender, ImageClickEventArgs e)
+    protected void btnDayOffAdd_Click(object sender, EventArgs e)
     {
         List<string> errorList = new List<string>();
         DateTime result = new DateTime();

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
 
     <style>
-        .no-resize {
+        textarea {
             resize: none;
         }
 
@@ -94,7 +94,7 @@
                 sanitize: false,
             })
 
-            
+
         });
 
         function pageLoad(sender, args) {
@@ -290,7 +290,7 @@
                 </div>--%>
                 <div class="row form-group">
                     <div class="col-sm-2">
-<%--                        <asp:DropDownList ID="ddlDayOffType" runat="server" CssClass="form-control-lg" AutoPostBack="true" OnSelectedIndexChanged="ddlDayOffType_SelectedIndexChanged">
+                        <%--                        <asp:DropDownList ID="ddlDayOffType" runat="server" CssClass="form-control-lg" AutoPostBack="true" OnSelectedIndexChanged="ddlDayOffType_SelectedIndexChanged">
                         </asp:DropDownList>--%>
                     </div>
                     <div class="col-sm-2" style="display: inline; padding-right: 0px;">
@@ -322,7 +322,7 @@
                         <asp:Label ID="lblDayOffRemainUnit" runat="server" Text=""></asp:Label>
                     </div>
                     <div class="col-sm-2 col-sm-offset-8">
-                        <asp:CheckBox ID="ckbTyphoonDayNoSub" runat="server" CssClass="checkbox-inline" Checked="false" Text="此假用在颱風天，無須代理人" />
+                        <%--<asp:CheckBox ID="ckbTyphoonDayNoSub" runat="server" CssClass="checkbox-inline" Checked="false" Text="此假用在颱風天，無須代理人" />--%>
                     </div>
                 </div>
                 <div class="row">
@@ -332,12 +332,12 @@
                 </div>
                 <div class="row form-group">
                     <div class="col-sm-12" style="display: inline;">
-                        <asp:TextBox ID="txtReason" runat="server" CssClass="form-control" MaxLength="100" placeholder="事假必填(100字內)"></asp:TextBox>
+                        <%--<asp:TextBox ID="txtReason" runat="server" CssClass="form-control" MaxLength="100" placeholder="事假必填(100字內)"></asp:TextBox>--%>
                     </div>
                 </div>
                 <div class="row form-group">
                     <div class="col-sm-1 col-sm-offset-5">
-                        <asp:ImageButton ID="btnDayOffAdd" runat="server" ImageUrl="~/hr360/image/icon/green-arrow-down.png" Width="40" OnClick="btnDayOffAdd_Click" />
+                        <%--<asp:ImageButton ID="btnDayOffAdd" runat="server" ImageUrl="~/hr360/image/icon/green-arrow-down.png" Width="40" OnClick="btnDayOffAdd_Click" />--%>
                     </div>
                     <div class="col-sm-6">
                         <asp:TextBox ID="txtErrorMessage" runat="server" TextMode="MultiLine" CssClass="autosize no-resize error-message" Width="400" BorderStyle="none" Wrap="false" ReadOnly="true"></asp:TextBox>
@@ -391,7 +391,7 @@
                                         <div class="input-group mb-1" id="timepickerend" data-target-input="nearest">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">結束時間</span>
-                                            </div>                                            
+                                            </div>
                                             <asp:TextBox ID="txtDayOffTimeEnd" runat="server"
                                                 CssClass="form-control datetimepicker-input"
                                                 data-target="#timepickerend"></asp:TextBox>
@@ -405,35 +405,21 @@
                                             </div>
                                             <asp:DropDownList ID="ddlDayOffFuncSub" runat="server" CssClass="custom-select"></asp:DropDownList>
                                         </div>
-                                        <div class="row">
-                                            <span class="col-12 text-danger">複數目的地請以逗號(,)做分隔</span>
+                                        <div class="input-group">
+                                            <asp:CheckBox ID="ckbTyphoonDayNoSub" runat="server" CssClass="custom-checkbox" Checked="false"
+                                                Text="此假用在颱風天，無須代理人" />
                                         </div>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                分攤公司:
-                                            </div>
-                                        </div>
-                                        <asp:CheckBoxList ID="cblGoOutFor" runat="server" CssClass="checkboxlist" RepeatDirection="Horizontal">
-                                            <asp:ListItem Text="日進" Value="NIZING">
-                                            </asp:ListItem>
-                                            <asp:ListItem Text="日出" Value="SUNRIZE">
-                                            </asp:ListItem>
-                                        </asp:CheckBoxList>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                外出事由:
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <asp:TextBox ID="txtReservationMemo" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
-                                            </div>
+                                        <div class="form-group">
+                                            <span>請假事由:</span>
+                                            <asp:TextBox ID="txtReason" runat="server" CssClass="form-control" MaxLength="100"
+                                                placeholder="事假必填(100字內)"></asp:TextBox>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <asp:Button ID="btnSaveReservationForm" runat="server" CssClass="btn btn-success w-100" Text="送出"
+                                        <asp:Button ID="btnDayOffAdd" runat="server" CssClass="btn btn-success w-100" Text="送出"
                                             UseSubmitBehavior="false"
-                                            data-dismiss="modal" />
+                                            data-dismiss="modal"
+                                            OnClick="btnDayOffAdd_Click"/>
                                     </div>
                                 </div>
                             </div>
