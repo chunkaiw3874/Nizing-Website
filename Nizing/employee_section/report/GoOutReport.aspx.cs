@@ -13,7 +13,6 @@ public partial class employee_section_report_GoOutReport : System.Web.UI.Page
     string SunrizeConnectionString = ConfigurationManager.ConnectionStrings["SunrizeConnectionString"].ConnectionString;
     string NzConnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
     string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
-    string defaultConnectionString;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)

@@ -2,12 +2,12 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style>
-        .scrollbox-500{
-            height:auto;
-            max-height:500px;
+        .scrollbox-500 {
+            height: auto;
+            max-height: 500px;
         }
 
-        .table td, .table th{
+        .table td, .table th {
             /*border:initial;*/
         }
 
@@ -27,14 +27,120 @@
         }
     </style>
     <script type="text/javascript">
-        $(document).ready(function () {
+        function pageLoad(sender, args) {
+            loadChartData();
             $('#<%=txtSearchbox.ClientID%>').keyup(function () {
                 var value = $(this).val().toLowerCase();
                 $('#<%=gvGoOutData.ClientID%> tr.tbody').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    $(this).toggle(($(this).text().toLowerCase().indexOf(value) > -1)
+                        || ($(this).find('input[type="hidden"]').val().toLowerCase().indexOf(value) > -1))
                 });
+                $('#userUsageChart').remove();
+                $('#userUsageChartContainer').append('<canvas id="userUsageChart"></canvas>')
+                $('#locationChart').remove();
+                $('#locationChartContainer').append('<canvas id="locationChart"></canvas>')
+                loadChartData();
             });
-        });
+        };
+
+        //統計顯示於gvGoOutData中的資料
+        function loadChartData() {
+            //計算總外出時間
+            var timespanArray = $('#<%=gvGoOutData.ClientID%>').find('span[id*="lblTimespan"]:visible');
+            var timespan = 0;
+            for (let i = 0; i < timespanArray.length; i++) {
+                timespan = parseFloat(timespan) + parseFloat(timeToHours(timespanArray[i].innerText));
+            }
+            $('#totalOutTime').text(timespan.toFixed(2));   //顯示總外出時間
+            ///////
+
+            //整理使用者使用時間資料
+            var users = getUsers();
+            //console.log(getTimespans(users));
+            var ctx = document.getElementById('userUsageChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: users,
+                    datasets: [{
+                        data: getTimespans(users),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                    title: {
+                        display: true,
+                        text: '使用者外出時間'
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            });
+
+        }
+
+        function timeToHours(time) {
+            if (!(typeof (time) == 'undefined')) {
+                time = time.split(/:/);
+                return isNaN(parseFloat(time[0])) || isNaN(parseFloat(time[1])) ? 0 : parseFloat(time[0]) + parseFloat(time[1] / 60);
+            }
+            else {
+                return 0;
+            }
+        }
+
+        function getUsers() {
+            var users = $('#<%=gvGoOutData.ClientID%>').find('span[id*="UserName"]:visible');
+            var userArray = [];
+            for (let i = 0; i < users.length; i++) {
+                userArray.push(users[i].innerText);
+            }
+            return userArray.filter(function (value, index, self) { return self.indexOf(value) == index; });
+        }
+
+        function getTimespans(users) {
+            var timespans = [];
+            var dataRows = $('#<%=gvGoOutData.ClientID%> tr.tbody:visible');
+            for (let i = 0; i < dataRows.length; i++) {
+                for (let j = 0; j < users.length; j++)
+                    if ((dataRows.children('td').find('span[id*="UserName"]'))[i].innerText === users[j]) {
+                        timespans[j] = typeof (timespans[j]) == 'undefined' ?
+                            parseFloat(timeToHours(dataRows.children('td').find('span[id*="Timespan"]')[i].innerText))
+                            : parseFloat(timespans[j]) + parseFloat(timeToHours(dataRows.children('td').find('span[id*="Timespan"]')[i].innerText));
+                        break;
+                    }
+            }
+
+            //for (let k = 0; k < users.length; k++) {
+            //    console.log(users[k] + ":");
+            //    console.log(timespans[users[k]].toFixed(2));
+            //}           
+            return timespans;
+        }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -52,7 +158,7 @@
         </asp:DropDownList>
         <div class="input-group-append">
             <asp:Button ID="btnSearchGoOutData" runat="server" Text="查詢" CssClass="btn btn-success"
-                OnClick="btnSearchGoOutData_Click"/>
+                OnClick="btnSearchGoOutData_Click" />
         </div>
     </div>
     <div class="input-group mb-2">
@@ -62,6 +168,19 @@
             </div>
         </div>
         <asp:TextBox ID="txtSearchbox" runat="server" CssClass="form-control"></asp:TextBox>
+    </div>
+    <div id="ChartArea">
+        總外出時間:
+        <span id="totalOutTime">0</span>
+        小時
+        <div class="row">
+            <div id="userUsageChartContainer" class="col-sm-6">
+                <canvas id="userUsageChart"></canvas>
+            </div>
+            <div id="locationChartContainer" class="col-sm-6">
+                <canvas id="locationChart"></canvas>
+            </div>
+        </div>
     </div>
     <asp:UpdatePanel ID="upDataview" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
         <Triggers>
