@@ -74,6 +74,16 @@
                 </li>
             </ul>
         </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <ul>
+                <li>
+                    <asp:Image ID="Image5" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/ACC.png" /></li>
+            </ul>
+            <ul>
+                <li>
+                    <asp:ImageButton ID="ImageButton15" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/ACC-1.png" PostBackUrl="~/sunrise_intranet/ACC01.aspx" /></li>
+            </ul>
+        </div>
     </div>
 </asp:Content>
 

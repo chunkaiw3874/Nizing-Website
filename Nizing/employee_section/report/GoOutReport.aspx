@@ -134,11 +134,7 @@
                         break;
                     }
             }
-
-            //for (let k = 0; k < users.length; k++) {
-            //    console.log(users[k] + ":");
-            //    console.log(timespans[users[k]].toFixed(2));
-            //}           
+      
             return timespans;
         }
     </script>

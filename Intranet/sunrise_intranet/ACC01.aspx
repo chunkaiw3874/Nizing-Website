@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/masterPage/MasterPage.master" AutoEventWireup="true" CodeFile="ACC01.aspx.cs" Inherits="nizing_intranet_ACC01" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/masterPage/sunrise-master.master" AutoEventWireup="true" CodeFile="ACC01.aspx.cs" Inherits="nizing_intranet_ACC01" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <script src="../Scripts/jquery-ui-1.12.0.min.js"></script>
+    <script src="../Scripts/jquery-ui-1.12.1.min.js"></script>
     <style>
         .right-align {
             text-align: right !important;
