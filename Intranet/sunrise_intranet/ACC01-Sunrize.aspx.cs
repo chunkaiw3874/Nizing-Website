@@ -152,7 +152,8 @@ public partial class nizing_intranet_ACC01_SUNRIZE : System.Web.UI.Page
                     + " LEFT JOIN COPMA MA ON TA.TA004=MA.MA001"
                     + " LEFT JOIN TAXMB MB ON TA.TA015 BETWEEN MB.MB006 AND MB.MB007"
                     + " LEFT JOIN TAXMA TMA ON MB.MB001=TMA.MA001"
-                    + " WHERE TA.TA016 BETWEEN @STARTDATE AND @ENDDATE"
+                    + " WHERE TA.TA038 BETWEEN @STARTDATE AND @ENDDATE" +
+                    " AND TA.TA042>0"
                     + clientCondition
                     + companyCondition
                     + " ORDER BY TA.TA016,TA.TA004,MB.MB001";

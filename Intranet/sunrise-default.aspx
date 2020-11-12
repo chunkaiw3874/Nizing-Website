@@ -81,7 +81,11 @@
             </ul>
             <ul>
                 <li>
-                    <asp:ImageButton ID="ImageButton15" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/ACC-1.png" PostBackUrl="~/sunrise_intranet/ACC01.aspx" /></li>
+                    <a href="sunrise_intranet/ACC01-Sunrise.aspx">發票開立統計表-日出國際</a>
+                </li>
+                <li>
+                    <a href="sunrise_intranet/ACC01-Sunrize.aspx">發票開立統計表-日出車材</a>
+                </li>                    
             </ul>
         </div>
     </div>
