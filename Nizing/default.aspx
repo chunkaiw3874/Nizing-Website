@@ -153,7 +153,7 @@
             </div>
             <div class="default-content">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink16" runat="server" ImageUrl="~/images/button/stock_icon2.jpg" NavigateUrl="https://www.cnyes.com/futures/html5chart/CDCS.html" Target="_blank" BorderStyle="None" />
+                    <asp:HyperLink ID="HyperLink16" runat="server" ImageUrl="~/images/button/stock_icon2.jpg" NavigateUrl="https://finance.sina.com.cn/futures/quotes/CAD.shtml" Target="_blank" BorderStyle="None" />
                 </div>
                 <div class="button">
                     <asp:HyperLink ID="HyperLink17" runat="server" ImageUrl="~/images/button/red_ul_icon2.jpg" NavigateUrl="http://taiwan.ul.com/" Target="_blank" />
