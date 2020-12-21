@@ -8,6 +8,8 @@
     <script src="../../Scripts/moment-with-locales.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/additional-methods.min.js"></script>
 
     <style>
         textarea {
@@ -120,7 +122,6 @@
             });
 
             $('.datetimepicker-input').keydown(function (e) {
-                console.log('keydown');
                 return false;
             });
 
@@ -267,27 +268,10 @@
         <div id="application_section">
             <div class="row" style="color: red">
                 *本次版更內容: 一張假單僅能請一天假，如需多天請假需登打多張假單
-            </div>
-            <div class="row form-group" style="margin-top: 10px;">
-                <div class="col-sm-12">
-                    <%--<span class="label label-info" id="btnDayOffAppVisibility" style="cursor: pointer; font-size: 20px;">我要請假</span>--%>
-                </div>
+                <asp:TextBox ID="txtTest" runat="server"></asp:TextBox>
+                <asp:Button ID="btntest" runat="server" Text="Button" />
             </div>
             <div id="DayOffApp">
-                <%--                <div class="row">
-                    <div class="col-sm-2">
-                        <span class="label label-default" style="font-size: 16px;">假別</span>
-                    </div>
-                    <div class="col-sm-4">
-                        <span class="label label-default" style="font-size: 16px;">請假起始時間</span>
-                    </div>
-                    <div class="col-sm-4">
-                        <span class="label label-default" style="font-size: 16px;">請假結束時間</span>
-                    </div>
-                    <div class="col-sm-2">
-                        <span class="label label-default" style="font-size: 16px;">代理人</span>
-                    </div>
-                </div>--%>
                 <div class="row form-group">
                     <div class="col-sm-2">
                         <%--                        <asp:DropDownList ID="ddlDayOffType" runat="server" CssClass="form-control-lg" AutoPostBack="true" OnSelectedIndexChanged="ddlDayOffType_SelectedIndexChanged">
@@ -321,24 +305,8 @@
                         <asp:Label ID="lblDayOffRemainAmount" runat="server" Text=""></asp:Label>
                         <asp:Label ID="lblDayOffRemainUnit" runat="server" Text=""></asp:Label>
                     </div>
-                    <div class="col-sm-2 col-sm-offset-8">
-                        <%--<asp:CheckBox ID="ckbTyphoonDayNoSub" runat="server" CssClass="checkbox-inline" Checked="false" Text="此假用在颱風天，無須代理人" />--%>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <span class="label label-default" style="font-size: 16px;">請假原因</span>
-                    </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-sm-12" style="display: inline;">
-                        <%--<asp:TextBox ID="txtReason" runat="server" CssClass="form-control" MaxLength="100" placeholder="事假必填(100字內)"></asp:TextBox>--%>
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-sm-1 col-sm-offset-5">
-                        <%--<asp:ImageButton ID="btnDayOffAdd" runat="server" ImageUrl="~/hr360/image/icon/green-arrow-down.png" Width="40" OnClick="btnDayOffAdd_Click" />--%>
-                    </div>
                     <div class="col-sm-6">
                         <asp:TextBox ID="txtErrorMessage" runat="server" TextMode="MultiLine" CssClass="autosize no-resize error-message" Width="400" BorderStyle="none" Wrap="false" ReadOnly="true"></asp:TextBox>
                     </div>
@@ -412,14 +380,14 @@
                                         <div class="form-group">
                                             <span>請假事由:</span>
                                             <asp:TextBox ID="txtReason" runat="server" CssClass="form-control" MaxLength="100"
-                                                placeholder="事假必填(100字內)"></asp:TextBox>
+                                                placeholder="事假必填(100字內)"></asp:TextBox>                                            
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <asp:Button ID="btnDayOffAdd" runat="server" CssClass="btn btn-success w-100" Text="送出"
                                             UseSubmitBehavior="false"
-                                            data-dismiss="modal"
-                                            OnClick="btnDayOffAdd_Click"/>
+                                            data-dismiss="modal" />
+                                            <%--OnClick="btnDayOffAdd_Click"/>--%>
                                     </div>
                                 </div>
                             </div>

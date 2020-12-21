@@ -79,14 +79,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             }
 
             //hidden field that contains normal work hour per day for current user
-            if (Session["erp_id"].ToString() == "0010")  //小倩8.5hr/day
-            {
-                hdnNormalWorkHour.Value = "8.5";
-            }
-            else
-            {
-                hdnNormalWorkHour.Value = "8";
-            }
+            hdnNormalWorkHour.Value = "8";
             Page.LoadComplete += new EventHandler(Page_LoadComplete);
         }
 

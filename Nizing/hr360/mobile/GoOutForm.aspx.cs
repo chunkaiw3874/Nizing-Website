@@ -605,6 +605,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
                 cmd.ExecuteNonQuery();
             }
             ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('" + hdnManualEndTripFormId.Value + "指定結案完成');", true);
+            LoadInProgressList(Session["erp_id"].ToString(), Session["company"].ToString());
             LoadReservationList(Session["erp_id"].ToString(), Session["company"].ToString());
 
         }
