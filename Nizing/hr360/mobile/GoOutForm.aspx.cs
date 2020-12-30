@@ -516,7 +516,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
 
     protected void btnHideFormDetail_Click(object sender, EventArgs e)
     {
-        int[] columnsToBeVisible = { 0, 4, 5, 7, 8, 10, 13, 14 };
+        int[] columnsToBeVisible = { 0, 2, 3, 5, 8, 9, 10 };
         ShowGridViewDetail(gvReservationList, columnsToBeVisible, false);
         btnDisplayFormDetail.Visible = true;
         btnHideFormDetail.Visible = false;
