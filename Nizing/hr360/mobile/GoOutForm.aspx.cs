@@ -472,7 +472,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
 
     protected void btnDisplayFormDetail_Click(object sender, EventArgs e)
     {
-        int[] columnsToBeHidden = { 1, gvReservationList.Columns.Count - 1 };    //column 0 為指定結案(目前不使用)
+        int[] columnsToBeHidden = { 1 };
         ShowGridViewDetail(gvReservationList, columnsToBeHidden, true);
         btnDisplayFormDetail.Visible = false;
         btnHideFormDetail.Visible = true;
@@ -516,7 +516,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
 
     protected void btnHideFormDetail_Click(object sender, EventArgs e)
     {
-        int[] columnsToBeVisible = { 0, 2, 3, 5, 8, 9, 10 };
+        int[] columnsToBeVisible = { 0, 2, 3, 5, 8, 9, 10, 11 };
         ShowGridViewDetail(gvReservationList, columnsToBeVisible, false);
         btnDisplayFormDetail.Visible = true;
         btnHideFormDetail.Visible = false;
@@ -575,7 +575,7 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
     }
 
     protected void btnManualEndTripSubmit_Click(object sender, EventArgs e)
-    {   
+    {
         if (DateTime.Parse(txtManualEndTripBegin.Text) > DateTime.Parse(txtManualEndTripEnd.Text))
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('回程時間不可小於出發時間');", true);

@@ -333,7 +333,7 @@
                                     </asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField Visible="false">
+                            <asp:TemplateField>
                                 <ItemTemplate>
                                     <asp:LinkButton ID="btnManualEndTrip" runat="server" CssClass="btn-list text-decoration-none"
                                         ToolTip="指定結案"
