@@ -63,7 +63,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         //Session["company"] = "NIZING";
 
         //only use when opening check exception for certain persion
-        //exceptionList111.Add("0162");
+        exceptionList111.Add("0067");
         //exceptionList202designated.Add("0112");
         //exceptionList107.Add("0162");
         exceptionList110.Add("0067");
@@ -259,7 +259,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             test110 = true;
         }
 
-        if (Session["erp_id"].ToString() != "0067" && DateTime.ParseExact(txtDayOffDate.Text, "yyyy/MM/dd", new CultureInfo("zh-TW")) < DateTime.Today.AddDays(-2))    //測試錯誤 111.請假日期不得小於三日前
+        if (DateTime.ParseExact(txtDayOffDate.Text, "yyyy/MM/dd", new CultureInfo("zh-TW")) < DateTime.Today.AddDays(-3))    //測試錯誤 111.請假日期不得小於三日前
         {
             if (exceptionList111.Contains(Session["erp_id"].ToString().Trim()))
             {
@@ -267,10 +267,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
             }
             else
             {
-                errorList.Add(errorCode(111, "請假日期不得早於" + DateTime.Today.AddDays(-2).ToString("d", new CultureInfo("zh-TW"))));
+                errorList.Add(errorCode(111, "請假日期不得早於" + DateTime.Today.AddDays(-3).ToString("d", new CultureInfo("zh-TW"))));
                 test111 = false;
             }
-            //test111 = true;
         }
         else
         {
