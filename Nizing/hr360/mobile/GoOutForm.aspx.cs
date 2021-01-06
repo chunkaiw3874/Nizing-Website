@@ -67,8 +67,10 @@ public partial class hr360_mobile_GoOutForm : System.Web.UI.Page
             conn.Open();
             string query = "select max(FormId)" +
                 " from GoOutForm" +
-                " where FormId >= @uid ";
+                " where FormId like @goOutDate" +
+                " and FormId >= @uid ";
             SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@goOutDate", defaultUid.Substring(0, 7) + "%");
             cmd.Parameters.AddWithValue("@uid", defaultUid);
             uid = cmd.ExecuteScalar() == DBNull.Value ? defaultUid : (Convert.ToInt64(cmd.ExecuteScalar().ToString()) + 1).ToString();
         }
