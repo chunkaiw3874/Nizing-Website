@@ -195,9 +195,9 @@
                                     <asp:Label ID="lblInvName" runat="server" Text='<%#Eval("INV_NAME") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="安全庫存量">
+                            <asp:TemplateField HeaderText="售價">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblSafeInv" runat="server" Text='<%#Eval("AMOUNT_SAFETY") %>'></asp:Label>
+                                    <asp:Label ID="lblSalePrice" runat="server" Text='<%#Eval("SALE_PRICE") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
