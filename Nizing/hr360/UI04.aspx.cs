@@ -1408,7 +1408,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         + " FROM NZ.dbo.PALTF TF"
                         + " WHERE TF.TF001=@APPLICANT"
                         + " AND TF.TF002=CONVERT(NVARCHAR(8),CTE.DAYOFF_START_TIME,112)"
-                        + " AND TF.TF008=CONVERT(NVARCHAR(3),CTE.DAYOFF_TOTAL_TIME)"
+                        + " AND TF.TF008=CONVERT(NVARCHAR(3),CTE.DAYOFF_TOTAL_TIME)" +
+                        " AND TF.TF005=REPLACE(CONVERT(NVARCHAR(5),CTE.DAYOFF_START_TIME,108),':','')"
                         + " )"
                         + " THEN '已登入'"
                         + " ELSE '未登入'"
@@ -1551,7 +1552,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         + " 	FROM NZ.dbo.PALTF TF"
                         + " 	WHERE TF.TF001=CTE.APPLICANT_ID"
                         + " 	AND TF.TF002=CONVERT(NVARCHAR(8),CTE.DAYOFF_START_TIME,112)"
-                        + " 	AND TF.TF008=CONVERT(NVARCHAR(3),CTE.DAYOFF_TOTAL_TIME)"
+                        + " 	AND TF.TF008=CONVERT(NVARCHAR(3),CTE.DAYOFF_TOTAL_TIME)" +
+                        " AND TF.TF005=REPLACE(CONVERT(NVARCHAR(5),CTE.DAYOFF_START_TIME,108),':','')"
                         + " )"
                         + " THEN '已登入'"
                         + " ELSE '未登入'"
@@ -2882,7 +2884,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 + " 	FROM NZ.dbo.PALTF TF"
                 + " 	WHERE TF.TF001=CTE.APPLICANT_ID"
                 + " 	AND TF.TF002=CONVERT(NVARCHAR(8),CTE.DAYOFF_START_TIME,112)"
-                + " 	AND TF.TF008=CONVERT(NVARCHAR(3),CTE.DAYOFF_TOTAL_TIME)"
+                + " 	AND TF.TF008=CONVERT(NVARCHAR(3),CTE.DAYOFF_TOTAL_TIME)" +
+                " AND TF.TF005=REPLACE(CONVERT(NVARCHAR(5),CTE.DAYOFF_START_TIME,108),':','')"
                 + " )"
                 + " THEN '已登入'"
                 + " ELSE '未登入'"
