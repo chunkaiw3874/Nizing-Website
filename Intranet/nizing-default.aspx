@@ -86,6 +86,7 @@
                 <li>
                     <asp:ImageButton ID="ImageButton10" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/SD-5.png" PostBackUrl="~/nizing_intranet/ABC_Comparison.aspx" /></li>
                 <li><a href="nizing_intranet/SD02_KeyInFormAmount.aspx">打單數量報表</a></li>
+                <li><a href="nizing_intranet/SD_ReceivableReceived.aspx">業務兌現表</a></li>
             </ul>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">

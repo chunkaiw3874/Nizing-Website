@@ -70,7 +70,11 @@
                 <li>
                     <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD-1.png" PostBackUrl="~/employee_section/report/SD01.aspx" /></li>
                 <li>
-                    <asp:ImageButton ID="ImageButton5" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD-2.png" PostBackUrl="~/employee_section/report/SaleRecord.aspx" /></li>
+                    <asp:ImageButton ID="ImageButton5" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD-2.png" PostBackUrl="~/employee_section/report/SaleRecord.aspx" />
+                </li>                
+                <li>
+                    <a href="report/SD_ReceivableReceived.aspx">業務兌現表</a>
+                </li>
                 <%--<li><asp:ImageButton ID="ImageButton6" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD-3.png" PostBackUrl="~/employee_section/report/NewClientReport.aspx" /></li>--%>
                 <%--<li><asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD-4.png" PostBackUrl="~/employee_section/report/CustomerTransactionReport.aspx" /></li>--%>
                 <%--<li><asp:ImageButton ID="ImageButton10" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD-5.png" PostBackUrl="~/employee_section/report/ABC_Comparison.aspx" /></li>--%>
