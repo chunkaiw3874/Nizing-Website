@@ -1141,7 +1141,10 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(NZconnectionString))
         {
             conn.Open();
-            SqlCommand cmd = new SqlCommand("SELECT CMSMV.MV001 'id',CMSMV.MV002 'name',CMSMJ.MJ003 'job',CMSMV.MV031 'workYear'"
+            SqlCommand cmd = new SqlCommand("SELECT CMSMV.MV001 'id'" +
+                " ,CMSMV.MV002 'name'" +
+                " ,CMSMJ.MJ003 'job'" +
+                " ,year(GETDATE())-SUBSTRING(MV021,1,4)-1 'workYear'"
                                             + " FROM CMSMV"
                                             + " LEFT JOIN CMSMJ ON CMSMV.MV006=CMSMJ.MJ001"
                                             + " WHERE CMSMV.MV001=@ID", conn);

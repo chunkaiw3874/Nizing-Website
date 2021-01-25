@@ -29,7 +29,7 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
         //Session["erp_id"] = "0080";
         //Session["view_year"] = "2019";
         //////////////////////////////
-
+        
         if (!IsPostBack)
         {
             assessed = Session["erp_id"].ToString().Trim();
@@ -987,7 +987,7 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
         finalScoreRow.Controls.Add(div);
         lbl = new Label();
         lbl.CssClass = "form-control text-center text-color-green";
-        lbl.Text = string.IsNullOrEmpty(dtWeightedScore.Rows[0]["EvaluationScore"].ToString()) ? "未評核" : dtWeightedScore.Rows[0]["EvaluationScore"].ToString();            
+        lbl.Text = dtWeightedScore.Rows.Count <= 0 ? "未評核" : dtWeightedScore.Rows[0]["EvaluationScore"].ToString();            
         div.Controls.Add(lbl);        
     }
 
