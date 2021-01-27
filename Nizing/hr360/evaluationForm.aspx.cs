@@ -797,7 +797,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             {
                 lblErrorMessage.Text = "成績非數字格式";
             }
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('資料已送出');window.location='UI05.aspx'", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('資料已送出');window.location='mobile/UI05.aspx'", true);
         }
         catch (Exception ex)
         {
@@ -1417,20 +1417,10 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
 + " ELSE 1"
 + " END AS DAY_OFF_CATEGORY"
 + " , DAY_OFF_ID, DAY_OFF_TYPE"
-+ " , CASE"
-+ " WHEN CTE1.EMP_ID='0010'"
-+ " THEN"
-+ " CASE CTE1.DAY_OFF_UNIT"
-+ " WHEN N'天' THEN CONVERT(DECIMAL(16,2),CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)*8.5)"
-+ " WHEN N'分' THEN CONVERT(DECIMAL(16,2),CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)/60.0)"
-+ " ELSE CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)"
-+ " END"
-+ " ELSE"
-+ " CASE CTE1.DAY_OFF_UNIT"
++ " , CASE CTE1.DAY_OFF_UNIT"
 + " WHEN N'天' THEN CONVERT(DECIMAL(16,2),CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)*8.0)"
 + " WHEN N'分' THEN CONVERT(DECIMAL(16,2),CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)/60.0)"
 + " ELSE CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)"
-+ " END"
 + " END AS DAY_OFF_AMOUNT"
 + " , N'時' AS DAY_OFF_UNIT"
 + " FROM CTE1"
@@ -1441,19 +1431,11 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
 + " ,Summary.DAY_OFF_AMOUNT"
 + " ,Case Summary.DAY_OFF_ID"
 + " When '02' THEN CONVERT(DECIMAL(16,1),(TK.TK005-TK.TK006))"
-+ " When '03' Then"
-+ " CASE"
-+ " WHEN @ID='0010' THEN CONVERT(DECIMAL(16,1),TK.TK003)-(SELECT SUM(TF008)"
++ " When '03' Then CONVERT(DECIMAL(16,1),TK.TK003)-(SELECT SUM(TF008)"
 + " FROM PALTF"
 + " WHERE TF001=@ID"
 + " AND TF002 LIKE @YEAR+'%'"
 + " AND TF004='03')"
-+ " ELSE CONVERT(DECIMAL(16,1),TK.TK003)-(SELECT SUM(TF008)"
-+ " FROM PALTF"
-+ " WHERE TF001=@ID"
-+ " AND TF002 LIKE @YEAR+'%'"
-+ " AND TF004='03')"
-+ " End"
 + " Else 0"
 + " END AS DAY_OFF_TOTAL"
 + " ,Summary.DAY_OFF_UNIT"
