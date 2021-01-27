@@ -121,7 +121,7 @@ public partial class SD_ReceivableReceived : System.Web.UI.Page
                 " (" +
                 " select '現銷' '貨款收取方式'" +
                 " , COPTG.TG006 'SalesId'" +
-                " , sum(COPTH.TH037 + COPTH.TH038) 'ReceivableReceiveValue'" +
+                " , sum(coalesce(COPTH.TH037,0) + coalesce(COPTH.TH038,0)) 'ReceivableReceiveValue'" +
                 " from COPTG" +
                 " left join COPTH on COPTG.TG001 = COPTH.TH001 and COPTG.TG002 = COPTH.TH002" +
                 " where COPTG.TG001 = 'A233'" +
@@ -130,7 +130,7 @@ public partial class SD_ReceivableReceived : System.Web.UI.Page
                 " union" +
                 " select '匯款'" +
                 " ,ACRTC.TC015" +
-                " ,sum(ACRTD.TD015)" +
+                " ,sum(coalesce(ACRTD.TD015,0))" +
                 " from ACRTC" +
                 " left join ACRTD on ACRTC.TC001 = ACRTD.TD001 and ACRTC.TC002 = ACRTD.TD002 and ACRTD.TD004 = 1 and ACRTD.TD005 = '1'" +
                 " where ACRTC.TC017 between @begin and @end" +
@@ -138,7 +138,7 @@ public partial class SD_ReceivableReceived : System.Web.UI.Page
                 " union" +
                 " select '收票'" +
                 " ,NOTTC.TC016" +
-                " ,sum(NOTTC.TC003 * NOTTC.TC027)" +
+                " ,sum(coalesce(NOTTC.TC003 * NOTTC.TC027,0))" +
                 " from NOTTC" +
                 " left join NOTTD on NOTTC.TC001 = NOTTD.TD001 and NOTTD.TD004 = '6'" +
                 " where NOTTD.TD003 between @begin and @end" +
@@ -185,12 +185,6 @@ public partial class SD_ReceivableReceived : System.Web.UI.Page
                 tc1.Text = _strFooterName;
                 tc.Add(tc1);
             }
-            else if (i == 4 || i == 6 || i == 8)
-            {
-                tc1 = new TableCell();
-                tc1.BackColor = Color.Orange;
-                tc.Add(tc1);
-            }
             else
             {
                 tc.Add(new TableCell());
@@ -219,10 +213,7 @@ public partial class SD_ReceivableReceived : System.Web.UI.Page
                 sum = 0;
                 for (int j = 0; j < _gd.Rows.Count; j++)
                 {
-                    if (i != 9) //row 9 是 %，為字串
-                    {
-                        sum += decimal.Parse(((Label)_gd.Rows[j].Cells[i].FindControl("Label" + (i + 1).ToString())).Text, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);
-                    }
+                    sum += decimal.Parse(((Label)_gd.Rows[j].Cells[i].FindControl("Label" + (i + 1).ToString())).Text, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign);            
                 }
                 _gd.FooterRow.Cells[i].Text = sum.ToString("C", new CultureInfo("zh-TW")).Substring(0, sum.ToString("C", new CultureInfo("zh-TW")).Length - 3);
             }
