@@ -1,0 +1,27 @@
+﻿.table td, .table th {
+    /*border:initial;*/
+}
+
+th {
+    background-color: #29ABE2;
+    color: #FFFFFF
+}
+
+td {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+tr:nth-child(2n) td {
+    background-color: #c3e8f4;
+    color: #000000;
+}
+
+.tbody {
+    /*text-align: center;*/
+}
+
+tr:last-child td {
+    background-color: yellow;
+    /*text-align: center;*/
+}
