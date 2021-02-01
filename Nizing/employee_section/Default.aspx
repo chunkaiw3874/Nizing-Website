@@ -147,7 +147,7 @@
             </ul>
             <ul class="list-body">                
                 <li>
-                    <asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/employee_section/report/image/button/dept/ADM-01.png" PostBackUrl="~/employee_section/report/SD_SalesBonusCalculator.aspx" />
+                    <asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/employee_section/report/image/button/dept/ADM-01.png" PostBackUrl="~/employee_section/report/ADM_SalesBonusCalculator.aspx" />
                 </li>
                 <li>
                     <asp:ImageButton ID="ImageButton10" runat="server" ImageUrl="~/employee_section/report/image/button/dept/ADM-02.png" PostBackUrl="~/employee_section/report/SD_ProfitMarginByProductReport.aspx" />

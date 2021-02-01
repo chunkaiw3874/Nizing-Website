@@ -21,7 +21,7 @@ tr:nth-child(2n) td {
     /*text-align: center;*/
 }
 
-tr:last-child td {
+.tfooter {
     background-color: yellow;
     /*text-align: center;*/
 }
