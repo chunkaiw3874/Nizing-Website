@@ -76,14 +76,14 @@
                                     <asp:Label ID="lblMV002" runat="server"></asp:Label>
                                 </td>
                             </tr>
-                            <tr>
+                            <%--<tr>
                                 <td style="font-weight:bold;">
                                     年齡:
                                 </td>
                                 <td>
                                     <asp:Label ID="lblAge" runat="server"></asp:Label>
                                 </td>
-                            </tr>
+                            </tr>--%>
                             <tr>
                                 <td style="font-weight:bold;">
                                     職務名稱:

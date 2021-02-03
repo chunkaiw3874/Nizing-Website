@@ -61,7 +61,7 @@ public partial class hr360_user_report_salary_change_notification : System.Web.U
                 lblM.Text = DateTime.Today.Month.ToString("D2");
                 lblMF001.Text = structureTabTable.Rows[0][0].ToString();
                 lblMV002.Text = structureTabTable.Rows[0][1].ToString();
-                lblAge.Text = structureTabTable.Rows[0][3].ToString();
+                //lblAge.Text = structureTabTable.Rows[0][3].ToString();
                 lblMJ003.Text = structureTabTable.Rows[0][5].ToString();
                 lblME002.Text = structureTabTable.Rows[0][7].ToString();
                 lblLastYear.Text = DateTime.Today.AddYears(-1).Year.ToString();
