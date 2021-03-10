@@ -191,7 +191,7 @@
                                         訂單未交數量
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label4" runat="server" Text='<%#Eval("amountUndelivered") %>'></asp:Label>
+                                        <asp:Label ID="Label4" runat="server" ForeColor="OrangeRed" Text='<%#Eval("amountUndelivered") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
 
