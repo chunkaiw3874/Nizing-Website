@@ -22,7 +22,11 @@
                     <%--<a href="sunrise_intranet/SD_PastCostsAndPrices.aspx">業務報價系統</a>--%>
                     <asp:ImageButton ID="ImageButton3" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/SD_PastCostsAndPrices.png" PostBackUrl="~/sunrise_intranet/SD_PastCostsAndPrices.aspx" /></li>
                 <li>
-                    <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/SD-1.png" PostBackUrl="~/sunrise_intranet/SD01.aspx" /></li>
+                    <a href="sunrise_intranet/SD01.aspx">車材業績排名表</a>
+                    <%--<asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/SD-1.png" PostBackUrl="~/sunrise_intranet/SD01.aspx" />--%></li>
+                <li>
+                    <a href="sunrise_intranet/SD01Car.aspx">車業業績排名表</a>
+                </li>
                 <li>
                     <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/OrderInProgress.png" PostBackUrl="~/sunrise_intranet/SD03_OrderInProgress.aspx" />
                 </li>
