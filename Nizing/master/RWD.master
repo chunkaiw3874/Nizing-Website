@@ -1,0 +1,372 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="RWD.master.cs" Inherits="master_RWD" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="../images/icon/nizing.ico.gif" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../Content/slick/slick.css" />
+    <link href="../Content/slick/slick-theme.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/32e9a84b4a.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../Content/slick/slick.min.js"></script>
+
+    <style>
+        body {
+            padding-top: 56px;
+        }
+
+        .container-fluid {
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #585858;
+            opacity: 0.8;
+        }
+
+            .navbar .navbar-brand {
+                color: #585858;
+                filter: invert(1) brightness(1.5);
+            }
+
+            .navbar .nav-link {
+                color: #585858;
+                filter: invert(1) brightness(1.5);
+            }
+
+        .navbar-toggler {
+            color: #585858;
+            filter: invert(1) brightness(1.5);
+        }
+
+        .fa-search, .dropdown-item {
+            cursor: pointer;
+        }
+
+        nav i {
+            color: #585858;
+            filter: invert(1) brightness(1.5);
+        }
+
+        nav hr {
+            border-color: white;
+        }
+
+        .pinned-item {
+            display: inline-block;
+        }
+
+        .footer {
+            padding-left: 20px;
+            background-color: #585858;
+            color: #f7f7f7;
+        }
+
+            .footer .card {
+                margin-bottom: 30px;
+                font-size: smaller;
+            }
+
+            .footer .card-title {
+                color: #d7d7d7;
+                font-size: 0.9rem;
+                font-weight: bold;
+            }
+
+            .footer .card-body {
+                padding: 0px;
+                font-size: 0.7rem;
+            }
+
+                .footer .card-body .card-link.img {
+                    font-size: 2rem;
+                }
+
+                .footer .card-body li {
+                    padding: 0px;
+                }
+
+                .footer .card-body a {
+                    color: #d7d7d7;
+                }
+
+                    .footer .card-body a:hover {
+                        cursor: pointer;
+                        color: #ffffff;
+                        transition: font-size linear 0.1s;
+                    }
+
+            .footer .card, .footer .list-group-item {
+                text-align: left;
+                background-color: inherit;
+                border: 0px;
+            }
+
+            .footer .disclaimer {
+                font-size: 0.7rem;
+            }
+
+        @media all and (min-width: 768px) {
+            /*body{
+                padding-top:0px;
+            }*/
+            .navbar .nav-item .dropdown-menu {
+                display: none;
+            }
+
+            .navbar .nav-item:hover .nav-link {
+                /*color: #fff;*/
+            }
+
+            .navbar .nav-item:hover .dropdown-menu {
+                display: block;
+            }
+
+            .navbar .nav-item .dropdown-menu {
+                margin-top: 0;
+            }
+
+            .footer {
+                padding-left: 0px;
+            }
+
+                .footer .card-title {
+                    margin: 0 40px;
+                    padding-bottom: 10px;
+                }
+
+                .footer .card, .footer .list-group-item {
+                    text-align: left;
+                }
+
+                .footer .card-body li {
+                    padding-top: 10px;
+                    padding-left: 40px;
+                }
+        }
+    </style>
+
+    <script type="text/javascript">
+        (function () {
+            var cx = '010054550380540391242:bbpyczxrrro';
+            var gcse = document.createElement('script');
+            gcse.type = 'text/javascript';
+            gcse.async = true;
+            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                '//cse.google.com/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(gcse, s);
+        })();
+    </script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-61636827-1', 'auto');
+        ga('send', 'pageview');
+
+        function pageLoad(sender, args) {
+        };
+    </script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container-fluid">
+            <header runat="server" id="navigation">
+                <nav class="navbar navbar-expand-lg fixed-top">
+                    <a class="navbar-brand" href="#">N</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavContent">
+                        <span class="fas fa-bars"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="NavContent">
+                        <ul runat="server" id="divNavContentList"
+                            class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        </ul>
+                        <hr />
+
+                        <div class="mr-3 pinned-item">
+                            <a data-toggle="modal" data-target="#gcse" title="搜尋網站">
+                                <div style="color: white">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="dropdown mr-3 pinned-item">
+                            <a data-toggle="dropdown" aria-expanded="false" title="變更語言"
+                                style="cursor: pointer;">
+                                <i class="fas fa-globe"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-lg-right">
+                                <asp:LinkButton ID="lnkToMandarin" CssClass="dropdown-item" runat="server" OnClick="ChangeLanguage">中文</asp:LinkButton>
+                                <asp:LinkButton ID="lnkToEnglish" CssClass="dropdown-item" runat="server" OnClick="ChangeLanguage">English</asp:LinkButton>
+                            </div>
+                        </div>
+                        <div class="pinned-item">
+                            <a href="/portal.aspx" target="_blank" title="職員專區">
+                                <i class="fas fa-user"></i>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+                <div id="gcse" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <%--Google Search Engine Here--%>
+                                <div class="gcse-searchbox-only">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </header>
+
+        </div>
+        <asp:ContentPlaceHolder ID="body" runat="server">
+        </asp:ContentPlaceHolder>
+        <div class="footer">
+            <div class="pt-3">
+                <div class="row row-m-0 row-cols-1 row-cols-md-5 w-100">
+                    <div class="col col-px-0">
+                        <div class="card">
+                            <div class="card-title">
+                                日進
+                            </div>
+                            <nav class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <a class="card-link"
+                                            href="company-culture.aspx">核心文化</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a class="card-link"
+                                            href="company-capability.aspx">設備技術</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col col-px-0">
+                        <div class="card">
+                            <div class="card-title">
+                                產品
+                            </div>
+                            <nav class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <a class="card-link"
+                                            href="product.aspx">產品總覽</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a class="card-link"
+                                            href="application.aspx">應用產業</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col col-px-0">
+                        <div class="card">
+                            <div class="card-title">
+                                聲明
+                            </div>
+                            <nav class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <a class="card-link"
+                                            href="conflict-free-mineral-declaration.aspx">無衝突金屬聲明</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col col-px-0">
+                        <div class="card">
+                            <div class="card-title">
+                                連結
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <a class="card-link"
+                                            target="_blank"
+                                            href="https://finance.sina.com.cn/futures/quotes/CAD.shtml">銅價</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a class="card-link"
+                                            target="_blank"
+                                            href="https://taiwan.ul.com/">UL</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a class="card-link"
+                                            target="_blank"
+                                            href="https://www.vde.com/en">VDE</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-px-0">
+                        <div class="card">
+                            <div class="card-title">
+                                聯繫
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <a class="card-link"
+                                            href="https://www.google.com/maps/place/%E6%97%A5%E9%80%B2%E9%9B%BB%E7%B7%9A%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8/@25.0587124,121.4718232,17z/data=!4m12!1m6!3m5!1s0x3442a7e768a1d123:0x1b3b1220987a8188!2z5pel6YCy6Zu757ea6IKh5Lu95pyJ6ZmQ5YWs5Y-4!8m2!3d25.0587076!4d121.4740119!3m4!1s0x3442a7e768a1d123:0x1b3b1220987a8188!8m2!3d25.0587076!4d121.4740119">地址: 新北市三重區光復路二段87巷10-12號</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a class="card-link"
+                                            href="tel:+886229999181">電話: 02-2999-9181
+                                        </a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a class="card-link">傳真: 02-2999-9771</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a class="card-link img"
+                                            href="https://www.facebook.com/NIZING.ELECTRIC/">
+                                            <i class="fab fa-facebook-square"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="disclaimer pt-3 pb-1">
+                <div class="row row-cols-1 w-100 text-center">
+                    <span>©2021 Nizing Electric Wire & Cable Co., Ltd
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
