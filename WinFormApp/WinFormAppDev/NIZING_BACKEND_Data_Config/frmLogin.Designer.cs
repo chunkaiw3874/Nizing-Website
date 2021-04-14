@@ -43,9 +43,9 @@ namespace NIZING_BACKEND_Data_Config
             this.bACKENDFUNCTIONLISTBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dsBackendLoginAccount = new NIZING_BACKEND_Data_Config.dsBackendLoginAccount();
             this.label3 = new System.Windows.Forms.Label();
+            this.lblVersion = new System.Windows.Forms.Label();
             this.dsBackendLoginAccountBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bACKEND_FUNCTION_LISTTableAdapter = new NIZING_BACKEND_Data_Config.dsBackendLoginAccountTableAdapters.BACKEND_FUNCTION_LISTTableAdapter();
-            this.lblVersion = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbpnlLogin.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -207,15 +207,6 @@ namespace NIZING_BACKEND_Data_Config
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label3.Click += new System.EventHandler(this.fastLogin);
             // 
-            // dsBackendLoginAccountBindingSource
-            // 
-            this.dsBackendLoginAccountBindingSource.DataSource = this.dsBackendLoginAccount;
-            this.dsBackendLoginAccountBindingSource.Position = 0;
-            // 
-            // bACKEND_FUNCTION_LISTTableAdapter
-            // 
-            this.bACKEND_FUNCTION_LISTTableAdapter.ClearBeforeFill = true;
-            // 
             // lblVersion
             // 
             this.lblVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -224,6 +215,15 @@ namespace NIZING_BACKEND_Data_Config
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(0, 12);
             this.lblVersion.TabIndex = 1;
+            // 
+            // dsBackendLoginAccountBindingSource
+            // 
+            this.dsBackendLoginAccountBindingSource.DataSource = this.dsBackendLoginAccount;
+            this.dsBackendLoginAccountBindingSource.Position = 0;
+            // 
+            // bACKEND_FUNCTION_LISTTableAdapter
+            // 
+            this.bACKEND_FUNCTION_LISTTableAdapter.ClearBeforeFill = true;
             // 
             // frmLogin
             // 

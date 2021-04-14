@@ -526,10 +526,11 @@ namespace NIZING_BACKEND_Data_Config
                 ckxCompanyAnnouncementVisible.Checked = (bool)gv.SelectedRows[0].Cells["VISIBLE"].Value;
                 ckxCompanyAnnouncementOnTop.Checked = (bool)gv.SelectedRows[0].Cells["ON_TOP"].Value;
                 txtCompanyAnnouncementBody.Text = gv.SelectedRows[0].Cells["BODY"].Value.ToString();
-                companyAnnouncementAttachmentFilePath = Path.Combine(Application.StartupPath, @"..\..\attachment\company_announcement\" + lblCompanyAnnouncementID.Text + @"\");
+                //companyAnnouncementAttachmentFilePath = Path.Combine(Application.StartupPath, @"..\..\attachment\company_announcement\" + lblCompanyAnnouncementID.Text + @"\");
+                companyAnnouncementAttachmentFilePath = @"\\192.168.10.222\Web\Nizing\hr360\attachment\company-announcement\" + lblCompanyAnnouncementID.Text + @"\";
                 if (Directory.Exists(companyAnnouncementAttachmentFilePath))
                 {
-                    MessageBox.Show(companyAnnouncementAttachmentFilePath);
+                    //MessageBox.Show(companyAnnouncementAttachmentFilePath);
                     foreach (string fName in Directory.GetFiles(companyAnnouncementAttachmentFilePath))
                     {
                         clbCompanyAnnouncementAttachmentList.Items.Add(Path.GetFileName(fName));
@@ -1301,7 +1302,8 @@ namespace NIZING_BACKEND_Data_Config
                     ofg.Multiselect = true;
                     if (ofg.ShowDialog() == DialogResult.OK)
                     {
-                        string destination = Path.Combine(Application.StartupPath, @"..\..\attachment\company_announcement\" + lblCompanyAnnouncementID.Text + @"\");
+                        //string destination = Path.Combine(Application.StartupPath, @"\\192.168.10.222\Web\Nizing\hr360\attachment\" + lblCompanyAnnouncementID.Text + @"\");
+                        string destination = @"\\192.168.10.222\Web\Nizing\hr360\attachment\company-announcement\" + lblCompanyAnnouncementID.Text + @"\";
                         System.IO.Directory.CreateDirectory(destination);
                         foreach(string srcFileName in ofg.FileNames)
                         {
@@ -1328,7 +1330,7 @@ namespace NIZING_BACKEND_Data_Config
             {
                 if (clbCompanyAnnouncementAttachmentList.CheckedItems.Contains(clbCompanyAnnouncementAttachmentList.Items[i - 1]))
                 {
-                    string fullFileName = companyAnnouncementAttachmentFilePath + clbCompanyAnnouncementAttachmentList.Items[i - 1].ToString();
+                    string fullFileName = @"\\192.168.10.222\Web\Nizing\hr360\attachment\company-announcement\" + lblCompanyAnnouncementID.Text + @"\" + clbCompanyAnnouncementAttachmentList.Items[i - 1].ToString();
                     if (File.Exists(fullFileName))
                     {
                         File.Delete(fullFileName);

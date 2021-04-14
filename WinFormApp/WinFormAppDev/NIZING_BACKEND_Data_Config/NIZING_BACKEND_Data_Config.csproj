@@ -24,7 +24,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>25</ApplicationRevision>
+    <ApplicationRevision>29</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -55,10 +55,10 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>45F3E1840C1112C56EF9DA71D544DFEB741AD903</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>FB217B89764DB7AD082CB7D1646D203C334C6A10</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>newKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>NIZING_BACKEND_Data_Config_2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -71,7 +71,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>newKey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>NIZING_BACKEND_Data_Config_2_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -134,6 +134,12 @@
     <Compile Include="frmBackend_Main.Designer.cs">
       <DependentUpon>frmBackend_Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmWEB_Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWEB_Main.Designer.cs">
+      <DependentUpon>frmWEB_Main.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmDPR_Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmBackend_Main.resx">
       <DependentUpon>frmBackend_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWEB_Main.resx">
+      <DependentUpon>frmWEB_Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDPR_Main.resx">
       <DependentUpon>frmDPR_Main.cs</DependentUpon>
@@ -263,8 +272,7 @@
       <DependentUpon>dsOQS_ProductInfo.xsd</DependentUpon>
     </None>
     <None Include="newKey.pfx" />
-    <None Include="NIZING_BACKEND_Data_Config_1_TemporaryKey.pfx" />
-    <None Include="NIZING_BACKEND_Data_Config_TemporaryKey.pfx" />
+    <None Include="NIZING_BACKEND_Data_Config_2_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -306,9 +314,7 @@
       <Name>nizingBackendUserControlLib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="attachment\company_announcement\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />

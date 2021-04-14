@@ -91,6 +91,15 @@ namespace NIZING_BACKEND_Data_Config
                     frmHR360.Show();
                     sourceForm.Hide();
                     break;
+                case "WEB":
+                    var frmWEB = new frmWEB_Main(this);
+                    frmWEB.Location = this.Location;
+                    frmWEB.StartPosition = FormStartPosition.Manual;
+                    frmWEB.FormClosing += delegate { Application.Exit(); };
+                    frmWEB.UserName = this.UserName;
+                    frmWEB.Show();
+                    sourceForm.Hide();
+                    break;
                 default:
                     break;
             }
@@ -132,13 +141,9 @@ namespace NIZING_BACKEND_Data_Config
             var tempRow = dtLoginAccount.Select("LOGIN_ID='" + txtUserName.Text.Trim().ToUpper() + "'");
             DataTable dtVerifyLogin = tempRow.Any()? tempRow.CopyToDataTable() : dtLoginAccount.Clone();
 
-            if (dtVerifyLogin.Rows.Count == 0)
+            if (dtVerifyLogin.Rows.Count == 0 || dtVerifyLogin.Rows[0]["PASSWORD"].ToString() != txtPassword.Text)
             {
-                lblLoginStatus.Text = "使用者不存在";
-            }
-            else if (dtVerifyLogin.Rows[0]["PASSWORD"].ToString() != txtPassword.Text)
-            {
-                lblLoginStatus.Text = "密碼錯誤";
+                lblLoginStatus.Text = "使用者/密碼錯誤";
             }
             else
             {
