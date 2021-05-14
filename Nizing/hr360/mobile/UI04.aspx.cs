@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-//using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -58,9 +57,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "0023";    //test only to avoid error on loading, delete after trial            
-        //Session["erp_id"] = "0023";
-        //Session["company"] = "NIZING";
+        //HR360LoggedUser.HR360Id = "0023";    //test only to avoid error on loading, delete after trial            
+        //HR360LoggedUser.ERPId = "0023";
+        //HR360LoggedUser.Company = "NIZING";
 
         //only use when opening check exception for certain persion
         exceptionList111.Add("0067");
@@ -71,7 +70,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         exceptionListHourForProduction.Add("0160"); //阿豪
 
 
-        if (Session["user_id"].ToString().ToUpper().Trim() != "ADMIN")  //admin doesnt have the proper erp information and will crash the system
+        if (HR360LoggedUser.HR360Id.ToUpper().Trim() != "ADMIN")  //admin doesnt have the proper erp information and will crash the system
         {
             if (!IsPostBack)
             {
@@ -104,7 +103,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     ////Test for Different ID
     //protected void btnTestName_Click(object sender, EventArgs e)
     //{
-    //    Session["erp_id"] = txtTestName.Text.Trim();
+    //    HR360LoggedUser.ERPId = txtTestName.Text.Trim();
     //    lblTest.Text = "測試帳號" + txtTestName.Text.Trim();
     //}
     ////Test for simple email construction
@@ -249,7 +248,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             test108 = true;
         }
         if (DateTime.ParseExact(txtDayOffDate.Text, "yyyy/MM/dd", new CultureInfo("zh-TW")).Year != DateTime.Today.Year
-            && !exceptionList110.Contains(Session["erp_id"].ToString()))  //測試錯誤 110.僅能請本年度的假
+            && !exceptionList110.Contains(HR360LoggedUser.ERPId))  //測試錯誤 110.僅能請本年度的假
         {
             errorList.Add(errorCode(110));
             test110 = false;
@@ -261,7 +260,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
         if (DateTime.ParseExact(txtDayOffDate.Text, "yyyy/MM/dd", new CultureInfo("zh-TW")) < DateTime.Today.AddDays(-3))    //測試錯誤 111.請假日期不得小於三日前
         {
-            if (exceptionList111.Contains(Session["erp_id"].ToString().Trim()))
+            if (exceptionList111.Contains(HR360LoggedUser.ERPId))
             {
                 test111 = true;
             }
@@ -301,7 +300,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         + " AND MB.MB002=@YYYYMM";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@YYYYMMDD", dayOffStartTime.Date.ToString("yyyyMMdd"));
-                cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                cmd.Parameters.AddWithValue("@ID", HR360LoggedUser.ERPId);
                 cmd.Parameters.AddWithValue("@YYYYMM", dayOffStartTime.Date.ToString("yyyyMM"));
                 using (SqlDataReader dr = cmd.ExecuteReader())
                 {
@@ -386,7 +385,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         if (timeDifference.Hours != 0 || timeDifference.Minutes != 0)
                         {
                             //判斷假期開始時間是否合理
-                            if (hdnOfficeOrProduction.Value == "production" && !typhoonDay && !exceptionListHourForProduction.Contains(Session["erp_id"].ToString()))  //除非是颱風假，線廠人員僅能以上、下午為單位請假                                
+                            if (hdnOfficeOrProduction.Value == "production" && !typhoonDay && !exceptionListHourForProduction.Contains(HR360LoggedUser.ERPId))  //除非是颱風假，線廠人員僅能以上、下午為單位請假                                
                             {
                                 if ((!(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(3, 2))     //開始放假時間(hhmm)!=開始上班時間
                                     && !(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(3, 2))  //開始放假時間(hhmm)!=休息開始時間
@@ -427,7 +426,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         if (timeDifference.Hours != 0 || timeDifference.Minutes != 0)
                         {
                             //判斷假期開始時間是否合理
-                            if (hdnOfficeOrProduction.Value == "production" && !typhoonDay && !exceptionListHourForProduction.Contains(Session["erp_id"].ToString()))  //除非是颱風假，線廠人員僅能以上、下午為單位請假                                
+                            if (hdnOfficeOrProduction.Value == "production" && !typhoonDay && !exceptionListHourForProduction.Contains(HR360LoggedUser.ERPId))  //除非是颱風假，線廠人員僅能以上、下午為單位請假                                
                             {
                                 if ((!(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][3].ToString().Substring(3, 2))     //開始放假時間(hhmm)!=開始上班時間
                                     && !(workStartTime.Hour.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(0, 2) && workStartTime.Minute.ToString("D2") == dtDayOffDaysInfo.Rows[i][5].ToString().Substring(3, 2))  //開始放假時間(hhmm)!=休息開始時間
@@ -536,7 +535,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 }
                 if (test102 && test103 && test104)
                 {
-                    if (!exceptionList107.Contains(Session["erp_id"].ToString().Trim()))
+                    if (!exceptionList107.Contains(HR360LoggedUser.ERPId))
                     {
                         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))  //測試錯誤 107.申請人於此時段已代理他人，不可請假
                         {
@@ -550,7 +549,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                                         + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
                                         + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
                             SqlCommand cmd = new SqlCommand(query, conn);
-                            cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                            cmd.Parameters.AddWithValue("@ID", HR360LoggedUser.ERPId);
                             cmd.Parameters.AddWithValue("@STARTTIME", dayOffStartTime);
                             cmd.Parameters.AddWithValue("@ENDTIME", dayOffEndTime);
                             using (SqlDataReader dr = cmd.ExecuteReader())
@@ -632,14 +631,14 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     }
                     //totalDayOffRemain = decimal.Parse(Session["makeupDayOff"].ToString()) - r;
                     totalDayOffRemain = decimal.Parse(lblDayOffRemainAmount.Text) - r;
-                    if (totalDayOffAmount > totalDayOffRemain && !exceptionList202makeup.Contains(Session["erp_id"].ToString().Trim()))
+                    if (totalDayOffAmount > totalDayOffRemain && !exceptionList202makeup.Contains(HR360LoggedUser.ERPId))
                     {
                         errorList.Add(errorCode(202, "於請假日期，補休時數僅剩餘" + totalDayOffRemain.ToString() + "小時"));
                     }
                 }
                 else if (ddlDayOffType.SelectedValue == "03" && !IsDataTableEmpty(dtDayOffDaysInfo))  //特休(03)用此判斷 依據請假日期會有2種可能
                 {
-                    if (exceptionList202designated.Contains(Session["erp_id"].ToString().Trim()))
+                    if (exceptionList202designated.Contains(HR360LoggedUser.ERPId.Trim()))
                     {
 
                     }
@@ -647,8 +646,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     {
                         r = 0;
                         DateTime dayOffStartDate = DateTime.ParseExact(dtDayOffDaysInfo.Rows[0]["日期"].ToString(), "yyyyMMdd", null);
-                        DateTime startWorkDate = DateTime.ParseExact(Session["startYear"].ToString() + Session["startDate"].ToString(), "yyyyMMdd", null);
-                        DateTime relevantWorkDate = DateTime.ParseExact(dayOffStartDate.Year.ToString() + Session["startDate"].ToString(), "yyyyMMdd", null);
+                        DateTime startWorkDate = HR360LoggedUser.StartDate;
+                        DateTime relevantWorkDate = new DateTime(DateTime.Today.Year, HR360LoggedUser.StartDate.Month, HR360LoggedUser.StartDate.Day);
                         /*
                          * 兩種可能性的計算方式                    
                          */
@@ -745,7 +744,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     + " OR (DAYOFF_START_TIME < @ENDTIME AND DAYOFF_END_TIME >= @ENDTIME)"
                     + " OR (DAYOFF_START_TIME >= @STARTTIME AND DAYOFF_END_TIME <= @ENDTIME))";
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                cmd.Parameters.AddWithValue("@ID", HR360LoggedUser.ERPId);
                 cmd.Parameters.AddWithValue("@STARTTIME", dayOffStartTime);
                 cmd.Parameters.AddWithValue("@ENDTIME", dayOffEndTime);
                 using (SqlDataReader dr = cmd.ExecuteReader())
@@ -971,7 +970,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 //        + " WHERE MC.MC001<>'02' AND MC.MC001<>'03'"
                 //        + " GROUP BY MC.MC001,MC.MC007,MC.MC004,APP.TOTAL_DAYOFF_TIME";
                 //    SqlCommand cmd = new SqlCommand(query, conn);
-                //    cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString().Trim());
+                //    cmd.Parameters.AddWithValue("@ID", HR360LoggedUser.ERPId.Trim());
                 //    cmd.Parameters.AddWithValue("@YEAR", DateTime.Now.Year.ToString().Trim());
                 //    //cmd.Parameters.AddWithValue("@YEAR", txtDayOffDate.Text.Substring(0,4));
                 //    using (SqlDataReader dr = cmd.ExecuteReader())
@@ -1081,7 +1080,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             conn.Open();
             SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@ApplicantID", Session["erp_id"].ToString());
+            cmd.Parameters.AddWithValue("@ApplicantID", HR360LoggedUser.ERPId);
             cmd.Parameters.AddWithValue("@DayOffID", dt.Rows[0]["ID"].ToString());
             cmd.Parameters.AddWithValue("@Year", year);
             cmd.Parameters.AddWithValue("@Month", month.ToString("D2"));
@@ -1108,7 +1107,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             conn.Open();
             SqlCommand cmd = new SqlCommand(query + where, conn);
-            cmd.Parameters.AddWithValue("@ApplicantID", Session["erp_id"].ToString());
+            cmd.Parameters.AddWithValue("@ApplicantID", HR360LoggedUser.ERPId);
             cmd.Parameters.AddWithValue("@DayOffID", ddlDayOffType.SelectedValue);
             cmd.Parameters.AddWithValue("@Year", year);
             cmd.Parameters.AddWithValue("@Month", month.ToString("D2"));
@@ -1422,7 +1421,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         + " FROM NZ.dbo.PALTF TF"
                         + " WHERE TF.TF001=@APPLICANT"
                         + " AND TF.TF002=CONVERT(NVARCHAR(8),CTE.DAYOFF_START_TIME,112)"
-                        + " AND TF.TF008=CONVERT(NVARCHAR(3),CTE.DAYOFF_TOTAL_TIME)"
+                        + " AND TF.TF008=CONVERT(NVARCHAR(3),CTE.DAYOFF_TOTAL_TIME)" +
+                        " AND TF.TF005=REPLACE(CONVERT(NVARCHAR(5),CTE.DAYOFF_START_TIME,108),':','')"
                         + " )"
                         + " THEN '已登入'"
                         + " ELSE '未登入'"
@@ -1430,7 +1430,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         + " FROM CTE"
                         + " ORDER BY APPLICATION_ID";
             SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@APPLICANT", Session["erp_id"].ToString());
+            cmd.Parameters.AddWithValue("@APPLICANT", HR360LoggedUser.ERPId);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
         }
@@ -1565,7 +1565,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         + " 	FROM NZ.dbo.PALTF TF"
                         + " 	WHERE TF.TF001=CTE.APPLICANT_ID"
                         + " 	AND TF.TF002=CONVERT(NVARCHAR(8),CTE.DAYOFF_START_TIME,112)"
-                        + " 	AND TF.TF008=CONVERT(NVARCHAR(3),CTE.DAYOFF_TOTAL_TIME)"
+                        + " 	AND TF.TF008=CONVERT(NVARCHAR(3),CTE.DAYOFF_TOTAL_TIME)" +
+                        " AND TF.TF005=REPLACE(CONVERT(NVARCHAR(5),CTE.DAYOFF_START_TIME,108),':','')"
                         + " )"
                         + " THEN '已登入'"
                         + " ELSE '未登入'"
@@ -1573,7 +1574,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         + " FROM CTE"
                         + " ORDER BY CTE.APP_STATUS,CTE.APPLICATION_ID";
             SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+            cmd.Parameters.AddWithValue("@ID", HR360LoggedUser.ERPId);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
         }
@@ -1836,7 +1837,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@APPLICATION_ID", withdrawID);
             cmd.Parameters.AddWithValue("@ACTION_TIME", DateTime.Now);
-            cmd.Parameters.AddWithValue("@EXECUTOR_ID", Session["erp_id"].ToString());
+            cmd.Parameters.AddWithValue("@EXECUTOR_ID", HR360LoggedUser.ERPId);
             cmd.Parameters.AddWithValue("@ACTION_ID", "04");
             cmd.Parameters.AddWithValue("@STATUS_ID", (Convert.ToInt16(appStatusId) + 1).ToString("D2"));
             cmd.ExecuteNonQuery();
@@ -1859,7 +1860,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     protected void btnApprove_Click(object sender, EventArgs e)
     {
         string nextReviewer;
-        string erpId = Session["erp_id"].ToString();
+        //string erpId = HR360LoggedUser.ERPId;
         string[] list = hdnApprovalPendingSelection.Value.ToString().Split(',');
         if (list.Count() > 0)
         {
@@ -1893,7 +1894,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 }
                 else
                 {
-                    nextReviewer = erpId;
+                    nextReviewer = HR360LoggedUser.ERPId;
                 }
 
                 do
@@ -1953,7 +1954,12 @@ public partial class hr360_UI04 : System.Web.UI.Page
                                 + " AND HIER.[RANK] BETWEEN 2 AND 7"
                                 + " AND MV.MV004<>'B-C'"  //SPECIAL RULE FOR 上膠部，因為沒人會電腦，故上膠部請假直接到第二層，由生管口頭詢問上膠主管 (DELETE WHEN SITUATION CHANGES)
                                 + " AND MV.MV004<>'A-SD'"   //KELVEN不需要簽核，業務部主管簽核由SYSTEM直接過 (DELETE WHEN SITUATION CHANGES)
-                                + " ORDER BY HIER.[RANK] DESC,MV.MV001";
+                                + " ORDER BY HIER.[RANK] DESC" +
+                                " ,case" +  //當有相通的部門時，如果兩個部門有同rank的主管，則會優先選擇與請假者同部門的主管
+                                " when MV.MV004 = @DEPT then 1" +
+                                " else 2" +
+                                " end" +
+                                " ,MV.MV001";
                             cmd = new SqlCommand(query, conn);
                             cmd.Parameters.AddWithValue("@ID", applicantID);
                             cmd.Parameters.AddWithValue("@DEPT", dt.Rows[0][0].ToString().Trim());
@@ -2146,7 +2152,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         + " VALUES(@APP_ID,GETDATE(),@EXE_ID,'03',@MEMO,@STATUS_ID)";
             cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@APP_ID", denyID);
-            cmd.Parameters.AddWithValue("@EXE_ID", Session["erp_id"].ToString());
+            cmd.Parameters.AddWithValue("@EXE_ID", HR360LoggedUser.ERPId);
             cmd.Parameters.AddWithValue("@MEMO", hdnDenyReason.Value);
             cmd.Parameters.AddWithValue("@STATUS_ID", (Convert.ToInt16(appStatusId) + 1).ToString("D2"));
             cmd.ExecuteNonQuery();
@@ -2207,7 +2213,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@APPLICATION_ID", uid);
                     cmd.Parameters.AddWithValue("@APPLICATION_DATE", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@APPLICANT_ID", Session["erp_id"].ToString().Trim());
+                    cmd.Parameters.AddWithValue("@APPLICANT_ID", HR360LoggedUser.ERPId.Trim());
                     cmd.Parameters.AddWithValue("@DAYOFF_ID", dayoff.typeID);
                     cmd.Parameters.AddWithValue("@DAYOFF_NAME", dayoff.typeName);
                     cmd.Parameters.AddWithValue("@DAYOFF_START_TIME", dayoff.startTime);
@@ -2239,7 +2245,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@APPLICATION_ID", uid);
                     cmd.Parameters.AddWithValue("@ACTION_TIME", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@EXECUTOR_ID", Session["erp_id"].ToString());
+                    cmd.Parameters.AddWithValue("@EXECUTOR_ID", HR360LoggedUser.ERPId);
                     cmd.Parameters.AddWithValue("@ACTION_ID", "01");
                     cmd.Parameters.AddWithValue("@STATUS_ID", "01");
                     cmd.ExecuteNonQuery();
@@ -2255,7 +2261,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         cmd = new SqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@APPLICATION_ID", (Convert.ToInt64(uid) + 1).ToString());
                         cmd.Parameters.AddWithValue("@APPLICATION_DATE", DateTime.Now);
-                        cmd.Parameters.AddWithValue("@APPLICANT_ID", Session["erp_id"].ToString().Trim());
+                        cmd.Parameters.AddWithValue("@APPLICANT_ID", HR360LoggedUser.ERPId.Trim());
                         cmd.Parameters.AddWithValue("@DAYOFF_ID", dayoff.typeID);
                         cmd.Parameters.AddWithValue("@DAYOFF_NAME", dayoff.typeName);
                         cmd.Parameters.AddWithValue("@DAYOFF_START_TIME", dayoff.startTime);
@@ -2287,7 +2293,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         cmd = new SqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@APPLICATION_ID", uid);
                         cmd.Parameters.AddWithValue("@ACTION_TIME", DateTime.Now);
-                        cmd.Parameters.AddWithValue("@EXECUTOR_ID", Session["erp_id"].ToString());
+                        cmd.Parameters.AddWithValue("@EXECUTOR_ID", HR360LoggedUser.ERPId);
                         cmd.Parameters.AddWithValue("@ACTION_ID", "01");
                         cmd.Parameters.AddWithValue("@STATUS_ID", "01");
                         cmd.ExecuteNonQuery();
@@ -2321,11 +2327,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         //hdnIsSearchFieldVisible.Value = "1";
         string nonAdminCondition = "";
-        if (Session["erp_id"].ToString() != currentHREmployeeID      //HR
-            && Session["erp_id"].ToString() != "0015"   //小榆
-            && Session["erp_id"].ToString() != "0080"
-            && Session["erp_id"].ToString() != "0006"
-            && Session["erp_id"].ToString() != "0007") //管理部跟HR可以查詢全部人的歷史資料
+        if (HR360LoggedUser.ERPId != currentHREmployeeID      //HR
+            && HR360LoggedUser.ERPId != "0015"   //小榆
+            && HR360LoggedUser.ERPId != "0080"
+            && HR360LoggedUser.ERPId != "0006"
+            && HR360LoggedUser.ERPId != "0007") //管理部跟HR可以查詢全部人的歷史資料
         {
             nonAdminCondition = " AND MV.MV001=@ID";
         }
@@ -2359,7 +2365,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             query += " ORDER BY 'list_order','value'";
             DataTable dt = new DataTable();
             SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+            cmd.Parameters.AddWithValue("@ID", HR360LoggedUser.ERPId);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
             ddlSearch_Parameter_ApplicantID.DataTextField = "display";
@@ -2367,11 +2373,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
             ddlSearch_Parameter_ApplicantID.DataSource = dt;
             ddlSearch_Parameter_ApplicantID.DataBind();
         }
-        if (!(Session["erp_id"].ToString() != currentHREmployeeID  //HR
-            && Session["erp_id"].ToString() != "0015"   //小榆
-            && Session["erp_id"].ToString() != "0080"
-            && Session["erp_id"].ToString() != "0006"
-            && Session["erp_id"].ToString() != "0007")) //管理部跟HR可以查詢全部人的歷史資料
+        if (!(HR360LoggedUser.ERPId != currentHREmployeeID  //HR
+            && HR360LoggedUser.ERPId != "0015"   //小榆
+            && HR360LoggedUser.ERPId != "0080"
+            && HR360LoggedUser.ERPId != "0006"
+            && HR360LoggedUser.ERPId != "0007")) //管理部跟HR可以查詢全部人的歷史資料
         {
             ddlSearch_Parameter_ApplicantID.Items.Insert(0, new ListItem("全部人員", "ALL"));
             ddlSearch_Parameter_ApplicantID.Enabled = true;
@@ -2422,7 +2428,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 + " LEFT JOIN NZ_ERP2.dbo.HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MV.MV006=HIER.JOB_ID"
                 + " WHERE MV.MV001=@ID";
             SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString().Trim());
+            cmd.Parameters.AddWithValue("@ID", HR360LoggedUser.ERPId.Trim());
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(ds, "userInfo");
             ViewState["userInfo"] = new UserInfo
@@ -2562,7 +2568,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             || userInfo.dept == "B-T"  //鐵氟龍部
             )
         {
-            if (!exceptionListHourForProduction.Contains(Session["erp_id"].ToString()))
+            if (!exceptionListHourForProduction.Contains(HR360LoggedUser.ERPId))
             {
                 hdnDayOffTimeRestraint.Value = "4";
                 hdnOfficeOrProduction.Value = "production";
@@ -2906,7 +2912,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 + " 	FROM NZ.dbo.PALTF TF"
                 + " 	WHERE TF.TF001=CTE.APPLICANT_ID"
                 + " 	AND TF.TF002=CONVERT(NVARCHAR(8),CTE.DAYOFF_START_TIME,112)"
-                + " 	AND TF.TF008=CONVERT(NVARCHAR(3),CTE.DAYOFF_TOTAL_TIME)"
+                + " 	AND TF.TF008=CONVERT(NVARCHAR(3),CTE.DAYOFF_TOTAL_TIME)" +
+                " AND TF.TF005=REPLACE(CONVERT(NVARCHAR(5),CTE.DAYOFF_START_TIME,108),':','')"
                 + " )"
                 + " THEN '已登入'"
                 + " ELSE '未登入'"
@@ -2939,10 +2946,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
         //看報告
         try
         {
-            if (Session["erp_id"].ToString() != "0007"      //Chrissy
-                && Session["erp_id"].ToString() != "0080"   //Kevin
-                && Session["erp_id"].ToString() != "0015"   //小榆
-                && Session["erp_id"].ToString() != currentHREmployeeID   //HR
+            if (HR360LoggedUser.ERPId != "0007"      //Chrissy
+                && HR360LoggedUser.ERPId != "0080"   //Kevin
+                && HR360LoggedUser.ERPId != "0015"   //小榆
+                && HR360LoggedUser.ERPId != currentHREmployeeID   //HR
                 )
             {
                 gvSearchResult.Columns[13].Visible = false;

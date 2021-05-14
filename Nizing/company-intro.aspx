@@ -34,7 +34,7 @@
                     <%--<asp:Image ID="Image1" runat="server" ImageUrl="~/images/company/company-intro4.jpg" />--%>
                     <video controls="controls" width="300">
                         <%--<asp:Image ID="Image1" runat="server" ImageUrl="~/images/company/company-intro4.jpg" />--%>
-                        <source src="video/nizing_video5.mp4" type="video/mp4" />
+                        <source src="video/nizing-intro.mp4" type="video/mp4" />
                         Your browser does not support the video tag
                     </video>
                     <a href="pdf/日進電線公司簡介(中).pptx" class="downloadLink" style="font-size:16px">下載公司簡介</a>

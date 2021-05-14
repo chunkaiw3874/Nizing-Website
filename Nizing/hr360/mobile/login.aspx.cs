@@ -11,10 +11,15 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Globalization;
 
 public partial class hr360_mobile_login : System.Web.UI.Page
 {
-    string erp2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
+    string NzConnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
+    string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
+    string SunrizeConnectionString = ConfigurationManager.ConnectionStrings["SunrizeConnectionString"].ConnectionString;
+
+    public string defaultERPDbConnectionString;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -48,7 +53,7 @@ public partial class hr360_mobile_login : System.Web.UI.Page
         {
             companyCondition = " and COMPANY=@company";
         }
-        using (SqlConnection conn = new SqlConnection(erp2ConnectionString))
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             conn.Open();
             string query = "SELECT [PASSWORD],[DISABLED],[ID],[ERP_ID],[COMPANY]"
@@ -80,6 +85,11 @@ public partial class hr360_mobile_login : System.Web.UI.Page
         else if (SiteUtils.Decrypt(dt.Rows[0]["PASSWORD"].ToString()) == txtPassword.Text)
         {
             match = true;
+            HR360LoggedUser.HR360Id = dt.Rows[0]["ID"].ToString().Trim();
+            HR360LoggedUser.ERPId = dt.Rows[0]["ERP_ID"].ToString().Trim();
+            HR360LoggedUser.Company = dt.Rows[0]["COMPANY"].ToString().Trim();
+
+            GetLoggedUserInfo(HR360LoggedUser.ERPId, HR360LoggedUser.Company);
             Session["user_id"] = dt.Rows[0]["ID"].ToString();
             Session["erp_id"] = dt.Rows[0]["ERP_ID"].ToString();
             Session["company"] = dt.Rows[0]["COMPANY"].ToString();
@@ -87,13 +97,51 @@ public partial class hr360_mobile_login : System.Web.UI.Page
         return match;
     }
 
-    public void SetlblLoginMessageText(string s)
-    {
-        lblLoginMessage.Text = s;
-    }
+    //public void SetlblLoginMessageText(string s)
+    //{
+    //    lblLoginMessage.Text = s;
+    //}
 
     protected void btnNizingWebsite_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/default.aspx");
+    }
+
+    protected void GetLoggedUserInfo(string erpId, string company)
+    {
+        if (company == "NIZING")
+        {
+            defaultERPDbConnectionString = NzConnectionString;
+        }
+        else
+        {
+            defaultERPDbConnectionString = SunrizeConnectionString;
+        }
+
+        using (SqlConnection conn = new SqlConnection(defaultERPDbConnectionString))
+        {
+            conn.Open();
+            string query = "select top 1 MV.MV001 'id'" +
+                " ,MV.MV002 'name'" +
+                " ,MV.MV004 'dept'" +
+                " ,MV.MV007 'sex'" +
+                " ,MV.MV021 'startDate'" +
+                " from CMSMV MV" +
+                " where MV.MV001=@id";
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@id", erpId);
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+
+            if(dt.Rows.Count > 0)
+            {
+                HR360LoggedUser.Name = dt.Rows[0]["name"].ToString().Trim();
+                HR360LoggedUser.Dept = dt.Rows[0]["dept"].ToString().Trim();
+                HR360LoggedUser.Sex = dt.Rows[0]["sex"].ToString().Trim() == "1" ? "M" : "F";
+                HR360LoggedUser.StartDate = DateTime.ParseExact(dt.Rows[0]["startDate"].ToString().Trim(), "yyyyMMdd", null, DateTimeStyles.None);
+            }
+        }
     }
 }

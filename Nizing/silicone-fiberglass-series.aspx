@@ -20,6 +20,11 @@
             max-height: 300px;
             overflow: auto;
         }
+
+        .container .img{
+            width:215px;
+            max-height:215px;
+        }
     </style>
     <script>
         $(document).ready(function ($) {
@@ -39,7 +44,7 @@
                 </h5>
             </div>
             <div class="row mb-1">
-                <img src="images/product_pic/silicone-fiberglass-wire-red-menu.jpg" class="img-fluid" alt="矽膠編織耐熱線" />
+                <img src="images/product_pic/silicone-fiberglass-wire-red-menu.jpg" class="img img-thumbnail" alt="矽膠編織耐熱線" />
             </div>
             <div class="scrollable-300 row">
                 <table class="table table-hover table-sm">
@@ -246,8 +251,7 @@
                 </h5>
             </div>
             <div class="row mb-1">
-                <img src="images/product_pic/tinned-copper-silicone-wire-3.jpg" class="img-fluid" 
-                    width="220"
+                <img src="images/product_pic/tinned-copper-silicone-wire-3.jpg" class="img img-thumbnail"
                     alt="銅網編織矽膠線" />
             </div>
             <div class="scrollable-300 row">

@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/report/MasterPage.master" AutoEventWireup="true" CodeFile="ADM_SalesBonusCalculator.aspx.cs" Inherits="employee_section_report_ADM_SalesBonusCalculator" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <link href="css/table.css?version=2" rel="stylesheet" />
     <style>
         .scrollbox-500 {
             height: auto;
@@ -134,7 +133,7 @@
                     </div>
                     <div class="table-responsive scrollbox-500 mb-2">
                         <asp:GridView ID="gvSalesBonusDisplayNew" runat="server" AutoGenerateColumns="false"
-                            CssClass="table table-light table-hover"
+                            CssClass="table table-hover table-striped-blue"
                             EmptyDataText="查詢期間無資料">
                             <Columns>
                                 <asp:TemplateField HeaderText="銷售年月">
@@ -200,7 +199,7 @@
                     </div>
                     <div class="table-responsive scrollbox-500 mb-2">
                         <asp:GridView ID="gvSalesBonusDisplayOld" runat="server" AutoGenerateColumns="false"
-                            CssClass="table table-light table-hover"
+                            CssClass="table table-hover table-striped-blue"
                             EmptyDataText="查詢期間無資料">
                             <Columns>
                                 <asp:TemplateField HeaderText="銷售年月">

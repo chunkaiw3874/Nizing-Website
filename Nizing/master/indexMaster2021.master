@@ -1,0 +1,78 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="indexMaster2021.master.cs" Inherits="master_indexMaster2021" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="msvalidate.01" content="9FD2A31229BA452ABDBB1C004A175F57" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <%--<meta name="viewport" content="width=device-width, initial-scale=1" />--%>
+    <%--<meta name="keywords" content="日進電線,專業製造,矽膠電線,鐵氟龍線,XLPE電線,PVC線,PE線材,PU線材,補償導線,耐高溫電線,耐高溫電纜,耐高壓電線,耐高壓電纜,電線規格,安規認證,UL產品,套管,客製化,配線,電動車,溫控,雲端,3D列印,醫療,LED照明,加熱系統,鋼鐵工業用線" />--%>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <%--<meta name="viewport" content="width=device-width, initial-scale=1" />--%>
+    <link rel="shortcut icon" href="../images/icon/nizing.ico.gif" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../Content/slick/slick.css" />
+    <link href="../Content/slick/slick-theme.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="../images/icon/nizing.ico.gif" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/32e9a84b4a.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../Content/slick/slick.min.js"></script>
+    <%--<link href="~/css/normalize.css" rel="stylesheet" type="text/css" />--%>
+    <%--<link href="~/css/base.css" rel="stylesheet" type="text/css" />--%>
+    <%--<link href="~/css/general.css" rel="stylesheet" type="text/css" />--%>
+    <%--<link href="~/css/template.css" rel="stylesheet" type="text/css" />--%>
+    <%--<link href="~/css/tabcontainer.css" rel="stylesheet" type="text/css" />--%>
+    <%--<link href="~/css/gridview.css" rel="stylesheet" type="text/css" />--%>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+    <script type="text/javascript">
+        (function () {
+            var cx = '010054550380540391242:bbpyczxrrro';
+            var gcse = document.createElement('script');
+            gcse.type = 'text/javascript';
+            gcse.async = true;
+            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                '//cse.google.com/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(gcse, s);
+        })();
+    </script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-61636827-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container">
+            <div class="header w-100 d-flex justify-content-between">
+                <div>
+                    <asp:ImageButton ID="imgLogo" runat="server" ImageUrl="~/images/logo.jpg" PostBackUrl="~/default.aspx" />
+                </div>
+                <div>
+                    <asp:HyperLink ID="linkPortal" runat="server" NavigateUrl="~/portal.aspx">職員專區 </asp:HyperLink>|
+                       
+                    <asp:HyperLink ID="linkHome" runat="server" NavigateUrl="~/default.aspx"> 首頁 </asp:HyperLink>| 
+                       
+                    <asp:HyperLink ID="linkChinese" runat="server"> 中文 </asp:HyperLink>| 
+                       
+                    <asp:HyperLink ID="linkEnglish" runat="server"> English</asp:HyperLink>
+                </div>
+            </div>
+            <asp:ContentPlaceHolder ID="body" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>

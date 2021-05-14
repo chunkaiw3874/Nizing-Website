@@ -5,13 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class _default : System.Web.UI.Page
+public partial class automotive_wire_series : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
-        {
-            imgNews.ImageUrl = "~\\" + url1.ToolTip;
-        }
+
     }
 }

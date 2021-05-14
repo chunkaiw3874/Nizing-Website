@@ -73,6 +73,9 @@
                     <asp:ImageButton ID="ImageButton5" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD-2.png" PostBackUrl="~/employee_section/report/SaleRecord.aspx" />
                 </li>                
                 <li>
+                    <a href="report/SD02_KeyInFormAmount.aspx">打單數量報表</a>
+                </li>                
+                <li>
                     <a href="report/SD_ReceivableReceived.aspx">業務兌現表</a>
                 </li>
                 <%--<li><asp:ImageButton ID="ImageButton6" runat="server" ImageUrl="~/employee_section/report/image/button/dept/SD-3.png" PostBackUrl="~/employee_section/report/NewClientReport.aspx" /></li>--%>

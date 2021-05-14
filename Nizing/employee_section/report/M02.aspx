@@ -1,10 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/report/MasterPage.master" AutoEventWireup="true" CodeFile="M02.aspx.cs" Inherits="M02" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-    <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-datepicker3.css" rel="stylesheet" />
-    <script src="../../../Scripts/bootstrap-datepicker.js"></script>
-    <script src="../../../Scripts/locales/bootstrap-datepicker.zh-TW.min.js"></script>
+    <link href="/Content/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="/Content/bootstrap-datepicker3.css" rel="stylesheet" />
+    <script src="/Scripts/bootstrap-datepicker.js"></script>
+    <script src="/Scripts/locales/bootstrap-datepicker.zh-TW.min.js"></script>
     <%--<script src="../Scripts/bootstrap.js"></script>--%>
     <script type="text/javascript">
         $(document).ready(function () {

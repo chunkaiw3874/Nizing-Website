@@ -1,629 +1,224 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWD.master" AutoEventWireup="true" CodeFile="default.aspx.cs" Inherits="_default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/index.master" AutoEventWireup="true" CodeFile="default.aspx.cs" Inherits="_default" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
     <title>高品質電線電纜製造-日進電線-國際安規認證通過</title>
     <meta name="keywords" content="電線,電纜,電線電纜,矽膠電線,鐵氟龍電線,照射電線,發熱電線,PVC電線,PE電線,PU電線,補償導線,耐高溫電線,耐高溫電纜,耐高壓電線,耐高壓電纜,UL電線,矽膠編織電線,軍規線,汽車花線" />
     <meta name="description" content="日進電線為國內一流電線及電纜製造商，專門製造特殊材質及用途電線及電纜，如耐高溫的矽膠電線、矽膠編織電線，抗酸鹼的聚合氟化線電線，抗UV的照射電線等，旗下電線電纜產品眾多，歡迎聯繫洽詢" />
-
-    <style>
-        video {
-            width: 100%;
-        }
-
-        a {
-            color: inherit;
-        }
-
-            a:hover {
-                color: inherit;
-                text-decoration: none;
-            }
-
-        textarea {
-            resize: none;
-        }
-
-        .title {
-            font-size: medium;
-            font-weight: bold;
-        }
-
-
-        .subtitle {
-            font-weight: bold;
-            font-size: small;
-            color: gray;
-        }
-
-        .jumbotron {
-            padding: 0;
-            margin: 0;
-        }
-
-        .row-m-0 {
-            margin: 0px;
-        }
-
-        .col-px-0 {
-            padding-left: 0px;
-            padding-right: 0px;
-        }
-
-        .company-image {
-            margin-bottom: -6px;
-        }
-
-        .main-block {
-            background-color: #ffffff;
-            padding: 48px 0px;
-        }
-
-            .main-block .container .title {
-                text-align: center;
-            }
-
-            .main-block .container .subtitle {
-                text-align: center;
-            }
-
-            .main-block .content {
-                margin-top: 48px;
-            }
-
-            .main-block:nth-child(2n) {
-                background-color: #000000;
-                color: #ffffff;
-            }
-
-            .main-block .list-group-item {
-                background-color: inherit;
-                border: none;
-            }
-
-        .emphasis-menu {
-            background-color: #f1f1f1;
-            padding: 0px;
-        }
-
-            .emphasis-menu .card {
-                border: none;
-                background-color: inherit;
-            }
-
-            .emphasis-menu .card-body {
-                text-align: center;
-            }
-
-                .emphasis-menu .card-body span {
-                    font-size: 1rem;
-                }
-
-                .emphasis-menu .card-body .img-thumbnail {
-                    filter: invert(0.4) sepia(0) saturate(1) hue-rotate(0deg) brightness(0.5);
-                    background-color: inherit;
-                    border: none;
-                    width: 75px;
-                }
-
-        .tilted {
-            transform: rotate(-135deg);
-        }
-
-        /*.emphasis-menu .card-body .card-text .title {
-                    font-size: large;
-                    font-weight: bold;
-                }
-
-                .emphasis-menu .card-body .card-text .subtitle {
-                    font-weight: bold;
-                    font-size: small;
-                    color: gray;
-                }*/
-
-        .emphasis-menu .card-body .card-text {
-            font-size: 0.8rem;
-            font-weight: normal;
-        }
-
-            .emphasis-menu .card-body .card-text .btn {
-                background-color: inherit;
-            }
-
-        .emphasis-menu .card-link {
-            color: inherit;
-        }
-
-        .product-menu .content-wrapper {
-            padding: 20px 0;
-            margin: 10px;
-            border: solid 1px #1a1a1a;
-            border-radius: 10px;
-        }
-
-        .product-menu .img {
-            filter: invert(0.4) sepia(0) saturate(1) hue-rotate(0deg) brightness(0.5);
-            background-color: inherit;
-            width: 200px;
-        }
-
-        .associate-partner {
-            background-color: #f1f1f1;
-            padding: 20px 10px;
-        }
-
-            .associate-partner img {
-                width: 50px;
-            }
-
-        
-
-        /*slick slide vertical center*/
-        .slick-initialized .slick-track {
-            display: flex;
-            align-items: center;
-        }
-
-        @media all and (min-width: 768px) {
-            .emphasis-menu .card {
-                border: none;
-                padding: 0px;
-            }
-
-            .emphasis-menu .col {
-                /*border-right: solid 1px #d7d7d7;*/
-            }
-
-                .emphasis-menu .col:last-child {
-                    border-right: none;
-                }
-
-            .emphasis-menu .card-link {
-                padding: 10px 0px;
-            }
-
-                .emphasis-menu .card-link:hover {
-                    background-color: #e0fffe;
-                }
-
-            
-        }
-    </style>
+</asp:Content>
+<asp:Content ID="Java" ContentPlaceHolderID="JavaScriptCode" runat="server">
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('.associate-partner .slider').slick({
-                mobileFirst: true,
-                arrows: false,
-                slidesToShow: 4,
-                slidesToScroll: 1,
-                autoplay: true,
-                autoplaySpeed: 500,
-                centerMode: true,
-                responsive: [
-                    {
-                        breakpoint: 576,
-                        settings: {
-                            slidesToShow: 4,
-                            sllidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 768,
-                        settings: {
-                            slidesToShow: 6,
-                            sllidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 992,
-                        settings: {
-                            slidesToShow: 8,
-                            sllidesToScroll: 1
-                        }
-                    }
-                ]
-
-            })
-        });
-
-        $(window).resize(function () {
-            $('.associate-partner .slider').not('.slick-initialized').slick('resize');
-        });
-
-        $(window).on('orientationchange', function () {
-            $('.associate-partner .slider').not('.slick-initialized').slick('resize');
-        });
+    //for onmouseover image swap
+    function SwapImage(e) {
+        e = e || window.event;
+        var link = e.target || e.srcElement;
+        document.getElementById("ContentPlaceHolder1_imgNews").src = link.title;
+        document.getElementById("ContentPlaceHolder1_imgNews").style.height = '180px';
+        document.getElementById("ContentPlaceHolder1_imgNews").style.width = '215px';
+    }
     </script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
-    <div class="container-fluid">
-        <div class="company-image">
-            <video preload="auto" muted autoplay loop playsinline>
-                <source src="/video/nizing-intro.mp4" />
-            </video>
-        </div>
-        <div class="emphasis-menu">
-            <div class="container">
-                <div class="row-m-0 row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 w-100">
-                    <div class="col-px-0 col align-self-center">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-text text-md-left">
-                                    <div class="title">暢銷分類</div>
-                                    <div class="subtitle">Best Sellers</div>
-                                    <div>
-                                        <a class="btn btn-dark text-dark mt-2" href="product.aspx">+ More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-px-0 col">
-                        <nav class="card">
-                            <a class="card-link" href="silicone-fiberglass-series.aspx">
-                                <div class="card-body d-sm-block">
-                                    <img src="images/menu/braided-wire-menu-white.svg" class="img img-thumbnail tilted" />
-                                    <p class="card-text">矽膠編織線</p>
-                                </div>
-                            </a>
-                        </nav>
-                    </div>
-                    <div class="col-px-0 col d-none d-sm-block">
-                        <nav class="card h-100">
-                            <a class="card-link" href="high-temperature-resistance-series.aspx">
-                                <div class="card-body">
-                                    <img src="images/menu/high-temperature-wire-menu-white.svg" class="img img-thumbnail tilted" />
-                                    <p class="card-text">高溫線</p>
-                                </div>
-                            </a>
-                        </nav>
-                    </div>
-                    <div class="col-px-0 col d-none d-sm-block">
-                        <nav class="card h-100">
-                            <a class="card-link" href="silicone-series.aspx">
-                                <div class="card-body">
-                                    <img src="images/menu/silicone-wire-menu-white.svg" class="img img-thumbnail tilted" />
-                                    <p class="card-text">矽膠線</p>
-                                </div>
-                            </a>
-                        </nav>
-                    </div>
-                    <div class="col-px-0 col d-none d-lg-block d-xl-block">
-                        <nav class="card h-100">
-                            <a class="card-link" href="teflon-series.aspx">
-                                <div class="card-body">
-                                    <img src="images/menu/teflon-wire-menu-white.svg" class="img img-thumbnail tilted" />
-                                    <p class="card-text">鐵氟龍線</p>
-                                </div>
-                            </a>
-                        </nav>
-                    </div>
-                    <div class="col-px-0 col d-none d-lg-block d-xl-block">
-                        <nav class="card h-100">
-                            <a class="card-link" href="xlpe-series.aspx">
-                                <div class="card-body">
-                                    <img src="images/menu/xlpe-wire-menu-white.svg" class="img img-thumbnail tilted" />
-                                    <p class="card-text">XLPE</p>
-                                </div>
-                            </a>
-                        </nav>
-                    </div>
-                    <%--<div class="col-px-0 col d-none d-lg-block d-xl-block">
-                        <nav class="card h-100">
-                            <a class="card-link" href="pvc-series.aspx">
-                                <div class="card-body">
-                                    <img src="images/menu/pvc-wire-menu-white.svg" class="img img-thumbnail tilted" />
-                                    <p class="card-text">PVC</p>
-                                </div>
-                            </a>
-                        </nav>
-                    </div>
-                    <div class="col-px-0 col d-none d-lg-block d-xl-block">
-                        <nav class="card h-100">
-                            <a class="card-link" href="sleeve-and-tube-series.aspx">
-                                <div class="card-body">
-                                    <img src="images/menu/tube-menu-white.svg" class="img img-thumbnail" />
-                                    <p class="card-text">套管</p>
-                                </div>
-                            </a>
-                        </nav>
-                    </div>
-                    <div class="col-px-0 col d-none d-lg-block d-xl-block">
-                        <nav class="card h-100">
-                            <a class="card-link" href="thermocouple-series.aspx">
-                                <div class="card-body">
-                                    <img src="images/menu/thermocouple-wire-menu-white.svg" class="img img-thumbnail tilted" />
-                                    <p class="card-text">補償導線</p>
-                                </div>
-                            </a>
-                        </nav>
-                    </div>
-                    <div class="col-px-0 col d-none d-lg-block d-xl-block">
-                        <nav class="card h-100">
-                            <a class="card-link" href="heating-wire-series.aspx">
-                                <div class="card-body">
-                                    <img src="images/menu/heating-wire-menu-white.svg" class="img img-thumbnail" />
-                                    <p class="card-text">發熱線</p>
-                                </div>
-                            </a>
-                        </nav>
-                    </div>--%>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <div class="main-content">
+        <div class="product">
+            <div class="title-no-border">
+                <asp:Image ID="Image2" runat="server" ImageUrl="~/images/title/title_product.jpg" />
+            </div>
+            <div class="main-page-menu-product">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink19" runat="server" ImageUrl="~/images/product/pro_01.jpg" NavigateUrl="~/pvc-series.aspx" Text="PVC電線" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink20" runat="server" ImageUrl="~/images/product/pro_02.jpg" NavigateUrl="~/silicone-fiberglass-series.aspx" Text="矽膠編織電線" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink21" runat="server" ImageUrl="~/images/product/pro_03.jpg" NavigateUrl="~/high-temperature-resistance-series.aspx" Text="耐溫電線" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink22" runat="server" ImageUrl="~/images/product/pro_04.jpg" NavigateUrl="~/silicone-series.aspx" Text="矽膠電線" />
+                </div>
+            </div>
+            <div class="main-page-menu-product">
+                <div class="button">                                
+                    <asp:HyperLink ID="HyperLink23" runat="server" ImageUrl="~/images/product/pro_05.jpg" NavigateUrl="~/teflon-series.aspx" Text="鐵氟龍電線" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink24" runat="server" ImageUrl="~/images/product/pro_06.jpg" NavigateUrl="~/xlpe-series.aspx" Text="照射電線" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink25" runat="server" ImageUrl="~/images/product/pro_07.jpg" NavigateUrl="~/sleeve-and-tube-series.aspx" Text="套管" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink26" runat="server" ImageUrl="~/images/product/pro_08.jpg" NavigateUrl="~/thermocouple-series.aspx" Text="補償導線" />
+                </div>
+            </div>
+            <div class="main-page-menu-product">                                
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink27" runat="server" ImageUrl="~/images/product/pro_09.jpg" NavigateUrl="~/heating-wire-series.aspx" Text="發熱線" />
+                </div>
+                <div class="button">                                
+                    <asp:HyperLink ID="HyperLink28" runat="server" ImageUrl="~/images/product/pro_10.jpg" NavigateUrl="~/special-cable.aspx" Text="特殊規格電線" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink29" runat="server" ImageUrl="~/images/product/pro_11.jpg" NavigateUrl="~/automotive-wire-series.aspx" Text="汽車花線" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink41" runat="server" ImageUrl="~/images/product/pro_12.jpg" NavigateUrl="~/military-grade-series.aspx" Text="軍規線" />
                 </div>
             </div>
         </div>
-        <div class="main-block product-menu">
-            <div class="container">
-                <div class="title">
-                    <span class="h1">產品分類</span>
+        <div class="product">
+            <div class="title-no-border">
+                <asp:Image ID="Image3" runat="server" ImageUrl="~/images/title/title_application.jpg" />
+            </div>
+            <div class="main-page-menu-product">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink30" runat="server" ImageUrl="~/images/service/s1.jpg" NavigateUrl="~/car.aspx" />
                 </div>
-                <div class="subtitle">Product Category</div>
-                <div class="content row row-cols-1 row-cols-sm-2 row-cols-md-3">
-                    <div class="col text-center">
-                        <div class="content-wrapper">
-                            <a href="silicone-fiberglass-series.aspx">
-                                <img class="img" src="/images/menu/braided-wire-menu-white.svg" />
-                                <div class="title">
-                                    矽膠編織線
-                                </div>
-                                <div class="subtitle">
-                                    Silicone Fiberglass Wire
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col text-center">
-                        <div class="content-wrapper">
-                            <a href="high-temperature-resistance-series.aspx">
-                                <img class="img" src="/images/menu/high-temperature-wire-menu-white.svg" />
-                                <div class="title">
-                                    高溫線
-                                </div>
-                                <div class="subtitle">
-                                    High Temperature Wire
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col text-center">
-                        <div class="content-wrapper">
-                            <a href="silicone-series.aspx">
-                                <img class="img" src="/images/menu/silicone-wire-menu-white.svg" />
-                                <div class="title">
-                                    矽膠線
-                                </div>
-                                <div class="subtitle">
-                                    Silicone Wire
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col text-center">
-                        <div class="content-wrapper">
-                            <a href="teflon-series.aspx">
-                                <img class="img" src="/images/menu/teflon-wire-menu-white.svg" />
-                                <div class="title">
-                                    鐵氟龍線
-                                </div>
-                                <div class="subtitle">
-                                    Teflon Wire
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col text-center">
-                        <div class="content-wrapper">
-                            <a href="xlpe-series.aspx">
-                                <img class="img" src="/images/menu/xlpe-wire-menu-white.svg" />
-                                <div class="title">
-                                    XLPE線
-                                </div>
-                                <div class="subtitle">
-                                    XLPE Wire
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col text-center">
-                        <div class="content-wrapper">
-                            <a href="pvc-series.aspx">
-                                <img class="img" src="/images/menu/pvc-wire-menu-white.svg" />
-                                <div class="title">
-                                    PVC線
-                                </div>
-                                <div class="subtitle">
-                                    PVC Wire
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col text-center">
-                        <div class="content-wrapper">
-                            <a href="sleeve-and-tube-series.aspx">
-                                <img class="img" src="/images/menu/tube-menu-white.svg" />
-                                <div class="title">
-                                    套管
-                                </div>
-                                <div class="subtitle">
-                                    Tube and Sleeve
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col text-center">
-                        <div class="content-wrapper">
-                            <a href="thermocouple-series.aspx">
-                                <img class="img" src="/images/menu/thermocouple-wire-menu-white.svg" />
-                                <div class="title">
-                                    補償導線
-                                </div>
-                                <div class="subtitle">
-                                    Thermocouple
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col text-center">
-                        <div class="content-wrapper">
-                            <a href="heating-wire-series.aspx">
-                                <img class="img" src="/images/menu/heating-wire-menu-white.svg" />
-                                <div class="title">
-                                    發熱線
-                                </div>
-                                <div class="subtitle">
-                                    Heating Wire
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink31" runat="server" ImageUrl="~/images/service/s2.jpg" NavigateUrl="~/cloud.aspx" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink32" runat="server" ImageUrl="~/images/service/s3.jpg" NavigateUrl="~/heating.aspx" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink33" runat="server" ImageUrl="~/images/service/s4.jpg" NavigateUrl="~/medical.aspx" />
+                </div>
+            </div>
+            <div class="main-page-menu-product">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink34" runat="server" ImageUrl="~/images/service/s5.jpg" NavigateUrl="~/led.aspx" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink35" runat="server" ImageUrl="~/images/service/s6.jpg" NavigateUrl="~/temperature-control.aspx" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink36" runat="server" ImageUrl="~/images/service/s7.jpg" NavigateUrl="~/construction.aspx" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink37" runat="server" ImageUrl="~/images/service/s8.jpg" NavigateUrl="~/solar.aspx" />
+                </div>
+            </div>
+            <div class="main-page-menu-product">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink38" runat="server" ImageUrl="~/images/service/s9.jpg" NavigateUrl="~/steel.aspx" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink40" runat="server" ImageUrl="~/images/service/s10.jpg" NavigateUrl="~/roboarm.aspx" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink39" runat="server" ImageUrl="~/images/service/misc-app.jpg" NavigateUrl="~/misc-app.aspx" />  
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLinkSvcLast" runat="server" ImageUrl="~/images/button/customize_icon-215x123.jpg" NavigateUrl="~/customize_page.aspx" />
                 </div>
             </div>
         </div>
-        <%--<div class="main-block company-info">
-            <div class="container">
-                <div class="title">
-                    <span class="h1">日進傳承</span>
-                </div>
-                <div class="subtitle">
-                    Nizing Ideology
-                </div>
-                <div class="content">
-                    <p>
-                        日進電線股份有限公司創立於1983年，耐熱電線電纜起步，目前日進電線已是台灣電線電纜及特殊線材產業領導廠商，同時成功跨足綠能光電、成為國際化企業。
-日進電線所生產的矽膠線、補償導線、PVC線、不銹鋼線材，廣泛運用於電力傳輸、電信網路、交通運輸、工業生產等基礎建設。旗下核心事業中，電線電纜事業包含矽膠耐熱電線、補償導線、PVC照射線等電線電纜。電力電纜與通信線纜產品線完整，深耕台灣電力和電信需求。
-                        <br />
-                        日進電線自2003年開始研發LED、溫度控制、醫療、雲端及太陽能光電等產業，藉由研發及先進材料產業的經驗及成果，作為佈局新興科技領域的基礎。
-                        <br />
-                        日進電線擁有完整的產品系列，通過數種國際安規認可產品。以最熱忱的服務態度，不斷精進品質，開發新產品，和客戶共同發展、共同成長。由于您持續的支持與愛護，以前瞻性的佈局策略追求企業創新成長，進行自主技術之研究，依據市場及客戶需求開發新產品與新業務。日進電線秉持一貫對品質的嚴謹要求，以及快速整合的服務，成為客戶的最佳伙伴，在兩岸經濟發展的重要里程中，扮演關鍵的參與和推動角色，未來日進電線將在卓越製造技術與多樣化客戶基礎下持續深耕，同時積極掌握產業新興發展機會，創造企業發展的新里程。
-                        <br />
-                        日進電線除了人的不懈努力外，更重要的歸功于各位先進的指導與愛護。貫徹整體顧客意識，珍惜每一次服務的機會。全體日進電線人員處世以"誠"、"信"為原則；"誠"乃是出自於內心的真誠，"信"則是言而有信、言出必行。"積極、創新、追求卓越"是日進電線的經營理念。我們深信，唯有堅定的企業信念、熱忱投入的工作態度、以及高效率和實事求是的負責精神，才能贏得客戶的支持與信賴。
-日進就是一個可以帶給大家幸福的地方。以日進為本，照顧大家。透過日進，大家互相協助，互相理解，同心協力幫助客戶解決問題。這就是我們的宗旨。
-                    </p>
-                </div>
+        <div id="news-default">
+            <div class="title-no-border">
+                <asp:Image ID="titleNews" runat="server" ImageUrl="~/images/title/title_news.jpg" />
             </div>
-        </div>--%>
-        <div class="main-block">
-            <div class="container">
-                <div class="title">
-                    客製化線材
+            <div class="img">
+                <asp:Image ID="imgNews" runat="server" />
+            </div>
+            <div class="default-content">
+                <ul>
+                    <%-- 最上面一排ID必須為url1，圖片才會變成預設顯示 --%>                      
+                    <li>
+                        <asp:HyperLink ID="url1" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20180823中元普渡.jpg"> 2018.08.23 一年一度的中元普度，保佑日進生意興隆~ </asp:HyperLink>
+                    </li>                                         
+                    <li>
+                        <asp:HyperLink ID="url5" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20180420_moving_notice.jpg" NavigateUrl="https://www.facebook.com/NIZING.ELECTRIC/photos/pb.367173643345648.-2207520000.1524197134./1818663161530015/?type=3&theater" Target="_blank"> 2018.04.20 遷移啟事：本公司將於107/06/04(一)遷至新址，並照常出貨至06/01(五)，06/02(六)全廠加班搬遷，06/04(一)恢復正常營運，搬遷期間一切正常營運，屆時請依新址、電話及傳真聯絡，繼續給予支持指教！ </asp:HyperLink>
+                    </li>
+                    <li>
+                        <asp:HyperLink ID="url2" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20170108_year_end_banquet.jpg"> 2018.03.28 4/4(三)~4/8(日)為清明連假，為配合貨運公司，4/3出貨將於4/9送達，請多加留意~ </asp:HyperLink>
+                    </li>                
+                    <li>
+                        <asp:HyperLink ID="url6" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20170108_year_end_banquet.jpg" NavigateUrl="https://www.facebook.com/pg/NIZING.ELECTRIC/photos/?tab=album&album_id=1328290773900592" Target="_blank"> 2017.01.08 日進尾牙圓滿落幕，恭喜各位大獎得主~ </asp:HyperLink>
+                    </li>
+                    <li>                        
+                        <asp:HyperLink ID="url3" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20161117_inv_check_announce.jpg"> 2016.11.17 我司將於12/26~12/27進行年度盤點作業，最後出貨時間為12/23 17:00，並於12/28恢復正常作業。<br />我司將於2016/12/30(五)休假一日。 </asp:HyperLink>
+                    </li>
+                    <li>
+                        <asp:HyperLink ID="url4" runat="server" onmouseover="SwapImage();" ToolTip="images/news/20151130_InvCheckAnnounce.jpg"> 2015.11.30 我司將於12/25~12/27進行年度結帳相關作業，最後出貨時間為12/24 17:00，並於12/28恢復正常作業 </asp:HyperLink>
+                    </li>
+                    <li style="border:none; text-align:right;">
+                        <asp:HyperLink ID="urlMore" runat="server" NavigateUrl="news.aspx">more news...</asp:HyperLink>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="link-default">
+            <div class="title-no-border">
+                <asp:Image ID="titleLink" runat="server" ImageUrl="~/images/title/title_links.jpg" />
+            </div>
+            <div class="default-content">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink16" runat="server" ImageUrl="~/images/button/stock_icon2.jpg" NavigateUrl="https://finance.sina.com.cn/futures/quotes/CAD.shtml" Target="_blank" BorderStyle="None" />
                 </div>
-                <div class="subtitle">
-                    Customized Cable
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink17" runat="server" ImageUrl="~/images/button/red_ul_icon2.jpg" NavigateUrl="http://taiwan.ul.com/" Target="_blank" />
                 </div>
-                <div class="content">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <p>專注於您的需求，為您客製專屬的線材，無論您所需要的是規格分析，亦或是材質解析，日進皆可給您最專業的服務</p>
-                            <a class="btn btn-light text-dark mt-2" href="customize_page.aspx">+ More</a>
-                        </div>
-                        <div class="col-md-2 d-none d-md-block">                            
-                            <img src="images/customize-02.jpg" width="100" class="img img-thumbnail d-block ml-5 mb-1" />
-                            <img src="images/customize-01.jpg" width="100" class="img img-thumbnail d-block" />
-                        </div>
-                    </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink18" runat="server" ImageUrl="~/images/button/vde_icon2.jpg" NavigateUrl="http://www.vde.com/en/Pages/Homepage.aspx" Target="_blank" />
                 </div>
             </div>
         </div>
-        <%--<div class="main-block">
-            <div class="container">
-                <div class="title">
-                    聯繫我們
+        <div id="clientlogo-default">
+            <div class="title-no-border">
+                <asp:Image ID="Image1" runat="server" ImageUrl="~/images/title/title_client.jpg" />
+            </div>
+            <div class="default-content">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/images/logo/aidc.jpg" NavigateUrl="http://www.aidc.com.tw/tw/index.asp" Target="_blank" />
                 </div>
-                <div class="subtitle">
-                    Contact Us
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/images/logo/cpc.jpg" NavigateUrl="http://new.cpc.com.tw/Home/" Target="_blank" />
                 </div>
-                <div class="content">
-                    <div class="row row-cols-1 row-cols-md-2">
-                        <div class="col">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <a class="card-link"
-                                        href="https://www.google.com/maps/place/%E6%97%A5%E9%80%B2%E9%9B%BB%E7%B7%9A%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8/@25.0587124,121.4718232,17z/data=!4m12!1m6!3m5!1s0x3442a7e768a1d123:0x1b3b1220987a8188!2z5pel6YCy6Zu757ea6IKh5Lu95pyJ6ZmQ5YWs5Y-4!8m2!3d25.0587076!4d121.4740119!3m4!1s0x3442a7e768a1d123:0x1b3b1220987a8188!8m2!3d25.0587076!4d121.4740119">地址: 新北市三重區光復路二段87巷10-12號</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a class="card-link"
-                                        href="tel:+886229999181">電話: 02-2999-9181
-                                    </a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a class="card-link">傳真: 02-2999-9771</a>
-                                </li>
-                                <li class="list-group-item" style="font-size: xx-large">
-                                    <a class="card-link img"
-                                        href="https://www.facebook.com/NIZING.ELECTRIC/">
-                                        <i class="fab fa-facebook-square"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col message-board">
-                            <div class="title">
-                                留言給我們
-                            </div>
-                            <div class="form-group">
-                                <label for="txtInquiryName">姓名</label>
-                                <asp:TextBox ID="txtInquiryName" runat="server" CssClass="form-control"></asp:TextBox>
-                            </div>
-                            <div class="form-group">
-                                <label for="txtInquiryEmail">Email</label>
-                                <asp:TextBox ID="txtInquiryEmail" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
-                            </div>
-                            <div class="form-group">
-                                <label for="txtInquirySubject">主旨</label>
-                                <asp:TextBox ID="txtInquirySubject" runat="server" CssClass="form-control"></asp:TextBox>
-                            </div>
-                            <div class="form-group">
-                                <label for="txtInquiryContent">內容</label>
-                                <asp:TextBox ID="txtInquiryContent" runat="server" Height="200"
-                                    CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
-                            </div>
-                            <div class="form-group">
-                                <asp:Button ID="btnSumbitInquiry" runat="server" Text="送出" CssClass="btn btn-dark" />
-                            </div>
-                        </div>
-                    </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/images/logo/csc.jpg" NavigateUrl="http://www.csc.com.tw/" Target="_blank" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/images/logo/delta.jpg" NavigateUrl="http://www.deltaww.com/default.aspx?hl=zh-TW" Target="_blank" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink5" runat="server" ImageUrl="~/images/logo/fpc.jpg" NavigateUrl="http://www.fpc.com.tw/fpcw/" Target="_blank" />
                 </div>
             </div>
-        </div>--%>
-        <div class="associate-partner">
-            <div class="">
-                <%--                <div class="title text-center text-black-50 mb-4">
-                    企業客戶
-                </div>--%>
-                <div class="slider">
-                    <div class="">
-                        <img src="/images/logo/aidc-logo.svg" />
-                    </div>
-                    <div class="">
-                        <img src="/images/logo/corning-logo.svg" />
-                    </div>
-                    <div class="">
-                        <img src="/images/logo/cpc-logo.svg" />
-                    </div>
-                    <div class="">
-                        <img src="/images/logo/csc-logo.svg" />
-                    </div>
-                    <div class="">
-                        <img src="/images/logo/delta-logo.svg" />
-                    </div>
-                    <div class="">
-                        <img src="/images/logo/fpg-logo.svg" />
-                    </div>
-                    <div class="">
-                        <img src="/images/logo/itri-logo.svg" />
-                    </div>
-                    <div class="">
-                        <img src="/images/logo/nypg-logo.svg" />
-                    </div>
-                    <div class="">
-                        <img src="/images/logo/osram-logo.svg" />
-                    </div>
-                    <div class="">
-                        <img src="/images/logo/tatung-logo.svg" />
-                    </div>
-                    <div class="">
-                        <img src="/images/logo/tsmc-logo.svg" />
-                    </div>
+            <div class="default-content">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink6" runat="server" ImageUrl="~/images/logo/huachuang.jpg" NavigateUrl="http://www.haitec.com.tw/tc/" Target="_blank" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink7" runat="server" ImageUrl="~/images/logo/ITRI.jpg" NavigateUrl="https://www.itri.org.tw/" Target="_blank" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink8" runat="server" ImageUrl="~/images/logo/nypc.jpg" NavigateUrl="http://www.npc.com.tw/index.htm" Target="_blank" />                    
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink9" runat="server" ImageUrl="~/images/logo/osram.jpg" NavigateUrl="http://www.osram.tw/osram_tw/" Target="_blank" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink10" runat="server" ImageUrl="~/images/logo/stsc.jpg" NavigateUrl="http://www.taiwansemi.com/zh-tw" Target="_blank" />
                 </div>
             </div>
-        </div>        
-    </div>
+            <div class="default-content">
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink11" runat="server" ImageUrl="~/images/logo/tatung.jpg" NavigateUrl="http://www.tatung.com.tw/b5/index.asp" Target="_blank" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink12" runat="server" ImageUrl="~/images/logo/teco.jpg" NavigateUrl="http://www.teco.com.tw/" Target="_blank" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink13" runat="server" ImageUrl="~/images/logo/ti.jpg" NavigateUrl="http://www.thermoway.com.tw/zh/home.php" Target="_blank" />         
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink14" runat="server" ImageUrl="~/images/logo/tsmc.jpg" NavigateUrl="http://www.tsmc.com.tw/chinese/default.htm" Target="_blank" />
+                </div>
+                <div class="button">
+                    <asp:HyperLink ID="HyperLink15" runat="server" ImageUrl="~/images/logo/walsin.jpg" NavigateUrl="http://www.walsin.com.tw/walsin/home.do" Target="_blank" />
+                </div>
+            </div>
+        </div>
+    </div>    
 </asp:Content>
+

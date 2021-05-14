@@ -37,6 +37,25 @@ public partial class InventorySearch : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!IsPostBack)
+        {
+            using (SqlConnection conn = new SqlConnection(NZconnectionString))
+            {
+                conn.Open();
+                string query = "select LTRIM(RTRIM(MC001)) 'value'" +
+                    " ,LTRIM(RTRIM(MC001))+'-'+LTRIM(RTRIM(MC002)) 'text'" +
+                    " from CMSMC";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                foreach(DataRow row in dt.Rows)
+                {
+                    ddlInvLoc.Items.Add(new ListItem(row["text"].ToString(), row["value"].ToString()));
+                }
+            }
+        }
 
     }
 
@@ -57,11 +76,11 @@ public partial class InventorySearch : System.Web.UI.Page
         string query = "SELECT COALESCE(INVMB.MB001, '') [ITEM_ID]"
                     + " , COALESCE(INVMB.MB002, '') [ITEM_NAME]"
                     + " , COALESCE(INVMB.MB003, '') [ITEM_SPEC]"
-                    + " , COALESCE(INVMC.MC007, 0) [AMOUNT_IN_INV]"
+                    + " , convert(decimal(20,1),COALESCE(INVMC.MC007, 0)) [AMOUNT_IN_INV]"
                     + " , COALESCE(INVMB.MB004, '') [UNIT]"
                     + " , COALESCE(CMSMC.MC001,'') [INV_ID]"
                     + " , COALESCE(CMSMC.MC002, '') [INV_NAME]"
-                    + " , COALESCE(INVMC.MC004, 0) [AMOUNT_SAFETY]"
+                    + " , convert(decimal(20,1),COALESCE(INVMC.MC004, 0)) [AMOUNT_SAFETY]"
                     + " , COALESCE(INVMB.MB064, 0) [AMOUNT_TOTAL]"
                     + " , COALESCE(INVMB.MB005, '') [CATEGORY_ACCT]"
                     + " , COALESCE(INVMB.MB006, '') [CATEGORY_RAW]"
@@ -70,7 +89,7 @@ public partial class InventorySearch : System.Web.UI.Page
                     + " FROM INVMB"
                     + " LEFT JOIN INVMC ON INVMB.MB001=INVMC.MC001"
                     + " LEFT JOIN CMSMC ON INVMC.MC002=CMSMC.MC001";
-        string condition = "";
+        string condition = " WHERE 1=1";
         char[] delimiters = new char[] { ',' };
         List<string> ID = new List<string>();
         List<string> Name = new List<string>();
@@ -132,14 +151,14 @@ public partial class InventorySearch : System.Web.UI.Page
             int i = 0;
             foreach (string str in ID)
             {
-                if (i == 0)
-                {
-                    condition += " WHERE INVMB.MB001 LIKE N'" + str + "'";
-                }
-                else if (i < ID.Count)
-                {
+                //if (i == 0)
+                //{
+                //    condition += " WHERE INVMB.MB001 LIKE N'" + str + "'";
+                //}
+                //else if (i < ID.Count)
+                //{
                     condition += " AND INVMB.MB001 LIKE N'" + str + "'";
-                }
+                //}
                 i++;
             }
         }
@@ -148,14 +167,14 @@ public partial class InventorySearch : System.Web.UI.Page
             int i = 0;
             foreach (string str in Name)
             {
-                if (ID.Count == 0 && i == 0)
-                {
-                    condition += " WHERE INVMB.MB002 LIKE N'" + str + "'";
-                }
-                else if (i < Name.Count)
-                {
+                //if (ID.Count == 0 && i == 0)
+                //{
+                //    condition += " WHERE INVMB.MB002 LIKE N'" + str + "'";
+                //}
+                //else if (i < Name.Count)
+                //{
                     condition += " AND INVMB.MB002 LIKE N'" + str + "'";
-                }
+                //}
                 i++;
             }
         }
@@ -164,70 +183,83 @@ public partial class InventorySearch : System.Web.UI.Page
         {
             if (txtCategory_Acct.Text.Trim() != "")
             {
-                if (ID.Count == 0 && Name.Count == 0)
-                {
-                    condition += " WHERE INVMB.MB005=N'" + txtCategory_Acct.Text.Trim() + "'";
-                }
-                else
-                {
+                //if (ID.Count == 0 && Name.Count == 0)
+                //{
+                //    condition += " WHERE INVMB.MB005=N'" + txtCategory_Acct.Text.Trim() + "'";
+                //}
+                //else
+                //{
                     condition += " AND INVMB.MB005=N'" + txtCategory_Acct.Text.Trim() + "'";
-                }
+                //}
             }
             if (txtCategory_Raw.Text.Trim() != "")
             {
-                if (ID.Count == 0 && Name.Count == 0 && txtCategory_Acct.Text.Trim() == "")
-                {
-                    condition += " WHERE INVMB.MB006=N'" + txtCategory_Raw.Text.Trim() + "'";
-                }
-                else
-                {
+                //if (ID.Count == 0 && Name.Count == 0 && txtCategory_Acct.Text.Trim() == "")
+                //{
+                //    condition += " WHERE INVMB.MB006=N'" + txtCategory_Raw.Text.Trim() + "'";
+                //}
+                //else
+                //{
                     condition += " AND INVMB.MB006=N'" + txtCategory_Raw.Text.Trim() + "'";
-                }
+                //}
             }
             if (txtCategory_Small.Text.Trim() != "")
             {
-                if (ID.Count == 0 && Name.Count == 0 && txtCategory_Acct.Text.Trim() == "" && txtCategory_Raw.Text.Trim() == "")
-                {
-                    condition += " WHERE INVMB.MB007=N'" + txtCategory_Small.Text.Trim() + "'";
-                }
-                else
-                {
+                //if (ID.Count == 0 && Name.Count == 0 && txtCategory_Acct.Text.Trim() == "" && txtCategory_Raw.Text.Trim() == "")
+                //{
+                //    condition += " WHERE INVMB.MB007=N'" + txtCategory_Small.Text.Trim() + "'";
+                //}
+                //else
+                //{
                     condition += " AND INVMB.MB007=N'" + txtCategory_Small.Text.Trim() + "'";
-                }
+                //}
             }
             if (txtCategory_Large.Text.Trim() != "")
             {
-                if (ID.Count == 0 && Name.Count == 0 && txtCategory_Acct.Text.Trim() == "" && txtCategory_Raw.Text.Trim() == "" && txtCategory_Small.Text.Trim() == "")
-                {
-                    condition += " WHERE INVMB.MB008=N'" + txtCategory_Large.Text.Trim() + "'";
-                }
-                else
-                {
+                //if (ID.Count == 0 && Name.Count == 0 && txtCategory_Acct.Text.Trim() == "" && txtCategory_Raw.Text.Trim() == "" && txtCategory_Small.Text.Trim() == "")
+                //{
+                //    condition += " WHERE INVMB.MB008=N'" + txtCategory_Large.Text.Trim() + "'";
+                //}
+                //else
+                //{
                     condition += " AND INVMB.MB008=N'" + txtCategory_Large.Text.Trim() + "'";
-                }
+                //}
             }
         }
+
+        if (chkInvLoc.Checked)
+        {
+            //if(ID.Count == 0 && Name.Count == 0
+            //    && string.IsNullOrWhiteSpace(txtCategory_Acct.Text)
+            //    && string.IsNullOrWhiteSpace(txtCategory_Large.Text)
+            //    && string.IsNullOrWhiteSpace(txtCategory_Raw.Text)
+            //    && string.IsNullOrWhiteSpace(txtCategory_Small.Text))
+            //{
+            condition += " AND INVMC.MC002=@INVLOC";
+            //}
+        }
+
         if (!chkInvShowZero.Checked)
         {
-            if (ID.Count == 0 && Name.Count == 0 && txtCategory_Acct.Text.Trim() == "" && txtCategory_Raw.Text.Trim() == "" && txtCategory_Small.Text.Trim() == "" && txtCategory_Large.Text.Trim() == "")
-            {
-                condition += " WHERE INVMB.MB064 <> 0";
-            }
-            else
-            {
+            //if (ID.Count == 0 && Name.Count == 0 && txtCategory_Acct.Text.Trim() == "" && txtCategory_Raw.Text.Trim() == "" && txtCategory_Small.Text.Trim() == "" && txtCategory_Large.Text.Trim() == "")
+            //{
+            //    condition += " WHERE INVMB.MB064 <> 0";
+            //}
+            //else
+            //{
                 condition += " AND INVMB.MB064 <> 0";
-            }
+            //}
         }
         if (!chkSafetyShowZero.Checked)
         {
-            if (ID.Count == 0 && Name.Count == 0 && txtCategory_Acct.Text.Trim() == "" && txtCategory_Raw.Text.Trim() == "" && txtCategory_Small.Text.Trim() == "" && txtCategory_Large.Text.Trim() == "" && chkInvShowZero.Checked == true)
-            {
-                condition += " WHERE INVMC.MC004 <> 0";
-            }
-            else
-            {
+            //if (ID.Count == 0 && Name.Count == 0 && txtCategory_Acct.Text.Trim() == "" && txtCategory_Raw.Text.Trim() == "" && txtCategory_Small.Text.Trim() == "" && txtCategory_Large.Text.Trim() == "" && chkInvShowZero.Checked == true)
+            //{
+            //    condition += " WHERE INVMC.MC004 <> 0";
+            //}
+            //else
+            //{
                 condition += " AND INVMC.MC004 <>0";
-            }
+            //}
         }
         condition += " ORDER BY INVMB.MB001, CMSMC.MC001";
         //string[] SearchWords = txtSearch.Text.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
@@ -332,6 +364,7 @@ public partial class InventorySearch : System.Web.UI.Page
             conn.Open();
 
             SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@INVLOC", ddlInvLoc.SelectedValue);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
@@ -339,7 +372,7 @@ public partial class InventorySearch : System.Web.UI.Page
             grdResult.DataBind();
         }
     }
-    protected void btnSearch_Click(object sender, ImageClickEventArgs e)
+    protected void btnSearch_Click(object sender, EventArgs e)
     {
         try
         {
@@ -418,4 +451,5 @@ public partial class InventorySearch : System.Web.UI.Page
     {
         txtCategory_Large.Text = grdLarge.SelectedRow.Cells[0].Text;
     }
+
 }

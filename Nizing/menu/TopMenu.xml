@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Menus>
+  <Menu>
+    <MenuId>1</MenuId>
+    <ParentId>0</ParentId>
+    <CnTitle>關於日進</CnTitle>
+    <EnTitle>Company</EnTitle>
+    <DisplayOrder>0</DisplayOrder>
+    <Location>~/company.aspx</Location>
+  </Menu>
+  <Menu>
+    <MenuId>2</MenuId>
+    <ParentId>1</ParentId>
+    <CnTitle>公司簡介</CnTitle>
+    <EnTitle>Introduction</EnTitle>
+    <DisplayOrder>0</DisplayOrder>
+    <Location>~/company-intro.aspx</Location>
+  </Menu>
+  <Menu>
+    <MenuId>3</MenuId>
+    <ParentId>1</ParentId>
+    <CnTitle>無衝突金屬聲明</CnTitle>
+    <EnTitle>Declaration</EnTitle>
+    <DisplayOrder>0</DisplayOrder>
+    <Location>~/conflict-free-mineral-declaration.aspx</Location>
+  </Menu>
+  <Menu>
+    <MenuId>4</MenuId>
+    <ParentId>0</ParentId>
+    <CnTitle>產品資訊</CnTitle>
+    <EnTitle>Product</EnTitle>
+    <DisplayOrder>0</DisplayOrder>
+    <Location>~/product.aspx</Location>
+  </Menu>
+  <Menu>
+    <MenuId>4</MenuId>
+    <ParentId>0</ParentId>
+    <CnTitle>產品資訊</CnTitle>
+    <EnTitle>Product</EnTitle>
+    <DisplayOrder>0</DisplayOrder>
+    <Location>~/product.aspx</Location>
+  </Menu>
+  <Menu>
+    <MenuId>5</MenuId>
+    <ParentId>4</ParentId>
+    <CnTitle>PVC線材</CnTitle>
+    <EnTitle>PVC Wire</EnTitle>
+    <DisplayOrder>0</DisplayOrder>
+    <Location>~/pvc-series.aspx</Location>
+  </Menu>
+  <Menu>
+    <MenuId>6</MenuId>
+    <ParentId>4</ParentId>
+    <CnTitle>矽膠編織耐熱線材</CnTitle>
+    <EnTitle>Silicone Fiberglass Wire</EnTitle>
+    <DisplayOrder>0</DisplayOrder>
+    <Location>~/silicone-fiberglass-series.aspx</Location>
+  </Menu>
+</Menus>

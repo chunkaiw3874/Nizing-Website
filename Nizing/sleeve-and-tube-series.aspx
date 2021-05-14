@@ -1,13 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/product.master" AutoEventWireup="true" CodeFile="sleeve-and-tube-series.aspx.cs" Inherits="sleeve_and_tube_series" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWD.master" AutoEventWireup="true" CodeFile="sleeve-and-tube-series.aspx.cs" Inherits="sleeve_and_tube_series" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title>套管、絕緣-日進電線</title>
     <meta name="keywords" content="矽膠套管,玻璃纖維套管,鐵氟龍套管,絕緣保護" />
     <meta name="description" content="各式套管、包含UL HST、UL FRS、UL SRG、各式鐵氟龍套管、矽膠套管、玻璃纖維套管，提供最適當的絕緣保護">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
     <div id="product-submenu">
         <div class="content-row">
             <div class="content-column">
@@ -161,7 +159,7 @@
                         </tr>
                     </table>
                 </div>
-            </div>            
+            </div>
             <div class="content-column">
                 <div class="button">
                     <asp:HyperLink ID="HyperLink6" runat="server" ImageUrl="~/images/product_pic/ptfe_tube-menu.jpg" Text="PTFE鐵氟龍絕緣套管" NavigateUrl="~/ptfe-tube.aspx"></asp:HyperLink>

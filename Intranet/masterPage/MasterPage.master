@@ -14,6 +14,7 @@
     <link href="~/css/general.css" rel="stylesheet" type="text/css" />
     <%--<link href="~/css/bootstrap/bootstrap.css" rel="stylesheet" />--%>
     <link href="~/css/bootstrap/bootstrap-mod.css" rel="stylesheet" />
+    <link href="~/css/table.css" rel="stylesheet" />
 <%--    <script src="<%=Page.ResolveClientUrl("~/Scripts/jquery-2.1.4.js") %>"></script>
     <script src="<%=Page.ResolveClientUrl("~/Scripts/jquery.validate.js") %>"></script>
     <script src="<%=Page.ResolveClientUrl("~/Scripts/bootstrap.js") %>"></script>--%>

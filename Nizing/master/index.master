@@ -8,7 +8,8 @@
 <head runat="server">
     <meta name="msvalidate.01" content="9FD2A31229BA452ABDBB1C004A175F57" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <%--<meta name="keywords" content="日進電線,專業製造,矽膠電線,鐵氟龍線,XLPE電線,PVC線,PE線材,PU線材,補償導線,耐高溫電線,耐高溫電纜,耐高壓電線,耐高壓電纜,電線規格,安規認證,UL產品,套管,客製化,配線,電動車,溫控,雲端,3D列印,醫療,LED照明,加熱系統,鋼鐵工業用線" />--%>
     <link rel="shortcut icon" href="../images/icon/nizing.ico.gif" />    
     <link href="~/css/normalize.css" rel="stylesheet" type="text/css" />

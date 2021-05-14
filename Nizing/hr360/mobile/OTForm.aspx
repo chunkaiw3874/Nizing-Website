@@ -50,12 +50,12 @@
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-            <asp:UpdatePanel ID="upApplicationTab" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
-                <Triggers>
-                    <asp:AsyncPostBackTrigger ControlID="btnAddOTApplication" />
-                </Triggers>
-                <ContentTemplate>
-                    <div class="tab-pane fade show active" id="nav-application" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="tab-pane fade show active" id="nav-application" role="tabpanel" aria-labelledby="nav-home-tab">
+                <asp:UpdatePanel ID="upApplicationTab" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="btnAddOTApplication" />
+                    </Triggers>
+                    <ContentTemplate>
                         <div class="form-group" style="color: red">
                             *員工因工作需要加班時，經權責主管核准後方可加班<br />
                             *最遲於加班發生後3日內完成申請<br />
@@ -67,9 +67,9 @@
                                 OnClick="btnOTApplication_Click" />
                             <asp:Button ID="btnOTAppointment" runat="server" CssClass="btn btn-primary" Text="申請派工" />
                         </div>
-                    </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
 
             <div class="tab-pane fade" id="nav-approval" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <div class="form-group">
@@ -97,6 +97,12 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
+                            <div class="input-group mb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">加班部門</span>
+                                </div>
+                                <asp:DropDownList ID="ddlApplicationOTDepartment" runat="server" CssClass="form-control"></asp:DropDownList>
+                            </div>
                             <div class="input-group mb-1" id="applicationDatetimePicker" data-target-input="nearest">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">加班開始時間</span>
@@ -125,11 +131,11 @@
                             </div>
                             <div class="input-group mb-1">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"> 補償方式</span>
+                                    <span class="input-group-text">補償方式</span>
                                 </div>
                                 <asp:DropDownList ID="ddlCompensationMethod" runat="server" CssClass="form-control"></asp:DropDownList>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-12">
                                     加班內容:
@@ -137,7 +143,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <asp:TextBox ID="txtOTReason" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
+                                    <asp:TextBox ID="txtApplicationOTReason" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
