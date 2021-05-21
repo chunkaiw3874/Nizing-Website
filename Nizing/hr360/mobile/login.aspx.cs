@@ -36,11 +36,21 @@ public partial class hr360_mobile_login : System.Web.UI.Page
     }
     protected void btnLogin_Click(object sender, EventArgs e)
     {
+        ////TEST
+        //HR360LoggedUser.HR360Id = "0164";
+        //HR360LoggedUser.ERPId = "0164";
+        //HR360LoggedUser.Company = "NIZING";
+        //GetLoggedUserInfo(HR360LoggedUser.ERPId, HR360LoggedUser.Company);
+        //Session["user_id"] = HR360LoggedUser.HR360Id;
+        //Session["erp_id"] = HR360LoggedUser.ERPId;
+        //Session["company"] = HR360LoggedUser.Company;
+        //Response.Redirect("main.aspx");
+
         if (isValid(txtUsername.Text, txtPassword.Text))
         {
             lblLoginMessage.Text = "成功登入";
             lblLoginMessage.ForeColor = Color.Green;
-            Response.Redirect("main.aspx");            
+            Response.Redirect("main.aspx");
         }
     }
 
