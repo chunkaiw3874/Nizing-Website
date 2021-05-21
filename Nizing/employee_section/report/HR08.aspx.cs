@@ -70,7 +70,7 @@ public partial class nizing_intranet_HR08 : System.Web.UI.Page
         {
             HtmlGenericControl divRow = new HtmlGenericControl("div");
             divRow.ID = "row" + i;
-            divRow.Attributes.Add("class", "row");
+            divRow.Attributes.Add("class", "row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 w-100");
             divReport_Section.Controls.Add(divRow);
             for (int j = 0; j < colCount && i * 4 + j < dtDept.Rows.Count; j++)
             {
@@ -100,11 +100,11 @@ public partial class nizing_intranet_HR08 : System.Web.UI.Page
                 }
                 HtmlGenericControl divCol = new HtmlGenericControl("div");
                 divCol.ID = divRow.ID + "col" + j;
-                divCol.Attributes.Add("class", "col-sm-3");
+                divCol.Attributes.Add("class", "col");
                 divRow.Controls.Add(divCol);
                 HtmlTable tb = new HtmlTable();
                 tb.ID = "tb" + divCol.ID;
-                tb.Attributes.Add("class", "table table-striped table-bordered col-xs-12");
+                tb.Attributes.Add("class", "table table-striped-blue");
                 divCol.Controls.Add(tb);
                 HtmlTableRow headerRow = new HtmlTableRow();
                 HtmlTableCell headerCell = new HtmlTableCell("th");

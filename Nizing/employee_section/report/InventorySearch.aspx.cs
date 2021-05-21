@@ -368,8 +368,8 @@ public partial class InventorySearch : System.Web.UI.Page
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
-            grdResult.DataSource = ds;
-            grdResult.DataBind();
+            gvResult.DataSource = ds;
+            gvResult.DataBind();
         }
     }
     protected void btnSearch_Click(object sender, EventArgs e)

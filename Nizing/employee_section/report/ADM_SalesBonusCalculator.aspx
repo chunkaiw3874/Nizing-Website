@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/report/MasterPage.master" AutoEventWireup="true" CodeFile="ADM_SalesBonusCalculator.aspx.cs" Inherits="employee_section_report_ADM_SalesBonusCalculator" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/report/MasterPage2021.master" AutoEventWireup="true" CodeFile="ADM_SalesBonusCalculator.aspx.cs" Inherits="employee_section_report_ADM_SalesBonusCalculator" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style>
@@ -8,9 +8,9 @@
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <div class="container-fluid">
+    <div class="container">
         <div class="mb-3">
             <h2>業績獎金計算作業</h2>
         </div>

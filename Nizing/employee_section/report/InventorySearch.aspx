@@ -1,8 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/master/report/MasterPage.Master" CodeFile="InventorySearch.aspx.cs" Inherits="InventorySearch" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/master/report/MasterPage2021.Master" CodeFile="InventorySearch.aspx.cs" Inherits="InventorySearch" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
     <style>
-        .table tr th {
+        /*.table tr th {
             font-size:14px;
             background-color: #29ABE2;
             color: #ffffff;
@@ -14,17 +14,16 @@
 
         .table tr td, .table tr th {
             border-color: white;
-        }
+        }*/
     </style>
 </asp:Content>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="body" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <div id="inventory">
-        <div id="search-field">
+    <div class="container-fluid px-5">
             <h2>庫存查詢系統</h2>
             <asp:Label ID="lblErrorMessage" runat="server" ForeColor="Red"></asp:Label>
-            <div>
-                <table id="search-table">
+            <div class="table-responsive">
+                <table id="search-table" class="table table-borderless text-left">
                     <tr>
                         <td>
                             <asp:CheckBox ID="chkId" runat="server" Text="品號查詢" Checked="true" />
@@ -116,15 +115,13 @@
                         </td>
                         <td>
                             <asp:Button ID="btnSearch" runat="server" Text="查詢" CssClass="btn btn-success" OnClick="btnSearch_Click" />
-                            <%--<asp:ImageButton ID="btnSearch" runat="server" ImageUrl="~/nizing_intranet/image/button/Search_Button.png" OnClick="btnSearch_Click" />--%>
                         </td>
                     </tr>
                 </table>
             </div>
-        </div>
 
-        <div>
-            <asp:GridView ID="grdResult" runat="server" AutoGenerateColumns="false" CssClass="table table-hover">
+        <div class="table-responsive">
+            <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="false" CssClass="table table-striped-blue">
                 <Columns>
                     <asp:TemplateField HeaderText="實際在庫量">
                         <ItemTemplate>
@@ -166,11 +163,6 @@
                             <asp:Label ID="label" runat="server" Text='<%#Eval("AMOUNT_SAFETY") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <%--<asp:TemplateField HeaderText="實際總在庫量" ItemStyle-Width="300">
-                        <ItemTemplate>
-                            <asp:Label ID="label" runat="server" Text='<%#Eval("AMOUNT_TOTAL") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>--%>
                     <asp:TemplateField HeaderText="會計分類" ItemStyle-Width="75">
                         <ItemTemplate>
                             <asp:Label ID="label" runat="server" Text='<%#Eval("CATEGORY_ACCT") %>'></asp:Label>

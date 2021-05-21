@@ -531,19 +531,19 @@ public partial class nizing_intranet_PC04 : System.Web.UI.Page
             TableCell HeaderCell = new TableCell();
             HeaderCell.Text = "";
             HeaderCell.ColumnSpan = 7;
-            HeaderCell.CssClass = "stackedHeader-1";
+            HeaderCell.CssClass = "stacked-header-1";
             HeaderGridRow.Cells.Add(HeaderCell);
 
             HeaderCell = new TableCell();
             HeaderCell.Text = "銷售月份";
             HeaderCell.ColumnSpan = 12;
-            HeaderCell.CssClass = "stackedHeader-2";
+            HeaderCell.CssClass = "stacked-header-2";
             HeaderGridRow.Cells.Add(HeaderCell);
 
             HeaderCell = new TableCell();
             HeaderCell.Text = "";
             HeaderCell.ColumnSpan = 1;
-            HeaderCell.CssClass = "stackedHeader-2";
+            HeaderCell.CssClass = "stacked-header-2";
             HeaderGridRow.Cells.Add(HeaderCell);
             gvResult.Controls[0].Controls.AddAt(0, HeaderGridRow);
         }
