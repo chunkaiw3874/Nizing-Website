@@ -780,9 +780,6 @@
                 </div>
             </div>
         </div>
-        <%--<div class="main-block">
-
-        </div>--%>
         <div class="main-block news">
             <div class="container">
                 <div class="title">

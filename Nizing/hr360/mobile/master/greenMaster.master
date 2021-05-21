@@ -120,7 +120,7 @@
                         <a class="nav-link" href="/hr360/UI03.aspx">填寫加班單</a>
                     </li>--%>
                     <li class="nav-item">
-                        <a class="nav-link" href="/hr360/mobile/UI04.aspx">我要請假</a>
+                        <a class="nav-link" href="/hr360/UI04.aspx">我要請假</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/hr360/mobile/OTForm.aspx">加班申請</a>
