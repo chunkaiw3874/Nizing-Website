@@ -234,5 +234,7 @@
     <siteMapNode url="contact_us.aspx" title="Contact Us" description="聯絡我們" />
     <siteMapNode url="news.aspx" title="News" description="最新消息" />
     <siteMapNode url="navigation.aspx" title="Navigation" description="網站導覽" />
+    <siteMapNode url="/future/Non-RWD/silicone-fiberglass-series.aspx" title="new fiberglass" description="新的玻纖編織" />
+    
   </siteMapNode>  
 </siteMap>

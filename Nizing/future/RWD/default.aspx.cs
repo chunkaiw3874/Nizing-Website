@@ -63,7 +63,7 @@ public partial class _default : System.Web.UI.Page
         foreach (DataRow row in dt.Rows)
         {
             HtmlAnchor a = new HtmlAnchor();
-            a.ServerClick += showNews;
+            a.ServerClick += new EventHandler(showNews);
             a.ID = row["newsId"].ToString();
             newsContent.Controls.Add(a);
 

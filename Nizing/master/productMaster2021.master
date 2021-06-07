@@ -1,0 +1,143 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/master/indexMaster2021.master" AutoEventWireup="true" CodeFile="productMaster2021.master.cs" Inherits="master_productMaster2021" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style>
+        .mini-menu .img {
+            height: 100px;
+        }
+
+        .product-mini-menu .card-link {
+            padding: 20px 0;
+        }
+
+        .product-list-item {
+            box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .product-list-wrapper {
+            padding-right: 48px;
+            padding-bottom: 48px;
+        }
+
+        .product .color-code-section {
+            padding: 15px 60px 15px 0;
+        }
+
+        .product .product-text {
+            font-size: 18px;
+        }
+
+        .product-spec table tr td:first-child {
+            text-align: right;
+        }
+
+        .block.content .content {
+            padding-top: 30px;
+        }
+
+            .block.content .content:first-child {
+                padding-top: 0px;
+            }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
+    <div class="container-fluid p-0">
+        <div class="banner">
+            <img src="/images/banner/banner-product-en-1920x300.png" class="w-100 img" />
+        </div>
+        <div class="mini-menu bg-gray">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <a class="card-link" href="silicone-fiberglass-series.aspx">
+                        <div class="">
+                            <img src="/images/menu/矽膠編織線系列 320x370.png" class="img" />
+                            <%--<p class="card-text">矽膠編織線系列</p>--%>
+                        </div>
+                    </a>
+                    <a class="card-link" href="silicone-series.aspx">
+                        <div class="">
+                            <img src="/images/menu/矽膠線系列 320x370.png" class="img" />
+                            <%--<p class="card-text">矽膠線系列</p>--%>
+                        </div>
+                    </a>
+                    <a class="card-link" href="high-temperature-resistance-series.aspx">
+                        <div class="">
+                            <img src="/images/menu/高溫線系列 320x370.png" class="img" />
+                            <%--<p class="card-text">高溫線系列</p>--%>
+                        </div>
+                    </a>
+                    <a class="card-link" href="teflon-series.aspx">
+                        <div class="">
+                            <img src="/images/menu/鐵氟龍線系列 320x370.png" class="img" />
+                            <%--<p class="card-text">鐵氟龍線系列</p>--%>
+                        </div>
+                    </a>
+                    <a class="card-link" href="pvc-series.aspx">
+                        <div class="">
+                            <img src="/images/menu/PVC系列 320x370.png" class="img" />
+                            <%--<p class="card-text">PVC線系列</p>--%>
+                        </div>
+                    </a>
+                    <a class="card-link" href="xlpe-series.aspx">
+                        <div class="">
+                            <img src="/images/menu/XLPE系列 320x370.png" class="img" />
+                            <%--<p class="card-text">XLPE線系列</p>--%>
+                        </div>
+                    </a>
+                    <a class="card-link" href="thermocouple-series.aspx">
+                        <div class="">
+                            <img src="/images/menu/補償導線系列 320x370.png" class="img" />
+                            <%--<p class="card-text">補償導線系列</p>--%>
+                        </div>
+                    </a>
+                    <a class="card-link" href="sleeve-and-tube-series.aspx">
+                        <div class="">
+                            <img src="/images/menu/套管系列 320x370.png" class="img" />
+                            <%--<p class="card-text">套管系列</p>--%>
+                        </div>
+                    </a>
+                    <a class="card-link" href="heating-wire-series.aspx">
+                        <div class="">
+                            <img src="/images/menu/發熱線系列 320x370.png" class="img" />
+                            <%--<p class="card-text">發熱線系列</p>--%>
+                        </div>
+                    </a>
+                    <a class="card-link" href="special-cable-series.aspx">
+                        <div class="">
+                            <img src="/images/menu/特殊線系列 320x370.png" class="img" />
+                            <%--<p class="card-text">特殊線系列</p>--%>
+                        </div>
+                    </a>
+                    <a class="card-link" href="automotive-wire-series.aspx">
+                        <div class="">
+                            <img src="/images/menu/汽車花線系列 320x370.png" class="img" />
+                            <%--<p class="card-text">汽車花線系列</p>--%>
+                        </div>
+                    </a>
+                    <a class="card-link" href="military-grade-series.aspx">
+                        <div class="">
+                            <img src="/images/menu/軍規線系列 320x370.png" class="img" />
+                            <%--<p class="card-text">軍規線系列</p>--%>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="breadcrumb">
+            <div class="container">
+                <asp:SiteMapPath ID="SiteMapPath1" runat="server">
+                    <RootNodeTemplate>
+                        <a href="default.aspx">
+                            <img src="/images/home_black-48x48.png" class="img" />
+                        </a>
+                    </RootNodeTemplate>
+                </asp:SiteMapPath>
+            </div>
+        </div>
+    </div>
+
+    <asp:ContentPlaceHolder ID="body" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+

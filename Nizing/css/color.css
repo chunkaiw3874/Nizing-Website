@@ -1,0 +1,33 @@
+﻿/*background color*/
+.bg-black {
+    background-color: #000000;
+}
+
+.bg-red {
+    background-color: #ff0000;
+}
+
+.bg-yellow {
+    background-color: #fffa00;
+}
+
+.bg-blue {
+    background-color: #00ffff;
+}
+
+.bg-green {
+    background-color: #4cff00;
+}
+
+.bg-brown {
+    background-color: #de7400;
+}
+
+.bg-yellowgreen {
+    background: linear-gradient(135deg, #fffa00 0 50%, #4cff00 50% 100%);
+}
+
+/*custom color*/
+.nizing-blue {
+    color: #1da3d9;
+}

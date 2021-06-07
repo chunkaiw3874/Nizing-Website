@@ -39,7 +39,7 @@ public partial class master_indexMaster2021 : System.Web.UI.MasterPage
         {
             bool hasChildNode = hasChild(dtMenu, row.Field<string>("id"));
             HtmlGenericControl li = new HtmlGenericControl("li");
-            li.Attributes.Add("class", "nav-item dropdown mr-3");
+            li.Attributes.Add("class", "nav-item dropdown mx-4");
             HtmlGenericControl a = new HtmlGenericControl("a");
             a.Attributes.Add("class", "nav-link text-white");
             if (language == "en")
@@ -54,10 +54,11 @@ public partial class master_indexMaster2021 : System.Web.UI.MasterPage
             divNavContentList.Controls.Add(li);
             if (hasChildNode)
             {
-                a.Attributes.Add("class", "nav-link dropdown-toggle text-white");
+                a.Attributes.Add("class", "nav-link text-white");
                 a.Attributes.Add("role", "button");
-                a.Attributes.Add("data-toggle", "dropdown");
-                a.Attributes.Remove("href");
+                a.Attributes.Add("href", row.Field<string>("link"));
+                //a.Attributes.Add("data-toggle", "dropdown");
+                //a.Attributes.Remove("href");
                 HtmlGenericControl ul = new HtmlGenericControl("ul");
                 ul.Attributes.Add("class", "dropdown-menu");
                 li.Controls.Add(ul);

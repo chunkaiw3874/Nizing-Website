@@ -1,40 +1,50 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/child.master" AutoEventWireup="true" CodeFile="material.aspx.cs" Inherits="material" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/materialMaster2021.master" AutoEventWireup="true" CodeFile="material.aspx.cs" Inherits="material" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title>日進電線-材料特性</title>
+    <style>
+        .material-list-item {
+            box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+    </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="TitleRow" Runat="Server">
-    材料特性
-</asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="TitleLink" Runat="Server">
-    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="plastic.aspx">塑料</asp:HyperLink> | 
-    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="silicone.aspx">矽膠</asp:HyperLink> | 
-    <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="teflon.aspx">鐵氟龍</asp:HyperLink> | 
-    <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="twinning.aspx">纏繞編織材料</asp:HyperLink> | 
-    <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="conductor.aspx">導體</asp:HyperLink>
-</asp:Content>
-<asp:Content ID="Content5" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div id="child-menu">
-        <div class="inner-content">
-            <div class="content-row">
-                <div class="button">
-                    <asp:HyperLink ID="HyperLink6" runat="server" ImageUrl="~/images/button/plastic.jpg" NavigateUrl="plastic.aspx"></asp:HyperLink>
-                </div>
-                <div class="button">
-                    <asp:HyperLink ID="HyperLink7" runat="server" ImageUrl="~/images/button/silicone.jpg" NavigateUrl="silicone.aspx"></asp:HyperLink>
-                </div>
-                <div class="button">
-                    <asp:HyperLink ID="HyperLink8" runat="server" ImageUrl="~/images/button/teflon.jpg" NavigateUrl="teflon.aspx"></asp:HyperLink>
-                </div>
-                <div class="button" style="margin-right:0px;">
-                    <asp:HyperLink ID="HyperLink9" runat="server" ImageUrl="~/images/button/twinning.jpg" NavigateUrl="twinning.aspx"></asp:HyperLink>
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
+    <div class="container">
+        <div class="material-list row row-cols-1">
+            <div class="col material-list-wrapper">
+                <div class="material-list-item move">
+                    <a href="conductor-category.aspx" class="card-link">
+                        <img src="/images/material/材料特性-導體系列.png" class="img w-100" />
+                    </a>
                 </div>
             </div>
-            <div class="content-row">
-                <div class="button">
-                    <asp:HyperLink ID="HyperLink10" runat="server" ImageUrl="~/images/button/conductor.jpg" NavigateUrl="conductor.aspx"></asp:HyperLink>
+            <div class="col material-list-wrapper">
+                <div class="material-list-item move">
+                    <a href="silicone.aspx" class="card-link">
+                        <img src="/images/material/材料特性-矽膠原料.png" class="img w-100" />
+                    </a>
+                </div>
+            </div>
+            <div class="col material-list-wrapper">
+                <div class="material-list-item move">
+                    <a href="teflon.aspx" class="card-link">
+                        <img src="/images/material/材料特性-鐵氟龍材料.png" class="img w-100" />
+                    </a>
+                </div>
+            </div>
+            <div class="col material-list-wrapper">
+                <div class="material-list-item move">
+                    <a href="plastic.aspx" class="card-link">
+                        <img src="/images/material/材料特性-塑膠原料.png" class="img w-100" />
+                    </a>
+                </div>
+            </div>
+            <div class="col material-list-wrapper">
+                <div class="material-list-item move">
+                    <a href="twinning.aspx" class="card-link">
+                        <img src="/images/material/材料特性-編織.png" class="img w-100" />
+                    </a>
                 </div>
             </div>
         </div>
