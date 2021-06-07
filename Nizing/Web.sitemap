@@ -175,7 +175,7 @@
         <siteMapNode url="cat6a10gssftp.aspx" title="CAT6A 10GS S/FTP" description="CAT6A 10GS S/FTP" />
         <siteMapNode url="cat710gplussftp.aspx" title="CAT7 10G-PLUS S/FTP" description="CAT7 10G-PLUS S/FTP" />
       </siteMapNode>
-      <siteMapNode url="roboarm.aspx" title="Robotic Arm" description="機器手臂" />
+      <siteMapNode url="robotic.aspx" title="Robotic Arm" description="機器手臂" />
       <siteMapNode url="heating.aspx" title="Heating System" description="加熱系統">
         <siteMapNode url="silicone-heating-pad.aspx" title="Silicone Rubber Heating Pad" description="軟質矽膠電熱片" />
       </siteMapNode>
@@ -200,19 +200,18 @@
       </siteMapNode>
     </siteMapNode>
     <siteMapNode url="material.aspx" title="Material" description="材料特性">
+      <siteMapNode url="conductor-category.aspx" title="Conductor Material" description="導體特性">
+        <siteMapNode url="copper.aspx" title="Pure Copper" description="純銅類" />
+        <siteMapNode url="agcu.aspx" title="Silver-Copper Alloy" description="銀銅合金類" />
+        <siteMapNode url="sncu.aspx" title="Tin-Copper Alloy" description="錫銅合金類" />
+        <siteMapNode url="nicu.aspx" title="Nickel-Copper Alloy" description="鎳銅合金類" />
+        <siteMapNode url="ag.aspx" title="Pure Silver and Silver Alloy" description="純銀及銀合金" />
+      </siteMapNode>
       <siteMapNode url="plastic.aspx" title="Plastic Material" description="塑料特性" />
       <siteMapNode url="silicone.aspx" title="Silicone Material" description="矽膠特性" />
       <siteMapNode url="teflon.aspx" title="Teflon Material" description="鐵氟龍特性" />
       <siteMapNode url="twinning.aspx" title="Twinning Material" description="纏繞編織材料特性" />
       <siteMapNode url="conductor.aspx" title="Conductor" description="導體特性" />
-    </siteMapNode>
-    <siteMapNode url="alloy.aspx" title="Alloy" description="合金導體">
-      <siteMapNode url="copper.aspx" title="Pure Copper" description="純銅類" />
-      <siteMapNode url="agcu.aspx" title="Silver-Copper Alloy" description="銀銅合金類" />
-      <siteMapNode url="sncu.aspx" title="Tin-Copper Alloy" description="錫銅合金類" />
-      <siteMapNode url="nicu.aspx" title="Nickel-Copper Alloy" description="鎳銅合金類" />
-      <siteMapNode url="ag.aspx" title="Pure Silver and Silver Alloy" description="純銀及銀合金" />
-      <siteMapNode url="ccs.aspx" title="Copper Clad Steel" description="銅包鋼類" />      
     </siteMapNode>
     <siteMapNode url="certificate.aspx" title="Certificate" description="安規認證">
       <siteMapNode url="spec-certificate.aspx" title="Wire Certificate" description="規格認證">
@@ -234,5 +233,7 @@
     <siteMapNode url="contact_us.aspx" title="Contact Us" description="聯絡我們" />
     <siteMapNode url="news.aspx" title="News" description="最新消息" />
     <siteMapNode url="navigation.aspx" title="Navigation" description="網站導覽" />
-  </siteMapNode>  
+    <siteMapNode url="/future/Non-RWD/silicone-fiberglass-series.aspx" title="new fiberglass" description="新的玻纖編織" />
+
+  </siteMapNode>
 </siteMap>

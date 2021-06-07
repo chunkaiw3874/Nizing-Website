@@ -2,6 +2,12 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
     <title>日進電線-安規認證</title>
+    <style>
+        .icon img{
+            height:225px;
+            width:150px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
 </asp:Content>
@@ -17,10 +23,7 @@
         <div class="inner-content">
             <div class="content-row">
                 <div class="icon">
-                    <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/images/certificate/cert_iso9001_en1-small.jpg" NavigateUrl="~/images/certificate/cert_iso9001_en1.jpg" Target="_blank"></asp:HyperLink>
-                </div>
-                <div class="icon">
-                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/images/certificate/cert_iso9001_en2-small.jpg" NavigateUrl="~/images/certificate/cert_iso9001_en2.jpg" Target="_blank"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/images/certificate/iso9001/ISO9001-2015_2020-2023.jpg" NavigateUrl="~/pdf/certificate/ISO9001-2015.pdf" Target="_blank"></asp:HyperLink>
                 </div>
             </div>
         </div>

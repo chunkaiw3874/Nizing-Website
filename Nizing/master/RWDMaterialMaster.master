@@ -1,0 +1,33 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/master/RWD.master" AutoEventWireup="true" CodeFile="RWDMaterialMaster.master.cs" Inherits="master_RWDMaterialMaster" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="banner" Runat="Server">
+    <asp:ContentPlaceHolder ID="banner" runat="server"></asp:ContentPlaceHolder>
+    <div class="container-fluid mini-menu">
+        <nav class="navbar justify-content-center">
+            <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="conductor-category.aspx">導體系列</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="silicone.aspx">矽膠原料</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="teflon.aspx">鐵氟龍材料</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="plastic.aspx">塑膠原料</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="twinning.aspx">編織纏繞材料</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="body" Runat="Server">
+    <asp:ContentPlaceHolder ID="body" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+

@@ -1,0 +1,75 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/master/RWD.master" AutoEventWireup="true" CodeFile="RWDApplicationMaster.master.cs" Inherits="master_RWDApplicationMaster" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        .application .mini-menu {
+            background-color: #f1f1f1;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+            .application .mini-menu .mini-menu-items .mini-menu-item {
+                padding: 1rem 0;
+            }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="banner" runat="Server">
+    <asp:ContentPlaceHolder ID="banner" runat="server"></asp:ContentPlaceHolder>
+    <div class="container-fluid application">
+        <div class="mini-menu">
+            <div class="container">
+                <div class="mini-menu-items row row-cols-2 row-cols-md-4 row-cols-lg-6">
+                    <div class="col mini-menu-item">
+                        <a href="car.aspx">車用配線
+                        </a>
+                    </div>
+                    <div class="col mini-menu-item">
+                        <a href="medical.aspx">醫療配線與耗材
+                        </a>
+                    </div>
+                    <div class="col mini-menu-item">
+                        <a href="heating.aspx">加熱系統配線
+                        </a>
+                    </div>
+                    <div class="col mini-menu-item">
+                        <a href="temperature-control.aspx">溫控系統配線
+                        </a>
+                    </div>
+                    <div class="col mini-menu-item">
+                        <a href="led.aspx">LED燈具配線
+                        </a>
+                    </div>
+                    <div class="col mini-menu-item">
+                        <a href="construction.aspx">建築配線
+                        </a>
+                    </div>
+                    <div class="col mini-menu-item">
+                        <a href="solar.aspx">太陽能配線
+                        </a>
+                    </div>
+                    <div class="col mini-menu-item">
+                        <a href="steel.aspx">鋼鐵工業配線
+                        </a>
+                    </div>
+                    <div class="col mini-menu-item">
+                        <a href="roboarm.aspx">機械手臂配線
+                        </a>
+                    </div>
+                    <div class="col mini-menu-item">
+                        <a href="cloud.aspx">雲端系統配線
+                        </a>
+                    </div>
+                    <div class="col mini-menu-item">
+                        <a href="misc-app.aspx">其他應用
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="body" runat="Server">
+    <asp:ContentPlaceHolder ID="body" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+

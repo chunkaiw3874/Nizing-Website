@@ -2,6 +2,11 @@
     text-align: center;
 }
 
+.table th,
+.table td{
+    vertical-align:middle;
+}
+
 .table-striped-blue th,
 .table-striped-blue.table-has-footer tr:last-child td {
     background-color: #29ABE2;

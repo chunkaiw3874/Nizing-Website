@@ -31,44 +31,48 @@ public partial class master_RWD : System.Web.UI.MasterPage
         dtMenu = GetMenuInformation();
         DataSet dsMenu = new DataSet();
 
-        //tier 0 menu
+        //Tier 0 menu
         dsMenu.Tables.Add(dtMenu.AsEnumerable()
-                          .Where(t => t.Field<string>("parent") == "root")
-                          .OrderBy(p => p.Field<int>("position"))
+                          .Where(t => t.Field<string>("Parent") == "root")
+                          .OrderBy(p => p.Field<int>("Position"))
                           .CopyToDataTable());
         //dsMenu.Tables[0].TableName = 0.ToString();
         int i = 1;
         foreach (DataRow row in dsMenu.Tables[0].Rows)
         {
-            bool hasChildNode = hasChild(dtMenu, row.Field<string>("id"));
+            bool hasChildNode = hasChild(dtMenu, row.Field<string>("ID"));
             HtmlGenericControl li = new HtmlGenericControl("li");
             li.Attributes.Add("class", "nav-item dropdown");
             HtmlGenericControl a = new HtmlGenericControl("a");
             a.Attributes.Add("class", "nav-link");
             if (language == "en")
             {
-                a.InnerText = row.Field<string>("altName");
+                a.InnerText = row.Field<string>("AltName");
             }
             else
             {
-                a.InnerText = row.Field<string>("name");
+                a.InnerText = row.Field<string>("Name");
             }
             li.Controls.Add(a);
             divNavContentList.Controls.Add(li);
-            if (hasChildNode)
+
+
+            //if (hasChildNode) //2021.06.29 Chrissy said no submenu
+            if (0 == 1)
             {
-                a.Attributes.Add("class", "nav-link dropdown-toggle");
+                a.Attributes.Add("class", "nav-link has-child");
                 a.Attributes.Add("role", "button");
-                a.Attributes.Add("data-toggle", "dropdown");
-                a.Attributes.Remove("href");
+                //a.Attributes.Add("data-toggle", "dropdown");
+                //a.Attributes.Remove("href");
+                a.Attributes.Add("href", row.Field<string>("Link"));
                 HtmlGenericControl ul = new HtmlGenericControl("ul");
                 ul.Attributes.Add("class", "dropdown-menu");
                 li.Controls.Add(ul);
 
-                //tier 1 menu
+                //Tier 1 menu
                 dsMenu.Tables.Add(dtMenu.AsEnumerable()
-                          .Where(t => t.Field<string>("parent") == row["id"].ToString())
-                          .OrderBy(p => p.Field<int>("position"))
+                          .Where(t => t.Field<string>("Parent") == row["ID"].ToString())
+                          .OrderBy(p => p.Field<int>("Position"))
                           .CopyToDataTable());
                 //dsMenu.Tables[i].TableName = i.ToString();
                 foreach (DataRow row1 in dsMenu.Tables[i].Rows)
@@ -77,14 +81,14 @@ public partial class master_RWD : System.Web.UI.MasterPage
                     ul.Controls.Add(li);
                     a = new HtmlGenericControl("a");
                     a.Attributes.Add("class", "dropdown-item");
-                    a.Attributes.Add("href", row1.Field<string>("link"));
+                    a.Attributes.Add("href", row1.Field<string>("Link"));
                     if (language == "en")
                     {
-                        a.InnerText = row1.Field<string>("altName");
+                        a.InnerText = row1.Field<string>("AltName");
                     }
                     else
                     {
-                        a.InnerText = row1.Field<string>("name");
+                        a.InnerText = row1.Field<string>("Name");
                     }
                     li.Controls.Add(a);
                 }
@@ -92,7 +96,7 @@ public partial class master_RWD : System.Web.UI.MasterPage
             }
             else
             {
-                a.Attributes["href"] = row.Field<string>("link");
+                a.Attributes["href"] = row.Field<string>("Link");
             }
         }
     }
@@ -103,20 +107,20 @@ public partial class master_RWD : System.Web.UI.MasterPage
         using (SqlConnection conn = new SqlConnection(websiteConnection))
         {
             conn.Open();
-            string query = "select id" +
-                " ,name" +
-                " ,altName" +
-                " ,parent" +
-                " ,tier" +
-                " ,position" +
-                " ,link" +
+            string query = "select ID" +
+                " ,Name" +
+                " ,AltName" +
+                " ,Parent" +
+                " ,Tier" +
+                " ,Position" +
+                " ,Link" +
                 " from Menu" +
-                " where target=@target" +
-                " order by tier" +
-                " ,position" +
-                " ,altName";
+                " where Target=@target" +
+                " order by Tier" +
+                " ,Position" +
+                " ,AltName";
             SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("target", "website");
+            cmd.Parameters.AddWithValue("@target", "website");
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
         }
@@ -125,16 +129,16 @@ public partial class master_RWD : System.Web.UI.MasterPage
 
     private bool hasChild(DataTable srcTable, string parentNode)
     {
-        return srcTable.AsEnumerable().Any(r => r.Field<string>("parent") == parentNode);
+        return srcTable.AsEnumerable().Any(r => r.Field<string>("Parent") == parentNode);
     }
 
 
     protected void ChangeLanguage(object sender, EventArgs e)
     {
         string senderId = ((LinkButton)sender).ClientID;
-        if(ViewState["language"] == null || senderId == "lnkToMandarin")
+        if (ViewState["language"] == null || senderId == "lnkToMandarin")
         {
-            ViewState["language"] = "zh";            
+            ViewState["language"] = "zh";
         }
         else if (senderId == "lnkToEnglish")
         {
@@ -142,7 +146,7 @@ public partial class master_RWD : System.Web.UI.MasterPage
         }
         if (ViewState["language"].ToString() == "en")
         {
-            Response.Redirect("~\\"+ViewState["language"].ToString() + "\\default.aspx");
+            Response.Redirect("~\\" + ViewState["language"].ToString() + "\\default.aspx");
         }
         else
         {

@@ -1,36 +1,51 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/index.master" AutoEventWireup="true" CodeFile="portal.aspx.cs" Inherits="portal" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWD.master" AutoEventWireup="true" CodeFile="portal.aspx.cs" Inherits="portal" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style>
-        .inline-div a img{
-            width:146px;
+        .display-block img {
+            width: 100%;
+        }
+
+        .display-block .col {
+            padding-bottom: 1.5rem;
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div class="main-content">
-        <div class="inline-div">
-            <div style="margin-right:50px;">
-                <a href="hr360/mobile/login.aspx" target="_blank"><img src="images/employee_section/portal/HR360.png" /></a>
-            </div>
-            <div style="margin-right:50px;">
-                <a href="employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/NEW-new.png" /></a>
-            </div>
-            <div style="margin-right:50px;">
-                <a href="revivify_employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/RVI.png" /></a>
-            </div>
-            <div style="margin-right:50px;">
-                <a href="neo_employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/NEO.png" /></a>
-            </div>
-            <div>
-                <a href="sunrise_employee_section/Default.aspx" target="_blank"><img src="images/employee_section/portal/SUNRISE.png" width="146" height="146" /></a>
-            </div>
-            <div>
-                <%--<a href="oqs/quotation-list.aspx" target="_blank">oqs</a>--%>
+<asp:Content ID="Content2" ContentPlaceHolderID="banner" runat="server">
+    <div class="container-fluid">
+        <div class="banner">
+            <img src="images/banner/banner-homepage-cn-1300x500.gif" class="w-100" />
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="body" runat="Server">
+    <div class="display-block-wrapper">
+        <div class="display-block">
+            <div class="container">
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+                    <div class="col">
+                        <a href="hr360/mobile/login.aspx" target="_blank">
+                            <img src="images/employee_section/portal/HR360.png" /></a>
+                    </div>
+                    <div class="col">
+                        <a href="employee_section/Default.aspx" target="_blank">
+                            <img src="images/employee_section/portal/NEW-new.png" /></a>
+                    </div>
+                    <div class="col">
+                        <a href="revivify_employee_section/Default.aspx" target="_blank">
+                            <img src="images/employee_section/portal/RVI.png" /></a>
+                    </div>
+                    <div class="col">
+                        <a href="neo_employee_section/Default.aspx" target="_blank">
+                            <img src="images/employee_section/portal/NEO.png" /></a>
+                    </div>
+                    <div class="col">
+                        <a href="sunrise_employee_section/Default.aspx" target="_blank">
+                            <img src="images/employee_section/portal/SUNRISE.png" /></a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>    
+    </div>
 </asp:Content>
 

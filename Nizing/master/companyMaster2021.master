@@ -1,0 +1,63 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/master/indexMaster2021.master" AutoEventWireup="true" CodeFile="companyMaster2021.master.cs" Inherits="master_companyMaster2021" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+    <style>
+        .mini-menu .wrapper {
+            padding: 0px 100px;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
+    <div class="container-fluid p-0">
+        <div class="banner">
+            <img src="/images/banner/banner-company-en-1920x500.png" class="w-100 img" />
+        </div>
+        <div class="mini-menu bg-gray">
+            <div class="container wrapper">
+                <div class="row d-flex justify-content-around">
+                    <a class="card-link" href="company-intro.aspx">
+                        <div>
+                            日進簡介
+                        </div>
+                    </a>
+                    <a class="card-link" href="company-culture.aspx">
+                        <div>
+                            企業核心價值與經營理念
+                        </div>
+                    </a>
+                    <a class="card-link" href="company-history.aspx">
+                        <div>
+                            歷史歷程
+                        </div>
+                    </a>
+                    <a class="card-link" href="company-capability.aspx">
+                        <div>
+                            生產設備
+                        </div>
+                    </a>
+                    <a class="card-link" href="company-lab.aspx">
+                        <div>
+                            實驗室
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="breadcrumb">
+            <div class="container">
+                <asp:SiteMapPath ID="SiteMapPath1" runat="server">
+                    <RootNodeTemplate>
+                        <a href="default.aspx">
+                            <img src="/images/home_black-48x48.png" class="img" />
+                        </a>
+                    </RootNodeTemplate>
+                </asp:SiteMapPath>
+            </div>
+        </div>
+    </div>
+
+    <asp:ContentPlaceHolder ID="body" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+

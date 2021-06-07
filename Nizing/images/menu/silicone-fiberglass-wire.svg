@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="320px"
+	 height="320px" viewBox="0 0 320 320" enable-background="new 0 0 320 320" xml:space="preserve">
+<g id="矽膠編織線">
+	<path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M257.047,264.643
+		c0.998,0.99,2.151,1.452,2.58,1.018l6.074-6.077c0.43-0.429-0.025-1.58-1.018-2.571l-52.106-52.113l-7.636,7.637L257.047,264.643z"
+		/>
+	<path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M53.599,80.222
+		c-1.506-1.506-1.505-3.945-0.003-5.447l21.22-21.219c1.505-1.502,3.941-1.506,5.447,0.001l139.108,139.106
+		c1.5,1.503,1.5,3.942,0,5.444l-21.222,21.219c-1.504,1.505-3.942,1.505-5.446,0L53.599,80.222z"/>
+	<g>
+		<defs>
+			<path id="SVGID_1_" d="M53.596,80.223c-1.505-1.507-1.503-3.943-0.001-5.444l21.221-21.223c1.502-1.501,3.939-1.505,5.447,0.003
+				l139.108,139.104c1.5,1.504,1.5,3.942,0,5.443l-21.225,21.223c-1.501,1.501-3.939,1.503-5.443-0.003L53.596,80.223z"/>
+		</defs>
+		<clipPath id="SVGID_2_">
+			<use xlink:href="#SVGID_1_"  overflow="visible"/>
+		</clipPath>
+		<g clip-path="url(#SVGID_2_)">
+			<rect x="41.042" y="51.368" fill="none" stroke="#000000" stroke-miterlimit="10" width="181.15" height="169.204"/>
+			<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="61.165" y1="51.367" x2="61.163" y2="220.572"/>
+			<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="81.288" y1="51.367" x2="81.288" y2="220.574"/>
+			<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="101.41" y1="51.367" x2="101.409" y2="220.572"/>
+			<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="121.534" y1="51.367" x2="121.536" y2="220.57"/>
+			<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="141.699" y1="51.367" x2="141.699" y2="220.574"/>
+			<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="161.823" y1="51.367" x2="161.823" y2="220.574"/>
+			<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="181.948" y1="51.367" x2="181.944" y2="220.574"/>
+			<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="202.066" y1="51.367" x2="202.074" y2="220.57"/>
+			<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="222.191" y1="201.777" x2="41.042" y2="201.776"/>
+			<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="222.191" y1="182.98" x2="41.042" y2="182.98"/>
+			<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="222.191" y1="164.185" x2="41.042" y2="164.185"/>
+			<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="222.191" y1="145.389" x2="41.042" y2="145.388"/>
+			<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="222.191" y1="126.552" x2="41.039" y2="126.552"/>
+			<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="222.191" y1="107.755" x2="41.042" y2="107.756"/>
+			<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="222.191" y1="88.959" x2="41.042" y2="88.961"/>
+			<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="222.191" y1="70.161" x2="41.042" y2="70.164"/>
+		</g>
+		<use xlink:href="#SVGID_1_"  overflow="visible" fill="none" stroke="#000000" stroke-miterlimit="10"/>
+	</g>
+	
+		<text transform="matrix(1 0 0 1 17.2241 356.5293)" display="none" fill="#231815" font-family="'MicrosoftYaHei'" font-size="41.1597">矽膠編織線系列</text>
+	<rect y="23.165" display="none" fill="none" stroke="#000000" stroke-miterlimit="10" width="318.525" height="368.485"/>
+</g>
+</svg>

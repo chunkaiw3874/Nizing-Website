@@ -1,13 +1,13 @@
 ﻿<%@ Application Language="C#" %>
 <%@ Import Namespace="System.Web.Routing" %>
+<%@ Import Namespace="Microsoft.AspNet.FriendlyUrls" %>
 
-
-<script runat="server">
+<script RunAt="server">
 
     void Application_Start(object sender, EventArgs e)
     {
         // Code that runs on application startup
-        //RouteHandler.RegisterRoutes(RouteTable.Routes);
+        RegisterRoutes(RouteTable.Routes);
     }
 
     void Application_End(object sender, EventArgs e)
@@ -35,6 +35,13 @@
         // is set to InProc in the Web.config file. If session mode is set to StateServer 
         // or SQLServer, the event is not raised.
 
+    }
+
+    void RegisterRoutes(RouteCollection routes)
+    {
+        routes.EnableFriendlyUrls();
+        routes.MapPageRoute("default", string.Empty, "~/default.aspx");
+        routes.MapPageRoute("rsge", "RS-GE", "~/rsge.aspx");
     }
 
 </script>

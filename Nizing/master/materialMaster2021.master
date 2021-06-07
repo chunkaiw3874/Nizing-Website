@@ -1,0 +1,63 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/master/indexMaster2021.master" AutoEventWireup="true" CodeFile="materialMaster2021.master.cs" Inherits="master_materialMaster2021" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+    <style>
+        .mini-menu .wrapper {
+            padding: 0px 100px;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
+    <div class="container-fluid p-0">
+        <div class="banner">
+            <img src="/images/banner/banner-materials-en-1920x500.png" class="w-100 img" />
+        </div>
+        <div class="mini-menu bg-gray">
+            <div class="container wrapper">
+                <div class="row d-flex justify-content-around">
+                    <a class="card-link" href="conductor-category.aspx">
+                        <div>
+                            導體系列
+                        </div>
+                    </a>
+                    <a class="card-link" href="silicone.aspx">
+                        <div>
+                            矽膠原料
+                        </div>
+                    </a>
+                    <a class="card-link" href="teflon.aspx">
+                        <div>
+                            鐵氟龍材料
+                        </div>
+                    </a>
+                    <a class="card-link" href="plastic.aspx">
+                        <div>
+                            塑膠原料
+                        </div>
+                    </a>
+                    <a class="card-link" href="twinning.aspx">
+                        <div>
+                            編織纏繞材料
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="breadcrumb">
+            <div class="container">
+                <asp:SiteMapPath ID="SiteMapPath1" runat="server">
+                    <RootNodeTemplate>
+                        <a href="default.aspx">
+                            <img src="/images/home_black-48x48.png" class="img" />
+                        </a>
+                    </RootNodeTemplate>
+                </asp:SiteMapPath>
+            </div>
+        </div>
+    </div>
+
+    <asp:ContentPlaceHolder ID="body" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+
