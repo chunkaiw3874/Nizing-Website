@@ -12,7 +12,10 @@
     <%--<meta name="viewport" content="width=device-width, initial-scale=1" />--%>
     <link rel="shortcut icon" href="/images/icon/nizing-icon.png" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<<<<<<< HEAD
     <link rel="stylesheet" href="/css/style.css" />
+=======
+>>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
     <link rel="stylesheet" href="/css/table.css" />
     <link rel="stylesheet" href="/css/color.css" />
     <link rel="stylesheet" type="text/css" href="/Content/slick/slick.css" />
@@ -47,6 +50,13 @@
         ga('send', 'pageview');
     </script>
     <style>
+<<<<<<< HEAD
+=======
+        body {
+            font-family: "Adobe Fan Heiti Std";
+        }
+
+>>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
         .navigation-wrapper {
             box-shadow: 0 3px 5px -2px #8f8f8f;
         }
@@ -137,7 +147,49 @@
             visibility: hidden;
             opacity: 0;
             transition: all 0.3s linear;
+<<<<<<< HEAD
+=======
         }
+
+        .navbar .nav-item:hover .dropdown-menu {
+            visibility: visible;
+            opacity: 1;
+            transition-delay: 0;
+        }
+
+        /*makes hovered item move*/
+        .move {
+            transition: transform 0.3s ease;
+            transform: translateX(0px);
+        }
+
+            .move:hover {
+                transform: translateX(-5px) translateY(-5px);
+            }
+
+        /*makes image zoom in on hover*/
+        .zoom {
+            overflow: hidden;
+        }
+
+            .zoom .img {
+                transition: transform 0.2s;
+            }
+
+            .zoom:hover .img {
+                transform: scale(1.2);
+            }
+
+        /*color code*/
+        .color-code {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: solid 1px #000000;
+            margin-left: 5px;
+>>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
+        }
+        
 
         .navbar .nav-item:hover .dropdown-menu {
             visibility: visible;

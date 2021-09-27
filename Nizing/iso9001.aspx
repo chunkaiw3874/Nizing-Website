@@ -24,6 +24,12 @@
             <div class="content-row">
                 <div class="icon">
                     <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/images/certificate/iso9001/ISO9001-2015_2020-2023.jpg" NavigateUrl="~/pdf/certificate/ISO9001-2015.pdf" Target="_blank"></asp:HyperLink>
+<<<<<<< HEAD
+=======
+                </div>
+                <div class="icon">
+                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/images/certificate/cert_iso9001_en2-small.jpg" NavigateUrl="~/images/certificate/cert_iso9001_en2.jpg" Target="_blank"></asp:HyperLink>
+>>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
                 </div>
             </div>
         </div>

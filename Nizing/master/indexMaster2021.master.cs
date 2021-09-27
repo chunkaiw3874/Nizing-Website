@@ -56,7 +56,11 @@ public partial class master_indexMaster2021 : System.Web.UI.MasterPage
             {
                 a.Attributes.Add("class", "nav-link text-white");
                 a.Attributes.Add("role", "button");
+<<<<<<< HEAD
                 a.Attributes.Add("href", row.Field<string>("Link"));
+=======
+                a.Attributes.Add("href", row.Field<string>("link"));
+>>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
                 //a.Attributes.Add("data-toggle", "dropdown");
                 //a.Attributes.Remove("href");
                 HtmlGenericControl ul = new HtmlGenericControl("ul");

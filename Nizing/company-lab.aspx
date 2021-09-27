@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWDCompanyMaster.master" AutoEventWireup="true" CodeFile="company-lab.aspx.cs" Inherits="company_lab" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
@@ -25,5 +26,12 @@
             </div>
         </div>
     </div>
+=======
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/labMaster2021.master" AutoEventWireup="true" CodeFile="company-lab.aspx.cs" Inherits="company_lab" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
+>>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
 </asp:Content>
 

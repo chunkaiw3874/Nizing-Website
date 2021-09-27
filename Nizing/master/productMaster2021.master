@@ -10,6 +10,18 @@
             padding: 20px 0;
         }
 
+<<<<<<< HEAD
+=======
+        .product-list-item {
+            box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .product-list-wrapper {
+            padding-right: 48px;
+            padding-bottom: 48px;
+        }
+
+>>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
         .product .color-code-section {
             padding: 15px 60px 15px 0;
         }
@@ -18,6 +30,13 @@
             font-size: 18px;
         }
 
+<<<<<<< HEAD
+=======
+        .product-spec table tr td:first-child {
+            text-align: right;
+        }
+
+>>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
         .block.content .content {
             padding-top: 30px;
         }
