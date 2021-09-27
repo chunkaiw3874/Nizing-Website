@@ -248,6 +248,7 @@ namespace NIZING_BACKEND_Data_Config
             this.ClientSize = new System.Drawing.Size(284, 362);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmOQS_AccountSearch";
+            this.ShowIcon = false;
             this.Text = "帳號搜尋";
             this.Load += new System.EventHandler(this.frmAccountSearch_Load);
             this.tableLayoutPanel1.ResumeLayout(false);

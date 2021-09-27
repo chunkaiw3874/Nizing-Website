@@ -6,34 +6,39 @@
     <script src="../Scripts/bootstrap-datepicker.js"></script>
     <script src="../Scripts/locales/bootstrap-datepicker.zh-TW.min.js"></script>
     <script src="../Scripts/text.area.auto.adjust.js"></script>
-    
-    
-    
+
+
+
     <style>
         .no-resize {
             resize: none;
         }
-        #loading-screen{
-            display:none;
-            position:fixed;
-            top:50%;
-            left:50%;
-            text-align:center;
+
+        #loading-screen {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            text-align: center;
         }
-        .highlight{
-            background-color:lightblue;
+
+        .highlight {
+            background-color: lightblue;
         }
-        .nohighlight{
-            background-color:none;
+
+        .nohighlight {
+            background-color: none;
         }
+
         .noselect {
             user-select: none; /* CSS3 (little to no support) */
             -ms-user-select: none; /* IE 10+ */
             -moz-user-select: none; /* Gecko (Firefox) */
             -webkit-user-select: none; /* Webkit (Safari, Chrome) */
         }
-        .pointer-cursor{
-            cursor:pointer;
+
+        .pointer-cursor {
+            cursor: pointer;
         }
     </style>
     <script type="text/javascript">
@@ -50,7 +55,7 @@
             $(this).closest("tr").next().remove();
         });
 
-        $(document).ready(function () {            
+        $(document).ready(function () {
 
             $('.datepicker').datepicker({
                 language: 'zh-TW',
@@ -60,7 +65,7 @@
                 todayHighlight: true
             }).on('changeDate', function () {
                 __doPostBack('txtDatePickerStart', 'TextChanged');
-            });            
+            });
 
             var isPostBack = $('#<%=hdnIsPostBack.ClientID%>').val();
             if (isPostBack == '0') {
@@ -68,18 +73,18 @@
                 $('#search_section').show();
             }
             else {
-                    if ($('#<%=hdnIsDayOffAppVisible.ClientID%>').val() == '1') {
-                        $('#DayOffApp').show();
-                    }
-                    else {
-                        $('#DayOffApp').hide();
-                    }
-                    if ($('#<%=hdnIsSearchFieldVisible.ClientID%>').val() == '1') {
-                        $('#search_section').show();
-                    }
-                    else {
-                        $('#search_section').hide();
-                    }
+                if ($('#<%=hdnIsDayOffAppVisible.ClientID%>').val() == '1') {
+                    $('#DayOffApp').show();
+                }
+                else {
+                    $('#DayOffApp').hide();
+                }
+                if ($('#<%=hdnIsSearchFieldVisible.ClientID%>').val() == '1') {
+                    $('#search_section').show();
+                }
+                else {
+                    $('#search_section').hide();
+                }
             };
 
             $(document).on('click', '#btnSearchVisibility', function () {
@@ -105,13 +110,13 @@
                     $('#<%=hdnIsDayOffAppVisible.ClientID%>').val('0');
                 }
             });
-            
+
             $('.classApprovalPending tr').click(function () {
                 approvalTableSelection($(this).index());
             });
 
             $('[data-toggle="popover"]').popover({
-                sanitize:false,
+                sanitize: false,
             })
         });
 
@@ -165,13 +170,13 @@
         };
 
         function selectBetweenItemsIntbApprovalPending(a, b) {
-            for (var i = a; i <= b; i++) {                    
+            for (var i = a; i <= b; i++) {
                 $('.classApprovalPending tr').eq(i).addClass('highlight');
-            }            
+            }
         };
 
-        function clearSelectionOntbApprovalPending(){
-            for(var i=1; i<= $('.classApprovalPending tr').length; i++){
+        function clearSelectionOntbApprovalPending() {
+            for (var i = 1; i <= $('.classApprovalPending tr').length; i++) {
                 $('.classApprovalPending tr').eq(i).removeClass('highlight');
             }
         };
@@ -231,18 +236,18 @@
             }
         };
 
-        
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="page_title" runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="top_menu" runat="Server">
 </asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="page_content" runat="Server">    
-    <div class="container" style="visibility:hidden">
+<asp:Content ID="Content4" ContentPlaceHolderID="page_content" runat="Server">
+    <div class="container" style="visibility: hidden">
         維護中，請稍後
     </div>
-    <div class="container" style="visibility:visible">
+    <div class="container" style="visibility: visible">
         <%--<div id="test_section">
             <div class="row form-group">
                 測試中，請勿使用    
@@ -257,7 +262,7 @@
             <hr />
         </div>--%>
         <div id="application_section">
-            <div class="row" style="color:red">
+            <div class="row" style="color: red">
                 *本次版更內容: 一張假單僅能請一天假，如需多天請假需登打多張假單
             </div>
             <div class="row form-group" style="margin-top: 10px;">
@@ -276,7 +281,7 @@
                     <asp:HiddenField ID="hdnDenyReason" runat="server" />
                 </div>
             </div>
-            <div id="DayOffApp">                
+            <div id="DayOffApp">
                 <div class="row">
                     <div class="col-sm-2">
                         <span class="label label-default" style="font-size: 16px;">假別</span>
@@ -328,7 +333,7 @@
                         <asp:CheckBox ID="ckbTyphoonDayNoSub" runat="server" CssClass="checkbox-inline" Checked="false" Text="此假用在颱風天，無須代理人" />
                     </div>
                 </div>
-                <div class="row">                    
+                <div class="row">
                     <div class="col-sm-12">
                         <span class="label label-default" style="font-size: 16px;">請假原因</span>
                     </div>
@@ -354,7 +359,7 @@
                            
                             </div>
                             <div class="panel-body">
-                                <div style="color:red">
+                                <div style="color: red">
                                     *假單不得跨天，請假半小時無須代理人<br />
                                     *休假最小單位為:辦公室0.5小時;製造部門0.5天<br />
                                     *請假前須確認當天工作進度已安排人員支援，且有代理人簽名<br />
@@ -411,26 +416,26 @@
                             待簽核假單                       
                         </div>
                         <div class="panel-body">
-                            <div style="color:red;">
+                            <div style="color: red;">
                                 *請先點選要簽核的假單，再點選最上層的"簽核"按鈕;如欲一次簽核多張假單，可按住Shift一次選擇，或按住Ctrl增選<br />
                                 **退回不可複選<br />
                                 ***如操作上有疑問，請詢問人事部
                             </div>
                             <asp:HiddenField ID="hdnApprovalPendingSelection" ClientIDMode="Static" runat="server" />
                             <table id="tbApprovalPending" class="classApprovalPending table col-sm-12 noselect" runat="server">
-                                <tr style="background-color:lightblue; color:white;">
-                                    <th style="text-align:center;font-weight:bold;">假單ID</th>
-		                            <th style="text-align:center;font-weight:bold;">申請人ID</th>
-		                            <th style="text-align:center;font-weight:bold;">申請人</th>
-		                            <th style="text-align:center;font-weight:bold;">假別</th>
-		                            <th style="text-align:center;font-weight:bold;">開始時間</th>
-		                            <th style="text-align:center;font-weight:bold;">結束時間</th>
-		                            <th style="text-align:center;font-weight:bold;">請假總量</th>
-		                            <th style="text-align:center;font-weight:bold;">代理人</th>
-		                            <th style="text-align:center;font-weight:bold;">請假原因</th>
-		                            <th style="text-align:center;font-weight:bold;">簽核階段</th>
-		                            <th style="text-align:center;font-weight:bold;">ERP狀態</th>
-                                    <th style="text-align:center;font-weight:bold;">
+                                <tr style="background-color: lightblue; color: white;">
+                                    <th style="text-align: center; font-weight: bold;">假單ID</th>
+                                    <th style="text-align: center; font-weight: bold;">申請人ID</th>
+                                    <th style="text-align: center; font-weight: bold;">申請人</th>
+                                    <th style="text-align: center; font-weight: bold;">假別</th>
+                                    <th style="text-align: center; font-weight: bold;">開始時間</th>
+                                    <th style="text-align: center; font-weight: bold;">結束時間</th>
+                                    <th style="text-align: center; font-weight: bold;">請假總量</th>
+                                    <th style="text-align: center; font-weight: bold;">代理人</th>
+                                    <th style="text-align: center; font-weight: bold;">請假原因</th>
+                                    <th style="text-align: center; font-weight: bold;">簽核階段</th>
+                                    <th style="text-align: center; font-weight: bold;">ERP狀態</th>
+                                    <th style="text-align: center; font-weight: bold;">
                                         <asp:Button ID="btnApprove" runat="server" Text="簽核" CssClass="btn btn-success" OnClientClick="javascript:return confirmApprove();" OnClick="btnApprove_Click" />
                                     </th>
                                 </tr>
@@ -469,8 +474,8 @@
                     </div>
                     <div class="row form-group">
                         <div class="col-sm-12">
-                            <asp:GridView ID="gvSearchResult" runat="server" AutoGenerateColumns="false" CssClass="table table-striped" 
-                                OnRowDataBound="gvSearchResult_RowDataBound" OnPageIndexChanging="gvSearchResult_PageIndexChanging"                                         
+                            <asp:GridView ID="gvSearchResult" runat="server" AutoGenerateColumns="false" CssClass="table table-striped"
+                                OnRowDataBound="gvSearchResult_RowDataBound" OnPageIndexChanging="gvSearchResult_PageIndexChanging"
                                 AllowPaging="True" PageSize="10" PagerSettings-Position="Top" PagerSettings-Mode="NumericFirstLast"
                                 PagerSettings-FirstPageText="首頁" PagerSettings-LastPageText="尾頁" OnRowCommand="gvSearchResult_RowCommand">
                                 <Columns>
@@ -479,8 +484,8 @@
                                             <asp:LinkButton ID="lbApplication_ID" runat="server" Text="假單單號" CommandName="Sort" CommandArgument="APPLICATION_ID"></asp:LinkButton>
                                         </HeaderTemplate>
                                         <ItemTemplate>
-                                            <asp:Label ID="lblAppId" runat="server" Text='<%#Eval("APPLICATION_ID") %>' alt="expand" CssClass="pointer-cursor"></asp:Label>                                               
-                                            <asp:Panel ID="pnlAppTrail" runat="server" Style="display:none;">
+                                            <asp:Label ID="lblAppId" runat="server" Text='<%#Eval("APPLICATION_ID") %>' alt="expand" CssClass="pointer-cursor"></asp:Label>
+                                            <asp:Panel ID="pnlAppTrail" runat="server" Style="display: none;">
                                                 <asp:GridView ID="gvAppTrail" runat="server" AutoGenerateColumns="false" CssClass="table table-striped" GridLines="Horizontal">
                                                     <Columns>
                                                         <asp:TemplateField ItemStyle-HorizontalAlign="Center">
@@ -653,6 +658,6 @@
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
-    </div>    
+    </div>
 </asp:Content>
 

@@ -14,7 +14,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="banner" runat="server">
     <div class="container-fluid">
         <div class="banner">
-            <img src="images/banner/banner-homepage-cn-1300x500.gif" class="w-100" />
+            <img src="/images/banner/banner-homepage-cn-1300x500.gif" class="w-100" />
         </div>
     </div>
 </asp:Content>
@@ -24,24 +24,24 @@
             <div class="container">
                 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
                     <div class="col">
-                        <a href="hr360/mobile/login.aspx" target="_blank">
-                            <img src="images/employee_section/portal/HR360.png" /></a>
+                        <a href="/hr360/mobile/login.aspx" target="_blank">
+                            <img src="/images/employee_section/portal/HR360.png" /></a>
                     </div>
                     <div class="col">
-                        <a href="employee_section/Default.aspx" target="_blank">
-                            <img src="images/employee_section/portal/NEW-new.png" /></a>
+                        <a href="/employee_section/Default.aspx" target="_blank">
+                            <img src="/images/employee_section/portal/NEW-new.png" /></a>
                     </div>
                     <div class="col">
-                        <a href="revivify_employee_section/Default.aspx" target="_blank">
-                            <img src="images/employee_section/portal/RVI.png" /></a>
+                        <a href="/revivify_employee_section/Default.aspx" target="_blank">
+                            <img src="/images/employee_section/portal/RVI.png" /></a>
                     </div>
                     <div class="col">
-                        <a href="neo_employee_section/Default.aspx" target="_blank">
-                            <img src="images/employee_section/portal/NEO.png" /></a>
+                        <a href="/neo_employee_section/Default.aspx" target="_blank">
+                            <img src="/images/employee_section/portal/NEO.png" /></a>
                     </div>
                     <div class="col">
-                        <a href="sunrise_employee_section/Default.aspx" target="_blank">
-                            <img src="images/employee_section/portal/SUNRISE.png" /></a>
+                        <a href="/sunrise_employee_section/Default.aspx" target="_blank">
+                            <img src="/images/employee_section/portal/SUNRISE.png" /></a>
                     </div>
                 </div>
             </div>

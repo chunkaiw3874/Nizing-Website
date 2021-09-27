@@ -134,7 +134,10 @@
 <asp:Content ID="banner" ContentPlaceHolderID="banner" runat="Server">
     <div class="container-fluid">
         <div class="banner">
-            <img src="/images/banner/banner-certificate-en-1920x500.png" />
+            <picture>
+                <source srcset="/images/banner/banner-certificate-en.webp" type="image/webp" />
+                <img src="/images/banner/banner-certificate-en.png" />
+            </picture>
         </div>
     </div>
 </asp:Content>
@@ -150,13 +153,19 @@
                 </div>
                 <div class="content">
                     <div class="certificate-image">
-                        <img src="images/certificate/certificate-1.png" />
+                        <picture>
+                            <source srcset="/images/certificate/certificate-1.webp" type="image/webp" />
+                            <img src="/images/certificate/certificate-1.png" />
+                        </picture>
                     </div>
                     <div class="certificate-text container">
                         我司每年度執行內部稽核審查所有作業流程，並由外部稽核單位執行外部稽核與查驗。
                     </div>
                     <div class="certificate-image">
-                        <img src="images/certificate/certificate-2.png" />
+                        <picture>
+                            <source srcet="/images/certificate/certificate-2.webp" type="image/webp" />
+                            <img src="/images/certificate/certificate-2.png" />
+                        </picture>
                     </div>
                     <div class="certificate-text container">
                         搭配ERP&ERP II、KPI、OKR、MES工廠管理系統與大數據，做完善的流程控管。
@@ -185,7 +194,10 @@
                                         Certified:2020/09/18
                                     </div>
                                     <div class="certificate-image">
-                                        <img src="images/certificate/iso9001/iso9001.png" />
+                                        <picture>
+                                            <source srcset="/images/certificate/iso9001/iso9001.webp" type="image/webp" />
+                                            <img src="/images/certificate/iso9001/iso9001.png" />
+                                        </picture>
                                     </div>
                                 </div>
                             </a>
@@ -217,7 +229,7 @@
                                         Certified:2021/05/10
                                     </div>
                                     <div class="certificate-image">
-                                        <img src="images/certificate/rohs/rohs.png" />
+                                        <img src="/images/certificate/rohs/rohs.png" />
                                     </div>
                                 </div>
                             </a>
@@ -237,7 +249,10 @@
                                         Certified:2020/07/30
                                     </div>
                                     <div class="certificate-image">
-                                        <img src="images/certificate/reach/reach.png" />
+                                        <picture>
+                                            <source srcset="/images/certificate/reach/reach.webp" type="image/webp" />
+                                            <img src="/images/certificate/reach/reach.png" />
+                                        </picture>
                                     </div>
                                 </div>
                             </a>
@@ -262,7 +277,10 @@
                         <div class="certification-body">
                             <a class="link">
                                 <div class="card">
-                                    <img src="images/certificate/sgs/sgs.png" class="img card-img mx-auto" />
+                                    <picture>
+                                        <source srcset="/images/certificate/sgs/sgs.webp" type="image/webp" />
+                                        <img src="/images/certificate/sgs/sgs.png" class="img card-img mx-auto" />
+                                    </picture>
                                     <div class="card-body p-0">
                                         <div class="certificate-text">
                                             SGS 台灣檢驗科技
@@ -276,7 +294,10 @@
                         <div class="certification-body">
                             <a class="link">
                                 <div class="card">
-                                    <img src="images/certificate/intertek/intertek.png" class="img card-img mx-auto" />
+                                    <picture>
+                                        <source srcset="/images/certificate/intertek/intertek.webp" type="image/webp" />
+                                        <img src="/images/certificate/intertek/intertek.png" class="img card-img mx-auto" />
+                                    </picture>
                                     <div class="card-body p-0">
                                         <div class="certificate-text">
                                             INTERTEK 全國公證檢驗
@@ -288,9 +309,12 @@
                     </div>
                     <div class="col">
                         <div class="certification-body">
-                            <a class="link" href="ul.aspx">
+                            <a class="link" href="/zh/certificate/ul">
                                 <div class="card">
-                                    <img src="images/certificate/ul/ul.png" class="img card-img mx-auto" />
+                                    <picture>
+                                        <source srcset="/images/certificate/ul/ul.webp" type="image/webp" />
+                                        <img src="/images/certificate/ul/ul.png" class="img card-img mx-auto" />
+                                    </picture>
                                     <div class="card-body p-0">
                                         <div class="certificate-text">
                                             美國UL檢測認證研究所
@@ -302,9 +326,12 @@
                     </div>
                     <div class="col">
                         <div class="certification-body">
-                            <a class="link" href="vde.aspx">
+                            <a class="link" href="/zh/certificate/vde">
                                 <div class="card">
-                                    <img src="images/certificate/vde/vde.png" class="img card-img mx-auto" />
+                                    <picture>
+                                        <source srcset="/images/certificate/vde/vde.webp" type="image/webp" />
+                                        <img src="/images/certificate/vde/vde.png" class="img card-img mx-auto" />
+                                    </picture>
                                     <div class="card-body p-0">
                                         <div class="certificate-text">
                                             德國VDE檢測認證研究所
@@ -318,7 +345,10 @@
                         <div class="certification-body">
                             <a class="link">
                                 <div class="card">
-                                    <img src="images/certificate/ccc/ccc.png" class="img card-img mx-auto" />
+                                    <picture>
+                                        <source srcset="/images/certificate/ccc/ccc.webp" type="image/webp" />
+                                        <img src="/images/certificate/ccc/ccc.png" class="img card-img mx-auto" />
+                                    </picture>
                                     <div class="card-body p-0">
                                         <div class="certificate-text">
                                             中國國際強制性產品認證
@@ -332,7 +362,10 @@
                         <div class="certification-body">
                             <a class="link">
                                 <div class="card">
-                                    <img src="images/certificate/pse/pse.png" class="img card-img mx-auto" />
+                                    <picture>
+                                        <source srcset="/images/certificate/pse/pse.webp" type="image/webp" />
+                                        <img src="/images/certificate/pse/pse.png" class="img card-img mx-auto" />
+                                    </picture>
                                     <div class="card-body p-0">
                                         <div class="certificate-text">
                                             日本PSE產品綠色認證

@@ -5,12 +5,34 @@
     <meta name="description" content="日進電線持續與最頂尖的新科技接軌，持續研發，滿足各種客製需求">
 
     <style type="text/css">
-        .bg-wrapper {
+        .display-block::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.4;
+            z-index: -1;
+            background-size: cover;
+        }
+
+        .webp .display-block::before {
+            background-image: url('/images/application/background/bg-application.webp');
+        }
+
+        .no-webp .display-block::before {
             background-image: url('/images/application/background/bg-application.jpg');
+        }
+
+        .display-block {
+            position: relative;
+            z-index: 1;
         }
 
         .overlay-parent {
             min-height: 100%;
+            margin: 0px;
         }
 
         .opacity-100 {
@@ -25,7 +47,10 @@
 <asp:Content ID="banner" ContentPlaceHolderID="banner" runat="Server">
     <div class="container-fluid">
         <div class="banner">
-            <img src="images/banner/banner-application-en.png" alt="電線電纜應用產業 wire and cable application" />
+            <picture>
+                <source srcset="/images/banner/banner-application-en.webp" type="image/webp" />
+                <img src="/images/banner/banner-application-en.png" alt="電線電纜應用產業 wire and cable application" />
+            </picture>
         </div>
     </div>
 </asp:Content>
@@ -40,163 +65,7 @@
             </div>
             <div class="container-fluid">
                 <div class="container">
-                    <div class="content row row-cols-2 row-cols-md-3 row-cols-lg-4 application-list">
-                        <div class="col application-category-item">
-                            <a href="car.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <img src="images/application/car/car.jpg"
-                                        alt="車用配線 Automobile Wire and Cable" />
-                                    <div class="overlay">
-                                        <figcaption class="title dark-background text-glow">
-                                            車用配線
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col application-category-item">
-                            <a href="medical.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <img src="images/application/medical/medical.jpg"
-                                        alt="醫療用線 Medical Wire and Cable" />
-                                    <div class="overlay">
-                                        <figcaption class="title light-background text-glow">
-                                            醫療配線與耗材
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col application-category-item">
-                            <a href="heating.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <div class="overlay bg-skyblue opacity-100">
-                                        <figcaption class="title dark-background text-glow">
-                                            加熱系統配線
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col application-category-item">
-                            <a href="temperature-control.aspx">
-                                <figure class="overlay-parent shadow move opacity-80">
-                                    <div class="overlay bg-white opacity-100">
-                                        <figcaption class="title light-background text-glow">
-                                            溫控系統配線
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col application-category-item">
-                            <a href="led.aspx">
-                                <figure class="overlay-parent shadow move bg-white opacity-80">
-                                    <div class="overlay bg-white opacity-100">
-                                        <figcaption class="title light-background text-glow">
-                                            LED燈具配線
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col application-category-item d-none d-lg-block">
-                            <div class="application-category-item-wrapper bg-white opacity-0">
-                            </div>
-                        </div>
-                        <div class="col application-category-item">
-                            <a href="construction.aspx">
-                                <figure class="overlay-parent shadow move opacity-80">
-                                    <div class="overlay bg-white opacity-100">
-                                        <figcaption class="title light-background text-glow">
-                                            建築配線
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col application-category-item">
-                            <a href="solar.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <img src="images/application/solar/solar.jpg"
-                                        alt="太陽能配線 Solar Electricity Wire and Cable" />
-                                    <div class="overlay">
-                                        <figcaption class="title dark-background text-glow">
-                                            太陽能配線
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col application-category-item d-none d-lg-block">
-                            <div class="application-category-item-wrapper bg-white opacity-0">
-                            </div>
-                        </div>
-                        <div class="col application-category-item">
-                            <a href="steel.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <div class="overlay bg-skyblue opacity-100">
-                                        <figcaption class="title dark-background text-glow">
-                                            鋼鐵工業配線
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col application-category-item d-none d-lg-block">
-                            <div class="application-category-item-wrapper bg-white opacity-0">
-                            </div>
-                        </div>
-                        <div class="col application-category-item">
-                            <a href="robotic.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <img src="images/application/robotic/robotic.jpg"
-                                        alt="機械手臂配線 Robotics wire and cable" />
-                                    <div class="overlay">
-                                        <figcaption class="title dark-background text-glow">
-                                            機械手臂配線
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col application-category-item">
-                            <a href="semiconductor.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <div class="overlay bg-skyblue opacity-80">
-                                        <figcaption class="title dark-background text-glow">
-                                            半導體產業
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col application-category-item d-none d-lg-block">
-                            <div class="application-category-item-wrapper bg-skyblue opacity-0">
-                            </div>
-                        </div>
-                        <div class="col application-category-item">
-                            <a href="cloud.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <div class="overlay bg-skyblue opacity-100">
-                                        <figcaption class="title dark-background text-glow">
-                                            雲端系統配線
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col application-category-item">
-                            <a href="misc-app.aspx">
-                                <figure class="overlay-parent shadow move opacity-80">
-                                    <div class="overlay bg-skyblue opacity-100">
-                                        <figcaption class="title dark-background text-glow">
-                                            其他應用
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
+                    <div id="divItemList" runat="server" class="content row row-cols-2 row-cols-md-3 row-cols-lg-4 application-list">
                     </div>
                 </div>
             </div>

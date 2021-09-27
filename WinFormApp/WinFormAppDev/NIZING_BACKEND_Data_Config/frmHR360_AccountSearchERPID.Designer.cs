@@ -72,6 +72,7 @@
             this.ClientSize = new System.Drawing.Size(284, 362);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmHR360_AccountSearchERPID";
+            this.ShowIcon = false;
             this.Text = "ERP使用者代號查詢";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmHR360_AccountSearchERPID_FormClosing);
             this.tableLayoutPanel1.ResumeLayout(false);

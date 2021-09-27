@@ -171,6 +171,7 @@
             this.ClientSize = new System.Drawing.Size(284, 362);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmHR360_AccountSearch";
+            this.ShowIcon = false;
             this.Text = "帳號搜尋";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmHR360_AccountSearch_FormClosing);
             this.tableLayoutPanel1.ResumeLayout(false);

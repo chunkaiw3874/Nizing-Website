@@ -7,7 +7,7 @@
 <asp:Content ID="banner" ContentPlaceHolderID="banner" runat="Server">
     <div class="container-fluid">
         <div class="banner">
-            <img src="images/banner/banner-materials-en-1920x500.png" />
+            <img src="/images/banner/banner-materials-en-1920x500.png" />
         </div>
     </div>
 </asp:Content>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="content">
                     <div class="image-frame">
-                        <img src="images/material/conductor/alloy/ag-1.jpg" class="image shadow" alt="電線導體 銀 銀合金 Wire Conductor Silver Alloy" />
+                        <img src="/images/material/conductor/silver/ag-1.jpg" class="image shadow" alt="電線導體 銀 銀合金 Wire Conductor Silver Alloy" />
                         <div class="image-text">
                             純銀及銀合金
                         </div>

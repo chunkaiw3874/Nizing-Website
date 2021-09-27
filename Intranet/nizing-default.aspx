@@ -146,6 +146,9 @@
                 <li>
                     <asp:ImageButton ID="ImageButton12" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/HR-3.png" PostBackUrl="~/nizing_intranet/EmployeeDayOffReport.aspx" /></li>
                 <li>
+                    <a href="nizing_intranet/EmployeeDayOffSubmitList.aspx">請假單清單(訂便當用)</a>
+                </li>
+                <li>
                     <asp:ImageButton ID="ImageButton13" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/HR-4.png" PostBackUrl="~/nizing_intranet/WorkDuration.aspx" /></li>
                 <li>
                     <asp:ImageButton ID="ImageButton7" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/HR-5.png" PostBackUrl="~/nizing_intranet/HR05.aspx" /></li>

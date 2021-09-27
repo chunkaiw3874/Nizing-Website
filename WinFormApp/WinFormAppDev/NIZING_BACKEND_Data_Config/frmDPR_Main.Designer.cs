@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDPR_Main));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tbcManagement = new System.Windows.Forms.TabControl();
             this.tbpDeficientRecordManagement = new System.Windows.Forms.TabPage();
@@ -59,14 +60,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.flpDeficientRecordResponsibleDeptPercent = new System.Windows.Forms.FlowLayoutPanel();
-            this.gvDeficientRecordSearchResult = new System.Windows.Forms.DataGridView();
-            this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnDeficientRecordSearch = new System.Windows.Forms.Button();
-            this.flowLayoutPanel11 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnLogout = new System.Windows.Forms.Button();
-            this.cbxFunctionList = new System.Windows.Forms.ComboBox();
-            this.clbDeficientRecordResponsibleDept = new System.Windows.Forms.CheckedListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.clbDeficientRecordResponsibleDept = new System.Windows.Forms.CheckedListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.clbDeficientRecordResponsiblePersonnel = new System.Windows.Forms.CheckedListBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -83,6 +78,12 @@
             this.flpDeficientRecordResponsiblePersonnelMemo = new System.Windows.Forms.FlowLayoutPanel();
             this.label12 = new System.Windows.Forms.Label();
             this.txtDeficientRecordMemo = new System.Windows.Forms.TextBox();
+            this.gvDeficientRecordSearchResult = new System.Windows.Forms.DataGridView();
+            this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnDeficientRecordSearch = new System.Windows.Forms.Button();
+            this.flowLayoutPanel11 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.cbxFunctionList = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpDeficientRecordManagement.SuspendLayout();
@@ -92,13 +93,13 @@
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gvDeficientRecordSearchResult)).BeginInit();
-            this.flowLayoutPanel9.SuspendLayout();
-            this.flowLayoutPanel11.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudDeficientRecordDeficientAmount)).BeginInit();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvDeficientRecordSearchResult)).BeginInit();
+            this.flowLayoutPanel9.SuspendLayout();
+            this.flowLayoutPanel11.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -460,7 +461,7 @@
             this.cbxDeficientRecordProductCostManualInput.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cbxDeficientRecordProductCostManualInput.AutoSize = true;
             this.cbxDeficientRecordProductCostManualInput.Enabled = false;
-            this.cbxDeficientRecordProductCostManualInput.Font = new System.Drawing.Font("PMingLiU", 9F);
+            this.cbxDeficientRecordProductCostManualInput.Font = new System.Drawing.Font("新細明體", 9F);
             this.cbxDeficientRecordProductCostManualInput.Location = new System.Drawing.Point(233, 146);
             this.cbxDeficientRecordProductCostManualInput.Name = "cbxDeficientRecordProductCostManualInput";
             this.cbxDeficientRecordProductCostManualInput.Size = new System.Drawing.Size(72, 16);
@@ -503,83 +504,17 @@
             this.flpDeficientRecordResponsibleDeptPercent.Size = new System.Drawing.Size(268, 123);
             this.flpDeficientRecordResponsibleDeptPercent.TabIndex = 0;
             // 
-            // gvDeficientRecordSearchResult
+            // groupBox1
             // 
-            this.gvDeficientRecordSearchResult.AllowUserToAddRows = false;
-            this.gvDeficientRecordSearchResult.AllowUserToDeleteRows = false;
-            this.gvDeficientRecordSearchResult.AllowUserToResizeColumns = false;
-            this.gvDeficientRecordSearchResult.AllowUserToResizeRows = false;
-            this.gvDeficientRecordSearchResult.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gvDeficientRecordSearchResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvDeficientRecordSearchResult.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gvDeficientRecordSearchResult.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.gvDeficientRecordSearchResult.Location = new System.Drawing.Point(602, 58);
-            this.gvDeficientRecordSearchResult.Margin = new System.Windows.Forms.Padding(0);
-            this.gvDeficientRecordSearchResult.MultiSelect = false;
-            this.gvDeficientRecordSearchResult.Name = "gvDeficientRecordSearchResult";
-            this.gvDeficientRecordSearchResult.RowHeadersVisible = false;
-            this.gvDeficientRecordSearchResult.RowTemplate.Height = 24;
-            this.gvDeficientRecordSearchResult.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvDeficientRecordSearchResult.Size = new System.Drawing.Size(567, 745);
-            this.gvDeficientRecordSearchResult.TabIndex = 2;
-            // 
-            // flowLayoutPanel9
-            // 
-            this.flowLayoutPanel9.Controls.Add(this.btnDeficientRecordSearch);
-            this.flowLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel9.Location = new System.Drawing.Point(602, 1);
-            this.flowLayoutPanel9.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel9.Name = "flowLayoutPanel9";
-            this.flowLayoutPanel9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel9.Size = new System.Drawing.Size(567, 56);
-            this.flowLayoutPanel9.TabIndex = 3;
-            // 
-            // btnDeficientRecordSearch
-            // 
-            this.btnDeficientRecordSearch.Location = new System.Drawing.Point(489, 3);
-            this.btnDeficientRecordSearch.Name = "btnDeficientRecordSearch";
-            this.btnDeficientRecordSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnDeficientRecordSearch.TabIndex = 4;
-            this.btnDeficientRecordSearch.Text = "查詢";
-            this.btnDeficientRecordSearch.UseVisualStyleBackColor = true;
-            // 
-            // flowLayoutPanel11
-            // 
-            this.flowLayoutPanel11.Controls.Add(this.btnLogout);
-            this.flowLayoutPanel11.Controls.Add(this.cbxFunctionList);
-            this.flowLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel11.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel11.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel11.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel11.Name = "flowLayoutPanel11";
-            this.flowLayoutPanel11.Size = new System.Drawing.Size(1184, 26);
-            this.flowLayoutPanel11.TabIndex = 2;
-            // 
-            // btnLogout
-            // 
-            this.btnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLogout.Location = new System.Drawing.Point(1084, 0);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(0);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(100, 26);
-            this.btnLogout.TabIndex = 1;
-            this.btnLogout.Text = "登出";
-            this.btnLogout.UseVisualStyleBackColor = true;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
-            // 
-            // cbxFunctionList
-            // 
-            this.cbxFunctionList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbxFunctionList.DisplayMember = "NAME";
-            this.cbxFunctionList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxFunctionList.FormattingEnabled = true;
-            this.cbxFunctionList.Location = new System.Drawing.Point(855, 3);
-            this.cbxFunctionList.Name = "cbxFunctionList";
-            this.cbxFunctionList.Size = new System.Drawing.Size(226, 20);
-            this.cbxFunctionList.TabIndex = 6;
-            this.cbxFunctionList.ValueMember = "ID";
-            this.cbxFunctionList.SelectionChangeCommitted += new System.EventHandler(this.cbxFunctionList_SelectionChangeCommitted);
+            this.tlpDecifientRecordInputField.SetColumnSpan(this.groupBox1, 2);
+            this.groupBox1.Controls.Add(this.clbDeficientRecordResponsibleDept);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(93, 199);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(224, 144);
+            this.groupBox1.TabIndex = 33;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "責任部門";
             // 
             // clbDeficientRecordResponsibleDept
             // 
@@ -593,18 +528,6 @@
             this.clbDeficientRecordResponsibleDept.Size = new System.Drawing.Size(218, 123);
             this.clbDeficientRecordResponsibleDept.TabIndex = 0;
             this.clbDeficientRecordResponsibleDept.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.clbDeficientRecordResponsibleDept_ItemCheck);
-            // 
-            // groupBox1
-            // 
-            this.tlpDecifientRecordInputField.SetColumnSpan(this.groupBox1, 2);
-            this.groupBox1.Controls.Add(this.clbDeficientRecordResponsibleDept);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(93, 199);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(224, 144);
-            this.groupBox1.TabIndex = 33;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "責任部門";
             // 
             // groupBox2
             // 
@@ -767,12 +690,91 @@
             this.txtDeficientRecordMemo.Size = new System.Drawing.Size(504, 144);
             this.txtDeficientRecordMemo.TabIndex = 48;
             // 
+            // gvDeficientRecordSearchResult
+            // 
+            this.gvDeficientRecordSearchResult.AllowUserToAddRows = false;
+            this.gvDeficientRecordSearchResult.AllowUserToDeleteRows = false;
+            this.gvDeficientRecordSearchResult.AllowUserToResizeColumns = false;
+            this.gvDeficientRecordSearchResult.AllowUserToResizeRows = false;
+            this.gvDeficientRecordSearchResult.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gvDeficientRecordSearchResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvDeficientRecordSearchResult.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gvDeficientRecordSearchResult.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.gvDeficientRecordSearchResult.Location = new System.Drawing.Point(602, 58);
+            this.gvDeficientRecordSearchResult.Margin = new System.Windows.Forms.Padding(0);
+            this.gvDeficientRecordSearchResult.MultiSelect = false;
+            this.gvDeficientRecordSearchResult.Name = "gvDeficientRecordSearchResult";
+            this.gvDeficientRecordSearchResult.RowHeadersVisible = false;
+            this.gvDeficientRecordSearchResult.RowTemplate.Height = 24;
+            this.gvDeficientRecordSearchResult.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gvDeficientRecordSearchResult.Size = new System.Drawing.Size(567, 745);
+            this.gvDeficientRecordSearchResult.TabIndex = 2;
+            // 
+            // flowLayoutPanel9
+            // 
+            this.flowLayoutPanel9.Controls.Add(this.btnDeficientRecordSearch);
+            this.flowLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel9.Location = new System.Drawing.Point(602, 1);
+            this.flowLayoutPanel9.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel9.Name = "flowLayoutPanel9";
+            this.flowLayoutPanel9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.flowLayoutPanel9.Size = new System.Drawing.Size(567, 56);
+            this.flowLayoutPanel9.TabIndex = 3;
+            // 
+            // btnDeficientRecordSearch
+            // 
+            this.btnDeficientRecordSearch.Location = new System.Drawing.Point(489, 3);
+            this.btnDeficientRecordSearch.Name = "btnDeficientRecordSearch";
+            this.btnDeficientRecordSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnDeficientRecordSearch.TabIndex = 4;
+            this.btnDeficientRecordSearch.Text = "查詢";
+            this.btnDeficientRecordSearch.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel11
+            // 
+            this.flowLayoutPanel11.Controls.Add(this.btnLogout);
+            this.flowLayoutPanel11.Controls.Add(this.cbxFunctionList);
+            this.flowLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel11.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel11.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel11.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel11.Name = "flowLayoutPanel11";
+            this.flowLayoutPanel11.Size = new System.Drawing.Size(1184, 26);
+            this.flowLayoutPanel11.TabIndex = 2;
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLogout.Location = new System.Drawing.Point(1084, 0);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(0);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(100, 26);
+            this.btnLogout.TabIndex = 1;
+            this.btnLogout.Text = "登出";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // cbxFunctionList
+            // 
+            this.cbxFunctionList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxFunctionList.DisplayMember = "NAME";
+            this.cbxFunctionList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxFunctionList.FormattingEnabled = true;
+            this.cbxFunctionList.Location = new System.Drawing.Point(855, 3);
+            this.cbxFunctionList.Name = "cbxFunctionList";
+            this.cbxFunctionList.Size = new System.Drawing.Size(226, 20);
+            this.cbxFunctionList.TabIndex = 6;
+            this.cbxFunctionList.ValueMember = "ID";
+            this.cbxFunctionList.SelectionChangeCommitted += new System.EventHandler(this.cbxFunctionList_SelectionChangeCommitted);
+            // 
             // frmDPR_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 862);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "frmDPR_Main";
             this.Text = "frmDPR_Main";
@@ -788,13 +790,13 @@
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gvDeficientRecordSearchResult)).EndInit();
-            this.flowLayoutPanel9.ResumeLayout(false);
-            this.flowLayoutPanel11.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudDeficientRecordDeficientAmount)).EndInit();
             this.groupBox4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gvDeficientRecordSearchResult)).EndInit();
+            this.flowLayoutPanel9.ResumeLayout(false);
+            this.flowLayoutPanel11.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

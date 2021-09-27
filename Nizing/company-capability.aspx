@@ -25,7 +25,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="banner" runat="Server">
     <div class="container-fluid">
         <div class="banner">
-            <img src="images/banner/banner-production-en-1920x500.png" />
+            <picture>
+                <source srcset="/images/banner/banner-production-en.webp" type="image/webp" />
+                <img src="/images/banner/banner-production-en.png" />
+            </picture>
         </div>
     </div>
 </asp:Content>
@@ -105,7 +108,10 @@
                 </div>
             </div>
             <div class="container-fluid p-0">
-                <img src="images/company/capability/機台照片.png" class="w-100" />
+                <picture>
+                    <source srcset="/images/company/capability/機台照片.webp" type="image/webp" />
+                    <img src="/images/company/capability/機台照片.png" />
+                </picture>
             </div>
         </div>
     </div>

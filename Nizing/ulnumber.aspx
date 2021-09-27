@@ -11,7 +11,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="banner" runat="server">
     <div class="container-fluid">
         <div class="banner">
-            <img src="images/banner/banner-ul-en.png" class="w-100" />
+            <img src="/images/banner/banner-ul-en.png" class="w-100" />
         </div>
     </div>
 </asp:Content>

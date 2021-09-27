@@ -7,7 +7,7 @@
 <asp:Content ID="banner" ContentPlaceHolderID="banner" runat="Server">
     <div class="container-fluid">
         <div class="banner">
-            <img src="images/banner/banner-materials-en-1920x500.png" />
+            <img src="/images/banner/banner-materials-en-1920x500.png" />
         </div>
     </div>
 </asp:Content>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="content">
                     <div class="image-frame">
-                        <img src="images/material/conductor/alloy/copper-1.jpg" class="image shadow" alt="電線導體 銅 Wire Conductor Pure Copper" />
+                        <img src="/images/material/conductor/copper/copper-1.jpg" class="image shadow" alt="電線導體 銅 Wire Conductor Pure Copper" />
                         <div class="image-text">
                             純銅
                         </div>
@@ -81,10 +81,10 @@
                                     <td></td>
                                     <td></td>
                                     <td>
-                                        <asp:Image ID="Image2" runat="server" ImageUrl="~/images/material/conductor/alloy/PCVCC-02.png" />
+                                        <asp:Image ID="Image2" runat="server" ImageUrl="~/images/material/conductor/copper/PCVCC-02.png" />
                                     </td>
                                     <td>
-                                        <asp:Image ID="Image3" runat="server" ImageUrl="~/images/material/conductor/alloy/PCVCC-03.png" />
+                                        <asp:Image ID="Image3" runat="server" ImageUrl="~/images/material/conductor/copper/PCVCC-03.png" />
                                     </td>
                                 </tr>
                             </table>

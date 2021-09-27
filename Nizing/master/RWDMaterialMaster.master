@@ -7,22 +7,7 @@
     <asp:ContentPlaceHolder ID="banner" runat="server"></asp:ContentPlaceHolder>
     <div class="container-fluid mini-menu">
         <nav class="navbar justify-content-center">
-            <ul class="nav nav-pills justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link" href="conductor-category.aspx">導體系列</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="silicone.aspx">矽膠原料</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="teflon.aspx">鐵氟龍材料</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="plastic.aspx">塑膠原料</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="twinning.aspx">編織纏繞材料</a>
-                </li>
+            <ul id="ulMenuList" runat="server" class="nav nav-pills justify-content-center">
             </ul>
         </nav>
     </div>

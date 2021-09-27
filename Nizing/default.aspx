@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWD.master" AutoEventWireup="true" CodeFile="default.aspx.cs" Inherits="_default" %>
 
+<%@ OutputCache Duration="600" VaryByParam="None" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title>高品質電線電纜製造-日進電線-國際安規認證通過</title>
     <meta name="keywords" content="電線,電纜,電線電纜,矽膠電線,鐵氟龍電線,照射電線,發熱電線,PVC電線,PE電線,PU電線,補償導線,耐高溫電線,耐高溫電纜,耐高壓電線,耐高壓電纜,UL電線,矽膠編織電線,軍規線,汽車花線" />
@@ -8,18 +9,32 @@
     <link href="/Content/slick/slick-theme.css" rel="stylesheet" />
     <script type="text/javascript" src="/Content/slick/slick.min.js"></script>
     <style style="text/css">
+        .overlay-parent {
+            min-height: 100%;
+            margin: 0px;
+        }
+
         /*首頁不顯示breadcrumb*/
         .breadcrumb {
             display: none;
         }
 
-        .product-category-list.bg-wrapper {
-            background-image: url('images/background/bg-product.png');
+        .display-block {
+            margin-bottom: 8px;
+        }
+
+
+
+        .webp .product-category-list.bg-wrapper {
+            background-image: url('/images/background/bg-product.webp');
+        }
+
+        .no-webp .product-category-list.bg-wrapper {
+            background-image: url('/images/background/bg-product.png');
         }
 
         .display-block:first-child {
             padding-top: 24px !important;
-            margin: 12px 0;
         }
 
         .display-block .list-group-item {
@@ -28,8 +43,12 @@
         }
 
 
-        .news.bg-wrapper {
-            background-image: url('images/background/bg-news.jpg');
+        .webp .news.bg-wrapper {
+            background-image: url('/images/background/bg-news.webp');
+        }
+
+        .no-webp .news.bg-wrapper {
+            background-image: url('/images/background/bg-news.jpg');
         }
 
         .news .title,
@@ -57,9 +76,13 @@
             justify-content: flex-end;
         }
 
-        .associate-partner img {
-            width: 50px;
+        .associate-partner {
+            margin: -8px 0;
         }
+
+            .associate-partner img {
+                width: 50px;
+            }
 
         /*modal*/
         #newsModal img {
@@ -136,7 +159,7 @@
 
             });
 
-            $('#promotionModal').modal('show');
+            //$('#promotionModal').modal('show');
         });
 
         $(window).resize(function () {
@@ -154,7 +177,7 @@
   "@context" : "http://schema.org",
   "@type" : "Product",
   "name" : "Wire and Cable",
-  "image" : [ "http://www.nizing.com.tw/images/banner/banner-homepage-cn-1300x500.gif", "http://www.nizing.com.tw/images/product_pic/high-temperature-wire/high-temperature-wire_menu-500x500.png", "http://www.nizing.com.tw/images/product_pic/silicone-wire/silicone-wire_menu-500x500.png", "http://www.nizing.com.tw/images/product_pic/teflon-wire/teflon-wire_menu-500x500.png", "http://www.nizing.com.tw/images/product_pic/xlpe-wire/xlpe-wire_menu-500x500.png", "http://www.nizing.com.tw/images/product_pic/pvc-wire/pvc-wire_menu-500x500.png", "http://www.nizing.com.tw/images/product_pic/tube/tube_menu-500x500.png", "http://www.nizing.com.tw/images/product_pic/thermocouple/thermocouple_menu-500x500.png", "http://www.nizing.com.tw/images/product_pic/heating-wire/heating-wire_menu-500x500.png", "http://www.nizing.com.tw/images/product_pic/special-cable/special-cable_menu-500x500.png" ],
+  "image" : [ "http://www.nizing.com.tw/images/banner/banner-homepage-cn-1300x500.gif", "http://www.nizing.com.tw/images/product/high-temperature-wire/high-temperature-wire_menu-500x500.png", "http://www.nizing.com.tw/images/product/silicone-wire/silicone-wire_menu-500x500.png", "http://www.nizing.com.tw/images/product/teflon-wire/teflon-wire_menu-500x500.png", "http://www.nizing.com.tw/images/product/xlpe-wire/xlpe-wire_menu-500x500.png", "http://www.nizing.com.tw/images/product/pvc-wire/pvc-wire_menu-500x500.png", "http://www.nizing.com.tw/images/product/tube/tube_menu-500x500.png", "http://www.nizing.com.tw/images/product/thermocouple/thermocouple_menu-500x500.png", "http://www.nizing.com.tw/images/product/heating-wire/heating-wire_menu-500x500.png", "http://www.nizing.com.tw/images/product/composite-cable/special-cable_menu-500x500.png" ],
   "url" : "http://www.nizing.com.tw/default.aspx",
   "brand" : {
     "@type" : "Brand",
@@ -218,7 +241,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="banner" runat="server">
     <div class="container-fluid">
         <div class="banner">
-            <img src="images/banner/banner-homepage-cn-1300x500.gif" alt="日進電線電纜 Nizing Electric Wire and Cable" />
+            <img src="/images/banner/banner-homepage-cn-1300x500.gif" alt="日進電線電纜 Nizing Electric Wire and Cable" />
         </div>
     </div>
 </asp:Content>
@@ -226,181 +249,245 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div class="container-fluid">
         <div class="display-block-wrapper homepage">
+            <section class="display-block hottest-item-list">
+                <div class="container">
+                    <h2 class="title">熱門精品區
+                    </h2>
+                    <h2 class="subtitle">HOTTEST BOUTIQUE SECTION
+                    </h2>
+                    <div class="content row row-cols-2 row-cols-md-3">
+                        <div class="col">
+                            <div class="hottest-item">
+                                <a href="/zh/product/heating-wire/MEDICAL-RESPIRATION-PIPE-HEATING-WIRE">
+                                    <div class="image-section">
+                                        <picture>
+                                            <source srcset="/images/product/hot-item/medical-repiration-tube.webp" type="image/webp">
+                                            <img src="/images/product/hot-item/medical-repiration-tube.jpg"
+                                                alt="醫療用呼吸加熱管 Medical Respiration Tube">
+                                        </picture>
+                                    </div>
+                                </a>
+                                <div class="text-section">
+                                    <div class="title text-left">醫療用呼吸加熱管</div>
+                                    <div class="subtitle text-left">HFNC高含氧人工呼吸器耗材</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="hottest-item">
+                                <a href="">
+                                    <div class="image-section">
+                                        <picture>
+                                            <source srcset="/images/product/hot-item/inflammable-signal-cable.webp" type="image/webp">
+                                            <img src="/images/product/hot-item/inflammable-signal-cable.jpg"
+                                                alt="防火耐燃訊號線 Inflammable Signal Cable">
+                                        </picture>
+                                    </div>
+                                </a>
+                                <div class="text-section">
+                                    <div class="title text-left">防火耐燃訊號線</div>
+                                    <div class="subtitle text-left">iPhone-Type C快速充電線</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="hottest-item">
+                                <a href="">
+                                    <div class="image-section">
+                                        <picture>
+                                            <source srcset="/images/product/hot-item/high-density-deep-sea-cable.webp" type="image/webp">
+                                            <img src="/images/product/hot-item/high-density-deep-sea-cable.jpg"
+                                                alt="水下不鏽鋼鎧裝海底網路通訊線 High Density Deep Sea Cable">
+                                        </picture>
+                                    </div>
+                                </a>
+                                <div class="text-section">
+                                    <div class="title text-left">高硬度防鼠咬CAT5E/CAT6A</div>
+                                    <div class="subtitle text-left">水下不鏽鋼鎧裝海底網路通訊線</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="display-block newest-item-list">
+                <div class="container">
+                    <h2 class="title">最新產品
+                    </h2>
+                    <h2 class="subtitle">Newest Product
+                    </h2>
+                    <div class="content row row-cols-2 row-cols-md-4">
+                        <div class="col">
+                            <div class="newest-item">
+                                <a href="">
+                                    <div class="image-section">
+                                        <picture>
+                                            <source srcset="/images/product/new-item/fighter-jet-temperature-control-cable.webp" type="image/webp">
+                                            <img src="/images/product/new-item/fighter-jet-temperature-control-cable.jpg"
+                                                alt="戰鬥機溫控線 Fighter Jet Temperature Control Cable">
+                                        </picture>
+                                    </div>
+                                </a>
+                                <div class="text-section">
+                                    <div class="title text-left">戰鬥機溫控線</div>
+                                    <div class="subtitle text-left">日本軍規配線</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="newest-item">
+                                <a href="">
+                                    <div class="image-section">
+                                        <picture>
+                                            <source srcset="https://via.placeholder.com/350x250?text=&nbsp" type="image/webp">
+                                            <img src="https://via.placeholder.com/350x250?text=&nbsp"
+                                                alt="高鐵/捷運光纖電纜 Optic Fiber Cable for High Speed Rail and Massive Transit System">
+                                        </picture>
+                                    </div>
+                                </a>
+                                <div class="text-section">
+                                    <div class="title text-left">高鐵/捷運光纖電纜</div>
+                                    <div class="subtitle text-left">通訊配線</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="newest-item">
+                                <a href="">
+                                    <div class="image-section">
+                                        <picture>
+                                            <source srcset="https://via.placeholder.com/350x250?text=&nbsp" type="image/webp">
+                                            <img src="https://via.placeholder.com/350x250?text=&nbsp"
+                                                alt="飛彈控制軍規線 Missile Control Cable">
+                                        </picture>
+                                    </div>
+                                </a>
+                                <div class="text-section">
+                                    <div class="title text-left">飛彈控制軍規線</div>
+                                    <div class="subtitle text-left">軍規船用電纜</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="newest-item">
+                                <a href="">
+                                    <div class="image-section">
+                                        <picture>
+                                            <source srcset="https://via.placeholder.com/350x250?text=&nbsp" type="image/webp">
+                                            <img src="https://via.placeholder.com/350x250?text=&nbsp"
+                                                alt="CR認證潛艦電纜 CR Certified Submarine Cable">
+                                        </picture>
+                                    </div>
+                                </a>
+                                <div class="text-section">
+                                    <div class="title text-left">潛艦國造-CR認證</div>
+                                    <div class="subtitle text-left">軍規船舶複合電纜</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="newest-item">
+                                <a href="">
+                                    <div class="image-section">
+                                        <picture>
+                                            <source srcset="https://via.placeholder.com/350x250?text=&nbsp" type="image/webp">
+                                            <img src="https://via.placeholder.com/350x250?text=&nbsp"
+                                                alt="飛彈發射器 Missle Launcher Control Cable">
+                                        </picture>
+                                    </div>
+                                </a>
+                                <div class="text-section">
+                                    <div class="title text-left">MIL 飛彈發射器</div>
+                                    <div class="subtitle text-left">軍規高頻傳輸控制複合電纜</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="newest-item">
+                                <a href="/zh/application/automobile/motor-temperature-sensor-cable-tesla-taycan">
+                                    <div class="image-section">
+                                        <picture>
+                                            <source srcset="/images/product/new-item/cable-electric-car.webp" type="image/webp">
+                                            <img src="/images/product/new-item/cable-electric-car.jpg"
+                                                alt="IATF-16949 馬達溫度感知線 Motor Temperature Sensor Cable">
+                                        </picture>
+                                    </div>
+                                </a>
+                                <div class="text-section">
+                                    <div class="title text-left">電動車用-Tesla/Porsche Taycan</div>
+                                    <div class="subtitle text-left">IATF-16949 馬達溫度感知線</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="newest-item">
+                                <a href="/zh/application/automobile/motor-power-cable">
+                                    <div class="image-section">
+                                        <picture>
+                                            <source srcset="/images/product/new-item/cable-electric-motorcycle.webp" type="image/webp">
+                                            <img src="/images/product/new-item/cable-electric-motorcycle.jpg"
+                                                alt="電源供應器 電動馬達動力線 Power Cable Motor Cable">
+                                        </picture>
+                                    </div>
+                                </a>
+                                <div class="text-section">
+                                    <div class="title text-left">電動機車-GOGORO</div>
+                                    <div class="subtitle text-left">電源供應器 & 電動馬達動力線</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="newest-item">
+                                <a href="">
+                                    <div class="image-section">
+                                        <picture>
+                                            <source srcset="/images/product/new-item/industrial-furnace.webp" type="image/webp">
+                                            <img src="/images/product/new-item/industrial-furnace.jpg"
+                                                alt="多爐溫控系統雙層屏蔽線 Temper Control Signal Shielding Cable">
+                                        </picture>
+                                    </div>
+                                </a>
+                                <div class="text-section">
+                                    <div class="title text-left">大型高溫爐</div>
+                                    <div class="subtitle text-left">多爐溫控系統雙層屏蔽線</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <section class="display-block product-category-list bg-wrapper">
                 <div class="container">
-                    <h2 class="title revealTrigger">
-                        產品分類
+                    <h2 class="title revealTrigger">產品分類
                     </h2>
-                    <h2 class="subtitle">
-                        PRODUCT
+                    <h2 class="subtitle">PRODUCT
                     </h2>
-                    <div class="content row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-                        <div class="col product-category-item reveal animate__animated">
-                            <a href="silicone-fiberglass-series.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <img src="images/product_pic/silicone-fiberglass-wire/silicone-fiberglass-wire-menu.png"
-                                        alt="矽膠編織電線 Silicone Fiberglass Wire" />
-                                    <div class="overlay">
-                                        <figcaption class="title">
-                                            矽膠編織線系列
-                                        </figcaption>
+                    <div id="divProductItemList" runat="server" class="content row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+                        <div class="col reveal animate__animated">
+                            <figure class="product-category-item move">
+                                <a href="/zh/product/silicone-fiberglass-wire">
+                                    <div class="image-section">
+                                        <picture>
+                                            <source srcset="/images/home/inflammable/big-menu.webp" type="image/webp">
+                                            <img src="/images/home/inflammable/big-menu.png"
+                                                alt="防火耐燃線 Anti-Flammatory Wire and Cable">
+                                        </picture>
                                     </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col product-category-item reveal animate__animated">
-                            <a href="high-temperature-resistance-series.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <img src="images/product_pic/high-temperature-wire/high-temperature-wire-menu.png"
-                                        alt="高溫電線 High Temperature Wire" />
-                                    <div class="overlay">
-                                        <figcaption class="title">
-                                            高溫線系列
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col product-category-item reveal animate__animated">
-                            <a href="silicone-series.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <img src="images/product_pic/silicone-wire/silicone-wire_menu-500x500.png"
-                                        alt="矽膠電線 Silicone Wire" />
-                                    <div class="overlay">
-                                        <figcaption class="title">
-                                            矽膠線系列
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col product-category-item reveal animate__animated">
-                            <a href="teflon-series.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <img src="images/product_pic/teflon-wire/teflon-wire-menu.png"
-                                        alt="鐵氟龍電線 Teflon Wire" />
-                                    <div class="overlay">
-                                        <figcaption class="title">
-                                            鐵氟龍線系列
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col product-category-item reveal animate__animated">
-                            <a href="xlpe-series.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <img src="images/product_pic/xlpe-wire/xlpe-wire_menu-500x500.png"
-                                        alt="交聯照射電線 cross linked wire xlpe" />
-                                    <div class="overlay">
-                                        <figcaption class="title">
-                                            交聯照射線系列
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col product-category-item reveal animate__animated">
-                            <a href="pvc-series.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <img src="images/product_pic/pvc-wire/pvc-wire_menu-500x500.png"
-                                        alt="PVC電線 PVC" />
-                                    <div class="overlay">
-                                        <figcaption class="title">
-                                            PVC線系列
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col product-category-item reveal animate__animated">
-                            <a href="sleeve-and-tube-series.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <img src="images/product_pic/tube/tube_menu-500x500.png"
-                                        alt="矽膠套管 玻纖套管 Silicone Fiberglass Tube" />
-                                    <div class="overlay">
-                                        <figcaption class="title">
-                                            套管系列
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col product-category-item reveal animate__animated">
-                            <a href="thermocouple-series.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <img src="images/product_pic/thermocouple/thermocouple_menu-500x500.png"
-                                        alt="補償導線 Thermocouple K-Type J-Type T-Type R-Type S-Type E-Type" />
-                                    <div class="overlay">
-                                        <figcaption class="title">
-                                            補償導線系列
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col product-category-item reveal animate__animated">
-                            <a href="heating-wire-series.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <img src="images/product_pic/heating-wire/heating-wire_menu-500x500.png"
-                                        alt="發熱線 Heating Wire" />
-                                    <div class="overlay">
-                                        <figcaption class="title">
-                                            發熱線系列
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col product-category-item reveal animate__animated">
-                            <a href="automotive-wire-series.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <img src="images/product_pic/xlpe-wire/xlpe-wire_menu-500x500.png"
-                                        alt="汽車花線 automotive wire" />
-                                    <div class="overlay">
-                                        <figcaption class="title">
-                                            汽車花線系列
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col product-category-item reveal animate__animated">
-                            <a href="military-grade-series.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <img src="images/product_pic/military-grade-wire/military-grade-wire.png"
-                                        alt="軍規線 Military Grade Wire and Cable" />
-                                    <div class="overlay">
-                                        <figcaption class="title">
-                                            軍規線系列
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
-                        </div>
-                        <div class="col product-category-item reveal animate__animated">
-                            <a href="special-cable.aspx">
-                                <figure class="overlay-parent shadow move">
-                                    <img src="images/product_pic/special-cable/special-cable_menu-500x500.png"
-                                        alt="特殊線 Custom Wire and Cable" />
-                                    <div class="overlay">
-                                        <figcaption class="title">
-                                            特殊線系列
-                                        </figcaption>
-                                    </div>
-                                </figure>
-                            </a>
+                                </a>
+                                <div class="text-section">
+                                    <figcaption class="title my-auto">防火耐燃系列
+                                    </figcaption>
+                                </div>
+                            </figure>
                         </div>
                     </div>
                 </div>
             </section>
             <section class="display-block news bg-wrapper">
                 <div class="container">
-                    <h2 class="title">
-                        最新消息
+                    <h2 class="title">最新消息
                     </h2>
-                    <h2 class="subtitle">
-                        LATEST NEWS
+                    <h2 class="subtitle">LATEST NEWS
                     </h2>
                     <asp:UpdatePanel ID="upNews" runat="server">
                         <Triggers>
@@ -419,7 +506,7 @@
             </section>
             <section class="display-block">
                 <div class="associate-partner">
-                    <figure class="slider">
+                    <figure class="slider m-0">
                         <img src="/images/logo/aidc-logo.svg" class="mx-auto" />
                         <img src="/images/logo/corning-logo.svg" class="mx-auto" />
                         <img src="/images/logo/cpc-logo.svg" class="mx-auto" />
@@ -436,7 +523,6 @@
             </section>
         </div>
     </div>
-
 
     <asp:UpdatePanel ID="upNewsModal" runat="server">
         <Triggers>
@@ -479,8 +565,8 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <a href="respiration-pipe-heating-wire.aspx">
-                                <img src="images/promotion/醫療用 呼吸加熱管.jpg" />
+                            <a href="/zh/product/heating-wire/MEDICAL-RESPIRATION-PIPE-HEATING-WIRE">
+                                <img src="/images/promotion/醫療用 呼吸加熱管.jpg" />
                             </a>
                         </div>
                     </div>

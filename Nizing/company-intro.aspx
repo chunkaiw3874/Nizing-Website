@@ -5,24 +5,27 @@
     <style>
         .content {
             margin-top: 30px;
-            text-align:left;
+            text-align: left;
         }
 
             .content:first-child {
                 margin-top: 0px;
             }
 
-            @media all and (min-width:992px){
-                .content{
-                    text-align:justify;
-                }
+        @media all and (min-width:992px) {
+            .content {
+                text-align: justify;
             }
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="banner" runat="Server">
     <div class="container-fluid">
         <div class="banner">
-            <img src="images/banner/banner-company-en-1920x500.png" />
+            <picture>
+                <source srcset="/images/banner/banner-company-en.webp" type="image/webp" />
+                <img src="/images/banner/banner-company-en.png" />
+            </picture>
         </div>
     </div>
 </asp:Content>
@@ -37,12 +40,18 @@
                     Brief Introduction
                 </div>
                 <div class="content d-flex justify-content-center">
-                    <div class="row m-0">                        
+                    <div class="row m-0">
                         <div class="col-lg-4 pl-lg-0 d-none d-lg-block">
-                            <img src="images/company/intro/nizing front desk.jpg" class="img w-100" />
+                            <picture>
+                                <source srcset="/images/company/intro/nizing front desk.webp" type="image/webp" />
+                                <img src="/images/company/intro/nizing front desk.jpg" />
+                            </picture>
                         </div>
                         <div class="d-block d-lg-none">
-                            <img src="images/company/intro/nizing office.jpg" class="w-100 pb-3"/>
+                            <picture>
+                                <source srcset="/images/company/intro/nizing office.webp" type="image/webp" />
+                                <img src="/images/company/intro/nizing office.jpg" class="pb-3" />
+                            </picture>
                         </div>
                         <div class="col-12 p-0 col-lg-8 h5">
                             <p>
@@ -72,7 +81,7 @@
                 </div>
                 <div class="content">
                     <div class="h5">
-                        <img src="images/company/intro/nizing office.jpg" class="img d-none d-lg-block" style="width: 500px; object-fit: contain; float: right; padding: 2px 0 12px 15px;" />
+                        <img src="/images/company/intro/nizing office.jpg" class="img d-none d-lg-block" style="width: 500px; object-fit: contain; float: right; padding: 2px 0 12px 15px;" />
                         <div>
                             <p>
                                 Nizing Group is the leader of high temperature and high voltage wire manufacturers.

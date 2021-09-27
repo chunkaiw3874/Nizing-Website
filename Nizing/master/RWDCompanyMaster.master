@@ -2,9 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
-        .mini-menu.sticky-top{
-            padding-top:56px;
-            margin-top:-56px;
+        .mini-menu.sticky-top {
+            padding-top: 56px;
+            margin-top: -56px;
         }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
@@ -13,22 +13,7 @@
     <asp:ContentPlaceHolder ID="banner" runat="server"></asp:ContentPlaceHolder>
     <div class="container-fluid mini-menu">
         <nav class="navbar justify-content-center">
-            <ul class="nav nav-pills justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link" href="company-intro.aspx">日進簡介</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="company-culture.aspx">企業核心價值與經營理念</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="company-history.aspx">歷史歷程</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="company-capability.aspx">生產設備</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="company-lab.aspx">實驗室</a>
-                </li>
+            <ul id="ulMenuList" runat="server" class="nav nav-pills justify-content-center">
             </ul>
         </nav>
     </div>

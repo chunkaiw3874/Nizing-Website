@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmWEB_Main));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tbcManagement = new System.Windows.Forms.TabControl();
             this.tbpNewsManagement = new System.Windows.Forms.TabPage();
@@ -52,6 +53,10 @@
             this.clbNewsAttachmentList = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNewsTitle = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dtpNewsDate = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtNewsLink = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnNewsAdd = new System.Windows.Forms.Button();
             this.btnNewsEdit = new System.Windows.Forms.Button();
@@ -62,10 +67,6 @@
             this.flowLayoutPanel11 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnLogout = new System.Windows.Forms.Button();
             this.cbxFunctionList = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dtpNewsDate = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtNewsLink = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tbcManagement.SuspendLayout();
             this.tbpNewsManagement.SuspendLayout();
@@ -388,6 +389,42 @@
             this.txtNewsTitle.Size = new System.Drawing.Size(498, 22);
             this.txtNewsTitle.TabIndex = 2;
             // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(37, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 12);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "新聞日期:";
+            // 
+            // dtpNewsDate
+            // 
+            this.dtpNewsDate.Location = new System.Drawing.Point(99, 3);
+            this.dtpNewsDate.Name = "dtpNewsDate";
+            this.dtpNewsDate.Size = new System.Drawing.Size(200, 22);
+            this.dtpNewsDate.TabIndex = 0;
+            this.dtpNewsDate.ValueChanged += new System.EventHandler(this.dtpNewsDate_ValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(37, 426);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 12);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "網址連結:";
+            // 
+            // txtNewsLink
+            // 
+            this.txtNewsLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNewsLink.Location = new System.Drawing.Point(99, 421);
+            this.txtNewsLink.Name = "txtNewsLink";
+            this.txtNewsLink.Size = new System.Drawing.Size(498, 22);
+            this.txtNewsLink.TabIndex = 4;
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.btnNewsAdd);
@@ -511,48 +548,13 @@
             this.cbxFunctionList.ValueMember = "ID";
             this.cbxFunctionList.SelectionChangeCommitted += new System.EventHandler(this.cbxFunctionList_SelectionChangeCommitted);
             // 
-            // label2
-            // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(37, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 12);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "新聞日期:";
-            // 
-            // dtpNewsDate
-            // 
-            this.dtpNewsDate.Location = new System.Drawing.Point(99, 3);
-            this.dtpNewsDate.Name = "dtpNewsDate";
-            this.dtpNewsDate.Size = new System.Drawing.Size(200, 22);
-            this.dtpNewsDate.TabIndex = 0;
-            this.dtpNewsDate.ValueChanged += new System.EventHandler(this.dtpNewsDate_ValueChanged);
-            // 
-            // label3
-            // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(37, 426);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 12);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "網址連結:";
-            // 
-            // txtNewsLink
-            // 
-            this.txtNewsLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNewsLink.Location = new System.Drawing.Point(99, 421);
-            this.txtNewsLink.Name = "txtNewsLink";
-            this.txtNewsLink.Size = new System.Drawing.Size(498, 22);
-            this.txtNewsLink.TabIndex = 4;
-            // 
             // frmWEB_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 862);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "frmWEB_Main";
             this.Text = "frmWEB_Main";

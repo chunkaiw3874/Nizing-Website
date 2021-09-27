@@ -2,15 +2,14 @@
 
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="Server">
     <title>日進電線-歷史紀錄</title>
-    <link rel="stylesheet" href="css/timeline/style-albe-timeline.css" />
-    <script src="Scripts/timeline/jquery-albe-timeline.min.js"></script>
+    <link rel="stylesheet" href="/css/timeline/style-albe-timeline.css" />
+    <script src="/Scripts/timeline/jquery-albe-timeline.min.js"></script>
     <style type="text/css">
-
         .company-timeline section#timeline:before {
             z-index: 0;
         }
 
-        .company-timeline section#timeline div[class*="group"], section#timeline article div.panel div.badge {            
+        .company-timeline section#timeline div[class*="group"], section#timeline article div.panel div.badge {
             box-shadow: none;
         }
 
@@ -362,7 +361,10 @@
 <asp:Content ID="banner" ContentPlaceHolderID="banner" runat="Server">
     <div class="container-fluid">
         <div class="banner">
-            <img src="images/banner/banner-company-en-1920x500.png" />
+            <picture>
+                <source srcset="/images/banner/banner-company-en.webp" type="image/webp" />
+                <img src="/images/banner/banner-company-en.png" />
+            </picture>
         </div>
     </div>
 </asp:Content>

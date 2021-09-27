@@ -112,6 +112,12 @@
             toggleNavigationArrow($miniMenu);
         });
 
+        function handleImageNotFoundError() {
+            alert('<%=ResolveUrl("/images/placeholder/product-image-placeholder.png")%>');
+            this.onerror = null;
+            this.src = '/images/placeholder/product-image-placeholder.png';
+        }
+
 
     </script>
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
@@ -126,55 +132,7 @@
                         <i class="fas fa-chevron-left"></i>
                     </button>
                 </div>
-                <div id="mini-menu-items" class="mini-menu-items">
-                    <a href="silicone-fiberglass-series.aspx">
-                        <img src="images/menu/silicone-fiberglass-wire.svg" class="mx-auto" />
-                        <p class="card-text">矽膠編織線</p>
-                    </a>
-                    <a href="high-temperature-resistance-series.aspx">
-                        <img src="images/menu/high-temperature-wire.svg" class="mx-auto" />
-                        <p class="card-text">高溫線</p>
-                    </a>
-                    <a href="silicone-series.aspx">
-                        <img src="images/menu/silicone-wire.svg" class="mx-auto" />
-                        <p class="card-text">矽膠線</p>
-                    </a>
-                    <a href="teflon-series.aspx">
-                        <img src="images/menu/teflon-wire.svg" class="mx-auto" />
-                        <p class="card-text">鐵氟龍線</p>
-                    </a>
-                    <a href="xlpe-series.aspx">
-                        <img src="images/menu/xlpe-wire.svg" class="mx-auto" />
-                        <p class="card-text">XLPE</p>
-                    </a>
-                    <a href="pvc-series.aspx">
-                        <img src="images/menu/pvc-wire.svg" class="mx-auto" />
-                        <p class="card-text">PVC</p>
-                    </a>
-                    <a href="sleeve-and-tube-series.aspx">
-                        <img src="images/menu/tube.svg" class="mx-auto" />
-                        <p class="card-text">套管</p>
-                    </a>
-                    <a href="thermocouple-series.aspx">
-                        <img src="images/menu/thermocouple.svg" class="mx-auto" />
-                        <p class="card-text">補償導線</p>
-                    </a>
-                    <a href="heating-wire-series.aspx">
-                        <img src="images/menu/heating-wire.svg" class="mx-auto" />
-                        <p class="card-text">發熱線</p>
-                    </a>
-                    <a href="automotive-wire-series.aspx">
-                        <img src="images/menu/automotive-wire.svg" class="mx-auto" />
-                        <p class="card-text">汽車花線</p>
-                    </a>
-                    <a href="military-grade-series.aspx">
-                        <img src="images/menu/military-wire.svg" class="mx-auto" />
-                        <p class="card-text">軍規線</p>
-                    </a>
-                    <a href="special-cable.aspx">
-                        <img src="images/menu/special-cable.svg" class="mx-auto" />
-                        <p class="card-text">特殊線</p>
-                    </a>
+                <div id="divMenuItemList" runat="server" class="mini-menu-items">                    
                 </div>
                 <div class="arrow-container right-arrow">
                     <button type="button" class="btn">

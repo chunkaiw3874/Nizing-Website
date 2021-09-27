@@ -17,9 +17,96 @@ public partial class _default : System.Web.UI.Page
     string webConnectionString = ConfigurationManager.ConnectionStrings["WebsiteConnectionString"].ConnectionString;
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (RouteData.Values["language"] == null || Session["language"] == null)
+        {
+            Session["language"] = "zh";
+            Response.Redirect("/" + Session["language"].ToString());
+        }
+
+        //if (Session["language"].ToString() != RouteData.Values["language"].ToString())
+        //{
+        string language = RouteData.Values["language"].ToString();
+        Session["language"] = language;
+        //}
+
+        if (!IsPostBack)
+        {
+            BuildProductMenu(language);
+        }
+
         DisplayNewsList();
     }
 
+    protected void BuildProductMenu(string language)
+    {
+        DataTable dt = FetchProductMenuData();
+        foreach (DataRow dr in dt.Rows)
+        {
+            AddProductItem(language, dr["ID"].ToString(), dr["zh"].ToString(), dr["en"].ToString());
+        }
+    }
+    protected void AddProductItem(string language, string id, string zhText, string enText)
+    {
+        HtmlGenericControl divCol = new HtmlGenericControl("div");
+        divCol.Attributes.Add("class", "col reveal animate__animated");
+        divProductItemList.Controls.Add(divCol);
+        HtmlGenericControl figureProductCategoryItem = new HtmlGenericControl("figure");
+        figureProductCategoryItem.Attributes.Add("class", "product-category-item move");
+        divCol.Controls.Add(figureProductCategoryItem);
+        HtmlAnchor a = new HtmlAnchor();
+        a.HRef = "/" + language + "/product/" + id;
+        figureProductCategoryItem.Controls.Add(a);
+        HtmlGenericControl divImageSection = new HtmlGenericControl("div");
+        divImageSection.Attributes.Add("class", "image-section");
+        a.Controls.Add(divImageSection);
+        HtmlGenericControl picture = new HtmlGenericControl("picture");
+        divImageSection.Controls.Add(picture);
+        HtmlSource pictureSource = new HtmlSource();
+        pictureSource.Attributes.Add("srcset", "/images/product/" + id + "/menu/big-menu.webp");
+        pictureSource.Attributes.Add("type", "image/webp");
+        picture.Controls.Add(pictureSource);
+        HtmlImage img = new HtmlImage();
+        img.Src = "/images/product/" + id + "/menu/big-menu.png";
+        img.Alt = zhText + " " + enText;
+        img.Attributes.Add("onerror", "onerror=null; this.src='/images/placeholder/product-image-placeholder.png'");
+        picture.Controls.Add(img);
+        HtmlGenericControl divTextSection = new HtmlGenericControl("div");
+        divTextSection.Attributes.Add("class", "text-section");
+        figureProductCategoryItem.Controls.Add(divTextSection);
+        HtmlGenericControl figcaption = new HtmlGenericControl("figcaption");
+        figcaption.Attributes.Add("class", "title");
+        if (language == "zh")
+        {
+            figcaption.InnerText = zhText;
+        }
+        else
+        {
+            figcaption.InnerText = enText;
+        }
+        divTextSection.Controls.Add(figcaption);
+    }
+
+    protected DataTable FetchProductMenuData()
+    {
+        DataTable dt = new DataTable();
+
+        using (SqlConnection conn = new SqlConnection(webConnectionString))
+        {
+            conn.Open();
+            string query = "select [ID]" +
+                " , [zh]" +
+                " , [en]" +
+                " from ProductCategory" +
+                " where [ID] <> 'other'" +
+                " order by OrderOfAppearance";
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+        }
+
+        return dt;
+    }
     private void DisplayNewsList()
     {
         DataTable newListTable = new DataTable();
@@ -58,7 +145,7 @@ public partial class _default : System.Web.UI.Page
     private void BuildNewsListOnFrontEnd(DataTable dt)
     {
         string imgServerFilePath = @"\\192.168.10.222\Web\Nizing\attachment\news\";
-        string imgWebFilePath = @"attachment/news/";
+        string imgWebFilePath = @"/attachment/news/";
 
         foreach (DataRow row in dt.Rows)
         {
@@ -91,11 +178,11 @@ public partial class _default : System.Web.UI.Page
             imgList = GetImageFiles(imgServerFilePath + row["newsId"].ToString());
             if (imgList.Count > 0)
             {
-                img.Attributes["src"] = imgWebFilePath+ row["newsId"].ToString()+@"/"+ imgList[0];
+                img.Attributes["src"] = imgWebFilePath + row["newsId"].ToString() + @"/" + imgList[0];
             }
             else
             {
-                img.Attributes["src"] = "https://via.placeholder.com/200";
+                img.Attributes["src"] = "/images/placeholder/product-image-placeholder.png";
             }
             div3.Controls.Add(img);
 
@@ -109,7 +196,7 @@ public partial class _default : System.Web.UI.Page
 
             HtmlGenericControl div5 = new HtmlGenericControl("div");
             div5.ID = a.ID + "_NewsTitle";
-            div5.Attributes["class"] = "card-title text-md-left text-center h5";            
+            div5.Attributes["class"] = "card-title text-md-left text-center h5";
             div5.InnerText = row["newsTitle"].ToString();
             div4.Controls.Add(div5);
 
@@ -163,7 +250,7 @@ public partial class _default : System.Web.UI.Page
         List<string> images = new List<string>();
 
         HtmlAnchor news = (HtmlAnchor)sender;
-        HtmlGenericControl newsTitle = (HtmlGenericControl) news.FindControl(news.ID + "_NewsTitle");
+        HtmlGenericControl newsTitle = (HtmlGenericControl)news.FindControl(news.ID + "_NewsTitle");
         HtmlGenericControl newsContent = (HtmlGenericControl)news.FindControl(news.ID + "_NewsContent");
         HtmlGenericControl newsDate = (HtmlGenericControl)news.FindControl(news.ID + "_NewsDate");
         HtmlGenericControl newsLink = (HtmlGenericControl)news.FindControl(news.ID + "_NewsLink");
@@ -178,7 +265,7 @@ public partial class _default : System.Web.UI.Page
         newsModalDate.Text = newsDate.InnerText;
 
         images = GetImageFiles(imgServerFilePath + news.ID);
-        foreach(string fileName in images)
+        foreach (string fileName in images)
         {
             HtmlGenericControl img = new HtmlGenericControl("img");
             img.Attributes["src"] = imgWebFilePath + news.ID + @"/" + fileName;

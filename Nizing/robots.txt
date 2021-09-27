@@ -1,7 +1,13 @@
 User-Agent:*
 Allow:/
+Allow: /*.js*
+Allow: /*.css*
+Disallow:/admin
 Disallow:/hr360
 Disallow:/employee_section
 Disallow:/neo_employee_section
 Disallow:/revivify_employee_section
+Disallow:/sunrize_employee_section
+Disallow:/legacy
 Disallow:/oqs
+Sitemap:http://www.nizing.com.tw/sitemap.xml

@@ -173,6 +173,7 @@
             this.ClientSize = new System.Drawing.Size(284, 362);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmBackend_AccountSearch";
+            this.ShowIcon = false;
             this.Text = "帳號搜尋";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmBackend_AccountSearch_FormClosing);
             this.flowLayoutPanel1.ResumeLayout(false);

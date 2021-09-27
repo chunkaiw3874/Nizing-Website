@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="320px" height="320px" viewBox="0 0 320 320" enable-background="new 0 0 320 320" xml:space="preserve">
+<g id="機械手臂">
+	<g>
+		<path fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M215.699,130.948c8.477,23.939-4.067,50.206-28.002,58.684c-23.945,8.471-50.22-4.074-58.695-28.016
+			c-8.464-23.936,4.077-50.204,28.009-58.678C180.959,94.474,207.233,107.01,215.699,130.948z"/>
+		<path fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M204.795,134.802c6.343,17.918-3.047,37.58-20.963,43.923c-17.918,6.342-37.576-3.042-43.917-20.959
+			c-6.345-17.916,3.044-37.579,20.96-43.922C178.795,107.5,198.455,116.886,204.795,134.802z"/>
+		<path fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M185.076,141.785c2.476,7.026-1.194,14.727-8.218,17.214c-7.022,2.483-14.731-1.195-17.215-8.219
+			c-2.484-7.016,1.195-14.721,8.216-17.208C174.88,131.077,182.591,134.759,185.076,141.785z"/>
+		
+			<polygon fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			219.004,149.606 253.424,161.655 267.918,203.46 239.553,242.942 228.107,232.937 249.973,202.441 240.326,175.186 
+			214.045,165.664 		"/>
+		
+			<polyline fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			211.576,174.026 233.74,181.939 240.701,201.577 226.932,219.806 228.107,232.937 		"/>
+		
+			<polygon fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			138.783,177.995 119.583,209.018 134.621,250.626 181.496,263.482 184.115,248.501 147.944,238.552 138.282,211.288 
+			151.85,187.432 		"/>
+		
+			<polyline fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			159.91,192.312 147.647,212.398 154.604,232.047 178.432,239.557 184.115,248.501 		"/>
+		
+			<line fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="36.56" y1="93.934" x2="106.978" y2="129.315"/>
+		
+			<line fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="57.366" y1="59.698" x2="129.274" y2="96.719"/>
+		<path fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M126.495,149.606c0,0-26.056-3.991-16.214-23.656c9.833-19.667,22.948-34.011,22.948-34.011s14.418-10.243,28.313,9.65"/>
+	</g>
+</g>
+<polyline fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	218.348,152.931 250.307,164.306 263.807,202.931 "/>
+<line fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="217.156" y1="156.646" x2="246.057" y2="166.431"/>
+<polyline fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	140.807,180.706 123.807,209.056 136.682,246.931 "/>
+<line fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="143.702" y1="182.248" x2="127.807" y2="208.056"/>
+<polyline fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	197.549,169.723 172.354,146.286 178.806,112.48 "/>
+<line fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="143.702" y1="164.333" x2="171.5" y2="146.286"/>
+</svg>

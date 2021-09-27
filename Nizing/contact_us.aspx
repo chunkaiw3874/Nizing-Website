@@ -29,8 +29,6 @@
                 word-wrap: break-word;
             }
 
-
-
         .address-section {
             padding-top: 0px !important;
         }
@@ -43,6 +41,12 @@
                 .address-section .title .chinese {
                     font-size: 20px;
                 }
+
+            .address-section .map {
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+            }
 
             .address-section .content {
                 font-size: 14px;
@@ -57,7 +61,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="banner" runat="server">
     <div class="banner">
-        <img src="/images/banner/banner-contact-en-1920x650.png" class="img" />
+        <picture>
+            <source srcset="/images/banner/banner-contact-en.webp" type="image/webp" />
+            <img src="/images/banner/banner-contact-en.png" />
+        </picture>
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="Server">
@@ -76,7 +83,10 @@
                             <div class="person-wrapper">
                                 <div class="person-frame">
                                     <div class="d-flex justify-content-center">
-                                        <img src="images/contact/Chris Huang.png" />
+                                        <picture>
+                                            <source srcset="/images/contact/Chris Huang.webp" type="image/webp" />
+                                            <img src="/images/contact/Chris Huang.png" />
+                                        </picture>
                                     </div>
                                 </div>
                                 <div class="person-text">
@@ -96,7 +106,10 @@
                             <div class="person-wrapper">
                                 <div class="person-frame">
                                     <div class="d-flex justify-content-center">
-                                        <img src="images/contact/Kelven Chao.png" />
+                                        <picture>
+                                            <source srcset="/images/contact/Kelven Chao.webp" type="image/webp" />
+                                            <img src="/images/contact/Kelven Chao.png" />
+                                        </picture>
                                     </div>
                                 </div>
                                 <div class="person-text">
@@ -116,7 +129,10 @@
                             <div class="person-wrapper">
                                 <div class="person-frame">
                                     <div class="d-flex justify-content-center">
-                                        <img src="images/contact/Aris Chen.png" />
+                                        <picture>
+                                            <source srcset="/images/contact/Aris Chen.webp" type="image/webp" />
+                                            <img src="/images/contact/Aris Chen.png" />
+                                        </picture>
                                     </div>
                                 </div>
                                 <div class="person-text">
@@ -150,7 +166,10 @@
                             <div class="person-wrapper">
                                 <div class="person-frame">
                                     <div class="d-flex justify-content-center">
-                                        <img src="images/contact/Nick Wang.png" />
+                                        <picture>
+                                            <source srcset="/images/contact/Nick Wang.webp" type="image/webp" />
+                                            <img src="/images/contact/Nick Wang.png" />
+                                        </picture>
                                     </div>
                                 </div>
                                 <div class="person-text">
@@ -170,7 +189,8 @@
                             <div class="person-wrapper">
                                 <div class="person-frame">
                                     <div class="d-flex justify-content-center">
-                                        <img src="images/contact/Kevin Wang.png" />
+                                        <source srcset="/images/contact/Kevin Wang.webp" type="image/webp" />
+                                        <img src="/images/contact/Kevin Wang.png" />
                                     </div>
                                 </div>
                                 <div class="person-text">
@@ -193,12 +213,21 @@
         <div class="display-block address-section">
             <div class="container-fluid p-0">
                 <div>
-                    <img src="images/contact/NIZING.jpg" class="img w-100" />
+                    <picture>
+                        <source srcset="/images/contact/NIZING.webp" type="image/webp" />
+                        <img src="/images/contact/NIZING.jpg" />
+                    </picture>
                 </div>
                 <div class="text-center">
                     <div class="title">
                         <span class="chinese">日進電線股份有限公司</span><br />
                         Nizing Electric Wire & Cable Co., Ltd.
+                    </div>
+                    <div class="map">
+                        <picture>
+                            <source srcset="/images/contact/nizing map_2021.webp" type="image/webp" />
+                            <img src="/images/contact/nizing map_2021.jpg" />
+                        </picture>
                     </div>
                     <div class="content">
                         <span class="chinese">地址: 新北市三重區光復路二段87巷10-12號</span><br />

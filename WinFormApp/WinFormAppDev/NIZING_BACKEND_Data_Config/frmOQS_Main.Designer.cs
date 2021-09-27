@@ -30,6 +30,7 @@ namespace NIZING_BACKEND_Data_Config
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOQS_Main));
             this.aCCOUNTVIPLEVELBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dsOQS_LoginAccount = new NIZING_BACKEND_Data_Config.dsOQS_LoginAccount();
             this.bgwProductSyncLoader = new System.ComponentModel.BackgroundWorker();
@@ -1032,6 +1033,7 @@ namespace NIZING_BACKEND_Data_Config
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 862);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "frmOQS_Main";
             this.Text = "線上報價系統";

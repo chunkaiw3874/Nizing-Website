@@ -16,7 +16,10 @@
 <asp:Content ID="banner" ContentPlaceHolderID="banner" runat="Server">
     <div class="container-fluid">
         <div class="banner">
-            <img src="images/banner/banner-materials-en-1920x500.png" />
+            <picture>
+                <source srcset="/images/banner/banner-materials-en.webp" type="image/webp" />
+                <img src="/images/banner/banner-materials-en.png" />
+            </picture>
         </div>
     </div>
 </asp:Content>
@@ -24,42 +27,7 @@
     <div class="display-block-wrapper">
         <div class="display-block">
             <div class="container">
-                <div class="conductor-list row row-cols-1">
-                    <div class="col conductor-list-wrapper">
-                        <div class="conductor-list-item">
-                            <a href="copper.aspx" class="card-link">
-                                <img src="images/material/conductor/合金導體-純銅系列.png" class="w-100" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col conductor-list-wrapper">
-                        <div class="conductor-list-item">
-                            <a href="agcu.aspx" class="card-link">
-                                <img src="images/material/conductor/合金導體-銀銅合金.png" class="w-100" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col conductor-list-wrapper">
-                        <div class="conductor-list-item move">
-                            <a href="sncu.aspx" class="card-link">
-                                <img src="images/material/conductor/合金導體-錫銅合金.png" class="w-100" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col conductor-list-wrapper">
-                        <div class="conductor-list-item">
-                            <a href="nicu.aspx" class="card-link">
-                                <img src="images/material/conductor/合金導體-鎳銅合金.png" class="w-100" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col conductor-list-wrapper">
-                        <div class="conductor-list-item">
-                            <a href="ag.aspx" class="card-link">
-                                <img src="images/material/conductor/合金導體-純銀與銀合金.png" class="w-100" />
-                            </a>
-                        </div>
-                    </div>
+                <div id="divMenuList" runat="server" class="conductor-list row row-cols-1">
                 </div>
             </div>
         </div>

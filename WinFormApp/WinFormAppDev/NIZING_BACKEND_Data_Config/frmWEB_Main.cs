@@ -36,11 +36,17 @@ namespace NIZING_BACKEND_Data_Config
 
         #endregion
 
+        #region 產品設定 Universal Variable
+        private FunctionMode productTabMode;
+        string productAttachmentFilePath = @"\\192.168.10.222\Web\Nizing\images\product_pic\";
+        #endregion
+
         public frmWEB_Main(frmLogin frmLogin)
         {
             InitializeComponent();
             _frmLogin = frmLogin;
             newsTabMode = FunctionMode.NORECORD;
+            productTabMode = FunctionMode.NORECORD;
             currentTabPage = tbcManagement.SelectedTab;
             LoadControlStatus(currentTabPage);
         }
@@ -562,7 +568,7 @@ namespace NIZING_BACKEND_Data_Config
 
         private void dtpNewsDate_ValueChanged(object sender, EventArgs e)
         {
-            lblNewsId.Text = GetNewsId();            
+            lblNewsId.Text = GetNewsId();
         }
     }
 }
