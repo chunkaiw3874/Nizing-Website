@@ -14,12 +14,6 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="Server">
     <div id="divBackground" runat="server" class="display-block bg-wrapper">
-        <div class="title">
-            車用配線
-        </div>
-        <div class="subtitle">
-            Automobile
-        </div>
         <div class="container">
             <div id="divApplicationItemList" runat="server" class="content row row-cols-2 row-cols-md-4 application-item-list">
 

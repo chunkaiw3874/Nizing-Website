@@ -1,15 +1,10 @@
-<<<<<<< HEAD
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWDCompanyMaster.master" AutoEventWireup="true" CodeFile="company-intro.aspx.cs" Inherits="company_intro" %>
-=======
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/companyMaster2021.master" AutoEventWireup="true" CodeFile="company-intro.aspx.cs" Inherits="company_intro" %>
->>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title>日進電線-公司簡介</title>
     <style>
         .content {
             margin-top: 30px;
-<<<<<<< HEAD
             text-align: left;
         }
 
@@ -21,16 +16,9 @@
             .content {
                 text-align: justify;
             }
-=======
->>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
         }
-
-            .content:first-child {
-                margin-top: 0px;
-            }
     </style>
 </asp:Content>
-<<<<<<< HEAD
 <asp:Content ID="Content2" ContentPlaceHolderID="banner" runat="Server">
     <div class="container-fluid">
         <div class="banner">
@@ -66,26 +54,6 @@
                             </picture>
                         </div>
                         <div class="col-12 p-0 col-lg-8 h5">
-=======
-<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
-    <div class="container-fluid p-0">
-        <div class="display-block">
-            <div class="block header">
-                <div class="block title h2">
-                    日進簡介
-                </div>
-                <div class="block subtitle h4">
-                    Brief Introduction
-                </div>
-            </div>
-            <div class="block content container">
-                <div class="content d-flex justify-content-center">
-                    <div class="row m-0">
-                        <div class="col-4">
-                            <img src="images/company/intro/nizing front desk.jpg" class="img w-100" />
-                        </div>
-                        <div class="col-8 pr-0 h5 text-justify">
->>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
                             <p>
                                 日進電線是世界知名的耐熱耐壓電線廠，自1983年起進行特殊線材的研發、設計、及製造有長達
                                 數十年的經驗，目前為國內最大的高溫及高壓電線研發製造商。日進電線集團以台灣為研發總部
@@ -111,20 +79,12 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
                 <div class="content">
                     <div class="h5">
                         <img src="/images/company/intro/nizing office.jpg" class="img d-none d-lg-block" style="width: 500px; object-fit: contain; float: right; padding: 2px 0 12px 15px;" />
                         <div>
                             <p>
                                 Nizing Group is the leader of high temperature and high voltage wire manufacturers.
-=======
-                <div class="content" style="padding-left: 15px;">
-                    <div class="h5 text-justify">
-                        <img src="images/company/intro/nizing office.jpg" class="img" style="width: 500px; object-fit: contain; float: right; padding: 2px 0 12px 15px;" />
-                        <p>
-                            Nizing Group is the leader of high temperature and high voltage wire manufacturers.
->>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
                                 We have been design, develop, and product custom wire and cable since 1983. Since then, 
                                 Nizing has become a world renowned supplier for high temperature and high voltage wire
                                 and cable. Our core ability is customizing and producing unique wire and cable products 
@@ -132,25 +92,15 @@
                                 1996, setup manufacture plants and marketing centers in Shanghai and Gongguan, and sales 
                                 channels all over mainland China. We provide customers with the best solutions and dedicated
                                 to making high quality high-end wire and cable.                                
-<<<<<<< HEAD
                             </p>
                             <p>
                                 Nizing have a wide range of products with great performance. Our greatest strength is our ability
-=======
-                        </p>
-                        <p>
-                            Nizing have a wide range of products with great performance. Our greatest strength is our ability
->>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
                                 to customize new product for each customer. We have been certified with global authorities such
                                 as UL, CUL, CSA, PSE, VDE, CCC, among others. Our products are widely used in home appliances, 
                                 air conditioners, computers, electronic equipments, communication equipments, aviations, automobiles,
                                 and other industrial machines, with temperature range from -60 to 1100 Celsius.
-<<<<<<< HEAD
                             </p>
                         </div>
-=======
-                        </p>
->>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
                     </div>
                 </div>
             </div>

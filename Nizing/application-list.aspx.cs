@@ -33,6 +33,31 @@ public partial class application_list : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(webConnectionString))
         {
             conn.Open();
+            string query = "select zh [zhText]" +
+                " , en [enText]" +
+                " from ApplicationCategory" +
+                " where ID = @AID";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@AID", application);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            dt = new DataTable();
+            da.Fill(dt);
+        }
+
+        //Build Menu Title
+        if (dt.Rows.Count > 0)
+        {
+            HtmlGenericControl divTitle = new HtmlGenericControl("div");
+            divTitle.Attributes.Add("class", "title");
+            divBackground.Controls.AddAt(0, divTitle);
+            HtmlGenericControl divSubtitle = new HtmlGenericControl("div");
+            divSubtitle.Attributes.Add("class", "subtitle");
+            divBackground.Controls.AddAt(1, divSubtitle);
+        }
+
+        using (SqlConnection conn = new SqlConnection(webConnectionString))
+        {
+            conn.Open();
             string query = "select pa.ProductID [PID]" +
                 " ,pmc.[Name]" +
                 " ,pmc.[Description]" +
@@ -45,6 +70,7 @@ public partial class application_list : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@language", language);
             cmd.Parameters.AddWithValue("@AID", application);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
+            dt = new DataTable();
             da.Fill(dt);
         }
 

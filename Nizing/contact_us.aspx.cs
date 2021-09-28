@@ -9,7 +9,6 @@ public partial class contact_us : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-<<<<<<< HEAD
         if (!IsPostBack)
         {
             if (RouteData.Values["language"] != null)
@@ -23,8 +22,5 @@ public partial class contact_us : System.Web.UI.Page
                 Session["language"] = "zh";
             }
         }
-=======
-
->>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
     }
 }

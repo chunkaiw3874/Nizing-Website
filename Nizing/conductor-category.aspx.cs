@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-<<<<<<< HEAD
 using System.Web.UI.HtmlControls;
-=======
->>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
 using System.Web.UI.WebControls;
 
 public partial class conductor_category : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-<<<<<<< HEAD
         if (!IsPostBack)
         {
             if (Session["language"] == null)
@@ -57,8 +53,5 @@ public partial class conductor_category : System.Web.UI.Page
         img.Alt = zhText + " " + enText;
         img.Attributes.Add("onerror", "onerror=null; this.src='/images/placeholder/product-image-placeholder.png'");
         picture.Controls.Add(img);
-=======
-
->>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
     }
 }

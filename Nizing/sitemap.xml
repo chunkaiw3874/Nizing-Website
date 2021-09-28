@@ -1013,6 +1013,11 @@
 		<priority>0.40</priority>
 	</url>
 	<url>
+		<loc>http://www.nizing.com.tw/zh/application/automobile</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
 		<loc>http://www.nizing.com.tw/zh/application/automobile/motor-temperature-sensor-cable</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
@@ -2061,6 +2066,11 @@
 		<loc>http://www.nizing.com.tw/en/contact_us</loc>
 		<changefreq>yearly</changefreq>
 		<priority>0.40</priority>
+	</url>
+	<url>
+		<loc>http://www.nizing.com.tw/en/application/automobile</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
 	</url>
 	<url>
 		<loc>http://www.nizing.com.tw/en/application/automobile/motor-temperature-sensor-cable</loc>
