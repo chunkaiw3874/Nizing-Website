@@ -109,13 +109,13 @@
 
         routes.MapPageRoute("", "{language}/declaration/conflict-free-mineral-declaration", "~/conflict-free-mineral-declaration.aspx");
 
-        routes.MapPageRoute("", "{language}/portal", "~/portal.aspx");
-
-        
+        routes.MapPageRoute("", "{language}/portal", "~/portal.aspx");        
 
         routes.MapPageRoute("", "{language}/sitemap", "~/sitemap.aspx");
 
-        //seo old page routing to new page
+
+
+        //seo old page routing to new page (has new page)
         routes.MapPageRoute("", "pdf/{filename}.pdf", "~/product-profile.aspx");
         //military-grade-wire
         routes.MapPageRoute("", "m16878", "~/product-profile.aspx", true,
@@ -450,13 +450,13 @@
             new RouteValueDictionary { { "language", "zh" }, { "productID", "ul3135" } });
         routes.MapPageRoute("", "en/ul3135", "~/product-profile.aspx", true,
             new RouteValueDictionary { }, new RouteValueDictionary { },
-            new RouteValueDictionary { { "language", "en" }, { "productID", "ul3ul3135132" } });
+            new RouteValueDictionary { { "language", "en" }, { "productID", "ul3135" } });
         routes.MapPageRoute("", "ul3135.aspx", "~/product-profile.aspx", true,
             new RouteValueDictionary { }, new RouteValueDictionary { },
             new RouteValueDictionary { { "language", "zh" }, { "productID", "ul3135" } });
         routes.MapPageRoute("", "en/ul3135.aspx", "~/product-profile.aspx", true,
             new RouteValueDictionary { }, new RouteValueDictionary { },
-            new RouteValueDictionary { { "language", "en" }, { "productID", "ul3ul3135132" } });
+            new RouteValueDictionary { { "language", "en" }, { "productID", "ul3135" } });
         routes.MapPageRoute("", "ul3136", "~/product-profile.aspx", true,
             new RouteValueDictionary { }, new RouteValueDictionary { },
             new RouteValueDictionary { { "language", "zh" }, { "productID", "ul3136" } });
@@ -1996,6 +1996,35 @@
         routes.MapPageRoute("", "special-cable-series", "~/composite-cable.aspx");
 
 
+        //redirect deprecated pages to relevant category pages
+        routes.MapPageRoute("", "cat6a10gsutp", "~/pvc-wire.aspx");
+        routes.MapPageRoute("", "en/cat6a10gsutp", "~/pvc-wire.aspx");
+        routes.MapPageRoute("", "cat6a10gsutp.aspx", "~/pvc-wire.aspx");
+        routes.MapPageRoute("", "en/cat6a10gsutp.aspx", "~/pvc-wire.aspx");
+        
+        routes.MapPageRoute("", "cat6a10gsftp", "~/pvc-wire.aspx");
+        routes.MapPageRoute("", "en/cat6a10gsftp", "~/pvc-wire.aspx");
+        routes.MapPageRoute("", "cat6a10gsftp.aspx", "~/pvc-wire.aspx");
+        routes.MapPageRoute("", "en/cat6a10gsftp.aspx", "~/pvc-wire.aspx");
+
+        routes.MapPageRoute("", "cat710gplussftp", "~/pvc-wire.aspx");
+        routes.MapPageRoute("", "en/cat710gplussftp", "~/pvc-wire.aspx");
+        routes.MapPageRoute("", "cat710gplussftp.aspx", "~/pvc-wire.aspx");
+        routes.MapPageRoute("", "en/cat710gplussftp.aspx", "~/pvc-wire.aspx");
+
+        routes.MapPageRoute("", "mil-c-24643-23-08", "~/military-grade-wire.aspx");
+        routes.MapPageRoute("", "en/mil-c-24643-23-08", "~/military-grade-wire.aspx");
+        routes.MapPageRoute("", "mil-c-24643-23-08.aspx", "~/military-grade-wire.aspx");
+        routes.MapPageRoute("", "en/mil-c-24643-23-08.aspx", "~/military-grade-wire.aspx");
+
+        routes.MapPageRoute("", "defibrillator-signal-wire", "~/pvc-wire.aspx");
+        routes.MapPageRoute("", "en/defibrillator-signal-wire", "~/pvc-wire.aspx");
+        routes.MapPageRoute("", "defibrillator-signal-wire.aspx", "~/pvc-wire.aspx");
+        routes.MapPageRoute("", "en/defibrillator-signal-wire.aspx", "~/pvc-wire.aspx");
+        
+        routes.MapPageRoute("", "{language}/silicone-fiberglass-wire", "~/silicone-fiberglass-wire.aspx");
+
+        routes.MapPageRoute("", "cloud", "~/application.aspx");
 
 
         var settings = new FriendlyUrlSettings();
