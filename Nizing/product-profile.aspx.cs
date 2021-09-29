@@ -91,40 +91,8 @@ public partial class product_profile : System.Web.UI.Page
     {
         if (Page.RouteData.DataTokens["language"] != null && Page.RouteData.DataTokens["productID"] != null)
         {
-            //string PID = Request.Url.AbsoluteUri.Split('/').Last().Split('.').First().ToUpper();
-
-            string PID = Page.RouteData.DataTokens["productID"].ToString().ToUpper();
+            string PID = Page.RouteData.DataTokens["productID"].ToString().ToLower();
             string language = Page.RouteData.DataTokens["language"].ToString().ToLower();
-
-            //#region DUMB PID REWRITE!!
-            ////DUMB WAY TO TRANSFORM URL INTO THE ONE I NEED!!!
-            //if (PID == "RSGE")
-            //{
-            //    PID = "RS-GE";
-            //}
-            //if (PID == "ULSRG")
-            //{
-            //    PID = "ULSSG";
-            //}
-            //if (PID == "PFA-FEP-TUBE")
-            //{
-            //    PID = "FEP-TUBE";
-            //}
-            //if (PID == "RS-TYPE")
-            //{
-            //    PID = "R-S-TYPE";
-            //}
-            //if (PID == "respiration-pipe-heating-wire".ToUpper())
-            //{
-            //    PID = "MEDICAL-RESPIRATION-PIPE-HEATING-WIRE";
-            //}
-            //if (PID == "rg178bu-rg179-rg316".ToUpper())
-            //{
-            //    PID = "RG179";
-            //}
-
-
-            //#endregion
 
             DataTable dt = FetchProductData(PID, language);
             Response.Redirect("/" + language + "/product/" + dt.Rows[0]["ProductCategoryID"].ToString() + "/" + PID);
@@ -133,8 +101,10 @@ public partial class product_profile : System.Web.UI.Page
         {
             try
             {
-                Product product = GetProduct(RouteData.Values["productID"].ToString().Trim(), RouteData.Values["language"].ToString().ToLower().Trim());
+                string PID = RouteData.Values["productID"].ToString().ToLower().Trim();
                 string language = RouteData.Values["language"].ToString().ToLower().Trim();
+                Product product = GetProduct(PID, language);
+                
                 Session["language"] = language;
 
                 if (language == "zh")
@@ -219,7 +189,7 @@ public partial class product_profile : System.Web.UI.Page
             }
             catch
             {
-                Response.Redirect(@"/" + RouteData.Values["language"].ToString().ToLower().Trim() + @"/product/" + @"/product-not-found?productID=" + RouteData.Values["productID"].ToString().ToUpper());
+                Response.Redirect(@"/" + RouteData.Values["language"].ToString().ToLower().Trim() + @"/product/" + @"/product-not-found?productID=" + RouteData.Values["productID"].ToString().ToLower());
             }
         }
 
@@ -426,7 +396,7 @@ public partial class product_profile : System.Web.UI.Page
         h2 = new HtmlGenericControl("h2");
         h2.Attributes["itemprop"] = "productID";
         h2.Attributes["class"] = "subtitle";
-        h2.InnerText = p.ID;
+        h2.InnerText = p.ID.ToUpper();
         article.Controls.Add(h2);
 
         HtmlGenericControl divBriefProductInfo = new HtmlGenericControl("div");

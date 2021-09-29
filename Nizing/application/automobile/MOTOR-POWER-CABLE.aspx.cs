@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class application_automobile_MOTOR_POWER_CABLE : System.Web.UI.Page
+public partial class application_automobile_motor_power_cable : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {

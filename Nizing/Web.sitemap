@@ -12,200 +12,203 @@
 
 		<siteMapNode url="/zh/product" title="產品分類" description="產品分類">
 			<siteMapNode url="/zh/product/silicone-fiberglass-wire" title="矽膠編織線系列" description="矽膠編織線系列">
-				<siteMapNode url="/zh/product/silicone-fiberglass-wire/RS-GE" title="RS-GE 矽膠編織耐熱線" description="RS-GE 矽膠編織耐熱線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-fiberglass-wire/TM3320" title="TM3320 矽膠編織耐熱線" description="TM3320 矽膠編織耐熱線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-fiberglass-wire/UL3071" title="UL3071 矽膠編織耐熱線" description="UL3071 矽膠編織耐熱線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-fiberglass-wire/UL3074" title="UL3074 矽膠編織耐熱線" description="UL3074 矽膠編織耐熱線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-fiberglass-wire/UL3075" title="UL3075 矽膠編織耐熱線" description="UL3075 矽膠編織耐熱線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-fiberglass-wire/UL3122" title="UL3122 矽膠編織耐熱線" description="UL3122 矽膠編織耐熱線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-fiberglass-wire/UL3172" title="UL3172 矽膠編織耐熱線" description="UL3172 矽膠編織耐熱線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-fiberglass-wire/UL3232" title="UL3232 尼龍矽膠線" description="UL3232 尼龍矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-fiberglass-wire/UL3304" title="UL3304 矽膠編織耐熱線" description="UL3304 矽膠編織耐熱線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-fiberglass-wire/UL3512" title="UL3512 矽膠編織耐熱線" description="UL3512 矽膠編織耐熱線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-fiberglass-wire/UL3513" title="UL3513 矽膠編織耐熱線" description="UL3513 矽膠編織耐熱線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-fiberglass-wire/UL3645" title="UL3645 矽膠編織耐熱線" description="UL3645 矽膠編織耐熱線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-fiberglass-wire/VDE-H05SJ-K" title="VDE-H05SJ-K 矽膠編織耐熱線" description="VDE-H05SJ-K 矽膠編織耐熱線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-fiberglass-wire/rs-ge" title="RS-GE 矽膠編織耐熱線" description="RS-GE 矽膠編織耐熱線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-fiberglass-wire/tm3320" title="TM3320 矽膠編織耐熱線" description="TM3320 矽膠編織耐熱線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-fiberglass-wire/ul3071" title="UL3071 矽膠編織耐熱線" description="UL3071 矽膠編織耐熱線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-fiberglass-wire/ul3074" title="UL3074 矽膠編織耐熱線" description="UL3074 矽膠編織耐熱線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-fiberglass-wire/ul3075" title="UL3075 矽膠編織耐熱線" description="UL3075 矽膠編織耐熱線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-fiberglass-wire/ul3122" title="UL3122 矽膠編織耐熱線" description="UL3122 矽膠編織耐熱線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-fiberglass-wire/ul3172" title="UL3172 矽膠編織耐熱線" description="UL3172 矽膠編織耐熱線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-fiberglass-wire/ul3232" title="UL3232 尼龍矽膠線" description="UL3232 尼龍矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-fiberglass-wire/ul3304" title="UL3304 矽膠編織耐熱線" description="UL3304 矽膠編織耐熱線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-fiberglass-wire/ul3512" title="UL3512 矽膠編織耐熱線" description="UL3512 矽膠編織耐熱線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-fiberglass-wire/ul3513" title="UL3513 矽膠編織耐熱線" description="UL3513 矽膠編織耐熱線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-fiberglass-wire/ul3645" title="UL3645 矽膠編織耐熱線" description="UL3645 矽膠編織耐熱線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-fiberglass-wire/vde-h05sj-k" title="VDE-H05SJ-K 矽膠編織耐熱線" description="VDE-H05SJ-K 矽膠編織耐熱線"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/zh/product/high-temperature-wire" title="高溫線系列" description="高溫線系列">
-				<siteMapNode url="/zh/product/high-temperature-wire/CF-750" title="CF-750 750C 高溫線" description="CF-750 750C 高溫線"></siteMapNode>
-				<siteMapNode url="/zh/product/high-temperature-wire/MG-5107" title="MG-5107 450C 高溫線" description="MG-5107 450C 高溫線"></siteMapNode>
-				<siteMapNode url="/zh/product/high-temperature-wire/TGGT-400" title="TGGT-400 400C 高溫線" description="TGGT-400 400C 高溫線"></siteMapNode>
-				<siteMapNode url="/zh/product/high-temperature-wire/TGGT-5256" title="TGGT-5256 250C 高溫線" description="TGGT-5256 250C 高溫線"></siteMapNode>
+				<siteMapNode url="/zh/product/high-temperature-wire/cf-750" title="CF-750 750C 高溫線" description="CF-750 750C 高溫線"></siteMapNode>
+				<siteMapNode url="/zh/product/high-temperature-wire/mg-5107" title="MG-5107 450C 高溫線" description="MG-5107 450C 高溫線"></siteMapNode>
+				<siteMapNode url="/zh/product/high-temperature-wire/tggt-400" title="TGGT-400 400C 高溫線" description="TGGT-400 400C 高溫線"></siteMapNode>
+				<siteMapNode url="/zh/product/high-temperature-wire/tggt-5256" title="TGGT-5256 250C 高溫線" description="TGGT-5256 250C 高溫線"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/zh/product/silicone-wire" title="矽膠線系列" description="矽膠線系列">
-				<siteMapNode url="/zh/product/silicone-wire/PSE3323" title="PSE3323 矽膠線" description="PSE3323 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3123" title="UL3123 矽膠線" description="UL3123 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3132" title="UL3132 矽膠線" description="UL3132 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3133" title="UL3133 矽膠線" description="UL3133 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3134" title="UL3134 矽膠線" description="UL3134 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3135" title="UL3135 矽膠線" description="UL3135 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3136" title="UL3136 矽膠線" description="UL3136 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3138" title="UL3138 矽膠線" description="UL3138 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3139" title="UL3139 矽膠線" description="UL3139 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3213" title="UL3213 矽膠線" description="UL3213 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3239" title="UL3239 高壓矽膠線" description="UL3239 高壓矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3529" title="UL3529 矽膠線" description="UL3529 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3530" title="UL3530 矽膠線" description="UL3530 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3572" title="UL3572 矽膠線" description="UL3572 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3580" title="UL3580 矽膠線" description="UL3580 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3641" title="UL3641 矽膠線" description="UL3641 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3642" title="UL3642 矽膠線" description="UL3642 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3643" title="UL3643 矽膠線" description="UL3643 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3644" title="UL3644 矽膠線" description="UL3644 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3662" title="UL3662 矽膠線" description="UL3662 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3663" title="UL3663 矽膠線" description="UL3663 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3664" title="UL3664 矽膠線" description="UL3664 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3754" title="UL3754 矽膠線" description="UL3754 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3755" title="UL3755 矽膠線" description="UL3755 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL3976" title="UL3976 矽膠線" description="UL3976 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL4330" title="UL4330 矽膠多芯線" description="UL4330 矽膠多芯線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/UL4476" title="UL4476 矽膠高壓多芯線" description="UL4476 矽膠高壓多芯線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/VDE-FG4G4" title="VDE-FG4G4 雙層絕緣矽膠線" description="VDE-FG4G4 雙層絕緣矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/VDE-H05S-K" title="VDE-H05S-K 矽膠線" description="VDE-H05S-K 矽膠線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/VDE-H05SS-F" title="VDE-H05SS-F 矽膠多芯線" description="VDE-H05SS-F 矽膠多芯線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-wire/VDE-REG-NR-103874" title="VDE-REG-NR-103874 並排矽膠線" description="VDE-REG-NR-103874 並排矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/pse3323" title="PSE3323 矽膠線" description="PSE3323 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3123" title="UL3123 矽膠線" description="UL3123 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3132" title="UL3132 矽膠線" description="UL3132 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3133" title="UL3133 矽膠線" description="UL3133 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3134" title="UL3134 矽膠線" description="UL3134 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3135" title="UL3135 矽膠線" description="UL3135 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3136" title="UL3136 矽膠線" description="UL3136 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3138" title="UL3138 矽膠線" description="UL3138 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3139" title="UL3139 矽膠線" description="UL3139 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3213" title="UL3213 矽膠線" description="UL3213 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3239" title="UL3239 高壓矽膠線" description="UL3239 高壓矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3529" title="UL3529 矽膠線" description="UL3529 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3530" title="UL3530 矽膠線" description="UL3530 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3572" title="UL3572 矽膠線" description="UL3572 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3580" title="UL3580 矽膠線" description="UL3580 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3641" title="UL3641 矽膠線" description="UL3641 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3642" title="UL3642 矽膠線" description="UL3642 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3643" title="UL3643 矽膠線" description="UL3643 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3644" title="UL3644 矽膠線" description="UL3644 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3662" title="UL3662 矽膠線" description="UL3662 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3663" title="UL3663 矽膠線" description="UL3663 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3664" title="UL3664 矽膠線" description="UL3664 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3754" title="UL3754 矽膠線" description="UL3754 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3755" title="UL3755 矽膠線" description="UL3755 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul3976" title="UL3976 矽膠線" description="UL3976 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul4330" title="UL4330 矽膠多芯線" description="UL4330 矽膠多芯線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/ul4476" title="UL4476 矽膠高壓多芯線" description="UL4476 矽膠高壓多芯線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/vde-fg4g4" title="VDE-FG4G4 雙層絕緣矽膠線" description="VDE-FG4G4 雙層絕緣矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/vde-h05s-k" title="VDE-H05S-K 矽膠線" description="VDE-H05S-K 矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/vde-h05ss-f" title="VDE-H05SS-F 矽膠多芯線" description="VDE-H05SS-F 矽膠多芯線"></siteMapNode>
+				<siteMapNode url="/zh/product/silicone-wire/vde-reg-nr-103874" title="VDE-REG-NR-103874 並排矽膠線" description="VDE-REG-NR-103874 並排矽膠線"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/zh/product/pvc-wire" title="PVC線系列" description="PVC線系列">
-				<siteMapNode url="/zh/product/pvc-wire/UL1007" title="UL1007 PVC線" description="UL1007 PVC線"></siteMapNode>
-				<siteMapNode url="/zh/product/pvc-wire/UL1015" title="UL1015 PVC線" description="UL1015 PVC線"></siteMapNode>
-				<siteMapNode url="/zh/product/pvc-wire/UL2464" title="UL2464 PVC傳輸隔離電腦線" description="UL2464 PVC傳輸隔離電腦線"></siteMapNode>
-				<siteMapNode url="/zh/product/pvc-wire/UL2517" title="UL2517 PVC傳輸隔離電腦線" description="UL2517 PVC傳輸隔離電腦線"></siteMapNode>
+				<siteMapNode url="/zh/product/pvc-wire/ul1007" title="UL1007 PVC線" description="UL1007 PVC線"></siteMapNode>
+				<siteMapNode url="/zh/product/pvc-wire/ul1015" title="UL1015 PVC線" description="UL1015 PVC線"></siteMapNode>
+				<siteMapNode url="/zh/product/pvc-wire/ul2464" title="UL2464 PVC傳輸隔離電腦線" description="UL2464 PVC傳輸隔離電腦線"></siteMapNode>
+				<siteMapNode url="/zh/product/pvc-wire/ul2517" title="UL2517 PVC傳輸隔離電腦線" description="UL2517 PVC傳輸隔離電腦線"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/zh/product/teflon-wire" title="鐵氟龍線系列" description="鐵氟龍線系列">
-				<siteMapNode url="/zh/product/teflon-wire/UL10109" title="UL10109 ETFE鐵氟龍線" description="UL10109 ETFE鐵氟龍線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL10344" title="UL10344 PTFE鐵氟龍線" description="UL10344 PTFE鐵氟龍線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL10362" title="UL10362 PFA鐵氟龍線" description="UL10362 PFA鐵氟龍線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL10393" title="UL10393 PTFE鐵氟龍線" description="UL10393 PTFE鐵氟龍線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL11331" title="UL11331 FEP鐵氟龍線" description="UL11331 FEP鐵氟龍線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL11817" title="UL11817 FEP鐵氟龍線" description="UL11817 FEP鐵氟龍線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL1199" title="UL1199 PTFE鐵氟龍線" description="UL1199 PTFE鐵氟龍線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL1330" title="UL1330 FEP鐵氟龍線" description="UL1330 FEP鐵氟龍線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL1331" title="UL1331 FEP鐵氟龍線" description="UL1331 FEP鐵氟龍線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL1332" title="UL1332 FEP鐵氟龍線" description="UL1332 FEP鐵氟龍線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL1709" title="UL1709 PFA鐵氟龍線" description="UL1709 PFA鐵氟龍線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL1710" title="UL1710 PFA鐵氟龍線" description="UL1710 PFA鐵氟龍線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL1726" title="UL1726 PFA鐵氟龍線" description="UL1726 PFA鐵氟龍線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL1727" title="UL1727 PFA鐵氟龍線" description="UL1727 PFA鐵氟龍線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL1813" title="UL1813 FEP鐵氟龍線" description="UL1813 FEP鐵氟龍線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL1887" title="UL1887 FEP鐵氟龍線" description="UL1887 FEP鐵氟龍線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL1901" title="UL1901 FEP鐵氟龍線" description="UL1901 FEP鐵氟龍線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL2748" title="UL2748 FEP鐵氟龍多芯隔離線" description="UL2748 FEP鐵氟龍多芯隔離線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL2750" title="UL2750 FEP鐵氟龍多芯隔離線" description="UL2750 FEP鐵氟龍多芯隔離線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL2894" title="UL2894 FEP鐵氟龍多芯隔離線" description="UL2894 FEP鐵氟龍多芯隔離線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/UL2895" title="UL2895 FEP鐵氟龍多芯隔離線" description="UL2895 FEP鐵氟龍多芯隔離線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/VDE-8219" title="VDE-8219 FEP鐵氟龍線" description="VDE-8219 FEP鐵氟龍線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/VDE-8220" title="VDE-8220 FEP鐵氟龍線" description="VDE-8220 FEP鐵氟龍線"></siteMapNode>
-				<siteMapNode url="/zh/product/teflon-wire/VDE-REG-NR-8295" title="VDE-REG-NR-8295 雙層絕緣FEP鐵氟龍線" description="VDE-REG-NR-8295 雙層絕緣FEP鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul10109" title="UL10109 ETFE鐵氟龍線" description="UL10109 ETFE鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul10344" title="UL10344 PTFE鐵氟龍線" description="UL10344 PTFE鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul10362" title="UL10362 PFA鐵氟龍線" description="UL10362 PFA鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul10393" title="UL10393 PTFE鐵氟龍線" description="UL10393 PTFE鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul11331" title="UL11331 FEP鐵氟龍線" description="UL11331 FEP鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul11817" title="UL11817 FEP鐵氟龍線" description="UL11817 FEP鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul1199" title="UL1199 PTFE鐵氟龍線" description="UL1199 PTFE鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul1330" title="UL1330 FEP鐵氟龍線" description="UL1330 FEP鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul1331" title="UL1331 FEP鐵氟龍線" description="UL1331 FEP鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul1332" title="UL1332 FEP鐵氟龍線" description="UL1332 FEP鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul1709" title="UL1709 PFA鐵氟龍線" description="UL1709 PFA鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul1710" title="UL1710 PFA鐵氟龍線" description="UL1710 PFA鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul1726" title="UL1726 PFA鐵氟龍線" description="UL1726 PFA鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul1727" title="UL1727 PFA鐵氟龍線" description="UL1727 PFA鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul1813" title="UL1813 FEP鐵氟龍線" description="UL1813 FEP鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul1887" title="UL1887 FEP鐵氟龍線" description="UL1887 FEP鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul1901" title="UL1901 FEP鐵氟龍線" description="UL1901 FEP鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul2748" title="UL2748 FEP鐵氟龍多芯隔離線" description="UL2748 FEP鐵氟龍多芯隔離線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul2750" title="UL2750 FEP鐵氟龍多芯隔離線" description="UL2750 FEP鐵氟龍多芯隔離線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul2894" title="UL2894 FEP鐵氟龍多芯隔離線" description="UL2894 FEP鐵氟龍多芯隔離線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/ul2895" title="UL2895 FEP鐵氟龍多芯隔離線" description="UL2895 FEP鐵氟龍多芯隔離線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/vde-8219" title="VDE-8219 FEP鐵氟龍線" description="VDE-8219 FEP鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/vde-8220" title="VDE-8220 FEP鐵氟龍線" description="VDE-8220 FEP鐵氟龍線"></siteMapNode>
+				<siteMapNode url="/zh/product/teflon-wire/vde-reg-nr-8295" title="VDE-REG-NR-8295 雙層絕緣FEP鐵氟龍線" description="VDE-REG-NR-8295 雙層絕緣FEP鐵氟龍線"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/zh/product/xlpe-wire" title="照射線系列" description="照射線系列">
-				<siteMapNode url="/zh/product/xlpe-wire/UL10368" title="UL10368 交連照射線" description="UL10368 交連照射線"></siteMapNode>
-				<siteMapNode url="/zh/product/xlpe-wire/UL1430" title="UL1430 交連照射線" description="UL1430 交連照射線"></siteMapNode>
-				<siteMapNode url="/zh/product/xlpe-wire/UL3173" title="UL3173 交連照射線" description="UL3173 交連照射線"></siteMapNode>
-				<siteMapNode url="/zh/product/xlpe-wire/UL3265" title="UL3265 交連照射線" description="UL3265 交連照射線"></siteMapNode>
-				<siteMapNode url="/zh/product/xlpe-wire/UL3266" title="UL3266 交連照射線" description="UL3266 交連照射線"></siteMapNode>
-				<siteMapNode url="/zh/product/xlpe-wire/UL3271" title="UL3271 交連照射線" description="UL3271 交連照射線"></siteMapNode>
-				<siteMapNode url="/zh/product/xlpe-wire/UL3272" title="UL3272 交連照射線" description="UL3272 交連照射線"></siteMapNode>
-				<siteMapNode url="/zh/product/xlpe-wire/UL3290" title="UL3290 交連照射線" description="UL3290 交連照射線"></siteMapNode>
-				<siteMapNode url="/zh/product/xlpe-wire/UL3302" title="UL3302 交連照射線" description="UL3302 交連照射線"></siteMapNode>
-				<siteMapNode url="/zh/product/xlpe-wire/UL3320" title="UL3320 交連照射線" description="UL3320 交連照射線"></siteMapNode>
-				<siteMapNode url="/zh/product/xlpe-wire/UL3321" title="UL3321 交連照射線" description="UL3321 交連照射線"></siteMapNode>
-				<siteMapNode url="/zh/product/xlpe-wire/UL3385" title="UL3385 交連照射線" description="UL3385 交連照射線"></siteMapNode>
-				<siteMapNode url="/zh/product/xlpe-wire/UL3386" title="UL3386 交連照射線" description="UL3386 交連照射線"></siteMapNode>
-				<siteMapNode url="/zh/product/xlpe-wire/UL3613" title="UL3613 交連照射線" description="UL3613 交連照射線"></siteMapNode>
-				<siteMapNode url="/zh/product/xlpe-wire/UL3688" title="UL3688 雙層交連照射線" description="UL3688 雙層交連照射線"></siteMapNode>
+				<siteMapNode url="/zh/product/xlpe-wire/ul10368" title="UL10368 交連照射線" description="UL10368 交連照射線"></siteMapNode>
+				<siteMapNode url="/zh/product/xlpe-wire/ul1430" title="UL1430 交連照射線" description="UL1430 交連照射線"></siteMapNode>
+				<siteMapNode url="/zh/product/xlpe-wire/ul3173" title="UL3173 交連照射線" description="UL3173 交連照射線"></siteMapNode>
+				<siteMapNode url="/zh/product/xlpe-wire/ul3265" title="UL3265 交連照射線" description="UL3265 交連照射線"></siteMapNode>
+				<siteMapNode url="/zh/product/xlpe-wire/ul3266" title="UL3266 交連照射線" description="UL3266 交連照射線"></siteMapNode>
+				<siteMapNode url="/zh/product/xlpe-wire/ul3271" title="UL3271 交連照射線" description="UL3271 交連照射線"></siteMapNode>
+				<siteMapNode url="/zh/product/xlpe-wire/ul3272" title="UL3272 交連照射線" description="UL3272 交連照射線"></siteMapNode>
+				<siteMapNode url="/zh/product/xlpe-wire/ul3290" title="UL3290 交連照射線" description="UL3290 交連照射線"></siteMapNode>
+				<siteMapNode url="/zh/product/xlpe-wire/ul3302" title="UL3302 交連照射線" description="UL3302 交連照射線"></siteMapNode>
+				<siteMapNode url="/zh/product/xlpe-wire/ul3320" title="UL3320 交連照射線" description="UL3320 交連照射線"></siteMapNode>
+				<siteMapNode url="/zh/product/xlpe-wire/ul3321" title="UL3321 交連照射線" description="UL3321 交連照射線"></siteMapNode>
+				<siteMapNode url="/zh/product/xlpe-wire/ul3385" title="UL3385 交連照射線" description="UL3385 交連照射線"></siteMapNode>
+				<siteMapNode url="/zh/product/xlpe-wire/ul3386" title="UL3386 交連照射線" description="UL3386 交連照射線"></siteMapNode>
+				<siteMapNode url="/zh/product/xlpe-wire/ul3613" title="UL3613 交連照射線" description="UL3613 交連照射線"></siteMapNode>
+				<siteMapNode url="/zh/product/xlpe-wire/ul3688" title="UL3688 雙層交連照射線" description="UL3688 雙層交連照射線"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/zh/product/tube" title="套管系列" description="套管系列">
-				<siteMapNode url="/zh/product/tube/FEP-TUBE" title="FEP套管" description="FEP套管"></siteMapNode>
-				<siteMapNode url="/zh/product/tube/PFA-TUBE" title="PFA套管" description="PFA套管"></siteMapNode>
-				<siteMapNode url="/zh/product/tube/PTFE-TUBE" title="PTFE套管" description="PTFE套管"></siteMapNode>
-				<siteMapNode url="/zh/product/tube/SILICONE-TUBE" title="矽膠套管" description="矽膠套管"></siteMapNode>
-				<siteMapNode url="/zh/product/tube/ULFRS" title="UL FRS 內纖外膠套管" description="UL FRS 內纖外膠套管"></siteMapNode>
-				<siteMapNode url="/zh/product/tube/ULHST" title="UL HST 內膠外纖套管" description="UL HST 內膠外纖套管"></siteMapNode>
-				<siteMapNode url="/zh/product/tube/ULSSG" title="UL SSG 玻纖套管" description="UL SSG 玻纖套管"></siteMapNode>
+				<siteMapNode url="/zh/product/tube/fep-tube" title="FEP套管" description="FEP套管"></siteMapNode>
+				<siteMapNode url="/zh/product/tube/pfa-tube" title="PFA套管" description="PFA套管"></siteMapNode>
+				<siteMapNode url="/zh/product/tube/ptfe-tube" title="PTFE套管" description="PTFE套管"></siteMapNode>
+				<siteMapNode url="/zh/product/tube/silicone-tube" title="矽膠套管" description="矽膠套管"></siteMapNode>
+				<siteMapNode url="/zh/product/tube/ulfrs" title="UL FRS 內纖外膠套管" description="UL FRS 內纖外膠套管"></siteMapNode>
+				<siteMapNode url="/zh/product/tube/ulhst" title="UL HST 內膠外纖套管" description="UL HST 內膠外纖套管"></siteMapNode>
+				<siteMapNode url="/zh/product/tube/ulssg" title="UL SSG 玻纖套管" description="UL SSG 玻纖套管"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/zh/product/thermocouple" title="補償導線系列" description="補償導線系列">
-				<siteMapNode url="/zh/product/thermocouple/E-TYPE" title="E-TYPE 補償導線" description="E-TYPE 補償導線"></siteMapNode>
-				<siteMapNode url="/zh/product/thermocouple/J-TYPE" title="J-TYPE 補償導線" description="J-TYPE 補償導線"></siteMapNode>
-				<siteMapNode url="/zh/product/thermocouple/K-TYPE" title="K-TYPE 補償導線" description="K-TYPE 補償導線"></siteMapNode>
-				<siteMapNode url="/zh/product/thermocouple/R-S-TYPE" title="R/S-TYPE 補償導線" description="R/S-TYPE 補償導線"></siteMapNode>
-				<siteMapNode url="/zh/product/thermocouple/RTD" title="RTD 鉑電阻" description="RTD 鉑電阻"></siteMapNode>
-				<siteMapNode url="/zh/product/thermocouple/T-TYPE" title="T-TYPE 補償導線" description="T-TYPE 補償導線"></siteMapNode>
+				<siteMapNode url="/zh/product/thermocouple/e-type" title="E-TYPE 補償導線" description="E-TYPE 補償導線"></siteMapNode>
+				<siteMapNode url="/zh/product/thermocouple/j-type" title="J-TYPE 補償導線" description="J-TYPE 補償導線"></siteMapNode>
+				<siteMapNode url="/zh/product/thermocouple/k-type" title="K-TYPE 補償導線" description="K-TYPE 補償導線"></siteMapNode>
+				<siteMapNode url="/zh/product/thermocouple/r-s-type" title="R/S-TYPE 補償導線" description="R/S-TYPE 補償導線"></siteMapNode>
+				<siteMapNode url="/zh/product/thermocouple/rtd" title="RTD 鉑電阻" description="RTD 鉑電阻"></siteMapNode>
+				<siteMapNode url="/zh/product/thermocouple/t-type" title="T-TYPE 補償導線" description="T-TYPE 補償導線"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/zh/product/heating-wire" title="發熱線系列" description="發熱線系列">
-				<siteMapNode url="/zh/product/heating-wire/MEDICAL-RESPIRATION-PIPE-HEATING-WIRE" title="醫療用呼吸加熱管發熱線" description="醫療用呼吸加熱管發熱線"></siteMapNode>
-				<siteMapNode url="/zh/product/heating-wire/PHC" title="並聯式電熱帶" description="並聯式電熱帶"></siteMapNode>
-				<siteMapNode url="/zh/product/heating-wire/PP-HEATING-WIRE" title="PP發熱線" description="PP發熱線"></siteMapNode>
-				<siteMapNode url="/zh/product/heating-wire/UL3323" title="UL3323 發熱線" description="UL3323 發熱線"></siteMapNode>
-				<siteMapNode url="/zh/product/heating-wire/UL3350" title="UL3350 發熱線" description="UL3350 發熱線"></siteMapNode>
-				<siteMapNode url="/zh/product/heating-wire/UL3589" title="UL3589 發熱線" description="UL3589 發熱線"></siteMapNode>
-				<siteMapNode url="/zh/product/heating-wire/UL3590" title="UL3590 發熱線" description="UL3590 發熱線"></siteMapNode>
+				<siteMapNode url="/zh/product/heating-wire/medical-respiration-pipe-heating-wire" title="醫療用呼吸加熱管發熱線" description="醫療用呼吸加熱管發熱線"></siteMapNode>
+				<siteMapNode url="/zh/product/heating-wire/phc" title="並聯式電熱帶" description="並聯式電熱帶"></siteMapNode>
+				<siteMapNode url="/zh/product/heating-wire/pp-heating-wire" title="PP發熱線" description="PP發熱線"></siteMapNode>
+				<siteMapNode url="/zh/product/heating-wire/ul3323" title="UL3323 發熱線" description="UL3323 發熱線"></siteMapNode>
+				<siteMapNode url="/zh/product/heating-wire/ul3350" title="UL3350 發熱線" description="UL3350 發熱線"></siteMapNode>
+				<siteMapNode url="/zh/product/heating-wire/ul3589" title="UL3589 發熱線" description="UL3589 發熱線"></siteMapNode>
+				<siteMapNode url="/zh/product/heating-wire/ul3590" title="UL3590 發熱線" description="UL3590 發熱線"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/zh/product/automobile-wire" title="汽車花線系列" description="汽車花線系列">
-				<siteMapNode url="/zh/product/automobile-wire/ISO-FL2X-A" title="歐規厚肉XLPE照射汽車花線" description="歐規厚肉XLPE照射汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/ISO-FL2X-B" title="歐規厚肉XLPE照射汽車花線" description="歐規厚肉XLPE照射汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/ISO-FLR13Y-A" title="歐規薄肉耐熱汽車花線" description="歐規薄肉耐熱汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/ISO-FLR2X-A" title="歐規薄肉XLPE照射汽車花線" description="歐規薄肉XLPE照射汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/ISO-FLR2X-B" title="歐規薄肉XLPE照射汽車花線" description="歐規薄肉XLPE照射汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/ISO-FLRY-A" title="歐規薄肉汽車花線" description="歐規薄肉汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/ISO-FLRY-B" title="歐規薄肉汽車花線" description="歐規薄肉汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/ISO-FLRYNX" title="歐規薄肉多芯絞線" description="歐規薄肉多芯絞線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/ISO-FLRYW-A" title="歐規薄肉耐熱汽車花線" description="歐規薄肉耐熱汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/ISO-FLRYW-B" title="歐規薄肉耐熱汽車花線" description="歐規薄肉耐熱汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/ISO-FLRYY" title="歐規薄肉多芯雙層絕緣汽車花線" description="歐規薄肉多芯雙層絕緣汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/ISO-FLY" title="歐規厚肉汽車花線" description="歐規厚肉汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/ISO-FLYW" title="歐規厚肉耐熱汽車花線" description="歐規厚肉耐熱汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/ISO-FLYY-MULTI" title="歐規厚肉多芯雙層絕緣汽車花線" description="歐規厚肉多芯雙層絕緣汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/ISO-FLYY-SINGLE" title="歐規厚肉單芯雙層絕緣汽車花線" description="歐規厚肉單芯雙層絕緣汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/JASO-AESSX" title="日規極薄耐熱XLPE汽車花線" description="日規極薄耐熱XLPE汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/JASO-AEX" title="日規耐熱XLPE汽車花線" description="日規耐熱XLPE汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/JASO-ASSSH" title="日規橫捲隔離線" description="日規橫捲隔離線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/JASO-AV" title="日規一般汽車花線" description="日規一般汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/JASO-AVS" title="日規薄肉汽車花線" description="日規薄肉汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/JASO-AVSS" title="日規極薄肉汽車花線" description="日規極薄肉汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/JASO-AVSSH" title="日規耐熱超薄肉汽車花線" description="日規耐熱超薄肉汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/JASO-AVX" title="日規耐熱XLPVC汽車花線" description="日規耐熱XLPVC汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/JASO-CAVS" title="日規壓縮導體薄肉汽車花線" description="日規壓縮導體薄肉汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/JASO-CAVUS" title="日規壓縮導體超薄肉汽車花線" description="日規壓縮導體超薄肉汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/JASO-CHFUS" title="日規壓縮導體超薄肉無鹵汽車花線" description="日規壓縮導體超薄肉無鹵汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/JASO-CIVUS" title="壓縮導體超薄肉汽車花線" description="壓縮導體超薄肉汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/JASO-HFSS" title="日規極薄肉無鹵汽車花線" description="日規極薄肉無鹵汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/JASO-IVSSH" title="日規耐熱極薄肉汽車花線" description="日規耐熱極薄肉汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/JASO-LE-SH" title="日規金屬箔隔離線" description="日規金屬箔隔離線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/JASO-LE-SS" title="日規金屬箔隔離線" description="日規金屬箔隔離線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/JASO-LE-SX" title="日規金屬箔隔離線" description="日規金屬箔隔離線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/JASO-SH-SH" title="日規橫捲隔離線" description="日規橫捲隔離線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/JASO-SH-SX" title="日規橫捲隔離線" description="日規橫捲隔離線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/SAE-GPT" title="美規一般汽車花線" description="美規一般汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/SAE-GXL" title="美規一般XLPE汽車花線" description="美規一般XLPE汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/SAE-HDT" title="美規厚肉汽車花線" description="美規厚肉汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/SAE-SXL" title="美規厚肉XLPE照射汽車花線" description="美規厚肉XLPE照射汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/SAE-TWP" title="美規薄肉汽車花線" description="美規薄肉汽車花線"></siteMapNode>
-				<siteMapNode url="/zh/product/automobile-wire/SAE-TXL" title="美規薄肉XLPE照射汽車花線" description="美規薄肉XLPE照射汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/iso-fl2x-a" title="歐規厚肉XLPE照射汽車花線" description="歐規厚肉XLPE照射汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/iso-fl2x-b" title="歐規厚肉XLPE照射汽車花線" description="歐規厚肉XLPE照射汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/iso-flr13y-a" title="歐規薄肉耐熱汽車花線" description="歐規薄肉耐熱汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/iso-flr2x-a" title="歐規薄肉XLPE照射汽車花線" description="歐規薄肉XLPE照射汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/iso-flr2x-b" title="歐規薄肉XLPE照射汽車花線" description="歐規薄肉XLPE照射汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/iso-flry-a" title="歐規薄肉汽車花線" description="歐規薄肉汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/iso-flry-b" title="歐規薄肉汽車花線" description="歐規薄肉汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/iso-flrynx" title="歐規薄肉多芯絞線" description="歐規薄肉多芯絞線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/iso-flryw-a" title="歐規薄肉耐熱汽車花線" description="歐規薄肉耐熱汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/iso-flryw-b" title="歐規薄肉耐熱汽車花線" description="歐規薄肉耐熱汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/iso-flryy" title="歐規薄肉多芯雙層絕緣汽車花線" description="歐規薄肉多芯雙層絕緣汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/iso-fly" title="歐規厚肉汽車花線" description="歐規厚肉汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/iso-flyw" title="歐規厚肉耐熱汽車花線" description="歐規厚肉耐熱汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/iso-flyy-multi" title="歐規厚肉多芯雙層絕緣汽車花線" description="歐規厚肉多芯雙層絕緣汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/iso-flyy-single" title="歐規厚肉單芯雙層絕緣汽車花線" description="歐規厚肉單芯雙層絕緣汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/jaso-aessx" title="日規極薄耐熱XLPE汽車花線" description="日規極薄耐熱XLPE汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/jaso-aex" title="日規耐熱XLPE汽車花線" description="日規耐熱XLPE汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/jaso-asssh" title="日規橫捲隔離線" description="日規橫捲隔離線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/jaso-av" title="日規一般汽車花線" description="日規一般汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/jaso-avs" title="日規薄肉汽車花線" description="日規薄肉汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/jaso-avss" title="日規極薄肉汽車花線" description="日規極薄肉汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/jaso-avssh" title="日規耐熱超薄肉汽車花線" description="日規耐熱超薄肉汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/jaso-avx" title="日規耐熱XLPVC汽車花線" description="日規耐熱XLPVC汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/jaso-cavs" title="日規壓縮導體薄肉汽車花線" description="日規壓縮導體薄肉汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/jaso-cavus" title="日規壓縮導體超薄肉汽車花線" description="日規壓縮導體超薄肉汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/jaso-chfus" title="日規壓縮導體超薄肉無鹵汽車花線" description="日規壓縮導體超薄肉無鹵汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/jaso-civus" title="壓縮導體超薄肉汽車花線" description="壓縮導體超薄肉汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/jaso-hfss" title="日規極薄肉無鹵汽車花線" description="日規極薄肉無鹵汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/jaso-ivssh" title="日規耐熱極薄肉汽車花線" description="日規耐熱極薄肉汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/jaso-le-sh" title="日規金屬箔隔離線" description="日規金屬箔隔離線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/jaso-le-ss" title="日規金屬箔隔離線" description="日規金屬箔隔離線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/jaso-le-sx" title="日規金屬箔隔離線" description="日規金屬箔隔離線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/jaso-sh-sh" title="日規橫捲隔離線" description="日規橫捲隔離線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/jaso-sh-sx" title="日規橫捲隔離線" description="日規橫捲隔離線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/sae-gpt" title="美規一般汽車花線" description="美規一般汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/sae-gxl" title="美規一般XLPE汽車花線" description="美規一般XLPE汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/sae-hdt" title="美規厚肉汽車花線" description="美規厚肉汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/sae-sxl" title="美規厚肉XLPE照射汽車花線" description="美規厚肉XLPE照射汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/sae-twp" title="美規薄肉汽車花線" description="美規薄肉汽車花線"></siteMapNode>
+				<siteMapNode url="/zh/product/automobile-wire/sae-txl" title="美規薄肉XLPE照射汽車花線" description="美規薄肉XLPE照射汽車花線"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/zh/product/military-grade-wire" title="軍規線系列" description="軍規線系列">
-				<siteMapNode url="/zh/product/military-grade-wire/M16878" title="M16878 軍規電纜" description="M16878 軍規電纜"></siteMapNode>
-				<siteMapNode url="/zh/product/military-grade-wire/M22759" title="M22759 軍規電纜" description="M22759 軍規電纜"></siteMapNode>
-				<siteMapNode url="/zh/product/military-grade-wire/M24643" title="M24643 軍規船用電纜" description="M24643 軍規船用電纜"></siteMapNode>
-				<siteMapNode url="/zh/product/military-grade-wire/M27500" title="M27500 軍規電纜" description="M27500 軍規電纜"></siteMapNode>
-				<siteMapNode url="/zh/product/military-grade-wire/M81822" title="M81822 軍規電纜" description="M81822 軍規電纜"></siteMapNode>
+				<siteMapNode url="/zh/product/military-grade-wire/m16878" title="M16878 軍規電纜" description="M16878 軍規電纜"></siteMapNode>
+				<siteMapNode url="/zh/product/military-grade-wire/m22759" title="M22759 軍規電纜" description="M22759 軍規電纜"></siteMapNode>
+				<siteMapNode url="/zh/product/military-grade-wire/m24643" title="M24643 軍規船用電纜" description="M24643 軍規船用電纜"></siteMapNode>
+				<siteMapNode url="/zh/product/military-grade-wire/m27500" title="M27500 軍規電纜" description="M27500 軍規電纜"></siteMapNode>
+				<siteMapNode url="/zh/product/military-grade-wire/m81822" title="M81822 軍規電纜" description="M81822 軍規電纜"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/zh/product/composite-cable" title="複合線系列" description="複合線系列">
-				<siteMapNode url="/zh/product/composite-cable/RG178-MINI" title="RG178-MINI 高頻同軸線" description="RG178-MINI 高頻同軸線"></siteMapNode>
-				<siteMapNode url="/zh/product/composite-cable/RG178BU" title="RG178BU 高頻同軸線" description="RG178BU 高頻同軸線"></siteMapNode>
-				<siteMapNode url="/zh/product/composite-cable/RG179" title="RG179 高頻同軸線" description="RG179 高頻同軸線"></siteMapNode>
-				<siteMapNode url="/zh/product/composite-cable/RG316" title="RG316 高頻同軸線" description="RG316 高頻同軸線"></siteMapNode>
-				<siteMapNode url="/zh/product/composite-cable/TEFLON-SILICONE-MEDICAL-WIRE" title="鐵氟龍矽膠醫療線" description="鐵氟龍矽膠醫療線"></siteMapNode>
-				<siteMapNode url="/zh/product/composite-cable/UL3270" title="UL3270 銅網編織矽膠線" description="UL3270 銅網編織矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/composite-cable/rg178-mini" title="RG178-MINI 高頻同軸線" description="RG178-MINI 高頻同軸線"></siteMapNode>
+				<siteMapNode url="/zh/product/composite-cable/rg178bu" title="RG178BU 高頻同軸線" description="RG178BU 高頻同軸線"></siteMapNode>
+				<siteMapNode url="/zh/product/composite-cable/rg179" title="RG179 高頻同軸線" description="RG179 高頻同軸線"></siteMapNode>
+				<siteMapNode url="/zh/product/composite-cable/rg316" title="RG316 高頻同軸線" description="RG316 高頻同軸線"></siteMapNode>
+				<siteMapNode url="/zh/product/composite-cable/teflon-silicone-medical-wire" title="鐵氟龍矽膠醫療線" description="鐵氟龍矽膠醫療線"></siteMapNode>
+				<siteMapNode url="/zh/product/composite-cable/ul3270" title="UL3270 銅網編織矽膠線" description="UL3270 銅網編織矽膠線"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/zh/product/anti-refrigerant-wire" title="冷媒線" description="冷媒線">
-				<siteMapNode url="/ezhn/product/anti-refrigerant-wire/UL5048" title="UL5048 冷媒線" description="UL5048 冷媒線"></siteMapNode>
+				<siteMapNode url="/ezhn/product/anti-refrigerant-wire/ul5048" title="UL5048 冷媒線" description="UL5048 冷媒線"></siteMapNode>
 			</siteMapNode>
 		</siteMapNode>
 
 		<siteMapNode url="/zh/application" title="應用產業" description="應用產業">
 			<siteMapNode url="/zh/application/automobile" title="汽車產業" description="汽車產業">
 				<siteMapNode url="/zh/application/automobile/motor-temperature-sensor-cable" title="IATF-16949 馬達溫度感知線" description="IATF-16949 馬達溫度感知線"></siteMapNode>
-				<siteMapNode url="/zh/application/automobile/motor-power-cable" title="電動機車馬達動力線" description="電動機車馬達動力線"></siteMapNode>
+				<siteMapNode url="/zh/application/automobile/motor-power-cable" title="電動機車馬達動力線" description="電動機車馬達動力線"></siteMapNode>				
+			</siteMapNode>
+			<siteMapNode url="/zh/application/misc-app" title="其他應用" description="其他應用">
+				<siteMapNode url="/zh/application/misc-app/fighter-jet-temperature-sensor-cable" title="戰鬥機溫控線" description="戰鬥機溫控線"></siteMapNode>
 			</siteMapNode>
 		</siteMapNode>
 
@@ -242,193 +245,193 @@
 
 		<siteMapNode url="/en/product" title="Product" description="Product">
 			<siteMapNode url="/en/product/silicone-fiberglass-wire" title="Silicone Fiberglass Wire" description="Silicone Fiberglass Wire">
-				<siteMapNode url="/en/product/silicone-fiberglass-wire/RS-GE" title="RS-GE Silicone Fiberglass Wire" description="RS-GE Silicone Fiberglass Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-fiberglass-wire/TM3320" title="TM3320 Silicone Fiberglass Wire" description="TM3320 Silicone Fiberglass Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-fiberglass-wire/UL3071" title="UL3071 Silicone Fiberglass Wire" description="UL3071 Silicone Fiberglass Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-fiberglass-wire/UL3074" title="UL3074 Silicone Fiberglass Wire" description="UL3074 Silicone Fiberglass Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-fiberglass-wire/UL3075" title="UL3075 Silicone Fiberglass Wire" description="UL3075 Silicone Fiberglass Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-fiberglass-wire/UL3122" title="UL3122 Silicone Fiberglass Wire" description="UL3122 Silicone Fiberglass Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-fiberglass-wire/UL3172" title="UL3172 Silicone Fiberglass Wire" description="UL3172 Silicone Fiberglass Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-fiberglass-wire/UL3232" title="UL3232 Nylon-Silicone Wire" description="UL3232 Nylon-Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-fiberglass-wire/UL3304" title="UL3304 Silicone Fiberglass Wire" description="UL3304 Silicone Fiberglass Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-fiberglass-wire/UL3512" title="UL3512 Silicone Fiberglass Wire" description="UL3512 Silicone Fiberglass Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-fiberglass-wire/UL3513" title="UL3513 Silicone Fiberglass Wire" description="UL3513 Silicone Fiberglass Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-fiberglass-wire/UL3645" title="UL3645 Silicone Fiberglass Wire" description="UL3645 Silicone Fiberglass Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-fiberglass-wire/VDE-H05SJ-K" title="VDE-H05SJ-K Silicone Fiberglass Wire" description="VDE-H05SJ-K Silicone Fiberglass Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-fiberglass-wire/rs-ge" title="RS-GE Silicone Fiberglass Wire" description="RS-GE Silicone Fiberglass Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-fiberglass-wire/tm3320" title="TM3320 Silicone Fiberglass Wire" description="TM3320 Silicone Fiberglass Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-fiberglass-wire/ul3071" title="UL3071 Silicone Fiberglass Wire" description="UL3071 Silicone Fiberglass Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-fiberglass-wire/ul3074" title="UL3074 Silicone Fiberglass Wire" description="UL3074 Silicone Fiberglass Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-fiberglass-wire/ul3075" title="UL3075 Silicone Fiberglass Wire" description="UL3075 Silicone Fiberglass Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-fiberglass-wire/ul3122" title="UL3122 Silicone Fiberglass Wire" description="UL3122 Silicone Fiberglass Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-fiberglass-wire/ul3172" title="UL3172 Silicone Fiberglass Wire" description="UL3172 Silicone Fiberglass Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-fiberglass-wire/ul3232" title="UL3232 Nylon-Silicone Wire" description="UL3232 Nylon-Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-fiberglass-wire/ul3304" title="UL3304 Silicone Fiberglass Wire" description="UL3304 Silicone Fiberglass Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-fiberglass-wire/ul3512" title="UL3512 Silicone Fiberglass Wire" description="UL3512 Silicone Fiberglass Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-fiberglass-wire/ul3513" title="UL3513 Silicone Fiberglass Wire" description="UL3513 Silicone Fiberglass Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-fiberglass-wire/ul3645" title="UL3645 Silicone Fiberglass Wire" description="UL3645 Silicone Fiberglass Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-fiberglass-wire/vde-h05sj-k" title="VDE-H05SJ-K Silicone Fiberglass Wire" description="VDE-H05SJ-K Silicone Fiberglass Wire"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/en/product/high-temperature-wire" title="High Temperature Wire" description="High Temperature Wire">
-				<siteMapNode url="/en/product/high-temperature-wire/CF-750" title="CF-750 750C High Temperature Wire" description="CF-750 750C High Temperature Wire"></siteMapNode>
-				<siteMapNode url="/en/product/high-temperature-wire/MG-5107" title="MG-5107 450C High Temperature Wire" description="MG-5107 450C High Temperature Wire"></siteMapNode>
-				<siteMapNode url="/en/product/high-temperature-wire/TGGT-400" title="TGGT-400 400C High Temperature Wire" description="TGGT-400 400C High Temperature Wire"></siteMapNode>
-				<siteMapNode url="/en/product/high-temperature-wire/TGGT-5256" title="TGGT-5256 250C High Temperature Wire" description="TGGT-5256 250C High Temperature Wire"></siteMapNode>
+				<siteMapNode url="/en/product/high-temperature-wire/cf-750" title="CF-750 750C High Temperature Wire" description="CF-750 750C High Temperature Wire"></siteMapNode>
+				<siteMapNode url="/en/product/high-temperature-wire/mg-5107" title="MG-5107 450C High Temperature Wire" description="MG-5107 450C High Temperature Wire"></siteMapNode>
+				<siteMapNode url="/en/product/high-temperature-wire/tggt-400" title="TGGT-400 400C High Temperature Wire" description="TGGT-400 400C High Temperature Wire"></siteMapNode>
+				<siteMapNode url="/en/product/high-temperature-wire/tggt-5256" title="TGGT-5256 250C High Temperature Wire" description="TGGT-5256 250C High Temperature Wire"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/en/product/silicone-wire" title="Silicone Wire" description="Silicone Wire">
-				<siteMapNode url="/en/product/silicone-wire/PSE3323" title="PSE3323 Silicone Wire" description="PSE3323 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3123" title="UL3123 Silicone Wire" description="UL3123 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3132" title="UL3132 Silicone Wire" description="UL3132 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3133" title="UL3133 Silicone Wire" description="UL3133 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3134" title="UL3134 Silicone Wire" description="UL3134 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3135" title="UL3135 Silicone Wire" description="UL3135 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3136" title="UL3136 Silicone Wire" description="UL3136 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3138" title="UL3138 Silicone Wire" description="UL3138 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3139" title="UL3139 Silicone Wire" description="UL3139 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3213" title="UL3213 Silicone Wire" description="UL3213 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3239" title="UL3239 High Voltage Silicone Wire" description="UL3239 High Voltage Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3529" title="UL3529 Silicone Wire" description="UL3529 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3530" title="UL3530 Silicone Wire" description="UL3530 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3572" title="UL3572 Silicone Wire" description="UL3572 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3580" title="UL3580 Silicone Wire" description="UL3580 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3641" title="UL3641 Silicone Wire" description="UL3641 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3642" title="UL3642 Silicone Wire" description="UL3642 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3643" title="UL3643 Silicone Wire" description="UL3643 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3644" title="UL3644 Silicone Wire" description="UL3644 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3662" title="UL3662 Silicone Wire" description="UL3662 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3663" title="UL3663 Silicone Wire" description="UL3663 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3664" title="UL3664 Silicone Wire" description="UL3664 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3754" title="UL3754 Silicone Wire" description="UL3754 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3755" title="UL3755 Silicone Wire" description="UL3755 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL3976" title="UL3976 Silicone Wire" description="UL3976 Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL4330" title="UL4330 Multi-Core Silicone Wire" description="UL4330 Multi-Core Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/UL4476" title="UL4476 High Voltage Multi-Core Silicone Wire" description="UL4476 High Voltage Multi-Core Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/VDE-FG4G4" title="VDE-FG4G4 Dual-Insulation Silicone Wire" description="VDE-FG4G4 Dual-Insulation Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/VDE-H05S-K" title="VDE-H05S-K Silicone Wire" description="VDE-H05S-K Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/VDE-H05SS-F" title="VDE-H05SS-F Multi-Core Silicone Wire" description="VDE-H05SS-F Multi-Core Silicone Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-wire/VDE-REG-NR-103874" title="VDE-REG-NR-103874 Side-By-Side Silicone Wire" description="VDE-REG-NR-103874 Side-By-Side Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/pse3323" title="PSE3323 Silicone Wire" description="PSE3323 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3123" title="UL3123 Silicone Wire" description="UL3123 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3132" title="UL3132 Silicone Wire" description="UL3132 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3133" title="UL3133 Silicone Wire" description="UL3133 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3134" title="UL3134 Silicone Wire" description="UL3134 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3135" title="UL3135 Silicone Wire" description="UL3135 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3136" title="UL3136 Silicone Wire" description="UL3136 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3138" title="UL3138 Silicone Wire" description="UL3138 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3139" title="UL3139 Silicone Wire" description="UL3139 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3213" title="UL3213 Silicone Wire" description="UL3213 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3239" title="UL3239 High Voltage Silicone Wire" description="UL3239 High Voltage Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3529" title="UL3529 Silicone Wire" description="UL3529 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3530" title="UL3530 Silicone Wire" description="UL3530 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3572" title="UL3572 Silicone Wire" description="UL3572 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3580" title="UL3580 Silicone Wire" description="UL3580 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3641" title="UL3641 Silicone Wire" description="UL3641 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3642" title="UL3642 Silicone Wire" description="UL3642 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3643" title="UL3643 Silicone Wire" description="UL3643 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3644" title="UL3644 Silicone Wire" description="UL3644 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3662" title="UL3662 Silicone Wire" description="UL3662 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3663" title="UL3663 Silicone Wire" description="UL3663 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3664" title="UL3664 Silicone Wire" description="UL3664 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3754" title="UL3754 Silicone Wire" description="UL3754 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3755" title="UL3755 Silicone Wire" description="UL3755 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul3976" title="UL3976 Silicone Wire" description="UL3976 Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul4330" title="UL4330 Multi-Core Silicone Wire" description="UL4330 Multi-Core Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/ul4476" title="UL4476 High Voltage Multi-Core Silicone Wire" description="UL4476 High Voltage Multi-Core Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/vde-fg4g4" title="VDE-FG4G4 Dual-Insulation Silicone Wire" description="VDE-FG4G4 Dual-Insulation Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/vde-h05s-k" title="VDE-H05S-K Silicone Wire" description="VDE-H05S-K Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/vde-h05ss-f" title="VDE-H05SS-F Multi-Core Silicone Wire" description="VDE-H05SS-F Multi-Core Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/silicone-wire/vde-reg-nr-103874" title="VDE-REG-NR-103874 Side-By-Side Silicone Wire" description="VDE-REG-NR-103874 Side-By-Side Silicone Wire"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/en/product/pvc-wire" title="PVC Wire" description="PVC Wire">
-				<siteMapNode url="/en/product/pvc-wire/UL1007" title="UL1007 PVCWire" description="UL1007 PVCWire"></siteMapNode>
-				<siteMapNode url="/en/product/pvc-wire/UL1015" title="UL1015 PVCWire" description="UL1015 PVCWire"></siteMapNode>
-				<siteMapNode url="/en/product/pvc-wire/UL2464" title="UL2464 PVC Signal Transmission Wire" description="UL2464 PVC Signal Transmission Wire"></siteMapNode>
-				<siteMapNode url="/en/product/pvc-wire/UL2517" title="UL2517 PVC Signal Transmission Wire" description="UL2517 PVC Signal Transmission Wire"></siteMapNode>
+				<siteMapNode url="/en/product/pvc-wire/ul1007" title="UL1007 PVCWire" description="UL1007 PVCWire"></siteMapNode>
+				<siteMapNode url="/en/product/pvc-wire/ul1015" title="UL1015 PVCWire" description="UL1015 PVCWire"></siteMapNode>
+				<siteMapNode url="/en/product/pvc-wire/ul2464" title="UL2464 PVC Signal Transmission Wire" description="UL2464 PVC Signal Transmission Wire"></siteMapNode>
+				<siteMapNode url="/en/product/pvc-wire/ul2517" title="UL2517 PVC Signal Transmission Wire" description="UL2517 PVC Signal Transmission Wire"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/en/product/teflon-wire" title="Teflon Wire" description="Teflon Wire">
-				<siteMapNode url="/en/product/teflon-wire/UL10109" title="UL10109 ETFE Teflon Wire" description="UL10109 ETFE Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL10344" title="UL10344 PTFE Teflon Wire" description="UL10344 PTFE Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL10362" title="UL10362 PFA Teflon Wire" description="UL10362 PFA Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL10393" title="UL10393 PTFE Teflon Wire" description="UL10393 PTFE Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL11331" title="UL11331 FEP Teflon Wire" description="UL11331 FEP Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL11817" title="UL11817 FEP Teflon Wire" description="UL11817 FEP Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL1199" title="UL1199 PTFE Teflon Wire" description="UL1199 PTFE Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL1330" title="UL1330 FEP Teflon Wire" description="UL1330 FEP Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL1331" title="UL1331 FEP Teflon Wire" description="UL1331 FEP Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL1332" title="UL1332 FEP Teflon Wire" description="UL1332 FEP Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL1709" title="UL1709 PFA Teflon Wire" description="UL1709 PFA Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL1710" title="UL1710 PFA Teflon Wire" description="UL1710 PFA Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL1726" title="UL1726 PFA Teflon Wire" description="UL1726 PFA Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL1727" title="UL1727 PFA Teflon Wire" description="UL1727 PFA Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL1813" title="UL1813 FEP Teflon Wire" description="UL1813 FEP Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL1887" title="UL1887 FEP Teflon Wire" description="UL1887 FEP Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL1901" title="UL1901 FEP Teflon Wire" description="UL1901 FEP Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL2748" title="UL2748 Shielded Multi-Core FEP Teflon Wire" description="UL2748 Shielded Multi-Core FEP Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL2750" title="UL2750 Shielded Multi-Core FEP Teflon Wire" description="UL2750 Shielded Multi-Core FEP Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL2894" title="UL2894 Shielded Multi-Core FEP Teflon Wire" description="UL2894 Shielded Multi-Core FEP Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/UL2895" title="UL2895 Shielded Multi-Core FEP Teflon Wire" description="UL2895 Shielded Multi-Core FEP Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/VDE-8219" title="VDE-8219 FEP Teflon Wire" description="VDE-8219 FEP Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/VDE-8220" title="VDE-8220 FEP Teflon Wire" description="VDE-8220 FEP Teflon Wire"></siteMapNode>
-				<siteMapNode url="/en/product/teflon-wire/VDE-REG-NR-8295" title="VDE-REG-NR-8295 Dual-Insulation FEP Teflon Wire" description="VDE-REG-NR-8295 Dual-Insulation FEP Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul10109" title="UL10109 ETFE Teflon Wire" description="UL10109 ETFE Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul10344" title="UL10344 PTFE Teflon Wire" description="UL10344 PTFE Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul10362" title="UL10362 PFA Teflon Wire" description="UL10362 PFA Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul10393" title="UL10393 PTFE Teflon Wire" description="UL10393 PTFE Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul11331" title="UL11331 FEP Teflon Wire" description="UL11331 FEP Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul11817" title="UL11817 FEP Teflon Wire" description="UL11817 FEP Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul1199" title="UL1199 PTFE Teflon Wire" description="UL1199 PTFE Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul1330" title="UL1330 FEP Teflon Wire" description="UL1330 FEP Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul1331" title="UL1331 FEP Teflon Wire" description="UL1331 FEP Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul1332" title="UL1332 FEP Teflon Wire" description="UL1332 FEP Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul1709" title="UL1709 PFA Teflon Wire" description="UL1709 PFA Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul1710" title="UL1710 PFA Teflon Wire" description="UL1710 PFA Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul1726" title="UL1726 PFA Teflon Wire" description="UL1726 PFA Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul1727" title="UL1727 PFA Teflon Wire" description="UL1727 PFA Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul1813" title="UL1813 FEP Teflon Wire" description="UL1813 FEP Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul1887" title="UL1887 FEP Teflon Wire" description="UL1887 FEP Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul1901" title="UL1901 FEP Teflon Wire" description="UL1901 FEP Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul2748" title="UL2748 Shielded Multi-Core FEP Teflon Wire" description="UL2748 Shielded Multi-Core FEP Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul2750" title="UL2750 Shielded Multi-Core FEP Teflon Wire" description="UL2750 Shielded Multi-Core FEP Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul2894" title="UL2894 Shielded Multi-Core FEP Teflon Wire" description="UL2894 Shielded Multi-Core FEP Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/ul2895" title="UL2895 Shielded Multi-Core FEP Teflon Wire" description="UL2895 Shielded Multi-Core FEP Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/vde-8219" title="VDE-8219 FEP Teflon Wire" description="VDE-8219 FEP Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/vde-8220" title="VDE-8220 FEP Teflon Wire" description="VDE-8220 FEP Teflon Wire"></siteMapNode>
+				<siteMapNode url="/en/product/teflon-wire/vde-reg-nr-8295" title="VDE-REG-NR-8295 Dual-Insulation FEP Teflon Wire" description="VDE-REG-NR-8295 Dual-Insulation FEP Teflon Wire"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/en/product/xlpe-wire" title="XLPE Wire" description="XLPE Wire">
-				<siteMapNode url="/en/product/xlpe-wire/UL10368" title="UL10368 XLPE Wire" description="UL10368 XLPE Wire"></siteMapNode>
-				<siteMapNode url="/en/product/xlpe-wire/UL1430" title="UL1430 XLPE Wire" description="UL1430 XLPE Wire"></siteMapNode>
-				<siteMapNode url="/en/product/xlpe-wire/UL3173" title="UL3173 XLPE Wire" description="UL3173 XLPE Wire"></siteMapNode>
-				<siteMapNode url="/en/product/xlpe-wire/UL3265" title="UL3265 XLPE Wire" description="UL3265 XLPE Wire"></siteMapNode>
-				<siteMapNode url="/en/product/xlpe-wire/UL3266" title="UL3266 XLPE Wire" description="UL3266 XLPE Wire"></siteMapNode>
-				<siteMapNode url="/en/product/xlpe-wire/UL3271" title="UL3271 XLPE Wire" description="UL3271 XLPE Wire"></siteMapNode>
-				<siteMapNode url="/en/product/xlpe-wire/UL3272" title="UL3272 XLPE Wire" description="UL3272 XLPE Wire"></siteMapNode>
-				<siteMapNode url="/en/product/xlpe-wire/UL3290" title="UL3290 XLPE Wire" description="UL3290 XLPE Wire"></siteMapNode>
-				<siteMapNode url="/en/product/xlpe-wire/UL3302" title="UL3302 XLPE Wire" description="UL3302 XLPE Wire"></siteMapNode>
-				<siteMapNode url="/en/product/xlpe-wire/UL3320" title="UL3320 XLPE Wire" description="UL3320 XLPE Wire"></siteMapNode>
-				<siteMapNode url="/en/product/xlpe-wire/UL3321" title="UL3321 XLPE Wire" description="UL3321 XLPE Wire"></siteMapNode>
-				<siteMapNode url="/en/product/xlpe-wire/UL3385" title="UL3385 XLPE Wire" description="UL3385 XLPE Wire"></siteMapNode>
-				<siteMapNode url="/en/product/xlpe-wire/UL3386" title="UL3386 XLPE Wire" description="UL3386 XLPE Wire"></siteMapNode>
-				<siteMapNode url="/en/product/xlpe-wire/UL3613" title="UL3613 XLPE Wire" description="UL3613 XLPE Wire"></siteMapNode>
-				<siteMapNode url="/en/product/xlpe-wire/UL3688" title="UL3688 Dual-Insulation XLPE Wire" description="UL3688 Dual-Insulation XLPE Wire"></siteMapNode>
+				<siteMapNode url="/en/product/xlpe-wire/ul10368" title="UL10368 XLPE Wire" description="UL10368 XLPE Wire"></siteMapNode>
+				<siteMapNode url="/en/product/xlpe-wire/ul1430" title="UL1430 XLPE Wire" description="UL1430 XLPE Wire"></siteMapNode>
+				<siteMapNode url="/en/product/xlpe-wire/ul3173" title="UL3173 XLPE Wire" description="UL3173 XLPE Wire"></siteMapNode>
+				<siteMapNode url="/en/product/xlpe-wire/ul3265" title="UL3265 XLPE Wire" description="UL3265 XLPE Wire"></siteMapNode>
+				<siteMapNode url="/en/product/xlpe-wire/ul3266" title="UL3266 XLPE Wire" description="UL3266 XLPE Wire"></siteMapNode>
+				<siteMapNode url="/en/product/xlpe-wire/ul3271" title="UL3271 XLPE Wire" description="UL3271 XLPE Wire"></siteMapNode>
+				<siteMapNode url="/en/product/xlpe-wire/ul3272" title="UL3272 XLPE Wire" description="UL3272 XLPE Wire"></siteMapNode>
+				<siteMapNode url="/en/product/xlpe-wire/ul3290" title="UL3290 XLPE Wire" description="UL3290 XLPE Wire"></siteMapNode>
+				<siteMapNode url="/en/product/xlpe-wire/ul3302" title="UL3302 XLPE Wire" description="UL3302 XLPE Wire"></siteMapNode>
+				<siteMapNode url="/en/product/xlpe-wire/ul3320" title="UL3320 XLPE Wire" description="UL3320 XLPE Wire"></siteMapNode>
+				<siteMapNode url="/en/product/xlpe-wire/ul3321" title="UL3321 XLPE Wire" description="UL3321 XLPE Wire"></siteMapNode>
+				<siteMapNode url="/en/product/xlpe-wire/ul3385" title="UL3385 XLPE Wire" description="UL3385 XLPE Wire"></siteMapNode>
+				<siteMapNode url="/en/product/xlpe-wire/ul3386" title="UL3386 XLPE Wire" description="UL3386 XLPE Wire"></siteMapNode>
+				<siteMapNode url="/en/product/xlpe-wire/ul3613" title="UL3613 XLPE Wire" description="UL3613 XLPE Wire"></siteMapNode>
+				<siteMapNode url="/en/product/xlpe-wire/ul3688" title="UL3688 Dual-Insulation XLPE Wire" description="UL3688 Dual-Insulation XLPE Wire"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/en/product/tube" title="Tube" description="Tube">
-				<siteMapNode url="/en/product/tube/FEP-TUBE" title="FEP Tube" description="FEP Tube"></siteMapNode>
-				<siteMapNode url="/en/product/tube/PFA-TUBE" title="PFA Tube" description="PFA Tube"></siteMapNode>
-				<siteMapNode url="/en/product/tube/PTFE-TUBE" title="PTFE Tube" description="PTFE Tube"></siteMapNode>
-				<siteMapNode url="/en/product/tube/SILICONE-TUBE" title="Silicone Tube" description="Silicone Tube"></siteMapNode>
-				<siteMapNode url="/en/product/tube/ULFRS" title="UL FRS Fiberglass Silicone Tube" description="UL FRS Fiberglass Silicone Tube"></siteMapNode>
-				<siteMapNode url="/en/product/tube/ULHST" title="UL HST Silicone Fiberglass Tube" description="UL HST Silicone Fiberglass Tube"></siteMapNode>
-				<siteMapNode url="/en/product/tube/ULSSG" title="UL SSG Fiberglass Tube" description="UL SSG Fiberglass Tube"></siteMapNode>
+				<siteMapNode url="/en/product/tube/fep-tube" title="FEP Tube" description="FEP Tube"></siteMapNode>
+				<siteMapNode url="/en/product/tube/pfa-tube" title="PFA Tube" description="PFA Tube"></siteMapNode>
+				<siteMapNode url="/en/product/tube/ptfe-tube" title="PTFE Tube" description="PTFE Tube"></siteMapNode>
+				<siteMapNode url="/en/product/tube/silicone-tube" title="Silicone Tube" description="Silicone Tube"></siteMapNode>
+				<siteMapNode url="/en/product/tube/ulfrs" title="UL FRS Fiberglass Silicone Tube" description="UL FRS Fiberglass Silicone Tube"></siteMapNode>
+				<siteMapNode url="/en/product/tube/ulhst" title="UL HST Silicone Fiberglass Tube" description="UL HST Silicone Fiberglass Tube"></siteMapNode>
+				<siteMapNode url="/en/product/tube/ulssg" title="UL SSG Fiberglass Tube" description="UL SSG Fiberglass Tube"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/en/product/thermocouple" title="Thermocouple" description="Thermocouple">
-				<siteMapNode url="/en/product/thermocouple/E-TYPE" title="E-TYPE Thermocouple" description="E-TYPE Thermocouple"></siteMapNode>
-				<siteMapNode url="/en/product/thermocouple/J-TYPE" title="J-TYPE Thermocouple" description="J-TYPE Thermocouple"></siteMapNode>
-				<siteMapNode url="/en/product/thermocouple/K-TYPE" title="K-TYPE Thermocouple" description="K-TYPE Thermocouple"></siteMapNode>
-				<siteMapNode url="/en/product/thermocouple/R-S-TYPE" title="R/S-TYPE Thermocouple" description="R/S-TYPE Thermocouple"></siteMapNode>
-				<siteMapNode url="/en/product/thermocouple/RTD" title="RTD" description="RTD"></siteMapNode>
-				<siteMapNode url="/en/product/thermocouple/T-TYPE" title="T-TYPE Thermocouple" description="T-TYPE Thermocouple"></siteMapNode>
+				<siteMapNode url="/en/product/thermocouple/e-type" title="E-TYPE Thermocouple" description="E-TYPE Thermocouple"></siteMapNode>
+				<siteMapNode url="/en/product/thermocouple/j-type" title="J-TYPE Thermocouple" description="J-TYPE Thermocouple"></siteMapNode>
+				<siteMapNode url="/en/product/thermocouple/k-type" title="K-TYPE Thermocouple" description="K-TYPE Thermocouple"></siteMapNode>
+				<siteMapNode url="/en/product/thermocouple/r-s-type" title="R/S-TYPE Thermocouple" description="R/S-TYPE Thermocouple"></siteMapNode>
+				<siteMapNode url="/en/product/thermocouple/rtd" title="RTD" description="RTD"></siteMapNode>
+				<siteMapNode url="/en/product/thermocouple/t-type" title="T-TYPE Thermocouple" description="T-TYPE Thermocouple"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/en/product/heating-wire" title="Heating Wire" description="Heating Wire">
-				<siteMapNode url="/en/product/heating-wire/MEDICAL-RESPIRATION-PIPE-HEATING-WIRE" title="Medical Respiration Pipe Heating Wire" description="Medical Respiration Pipe Heating Wire"></siteMapNode>
-				<siteMapNode url="/en/product/heating-wire/PHC" title="Parallel Heating Cable" description="Parallel Heating Cable"></siteMapNode>
-				<siteMapNode url="/en/product/heating-wire/PP-HEATING-WIRE" title="PP Heating Wire" description="PP Heating Wire"></siteMapNode>
-				<siteMapNode url="/en/product/heating-wire/UL3323" title="UL3323 Heating Wire" description="UL3323 Heating Wire"></siteMapNode>
-				<siteMapNode url="/en/product/heating-wire/UL3350" title="UL3350 Heating Wire" description="UL3350 Heating Wire"></siteMapNode>
-				<siteMapNode url="/en/product/heating-wire/UL3589" title="UL3589 Heating Wire" description="UL3589 Heating Wire"></siteMapNode>
-				<siteMapNode url="/en/product/heating-wire/UL3590" title="UL3590 Heating Wire" description="UL3590 Heating Wire"></siteMapNode>
+				<siteMapNode url="/en/product/heating-wire/medical-respiration-pipe-heating-wire" title="Medical Respiration Pipe Heating Wire" description="Medical Respiration Pipe Heating Wire"></siteMapNode>
+				<siteMapNode url="/en/product/heating-wire/phc" title="Parallel Heating Cable" description="Parallel Heating Cable"></siteMapNode>
+				<siteMapNode url="/en/product/heating-wire/pp-heating-wire" title="PP Heating Wire" description="PP Heating Wire"></siteMapNode>
+				<siteMapNode url="/en/product/heating-wire/ul3323" title="UL3323 Heating Wire" description="UL3323 Heating Wire"></siteMapNode>
+				<siteMapNode url="/en/product/heating-wire/ul3350" title="UL3350 Heating Wire" description="UL3350 Heating Wire"></siteMapNode>
+				<siteMapNode url="/en/product/heating-wire/ul3589" title="UL3589 Heating Wire" description="UL3589 Heating Wire"></siteMapNode>
+				<siteMapNode url="/en/product/heating-wire/ul3590" title="UL3590 Heating Wire" description="UL3590 Heating Wire"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/en/product/automobile-wire" title="Automobile Wire" description="Automobile Wire">
-				<siteMapNode url="/en/product/automobile-wire/ISO-FL2X-A" title="ISO-FL2X-A" description="ISO-FL2X-A"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/ISO-FL2X-B" title="ISO-FL2X-B" description="FL2X-B"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/ISO-FLR13Y-A" title="ISO-FLR13Y-A" description="ISO-FLR13Y-A"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/ISO-FLR2X-A" title="ISO-FLR2X-A" description="ISO-FLR2X-A"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/ISO-FLR2X-B" title="ISO-FLR2X-B" description="ISO-FLR2X-B"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/ISO-FLRY-A" title="ISO-FLRY-A" description="ISO-FLRY-A"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/ISO-FLRY-B" title="ISO-FLRY-B" description="ISO-FLRY-B"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/ISO-FLRYNX" title="ISO-FLRYNX" description="ISO-FLRYNX"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/ISO-FLRYW-A" title="ISO-FLRYW-A" description="ISO-FLRYW-A"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/ISO-FLRYW-B" title="ISO-FLRYW-B" description="ISO-FLRYW-B"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/ISO-FLRYY" title="ISO-FLRYY" description="ISO-FLRYY"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/ISO-FLY" title="ISO-FLY" description="ISO-FLY"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/ISO-FLYW" title="ISO-FLYW" description="ISO-FLYW"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/ISO-FLYY-MULTI" title="ISO-FLYY-MULTI" description="ISO-FLYY-MULTI"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/ISO-FLYY-SINGLE" title="ISO-FLYY-SINGLE" description="ISO-FLYY-SINGLE"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/JASO-AESSX" title="JASO-AESSX" description="JASO-AESSX"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/JASO-AEX" title="JASO-AEX" description="JASO-AEX"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/JASO-ASSSH" title="JASO-ASSSH" description="JASO-ASSSH"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/JASO-AV" title="JASO-AV" description="JASO-AV"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/JASO-AVS" title="JASO-AVS" description="JASO-AVS"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/JASO-AVSS" title="JASO-AVSS" description="JASO-AVSS"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/JASO-AVSSH" title="JASO-AVSSH" description="JASO-AVSSH"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/JASO-AVX" title="JASO-AVX" description="JASO-AVX"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/JASO-CAVS" title="JASO-CAVS" description="JASO-CAVS"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/JASO-CAVUS" title="JASO-CAVUS" description="JASO-CAVUS"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/JASO-CHFUS" title="JASO-CHFUS" description="JASO-CHFUS"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/JASO-CIVUS" title="JASO-CIVUS" description="JASO-CIVUS"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/JASO-HFSS" title="JASO-HFSS" description="JASO-HFSS"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/JASO-IVSSH" title="JASO-IVSSH" description="JASO-IVSSH"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/JASO-LE-SH" title="JASO-LE-SH" description="JASO-LE-SH"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/JASO-LE-SS" title="JASO-LE-SS" description="JASO-LE-SS"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/JASO-LE-SX" title="JASO-LE-SX" description="JASO-LE-SX"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/JASO-SH-SH" title="JASO-SH-SH" description="JASO-SH-SH"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/JASO-SH-SX" title="JASO-SH-SX" description="JASO-SH-SX"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/SAE-GPT" title="SAE-GPT" description="SAE-GPT"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/SAE-GXL" title="SAE-GXL" description="SAE-GXL"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/SAE-HDT" title="SAE-HDT" description="SAE-HDT"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/SAE-SXL" title="SAE-SXL" description="SAE-SXL"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/SAE-TWP" title="SAE-TWP" description="SAE-TWP"></siteMapNode>
-				<siteMapNode url="/en/product/automobile-wire/SAE-TXL" title="SAE-TXL" description="SAE-TXL"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/iso-fl2x-a" title="ISO-FL2X-A" description="ISO-FL2X-A"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/iso-fl2x-b" title="ISO-FL2X-B" description="FL2X-B"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/iso-flr13y-a" title="ISO-FLR13Y-A" description="ISO-FLR13Y-A"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/iso-flr2x-a" title="ISO-FLR2X-A" description="ISO-FLR2X-A"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/iso-flr2x-b" title="ISO-FLR2X-B" description="ISO-FLR2X-B"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/iso-flry-a" title="ISO-FLRY-A" description="ISO-FLRY-A"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/iso-flry-b" title="ISO-FLRY-B" description="ISO-FLRY-B"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/iso-flrynx" title="ISO-FLRYNX" description="ISO-FLRYNX"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/iso-flryw-a" title="ISO-FLRYW-A" description="ISO-FLRYW-A"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/iso-flryw-b" title="ISO-FLRYW-B" description="ISO-FLRYW-B"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/iso-flryy" title="ISO-FLRYY" description="ISO-FLRYY"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/iso-fly" title="ISO-FLY" description="ISO-FLY"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/iso-flyw" title="ISO-FLYW" description="ISO-FLYW"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/iso-flyy-multi" title="ISO-FLYY-MULTI" description="ISO-FLYY-MULTI"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/iso-flyy-single" title="ISO-FLYY-SINGLE" description="ISO-FLYY-SINGLE"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/jaso-aessx" title="JASO-AESSX" description="JASO-AESSX"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/jaso-aex" title="JASO-AEX" description="JASO-AEX"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/jaso-asssh" title="JASO-ASSSH" description="JASO-ASSSH"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/jaso-av" title="JASO-AV" description="JASO-AV"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/jaso-avs" title="JASO-AVS" description="JASO-AVS"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/jaso-avss" title="JASO-AVSS" description="JASO-AVSS"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/jaso-avssh" title="JASO-AVSSH" description="JASO-AVSSH"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/jaso-avx" title="JASO-AVX" description="JASO-AVX"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/jaso-cavs" title="JASO-CAVS" description="JASO-CAVS"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/jaso-cavus" title="JASO-CAVUS" description="JASO-CAVUS"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/jaso-chfus" title="JASO-CHFUS" description="JASO-CHFUS"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/jaso-civus" title="JASO-CIVUS" description="JASO-CIVUS"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/jaso-hfss" title="JASO-HFSS" description="JASO-HFSS"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/jaso-ivssh" title="JASO-IVSSH" description="JASO-IVSSH"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/jaso-le-sh" title="JASO-LE-SH" description="JASO-LE-SH"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/jaso-le-ss" title="JASO-LE-SS" description="JASO-LE-SS"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/jaso-le-sx" title="JASO-LE-SX" description="JASO-LE-SX"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/jaso-sh-sh" title="JASO-SH-SH" description="JASO-SH-SH"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/jaso-sh-sx" title="JASO-SH-SX" description="JASO-SH-SX"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/sae-gpt" title="SAE-GPT" description="SAE-GPT"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/sae-gxl" title="SAE-GXL" description="SAE-GXL"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/sae-hdt" title="SAE-HDT" description="SAE-HDT"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/sae-sxl" title="SAE-SXL" description="SAE-SXL"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/sae-twp" title="SAE-TWP" description="SAE-TWP"></siteMapNode>
+				<siteMapNode url="/en/product/automobile-wire/sae-txl" title="SAE-TXL" description="SAE-TXL"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/en/product/military-grade-wire" title="Military Grade Wire" description="Military Grade Wire">
-				<siteMapNode url="/en/product/military-grade-wire/M16878" title="M16878 Military Cable" description="M16878 Military Cable"></siteMapNode>
-				<siteMapNode url="/en/product/military-grade-wire/M22759" title="M22759 Military Cable" description="M22759 Military Cable"></siteMapNode>
-				<siteMapNode url="/en/product/military-grade-wire/M24643" title="M24643 Military Shipboard Cable" description="M24643 Military Shipboard Cable"></siteMapNode>
-				<siteMapNode url="/en/product/military-grade-wire/M27500" title="M27500 Military Cable" description="M27500 Military Cable"></siteMapNode>
-				<siteMapNode url="/en/product/military-grade-wire/M81822" title="M81822 Military Cable" description="M81822 Military Cable"></siteMapNode>
+				<siteMapNode url="/en/product/military-grade-wire/m16878" title="M16878 Military Cable" description="M16878 Military Cable"></siteMapNode>
+				<siteMapNode url="/en/product/military-grade-wire/m22759" title="M22759 Military Cable" description="M22759 Military Cable"></siteMapNode>
+				<siteMapNode url="/en/product/military-grade-wire/m24643" title="M24643 Military Shipboard Cable" description="M24643 Military Shipboard Cable"></siteMapNode>
+				<siteMapNode url="/en/product/military-grade-wire/m27500" title="M27500 Military Cable" description="M27500 Military Cable"></siteMapNode>
+				<siteMapNode url="/en/product/military-grade-wire/m81822" title="M81822 Military Cable" description="M81822 Military Cable"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/en/product/composite-cable" title="Composite Cable" description="Composite Cable">
-				<siteMapNode url="/en/product/composite-cable/RG178-MINI" title="RG178-MINI High Frequency Coaxial Cable" description="RG178-MINI High Frequency Coaxial Cable"></siteMapNode>
-				<siteMapNode url="/en/product/composite-cable/RG178BU" title="RG178BU High Frequency Coaxial Cable" description="RG178BU High Frequency Coaxial Cable"></siteMapNode>
-				<siteMapNode url="/en/product/composite-cable/RG179" title="RG179 High Frequency Coaxial Cable" description="RG179 High Frequency Coaxial Cable"></siteMapNode>
-				<siteMapNode url="/en/product/composite-cable/RG316" title="RG316 High Frequency Coaxial Cable" description="RG316 High Frequency Coaxial Cable"></siteMapNode>
-				<siteMapNode url="/en/product/composite-cable/TEFLON-SILICONE-MEDICAL-WIRE" title="Teflon Silicone Medical Wire" description="Teflon Silicone Medical Wire"></siteMapNode>
-				<siteMapNode url="/en/product/composite-cable/UL3270" title="UL3270 Tinned-Copper Braided Silicone Wire" description="UL3270 Tinned-Copper Braided Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/composite-cable/rg178-mini" title="RG178-MINI High Frequency Coaxial Cable" description="RG178-MINI High Frequency Coaxial Cable"></siteMapNode>
+				<siteMapNode url="/en/product/composite-cable/rg178bu" title="RG178BU High Frequency Coaxial Cable" description="RG178BU High Frequency Coaxial Cable"></siteMapNode>
+				<siteMapNode url="/en/product/composite-cable/rg179" title="RG179 High Frequency Coaxial Cable" description="RG179 High Frequency Coaxial Cable"></siteMapNode>
+				<siteMapNode url="/en/product/composite-cable/rg316" title="RG316 High Frequency Coaxial Cable" description="RG316 High Frequency Coaxial Cable"></siteMapNode>
+				<siteMapNode url="/en/product/composite-cable/teflon-silicone-medical-wire" title="Teflon Silicone Medical Wire" description="Teflon Silicone Medical Wire"></siteMapNode>
+				<siteMapNode url="/en/product/composite-cable/ul3270" title="UL3270 Tinned-Copper Braided Silicone Wire" description="UL3270 Tinned-Copper Braided Silicone Wire"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/en/product/anti-refrigerant-wire" title="Anti-Refrigerant Wire" description="Anti-Refrigerant Wire">
-				<siteMapNode url="/en/product/anti-refrigerant-wire/UL5048" title="UL5048 Anti-Refrigerant Wire" description="UL5048 Anti-Refrigerant Wire"></siteMapNode>
+				<siteMapNode url="/en/product/anti-refrigerant-wire/ul5048" title="UL5048 Anti-Refrigerant Wire" description="UL5048 Anti-Refrigerant Wire"></siteMapNode>
 			</siteMapNode>
 		</siteMapNode>
 
@@ -436,6 +439,9 @@
 			<siteMapNode url="/en/application/automobile" title="Automobile" description="Automobile">
 				<siteMapNode url="/en/application/automobile/motor-temperature-sensor-cable" title="IATF-16949 Motor Temperature Sensor Cable" description="IATF-16949 Motor Temperature Sensor Cable"></siteMapNode>
 				<siteMapNode url="/en/application/automobile/motor-power-cable" title="Electric Motorcycle Power Cable" description="Electric Motorcycle Power Cable"></siteMapNode>				
+			</siteMapNode>
+			<siteMapNode url="/en/application/misc-app" title="Other Application" description="Other Application">
+				<siteMapNode url="/en/application/misc-app/fighter-jet-temperature-sensor-cable" title="Fighter Jet Temperature Sensor Cable" description="Fighter Jet Temperature Sensor Cable"></siteMapNode>
 			</siteMapNode>
 		</siteMapNode>
 

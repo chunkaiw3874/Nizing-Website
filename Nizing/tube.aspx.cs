@@ -101,7 +101,7 @@ public partial class tube : System.Web.UI.Page
 
             HtmlGenericControl divCardSubTitle = new HtmlGenericControl("div");
             divCardSubTitle.Attributes.Add("class", "card-title");
-            divCardSubTitle.InnerText = dr["ID"].ToString();
+            divCardSubTitle.InnerText = dr["ID"].ToString().ToUpper();
             divCardBody.Controls.Add(divCardSubTitle);
 
             HtmlGenericControl divCardTextWrapper = new HtmlGenericControl("div");

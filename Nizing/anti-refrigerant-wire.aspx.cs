@@ -21,7 +21,7 @@ public partial class anti_refrigerant_wire : System.Web.UI.Page
         {
             Response.Redirect("/zh/product/anti-refrigerant-wire");
         }
-        string productCategory = Request.Url.ToString().Split('/').Last();
+        string productCategory = Request.Url.ToString().Split('/').Last().ToLower();
         string language = RouteData.Values["language"].ToString().ToLower();
 
         if (!IsPostBack)
@@ -103,7 +103,7 @@ public partial class anti_refrigerant_wire : System.Web.UI.Page
 
             HtmlGenericControl divCardSubTitle = new HtmlGenericControl("div");
             divCardSubTitle.Attributes.Add("class", "card-title");
-            divCardSubTitle.InnerText = dr["ID"].ToString();
+            divCardSubTitle.InnerText = dr["ID"].ToString().ToUpper();
             divCardBody.Controls.Add(divCardSubTitle);
 
             HtmlGenericControl divCardTextWrapper = new HtmlGenericControl("div");

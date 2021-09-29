@@ -418,8 +418,7 @@ public partial class admin_productSetup : System.Web.UI.Page
 
     protected void btnFetchData_Click(object sender, EventArgs e)
     {
-        //ClearMessages();
-        //FetchData(txtProductIDSearch.Text.Trim().ToUpper());
+
     }
 
     protected void FetchData(string PID)
@@ -1325,7 +1324,7 @@ public partial class admin_productSetup : System.Web.UI.Page
                 " from Product" +
                 " where [ID]=@ID";
             SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@ID", PID.ToUpper());
+            cmd.Parameters.AddWithValue("@ID", PID.ToLower());
             exists = cmd.ExecuteScalar() == null ? false : true;
         }
 
@@ -1334,7 +1333,7 @@ public partial class admin_productSetup : System.Web.UI.Page
 
     protected void btnCopyToProduct_Click(object sender, EventArgs e)
     {
-        string PID = txtCopyToProductID.Text.Trim().ToUpper();
+        string PID = txtCopyToProductID.Text.Trim().ToLower();
         if (string.IsNullOrWhiteSpace(PID))
         {
             AppendSystemMessage("複製的產品ID不可為空白", "red");
@@ -1412,7 +1411,7 @@ public partial class admin_productSetup : System.Web.UI.Page
     protected void btnAddProduct_Click(object sender, EventArgs e)
     {
         ClearMessages();
-        FetchData(txtProductIDSearch.Text.Trim().ToUpper());
+        FetchData(txtProductIDSearch.Text.Trim().ToLower());
     }
 
     protected void btnAddApplication_Click(object sender, EventArgs e)

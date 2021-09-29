@@ -258,7 +258,7 @@
                     <div class="content row row-cols-2 row-cols-md-3">
                         <div class="col">
                             <div class="hottest-item">
-                                <a href="/zh/product/heating-wire/MEDICAL-RESPIRATION-PIPE-HEATING-WIRE">
+                                <a href="/zh/product/heating-wire/medical-respiration-pipe-heating-wire">
                                     <div class="image-section">
                                         <picture>
                                             <source srcset="/images/product/hot-item/medical-repiration-tube.webp" type="image/webp">
@@ -319,7 +319,7 @@
                     <div class="content row row-cols-2 row-cols-md-4">
                         <div class="col">
                             <div class="newest-item">
-                                <a href="">
+                                <a href="/zh/application/misc-app/fighter-jet-temperature-sensor-cable">
                                     <div class="image-section">
                                         <picture>
                                             <source srcset="/images/product/new-item/fighter-jet-temperature-control-cable.webp" type="image/webp">
@@ -565,7 +565,7 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <a href="/zh/product/heating-wire/MEDICAL-RESPIRATION-PIPE-HEATING-WIRE">
+                            <a href="/zh/product/heating-wire/medical-respiration-pipe-heating-wire">
                                 <img src="/images/promotion/醫療用 呼吸加熱管.jpg" />
                             </a>
                         </div>

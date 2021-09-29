@@ -49,9 +49,11 @@ public partial class application_list : System.Web.UI.Page
         {
             HtmlGenericControl divTitle = new HtmlGenericControl("div");
             divTitle.Attributes.Add("class", "title");
+            divTitle.InnerText = dt.Rows[0]["zhText"].ToString();
             divBackground.Controls.AddAt(0, divTitle);
-            HtmlGenericControl divSubtitle = new HtmlGenericControl("div");
+            HtmlGenericControl divSubtitle = new HtmlGenericControl("div");            
             divSubtitle.Attributes.Add("class", "subtitle");
+            divSubtitle.InnerText = dt.Rows[0]["enText"].ToString();
             divBackground.Controls.AddAt(1, divSubtitle);
         }
 
@@ -76,7 +78,7 @@ public partial class application_list : System.Web.UI.Page
 
         foreach (DataRow dr in dt.Rows)
         {
-            BuildMenuItem(application, dr["PID"].ToString(), dr["Description"].ToString(), dr["Name"].ToString(), "~/" + language + "/application/" + application + "/");
+            BuildMenuItem(application, dr["PID"].ToString().ToLower(), dr["Description"].ToString(), dr["Name"].ToString(), "~/" + language + "/application/" + application + "/");
         }
     }
 
@@ -89,7 +91,7 @@ public partial class application_list : System.Web.UI.Page
         divItem.Attributes.Add("class", "item");
         divCol.Controls.Add(divItem);
         HtmlAnchor a = new HtmlAnchor();
-        a.HRef = url + PID.ToLower();
+        a.HRef = url + PID;
         divItem.Controls.Add(a);
         HtmlGenericControl divImageSection = new HtmlGenericControl("div");
         divImageSection.Attributes.Add("class", "image-section");
