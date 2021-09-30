@@ -10,4 +10,5 @@ Disallow:/revivify_employee_section
 Disallow:/sunrize_employee_section
 Disallow:/legacy
 Disallow:/oqs
-Sitemap:http://www.nizing.com.tw/sitemap.xml
+Sitemap:https://www.nizing.com.tw/sitemap.xml
+Host:https://www.nizing.com.tw

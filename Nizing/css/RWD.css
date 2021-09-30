@@ -43,6 +43,10 @@ img {
     width: 100%;
 }
 
+.banner{
+    position:relative;
+}
+
 .display-block {
     padding: 24px 0px;
 }
@@ -154,7 +158,10 @@ img {
     background-color: #efefef;
 }
 
-.hottest-item-list .col, .newest-item-list .col, .product-category-list .col {
+.hottest-item-list .col,
+.newest-item-list .col,
+.product-category-list .col,
+.application-item-list .col {
     margin: 0.5rem 0;
     padding: 0 0.5rem;
 }
@@ -162,7 +169,7 @@ img {
 .hottest-item-list .hottest-item,
 .newest-item-list .newest-item,
 .product-category-list .product-category-item,
-.application-item-list .item{
+.application-item-list .item {
     background-color: #ffffff;
     height: 100%;
 }
@@ -173,25 +180,31 @@ img {
     .application-item-list .item .text-section {
         padding: 0.5rem 0.4rem;
         color: #0f0f0f;
+        /*margin-top: 8px;*/
         margin-bottom: 16px;
     }
 
     .hottest-item-list .hottest-item .title,
     .newest-item-list .newest-item .title,
-    .application-item-list .item .title{
+    .application-item-list .item .title {
         font-size: 20px;
         text-align: left;
     }
 
     .hottest-item-list .hottest-item .subtitle,
     .newest-item-list .newest-item .subtitle,
-    .application-item-list .item .subtitle{
+    .application-item-list .item .subtitle {
         font-size: 16px;
         text-align: left;
     }
 
     .product-category-list .product-category-item .title {
         font-size: 20px;
+        text-align: center;
+    }
+
+    .product-category-list .product-category-item .subtitle {
+        font-size: 16px;
         text-align: center;
     }
 

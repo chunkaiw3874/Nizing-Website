@@ -27,9 +27,9 @@
     <div class="display-block-wrapper">
         <section class="display-block product-category-list bg-wrapper">
             <div class="container">
-                <h2 class="title revealTrigger">產品分類
+                <h2 class="title revealTrigger">電線產品分類
                 </h2>
-                <h2 class="subtitle">PRODUCT
+                <h2 class="subtitle">WIRE CATEGORY
                 </h2>
                 <div id="divItemList" runat="server" class="content row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                     <%--<div class="col reveal animate__animated">

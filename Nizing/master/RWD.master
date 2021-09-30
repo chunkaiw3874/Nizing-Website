@@ -307,8 +307,8 @@
                                     <i class="fas fa-globe"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-lg-right">
-                                    <asp:LinkButton ID="lnkToMandarin" CssClass="dropdown-item" runat="server" OnClick="ChangeLanguage">中文</asp:LinkButton>
-                                    <asp:LinkButton ID="lnkToEnglish" CssClass="dropdown-item" runat="server" OnClick="ChangeLanguage">English</asp:LinkButton>
+                                    <asp:LinkButton ID="zh" CssClass="dropdown-item" runat="server" OnClick="ChangeLanguage">中文</asp:LinkButton>
+                                    <asp:LinkButton ID="en" CssClass="dropdown-item" runat="server" OnClick="ChangeLanguage">English</asp:LinkButton>
                                 </div>
                             </div>
                             <div class="pinned-item">

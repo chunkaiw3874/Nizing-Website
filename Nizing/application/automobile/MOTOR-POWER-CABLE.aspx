@@ -105,6 +105,7 @@
                     <img src="/images/application/automobile/motor-power-cable/impression/motor-power-cable-1.jpg"
                         alt="Gogoro Electric Motorcycle" />
                 </picture>
+
             </div>
             <div class="col-md-6">
                 <div class="container text-section">

@@ -58,10 +58,10 @@
     <div class="display-block-wrapper application-category-list">
         <section class="display-block bg-wrapper">
             <div class="title">
-                應用產業
+                電線電纜應用
             </div>
             <div class="subtitle">
-                PRODUCT APPLICATION
+                WIRE & CABLE APPLICATION
             </div>
             <div class="container-fluid">
                 <div class="container">

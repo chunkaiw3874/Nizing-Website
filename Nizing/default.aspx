@@ -23,7 +23,111 @@
             margin-bottom: 8px;
         }
 
+        .banner .banner-text {
+            color: white;
+            font-size: 30px;
+            text-shadow: 1px 1px 3px black,3px 3px 9px black;
+        }
 
+            .banner .banner-text p {
+                margin: 0;
+            }
+
+            .banner .banner-text .top-left {
+                position: absolute;
+                top: 50px;
+                left: 30px;
+            }
+
+                .banner .banner-text .top-left p {
+                    line-height: 1.1;
+                }
+
+                    .banner .banner-text .top-left p:nth-child(2) {
+                        padding-left: 20px;
+                    }
+
+            .banner .banner-text .bottom-right {
+                position: absolute;
+                bottom: 30px;
+                right: 0;
+                margin-right: -300px;
+            }
+
+                .banner .banner-text .bottom-right p {
+                    line-height: 2;
+                }
+
+                    .banner .banner-text .bottom-right p:not(:first-child) {
+                        line-height: 0.5;
+                    }
+
+                .banner .banner-text .bottom-right .small-text {
+                    transform: scale(0.4);
+                    -webkit-transform-origin-x: 0;
+                }
+
+        @media all and (max-width:1199px) {
+            .banner .banner-text {
+                color: white;
+                font-size: 26px;
+            }
+
+                .banner .banner-text .bottom-right .small-text {
+                    transform: scale(0.4);
+                    -webkit-transform-origin-x: 0;
+                }
+        }
+
+        @media all and (max-width:991px) {
+            .banner .banner-text {
+                color: white;
+                font-size: 20px;
+            }
+
+                .banner .banner-text .bottom-right .small-text {
+                    transform: scale(0.4);
+                    -webkit-transform-origin-x: 0;
+                }
+        }
+
+        @media all and (max-width:767px) {
+            .banner .banner-text {
+                color: white;
+                font-size: 16px;
+            }
+
+                .banner .banner-text .bottom-right .small-text {
+                    transform: scale(0.4);
+                    -webkit-transform-origin-x: 0;
+                }
+
+                .banner .banner-text .bottom-right {
+                    margin-right: -250px;
+                }
+        }
+
+        @media all and (max-width:575px) {
+            .banner .banner-text .top-left {
+                position: absolute;
+                top: 30px;
+                left: 20px;
+            }
+
+            .banner .banner-text {
+                color: white;
+                font-size: 14px;
+            }
+
+                .banner .banner-text .bottom-right .small-text {
+                    transform: scale(0.3);
+                    -webkit-transform-origin-x: 0;
+                }
+
+                .banner .banner-text .bottom-right {
+                    bottom: 20px;
+                }
+        }
 
         .webp .product-category-list.bg-wrapper {
             background-image: url('/images/background/bg-product.webp');
@@ -177,7 +281,7 @@
   "@context" : "http://schema.org",
   "@type" : "Product",
   "name" : "Wire and Cable",
-  "image" : [ "http://www.nizing.com.tw/images/banner/banner-homepage-cn-1300x500.gif", "http://www.nizing.com.tw/images/product/high-temperature-wire/high-temperature-wire_menu-500x500.png", "http://www.nizing.com.tw/images/product/silicone-wire/silicone-wire_menu-500x500.png", "http://www.nizing.com.tw/images/product/teflon-wire/teflon-wire_menu-500x500.png", "http://www.nizing.com.tw/images/product/xlpe-wire/xlpe-wire_menu-500x500.png", "http://www.nizing.com.tw/images/product/pvc-wire/pvc-wire_menu-500x500.png", "http://www.nizing.com.tw/images/product/tube/tube_menu-500x500.png", "http://www.nizing.com.tw/images/product/thermocouple/thermocouple_menu-500x500.png", "http://www.nizing.com.tw/images/product/heating-wire/heating-wire_menu-500x500.png", "http://www.nizing.com.tw/images/product/composite-cable/special-cable_menu-500x500.png" ],
+  "image" : [ "http://www.nizing.com.tw/images/banner/banner-home.jpg"],
   "url" : "http://www.nizing.com.tw/default.aspx",
   "brand" : {
     "@type" : "Brand",
@@ -241,7 +345,27 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="banner" runat="server">
     <div class="container-fluid">
         <div class="banner">
-            <img src="/images/banner/banner-homepage-cn-1300x500.gif" alt="日進電線電纜 Nizing Electric Wire and Cable" />
+            <picture>
+                <source srcset="/images/banner/banner-home-mobile.webp" media="(max-width:767px)" type="image/webp" />
+                <source srcset="/images/banner/banner-home.webp" type="image/webp" />
+                <source srcset="/images/banner/banner-home-mobile.jpg" media="(max-width:767px)" />
+                <img src="/images/banner/banner-home.jpg" alt="日進電線電纜 Nizing Electric Wire and Cable" />
+            </picture>
+            <div class="banner-text">
+                <div class="top-left">
+                    <p>
+                        為您客製品質優異、耐熱、耐電壓、
+                    </p>
+                    <p>
+                        抗老化，安全時尚的電線電纜供應商
+                    </p>
+                </div>
+                <div class="bottom-right">
+                    <p>專業電線電纜製造商</p>
+                    <p class="small-text">GB/T 19001-2015; ISO: 9001-2015 Certified No. 00610 Q20229RIM</p>
+                    <p class="small-text">UL / CSA / VDE / PSE / CCC / CE / RoHs, REACH, MIT Certified</p>
+                </div>
+            </div>
         </div>
     </div>
 </asp:Content>
@@ -251,9 +375,9 @@
         <div class="display-block-wrapper homepage">
             <section class="display-block hottest-item-list">
                 <div class="container">
-                    <h2 class="title">熱門精品區
+                    <h2 class="title">熱門電線精品區
                     </h2>
-                    <h2 class="subtitle">HOTTEST BOUTIQUE SECTION
+                    <h2 class="subtitle">HOTTEST WIRE AND CABLE
                     </h2>
                     <div class="content row row-cols-2 row-cols-md-3">
                         <div class="col">
@@ -314,7 +438,7 @@
                 <div class="container">
                     <h2 class="title">最新產品
                     </h2>
-                    <h2 class="subtitle">Newest Product
+                    <h2 class="subtitle">Latest Product
                     </h2>
                     <div class="content row row-cols-2 row-cols-md-4">
                         <div class="col">
@@ -324,12 +448,12 @@
                                         <picture>
                                             <source srcset="/images/product/new-item/fighter-jet-temperature-control-cable.webp" type="image/webp">
                                             <img src="/images/product/new-item/fighter-jet-temperature-control-cable.jpg"
-                                                alt="戰鬥機溫控線 Fighter Jet Temperature Control Cable">
+                                                alt="戰鬥機溫控電纜 Fighter Jet Temperature Control Cable">
                                         </picture>
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <div class="title text-left">戰鬥機溫控線</div>
+                                    <div class="title text-left">戰鬥機溫控電纜</div>
                                     <div class="subtitle text-left">日本軍規配線</div>
                                 </div>
                             </div>
@@ -443,7 +567,7 @@
                                         <picture>
                                             <source srcset="/images/product/new-item/industrial-furnace.webp" type="image/webp">
                                             <img src="/images/product/new-item/industrial-furnace.jpg"
-                                                alt="多爐溫控系統雙層屏蔽線 Temper Control Signal Shielding Cable">
+                                                alt="多爐溫控系統雙層屏蔽電纜 Temper Control Signal Shielding Cable">
                                         </picture>
                                     </div>
                                 </a>
@@ -458,9 +582,9 @@
             </section>
             <section class="display-block product-category-list bg-wrapper">
                 <div class="container">
-                    <h2 class="title revealTrigger">產品分類
+                    <h2 class="title revealTrigger">電線產品分類
                     </h2>
-                    <h2 class="subtitle">PRODUCT
+                    <h2 class="subtitle">WIRE CATEGORY
                     </h2>
                     <div id="divProductItemList" runat="server" class="content row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                         <div class="col reveal animate__animated">
@@ -470,12 +594,12 @@
                                         <picture>
                                             <source srcset="/images/home/inflammable/big-menu.webp" type="image/webp">
                                             <img src="/images/home/inflammable/big-menu.png"
-                                                alt="防火耐燃線 Anti-Flammatory Wire and Cable">
+                                                alt="防火耐燃電線 Anti-Flammatory Wire and Cable">
                                         </picture>
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <figcaption class="title my-auto">防火耐燃系列
+                                    <figcaption class="title my-auto">防火耐燃電線系列
                                     </figcaption>
                                 </div>
                             </figure>

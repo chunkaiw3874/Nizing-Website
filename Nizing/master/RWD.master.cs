@@ -20,24 +20,24 @@ public partial class master_RWD : System.Web.UI.MasterPage
     {
         //if (!IsPostBack)
         //{
-            //if(Request.Url.AbsoluteUri == "http://www.nizing.com.tw/zh"
-            //    | Request.Url.AbsoluteUri == "http://www.nizing.com.tw/"
-            //    | Request.Url.AbsoluteUri == "http://localhost:50429/zh")
-            //{
-            //    Session["language"] = "zh";
-            //}
-            //else if (Request.Url.AbsoluteUri == "http://www.nizing.com.tw/en"
-            //| Request.Url.AbsoluteUri == "http://localhost:50429/en")
-            //{
-            //    Session["language"] = "en";
-            //}
-            
-            //if (Session["language"] == null)
-            //{
-            //    Session["language"] = "zh";
-            //}            
-            BuildMenu( Session["language"].ToString());
-            BuildFooterMenu(Session["language"].ToString());
+        //if(Request.Url.AbsoluteUri == "http://www.nizing.com.tw/zh"
+        //    | Request.Url.AbsoluteUri == "http://www.nizing.com.tw/"
+        //    | Request.Url.AbsoluteUri == "http://localhost:50429/zh")
+        //{
+        //    Session["language"] = "zh";
+        //}
+        //else if (Request.Url.AbsoluteUri == "http://www.nizing.com.tw/en"
+        //| Request.Url.AbsoluteUri == "http://localhost:50429/en")
+        //{
+        //    Session["language"] = "en";
+        //}
+
+        //if (Session["language"] == null)
+        //{
+        //    Session["language"] = "zh";
+        //}            
+        BuildMenu(Session["language"].ToString());
+        BuildFooterMenu(Session["language"].ToString());
         //}
     }
 
@@ -169,7 +169,7 @@ public partial class master_RWD : System.Web.UI.MasterPage
         AddFooterMenuSubItem(ulListGroup, language, "人才招募", "Recruit", "https://www.104.com.tw/company/12vkr1cg", "_blank");
         AddFooterMenuSubItem(ulListGroup, language, "地址: 新北市三重區光復路二段87巷10-12號", "ADD: No.10-12, Ln.87, Sec.2, Guanfu Road, Sanchong Dist., New Taipei City, Taiwan 24158", "https://www.google.com/maps/place/%E6%97%A5%E9%80%B2%E9%9B%BB%E7%B7%9A%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8/@25.0587124,121.4718232,17z/data=!4m12!1m6!3m5!1s0x3442a7e768a1d123:0x1b3b1220987a8188!2z5pel6YCy6Zu757ea6IKh5Lu95pyJ6ZmQ5YWs5Y-4!8m2!3d25.0587076!4d121.4740119!3m4!1s0x3442a7e768a1d123:0x1b3b1220987a8188!8m2!3d25.0587076!4d121.4740119", "_blank");
         AddFooterMenuSubItem(ulListGroup, language, "電話: +886-2-2999-9181", "TEL: +886-2-2999-9181", "tel:+886229999181");
-        AddFooterMenuSubItem(ulListGroup, language, "傳真: +886-2-2999-9771", "FAX: +886-2-2999-9771", "/" + language + "#");        
+        AddFooterMenuSubItem(ulListGroup, language, "傳真: +886-2-2999-9771", "FAX: +886-2-2999-9771", "/" + language + "#");
         HtmlGenericControl liListGroupItem = new HtmlGenericControl("li");
         liListGroupItem.Attributes.Add("class", "list-group-item");
         ulListGroup.Controls.Add(liListGroupItem);
@@ -213,7 +213,7 @@ public partial class master_RWD : System.Web.UI.MasterPage
         return ulListGroup;
     }
 
-    protected void AddFooterMenuSubItem(HtmlGenericControl ul, string language, string zhText, string enText, string url, string urlTarget="")
+    protected void AddFooterMenuSubItem(HtmlGenericControl ul, string language, string zhText, string enText, string url, string urlTarget = "")
     {
         HtmlGenericControl liListGroupItem = new HtmlGenericControl("li");
         liListGroupItem.Attributes.Add("class", "list-group-item");
@@ -235,18 +235,26 @@ public partial class master_RWD : System.Web.UI.MasterPage
 
     protected void ChangeLanguage(object sender, EventArgs e)
     {
-        string senderId = ((LinkButton)sender).ClientID;
-        if (Session["language"] == null || senderId == "lnkToMandarin")
+        string newLanguage = ((LinkButton)sender).ClientID;
+        Session["language"] = newLanguage;
+        string url = Request.Url.AbsolutePath;
+        string[] urlSections = url.Split('/');
+        string newUrl = "";
+
+        for (int i = 1; i < urlSections.Length; i++)
         {
-            Session["language"] = "zh";
-        }
-        else if (senderId == "lnkToEnglish")
-        {
-            Session["language"] = "en";
+            if (i == 1)
+            {
+                newUrl += "/" + newLanguage;
+            }
+            else
+            {
+                newUrl += "/" + urlSections[i];
+            }
         }
 
-        Response.Redirect("~/" + Session["language"].ToString());
+        Response.Redirect("~" + newUrl);
 
-        BuildMenu(Session["language"].ToString());
+        BuildMenu(newLanguage);
     }
 }

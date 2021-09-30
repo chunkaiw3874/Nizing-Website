@@ -100,14 +100,11 @@ public partial class product : System.Web.UI.Page
         figureProductCategoryItem.Controls.Add(divTextSection);
         HtmlGenericControl figcaption = new HtmlGenericControl("figcaption");
         figcaption.Attributes.Add("class", "title");
-        if (language == "zh")
-        {
-            figcaption.InnerText = zhText;
-        }
-        else
-        {
-            figcaption.InnerText = enText;
-        }
+        figcaption.InnerText = zhText;
+        divTextSection.Controls.Add(figcaption);
+        figcaption = new HtmlGenericControl("figcaption");
+        figcaption.Attributes.Add("class", "subtitle");
+        figcaption.InnerText = enText;
         divTextSection.Controls.Add(figcaption);
     }
 

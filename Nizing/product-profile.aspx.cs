@@ -350,13 +350,16 @@ public partial class product_profile : System.Web.UI.Page
             csText.Append("\"material\":\"" + p.StructuredDataSchema.Material + "\",\n");
             if (displayImages.Count > 0)
             {
-                csText.Append("\"image\":");
+                csText.Append("\"image\":[");
                 for (int i = 0; i < displayImages.Count; i++)
                 {
-                    csText.Append("\"" + displayWebFilePath + displayImages[i] + "\",");
                     if (i == displayImages.Count - 1)
                     {
-                        csText.Append("\n");
+                        csText.Append("\"" + displayWebFilePath + displayImages[i] + "\"],\n");
+                    }
+                    else
+                    {
+                        csText.Append("\"" + displayWebFilePath + displayImages[i] + "\",");
                     }
                 }
             }

@@ -10,7 +10,7 @@
 			<siteMapNode url="/zh/company/lab" title="實驗室" description="實驗室"></siteMapNode>
 		</siteMapNode>
 
-		<siteMapNode url="/zh/product" title="產品分類" description="產品分類">
+		<siteMapNode url="/zh/product" title="電線產品分類" description="電線產品分類">
 			<siteMapNode url="/zh/product/silicone-fiberglass-wire" title="矽膠編織線系列" description="矽膠編織線系列">
 				<siteMapNode url="/zh/product/silicone-fiberglass-wire/rs-ge" title="RS-GE 矽膠編織耐熱線" description="RS-GE 矽膠編織耐熱線"></siteMapNode>
 				<siteMapNode url="/zh/product/silicone-fiberglass-wire/tm3320" title="TM3320 矽膠編織耐熱線" description="TM3320 矽膠編織耐熱線"></siteMapNode>
@@ -202,7 +202,7 @@
 			</siteMapNode>
 		</siteMapNode>
 
-		<siteMapNode url="/zh/application" title="應用產業" description="應用產業">
+		<siteMapNode url="/zh/application" title="電纜應用" description="電纜應用">
 			<siteMapNode url="/zh/application/automobile" title="汽車產業" description="汽車產業">
 				<siteMapNode url="/zh/application/automobile/motor-temperature-sensor-cable" title="IATF-16949 馬達溫度感知線" description="IATF-16949 馬達溫度感知線"></siteMapNode>
 				<siteMapNode url="/zh/application/automobile/motor-power-cable" title="電動機車馬達動力線" description="電動機車馬達動力線"></siteMapNode>				
@@ -243,7 +243,7 @@
 			<siteMapNode url="/en/company/lab" title="Lab" description="Lab"></siteMapNode>
 		</siteMapNode>
 
-		<siteMapNode url="/en/product" title="Product" description="Product">
+		<siteMapNode url="/en/product" title="Wire Category" description="Wire Category">
 			<siteMapNode url="/en/product/silicone-fiberglass-wire" title="Silicone Fiberglass Wire" description="Silicone Fiberglass Wire">
 				<siteMapNode url="/en/product/silicone-fiberglass-wire/rs-ge" title="RS-GE Silicone Fiberglass Wire" description="RS-GE Silicone Fiberglass Wire"></siteMapNode>
 				<siteMapNode url="/en/product/silicone-fiberglass-wire/tm3320" title="TM3320 Silicone Fiberglass Wire" description="TM3320 Silicone Fiberglass Wire"></siteMapNode>
@@ -435,7 +435,7 @@
 			</siteMapNode>
 		</siteMapNode>
 
-		<siteMapNode url="/en/application" title="Application" description="Application">
+		<siteMapNode url="/en/application" title="Wire and Cable Application" description="Wire and Cable Application">
 			<siteMapNode url="/en/application/automobile" title="Automobile" description="Automobile">
 				<siteMapNode url="/en/application/automobile/motor-temperature-sensor-cable" title="IATF-16949 Motor Temperature Sensor Cable" description="IATF-16949 Motor Temperature Sensor Cable"></siteMapNode>
 				<siteMapNode url="/en/application/automobile/motor-power-cable" title="Electric Motorcycle Power Cable" description="Electric Motorcycle Power Cable"></siteMapNode>				
