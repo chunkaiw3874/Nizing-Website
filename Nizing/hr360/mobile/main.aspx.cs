@@ -209,7 +209,7 @@ public partial class hr360_mobile_main : System.Web.UI.Page
             Session["secondPartDayOff"] = doubleSecondPartFinal;
             Session["startYear"] = dtUserInfo.Rows[0]["START_YEAR"].ToString();
             Session["startDate"] = dtUserInfo.Rows[0]["START_MONTH"].ToString() + dtUserInfo.Rows[0]["START_DAY"].ToString();
-
+            
             //抓取剩餘補休時數(不需要為小倩(0010)特別做計算，因為使用的單位皆為小時)
             SqlCommand cmdSelectMakeupDayOff = new SqlCommand("SELECT"
                                                 + " COALESCE(CONVERT(NVARCHAR,(SELECT PALTK.TK005 FROM PALTK WHERE PALTK.TK001=@ID AND PALTK.TK002=YEAR(GETDATE()))"

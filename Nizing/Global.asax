@@ -82,9 +82,9 @@
         routes.MapPageRoute("", "{language}/application/{application}", "~/application-list.aspx");
         routes.MapPageRoute("", "{language}/application/{application}/motor-temperature-sensor-cable-tesla-taycan", "~/application/automobile/motor-temperature-sensor-cable-tesla-taycan.aspx");
         routes.MapPageRoute("", "{language}/application/{application}/motor-power-cable", "~/application/automobile/motor-power-cable.aspx");
-        
+
         routes.MapPageRoute("", "{language}/application/{application}/fighter-jet-temperature-sensor-cable", "~/application/misc-app/fighter-jet-temperature-sensor-cable.aspx");
-        
+
 
         routes.MapPageRoute("", "{language}/material", "~/material.aspx");
         routes.MapPageRoute("", "{language}/material/conductor", "~/conductor-category.aspx");
@@ -109,7 +109,7 @@
 
         routes.MapPageRoute("", "{language}/declaration/conflict-free-mineral-declaration", "~/conflict-free-mineral-declaration.aspx");
 
-        routes.MapPageRoute("", "{language}/portal", "~/portal.aspx");        
+        //routes.MapPageRoute("", "{language}/portal", "~/portal.aspx");        
 
         routes.MapPageRoute("", "{language}/sitemap", "~/sitemap.aspx");
 
@@ -117,6 +117,7 @@
 
         //seo old page routing to new page (has new page)
         routes.MapPageRoute("", "pdf/{filename}.pdf", "~/product-profile.aspx");
+        routes.MapPageRoute("", "en/default", "~/default.aspx");
         //military-grade-wire
         routes.MapPageRoute("", "m16878", "~/product-profile.aspx", true,
             new RouteValueDictionary { }, new RouteValueDictionary { },
@@ -1595,16 +1596,16 @@
         routes.MapPageRoute("", "en/flr2x-b.aspx", "~/product-profile.aspx", true,
             new RouteValueDictionary { }, new RouteValueDictionary { },
             new RouteValueDictionary { { "language", "en" }, { "productID", "iso-flr2x-b" } });
-        routes.MapPageRoute("", "flr13y-a", "~/product-profile.aspx", true,
+        routes.MapPageRoute("", "flr13ya", "~/product-profile.aspx", true,
             new RouteValueDictionary { }, new RouteValueDictionary { },
             new RouteValueDictionary { { "language", "zh" }, { "productID", "iso-flr13y-a" } });
-        routes.MapPageRoute("", "en/flr13y-a", "~/product-profile.aspx", true,
+        routes.MapPageRoute("", "en/flr13ya", "~/product-profile.aspx", true,
             new RouteValueDictionary { }, new RouteValueDictionary { },
             new RouteValueDictionary { { "language", "en" }, { "productID", "iso-flr13y-a" } });
-        routes.MapPageRoute("", "flr13y-a.aspx", "~/product-profile.aspx", true,
+        routes.MapPageRoute("", "flr13ya.aspx", "~/product-profile.aspx", true,
             new RouteValueDictionary { }, new RouteValueDictionary { },
             new RouteValueDictionary { { "language", "zh" }, { "productID", "iso-flr13y-a" } });
-        routes.MapPageRoute("", "en/flr13y-a.aspx", "~/product-profile.aspx", true,
+        routes.MapPageRoute("", "en/flr13ya.aspx", "~/product-profile.aspx", true,
             new RouteValueDictionary { }, new RouteValueDictionary { },
             new RouteValueDictionary { { "language", "en" }, { "productID", "iso-flr13y-a" } });
         routes.MapPageRoute("", "flry-a", "~/product-profile.aspx", true,
@@ -2001,7 +2002,7 @@
         routes.MapPageRoute("", "en/cat6a10gsutp", "~/pvc-wire.aspx");
         routes.MapPageRoute("", "cat6a10gsutp.aspx", "~/pvc-wire.aspx");
         routes.MapPageRoute("", "en/cat6a10gsutp.aspx", "~/pvc-wire.aspx");
-        
+
         routes.MapPageRoute("", "cat6a10gsftp", "~/pvc-wire.aspx");
         routes.MapPageRoute("", "en/cat6a10gsftp", "~/pvc-wire.aspx");
         routes.MapPageRoute("", "cat6a10gsftp.aspx", "~/pvc-wire.aspx");
@@ -2021,11 +2022,10 @@
         routes.MapPageRoute("", "en/defibrillator-signal-wire", "~/pvc-wire.aspx");
         routes.MapPageRoute("", "defibrillator-signal-wire.aspx", "~/pvc-wire.aspx");
         routes.MapPageRoute("", "en/defibrillator-signal-wire.aspx", "~/pvc-wire.aspx");
-        
+
         routes.MapPageRoute("", "{language}/silicone-fiberglass-wire", "~/silicone-fiberglass-wire.aspx");
 
         routes.MapPageRoute("", "cloud", "~/application.aspx");
-
 
         var settings = new FriendlyUrlSettings();
         settings.AutoRedirectMode = RedirectMode.Permanent;

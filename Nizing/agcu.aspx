@@ -7,7 +7,10 @@
 <asp:Content ID="banner" ContentPlaceHolderID="banner" runat="Server">
     <div class="container-fluid">
         <div class="banner">
-            <img src="/images/banner/banner-materials-en-1920x500.png" />
+            <picture>
+                <source srcset="/images/banner/banner-conductor.webp" type="image/webp" />
+                <img src="/images/banner/banner-conductor.png" />
+            </picture>
         </div>
     </div>
 </asp:Content>

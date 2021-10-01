@@ -267,15 +267,13 @@
         </div>--%>
         <div id="application_section">
             <div class="row" style="color: red">
-                *本次版更內容: 一張假單僅能請一天假，如需多天請假需登打多張假單
-                <asp:TextBox ID="txtTest" runat="server"></asp:TextBox>
-                <asp:Button ID="btntest" runat="server" Text="Button" />
+                <%--*本次版更內容: 一張假單僅能請一天假，如需多天請假需登打多張假單--%>
+<%--                <asp:TextBox ID="txtTest" runat="server"></asp:TextBox>
+                <asp:Button ID="btntest" runat="server" Text="Button" />--%>
             </div>
             <div id="DayOffApp">
-                <div class="row form-group">
+                <%--<div class="row form-group">
                     <div class="col-sm-2">
-                        <%--                        <asp:DropDownList ID="ddlDayOffType" runat="server" CssClass="form-control-lg" AutoPostBack="true" OnSelectedIndexChanged="ddlDayOffType_SelectedIndexChanged">
-                        </asp:DropDownList>--%>
                     </div>
                     <div class="col-sm-2" style="display: inline; padding-right: 0px;">
                         <asp:TextBox ID="txtDatePickerStart" runat="server" CssClass="form-control datepicker" placeholder="請假起始日期"></asp:TextBox>
@@ -295,10 +293,7 @@
                     <div class="col-sm-1" style="display: inline; padding-left: 0px;">
                         <asp:DropDownList ID="ddlDayOffEndMin" runat="server" CssClass="form-control"></asp:DropDownList>
                     </div>
-                    <div class="col-sm-2" style="display: inline;">
-                        <%--<asp:DropDownList ID="ddlDayOffFuncSub" runat="server" CssClass="form-control-lg"></asp:DropDownList>--%>
-                    </div>
-                </div>
+                </div>--%>
                 <div class="row">
                     <div class="col-sm-2">
                         <asp:Label ID="lblDayOffRemainType" runat="server" Text=""></asp:Label>
@@ -380,14 +375,14 @@
                                         <div class="form-group">
                                             <span>請假事由:</span>
                                             <asp:TextBox ID="txtReason" runat="server" CssClass="form-control" MaxLength="100"
-                                                placeholder="事假必填(100字內)"></asp:TextBox>                                            
+                                                placeholder="事假必填(100字內)"></asp:TextBox>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <asp:Button ID="btnDayOffAdd" runat="server" CssClass="btn btn-success w-100" Text="送出"
                                             UseSubmitBehavior="false"
                                             data-dismiss="modal" />
-                                            <%--OnClick="btnDayOffAdd_Click"/>--%>
+                                        <%--OnClick="btnDayOffAdd_Click"/>--%>
                                     </div>
                                 </div>
                             </div>

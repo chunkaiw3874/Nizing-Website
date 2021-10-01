@@ -22,7 +22,7 @@ using System.Web.UI.WebControls;
 public partial class hr360_UI04 : System.Web.UI.Page
 {
     string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
-    string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
+    string NZConnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
     List<DayOffInfo> lstDayOffAppSummary = new List<DayOffInfo>();
     //DataTable userInfo = new DataTable();
     string currentHREmployeeID = "0142"; //current //HR code;
@@ -34,14 +34,14 @@ public partial class hr360_UI04 : System.Web.UI.Page
     List<string> exceptionListHourForProduction = new List<string>();   //例外清單:可用小時計假的線廠人員(阿豪0160)
 
     [Serializable]
-    public class UserInfo
-    {
-        public string id { set; get; }
-        public string name { set; get; }
-        public string sex { set; get; }
-        public string dept { set; get; }
-        public string rank { set; get; }
-    }
+    //public class UserInfo
+    //{
+    //    public string id { set; get; }
+    //    public string name { set; get; }
+    //    public string sex { set; get; }
+    //    public string dept { set; get; }
+    //    public string rank { set; get; }
+    //}
     public class DayOffInfo
     {
         public string typeID { set; get; }
@@ -60,7 +60,6 @@ public partial class hr360_UI04 : System.Web.UI.Page
         //HR360LoggedUser.HR360Id = "0023";    //test only to avoid error on loading, delete after trial            
         //HR360LoggedUser.ERPId = "0023";
         //HR360LoggedUser.Company = "NIZING";
-
         //only use when opening check exception for certain persion
         exceptionList111.Add("0067");
         //exceptionList202designated.Add("0112");
@@ -159,8 +158,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
         bool typhoonDay = false;    //Flag for if the entire duration of the day off is typhoon day
         bool test101 = false;
         bool test102 = false;
-        bool test103 = false;
-        bool test104 = false;
+        //bool test103 = false;
+        //bool test104 = false;
         //bool test105 = false;
         //bool test106 = false;
         //bool test107 = false;
@@ -199,7 +198,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
         if (DateTime.TryParse(txtDayOffDate.Text.Trim(), out result))  //測試錯誤 102.起始日期輸入錯誤
         {
-            dayOffStartTime = result.Date.AddHours(Convert.ToInt16(ddlDayOffStartHour.SelectedValue)).AddMinutes(Convert.ToInt16(ddlDayOffStartMin.SelectedValue));
+            //dayOffStartTime = result.Date.AddHours(Convert.ToInt16(ddlDayOffStartHour.SelectedValue)).AddMinutes(Convert.ToInt16(ddlDayOffStartMin.SelectedValue));
             test102 = true;
         }
         else
@@ -207,16 +206,16 @@ public partial class hr360_UI04 : System.Web.UI.Page
             errorList.Add(errorCode(102));
             test102 = false;
         }
-        if (DateTime.TryParse(txtDatePickerEnd.Text.Trim(), out result))  //測試錯誤 103.結束日期輸入錯誤
-        {
-            dayOffEndTime = result.Date.AddHours(Convert.ToInt16(ddlDayOffEndHour.SelectedValue)).AddMinutes(Convert.ToInt16(ddlDayOffEndMin.SelectedValue));
-            test103 = true;
-        }
-        else
-        {
-            errorList.Add(errorCode(103));
-            test103 = false;
-        }
+        //if (DateTime.TryParse(txtDatePickerEnd.Text.Trim(), out result))  //測試錯誤 103.結束日期輸入錯誤
+        //{
+        //    dayOffEndTime = result.Date.AddHours(Convert.ToInt16(ddlDayOffEndHour.SelectedValue)).AddMinutes(Convert.ToInt16(ddlDayOffEndMin.SelectedValue));
+        //    test103 = true;
+        //}
+        //else
+        //{
+        //    errorList.Add(errorCode(103));
+        //    test103 = false;
+        //}
         //if (dayOffEndTime < dayOffStartTime)  //測試錯誤 104.結束日期小於開始日期
         //{
         //    errorList.Add(errorCode(104));
@@ -226,18 +225,18 @@ public partial class hr360_UI04 : System.Web.UI.Page
         //{
         //    test104 = true;
         //}
-        if (txtDayOffDate.Text != txtDatePickerEnd.Text)  //測試錯誤 104.假單不可跨天
-        {
-            if (ddlDayOffEndHour.SelectedValue != "00" || ddlDayOffEndMin.SelectedValue != "00" || DateTime.Parse(txtDatePickerEnd.Text).Date != DateTime.Parse(txtDayOffDate.Text).Date.AddDays(1))
-            {
-                errorList.Add(errorCode(104));
-                test104 = false;
-            }
-        }
-        else
-        {
-            test104 = true;
-        }
+        //if (txtDayOffDate.Text != txtDatePickerEnd.Text)  //測試錯誤 104.假單不可跨天
+        //{
+        //    if (ddlDayOffEndHour.SelectedValue != "00" || ddlDayOffEndMin.SelectedValue != "00" || DateTime.Parse(txtDatePickerEnd.Text).Date != DateTime.Parse(txtDayOffDate.Text).Date.AddDays(1))
+        //    {
+        //        errorList.Add(errorCode(104));
+        //        test104 = false;
+        //    }
+        //}
+        //else
+        //{
+        //    test104 = true;
+        //}
         if (ddlDayOffType.SelectedValue == "05" && txtReason.Text.Trim() == "") //測試錯誤 108.請事假未填寫請假原因
         {
             errorList.Add(errorCode(108));
@@ -275,12 +274,18 @@ public partial class hr360_UI04 : System.Web.UI.Page
             test111 = true;
         }
 
-        if (test101 && test102 && test103 && test104 && test108 && test110 && test111)  //PASS ALL INPUT TESTS (except for functional substitute), NEED TO START CALCULATING FOR OTHER ERRORS
+        if (test101
+            && test102
+            //&& test103 
+            //&& test104 
+            && test108
+            && test110
+            && test111)  //PASS ALL INPUT TESTS (except for functional substitute), NEED TO START CALCULATING FOR OTHER ERRORS
         {
             //DateTime[] days = GetDatesBetween(dayOffStartTime.Date, dayOffEndTime.Date);
             //for (int i = 0; i < days.Length; i++)
             //{
-            using (SqlConnection conn = new SqlConnection(NZconnectionString))
+            using (SqlConnection conn = new SqlConnection(NZConnectionString))
             {
                 conn.Open();
                 string query = "SELECT MP.MP004 '日期',MP.MP005 '放假'," + "MB.MB0" + (Convert.ToInt16(dayOffStartTime.Day.ToString()) + 2).ToString("D2") + " '班別',CONVERT(TIME,STUFF(MK.MK003,3,0,':')) '上班時間',CONVERT(TIME,STUFF(MK.MK004,3,0,':'))  '下班時間'"
@@ -501,7 +506,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 {
                     //test105 = true;
                 }
-                if (test102 && test103 && test104)
+                if (test102
+                    //&& test103 && test104
+                    )
                 {
                     using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))  //測試錯誤 106.代理人有事，不能代理
                     {
@@ -533,7 +540,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         }
                     }
                 }
-                if (test102 && test103 && test104)
+                if (test102
+                    //&& test103 && test104
+                    )
                 {
                     if (!exceptionList107.Contains(HR360LoggedUser.ERPId))
                     {
@@ -1023,7 +1032,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     + " ,MC017 'MONTHLY_QUOTA'"
                     + " FROM PALMC"
                     + " WHERE MC001=@ID";
-        using (SqlConnection conn = new SqlConnection(NZconnectionString))
+        using (SqlConnection conn = new SqlConnection(NZConnectionString))
         {
             conn.Open();
             SqlCommand cmd = new SqlCommand(query, conn);
@@ -1076,7 +1085,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 + " WHERE MC.MC001=@DayOffID"
                 + " GROUP BY MC.MC001,MC.MC017,MC.MC004";
         }
-        using (SqlConnection conn = new SqlConnection(NZconnectionString))
+        using (SqlConnection conn = new SqlConnection(NZConnectionString))
         {
             conn.Open();
             SqlCommand cmd = new SqlCommand(query, conn);
@@ -2359,7 +2368,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     + nonAdminCondition;
 
 
-        using (SqlConnection conn = new SqlConnection(NZconnectionString))  //FILL ddlSearch_Parameter_ApplicantID
+        using (SqlConnection conn = new SqlConnection(NZConnectionString))  //FILL ddlSearch_Parameter_ApplicantID
         {
             conn.Open();
             query += " ORDER BY 'list_order','value'";
@@ -2412,105 +2421,20 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         Session["lstDayOffAppSummary"] = lstDayOffAppSummary;
         hdnIsPostBack.Value = "1";  //variable for determining whether this page is a postback for jquery
-        UserInfo userInfo = new UserInfo();
         //hdnIsDayOffAppVisible.Value = "0";  //variable for determining whether the div DayOffApp is visible
-        DataSet ds = new DataSet();
-        string query = "";
-        using (SqlConnection conn = new SqlConnection(NZconnectionString))
+        DataTable dt = GetUserDayOffTypes(HR360LoggedUser.Sex);
+        FillDropDownListContent(ddlDayOffType, dt);
+        ddlDayOffFuncSub.SelectedValue = "03";
+
+        //抓取跟登入者同部門及可替代部門的人 (according to DB HR360_DAYOFFAPPLICATION_DEPT_REFERENCE)            
+        dt = GetUserFunctionalSub(HR360LoggedUser.ERPId, HR360LoggedUser.Dept);
+        FillDropDownListContent(ddlDayOffFuncSub, dt);
+        if (ddlDayOffFuncSub.Items.Count == 0)   //如使用者沒代理人，用小K
         {
-            conn.Open();
-            query = "SELECT MV.MV001 'id'" +
-                " ,MV.MV002 'name'" +
-                " ,MV.MV007 'sex'" +
-                " ,MV.MV004 'dept'" +
-                " ,HIER.[RANK] 'rank'"  //獲取登入者資料 性別、部門別
-                + " FROM CMSMV MV"
-                + " LEFT JOIN NZ_ERP2.dbo.HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MV.MV006=HIER.JOB_ID"
-                + " WHERE MV.MV001=@ID";
-            SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@ID", HR360LoggedUser.ERPId.Trim());
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            da.Fill(ds, "userInfo");
-            ViewState["userInfo"] = new UserInfo
-            {
-                id = ds.Tables["userInfo"].Rows[0]["id"].ToString().Trim(),
-                name = ds.Tables["userInfo"].Rows[0]["name"].ToString().Trim(),
-                sex = ds.Tables["userInfo"].Rows[0]["sex"].ToString().Trim() == "1" ? "M" : "F",
-                dept = ds.Tables["userInfo"].Rows[0]["dept"].ToString().Trim(),
-                rank = ds.Tables["userInfo"].Rows[0]["rank"].ToString().Trim()
-            };
-            userInfo = (UserInfo)ViewState["userInfo"];
-            if (userInfo.sex == "M")  //性別為男性
-            {
-                query = "SELECT PALMC.MC002" +
-                    " ,PALMC.MC001"
-                    + " FROM PALMC"
-                    + " WHERE PALMC.MC001<>'08'" //產假
-                    + " AND PALMC.MC001<>'16'" //生理假
-                    + " AND PALMC.MC001<>'19'" //安胎假
-                    + " AND PALMC.MC001<>'10'" //曠職
-                    + " AND PALMC.MC001<>'18'" //育嬰留停
-                    + " AND PALMC.MC001<>'21'" //遲到(HR將會移除此選項)
-                    + " ORDER BY PALMC.MC001";
-            }
-            else //女性無陪產假
-            {
-                query = "SELECT PALMC.MC002" +
-                    " ,PALMC.MC001"
-                    + " FROM PALMC"
-                    + " WHERE PALMC.MC001<>'09'" //陪產假
-                    + " AND PALMC.MC001<>'10'" //曠職
-                    + " AND PALMC.MC001<>'18'" //育嬰留停
-                    + " AND PALMC.MC001<>'21'" //遲到(HR將會移除此選項)
-                    + " ORDER BY PALMC.MC001";
-            }
-            cmd = new SqlCommand(query, conn);
-            da = new SqlDataAdapter(cmd);
-            da.Fill(ds, "dayOffType");
-            //抓取跟登入者同部門及可替代部門的人 (according to DB HR360_DAYOFFAPPLICATION_DEPT_REFERENCE)            
-            query = ";WITH REF_DEPT"
-                + " AS"
-                + " ("
-                + " SELECT REF.DEPT_MAIN MAIN,REF.DEPT_REF REF"
-                + " FROM CMSMV MV"
-                + " LEFT JOIN NZ_ERP2.dbo.HR360_DAYOFFAPPLICATION_DEPT_REFERENCE REF ON MV.MV004=REF.DEPT_MAIN AND REF.ACTIVE=1"
-                + " WHERE MV.MV001=@ID"
-                + " )"
-                + " SELECT DISTINCT LTRIM(RTRIM(MV.MV001))+' '+MV.MV002,MV.MV001"
-                + " FROM CMSMV MV"
-                + " LEFT JOIN CMSMK MK ON MV.MV001=MK.MK002"
-                + " LEFT JOIN REF_DEPT REF ON MV.MV004=REF.MAIN OR MV.MV004=REF.REF"
-                + " WHERE MV.MV022=''"
-                + " AND MV.MV001<>'0000'" //李小姐
-                + " AND MV.MV001<>'0098'" //黃耀南
-                + " AND MV.MV001<>@ID"
-                + " AND (MV.MV004=@DEPT OR MV.MV004=REF.REF)"
-                + " ORDER BY MV.MV001";
-            cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@DEPT", userInfo.dept);
-            cmd.Parameters.AddWithValue("@ID", userInfo.id);
-            da = new SqlDataAdapter(cmd);
-            da.Fill(ds, "Functional Substitute");
-        }
-        DataTable dtDayOffType = ds.Tables["dayOffType"];
-        for (int i = 0; i < dtDayOffType.Rows.Count; i++)
-        {
-            ddlDayOffType.Items.Add(new ListItem(dtDayOffType.Rows[i][0].ToString().Trim(), dtDayOffType.Rows[i][1].ToString().Trim()));
-        }
-        ddlDayOffType.SelectedValue = "03";
-        for (int i = 0; i < 24; i++)
-        {
-            ddlDayOffStartHour.Items.Add(i.ToString("D2"));
-            ddlDayOffStartHour.SelectedIndex = 8;
-            ddlDayOffEndHour.Items.Add(i.ToString("D2"));
-            ddlDayOffEndHour.SelectedIndex = 17;
-        }
-        for (int i = 0; i < 60; i += 30)
-        {
-            ddlDayOffStartMin.Items.Add(i.ToString("D2"));
-            ddlDayOffEndMin.Items.Add(i.ToString("D2"));
+            ddlDayOffFuncSub.Items.Add(new ListItem("0080 王君凱", "0080"));
         }
 
+        /*2021.10.01 更改請假內容顯示，改成一張假單一個Card，適合RWD顯示*/
         //請假內容header
         HtmlTableRow newHeaderRow = new HtmlTableRow();
         HtmlTableCell newHeaderCell = new HtmlTableCell("th");
@@ -2542,30 +2466,17 @@ public partial class hr360_UI04 : System.Web.UI.Page
         newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
         newHeaderRow.Controls.Add(newHeaderCell);
         tbAppSummary.Controls.Add(newHeaderRow);
-        //還需要代理人是否eligible for代理的篩選條件
-        ddlDayOffFuncSub.Items.Add(new ListItem("請選擇代理人", "0"));
-        ddlDayOffFuncSub.SelectedIndex = 0;
-        if (ds.Tables[1].Rows.Count == 0)   //此人沒代理人，用小K
-        {
-            ddlDayOffFuncSub.Items.Add(new ListItem("0080 王君凱", "0080"));
-        }
-        else
-        {
-            for (int i = 0; i < ds.Tables[1].Rows.Count; i++)
-            {
-                ddlDayOffFuncSub.Items.Add(new ListItem(ds.Tables[1].Rows[i][0].ToString().Trim(), ds.Tables[1].Rows[i][1].ToString().Trim()));
-            }
-        }
+
         //hidden field insertion
         //determine if applicant is within 0.5hr restraint or 4hr restraint (by dept)
-        if (userInfo.dept == "B-C"     //使用者部門為上膠部
-            || userInfo.dept == "B-E"  //絞線包帶部
-            || userInfo.dept == "B-G"  //編織部
-            || userInfo.dept == "B-IC" //倉儲管理科
-            || userInfo.dept == "B-K"  //捲線部
-            || userInfo.dept == "B-P"  //PVC押出部
-            || userInfo.dept == "B-S"  //矽膠部
-            || userInfo.dept == "B-T"  //鐵氟龍部
+        if (HR360LoggedUser.Dept == "B-C"     //使用者部門為上膠部
+            || HR360LoggedUser.Dept == "B-E"  //絞線包帶部
+            || HR360LoggedUser.Dept == "B-G"  //編織部
+            || HR360LoggedUser.Dept == "B-IC" //倉儲管理科
+            || HR360LoggedUser.Dept == "B-K"  //捲線部
+            || HR360LoggedUser.Dept == "B-P"  //PVC押出部
+            || HR360LoggedUser.Dept == "B-S"  //矽膠部
+            || HR360LoggedUser.Dept == "B-T"  //鐵氟龍部
             )
         {
             if (!exceptionListHourForProduction.Contains(HR360LoggedUser.ERPId))
@@ -2584,8 +2495,109 @@ public partial class hr360_UI04 : System.Web.UI.Page
             hdnOfficeOrProduction.Value = "office";
             hdnDayOffTimeRestraint.Value = "0.5";
         }
-        hdnEmployeeRank.Value = userInfo.rank;
+        hdnEmployeeRank.Value = GetUserJobRank(HR360LoggedUser.Job).ToString();
     }
+
+    protected int GetUserJobRank(string job)
+    {
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            string query = "select RANK 'rank'" +
+                " from HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY" +
+                " where JOB_ID=@job";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@job", job);
+            return cmd.ExecuteScalar() == null ? 0 : (int)cmd.ExecuteScalar();
+        }
+    }
+
+    protected DataTable GetUserDayOffTypes(string sex)
+    {
+        DataTable dt = new DataTable();
+        using (SqlConnection conn = new SqlConnection(NZConnectionString))
+        {
+            string query = "";
+
+            if (sex == "M")  //性別為男性
+            {
+                query = "SELECT PALMC.MC002 'text'" +
+                    " ,PALMC.MC001 'value'" +
+                    " FROM PALMC" +
+                    " WHERE PALMC.MC001<>'08'" +    //產假
+                    " AND PALMC.MC001<>'16'" +  //生理假
+                    " AND PALMC.MC001<>'19'" +  //安胎假
+                    " AND PALMC.MC001<>'10'" +  //曠職
+                    " AND PALMC.MC001<>'18'" +  //育嬰留停
+                    " AND PALMC.MC001<>'21'" + //遲到
+                    " ORDER BY PALMC.MC001";
+            }
+            else //女性無陪產假
+            {
+                query = "SELECT PALMC.MC002 'text'" +
+                    " ,PALMC.MC001 'value'" +
+                    " FROM PALMC" +
+                    " WHERE PALMC.MC001<>'09'" +    //陪產假
+                    " AND PALMC.MC001<>'10'" +  //曠職
+                    " AND PALMC.MC001<>'18'" +  //育嬰留停
+                    " AND PALMC.MC001<>'21'" + //遲到
+                    " ORDER BY PALMC.MC001";
+            }
+            SqlCommand cmd = new SqlCommand(query, conn);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+        }
+
+        return dt;
+    }
+
+    protected DataTable GetUserFunctionalSub(string empID, string empDept)
+    {
+        DataTable dt = new DataTable();
+        using (SqlConnection conn = new SqlConnection(NZConnectionString))
+        {
+            string query = ";WITH REF_DEPT" +
+            " AS" +
+            " (" +
+            " SELECT REF.DEPT_MAIN MAIN,REF.DEPT_REF REF" +
+            " FROM CMSMV MV" +
+            " LEFT JOIN NZ_ERP2.dbo.HR360_DAYOFFAPPLICATION_DEPT_REFERENCE REF ON MV.MV004=REF.DEPT_MAIN AND REF.ACTIVE=1" +
+            " WHERE MV.MV001=@ID" +
+            " )" +
+            " SELECT DISTINCT LTRIM(RTRIM(MV.MV001))+' '+MV.MV002,MV.MV001 'text'" +
+            " ,MV.MV001 'value'" +
+            " FROM CMSMV MV" +
+            " LEFT JOIN CMSMK MK ON MV.MV001=MK.MK002" +
+            " LEFT JOIN REF_DEPT REF ON MV.MV004=REF.MAIN OR MV.MV004=REF.REF" +
+            " WHERE MV.MV022=''" +
+            " AND MV.MV001<>'0000'" +    //李小姐
+            " AND MV.MV001<>'0098'" +    //黃耀南
+            " AND MV.MV001<>@ID" +
+            " AND (MV.MV004=@DEPT OR MV.MV004=REF.REF)" +
+            " ORDER BY MV.MV001";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@DEPT", empDept);
+            cmd.Parameters.AddWithValue("@ID", empID);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+        }
+        return dt;
+    }
+
+    /// <summary>
+    /// Fill in content for DropDownList with DataTable
+    /// DataTable must have columns "text" and "value"
+    /// </summary>
+    /// <param name="ddl"></param>
+    /// <param name="dt"></param>
+    protected void FillDropDownListContent(DropDownList ddl, DataTable dt)
+    {
+        foreach (DataRow dr in dt.Rows)
+        {
+            ddl.Items.Add(new ListItem(dr["text"].ToString().Trim(), dr["value"].ToString().Trim()));
+        }
+    }
+
     /// <summary>
     /// Postback loading for div application section
     /// </summary>
@@ -2720,7 +2732,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         List<string> recipientEmailList = new List<string>();
         foreach (string recipient in recipientId)
         {
-            using (SqlConnection conn = new SqlConnection(NZconnectionString))
+            using (SqlConnection conn = new SqlConnection(NZConnectionString))
             {
                 conn.Open();
                 string query = "SELECT COALESCE(MV.MV020,'')"
@@ -3080,5 +3092,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
     protected void btnAddApplicationForm_Click(object sender, EventArgs e)
     {
         ShowModal("ApplicationForm");
+    }
+
+    protected void AppendSystemMessage(string text, string textCondition)
+    {
+
     }
 }

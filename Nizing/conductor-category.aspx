@@ -17,8 +17,8 @@
     <div class="container-fluid">
         <div class="banner">
             <picture>
-                <source srcset="/images/banner/banner-materials-en.webp" type="image/webp" />
-                <img src="/images/banner/banner-materials-en.png" />
+                <source srcset="/images/banner/banner-conductor.webp" type="image/webp" />
+                <img src="/images/banner/banner-conductor.png" />
             </picture>
         </div>
     </div>

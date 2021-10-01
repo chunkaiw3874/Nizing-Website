@@ -12,10 +12,9 @@ public partial class conductor_category : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            if (Session["language"] == null)
-            {
-                Session["language"] = "zh";
-            }
+            Session["language"] = RouteData.Values["language"] == null ? "zh" : RouteData.Values["language"].ToString();
+            string language = Session["language"].ToString();
+
             BuildMenu(Session["language"].ToString());
         }
     }

@@ -25,7 +25,7 @@
 
         .banner .banner-text {
             color: white;
-            font-size: 30px;
+            font-size: 36px;
             text-shadow: 1px 1px 3px black,3px 3px 9px black;
         }
 
@@ -35,8 +35,8 @@
 
             .banner .banner-text .top-left {
                 position: absolute;
-                top: 50px;
-                left: 30px;
+                top: 70px;
+                left: 60px;
             }
 
                 .banner .banner-text .top-left p {
@@ -51,7 +51,7 @@
                 position: absolute;
                 bottom: 30px;
                 right: 0;
-                margin-right: -300px;
+                margin-right: -450px;
             }
 
                 .banner .banner-text .bottom-right p {
@@ -67,6 +67,18 @@
                     -webkit-transform-origin-x: 0;
                 }
 
+        @media all and (max-width:1399px) {
+            .banner .banner-text {
+                color: white;
+                font-size: 30px;
+            }
+
+                .banner .banner-text .bottom-right .small-text {
+                    transform: scale(0.4);
+                    -webkit-transform-origin-x: 0;
+                }
+        }
+
         @media all and (max-width:1199px) {
             .banner .banner-text {
                 color: white;
@@ -76,6 +88,10 @@
                 .banner .banner-text .bottom-right .small-text {
                     transform: scale(0.4);
                     -webkit-transform-origin-x: 0;
+                }
+
+                .banner .banner-text .bottom-right {
+                    margin-right: -350px;
                 }
         }
 
@@ -88,6 +104,10 @@
                 .banner .banner-text .bottom-right .small-text {
                     transform: scale(0.4);
                     -webkit-transform-origin-x: 0;
+                }
+
+                .banner .banner-text .bottom-right {
+                    margin-right: -300px;
                 }
         }
 

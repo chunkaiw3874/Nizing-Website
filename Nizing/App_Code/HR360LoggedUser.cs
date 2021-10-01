@@ -15,5 +15,6 @@ public static class HR360LoggedUser
     public static string Name { set; get; }
     public static string Sex { set; get; }
     public static string Dept { set; get; }
+    public static string Job { set; get; }
     public static DateTime StartDate { set; get; }
 }

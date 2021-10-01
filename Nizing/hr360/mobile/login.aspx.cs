@@ -134,6 +134,7 @@ public partial class hr360_mobile_login : System.Web.UI.Page
             string query = "select top 1 MV.MV001 'id'" +
                 " ,MV.MV002 'name'" +
                 " ,MV.MV004 'dept'" +
+                " ,MV.MV006 'job'" +
                 " ,MV.MV007 'sex'" +
                 " ,MV.MV021 'startDate'" +
                 " from CMSMV MV" +
@@ -149,6 +150,7 @@ public partial class hr360_mobile_login : System.Web.UI.Page
             {
                 HR360LoggedUser.Name = dt.Rows[0]["name"].ToString().Trim();
                 HR360LoggedUser.Dept = dt.Rows[0]["dept"].ToString().Trim();
+                HR360LoggedUser.Job = dt.Rows[0]["job"].ToString().Trim();
                 HR360LoggedUser.Sex = dt.Rows[0]["sex"].ToString().Trim() == "1" ? "M" : "F";
                 HR360LoggedUser.StartDate = DateTime.ParseExact(dt.Rows[0]["startDate"].ToString().Trim(), "yyyyMMdd", null, DateTimeStyles.None);
             }
