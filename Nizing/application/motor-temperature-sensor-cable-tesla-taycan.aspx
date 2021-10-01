@@ -6,7 +6,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:title" content="IATF-16949 馬達溫度感知線-日進電線 2021" />
     <meta property="og:description" content="電動車內部馬達溫度感知線，為行車安全不可或缺的元件" />
-    <meta property="og:image" content="http://www.nizing.com.tw/images/application/automobile/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-02.jpg" />
+    <meta property="og:image" content="http://www.nizing.com.tw/images/application/products/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-02.jpg" />
     <meta property="og:url" content="http://www.nizing.com.tw/zh/application/automobile/motor-temperature-sensor-cable" />
     <meta property="og:site_name" content="Nizing Electric Wire and Cable" />
     <style type="text/css">
@@ -97,9 +97,9 @@
         <div class="row bg-black m-0 pb-3">
             <div class="col-md-6">
                 <picture>
-                    <source srcset="/images/application/automobile/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-01.webp"
+                    <source srcset="/images/application/products/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-01.webp"
                         type="image/webp" />
-                    <img src="/images/application/automobile/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-01.jpg"
+                    <img src="/images/application/products/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-01.jpg"
                         alt="Taycan Electric Car" />
                 </picture>
             </div>
@@ -123,17 +123,17 @@
                 </div>
                 <div>
                     <picture>
-                        <source srcset="/images/application/automobile/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-02.webp"
+                        <source srcset="/images/application/products/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-02.webp"
                             type="image/webp" />
-                        <img src="/images/application/automobile/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-02.jpg"
+                        <img src="/images/application/products/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-02.jpg"
                             alt="Tesla and Taycan  Motor Temperature Sensor Wire" />
                     </picture>
                 </div>
                 <div class="d-flex justify-content-center">
                     <picture>
-                        <source srcset="/images/application/automobile/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-03.webp"
+                        <source srcset="/images/application/products/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-03.webp"
                             type="image/webp" />
-                        <img src="/images/application/automobile/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-03.jpg"
+                        <img src="/images/application/products/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-03.jpg"
                             alt="Tesla and Taycan  Motor Temperature Sensor Wire Structure" class="img-small" />
                     </picture>
                 </div>

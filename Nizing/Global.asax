@@ -80,10 +80,10 @@
         routes.MapPageRoute("", "{language}/application", "~/application.aspx");
 
         routes.MapPageRoute("", "{language}/application/{application}", "~/application-list.aspx");
-        routes.MapPageRoute("", "{language}/application/{application}/motor-temperature-sensor-cable-tesla-taycan", "~/application/automobile/motor-temperature-sensor-cable-tesla-taycan.aspx");
-        routes.MapPageRoute("", "{language}/application/{application}/motor-power-cable", "~/application/automobile/motor-power-cable.aspx");
 
-        routes.MapPageRoute("", "{language}/application/{application}/fighter-jet-temperature-sensor-cable", "~/application/misc-app/fighter-jet-temperature-sensor-cable.aspx");
+        routes.MapPageRoute("", "{language}/application/{application}/motor-temperature-sensor-cable-tesla-taycan", "~/application/motor-temperature-sensor-cable-tesla-taycan.aspx");
+        routes.MapPageRoute("", "{language}/application/{application}/motor-power-cable", "~/application/motor-power-cable.aspx");
+        routes.MapPageRoute("", "{language}/application/{application}/fighter-jet-temperature-sensor-cable", "~/application/fighter-jet-temperature-sensor-cable.aspx");
 
 
         routes.MapPageRoute("", "{language}/material", "~/material.aspx");

@@ -6,7 +6,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:title" content="戰鬥機溫控線-日進電線 2021" />
     <meta property="og:description" content="戰鬥機的設計結構繁複精密，在任一環節都不予許任何出錯的可能，在電線上的選擇更不能馬虎，戰鬥機內感溫線須具備抗高溫及卓越耐腐蝕性及極強的耐絕緣性，此款產品使用可耐高低溫性的PFA鐵氟龍材質，具有最優秀可連續使用溫度260°C，且具耐腐蝕及耐絕緣性二項特色，並在內層搭配多重防雜訊隔離使其數值回饋更加精準，提高可靠性及安全性。" />
-    <meta property="og:image" content="http://www.nizing.com.tw/images/application/misc-app/fighter-jet-temperature-sensor-cable/impression/fighter-jet-temperature-sensor-cable-01.png" />
+    <meta property="og:image" content="http://www.nizing.com.tw/images/application/products/fighter-jet-temperature-sensor-cable/impression/fighter-jet-temperature-sensor-cable-01.png" />
     <meta property="og:url" content="http://www.nizing.com.tw/zh/application/misc-app/fighter-jet-temperature-sensor-cable" />
     <meta property="og:site_name" content="Nizing Electric Wire and Cable" />
     <style type="text/css">
@@ -30,11 +30,11 @@
         }
 
         .webp .bg-wrapper {
-            background: url("/images/application/misc-app/fighter-jet-temperature-sensor-cable/impression/fighter-jet-temperature-sensor-cable-bg.webp") no-repeat right / contain;
+            background: url("/images/application/products/fighter-jet-temperature-sensor-cable/impression/fighter-jet-temperature-sensor-cable-bg.webp") no-repeat right / contain;
         }
 
         .no-webp .bg-wrapper {
-            background: url("/images/application/misc-app/fighter-jet-temperature-sensor-cable/impression/fighter-jet-temperature-sensor-cable-bg.jpg") no-repeat right / contain;
+            background: url("/images/application/products/fighter-jet-temperature-sensor-cable/impression/fighter-jet-temperature-sensor-cable-bg.jpg") no-repeat right / contain;
         }
 
         .bg-color {
@@ -166,9 +166,9 @@
                 <div class="col-sm-6"></div>
                 <div class="col-sm-6 d-flex justify-content-end">
                     <picture>
-                        <source srcset="/images/application/misc-app/fighter-jet-temperature-sensor-cable/impression/fighter-jet-temperature-sensor-cable-01.webp"
+                        <source srcset="/images/application/products/fighter-jet-temperature-sensor-cable/impression/fighter-jet-temperature-sensor-cable-01.webp"
                             type="image/webp" />
-                        <img src="/images/application/misc-app/fighter-jet-temperature-sensor-cable/impression/fighter-jet-temperature-sensor-cable-01.png"
+                        <img src="/images/application/products/fighter-jet-temperature-sensor-cable/impression/fighter-jet-temperature-sensor-cable-01.png"
                             alt="Fighter Jet Temperature Sensor Cable" />
                     </picture>
                 </div>
@@ -192,9 +192,9 @@
                         </div>
                         <div class="d-flex justify-content-center limit-width-500">
                             <picture>
-                                <source srcset="/images/application/misc-app/fighter-jet-temperature-sensor-cable/impression/fighter-jet-temperature-sensor-cable-02.webp"
+                                <source srcset="/images/application/products/fighter-jet-temperature-sensor-cable/impression/fighter-jet-temperature-sensor-cable-02.webp"
                                     type="image/webp" />
-                                <img src="/images/application/misc-app/fighter-jet-temperature-sensor-cable/impression/fighter-jet-temperature-sensor-cable-02.png"
+                                <img src="/images/application/products/fighter-jet-temperature-sensor-cable/impression/fighter-jet-temperature-sensor-cable-02.png"
                                     alt="Fighter Jet Temperature Sensor Cable Structure" class="mx-auto" />
                             </picture>
                         </div>
@@ -203,9 +203,9 @@
             </div>
             <div class="d-sm-none" style="margin-top: -100px">
                 <picture>
-                    <source srcset="/images/application/misc-app/fighter-jet-temperature-sensor-cable/impression/fighter-jet-temperature-sensor-cable-03.webp"
+                    <source srcset="/images/application/products/fighter-jet-temperature-sensor-cable/impression/fighter-jet-temperature-sensor-cable-03.webp"
                         type="image/webp" />
-                    <img src="/images/application/misc-app/fighter-jet-temperature-sensor-cable/impression/fighter-jet-temperature-sensor-cable-03.png"
+                    <img src="/images/application/products/fighter-jet-temperature-sensor-cable/impression/fighter-jet-temperature-sensor-cable-03.png"
                         alt="Fighter Jet Temperature Sensor Cable" />
                 </picture>
             </div>

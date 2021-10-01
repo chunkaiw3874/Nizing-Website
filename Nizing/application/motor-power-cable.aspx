@@ -6,7 +6,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:title" content="電動機車電源供應器 電動馬達動力線-日進電線 2021" />
     <meta property="og:description" content="電動機車的主要電源供應電纜，為電動機車的核心元件" />
-    <meta property="og:image" content="http://www.nizing.com.tw/images/application/automobile/motor-power-cable/impression/motor-power-cable-2.jpg" />
+    <meta property="og:image" content="http://www.nizing.com.tw/images/application/products/motor-power-cable/impression/motor-power-cable-2.jpg" />
     <meta property="og:url" content="http://www.nizing.com.tw/zh/application/automobile/motor-power-cable" />
     <meta property="og:site_name" content="Nizing Electric Wire and Cable" />
     <style type="text/css">
@@ -99,10 +99,10 @@
         <div class="row bg-color m-0 pb-3">
             <div class="col-md-6">
                 <picture>
-                    <source srcset="/images/application/automobile/motor-power-cable/impression/motor-power-cable-1-mobile.webp" media="(max-width:767px)" type="image/webp" />
-                    <source srcset="/images/application/automobile/motor-power-cable/impression/motor-power-cable-1.webp" type="image/webp" />
-                    <source srcset="/images/application/automobile/motor-power-cable/impression/motor-power-cable-1-mobile.jpg" media="(max-width:767px)" />
-                    <img src="/images/application/automobile/motor-power-cable/impression/motor-power-cable-1.jpg"
+                    <source srcset="/images/application/products/motor-power-cable/impression/motor-power-cable-1-mobile.webp" media="(max-width:767px)" type="image/webp" />
+                    <source srcset="/images/application/products/motor-power-cable/impression/motor-power-cable-1.webp" type="image/webp" />
+                    <source srcset="/images/application/products/motor-power-cable/impression/motor-power-cable-1-mobile.jpg" media="(max-width:767px)" />
+                    <img src="/images/application/products/motor-power-cable/impression/motor-power-cable-1.jpg"
                         alt="Gogoro Electric Motorcycle" />
                 </picture>
 
@@ -128,15 +128,15 @@
                 </div>
                 <div>
                     <picture>
-                        <source srtset="/images/application/automobile/motor-power-cable/impression/motor-power-cable-2.webp" type="image/webp" />
-                        <img src="/images/application/automobile/motor-power-cable/impression/motor-power-cable-2.jpg"
+                        <source srtset="/images/application/products/motor-power-cable/impression/motor-power-cable-2.webp" type="image/webp" />
+                        <img src="/images/application/products/motor-power-cable/impression/motor-power-cable-2.jpg"
                             alt="Gogoro Electric Motorcycle Power Cable" />
                     </picture>
                 </div>
                 <div class="d-flex justify-content-center">
                     <picture>
-                        <source srtset="/images/application/automobile/motor-power-cable/impression/motor-power-cable-3.webp" type="image/webp" />
-                        <img src="/images/application/automobile/motor-power-cable/impression/motor-power-cable-3.jpg"
+                        <source srtset="/images/application/products/motor-power-cable/impression/motor-power-cable-3.webp" type="image/webp" />
+                        <img src="/images/application/products/motor-power-cable/impression/motor-power-cable-3.jpg"
                             alt="Gogoro Electric Motorcycle Power Cable Structure" class="img-small" />
                     </picture>
                 </div>

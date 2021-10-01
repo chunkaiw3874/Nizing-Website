@@ -99,11 +99,11 @@ public partial class application_list : System.Web.UI.Page
         HtmlGenericControl picture = new HtmlGenericControl("picture");
         divImageSection.Controls.Add(picture);
         HtmlSource src = new HtmlSource();
-        src.Attributes.Add("srcset", "/images/application/" + application + "/" + PID + "/menu/" + PID + ".webp");
+        src.Attributes.Add("srcset", "/images/application/products/" + PID + "/menu/" + PID + ".webp");
         src.Attributes.Add("type", "image/webp");
         picture.Controls.Add(src);
         HtmlImage img = new HtmlImage();
-        img.Src = "/images/application/" + application + "/" + PID + "/menu/" + PID + ".jpg";
+        img.Src = "/images/application/products/" + PID + "/menu/" + PID + ".jpg";
         img.Alt = title;
         picture.Controls.Add(img);
         HtmlGenericControl divTextSection = new HtmlGenericControl("div");
