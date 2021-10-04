@@ -14,7 +14,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="banner" runat="server">
     <div class="container-fluid">
         <div class="banner">
-            <img src="/images/banner/banner-homepage-cn-1300x500.gif" class="w-100" />
+            <picture>
+                <source srcset="/images/banner/banner-home-mobile.webp" media="(max-width:767px)" type="image/webp" />
+                <source srcset="/images/banner/banner-home.webp" type="image/webp" />
+                <source srcset="/images/banner/banner-home-mobile.jpg" media="(max-width:767px)" />
+                <img src="/images/banner/banner-home.jpg" alt="日進電線電纜 Nizing Electric Wire and Cable" />
+            </picture>
         </div>
     </div>
 </asp:Content>

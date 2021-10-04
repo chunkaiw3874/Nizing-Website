@@ -380,11 +380,11 @@
                         抗老化，安全時尚的電線電纜供應商
                     </p>
                 </div>
-                <div class="bottom-right">
+<%--                <div class="bottom-right">
                     <p>專業電線電纜製造商</p>
                     <p class="small-text">GB/T 19001-2015; ISO: 9001-2015 Certified No. 00610 Q20229RIM</p>
                     <p class="small-text">UL / CSA / VDE / PSE / CCC / CE / RoHs, REACH, MIT Certified</p>
-                </div>
+                </div>--%>
             </div>
         </div>
     </div>
@@ -419,7 +419,7 @@
                         </div>
                         <div class="col">
                             <div class="hottest-item">
-                                <a href="">
+                                <a href="/zh/application/cloud-system/inflammable-signal-cable">
                                     <div class="image-section">
                                         <picture>
                                             <source srcset="/images/product/hot-item/inflammable-signal-cable.webp" type="image/webp">
@@ -430,7 +430,7 @@
                                 </a>
                                 <div class="text-section">
                                     <div class="title text-left">防火耐燃訊號線</div>
-                                    <div class="subtitle text-left">iPhone-Type C快速充電線</div>
+                                    <div class="subtitle text-left">iPhone-Type C 快速充電線</div>
                                 </div>
                             </div>
                         </div>

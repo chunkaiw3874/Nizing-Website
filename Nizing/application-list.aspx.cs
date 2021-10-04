@@ -16,14 +16,23 @@ public partial class application_list : System.Web.UI.Page
     string webConnectionString = ConfigurationManager.ConnectionStrings["WebsiteConnectionString"].ConnectionString;
     protected void Page_Load(object sender, EventArgs e)
     {
-        Session["language"] = RouteData.Values["language"] == null ? "zh" : RouteData.Values["language"].ToString();
-        string language = Session["language"].ToString();
-
-        string application = RouteData.Values["application"].ToString();
-
-        if (!IsPostBack)
+        if (Page.RouteData.DataTokens["language"] != null && Page.RouteData.DataTokens["application"] != null)
         {
-            BuildMenu(language, application);
+            string language = Page.RouteData.DataTokens["language"].ToString();
+            string application = Page.RouteData.DataTokens["application"].ToString();
+            Response.Redirect("~/" + language + "/application/" + application);
+        }
+        else
+        {
+            Session["language"] = RouteData.Values["language"] == null ? "zh" : RouteData.Values["language"].ToString();
+            string language = Session["language"].ToString();
+
+            string application = RouteData.Values["application"].ToString();
+
+            if (!IsPostBack)
+            {
+                BuildMenu(language, application);
+            }
         }
     }
 
@@ -51,7 +60,7 @@ public partial class application_list : System.Web.UI.Page
             divTitle.Attributes.Add("class", "title");
             divTitle.InnerText = dt.Rows[0]["zhText"].ToString();
             divBackground.Controls.AddAt(0, divTitle);
-            HtmlGenericControl divSubtitle = new HtmlGenericControl("div");            
+            HtmlGenericControl divSubtitle = new HtmlGenericControl("div");
             divSubtitle.Attributes.Add("class", "subtitle");
             divSubtitle.InnerText = dt.Rows[0]["enText"].ToString();
             divBackground.Controls.AddAt(1, divSubtitle);
@@ -78,11 +87,11 @@ public partial class application_list : System.Web.UI.Page
 
         foreach (DataRow dr in dt.Rows)
         {
-            BuildMenuItem(application, dr["PID"].ToString().ToLower(), dr["Description"].ToString(), dr["Name"].ToString(), "~/" + language + "/application/" + application + "/");
+            BuildMenuItem(dr["PID"].ToString().ToLower(), dr["Name"].ToString(), dr["Description"].ToString(), "~/" + language + "/application/" + application + "/");
         }
     }
 
-    protected void BuildMenuItem(string application, string PID, string title, string subtitle, string url)
+    protected void BuildMenuItem(string PID, string title, string subtitle, string url)
     {
         HtmlGenericControl divCol = new HtmlGenericControl("div");
         divCol.Attributes.Add("class", "col");

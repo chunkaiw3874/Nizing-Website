@@ -207,8 +207,12 @@
 				<siteMapNode url="/zh/application/automobile/motor-temperature-sensor-cable" title="IATF-16949 馬達溫度感知線" description="IATF-16949 馬達溫度感知線"></siteMapNode>
 				<siteMapNode url="/zh/application/automobile/motor-power-cable" title="電動機車馬達動力線" description="電動機車馬達動力線"></siteMapNode>				
 			</siteMapNode>
+			<siteMapNode url="/zh/application/cloud-system" title="雲端系統" description="雲端系統">
+				<siteMapNode url="/zh/application/cloud-system/inflammable-signal-cable" title="防火耐燃訊號線" description="防火耐燃訊號線"></siteMapNode>
+			</siteMapNode>
 			<siteMapNode url="/zh/application/misc-app" title="其他應用" description="其他應用">
 				<siteMapNode url="/zh/application/misc-app/fighter-jet-temperature-sensor-cable" title="戰鬥機溫控線" description="戰鬥機溫控線"></siteMapNode>
+				<siteMapNode url="/zh/application/misc-app/inflammable-signal-cable" title="防火耐燃訊號線" description="防火耐燃訊號線"></siteMapNode>
 			</siteMapNode>
 		</siteMapNode>
 
@@ -440,8 +444,12 @@
 				<siteMapNode url="/en/application/automobile/motor-temperature-sensor-cable" title="IATF-16949 Motor Temperature Sensor Cable" description="IATF-16949 Motor Temperature Sensor Cable"></siteMapNode>
 				<siteMapNode url="/en/application/automobile/motor-power-cable" title="Electric Motorcycle Power Cable" description="Electric Motorcycle Power Cable"></siteMapNode>				
 			</siteMapNode>
+			<siteMapNode url="/en/application/cloud-system" title="Cloud System" description="Cloud System">
+				<siteMapNode url="/en/application/cloud-system/inflammable-signal-cable" title="Inflammable Signal Cable" description="Inflammable Signal Cable"></siteMapNode>
+			</siteMapNode>
 			<siteMapNode url="/en/application/misc-app" title="Other Application" description="Other Application">
 				<siteMapNode url="/en/application/misc-app/fighter-jet-temperature-sensor-cable" title="Fighter Jet Temperature Sensor Cable" description="Fighter Jet Temperature Sensor Cable"></siteMapNode>
+				<siteMapNode url="/en/application/misc-app/inflammable-signal-cable" title="Inflammable Signal Cable" description="Inflammable Signal Cable"></siteMapNode>
 			</siteMapNode>
 		</siteMapNode>
 

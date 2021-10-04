@@ -1008,7 +1008,7 @@
 		<priority>0.40</priority>
 	</url>
 	<url>
-		<loc>https://www.nizing.com.tw/zh/contact_us</loc>
+		<loc>https://www.nizing.com.tw/zh/contact-us</loc>
 		<changefreq>yearly</changefreq>
 		<priority>0.40</priority>
 	</url>
@@ -1018,12 +1018,22 @@
 		<priority>0.70</priority>
 	</url>
 	<url>
-		<loc>https://www.nizing.com.tw/zh/application/automobile/motor-temperature-sensor-cable</loc>
+		<loc>https://www.nizing.com.tw/zh/application/automobile/motor-temperature-sensor-cable-tesla-taycan</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>
 	<url>
 		<loc>https://www.nizing.com.tw/zh/application/automobile/motor-power-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/zh/application/cloud-system</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/zh/application/cloud-system/inflammable-signal-cable</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>
@@ -1034,6 +1044,11 @@
 	</url>
 	<url>
 		<loc>https://www.nizing.com.tw/zh/application/misc-app/fighter-jet-temperature-sensor-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/zh/application/misc-app/inflammable-signal-cable</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>
@@ -2078,7 +2093,7 @@
 		<priority>0.40</priority>
 	</url>
 	<url>
-		<loc>https://www.nizing.com.tw/en/contact_us</loc>
+		<loc>https://www.nizing.com.tw/en/contact-us</loc>
 		<changefreq>yearly</changefreq>
 		<priority>0.40</priority>
 	</url>
@@ -2088,12 +2103,22 @@
 		<priority>0.70</priority>
 	</url>
 	<url>
-		<loc>https://www.nizing.com.tw/en/application/automobile/motor-temperature-sensor-cable</loc>
+		<loc>https://www.nizing.com.tw/en/application/automobile/motor-temperature-sensor-cable-tesla-taycan</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>
 	<url>
 		<loc>https://www.nizing.com.tw/en/application/automobile/motor-power-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/en/application/cloud-system</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/en/application/cloud-system/inflammable-signal-cable</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>
@@ -2104,6 +2129,11 @@
 	</url>
 	<url>
 		<loc>https://www.nizing.com.tw/en/application/misc-app/fighter-jet-temperature-sensor-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/en/application/misc-app/inflammable-signal-cable</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>

@@ -14,25 +14,25 @@ public partial class military_grade_wire : System.Web.UI.Page
     string webConnectionString = ConfigurationManager.ConnectionStrings["WebsiteConnectionString"].ConnectionString;
     protected void Page_Load(object sender, EventArgs e)
     {
-        Session["language"] = RouteData.Values["language"] == null ? "zh" : RouteData.Values["language"].ToString();
+            Session["language"] = RouteData.Values["language"] == null ? "zh" : RouteData.Values["language"].ToString();
 
-        if (RouteData.Values["language"] == null)
-        {
-            Response.Redirect("/zh/product/military-grade-wire");
-        }
-
-        string productCategory = Request.Url.ToString().Split('/').Last();
-        string language = RouteData.Values["language"].ToString().ToLower();
-
-        if (!IsPostBack)
-        {
-            DataTable dt = GetCategoryItem(productCategory, language);
-
-            if (dt.Rows.Count > 0)
+            if (RouteData.Values["language"] == null)
             {
-                PopulateProductListItem(dt);
+                Response.Redirect("/zh/product/military-grade-wire");
             }
-        }
+
+            string productCategory = Request.Url.ToString().Split('/').Last();
+            string language = RouteData.Values["language"].ToString().ToLower();
+
+            if (!IsPostBack)
+            {
+                DataTable dt = GetCategoryItem(productCategory, language);
+
+                if (dt.Rows.Count > 0)
+                {
+                    PopulateProductListItem(dt);
+                }
+            }
     }
 
     protected DataTable GetCategoryItem(string category, string lang)

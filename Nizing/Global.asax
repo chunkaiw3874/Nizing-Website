@@ -84,6 +84,7 @@
         routes.MapPageRoute("", "{language}/application/{application}/motor-temperature-sensor-cable-tesla-taycan", "~/application/motor-temperature-sensor-cable-tesla-taycan.aspx");
         routes.MapPageRoute("", "{language}/application/{application}/motor-power-cable", "~/application/motor-power-cable.aspx");
         routes.MapPageRoute("", "{language}/application/{application}/fighter-jet-temperature-sensor-cable", "~/application/fighter-jet-temperature-sensor-cable.aspx");
+        routes.MapPageRoute("", "{language}/application/{application}/inflammable-signal-cable", "~/application/inflammable-signal-cable.aspx");
 
 
         routes.MapPageRoute("", "{language}/material", "~/material.aspx");
@@ -109,7 +110,7 @@
 
         routes.MapPageRoute("", "{language}/declaration/conflict-free-mineral-declaration", "~/conflict-free-mineral-declaration.aspx");
 
-        //routes.MapPageRoute("", "{language}/portal", "~/portal.aspx");        
+        routes.MapPageRoute("", "{language}/portal", "~/portal.aspx");
 
         routes.MapPageRoute("", "{language}/sitemap", "~/sitemap.aspx");
 
@@ -1983,18 +1984,87 @@
 
         routes.MapPageRoute("", "engine-power-cable", "~/application/automobile/MOTOR-POWER-CABLE.aspx");
 
-        routes.MapPageRoute("", "military-grade-series", "~/military-grade-wire.aspx");
-        routes.MapPageRoute("", "silicone-fiberglass-series", "~/silicone-fiberglass-wire.aspx");
-        routes.MapPageRoute("", "high-temperature-resistance-series", "~/high-temperature-wire.aspx");
-        routes.MapPageRoute("", "silicone-series", "~/silicone-wire.aspx");
-        routes.MapPageRoute("", "teflon-series", "~/teflon-wire.aspx");
-        routes.MapPageRoute("", "xlpe-series", "~/xlpe-wire.aspx");
-        routes.MapPageRoute("", "pvc-series", "~/pvc-wire.aspx");
-        routes.MapPageRoute("", "sleeve-and-tube-series", "~/tube.aspx");
-        routes.MapPageRoute("", "thermocouple-series", "~/thermocouple.aspx");
-        routes.MapPageRoute("", "heating-wire-series", "~/heating-wire.aspx");
-        routes.MapPageRoute("", "automotive-wire-series", "~/automobile-wire.aspx");
-        routes.MapPageRoute("", "special-cable-series", "~/composite-cable.aspx");
+        routes.MapPageRoute("", "military-grade-series", "~/military-grade-wire.aspx", false);
+        routes.MapPageRoute("", "military-grade-series.aspx", "~/military-grade-wire.aspx", false);
+        routes.MapPageRoute("", "en/military-grade-series", "~/military-grade-wire.aspx", false);
+        routes.MapPageRoute("", "en/military-grade-series.aspx", "~/military-grade-wire.aspx", false);
+        routes.MapPageRoute("", "silicone-fiberglass-series", "~/silicone-fiberglass-wire.aspx", false);
+        routes.MapPageRoute("", "silicone-fiberglass-series.aspx", "~/silicone-fiberglass-wire.aspx", false);
+        routes.MapPageRoute("", "en/silicone-fiberglass-series", "~/silicone-fiberglass-wire.aspx", false);
+        routes.MapPageRoute("", "en/silicone-fiberglass-series.aspx", "~/silicone-fiberglass-wire.aspx", false);
+        routes.MapPageRoute("", "high-temperature-resistance-series", "~/high-temperature-wire.aspx", false);
+        routes.MapPageRoute("", "high-temperature-resistance-series.aspx", "~/high-temperature-wire.aspx", false);
+        routes.MapPageRoute("", "en/high-temperature-resistance-seriess", "~/high-temperature-wire.aspx", false);
+        routes.MapPageRoute("", "en/high-temperature-resistance-series.aspx", "~/high-temperature-wire.aspx", false);
+        routes.MapPageRoute("", "silicone-series", "~/silicone-wire.aspx", false);
+        routes.MapPageRoute("", "silicone-series.aspx", "~/silicone-wire.aspx", false);
+        routes.MapPageRoute("", "en/silicone-series", "~/silicone-wire.aspx", false);
+        routes.MapPageRoute("", "en/silicone-series.aspx", "~/silicone-wire.aspx", false);
+        routes.MapPageRoute("", "teflon-series", "~/teflon-wire.aspx", false);
+        routes.MapPageRoute("", "teflon-series.aspx", "~/teflon-wire.aspx", false);
+        routes.MapPageRoute("", "en/teflon-series", "~/teflon-wire.aspx", false);
+        routes.MapPageRoute("", "en/teflone-series.aspx", "~/teflon-wire.aspx", false);
+        routes.MapPageRoute("", "xlpe-series", "~/xlpe-wire.aspx", false);
+        routes.MapPageRoute("", "xlpe-series.aspx", "~/xlpe-wire.aspx", false);
+        routes.MapPageRoute("", "en/xlpe-series", "~/xlpe-wire.aspx", false);
+        routes.MapPageRoute("", "en/xlpe-series.aspx", "~/xlpee-wire.aspx", false);
+        routes.MapPageRoute("", "pvc-series", "~/pvc-wire.aspx", false);
+        routes.MapPageRoute("", "pvc-series.aspx", "~/pvc-wire.aspx", false);
+        routes.MapPageRoute("", "en/pvc-series", "~/pvc-wire.aspx", false);
+        routes.MapPageRoute("", "en/pvc-series.aspx", "~/pvc-wire.aspx", false);
+        routes.MapPageRoute("", "sleeve-and-tube-series", "~/tube.aspx", false);
+        routes.MapPageRoute("", "sleeve-and-tube-series.aspx", "~/tube.aspx", false);
+        routes.MapPageRoute("", "en/sleeve-and-tube-series", "~/tube.aspx", false);
+        routes.MapPageRoute("", "en/sleeve-and-tube-series.aspx", "~/tube.aspx", false);
+        routes.MapPageRoute("", "thermocouple-series", "~/thermocouple.aspx", false);
+        routes.MapPageRoute("", "thermocouple-series.aspx", "~/thermocouple.aspx", false);
+        routes.MapPageRoute("", "en/thermocouple-series", "~/thermocouple.aspx", false);
+        routes.MapPageRoute("", "en/thermocouple-series.aspx", "~/thermocouple.aspx", false);
+        routes.MapPageRoute("", "heating-wire-series", "~/heating-wire.aspx", false);
+        routes.MapPageRoute("", "heating-wire-series.aspx", "~/heating-wire.aspx", false);
+        routes.MapPageRoute("", "en/heating-wire-series", "~/heating-wire.aspx", false);
+        routes.MapPageRoute("", "en/heating-wire-series.aspx", "~/heating-wire.aspx", false);
+        routes.MapPageRoute("", "automotive-wire-series", "~/automobile-wire.aspx", false);
+        routes.MapPageRoute("", "automotive-wire-series.aspx", "~/automobile-wire.aspx", false);
+        routes.MapPageRoute("", "en/automotive-wire-series", "~/automobile-wire.aspx", false);
+        routes.MapPageRoute("", "en/automotive-wire-series.aspx", "~/automobile-wire.aspx", false);
+        routes.MapPageRoute("", "automotive-wire-standard-iso", "~/automobile-wire.aspx", false);
+        routes.MapPageRoute("", "automotive-wire-standard-iso.aspx", "~/automobile-wire.aspx", false);
+        routes.MapPageRoute("", "en/automotive-wire-standard-iso", "~/automobile-wire.aspx", false);
+        routes.MapPageRoute("", "en/automotive-wire-standard-iso.aspx", "~/automobile-wire.aspx", false);
+        routes.MapPageRoute("", "automotive-wire-standard-sae", "~/automobile-wire.aspx", false);
+        routes.MapPageRoute("", "automotive-wire-standard-sae.aspx", "~/automobile-wire.aspx", false);
+        routes.MapPageRoute("", "en/automotive-wire-standard-sae", "~/automobile-wire.aspx", false);
+        routes.MapPageRoute("", "en/automotive-wire-standard-sae.aspx", "~/automobile-wire.aspx", false);
+        routes.MapPageRoute("", "automotive-wire-standard-jaso", "~/automobile-wire.aspx", false);
+        routes.MapPageRoute("", "automotive-wire-standard-jaso.aspx", "~/automobile-wire.aspx", false);
+        routes.MapPageRoute("", "en/automotive-wire-standard-jaso", "~/automobile-wire.aspx", false);
+        routes.MapPageRoute("", "en/automotive-wire-standard-jaso.aspx", "~/automobile-wire.aspx", false);
+        routes.MapPageRoute("", "special-cable", "~/composite-cable.aspx", false);
+        routes.MapPageRoute("", "special-cable.aspx", "~/composite-cable.aspx", false);
+        routes.MapPageRoute("", "en/special-cable", "~/composite-cable.aspx", false);
+        routes.MapPageRoute("", "en/special-cable.aspx", "~/composite-cable.aspx", false);
+        
+        
+
+        routes.MapPageRoute("", "car", "~/application-list.aspx", true,
+            new RouteValueDictionary { }, new RouteValueDictionary { },
+            new RouteValueDictionary { { "language", "zh" }, { "application", "automobile" } });
+        routes.MapPageRoute("", "en/car", "~/application-list.aspx", true,
+            new RouteValueDictionary { }, new RouteValueDictionary { },
+            new RouteValueDictionary { { "language", "en" }, { "application", "automobile" } });
+        routes.MapPageRoute("", "medical", "~/application-list.aspx", true,
+            new RouteValueDictionary { }, new RouteValueDictionary { },
+            new RouteValueDictionary { { "language", "zh" }, { "application", "medical" } });
+        routes.MapPageRoute("", "en/medical", "~/application-list.aspx", true,
+            new RouteValueDictionary { }, new RouteValueDictionary { },
+            new RouteValueDictionary { { "language", "en" }, { "application", "medical" } });
+        routes.MapPageRoute("", "cloud", "~/application-list.aspx", true,
+            new RouteValueDictionary { }, new RouteValueDictionary { },
+            new RouteValueDictionary { { "language", "zh" }, { "application", "cloud-system" } });
+        routes.MapPageRoute("", "en/cloud", "~/application-list.aspx", true,
+            new RouteValueDictionary { }, new RouteValueDictionary { },
+            new RouteValueDictionary { { "language", "en" }, { "application", "cloud-system" } });
 
 
         //redirect deprecated pages to relevant category pages
@@ -2017,6 +2087,11 @@
         routes.MapPageRoute("", "en/mil-c-24643-23-08", "~/military-grade-wire.aspx");
         routes.MapPageRoute("", "mil-c-24643-23-08.aspx", "~/military-grade-wire.aspx");
         routes.MapPageRoute("", "en/mil-c-24643-23-08.aspx", "~/military-grade-wire.aspx");
+        
+        routes.MapPageRoute("", "double-shield-fep-sili-cable", "~/teflon-wire.aspx");
+        routes.MapPageRoute("", "en/double-shield-fep-sili-cable", "~/teflon-wire.aspx");
+        routes.MapPageRoute("", "double-shield-fep-sili-cable.aspx", "~/teflon-wire.aspx");
+        routes.MapPageRoute("", "en/double-shield-fep-sili-cable.aspx", "~/teflon-wire.aspx");
 
         routes.MapPageRoute("", "defibrillator-signal-wire", "~/pvc-wire.aspx");
         routes.MapPageRoute("", "en/defibrillator-signal-wire", "~/pvc-wire.aspx");
@@ -2025,7 +2100,21 @@
 
         routes.MapPageRoute("", "{language}/silicone-fiberglass-wire", "~/silicone-fiberglass-wire.aspx");
 
-        routes.MapPageRoute("", "cloud", "~/application.aspx");
+        routes.MapPageRoute("", "ccs", "~/conductor-category.aspx", false);
+
+        routes.MapPageRoute("", "en/conductor", "~/conductor-category.aspx", false);
+        routes.MapPageRoute("", "en/nicu", "~/conductor-category.aspx", false);
+        routes.MapPageRoute("", "en/copper", "~/conductor-category.aspx", false);
+        routes.MapPageRoute("", "en/sncu", "~/conductor-category.aspx", false);
+        routes.MapPageRoute("", "en/ccs", "~/conductor-category.aspx", false);
+
+        routes.MapPageRoute("", "en/quality-certificate", "~/certificate.aspx");
+        routes.MapPageRoute("", "vde", "~/certificate.aspx");
+        routes.MapPageRoute("", "en/vde", "~/certificate.aspx");
+
+        routes.MapPageRoute("", "en/contact_us", "~/contact_us.aspx");
+
+        routes.MapPageRoute("", "navigation", "~/sitemap.aspx");
 
         var settings = new FriendlyUrlSettings();
         settings.AutoRedirectMode = RedirectMode.Permanent;
