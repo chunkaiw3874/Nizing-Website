@@ -43,25 +43,26 @@ img {
     width: 100%;
 }
 
-.banner{
-    position:relative;
+.banner {
+    position: relative;
 }
 
 .display-block {
     padding: 24px 0px;
+    background-color: #ffffff;
 }
 
     .display-block:first-child {
         padding-top: 0;
     }
 
-    .display-block:nth-child(2n+1) {
+    /*    .display-block:nth-child(2n+1) {
         background-color: #ffffff;
     }
 
     .display-block:nth-child(2n) {
         background-color: #f1f1f1;
-    }
+    }*/
 
     .display-block .title,
     .display-block .subtitle {
@@ -155,7 +156,7 @@ img {
 }
 
 .display-block.hottest-item-list {
-    background-color: #efefef;
+    border-bottom:solid 8px #cccccc;
 }
 
 .hottest-item-list .col,

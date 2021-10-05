@@ -61,10 +61,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
         //HR360LoggedUser.ERPId = "0023";
         //HR360LoggedUser.Company = "NIZING";
         //only use when opening check exception for certain persion
-        exceptionList111.Add("0067");
+        //exceptionList111.Add("0067");
         //exceptionList202designated.Add("0112");
         //exceptionList107.Add("0162");
-        exceptionList110.Add("0067");
+        //exceptionList110.Add("0067");
         //exceptionList202makeup.Add("0067");
         exceptionListHourForProduction.Add("0160"); //阿豪
 
@@ -77,6 +77,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 InProgressSection_Init_Load();
                 ApprovalSection_Init_Load();
                 SearchSection_Init_Load();
+                SearchDayOffRecords();
             }
             else
             {
@@ -87,14 +88,14 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
             //hidden field that contains normal work hour per day for current user
             hdnNormalWorkHour.Value = "8";
-            Page.LoadComplete += new EventHandler(Page_LoadComplete);
+            //Page.LoadComplete += new EventHandler(Page_LoadComplete);
         }
 
     }
 
     void Page_LoadComplete(object sender, EventArgs e)
     {
-        btnSearchSubmit_Click(sender, e);   //does search automatically everytime page finishes loading
+        //btnSearchSubmit_Click(sender, e);   //does search automatically everytime page finishes loading
     }
 
 
@@ -787,6 +788,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
         if (errorList.Count == 0) //都沒有錯誤，可執行之後的步驟
         {
+            CreateDayOffApplicationListItem();
             if (ckbTyphoonDayNoSub.Checked)
             {
                 string temp = "PS.颱風假期間";
@@ -872,6 +874,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
             txtReason.Text = string.Empty;
             ckbTyphoonDayNoSub.Checked = false;
         }
+    }
+
+    protected void CreateDayOffApplicationListItem()
+    {
+
     }
     /// <summary>
     /// 選擇假別改變，如有設定，會讀取該假別剩餘時數
@@ -2424,7 +2431,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         //hdnIsDayOffAppVisible.Value = "0";  //variable for determining whether the div DayOffApp is visible
         DataTable dt = GetUserDayOffTypes(HR360LoggedUser.Sex);
         FillDropDownListContent(ddlDayOffType, dt);
-        ddlDayOffFuncSub.SelectedValue = "03";
+        ddlDayOffType.SelectedValue = "03";
 
         //抓取跟登入者同部門及可替代部門的人 (according to DB HR360_DAYOFFAPPLICATION_DEPT_REFERENCE)            
         dt = GetUserFunctionalSub(HR360LoggedUser.ERPId, HR360LoggedUser.Dept);
@@ -2564,7 +2571,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             " LEFT JOIN NZ_ERP2.dbo.HR360_DAYOFFAPPLICATION_DEPT_REFERENCE REF ON MV.MV004=REF.DEPT_MAIN AND REF.ACTIVE=1" +
             " WHERE MV.MV001=@ID" +
             " )" +
-            " SELECT DISTINCT LTRIM(RTRIM(MV.MV001))+' '+MV.MV002,MV.MV001 'text'" +
+            " SELECT DISTINCT LTRIM(RTRIM(MV.MV001))+' '+MV.MV002 'text'" +
             " ,MV.MV001 'value'" +
             " FROM CMSMV MV" +
             " LEFT JOIN CMSMK MK ON MV.MV001=MK.MK002" +
@@ -2606,7 +2613,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         hdnIsPostBack.Value = "1";
         if (getPostBackControlName() != "btnDayOffAdd")
         {
-            if (((List<DayOffInfo>)Session["lstDayOffAppSummary"]).Count != 0)
+            if (Session["lstDayOffAppSummary"] != null)
             {
                 lstDayOffAppSummary = (List<DayOffInfo>)Session["lstDayOffAppSummary"];
             }
@@ -2823,6 +2830,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// <param name="e"></param>
     protected void btnSearchSubmit_Click(object sender, EventArgs e)
     {
+        SearchDayOffRecords();
+    }
+
+    protected void SearchDayOffRecords()
+    {
         DateTime startTime = new DateTime();
         DateTime endTime = new DateTime();
         DataTable dt = new DataTable();
@@ -2955,7 +2967,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         gvSearchResult.DataSource = dt;
         gvSearchResult.DataBind();
 
-        //看報告
+        //人事退回權限
         try
         {
             if (HR360LoggedUser.ERPId != "0007"      //Chrissy
@@ -2971,6 +2983,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             Server.Transfer("~/hr360/no_permission.aspx"); //session expires and value stored in session value disappears
         }
+
     }
     /// <summary>
     /// Disable "退回" button for rows whose status is "退回" or "撤銷"
@@ -3091,6 +3104,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void btnAddApplicationForm_Click(object sender, EventArgs e)
     {
+        lblApplicationFormTitle.Text = "新增假單";
+        btnDayOffAdd.Text = "新增";
         ShowModal("ApplicationForm");
     }
 

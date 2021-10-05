@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWDApplicationMaster.master" AutoEventWireup="true" CodeFile="motor-power-cable.aspx.cs" Inherits="application_automobile_motor_power_cable" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWDApplicationMaster.master" AutoEventWireup="true" CodeFile="motor-power-cable.aspx.cs" Inherits="application_motor_power_cable" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title>電動機車電源供應器 電動馬達動力線-日進電線 2021</title>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWDApplicationMaster.master" AutoEventWireup="true" CodeFile="fighter-jet-temperature-sensor-cable.aspx.cs" Inherits="application_fighter_jet_temperature_sensor_cable" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWDApplicationMaster.master" AutoEventWireup="true" CodeFile="electrosurgical-unit-cable.aspx.cs" Inherits="application_electrosurgical_unit_cable" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title>戰鬥機溫控線-日進電線 2021</title>

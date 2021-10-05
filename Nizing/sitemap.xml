@@ -1028,6 +1028,26 @@
 		<priority>0.70</priority>
 	</url>
 	<url>
+		<loc>https://www.nizing.com.tw/zh/application/medical</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/zh/application/medical/electrosurgical-unit-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/zh/application/temperature-control-system</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/zh/application/temperature-control-system/fighter-jet-temperature-sensor-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
 		<loc>https://www.nizing.com.tw/zh/application/cloud-system</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
@@ -2109,6 +2129,26 @@
 	</url>
 	<url>
 		<loc>https://www.nizing.com.tw/en/application/automobile/motor-power-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/en/application/medical</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/en/application/medical/electrosurgical-unit-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/en/application/temperature-control-system</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/en/application/temperature-control-system/fighter-jet-temperature-sensor-cable</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>

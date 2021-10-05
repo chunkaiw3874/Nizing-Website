@@ -380,7 +380,7 @@
                         抗老化，安全時尚的電線電纜供應商
                     </p>
                 </div>
-<%--                <div class="bottom-right">
+                <%--                <div class="bottom-right">
                     <p>專業電線電纜製造商</p>
                     <p class="small-text">GB/T 19001-2015; ISO: 9001-2015 Certified No. 00610 Q20229RIM</p>
                     <p class="small-text">UL / CSA / VDE / PSE / CCC / CE / RoHs, REACH, MIT Certified</p>
@@ -466,8 +466,8 @@
                                 <a href="/zh/application/misc-app/fighter-jet-temperature-sensor-cable">
                                     <div class="image-section">
                                         <picture>
-                                            <source srcset="/images/product/new-item/fighter-jet-temperature-control-cable.webp" type="image/webp">
-                                            <img src="/images/product/new-item/fighter-jet-temperature-control-cable.jpg"
+                                            <source srcset="/images/application/products/fighter-jet-temperature-sensor-cable/menu/fighter-jet-temperature-sensor-cable.webp" type="image/webp">
+                                            <img src="/images/application/products/fighter-jet-temperature-sensor-cable/menu/fighter-jet-temperature-sensor-cable.jpg"
                                                 alt="戰鬥機溫控電纜 Fighter Jet Temperature Control Cable">
                                         </picture>
                                     </div>
@@ -500,15 +500,15 @@
                                 <a href="">
                                     <div class="image-section">
                                         <picture>
-                                            <source srcset="https://via.placeholder.com/350x250?text=&nbsp" type="image/webp">
-                                            <img src="https://via.placeholder.com/350x250?text=&nbsp"
-                                                alt="飛彈控制軍規線 Missile Control Cable">
+                                            <source srcset="/images/application/products/electrosurgical-unit-cable/menu/electrosurgical-unit-cable.webp" type="image/webp">
+                                            <img src="/images/application/products/electrosurgical-unit-cable/menu/electrosurgical-unit-cable.png"
+                                                alt="醫療級止血線 Electrosurgical Unit Cable">
                                         </picture>
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <div class="title text-left">飛彈控制軍規線</div>
-                                    <div class="subtitle text-left">軍規船用電纜</div>
+                                    <div class="title text-left">手術用電燒刀</div>
+                                    <div class="subtitle text-left">醫療級止血線</div>
                                 </div>
                             </div>
                         </div>
@@ -551,8 +551,8 @@
                                 <a href="/zh/application/automobile/motor-temperature-sensor-cable-tesla-taycan">
                                     <div class="image-section">
                                         <picture>
-                                            <source srcset="/images/product/new-item/cable-electric-car.webp" type="image/webp">
-                                            <img src="/images/product/new-item/cable-electric-car.jpg"
+                                            <source srcset="/images/application/products/motor-temperature-sensor-cable-tesla-taycan/menu/motor-temperature-sensor-cable-tesla-taycan.webp" type="image/webp">
+                                            <img src="/images/application/products/motor-temperature-sensor-cable-tesla-taycan/menu/motor-temperature-sensor-cable-tesla-taycan.jpg"
                                                 alt="IATF-16949 馬達溫度感知線 Motor Temperature Sensor Cable">
                                         </picture>
                                     </div>
@@ -568,8 +568,8 @@
                                 <a href="/zh/application/automobile/motor-power-cable">
                                     <div class="image-section">
                                         <picture>
-                                            <source srcset="/images/product/new-item/cable-electric-motorcycle.webp" type="image/webp">
-                                            <img src="/images/product/new-item/cable-electric-motorcycle.jpg"
+                                            <source srcset="/images/application/products/motor-power-cable/menu/motor-power-cable.webp" type="image/webp">
+                                            <img src="/images/application/products/motor-power-cable/menu/motor-power-cable.jpg"
                                                 alt="電源供應器 電動馬達動力線 Power Cable Motor Cable">
                                         </picture>
                                     </div>
@@ -594,6 +594,23 @@
                                 <div class="text-section">
                                     <div class="title text-left">大型高溫爐</div>
                                     <div class="subtitle text-left">多爐溫控系統雙層屏蔽線</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="newest-item">
+                                <a href="">
+                                    <div class="image-section">
+                                        <picture>
+                                            <source srcset="https://via.placeholder.com/350x250?text=&nbsp" type="image/webp">
+                                            <img src="https://via.placeholder.com/350x250?text=&nbsp"
+                                                alt="飛彈控制軍規線 Missile Control Cable">
+                                        </picture>
+                                    </div>
+                                </a>
+                                <div class="text-section">
+                                    <div class="title text-left">飛彈控制軍規線</div>
+                                    <div class="subtitle text-left">軍規船用電纜</div>
                                 </div>
                             </div>
                         </div>
