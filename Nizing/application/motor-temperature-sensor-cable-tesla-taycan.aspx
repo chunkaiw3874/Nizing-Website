@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWDApplicationMaster.master" AutoEventWireup="true" CodeFile="motor-temperature-sensor-cable-tesla-taycan.aspx.cs" Inherits="application_automobile_motor_temperature_sensor_cable_tesla_taycan" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWDApplicationMaster.master" AutoEventWireup="true" CodeFile="motor-temperature-sensor-cable-tesla-taycan.aspx.cs" Inherits="application_motor_temperature_sensor_cable_tesla_taycan" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title>IATF-16949 馬達溫度感知線-日進電線 2021</title>
