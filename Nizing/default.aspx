@@ -440,12 +440,12 @@
                         </div>
                         <div class="col">
                             <div class="hottest-item">
-                                <a href="">
+                                <a href="/zh/application/cloud-system/deep-sea-stainless-steel-armored-internet-cable">
                                     <div class="image-section">
                                         <picture>
-                                            <source srcset="/images/product/hot-item/high-density-deep-sea-cable.webp" type="image/webp">
-                                            <img src="/images/product/hot-item/high-density-deep-sea-cable.jpg"
-                                                alt="水下不鏽鋼鎧裝海底網路通訊線 High Density Deep Sea Cable">
+                                            <source srcset="/images/application/products/deep-sea-stainless-steel-armored-internet-cable/menu/deep-sea-stainless-steel-armored-internet-cable.webp" type="image/webp">
+                                            <img src="/images/application/products/deep-sea-stainless-steel-armored-internet-cable/menu/deep-sea-stainless-steel-armored-internet-cable.jpg"
+                                                alt="水下不鏽鋼鎧裝海底網路通訊線 Deep Sea Stainless Steel Armored Internet Cable">
                                         </picture>
                                     </div>
                                 </a>

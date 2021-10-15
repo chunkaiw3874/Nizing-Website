@@ -215,6 +215,7 @@
 			</siteMapNode>
 			<siteMapNode url="/zh/application/cloud-system" title="雲端系統" description="雲端系統">
 				<siteMapNode url="/zh/application/cloud-system/inflammable-signal-cable" title="防火耐燃訊號線" description="防火耐燃訊號線"></siteMapNode>
+				<siteMapNode url="/zh/application/cloud-system/deep-sea-stainless-steel-armored-internet-cable" title="水下不鏽鋼鎧裝海底網路通訊線" description="水下不鏽鋼鎧裝海底網路通訊線"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/zh/application/misc-app" title="其他應用" description="其他應用">
 				<siteMapNode url="/zh/application/misc-app/fighter-jet-temperature-sensor-cable" title="戰鬥機溫控線" description="戰鬥機溫控線"></siteMapNode>
@@ -458,6 +459,7 @@
 			</siteMapNode>
 			<siteMapNode url="/en/application/cloud-system" title="Cloud System" description="Cloud System">
 				<siteMapNode url="/en/application/cloud-system/inflammable-signal-cable" title="Inflammable Signal Cable" description="Inflammable Signal Cable"></siteMapNode>
+				<siteMapNode url="/en/application/cloud-system/deep-sea-stainless-steel-armored-internet-cable" title="Deep Sea Stainless Steel Armored Internet Cable" description="Deep Sea Stainless Steel Armored Internet Cable"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/en/application/misc-app" title="Other Application" description="Other Application">
 				<siteMapNode url="/en/application/misc-app/fighter-jet-temperature-sensor-cable" title="Fighter Jet Temperature Sensor Cable" description="Fighter Jet Temperature Sensor Cable"></siteMapNode>

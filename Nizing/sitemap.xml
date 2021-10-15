@@ -1072,6 +1072,11 @@
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/zh/application/cloud-system/deep-sea-stainless-steel-armored-internet-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
 
 
 
@@ -2174,6 +2179,11 @@
 	</url>
 	<url>
 		<loc>https://www.nizing.com.tw/en/application/misc-app/inflammable-signal-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/en/application/cloud-system/deep-sea-stainless-steel-armored-internet-cable</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>
