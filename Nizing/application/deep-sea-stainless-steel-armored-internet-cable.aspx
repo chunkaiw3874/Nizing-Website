@@ -6,7 +6,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:title" content="水下不鏽鋼鎧裝海底網路通訊線-日進電線 2021" />
     <meta property="og:description" content="使用90A高硬度絕緣外被，先進的線材結構，可長時間浸泡於高密度及高深水壓的海水環境也不易腐蝕變質，堅固耐用且耐魚咬。不鏽鋼鎧裝及多重防雜訊隔離，可阻止外部的電磁干擾進入，保持傳輸網絡信號的穩定快速，品質優越，非常適合安裝於水底或其它嚴苛環境之網路通訊使用。" />
-    <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/deep-sea-stainless-steel-armored-internet-cable/impression/deep-sea-stainless-steel-armored-internet-cable-01-mobile.png" />
+    <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/deep-sea-stainless-steel-armored-internet-cable/impression/deep-sea-stainless-steel-armored-internet-cable-01-mobile.jpg" />
     <meta property="og:url" content="https://www.nizing.com.tw/zh/application/cloud-system/deep-sea-stainless-steel-armored-internet-cable" />
     <meta property="og:site_name" content="Nizing Electric Wire and Cable" />
     <style type="text/css">
@@ -39,14 +39,14 @@
         }
 
         .bg-color {
-            background-color: #0138ae !important;
+            background-color: #012fb6 !important;
         }
 
         .bottom-image {
             position: absolute;
             top: 320px;
             right: 0;
-            width: 50%;
+            width: 40%;
         }
 
         .text-section {
@@ -80,9 +80,14 @@
                 }
 
             .text-section .text-content {
-                font-size: 16px;
+                font-size: 20px;
                 color: #ffffff;
                 padding-bottom: 24px;
+            }
+
+            .text-section .text-image {
+                width: 70%;
+                margin: 0 auto;
             }
 
         @media all and (max-width:1199px) {
@@ -93,6 +98,7 @@
 
             .bottom-image {
                 top: 280px;
+                width: 45%;
             }
 
             .text-section .text-title {
@@ -113,16 +119,25 @@
                 font-size: 16px;
                 padding-bottom: 20px;
             }
+
+            .text-section .text-image {
+                width: 100%;
+            }
         }
 
         @media all and (max-width:991px) {
+            .bg-color-gradient {
+                background-color: none;
+            }
+
             .text-section {
                 margin-top: 40px;
                 margin-bottom: 100px;
             }
 
             .bottom-image {
-                top: 210px;
+                top: 250px;
+                width: 50%;
             }
 
             .text-section .text-title {
@@ -143,6 +158,10 @@
         }
 
         @media all and (max-width:767px) {
+            .bg-color-gradient {
+                background-image: linear-gradient(#012fb6, #00246c);
+            }
+
             .webp .bg-wrapper {
                 background: none;
             }
@@ -194,7 +213,7 @@
                         alt="水下不鏽鋼鎧裝海底網路通訊線 Deep Sea Stainless Steel Armored Internet Cable" />
                 </picture>
             </div>
-            <div class="row">
+            <div class="row bg-color-gradient">
                 <div class="col-md-6">
                     <div class="text-section">
                         <div class="text-subtitle">
