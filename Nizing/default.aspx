@@ -49,9 +49,8 @@
 
             .banner .banner-text .bottom-right {
                 position: absolute;
-                bottom: 30px;
-                right: 0;
-                margin-right: -450px;
+                bottom: 100px;
+                right: 200px;
             }
 
                 .banner .banner-text .bottom-right p {
@@ -91,7 +90,9 @@
                 }
 
                 .banner .banner-text .bottom-right {
-                    margin-right: -350px;
+                    /*margin-right: -350px;*/
+                bottom: 100px;
+                right: 200px;
                 }
         }
 
@@ -107,7 +108,8 @@
                 }
 
                 .banner .banner-text .bottom-right {
-                    margin-right: -300px;
+                bottom: 50px;
+                right: 150px;
                 }
         }
 
@@ -123,7 +125,8 @@
                 }
 
                 .banner .banner-text .bottom-right {
-                    margin-right: -250px;
+                bottom: 50px;
+                right: 20px;
                 }
         }
 
@@ -146,6 +149,7 @@
 
                 .banner .banner-text .bottom-right {
                     bottom: 20px;
+                    right:20px;
                 }
         }
 
@@ -380,11 +384,11 @@
                         抗老化，安全時尚的電線電纜供應商
                     </p>
                 </div>
-                <%--                <div class="bottom-right">
+                <div class="bottom-right">
                     <p>專業電線電纜製造商</p>
-                    <p class="small-text">GB/T 19001-2015; ISO: 9001-2015 Certified No. 00610 Q20229RIM</p>
-                    <p class="small-text">UL / CSA / VDE / PSE / CCC / CE / RoHs, REACH, MIT Certified</p>
-                </div>--%>
+<%--                    <p class="small-text">GB/T 19001-2015; ISO: 9001-2015 Certified No. 00610 Q20229RIM</p>
+                    <p class="small-text">UL / CSA / VDE / PSE / CCC / CE / RoHs, REACH, MIT Certified</p>--%>
+                </div>
             </div>
         </div>
     </div>
@@ -497,7 +501,7 @@
                         </div>
                         <div class="col">
                             <div class="newest-item">
-                                <a href="">
+                                <a href="/zh/application/medical/electrosurgical-unit-cable">
                                     <div class="image-section">
                                         <picture>
                                             <source srcset="/images/application/products/electrosurgical-unit-cable/menu/electrosurgical-unit-cable.webp" type="image/webp">

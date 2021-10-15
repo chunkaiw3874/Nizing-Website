@@ -6,8 +6,8 @@
     <meta property="og:type" content="article" />
     <meta property="og:title" content="IATF-16949 馬達溫度感知線-日進電線 2021" />
     <meta property="og:description" content="電動車內部馬達溫度感知線，為行車安全不可或缺的元件" />
-    <meta property="og:image" content="http://www.nizing.com.tw/images/application/products/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-02.jpg" />
-    <meta property="og:url" content="http://www.nizing.com.tw/zh/application/automobile/motor-temperature-sensor-cable" />
+    <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-02.jpg" />
+    <meta property="og:url" content="https://www.nizing.com.tw/zh/application/automobile/motor-temperature-sensor-cable" />
     <meta property="og:site_name" content="Nizing Electric Wire and Cable" />
     <style type="text/css">
         .breadcrumb {

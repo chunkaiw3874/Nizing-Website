@@ -16,6 +16,10 @@
             resize: none;
         }
 
+            textarea.form-control[readonly] {
+                background-color: #ffffff;
+            }
+
         #loading-screen {
             display: none;
             position: fixed;
@@ -23,6 +27,20 @@
             left: 50%;
             text-align: center;
         }
+
+        .col {
+            margin-bottom: 1rem;
+        }
+
+        .application-form-list-item {
+            border: solid 1px #cccccc;
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+        }
+
+            .application-form-list-item .input-group {
+                margin-bottom: 5px;
+            }
 
         .highlight {
             background-color: lightblue;
@@ -54,19 +72,24 @@
         .search-conditions > div {
             margin-bottom: 8px;
         }
+
+        table th a,
+        table th a:hover {
+            color: #ffffff;
+            text-decoration: none;
+        }
     </style>
     <script type="text/javascript">
-
-        $("[alt*='expand']").on("click", function () {
-            $(this).closest("tr").after("<tr><td></td><td colspan = '999'>" + $(this).next().html() + "</td></tr>")
-            $(this).attr("alt", "collapse");
-        });
-        $("[alt*='collapse']").on("click", function () {
-            $(this).attr("alt", "expand");
-            $(this).closest("tr").next().remove();
-        });
-
         $(document).ready(function () {
+            $(this).on("click", "[alt*='expand']", function () {
+                console.log($(this).attr('id'));
+                $(this).closest("tr").after("<tr><td colspan = '999'>" + $(this).next().html() + "</td></tr>")
+                $(this).attr("alt", "collapse");
+            });
+            $(this).on("click", "[alt*='collapse']", function () {
+                $(this).attr("alt", "expand");
+                $(this).closest("tr").next().remove();
+            });
 
 <%--            $(document).on('click', '#btnSearchVisibility', function () {
                 $('#search_section').toggle();
@@ -333,75 +356,7 @@
                 <asp:HiddenField ID="hdnDayOffTypeUnit" runat="server" />
                 <asp:HiddenField ID="hdnDenyReason" runat="server" />
 
-                <asp:UpdatePanel ID="upApplicationForm" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
-                    <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="btnAddApplicationForm" />
-                    </Triggers>
-                    <ContentTemplate>
-                        <div class="modal fade" id="ApplicationForm" data-backdrop="static" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <asp:Label ID="lblApplicationFormTitle" runat="server" Text=""></asp:Label>
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="input-group mb-1">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">假別</span>
-                                            </div>
-                                            <asp:DropDownList ID="ddlDayOffType" runat="server" CssClass="custom-select" AutoPostBack="true" OnSelectedIndexChanged="ddlDayOffType_SelectedIndexChanged">
-                                            </asp:DropDownList>
-                                        </div>
-                                        <div class="input-group mb-1" id="datetimepicker" data-target-input="nearest">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">請假日期</span>
-                                            </div>
-                                            <asp:TextBox ID="txtDayOffDate" runat="server"
-                                                CssClass="form-control datetimepicker-input"
-                                                data-target="#datetimepicker"></asp:TextBox>
-                                            <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
-                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                            </div>
-                                        </div>
-                                        <div class="input-group mb-1" id="timepickerend" data-target-input="nearest">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">結束時間</span>
-                                            </div>
-                                            <asp:TextBox ID="txtDayOffTimeEnd" runat="server"
-                                                CssClass="form-control datetimepicker-input"
-                                                data-target="#timepickerend"></asp:TextBox>
-                                            <div class="input-group-append" data-target="#timepickerend" data-toggle="datetimepicker">
-                                                <div class="input-group-text"><i class="far fa-clock"></i></div>
-                                            </div>
-                                        </div>
-                                        <div class="input-group mb-1">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">代理人</span>
-                                            </div>
-                                            <asp:DropDownList ID="ddlDayOffFuncSub" runat="server" CssClass="custom-select"></asp:DropDownList>
-                                        </div>
-                                        <div class="input-group">
-                                            <asp:CheckBox ID="ckbTyphoonDayNoSub" runat="server" CssClass="custom-checkbox" Checked="false"
-                                                Text="此假用在颱風天，無須代理人" />
-                                        </div>
-                                        <div class="form-group">
-                                            <span>請假事由:</span>
-                                            <asp:TextBox ID="txtReason" runat="server" CssClass="form-control" MaxLength="100"
-                                                placeholder="事假必填(100字內)"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <asp:Button ID="btnDayOffAdd" runat="server" CssClass="btn btn-success w-100" Text=""
-                                            UseSubmitBehavior="false"
-                                            data-dismiss="modal" />
-                                        <%--OnClick="btnDayOffAdd_Click"/>--%>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+
 
                 <asp:UpdatePanel ID="upApplicationList" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
                     <Triggers>
@@ -433,7 +388,44 @@
                                     <table id="tbAppSummary" class="table" runat="server">
                                     </table>
                                 </div>
-                                <div id="divApplicationList" runat="server">
+                                <div id="divApplicationFormList" runat="server"
+                                    class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+                                    <%--<div class="col">
+                                        <div class="application-form-list-item">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text">假單</label>
+                                                </div>
+                                                <label class="form-control">特休</label>
+                                            </div>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text">日期</label>
+                                                </div>
+                                                <label class="form-control">2021/10/01</label>
+                                            </div>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text">時間</label>
+                                                </div>
+                                                <label class="form-control">15:00 ~ 17:00</label>
+                                            </div>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text">代理</label>
+                                                </div>
+                                                <label class="form-control">0080 王君凱</label>
+                                            </div>
+                                            <hr />
+                                            <div class="input-group">
+                                                <textarea class="form-control" readonly>
+                                            </textarea>
+                                            </div>
+                                            <div class="input-group">
+                                                <input type="button" class="btn btn-danger w-100" value="移除" />
+                                            </div>
+                                        </div>
+                                    </div>--%>
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-end">
@@ -563,7 +555,7 @@
                     </div>
                     <div class="table-responsive">
                         <asp:GridView ID="gvSearchResult" runat="server" AutoGenerateColumns="false"
-                            CssClass="table table-striped"
+                            CssClass="table table-striped table-striped-blue"
                             AllowPaging="True"
                             PageSize="10"
                             PagerSettings-Position="Top"
@@ -576,21 +568,22 @@
                             <Columns>
                                 <asp:TemplateField ItemStyle-HorizontalAlign="Center">
                                     <HeaderTemplate>
-                                        <asp:LinkButton ID="lbApplication_ID" runat="server" Text="假單單號" CommandName="Sort" CommandArgument="APPLICATION_ID"></asp:LinkButton>
+                                        <asp:LinkButton ID="lbApplication_ID" runat="server" Text="假單單號"
+                                            CommandName="Sort" CommandArgument="APPLICATION_ID"></asp:LinkButton>
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="lblAppId" runat="server" Text='<%#Eval("APPLICATION_ID") %>' alt="expand" CssClass="pointer-cursor"></asp:Label>
                                         <asp:Panel ID="pnlAppTrail" runat="server" Style="display: none;">
-                                            <asp:GridView ID="gvAppTrail" runat="server" AutoGenerateColumns="false" CssClass="table table-striped" GridLines="Horizontal">
+                                            <asp:GridView ID="gvAppTrail" runat="server" AutoGenerateColumns="false" CssClass="table table-striped table-striped-blue" GridLines="Horizontal">
                                                 <Columns>
-                                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                                                    <%--                                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center">
                                                         <HeaderTemplate>
                                                             <asp:Label ID="lblAppTrailId" runat="server" Text="假單單號"></asp:Label>
                                                         </HeaderTemplate>
                                                         <ItemTemplate>
                                                             <asp:Label ID="lblAppTrailIdContent" runat="server" Text='<%#Eval("APPLICATION_ID") %>'></asp:Label>
                                                         </ItemTemplate>
-                                                    </asp:TemplateField>
+                                                    </asp:TemplateField>--%>
                                                     <asp:TemplateField ItemStyle-HorizontalAlign="Center">
                                                         <HeaderTemplate>
                                                             <asp:Label ID="lblAppTrailTime" runat="server" Text="動作時間"></asp:Label>
@@ -753,5 +746,76 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
+
+    <!--Modals-->
+    <asp:UpdatePanel ID="upApplicationForm" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="btnAddApplicationForm" />
+        </Triggers>
+        <ContentTemplate>
+            <div class="modal fade" id="ApplicationForm" data-backdrop="static" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <asp:Label ID="lblApplicationFormTitle" runat="server" Text=""></asp:Label>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group mb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">假別</span>
+                                </div>
+                                <asp:DropDownList ID="ddlDayOffType" runat="server" CssClass="custom-select" AutoPostBack="true" OnSelectedIndexChanged="ddlDayOffType_SelectedIndexChanged">
+                                </asp:DropDownList>
+                            </div>
+                            <div class="input-group mb-1" id="datetimepicker" data-target-input="nearest">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">請假日期</span>
+                                </div>
+                                <asp:TextBox ID="txtDayOffDate" runat="server"
+                                    CssClass="form-control datetimepicker-input"
+                                    data-target="#datetimepicker"></asp:TextBox>
+                                <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-1" id="timepickerend" data-target-input="nearest">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">結束時間</span>
+                                </div>
+                                <asp:TextBox ID="txtDayOffTimeEnd" runat="server"
+                                    CssClass="form-control datetimepicker-input"
+                                    data-target="#timepickerend"></asp:TextBox>
+                                <div class="input-group-append" data-target="#timepickerend" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-1">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">代理人</span>
+                                </div>
+                                <asp:DropDownList ID="ddlDayOffFuncSub" runat="server" CssClass="custom-select"></asp:DropDownList>
+                            </div>
+                            <div class="input-group">
+                                <asp:CheckBox ID="ckbTyphoonDayNoSub" runat="server" CssClass="custom-checkbox" Checked="false"
+                                    Text="此假用在颱風天，無須代理人" />
+                            </div>
+                            <div class="form-group">
+                                <span>請假事由:</span>
+                                <asp:TextBox ID="txtReason" runat="server" CssClass="form-control" MaxLength="100"
+                                    placeholder="事假必填(100字內)"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="btnDayOffAdd" runat="server" CssClass="btn btn-success w-100" Text=""
+                                UseSubmitBehavior="false"
+                                data-dismiss="modal"
+                                OnClick="btnDayOffAdd_Click" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 </asp:Content>
 

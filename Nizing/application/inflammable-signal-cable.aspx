@@ -6,8 +6,8 @@
     <meta property="og:type" content="article" />
     <meta property="og:title" content="防火耐燃訊號線-日進電線 2021" />
     <meta property="og:description" content="AM2F特殊編織環保線材，有效阻絕火焰直接燃燒，將防火與耐燃能力推向消防等級，符合綠色能量之宗旨，無毒、無味、無汙染、耐腐蝕化學品...等特性，以環保及居家安全為首要指標。編織線材高柔韌性、耐彎折、不易斷且好收藏，此材質應用廣泛，也可應用汽車排氣管、潛艇引擎、發電機等各式線材上，適合各式場合或極端工作環境。" />
-    <meta property="og:image" content="http://www.nizing.com.tw/images/application/products/inflammable-signal-cable/impression/inflammable-signal-cable-01-horizontal.png" />
-    <meta property="og:url" content="http://www.nizing.com.tw/zh/application/cloud-system/inflammable-signal-cable" />
+    <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/inflammable-signal-cable/impression/inflammable-signal-cable-01-horizontal.png" />
+    <meta property="og:url" content="https://www.nizing.com.tw/zh/application/cloud-system/inflammable-signal-cable" />
     <meta property="og:site_name" content="Nizing Electric Wire and Cable" />
     <style type="text/css">
         body {

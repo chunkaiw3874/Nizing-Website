@@ -6,8 +6,8 @@
     <meta property="og:type" content="article" />
     <meta property="og:title" content="電動機車電源供應器 電動馬達動力線-日進電線 2021" />
     <meta property="og:description" content="電動機車的主要電源供應電纜，為電動機車的核心元件" />
-    <meta property="og:image" content="http://www.nizing.com.tw/images/application/products/motor-power-cable/impression/motor-power-cable-2.jpg" />
-    <meta property="og:url" content="http://www.nizing.com.tw/zh/application/automobile/motor-power-cable" />
+    <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/motor-power-cable/impression/motor-power-cable-2.jpg" />
+    <meta property="og:url" content="https://www.nizing.com.tw/zh/application/automobile/motor-power-cable" />
     <meta property="og:site_name" content="Nizing Electric Wire and Cable" />
     <style type="text/css">
         .breadcrumb {

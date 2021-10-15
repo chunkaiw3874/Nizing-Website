@@ -109,11 +109,11 @@ public partial class product_profile : System.Web.UI.Page
 
                 if (language == "zh")
                 {
-                    Page.Title = product.Name + " " + product.ID + " - " + "日進電線 " + DateTime.Today.Year.ToString();
+                    Page.Title = product.Name + " " + product.ID.ToUpper() + " - " + "日進電線 " + DateTime.Today.Year.ToString();
                 }
                 else
                 {
-                    Page.Title = product.Name + " " + product.ID + " - " + "Nizing Electric Wire and Cable " + DateTime.Today.Year.ToString();
+                    Page.Title = product.Name + " " + product.ID.ToUpper() + " - " + "Nizing Electric Wire and Cable " + DateTime.Today.Year.ToString();
                 }
                 HtmlMeta metaDesc = new HtmlMeta();
                 metaDesc.Name = "description";

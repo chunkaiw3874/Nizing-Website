@@ -1,13 +1,13 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWDApplicationMaster.master" AutoEventWireup="true" CodeFile="electrosurgical-unit-cable.aspx.cs" Inherits="application_electrosurgical_unit_cable" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWDApplicationMaster.master" AutoEventWireup="true" CodeFile="deep-sea-stainless-steel-armored-internet-cable.aspx.cs" Inherits="application_deep_sea_stainless_steel_armored_internet_cable" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <title>醫療級止血線-日進電線 2021</title>
-    <meta name="description" content="電刀是利用電能產生熱，加熱至100°C則可使細胞破裂，達到切割目的，當溫度來至200°C時則可以快速且大面積的止血，選用擁有極為優越溫度高穩定性的「醫療級止血線」，可在-40°C~200°C溫度內安全穩定的提供電能。" />
+    <title>水下不鏽鋼鎧裝海底網路通訊線-日進電線 2021</title>
+    <meta name="description" content="使用90A高硬度絕緣外被，先進的線材結構，可長時間浸泡於高密度及高深水壓的海水環境也不易腐蝕變質，堅固耐用且耐魚咬。不鏽鋼鎧裝及多重防雜訊隔離，可阻止外部的電磁干擾進入，保持傳輸網絡信號的穩定快速，品質優越，非常適合安裝於水底或其它嚴苛環境之網路通訊使用。" />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="醫療級止血線-日進電線 2021" />
-    <meta property="og:description" content="電刀是利用電能產生熱，加熱至100°C則可使細胞破裂，達到切割目的，當溫度來至200°C時則可以快速且大面積的止血，選用擁有極為優越溫度高穩定性的「醫療級止血線」，可在-40°C~200°C溫度內安全穩定的提供電能。" />
-    <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/electrosurgical-unit-cable/impression/electrosurgical-unit-cable-01-mobile.png" />
-    <meta property="og:url" content="https://www.nizing.com.tw/zh/application/misc-app/electrosurgical-unit-cable" />
+    <meta property="og:title" content="水下不鏽鋼鎧裝海底網路通訊線-日進電線 2021" />
+    <meta property="og:description" content="使用90A高硬度絕緣外被，先進的線材結構，可長時間浸泡於高密度及高深水壓的海水環境也不易腐蝕變質，堅固耐用且耐魚咬。不鏽鋼鎧裝及多重防雜訊隔離，可阻止外部的電磁干擾進入，保持傳輸網絡信號的穩定快速，品質優越，非常適合安裝於水底或其它嚴苛環境之網路通訊使用。" />
+    <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/deep-sea-stainless-steel-armored-internet-cable/impression/deep-sea-stainless-steel-armored-internet-cable-01-mobile.png" />
+    <meta property="og:url" content="https://www.nizing.com.tw/zh/application/cloud-system/deep-sea-stainless-steel-armored-internet-cable" />
     <meta property="og:site_name" content="Nizing Electric Wire and Cable" />
     <style type="text/css">
         .breadcrumb {

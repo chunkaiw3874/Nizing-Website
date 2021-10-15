@@ -3,69 +3,84 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title>日進電線-核心文化</title>
     <style>
-        .content .title {
-            text-align: left;
-            font-size: 24px;
+        .content {
+            margin-top: 48px;
         }
 
-        .belief-list-item {
+            .content .title {
+                text-align: left;
+                font-size: 24px;
+                font-weight: bold;
+                border-bottom: solid 1px #000000;
+                padding-bottom: 20px;
+            }
+
+            .content .body {
+                padding-top: 20px;
+                font-weight: bold;
+            }
+
+                .content .body.philosophy-list {
+                    padding-left: 8px;
+                    padding-right: 8px;
+                }
+
+        .philosophy-list-item {
             padding-left: 16px;
             padding-right: 16px;
         }
 
-            .belief-list-item .title {
+            .philosophy-list-item .title {
                 font-size: 24px;
                 text-align: center;
+                border: none;
+                padding: 10px 0;
             }
 
-            .belief-list-item .content {
-                text-align: center;
+            .philosophy-list-item:nth-child(1) .title {
+                color: #172987;
+            }
+
+            .philosophy-list-item:nth-child(2) .title {
+                color: #006834;
+            }
+
+            .philosophy-list-item:nth-child(3) .title {
+                color: #E73828;
+            }
+
+            .philosophy-list-item:nth-child(4) .title {
+                color: #F39700;
+            }
+
+            .philosophy-list-item .content {
+                text-align: left;
                 margin-top: 0.5rem;
             }
 
-        .circle {
-            position: relative;
-            display: block;
-            margin: 2em 0;
-            background-color: transparent;
-            color: #222;
-            border-radius: 50%;
-            background-color: var(--nizing-red);
-            text-align: center;
+        .mission .red {
+            color: #C30D22;
         }
 
-            .circle:after {
-                display: block;
-                padding-bottom: 100%;
-                width: 100%;
-                height: 0;
-                /*                border-radius: 50%;
-                background-color: var(--nizing-red);*/
-                content: "";
+        @media all and (max-width:1199px) {
+        }
+
+        @media all and (max-width:991px) {
+            .philosophy-list-item .title {
+                font-size: 18px;
             }
-
-        .circle__inner {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
         }
 
-        .circle__wrapper {
-            display: table;
-            width: 100%;
-            height: 100%;
+        @media all and (max-width:767px) {
+            .philosophy-list-item .title {
+                font-size: 26px;
+            }
         }
 
-        .circle__content {
-            display: flex;
-            align-items: center;
-            height: 100%;
-            justify-content: space-between;
-            padding: 1em;
-            font-size: 1.5rem;
+        @media all and (max-width:575px) {
+            .philosophy-list-item .title {
+                font-size: 20px;
+            }
         }
     </style>
 </asp:Content>
@@ -91,51 +106,14 @@
                 </div>
                 <div class="content">
                     <div class="title">
-                        企業願景
+                        經營理念 Philosophy
                     </div>
-                    <div>
-                        成為全世界最先進，靈活開發產品電源供應元件之設計製造公司，經由研發與設計，提供客製化電線電纜與元組件滿足各種電源供應的需求與應用。
-                    </div>
-                    <ul>
-                        <li>持續研發新型技術，導入新機台，新製程，與新原料
-                        </li>
-                        <li>E化製造工廠，並以大數據控制品質，達到優良的良率
-                        </li>
-                        <li>持續提升與精進公司經營管理流程，搭配IT系統開發與AI人工智慧提升服務質量
-                        </li>
-                    </ul>
-                    <div class="title">
-                        企業使命
-                    </div>
-                    <ul>
-                        <li>由專業的研發與設計，提供客製化電線電纜與元組件，滿足各種電源供應的需求與應用，成為特殊線材市場領導者
-                        </li>
-                        <li>積極強化整體經營體質，持續獲利成長，追求永續發展
-                        </li>
-                        <li>實踐企業社會責任，持續提供給員工同業平均水準以上的薪資與福利，並優化改善工作環境
-                        </li>
-                        <li>生產力提升、顧客滿意，是我們成長的動力!!
-                        </li>
-                        <li>持續提供給員工同業平均水準以上的薪資與福利，並優化工作環境
-                        </li>
-                    </ul>
-                    <div class="title">
-                        經營理念
-                    </div>
-                    <div class="row row-cols-2 row-cols-md-4">
-                        <div class="cols belief-list-item">
-                            <div class="circle bg-red">
-                                <div class="circle__inner">
-                                    <div class="circle__wrapper">
-                                        <div class="circle__content text-white">
-                                            <span>負</span>
-                                            <span>責</span>
-                                            <span>誠</span>
-                                            <span>信</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="row row-cols-2 row-cols-md-4 body philosophy-list">
+                        <div class="cols philosophy-list-item">
+                            <picture>
+                                <source srcset="/images/company/culture/company-culture-01.webp" type="image/webp" />
+                                <img src="/images/company/culture/company-culture-01.png" />
+                            </picture>
                             <div class="title">
                                 誠信負責迎得信賴
                             </div>
@@ -144,19 +122,11 @@
                                     ，遵守道德法律規範，以此為基礎維持良好的夥伴關係及形成大家皆贏的局勢，並兼顧企業社會責任
                             </div>
                         </div>
-                        <div class="cols belief-list-item">
-                            <div class="circle bg-blue">
-                                <div class="circle__inner">
-                                    <div class="circle__wrapper">
-                                        <div class="circle__content text-white">
-                                            <span>研</span>
-                                            <span>發</span>
-                                            <span>創</span>
-                                            <span>新</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="cols philosophy-list-item">
+                            <picture>
+                                <source srcset="/images/company/culture/company-culture-02.webp" type="image/webp" />
+                                <img src="/images/company/culture/company-culture-02.png" />
+                            </picture>
                             <div class="title">
                                 創新超越自我
                             </div>
@@ -165,19 +135,11 @@
                                 ，不斷自我超越以期技術及客戶權益維持領先。
                             </div>
                         </div>
-                        <div class="cols belief-list-item">
-                            <div class="circle bg-green">
-                                <div class="circle__inner">
-                                    <div class="circle__wrapper">
-                                        <div class="circle__content text-white">
-                                            <span>專</span>
-                                            <span>業</span>
-                                            <span>用</span>
-                                            <span>心</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="cols philosophy-list-item">
+                            <picture>
+                                <source srcset="/images/company/culture/company-culture-03.webp" type="image/webp" />
+                                <img src="/images/company/culture/company-culture-03.png" />
+                            </picture>
                             <div class="title">
                                 品質至上的堅持
                             </div>
@@ -185,19 +147,11 @@
                                 專業知識與素養，堅守職場敬業的工作精神，達成客戶滿意度就是我們的堅持
                             </div>
                         </div>
-                        <div class="cols belief-list-item">
-                            <div class="circle bg-lightgray">
-                                <div class="circle__inner">
-                                    <div class="circle__wrapper">
-                                        <div class="circle__content text-white">
-                                            <span>團</span>
-                                            <span>隊</span>
-                                            <span>合</span>
-                                            <span>作</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="cols philosophy-list-item">
+                            <picture>
+                                <source srcset="/images/company/culture/company-culture-04.webp" type="image/webp" />
+                                <img src="/images/company/culture/company-culture-04.png" />
+                            </picture>
                             <div class="title">
                                 共同追求卓越
                             </div>
@@ -206,6 +160,41 @@
                                 共識建立後，就團結合一、傾全力向既定共同目標積極穩健前進
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="title">
+                        企業願景 Vision
+                    </div>
+                    <div class="body">
+                        成為全球最專業、多元開發設計之電線電纜公司，垂直整合客製化線材方案的提供者。
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="title">
+                        企業使命 Mission
+                    </div>
+                    <div class="body mission">
+                        <ul>
+                            <li>專業的設計實力，提供「客製化」電線電纜與元組件，成為<span class="red">特殊線材領域之技術領導者</span>。
+                            </li>
+                            <li>一條龍的製程，完整多樣化的全產品線，卓越的整合服務，給予<span class="red">客戶最完整的線材垂直整合服務者</span>。
+                            </li>
+                            <li>遵守道德/法律規範，實踐企業社會責任；建立開放型管理模式，持續創造獲利成長，讓<span class="red">客戶與員工安心的企業</span>。
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="title">
+                        核心價值觀 Core Value
+                    </div>
+                    <div class="body">
+                        <picture>
+                            <source srcset="/images/company/culture/company-culture-05.webp" type="image/webp" />
+                            <img src="/images/company/culture/company-culture-05.png"
+                                class="w-50 d-block mx-auto" />
+                        </picture>
                     </div>
                 </div>
             </div>

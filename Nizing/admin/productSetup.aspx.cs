@@ -41,7 +41,6 @@ public partial class admin_productSetup : System.Web.UI.Page
             dynamicSpecControls.Add(new Tuple<string, string>(div.ID, ((LiteralControl)div.FindControl("span" + div.ID)).Text));
         }
         ViewState["DynamicSpecList"] = dynamicSpecControls;
-
     }
 
     protected void Initialize()
