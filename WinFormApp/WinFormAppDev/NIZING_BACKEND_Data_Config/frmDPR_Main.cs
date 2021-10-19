@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
-using nizingBackendUserControlLib;
+//using nizingBackendUserControlLib;
 
 namespace NIZING_BACKEND_Data_Config
 {
@@ -109,10 +109,10 @@ namespace NIZING_BACKEND_Data_Config
 
         private void AddDeptResponsible(ItemCheckEventArgs e)
         {
-            LabelTextSet lts = new LabelTextSet();
-            lts.Name = "ltsDeficientRecordResponsibleDept_" + ((DataRowView)clbDeficientRecordResponsibleDept.Items[e.Index])["deptId"].ToString().Trim();
-            lts.Title = ((DataRowView)clbDeficientRecordResponsibleDept.Items[e.Index])["deptName"].ToString().Trim();
-            flpDeficientRecordResponsibleDeptPercent.Controls.Add(lts);
+            //LabelTextSet lts = new LabelTextSet();
+            //lts.Name = "ltsDeficientRecordResponsibleDept_" + ((DataRowView)clbDeficientRecordResponsibleDept.Items[e.Index])["deptId"].ToString().Trim();
+            //lts.Title = ((DataRowView)clbDeficientRecordResponsibleDept.Items[e.Index])["deptName"].ToString().Trim();
+            //flpDeficientRecordResponsibleDeptPercent.Controls.Add(lts);
         }
 
         private void RemoveDeptResponsible(ItemCheckEventArgs e)
@@ -142,10 +142,10 @@ namespace NIZING_BACKEND_Data_Config
 
         private void AddPersonnelResponsible(ItemCheckEventArgs e)
         {
-            LabelTextSet lts = new LabelTextSet();
-            lts.Name = "ltsDeficientRecordResponsiblePersonnel_" + ((DataRowView)clbDeficientRecordResponsiblePersonnel.Items[e.Index])["personnelId"].ToString().Trim();
-            lts.Title = ((DataRowView)clbDeficientRecordResponsiblePersonnel.Items[e.Index])["personnelName"].ToString().Trim();
-            flpDeficientRecordResponsiblePersonnelMemo.Controls.Add(lts);
+            //LabelTextSet lts = new LabelTextSet();
+            //lts.Name = "ltsDeficientRecordResponsiblePersonnel_" + ((DataRowView)clbDeficientRecordResponsiblePersonnel.Items[e.Index])["personnelId"].ToString().Trim();
+            //lts.Title = ((DataRowView)clbDeficientRecordResponsiblePersonnel.Items[e.Index])["personnelName"].ToString().Trim();
+            //flpDeficientRecordResponsiblePersonnelMemo.Controls.Add(lts);
         }
 
         private void RemovePersonnelResponsible(ItemCheckEventArgs e)
