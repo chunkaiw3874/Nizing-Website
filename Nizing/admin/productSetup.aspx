@@ -113,8 +113,6 @@
             }
         }
 
-
-
         function RefreshUpdatePanel() {
             __doPostBack('<%= txtProductIDSearch.ClientID %>', '');
         };

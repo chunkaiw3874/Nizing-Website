@@ -330,30 +330,31 @@
                         <asp:DropDownList ID="ddlDayOffEndMin" runat="server" CssClass="form-control"></asp:DropDownList>
                     </div>
                 </div>--%>
-                <div class="row">
+                <%--                <div class="row">
                     <div class="col-sm-2">
                         <asp:Label ID="lblDayOffRemainType" runat="server" Text=""></asp:Label>
                         <asp:Label ID="lblDayOffRemainAmount" runat="server" Text=""></asp:Label>
                         <asp:Label ID="lblDayOffRemainUnit" runat="server" Text=""></asp:Label>
                     </div>
-                </div>
-                <div class="row form-group">
+                </div>--%>
+                <%--                <div class="row form-group">
                     <div class="col-sm-6">
                         <asp:TextBox ID="txtErrorMessage" runat="server" TextMode="MultiLine" CssClass="autosize no-resize error-message" Width="400" BorderStyle="none" Wrap="false" ReadOnly="true"></asp:TextBox>
                     </div>
-                </div>
+                </div>--%>
 
                 <!--RWD version application form-->
                 <asp:HiddenField ID="hdnIsPostBack" runat="server" />
                 <%--<asp:HiddenField ID="hdnIsDayOffAppVisible" runat="server" />--%>
-                <asp:HiddenField ID="hdnDayOffTimeRestraint" runat="server" />
+                <%--員工請假基本時數 (辦公室:0.5hr / 線廠:4hr)--%>
+                <%--<asp:HiddenField ID="hdnDayOffTimeRestraint" runat="server" />--%>
                 <asp:HiddenField ID="hdnOfficeOrProduction" runat="server" />
-                <asp:HiddenField ID="hdnEmployeeRank" runat="server" />
+                <%--<asp:HiddenField ID="hdnEmployeeRank" runat="server" />--%>
                 <asp:HiddenField ID="hdnImmediateReviewerID" runat="server" />
-                <asp:HiddenField ID="hdnNormalWorkHour" runat="server" />
+                <%--<asp:HiddenField ID="hdnNormalWorkHour" runat="server" />--%>
                 <asp:HiddenField ID="hdnDayOffTimeRemainBeforeSubmit" runat="server" />
-                <asp:HiddenField ID="hdnTotalDayOffTime" runat="server" />
-                <asp:HiddenField ID="hdnDayOffTypeUnit" runat="server" />
+                <%--<asp:HiddenField ID="hdnTotalDayOffTime" runat="server" />--%>
+                <%--<asp:HiddenField ID="hdnDayOffTypeUnit" runat="server" />--%>
                 <asp:HiddenField ID="hdnDenyReason" runat="server" />
 
 
@@ -748,12 +749,13 @@
     </div>
 
     <!--Modals-->
-    <asp:UpdatePanel ID="upApplicationForm" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
+    <asp:UpdatePanel ID="upApplicationForm" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="btnAddApplicationForm" />
+            <asp:AsyncPostBackTrigger ControlID="ddlDayOffType" />
         </Triggers>
         <ContentTemplate>
-            <div class="modal fade" id="ApplicationForm" data-backdrop="static" role="dialog">
+            <div class="modal" id="ApplicationForm" data-backdrop="false" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -768,11 +770,14 @@
                                 <asp:DropDownList ID="ddlDayOffType" runat="server" CssClass="custom-select" AutoPostBack="true" OnSelectedIndexChanged="ddlDayOffType_SelectedIndexChanged">
                                 </asp:DropDownList>
                             </div>
+                            <div class="mb-1">
+                                <asp:Label ID="lblDayOffRemaining" runat="server" Text=""></asp:Label>
+                            </div>
                             <div class="input-group mb-1" id="datetimepicker" data-target-input="nearest">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">請假日期</span>
                                 </div>
-                                <asp:TextBox ID="txtDayOffDate" runat="server"
+                                <asp:TextBox ID="txtDayOffBeginDateTime" runat="server"
                                     CssClass="form-control datetimepicker-input"
                                     data-target="#datetimepicker"></asp:TextBox>
                                 <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
@@ -783,7 +788,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">結束時間</span>
                                 </div>
-                                <asp:TextBox ID="txtDayOffTimeEnd" runat="server"
+                                <asp:TextBox ID="txtDayOffEndTime" runat="server"
                                     CssClass="form-control datetimepicker-input"
                                     data-target="#timepickerend"></asp:TextBox>
                                 <div class="input-group-append" data-target="#timepickerend" data-toggle="datetimepicker">
@@ -803,6 +808,7 @@
                             <div class="form-group">
                                 <span>請假事由:</span>
                                 <asp:TextBox ID="txtReason" runat="server" CssClass="form-control" MaxLength="100"
+                                    TextMode="MultiLine"
                                     placeholder="事假必填(100字內)"></asp:TextBox>
                             </div>
                         </div>

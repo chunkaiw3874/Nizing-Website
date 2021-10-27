@@ -2219,7 +2219,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     else
                     {
                         int pos = 2;    //get the index of the first char after the first 2 chars that is not number (正式員工編碼為xxxx, PT員工編碼為PTxxxx, 需要用此方法抓出完整員編)
-                        while (!Char.IsLetter(dayoff.funcSub[pos]))
+                        while (Char.IsNumber(dayoff.funcSub[pos]))
                         {
                             ++pos;
                         }
@@ -2267,7 +2267,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         else
                         {
                             int pos = 2;    //get the index of the first char after the first 2 chars that is not number (正式員工編碼為xxxx, PT員工編碼為PTxxxx, 需要用此方法抓出完整員編)
-                            while (!Char.IsLetter(dayoff.funcSub[pos]))
+                            while (Char.IsNumber(dayoff.funcSub[pos]))
                             {
                                 ++pos;
                             }

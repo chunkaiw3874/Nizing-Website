@@ -87,6 +87,7 @@
         routes.MapPageRoute("", "{language}/application/{application}/inflammable-signal-cable", "~/application/inflammable-signal-cable.aspx");
         routes.MapPageRoute("", "{language}/application/{application}/electrosurgical-unit-cable", "~/application/electrosurgical-unit-cable.aspx");
         routes.MapPageRoute("", "{language}/application/{application}/deep-sea-stainless-steel-armored-internet-cable", "~/application/deep-sea-stainless-steel-armored-internet-cable.aspx");
+        routes.MapPageRoute("", "{language}/application/{application}/multi-furnace-temperature-control-dual-shielded-cable", "~/application/multi-furnace-temperature-control-dual-shielded-cable.aspx");
 
 
         routes.MapPageRoute("", "{language}/material", "~/material.aspx");

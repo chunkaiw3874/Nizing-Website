@@ -1077,6 +1077,21 @@
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/zh/application/temperature-control-system/multi-furnace-temperature-control-dual-shielded-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/zh/application/steel-industry/multi-furnace-temperature-control-dual-shielded-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/zh/application/steel-industry</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
 
 
 
@@ -2184,6 +2199,21 @@
 	</url>
 	<url>
 		<loc>https://www.nizing.com.tw/en/application/cloud-system/deep-sea-stainless-steel-armored-internet-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/en/application/temperature-control-system/multi-furnace-temperature-control-dual-shielded-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/en/application/steel-industry/multi-furnace-temperature-control-dual-shielded-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/en/application/steel-industry</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>

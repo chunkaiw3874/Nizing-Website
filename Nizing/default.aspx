@@ -521,9 +521,9 @@
                                 <a href="">
                                     <div class="image-section">
                                         <picture>
-                                            <source srcset="https://via.placeholder.com/350x250?text=&nbsp" type="image/webp">
-                                            <img src="https://via.placeholder.com/350x250?text=&nbsp"
-                                                alt="CR認證潛艦電纜 CR Certified Submarine Cable">
+                                            <source srcset="/images/application/products/shipboard-composite-cable/menu/shipboard-composite-cable.webp" type="image/webp">
+                                            <img src="/images/application/products/shipboard-composite-cable/menu/shipboard-composite-cable.jpg"
+                                                alt="CR認證軍用船舶複合電纜 CR Certified Shipboard Composite Cable">
                                         </picture>
                                     </div>
                                 </a>
@@ -538,9 +538,9 @@
                                 <a href="">
                                     <div class="image-section">
                                         <picture>
-                                            <source srcset="https://via.placeholder.com/350x250?text=&nbsp" type="image/webp">
-                                            <img src="https://via.placeholder.com/350x250?text=&nbsp"
-                                                alt="飛彈發射器 Missle Launcher Control Cable">
+                                            <source srcset="/images/application/products/military-spec-high-frequency-transimission-control-cable/menu/military-spec-high-frequency-transimission-control-cable.webp" type="image/webp">
+                                            <img src="/images/application/products/military-spec-high-frequency-transimission-control-cable/menu/military-spec-high-frequency-transimission-control-cable.jpg"
+                                                alt="MIL軍規高頻傳輸控制複合電纜 MIL High Frequency Transmission Control Cable">
                                         </picture>
                                     </div>
                                 </a>
@@ -586,11 +586,11 @@
                         </div>
                         <div class="col">
                             <div class="newest-item">
-                                <a href="">
+                                <a href="/zh/application/temperature-control-system/multi-furnace-temperature-control-dual-shielded-cable">
                                     <div class="image-section">
                                         <picture>
-                                            <source srcset="/images/product/new-item/industrial-furnace.webp" type="image/webp">
-                                            <img src="/images/product/new-item/industrial-furnace.jpg"
+                                            <source srcset="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/menu/multi-furnace-temperature-control-dual-shielded-cable.webp" type="image/webp">
+                                            <img src="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/menu/multi-furnace-temperature-control-dual-shielded-cable.jpg"
                                                 alt="多爐溫控系統雙層屏蔽電纜 Temper Control Signal Shielding Cable">
                                         </picture>
                                     </div>
@@ -606,15 +606,32 @@
                                 <a href="">
                                     <div class="image-section">
                                         <picture>
-                                            <source srcset="https://via.placeholder.com/350x250?text=&nbsp" type="image/webp">
-                                            <img src="https://via.placeholder.com/350x250?text=&nbsp"
-                                                alt="飛彈控制軍規線 Missile Control Cable">
+                                            <source srcset="/images/application/products/military-spec-missile-control-cable/menu/military-spec-missile-control-cable.webp" type="image/webp">
+                                            <img src="/images/application/products/military-spec-missile-control-cable/menu/military-spec-missile-control-cable.jpg"
+                                                alt="軍規飛彈控制軍規線 MIL Missile Control Cable">
                                         </picture>
                                     </div>
                                 </a>
                                 <div class="text-section">
                                     <div class="title text-left">飛彈控制軍規線</div>
                                     <div class="subtitle text-left">軍規船用電纜</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="newest-item">
+                                <a href="">
+                                    <div class="image-section">
+                                        <picture>
+                                            <source srcset="https://via.placeholder.com/350x250?text=&nbsp" type="image/webp">
+                                            <img src="https://via.placeholder.com/350x250?text=&nbsp"
+                                                alt="高壓點火線 High Voltage Ignition Wire">
+                                        </picture>
+                                    </div>
+                                </a>
+                                <div class="text-section">
+                                    <div class="title text-left">汽車用 高壓點火線</div>
+                                    <div class="subtitle text-left"></div>
                                 </div>
                             </div>
                         </div>
@@ -630,12 +647,12 @@
                     <div id="divProductItemList" runat="server" class="content row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                         <div class="col reveal animate__animated">
                             <figure class="product-category-item move">
-                                <a href="/zh/product/silicone-fiberglass-wire">
+                                <a href="/zh/application/cloud-system/inflammable-signal-cable">
                                     <div class="image-section">
                                         <picture>
                                             <source srcset="/images/home/inflammable/big-menu.webp" type="image/webp">
                                             <img src="/images/home/inflammable/big-menu.png"
-                                                alt="防火耐燃電線 Anti-Flammatory Wire and Cable">
+                                                alt="防火耐燃訊號線 Inflammable Signal Cable">
                                         </picture>
                                     </div>
                                 </a>

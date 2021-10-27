@@ -212,6 +212,10 @@
 			</siteMapNode>
 			<siteMapNode url="/zh/application/temperature-control-system" title="溫控系統" description="溫控系統">
 				<siteMapNode url="/zh/application/temperature-control-system/fighter-jet-temperature-sensor-cable" title="戰鬥機溫控電纜" description="戰鬥機溫控電纜"></siteMapNode>
+				<siteMapNode url="/zh/application/temperature-control-system/multi-furnace-temperature-control-dual-shielded-cable" title="多爐溫控系統雙層屏蔽線" description="多爐溫控系統雙層屏蔽線"></siteMapNode>
+			</siteMapNode>
+			<siteMapNode url="/zh/application/steel-industry" title="鋼鐵工業" description="鋼鐵工業">
+				<siteMapNode url="/zh/application/steel-industry/multi-furnace-temperature-control-dual-shielded-cable" title="多爐溫控系統雙層屏蔽線" description="多爐溫控系統雙層屏蔽線"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/zh/application/cloud-system" title="雲端系統" description="雲端系統">
 				<siteMapNode url="/zh/application/cloud-system/inflammable-signal-cable" title="防火耐燃訊號線" description="防火耐燃訊號線"></siteMapNode>
@@ -456,6 +460,10 @@
 			</siteMapNode>
 			<siteMapNode url="/en/application/temperature-control-system" title="Temperature Control System" description="Temperature Control System">
 				<siteMapNode url="/en/application/temperature-control-system/fighter-jet-temperature-sensor-cable" title="Fighter Jet Temperature Sensor Cable" description="Fighter Jet Temperature Sensor Cable"></siteMapNode>
+				<siteMapNode url="/en/application/temperature-control-system/multi-furnace-temperature-control-dual-shielded-cable" title="Multi-Furnace Temperature Control Dual Shielded Cable" description="Multi-Furnace Temperature Control Dual Shielded Cable"></siteMapNode>
+			</siteMapNode>
+			<siteMapNode url="/en/application/steel-industry" title="Steel Industry" description="Steel Industry">
+				<siteMapNode url="/en/application/steel-industry/multi-furnace-temperature-control-dual-shielded-cable" title="Multi-Furnace Temperature Control Dual Shielded Cable" description="Multi-Furnace Temperature Control Dual Shielded Cable"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/en/application/cloud-system" title="Cloud System" description="Cloud System">
 				<siteMapNode url="/en/application/cloud-system/inflammable-signal-cable" title="Inflammable Signal Cable" description="Inflammable Signal Cable"></siteMapNode>
