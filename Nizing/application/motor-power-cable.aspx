@@ -33,15 +33,16 @@
         .text-section .top {
             padding-top: 1.5rem;
             padding-bottom: 0.6rem;
-            font-size: 16px;
+            font-size: 20px;
         }
 
         .text-section {
             padding-right: 48px;
+            font-weight: bold;
         }
 
             .text-section .middle {
-                font-size: 40px;
+                font-size: 50px;
                 padding-bottom: 0.6rem;
                 letter-spacing: 5px;
             }
@@ -51,15 +52,34 @@
                 }
 
                     .text-section .middle p:first-child {
-                        font-size: 38px;
+                        font-size: 47px;
                     }
 
             .text-section .bottom {
                 padding-bottom: 1rem;
+                font-size: 18px;
             }
 
         .img-small {
             width: 90%;
+        }
+
+        @media all and (max-width:1199px) {
+            .text-section .top {
+                font-size: 18px;
+            }
+
+            .text-section .middle {
+                font-size: 40px;
+            }
+
+                .text-section .middle p:first-child {
+                    font-size: 38px;
+                }
+
+            .text-section .bottom {
+                font-size: 16px;
+            }
         }
 
         @media all and (max-width:991px) {

@@ -47,6 +47,7 @@
             top: 320px;
             right: 0;
             width: 50%;
+            justify-content: right;
         }
 
         .bottom-image-2 {
@@ -57,14 +58,14 @@
         }
 
         .text-section {
-            padding: 0 46px;
+            padding: 0 46px 0 150px;
             margin-top: 40px;
             margin-bottom: 150px;
             font-weight: bold;
         }
 
             .text-section .text-title {
-                font-size: 66px;
+                font-size: 56px;
                 color: #B7467E;
                 padding-bottom: 18px;
             }
@@ -89,6 +90,7 @@
             .text-section {
                 margin-top: 40px;
                 margin-bottom: 40px;
+                padding-left: 46px;
             }
 
             .bottom-image {

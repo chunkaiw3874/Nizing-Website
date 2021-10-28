@@ -620,11 +620,11 @@
                         </div>
                         <div class="col">
                             <div class="newest-item">
-                                <a href="">
+                                <a href="/zh/application/automobile/high-voltage-ignition-wire">
                                     <div class="image-section">
                                         <picture>
-                                            <source srcset="https://via.placeholder.com/350x250?text=&nbsp" type="image/webp">
-                                            <img src="https://via.placeholder.com/350x250?text=&nbsp"
+                                            <source srcset="/images/application/products/high-voltage-ignition-wire/menu/high-voltage-ignition-wire.webp" type="image/webp">
+                                            <img src="/images/application/products/high-voltage-ignition-wire/menu/high-voltage-ignition-wire.jpg"
                                                 alt="高壓點火線 High Voltage Ignition Wire">
                                         </picture>
                                     </div>

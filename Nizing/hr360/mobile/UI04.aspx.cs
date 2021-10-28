@@ -33,7 +33,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     List<string> exceptionList110 = new List<string>(); //請假年分限本年度例外清單
     List<string> exceptionListHourForProduction = new List<string>();   //例外清單:可用小時計假的線廠人員(阿豪0160)
 
-    [Serializable]
+    //[Serializable]
     //public class UserInfo
     //{
     //    public string id { set; get; }
@@ -50,8 +50,18 @@ public partial class hr360_UI04 : System.Web.UI.Page
         public double dayOffTimespan { set; get; }
         public string functionalSubstitute { set; get; }
         public string reason { set; get; }
-        public bool isTyphoonDay { set; get; }
-        public bool needFunctionalSubstitute { get; set; }
+        public bool isTyphoonDayChecked { set; get; }
+        public bool isTyphoonDay()
+        {
+            return dayOffType.id == "11" || isTyphoonDayChecked;
+        }
+        //不需要代理人條件
+        //2018.06.13 請假半小時
+        //2018.07.12 颱風假
+        public bool needFunctionalSubstitute()
+        {
+            return !(dayOffTimespan <= 0.5 || isTyphoonDay());
+        }
     }
 
     public class DayOffType
@@ -85,12 +95,15 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_PreRenderComplete(object sender, EventArgs e)
     {
-        lstDayOffAppSummary = ViewState["lstDayOffAppSummary"] == null ? null : (List<DayOff>)ViewState["lstDayOffAppSummary"];
-        //foreach (HtmlGenericControl div in divSpecList.Controls.OfType<HtmlGenericControl>())
+        //lstDayOffAppSummary = ViewState["lstDayOffAppSummary"] == null ? null : (List<DayOff>)ViewState["lstDayOffAppSummary"];
+        //List<DayOff> dayOff = new List<DayOff>();
+        //foreach (HtmlGenericControl div in divApplicationFormList.Controls.OfType<HtmlGenericControl>())
         //{
-        //    dynamicSpecControls.Add(new Tuple<string, string>(div.ID, ((LiteralControl)div.FindControl("span" + div.ID)).Text));
+        //    dayOff.Add(new DayOff { 
+        //        dayOffType = GetDayOffTypeInfo()
+        //    });
         //}
-        //ViewState["DynamicSpecList"] = dynamicSpecControls;
+        //ViewState["DynamicSpecList"] = dayOff;
     }
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -123,6 +136,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 ApprovalSection_PostBack_Load();
             }
 
+            if (ViewState["lstDayOffAppSummary"] != null)
+            {
+                fillDayOffApplicationTable((List<DayOff>)ViewState["lstDayOffAppSummary"]);
+            }
             //Page.LoadComplete += new EventHandler(Page_LoadComplete);
         }
 
@@ -213,7 +230,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     }
 
                     //颱風假任何人都可以0.5小時請假
-                    if (dayOffApplicationInfo.isTyphoonDay)
+                    if (dayOffApplicationInfo.isTyphoonDay())
                     {
                         //測試錯誤 203.請假時數不是基本請假時數的倍數(0.5hr)，表示請假時數不合規定
                         if (dayOffApplicationInfo.dayOffTimespan % 0.5 != 0)
@@ -256,7 +273,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             }
 
             //測試代理人條件
-            if (dayOffApplicationInfo.needFunctionalSubstitute)
+            if (dayOffApplicationInfo.needFunctionalSubstitute())
             {
                 //測試錯誤 106.代理人有事，不能代理
                 if (!isFunctionalSubstituteAvailable(ddlDayOffFuncSub.SelectedValue, dayOffStartTime, dayOffEndTime))
@@ -383,8 +400,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
         if (errorList.Count == 0) //都沒有錯誤，可執行之後的步驟
         {
+            lblTest.Text = "application submitted";
             //將申請單資料依照申請內容正規化
-            if (dayOffApplicationInfo.isTyphoonDay)
+            if (dayOffApplicationInfo.isTyphoonDay())
             {
                 string temp = "PS.颱風假期間";
                 if (string.IsNullOrWhiteSpace(dayOffApplicationInfo.reason))
@@ -396,14 +414,14 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     dayOffApplicationInfo.reason = dayOffApplicationInfo.reason.Trim() + Environment.NewLine + temp;
                 }
             }
-            if (!dayOffApplicationInfo.needFunctionalSubstitute)
+            if (!dayOffApplicationInfo.needFunctionalSubstitute())
             {
                 dayOffApplicationInfo.functionalSubstitute = "N/A";
             }
             //將申請單加入此次的申請清單
             lstDayOffAppSummary.Add(dayOffApplicationInfo);
 
-            fillDayOffApplicationTable(lstDayOffAppSummary);
+            //fillDayOffApplicationTable(lstDayOffAppSummary);
             ViewState["lstDayOffAppSummary"] = lstDayOffAppSummary;
 
             resetApplicationForm();
@@ -438,7 +456,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
 
         //測試錯誤 111.請假日期不得小於三日前
-        if (!(dayOffBegin < DateTime.Today.AddDays(-3)))
+        if (dayOffBegin < DateTime.Today.AddDays(-3))
         {
             if (!exceptionList111.Contains(HR360LoggedUser.ERPId))
             {
@@ -547,11 +565,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         dayoff.dayOffTimespan = GetApplicationDayOffHours(dayOffDay, dayoff.startTime, dayoff.endTime);
         dayoff.functionalSubstitute = ddlDayOffFuncSub.SelectedValue;
         dayoff.reason = txtReason.Text.Trim();
-        dayoff.isTyphoonDay = ddlDayOffType.SelectedValue == "11" || ckbTyphoonDayNoSub.Checked;
-        //不需要代理人條件
-        //2018.06.13 請假半小時
-        //2018.07.12 颱風假
-        dayoff.needFunctionalSubstitute = !(dayoff.dayOffTimespan <= 0.5 || dayoff.isTyphoonDay);
+        dayoff.isTyphoonDayChecked = ckbTyphoonDayNoSub.Checked;
         return dayoff;
     }
 
@@ -1229,101 +1243,101 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// <param name="lstDayOffAppSummary"></param>
     protected void fillDayOffApplicationTable(List<DayOff> lstDayOffAppSummary)
     {
-        tbAppSummary.Rows.Clear();
+        //tbAppSummary.Rows.Clear();
 
-        HtmlTableRow newHeaderRow = new HtmlTableRow();
-        HtmlTableCell newHeaderCell = new HtmlTableCell("th");
-        newHeaderCell.InnerText = "假別";
-        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
-        newHeaderRow.Controls.Add(newHeaderCell);
-        newHeaderCell = new HtmlTableCell("th");
-        newHeaderCell.InnerText = "開始時間";
-        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
-        newHeaderRow.Controls.Add(newHeaderCell);
-        newHeaderCell = new HtmlTableCell("th");
-        newHeaderCell.InnerText = "結束時間";
-        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
-        newHeaderRow.Controls.Add(newHeaderCell);
-        newHeaderCell = new HtmlTableCell("th");
-        newHeaderCell.InnerText = "請假總量";
-        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
-        newHeaderRow.Controls.Add(newHeaderCell);
-        newHeaderCell = new HtmlTableCell("th");
-        newHeaderCell.InnerText = "代理人";
-        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
-        newHeaderRow.Controls.Add(newHeaderCell);
-        newHeaderCell = new HtmlTableCell("th");
-        newHeaderCell.InnerText = "請假原因";
-        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
-        newHeaderRow.Controls.Add(newHeaderCell);
-        newHeaderCell = new HtmlTableCell("th");
-        newHeaderCell.InnerText = "移除";
-        newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
-        newHeaderRow.Controls.Add(newHeaderCell);
-        tbAppSummary.Controls.Add(newHeaderRow);
-        int listCounter = 0;
-        foreach (DayOff info in lstDayOffAppSummary)
-        {
-            listCounter += 1;
-            HtmlTableRow newRow = new HtmlTableRow();
-            HtmlTableCell cell = new HtmlTableCell();
-            cell.InnerText = info.dayOffType.name;
-            cell.Attributes.Add("style", "text-align:center;");
-            newRow.Controls.Add(cell);
-            cell = new HtmlTableCell();
-            cell.InnerText = info.startTime.ToString("yyyy/MM/dd tt hh:mm");
-            cell.Attributes.Add("style", "text-align:center;");
-            newRow.Controls.Add(cell);
-            cell = new HtmlTableCell();
-            cell.InnerText = info.endTime.ToString("yyyy/MM/dd tt hh:mm");
-            cell.Attributes.Add("style", "text-align:center;");
-            newRow.Controls.Add(cell);
-            cell = new HtmlTableCell();
-            cell.InnerText = info.dayOffTimespan.ToString() + info.dayOffType.dayOffUnit;
-            cell.Attributes.Add("style", "text-align:center;");
-            newRow.Controls.Add(cell);
-            cell = new HtmlTableCell();
-            cell.InnerText = info.functionalSubstitute;
-            cell.Attributes.Add("style", "text-align:center;");
-            newRow.Controls.Add(cell);
-            cell = new HtmlTableCell();
-            cell.InnerText = info.reason;
-            cell.Attributes.Add("style", "text-align:center;");
-            newRow.Controls.Add(cell);
-            cell = new HtmlTableCell();
-            Button btn = new Button();
-            btn.ID = "btnRemoveApp" + listCounter;
-            btn.Text = "移除";
-            btn.CssClass = "btn btn-danger";
-            btn.Click += new EventHandler(btnRemoveApp_Click);
-            cell.Controls.Add(btn);
-            cell.Attributes.Add("style", "text-align:center;");
-            newRow.Controls.Add(cell);
-            tbAppSummary.Rows.Add(newRow);
-        }
+        //HtmlTableRow newHeaderRow = new HtmlTableRow();
+        //HtmlTableCell newHeaderCell = new HtmlTableCell("th");
+        //newHeaderCell.InnerText = "假別";
+        //newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        //newHeaderRow.Controls.Add(newHeaderCell);
+        //newHeaderCell = new HtmlTableCell("th");
+        //newHeaderCell.InnerText = "開始時間";
+        //newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        //newHeaderRow.Controls.Add(newHeaderCell);
+        //newHeaderCell = new HtmlTableCell("th");
+        //newHeaderCell.InnerText = "結束時間";
+        //newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        //newHeaderRow.Controls.Add(newHeaderCell);
+        //newHeaderCell = new HtmlTableCell("th");
+        //newHeaderCell.InnerText = "請假總量";
+        //newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        //newHeaderRow.Controls.Add(newHeaderCell);
+        //newHeaderCell = new HtmlTableCell("th");
+        //newHeaderCell.InnerText = "代理人";
+        //newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        //newHeaderRow.Controls.Add(newHeaderCell);
+        //newHeaderCell = new HtmlTableCell("th");
+        //newHeaderCell.InnerText = "請假原因";
+        //newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        //newHeaderRow.Controls.Add(newHeaderCell);
+        //newHeaderCell = new HtmlTableCell("th");
+        //newHeaderCell.InnerText = "移除";
+        //newHeaderCell.Attributes.Add("style", "text-align:center;font-weight:bold;");
+        //newHeaderRow.Controls.Add(newHeaderCell);
+        //tbAppSummary.Controls.Add(newHeaderRow);
+        //int listCounter = 0;
+        //foreach (DayOff info in lstDayOffAppSummary)
+        //{
+        //    listCounter += 1;
+        //    HtmlTableRow newRow = new HtmlTableRow();
+        //    HtmlTableCell cell = new HtmlTableCell();
+        //    cell.InnerText = info.dayOffType.name;
+        //    cell.Attributes.Add("style", "text-align:center;");
+        //    newRow.Controls.Add(cell);
+        //    cell = new HtmlTableCell();
+        //    cell.InnerText = info.startTime.ToString("yyyy/MM/dd tt hh:mm");
+        //    cell.Attributes.Add("style", "text-align:center;");
+        //    newRow.Controls.Add(cell);
+        //    cell = new HtmlTableCell();
+        //    cell.InnerText = info.endTime.ToString("yyyy/MM/dd tt hh:mm");
+        //    cell.Attributes.Add("style", "text-align:center;");
+        //    newRow.Controls.Add(cell);
+        //    cell = new HtmlTableCell();
+        //    cell.InnerText = info.dayOffTimespan.ToString() + info.dayOffType.dayOffUnit;
+        //    cell.Attributes.Add("style", "text-align:center;");
+        //    newRow.Controls.Add(cell);
+        //    cell = new HtmlTableCell();
+        //    cell.InnerText = info.functionalSubstitute;
+        //    cell.Attributes.Add("style", "text-align:center;");
+        //    newRow.Controls.Add(cell);
+        //    cell = new HtmlTableCell();
+        //    cell.InnerText = info.reason;
+        //    cell.Attributes.Add("style", "text-align:center;");
+        //    newRow.Controls.Add(cell);
+        //    cell = new HtmlTableCell();
+        //    Button btn = new Button();
+        //    btn.ID = "btnRemoveApp" + listCounter;
+        //    btn.Text = "移除";
+        //    btn.CssClass = "btn btn-danger";
+        //    btn.Click += new EventHandler(btnRemoveApp_Click);
+        //    cell.Controls.Add(btn);
+        //    cell.Attributes.Add("style", "text-align:center;");
+        //    newRow.Controls.Add(cell);
+        //    tbAppSummary.Rows.Add(newRow);
+        //}
 
         divApplicationFormList.Controls.Clear();
         for (int i = 0; i < lstDayOffAppSummary.Count; i++)
         {
-            buildApplicationFormListItem_labels(i, "假別", lstDayOffAppSummary[i].dayOffType.name);
-            buildApplicationFormListItem_labels(i, "日期", lstDayOffAppSummary[i].startTime.Date.ToString("yyyyMMdd"));
-            buildApplicationFormListItem_labels(i, "時間", lstDayOffAppSummary[i].startTime.ToString("HH:mm") + "~" + lstDayOffAppSummary[i].endTime.ToString("HH:mm"));
-            buildApplicationFormListItem_labels(i, "代理", lstDayOffAppSummary[i].functionalSubstitute);
+            HtmlGenericControl divCol = new HtmlGenericControl("div");
+            divCol.Attributes.Add("class", "col");
+            divApplicationFormList.Controls.Add(divCol);
+            HtmlGenericControl divApplicationFormListItem = new HtmlGenericControl("div");
+            divApplicationFormListItem.ID = "applicationFormListItem_" + i.ToString();
+            divApplicationFormListItem.Attributes.Add("class", "application-form-list-item");
+            divCol.Controls.Add(divApplicationFormListItem);
+            buildApplicationFormListItem_labels(i, "假別", lstDayOffAppSummary[i].dayOffType.name, divApplicationFormListItem);
+            buildApplicationFormListItem_labels(i, "日期", lstDayOffAppSummary[i].startTime.Date.ToString("yyyyMMdd"), divApplicationFormListItem);
+            buildApplicationFormListItem_labels(i, "時間", lstDayOffAppSummary[i].startTime.ToString("HH:mm") + "~" + lstDayOffAppSummary[i].endTime.ToString("HH:mm"), divApplicationFormListItem);
+            buildApplicationFormListItem_labels(i, "代理", lstDayOffAppSummary[i].functionalSubstitute, divApplicationFormListItem);
         }
     }
 
-    protected void buildApplicationFormListItem_labels(int positionInList, string titleText, string contentText)
+    protected void buildApplicationFormListItem_labels(int positionInList, string titleText, string contentText, HtmlGenericControl parentControl)
     {
-        HtmlGenericControl divCol = new HtmlGenericControl("div");
-        divCol.Attributes.Add("class", "col");
-        divApplicationFormList.Controls.Add(divCol);
-        HtmlGenericControl divApplicationFormListItem = new HtmlGenericControl("div");
-        divApplicationFormListItem.ID = "applicationFormListItem_" + positionInList.ToString();
-        divApplicationFormListItem.Attributes.Add("class", "application-form-list-item");
-        divCol.Controls.Add(divApplicationFormListItem);
         HtmlGenericControl divInputGroup = new HtmlGenericControl("div");
         divInputGroup.Attributes.Add("class", "input-group");
-        divApplicationFormListItem.Controls.Add(divInputGroup);
+        parentControl.Controls.Add(divInputGroup);
         HtmlGenericControl divInputGroupPrepend = new HtmlGenericControl("div");
         divInputGroupPrepend.Attributes.Add("class", "input-group-prepend");
         divInputGroup.Controls.Add(divInputGroupPrepend);
@@ -2168,7 +2182,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     else
                     {
                         int pos = 2;    //get the index of the first char after the first 2 chars that is not number (正式員工編碼為xxxx, PT員工編碼為PTxxxx, 需要用此方法抓出完整員編)
-                        while (!Char.IsLetter(dayoff.functionalSubstitute[pos]))
+                        while (Char.IsNumber(dayoff.functionalSubstitute[pos]))
                         {
                             ++pos;
                         }
@@ -2216,7 +2230,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         else
                         {
                             int pos = 2;    //get the index of the first char after the first 2 chars that is not number (正式員工編碼為xxxx, PT員工編碼為PTxxxx, 需要用此方法抓出完整員編)
-                            while (!Char.IsLetter(dayoff.functionalSubstitute[pos]))
+                            while (Char.IsNumber(dayoff.functionalSubstitute[pos]))
                             {
                                 ++pos;
                             }
@@ -3022,7 +3036,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     {
         lblApplicationFormTitle.Text = "新增假單";
         btnDayOffAdd.Text = "新增";
-        txtDayOffBeginDateTime.Text = DateTime.Now.ToString();
+        txtDayOffBeginDateTime.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm");
         txtDayOffEndTime.Text = DateTime.Now.AddMinutes(30).ToString("HH:mm");
         updateRemainingDayOffHours(HR360LoggedUser.ERPId, Convert.ToDateTime(txtDayOffBeginDateTime.Text));
         ShowModal("ApplicationForm");

@@ -50,14 +50,14 @@
         }
 
         .text-section {
-            padding: 0 46px;
+            padding: 0 46px 0 150px;
             margin-top: 40px;
             margin-bottom: 150px;
             font-weight: bold;
         }
 
             .text-section .text-title {
-                font-size: 54px;
+                font-size: 44px;
                 color: #FFF000;
                 line-height: 1.3;
                 padding: 20px 0;
@@ -92,6 +92,7 @@
 
         @media all and (max-width:1199px) {
             .text-section {
+                padding-left: 46px;
                 margin-top: 40px;
                 margin-bottom: 40px;
             }

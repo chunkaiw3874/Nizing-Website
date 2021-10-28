@@ -46,7 +46,7 @@
         }
 
         .text-section {
-            padding: 0 36px;
+            padding: 0 36px 0 150px;
             margin-top: -260px;
         }
 
@@ -60,7 +60,7 @@
 
 
             .text-section .middle {
-                font-size: 60px;
+                font-size: 48px;
             }
 
                 .text-section .middle p {
@@ -81,7 +81,7 @@
             }
 
             .text-section {
-                padding: 0 36px;
+                padding-left: 36px;
                 margin-top: -150px;
             }
 

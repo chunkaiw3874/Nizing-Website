@@ -365,6 +365,9 @@
                         <asp:AsyncPostBackTrigger ControlID="btnAppSubmit" />
                     </Triggers>
                     <ContentTemplate>
+                        <div id="divSystemMessage" runat="server">
+                            <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>
+                        </div>
                         <div class="card">
                             <div class="card-header bg-success d-flex justify-content-between text-white">
                                 本次請假內容                      
