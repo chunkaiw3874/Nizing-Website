@@ -308,56 +308,12 @@
                 <asp:Button ID="btntest" runat="server" Text="Button" />--%>
             </div>
             <div id="DayOffApp">
-                <%--<div class="row form-group">
-                    <div class="col-sm-2">
-                    </div>
-                    <div class="col-sm-2" style="display: inline; padding-right: 0px;">
-                        <asp:TextBox ID="txtDatePickerStart" runat="server" CssClass="form-control datepicker" placeholder="請假起始日期"></asp:TextBox>
-                    </div>
-                    <div class="col-sm-1" style="display: inline; padding: 0px;">
-                        <asp:DropDownList ID="ddlDayOffStartHour" runat="server" CssClass="form-control"></asp:DropDownList>
-                    </div>
-                    <div class="col-sm-1" style="display: inline; padding-left: 0px;">
-                        <asp:DropDownList ID="ddlDayOffStartMin" runat="server" CssClass="form-control"></asp:DropDownList>
-                    </div>
-                    <div class="col-sm-2" style="display: inline; padding-right: 0px;">
-                        <asp:TextBox ID="txtDatePickerEnd" runat="server" CssClass="form-control datepicker" placeholder="請假結束日期"></asp:TextBox>
-                    </div>
-                    <div class="col-sm-1" style="display: inline; padding: 0px;">
-                        <asp:DropDownList ID="ddlDayOffEndHour" runat="server" CssClass="form-control"></asp:DropDownList>
-                    </div>
-                    <div class="col-sm-1" style="display: inline; padding-left: 0px;">
-                        <asp:DropDownList ID="ddlDayOffEndMin" runat="server" CssClass="form-control"></asp:DropDownList>
-                    </div>
-                </div>--%>
-                <%--                <div class="row">
-                    <div class="col-sm-2">
-                        <asp:Label ID="lblDayOffRemainType" runat="server" Text=""></asp:Label>
-                        <asp:Label ID="lblDayOffRemainAmount" runat="server" Text=""></asp:Label>
-                        <asp:Label ID="lblDayOffRemainUnit" runat="server" Text=""></asp:Label>
-                    </div>
-                </div>--%>
-                <%--                <div class="row form-group">
-                    <div class="col-sm-6">
-                        <asp:TextBox ID="txtErrorMessage" runat="server" TextMode="MultiLine" CssClass="autosize no-resize error-message" Width="400" BorderStyle="none" Wrap="false" ReadOnly="true"></asp:TextBox>
-                    </div>
-                </div>--%>
-
                 <!--RWD version application form-->
                 <asp:HiddenField ID="hdnIsPostBack" runat="server" />
-                <%--<asp:HiddenField ID="hdnIsDayOffAppVisible" runat="server" />--%>
-                <%--員工請假基本時數 (辦公室:0.5hr / 線廠:4hr)--%>
-                <%--<asp:HiddenField ID="hdnDayOffTimeRestraint" runat="server" />--%>
                 <asp:HiddenField ID="hdnOfficeOrProduction" runat="server" />
-                <%--<asp:HiddenField ID="hdnEmployeeRank" runat="server" />--%>
                 <asp:HiddenField ID="hdnImmediateReviewerID" runat="server" />
-                <%--<asp:HiddenField ID="hdnNormalWorkHour" runat="server" />--%>
                 <asp:HiddenField ID="hdnDayOffTimeRemainBeforeSubmit" runat="server" />
-                <%--<asp:HiddenField ID="hdnTotalDayOffTime" runat="server" />--%>
-                <%--<asp:HiddenField ID="hdnDayOffTypeUnit" runat="server" />--%>
                 <asp:HiddenField ID="hdnDenyReason" runat="server" />
-
-
 
                 <asp:UpdatePanel ID="upApplicationList" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
                     <Triggers>
@@ -388,10 +344,11 @@
                                     *連續請假超過5日(含)者，須至少提前兩周告知，以利人力安排<br />
                                     *補單者須四日內完成補單動作(例:1/7臨時請假，最晚須於1/10補單)
                                 </div>
-                                <div class="table-responsive">
+                                <hr />
+<%--                                <div class="table-responsive">
                                     <table id="tbAppSummary" class="table" runat="server">
                                     </table>
-                                </div>
+                                </div>--%>
                                 <div id="divApplicationFormList" runat="server"
                                     class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
                                     <%--<div class="col">
@@ -455,7 +412,8 @@
                         </div>
                         <div class="panel-body">
                             <table id="tbInProgressSummary" class="table col-sm-12" runat="server">
-                            </table>
+                            </table>                            
+                            <div id="divInProgressApplicationList"></div>
                         </div>
                     </div>
                 </div>

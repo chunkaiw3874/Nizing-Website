@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWDApplicationMaster.master" AutoEventWireup="true" CodeFile="deep-sea-stainless-steel-armored-internet-cable.aspx.cs" Inherits="application_deep_sea_stainless_steel_armored_internet_cable" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWDApplicationMaster.master" AutoEventWireup="true" CodeFile="submarine-communications-cable.aspx.cs" Inherits="application_submarine_communications_cable" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title>水下不鏽鋼鎧裝海底網路通訊線-日進電線 2021</title>
@@ -6,8 +6,8 @@
     <meta property="og:type" content="article" />
     <meta property="og:title" content="水下不鏽鋼鎧裝海底網路通訊線-日進電線 2021" />
     <meta property="og:description" content="使用90A高硬度絕緣外被，先進的線材結構，可長時間浸泡於高密度及高深水壓的海水環境也不易腐蝕變質，堅固耐用且耐魚咬。不鏽鋼鎧裝及多重防雜訊隔離，可阻止外部的電磁干擾進入，保持傳輸網絡信號的穩定快速，品質優越，非常適合安裝於水底或其它嚴苛環境之網路通訊使用。" />
-    <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/deep-sea-stainless-steel-armored-internet-cable/impression/deep-sea-stainless-steel-armored-internet-cable-01-mobile.jpg" />
-    <meta property="og:url" content="https://www.nizing.com.tw/zh/application/cloud-system/deep-sea-stainless-steel-armored-internet-cable" />
+    <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/submarine-communications-cable/impression/submarine-communications-cable-01-mobile.jpg" />
+    <meta property="og:url" content="https://www.nizing.com.tw/zh/application/cloud-system/submarine-communications-cable" />
     <meta property="og:site_name" content="Nizing Electric Wire and Cable" />
     <style type="text/css">
         .breadcrumb {
@@ -31,11 +31,11 @@
         }
 
         .webp .bg-wrapper {
-            background: url("/images/application/products/deep-sea-stainless-steel-armored-internet-cable/impression/deep-sea-stainless-steel-armored-internet-cable-bg.webp") no-repeat top right / contain;
+            background: url("/images/application/products/submarine-communications-cable/impression/submarine-communications-cable-bg.webp") no-repeat top right / contain;
         }
 
         .no-webp .bg-wrapper {
-            background: url("/images/application/products/deep-sea-stainless-steel-armored-internet-cable/impression/deep-sea-stainless-steel-armored-internet-cable-bg.jpg") no-repeat top right / contain;
+            background: url("/images/application/products/submarine-communications-cable/impression/submarine-communications-cable-bg.jpg") no-repeat top right / contain;
         }
 
         .bg-color {
@@ -208,10 +208,10 @@
         <div class="content-wrapper">
             <div class="d-md-none">
                 <picture>
-                    <source srcset="/images/application/products/deep-sea-stainless-steel-armored-internet-cable/impression/deep-sea-stainless-steel-armored-internet-cable-01-mobile.webp"
+                    <source srcset="/images/application/products/submarine-communications-cable/impression/submarine-communications-cable-01-mobile.webp"
                         type="image/webp" />
-                    <img src="/images/application/products/deep-sea-stainless-steel-armored-internet-cable/impression/deep-sea-stainless-steel-armored-internet-cable-01-mobile.jpg"
-                        alt="水下不鏽鋼鎧裝海底網路通訊線 Deep Sea Stainless Steel Armored Internet Cable" />
+                    <img src="/images/application/products/submarine-communications-cable/impression/submarine-communications-cable-01-mobile.jpg"
+                        alt="水下不鏽鋼鎧裝海底網路通訊線 Submarine Communications Cable" />
                 </picture>
             </div>
             <div class="row bg-color-gradient">
@@ -230,10 +230,10 @@
                         </div>
                         <div class="d-flex justify-content-center text-image">
                             <picture>
-                                <source srcset="/images/application/products/deep-sea-stainless-steel-armored-internet-cable/impression/deep-sea-stainless-steel-armored-internet-cable-03.webp"
+                                <source srcset="/images/application/products/submarine-communications-cable/impression/submarine-communications-cable-03.webp"
                                     type="image/webp" />
-                                <img src="/images/application/products/deep-sea-stainless-steel-armored-internet-cable/impression/deep-sea-stainless-steel-armored-internet-cable-03.png"
-                                    alt="水下不鏽鋼鎧裝海底網路通訊線結構 Deep Sea Stainless Steel Armored Internet Cable Structure" class="mx-auto" />
+                                <img src="/images/application/products/submarine-communications-cable/impression/submarine-communications-cable-03.png"
+                                    alt="水下不鏽鋼鎧裝海底網路通訊線結構 Submarine Communications Cable Structure" class="mx-auto" />
                             </picture>
                         </div>
                     </div>
@@ -241,10 +241,10 @@
             </div>
             <div class="d-none d-md-flex bottom-image">
                 <picture>
-                    <source srcset="/images/application/products/deep-sea-stainless-steel-armored-internet-cable/impression/deep-sea-stainless-steel-armored-internet-cable-02.webp"
+                    <source srcset="/images/application/products/submarine-communications-cable/impression/submarine-communications-cable-02.webp"
                         type="image/webp" />
-                    <img src="/images/application/products/deep-sea-stainless-steel-armored-internet-cable/impression/deep-sea-stainless-steel-armored-internet-cable-02.png"
-                        alt="水下不鏽鋼鎧裝海底網路通訊線 Deep Sea Stainless Steel Armored Internet Cable" />
+                    <img src="/images/application/products/submarine-communications-cable/impression/submarine-communications-cable-02.png"
+                        alt="水下不鏽鋼鎧裝海底網路通訊線 Submarine Communications Cable" />
                 </picture>
             </div>
         </div>

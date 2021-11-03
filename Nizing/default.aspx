@@ -91,8 +91,8 @@
 
                 .banner .banner-text .bottom-right {
                     /*margin-right: -350px;*/
-                bottom: 100px;
-                right: 200px;
+                    bottom: 100px;
+                    right: 200px;
                 }
         }
 
@@ -108,8 +108,8 @@
                 }
 
                 .banner .banner-text .bottom-right {
-                bottom: 50px;
-                right: 150px;
+                    bottom: 50px;
+                    right: 150px;
                 }
         }
 
@@ -125,8 +125,8 @@
                 }
 
                 .banner .banner-text .bottom-right {
-                bottom: 50px;
-                right: 20px;
+                    bottom: 50px;
+                    right: 20px;
                 }
         }
 
@@ -149,7 +149,7 @@
 
                 .banner .banner-text .bottom-right {
                     bottom: 20px;
-                    right:20px;
+                    right: 20px;
                 }
         }
 
@@ -386,7 +386,7 @@
                 </div>
                 <div class="bottom-right">
                     <p>專業電線電纜製造商</p>
-<%--                    <p class="small-text">GB/T 19001-2015; ISO: 9001-2015 Certified No. 00610 Q20229RIM</p>
+                    <%--                    <p class="small-text">GB/T 19001-2015; ISO: 9001-2015 Certified No. 00610 Q20229RIM</p>
                     <p class="small-text">UL / CSA / VDE / PSE / CCC / CE / RoHs, REACH, MIT Certified</p>--%>
                 </div>
             </div>
@@ -440,12 +440,12 @@
                         </div>
                         <div class="col">
                             <div class="hottest-item">
-                                <a href="/zh/application/cloud-system/deep-sea-stainless-steel-armored-internet-cable">
+                                <a href="/zh/application/cloud-system/submarine-communications-cable">
                                     <div class="image-section">
                                         <picture>
-                                            <source srcset="/images/application/products/deep-sea-stainless-steel-armored-internet-cable/menu/deep-sea-stainless-steel-armored-internet-cable.webp" type="image/webp">
-                                            <img src="/images/application/products/deep-sea-stainless-steel-armored-internet-cable/menu/deep-sea-stainless-steel-armored-internet-cable.jpg"
-                                                alt="水下不鏽鋼鎧裝海底網路通訊線 Deep Sea Stainless Steel Armored Internet Cable">
+                                            <source srcset="/images/application/products/submarine-communications-cable/menu/submarine-communications-cable.webp" type="image/webp">
+                                            <img src="/images/application/products/submarine-communications-cable/menu/submarine-communications-cable.jpg"
+                                                alt="水下不鏽鋼鎧裝海底網路通訊線 Submarine Communications Cable">
                                         </picture>
                                     </div>
                                 </a>
@@ -484,18 +484,18 @@
                         </div>
                         <div class="col">
                             <div class="newest-item">
-                                <a href="">
+                                <a href="/zh/application/automobile/high-frequency-communication-cable">
                                     <div class="image-section">
                                         <picture>
-                                            <source srcset="https://via.placeholder.com/350x250?text=&nbsp" type="image/webp">
-                                            <img src="https://via.placeholder.com/350x250?text=&nbsp"
-                                                alt="高鐵/捷運光纖電纜 Optic Fiber Cable for High Speed Rail and Massive Transit System">
+                                            <source srcset="/images/application/products/high-frequency-communication-cable/menu/high-frequency-communication-cable.webp" type="image/webp">
+                                            <img src="/images/application/products/high-frequency-communication-cable/menu/high-frequency-communication-cable.jpg"
+                                                alt="車用高頻無線通訊電纜 Automobile High Frequency Communication Cable">
                                         </picture>
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <div class="title text-left">高鐵/捷運光纖電纜</div>
-                                    <div class="subtitle text-left">通訊配線</div>
+                                    <div class="title text-left">車用-高頻無線通訊電纜</div>
+                                    <div class="subtitle text-left">Apple Car Play, WiFi, 衛星導航,無人自動駕駛系統</div>
                                 </div>
                             </div>
                         </div>
@@ -632,6 +632,23 @@
                                 <div class="text-section">
                                     <div class="title text-left">汽車用 高壓點火線</div>
                                     <div class="subtitle text-left"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="newest-item">
+                                <a href="">
+                                    <div class="image-section">
+                                        <picture>
+                                            <source srcset="https://via.placeholder.com/350x250?text=&nbsp" type="image/webp">
+                                            <img src="https://via.placeholder.com/350x250?text=&nbsp"
+                                                alt="高鐵/捷運光纖電纜 Optic Fiber Cable for High Speed Rail and Massive Transit System">
+                                        </picture>
+                                    </div>
+                                </a>
+                                <div class="text-section">
+                                    <div class="title text-left">高鐵/捷運光纖電纜</div>
+                                    <div class="subtitle text-left">通訊配線</div>
                                 </div>
                             </div>
                         </div>

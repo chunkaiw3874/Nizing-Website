@@ -86,9 +86,10 @@
         routes.MapPageRoute("", "{language}/application/{application}/fighter-jet-temperature-sensor-cable", "~/application/fighter-jet-temperature-sensor-cable.aspx");
         routes.MapPageRoute("", "{language}/application/{application}/inflammable-signal-cable", "~/application/inflammable-signal-cable.aspx");
         routes.MapPageRoute("", "{language}/application/{application}/electrosurgical-unit-cable", "~/application/electrosurgical-unit-cable.aspx");
-        routes.MapPageRoute("", "{language}/application/{application}/deep-sea-stainless-steel-armored-internet-cable", "~/application/deep-sea-stainless-steel-armored-internet-cable.aspx");
+        routes.MapPageRoute("", "{language}/application/{application}/submarine-communications-cable", "~/application/submarine-communications-cable.aspx");
         routes.MapPageRoute("", "{language}/application/{application}/multi-furnace-temperature-control-dual-shielded-cable", "~/application/multi-furnace-temperature-control-dual-shielded-cable.aspx");
         routes.MapPageRoute("", "{language}/application/{application}/high-voltage-ignition-wire", "~/application/high-voltage-ignition-wire.aspx");
+        routes.MapPageRoute("", "{language}/application/{application}/high-frequency-communication-cable", "~/application/high-frequency-communication-cable.aspx");
 
 
         routes.MapPageRoute("", "{language}/material", "~/material.aspx");
