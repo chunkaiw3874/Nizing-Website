@@ -278,7 +278,7 @@
         <header class="container-fluid">
             <nav runat="server" id="navigation">
                 <div class="navbar navbar-expand-md fixed-top nav-wrapper">
-                    <a class="navbar-brand mr-0" href="/">
+                    <a id="logoAnchor" runat="server" class="navbar-brand mr-0" href="/">
                         <img src="/images/logo/nizing.png" />
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavContent">

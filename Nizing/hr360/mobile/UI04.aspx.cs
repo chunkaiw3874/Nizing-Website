@@ -4,10 +4,12 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Threading;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -18,6 +20,7 @@ using System.Web.UI.WebControls;
  * 2018.11.01 HR:0142
  * 2018.09.27 改版為假單不跨天
  * PS: 搜尋"NEED FIX" for code
+ * 2021.11.04 新版(RWD)將假單ID格式改成 (員編)-YYYYMMDD-流水號
  */
 public partial class hr360_UI04 : System.Web.UI.Page
 {
@@ -36,6 +39,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
     [Serializable()]
     public class DayOff
     {
+        public string applicationId { set; get; }
+        public string applicantId { set; get; }
         public DayOffType dayOffType { set; get; }
         public DateTime startTime { set; get; }
         public DateTime endTime { set; get; }
@@ -92,6 +97,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
         int i = 0;
         foreach (HtmlGenericControl div in divApplicationFormList.Controls.OfType<HtmlGenericControl>())
         {
+            string dayOffApplicationId = ((HtmlGenericControl)div.FindControl("dayOffApplicationId_" + i.ToString())).InnerText;
+            string dayOffApplicantId = ((HtmlInputHidden)div.FindControl("dayOffApplicantId_" + i.ToString())).Value;
             string dayOffTypeId = ((HtmlInputHidden)div.FindControl("dayOffTypeId_" + i.ToString())).Value;
             string[] dayOffTime = ((HtmlGenericControl)div.FindControl("dayOffTime_" + i.ToString())).InnerText.Split('~');
             DateTime startTime = Convert.ToDateTime(((HtmlGenericControl)div.FindControl("dayOffDate_" + i.ToString())).InnerText + " " + dayOffTime[0]);
@@ -103,6 +110,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
             bool isTyphoonDayChecked = Convert.ToBoolean(((HtmlInputHidden)div.FindControl("isTyphoonDayChecked_" + i.ToString())).Value);
             dayOff.Add(new DayOff
             {
+                applicationId = dayOffApplicationId,
+                applicantId = dayOffApplicantId,
                 dayOffType = GetDayOffTypeInfo(dayOffTypeId),
                 startTime = startTime,
                 endTime = endTime,
@@ -348,7 +357,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 {
                     //計算非特休或補休的剩餘時數
                     double remainingHours = GetRamainingDayOffHours(dayOffTypeInfo, HR360LoggedUser.ERPId, dayOffStartTime);
-                    errorList.Add(errorCode(202));
+                    if (dayOffApplicationInfo.dayOffTimespan > remainingHours)
+                    {
+                        errorList.Add(errorCode(202));
+                    }
                 }
             }
 
@@ -559,6 +571,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
     protected DayOff GetDayOffApplicationInfo(DayOffType dayOffType, DayOffDay dayOffDay, DateTime dayOffStart, DateTime dayOffEnd)
     {
         DayOff dayoff = new DayOff();
+        dayoff.applicantId = HR360LoggedUser.ERPId;
+        dayoff.applicationId = GetApplicationUID(dayoff.applicantId, DateTime.Today);
         dayoff.dayOffType = dayOffType;
         dayoff.startTime = dayOffStart;
         dayoff.endTime = dayOffEnd;
@@ -922,9 +936,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
             DateTime applicationDayOffDate = Convert.ToDateTime(((HtmlGenericControl)div.FindControl("dayOffDate_" + divApplicationFormListCounter.ToString())).InnerText);
             if (applicationDayOffId == dayOffType.id)
             {
-                if(dayOffType.monthlyAllowance > 0)
+                if (dayOffType.monthlyAllowance > 0)
                 {
-                    if(applicationDayOffDate.Month == dayOffDate.Month)
+                    if (applicationDayOffDate.Month == dayOffDate.Month)
                     {
                         hoursLocked += double.Parse(((HtmlInputHidden)div.FindControl("dayOffTimeSpan_" + divApplicationFormListCounter.ToString())).Value);
                     }
@@ -1175,12 +1189,26 @@ public partial class hr360_UI04 : System.Web.UI.Page
             divApplicationFormListItem.ID = "applicationFormListItem_" + i.ToString();
             divApplicationFormListItem.Attributes.Add("class", "application-form-list-item");
             divCol.Controls.Add(divApplicationFormListItem);
+
+            HtmlGenericControl divInputGroup = new HtmlGenericControl("div");
+            divInputGroup.Attributes.Add("class", "input-group justify-content-end");
+            divApplicationFormListItem.Controls.Add(divInputGroup);
+
+            Button btnAddAttachment = new Button();
+            btnAddAttachment.ID = "btnAddAttachmentFromNewApplication_" + lstDayOffAppSummary[i].applicationId.Replace('-', '_');
+            btnAddAttachment.Attributes.Add("class", "btn btn-success w-50");
+            btnAddAttachment.Text = "加附件";
+            btnAddAttachment.Click += new EventHandler(btnShowAttachmentModal);
+            divInputGroup.Controls.Add(btnAddAttachment);
+
+
+            buildApplicationFormListItem_labels(i, "單號", lstDayOffAppSummary[i].applicationId, divApplicationFormListItem, "dayOffApplicationId");
             buildApplicationFormListItem_labels(i, "假別", lstDayOffAppSummary[i].dayOffType.name, divApplicationFormListItem, "dayOffTypeName");
             buildApplicationFormListItem_labels(i, "日期", lstDayOffAppSummary[i].startTime.Date.ToString("yyyy/MM/dd"), divApplicationFormListItem, "dayOffDate");
             buildApplicationFormListItem_labels(i, "時間", lstDayOffAppSummary[i].startTime.ToString("HH:mm") + "~" + lstDayOffAppSummary[i].endTime.ToString("HH:mm"), divApplicationFormListItem, "dayOffTime");
             buildApplicationFormListItem_labels(i, "代理", lstDayOffAppSummary[i].functionalSubstitute.Item2, divApplicationFormListItem, "functionalSubstituteName");
 
-            HtmlGenericControl divInputGroup = new HtmlGenericControl("div");
+            divInputGroup = new HtmlGenericControl("div");
             divInputGroup.Attributes.Add("class", "input-group");
             divApplicationFormListItem.Controls.Add(divInputGroup);
 
@@ -1202,6 +1230,10 @@ public partial class hr360_UI04 : System.Web.UI.Page
             btnRemoveApplication.Click += new EventHandler(btnRemoveApp_Click);
             divInputGroup.Controls.Add(btnRemoveApplication);
 
+            HtmlInputHidden hdnApplicantId = new HtmlInputHidden();
+            hdnApplicantId.ID = "dayOffApplicantId_" + i.ToString();
+            hdnApplicantId.Value = lstDayOffAppSummary[i].applicantId;
+            divApplicationFormListItem.Controls.Add(hdnApplicantId);
             HtmlInputHidden hdnDayOffTypeId = new HtmlInputHidden();
             hdnDayOffTypeId.ID = "dayOffTypeId_" + i.ToString();
             hdnDayOffTypeId.Value = lstDayOffAppSummary[i].dayOffType.id;
@@ -1638,6 +1670,39 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     }
 
+
+    protected void btnShowAttachmentModal(object sender, EventArgs e)
+    {
+        Button btn = (Button)sender;
+        string[] btnId = btn.ID.Split('_');
+        string applicationId = btnId[1] + "-" + btnId[2] + "-" + btnId[3];
+        lblApplicationIdForAttachment.Text = "假單 " + applicationId + " 附件編輯";
+        DisplayAttachmentList(applicationId);
+        ShowModal("Attachment");
+    }
+
+    protected void DisplayAttachmentList(string applicationId)
+    {
+        string[] folderIdParts = applicationId.Split('-');
+        lbxAttachmentList.Items.Clear();
+        string filePath = Server.MapPath("/hr360/attachment/dayoff-application-attachment/" + folderIdParts[0] + "/" + folderIdParts[1] + '-' + folderIdParts[2] + "/");
+        if (Directory.Exists(filePath))
+        {
+            foreach (string file in Directory.GetFiles(filePath))
+            {
+                lbxAttachmentList.Items.Add(new ListItem(Path.GetFileName(file), file));
+            }
+        }
+    }
+    protected void AddAttachment()
+    {
+
+    }
+
+    protected void RemoveAttachment()
+    {
+
+    }
     /// <summary>
     /// Remove selected day off application from list
     /// </summary>
@@ -1702,262 +1767,271 @@ public partial class hr360_UI04 : System.Web.UI.Page
     /// <param name="e"></param>
     protected void btnApprove_Click(object sender, EventArgs e)
     {
-        string nextReviewer;
-        //string erpId = HR360LoggedUser.ERPId;
         string[] list = hdnApprovalPendingSelection.Value.ToString().Split(',');
         if (list.Count() > 0)
         {
-            foreach (string s in list)
+            foreach (string applicationId in list)
             {
-                string approveID = s;
-                string approveID_status = "";
-                string applicantID = "";
-                string memberOf = "";
-                DataTable dtApplicant = new DataTable();
+                ApproveApplication(applicationId);
+            }
+
+            //fill table after selection iteration is done, or it'll mess up the table row selection
+            fillApprovalTable();
+        }
+    }
+
+    protected void ApproveApplication(string applicationId)
+    {
+        string nextReviewer;
+        DataTable dtApplicant = new DataTable();
+
+        //get current application status and applicant information
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            string query = "SELECT APP.APPLICATION_STATUS_ID" +
+                        " ,HIER.MEMBEROF" +
+                        " ,APP.APPLICANT_ID" +
+                        " ,APP.FUNCTIONAL_SUBSTITUTE_ID" +
+                        " FROM HR360_DAYOFFAPPLICATION_APPLICATION APP" +
+                        " LEFT JOIN NZ.dbo.CMSMV MV ON APP.APPLICANT_ID=MV.MV001" +
+                        " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MV.MV006=HIER.JOB_ID" +
+                        " WHERE APPLICATION_ID=@APP_ID";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@APP_ID", applicationId);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dtApplicant);
+        }
+        string applicatoinStatus = dtApplicant.Rows[0]["APPLICATION_STATUS_ID"].ToString();
+        string memberOf = dtApplicant.Rows[0]["MEMBEROF"].ToString();
+        string applicantID = dtApplicant.Rows[0]["APPLICANT_ID"].ToString().Trim();
+
+        //新申請的假單，沒有代理人的情況下從系統直接送出做簽核，nextReviewer設定為System
+        if (dtApplicant.Rows[0]["FUNCTIONAL_SUBSTITUTE_ID"].ToString() == "N/A" && applicatoinStatus == "02")
+        {
+            nextReviewer = "SYSTEM";
+        }
+        //人為啟動簽核程序，啟動者自然為可簽核者
+        else
+        {
+            nextReviewer = HR360LoggedUser.ERPId;
+        }
+
+        do
+        {
+            //insert trail
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                //insert approval trail to DB
+                string query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B (APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID,STATUS_ID)"
+                            + " VALUES(@APP_ID,GETDATE(),@EXE_ID,'02',@STATUS_ID)";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@APP_ID", applicationId);
+                cmd.Parameters.AddWithValue("@EXE_ID", nextReviewer);
+                cmd.Parameters.AddWithValue("@STATUS_ID", applicatoinStatus);
+                cmd.ExecuteNonQuery();
+            }
+
+            //get new application status and the reviewer for that stage
+            if (Convert.ToInt16(applicatoinStatus) < 7)
+            {
+                applicatoinStatus = (Convert.ToInt16(applicatoinStatus) + 1).ToString("D2");
+            }
+            if (applicatoinStatus == "03")  //代理人簽核通過，搜尋第一層簽核人(部門最高負責人 BELOW RANK 7)
+            {
                 using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                 {
                     conn.Open();
-                    //get current state of the application
-                    string query = "SELECT APP.APPLICATION_STATUS_ID,HIER.MEMBEROF,APP.APPLICANT_ID,APP.FUNCTIONAL_SUBSTITUTE_ID"
-                                + " FROM HR360_DAYOFFAPPLICATION_APPLICATION APP"
-                                + " LEFT JOIN NZ.dbo.CMSMV MV ON APP.APPLICANT_ID=MV.MV001"
+                    DataTable dt = new DataTable();
+                    //get applicant's dept
+                    string query = "SELECT MV.MV004,HIER.[RANK]"
+                                + " FROM NZ.dbo.CMSMV MV"
                                 + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MV.MV006=HIER.JOB_ID"
-                                + " WHERE APPLICATION_ID=@APP_ID";
+                                + " WHERE MV.MV001=@ID";
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@APP_ID", approveID);
+                    cmd.Parameters.AddWithValue("@ID", applicantID);
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    da.Fill(dtApplicant);
+                    da.Fill(dt);
+                    //第一層簽核 限制:RANK 2-7、RANK高於申請者RANK、同部門或可替換部門
+                    query = ";WITH REF_DEPT"
+                        + " AS"
+                        + " ("
+                        + " SELECT REF.DEPT_MAIN MAIN,REF.DEPT_REF REF"
+                        + " FROM NZ.dbo.CMSMV MV"
+                        + " LEFT JOIN HR360_DAYOFFAPPLICATION_DEPT_REFERENCE REF ON MV.MV004=REF.DEPT_MAIN AND REF.ACTIVE=1"
+                        + " WHERE MV.MV001=@ID"
+                        + " )"
+                        + " SELECT TOP 1 MV.MV001,MV.MV002,MV.MV004,MK.MK001,HIER.[RANK],HIER.MEMBEROF"
+                        + " FROM NZ.dbo.CMSMV MV"
+                        + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
+                        + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
+                        + " LEFT JOIN REF_DEPT REF ON MV.MV004=REF.MAIN OR MV.MV004=REF.REF"
+                        + " WHERE MV.MV022=''"
+                        + " AND MV.MV001<>'0000'"
+                        + " AND MV.MV001<>'0098'"
+                        + " AND MV.MV001<>@ID"
+                        + " AND (MV.MV004=@DEPT OR MV.MV004=REF.REF)"
+                        + " AND HIER.[RANK] > @RANK"
+                        + " AND HIER.[RANK] BETWEEN 2 AND 7"
+                        + " AND MV.MV004<>'B-C'"  //SPECIAL RULE FOR 上膠部，因為沒人會電腦，故上膠部請假直接到第二層，由生管口頭詢問上膠主管 (DELETE WHEN SITUATION CHANGES)
+                        + " AND MV.MV004<>'A-SD'"   //KELVEN不需要簽核，業務部主管簽核由SYSTEM直接過 (DELETE WHEN SITUATION CHANGES)
+                        + " ORDER BY HIER.[RANK] DESC" +
+                        " ,case" +  //當有相通的部門時，如果兩個部門有同rank的主管，則會優先選擇與請假者同部門的主管
+                        " when MV.MV004 = @DEPT then 1" +
+                        " else 2" +
+                        " end" +
+                        " ,MV.MV001";
+                    cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@ID", applicantID);
+                    cmd.Parameters.AddWithValue("@DEPT", dt.Rows[0][0].ToString().Trim());
+                    cmd.Parameters.AddWithValue("@RANK", dt.Rows[0][1].ToString().Trim());
+                    dt = new DataTable();
+                    da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        nextReviewer = dt.Rows[0][0].ToString().Trim();
+                    }
+                    else
+                    {
+                        nextReviewer = "SYSTEM";
+                    }
                 }
-                approveID_status = dtApplicant.Rows[0][0].ToString();
-                memberOf = dtApplicant.Rows[0][1].ToString();
-                applicantID = dtApplicant.Rows[0][2].ToString().Trim();
-                if (dtApplicant.Rows[0]["FUNCTIONAL_SUBSTITUTE_ID"].ToString() == "N/A" && approveID_status == "02")
-                {
-                    nextReviewer = "SYSTEM";
-                }
-                else
-                {
-                    nextReviewer = HR360LoggedUser.ERPId;
-                }
-
-                do
+            }
+            else if (applicatoinStatus == "04")  //第一層通過，搜尋第二層審核者(廠長/副廠長/生管主任)
+            {
+                //產線才需要第二層(廠長)簽核，辦公室直接通過
+                if (memberOf == "產線")
                 {
                     using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
                     {
                         conn.Open();
-                        //insert approval trail to DB
-                        string query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B (APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID,STATUS_ID)"
-                                    + " VALUES(@APP_ID,GETDATE(),@EXE_ID,'02',@STATUS_ID)";
+                        //簽核限制:產線 RANK 4-6
+                        string query = "SELECT TOP 1 MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
+                                    + " FROM NZ.dbo.CMSMV MV"
+                                    + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
+                                    + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
+                                    + " WHERE MV.MV022=''"
+                                    + " AND HIER.MEMBEROF='產線'"
+                                    + " AND HIER.[RANK] BETWEEN 4 AND 6"
+                                    + " AND MV.MV001<>@ID"
+                                    + " ORDER BY HIER.[RANK] DESC";
                         SqlCommand cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@APP_ID", approveID);
-                        cmd.Parameters.AddWithValue("@EXE_ID", nextReviewer);
-                        cmd.Parameters.AddWithValue("@STATUS_ID", approveID_status);
-                        cmd.ExecuteNonQuery();
-                    }
-                    //update application status to next stage
-                    if (Convert.ToInt16(approveID_status) < 7)
-                    {
-                        approveID_status = (Convert.ToInt16(approveID_status) + 1).ToString("D2");
-                    }
-                    if (approveID_status == "03")  //代理人簽核通過，搜尋第一層簽核人(部門最高負責人 BELOW RANK 7)
-                    {
-                        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                        cmd.Parameters.AddWithValue("@ID", applicantID);
+                        DataTable dt = new DataTable();
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(dt);
+                        if (dt.Rows.Count > 0)
                         {
-                            conn.Open();
-                            DataTable dt = new DataTable();
-                            //get applicant's dept
-                            string query = "SELECT MV.MV004,HIER.[RANK]"
-                                        + " FROM NZ.dbo.CMSMV MV"
-                                        + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MV.MV006=HIER.JOB_ID"
-                                        + " WHERE MV.MV001=@ID";
-                            SqlCommand cmd = new SqlCommand(query, conn);
-                            cmd.Parameters.AddWithValue("@ID", applicantID);
-                            SqlDataAdapter da = new SqlDataAdapter(cmd);
-                            da.Fill(dt);
-                            //第一層簽核 限制:RANK 2-7、RANK高於申請者RANK、同部門或可替換部門
-                            query = ";WITH REF_DEPT"
-                                + " AS"
-                                + " ("
-                                + " SELECT REF.DEPT_MAIN MAIN,REF.DEPT_REF REF"
-                                + " FROM NZ.dbo.CMSMV MV"
-                                + " LEFT JOIN HR360_DAYOFFAPPLICATION_DEPT_REFERENCE REF ON MV.MV004=REF.DEPT_MAIN AND REF.ACTIVE=1"
-                                + " WHERE MV.MV001=@ID"
-                                + " )"
-                                + " SELECT TOP 1 MV.MV001,MV.MV002,MV.MV004,MK.MK001,HIER.[RANK],HIER.MEMBEROF"
-                                + " FROM NZ.dbo.CMSMV MV"
-                                + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
-                                + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
-                                + " LEFT JOIN REF_DEPT REF ON MV.MV004=REF.MAIN OR MV.MV004=REF.REF"
-                                + " WHERE MV.MV022=''"
-                                + " AND MV.MV001<>'0000'"
-                                + " AND MV.MV001<>'0098'"
-                                + " AND MV.MV001<>@ID"
-                                + " AND (MV.MV004=@DEPT OR MV.MV004=REF.REF)"
-                                + " AND HIER.[RANK] > @RANK"
-                                + " AND HIER.[RANK] BETWEEN 2 AND 7"
-                                + " AND MV.MV004<>'B-C'"  //SPECIAL RULE FOR 上膠部，因為沒人會電腦，故上膠部請假直接到第二層，由生管口頭詢問上膠主管 (DELETE WHEN SITUATION CHANGES)
-                                + " AND MV.MV004<>'A-SD'"   //KELVEN不需要簽核，業務部主管簽核由SYSTEM直接過 (DELETE WHEN SITUATION CHANGES)
-                                + " ORDER BY HIER.[RANK] DESC" +
-                                " ,case" +  //當有相通的部門時，如果兩個部門有同rank的主管，則會優先選擇與請假者同部門的主管
-                                " when MV.MV004 = @DEPT then 1" +
-                                " else 2" +
-                                " end" +
-                                " ,MV.MV001";
-                            cmd = new SqlCommand(query, conn);
-                            cmd.Parameters.AddWithValue("@ID", applicantID);
-                            cmd.Parameters.AddWithValue("@DEPT", dt.Rows[0][0].ToString().Trim());
-                            cmd.Parameters.AddWithValue("@RANK", dt.Rows[0][1].ToString().Trim());
-                            dt = new DataTable();
-                            da = new SqlDataAdapter(cmd);
-                            da.Fill(dt);
-                            if (dt.Rows.Count > 0)
-                            {
-                                nextReviewer = dt.Rows[0][0].ToString().Trim();
-                            }
-                            else
-                            {
-                                nextReviewer = "SYSTEM";
-                            }
-                        }
-                    }
-                    else if (approveID_status == "04")  //第一層通過，搜尋第二層審核者(廠長/副廠長/生管主任)
-                    {
-                        //產線才需要第二層(廠長)簽核，辦公室直接通過
-                        if (memberOf == "產線")
-                        {
-                            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-                            {
-                                conn.Open();
-                                //簽核限制:產線 RANK 4-6
-                                string query = "SELECT TOP 1 MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
-                                            + " FROM NZ.dbo.CMSMV MV"
-                                            + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
-                                            + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
-                                            + " WHERE MV.MV022=''"
-                                            + " AND HIER.MEMBEROF='產線'"
-                                            + " AND HIER.[RANK] BETWEEN 4 AND 6"
-                                            + " AND MV.MV001<>@ID"
-                                            + " ORDER BY HIER.[RANK] DESC";
-                                SqlCommand cmd = new SqlCommand(query, conn);
-                                cmd.Parameters.AddWithValue("@ID", applicantID);
-                                DataTable dt = new DataTable();
-                                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                                da.Fill(dt);
-                                if (dt.Rows.Count > 0)
-                                {
-                                    nextReviewer = dt.Rows[0][0].ToString().Trim();
-                                }
-                                else
-                                {
-                                    nextReviewer = "SYSTEM";
-                                }
-                            }
+                            nextReviewer = dt.Rows[0][0].ToString().Trim();
                         }
                         else
                         {
                             nextReviewer = "SYSTEM";
                         }
                     }
-                    else if (approveID_status == "05")  //第二層通過，搜尋第三層審核者(人事主任)
-                    {
-                        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-                        {
-                            conn.Open();
-                            //簽核限制:人事主任 RANK 7 //HR(2018.10.08 HR:NONE)
-                            string query = "SELECT MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
-                                        + " FROM NZ.dbo.CMSMV MV"
-                                        + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
-                                        + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
-                                        + " WHERE MV.MV022=''"
-                                        + " AND MV.MV001<>@ID"
-                                        //+ " AND MK.MK001='A20'"           
-                                        //+ " AND HIER.[RANK]=7";
-                                        + " AND MV.MV001='" + HREmpId + "'" //HR NEED FIX: 如無人事主任(A20)，則指定人事專員審核
-                                        + " AND MK.MK001='A21'";
-                            SqlCommand cmd = new SqlCommand(query, conn);
-                            cmd.Parameters.AddWithValue("@ID", applicantID);
-                            DataTable dt = new DataTable();
-                            SqlDataAdapter da = new SqlDataAdapter(cmd);
-                            da.Fill(dt);
-                            if (dt.Rows.Count > 0)
-                            {
-                                nextReviewer = dt.Rows[0][0].ToString().Trim();
-                            }
-                            else
-                            {
-                                nextReviewer = "SYSTEM";
-                            }
-                        }
-                    }
-                    else if (approveID_status == "06")  //第三層通過，搜尋第四層審核者(副總)
-                    {
-                        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-                        {
-                            conn.Open();
-                            //簽核限制:副總 RANK 8
-                            string query = "SELECT MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
-                                        + " FROM NZ.dbo.CMSMV MV"
-                                        + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
-                                        + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
-                                        + " WHERE MV.MV022=''"
-                                        + " AND MV.MV001<>@ID"
-                                        + " AND MK.MK001='A03'"
-                                        + " AND HIER.[RANK]=8";
-                            SqlCommand cmd = new SqlCommand(query, conn);
-                            cmd.Parameters.AddWithValue("@ID", applicantID);
-                            DataTable dt = new DataTable();
-                            SqlDataAdapter da = new SqlDataAdapter(cmd);
-                            da.Fill(dt);
-                            if (dt.Rows.Count > 0)
-                            {
-                                nextReviewer = dt.Rows[0][0].ToString().Trim();
-                            }
-                            else
-                            {
-                                nextReviewer = "SYSTEM";
-                            }
-                        }
-                    }
-                    else if (approveID_status == "07")
-                    {
-                        nextReviewer = "";
-                    }
-                    using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-                    {
-                        //update application with new status and reviewer
-                        conn.Open();
-                        string query = "UPDATE HR360_DAYOFFAPPLICATION_APPLICATION"
-                                + " SET APPLICATION_STATUS_ID=@STATUS,NEXT_REVIEWER=@REVIEWER"
-                                + " WHERE APPLICATION_ID=@APPLICATION";
-                        SqlCommand cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@STATUS", approveID_status);
-                        cmd.Parameters.AddWithValue("@REVIEWER", nextReviewer);
-                        cmd.Parameters.AddWithValue("@APPLICATION", approveID);
-                        cmd.ExecuteNonQuery();
-                    }
-                    System.Threading.Thread.Sleep(1000);    //sleeps for 1 second before continuing so trail records can be ordered by time
-                } while (nextReviewer == "SYSTEM" && Convert.ToInt16(approveID_status) < 7); //stops when somebody is required to review the application,
-                //or when approval status reached 7, which means the application is approved by everyone necessary
-                //automatic approval should only happen on 1st and 2nd level,
-                //3rd and 4th level should always have reviewer (人事主管/副總)
-                if (approveID_status != "07")
-                {
-                    SendEmailNotification(approveID, 1);
                 }
                 else
                 {
-                    SendEmailNotification(approveID, 4);
+                    nextReviewer = "SYSTEM";
                 }
             }
+            else if (applicatoinStatus == "05")  //第二層通過，搜尋第三層審核者(人事主任)
+            {
+                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                {
+                    conn.Open();
+                    //簽核限制:人事主任 RANK 7 //HR(2018.10.08 HR:NONE)
+                    string query = "SELECT MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
+                                + " FROM NZ.dbo.CMSMV MV"
+                                + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
+                                + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
+                                + " WHERE MV.MV022=''"
+                                + " AND MV.MV001<>@ID"
+                                //+ " AND MK.MK001='A20'"           
+                                //+ " AND HIER.[RANK]=7";
+                                + " AND MV.MV001='" + HREmpId + "'" //HR NEED FIX: 如無人事主任(A20)，則指定人事專員審核
+                                + " AND MK.MK001='A21'";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@ID", applicantID);
+                    DataTable dt = new DataTable();
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        nextReviewer = dt.Rows[0][0].ToString().Trim();
+                    }
+                    else
+                    {
+                        nextReviewer = "SYSTEM";
+                    }
+                }
+            }
+            else if (applicatoinStatus == "06")  //第三層通過，搜尋第四層審核者(副總)
+            {
+                using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+                {
+                    conn.Open();
+                    //簽核限制:副總 RANK 8
+                    string query = "SELECT MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
+                                + " FROM NZ.dbo.CMSMV MV"
+                                + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
+                                + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
+                                + " WHERE MV.MV022=''"
+                                + " AND MV.MV001<>@ID"
+                                + " AND MK.MK001='A03'"
+                                + " AND HIER.[RANK]=8";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@ID", applicantID);
+                    DataTable dt = new DataTable();
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        nextReviewer = dt.Rows[0][0].ToString().Trim();
+                    }
+                    else
+                    {
+                        nextReviewer = "SYSTEM";
+                    }
+                }
+            }
+            else if (applicatoinStatus == "07")
+            {
+                nextReviewer = "";
+            }
 
-            //fill table after selection iteration is done, or it'll mess up the table row selection
-            fillApprovalTable();
+            //update application with new status and reviewer
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                string query = "UPDATE HR360_DAYOFFAPPLICATION_APPLICATION"
+                        + " SET APPLICATION_STATUS_ID=@STATUS,NEXT_REVIEWER=@REVIEWER"
+                        + " WHERE APPLICATION_ID=@APPLICATION";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@STATUS", applicatoinStatus);
+                cmd.Parameters.AddWithValue("@REVIEWER", nextReviewer);
+                cmd.Parameters.AddWithValue("@APPLICATION", applicationId);
+                cmd.ExecuteNonQuery();
+            }
+            System.Threading.Thread.Sleep(1000);    //sleeps for 1 second before continuing so trail records can be ordered by time
+        } while (nextReviewer == "SYSTEM" && Convert.ToInt16(applicatoinStatus) < 7);
+        //stops when somebody is required to review the application,
+        //or when approval status reached 7, which means the application is approved by everyone necessary
+        //automatic approval should only happen on 1st and 2nd level,
+        //3rd and 4th level should always have reviewer (人事主管/副總)
+
+        if (applicatoinStatus != "07")
+        {
+            SendEmailNotification(applicationId, 1);
         }
         else
         {
-
+            SendEmailNotification(applicationId, 4);
         }
     }
+
     /// <summary>
     /// Deny application
     /// </summary>
@@ -2024,139 +2098,22 @@ public partial class hr360_UI04 : System.Web.UI.Page
     protected void btnAppSubmit_Click(object sender, EventArgs e)
     {
         //assign unique ID (yyyymmdd+流水號) to each application
+        //2021.11.18 新版UID於新增請假單時assign, 以利確定附件存放位置
         List<DayOff> lstDayOffAppSummary = (List<DayOff>)ViewState["lstDayOffAppSummary"] == null ? new List<DayOff>() : (List<DayOff>)ViewState["lstDayOffAppSummary"]; ;
-        string uid = "";
-        string query;
+        //string uid = "";
         foreach (DayOff dayoff in lstDayOffAppSummary)
         {
-            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
-            {
-                conn.Open();
-                //gerneral unique id
-                query = "SELECT MAX(CONVERT(INT,(SUBSTRING(APPLICATION_ID,LEN(APPLICATION_ID)-2,3))))"
-                    + " FROM HR360_DAYOFFAPPLICATION_APPLICATION"
-                    + " WHERE APPLICATION_ID LIKE @ID";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@ID", DateTime.Now.ToString("yyyyMMdd") + "%");
-                if (cmd.ExecuteScalar() == DBNull.Value)
-                {
-                    uid = DateTime.Now.ToString("yyyyMMdd") + "001";
-                }
-                else
-                {
-                    uid = DateTime.Now.ToString("yyyyMMdd") + (Convert.ToInt16(cmd.ExecuteScalar()) + 1).ToString("D3");
-                }
+            InsertNewApplication(dayoff);
 
-                //insert record with unique id
-                try
-                {
-                    query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION"
-                        + " VALUES ("
-                        + " @APPLICATION_ID,@APPLICATION_DATE,@APPLICANT_ID,@DAYOFF_ID,@DAYOFF_NAME,@DAYOFF_START_TIME,@DAYOFF_END_TIME,@DAYOFF_TOTAL_TIME,@DAYOFF_TIME_UNIT,@FUNC_SUB_ID,@STATUS_ID,@NEXT_REVIEWER,@REASON"
-                        + " )";
-                    cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@APPLICATION_ID", uid);
-                    cmd.Parameters.AddWithValue("@APPLICATION_DATE", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@APPLICANT_ID", HR360LoggedUser.ERPId.Trim());
-                    cmd.Parameters.AddWithValue("@DAYOFF_ID", dayoff.dayOffType.id);
-                    cmd.Parameters.AddWithValue("@DAYOFF_NAME", dayoff.dayOffType.name);
-                    cmd.Parameters.AddWithValue("@DAYOFF_START_TIME", dayoff.startTime);
-                    cmd.Parameters.AddWithValue("@DAYOFF_END_TIME", dayoff.endTime);
-                    cmd.Parameters.AddWithValue("@DAYOFF_TOTAL_TIME", dayoff.dayOffTimespan);
-                    cmd.Parameters.AddWithValue("@DAYOFF_TIME_UNIT", dayoff.dayOffType.dayOffUnit);
-                    cmd.Parameters.AddWithValue("@STATUS_ID", "02");
-                    if (dayoff.functionalSubstitute.Item1 == "N/A")
-                    {
-                        cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.functionalSubstitute);
-                        cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.functionalSubstitute);
-                    }
-                    else
-                    {
-                        int pos = 2;    //get the index of the first char after the first 2 chars that is not number (正式員工編碼為xxxx, PT員工編碼為PTxxxx, 需要用此方法抓出完整員編)
-                        while (Char.IsNumber(dayoff.functionalSubstitute.Item1[pos]))
-                        {
-                            ++pos;
-                        }
-                        cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.functionalSubstitute.Item1.Substring(0, pos));
-                        cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.functionalSubstitute.Item1.Substring(0, pos));
-                    }
-                    cmd.Parameters.AddWithValue("@REASON", dayoff.reason);
-                    cmd.ExecuteNonQuery();
-                    query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B (APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID,STATUS_ID)"
-                        + " VALUES ("
-                        + " @APPLICATION_ID, @ACTION_TIME, @EXECUTOR_ID, @ACTION_ID, @STATUS_ID"
-                        + " )";
-                    cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@APPLICATION_ID", uid);
-                    cmd.Parameters.AddWithValue("@ACTION_TIME", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@EXECUTOR_ID", HR360LoggedUser.ERPId);
-                    cmd.Parameters.AddWithValue("@ACTION_ID", "01");
-                    cmd.Parameters.AddWithValue("@STATUS_ID", "01");
-                    cmd.ExecuteNonQuery();
-                }
-                catch (SqlException ex)
-                {
-                    if (ex.Number == 2627) //ID 重複錯誤
-                    {
-                        query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION"
-                        + " VALUES ("
-                        + " @APPLICATION_ID,@APPLICATION_DATE,@APPLICANT_ID,@DAYOFF_ID,@DAYOFF_NAME,@DAYOFF_START_TIME,@DAYOFF_END_TIME,@DAYOFF_TOTAL_TIME,@DAYOFF_TIME_UNIT,@FUNC_SUB_ID,@STATUS_ID,@NEXT_REVIEWER,@REASON"
-                        + " )";
-                        cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@APPLICATION_ID", (Convert.ToInt64(uid) + 1).ToString());
-                        cmd.Parameters.AddWithValue("@APPLICATION_DATE", DateTime.Now);
-                        cmd.Parameters.AddWithValue("@APPLICANT_ID", HR360LoggedUser.ERPId.Trim());
-                        cmd.Parameters.AddWithValue("@DAYOFF_ID", dayoff.dayOffType.id);
-                        cmd.Parameters.AddWithValue("@DAYOFF_NAME", dayoff.dayOffType.name);
-                        cmd.Parameters.AddWithValue("@DAYOFF_START_TIME", dayoff.startTime);
-                        cmd.Parameters.AddWithValue("@DAYOFF_END_TIME", dayoff.endTime);
-                        cmd.Parameters.AddWithValue("@DAYOFF_TOTAL_TIME", dayoff.dayOffTimespan);
-                        cmd.Parameters.AddWithValue("@DAYOFF_TIME_UNIT", dayoff.dayOffType.dayOffUnit);
-                        cmd.Parameters.AddWithValue("@STATUS_ID", "02");
-                        if (dayoff.functionalSubstitute.Item1 == "N/A")
-                        {
-                            cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.functionalSubstitute);
-                            cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.functionalSubstitute);
-                        }
-                        else
-                        {
-                            int pos = 2;    //get the index of the first char after the first 2 chars that is not number (正式員工編碼為xxxx, PT員工編碼為PTxxxx, 需要用此方法抓出完整員編)
-                            while (Char.IsNumber(dayoff.functionalSubstitute.Item1[pos]))
-                            {
-                                ++pos;
-                            }
-                            cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.functionalSubstitute.Item1.Substring(0, pos));
-                            cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.functionalSubstitute.Item1.Substring(0, pos));
-                        }
-                        cmd.Parameters.AddWithValue("@REASON", dayoff.reason);
-                        cmd.ExecuteNonQuery();
-                        query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B (APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID,STATUS_ID)"
-                        + " VALUES ("
-                        + " @APPLICATION_ID, @ACTION_TIME, @EXECUTOR_ID, @ACTION_ID, @STATUS_ID"
-                        + " )";
-                        cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@APPLICATION_ID", uid);
-                        cmd.Parameters.AddWithValue("@ACTION_TIME", DateTime.Now);
-                        cmd.Parameters.AddWithValue("@EXECUTOR_ID", HR360LoggedUser.ERPId);
-                        cmd.Parameters.AddWithValue("@ACTION_ID", "01");
-                        cmd.Parameters.AddWithValue("@STATUS_ID", "01");
-                        cmd.ExecuteNonQuery();
-                    }
-                    else
-                    {
-
-                    }
-                }
-            }
-            if (dayoff.functionalSubstitute.Item1 == "N/A")    //此單不需要代理人，可直接執行代理人APPROVE
+            //此單不需要代理人，可直接執行代理人APPROVE
+            if (dayoff.functionalSubstitute.Item1 == "N/A")
             {
-                hdnApprovalPendingSelection.Value = string.Empty;
-                hdnApprovalPendingSelection.Value = uid;
-                btnApprove_Click(sender, e);
+                ApproveApplication(dayoff.applicationId);
+                fillApprovalTable();
             }
             else
             {
-                SendEmailNotification(uid, 1);
+                SendEmailNotification(dayoff.applicationId, 1);
             }
         }
         ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('申請已送出');", true);
@@ -2164,6 +2121,98 @@ public partial class hr360_UI04 : System.Web.UI.Page
         fillDayOffApplicationTable(lstDayOffAppSummary);
         fillInProgressApplicationTable();
     }
+
+    protected void InsertNewApplication(DayOff dayoff)
+    {
+        string query;
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION"
+                + " VALUES ("
+                + " @APPLICATION_ID,@APPLICATION_DATE,@APPLICANT_ID,@DAYOFF_ID,@DAYOFF_NAME,@DAYOFF_START_TIME,@DAYOFF_END_TIME,@DAYOFF_TOTAL_TIME,@DAYOFF_TIME_UNIT,@FUNC_SUB_ID,@STATUS_ID,@NEXT_REVIEWER,@REASON"
+                + " )";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@APPLICATION_ID", dayoff.applicationId);
+            cmd.Parameters.AddWithValue("@APPLICATION_DATE", DateTime.Now);
+            cmd.Parameters.AddWithValue("@APPLICANT_ID", HR360LoggedUser.ERPId.Trim());
+            cmd.Parameters.AddWithValue("@DAYOFF_ID", dayoff.dayOffType.id);
+            cmd.Parameters.AddWithValue("@DAYOFF_NAME", dayoff.dayOffType.name);
+            cmd.Parameters.AddWithValue("@DAYOFF_START_TIME", dayoff.startTime);
+            cmd.Parameters.AddWithValue("@DAYOFF_END_TIME", dayoff.endTime);
+            cmd.Parameters.AddWithValue("@DAYOFF_TOTAL_TIME", dayoff.dayOffTimespan);
+            cmd.Parameters.AddWithValue("@DAYOFF_TIME_UNIT", dayoff.dayOffType.dayOffUnit);
+            cmd.Parameters.AddWithValue("@STATUS_ID", "02");
+            if (dayoff.functionalSubstitute.Item1 == "N/A")
+            {
+                cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.functionalSubstitute);
+                cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.functionalSubstitute);
+            }
+            else
+            {
+                int pos = 2;    //get the index of the first char after the first 2 chars that is not number (正式員工編碼為xxxx, PT員工編碼為PTxxxx, 需要用此方法抓出完整員編)
+                while (Char.IsNumber(dayoff.functionalSubstitute.Item1[pos]))
+                {
+                    ++pos;
+                }
+                cmd.Parameters.AddWithValue("@FUNC_SUB_ID", dayoff.functionalSubstitute.Item1.Substring(0, pos));
+                cmd.Parameters.AddWithValue("@NEXT_REVIEWER", dayoff.functionalSubstitute.Item1.Substring(0, pos));
+            }
+            cmd.Parameters.AddWithValue("@REASON", dayoff.reason);
+            cmd.ExecuteNonQuery();
+            query = "INSERT INTO HR360_DAYOFFAPPLICATION_APPLICATION_TRAIL_B (APPLICATION_ID,ACTION_TIME,EXECUTOR_ID,ACTION_ID,STATUS_ID)"
+                + " VALUES ("
+                + " @APPLICATION_ID, @ACTION_TIME, @EXECUTOR_ID, @ACTION_ID, @STATUS_ID"
+                + " )";
+            cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@APPLICATION_ID", dayoff.applicationId);
+            cmd.Parameters.AddWithValue("@ACTION_TIME", DateTime.Now);
+            cmd.Parameters.AddWithValue("@EXECUTOR_ID", HR360LoggedUser.ERPId);
+            cmd.Parameters.AddWithValue("@ACTION_ID", "01");
+            cmd.Parameters.AddWithValue("@STATUS_ID", "01");
+            cmd.ExecuteNonQuery();
+        }
+    }
+
+    /// <summary>
+    /// 為申請單獲取一個UID
+    /// 格式: 員編-日期-流水號 (0080-20211104-001)
+    /// </summary>
+    /// <param name="empId"></param>
+    /// <returns></returns>
+    protected string GetApplicationUID(string empId, DateTime applicationDate)
+    {
+        int applicationUID = 1;
+        //Check DB for dublicate
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            string query = "select MAX(APPLICATION_ID)" +
+                " from HR360_DAYOFFAPPLICATION_APPLICATION" +
+                " where APPLICANT_ID=@empId" +
+                " and Convert(Date, APPLICATION_DATE)=@applicationDate";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@empId", empId);
+            cmd.Parameters.AddWithValue("@applicationDate", applicationDate.ToString("yyyy-MM-dd"));
+            applicationUID = cmd.ExecuteScalar() == DBNull.Value ? 1 : Convert.ToInt16(cmd.ExecuteScalar().ToString()) + 1;
+        }
+
+        //Check application list for duplicate
+        int divCounter = 0;
+        foreach (HtmlGenericControl div in divApplicationFormList.Controls.OfType<HtmlGenericControl>())
+        {
+            string[] applicationListApplicationId = ((HtmlGenericControl)div.FindControl("dayOffApplicationId_" + divCounter.ToString())).InnerText.Split('-');
+            if (empId == applicationListApplicationId[0]
+                && applicationDate.ToString("yyyyMMdd") == applicationListApplicationId[1]
+                && applicationUID <= Convert.ToInt16(applicationListApplicationId[2]))  //使用可查到的最大流水號+1做為新單號(單號跳號不補)
+            {
+                applicationUID = Convert.ToInt16(applicationListApplicationId[2]) + 1;
+            }
+            divCounter++;
+        }
+        return empId + "-" + applicationDate.ToString("yyyyMMdd") + "-" + applicationUID.ToString("D3");
+    }
+
     /// <summary>
     /// Initial loading for div search section
     /// </summary>
@@ -2517,14 +2566,17 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
         recipientId.Add(HREmpId);    //HR
         recipientId.Add("0080");    //Kevin for the sake of testing mail delivery function
-        //status 1:新申請/一般簽核通過(HR&下個簽核者) 2:申請撤銷(HR&代理人) 3:申請退回(HR&申請人&代理人) 4:最後一層簽核通過(HR&申請人&代理人)
+        //status
+        //1:新申請/一般簽核通過(HR&下個簽核者)
+        //2:申請撤銷(HR&代理人)
+        //3:申請退回(HR&申請人&代理人)
+        //4:最後一層簽核通過(HR&申請人&代理人)
         switch (appStatus)
         {
             case 1:
                 recipientId.Add(dt.Rows[0]["NEXT_REVIEWER"].ToString());
                 break;
             case 2:
-                //recipientId.Add(dt.Rows[0]["NEXT_REVIEWER"].ToString());
                 if (dt.Rows[0]["FUNCTIONAL_SUBSTITUTE_ID"].ToString() != "N/A")
                 {
                     recipientId.Add(dt.Rows[0]["FUNCTIONAL_SUBSTITUTE_ID"].ToString());
@@ -2958,5 +3010,36 @@ public partial class hr360_UI04 : System.Web.UI.Page
         }
         span.InnerText = text;
         divSystemMessage.Controls.Add(span);
+    }
+
+    protected void btnRemoveAttachment_Click(object sender, EventArgs e)
+    {
+        if (lbxAttachmentList.SelectedIndex != -1)
+        {
+            RemoveAttachment(lbxAttachmentList.SelectedValue);
+            DisplayAttachmentList(lblApplicationIdForAttachment.Text.Split(' ')[1]);
+        }
+        ShowModal("Attachment");
+    }
+
+    protected void RemoveAttachment(string filePath)
+    {
+        FileInfo file = new FileInfo(filePath);
+        if (file.Exists)
+        {
+            file.Delete();
+        }
+    }
+
+    protected void btnOpenAttachment_Click(object sender, EventArgs e)
+    {
+        if (lbxAttachmentList.SelectedIndex != -1)
+        {
+            string applicationId = lblApplicationIdForAttachment.Text.Split(' ')[1];
+            string[] folderIdParts = applicationId.Split('-');
+            string webFilePath = "/hr360/attachment/dayoff-application-attachment/" + folderIdParts[0] + "/" + folderIdParts[1] + '-' + folderIdParts[2] + "/" + lbxAttachmentList.SelectedItem.Text;
+            ScriptManager.RegisterStartupScript(Page, typeof(Page), "OpenWindow", "window.open('" + webFilePath + "');", true);
+        }
+        ShowModal("Attachment");
     }
 }

@@ -36,6 +36,7 @@ public partial class master_RWD : System.Web.UI.MasterPage
         //{
         //    Session["language"] = "zh";
         //}            
+        logoAnchor.HRef = "\\" + Session["language"].ToString();
         BuildMenu(Session["language"].ToString());
         BuildFooterMenu(Session["language"].ToString());
         //}

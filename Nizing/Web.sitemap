@@ -19,7 +19,6 @@
 				<siteMapNode url="/zh/product/silicone-fiberglass-wire/ul3075" title="UL3075 矽膠編織耐熱線" description="UL3075 矽膠編織耐熱線"></siteMapNode>
 				<siteMapNode url="/zh/product/silicone-fiberglass-wire/ul3122" title="UL3122 矽膠編織耐熱線" description="UL3122 矽膠編織耐熱線"></siteMapNode>
 				<siteMapNode url="/zh/product/silicone-fiberglass-wire/ul3172" title="UL3172 矽膠編織耐熱線" description="UL3172 矽膠編織耐熱線"></siteMapNode>
-				<siteMapNode url="/zh/product/silicone-fiberglass-wire/ul3232" title="UL3232 尼龍矽膠線" description="UL3232 尼龍矽膠線"></siteMapNode>
 				<siteMapNode url="/zh/product/silicone-fiberglass-wire/ul3304" title="UL3304 矽膠編織耐熱線" description="UL3304 矽膠編織耐熱線"></siteMapNode>
 				<siteMapNode url="/zh/product/silicone-fiberglass-wire/ul3512" title="UL3512 矽膠編織耐熱線" description="UL3512 矽膠編織耐熱線"></siteMapNode>
 				<siteMapNode url="/zh/product/silicone-fiberglass-wire/ul3513" title="UL3513 矽膠編織耐熱線" description="UL3513 矽膠編織耐熱線"></siteMapNode>
@@ -68,8 +67,6 @@
 			<siteMapNode url="/zh/product/pvc-wire" title="PVC線系列" description="PVC線系列">
 				<siteMapNode url="/zh/product/pvc-wire/ul1007" title="UL1007 PVC線" description="UL1007 PVC線"></siteMapNode>
 				<siteMapNode url="/zh/product/pvc-wire/ul1015" title="UL1015 PVC線" description="UL1015 PVC線"></siteMapNode>
-				<siteMapNode url="/zh/product/pvc-wire/ul2464" title="UL2464 PVC傳輸隔離電腦線" description="UL2464 PVC傳輸隔離電腦線"></siteMapNode>
-				<siteMapNode url="/zh/product/pvc-wire/ul2517" title="UL2517 PVC傳輸隔離電腦線" description="UL2517 PVC傳輸隔離電腦線"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/zh/product/teflon-wire" title="鐵氟龍線系列" description="鐵氟龍線系列">
 				<siteMapNode url="/zh/product/teflon-wire/ul10109" title="UL10109 ETFE鐵氟龍線" description="UL10109 ETFE鐵氟龍線"></siteMapNode>
@@ -196,6 +193,9 @@
 				<siteMapNode url="/zh/product/composite-cable/rg316" title="RG316 高頻同軸線" description="RG316 高頻同軸線"></siteMapNode>
 				<siteMapNode url="/zh/product/composite-cable/teflon-silicone-medical-wire" title="鐵氟龍矽膠醫療線" description="鐵氟龍矽膠醫療線"></siteMapNode>
 				<siteMapNode url="/zh/product/composite-cable/ul3270" title="UL3270 銅網編織矽膠線" description="UL3270 銅網編織矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/composite-cable/ul3232" title="UL3232 尼龍矽膠線" description="UL3232 尼龍矽膠線"></siteMapNode>
+				<siteMapNode url="/zh/product/composite-cable/ul2464" title="UL2464 PVC傳輸隔離電腦線" description="UL2464 PVC傳輸隔離電腦線"></siteMapNode>
+				<siteMapNode url="/zh/product/composite-cable/ul2517" title="UL2517 PVC傳輸隔離電腦線" description="UL2517 PVC傳輸隔離電腦線"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/zh/product/anti-refrigerant-wire" title="冷媒線" description="冷媒線">
 				<siteMapNode url="/ezhn/product/anti-refrigerant-wire/ul5048" title="UL5048 冷媒線" description="UL5048 冷媒線"></siteMapNode>
@@ -226,6 +226,8 @@
 			<siteMapNode url="/zh/application/misc-app" title="其他應用" description="其他應用">
 				<siteMapNode url="/zh/application/misc-app/fighter-jet-temperature-sensor-cable" title="戰鬥機溫控線" description="戰鬥機溫控線"></siteMapNode>
 				<siteMapNode url="/zh/application/misc-app/inflammable-signal-cable" title="防火耐燃訊號線" description="防火耐燃訊號線"></siteMapNode>
+				<siteMapNode url="/zh/application/misc-app/military-spec-missile-control-cable" title="飛彈控制軍規線" description="飛彈控制軍規線"></siteMapNode>
+				<siteMapNode url="/zh/application/misc-app/military-spec-submarine-cable" title="軍規船舶複合電纜" description="軍規船舶複合電纜"></siteMapNode>
 			</siteMapNode>
 		</siteMapNode>
 
@@ -269,7 +271,6 @@
 				<siteMapNode url="/en/product/silicone-fiberglass-wire/ul3075" title="UL3075 Silicone Fiberglass Wire" description="UL3075 Silicone Fiberglass Wire"></siteMapNode>
 				<siteMapNode url="/en/product/silicone-fiberglass-wire/ul3122" title="UL3122 Silicone Fiberglass Wire" description="UL3122 Silicone Fiberglass Wire"></siteMapNode>
 				<siteMapNode url="/en/product/silicone-fiberglass-wire/ul3172" title="UL3172 Silicone Fiberglass Wire" description="UL3172 Silicone Fiberglass Wire"></siteMapNode>
-				<siteMapNode url="/en/product/silicone-fiberglass-wire/ul3232" title="UL3232 Nylon-Silicone Wire" description="UL3232 Nylon-Silicone Wire"></siteMapNode>
 				<siteMapNode url="/en/product/silicone-fiberglass-wire/ul3304" title="UL3304 Silicone Fiberglass Wire" description="UL3304 Silicone Fiberglass Wire"></siteMapNode>
 				<siteMapNode url="/en/product/silicone-fiberglass-wire/ul3512" title="UL3512 Silicone Fiberglass Wire" description="UL3512 Silicone Fiberglass Wire"></siteMapNode>
 				<siteMapNode url="/en/product/silicone-fiberglass-wire/ul3513" title="UL3513 Silicone Fiberglass Wire" description="UL3513 Silicone Fiberglass Wire"></siteMapNode>
@@ -318,8 +319,6 @@
 			<siteMapNode url="/en/product/pvc-wire" title="PVC Wire" description="PVC Wire">
 				<siteMapNode url="/en/product/pvc-wire/ul1007" title="UL1007 PVCWire" description="UL1007 PVCWire"></siteMapNode>
 				<siteMapNode url="/en/product/pvc-wire/ul1015" title="UL1015 PVCWire" description="UL1015 PVCWire"></siteMapNode>
-				<siteMapNode url="/en/product/pvc-wire/ul2464" title="UL2464 PVC Signal Transmission Wire" description="UL2464 PVC Signal Transmission Wire"></siteMapNode>
-				<siteMapNode url="/en/product/pvc-wire/ul2517" title="UL2517 PVC Signal Transmission Wire" description="UL2517 PVC Signal Transmission Wire"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/en/product/teflon-wire" title="Teflon Wire" description="Teflon Wire">
 				<siteMapNode url="/en/product/teflon-wire/ul10109" title="UL10109 ETFE Teflon Wire" description="UL10109 ETFE Teflon Wire"></siteMapNode>
@@ -446,6 +445,9 @@
 				<siteMapNode url="/en/product/composite-cable/rg316" title="RG316 High Frequency Coaxial Cable" description="RG316 High Frequency Coaxial Cable"></siteMapNode>
 				<siteMapNode url="/en/product/composite-cable/teflon-silicone-medical-wire" title="Teflon Silicone Medical Wire" description="Teflon Silicone Medical Wire"></siteMapNode>
 				<siteMapNode url="/en/product/composite-cable/ul3270" title="UL3270 Tinned-Copper Braided Silicone Wire" description="UL3270 Tinned-Copper Braided Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/composite-cable/ul3232" title="UL3232 Nylon-Silicone Wire" description="UL3232 Nylon-Silicone Wire"></siteMapNode>
+				<siteMapNode url="/en/product/composite-cable/ul2464" title="UL2464 PVC Signal Transmission Wire" description="UL2464 PVC Signal Transmission Wire"></siteMapNode>
+				<siteMapNode url="/en/product/composite-cable/ul2517" title="UL2517 PVC Signal Transmission Wire" description="UL2517 PVC Signal Transmission Wire"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/en/product/anti-refrigerant-wire" title="Anti-Refrigerant Wire" description="Anti-Refrigerant Wire">
 				<siteMapNode url="/en/product/anti-refrigerant-wire/ul5048" title="UL5048 Anti-Refrigerant Wire" description="UL5048 Anti-Refrigerant Wire"></siteMapNode>
@@ -476,6 +478,8 @@
 			<siteMapNode url="/en/application/misc-app" title="Other Application" description="Other Application">
 				<siteMapNode url="/en/application/misc-app/fighter-jet-temperature-sensor-cable" title="Fighter Jet Temperature Sensor Cable" description="Fighter Jet Temperature Sensor Cable"></siteMapNode>
 				<siteMapNode url="/en/application/misc-app/inflammable-signal-cable" title="Inflammable Signal Cable" description="Inflammable Signal Cable"></siteMapNode>
+				<siteMapNode url="/en/application/misc-app/military-spec-missile-control-cable" title="Military Spec Missile Control Cable" description="Military Spec Missile Control Cable"></siteMapNode>
+				<siteMapNode url="/en/application/misc-app/military-spec-submarine-cable" title="Military Spec Submarine Cable" description="Military Spec Submarine Cable"></siteMapNode>
 			</siteMapNode>
 		</siteMapNode>
 

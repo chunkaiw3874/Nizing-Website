@@ -118,7 +118,7 @@
 		<priority>0.70</priority>
 	</url>
 	<url>
-		<loc>https://www.nizing.com.tw/zh/product-profile/silicone-fiberglass-wire/ul3232</loc>
+		<loc>https://www.nizing.com.tw/zh/product-profile/composite-cable/ul3232</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>
@@ -553,12 +553,12 @@
 		<priority>0.70</priority>
 	</url>
 	<url>
-		<loc>https://www.nizing.com.tw/zh/product/pvc-wire/ul2464</loc>
+		<loc>https://www.nizing.com.tw/zh/product/composite-cable/ul2464</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>
 	<url>
-		<loc>https://www.nizing.com.tw/zh/product/pvc-wire/ul2517</loc>
+		<loc>https://www.nizing.com.tw/zh/product/composite-cable/ul2517</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>
@@ -1102,6 +1102,17 @@
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/zh/application/misc-app/military-spec-missile-control-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/zh/application/misc-app/military-spec-submarine-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+
 
 
 
@@ -1253,7 +1264,7 @@
 		<priority>0.70</priority>
 	</url>
 	<url>
-		<loc>https://www.nizing.com.tw/en/product-profile/silicone-fiberglass-wire/ul3232</loc>
+		<loc>https://www.nizing.com.tw/en/product-profile/composite-cable/ul3232</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>
@@ -1688,12 +1699,12 @@
 		<priority>0.70</priority>
 	</url>
 	<url>
-		<loc>https://www.nizing.com.tw/en/product/pvc-wire/ul2464</loc>
+		<loc>https://www.nizing.com.tw/en/product/composite-cable/ul2464</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>
 	<url>
-		<loc>https://www.nizing.com.tw/en/product/pvc-wire/ul2517</loc>
+		<loc>https://www.nizing.com.tw/en/product/composite-cable/ul2517</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>
@@ -2234,6 +2245,16 @@
 	</url>
 	<url>
 		<loc>https://www.nizing.com.tw/en/application/automobile/high-frequency-communication-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/en/application/misc-app/military-spec-missile-control-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/en/application/misc-app/military-spec-submarine-cable</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>

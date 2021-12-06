@@ -1,7 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWDApplicationMaster.master" AutoEventWireup="true" CodeFile="fighter-jet-temperature-sensor-cable.aspx.cs" Inherits="application_fighter_jet_temperature_sensor_cable" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <title>戰鬥機溫控線-日進電線 2021</title>
+    <title><%if (RouteData.Values["language"].ToString() == "zh")
+            {%>
+                                                戰鬥機溫控線-日進電線 2021
+                                                <%}
+                                                    else
+                                                    {%>
+                                                Fighter Jet Temperature Control Cable - Nizing Electric Wire & Cable
+                                            <%}%> /></title>
     <meta name="description" content="戰鬥機的設計結構繁複精密，在任一環節都不允許任何出錯的可能，在電線上的選擇更不能馬虎，戰鬥機內感溫線須具備抗高溫及卓越耐腐蝕性及極強的耐絕緣性，此款產品使用可耐高低溫性的PFA鐵氟龍材質，具有最優秀可連續使用溫度260°C，且具耐腐蝕及耐絕緣性二項特色，並在內層搭配多重防雜訊隔離使其數值回饋更加精準，提高可靠性及安全性。" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="戰鬥機溫控線-日進電線 2021" />
@@ -160,7 +167,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="banner" runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="Server">
-    <div class="container-fluid bg-wrapper bg-color">
+    <div class="container-fluid bg-wrapper bg-color <%=RouteData.Values["language"].ToString() %>">
         <div class="content-wrapper">
             <div class="row">
                 <div class="col-sm-6"></div>
@@ -177,7 +184,14 @@
                 <div class="col-sm-6">
                     <div class="text-section">
                         <div class="top text-blue">
-                            戰鬥機溫控線 日本軍規配線
+                            <%if (RouteData.Values["language"].ToString() == "zh")
+                            {%>                                                
+                                戰鬥機溫控線 日本軍規配線
+                                                <%}
+                                                    else
+                                                    {%>
+                                                Fighter Jet Temperature Control Cable - Nizing Electric Wire & Cable
+                                            <%}%>
                         </div>
                         <div class="middle text-white d-flex">
                             <p>

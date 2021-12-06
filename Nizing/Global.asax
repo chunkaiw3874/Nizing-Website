@@ -90,6 +90,8 @@
         routes.MapPageRoute("", "{language}/application/{application}/multi-furnace-temperature-control-dual-shielded-cable", "~/application/multi-furnace-temperature-control-dual-shielded-cable.aspx");
         routes.MapPageRoute("", "{language}/application/{application}/high-voltage-ignition-wire", "~/application/high-voltage-ignition-wire.aspx");
         routes.MapPageRoute("", "{language}/application/{application}/high-frequency-communication-cable", "~/application/high-frequency-communication-cable.aspx");
+        routes.MapPageRoute("", "{language}/application/{application}/military-spec-missile-control-cable", "~/application/military-spec-missile-control-cable.aspx");
+        routes.MapPageRoute("", "{language}/application/{application}/military-spec-submarine-cable", "~/application/military-spec-submarine-cable.aspx");
 
 
         routes.MapPageRoute("", "{language}/material", "~/material.aspx");

@@ -24,7 +24,7 @@
             }
 
             .mini-menu .mini-menu-items .card-text {
-                /*font-size: 12px;*/
+                font-size: 13px;
             }
 
         .arrow-container {

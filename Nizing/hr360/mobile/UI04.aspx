@@ -91,39 +91,13 @@
                 $(this).closest("tr").next().remove();
             });
 
-<%--            $(document).on('click', '#btnSearchVisibility', function () {
-                $('#search_section').toggle();
-                if ($('#search_section').is(":visible") == true) {
-                    $('#search_section').show();
-                    $('#<%=hdnIsSearchFieldVisible.ClientID%>').val('1');
-                }
-                else {
-                    $('#search_section').hide();
-                    $('#<%=hdnIsSearchFieldVisible.ClientID%>').val('0');
-                }
-            });
-
-            $(document).on('click', '#btnDayOffAppVisibility', function () {
-                $('#DayOffApp').toggle();
-                if ($('#DayOffApp').is(":visible") == true) {
-                    $('#DayOffApp').show();
-                    $('#<%=hdnIsDayOffAppVisible.ClientID%>').val('1');
-                }
-                else {
-                    $('#DayOffApp').hide();
-                    $('#<%=hdnIsDayOffAppVisible.ClientID%>').val('0');
-                }
-            });--%>
-
             $('.classApprovalPending tr').click(function () {
                 approvalTableSelection($(this).index());
             });
 
             $('[data-toggle="popover"]').popover({
                 sanitize: false,
-            })
-
-
+            });
         });
 
         function pageLoad(sender, args) {
@@ -164,6 +138,44 @@
                 toolbarPlacement: 'top'
             });
         }
+
+        function uploadFileFromApplication() {
+            var attachmentControlId = 'fileAttachment';
+            var formId = $('#<%=lblApplicationIdForAttachment.ClientID%>').text().split(' ')[1];
+            uploadFile(attachmentControlId, formId);
+        }
+
+        function uploadFile(attachmentControlId, formId) {
+            var fileUpload = $("#" + attachmentControlId).get(0);
+            var files = fileUpload.files;
+            var userId = formId.split('-')[0];
+            var folderId = formId.split('-')[1] + '-' + formId.split('-')[2];
+            var filepath = "";
+            if (formId) {
+                filepath = "/hr360/attachment/dayoff-application-attachment/" + userId + "/" + folderId + "/";
+            }
+
+            var data = new FormData();
+            for (var i = 0; i < files.length; i++) {
+                data.append(files[i].name, files[i]);
+                ;
+            };
+
+            //額外的參數 
+            data.append("filePath", filepath);
+
+            var options = {};
+            options.url = "/hr360/FileUploadHandler.ashx";
+            options.type = "POST";
+            options.data = data;
+            options.contentType = false;
+            options.processData = false;
+            options.success = function (result) { alert(result); };
+            options.error = function (err) { alert(err.statusText); };
+
+            $.ajax(options);
+
+        };
 
         var approvalPendingAnchor = 0;
         function approvalTableSelection(e) {
@@ -283,29 +295,13 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
     <div class="container" style="visibility: hidden">
         維護中，請稍後
     </div>
     <div class="container" style="visibility: visible">
-        <%--<div id="test_section">
-            <div class="row form-group">
-                測試中，請勿使用    
-                <br />
-                <asp:TextBox ID="txtTestName" runat="server"></asp:TextBox>
-                <asp:Button ID="btnTestName" runat="server" Text="測試ERP ID" OnClick="btnTestName_Click" />
-                <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>
-            </div>
-            <div class="row form-group">
-                <asp:Button ID="btnTestEmail" runat="server" Text="Send Test Email" OnClick="btnTestEmail_Click" />
-            </div>
-            <hr />
-        </div>--%>
         <div id="application_section">
             <div class="row" style="color: red">
-                <%--*本次版更內容: 一張假單僅能請一天假，如需多天請假需登打多張假單--%>
-                <%--                <asp:TextBox ID="txtTest" runat="server"></asp:TextBox>
-                <asp:Button ID="btntest" runat="server" Text="Button" />--%>
             </div>
             <div id="DayOffApp">
                 <!--RWD version application form-->
@@ -322,7 +318,7 @@
                     </Triggers>
                     <ContentTemplate>
                         <div id="divSystemMessage" runat="server">
-                            <asp:Label ID="lblTest" runat="server" Text="Label"></asp:Label>
+                            <asp:Label ID="lblTest" runat="server" Text=""></asp:Label>
                         </div>
                         <div class="card">
                             <div class="card-header bg-success d-flex justify-content-between text-white">
@@ -345,48 +341,8 @@
                                     *補單者須四日內完成補單動作(例:1/7臨時請假，最晚須於1/10補單)
                                 </div>
                                 <hr />
-<%--                                <div class="table-responsive">
-                                    <table id="tbAppSummary" class="table" runat="server">
-                                    </table>
-                                </div>--%>
                                 <div id="divApplicationFormList" runat="server"
                                     class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-                                    <%--<div class="col">
-                                        <div class="application-form-list-item">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <label class="input-group-text">假單</label>
-                                                </div>
-                                                <label class="form-control">特休</label>
-                                            </div>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <label class="input-group-text">日期</label>
-                                                </div>
-                                                <label class="form-control">2021/10/01</label>
-                                            </div>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <label class="input-group-text">時間</label>
-                                                </div>
-                                                <label class="form-control">15:00 ~ 17:00</label>
-                                            </div>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <label class="input-group-text">代理</label>
-                                                </div>
-                                                <label class="form-control">0080 王君凱</label>
-                                            </div>
-                                            <hr />
-                                            <div class="input-group">
-                                                <textarea class="form-control" readonly>
-                                            </textarea>
-                                            </div>
-                                            <div class="input-group">
-                                                <input type="button" class="btn btn-danger w-100" value="移除" />
-                                            </div>
-                                        </div>
-                                    </div>--%>
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-end">
@@ -407,12 +363,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel panel-info">
-                        <div class="panel-heading">
-                            申請中假單                       
-                        </div>
                         <div class="panel-body">
                             <table id="tbInProgressSummary" class="table col-sm-12" runat="server">
-                            </table>                            
+                            </table>
                             <div id="divInProgressApplicationList"></div>
                         </div>
                     </div>
@@ -429,9 +382,6 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel panel-info">
-                        <div class="panel-heading">
-                            待簽核假單                       
-                        </div>
                         <div class="panel-body">
                             <div style="color: red;">
                                 *請先點選要簽核的假單，再點選最上層的"簽核"按鈕;如欲一次簽核多張假單，可按住Shift一次選擇，或按住Ctrl增選<br />
@@ -778,6 +728,44 @@
                                 UseSubmitBehavior="false"
                                 data-dismiss="modal"
                                 OnClick="btnDayOffAdd_Click" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
+    <asp:UpdatePanel ID="upAttachment" runat="server" UpdateMode="Always" ChildrenAsTriggers="true">
+        <Triggers>
+        </Triggers>
+        <ContentTemplate>
+            <div class="modal" id="Attachment" data-backdrop="false" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <asp:Label ID="lblApplicationIdForAttachment" runat="server" Text=""></asp:Label>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group justify-content-between mb-2">
+                                <input id="fileAttachment" name="fileBox" type="file" multiple="multiple" accept=".jpg, .png" />
+                                <asp:Button ID="btnAddAttachment" runat="server" Text="增加附件" CssClass="btn btn-success"
+                                    UseSubmitBehavior="false"
+                                    OnClientClick="uploadFileFromApplication();"/>
+                            </div>
+                            <div class="input-group justify-content-end mb-2">
+                                <asp:Button ID="btnOpenAttachment" runat="server" Text="開啟附件" CssClass="btn btn-primary mr-2"
+                                    UseSubmitBehavior="false"
+                                    OnClick="btnOpenAttachment_Click" />
+                                <asp:Button ID="btnRemoveAttachment" runat="server" Text="移除附件" CssClass="btn btn-danger"
+                                    UseSubmitBehavior="false"
+                                    OnClick="btnRemoveAttachment_Click" />
+                            </div>
+                            <div class="input-group">
+                                <asp:ListBox ID="lbxAttachmentList" runat="server" CssClass="form-control"></asp:ListBox>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
                         </div>
                     </div>
                 </div>

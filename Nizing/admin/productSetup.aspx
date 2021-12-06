@@ -34,7 +34,7 @@
         }
 
         #ProductMaterial .btn,
-        #ProductApplication .btn{
+        #ProductApplication .btn {
             border-radius: 0;
             display: flex;
             align-items: center;
@@ -142,7 +142,7 @@
                             <asp:Button ID="btnAddProduct" runat="server" Text="新增"
                                 CssClass="btn btn-success"
                                 Enabled="false"
-                                OnClick="btnAddProduct_Click"/>
+                                OnClick="btnAddProduct_Click" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -264,7 +264,12 @@
                             <asp:TextBox ID="txtProductEnglishDescription" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder="英文"></asp:TextBox>
                         </div>
                     </div>
-
+                    <div id="ProductAttribute" class="input-group input-group-wrapper">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">特性</span>
+                        </div>
+                        <div id="divAttributeList" runat="server" class="form-control h-auto row-cols-2 row-cols-md-3 row-cols-lg-6"></div>
+                    </div>
                     <div id="ProductCertification" class="input-group input-group-wrapper">
                         <div class="input-group-prepend">
                             <span class="input-group-text">認證</span>
@@ -351,6 +356,8 @@
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
+
+
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>

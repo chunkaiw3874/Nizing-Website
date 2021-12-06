@@ -26,7 +26,10 @@ public partial class admin_productSetup : System.Web.UI.Page
 
         //fill up 產品顏色 清單
         GenerateColorList();
-        //lblMessage.Text = ((HtmlInputCheckBox)divColorList.FindControl("Black")).Checked.ToString();
+
+        //fill up 產品特性 清單
+        GenerateAttributeList();
+
         if (ViewState["DynamicSpecList"] != null)
         {
             GenerateProductSpecControl((List<Tuple<string, string>>)ViewState["DynamicSpecList"]);
@@ -312,6 +315,41 @@ public partial class admin_productSetup : System.Web.UI.Page
         }
     }
 
+    protected void GenerateAttributeList()
+    {
+        DataTable dt = new DataTable();
+        using (SqlConnection conn = new SqlConnection(webConnectionString))
+        {
+            conn.Open();
+
+            string query = "select ID" +
+                " ,zh 'Name'" +
+                " from ProductAttributeCategory";
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            dt = new DataTable();
+            da.Fill(dt);
+        }
+
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            HtmlGenericControl divCheckboxWrapper = new HtmlGenericControl("div");
+            divCheckboxWrapper.ID = "divAttributeList" + dt.Rows[i]["ID"].ToString();
+            divCheckboxWrapper.Attributes.Add("class", "col");
+            divAttributeList.Controls.Add(divCheckboxWrapper);
+
+            HtmlInputCheckBox ckx = new HtmlInputCheckBox();
+            ckx.ID = "productAttribute_" + dt.Rows[i]["ID"].ToString();
+            divCheckboxWrapper.Controls.Add(ckx);
+
+            HtmlGenericControl label = new HtmlGenericControl("label");
+            label.Attributes.Add("for", ckx.ClientID);
+            label.InnerText = dt.Rows[i]["Name"].ToString();
+            divCheckboxWrapper.Controls.Add(label);
+        }
+    }
+
     protected void SortListBox(ListBox lbx)
     {
         List<ListItem> list = new List<ListItem>();
@@ -528,9 +566,10 @@ public partial class admin_productSetup : System.Web.UI.Page
                 da.Fill(dt);
             }
 
+            ResetDynamicCheckboxControls(divColorList);
+
             if (dt.Rows.Count > 0)
             {
-                ClearColors();
                 foreach (DataRow dr in dt.Rows)
                 {
                     ((HtmlInputCheckBox)divColorList.FindControl(dr["Colors"].ToString().Trim())).Checked = true;
@@ -574,12 +613,13 @@ public partial class admin_productSetup : System.Web.UI.Page
                 da.Fill(dt);
             }
 
+            ResetDynamicCheckboxControls(divCertificationList);
+
             if (dt.Rows.Count > 0)
             {
-                ClearCertificates();
                 foreach (DataRow dr in dt.Rows)
                 {
-                    ((HtmlInputCheckBox)divColorList.FindControl(dr["Header"].ToString().Trim())).Checked = true;
+                    ((HtmlInputCheckBox)divCertificationList.FindControl(dr["Header"].ToString().Trim())).Checked = true;
                 }
             }
             #endregion
@@ -708,6 +748,32 @@ public partial class admin_productSetup : System.Web.UI.Page
             SortApplicationList();
             #endregion
 
+            #region Fetch Attributes
+            using (SqlConnection conn = new SqlConnection(webConnectionString))
+            {
+                conn.Open();
+
+                string query = "select [attribute]" +
+                    " from ProductAttribute" +
+                    " where [ID]=@PID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@PID", PID);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                dt = new DataTable();
+                da.Fill(dt);
+            }
+
+            ResetDynamicCheckboxControls(divAttributeList);
+
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    ((HtmlInputCheckBox)divAttributeList.FindControl("productAttribute_" + dr["attribute"].ToString().Trim())).Checked = true;
+                }
+            }
+            #endregion
+
             lblMessage.Text = "產品已存在，進行編輯";
         }
         else
@@ -719,20 +785,9 @@ public partial class admin_productSetup : System.Web.UI.Page
         }
     }
 
-    protected void ClearColors()
+    protected void ResetDynamicCheckboxControls(HtmlGenericControl divList)
     {
-        foreach (HtmlGenericControl div in divColorList.Controls)
-        {
-            foreach (HtmlInputCheckBox cbx in div.Controls.OfType<HtmlInputCheckBox>())
-            {
-                cbx.Checked = false;
-            }
-        }
-    }
-
-    protected void ClearCertificates()
-    {
-        foreach (HtmlGenericControl div in divCertificationList.Controls)
+        foreach (HtmlGenericControl div in divList.Controls)
         {
             foreach (HtmlInputCheckBox cbx in div.Controls.OfType<HtmlInputCheckBox>())
             {
@@ -779,8 +834,9 @@ public partial class admin_productSetup : System.Web.UI.Page
         txtProductEnglishDescription.Text = string.Empty;
         ddlProductCategory.SelectedValue = "silicone-fiberglass-wire";
         ClearMessages();
-        ClearColors();
-        ClearCertificates();
+        ResetDynamicCheckboxControls(divColorList);
+        ResetDynamicCheckboxControls(divCertificationList);
+        ResetDynamicCheckboxControls(divAttributeList);
         ClearMaterialList();
         ClearSpecList();
         ClearApplicationList();
@@ -1147,7 +1203,7 @@ public partial class admin_productSetup : System.Web.UI.Page
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@PID", lblProductID.Text);
                 cmd.ExecuteNonQuery();
-                foreach(ListItem item in lbxProductApplicationList.Items)
+                foreach (ListItem item in lbxProductApplicationList.Items)
                 {
                     query = "insert into ProductApplication" +
                         " values (@PID, @AID)";
@@ -1157,6 +1213,33 @@ public partial class admin_productSetup : System.Web.UI.Page
                     cmd.ExecuteNonQuery();
                 }
             }
+            #endregion
+
+            #region Upload ProductAttribute
+            using (SqlConnection conn = new SqlConnection(webConnectionString))
+            {
+                conn.Open();
+                string query = "delete from ProductAttribute" +
+                    " where ID=@PID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@PID", lblProductID.Text);
+                cmd.ExecuteNonQuery();
+                foreach (HtmlGenericControl div in divAttributeList.Controls.OfType<HtmlGenericControl>())
+                {
+                    string columnID = div.ID.Replace("divAttributeList", "");
+                    HtmlInputCheckBox cbx = (HtmlInputCheckBox)div.FindControl("productAttribute_" + columnID);
+                    if (cbx.Checked)
+                    {
+                        query = "insert into ProductAttribute" +
+                        " values (@PID, @AID)";
+                        cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@PID", lblProductID.Text);
+                        cmd.Parameters.AddWithValue("@AID", columnID);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+
             #endregion
             AppendSystemMessage("產品 " + lblProductID.Text + " 上傳成功", "green");
             DeleteButton(true);

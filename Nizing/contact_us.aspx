@@ -185,7 +185,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        <%--<div class="col">
                             <div class="person-wrapper">
                                 <div class="person-frame">
                                     <div class="d-flex justify-content-center">
@@ -205,7 +205,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                     </div>
                 </div>
             </div>

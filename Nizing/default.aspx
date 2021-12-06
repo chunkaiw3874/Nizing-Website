@@ -406,7 +406,7 @@
                     <div class="content row row-cols-2 row-cols-md-3">
                         <div class="col">
                             <div class="hottest-item">
-                                <a href="/zh/product/heating-wire/medical-respiration-pipe-heating-wire">
+                                <a href="/<%=RouteData.Values["language"].ToString() %>/product/heating-wire/medical-respiration-pipe-heating-wire">
                                     <div class="image-section">
                                         <picture>
                                             <source srcset="/images/product/hot-item/medical-repiration-tube.webp" type="image/webp">
@@ -416,14 +416,28 @@
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <div class="title text-left">醫療用呼吸加熱管</div>
-                                    <div class="subtitle text-left">HFNC高含氧人工呼吸器耗材</div>
+                                    <div class="title text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                醫療用呼吸加熱管
+                                                <%}
+                                            else {%>
+                                                Medical Respiration Pipe Heating Wire
+                                            <%}%>
+                                    </div>
+                                    <div class="subtitle text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                HFNC高含氧人工呼吸器耗材
+                                                <%}
+                                            else {%>
+                                                HFNC High Flow Nasal Cannula Consumables
+                                            <%}%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="hottest-item">
-                                <a href="/zh/application/cloud-system/inflammable-signal-cable">
+                                <a href="/<%=RouteData.Values["language"].ToString() %>/application/cloud-system/inflammable-signal-cable">
                                     <div class="image-section">
                                         <picture>
                                             <source srcset="/images/product/hot-item/inflammable-signal-cable.webp" type="image/webp">
@@ -433,14 +447,28 @@
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <div class="title text-left">防火耐燃訊號線</div>
-                                    <div class="subtitle text-left">iPhone-Type C 快速充電線</div>
+                                    <div class="title text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                防火耐燃訊號線
+                                                <%}
+                                            else {%>
+                                                Inflammable Signal Cable
+                                            <%}%>
+                                    </div>
+                                    <div class="subtitle text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                iPhone-Type C 快速充電線
+                                                <%}
+                                            else {%>
+                                                iPhone-Type C Fast Charge Cable
+                                            <%}%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="hottest-item">
-                                <a href="/zh/application/cloud-system/submarine-communications-cable">
+                                <a href="/<%=RouteData.Values["language"].ToString() %>/application/cloud-system/submarine-communications-cable">
                                     <div class="image-section">
                                         <picture>
                                             <source srcset="/images/application/products/submarine-communications-cable/menu/submarine-communications-cable.webp" type="image/webp">
@@ -450,8 +478,22 @@
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <div class="title text-left">高硬度防鼠咬CAT5E/CAT6A</div>
-                                    <div class="subtitle text-left">水下不鏽鋼鎧裝海底網路通訊線</div>
+                                    <div class="title text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                高硬度防鼠咬CAT5E/CAT6A
+                                                <%}
+                                            else {%>
+                                                High Density CAT5E/CAT6A
+                                            <%}%>
+                                    </div>
+                                    <div class="subtitle text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                水下不鏽鋼鎧裝海底網路通訊線
+                                                <%}
+                                            else {%>
+                                                Submarine Communications Cable
+                                            <%}%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -464,10 +506,10 @@
                     </h2>
                     <h2 class="subtitle">Latest Product
                     </h2>
-                    <div class="content row row-cols-2 row-cols-md-4">
+                    <div id="divLatestProduct" runat="server" class="content row row-cols-2 row-cols-md-4">
                         <div class="col">
                             <div class="newest-item">
-                                <a href="/zh/application/misc-app/fighter-jet-temperature-sensor-cable">
+                                <a href="/<%=RouteData.Values["language"].ToString() %>/application/misc-app/fighter-jet-temperature-sensor-cable">
                                     <div class="image-section">
                                         <picture>
                                             <source srcset="/images/application/products/fighter-jet-temperature-sensor-cable/menu/fighter-jet-temperature-sensor-cable.webp" type="image/webp">
@@ -477,14 +519,28 @@
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <div class="title text-left">戰鬥機溫控電纜</div>
-                                    <div class="subtitle text-left">日本軍規配線</div>
+                                    <div class="title text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                戰鬥機溫控電纜
+                                                <%}
+                                            else {%>
+                                                Fighter Jet Temperature Control Cable
+                                            <%}%>
+                                    </div>
+                                    <div class="subtitle text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                日本軍規配線
+                                                <%}
+                                            else {%>
+                                                Japan MIL Cable
+                                            <%}%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="newest-item">
-                                <a href="/zh/application/automobile/high-frequency-communication-cable">
+                                <a href="/<%=RouteData.Values["language"].ToString() %>/application/automobile/high-frequency-communication-cable">
                                     <div class="image-section">
                                         <picture>
                                             <source srcset="/images/application/products/high-frequency-communication-cable/menu/high-frequency-communication-cable.webp" type="image/webp">
@@ -494,14 +550,28 @@
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <div class="title text-left">車用-高頻無線通訊電纜</div>
-                                    <div class="subtitle text-left">Apple Car Play, WiFi, 衛星導航,無人自動駕駛系統</div>
+                                    <div class="title text-left">                                        
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                車用-高頻無線通訊電纜
+                                                <%}
+                                            else {%>
+                                                High Frequncy Communication Cable
+                                            <%}%>
+                                    </div>
+                                    <div class="subtitle text-left">                                        
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                Apple Car Play, WiFi, 衛星導航,無人自動駕駛系統
+                                                <%}
+                                            else {%>
+                                                Apple Car Play, WiFi, Satellite Navigation, Autopilot System
+                                            <%}%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="newest-item">
-                                <a href="/zh/application/medical/electrosurgical-unit-cable">
+                                <a href="/<%=RouteData.Values["language"].ToString() %>/application/medical/electrosurgical-unit-cable">
                                     <div class="image-section">
                                         <picture>
                                             <source srcset="/images/application/products/electrosurgical-unit-cable/menu/electrosurgical-unit-cable.webp" type="image/webp">
@@ -511,25 +581,53 @@
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <div class="title text-left">手術用電燒刀</div>
-                                    <div class="subtitle text-left">醫療級止血線</div>
+                                    <div class="title text-left">                                       
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                手術用電燒刀
+                                                <%}
+                                            else {%>
+                                                Electrosurgical Unit Cable
+                                            <%}%>
+                                    </div>
+                                    <div class="subtitle text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                醫療級止血線
+                                                <%}
+                                            else {%>
+                                                Medical Cable
+                                            <%}%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="newest-item">
-                                <a href="">
+                                <a href="/<%=RouteData.Values["language"].ToString() %>/application/misc-app/military-spec-submarine-cable">
                                     <div class="image-section">
                                         <picture>
-                                            <source srcset="/images/application/products/shipboard-composite-cable/menu/shipboard-composite-cable.webp" type="image/webp">
-                                            <img src="/images/application/products/shipboard-composite-cable/menu/shipboard-composite-cable.jpg"
+                                            <source srcset="/images/application/products/military-spec-submarine-cable/menu/military-spec-submarine-cable.webp" type="image/webp">
+                                            <img src="/images/application/products/military-spec-submarine-cable/menu/military-spec-submarine-cable.jpg"
                                                 alt="CR認證軍用船舶複合電纜 CR Certified Shipboard Composite Cable">
                                         </picture>
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <div class="title text-left">潛艦國造-CR認證</div>
-                                    <div class="subtitle text-left">軍規船舶複合電纜</div>
+                                    <div class="title text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                潛艦國造-CR認證
+                                                <%}
+                                            else {%>
+                                                Submarine Cable-CR Certified
+                                            <%}%>
+                                    </div>
+                                    <div class="subtitle text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                軍規船舶複合電纜
+                                                <%}
+                                            else {%>
+                                                MIL Spec Shipboard Composite Cable
+                                            <%}%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -545,14 +643,28 @@
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <div class="title text-left">MIL 飛彈發射器</div>
-                                    <div class="subtitle text-left">軍規高頻傳輸控制複合電纜</div>
+                                    <div class="title text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                MIL 飛彈發射器
+                                                <%}
+                                            else {%>
+                                                MIL Missile Launcher Cable
+                                            <%}%>
+                                    </div>
+                                    <div class="subtitle text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                軍規高頻傳輸控制複合電纜
+                                                <%}
+                                            else {%>
+                                                MIL Spec High Frequency Communications Control Cable
+                                            <%}%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="newest-item">
-                                <a href="/zh/application/automobile/motor-temperature-sensor-cable-tesla-taycan">
+                                <a href="/<%=RouteData.Values["language"].ToString() %>/application/automobile/motor-temperature-sensor-cable-tesla-taycan">
                                     <div class="image-section">
                                         <picture>
                                             <source srcset="/images/application/products/motor-temperature-sensor-cable-tesla-taycan/menu/motor-temperature-sensor-cable-tesla-taycan.webp" type="image/webp">
@@ -562,14 +674,28 @@
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <div class="title text-left">電動車用-Tesla/Porsche Taycan</div>
-                                    <div class="subtitle text-left">IATF-16949 馬達溫度感知線</div>
+                                    <div class="title text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                電動車用-Tesla/Porsche Taycan
+                                                <%}
+                                            else {%>
+                                                Electric Cars-Tesla/Porsche Taycan
+                                            <%}%>
+                                    </div>
+                                    <div class="subtitle text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                IATF-16949 馬達溫度感知線
+                                                <%}
+                                            else {%>
+                                                IATF-16949 Motor Temperature Sensor Cable
+                                            <%}%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="newest-item">
-                                <a href="/zh/application/automobile/motor-power-cable">
+                                <a href="/<%=RouteData.Values["language"].ToString() %>/application/automobile/motor-power-cable">
                                     <div class="image-section">
                                         <picture>
                                             <source srcset="/images/application/products/motor-power-cable/menu/motor-power-cable.webp" type="image/webp">
@@ -579,31 +705,59 @@
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <div class="title text-left">電動機車-GOGORO</div>
-                                    <div class="subtitle text-left">電源供應器 & 電動馬達動力線</div>
+                                    <div class="title text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                電動機車-GOGORO
+                                                <%}
+                                            else {%>
+                                                Electric Motorcycle-GOGORO
+                                            <%}%>
+                                    </div>
+                                    <div class="subtitle text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                電源供應器 & 電動馬達動力線
+                                                <%}
+                                            else {%>
+                                                Motor Power Cable
+                                            <%}%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="newest-item">
-                                <a href="/zh/application/temperature-control-system/multi-furnace-temperature-control-dual-shielded-cable">
+                                <a href="/<%=RouteData.Values["language"].ToString() %>/application/temperature-control-system/multi-furnace-temperature-control-dual-shielded-cable">
                                     <div class="image-section">
                                         <picture>
                                             <source srcset="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/menu/multi-furnace-temperature-control-dual-shielded-cable.webp" type="image/webp">
                                             <img src="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/menu/multi-furnace-temperature-control-dual-shielded-cable.jpg"
-                                                alt="多爐溫控系統雙層屏蔽電纜 Temper Control Signal Shielding Cable">
+                                                alt="多爐溫控系統雙層屏蔽電纜 Temperature Control Signal Shielding Cable">
                                         </picture>
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <div class="title text-left">大型高溫爐</div>
-                                    <div class="subtitle text-left">多爐溫控系統雙層屏蔽線</div>
+                                    <div class="title text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                大型高溫爐
+                                                <%}
+                                            else {%>
+                                                Industrial Furnaces
+                                            <%}%>
+                                    </div>
+                                    <div class="subtitle text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                多爐溫控系統雙層屏蔽線
+                                                <%}
+                                            else {%>
+                                                Temperature Control Signal Shielding Cable
+                                            <%}%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="newest-item">
-                                <a href="">
+                                <a href="/<%=RouteData.Values["language"].ToString() %>/application/misc-app/military-spec-missile-control-cable">
                                     <div class="image-section">
                                         <picture>
                                             <source srcset="/images/application/products/military-spec-missile-control-cable/menu/military-spec-missile-control-cable.webp" type="image/webp">
@@ -613,14 +767,28 @@
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <div class="title text-left">飛彈控制軍規線</div>
-                                    <div class="subtitle text-left">軍規船用電纜</div>
+                                    <div class="title text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                飛彈控制軍規線
+                                                <%}
+                                            else {%>
+                                                Missile Control Cable
+                                            <%}%>
+                                    </div>
+                                    <div class="subtitle text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                軍規船用電纜
+                                                <%}
+                                            else {%>
+                                                MIL Spec Shipboard Cable
+                                            <%}%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="newest-item">
-                                <a href="/zh/application/automobile/high-voltage-ignition-wire">
+                                <a href="/<%=RouteData.Values["language"].ToString() %>/application/automobile/high-voltage-ignition-wire">
                                     <div class="image-section">
                                         <picture>
                                             <source srcset="/images/application/products/high-voltage-ignition-wire/menu/high-voltage-ignition-wire.webp" type="image/webp">
@@ -630,7 +798,14 @@
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <div class="title text-left">汽車用 高壓點火線</div>
+                                    <div class="title text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                汽車用 高壓點火線
+                                                <%}
+                                            else {%>
+                                                Ignition Cable
+                                            <%}%>
+                                        </div>
                                     <div class="subtitle text-left"></div>
                                 </div>
                             </div>
@@ -647,8 +822,53 @@
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <div class="title text-left">高鐵/捷運光纖電纜</div>
-                                    <div class="subtitle text-left">通訊配線</div>
+                                    <div class="title text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                高鐵/捷運光纖電纜
+                                                <%}
+                                            else {%>
+                                                High Speed Rail Optic Fiber Cable
+                                            <%}%>
+                                    </div>
+                                    <div class="subtitle text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                通訊配線
+                                                <%}
+                                            else {%>
+                                                Communications Cable
+                                            <%}%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="newest-item">
+                                <a href="">
+                                    <div class="image-section">
+                                        <picture>
+                                            <source srcset="https://via.placeholder.com/350x250?text=&nbsp" type="image/webp">
+                                            <img src="https://via.placeholder.com/350x250?text=&nbsp"
+                                                alt="MIL軍規線無人機/無人載具訊號控制線 MIL Drone Signal Control Cable">
+                                        </picture>
+                                    </div>
+                                </a>
+                                <div class="text-section">
+                                    <div class="title text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                無人機/無人載具訊號控制線
+                                                <%}
+                                            else {%>
+                                                Drone Signal Communication Cable
+                                            <%}%>
+                                    </div>
+                                    <div class="subtitle text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                                MIL認證軍規線
+                                                <%}
+                                            else {%>
+                                                MIL Spec Cable
+                                            <%}%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -675,6 +895,9 @@
                                 </a>
                                 <div class="text-section">
                                     <figcaption class="title my-auto">防火耐燃電線系列
+                                    </figcaption>
+                                    <figcaption class="subtitle">
+                                        Inflammable Cable
                                     </figcaption>
                                 </div>
                             </figure>
