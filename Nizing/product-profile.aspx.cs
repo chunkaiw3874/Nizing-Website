@@ -557,8 +557,9 @@ public partial class product_profile : System.Web.UI.Page
             div.InnerText = "Application";
         }
         divApplicationField.Controls.Add(div);
-        HtmlGenericControl spanApplicationField = new HtmlGenericControl("span");
-        spanApplicationField.InnerText = p.Description;
+        HtmlGenericControl spanApplicationField = new HtmlGenericControl("div");
+        spanApplicationField.Attributes.Add("style", "white-space:pre-wrap");
+        spanApplicationField.InnerHtml = p.Description;
         divApplicationField.Controls.Add(spanApplicationField);
         #endregion
         #region 技術資料

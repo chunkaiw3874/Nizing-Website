@@ -11,11 +11,11 @@
                                             <%}%></title>
     <meta name="description" content=<%if (RouteData.Values["language"].ToString() == "zh")
         {%>
-                                                "飛彈控制系統是一個綜合性很強的複雜系統，透過訊號傳遞所獲取的信息，引導飛彈攻擊目標的技術方法和手段，飛彈性能的優劣，命中目標的精確程度，均由此系統的好壞來決定，控制系統可視為飛彈之靈魂，需達到高精確度及可靠性，不得有任何的誤差及延遲，故導線的訊號回饋的即時性就非常的重要。此電線導體使用超高無氧、高純度、高導電導體，提供訊號傳遞及電力，並使用符合綠色能量 Silicone 作為絕緣外被，無毒無味、耐腐蝕化學品...等特性，可耐200°C耐壓750V。"
+                                                "飛彈發射器需接收飛彈下鏈資料，目標分類與辨識、追蹤與接戰，必須不受雜訊的干擾及即時的訊息回饋，才能精準有效的達成發彈發射的所有動作，此線材外層增加多重防雜訊隔離，有效的阻止外部電磁雜訊的干擾並保持傳輸網絡信號數據的完整傳遞，可運用在單臂及雙臂飛彈發射器中的傾斜式環形彈艙、垂直圓柱型彈艙、垂直輸送帶彈艙或其它各種型態不同的發彈發射器，結合飛彈控制系統即為完整的飛彈防禦系統。"
                                                 <%}
         else
         {%>
-                                                "Missile guiding system is a highly complex, multi-dimensional system. It utilizes data from split second signal transmittance to make accurate"
+                                                "Missile launcher needs to complete complex tasks such as target recognition, tracking, and contact, in order make accurate calculation for a successful missile launch, which requires fast and clean signal transmission. The Military Spec High Frequency Transmission Control Cable added multiple layers of anti-interference layers to ensure the data is being transferred clean and unaltered."
                                             <%}%> />
     <meta property="og:type" content="article" />
     <meta property="og:title" content=<%if (RouteData.Values["language"].ToString() == "zh")
@@ -26,7 +26,14 @@
         {%>
                                                 "Military Spec High Frequency Transmission Control Cable - Nizing Electric Wire & Cable"
                                             <%}%> />
-    <meta property="og:description" content="飛彈控制系統是一個綜合性很強的複雜系統，透過訊號傳遞所獲取的信息，引導飛彈攻擊目標的技術方法和手段，飛彈性能的優劣，命中目標的精確程度，均由此系統的好壞來決定，控制系統可視為飛彈之靈魂，需達到高精確度及可靠性，不得有任何的誤差及延遲，故導線的訊號回饋的即時性就非常的重要。此電線導體使用超高無氧、高純度、高導電導體，提供訊號傳遞及電力，並使用符合綠色能量 Silicone 作為絕緣外被，無毒無味、耐腐蝕化學品...等特性，可耐200°C耐壓750V。" />
+    <meta property="og:description" content=<%if (RouteData.Values["language"].ToString() == "zh")
+        {%>
+                                                "飛彈發射器需接收飛彈下鏈資料，目標分類與辨識、追蹤與接戰，必須不受雜訊的干擾及即時的訊息回饋，才能精準有效的達成發彈發射的所有動作，此線材外層增加多重防雜訊隔離，有效的阻止外部電磁雜訊的干擾並保持傳輸網絡信號數據的完整傳遞，可運用在單臂及雙臂飛彈發射器中的傾斜式環形彈艙、垂直圓柱型彈艙、垂直輸送帶彈艙或其它各種型態不同的發彈發射器，結合飛彈控制系統即為完整的飛彈防禦系統。"
+                                                <%}
+        else
+        {%>
+                                                "Missile launcher needs to complete complex tasks such as target recognition, tracking, and contact, in order make accurate calculation for a successful missile launch, which requires fast and clean signal transmission. The Military Spec High Frequency Transmission Control Cable added multiple layers of anti-interference layers to ensure the data is being transferred clean and unaltered."
+                                            <%}%> />
     <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/military-spec-high-frequency-transmission-control-cable-01-mobile.jpg" />
     <meta property="og:url" content="https://www.nizing.com.tw/<%=RouteData.Values["language"].ToString() %>/application/temperature-control-system/military-spec-high-frequency-transmission-control-cable" />
     <meta property="og:site_name" content="Nizing Electric Wire and Cable" />
@@ -79,7 +86,7 @@
         }
 
         .en .text-section .text-title {
-            font-size: 61px;
+            font-size: 56px;
         }
 
         .text-section .text-subtitle {
@@ -94,7 +101,7 @@
         }
 
         .en .text-section .text-subtitle {
-            font-size: 36px;
+            font-size: 22px;
         }
 
         .text-section .text-subtitle .subtitle-indent {
@@ -108,7 +115,7 @@
         }
 
         .en .text-section .text-subtitle .subtitle-indent {
-            height: 34px;
+            height: 0px;
         }
 
         .text-section .text-content {
@@ -149,7 +156,7 @@
             }
 
             .en .text-section .text-title {
-                font-size: 76px;
+                font-size: 75px;
             }
 
             .zh .text-section .text-subtitle {
@@ -157,7 +164,7 @@
             }
 
             .en .text-section .text-subtitle {
-                font-size: 36px;
+                font-size: 25px;
             }
 
             .zh .text-section .text-subtitle .subtitle-indent {
@@ -165,7 +172,7 @@
             }
 
             .en .text-section .text-subtitle .subtitle-indent {
-                height: 34px;
+                height: 0;
             }
 
             .zh .text-section .text-content {
@@ -173,7 +180,7 @@
             }
 
             .en .text-section .text-content {
-                font-size: 24px;
+                font-size: 22px;
             }
         }
 
@@ -187,7 +194,7 @@
             }
 
             .en .text-section .text-title {
-                font-size: 62px;
+                font-size: 73px;
             }
 
             .zh .text-section .text-subtitle {
@@ -195,7 +202,7 @@
             }
 
             .en .text-section .text-subtitle {
-                font-size: 30px;
+                font-size: 24px;
             }
 
             .zh .text-section .text-subtitle .subtitle-indent {
@@ -203,7 +210,7 @@
             }
 
             .en .text-section .text-subtitle .subtitle-indent {
-                height: 28px;
+                height: 0;
             }
 
             .zh .text-section .text-content {
@@ -225,7 +232,7 @@
             }
 
             .en .text-section .text-title {
-                font-size: 46px;
+                font-size: 53px;
             }
 
             .zh .text-section .text-subtitle {
@@ -233,7 +240,7 @@
             }
 
             .en .text-section .text-subtitle {
-                font-size: 22px;
+                font-size: 17px;
             }
 
             .zh .text-section .text-subtitle .subtitle-indent {
@@ -241,7 +248,7 @@
             }
 
             .en .text-section .text-subtitle .subtitle-indent {
-                height: 20px;
+                height: 0;
             }
 
             .zh .text-section .text-content {
@@ -279,7 +286,7 @@
             }
 
             .en .text-section .text-title {
-                font-size: 52px;
+                font-size: 69px;
             }
 
             .text-section .text-subtitle {
@@ -291,7 +298,7 @@
             }
 
             .en .text-section .text-subtitle {
-                font-size: 24px;
+                font-size: 17px;
             }
 
             .text-section .text-subtitle .subtitle-indent {
@@ -303,7 +310,7 @@
             }
 
             .en .text-section .text-subtitle .subtitle-indent {
-                height: 22px;
+                height: 0;
             }
 
             .text-section .text-content {
@@ -315,7 +322,7 @@
             }
 
             .en .text-section .text-content {
-                font-size: 16px;
+                font-size: 20px;
             }
 
             .text-section .text-image {
@@ -338,7 +345,7 @@
             }
 
             .en .text-section .text-title {
-                font-size: 31px;
+                font-size: 45px;
             }
 
             .zh .text-section .text-subtitle {
@@ -346,7 +353,7 @@
             }
 
             .en .text-section .text-subtitle {
-                font-size: 16px;
+                font-size: 22px;
             }
 
             .zh .text-section .text-subtitle .subtitle-indent {
@@ -354,7 +361,7 @@
             }
 
             .en .text-section .text-subtitle .subtitle-indent {
-                height: 14px;
+                height: 0;
             }
 
             .zh .text-section .text-content {
@@ -362,7 +369,7 @@
             }
 
             .en .text-section .text-content {
-                font-size: 16px;
+                font-size: 18px;
             }
         }
     </style>
@@ -415,7 +422,14 @@
                                             <%}%>                                
                             </div>
                             <div class="text-content">
-                                飛彈發射器需接收飛彈下鏈資料，目標分類與辨識、追蹤與接戰，必須不受雜訊的干擾及即時的訊息回饋，才能精準有效的達成發彈發射的所有動作，此線材外層增加多重防雜訊隔離，有效的阻止外部電磁雜訊的干擾並保持傳輸網絡信號數據的完整傳遞，可運用在單臂及雙臂飛彈發射器中的傾斜式環形彈艙、垂直圓柱型彈艙、垂直輸送帶彈艙或其它各種型態不同的發彈發射器，結合飛彈控制系統即為完整的飛彈防禦系統。
+                                <%if (RouteData.Values["language"].ToString() == "zh")
+                                    {%>
+                                                飛彈發射器需接收飛彈下鏈資料，目標分類與辨識、追蹤與接戰，必須不受雜訊的干擾及即時的訊息回饋，才能精準有效的達成發彈發射的所有動作，此線材外層增加多重防雜訊隔離，有效的阻止外部電磁雜訊的干擾並保持傳輸網絡信號數據的完整傳遞，可運用在單臂及雙臂飛彈發射器中的傾斜式環形彈艙、垂直圓柱型彈艙、垂直輸送帶彈艙或其它各種型態不同的發彈發射器，結合飛彈控制系統即為完整的飛彈防禦系統。
+                                                <%}
+                                                    else
+                                                    {%>
+                                                Missile launcher needs to complete complex tasks such as target recognition, tracking, and contact, in order make accurate calculation for a successful missile launch, which requires fast and clean signal transmission. The Military Spec High Frequency Transmission Control Cable added multiple layers of anti-interference layers to ensure the data is being transferred clean and unaltered.
+                                            <%}%>
                             </div>
                             <div class="text-image">
                                 <picture>
@@ -425,7 +439,16 @@
                             </div>
                             <div class="text-content-link">
                                 <a href="/<%=RouteData.Values["language"].ToString() %>/product/military-grade-wire" class="btn-primary">
+                                    <%if (RouteData.Values["language"].ToString() == "zh")
+                                        {%>
+                                                
                                     ▶▶▶更多軍規線產品
+                                                <%}
+                                    else
+                                    {%>
+                                                
+                                    ▶▶▶More Military Grade Wire
+                                            <%}%>
                                 </a>
                             </div>
                         </div>

@@ -3,6 +3,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <asp:PlaceHolder ID="MetaTagPlaceholder" runat="server"></asp:PlaceHolder>
     <meta name="robots" content="index, follow" />
+    <style>
+        textarea {
+            width: 100%;
+            border: none;
+            height:100%;
+        }
+    </style>
     <script type="text/javascript">
         //$(function () {
         //    dragScroll();
