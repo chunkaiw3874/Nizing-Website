@@ -1,13 +1,34 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWDApplicationMaster.master" AutoEventWireup="true" CodeFile="military-spec-missile-control-cable.aspx.cs" Inherits="application_military_spec_missile_control_cable" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <title>飛彈控制軍規線-日進電線 2021</title>
-    <meta name="description" content="飛彈控制系統是一個綜合性很強的複雜系統，透過訊號傳遞所獲取的信息，引導飛彈攻擊目標的技術方法和手段，飛彈性能的優劣，命中目標的精確程度，均由此系統的好壞來決定，控制系統可視為飛彈之靈魂，需達到高精確度及可靠性，不得有任何的誤差及延遲，故導線的訊號回饋的即時性就非常的重要。此電線導體使用超高無氧、高純度、高導電導體，提供訊號傳遞及電力，並使用符合綠色能量 Silicone 作為絕緣外被，無毒無味、耐腐蝕化學品...等特性，可耐200°C耐壓750V。" />
+    <title><%if (RouteData.Values["language"].ToString() == "zh")
+               {%>
+                                                飛彈控制軍規線-日進電線 2021
+                                                <%}
+                                                    else
+                                                    {%>
+                                                Military Spec Missile Control Cable - Nizing Electric Wire & Cable
+                                            <%}%></title>
+    <meta name="description" content=<%if (RouteData.Values["language"].ToString() == "zh")
+        {%>
+                                                "飛彈控制系統是一個綜合性很強的複雜系統，透過訊號傳遞所獲取的信息，引導飛彈攻擊目標的技術方法和手段，飛彈性能的優劣，命中目標的精確程度，均由此系統的好壞來決定，控制系統可視為飛彈之靈魂，需達到高精確度及可靠性，不得有任何的誤差及延遲，故導線的訊號回饋的即時性就非常的重要。此電線導體使用超高無氧、高純度、高導電導體，提供訊號傳遞及電力，並使用符合綠色能量 Silicone 作為絕緣外被，無毒無味、耐腐蝕化學品...等特性，可耐200°C耐壓750V。"
+                                                <%}
+        else
+        {%>
+                                                "Missile guiding system is a highly complex, multi-dimensional system. It utilizes data from split second signal transmittance to make accurate"
+                                            <%}%> />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="飛彈控制軍規線-日進電線 2021" />
+    <meta property="og:title" content=<%if (RouteData.Values["language"].ToString() == "zh")
+        {%>
+                                                "飛彈控制軍規線-日進電線 2021"
+                                                <%}
+        else
+        {%>
+                                                "Military Spec Missile Control Cable - Nizing Electric Wire & Cable"
+                                            <%}%> />
     <meta property="og:description" content="飛彈控制系統是一個綜合性很強的複雜系統，透過訊號傳遞所獲取的信息，引導飛彈攻擊目標的技術方法和手段，飛彈性能的優劣，命中目標的精確程度，均由此系統的好壞來決定，控制系統可視為飛彈之靈魂，需達到高精確度及可靠性，不得有任何的誤差及延遲，故導線的訊號回饋的即時性就非常的重要。此電線導體使用超高無氧、高純度、高導電導體，提供訊號傳遞及電力，並使用符合綠色能量 Silicone 作為絕緣外被，無毒無味、耐腐蝕化學品...等特性，可耐200°C耐壓750V。" />
     <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/military-spec-missile-control-cable/impression/military-spec-missile-control-cable-mobile-01.jpg" />
-    <meta property="og:url" content="https://www.nizing.com.tw/zh/application/temperature-control-system/military-spec-missile-control-cable" />
+    <meta property="og:url" content="https://www.nizing.com.tw/<%=RouteData.Values["language"].ToString() %>/application/temperature-control-system/military-spec-missile-control-cable" />
     <meta property="og:site_name" content="Nizing Electric Wire and Cable" />
     <style type="text/css">
         .breadcrumb {
@@ -84,8 +105,8 @@
             text-shadow: 1px 1px 15px #000000, 2px 2px 30px #000000;
         }
 
-        .special-char-font{
-            font-family:Arial;
+        .special-char-font {
+            font-family: Arial;
         }
 
         @media all and (max-width:1423px) {
@@ -224,7 +245,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="banner" runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="Server">
-    <div class="container-fluid bg-wrapper bg-color-gradient">
+    <div class="container-fluid bg-wrapper bg-color-gradient <%=RouteData.Values["language"].ToString() %>">
         <div class="content-wrapper">
             <div class="d-md-none">
                 <picture>
@@ -240,10 +261,24 @@
                         <div class="text-section">
                             <div class="text-subtitle">
                                 <div class="subtitle-indent"></div>
-                                飛彈控制軍規線
+                                <%if (RouteData.Values["language"].ToString() == "zh")
+                                    {%>
+                                                飛彈控制軍規線
+                                                <%}
+                                                    else
+                                                    {%>
+                                                Military Spec Missile Control Cable
+                                            <%}%>
                             </div>
                             <div class="text-title">
-                                精準零延遲 完美發射
+                                <%if (RouteData.Values["language"].ToString() == "zh")
+                                    {%>
+                                                精準零延遲 完美發射
+                                                <%}
+                                                    else
+                                                    {%>
+                                            Zero Delay、Perfect Timing
+                                            <%}%>                                
                             </div>
                             <div class="text-image-top d-none d-md-block">
                                 <picture>

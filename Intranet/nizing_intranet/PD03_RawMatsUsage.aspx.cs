@@ -176,6 +176,7 @@ public partial class nizing_intranet_PD03_RawMatsUsage : System.Web.UI.Page
             " AS" +
             " (" +
             " SELECT MB.MB001 'ID'" +
+            " , MB.MB002 'name'" +
             " , CAST(COALESCE(MC.MC004, 0) AS DECIMAL) 'safeInv'" +
             " , CAST(COALESCE(SUM(MC.MC007), 0) AS DECIMAL) 'invAmount'" +
             " , MB.MB004 'unit'" +
@@ -187,12 +188,13 @@ public partial class nizing_intranet_PD03_RawMatsUsage : System.Web.UI.Page
             " LEFT JOIN MOCTE TE ON MB.MB001 = TE.TE004" +
             " LEFT JOIN MOCTC TC ON TE.TE001 = TC.TC001 AND TE.TE002 = TC.TC002 AND TC.TC014 BETWEEN @beginDate AND @endDate" +
             categoryCondition +
-            " GROUP BY MB.MB001, MC.MC004, MB.MB004, TC.TC014, TE.TE005, TE.TE001, TE.TE002, TE.TE003" +
+            " GROUP BY MB.MB001, MB.MB002, MC.MC004, MB.MB004, TC.TC014, TE.TE005, TE.TE001, TE.TE002, TE.TE003" +
             " )" +            
             " SELECT*" +
             " FROM" +
             " (" +
             " SELECT usage.ID" +
+            " , usage.name" +
             " , COALESCE(usage.safeInv, 0) 'safeInv' " +
             " , COALESCE(usage.invAmount, 0) 'invAmount'" +
             " , COALESCE(usage.unit, 'N/A') 'unit'" +
@@ -277,7 +279,7 @@ public partial class nizing_intranet_PD03_RawMatsUsage : System.Web.UI.Page
         calculateMonthlySubtotal(e);
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            if (((Label)e.Row.Cells[3].FindControl("Label5")).Text == "銷貨")
+            if (((Label)e.Row.Cells[4].FindControl("Label6")).Text == "銷貨")
             {
                 for (int i = 0; i < e.Row.Cells.Count; i++)
                 {
@@ -322,16 +324,16 @@ public partial class nizing_intranet_PD03_RawMatsUsage : System.Web.UI.Page
             double currentInv = 0;
             double safeInv = 0;
 
-            if (double.TryParse(((Label)e.Row.FindControl("Label1")).Text, out safeInv) && double.TryParse(((Label)e.Row.FindControl("Label2")).Text, out currentInv))
+            if (double.TryParse(((Label)e.Row.FindControl("Label2")).Text, out safeInv) && double.TryParse(((Label)e.Row.FindControl("Label3")).Text, out currentInv))
             {
                 if (currentInv < safeInv)
                 {
-                    ((Label)e.Row.FindControl("Label2")).ForeColor = c;
-                    ((Label)e.Row.FindControl("Label2")).CssClass = "bold";
+                    ((Label)e.Row.FindControl("Label3")).ForeColor = c;
+                    ((Label)e.Row.FindControl("Label3")).CssClass = "bold";
                 }
                 else
                 {
-                    ((Label)e.Row.FindControl("Label2")).ForeColor = System.Drawing.Color.Black;
+                    ((Label)e.Row.FindControl("Label3")).ForeColor = System.Drawing.Color.Black;
                 }
             }
         }
@@ -355,56 +357,56 @@ public partial class nizing_intranet_PD03_RawMatsUsage : System.Web.UI.Page
             double nov = 0;
             double dec = 0;
 
-            if (!double.TryParse(((Label)e.Row.FindControl("Label5")).Text, out jan))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label6")).Text, out jan))
             {
                 jan = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label6")).Text, out feb))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label7")).Text, out feb))
             {
                 feb = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label7")).Text, out mar))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label8")).Text, out mar))
             {
                 mar = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label8")).Text, out apr))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label9")).Text, out apr))
             {
                 apr = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label9")).Text, out may))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label10")).Text, out may))
             {
                 may = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label10")).Text, out june))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label11")).Text, out june))
             {
                 june = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label11")).Text, out july))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label12")).Text, out july))
             {
                 july = 0;
             } 
-            if (!double.TryParse(((Label)e.Row.FindControl("Label12")).Text, out aug))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label13")).Text, out aug))
             {
                 aug = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label13")).Text, out sept))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label14")).Text, out sept))
             {
                 sept = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label14")).Text, out oct))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label15")).Text, out oct))
             {
                 oct = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label15")).Text, out nov))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label16")).Text, out nov))
             {
                 nov = 0;
             }
-            if (!double.TryParse(((Label)e.Row.FindControl("Label16")).Text, out dec))
+            if (!double.TryParse(((Label)e.Row.FindControl("Label17")).Text, out dec))
             {
                 dec = 0;
             }
 
-            ((Label)e.Row.FindControl("Label17")).Text = (jan + feb + mar + apr + may + june + july + aug + sept + oct + nov + dec).ToString();
+            ((Label)e.Row.FindControl("Label18")).Text = (jan + feb + mar + apr + may + june + july + aug + sept + oct + nov + dec).ToString();
         }
     }
     protected void gvResult_RowCreated(object sender, GridViewRowEventArgs e)
@@ -415,7 +417,7 @@ public partial class nizing_intranet_PD03_RawMatsUsage : System.Web.UI.Page
             GridViewRow HeaderGridRow = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Insert);
             TableCell HeaderCell = new TableCell();
             HeaderCell.Text = "";
-            HeaderCell.ColumnSpan = 5;
+            HeaderCell.ColumnSpan = 6;
             HeaderCell.CssClass = "stackedHeader-1";
             HeaderGridRow.Cells.Add(HeaderCell);
 
@@ -446,7 +448,7 @@ public partial class nizing_intranet_PD03_RawMatsUsage : System.Web.UI.Page
         double sum = 0;
         if (_gd.Rows.Count > 0)
         {
-            for (int i = 5; i < _gd.Rows[0].Cells.Count; i++)
+            for (int i = 6; i < _gd.Rows[0].Cells.Count; i++)
             {
                 sum = 0;
                 for (int j = 1; j < _gd.Rows.Count; j++)

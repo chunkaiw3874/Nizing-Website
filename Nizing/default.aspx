@@ -633,11 +633,11 @@
                         </div>
                         <div class="col">
                             <div class="newest-item">
-                                <a href="">
+                                <a href="/<%=RouteData.Values["language"].ToString() %>/application/misc-app/military-spec-high-frequency-transmission-control-cable">
                                     <div class="image-section">
                                         <picture>
-                                            <source srcset="/images/application/products/military-spec-high-frequency-transimission-control-cable/menu/military-spec-high-frequency-transimission-control-cable.webp" type="image/webp">
-                                            <img src="/images/application/products/military-spec-high-frequency-transimission-control-cable/menu/military-spec-high-frequency-transimission-control-cable.jpg"
+                                            <source srcset="/images/application/products/military-spec-high-frequency-transmission-control-cable/menu/military-spec-high-frequency-transmission-control-cable.webp" type="image/webp">
+                                            <img src="/images/application/products/military-spec-high-frequency-transmission-control-cable/menu/military-spec-high-frequency-transmission-control-cable.jpg"
                                                 alt="MIL軍規高頻傳輸控制複合電纜 MIL High Frequency Transmission Control Cable">
                                         </picture>
                                     </div>

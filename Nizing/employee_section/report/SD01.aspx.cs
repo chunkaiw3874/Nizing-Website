@@ -233,7 +233,11 @@ public partial class SD01 : System.Web.UI.Page
                     " ,convert(decimal(20, 0), coalesce(pvt.foreignReturn, 0)) 'foreignReturn'" +
                     " ,convert(decimal(20, 0), coalesce(pvt.domesticSale, 0) - coalesce(pvt.domesticReturn, 0)) 'domesticNetSale'" +
                     " ,convert(decimal(20, 0), coalesce(pvt.foreignSale, 0) - coalesce(pvt.foreignReturn, 0)) 'foreignNetSale'" +
-                    " ,convert(nvarchar(6), convert(decimal(5, 2), convert(decimal(20, 0), coalesce(pvt.foreignSale, 0) - coalesce(pvt.foreignReturn, 0)) * 100 /convert(decimal(20, 0), coalesce(pvt.domesticSale, 0) - coalesce(pvt.domesticReturn, 0) + coalesce(pvt.foreignSale, 0) - coalesce(pvt.foreignReturn, 0)))) + '%' 'foreignNetSalePercent'" +
+                    " ,case" +
+                    " when coalesce(pvt.domesticSale, 0) - coalesce(pvt.domesticReturn, 0) + coalesce(pvt.foreignSale, 0) - coalesce(pvt.foreignReturn, 0)=0" +
+                    " then 'N/A'" +
+                    " else convert(nvarchar(6), convert(decimal(5, 2), convert(decimal(20, 0), coalesce(pvt.foreignSale, 0) - coalesce(pvt.foreignReturn, 0)) * 100 /convert(decimal(20, 0), coalesce(pvt.domesticSale, 0) - coalesce(pvt.domesticReturn, 0) + coalesce(pvt.foreignSale, 0) - coalesce(pvt.foreignReturn, 0)))) + '%'" +
+                    " end 'foreignNetSalePercent'" +
                     " ,convert(decimal(20, 0), coalesce(pvt.domesticSale, 0) - coalesce(pvt.domesticReturn, 0) + coalesce(pvt.foreignSale, 0) - coalesce(pvt.foreignReturn, 0)) 'netSale'" +
                     " ,convert(decimal(20, 0), coalesce(sum(saleTarget.[TARGET]), 0)) 'saleTarget'" +
                     " ,case" +

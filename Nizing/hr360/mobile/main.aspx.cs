@@ -26,6 +26,12 @@ public partial class hr360_mobile_main : System.Web.UI.Page
     public string defaultERPDbConnectionString;
     protected void Page_Load(object sender, EventArgs e)
     {
+        //test values
+        //HR360LoggedUser.ERPId = "0174";
+        //HR360LoggedUser.HR360Id = "0174";
+        //Session["erp_id"] = "0174";
+        //Session["company"] = "NIZING";
+
         if (Session["company"].ToString() == "NIZING")
         {
             defaultERPDbConnectionString = NzConnectionString;
