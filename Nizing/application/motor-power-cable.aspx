@@ -11,11 +11,11 @@
                                             <%}%></title>
     <meta name="description" content=                        
                             <%if (RouteData.Values["language"].ToString() == "zh")
-                                {%>
+        {%>
                                                 "使用超軟導體讓有限空間內佈線更加自由輕巧，具有『超高無氧』、『高純度』及『高導電』等特點，可耐-40~200°C，也適合在極端溫度環境下使用。 為符合綠色能量之宗旨，使用 Silicone 作為絕緣外被，是公認最具環保材質，無毒無味、無汙染、耐腐蝕化學品...等，沒有汙染，絕對環保 。"
                                                 <%}
-                                                    else
-                                                    {%>
+        else
+        {%>
                                                  "Uses ultra flexible conductor, allowing more freedom in wiring design. With high purity, great conductivity, and -40~200°C temperature range, the Motor Power Cable can withstand extreme conditions, coupling with its silicone insulation, the most environmental friendly material, it is the ideal representation of both green & technology."
                                             <%}%>         />
     <meta property="og:type" content="article" />
@@ -29,11 +29,11 @@
                                             <%}%> />
     <meta property="og:description" content=                        
                             <%if (RouteData.Values["language"].ToString() == "zh")
-                                {%>
+        {%>
                                                 "使用超軟導體讓有限空間內佈線更加自由輕巧，具有『超高無氧』、『高純度』及『高導電』等特點，可耐-40~200°C，也適合在極端溫度環境下使用。 為符合綠色能量之宗旨，使用 Silicone 作為絕緣外被，是公認最具環保材質，無毒無味、無汙染、耐腐蝕化學品...等，沒有汙染，絕對環保 。"
                                                 <%}
-                                                    else
-                                                    {%>
+        else
+        {%>
                                                  "Uses ultra flexible conductor, allowing more freedom in wiring design. With high purity, great conductivity, and -40~200°C temperature range, the Motor Power Cable can withstand extreme conditions, coupling with its silicone insulation, the most environmental friendly material, it is the ideal representation of both green & technology."
                                             <%}%> />
     <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/motor-power-cable/impression/motor-power-cable-2.jpg" />
@@ -63,6 +63,13 @@
         .text-section .top {
             padding-top: 1.5rem;
             padding-bottom: 0.6rem;
+        }
+
+        .zh .text-section .top {
+            font-size: 20px;
+        }
+
+        .en .text-section .top {
             font-size: 20px;
         }
 
@@ -72,57 +79,96 @@
         }
 
             .text-section .middle {
-                font-size: 50px;
                 padding-bottom: 0.6rem;
                 letter-spacing: 5px;
             }
 
-                .text-section .middle p {
-                    margin: 0;
-                }
+        .zh .text-section .middle {
+            font-size: 50px;
+        }
 
-                    .text-section .middle p:first-child {
-                        font-size: 47px;
-                    }
+        .en .text-section .middle {
+            font-size: 54px;
+        }
 
-            .text-section .bottom {
-                padding-bottom: 1rem;
-                font-size: 18px;
-            }
+        .text-section .middle p {
+            margin: 0;
+        }
+
+        .zh .text-section .middle p:first-child {
+            font-size: 47px;
+        }
+
+        .en .text-section .middle p:first-child {
+            font-size: 47px;
+        }
+
+        .text-section .bottom {
+            padding-bottom: 1rem;
+        }
+
+        .zh .text-section .bottom {
+            font-size: 18px;
+        }
 
         .img-small {
             width: 90%;
         }
-        
+
         .special-char-font {
             font-family: Arial;
         }
+
         @media all and (max-width:1199px) {
-            .text-section .top {
+            .zh .text-section .top {
                 font-size: 18px;
             }
 
-            .text-section .middle {
+            .en .text-section .top {
+                font-size: 18px;
+            }
+
+            .zh .text-section .middle {
                 font-size: 40px;
             }
 
-                .text-section .middle p:first-child {
-                    font-size: 38px;
-                }
+            .en .text-section .middle {
+                font-size: 42px;
+            }
 
-            .text-section .bottom {
+            .zh .text-section .middle p:first-child {
+                font-size: 38px;
+            }
+
+            .en .text-section .middle p:first-child {
+                font-size: 36px;
+            }
+
+            .zh .text-section .bottom {
+                font-size: 16px;
+            }
+
+            .en .text-section .bottom {
                 font-size: 16px;
             }
         }
 
         @media all and (max-width:991px) {
-            .text-section .middle {
+            .zh .text-section .middle {
                 font-size: 34px;
             }
 
-                .text-section .middle p:first-child {
-                    font-size: 32px;
-                }
+            .en .text-section .middle {
+                font-size: 23px;
+            }
+
+            .zh .text-section .middle p:first-child {
+                font-size: 32px;
+            }
+
+            .en .text-section .middle p:first-child {
+                font-size: 28px;
+            }
         }
 
         @media all and (max-width:767px) {
@@ -135,13 +181,25 @@
                 width: fit-content;
             }
 
-            .text-section .middle {
+            .zh .text-section .middle {
                 font-size: 30px;
             }
 
-                .text-section .middle p:first-child {
-                    font-size: 28px;
-                }
+            .en .text-section .middle {
+                font-size: 30px;
+            }
+
+            .zh .text-section .middle p:first-child {
+                font-size: 28px;
+            }
+
+            .en .text-section .middle p:first-child {
+                font-size: 27px;
+            }
+
+            .text-section .bottom {
+                margin: auto;
+            }
         }
     </style>
 </asp:Content>
