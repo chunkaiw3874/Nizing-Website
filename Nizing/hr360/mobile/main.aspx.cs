@@ -156,59 +156,59 @@ public partial class hr360_mobile_main : System.Web.UI.Page
             if (dtUserInfo.Rows.Count > 0)
             {
                 //不分上下年度
-                lblTotalDayOff.Text = "剩餘: " + (doubleFirstPartFinal + doubleSecondPartFinal).ToString() + "小時";
-                ////分上下年度
-                //if (dtUserInfo.Rows[0]["START_MONTH"].ToString() == "01")
-                //{
-                //    lblFirstPartDayOff.Visible = false;
-                //    lblDayOffMemo.Visible = false;
-                //}
-                //else
-                //{
-                //    DateTime startDate = DateTime.ParseExact(dtUserInfo.Rows[0]["START_MONTH"].ToString() + "/" + dtUserInfo.Rows[0]["START_DAY"].ToString(), "MM/dd", new CultureInfo("zh-TW"));
+                //lblTotalDayOff.Text = "剩餘: " + (doubleFirstPartFinal + doubleSecondPartFinal).ToString() + "小時";
+                //分上下年度
+                if (dtUserInfo.Rows[0]["START_MONTH"].ToString() == "01")
+                {
+                    lblFirstPartDayOff.Visible = false;
+                    lblDayOffMemo.Visible = false;
+                }
+                else
+                {
+                    DateTime startDate = DateTime.ParseExact(dtUserInfo.Rows[0]["START_MONTH"].ToString() + "/" + dtUserInfo.Rows[0]["START_DAY"].ToString(), "MM/dd", new CultureInfo("zh-TW"));
 
 
-                //    if (DateTime.Today < startDate)
-                //    {
-                //        lblDayOffMemo.Visible = false;
-                //        lblDayOffMemo.Text = "";
-                //    }
-                //    else
-                //    {
-                //        lblDayOffMemo.Visible = true;
-                //        strFirstPartDayOff = "0";
-                //        if (doubleFirstPartFinal > 0)
-                //        {
-                //            lblDayOffMemo.Text = "上半季未休完之" + doubleFirstPartFinal.ToString() + "小時併入" + startDate.ToString("MM/dd") + "-12/31之剩餘時數";
-                //            doubleSecondPartFinal += doubleFirstPartFinal;
-                //            strSecondPartDayOff = doubleSecondPartFinal.ToString();
-                //        }
-                //        else if (doubleFirstPartFinal < 0)
-                //        {
-                //            doubleFirstPartFinal *= -1;
-                //            lblDayOffMemo.Text = "超休" + doubleFirstPartFinal.ToString() + "小時，於" + startDate.ToString("MM/dd") + "-12/31之特休時數扣除";
-                //            doubleSecondPartFinal -= doubleFirstPartFinal;
-                //            strSecondPartDayOff = doubleSecondPartFinal.ToString();
-                //        }
-                //        else
-                //        {
-                //            lblDayOffMemo.Visible = false;
-                //            lblDayOffMemo.Text = "";
-                //        }
-                //    }
-                //    lblFirstPartDayOff.Visible = true;
-                //    lblFirstPartDayOff.Text = "01/01-" + startDate.AddDays(-1).ToString("MM/dd") + " 剩餘: " + strFirstPartDayOff + "小時";
-                //    lblSecondPartDayOff.Text = startDate.ToString("MM/dd") + "-12/31 剩餘: " + strSecondPartDayOff + "小時";
-                //}
+                    if (DateTime.Today < startDate)
+                    {
+                        lblDayOffMemo.Visible = false;
+                        lblDayOffMemo.Text = "";
+                    }
+                    else
+                    {
+                        lblDayOffMemo.Visible = true;
+                        strFirstPartDayOff = "0";
+                        if (doubleFirstPartFinal > 0)
+                        {
+                            lblDayOffMemo.Text = "上半季未休完之" + doubleFirstPartFinal.ToString() + "小時併入" + startDate.ToString("MM/dd") + "-12/31之剩餘時數";
+                            doubleSecondPartFinal += doubleFirstPartFinal;
+                            strSecondPartDayOff = doubleSecondPartFinal.ToString();
+                        }
+                        else if (doubleFirstPartFinal < 0)
+                        {
+                            doubleFirstPartFinal *= -1;
+                            lblDayOffMemo.Text = "超休" + doubleFirstPartFinal.ToString() + "小時，於" + startDate.ToString("MM/dd") + "-12/31之特休時數扣除";
+                            doubleSecondPartFinal -= doubleFirstPartFinal;
+                            strSecondPartDayOff = doubleSecondPartFinal.ToString();
+                        }
+                        else
+                        {
+                            lblDayOffMemo.Visible = false;
+                            lblDayOffMemo.Text = "";
+                        }
+                    }
+                    lblFirstPartDayOff.Visible = true;
+                    lblFirstPartDayOff.Text = "01/01-" + startDate.AddDays(-1).ToString("MM/dd") + " 剩餘: " + strFirstPartDayOff + "小時";
+                    lblSecondPartDayOff.Text = startDate.ToString("MM/dd") + "-12/31 剩餘: " + strSecondPartDayOff + "小時";
+                }
             }
             else
             {
                 ////分上下年度
-                lblTotalDayOff.Text = "N/A";
-                ////分上下年度
-                //lblFirstPartDayOff.Visible = false;
-                //lblSecondPartDayOff.Visible = true;
-                //lblSecondPartDayOff.Text = "N/A";
+                //lblTotalDayOff.Text = "N/A";
+                //分上下年度
+                lblFirstPartDayOff.Visible = false;
+                lblSecondPartDayOff.Visible = true;
+                lblSecondPartDayOff.Text = "N/A";
             }
 
             Session["firstPartDayOff"] = doubleFirstPartFinal;

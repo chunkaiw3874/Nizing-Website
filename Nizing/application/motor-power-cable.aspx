@@ -1,13 +1,43 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWDApplicationMaster.master" AutoEventWireup="true" CodeFile="motor-power-cable.aspx.cs" Inherits="application_motor_power_cable" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <title>電動機車電源供應器 電動馬達動力線-日進電線 2021</title>
-    <meta name="description" content="電動機車的主要電源供應電纜，為電動機車的核心元件" />
+    <title><%if (RouteData.Values["language"].ToString() == "zh")
+               {%>
+                                                電動機車電源供應器 電動馬達動力線-日進電線 2021
+                                                <%}
+                                                    else
+                                                    {%>
+                                                 Motor Power Cable - Nizing Electric Wire & Cable
+                                            <%}%></title>
+    <meta name="description" content=                        
+                            <%if (RouteData.Values["language"].ToString() == "zh")
+                                {%>
+                                                "使用超軟導體讓有限空間內佈線更加自由輕巧，具有『超高無氧』、『高純度』及『高導電』等特點，可耐-40~200°C，也適合在極端溫度環境下使用。 為符合綠色能量之宗旨，使用 Silicone 作為絕緣外被，是公認最具環保材質，無毒無味、無汙染、耐腐蝕化學品...等，沒有汙染，絕對環保 。"
+                                                <%}
+                                                    else
+                                                    {%>
+                                                 "Uses ultra flexible conductor, allowing more freedom in wiring design. With high purity, great conductivity, and -40~200°C temperature range, the Motor Power Cable can withstand extreme conditions, coupling with its silicone insulation, the most environmental friendly material, it is the ideal representation of both green & technology."
+                                            <%}%>         />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="電動機車電源供應器 電動馬達動力線-日進電線 2021" />
-    <meta property="og:description" content="電動機車的主要電源供應電纜，為電動機車的核心元件" />
+    <meta property="og:title" content=<%if (RouteData.Values["language"].ToString() == "zh")
+        {%>
+                                                "電動機車電源供應器 電動馬達動力線-日進電線 2021"
+                                                <%}
+        else
+        {%>
+                                                 "Motor Power Cable - Nizing Electric Wire & Cable"
+                                            <%}%> />
+    <meta property="og:description" content=                        
+                            <%if (RouteData.Values["language"].ToString() == "zh")
+                                {%>
+                                                "使用超軟導體讓有限空間內佈線更加自由輕巧，具有『超高無氧』、『高純度』及『高導電』等特點，可耐-40~200°C，也適合在極端溫度環境下使用。 為符合綠色能量之宗旨，使用 Silicone 作為絕緣外被，是公認最具環保材質，無毒無味、無汙染、耐腐蝕化學品...等，沒有汙染，絕對環保 。"
+                                                <%}
+                                                    else
+                                                    {%>
+                                                 "Uses ultra flexible conductor, allowing more freedom in wiring design. With high purity, great conductivity, and -40~200°C temperature range, the Motor Power Cable can withstand extreme conditions, coupling with its silicone insulation, the most environmental friendly material, it is the ideal representation of both green & technology."
+                                            <%}%> />
     <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/motor-power-cable/impression/motor-power-cable-2.jpg" />
-    <meta property="og:url" content="https://www.nizing.com.tw/zh/application/automobile/motor-power-cable" />
+    <meta property="og:url" content="https://www.nizing.com.tw/<%=RouteData.Values["language"].ToString()%>/application/automobile/motor-power-cable" />
     <meta property="og:site_name" content="Nizing Electric Wire and Cable" />
     <style type="text/css">
         .breadcrumb {
@@ -63,7 +93,10 @@
         .img-small {
             width: 90%;
         }
-
+        
+        .special-char-font {
+            font-family: Arial;
+        }
         @media all and (max-width:1199px) {
             .text-section .top {
                 font-size: 18px;
@@ -116,7 +149,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="Server">
     <div class="container-fluid">
-        <div class="row bg-color m-0 pb-3">
+        <div class="row bg-color m-0 pb-3 <%=RouteData.Values["language"].ToString() %>">
             <div class="col-md-6">
                 <picture>
                     <source srcset="/images/application/products/motor-power-cable/impression/motor-power-cable-1-mobile.webp" media="(max-width:767px)" type="image/webp" />
@@ -125,39 +158,65 @@
                     <img src="/images/application/products/motor-power-cable/impression/motor-power-cable-1.jpg"
                         alt="Gogoro Electric Motorcycle" />
                 </picture>
-
             </div>
             <div class="col-md-6">
                 <div class="container text-section">
                     <div class="mobile-text-wrapper">
                         <div class="top text-green">
-                            電源供應器 & 電動馬達動力線
+                            <%if (RouteData.Values["language"].ToString() == "zh")
+                                {%>
+                                                電源供應器 & 電動馬達動力線
+                                                <%}
+                                                    else
+                                                    {%>
+                                                 Motor Power Cable
+                                            <%}%>
                         </div>
                         <div class="middle text-white">
-                            <p>
-                                超軟導體  恣意佈線
+                            <p>                                
+                            <%if (RouteData.Values["language"].ToString() == "zh")
+                                {%>
+                                                超軟導體  恣意佈線
+                                                <%}
+                                                    else
+                                                    {%>
+                                                 Flexibility Freedom
+                                            <%}%>
                             </p>
                             <p>
-                                綠能環保線在啟動
+                            <%if (RouteData.Values["language"].ToString() == "zh")
+                                {%>
+                                                綠能環保線在啟動
+                                                <%}
+                                                    else
+                                                    {%>
+                                                 Green Cable Now
+                                            <%}%>                                
                             </p>
                         </div>
                     </div>
-                    <div class="bottom text-white">
-                        使用超軟導體讓有限空間內佈線更加自由輕巧，具有『超高無氧』、『高純度』及『高導電』等特點，可耐-40C~200°C，也適合在極端溫度環境下使用。 為符合綠色能量之宗旨，使用 Silicone 作為絕緣外被，是公認最具環保材質，無毒無味、無汙染、耐腐蝕化學品...等，沒有汙染，絕對環保 。
+                    <div class="bottom text-white">                        
+                            <%if (RouteData.Values["language"].ToString() == "zh")
+                                {%>
+                                                使用超軟導體讓有限空間內佈線更加自由輕巧，具有『超高無氧』、『高純度』及『高導電』等特點，可耐-40~200<span class="special-char-font">°</span>C，也適合在極端溫度環境下使用。 為符合綠色能量之宗旨，使用 Silicone 作為絕緣外被，是公認最具環保材質，無毒無味、無汙染、耐腐蝕化學品...等，沒有汙染，絕對環保 。
+                                                <%}
+                                                    else
+                                                    {%>
+                                                 Uses ultra flexible conductor, allowing more freedom in wiring design. With high purity, great conductivity, and -40~200<span class="special-char-font">°</span>C temperature range, the Motor Power Cable can withstand extreme conditions, coupling with its silicone insulation, the most environmental friendly material, it is the ideal representation of both green & technology.
+                                            <%}%>                              
                     </div>
                 </div>
                 <div>
                     <picture>
                         <source srtset="/images/application/products/motor-power-cable/impression/motor-power-cable-2.webp" type="image/webp" />
                         <img src="/images/application/products/motor-power-cable/impression/motor-power-cable-2.jpg"
-                            alt="Gogoro Electric Motorcycle Power Cable" />
+                            alt="電動馬達動力線 Electric Motorcycle Power Cable" />
                     </picture>
                 </div>
                 <div class="d-flex justify-content-center">
                     <picture>
-                        <source srtset="/images/application/products/motor-power-cable/impression/motor-power-cable-3.webp" type="image/webp" />
-                        <img src="/images/application/products/motor-power-cable/impression/motor-power-cable-3.jpg"
-                            alt="Gogoro Electric Motorcycle Power Cable Structure" class="img-small" />
+                        <img src="/images/application/products/motor-power-cable/impression/motor-power-cable-3-<%=RouteData.Values["language"].ToString() %>.svg"
+                            alt="電動馬達動力線 Electric Motorcycle Power Cable Structure" class="img-small" />
                     </picture>
                 </div>
             </div>

@@ -66,6 +66,11 @@
                     -webkit-transform-origin-x: 0;
                 }
 
+
+        .content .card-body.text-shadow {
+            text-shadow: 3px 3px 10px #000000;
+        }
+
         @media all and (max-width:1399px) {
             .banner .banner-text {
                 color: white;
@@ -420,7 +425,7 @@
                                         <%if (RouteData.Values["language"].ToString() == "zh") {%>
                                                 醫療用呼吸加熱管
                                                 <%}
-                                            else {%>
+                                                    else {%>
                                                 Medical Respiration Pipe Heating Wire
                                             <%}%>
                                     </div>
@@ -428,7 +433,7 @@
                                         <%if (RouteData.Values["language"].ToString() == "zh") {%>
                                                 HFNC高含氧人工呼吸器耗材
                                                 <%}
-                                            else {%>
+                                                    else {%>
                                                 HFNC High Flow Nasal Cannula Consumables
                                             <%}%>
                                     </div>
@@ -451,7 +456,7 @@
                                         <%if (RouteData.Values["language"].ToString() == "zh") {%>
                                                 防火耐燃訊號線
                                                 <%}
-                                            else {%>
+                                                    else {%>
                                                 Inflammable Signal Cable
                                             <%}%>
                                     </div>
@@ -459,7 +464,7 @@
                                         <%if (RouteData.Values["language"].ToString() == "zh") {%>
                                                 iPhone-Type C 快速充電線
                                                 <%}
-                                            else {%>
+                                                    else {%>
                                                 iPhone-Type C Fast Charge Cable
                                             <%}%>
                                     </div>
@@ -520,18 +525,22 @@
                                 </a>
                                 <div class="text-section">
                                     <div class="title text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 戰鬥機溫控電纜
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 Fighter Jet Temperature Control Cable
                                             <%}%>
                                     </div>
                                     <div class="subtitle text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 日本軍規配線
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 Japan MIL Cable
                                             <%}%>
                                     </div>
@@ -550,19 +559,23 @@
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <div class="title text-left">                                        
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                    <div class="title text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 車用-高頻無線通訊電纜
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 High Frequncy Communication Cable
                                             <%}%>
                                     </div>
-                                    <div class="subtitle text-left">                                        
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                    <div class="subtitle text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 Apple Car Play, WiFi, 衛星導航,無人自動駕駛系統
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 Apple Car Play, WiFi, Satellite Navigation, Autopilot System
                                             <%}%>
                                     </div>
@@ -581,19 +594,23 @@
                                     </div>
                                 </a>
                                 <div class="text-section">
-                                    <div class="title text-left">                                       
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                    <div class="title text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 手術用電燒刀
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 Electrosurgical Unit Cable
                                             <%}%>
                                     </div>
                                     <div class="subtitle text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 醫療級止血線
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 Medical Cable
                                             <%}%>
                                     </div>
@@ -613,18 +630,22 @@
                                 </a>
                                 <div class="text-section">
                                     <div class="title text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 潛艦國造-CR認證
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 Submarine Cable-CR Certified
                                             <%}%>
                                     </div>
                                     <div class="subtitle text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 軍規船舶複合電纜
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 MIL Spec Shipboard Composite Cable
                                             <%}%>
                                     </div>
@@ -644,18 +665,22 @@
                                 </a>
                                 <div class="text-section">
                                     <div class="title text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 MIL 飛彈發射器
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 MIL Missile Launcher Cable
                                             <%}%>
                                     </div>
                                     <div class="subtitle text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 軍規高頻傳輸控制複合電纜
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 MIL Spec High Frequency Communications Control Cable
                                             <%}%>
                                     </div>
@@ -675,18 +700,22 @@
                                 </a>
                                 <div class="text-section">
                                     <div class="title text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 電動車用-Tesla/Porsche Taycan
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 Electric Cars-Tesla/Porsche Taycan
                                             <%}%>
                                     </div>
                                     <div class="subtitle text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 IATF-16949 馬達溫度感知線
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 IATF-16949 Motor Temperature Sensor Cable
                                             <%}%>
                                     </div>
@@ -706,18 +735,22 @@
                                 </a>
                                 <div class="text-section">
                                     <div class="title text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 電動機車-GOGORO
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 Electric Motorcycle-GOGORO
                                             <%}%>
                                     </div>
                                     <div class="subtitle text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 電源供應器 & 電動馬達動力線
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 Motor Power Cable
                                             <%}%>
                                     </div>
@@ -737,18 +770,22 @@
                                 </a>
                                 <div class="text-section">
                                     <div class="title text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 大型高溫爐
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 Industrial Furnaces
                                             <%}%>
                                     </div>
                                     <div class="subtitle text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 多爐溫控系統雙層屏蔽線
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 Temperature Control Signal Shielding Cable
                                             <%}%>
                                     </div>
@@ -768,18 +805,22 @@
                                 </a>
                                 <div class="text-section">
                                     <div class="title text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 飛彈控制軍規線
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 Missile Control Cable
                                             <%}%>
                                     </div>
                                     <div class="subtitle text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 軍規船用電纜
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 MIL Spec Shipboard Cable
                                             <%}%>
                                     </div>
@@ -799,13 +840,15 @@
                                 </a>
                                 <div class="text-section">
                                     <div class="title text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 汽車用 高壓點火線
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 Ignition Cable
                                             <%}%>
-                                        </div>
+                                    </div>
                                     <div class="subtitle text-left"></div>
                                 </div>
                             </div>
@@ -823,18 +866,22 @@
                                 </a>
                                 <div class="text-section">
                                     <div class="title text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 高鐵/捷運光纖電纜
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 High Speed Rail Optic Fiber Cable
                                             <%}%>
                                     </div>
                                     <div class="subtitle text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 通訊配線
                                                 <%}
-                                            else {%>
+                                        else
+                                        {%>
                                                 Communications Cable
                                             <%}%>
                                     </div>
@@ -854,18 +901,22 @@
                                 </a>
                                 <div class="text-section">
                                     <div class="title text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 無人機/無人載具訊號控制線
                                                 <%}
-                                            else {%>
+                    else
+                    {%>
                                                 Drone Signal Communication Cable
                                             <%}%>
                                     </div>
                                     <div class="subtitle text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh") {%>
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
                                                 MIL認證軍規線
                                                 <%}
-                                            else {%>
+                     else
+                     {%>
                                                 MIL Spec Cable
                                             <%}%>
                                     </div>
@@ -896,8 +947,7 @@
                                 <div class="text-section">
                                     <figcaption class="title my-auto">防火耐燃電線系列
                                     </figcaption>
-                                    <figcaption class="subtitle">
-                                        Inflammable Cable
+                                    <figcaption class="subtitle">Inflammable Cable
                                     </figcaption>
                                 </div>
                             </figure>

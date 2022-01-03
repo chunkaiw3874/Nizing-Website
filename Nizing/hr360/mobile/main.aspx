@@ -96,16 +96,18 @@
             <div id="dayoff_remain">
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-sm-3">特休</div>
-<%--                        <div class="col-sm-3">
+                        <div class="col-sm-3">特休</div>                        
+                        <%--分上下年度--%>
+                        <div class="col-sm-3">
                             <asp:Label ID="lblFirstPartDayOff" runat="server" Text=""></asp:Label>
                         </div>
                         <div class="col-sm-3">
                             <asp:Label ID="lblSecondPartDayOff" runat="server" Text=""></asp:Label>
-                        </div>--%>
-                        <div class="col-sm-6">
-                            <asp:Label ID="lblTotalDayOff" runat="server" Text=""></asp:Label>
                         </div>
+                        <%--不分上下年度--%>
+<%--                        <div class="col-sm-6">
+                            <asp:Label ID="lblTotalDayOff" runat="server" Text=""></asp:Label>
+                        </div>--%>
                         <div class="col-sm-3">
                             <asp:Label ID="lblDayOffMemo" runat="server" Text="" ForeColor="Red" Font-Size="Smaller"></asp:Label>
                         </div>

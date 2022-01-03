@@ -188,27 +188,30 @@ public partial class _default : System.Web.UI.Page
             div2.Controls.Add(div3);
 
             HtmlGenericControl div4 = new HtmlGenericControl("div");
-            div4.Attributes["class"] = "card-body py-2";
+            div4.Attributes["class"] = "card-body pt-2 pb-0 h-100 d-flex flex-column justify-content-between text-shadow";
             div3.Controls.Add(div4);
 
             HtmlGenericControl div5 = new HtmlGenericControl("div");
-            div5.ID = a.ID + "_NewsTitle";
-            div5.Attributes["class"] = "card-title text-md-left text-center h5";
-            div5.InnerText = row["newsTitle"].ToString();
             div4.Controls.Add(div5);
 
-            div5 = new HtmlGenericControl("div");
-            div5.ID = a.ID + "_NewsContent";
-            div5.Attributes["class"] = "card-text";
-            div5.InnerText = row["newsContent"].ToString();
-            div4.Controls.Add(div5);
+            HtmlGenericControl div6 = new HtmlGenericControl("div");
+            div6.ID = a.ID + "_NewsTitle";
+            div6.Attributes["class"] = "card-title text-md-left text-center h5";
+            div6.InnerText = row["newsTitle"].ToString();
+            div5.Controls.Add(div6);
 
-            div5 = new HtmlGenericControl("time");
-            div5.ID = a.ID + "_NewsDate";
-            div5.Attributes["class"] = "news-date";
-            div5.Attributes["datetime"] = row["newsDate"].ToString();
-            div5.InnerText = Convert.ToDateTime(row["newsDate"]).ToString("yyyy/MM/dd");
-            div4.Controls.Add(div5);
+            div6 = new HtmlGenericControl("div");
+            div6.ID = a.ID + "_NewsContent";
+            div6.Attributes["class"] = "card-text";
+            div6.InnerText = row["newsContent"].ToString();
+            div5.Controls.Add(div6);
+
+            HtmlGenericControl time = new HtmlGenericControl("time");
+            time.ID = a.ID + "_NewsDate";
+            time.Attributes["class"] = "news-date";
+            time.Attributes["datetime"] = row["newsDate"].ToString();
+            time.InnerText = Convert.ToDateTime(row["newsDate"]).ToString("yyyy/MM/dd");
+            div4.Controls.Add(time);
 
         }
     }
