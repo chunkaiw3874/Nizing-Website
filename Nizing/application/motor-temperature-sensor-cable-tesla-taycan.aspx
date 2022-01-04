@@ -12,20 +12,20 @@
     <meta name="description" content="電動車內部馬達溫度感知線，為行車安全不可或缺的元件" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content=<%if (RouteData.Values["language"].ToString() == "zh")
-               {%>
+        {%>
                                                 "IATF-16949 馬達溫度感知線-日進電線 2021"
                                                 <%}
-                                                    else
-                                                    {%>
+        else
+        {%>
                                                  "IATF-16949 Motor Temperature Sensor Cable - Nizing Electric Wire & Cable"
                                             <%}%> />
     <meta property="og:description" content=<%if (RouteData.Values["language"].ToString() == "zh")
-               {%>
+        {%>
                                                 "汽車馬達內感溫線須具備卓越耐腐蝕性及極強的耐絕緣性，此款產品使用可耐高低溫性的PFA鐵氟龍材質，具備其耐腐蝕及耐絕緣性二項特色外，並搭配多重防雜訊隔離使其數值回饋更加精準，優秀的品質是多家知名車廠指定使用之線材。"
                                                 <%}
-                                                    else
-                                                    {%>
-                                                 ""
+        else
+        {%>
+                                                 "The temperature sensor cable inside an automobile motor must have excellent corrosion and electric resistance. This cable uses PFA Teflon insulation, which is known for its wide temperature range, extreme chemical resistance, and high voltage protection, in combination with noise insulation, making the feedbacks much more accurate."
                                             <%}%> />
     <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-02.jpg" />
     <meta property="og:url" content="https://www.nizing.com.tw/<%=RouteData.Values["language"].ToString() %>/application/automobile/motor-temperature-sensor-cable" />
@@ -54,7 +54,14 @@
         .text-section .top {
             padding-top: 1.5rem;
             padding-bottom: 1rem;
+        }
+
+        .zh .text-section .top {
             font-size: 24px;
+        }
+
+        .en .text-section .top {
+            font-size: 20px;
         }
 
         .text-section {
@@ -63,48 +70,86 @@
         }
 
             .text-section .middle {
-                font-size: 32px;
                 padding-bottom: 1rem;
             }
 
-                .text-section .middle p {
-                    margin: 0;
-                }
+        .zh .text-section .middle {
+            font-size: 32px;
+        }
 
-            .text-section .bottom {
-                padding-bottom: 1rem;
-                font-size: 18px;
-            }
+        .en .text-section .middle {
+            font-size: 28px;
+        }
+
+        .text-section .middle p {
+            margin: 0;
+        }
+
+        .text-section .bottom {
+            padding-bottom: 1rem;
+        }
+
+        .zh .text-section .bottom {
+            font-size: 18px;
+        }
+
+        .en .text-section .bottom {
+            font-size: 18px;
+        }
 
         .img-small {
             width: 70%;
         }
 
         @media all and (max-width:1199px) {
-            .text-section .top {
+            .zh .text-section .top {
                 font-size: 20px;
             }
 
-            .text-section .middle {
+            .en .text-section .top {
+                font-size: 16px;
+            }
+
+            .zh .text-section .middle {
                 font-size: 28px;
             }
 
-            .text-section .bottom {
+            .en .text-section .middle {
+                font-size: 22px;
+            }
+
+            .zh .text-section .bottom {
+                font-size: 16px;
+            }
+
+            .en .text-section .bottom {
                 font-size: 16px;
             }
         }
 
         @media all and (max-width:991px) {
-            .text-section .top {
+            .zh .text-section .top {
                 font-size: 18px;
             }
 
-            .text-section .middle {
+            .en .text-section .top {
+                font-size: 14px;
+            }
+
+            .zh .text-section .middle {
                 font-size: 20px;
             }
 
-            .text-section .bottom {
+            .en .text-section .middle {
                 font-size: 16px;
+            }
+
+            .zh .text-section .bottom {
+                font-size: 16px;
+            }
+
+            .en .text-section .bottom {
+                font-size: 14px;
             }
         }
 
@@ -113,16 +158,32 @@
                 padding-right: 15px;
             }
 
-            .text-section .top {
+            .zh .text-section .top {
                 font-size: 18px;
             }
 
-            .text-section .middle {
+            .en .text-section .top {
+                font-size: 14px;
+            }
+
+            .zh .text-section .middle {
                 font-size: 22px;
             }
 
-            .text-section .bottom {
+            .en .text-section .middle {
+                font-size: 18px;
+            }
+
+            .zh .text-section .bottom {
                 font-size: 16px;
+            }
+
+            .en .text-section .bottom {
+                font-size: 14px;
+            }
+
+            .img-small {
+                width: 100%;
             }
         }
     </style>
@@ -143,18 +204,47 @@
             <div class="col-md-6">
                 <div class="container text-section">
                     <div class="top text-blue">
-                        IATF-16949 馬達溫度感知線
+                        <%if (RouteData.Values["language"].ToString() == "zh")
+                            {%>
+                                                IATF-16949 馬達溫度感知線
+                                                <%}
+                                                    else
+                                                    {%>
+                                                 IATF-16949 Motor Temperature Sensor Cable
+                                            <%}%>
                     </div>
                     <div class="middle text-white">
-                        <p>
-                            ”卓越耐腐蝕性、極強的耐絕緣性
+                        <p>                            
+                        <%if (RouteData.Values["language"].ToString() == "zh")
+                            {%>
+                                                ”卓越耐腐蝕性、極強的耐絕緣性
+                                                <%}
+                                                    else
+                                                    {%>
+                                                 "Anti-Corrosion, Voltage Resistant
+                                            <%}%>
                         </p>
                         <p>
-                            多重防雜訊隔離，數據更加精準 ”
+                        <%if (RouteData.Values["language"].ToString() == "zh")
+                            {%>
+                                                多重防雜訊隔離，數據更加精準 ”
+                                                <%}
+                                                    else
+                                                    {%>
+                                                 Noise Insulation, Accurate Feedback"
+                                            <%}%>
+                            
                         </p>
                     </div>
                     <div class="bottom text-white">
-                        汽車馬達內感溫線須具備卓越耐腐蝕性及極強的耐絕緣性，此款產品使用可耐高低溫性的PFA鐵氟龍材質，具備其耐腐蝕及耐絕緣性二項特色外，並搭配多重防雜訊隔離使其數值回饋更加精準，優秀的品質是多家知名車廠指定使用之線材。
+                        <%if (RouteData.Values["language"].ToString() == "zh")
+                            {%>
+                                                汽車馬達內感溫線須具備卓越耐腐蝕性及極強的耐絕緣性，此款產品使用可耐高低溫性的PFA鐵氟龍材質，具備其耐腐蝕及耐絕緣性二項特色外，並搭配多重防雜訊隔離使其數值回饋更加精準，優秀的品質是多家知名車廠指定使用之線材。
+                                                <%}
+                                                    else
+                                                    {%>
+                                                 The temperature sensor cable inside an automobile motor must have excellent corrosion and electric resistance. This cable uses PFA Teflon insulation, which is known for its wide temperature range, extreme chemical resistance, and high voltage protection, in combination with noise insulation, making the feedbacks much more accurate.
+                                            <%}%>
                     </div>
 
                 </div>
@@ -168,9 +258,7 @@
                 </div>
                 <div class="d-flex justify-content-center">
                     <picture>
-                        <source srcset="/images/application/products/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-03.webp"
-                            type="image/webp" />
-                        <img src="/images/application/products/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-03.jpg"
+                        <img src="/images/application/products/motor-temperature-sensor-cable-tesla-taycan/impression/motor-temperature-sensor-cable-tesla-taycan-03-<%=RouteData.Values["language"].ToString() %>.svg"
                             alt="Tesla and Taycan  Motor Temperature Sensor Wire Structure" class="img-small" />
                     </picture>
                 </div>
