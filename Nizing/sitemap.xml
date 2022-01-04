@@ -918,6 +918,11 @@
 		<priority>0.70</priority>
 	</url>
 	<url>
+		<loc>https://www.nizing.com.tw/zh/product/composite-cable/high-speed-liquid-sensor-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
 		<loc>https://www.nizing.com.tw/zh/product/anti-refrigerant-wire</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
@@ -2065,6 +2070,11 @@
 	</url>
 	<url>
 		<loc>https://www.nizing.com.tw/en/product/composite-cable/ul3270</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/en/product/composite-cable/high-speed-liquid-sensor-cable</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>
