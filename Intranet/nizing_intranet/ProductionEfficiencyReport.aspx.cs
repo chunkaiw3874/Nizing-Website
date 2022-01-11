@@ -29,8 +29,70 @@ public partial class ProductionEfficiencyReport : System.Web.UI.Page
             }
             ddlStartYear.SelectedValue = DateTime.Today.Year.ToString();
             ddlEndYear.SelectedValue = DateTime.Today.Year.ToString();
+
+            DataTable dt = new DataTable();
+            dt = GetDept();
+            foreach (DataRow dr in dt.Rows)
+            {
+                ddlDept.Items.Add(new ListItem(dr["name"].ToString().Trim(), dr["id"].ToString().Trim()));
+            }
+            ddlDept.SelectedValue = "all";
+
+            dt = GetEmployees();
+            foreach (DataRow dr in dt.Rows)
+            {
+                ddlEmployee.Items.Add(new ListItem(dr["name"].ToString().Trim(), dr["id"].ToString().Trim()));
+            }
+            ddlEmployee.SelectedValue = "all";
         }
     }
+
+    protected DataTable GetDept()
+    {
+        DataTable dt = new DataTable();
+        using (SqlConnection conn = new SqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = "select MD001 'id'" +
+                " ,MD002 'name'" +
+                " from CMSMD" +
+                " where MD001='C'" +
+                " or MD001='D'" +
+                " or MD001='E'" +
+                " or MD001='G'" +
+                " or MD001='K'" +
+                " or MD001='P'" +
+                " or MD001='S'" +
+                " or MD001='SM'" +
+                " or MD001='T'";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+        }
+        return dt;
+    }
+
+    protected DataTable GetEmployees()
+    {
+        DataTable dt = new DataTable();
+        using (SqlConnection conn = new SqlConnection(connectionString))
+        {
+            conn.Open();
+            string query = "select MV.MV001 'id'" +
+                " ,ltrim(rtrim(MV.MV001))+' ' + ltrim(rtrim(MV.MV002)) 'name'" +
+                " from CMSMV MV" +
+                " where MV.MV004 like 'B-%'" +
+                " and MV.MV004 <> 'B-IC'" +
+                " and MV.MV004 <> 'B-PC'" +
+                " and MV.MV004 <> 'B-QC'" +
+                " and MV.MV004 <> 'B-STR'";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+        }
+        return dt;
+    }
+
     protected void R1_CheckedChanged(object sender, EventArgs e)
     {
         if (rdoYear.Checked == true)
@@ -51,7 +113,7 @@ public partial class ProductionEfficiencyReport : System.Web.UI.Page
     protected void btnReport_Click(object sender, EventArgs e)
     {
         try
-        {            
+        {
             SqlSearch(GetQuery());
         }
         catch (Exception ex)
@@ -61,168 +123,484 @@ public partial class ProductionEfficiencyReport : System.Web.UI.Page
     }
     private string GetQuery()
     {
-        string query = "";        
+        string query = "";
         if (rdoMonth.Checked == true) //月報表
         {
-            if (ddlDept.SelectedValue.ToString() == "all") //全部部門月報表
+            if (rdoSearchByDept.Checked)    //部門月報表
             {
-                query = "WITH PROD"
-                            + " AS"
-                            + " ("
-                            + " SELECT SUBSTRING(TF.TF003, 1, 4) YR, SUBSTRING(TF.TF003, 5, 2) MN, TA.TA021 PROD_LINE, SUM(TG.TG011) TOTAL, CASE TA.TA021"
-                            + " WHEN N'C' THEN N'B-C'"
-                            + " WHEN N'D' THEN N'B-G'"
-                            + " WHEN N'G' THEN N'B-G'"
-                            + " WHEN N'GM' THEN N'B-G'"
-                            + " WHEN N'E' THEN N'B-E'"
-                            + " WHEN N'K' THEN N'B-K'"
-                            + " WHEN N'P' THEN N'B-P'"
-                            + " WHEN N'PK' THEN N'B-P'"
-                            + " WHEN N'RD' THEN N'A-RD'"
-                            + " WHEN N'S' THEN N'B-S'"
-                            + " WHEN N'SM' THEN N'B-S'"
-                            + " WHEN N'T' THEN N'B-T'"
-                            + " WHEN N'TK' THEN N'B-T'"
-                            + " END AS DEPT"
-                            + " FROM MOCTG TG"
-                            + " LEFT JOIN MOCTF TF ON TG.TG002 = TF.TF002"
-                            + " LEFT JOIN MOCTA TA ON TG.TG015 = TA.TA002 AND TG.TG014 = TA.TA001"
-                            + " WHERE TF.TF003 BETWEEN N'" + ddlStartYear.SelectedValue + ddlStartMonth.SelectedValue + "01' AND N'" + ddlEndYear.SelectedValue + ddlEndMonth.SelectedValue + "31'"
-                            + " GROUP BY SUBSTRING(TF.TF003, 1, 4), SUBSTRING(TF.TF003,5,2), TA.TA021"
-                            + " )"
-                            + " SELECT PROD.YR 年, PROD.MN 月, PROD.PROD_LINE 生產線別, CONVERT(DECIMAL(10,2),PROD.TOTAL) 產能"
-                            + " , COALESCE(NULLIF(CONVERT(NVARCHAR(20),CONVERT(DECIMAL(10,2),SUM(TB.TB005)*8) + CONVERT(DECIMAL(10,2),SUM(TB.TB027))),'0.00'), N'-') 正常時數"
-                            + " , COALESCE(NULLIF(CONVERT(NVARCHAR(20),CONVERT(DECIMAL(10,2),SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039))),'0.00'), N'-') 加班時數"
-                            + " , COALESCE(NULLIF(CONVERT(NVARCHAR(20),CONVERT(DECIMAL(10,2),(SUM(TB.TB005)*8)+SUM(TB.TB027)+SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039))),'0.00'), N'-') 總工作時數"
-                            + " , COALESCE(CONVERT(NVARCHAR(20),CONVERT(DECIMAL(10,2), PROD.TOTAL/NULLIF(((SUM(TB.TB005)*8)+SUM(TB.TB027)+SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039)),0))), N'未到當月底無法計算') 當月效率"
-                            + " FROM PALTB TB"
-                            + " LEFT JOIN PROD ON TB.TB003 = PROD.DEPT"
-                            + " WHERE TB.TB002 BETWEEN N'" + ddlStartYear.SelectedValue + ddlStartMonth.SelectedValue + "01' AND N'" + ddlEndYear.SelectedValue + ddlEndMonth.SelectedValue + "31' AND SUBSTRING(TB.TB002, 1, 4) = PROD.YR AND SUBSTRING(TB.TB002,5,2) = PROD.MN"
-                            + " GROUP BY PROD.YR, PROD.MN, PROD.PROD_LINE, PROD.TOTAL"
-                            + " ORDER BY PROD.PROD_LINE";
+                if (ddlDept.SelectedValue.ToString() == "all") //全部部門月報表
+                {
+                    query = "WITH PROD"
+                                + " AS"
+                                + " ("
+                                + " SELECT SUBSTRING(TF.TF003, 1, 4) YR" +
+                                " , SUBSTRING(TF.TF003, 5, 2) MN" +
+                                " , TF.TF011 PROD_LINE" +
+                                " , SUM(TG.TG011) TOTAL" +
+                                " , CASE TF.TF011"
+                                + " WHEN N'C' THEN N'B-C'"
+                                + " WHEN N'D' THEN N'B-G'"
+                                + " WHEN N'G' THEN N'B-G'"
+                                + " WHEN N'E' THEN N'B-E'"
+                                + " WHEN N'K' THEN N'B-K'"
+                                + " WHEN N'P' THEN N'B-P'"
+                                + " WHEN N'RD' THEN N'A-RD'"
+                                + " WHEN N'S' THEN N'B-S'"
+                                + " WHEN N'SM' THEN N'B-S'"
+                                + " WHEN N'T' THEN N'B-T'"
+                                + " END AS DEPT"
+                                + " FROM MOCTG TG"
+                                + " LEFT JOIN MOCTF TF ON TG.TG002 = TF.TF002"
+                                + " WHERE TF.TF003 BETWEEN @startDate AND @endDate"
+                                + " GROUP BY SUBSTRING(TF.TF003, 1, 4)" +
+                                " , SUBSTRING(TF.TF003,5,2)" +
+                                " , TF.TF011"
+                                + " )"
+                                + " SELECT PROD.YR 年, PROD.MN 月, PROD.PROD_LINE 生產線別, CONVERT(DECIMAL(10,2),PROD.TOTAL) 產能"
+                                + " , COALESCE(NULLIF(CONVERT(NVARCHAR(20),CONVERT(DECIMAL(10,2),SUM(TB.TB005)*8) + CONVERT(DECIMAL(10,2),SUM(TB.TB027))),'0.00'), N'-') 正常時數"
+                                + " , COALESCE(NULLIF(CONVERT(NVARCHAR(20),CONVERT(DECIMAL(10,2),SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039))),'0.00'), N'-') 加班時數"
+                                + " , COALESCE(NULLIF(CONVERT(NVARCHAR(20),CONVERT(DECIMAL(10,2),(SUM(TB.TB005)*8)+SUM(TB.TB027)+SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039))),'0.00'), N'-') 總工作時數"
+                                + " , COALESCE(CONVERT(NVARCHAR(20),CONVERT(DECIMAL(10,2), PROD.TOTAL/NULLIF(((SUM(TB.TB005)*8)+SUM(TB.TB027)+SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039)),0))), N'未到當月底無法計算') 當月效率"
+                                + " FROM PALTB TB"
+                                + " LEFT JOIN PROD ON TB.TB003 = PROD.DEPT"
+                                + " WHERE TB.TB002 BETWEEN @startDate AND @endDate" +
+                                " AND SUBSTRING(TB.TB002, 1, 4) = PROD.YR AND SUBSTRING(TB.TB002,5,2) = PROD.MN"
+                                + " GROUP BY PROD.YR, PROD.MN, PROD.PROD_LINE, PROD.TOTAL"
+                                + " ORDER BY PROD.PROD_LINE" +
+                                ", PROD.YR" +
+                                ", PROD.MN";
 
+                }
+                else //指定部門月報表
+                {
+                    query = "WITH PROD"
+                                + " AS"
+                                + " ("
+                                + " SELECT SUBSTRING(TF.TF003, 1, 4) YR" +
+                                " , SUBSTRING(TF.TF003, 5, 2) MN" +
+                                " , TF.TF011 PROD_LINE" +
+                                " , SUM(TG.TG011) TOTAL" +
+                                " , CASE TF.TF011"
+                                + " WHEN N'C' THEN N'B-C'"
+                                + " WHEN N'D' THEN N'B-G'"
+                                + " WHEN N'E' THEN N'B-E'"
+                                + " WHEN N'G' THEN N'B-G'"
+                                + " WHEN N'K' THEN N'B-K'"
+                                + " WHEN N'P' THEN N'B-P'"
+                                + " WHEN N'RD' THEN N'A-RD'"
+                                + " WHEN N'S' THEN N'B-S'"
+                                + " WHEN N'SM' THEN N'B-S'"
+                                + " WHEN N'T' THEN N'B-T'"
+                                + " END AS DEPT"
+                                + " FROM MOCTG TG"
+                                + " LEFT JOIN MOCTF TF ON TG.TG002 = TF.TF002"
+                                + " WHERE TF.TF011= @dept" +
+                                " AND TF.TF003 BETWEEN @startDate AND @endDate"
+                                + " GROUP BY SUBSTRING(TF.TF003, 1, 4)" +
+                                " , SUBSTRING(TF.TF003,5,2)" +
+                                " , TF.TF011"
+                                + " )"
+                                + " SELECT PROD.YR 年, PROD.MN 月, PROD.PROD_LINE 生產線別, CONVERT(DECIMAL(10,2),PROD.TOTAL) 產能"
+                                + " , COALESCE(NULLIF(CONVERT(NVARCHAR(20),CONVERT(DECIMAL(10,2),SUM(TB.TB005)*8) + CONVERT(DECIMAL(10,2),SUM(TB.TB027))),'0.00'), N'-') 正常時數"
+                                + " , COALESCE(NULLIF(CONVERT(NVARCHAR(20),CONVERT(DECIMAL(10,2),SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039))),'0.00'), N'-') 加班時數"
+                                + " , COALESCE(NULLIF(CONVERT(NVARCHAR(20),CONVERT(DECIMAL(10,2),(SUM(TB.TB005)*8)+SUM(TB.TB027)+SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039))),'0.00'), N'-') 總工作時數"
+                                + " , COALESCE(CONVERT(NVARCHAR(20),CONVERT(DECIMAL(10,2), PROD.TOTAL/NULLIF(((SUM(TB.TB005)*8)+SUM(TB.TB027)+SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039)),0))), N'未到當月底無法計算') 當月效率"
+                                + " FROM PALTB TB"
+                                + " LEFT JOIN PROD ON TB.TB003 = PROD.DEPT"
+                                + " WHERE TB.TB003 = PROD.DEPT" +
+                                " AND TB.TB002 BETWEEN @startDate AND @endDate" +
+                                " AND SUBSTRING(TB.TB002, 1, 4) = PROD.YR" +
+                                " AND SUBSTRING(TB.TB002,5,2) = PROD.MN"
+                                + " GROUP BY PROD.YR, PROD.MN, PROD.PROD_LINE, PROD.TOTAL"
+                                + " ORDER BY PROD.PROD_LINE" +
+                                ", PROD.YR" +
+                                ", PROD.MN";
+                }
             }
-            else //指定部門月報表
+            else  //人員月報表
             {
-                query = "WITH PROD"
-                            + " AS"
-                            + " ("
-                            + " SELECT SUBSTRING(TF.TF003, 1, 4) YR, SUBSTRING(TF.TF003, 5, 2) MN, TA.TA021 PROD_LINE, SUM(TG.TG011) TOTAL, CASE TA.TA021"
-                            + " WHEN N'C' THEN N'B-C'"
-                            + " WHEN N'D' THEN N'B-G'"
-                            + " WHEN N'G' THEN N'B-G'"
-                            + " WHEN N'GM' THEN N'B-G'"
-                            + " WHEN N'E' THEN N'B-E'"
-                            + " WHEN N'K' THEN N'B-K'"
-                            + " WHEN N'P' THEN N'B-P'"
-                            + " WHEN N'PK' THEN N'B-P'"
-                            + " WHEN N'RD' THEN N'A-RD'"
-                            + " WHEN N'S' THEN N'B-S'"
-                            + " WHEN N'SM' THEN N'B-S'"
-                            + " WHEN N'T' THEN N'B-T'"
-                            + " WHEN N'TK' THEN N'B-T'"
-                            + " END AS DEPT"
-                            + " FROM MOCTG TG"
-                            + " LEFT JOIN MOCTF TF ON TG.TG002 = TF.TF002"
-                            + " LEFT JOIN MOCTA TA ON TG.TG015 = TA.TA002 AND TG.TG014 = TA.TA001"
-                            + " WHERE TA.TA021 = N'" + ddlDept.SelectedValue.ToString() + "' AND TF.TF003 BETWEEN N'" + ddlStartYear.SelectedValue + ddlStartMonth.SelectedValue + "01' AND N'" + ddlEndYear.SelectedValue + ddlEndMonth.SelectedValue + "31'"
-                            + " GROUP BY SUBSTRING(TF.TF003, 1, 4), SUBSTRING(TF.TF003,5,2), TA.TA021"
-                            + " )"
-                            + " SELECT PROD.YR 年, PROD.MN 月, PROD.PROD_LINE 生產線別, CONVERT(DECIMAL(10,2),PROD.TOTAL) 產能"
-                            + " , COALESCE(NULLIF(CONVERT(NVARCHAR(20),CONVERT(DECIMAL(10,2),SUM(TB.TB005)*8) + CONVERT(DECIMAL(10,2),SUM(TB.TB027))),'0.00'), N'-') 正常時數"
-                            + " , COALESCE(NULLIF(CONVERT(NVARCHAR(20),CONVERT(DECIMAL(10,2),SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039))),'0.00'), N'-') 加班時數"
-                            + " , COALESCE(NULLIF(CONVERT(NVARCHAR(20),CONVERT(DECIMAL(10,2),(SUM(TB.TB005)*8)+SUM(TB.TB027)+SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039))),'0.00'), N'-') 總工作時數"
-                            + " , COALESCE(CONVERT(NVARCHAR(20),CONVERT(DECIMAL(10,2), PROD.TOTAL/NULLIF(((SUM(TB.TB005)*8)+SUM(TB.TB027)+SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039)),0))), N'未到當月底無法計算') 當月效率"
-                            + " FROM PALTB TB"
-                            + " LEFT JOIN PROD ON TB.TB003 = PROD.DEPT"
-                            + " WHERE TB.TB003 = PROD.DEPT AND TB.TB002 BETWEEN N'" + ddlStartYear.SelectedValue + ddlStartMonth.SelectedValue + "01' AND N'" + ddlEndYear.SelectedValue + ddlEndMonth.SelectedValue + "31' AND SUBSTRING(TB.TB002, 1, 4) = PROD.YR AND SUBSTRING(TB.TB002,5,2) = PROD.MN"
-                            + " GROUP BY PROD.YR, PROD.MN, PROD.PROD_LINE, PROD.TOTAL"
-                            + " ORDER BY PROD.PROD_LINE";                
+                if (ddlEmployee.SelectedValue.ToString() == "all")    //全部人員月報表
+                {
+                    query = "WITH productionData" +
+                        " AS" +
+                        " (" +
+                        " SELECT SUBSTRING(TF.TF003, 1, 4)[year]" +
+                        " , SUBSTRING(TF.TF003, 5, 2)[month]" +
+                        " , TF.TF200 employeeId" +
+                        " , TF.TF011 productionLine" +
+                        " , CONVERT(DECIMAL(10, 2), SUM(COALESCE(TG.TG011, 0))) totalProduction" +
+                        " , CASE TF.TF011" +
+                        " WHEN N'C' THEN N'B-C'" +
+                        " WHEN N'D' THEN N'B-G'" +
+                        " WHEN N'E' THEN N'B-E'" +
+                        " WHEN N'G' THEN N'B-G'" +
+                        " WHEN N'K' THEN N'B-K'" +
+                        " WHEN N'P' THEN N'B-P'" +
+                        " WHEN N'RD' THEN N'A-RD'" +
+                        " WHEN N'S' THEN N'B-S'" +
+                        " WHEN N'SM' THEN N'B-S'" +
+                        " WHEN N'T' THEN N'B-T'" +
+                        " END AS productionDepartment" +
+                        " FROM MOCTF TF" +
+                        " LEFT JOIN MOCTG TG ON TF.TF001 = TG.TG001 and TF.TF002 = TG.TG002" +
+                        " WHERE TF.TF003 BETWEEN @startDate AND @endDate" +
+                        " GROUP BY SUBSTRING(TF.TF003, 1, 4)" +
+                        " , SUBSTRING(TF.TF003, 5, 2)" +
+                        " , TF.TF011" +
+                        " , TF.TF200" +
+                        " ), employeeWorkHour" +
+                        " AS" +
+                        " (" +
+                        " SELECT SUBSTRING(TB.TB002, 1, 4)[year]" +
+                        " , SUBSTRING(TB.TB002, 5, 2)[month]" +
+                        " , LTRIM(RTRIM(MV.MV001)) 'employeeId'" +
+                        " , TB.TB003 'employeeDept'" +
+                        " , CONVERT(DECIMAL(10, 2), SUM(TB.TB005) * 8 + CONVERT(DECIMAL(10, 2), SUM(TB.TB027))) 'normalWorkingHour'" +
+                        " , CONVERT(DECIMAL(10, 2), SUM(TB.TB010) + SUM(TB.TB011) + SUM(TB.TB012) + SUM(TB.TB013) + SUM(TB.TB018) + SUM(TB.TB019) + SUM(TB.TB020) + SUM(TB.TB029) + SUM(TB.TB030) + SUM(TB.TB031) + SUM(TB.TB032) + SUM(TB.TB033) + SUM(TB.TB034) + SUM(TB.TB035) + SUM(TB.TB036) + SUM(TB.TB037) + SUM(TB.TB038) + SUM(TB.TB039)) 'overtimeHour'" +
+                        " FROM PALTB TB" +
+                        " RIGHT JOIN CMSMV MV ON TB.TB001 = MV.MV001 AND TB.TB002 BETWEEN @startDate AND @endDate" +
+                        " WHERE MV.MV021 <= @startDate" +
+                        " AND(MV.MV022 >= @startDate" +
+                        " OR MV.MV022 = '')" +
+                        " AND(TB.TB003 = 'B-C'" +
+                        " OR TB.TB003 = 'B-E'" +
+                        " OR TB.TB003 = 'B-G'" +
+                        " OR TB.TB003 = 'B-K'" +
+                        " OR TB.TB003 = 'B-P'" +
+                        " OR TB.TB003 = 'B-S'" +
+                        " OR TB.TB003 = 'B-T')" +
+                        " GROUP BY SUBSTRING(TB.TB002, 1, 4)" +
+                        " , SUBSTRING(TB.TB002, 5, 2)" +
+                        " , MV.MV001" +
+                        " , TB.TB003" +
+                        " )" +
+                        " select ewh.[year] '年份'" +
+                        " ,ewh.[month] '月份'" +
+                        " ,ewh.employeeId '員工代號'" +
+                        " ,pd.productionLine '生產線別'" +
+                        " ,ewh.employeeDept '所屬部門'" +
+                        " ,pd.totalProduction '產能'" +
+                        " ,ewh.normalWorkingHour '正常時數'" +
+                        " ,ewh.overtimeHour '加班時數'" +
+                        " ,coalesce(ewh.normalWorkingHour, 0) + coalesce(ewh.overtimeHour, 0) '總時數'" +
+                        " ,convert(decimal(10, 2), coalesce(coalesce(pd.totalProduction, 0) / nullif((coalesce(ewh.normalWorkingHour, 0) + coalesce(ewh.overtimeHour, 0)), 0), 0)) '生產效能'" +
+                        " from employeeWorkHour ewh" +
+                        " left join productionData pd on ewh.employeeId = pd.employeeId and ewh.employeeDept = pd.productionDepartment and ewh.[year]=pd.[year] and ewh.[month]=pd.[month]" +
+                        " order by ewh.employeeId" +
+                        " ,ewh.[year]" +
+                        " ,ewh.[month]" +
+                        " ,ewh.employeeDept" +
+                        " ,pd.productionLine";
+                }
+                else  //指定人員月報表
+                {
+                    query = "WITH productionData" +
+                        " AS" +
+                        " (" +
+                        " SELECT SUBSTRING(TF.TF003, 1, 4)[year]" +
+                        " , SUBSTRING(TF.TF003, 5, 2)[month]" +
+                        " , TF.TF200 employeeId" +
+                        " , TF.TF011 productionLine" +
+                        " , CONVERT(DECIMAL(10, 2), SUM(COALESCE(TG.TG011, 0))) totalProduction" +
+                        " , CASE TF.TF011" +
+                        " WHEN N'C' THEN N'B-C'" +
+                        " WHEN N'D' THEN N'B-G'" +
+                        " WHEN N'E' THEN N'B-E'" +
+                        " WHEN N'G' THEN N'B-G'" +
+                        " WHEN N'K' THEN N'B-K'" +
+                        " WHEN N'P' THEN N'B-P'" +
+                        " WHEN N'RD' THEN N'A-RD'" +
+                        " WHEN N'S' THEN N'B-S'" +
+                        " WHEN N'SM' THEN N'B-S'" +
+                        " WHEN N'T' THEN N'B-T'" +
+                        " END AS productionDepartment" +
+                        " FROM MOCTF TF" +
+                        " LEFT JOIN MOCTG TG ON TF.TF001 = TG.TG001 and TF.TF002 = TG.TG002" +
+                        " WHERE TF.TF003 BETWEEN @startDate AND @endDate" +
+                        " GROUP BY SUBSTRING(TF.TF003, 1, 4)" +
+                        " , SUBSTRING(TF.TF003, 5, 2)" +
+                        " , TF.TF011" +
+                        " , TF.TF200" +
+                        " ), employeeWorkHour" +
+                        " AS" +
+                        " (" +
+                        " SELECT SUBSTRING(TB.TB002, 1, 4)[year]" +
+                        " , SUBSTRING(TB.TB002, 5, 2)[month]" +
+                        " , LTRIM(RTRIM(MV.MV001)) 'employeeId'" +
+                        " , TB.TB003 'employeeDept'" +
+                        " , CONVERT(DECIMAL(10, 2), SUM(TB.TB005) * 8 + CONVERT(DECIMAL(10, 2), SUM(TB.TB027))) 'normalWorkingHour'" +
+                        " , CONVERT(DECIMAL(10, 2), SUM(TB.TB010) + SUM(TB.TB011) + SUM(TB.TB012) + SUM(TB.TB013) + SUM(TB.TB018) + SUM(TB.TB019) + SUM(TB.TB020) + SUM(TB.TB029) + SUM(TB.TB030) + SUM(TB.TB031) + SUM(TB.TB032) + SUM(TB.TB033) + SUM(TB.TB034) + SUM(TB.TB035) + SUM(TB.TB036) + SUM(TB.TB037) + SUM(TB.TB038) + SUM(TB.TB039)) 'overtimeHour'" +
+                        " FROM PALTB TB" +
+                        " RIGHT JOIN CMSMV MV ON TB.TB001 = MV.MV001 AND TB.TB002 BETWEEN @startDate AND @endDate" +
+                        " WHERE MV.MV021 <= @startDate" +
+                        " AND(MV.MV022 >= @startDate" +
+                        " OR MV.MV022 = '')" +
+                        " AND(TB.TB003 = 'B-C'" +
+                        " OR TB.TB003 = 'B-E'" +
+                        " OR TB.TB003 = 'B-G'" +
+                        " OR TB.TB003 = 'B-K'" +
+                        " OR TB.TB003 = 'B-P'" +
+                        " OR TB.TB003 = 'B-S'" +
+                        " OR TB.TB003 = 'B-T')" +
+                        " GROUP BY SUBSTRING(TB.TB002, 1, 4)" +
+                        " , SUBSTRING(TB.TB002, 5, 2)" +
+                        " , MV.MV001" +
+                        " , TB.TB003" +
+                        " )" +
+                        " select ewh.[year] '年份'" +
+                        " ,ewh.[month] '月份'" +
+                        " ,ewh.employeeId '員工代號'" +
+                        " ,pd.productionLine '生產線別'" +
+                        " ,ewh.employeeDept '所屬部門'" +
+                        " ,pd.totalProduction '產能'" +
+                        " ,ewh.normalWorkingHour '正常時數'" +
+                        " ,ewh.overtimeHour '加班時數'" +
+                        " ,coalesce(ewh.normalWorkingHour, 0) + coalesce(ewh.overtimeHour, 0) '總時數'" +
+                        " ,convert(decimal(10, 2), coalesce(coalesce(pd.totalProduction, 0) / nullif((coalesce(ewh.normalWorkingHour, 0) + coalesce(ewh.overtimeHour, 0)), 0), 0)) '生產效能'" +
+                        " from employeeWorkHour ewh" +
+                        " left join productionData pd on ewh.employeeId = pd.employeeId and ewh.employeeDept = pd.productionDepartment and ewh.[year]=pd.[year] and ewh.[month]=pd.[month]" +
+                        " where ewh.employeeId=@employeeId" +
+                        " order by ewh.employeeId" +
+                        " ,ewh.[year]" +
+                        " ,ewh.[month]" +
+                        " ,ewh.employeeDept" +
+                        " ,pd.productionLine";
+                }
+
+                lblRange.Text = "查詢期間: " + ddlEmployee.SelectedItem.Text + ddlStartYear.SelectedValue + ddlStartMonth.SelectedValue + "~" + ddlEndYear.SelectedValue + ddlEndMonth.SelectedValue + rdoMonth.Text;
+                fileName = ddlEmployee.SelectedItem.Text + "ProductionEfficiencyMonthlyReport" + ddlStartYear.SelectedValue + ddlStartMonth.SelectedValue + "~" + ddlEndYear.SelectedValue + ddlEndMonth.SelectedValue;
             }
-            lblRange.Text = "查詢期間: " + ddlDept.SelectedItem.Text + ddlStartYear.SelectedValue + ddlStartMonth.SelectedValue + "~" + ddlEndYear.SelectedValue + ddlEndMonth.SelectedValue + rdoMonth.Text;
-            fileName = ddlDept.SelectedItem.Text + "ProductionEfficiencyMonthlyReport" + ddlStartYear.SelectedValue + ddlStartMonth.SelectedValue + "~" + ddlEndYear.SelectedValue + ddlEndMonth.SelectedValue;
         }
         else //年報表
-        {            
-            if (ddlDept.SelectedValue.ToString() == "all") //全部部門年報表
+        {
+            if (rdoSearchByDept.Checked)    //部門年報表
             {
-                query = "WITH PROD"
-                            + " AS"
-                            + " ("
-                            + " SELECT SUBSTRING(TF.TF003, 1, 4) YR, TA.TA021 PROD_LINE, SUM(TG.TG011) TOTAL, CASE TA.TA021"
-                            + " WHEN N'C' THEN N'B-C'"
-                            + " WHEN N'D' THEN N'B-G'"
-                            + " WHEN N'G' THEN N'B-G'"
-                            + " WHEN N'GM' THEN N'B-G'"
-                            + " WHEN N'E' THEN N'B-E'"
-                            + " WHEN N'K' THEN N'B-K'"
-                            + " WHEN N'P' THEN N'B-P'"
-                            + " WHEN N'PK' THEN N'B-P'"
-                            + " WHEN N'RD' THEN N'A-RD'"
-                            + " WHEN N'S' THEN N'B-S'"
-                            + " WHEN N'SM' THEN N'B-S'"
-                            + " WHEN N'T' THEN N'B-T'"
-                            + " WHEN N'TK' THEN N'B-T'"
-                            + " END AS DEPT"
-                            + " FROM MOCTG TG"
-                            + " LEFT JOIN MOCTF TF ON TG.TG002 = TF.TF002"
-                            + " LEFT JOIN MOCTA TA ON TG.TG015 = TA.TA002 AND TG.TG014 = TA.TA001"
-                            + " WHERE TF.TF003 BETWEEN N'" + ddlStartYear.SelectedValue + "0101' AND N'" + ddlEndYear.SelectedValue + "1231'"
-                            + " GROUP BY SUBSTRING(TF.TF003, 1, 4), TA.TA021"
-                            + " )"
-                            + " SELECT PROD.YR 年, PROD.PROD_LINE 生產線別" +
-                            " , CONVERT(DECIMAL(10,2),PROD.TOTAL) 產能" +
-                            " , CONVERT(DECIMAL(10,2),SUM(TB.TB005)*8 + CONVERT(DECIMAL(10,2),SUM(TB.TB027))) 正常時數" +
-                            " , CONVERT(DECIMAL(10,2),SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039)) 加班時數" +
-                            " , CONVERT(DECIMAL(10,2),(SUM(TB.TB005)*8)+SUM(TB.TB027)+SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039)) 總工作時數" +
-                            " , COALESCE(CONVERT(NVARCHAR(20),(PROD.TOTAL/NULLIF(CONVERT(DECIMAL(20,2), SUM(TB.TB005)*8+SUM(TB.TB027)+SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039)),0))),N'未到本年度年底') 當年效率"
-                            + " FROM PALTB TB"
-                            + " LEFT JOIN PROD ON TB.TB003 = PROD.DEPT"
-                            + " WHERE TB.TB002 BETWEEN N'" + ddlStartYear.SelectedValue + "0101' AND N'" + ddlEndYear.SelectedValue + "1231' AND SUBSTRING(TB.TB002, 1, 4) = PROD.YR"
-                            + " GROUP BY PROD.YR, PROD.PROD_LINE, PROD.TOTAL"
-                            + " ORDER BY PROD.PROD_LINE";
+                if (ddlDept.SelectedValue.ToString() == "all") //全部部門年報表
+                {
+                    query = "WITH PROD"
+                                + " AS"
+                                + " ("
+                                + " SELECT SUBSTRING(TF.TF003, 1, 4) YR" +
+                                " , TF.TF011 PROD_LINE" +
+                                " , SUM(TG.TG011) TOTAL" +
+                                " , CASE TF.TF011"
+                                + " WHEN N'C' THEN N'B-C'"
+                                + " WHEN N'D' THEN N'B-G'"
+                                + " WHEN N'G' THEN N'B-G'"
+                                + " WHEN N'E' THEN N'B-E'"
+                                + " WHEN N'K' THEN N'B-K'"
+                                + " WHEN N'P' THEN N'B-P'"
+                                + " WHEN N'RD' THEN N'A-RD'"
+                                + " WHEN N'S' THEN N'B-S'"
+                                + " WHEN N'SM' THEN N'B-S'"
+                                + " WHEN N'T' THEN N'B-T'"
+                                + " END AS DEPT"
+                                + " FROM MOCTG TG"
+                                + " LEFT JOIN MOCTF TF ON TG.TG002 = TF.TF002"
+                                + " WHERE TF.TF003 BETWEEN @startDate AND @endDate"
+                                + " GROUP BY SUBSTRING(TF.TF003, 1, 4)" +
+                                " , TF.TF011"
+                                + " )"
+                                + " SELECT PROD.YR 年, PROD.PROD_LINE 生產線別" +
+                                " , CONVERT(DECIMAL(10,2),PROD.TOTAL) 產能" +
+                                " , CONVERT(DECIMAL(10,2),SUM(TB.TB005)*8 + CONVERT(DECIMAL(10,2),SUM(TB.TB027))) 正常時數" +
+                                " , CONVERT(DECIMAL(10,2),SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039)) 加班時數" +
+                                " , CONVERT(DECIMAL(10,2),(SUM(TB.TB005)*8)+SUM(TB.TB027)+SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039)) 總工作時數" +
+                                " , COALESCE(CONVERT(NVARCHAR(20),(PROD.TOTAL/NULLIF(CONVERT(DECIMAL(20,2), SUM(TB.TB005)*8+SUM(TB.TB027)+SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039)),0))),N'未到本年度年底') 當年效率"
+                                + " FROM PALTB TB"
+                                + " LEFT JOIN PROD ON TB.TB003 = PROD.DEPT"
+                                + " WHERE TB.TB002 BETWEEN @startDate AND @endDate" +
+                                " AND SUBSTRING(TB.TB002, 1, 4) = PROD.YR"
+                                + " GROUP BY PROD.YR, PROD.PROD_LINE, PROD.TOTAL"
+                                + " ORDER BY PROD.PROD_LINE" +
+                                ", PROD.YR";
+                }
+                else //指定部門年報表
+                {
+                    query = "WITH PROD"
+                                + " AS"
+                                + " ("
+                                + " SELECT SUBSTRING(TF.TF003, 1, 4) YR" +
+                                " , TF.TF011 PROD_LINE" +
+                                " , SUM(TG.TG011) TOTAL" +
+                                " , CASE TF.TF011"
+                                + " WHEN N'C' THEN N'B-C'"
+                                + " WHEN N'D' THEN N'B-G'"
+                                + " WHEN N'G' THEN N'B-G'"
+                                + " WHEN N'E' THEN N'B-E'"
+                                + " WHEN N'K' THEN N'B-K'"
+                                + " WHEN N'P' THEN N'B-P'"
+                                + " WHEN N'RD' THEN N'A-RD'"
+                                + " WHEN N'S' THEN N'B-S'"
+                                + " WHEN N'SM' THEN N'B-S'"
+                                + " WHEN N'T' THEN N'B-T'"
+                                + " END AS DEPT"
+                                + " FROM MOCTG TG"
+                                + " LEFT JOIN MOCTF TF ON TG.TG002 = TF.TF002"
+                                + " WHERE TF.TF011 = @dept" +
+                                " AND TF.TF003 BETWEEN @startDate AND @endDate"
+                                + " GROUP BY SUBSTRING(TF.TF003, 1, 4)" +
+                                " , TF.TF011"
+                                + " )"
+                                + " SELECT PROD.YR 年, PROD.PROD_LINE 生產線別" +
+                                " , CONVERT(DECIMAL(10,2),PROD.TOTAL) 產能" +
+                                " , CONVERT(DECIMAL(10,2),SUM(TB.TB005)*8 + CONVERT(DECIMAL(10,2),SUM(TB.TB027))) 正常時數" +
+                                " , CONVERT(DECIMAL(10,2),SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039)) 加班時數" +
+                                ", CONVERT(DECIMAL(10,2),(SUM(TB.TB005)*8)+SUM(TB.TB027)+SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039)) 總工作時數" +
+                                ", COALESCE(CONVERT(NVARCHAR(20),(PROD.TOTAL/NULLIF(CONVERT(DECIMAL(20,2), SUM(TB.TB005)*8+SUM(TB.TB027)+SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039)),0))),N'未到本年度年底') 當年效率"
+                                + " FROM PALTB TB"
+                                + " LEFT JOIN PROD ON TB.TB003 = PROD.DEPT"
+                                + " WHERE TB.TB003 = PROD.DEPT" +
+                                " AND TB.TB002 BETWEEN @startDate AND @endDate" +
+                                " AND SUBSTRING(TB.TB002, 1, 4) = PROD.YR"
+                                + " GROUP BY PROD.YR, PROD.PROD_LINE, PROD.TOTAL"
+                                + " ORDER BY PROD.PROD_LINE" +
+                                ", PROD.YR";
+                }
+                lblRange.Text = "查詢期間: " + ddlDept.SelectedItem.Text + ddlStartYear.SelectedValue + "~" + ddlEndYear.SelectedValue + rdoYear.Text;
+                fileName = ddlDept.SelectedItem.Text + "ProductionEfficiencyAnnualReport" + ddlStartYear.SelectedValue + "~" + ddlEndYear.SelectedValue;
+            }
+            else
+            {
+                if (ddlEmployee.SelectedValue.ToString() == "all")    //全部人員年報表
+                {
+                    query = "WITH productionData" +
+                        " AS" +
+                        " (" +
+                        " SELECT SUBSTRING(TF.TF003, 1, 4)[year]" +
+                        " , TF.TF200 employeeId" +
+                        " , TF.TF011 productionLine" +
+                        " , CONVERT(DECIMAL(10, 2), SUM(COALESCE(TG.TG011, 0))) totalProduction" +
+                        " , CASE TF.TF011" +
+                        " WHEN N'C' THEN N'B-C'" +
+                        " WHEN N'D' THEN N'B-G'" +
+                        " WHEN N'E' THEN N'B-E'" +
+                        " WHEN N'G' THEN N'B-G'" +
+                        " WHEN N'K' THEN N'B-K'" +
+                        " WHEN N'P' THEN N'B-P'" +
+                        " WHEN N'RD' THEN N'A-RD'" +
+                        " WHEN N'S' THEN N'B-S'" +
+                        " WHEN N'SM' THEN N'B-S'" +
+                        " WHEN N'T' THEN N'B-T'" +
+                        " END AS productionDepartment" +
+                        " FROM MOCTF TF" +
+                        " LEFT JOIN MOCTG TG ON TF.TF001 = TG.TG001 and TF.TF002 = TG.TG002" +
+                        " WHERE TF.TF003 BETWEEN '20210101' AND '20211231'" +
+                        " GROUP BY SUBSTRING(TF.TF003, 1, 4)" +
+                        " , TF.TF011" +
+                        " , TF.TF200" +
+                        " ), employeeWorkHour" +
+                        " AS" +
+                        " (" +
+                        " SELECT SUBSTRING(TB.TB002, 1, 4)[year]" +
+                        " , LTRIM(RTRIM(MV.MV001)) 'employeeId'" +
+                        " , TB.TB003 'employeeDept'" +
+                        " , CONVERT(DECIMAL(10, 2), SUM(TB.TB005) * 8 + CONVERT(DECIMAL(10, 2), SUM(TB.TB027))) 'normalWorkingHour'" +
+                        " , CONVERT(DECIMAL(10, 2), SUM(TB.TB010) + SUM(TB.TB011) + SUM(TB.TB012) + SUM(TB.TB013) + SUM(TB.TB018) + SUM(TB.TB019) + SUM(TB.TB020) + SUM(TB.TB029) + SUM(TB.TB030) + SUM(TB.TB031) + SUM(TB.TB032) + SUM(TB.TB033) + SUM(TB.TB034) + SUM(TB.TB035) + SUM(TB.TB036) + SUM(TB.TB037) + SUM(TB.TB038) + SUM(TB.TB039)) 'overtimeHour'" +
+                        " FROM PALTB TB" +
+                        " RIGHT JOIN CMSMV MV ON TB.TB001 = MV.MV001 AND TB.TB002 BETWEEN '20210101' AND '20211231'" +
+                        " WHERE MV.MV021 <= '20210101'" +
+                        " AND(MV.MV022 >= '20210101'" +
+                        " OR MV.MV022 = '')" +
+                        " AND(TB.TB003 = 'B-C'" +
+                        " OR TB.TB003 = 'B-E'" +
+                        " OR TB.TB003 = 'B-G'" +
+                        " OR TB.TB003 = 'B-K'" +
+                        " OR TB.TB003 = 'B-P'" +
+                        " OR TB.TB003 = 'B-S'" +
+                        " OR TB.TB003 = 'B-T')" +
+                        " GROUP BY SUBSTRING(TB.TB002, 1, 4)" +
+                        " , MV.MV001" +
+                        " , TB.TB003" +
+                        " )" +
+                        " select ewh.[year] '年份'" +
+                        " ,ewh.employeeId '員工代號'" +
+                        " ,pd.productionLine '生產線別'" +
+                        " ,ewh.employeeDept '所屬部門'" +
+                        " ,pd.totalProduction '產能'" +
+                        " ,ewh.normalWorkingHour '正常時數'" +
+                        " ,ewh.overtimeHour '加班時數'" +
+                        " ,coalesce(ewh.normalWorkingHour, 0) + coalesce(ewh.overtimeHour, 0) '總時數'" +
+                        " ,convert(decimal(10, 2), coalesce(coalesce(pd.totalProduction, 0) / nullif((coalesce(ewh.normalWorkingHour, 0) + coalesce(ewh.overtimeHour, 0)), 0), 0)) '生產效能'" +
+                        " from employeeWorkHour ewh" +
+                        " left join productionData pd on ewh.employeeId = pd.employeeId and pd.productionDepartment = ewh.employeeDept and ewh.[year]= pd.[year]" +
+                        " order by ewh.employeeId" +
+                        " ,ewh.[year]" +
+                        " ,ewh.employeeDept" +
+                        " ,pd.productionLine";
+                }
+                else  //指定人員年報表
+                {
+                    query = "WITH productionData" +
+                        " AS" +
+                        " (" +
+                        " SELECT SUBSTRING(TF.TF003, 1, 4)[year]" +
+                        " , TF.TF200 employeeId" +
+                        " , TF.TF011 productionLine" +
+                        " , CONVERT(DECIMAL(10, 2), SUM(COALESCE(TG.TG011, 0))) totalProduction" +
+                        " , CASE TF.TF011" +
+                        " WHEN N'C' THEN N'B-C'" +
+                        " WHEN N'D' THEN N'B-G'" +
+                        " WHEN N'E' THEN N'B-E'" +
+                        " WHEN N'G' THEN N'B-G'" +
+                        " WHEN N'K' THEN N'B-K'" +
+                        " WHEN N'P' THEN N'B-P'" +
+                        " WHEN N'RD' THEN N'A-RD'" +
+                        " WHEN N'S' THEN N'B-S'" +
+                        " WHEN N'SM' THEN N'B-S'" +
+                        " WHEN N'T' THEN N'B-T'" +
+                        " END AS productionDepartment" +
+                        " FROM MOCTF TF" +
+                        " LEFT JOIN MOCTG TG ON TF.TF001 = TG.TG001 and TF.TF002 = TG.TG002" +
+                        " WHERE TF.TF003 BETWEEN '20210101' AND '20211231'" +
+                        " GROUP BY SUBSTRING(TF.TF003, 1, 4)" +
+                        " , TF.TF011" +
+                        " , TF.TF200" +
+                        " ), employeeWorkHour" +
+                        " AS" +
+                        " (" +
+                        " SELECT SUBSTRING(TB.TB002, 1, 4)[year]" +
+                        " , LTRIM(RTRIM(MV.MV001)) 'employeeId'" +
+                        " , TB.TB003 'employeeDept'" +
+                        " , CONVERT(DECIMAL(10, 2), SUM(TB.TB005) * 8 + CONVERT(DECIMAL(10, 2), SUM(TB.TB027))) 'normalWorkingHour'" +
+                        " , CONVERT(DECIMAL(10, 2), SUM(TB.TB010) + SUM(TB.TB011) + SUM(TB.TB012) + SUM(TB.TB013) + SUM(TB.TB018) + SUM(TB.TB019) + SUM(TB.TB020) + SUM(TB.TB029) + SUM(TB.TB030) + SUM(TB.TB031) + SUM(TB.TB032) + SUM(TB.TB033) + SUM(TB.TB034) + SUM(TB.TB035) + SUM(TB.TB036) + SUM(TB.TB037) + SUM(TB.TB038) + SUM(TB.TB039)) 'overtimeHour'" +
+                        " FROM PALTB TB" +
+                        " RIGHT JOIN CMSMV MV ON TB.TB001 = MV.MV001 AND TB.TB002 BETWEEN '20210101' AND '20211231'" +
+                        " WHERE MV.MV021 <= '20210101'" +
+                        " AND(MV.MV022 >= '20210101'" +
+                        " OR MV.MV022 = '')" +
+                        " AND(TB.TB003 = 'B-C'" +
+                        " OR TB.TB003 = 'B-E'" +
+                        " OR TB.TB003 = 'B-G'" +
+                        " OR TB.TB003 = 'B-K'" +
+                        " OR TB.TB003 = 'B-P'" +
+                        " OR TB.TB003 = 'B-S'" +
+                        " OR TB.TB003 = 'B-T')" +
+                        " GROUP BY SUBSTRING(TB.TB002, 1, 4)" +
+                        " , MV.MV001" +
+                        " , TB.TB003" +
+                        " )" +
+                        " select ewh.[year] '年份'" +
+                        " ,ewh.employeeId '員工代號'" +
+                        " ,pd.productionLine '生產線別'" +
+                        " ,ewh.employeeDept '所屬部門'" +
+                        " ,pd.totalProduction '產能'" +
+                        " ,ewh.normalWorkingHour '正常時數'" +
+                        " ,ewh.overtimeHour '加班時數'" +
+                        " ,coalesce(ewh.normalWorkingHour, 0) + coalesce(ewh.overtimeHour, 0) '總時數'" +
+                        " ,convert(decimal(10, 2), coalesce(coalesce(pd.totalProduction, 0) / nullif((coalesce(ewh.normalWorkingHour, 0) + coalesce(ewh.overtimeHour, 0)), 0), 0)) '生產效能'" +
+                        " from employeeWorkHour ewh" +
+                        " left join productionData pd on ewh.employeeId = pd.employeeId and pd.productionDepartment = ewh.employeeDept and ewh.[year]= pd.[year]" +
+                        " where ewh.employeeId=@employeeId" +
+                        " order by ewh.employeeId" +
+                        " ,ewh.[year]" +
+                        " ,ewh.employeeDept" +
+                        " ,pd.productionLine";
+                }
 
+                lblRange.Text = "查詢期間: " + ddlEmployee.SelectedItem.Text + ddlStartYear.SelectedValue + ddlStartMonth.SelectedValue + "~" + ddlEndYear.SelectedValue + ddlEndMonth.SelectedValue + rdoYear.Text;
+                fileName = ddlEmployee.SelectedItem.Text + "ProductionEfficiencyAnnualReport" + ddlStartYear.SelectedValue + "~" + ddlEndYear.SelectedValue;
             }
-            else //指定部門年報表
-            {
-                query = "WITH PROD"
-                            + " AS"
-                            + " ("
-                            + " SELECT SUBSTRING(TF.TF003, 1, 4) YR, TA.TA021 PROD_LINE, SUM(TG.TG011) TOTAL, CASE TA.TA021"
-                            + " WHEN N'C' THEN N'B-C'"
-                            + " WHEN N'D' THEN N'B-G'"
-                            + " WHEN N'G' THEN N'B-G'"
-                            + " WHEN N'GM' THEN N'B-G'"
-                            + " WHEN N'E' THEN N'B-E'"
-                            + " WHEN N'K' THEN N'B-K'"
-                            + " WHEN N'P' THEN N'B-P'"
-                            + " WHEN N'PK' THEN N'B-P'"
-                            + " WHEN N'RD' THEN N'A-RD'"
-                            + " WHEN N'S' THEN N'B-S'"
-                            + " WHEN N'SM' THEN N'B-S'"
-                            + " WHEN N'T' THEN N'B-T'"
-                            + " WHEN N'TK' THEN N'B-T'"
-                            + " END AS DEPT"
-                            + " FROM MOCTG TG"
-                            + " LEFT JOIN MOCTF TF ON TG.TG002 = TF.TF002"
-                            + " LEFT JOIN MOCTA TA ON TG.TG015 = TA.TA002 AND TG.TG014 = TA.TA001"
-                            + " WHERE TA.TA021 = N'" + ddlDept.SelectedValue.ToString() + "' AND TF.TF003 BETWEEN N'" + ddlStartYear.SelectedValue + "0101' AND N'" + ddlEndYear.SelectedValue + "1231'"
-                            + " GROUP BY SUBSTRING(TF.TF003, 1, 4), TA.TA021"
-                            + " )"
-                            + " SELECT PROD.YR 年, PROD.PROD_LINE 生產線別" +
-                            " , CONVERT(DECIMAL(10,2),PROD.TOTAL) 產能" +
-                            " , CONVERT(DECIMAL(10,2),SUM(TB.TB005)*8 + CONVERT(DECIMAL(10,2),SUM(TB.TB027))) 正常時數" +
-                            " , CONVERT(DECIMAL(10,2),SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039)) 加班時數" +
-                            ", CONVERT(DECIMAL(10,2),(SUM(TB.TB005)*8)+SUM(TB.TB027)+SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039)) 總工作時數" +
-                            ", COALESCE(CONVERT(NVARCHAR(20),(PROD.TOTAL/NULLIF(CONVERT(DECIMAL(20,2), SUM(TB.TB005)*8+SUM(TB.TB027)+SUM(TB.TB010)+SUM(TB.TB011)+SUM(TB.TB012)+SUM(TB.TB013)+SUM(TB.TB018)+SUM(TB.TB019)+SUM(TB.TB020)+SUM(TB.TB029)+SUM(TB.TB030)+SUM(TB.TB031)+SUM(TB.TB032)+SUM(TB.TB033)+SUM(TB.TB034)+SUM(TB.TB035)+SUM(TB.TB036)+SUM(TB.TB037)+SUM(TB.TB038)+SUM(TB.TB039)),0))),N'未到本年度年底') 當年效率"
-                            + " FROM PALTB TB"
-                            + " LEFT JOIN PROD ON TB.TB003 = PROD.DEPT"
-                            + " WHERE TB.TB003 = PROD.DEPT AND TB.TB002 BETWEEN N'" + ddlStartYear.SelectedValue + "0101' AND N'" + ddlEndYear.SelectedValue + "1231' AND SUBSTRING(TB.TB002, 1, 4) = PROD.YR"
-                            + " GROUP BY PROD.YR, PROD.PROD_LINE, PROD.TOTAL"
-                            + " ORDER BY PROD.PROD_LINE";
-            }
-            lblRange.Text = "查詢期間: " + ddlDept.SelectedItem.Text + ddlStartYear.SelectedValue + "~" + ddlEndYear.SelectedValue + rdoYear.Text;
-            fileName = ddlDept.SelectedItem.Text + "ProductionEfficiencyAnnualReport" + ddlStartYear.SelectedValue + "~" + ddlEndYear.SelectedValue;
         }
         return query;
     }
@@ -234,10 +612,22 @@ public partial class ProductionEfficiencyReport : System.Web.UI.Page
             conn.Open();
 
             SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@dept", ddlDept.SelectedValue);
+            cmd.Parameters.AddWithValue("@employeeId", ddlEmployee.SelectedValue);
+            if (rdoMonth.Checked)
+            {
+                cmd.Parameters.AddWithValue("@startDate", ddlStartYear.SelectedValue + ddlStartMonth.SelectedValue + "01");
+                cmd.Parameters.AddWithValue("@endDate", ddlEndYear.SelectedValue + ddlEndMonth.SelectedValue + "31");
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@startDate", ddlStartYear.SelectedValue + "0101");
+                cmd.Parameters.AddWithValue("@endDate", ddlEndYear.SelectedValue + "1231");
+            }
             SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            grdReport.DataSource = ds;
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            grdReport.DataSource = dt;
             grdReport.DataBind();
             lblError.Text = "";
         }
@@ -266,88 +656,21 @@ public partial class ProductionEfficiencyReport : System.Web.UI.Page
 
     private void Export_Excel(string fileName)
     {
-        HSSFWorkbook workbook = new HSSFWorkbook();
-        MemoryStream ms = new MemoryStream();
-        ISheet sheet1 = workbook.CreateSheet("生產部門效能報表");
-        IRow rowHeader1 = sheet1.CreateRow(0);
-        HSSFCellStyle headerCellStyle = (HSSFCellStyle)workbook.CreateCellStyle();
-        HSSFCellStyle oddRowCellStyle = (HSSFCellStyle)workbook.CreateCellStyle();
-        HSSFCellStyle evenRowCellStyle = (HSSFCellStyle)workbook.CreateCellStyle();
-        HSSFFont headerFont = (HSSFFont)workbook.CreateFont();
-        HSSFFont oddRowFont = (HSSFFont)workbook.CreateFont();
-        HSSFFont evenRowFont = (HSSFFont)workbook.CreateFont();
+        string strfileext = ".xls";
+        StringWriter tw = new StringWriter();
+        HtmlTextWriter hw = new HtmlTextWriter(tw);
+        HttpContext.Current.Response.ContentType = "application/vnd.ms-excel";
+        HttpContext.Current.Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName + strfileext);
+        HttpContext.Current.Response.Write("<meta http-equiv=Content-Type content=text/html;charset=utf-8>");
 
-
-        //set Header's Cell Style
-        SetCustomCellColor(workbook, HSSFColor.CornflowerBlue.Index, "29ABE2");
-        headerCellStyle.FillForegroundColor = HSSFColor.CornflowerBlue.Index;
-        headerCellStyle.FillPattern = FillPattern.SolidForeground;
-        headerCellStyle.Alignment = HorizontalAlignment.Center;
-        headerFont.Color = HSSFColor.White.Index;
-        headerFont.Boldweight = (short)FontBoldWeight.Bold;
-        headerCellStyle.SetFont(headerFont);
-        //set Odd Row's Cell Style
-        SetCustomCellColor(workbook, HSSFColor.Grey25Percent.Index, "c3e8f4");
-        oddRowCellStyle.FillForegroundColor = HSSFColor.Grey25Percent.Index;
-        oddRowCellStyle.FillPattern = FillPattern.SolidForeground;
-        oddRowCellStyle.Alignment = HorizontalAlignment.Center;
-        oddRowFont.Color = HSSFColor.Black.Index;
-        oddRowCellStyle.SetFont(oddRowFont);
-        //set Even Row's Cell Style
-        SetCustomCellColor(workbook, HSSFColor.PaleBlue.Index, "ffffff");
-        evenRowCellStyle.FillForegroundColor = HSSFColor.White.Index;
-        evenRowCellStyle.FillPattern = FillPattern.SolidForeground;
-        evenRowCellStyle.Alignment = HorizontalAlignment.Center;
-        evenRowFont.Color = HSSFColor.PaleBlue.Index;
-        evenRowFont.Color = HSSFColor.Black.Index;
-        evenRowCellStyle.SetFont(evenRowFont);
-
-
-        //grdReport資料匯入sheet1
-        //sheet1 Header
-        for (int i = 0, iCount = grdReport.HeaderRow.Cells.Count; i < iCount; i++)
-        {
-            ICell cell = rowHeader1.CreateCell(i);
-            cell.CellStyle = headerCellStyle;
-            cell.SetCellValue(grdReport.HeaderRow.Cells[i].Text.Replace("&nbsp;", "").Trim());
-        }
-        //sheet1 Body
-        for (int i = 0, iCount = grdReport.Rows.Count; i < iCount; i++)
-        {
-            IRow rowItem = sheet1.CreateRow(i + 1);
-            for (int j = 0, jCount = grdReport.HeaderRow.Cells.Count; j < jCount; j++)
-            {
-                ICell cell = rowItem.CreateCell(j);
-                if ((i + 1) % 2 == 1)
-                {
-                    cell.CellStyle = oddRowCellStyle;
-                }
-                else
-                {
-                    cell.CellStyle = evenRowCellStyle;
-                }
-                cell.SetCellValue(grdReport.Rows[i].Cells[j].Text.Replace("&nbsp;", "").Trim());
-                sheet1.AutoSizeColumn(j);
-            }
-            sheet1.GetRow(i).HeightInPoints = 16.5f;
-        }
-        //workbook匯出至excel
-        workbook.Write(ms);
-        Response.AddHeader("Content-Disposition", string.Format("attachment; filename=" + Server.UrlEncode(fileName) + ".xls"));
-        Response.BinaryWrite(ms.ToArray());
-        //收尾
-        workbook = null;
-        ms.Close();
-        ms.Dispose();
+        //Get the HTML for the control.
+        grdReport.RenderControl(hw);
+        HttpContext.Current.Response.Write(tw.ToString());
+        HttpContext.Current.Response.End();
     }
-    private void SetCustomCellColor(HSSFWorkbook workbook, short originalColorIndex, string alternateColor)
+
+    public override void VerifyRenderingInServerForm(Control control)
     {
-        HSSFPalette cellPalette = workbook.GetCustomPalette();
-        byte CR, CG, CB;
-        CR = Convert.ToByte("0x" + alternateColor.Substring(0, 2), 16);
-        CG = Convert.ToByte("0x" + alternateColor.Substring(2, 2), 16);
-        CB = Convert.ToByte("0x" + alternateColor.Substring(4, 2), 16);
-        cellPalette.SetColorAtIndex(originalColorIndex, CR, CG, CB);
+        //用export_excel必須要有這個override
     }
-
 }
