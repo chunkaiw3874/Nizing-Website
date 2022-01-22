@@ -14,7 +14,6 @@ public partial class nizing_intranet_PD04_KeyInFormAmount : System.Web.UI.Page
 {
     string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
 
-    decimal footerSum = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -60,43 +59,35 @@ public partial class nizing_intranet_PD04_KeyInFormAmount : System.Web.UI.Page
         {
             conn.Open();
             query = ";with keyInTable" +
-            " as" +
-            " (" +
-            " select '報價單' '單別'" +
-            " ,ta.CREATOR '打單人員'" +
-            " ,COUNT(*) '單數'" +
-            " from COPTA ta" +
-            " where ta.TA013 between @start and @end" +
-            " group by ta.CREATOR" +
-            " union" +
-            " select '訂單'" +
-            " ,tc.CREATOR" +
-            " ,COUNT(*)" +
-            " from COPTC tc" +
-            " where tc.TC039 between @start and @end" +
-            " group by tc.CREATOR" +
-            " union" +
-            " select '銷貨單'" +
-            " ,tg.CREATOR" +
-            " ,COUNT(*)" +
-            " from COPTG tg" +
-            " where tg.TG042 between @start and @end" +
-            " group by tg.CREATOR" +
-            " )" +
-            " select ROW_NUMBER() over(order by coalesce(報價單, 0) + coalesce(訂單, 0) + coalesce(銷貨單, 0) desc) '#'" +
-            " ,ma.MA002 '人員姓名'" +
-            " ,coalesce(報價單, 0) '報價單'" +
-            " ,coalesce(訂單, 0) '訂單'" +
-            " ,coalesce(銷貨單, 0) '銷貨單'" +
-            " ,coalesce(報價單, 0) + coalesce(訂單, 0) + coalesce(銷貨單, 0) '總數'" +
-            " from" +
-            " (" +
-            " select *" +
-            " from keyInTable" +
-            " ) src" +
-            " pivot" +
-            " (sum(單數) for 單別 in ([報價單],[訂單],[銷貨單])) pvt" +
-            " left join SMARTDSCSYS.dbo.DSCMA ma on ma.MA001 = pvt.打單人員";
+                " as" +
+                " (" +
+                " select '採購單' '單別'" +
+                " ,tc.CREATOR '打單人員'" +
+                " ,COUNT(*) '單數'" +
+                " from PURTC tc" +
+                " where tc.TC024 between @start and @end" +
+                " group by tc.CREATOR" +
+                " union" +
+                " select '進貨單'" +
+                " ,tg.CREATOR" +
+                " ,COUNT(*)" +
+                " from PURTG tg" +
+                " where tg.TG014 between @start and @end" +
+                " group by tg.CREATOR" +
+                " )" +
+                " select ROW_NUMBER() over(order by coalesce(採購單, 0) + coalesce(進貨單, 0) desc) '#'" +
+                " ,ma.MA002 '人員姓名'" +
+                " ,coalesce(採購單, 0) '採購單'" +
+                " ,coalesce(進貨單, 0) '進貨單'" +
+                " ,coalesce(採購單, 0) + coalesce(進貨單, 0) '總數'" +
+                " from" +
+                " (" +
+                " select *" +
+                " from keyInTable" +
+                " ) src" +
+                " pivot" +
+                " (sum(單數) for 單別 in ([採購單],[進貨單])) pvt" +
+                " left join SMARTDSCSYS.dbo.DSCMA ma on ma.MA001 = pvt.打單人員";
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@start", queryDateRange[0]);
             cmd.Parameters.AddWithValue("@end", queryDateRange[1]);
@@ -145,17 +136,10 @@ public partial class nizing_intranet_PD04_KeyInFormAmount : System.Web.UI.Page
         HttpContext.Current.Response.AppendHeader("Content-Disposition", "attachment; filename=" + filename + strfileext);
         HttpContext.Current.Response.Write("<meta http-equiv=Content-Type content=text/html;charset=utf-8>");
 
-        //先把分頁關掉
-        //gvResult.AllowPaging = false;
-        //bindgv();
-
         //Get the HTML for the control.
         gvResult.RenderControl(hw);
         HttpContext.Current.Response.Write(tw.ToString());
         HttpContext.Current.Response.End();
-
-        //gvResult.AllowPaging = true;
-        //bindgv();
     }
 
     public override void VerifyRenderingInServerForm(Control control)
@@ -166,22 +150,19 @@ public partial class nizing_intranet_PD04_KeyInFormAmount : System.Web.UI.Page
 
     protected void gvResult_DataBound(object sender, EventArgs e)
     {
-        decimal sumPI = 0;
-        decimal sumPO = 0;
-        decimal sumSO = 0;
+        decimal sumPurchaseForm = 0;
+        decimal sumReceiveMaterialForm = 0;
         decimal sumTotal = 0;
 
         for (int i = 0; i < gvResult.Rows.Count; i++)
         {
-            sumPI += Convert.ToDecimal(((Label)gvResult.Rows[i].FindControl("lblPI")).Text);
-            sumPO += Convert.ToDecimal(((Label)gvResult.Rows[i].FindControl("lblPO")).Text);
-            sumSO += Convert.ToDecimal(((Label)gvResult.Rows[i].FindControl("lblSO")).Text);
+            sumPurchaseForm += Convert.ToDecimal(((Label)gvResult.Rows[i].FindControl("lblPurchaseForm")).Text);
+            sumReceiveMaterialForm += Convert.ToDecimal(((Label)gvResult.Rows[i].FindControl("lblReceiveMaterialForm")).Text);
             sumTotal += Convert.ToDecimal(((Label)gvResult.Rows[i].FindControl("lblTotal")).Text);
         }
 
-        ((Label)gvResult.FooterRow.FindControl("lblPITotal")).Text = sumPI.ToString();
-        ((Label)gvResult.FooterRow.FindControl("lblPOTotal")).Text = sumPO.ToString();
-        ((Label)gvResult.FooterRow.FindControl("lblSOTotal")).Text = sumSO.ToString();
+        ((Label)gvResult.FooterRow.FindControl("lblPurchaseFormTotal")).Text = sumPurchaseForm.ToString();
+        ((Label)gvResult.FooterRow.FindControl("lblReceiveMaterialFormTotal")).Text = sumReceiveMaterialForm.ToString();
         ((Label)gvResult.FooterRow.FindControl("lblAllTotal")).Text = sumTotal.ToString();
     }
 }

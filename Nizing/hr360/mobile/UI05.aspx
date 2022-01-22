@@ -42,6 +42,7 @@
                                 <th class="text-center">自評</th>
                                 <th class="text-center">初評</th>
                                 <th class="text-center">複評</th>
+                                <th class="text-center">特評</th>
                             </tr>
                         </thead>
                         <tbody id="tbFirstAssessmentBody" runat="server">
@@ -58,6 +59,7 @@
                                 <th class="text-center">自評</th>
                                 <th class="text-center">初評</th>
                                 <th class="text-center">複評</th>
+                                <th class="text-center">特評</th>
                             </tr>
                         </thead>
                         <tbody id="tbAssessmentEditBody" runat="server">

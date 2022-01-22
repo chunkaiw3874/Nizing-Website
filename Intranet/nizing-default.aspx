@@ -107,6 +107,7 @@
                     <%--<a href="nizing_intranet/PD_PurchaseInProgress.aspx">採購未交單</a>--%>
                     <asp:ImageButton ID="ImageButton22" runat="server" ImageUrl="~/nizing_intranet/image/button/dept/PD_PurchaseInProgress.png" PostBackUrl="~/nizing_intranet/PD_PurchaseInProgress.aspx" />
                 </li>
+                <li><a href="nizing_intranet/PD04_KeyInFormAmount.aspx">打單數量報表</a></li>
             </ul>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">

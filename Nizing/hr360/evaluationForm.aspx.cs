@@ -18,7 +18,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
     string NZconnectionString = ConfigurationManager.ConnectionStrings["NZConnectionString"].ConnectionString;
 
     //Setup basic info for the assessment 
-    DataTable dtAssessmentQuestion = new DataTable();    
+    DataTable dtAssessmentQuestion = new DataTable();
     protected void Page_Load(object sender, EventArgs e)
     {
         //check if session has expired
@@ -26,7 +26,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "showalert", "alert('連線已逾時，將會回到登入頁面');window.location='login.aspx'", true);
         }
-        else        
+        else
         {
             string year = "";
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
@@ -39,10 +39,10 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 year = cmd.ExecuteScalar().ToString() ?? "2016";
             }
 
-            /////////////test value
-            //Session["erp_id"] = "0007";
-            //Session["eval_id"] = "0142";
-            /////////////////////////
+            /////////test value
+            //Session["erp_id"] = "0186";
+            //Session["eval_id"] = "0186";
+            ///////////////////////
 
             string assessor = Session["erp_id"].ToString().Trim();
             string assessed = "";
@@ -55,7 +55,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 assessed = lblEmpID.Text.Trim();
             }
 
-            
+
 
             DataTable dtEval = new DataTable();
             //string evaluated = isEvaluated(assessor, assessed);
@@ -202,11 +202,69 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 headerText.InnerText = "複評分數";
                 headerDiv.Controls.Add(headerText);
             }
+            else if (dtEval.Rows[0]["ASSESS_TYPE"].ToString() == "9")
+            {
+                headerDiv = new HtmlGenericControl();
+                headerDiv.TagName = "div";
+                if (supervisorAssigned)
+                {
+                    headerDiv.Attributes["class"] = "col-xs-4 border";
+                }
+                else
+                {
+                    headerDiv.Attributes["class"] = "col-xs-5 border";
+                }
+                divQuestionTitleRow.Controls.Add(headerDiv);
+                headerText = new HtmlGenericControl();
+                headerText.TagName = "span";
+                headerText.Attributes["class"] = "form-control text-center";
+                headerText.InnerText = "問題";
+                headerDiv.Controls.Add(headerText);
+                headerDiv = new HtmlGenericControl();
+                headerDiv.TagName = "div";
+                headerDiv.Attributes["class"] = "col-xs-1 border";
+                divQuestionTitleRow.Controls.Add(headerDiv);
+                headerText = new HtmlGenericControl();
+                headerText.TagName = "span";
+                headerText.Attributes["class"] = "form-control text-center";
+                headerText.InnerText = "自評分數";
+                headerDiv.Controls.Add(headerText);
+                if (supervisorAssigned)
+                {
+                    headerDiv = new HtmlGenericControl();
+                    headerDiv.TagName = "div";
+                    headerDiv.Attributes["class"] = "col-xs-1 border";
+                    divQuestionTitleRow.Controls.Add(headerDiv);
+                    headerText = new HtmlGenericControl();
+                    headerText.TagName = "span";
+                    headerText.Attributes["class"] = "form-control text-center";
+                    headerText.InnerText = "初評分數";
+                    headerDiv.Controls.Add(headerText);
+                }
+                headerDiv = new HtmlGenericControl();
+                headerDiv.TagName = "div";
+                headerDiv.Attributes["class"] = "col-xs-1 border";
+                divQuestionTitleRow.Controls.Add(headerDiv);
+                headerText = new HtmlGenericControl();
+                headerText.TagName = "span";
+                headerText.Attributes["class"] = "form-control text-center";
+                headerText.InnerText = "複評分數";
+                headerDiv.Controls.Add(headerText);
+                headerDiv = new HtmlGenericControl();
+                headerDiv.TagName = "div";
+                headerDiv.Attributes["class"] = "col-xs-1 border";
+                divQuestionTitleRow.Controls.Add(headerDiv);
+                headerText = new HtmlGenericControl();
+                headerText.TagName = "span";
+                headerText.Attributes["class"] = "form-control text-center";
+                headerText.InnerText = "特評分數";
+                headerDiv.Controls.Add(headerText);
+            }
         }
     }
 
-    
-    
+
+
     /// <summary>
     /// 讀取assessor/assessed組合評核狀況
     /// </summary>
@@ -231,7 +289,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
         }
         return dt;
     }
-    
+
 
     /// <summary>
     /// 設定及顯示表單資料
@@ -277,7 +335,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             lblEvalYear.Text = year;
             lblEvalDate.Text = DateTime.Today.ToString("yyyy/MM/dd");
             lblEvalType.Text = LoadAssessDateInfo(year, assessor, assessed);
-            
+
         }
 
         //讀取評量問題
@@ -328,7 +386,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             label.Text = dtAssessmentQuestion.Rows[i]["QUESTION_CATEGORY_WEIGHT"].ToString();
             innerDiv.Controls.Add(label);
             if (assessType == "1")
-            {                
+            {
                 //column 4 問題
                 innerDiv = new HtmlGenericControl();
                 innerDiv.TagName = "div";
@@ -364,7 +422,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 innerDiv.Controls.Add(txt);
             }
             else if (assessType == "2")
-            {                
+            {
                 //column 4 問題
                 innerDiv = new HtmlGenericControl();
                 innerDiv.TagName = "div";
@@ -457,7 +515,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                     label.CssClass = "form-control text-center col" + (i + 1) + "_7";
                     label.Text = dtAssessmentQuestion.Rows[i]["SUPER_SCORE"].ToString() ?? "未評核";
                     innerDiv.Controls.Add(label);
-                }                
+                }
                 //column 5 分數
                 innerDiv = new HtmlGenericControl();
                 innerDiv.TagName = "div";
@@ -467,9 +525,89 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 txt = new TextBox();
                 txt.ID = "txtAssessmentScore" + (i + 1).ToString();
                 txt.CssClass = "form-control  numbers-only add-number col" + (i + 1) + "_5";
-                if(isAssessed)
+                if (isAssessed)
                 {
                     txt.Text = dtAssessmentQuestion.Rows[i]["FINAL_SCORE"].ToString();
+                }
+                else
+                {
+                    txt.Text = "";
+                    txt.Attributes["placeholder"] = "請打分數";
+                }
+                innerDiv.Controls.Add(txt);
+            }
+            else if (assessType == "9")
+            {
+                //column 4 問題
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_4";
+                if (supervisorAssigned)
+                {
+                    innerDiv.Attributes["class"] = "col-xs-4 border";
+                }
+                else
+                {
+                    innerDiv.Attributes["class"] = "col-xs-5 border";
+                }
+                outerDiv.Controls.Add(innerDiv);
+                TextBox txt = new TextBox();
+                txt.ID = "txtAssessmentQuestion" + (i + 1).ToString();
+                txt.CssClass = "form-control no-resize autosize col" + (i + 1) + "_4";
+                txt.TextMode = TextBoxMode.MultiLine;
+                txt.Wrap = true;
+                txt.ReadOnly = true;
+                txt.Text = dtAssessmentQuestion.Rows[i]["QUESTION"].ToString();
+                innerDiv.Controls.Add(txt);
+                //column 6 自評分數
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_6";
+                innerDiv.Attributes["class"] = "col-xs-1 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                label = new Label();
+                label.ID = "lblSelfAssessmentScore" + (i + 1).ToString();
+                label.CssClass = "form-control text-center col" + (i + 1) + "_6";
+                label.Text = dtAssessmentQuestion.Rows[i]["SELF_SCORE"].ToString() ?? "未評核";
+                innerDiv.Controls.Add(label);
+                if (supervisorAssigned)
+                {
+                    //column 7 主管評分數
+                    innerDiv = new HtmlGenericControl();
+                    innerDiv.TagName = "div";
+                    innerDiv.ID = outerDiv.ID + "_7";
+                    innerDiv.Attributes["class"] = "col-xs-1 border text-center";
+                    outerDiv.Controls.Add(innerDiv);
+                    label = new Label();
+                    label.ID = "lblSuperAssessmentScore" + (i + 1).ToString();
+                    label.CssClass = "form-control text-center col" + (i + 1) + "_7";
+                    label.Text = dtAssessmentQuestion.Rows[i]["SUPER_SCORE"].ToString() ?? "未評核";
+                    innerDiv.Controls.Add(label);
+                }
+                //column 8 複評分數
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_8";
+                innerDiv.Attributes["class"] = "col-xs-1 border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                label = new Label();
+                label.ID = "lblFinalAssessmentScore" + (i + 1).ToString();
+                label.CssClass = "form-control text-center col" + (i + 1) + "_8";
+                label.Text = dtAssessmentQuestion.Rows[i]["FINAL_SCORE"].ToString() ?? "未評核";
+                innerDiv.Controls.Add(label);
+
+                //column 5 分數
+                innerDiv = new HtmlGenericControl();
+                innerDiv.TagName = "div";
+                innerDiv.ID = outerDiv.ID + "_5";
+                innerDiv.Attributes["class"] = "col-xs-1 lowmargin border text-center";
+                outerDiv.Controls.Add(innerDiv);
+                txt = new TextBox();
+                txt.ID = "txtAssessmentScore" + (i + 1).ToString();
+                txt.CssClass = "form-control  numbers-only add-number col" + (i + 1) + "_5";
+                if (isAssessed)
+                {
+                    txt.Text = dtAssessmentQuestion.Rows[i]["SPECIAL_SCORE"].ToString();
                 }
                 else
                 {
@@ -594,7 +732,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             lblExpectedAttendance.Text = expectedWorkHour.ToString("N2");
             lblActualAttendance.Text = (expectedWorkHour - dayOffSum).ToString("N2");
             lblAttendanceScore.Text = (100 + dayOffValue).ToString("N2");
-            lblAttendanceFailure.Text = (((expectedWorkHour - dayOffSum) / expectedWorkHour)*100 - 100).ToString("N2") + "%";
+            lblAttendanceFailure.Text = (((expectedWorkHour - dayOffSum) / expectedWorkHour) * 100).ToString("N2") + "%";
             //lblOnJobPercent.Text = (Math.Floor(100 * 100 * (1 - (dayOffSum / onJobHour))) / 100).ToString();    //2018.07.23 改成小數第二位無條件捨去
         }
         else
@@ -603,7 +741,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             lblActualAttendance.Text = "N/A";
             lblAttendanceScore.Text = "N/A";
         }
-        
+
         //讀取獎懲紀錄
         DataTable dtRnPRecord = new DataTable();
 
@@ -742,7 +880,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 txt.Text = LoadComment(year, dtAssessorList.Rows[i]["ASSESSOR_ID"].ToString(), assessed, assessorsWithOwnCommentSection);
                 txt.TextMode = TextBoxMode.MultiLine;
                 txt.Wrap = true;
-                if(dtAssessorList.Rows[i]["ASSESSOR_ID"].ToString() == Session["erp_id"].ToString())
+                if (dtAssessorList.Rows[i]["ASSESSOR_ID"].ToString() == Session["erp_id"].ToString())
                 {
                     txt.ReadOnly = false;
                 }
@@ -754,7 +892,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
             }
         }
     }
-    
+
     /// <summary>
     /// submit按鈕觸發事件
     /// </summary>
@@ -766,9 +904,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
         {
             saveSurveyData();
 
-            //更新:2017.01.19 PER 吉田，移除特評制度
-            //更新:2017.01.20 PER CHRISSY，恢復使用特評制度
-            //更新:2019.11 停止使用特評
+            //更新:2022.01.11 恢復使用特評，詳使用手冊
             //double standard; //特評標準分數的門檻, retrieve from database HR360_ASSESSMENTSCORE_STANDARD
             double d;
             //using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
@@ -984,7 +1120,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@ASSESSOR_ID", Session["erp_id"].ToString().Trim());
                 cmd.Parameters.AddWithValue("@ASSESS_YEAR", lblEvalYear.Text);
                 cmd.Parameters.AddWithValue("@ASSESSED_ID", lblEmpID.Text);
-                cmd.ExecuteNonQuery();                
+                cmd.ExecuteNonQuery();
             }
         }
         catch (Exception ex)
@@ -1157,7 +1293,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
 
     //讀取日期資料
     private string LoadAssessDateInfo(string year, string assessor, string assessed)
-    {        
+    {
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
         {
             conn.Open();
@@ -1265,6 +1401,65 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                     + " AND [SELF].ASSESS_YEAR=@ASSESS_YEAR"
                     + " ORDER BY [INDEX]";
             }
+            else if (assessType == "9")
+            {
+                query = ";WITH ASSESS_TABLE"
+                    + " AS"
+                    + " ("
+                    + " SELECT ASSESSOR_ID,ASSESS_TYPE"
+                    + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+                    + " WHERE [YEAR]=@ASSESS_YEAR"
+                    + " AND ASSESSED_ID=@ASSESSED_ID"
+                    + " )"
+                    + " ,SUPER_TABLE"
+                    + " AS"
+                    + " ("
+                    + " SELECT A.[INDEX],AVG(CONVERT(DECIMAL(3,1),A.SCORE)) SCORE"
+                    + " FROM HR360_ASSESSMENTSCORE_SCORE_A A"
+                    + " LEFT JOIN ASSESS_TABLE ASSESS ON ASSESS.ASSESS_TYPE='2'"
+                    + " WHERE A.ASSESSOR_ID=ASSESS.ASSESSOR_ID"
+                    + " AND A.ASSESSED_ID=@ASSESSED_ID"
+                    + " AND A.ASSESS_YEAR=@ASSESS_YEAR"
+                    + " GROUP BY A.[INDEX]"
+                    + " ),"
+                    + " FINALIZER_TABLE"
+                    + " AS"
+                    + " ("
+                    + " SELECT A.[INDEX],A.SCORE"
+                    + " FROM HR360_ASSESSMENTSCORE_SCORE_A A"
+                    + " LEFT JOIN ASSESS_TABLE ASSESS ON ASSESS.ASSESS_TYPE='3'"
+                    + " WHERE A.ASSESSOR_ID=ASSESS.ASSESSOR_ID"
+                    + " AND A.ASSESSED_ID=@ASSESSED_ID"
+                    + " AND A.ASSESS_YEAR=@ASSESS_YEAR"
+                    + " )," +
+                    " SPECIAL_TABLE" +
+                    " AS" +
+                    " (" +
+                    " SELECT A.[INDEX],A.SCORE" +
+                    " FROM HR360_ASSESSMENTSCORE_SCORE_A A" +
+                    " LEFT JOIN ASSESS_TABLE ASSESS ON ASSESS.ASSESS_TYPE='9'" +
+                    " WHERE A.ASSESSOR_ID=ASSESS.ASSESSOR_ID" +
+                    " AND A.ASSESSED_ID=@ASSESSED_ID" +
+                    " AND A.ASSESS_YEAR=@ASSESS_YEAR" +
+                    " )"
+                    + " SELECT [SELF].[INDEX]"
+                    + " ,[SELF].QUESTION_CATEGORY_ID"
+                    + " ,[SELF].QUESTION_CATEGORY_NAME"
+                    + " ,[SELF].QUESTION_CATEGORY_WEIGHT"
+                    + " ,[SELF].QUESTION"
+                    + " ,CONVERT(DECIMAL(3,1),[SELF].SCORE) 'SELF_SCORE'"
+                    + " ,CONVERT(DECIMAL(3,1),SUPER.SCORE) 'SUPER_SCORE'"
+                    + " ,CONVERT(DECIMAL(3,1),[FINAL].SCORE) 'FINAL_SCORE'"
+                    + " ,CONVERT(DECIMAL(3,1),[SPECIAL].SCORE) 'SPECIAL_SCORE'"
+                    + " FROM HR360_ASSESSMENTSCORE_SCORE_A [SELF]"
+                    + " LEFT JOIN SUPER_TABLE SUPER ON SUPER.[INDEX]=[SELF].[INDEX]"
+                    + " LEFT JOIN FINALIZER_TABLE FINAL ON FINAL.[INDEX]=[SELF].[INDEX]"
+                    + " LEFT JOIN SPECIAL_TABLE SPECIAL ON SPECIAL.[INDEX]=[SELF].[INDEX]"
+                    + " WHERE [SELF].ASSESSOR_ID=@ASSESSED_ID"
+                    + " AND [SELF].ASSESSED_ID=@ASSESSED_ID"
+                    + " AND [SELF].ASSESS_YEAR=@ASSESS_YEAR"
+                    + " ORDER BY [INDEX]";
+            }
         }
         else
         {
@@ -1294,7 +1489,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                     + " LEFT JOIN NZ.dbo.CMSMK ON CMSMV.MV001=CMSMK.MK002"
                     + " WHERE CMSMV.MV001=@ASSESSED_ID)"
                     + " )"
-                    + " ORDER BY A.ID";                
+                    + " ORDER BY A.ID";
             }
             else if (assessType == "2") //load questions saved from 自評
             {
@@ -1343,6 +1538,54 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
                     + " AND [SELF].ASSESS_YEAR=@ASSESS_YEAR"
                     + " ORDER BY [INDEX]";
             }
+            else if (assessType == "9")
+            {
+                query = ";WITH ASSESS_TABLE"
+                    + " AS"
+                    + " ("
+                    + " SELECT ASSESSOR_ID,ASSESS_TYPE"
+                    + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A"
+                    + " WHERE [YEAR]=@ASSESS_YEAR"
+                    + " AND ASSESSED_ID=@ASSESSED_ID"
+                    + " )"
+                    + " ,SUPER_TABLE"
+                    + " AS"
+                    + " ("
+                    + " SELECT A.[INDEX],AVG(CONVERT(DECIMAL(3,1),A.SCORE)) SCORE"
+                    + " FROM HR360_ASSESSMENTSCORE_SCORE_A A"
+                    + " LEFT JOIN ASSESS_TABLE ASSESS ON ASSESS.ASSESS_TYPE='2'"
+                    + " WHERE A.ASSESSOR_ID=ASSESS.ASSESSOR_ID"
+                    + " AND A.ASSESSED_ID=@ASSESSED_ID"
+                    + " AND A.ASSESS_YEAR=@ASSESS_YEAR"
+                    + " GROUP BY A.[INDEX]"
+                    + " )"
+                    + " ,FINALIZER_TABLE"
+                    + " AS"
+                    + " ("
+                    + " SELECT A.[INDEX],AVG(CONVERT(DECIMAL(3,1),A.SCORE)) SCORE"
+                    + " FROM HR360_ASSESSMENTSCORE_SCORE_A A"
+                    + " LEFT JOIN ASSESS_TABLE ASSESS ON ASSESS.ASSESS_TYPE='3'"
+                    + " WHERE A.ASSESSOR_ID=ASSESS.ASSESSOR_ID"
+                    + " AND A.ASSESSED_ID=@ASSESSED_ID"
+                    + " AND A.ASSESS_YEAR=@ASSESS_YEAR"
+                    + " GROUP BY A.[INDEX]"
+                    + " )"
+                    + " SELECT [SELF].[INDEX]"
+                    + " ,[SELF].QUESTION_CATEGORY_ID"
+                    + " ,[SELF].QUESTION_CATEGORY_NAME"
+                    + " ,[SELF].QUESTION_CATEGORY_WEIGHT"
+                    + " ,[SELF].QUESTION"
+                    + " ,CONVERT(DECIMAL(3,1),[SELF].SCORE) 'SELF_SCORE'"
+                    + " ,CONVERT(DECIMAL(3,1),SUPER.SCORE) 'SUPER_SCORE'"
+                    + " ,CONVERT(DECIMAL(3,1),FINAL.SCORE) 'FINAL_SCORE'"
+                    + " FROM HR360_ASSESSMENTSCORE_SCORE_A [SELF]"
+                    + " LEFT JOIN SUPER_TABLE SUPER ON SUPER.[INDEX]=[SELF].[INDEX]"
+                    + " LEFT JOIN FINALIZER_TABLE FINAL ON FINAL.[INDEX]=[SELF].[INDEX]"
+                    + " WHERE [SELF].ASSESSOR_ID=@ASSESSED_ID"
+                    + " AND [SELF].ASSESSED_ID=@ASSESSED_ID"
+                    + " AND [SELF].ASSESS_YEAR=@ASSESS_YEAR"
+                    + " ORDER BY [INDEX]";
+            }
         }
 
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
@@ -1367,85 +1610,86 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
         using (SqlConnection conn = new SqlConnection(NZconnectionString))
         {
             conn.Open();
-            SqlCommand cmd = new SqlCommand(";WITH CTE1"
-+ " AS"
-+ " ("
-+ " SELECT PALTL.TL001 EMP_ID"
-+ " ,PALMC.MC001 DAY_OFF_ID"
-+ " ,PALMC.MC002 DAY_OFF_TYPE"
-+ " ,COALESCE(SUM(PALTL.TL006+PALTL.TL007),0) DAY_OFF_AMOUNT"
-+ " ,CASE PALMC.MC004"
-+ " WHEN 1 THEN N'天'"
-+ " WHEN 2 THEN N'時'"
-+ " WHEN 3 THEN N'次'"
-+ " WHEN 4 THEN N'分'"
-+ " END AS DAY_OFF_UNIT"
-+ " FROM PALMC"
-+ " LEFT OUTER JOIN PALTL ON PALMC.MC001=PALTL.TL004 AND PALTL.TL002=@YEAR AND PALTL.TL001=@ID"
-+ " GROUP BY PALTL.TL001,PALMC.MC001,PALMC.MC002,PALMC.MC004"
-+ " UNION"
-+ " SELECT"
-+ " UNPIVOTTABLE.EMP_ID"
-+ " ,CASE UNPIVOTTABLE.DAY_OFF_TYPE"
-+ " WHEN N'遲到' THEN N'98'"
-+ " WHEN N'早退' THEN N'99'"
-+ " END AS DAY_OFF_ID"
-+ " ,UNPIVOTTABLE.DAY_OFF_TYPE,UNPIVOTTABLE.DAY_OFF_AMOUNT,N'分' AS DAY_OFF_UNIT"
-+ " FROM"
-+ " ("
-+ " SELECT PALTB.TB001 EMP_ID"
-+ " ,CONVERT(DECIMAL(16,2),SUM(PALTB.TB007)) 遲到"
-+ " ,CONVERT(DECIMAL(16,2),SUM(PALTB.TB008)) 早退"
-+ " FROM PALTB"
-+ " WHERE PALTB.TB001=@ID AND SUBSTRING(PALTB.TB002,1,4)=@YEAR"
-+ " GROUP BY PALTB.TB001"
-+ " ) AS GROUPTABLE"
-+ " UNPIVOT"
-+ " ("
-+ " DAY_OFF_AMOUNT FOR DAY_OFF_TYPE IN (遲到,早退)"
-+ " ) AS UNPIVOTTABLE"
-+ " ),"
-+ " DAYOFF_SUMMARY"
-+ " AS"
-+ " ("
-+ " SELECT CASE CTE1.DAY_OFF_ID"
-+ " WHEN 04 THEN 2"
-+ " WHEN 05 THEN 2"
-+ " WHEN 10 THEN 2"
-+ " WHEN 98 THEN 2"
-+ " WHEN 99 THEN 2"
-+ " ELSE 1"
-+ " END AS DAY_OFF_CATEGORY"
-+ " , DAY_OFF_ID, DAY_OFF_TYPE"
-+ " , CASE CTE1.DAY_OFF_UNIT"
-+ " WHEN N'天' THEN CONVERT(DECIMAL(16,2),CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)*8.0)"
-+ " WHEN N'分' THEN CONVERT(DECIMAL(16,2),CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)/60.0)"
-+ " ELSE CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)"
-+ " END AS DAY_OFF_AMOUNT"
-+ " , N'時' AS DAY_OFF_UNIT"
-+ " FROM CTE1"
-+ " )"
-+ " SELECT Summary.DAY_OFF_CATEGORY"
-+ " ,Summary.DAY_OFF_ID"
-+ " ,Summary.DAY_OFF_TYPE"
-+ " ,Summary.DAY_OFF_AMOUNT"
-+ " ,Case Summary.DAY_OFF_ID"
-+ " When '02' THEN CONVERT(DECIMAL(16,1),(TK.TK005-TK.TK006))"
-+ " When '03' Then CONVERT(DECIMAL(16,1),TK.TK003)-(SELECT SUM(TF008)"
-+ " FROM PALTF"
-+ " WHERE TF001=@ID"
-+ " AND TF002 LIKE @YEAR+'%'"
-+ " AND TF004='03')"
-+ " Else 0"
-+ " END AS DAY_OFF_TOTAL"
-+ " ,Summary.DAY_OFF_UNIT"
-+ " ,COALESCE(Value.[Value],null) 'Value'"
-+ " ,N'分' 'ValueUnit'"
-+ " ,COALESCE(Convert(decimal(16,2),Summary.DAY_OFF_AMOUNT*Value.[Value]),null) 'Subtotal'"
-+ " FROM DAYOFF_SUMMARY Summary"
-+ " LEFT JOIN NZ_ERP2.dbo.HR360_Attendance_CategoryValue Value on Summary.DAY_OFF_ID=Value.[UID] and Value.[Year]=@YEAR"
-+ " LEFT JOIN PALTK TK ON TK.TK001=@ID AND TK.TK002=@YEAR"
-+ " ORDER BY DAY_OFF_CATEGORY,DAY_OFF_ID", conn);
+            SqlCommand cmd = new SqlCommand(";WITH CTE1" +
+                " AS" +
+                " (" +
+                " SELECT PALTL.TL001 EMP_ID" +
+                " , PALMC.MC001 DAY_OFF_ID" +
+                " , PALMC.MC002 DAY_OFF_TYPE" +
+                " , COALESCE(SUM(PALTL.TL006 + PALTL.TL007), 0) DAY_OFF_AMOUNT" +
+                " , CASE PALMC.MC004" +
+                " WHEN 1 THEN N'天'" +
+                " WHEN 2 THEN N'時'" +
+                " WHEN 3 THEN N'次'" +
+                " WHEN 4 THEN N'分'" +
+                " END AS DAY_OFF_UNIT" +
+                " FROM PALMC" +
+                " LEFT OUTER JOIN PALTL ON PALMC.MC001 = PALTL.TL004 AND PALTL.TL002 = @YEAR AND PALTL.TL001 = @ID" +
+                " WHERE PALMC.MC001 <> '21'" +
+                " GROUP BY PALTL.TL001, PALMC.MC001, PALMC.MC002, PALMC.MC004" +
+                " UNION" +
+                " SELECT" +
+                " UNPIVOTTABLE.EMP_ID" +
+                " , CASE UNPIVOTTABLE.DAY_OFF_TYPE" +
+                " WHEN N'遲到' THEN N'98'" +
+                " WHEN N'早退' THEN N'99'" +
+                " END AS DAY_OFF_ID" +
+                " , UNPIVOTTABLE.DAY_OFF_TYPE, UNPIVOTTABLE.DAY_OFF_AMOUNT, N'時' AS DAY_OFF_UNIT" +
+                " FROM" +
+                " (" +
+                " SELECT PALTB.TB001 EMP_ID" +
+                " , CONVERT(DECIMAL(16, 2), SUM(PALTB.TB007)) / 60.0 遲到" +
+                " , CONVERT(DECIMAL(16, 2), SUM(PALTB.TB008)) / 60.0 早退" +
+                " FROM PALTB" +
+                " WHERE PALTB.TB001 = @ID AND SUBSTRING(PALTB.TB002, 1, 4) = @YEAR" +
+                " GROUP BY PALTB.TB001" +
+                " ) AS GROUPTABLE" +
+                " UNPIVOT" +
+                " (" +
+                " DAY_OFF_AMOUNT FOR DAY_OFF_TYPE IN(遲到, 早退)" +
+                " ) AS UNPIVOTTABLE" +
+                " )," +
+                " DAYOFF_SUMMARY" +
+                " AS" +
+                " (" +
+                " SELECT CASE CTE1.DAY_OFF_ID" +
+                " WHEN 04 THEN 2" +
+                " WHEN 05 THEN 2 " +
+                " WHEN 10 THEN 2" +
+                " WHEN 98 THEN 2" +
+                " WHEN 99 THEN 2" +
+                " ELSE 1" +
+                " END AS DAY_OFF_CATEGORY" +
+                " , DAY_OFF_ID, DAY_OFF_TYPE" +
+                " , CASE CTE1.DAY_OFF_UNIT" +
+                " WHEN N'天' THEN CONVERT(DECIMAL(16, 2), CONVERT(DECIMAL(16, 2), CTE1.DAY_OFF_AMOUNT) * 8.0)" +
+                " WHEN N'分' THEN CONVERT(DECIMAL(16, 2), CONVERT(DECIMAL(16, 2), CTE1.DAY_OFF_AMOUNT) / 60.0)" +
+                " ELSE CONVERT(DECIMAL(16, 2), CTE1.DAY_OFF_AMOUNT)" +
+                " END AS DAY_OFF_AMOUNT" +
+                " , N'時' AS DAY_OFF_UNIT" +
+                " FROM CTE1" +
+                " )" +
+                " SELECT Summary.DAY_OFF_CATEGORY" +
+                " , Summary.DAY_OFF_ID" +
+                " , Summary.DAY_OFF_TYPE" +
+                " , Summary.DAY_OFF_AMOUNT" +
+                " , Case Summary.DAY_OFF_ID" +
+                " When '02' THEN CONVERT(DECIMAL(16, 1), (TK.TK005 - TK.TK006))" +
+                " When '03' Then CONVERT(DECIMAL(16, 1), TK.TK003) - (SELECT SUM(TF008)" +
+                " FROM PALTF" +
+                " WHERE TF001 = @ID" +
+                " AND TF002 LIKE @YEAR + '%'" +
+                " AND TF004 = '03')" +
+                " Else 0" +
+                " END AS DAY_OFF_TOTAL" +
+                " ,Summary.DAY_OFF_UNIT" +
+                " ,COALESCE(Value.[Value], null) 'Value'" +
+                " ,N'分' 'ValueUnit'" +
+                " ,COALESCE(Convert(decimal(16, 2), Summary.DAY_OFF_AMOUNT * Value.[Value]), null) 'Subtotal'" +
+                " FROM DAYOFF_SUMMARY Summary" +
+                " LEFT JOIN NZ_ERP2.dbo.HR360_Attendance_CategoryValue Value on Summary.DAY_OFF_ID = Value.[UID] and Value.[Year]= @YEAR" +
+                " LEFT JOIN PALTK TK ON TK.TK001 = @ID AND TK.TK002 = @YEAR" +
+                " ORDER BY DAY_OFF_CATEGORY,DAY_OFF_ID", conn);
             cmd.Parameters.AddWithValue("@ID", assessed);
             cmd.Parameters.AddWithValue("@YEAR", year);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -1510,7 +1754,7 @@ public partial class hr360_evaluationForm : System.Web.UI.Page
     }
 
     //擷取評核者清單
-    private DataTable GetAssessorList(string year, string assessed, string assessType="3")
+    private DataTable GetAssessorList(string year, string assessed, string assessType = "9")
     {
         DataTable dt = new DataTable();
         using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))

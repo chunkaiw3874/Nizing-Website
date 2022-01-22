@@ -38,7 +38,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tbcManagement = new System.Windows.Forms.TabControl();
             this.tbpQuestionCategory = new System.Windows.Forms.TabPage();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.txtQuestionCategoryTabMemo = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -139,6 +138,24 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtScoreStandardStandard = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.cbxScoreStandardYear = new System.Windows.Forms.ComboBox();
+            this.tbpSpecialAssignmentSetup = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel18 = new System.Windows.Forms.TableLayoutPanel();
+            this.flowLayoutPanel20 = new System.Windows.Forms.FlowLayoutPanel();
+            this.cbxSpecialAssignmentSetupYear = new System.Windows.Forms.ComboBox();
+            this.btnSpecialAssignmentCalculate = new System.Windows.Forms.Button();
+            this.lblSpecialAssignmentSetupLowScoreEmployee = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
+            this.flowLayoutPanel21 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnSpecialAssignmentSetupCancel = new System.Windows.Forms.Button();
+            this.btnSpecialAssignmentSetupSave = new System.Windows.Forms.Button();
+            this.gvSpecialAssignmentSetupAssignmentList = new System.Windows.Forms.DataGridView();
+            this.btnSpecialAssignmentSetupEdit = new System.Windows.Forms.Button();
+            this.txtSpecialAssignmentSetupMemo = new System.Windows.Forms.TextBox();
             this.tbpYearAndEvalTime = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
@@ -163,6 +180,10 @@
             this.dtpYearAndEvalTimeFinalizerEndTime = new System.Windows.Forms.DateTimePicker();
             this.label19 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
+            this.dtpYearAndEvalTimeSpecialStartTime = new System.Windows.Forms.DateTimePicker();
+            this.dtpYearAndEvalTimeSpecialEndTime = new System.Windows.Forms.DateTimePicker();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
             this.txtYearAndEvalTimeTabMemo = new System.Windows.Forms.RichTextBox();
             this.tbpAccountPriviledge = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
@@ -235,6 +256,13 @@
             this.flowLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.flowLayoutPanel9.SuspendLayout();
+            this.tbpSpecialAssignmentSetup.SuspendLayout();
+            this.tableLayoutPanel17.SuspendLayout();
+            this.tableLayoutPanel18.SuspendLayout();
+            this.flowLayoutPanel20.SuspendLayout();
+            this.tableLayoutPanel19.SuspendLayout();
+            this.flowLayoutPanel21.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvSpecialAssignmentSetupAssignmentList)).BeginInit();
             this.tbpYearAndEvalTime.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
@@ -278,6 +306,7 @@
             this.tbcManagement.Controls.Add(this.tbpPersonnelAssignment);
             this.tbcManagement.Controls.Add(this.tbpEmployeeWorkhourInput);
             this.tbcManagement.Controls.Add(this.tbpScoreStandard);
+            this.tbcManagement.Controls.Add(this.tbpSpecialAssignmentSetup);
             this.tbcManagement.Controls.Add(this.tbpYearAndEvalTime);
             this.tbcManagement.Controls.Add(this.tbpAccountPriviledge);
             this.tbcManagement.Controls.Add(this.tbpReportPreview);
@@ -295,7 +324,6 @@
             // tbpQuestionCategory
             // 
             this.tbpQuestionCategory.CausesValidation = false;
-            this.tbpQuestionCategory.Controls.Add(this.maskedTextBox1);
             this.tbpQuestionCategory.Controls.Add(this.tableLayoutPanel2);
             this.tbpQuestionCategory.Location = new System.Drawing.Point(4, 22);
             this.tbpQuestionCategory.Name = "tbpQuestionCategory";
@@ -304,13 +332,6 @@
             this.tbpQuestionCategory.TabIndex = 0;
             this.tbpQuestionCategory.Text = "問題分類建立";
             this.tbpQuestionCategory.UseVisualStyleBackColor = true;
-            // 
-            // maskedTextBox1
-            // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(8, 34);
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(100, 22);
-            this.maskedTextBox1.TabIndex = 1;
             // 
             // tableLayoutPanel2
             // 
@@ -509,12 +530,12 @@
             this.ctxmsQuestion.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmQuestionAssignment});
             this.ctxmsQuestion.Name = "ctxmsQuestion";
-            this.ctxmsQuestion.Size = new System.Drawing.Size(125, 26);
+            this.ctxmsQuestion.Size = new System.Drawing.Size(123, 26);
             // 
             // tsmQuestionAssignment
             // 
             this.tsmQuestionAssignment.Name = "tsmQuestionAssignment";
-            this.tsmQuestionAssignment.Size = new System.Drawing.Size(124, 22);
+            this.tsmQuestionAssignment.Size = new System.Drawing.Size(122, 22);
             this.tsmQuestionAssignment.Text = "問題分配";
             this.tsmQuestionAssignment.Click += new System.EventHandler(this.tsmQuestionAssignment_Click);
             // 
@@ -1451,7 +1472,7 @@
             this.tbpScoreStandard.Padding = new System.Windows.Forms.Padding(3);
             this.tbpScoreStandard.Size = new System.Drawing.Size(1176, 810);
             this.tbpScoreStandard.TabIndex = 4;
-            this.tbpScoreStandard.Text = "(停止使用)特評標準設定";
+            this.tbpScoreStandard.Text = "特評標準設定";
             this.tbpScoreStandard.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel5
@@ -1486,6 +1507,7 @@
             this.btnScoreStandardEdit.TabIndex = 0;
             this.btnScoreStandardEdit.Text = "編輯";
             this.btnScoreStandardEdit.UseVisualStyleBackColor = true;
+            this.btnScoreStandardEdit.Click += new System.EventHandler(this.btnScoreStandardEdit_Click);
             // 
             // txtScoreStandardTabMemo
             // 
@@ -1523,6 +1545,7 @@
             this.btnScoreStandardCancel.TabIndex = 1;
             this.btnScoreStandardCancel.Text = "取消";
             this.btnScoreStandardCancel.UseVisualStyleBackColor = true;
+            this.btnScoreStandardCancel.Click += new System.EventHandler(this.btnScoreStandardCancel_Click);
             // 
             // btnScoreStandardSave
             // 
@@ -1533,19 +1556,21 @@
             this.btnScoreStandardSave.TabIndex = 0;
             this.btnScoreStandardSave.Text = "儲存";
             this.btnScoreStandardSave.UseVisualStyleBackColor = true;
+            this.btnScoreStandardSave.Click += new System.EventHandler(this.btnScoreStandardSave_Click);
             // 
             // tableLayoutPanel7
             // 
             this.tableLayoutPanel7.ColumnCount = 1;
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel7.Controls.Add(this.flowLayoutPanel9, 0, 0);
-            this.tableLayoutPanel7.Controls.Add(this.label4, 0, 1);
+            this.tableLayoutPanel7.Controls.Add(this.flowLayoutPanel9, 0, 1);
+            this.tableLayoutPanel7.Controls.Add(this.label4, 0, 2);
+            this.tableLayoutPanel7.Controls.Add(this.cbxScoreStandardYear, 0, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(1, 31);
             this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.tableLayoutPanel7.RowCount = 2;
+            this.tableLayoutPanel7.RowCount = 3;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel7.Size = new System.Drawing.Size(1168, 641);
@@ -1556,7 +1581,7 @@
             this.flowLayoutPanel9.Controls.Add(this.label1);
             this.flowLayoutPanel9.Controls.Add(this.txtScoreStandardStandard);
             this.flowLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel9.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel9.Location = new System.Drawing.Point(0, 29);
             this.flowLayoutPanel9.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel9.Name = "flowLayoutPanel9";
             this.flowLayoutPanel9.Size = new System.Drawing.Size(1168, 29);
@@ -1582,11 +1607,228 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 29);
+            this.label4.Location = new System.Drawing.Point(3, 58);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(201, 12);
+            this.label4.Size = new System.Drawing.Size(174, 12);
             this.label4.TabIndex = 1;
-            this.label4.Text = "分數設定限制: 0-10之間，小數點一位";
+            this.label4.Text = "分數設定限制: 0-100之間 的整數";
+            // 
+            // cbxScoreStandardYear
+            // 
+            this.cbxScoreStandardYear.FormattingEnabled = true;
+            this.cbxScoreStandardYear.Location = new System.Drawing.Point(3, 3);
+            this.cbxScoreStandardYear.Name = "cbxScoreStandardYear";
+            this.cbxScoreStandardYear.Size = new System.Drawing.Size(121, 20);
+            this.cbxScoreStandardYear.TabIndex = 2;
+            this.cbxScoreStandardYear.SelectedIndexChanged += new System.EventHandler(this.cbxScoreStandardYear_SelectedIndexChanged);
+            // 
+            // tbpSpecialAssignmentSetup
+            // 
+            this.tbpSpecialAssignmentSetup.Controls.Add(this.tableLayoutPanel17);
+            this.tbpSpecialAssignmentSetup.Location = new System.Drawing.Point(4, 22);
+            this.tbpSpecialAssignmentSetup.Name = "tbpSpecialAssignmentSetup";
+            this.tbpSpecialAssignmentSetup.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpSpecialAssignmentSetup.Size = new System.Drawing.Size(1176, 810);
+            this.tbpSpecialAssignmentSetup.TabIndex = 12;
+            this.tbpSpecialAssignmentSetup.Text = "特評設定作業";
+            this.tbpSpecialAssignmentSetup.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel17
+            // 
+            this.tableLayoutPanel17.ColumnCount = 1;
+            this.tableLayoutPanel17.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel17.Controls.Add(this.tableLayoutPanel18, 0, 0);
+            this.tableLayoutPanel17.Controls.Add(this.txtSpecialAssignmentSetupMemo, 0, 1);
+            this.tableLayoutPanel17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel17.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel17.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel17.Name = "tableLayoutPanel17";
+            this.tableLayoutPanel17.RowCount = 2;
+            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel17.Size = new System.Drawing.Size(1170, 804);
+            this.tableLayoutPanel17.TabIndex = 0;
+            // 
+            // tableLayoutPanel18
+            // 
+            this.tableLayoutPanel18.ColumnCount = 2;
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel18.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel18.Controls.Add(this.flowLayoutPanel20, 1, 0);
+            this.tableLayoutPanel18.Controls.Add(this.lblSpecialAssignmentSetupLowScoreEmployee, 1, 1);
+            this.tableLayoutPanel18.Controls.Add(this.label26, 0, 0);
+            this.tableLayoutPanel18.Controls.Add(this.label27, 0, 1);
+            this.tableLayoutPanel18.Controls.Add(this.label28, 0, 2);
+            this.tableLayoutPanel18.Controls.Add(this.tableLayoutPanel19, 1, 2);
+            this.tableLayoutPanel18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel18.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel18.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel18.Name = "tableLayoutPanel18";
+            this.tableLayoutPanel18.RowCount = 3;
+            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel18.Size = new System.Drawing.Size(1170, 704);
+            this.tableLayoutPanel18.TabIndex = 0;
+            // 
+            // flowLayoutPanel20
+            // 
+            this.flowLayoutPanel20.Controls.Add(this.cbxSpecialAssignmentSetupYear);
+            this.flowLayoutPanel20.Controls.Add(this.btnSpecialAssignmentCalculate);
+            this.flowLayoutPanel20.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel20.Location = new System.Drawing.Point(100, 0);
+            this.flowLayoutPanel20.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel20.Name = "flowLayoutPanel20";
+            this.flowLayoutPanel20.Size = new System.Drawing.Size(1070, 29);
+            this.flowLayoutPanel20.TabIndex = 0;
+            // 
+            // cbxSpecialAssignmentSetupYear
+            // 
+            this.cbxSpecialAssignmentSetupYear.FormattingEnabled = true;
+            this.cbxSpecialAssignmentSetupYear.Location = new System.Drawing.Point(3, 3);
+            this.cbxSpecialAssignmentSetupYear.Name = "cbxSpecialAssignmentSetupYear";
+            this.cbxSpecialAssignmentSetupYear.Size = new System.Drawing.Size(121, 20);
+            this.cbxSpecialAssignmentSetupYear.TabIndex = 0;
+            this.cbxSpecialAssignmentSetupYear.SelectedIndexChanged += new System.EventHandler(this.cbxSpecialAssignmentSetupYear_SelectedIndexChanged);
+            // 
+            // btnSpecialAssignmentCalculate
+            // 
+            this.btnSpecialAssignmentCalculate.Location = new System.Drawing.Point(130, 3);
+            this.btnSpecialAssignmentCalculate.Name = "btnSpecialAssignmentCalculate";
+            this.btnSpecialAssignmentCalculate.Size = new System.Drawing.Size(110, 23);
+            this.btnSpecialAssignmentCalculate.TabIndex = 1;
+            this.btnSpecialAssignmentCalculate.Text = "篩選需特評人員";
+            this.btnSpecialAssignmentCalculate.UseVisualStyleBackColor = true;
+            this.btnSpecialAssignmentCalculate.Click += new System.EventHandler(this.btnSpecialAssignmentCalculate_Click);
+            // 
+            // lblSpecialAssignmentSetupLowScoreEmployee
+            // 
+            this.lblSpecialAssignmentSetupLowScoreEmployee.AutoSize = true;
+            this.lblSpecialAssignmentSetupLowScoreEmployee.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblSpecialAssignmentSetupLowScoreEmployee.Location = new System.Drawing.Point(103, 29);
+            this.lblSpecialAssignmentSetupLowScoreEmployee.Name = "lblSpecialAssignmentSetupLowScoreEmployee";
+            this.lblSpecialAssignmentSetupLowScoreEmployee.Size = new System.Drawing.Size(1064, 29);
+            this.lblSpecialAssignmentSetupLowScoreEmployee.TabIndex = 1;
+            this.lblSpecialAssignmentSetupLowScoreEmployee.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label26.Location = new System.Drawing.Point(3, 0);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(94, 29);
+            this.label26.TabIndex = 2;
+            this.label26.Text = "年份:";
+            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label27.Location = new System.Drawing.Point(3, 29);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(94, 29);
+            this.label27.TabIndex = 3;
+            this.label27.Text = "未達標人員:";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label28.Location = new System.Drawing.Point(3, 58);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(94, 646);
+            this.label28.TabIndex = 4;
+            this.label28.Text = "待設定特評人員:";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // tableLayoutPanel19
+            // 
+            this.tableLayoutPanel19.ColumnCount = 1;
+            this.tableLayoutPanel19.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel19.Controls.Add(this.flowLayoutPanel21, 0, 2);
+            this.tableLayoutPanel19.Controls.Add(this.gvSpecialAssignmentSetupAssignmentList, 0, 1);
+            this.tableLayoutPanel19.Controls.Add(this.btnSpecialAssignmentSetupEdit, 0, 0);
+            this.tableLayoutPanel19.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel19.Location = new System.Drawing.Point(100, 58);
+            this.tableLayoutPanel19.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel19.Name = "tableLayoutPanel19";
+            this.tableLayoutPanel19.RowCount = 3;
+            this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel19.Size = new System.Drawing.Size(1070, 646);
+            this.tableLayoutPanel19.TabIndex = 5;
+            // 
+            // flowLayoutPanel21
+            // 
+            this.flowLayoutPanel21.Controls.Add(this.btnSpecialAssignmentSetupCancel);
+            this.flowLayoutPanel21.Controls.Add(this.btnSpecialAssignmentSetupSave);
+            this.flowLayoutPanel21.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel21.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel21.Location = new System.Drawing.Point(0, 617);
+            this.flowLayoutPanel21.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel21.Name = "flowLayoutPanel21";
+            this.flowLayoutPanel21.Size = new System.Drawing.Size(1070, 29);
+            this.flowLayoutPanel21.TabIndex = 0;
+            // 
+            // btnSpecialAssignmentSetupCancel
+            // 
+            this.btnSpecialAssignmentSetupCancel.Location = new System.Drawing.Point(992, 3);
+            this.btnSpecialAssignmentSetupCancel.Name = "btnSpecialAssignmentSetupCancel";
+            this.btnSpecialAssignmentSetupCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnSpecialAssignmentSetupCancel.TabIndex = 1;
+            this.btnSpecialAssignmentSetupCancel.Text = "取消";
+            this.btnSpecialAssignmentSetupCancel.UseVisualStyleBackColor = true;
+            this.btnSpecialAssignmentSetupCancel.Click += new System.EventHandler(this.btnSpecialAssignmentSetupCancel_Click);
+            // 
+            // btnSpecialAssignmentSetupSave
+            // 
+            this.btnSpecialAssignmentSetupSave.Location = new System.Drawing.Point(911, 3);
+            this.btnSpecialAssignmentSetupSave.Name = "btnSpecialAssignmentSetupSave";
+            this.btnSpecialAssignmentSetupSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSpecialAssignmentSetupSave.TabIndex = 0;
+            this.btnSpecialAssignmentSetupSave.Text = "儲存";
+            this.btnSpecialAssignmentSetupSave.UseVisualStyleBackColor = true;
+            this.btnSpecialAssignmentSetupSave.Click += new System.EventHandler(this.btnSpecialAssignmentSetupSave_Click);
+            // 
+            // gvSpecialAssignmentSetupAssignmentList
+            // 
+            this.gvSpecialAssignmentSetupAssignmentList.AllowUserToAddRows = false;
+            this.gvSpecialAssignmentSetupAssignmentList.AllowUserToDeleteRows = false;
+            this.gvSpecialAssignmentSetupAssignmentList.AllowUserToResizeColumns = false;
+            this.gvSpecialAssignmentSetupAssignmentList.AllowUserToResizeRows = false;
+            this.gvSpecialAssignmentSetupAssignmentList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvSpecialAssignmentSetupAssignmentList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gvSpecialAssignmentSetupAssignmentList.Location = new System.Drawing.Point(3, 32);
+            this.gvSpecialAssignmentSetupAssignmentList.Name = "gvSpecialAssignmentSetupAssignmentList";
+            this.gvSpecialAssignmentSetupAssignmentList.RowTemplate.Height = 24;
+            this.gvSpecialAssignmentSetupAssignmentList.Size = new System.Drawing.Size(1064, 582);
+            this.gvSpecialAssignmentSetupAssignmentList.TabIndex = 1;
+            // 
+            // btnSpecialAssignmentSetupEdit
+            // 
+            this.btnSpecialAssignmentSetupEdit.Location = new System.Drawing.Point(3, 3);
+            this.btnSpecialAssignmentSetupEdit.Name = "btnSpecialAssignmentSetupEdit";
+            this.btnSpecialAssignmentSetupEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnSpecialAssignmentSetupEdit.TabIndex = 2;
+            this.btnSpecialAssignmentSetupEdit.Text = "編輯";
+            this.btnSpecialAssignmentSetupEdit.UseVisualStyleBackColor = true;
+            this.btnSpecialAssignmentSetupEdit.Click += new System.EventHandler(this.btnSpecialAssignmentSetupEdit_Click);
+            // 
+            // txtSpecialAssignmentSetupMemo
+            // 
+            this.txtSpecialAssignmentSetupMemo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSpecialAssignmentSetupMemo.Location = new System.Drawing.Point(0, 704);
+            this.txtSpecialAssignmentSetupMemo.Margin = new System.Windows.Forms.Padding(0);
+            this.txtSpecialAssignmentSetupMemo.Multiline = true;
+            this.txtSpecialAssignmentSetupMemo.Name = "txtSpecialAssignmentSetupMemo";
+            this.txtSpecialAssignmentSetupMemo.ReadOnly = true;
+            this.txtSpecialAssignmentSetupMemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtSpecialAssignmentSetupMemo.Size = new System.Drawing.Size(1170, 100);
+            this.txtSpecialAssignmentSetupMemo.TabIndex = 1;
             // 
             // tbpYearAndEvalTime
             // 
@@ -1627,7 +1869,7 @@
             this.tableLayoutPanel10.Controls.Add(this.label8, 0, 1);
             this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeStartTime, 1, 1);
             this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeEndTime, 1, 2);
-            this.tableLayoutPanel10.Controls.Add(this.flowLayoutPanel11, 1, 9);
+            this.tableLayoutPanel10.Controls.Add(this.flowLayoutPanel11, 1, 11);
             this.tableLayoutPanel10.Controls.Add(this.label10, 0, 3);
             this.tableLayoutPanel10.Controls.Add(this.label11, 0, 4);
             this.tableLayoutPanel10.Controls.Add(this.label12, 0, 5);
@@ -1640,11 +1882,17 @@
             this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeFinalizerEndTime, 1, 8);
             this.tableLayoutPanel10.Controls.Add(this.label19, 0, 7);
             this.tableLayoutPanel10.Controls.Add(this.label21, 0, 8);
+            this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeSpecialStartTime, 1, 9);
+            this.tableLayoutPanel10.Controls.Add(this.dtpYearAndEvalTimeSpecialEndTime, 1, 10);
+            this.tableLayoutPanel10.Controls.Add(this.label23, 0, 9);
+            this.tableLayoutPanel10.Controls.Add(this.label24, 0, 10);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel10.Location = new System.Drawing.Point(1, 1);
             this.tableLayoutPanel10.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RowCount = 10;
+            this.tableLayoutPanel10.RowCount = 12;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
@@ -1722,10 +1970,10 @@
             this.flowLayoutPanel11.Controls.Add(this.btnYearAndEvalTimeSave);
             this.flowLayoutPanel11.Controls.Add(this.btnYearAndEvalTimeCancel);
             this.flowLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel11.Location = new System.Drawing.Point(120, 261);
+            this.flowLayoutPanel11.Location = new System.Drawing.Point(120, 319);
             this.flowLayoutPanel11.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel11.Name = "flowLayoutPanel11";
-            this.flowLayoutPanel11.Size = new System.Drawing.Size(1048, 440);
+            this.flowLayoutPanel11.Size = new System.Drawing.Size(1048, 382);
             this.flowLayoutPanel11.TabIndex = 9;
             // 
             // btnYearAndEvalTimeSave
@@ -1867,6 +2115,46 @@
             this.label21.TabIndex = 19;
             this.label21.Text = "核決主管結束時間:";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dtpYearAndEvalTimeSpecialStartTime
+            // 
+            this.dtpYearAndEvalTimeSpecialStartTime.Location = new System.Drawing.Point(123, 264);
+            this.dtpYearAndEvalTimeSpecialStartTime.Name = "dtpYearAndEvalTimeSpecialStartTime";
+            this.dtpYearAndEvalTimeSpecialStartTime.Size = new System.Drawing.Size(200, 22);
+            this.dtpYearAndEvalTimeSpecialStartTime.TabIndex = 9;
+            // 
+            // dtpYearAndEvalTimeSpecialEndTime
+            // 
+            this.dtpYearAndEvalTimeSpecialEndTime.Location = new System.Drawing.Point(123, 293);
+            this.dtpYearAndEvalTimeSpecialEndTime.Name = "dtpYearAndEvalTimeSpecialEndTime";
+            this.dtpYearAndEvalTimeSpecialEndTime.Size = new System.Drawing.Size(200, 22);
+            this.dtpYearAndEvalTimeSpecialEndTime.TabIndex = 10;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label23.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label23.ForeColor = System.Drawing.Color.Crimson;
+            this.label23.Location = new System.Drawing.Point(3, 261);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(114, 29);
+            this.label23.TabIndex = 22;
+            this.label23.Text = "特評開始時間:";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label24.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label24.ForeColor = System.Drawing.Color.Crimson;
+            this.label24.Location = new System.Drawing.Point(3, 290);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(114, 29);
+            this.label24.TabIndex = 23;
+            this.label24.Text = "特評結束時間:";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtYearAndEvalTimeTabMemo
             // 
@@ -2248,7 +2536,6 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tbcManagement.ResumeLayout(false);
             this.tbpQuestionCategory.ResumeLayout(false);
-            this.tbpQuestionCategory.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -2299,6 +2586,15 @@
             this.tableLayoutPanel7.PerformLayout();
             this.flowLayoutPanel9.ResumeLayout(false);
             this.flowLayoutPanel9.PerformLayout();
+            this.tbpSpecialAssignmentSetup.ResumeLayout(false);
+            this.tableLayoutPanel17.ResumeLayout(false);
+            this.tableLayoutPanel17.PerformLayout();
+            this.tableLayoutPanel18.ResumeLayout(false);
+            this.tableLayoutPanel18.PerformLayout();
+            this.flowLayoutPanel20.ResumeLayout(false);
+            this.tableLayoutPanel19.ResumeLayout(false);
+            this.flowLayoutPanel21.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gvSpecialAssignmentSetupAssignmentList)).EndInit();
             this.tbpYearAndEvalTime.ResumeLayout(false);
             this.tableLayoutPanel11.ResumeLayout(false);
             this.tableLayoutPanel10.ResumeLayout(false);
@@ -2455,7 +2751,6 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox txtSetScoreWeightFinalizerWeight;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label22;
@@ -2481,5 +2776,27 @@
         private System.Windows.Forms.Button btnPersonnelAssignmentClearData;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel19;
         private System.Windows.Forms.Button btnFinalScoreAssessmentDone;
+        private System.Windows.Forms.DateTimePicker dtpYearAndEvalTimeSpecialStartTime;
+        private System.Windows.Forms.DateTimePicker dtpYearAndEvalTimeSpecialEndTime;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.ComboBox cbxScoreStandardYear;
+        private System.Windows.Forms.TabPage tbpSpecialAssignmentSetup;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel17;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel18;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel20;
+        private System.Windows.Forms.ComboBox cbxSpecialAssignmentSetupYear;
+        private System.Windows.Forms.Label lblSpecialAssignmentSetupLowScoreEmployee;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel19;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel21;
+        private System.Windows.Forms.Button btnSpecialAssignmentSetupCancel;
+        private System.Windows.Forms.Button btnSpecialAssignmentSetupSave;
+        private System.Windows.Forms.DataGridView gvSpecialAssignmentSetupAssignmentList;
+        private System.Windows.Forms.TextBox txtSpecialAssignmentSetupMemo;
+        private System.Windows.Forms.Button btnSpecialAssignmentSetupEdit;
+        private System.Windows.Forms.Button btnSpecialAssignmentCalculate;
     }
 }

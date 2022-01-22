@@ -19,8 +19,6 @@ public partial class hr360_UI05 : System.Web.UI.Page
     //Setup basic info for the assessment 
     string year = "";
 
-
-
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -32,6 +30,8 @@ public partial class hr360_UI05 : System.Web.UI.Page
         DateTime superEvalEnd = new DateTime();
         DateTime finalizerEvalStart = new DateTime();
         DateTime finalizerEvalEnd = new DateTime();
+        DateTime specialEvalStart = new DateTime();
+        DateTime specialEvalEnd = new DateTime();
         divPlaceholder.Visible = false;
 
         ////////test area
@@ -60,8 +60,13 @@ public partial class hr360_UI05 : System.Web.UI.Page
                 ",EVAL_SUPERVISOR_ENDTIME" +
                 ",EVAL_FINALIZER_STARTTIME" +
                 ",EVAL_FINALIZER_ENDTIME" +
+                ",coalesce(EVAL_SPECIAL_STARTTIME, getdate()) 'EVAL_SPECIAL_STARTTIME'" +
+                ",coalesce(EVAL_SPECIAL_ENDTIME, getdate()) 'EVAL_SPECIAL_ENDTIME'" +
                 " from HR360_ASSESSMENTTIME" +
-                " where EVAL_YEAR = (select MIN(EVAL_YEAR) from HR360_ASSESSMENTTIME where EVAL_DONE = 0)";
+                " where EVAL_YEAR = " +
+                " (select MIN(EVAL_YEAR) " +
+                " from HR360_ASSESSMENTTIME " +
+                " where EVAL_DONE = 0)";
             SqlCommand cmd = new SqlCommand(query, conn);
             using (SqlDataReader dr = cmd.ExecuteReader())
             {
@@ -78,6 +83,8 @@ public partial class hr360_UI05 : System.Web.UI.Page
                         superEvalEnd = dr.GetDateTime(6);
                         finalizerEvalStart = dr.GetDateTime(7);
                         finalizerEvalEnd = dr.GetDateTime(8);
+                        specialEvalStart = dr.GetDateTime(9);
+                        specialEvalEnd = dr.GetDateTime(10);
                     }
                 }
             }
@@ -96,11 +103,13 @@ public partial class hr360_UI05 : System.Web.UI.Page
                     ddlBonusYear.Items.Add(i.ToString());
                 }
             }
-            //Create table for all three assessment type (自評、主管評、核決主管評)
+            //Create table for all four assessment type (自評、主管評、核決主管評、特評)
             DataTable dtEvalSelf = new DataTable();  //自評 table
             DataTable dtEvalSupervisor = new DataTable();  //直屬主管評 table
             DataTable dtEvalFinalizer = new DataTable();  //核決主管評 table
-                                                          //Fill tables (未評核人員)
+            DataTable dtEvalSpecial = new DataTable();  //特評 table
+            
+            //Fill tables (未評核人員)
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
@@ -152,8 +161,24 @@ public partial class hr360_UI05 : System.Web.UI.Page
                 {
                     dtEvalFinalizer.Load(dr);
                 }
+                //fill 特評 list
+                cmd = new SqlCommand("SELECT ASSESSED_ID,B.MV002 'ASSESSED_NAME'"
+                                    + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
+                                    + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
+                                    + " WHERE ASSESSOR_ID=@ID AND [YEAR]=@YEAR AND ASSESS_TYPE=@TYPE"
+                                    + " AND ASSESSMENT_DONE<>N'1'"
+                                    + " AND ACTIVE='1'"
+                                    + " AND B.MV022=''"
+                                    + " ORDER BY ASSESSED_ID", conn);
+                cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                cmd.Parameters.AddWithValue("@YEAR", year);
+                cmd.Parameters.AddWithValue("@TYPE", 9);
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    dtEvalSpecial.Load(dr);
+                }
             }
-            int rowNumber = Math.Max(dtEvalSupervisor.Rows.Count, Math.Max(dtEvalSelf.Rows.Count, dtEvalFinalizer.Rows.Count)); //number of rows for the table display
+            int rowNumber = Math.Max(dtEvalSpecial.Rows.Count, Math.Max(dtEvalSupervisor.Rows.Count, Math.Max(dtEvalSelf.Rows.Count, dtEvalFinalizer.Rows.Count))); //number of rows for the table display
             for (int i = 0; i < rowNumber; i++)
             {
                 //寫入動態table
@@ -241,11 +266,38 @@ public partial class hr360_UI05 : System.Web.UI.Page
                         td.Controls.Add(lbl);
                     }
                 }
+                //insert first column into row (特評)
+                td = new HtmlGenericControl();
+                td.TagName = "td";
+                td.ID = tr.ID.ToString() + "_4";
+                td.Attributes["class"] = "text-center";
+                tr.Controls.Add(td);
+                //判斷dtEvalFinalizer裡面有沒有東西
+                if (dtEvalSpecial != null && dtEvalSpecial.Rows.Count > i)
+                {
+                    if (DateTime.Now >= specialEvalStart && DateTime.Now < specialEvalEnd)
+                    {
+                        //insert control into 特評 column
+                        LinkButton lb = new LinkButton();
+                        lb.ID = dtEvalSpecial.Rows[i][0].ToString();
+                        lb.Text = dtEvalSpecial.Rows[i][1].ToString();
+                        lb.Click += new EventHandler(lb_Click);
+                        td.Controls.Add(lb);
+                    }
+                    else
+                    {
+                        Label lbl = new Label();
+                        lbl.ID = dtEvalSpecial.Rows[i][0].ToString();
+                        lbl.Text = dtEvalSpecial.Rows[i][1].ToString();
+                        td.Controls.Add(lbl);
+                    }
+                }
             }
             //Fill tables (已評核人員)
             dtEvalSelf = new DataTable();  //new 自評 table 
             dtEvalSupervisor = new DataTable();  //new 主管評 table
             dtEvalFinalizer = new DataTable();  //new 核決主管評 table
+            dtEvalSpecial = new DataTable();    //new 特評 table
             using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
             {
                 conn.Open();
@@ -297,8 +349,24 @@ public partial class hr360_UI05 : System.Web.UI.Page
                 {
                     dtEvalFinalizer.Load(dr);
                 }
+                //fill 特評 list
+                cmd = new SqlCommand("SELECT ASSESSED_ID,B.MV002 'ASSESSED_NAME'"
+                                    + " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A"
+                                    + " LEFT JOIN NZ.dbo.CMSMV B ON A.ASSESSED_ID=B.MV001"
+                                    + " WHERE ASSESSOR_ID=@ID AND [YEAR]=@YEAR AND ASSESS_TYPE=@TYPE"
+                                    + " AND ASSESSMENT_DONE=N'1'"
+                                    + " AND ACTIVE='1'"
+                                    + " AND B.MV022=''"
+                                    + " ORDER BY ASSESSED_ID", conn);
+                cmd.Parameters.AddWithValue("@ID", Session["erp_id"].ToString());
+                cmd.Parameters.AddWithValue("@YEAR", year);
+                cmd.Parameters.AddWithValue("@TYPE", 9);
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    dtEvalSpecial.Load(dr);
+                }
             }
-            rowNumber = Math.Max(dtEvalSupervisor.Rows.Count, Math.Max(dtEvalSelf.Rows.Count, dtEvalFinalizer.Rows.Count)); //number of rows for the table display
+            rowNumber = Math.Max(dtEvalSpecial.Rows.Count, Math.Max(dtEvalSupervisor.Rows.Count, Math.Max(dtEvalSelf.Rows.Count, dtEvalFinalizer.Rows.Count))); //number of rows for the table display
             for (int i = 0; i < rowNumber; i++)
             {
                 //寫入動態table
@@ -382,6 +450,32 @@ public partial class hr360_UI05 : System.Web.UI.Page
                         Label lbl = new Label();
                         lbl.ID = dtEvalFinalizer.Rows[i][0].ToString();
                         lbl.Text = dtEvalFinalizer.Rows[i][1].ToString();
+                        td.Controls.Add(lbl);
+                    }
+                }
+                //insert fourth column (特評)
+                td = new HtmlGenericControl();
+                td.TagName = "td";
+                td.ID = tr.ID.ToString() + "_4";
+                td.Attributes["class"] = "text-center";
+                tr.Controls.Add(td);
+                //判斷dtEvalSpecial裡面有沒有東西
+                if (dtEvalSpecial != null && dtEvalSpecial.Rows.Count > i)
+                {
+                    if (DateTime.Now >=specialEvalStart && DateTime.Now < specialEvalEnd)
+                    {
+                        //insert control into 特評 column
+                        LinkButton lb = new LinkButton();
+                        lb.ID = dtEvalSpecial.Rows[i][0].ToString().Trim();
+                        lb.Text = dtEvalSpecial.Rows[i][1].ToString().Trim();
+                        lb.Click += new EventHandler(lb_Click);
+                        td.Controls.Add(lb);
+                    }
+                    else
+                    {
+                        Label lbl = new Label();
+                        lbl.ID = dtEvalSpecial.Rows[i][0].ToString();
+                        lbl.Text = dtEvalSpecial.Rows[i][1].ToString();
                         td.Controls.Add(lbl);
                     }
                 }

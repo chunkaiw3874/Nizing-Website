@@ -820,7 +820,7 @@
             <!--非自評的話，需於code behind加上一個動態div for 評核者 comment-->
             <div class="row">
                 <div class="col-xs-12 subtitle border">
-                    自評評語
+                    自我評語與建議
                 </div>
             </div>
             <div class="row">

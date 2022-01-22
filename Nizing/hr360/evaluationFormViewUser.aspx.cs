@@ -11,7 +11,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
-{   
+{
     //每年須手動修改的地方有"edit annually"的字樣，請查詢!!!!!
 
     string ERP2ConnectionString = ConfigurationManager.ConnectionStrings["ERP2ConnectionString"].ConnectionString;
@@ -25,11 +25,11 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
     {
         string assessed = "";
         string year = "";
-        ////////test info
-        //Session["erp_id"] = "0080";
-        //Session["view_year"] = "2019";
-        //////////////////////////////
-        
+        //////test info
+        //Session["erp_id"] = "0001";
+        //Session["view_year"] = "2021";
+        ////////////////////////////
+
         if (!IsPostBack)
         {
             assessed = Session["erp_id"].ToString().Trim();
@@ -78,99 +78,194 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
 
         //製作評核問題欄位於divQuestionBodyRow
         CreateQuestionBodyRow(dtQuestionData);
-
         //讀取最終評核成績
         DataTable dtQuestionnaireScore = new DataTable();
         dtQuestionnaireScore = GetWeightedScore(year, assessed);
         //製作評核問題最終成績欄位於finalScoreRow
         CreateFinalScoreRow(dtQuestionnaireScore);
 
-        //置入各評核者所打的最終分數        
-        
+        //2022.01.21: 加入特評，評核計算方式變更
+        if (Convert.ToInt32(year) >= 2021)
+        {
+            //get assessors, assessment types, weighted scores, if the score is below standard
+            DataTable dtAssessorScoreData = GetAssessorScoresAndWeight(Convert.ToInt32(year), assessed);
+
+            //calculate the weight of each assessment types
+            double selfEvalWeight = (dtAssessorScoreData.Select("assessType=1")).Count() > 0 ? Convert.ToDouble(dtAssessorScoreData.Select("assessType=1")[0]["scoreWeight"].ToString()) : 0;
+            double numberOfSupervisors = (dtAssessorScoreData.Select("assessType=2")).Count();
+            double numberOfQualifiedSupervisors = (dtAssessorScoreData.Select("assessType=2 and isQualified=1")).Count();
+            double supervisorEvalWeight = (dtAssessorScoreData.Select("assessType=2")).Count() > 0 ? Convert.ToDouble(dtAssessorScoreData.Select("assessType=2")[0]["scoreWeight"].ToString()) * numberOfQualifiedSupervisors / numberOfSupervisors : 0;
+            double finalEvalWeight = (dtAssessorScoreData.Select("assessType=3")).Count() > 0 ? Convert.ToDouble(dtAssessorScoreData.Select("assessType=3")[0]["scoreWeight"].ToString()) : 0;
+            double specialEvalWeight = (dtAssessorScoreData.Select("assessType=3 and isQualified=0")).Count() > 0 ?
+                (Convert.ToDouble(dtAssessorScoreData.Select("assessType=2")[0]["scoreWeight"].ToString()) * (numberOfSupervisors - numberOfQualifiedSupervisors) / numberOfSupervisors)
+                + Convert.ToDouble(dtAssessorScoreData.Select("assessType=3")[0]["scoreWeight"].ToString()) : (Convert.ToDouble(dtAssessorScoreData.Select("assessType=2")[0]["scoreWeight"].ToString()) * (numberOfSupervisors - numberOfQualifiedSupervisors) / numberOfSupervisors);
+            //get qualify assessor's score for each questions
+            //calculate each question's weighted scores
+            DataTable dtQuestionWeightedScore = new DataTable();
+            using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+            {
+                conn.Open();
+                query = ";with selfEvalScore" +
+                    " as" +
+                    " (" +
+                    " select [INDEX]" +
+                    " , QUESTION_CATEGORY_WEIGHT" +
+                    " , coalesce(cast(SCORE as decimal(5,2)), 0) * " + selfEvalWeight.ToString() + " 'weightedScore'" +
+                    " from HR360_ASSESSMENTSCORE_SCORE_A" +
+                    " where ASSESS_YEAR = @year" +
+                    " and ASSESSED_ID = @assessedId" +
+                    " and ASSESSOR_ID = @assessorIdSelf" +
+                    " )" +
+                    " ,supervisorEvalScore" +
+                    " as" +
+                    " (" +
+                    " select [INDEX]" +
+                    " , coalesce(cast(SCORE as decimal(5,2)), 0) * " + supervisorEvalWeight.ToString() + " 'weightedScore'" +
+                    " from HR360_ASSESSMENTSCORE_SCORE_A" +
+                    " where ASSESS_YEAR = @year" +
+                    " and ASSESSED_ID = @assessedId" +
+                    " and ASSESSOR_ID = @assessorIdSupervisor" +
+                    " )" +
+                    " ,finalEvalScore" +
+                    " as" +
+                    " (" +
+                    " select [INDEX]" +
+                    " , coalesce(cast(SCORE as decimal(5,2)), 0) * " + finalEvalWeight.ToString() + " 'weightedScore'" +
+                    " from HR360_ASSESSMENTSCORE_SCORE_A" +
+                    " where ASSESS_YEAR = @year" +
+                    " and ASSESSED_ID = @assessedId" +
+                    " and ASSESSOR_ID = @assessorIdFinal" +
+                    " )" +
+                    " ,specialEvalScore" +
+                    " as" +
+                    " (" +
+                    " select ASSESSOR_ID" +
+                    " ,[INDEX]" +
+                    " , coalesce(cast(SCORE as decimal(5,2)), 0) * " + specialEvalWeight.ToString() + " 'weightedScore'" +
+                    " from HR360_ASSESSMENTSCORE_SCORE_A" +
+                    " where ASSESS_YEAR = @year" +
+                    " and ASSESSED_ID = @assessedId" +
+                    " and ASSESSOR_ID = @assessorIdSpecial" +
+                    " )" +
+                    " select ses.[INDEX] 'questionIndex'" +
+                    " ,ses.QUESTION_CATEGORY_WEIGHT 'questionWeight'" +
+                    " ,cast((coalesce(ses.weightedScore, 0) + coalesce(superes.weightedScore, 0) + coalesce(fes.weightedScore, 0) + coalesce(speciales.weightedScore, 0)) / 100.0 as decimal(4, 2)) 'questionWeightedScore'" +
+                    " from selfEvalScore ses" +
+                    " left join supervisorEvalScore superes on ses.[INDEX] = superes.[INDEX]" +
+                    " left join finalEvalScore fes on ses.[INDEX] = fes.[INDEX]" +
+                    " left join specialEvalScore speciales on ses.[INDEX] = speciales.[INDEX]" +
+                    " order by ses.[INDEX]";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@year", year);
+                cmd.Parameters.AddWithValue("@assessedId", assessed);
+                cmd.Parameters.AddWithValue("@assessorIdSelf", (dtAssessorScoreData.Select("assessType=1")).Count() > 0 ? dtAssessorScoreData.Select("assessType=1")[0]["assessorId"].ToString() : "");
+                cmd.Parameters.AddWithValue("@assessorIdSupervisor", (dtAssessorScoreData.Select("assessType=2")).Count() > 0 ? dtAssessorScoreData.Select("assessType=2")[0]["assessorId"].ToString() : "");
+                cmd.Parameters.AddWithValue("@assessorIdFinal", (dtAssessorScoreData.Select("assessType=3")).Count() > 0 ? dtAssessorScoreData.Select("assessType=3")[0]["assessorId"].ToString() : "");
+                cmd.Parameters.AddWithValue("@assessorIdSpecial", (dtAssessorScoreData.Select("assessType=9")).Count() > 0 ? dtAssessorScoreData.Select("assessType=9")[0]["assessorId"].ToString() : "");
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dtQuestionWeightedScore);
+            }
+            //calculate final score
+            double finalScore = 0;
+            double totalScoreWeight = 0;
+            double accumulatedWeightedScore = 0;
+            for (int i = 0; i < dtQuestionWeightedScore.Rows.Count; i++)
+            {
+                DataRow dr = dtQuestionWeightedScore.Rows[i];
+                Label lbl = (Label)divQuestionBodyRow.FindControl("lblAssessmentScore" + (i+1).ToString());
+                lbl.Text = dr["questionWeightedScore"].ToString();
+                totalScoreWeight += Convert.ToDouble(dr["questionWeight"].ToString());
+                accumulatedWeightedScore += Convert.ToDouble(dr["questionWeightedScore"].ToString()) * Convert.ToDouble(dr["questionWeight"].ToString());
+            }
+            finalScore = Math.Round(accumulatedWeightedScore / totalScoreWeight, 2);
+        }
+
+
         //讀取出勤資料
         DataTable dtAttendance = new DataTable();
         using (SqlConnection conn = new SqlConnection(NZconnectionString))
         {
             conn.Open();
-            SqlCommand cmd = new SqlCommand(";WITH CTE1"
-+ " AS"
-+ " ("
-+ " SELECT PALTL.TL001 EMP_ID"
-+ " ,PALMC.MC001 DAY_OFF_ID"
-+ " ,PALMC.MC002 DAY_OFF_TYPE"
-+ " ,COALESCE(SUM(PALTL.TL006+PALTL.TL007),0) DAY_OFF_AMOUNT"
-+ " ,CASE PALMC.MC004"
-+ " WHEN 1 THEN N'天'"
-+ " WHEN 2 THEN N'時'"
-+ " WHEN 3 THEN N'次'"
-+ " WHEN 4 THEN N'分'"
-+ " END AS DAY_OFF_UNIT"
-+ " FROM PALMC"
-+ " LEFT OUTER JOIN PALTL ON PALMC.MC001=PALTL.TL004 AND PALTL.TL002=@YEAR AND PALTL.TL001=@ID"
-+ " GROUP BY PALTL.TL001,PALMC.MC001,PALMC.MC002,PALMC.MC004"
-+ " UNION"
-+ " SELECT"
-+ " UNPIVOTTABLE.EMP_ID"
-+ " ,CASE UNPIVOTTABLE.DAY_OFF_TYPE"
-+ " WHEN N'遲到' THEN N'98'"
-+ " WHEN N'早退' THEN N'99'"
-+ " END AS DAY_OFF_ID"
-+ " ,UNPIVOTTABLE.DAY_OFF_TYPE,UNPIVOTTABLE.DAY_OFF_AMOUNT,N'分' AS DAY_OFF_UNIT"
-+ " FROM"
-+ " ("
-+ " SELECT PALTB.TB001 EMP_ID"
-+ " ,CONVERT(DECIMAL(16,2),SUM(PALTB.TB007))/60.0 遲到"
-+ " ,CONVERT(DECIMAL(16,2),SUM(PALTB.TB008))/60.0 早退"
-+ " FROM PALTB"
-+ " WHERE PALTB.TB001=@ID AND SUBSTRING(PALTB.TB002,1,4)=@YEAR"
-+ " GROUP BY PALTB.TB001"
-+ " ) AS GROUPTABLE"
-+ " UNPIVOT"
-+ " ("
-+ " DAY_OFF_AMOUNT FOR DAY_OFF_TYPE IN (遲到,早退)"
-+ " ) AS UNPIVOTTABLE"
-+ " ),"
-+ " DAYOFF_SUMMARY"
-+ " AS"
-+ " ("
-+ " SELECT CASE CTE1.DAY_OFF_ID"
-+ " WHEN 04 THEN 2"
-+ " WHEN 05 THEN 2"
-+ " WHEN 10 THEN 2"
-+ " WHEN 98 THEN 2"
-+ " WHEN 99 THEN 2"
-+ " ELSE 1"
-+ " END AS DAY_OFF_CATEGORY"
-+ " , DAY_OFF_ID, DAY_OFF_TYPE"
-+ " , CASE CTE1.DAY_OFF_UNIT"
-+ " WHEN N'天' THEN CONVERT(DECIMAL(16,2),CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)*8.0)"
-+ " WHEN N'分' THEN CONVERT(DECIMAL(16,2),CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)/60.0)"
-+ " ELSE CONVERT(DECIMAL(16,2),CTE1.DAY_OFF_AMOUNT)"
-+ " END AS DAY_OFF_AMOUNT"
-+ " , N'時' AS DAY_OFF_UNIT"
-+ " FROM CTE1"
-+ " )"
-+ " SELECT Summary.DAY_OFF_CATEGORY"
-+ " ,Summary.DAY_OFF_ID"
-+ " ,Summary.DAY_OFF_TYPE"
-+ " ,Summary.DAY_OFF_AMOUNT"
-+ " ,Case Summary.DAY_OFF_ID"
-+ " When '02' THEN CONVERT(DECIMAL(16,1),(TK.TK005-TK.TK006))"
-+ " When '03' Then CONVERT(DECIMAL(16,1),TK.TK003)-(SELECT SUM(TF008)"
-+ " FROM PALTF"
-+ " WHERE TF001=@ID"
-+ " AND TF002 LIKE @YEAR+'%'"
-+ " AND TF004='03')"
-+ " Else 0"
-+ " END AS DAY_OFF_TOTAL"
-+ " ,Summary.DAY_OFF_UNIT"
-+ " ,COALESCE(Value.[Value],null) 'Value'"
-+ " ,N'分' 'ValueUnit'"
-+ " ,COALESCE(Convert(decimal(16,2),Summary.DAY_OFF_AMOUNT*Value.[Value]),null) 'Subtotal'"
-+ " FROM DAYOFF_SUMMARY Summary"
-+ " LEFT JOIN NZ_ERP2.dbo.HR360_Attendance_CategoryValue Value on Summary.DAY_OFF_ID=Value.[UID] and Value.[Year]=@YEAR"
-+ " LEFT JOIN PALTK TK ON TK.TK001=@ID AND TK.TK002=@YEAR"
-+ " ORDER BY DAY_OFF_CATEGORY,DAY_OFF_ID", conn);
+            SqlCommand cmd = new SqlCommand(";WITH CTE1" +
+                " AS" +
+                " (" +
+                " SELECT PALTL.TL001 EMP_ID" +
+                " , PALMC.MC001 DAY_OFF_ID" +
+                " , PALMC.MC002 DAY_OFF_TYPE" +
+                " , COALESCE(SUM(PALTL.TL006 + PALTL.TL007), 0) DAY_OFF_AMOUNT" +
+                " , CASE PALMC.MC004" +
+                " WHEN 1 THEN N'天'" +
+                " WHEN 2 THEN N'時'" +
+                " WHEN 3 THEN N'次'" +
+                " WHEN 4 THEN N'分'" +
+                " END AS DAY_OFF_UNIT" +
+                " FROM PALMC" +
+                " LEFT OUTER JOIN PALTL ON PALMC.MC001 = PALTL.TL004 AND PALTL.TL002 = @YEAR AND PALTL.TL001 = @ID" +
+                " WHERE PALMC.MC001 <> '21'" +
+                " GROUP BY PALTL.TL001, PALMC.MC001, PALMC.MC002, PALMC.MC004" +
+                " UNION" +
+                " SELECT" +
+                " UNPIVOTTABLE.EMP_ID" +
+                " , CASE UNPIVOTTABLE.DAY_OFF_TYPE" +
+                " WHEN N'遲到' THEN N'98'" +
+                " WHEN N'早退' THEN N'99'" +
+                " END AS DAY_OFF_ID" +
+                " , UNPIVOTTABLE.DAY_OFF_TYPE, UNPIVOTTABLE.DAY_OFF_AMOUNT, N'時' AS DAY_OFF_UNIT" +
+                " FROM" +
+                " (" +
+                " SELECT PALTB.TB001 EMP_ID" +
+                " , CONVERT(DECIMAL(16, 2), SUM(PALTB.TB007)) / 60.0 遲到" +
+                " , CONVERT(DECIMAL(16, 2), SUM(PALTB.TB008)) / 60.0 早退" +
+                " FROM PALTB" +
+                " WHERE PALTB.TB001 = @ID AND SUBSTRING(PALTB.TB002, 1, 4) = @YEAR" +
+                " GROUP BY PALTB.TB001" +
+                " ) AS GROUPTABLE" +
+                " UNPIVOT" +
+                " (" +
+                " DAY_OFF_AMOUNT FOR DAY_OFF_TYPE IN(遲到, 早退)" +
+                " ) AS UNPIVOTTABLE" +
+                " )," +
+                " DAYOFF_SUMMARY" +
+                " AS" +
+                " (" +
+                " SELECT CASE CTE1.DAY_OFF_ID" +
+                " WHEN 04 THEN 2" +
+                " WHEN 05 THEN 2 " +
+                " WHEN 10 THEN 2" +
+                " WHEN 98 THEN 2" +
+                " WHEN 99 THEN 2" +
+                " ELSE 1" +
+                " END AS DAY_OFF_CATEGORY" +
+                " , DAY_OFF_ID, DAY_OFF_TYPE" +
+                " , CASE CTE1.DAY_OFF_UNIT" +
+                " WHEN N'天' THEN CONVERT(DECIMAL(16, 2), CONVERT(DECIMAL(16, 2), CTE1.DAY_OFF_AMOUNT) * 8.0)" +
+                " WHEN N'分' THEN CONVERT(DECIMAL(16, 2), CONVERT(DECIMAL(16, 2), CTE1.DAY_OFF_AMOUNT) / 60.0)" +
+                " ELSE CONVERT(DECIMAL(16, 2), CTE1.DAY_OFF_AMOUNT)" +
+                " END AS DAY_OFF_AMOUNT" +
+                " , N'時' AS DAY_OFF_UNIT" +
+                " FROM CTE1" +
+                " )" +
+                " SELECT Summary.DAY_OFF_CATEGORY" +
+                " , Summary.DAY_OFF_ID" +
+                " , Summary.DAY_OFF_TYPE" +
+                " , Summary.DAY_OFF_AMOUNT" +
+                " , Case Summary.DAY_OFF_ID" +
+                " When '02' THEN CONVERT(DECIMAL(16, 1), (TK.TK005 - TK.TK006))" +
+                " When '03' Then CONVERT(DECIMAL(16, 1), TK.TK003) - (SELECT SUM(TF008)" +
+                " FROM PALTF" +
+                " WHERE TF001 = @ID" +
+                " AND TF002 LIKE @YEAR + '%'" +
+                " AND TF004 = '03')" +
+                " Else 0" +
+                " END AS DAY_OFF_TOTAL" +
+                " ,Summary.DAY_OFF_UNIT" +
+                " ,COALESCE(Value.[Value], null) 'Value'" +
+                " ,N'分' 'ValueUnit'" +
+                " ,COALESCE(Convert(decimal(16, 2), Summary.DAY_OFF_AMOUNT * Value.[Value]), null) 'Subtotal'" +
+                " FROM DAYOFF_SUMMARY Summary" +
+                " LEFT JOIN NZ_ERP2.dbo.HR360_Attendance_CategoryValue Value on Summary.DAY_OFF_ID = Value.[UID] and Value.[Year]= @YEAR" +
+                " LEFT JOIN PALTK TK ON TK.TK001 = @ID AND TK.TK002 = @YEAR" +
+                " ORDER BY DAY_OFF_CATEGORY,DAY_OFF_ID", conn);
             cmd.Parameters.AddWithValue("@ID", lblEmpID.Text.Trim());
             cmd.Parameters.AddWithValue("@YEAR", year);
             using (SqlDataReader dr = cmd.ExecuteReader())
@@ -291,7 +386,7 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
             lblExpectedAttendance.Text = Convert.ToDouble(checkForNull).ToString("N2");
             lblActualAttendance.Text = (Convert.ToDouble(checkForNull) - dayOffSum).ToString("N2");
             lblAttendanceScore.Text = (100 + dayOffValue).ToString("N2");
-            lblAttendanceFailure.Text = (((Convert.ToDouble(checkForNull) - dayOffSum) / Convert.ToDouble(checkForNull))*100 - 100).ToString("N2") + "%";
+            lblAttendanceFailure.Text = (((Convert.ToDouble(checkForNull) - dayOffSum) / Convert.ToDouble(checkForNull)) * 100).ToString("N2") + "%";
             //lblOnJobPercent.Text = (Math.Floor(100 * 100 * (1 - (dayOffSum / onJobHour))) / 100).ToString();    //2018.07.23 改成小數第二位無條件捨去
         }
         else
@@ -685,6 +780,7 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
         return dt;
     }
 
+    //2021之前使用
     private DataTable GetWeightedScore(string year, string assessed)
     {
         DataTable dt = new DataTable();
@@ -969,8 +1065,8 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
         finalScoreRow.Controls.Add(div);
         lbl = new Label();
         lbl.CssClass = "form-control text-center text-color-green";
-        lbl.Text = dtWeightedScore.Rows.Count <= 0 ? "未評核" : dtWeightedScore.Rows[0]["EvaluationScore"].ToString();            
-        div.Controls.Add(lbl);        
+        lbl.Text = dtWeightedScore.Rows.Count <= 0 ? "未評核" : dtWeightedScore.Rows[0]["EvaluationScore"].ToString();
+        div.Controls.Add(lbl);
     }
 
     private void CreateCommentRow(List<string> commentatorList, List<string> specialCommentator, DataTable dtComments)
@@ -1009,12 +1105,121 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
             TextBox txt = new TextBox();
             txt.ID = "txtComment" + commentatorList[i];
             txt.CssClass = "form-control no-resize autosize";
-            txt.ReadOnly = true;            
+            txt.ReadOnly = true;
             txt.TextMode = TextBoxMode.MultiLine;
             txt.Wrap = true;
             txt.Text = commentatorContent == null ? "" : commentatorContent.ToString();
-            controlDiv.Controls.Add(txt);            
+            controlDiv.Controls.Add(txt);
         }
     }
 
+    protected DataTable GetAssessorScoresAndWeight(int assessYear, string assessedId)
+    {
+        DataTable dt = new DataTable();
+        using (SqlConnection conn = new SqlConnection(ERP2ConnectionString))
+        {
+            conn.Open();
+            string query = ";WITH SCORE_TABLE" +
+                " AS" +
+                " (" +
+                " SELECT A.ASSESSED_ID[受評者ID]" +
+                " , cast(coalesce(B.WEIGHTED_SCORE, cast(0 as decimal(4, 2))) as decimal(4, 2))[自評分數]" +
+                " , (SELECT coalesce(scoreWeight, 0)" +
+                " from HR360_AssessmentCategory_CategoryWeight" +
+                " where assessYear = @YEAR" +
+                " and assessType = '1') '自評權重'" +
+                " ,cast(coalesce(C.WEIGHTED_SCORE, cast(0 as decimal(4, 2))) as decimal(4, 2))[主管評分數]" +
+                " ,(SELECT coalesce(scoreWeight, 0)" +
+                " from HR360_AssessmentCategory_CategoryWeight" +
+                " where assessYear = @YEAR" +
+                " and assessType = '2') '主管評權重'" +
+                " ,(select ASSESSOR_ID" +
+                " from HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A C1" +
+                " where C1.[YEAR]= @YEAR" +
+                " and C1.ASSESSED_ID = A.ASSESSED_ID" +
+                " and C1.ASSESS_TYPE = '3') '核決主管ID'" +
+                " ,cast(coalesce(D.WEIGHTED_SCORE, cast(0 as decimal(4, 2))) as decimal(4, 2))[核決主管評分數]" +
+                " ,(SELECT coalesce(scoreWeight, 0)" +
+                " from HR360_AssessmentCategory_CategoryWeight" +
+                " where assessYear = @YEAR" +
+                " and assessType = '3') '核決主管評權重'" +
+                " ,cast(coalesce(E.WEIGHTED_SCORE, cast(0 as decimal(4, 2))) as decimal(4, 2))特評分數" +
+                " ,cast(coalesce(SCORE.ATTENDANCE_SCORE, cast(0 as decimal(5, 2))) as decimal(5, 2))[出勤成績]" +
+                " ,cast(coalesce(SCORE.RNP_SCORE, cast(0 as decimal(5, 2))) as decimal(5, 2))[獎懲成績]" +
+                " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A" +
+                " LEFT JOIN NZ.dbo.CMSMV MV ON A.ASSESSED_ID = MV.MV001" +
+                " LEFT JOIN HR360_ASSESSMENTSCORE_ASSESSED_A SCORE ON A.ASSESSOR_ID = SCORE.ASSESSOR_ID AND A.ASSESSED_ID = SCORE.ASSESSED_ID AND A.[YEAR]= SCORE.ASSESS_YEAR" +
+                " LEFT JOIN" +
+                " (" +
+                " SELECT A.ASSESSED_ID, SCORE.WEIGHTED_SCORE 'WEIGHTED_SCORE'" +
+                " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A" +
+                " LEFT JOIN HR360_ASSESSMENTSCORE_ASSESSED_A SCORE ON A.ASSESSOR_ID = SCORE.ASSESSOR_ID AND A.ASSESSED_ID = SCORE.ASSESSED_ID AND A.[YEAR]= SCORE.ASSESS_YEAR" +
+                " WHERE A.ACTIVE = '1' AND A.ASSESS_TYPE = '1'" +
+                " AND A.[YEAR]= @YEAR" +
+                " ) B ON A.ASSESSOR_ID = B.ASSESSED_ID" +
+                " LEFT JOIN" +
+                " (" +
+                " SELECT A.ASSESSED_ID, AVG(CONVERT(DECIMAL(5,2),SCORE.WEIGHTED_SCORE)) 'WEIGHTED_SCORE'" +
+                " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A" +
+                " LEFT JOIN HR360_ASSESSMENTSCORE_ASSESSED_A SCORE ON A.ASSESSOR_ID = SCORE.ASSESSOR_ID AND A.ASSESSED_ID = SCORE.ASSESSED_ID AND A.[YEAR]= SCORE.ASSESS_YEAR" +
+                " WHERE A.ACTIVE = '1' AND A.ASSESS_TYPE = '2'" +
+                " AND A.[YEAR]= @YEAR" +
+                " GROUP BY A.ASSESSED_ID" +
+                " ) C ON A.ASSESSOR_ID = C.ASSESSED_ID" +
+                " LEFT JOIN" +
+                " (" +
+                " SELECT A.ASSESSED_ID, SCORE.WEIGHTED_SCORE" +
+                " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A" +
+                " LEFT JOIN HR360_ASSESSMENTSCORE_ASSESSED_A SCORE ON A.ASSESSOR_ID= SCORE.ASSESSOR_ID AND A.ASSESSED_ID= SCORE.ASSESSED_ID AND A.[YEAR]= SCORE.ASSESS_YEAR" +
+                " WHERE A.ACTIVE= '1' AND A.ASSESS_TYPE= '3'" +
+                " AND A.[YEAR]= @YEAR" +
+                " ) D ON A.ASSESSOR_ID = D.ASSESSED_ID" +
+                " LEFT JOIN" +
+                " (" +
+                " SELECT A.ASSESSED_ID, SCORE.WEIGHTED_SCORE" +
+                " FROM HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A A" +
+                " LEFT JOIN HR360_ASSESSMENTSCORE_ASSESSED_A SCORE ON A.ASSESSOR_ID= SCORE.ASSESSOR_ID AND A.ASSESSED_ID= SCORE.ASSESSED_ID AND A.[YEAR]= SCORE.ASSESS_YEAR" +
+                " WHERE A.ACTIVE= '1' AND A.ASSESS_TYPE= '9'" +
+                " AND A.[YEAR]= @YEAR" +
+                " ) E ON A.ASSESSOR_ID = E.ASSESSED_ID" +
+                " WHERE A.ACTIVE = '1'" +
+                " AND A.ASSESS_TYPE = '1'" +
+                " AND A.[YEAR]= @YEAR" +
+                " )" +
+                " ,finalScore" +
+                " as" +
+                " (" +
+                " SELECT st.受評者ID[empId]" +
+                " ,cast(((st.自評分數 * st.自評權重 / 10.0) + (st.主管評分數 * st.主管評權重 / 10.0) + (st.核決主管評分數 * st.核決主管評權重 / 10.0)) * 0.8 + st.出勤成績 * 0.2 + st.獎懲成績 as decimal(5, 2)) 'finalScore'" +
+                " FROM SCORE_TABLE st" +
+                " )" +
+                " select fs.empId 'assessorId'" +
+                " ,fs.finalScore 'score'" +
+                " ,assignment.ASSESS_TYPE 'assessType'" +
+                " ,cw.scoreWeight" +
+                " ,case" +
+                " when fs.finalScore < (SELECT COALESCE(SCORE_STANDARD, 0)" +
+                " FROM HR360_ASSESSMENTSCORE_STANDARD" +
+                " where[YEAR] = (SELECT" +
+                " MAX([YEAR])" +
+                " FROM HR360_ASSESSMENTSCORE_STANDARD" +
+                " WHERE[YEAR] <= @YEAR))" +
+                " then 0" +
+                " else 1" +
+                " end as 'isQualified'" +
+                " from finalScore fs" +
+                " left join HR360_ASSESSMENTPERSONNEL_ASSIGNMENT_A assignment" +
+                " on fs.empId = assignment.ASSESSOR_ID" +
+                " and assignment.[YEAR]= @YEAR" +
+                " left join HR360_AssessmentCategory_CategoryWeight cw on assignment.ASSESS_TYPE = cw.assessType and assignment.[YEAR]= cw.assessYear" +
+                " where assignment.ASSESSED_ID = @assessedId" +
+                " and assignment.ACTIVE = '1'";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@YEAR", assessYear);
+            cmd.Parameters.AddWithValue("@assessedId", assessedId);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+        }
+        return dt;
+    }
 }

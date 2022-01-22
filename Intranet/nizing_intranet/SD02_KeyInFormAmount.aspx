@@ -26,6 +26,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div class="container">
         <div id="formTitle" class="form-group">
             <div class="row">
@@ -70,80 +71,87 @@
             </div>
         </div>
         <div id="displayField" class="pt-3">
-            <asp:Label ID="lblQueryRange" runat="server" Text="{查詢範圍}"></asp:Label>
-            <div class="table-responsive">
-                <asp:GridView ID="gvResult" runat="server"
-                    CssClass="table table-striped-blue table-has-footer"
-                    AutoGenerateColumns="false"
-                    ShowFooter="true"
-                    OnDataBound="gvResult_DataBound">
-                    <Columns>
-                        <asp:TemplateField>
-                            <HeaderTemplate>
-                                #
-                            </HeaderTemplate>
-                            <ItemTemplate>
-                                <asp:Label ID="Label1" runat="server" Text='<%#Eval("#") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField>
-                            <HeaderTemplate>
-                                人員姓名
-                            </HeaderTemplate>
-                            <ItemTemplate>
-                                <asp:Label ID="Label2" runat="server" Text='<%#Eval("人員姓名") %>'></asp:Label>
-                            </ItemTemplate>
-                            <FooterTemplate>
-                                小記:
-                            </FooterTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField>
-                            <HeaderTemplate>
-                                報價單
-                            </HeaderTemplate>
-                            <ItemTemplate>
-                                <asp:Label ID="lblPI" runat="server" Text='<%#Eval("報價單") %>'></asp:Label>
-                            </ItemTemplate>
-                            <FooterTemplate>
-                                <asp:Label ID="lblPITotal" runat="server" Text="Label"></asp:Label>
-                            </FooterTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField>
-                            <HeaderTemplate>
-                                訂單
-                            </HeaderTemplate>
-                            <ItemTemplate>
-                                <asp:Label ID="lblPO" runat="server" Text='<%#Eval("訂單") %>'></asp:Label>
-                            </ItemTemplate>
-                            <FooterTemplate>
-                                <asp:Label ID="lblPOTotal" runat="server" Text="Label"></asp:Label>
-                            </FooterTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField>
-                            <HeaderTemplate>
-                                銷貨單
-                            </HeaderTemplate>
-                            <ItemTemplate>
-                                <asp:Label ID="lblSO" runat="server" Text='<%#Eval("銷貨單") %>'></asp:Label>
-                            </ItemTemplate>
-                            <FooterTemplate>
-                                <asp:Label ID="lblSOTotal" runat="server" Text="Label"></asp:Label>
-                            </FooterTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField>
-                            <HeaderTemplate>
-                                總數
-                            </HeaderTemplate>
-                            <ItemTemplate>
-                                <asp:Label ID="lblTotal" runat="server" Text='<%#Eval("總數") %>'></asp:Label>
-                            </ItemTemplate>
-                            <FooterTemplate>
-                                <asp:Label ID="lblAllTotal" runat="server" Text="Label"></asp:Label>
-                            </FooterTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
-            </div>
+            <asp:UpdatePanel ID="upReport" runat="server">
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="btnSubmit" />
+                </Triggers>
+                <ContentTemplate>
+                    <asp:Label ID="lblQueryRange" runat="server" Text="{查詢範圍}"></asp:Label>
+                    <div class="table-responsive">
+                        <asp:GridView ID="gvResult" runat="server"
+                            CssClass="table table-striped-blue table-has-footer"
+                            AutoGenerateColumns="false"
+                            ShowFooter="true"
+                            OnDataBound="gvResult_DataBound">
+                            <Columns>
+                                <asp:TemplateField>
+                                    <HeaderTemplate>
+                                        #
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label1" runat="server" Text='<%#Eval("#") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField>
+                                    <HeaderTemplate>
+                                        人員姓名
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label2" runat="server" Text='<%#Eval("人員姓名") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                        小記:
+                                    </FooterTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField>
+                                    <HeaderTemplate>
+                                        報價單
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblPI" runat="server" Text='<%#Eval("報價單") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                        <asp:Label ID="lblPITotal" runat="server" Text="Label"></asp:Label>
+                                    </FooterTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField>
+                                    <HeaderTemplate>
+                                        訂單
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblPO" runat="server" Text='<%#Eval("訂單") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                        <asp:Label ID="lblPOTotal" runat="server" Text="Label"></asp:Label>
+                                    </FooterTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField>
+                                    <HeaderTemplate>
+                                        銷貨單
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblSO" runat="server" Text='<%#Eval("銷貨單") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                        <asp:Label ID="lblSOTotal" runat="server" Text="Label"></asp:Label>
+                                    </FooterTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField>
+                                    <HeaderTemplate>
+                                        總數
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblTotal" runat="server" Text='<%#Eval("總數") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                        <asp:Label ID="lblAllTotal" runat="server" Text="Label"></asp:Label>
+                                    </FooterTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
     </div>
 </asp:Content>
