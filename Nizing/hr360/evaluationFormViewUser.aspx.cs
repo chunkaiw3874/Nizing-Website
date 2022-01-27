@@ -26,7 +26,7 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
         string assessed = "";
         string year = "";
         //////test info
-        //Session["erp_id"] = "0001";
+        //Session["erp_id"] = "0133";
         //Session["view_year"] = "2021";
         ////////////////////////////
 
@@ -1192,6 +1192,10 @@ public partial class hr360_evaluationFormViewUser : System.Web.UI.Page
                 " SELECT st.受評者ID[empId]" +
                 " ,cast(((st.自評分數 * st.自評權重 / 10.0) + (st.主管評分數 * st.主管評權重 / 10.0) + (st.核決主管評分數 * st.核決主管評權重 / 10.0)) * 0.8 + st.出勤成績 * 0.2 + st.獎懲成績 as decimal(5, 2)) 'finalScore'" +
                 " FROM SCORE_TABLE st" +
+                " union" +
+                " select '0006', 100" +     //0006跟0007因為不需要經過評核，故手動加入
+                " union" +
+                " select '0007', 100" +
                 " )" +
                 " select fs.empId 'assessorId'" +
                 " ,fs.finalScore 'score'" +
