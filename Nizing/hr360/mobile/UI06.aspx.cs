@@ -244,6 +244,12 @@ public partial class hr360_UI06 : System.Web.UI.Page
     {
         DateTime slipAvailableDate = DateTime.ParseExact(ddlYear.SelectedValue + ddlMonth.SelectedValue + "05170000", "yyyyMMddHHmmss", null);
 
+        //例外: 202201 薪資單於 2022/02/01 即可檢查
+        if(ddlYear.SelectedValue == "2022" && ddlMonth.SelectedValue== "01" && DateTime.Now >= DateTime.ParseExact("20220201000000", "yyyyMMddHHmmss", null))
+        {
+            return true;
+        }
+
         if (DateTime.Now > slipAvailableDate.AddYears(1).AddMonths(1))  //2019.01.31 Check implemented per Chrissy
         {
             lblErrorMessage.Text = "此系統僅能查詢一年內薪資單，如需查詢更久以前的，請與人事部聯繫";
