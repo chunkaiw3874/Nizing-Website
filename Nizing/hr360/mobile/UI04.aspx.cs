@@ -1790,7 +1790,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
         {
             conn.Open();
             string query = "SELECT APP.APPLICATION_STATUS_ID" +
-                        " ,HIER.MEMBEROF" +
+                        " ,COALESCE(HIER.MEMBEROF,'產線') 'MEMBEROF'" +
                         " ,APP.APPLICANT_ID" +
                         " ,APP.FUNCTIONAL_SUBSTITUTE_ID" +
                         " FROM HR360_DAYOFFAPPLICATION_APPLICATION APP" +
@@ -1845,7 +1845,8 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     conn.Open();
                     DataTable dt = new DataTable();
                     //get applicant's dept
-                    string query = "SELECT MV.MV004,HIER.[RANK]"
+                    string query = "SELECT MV.MV004" +
+                                " ,COALESCE(HIER.[RANK],1) 'RANK'"
                                 + " FROM NZ.dbo.CMSMV MV"
                                 + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MV.MV006=HIER.JOB_ID"
                                 + " WHERE MV.MV001=@ID";
@@ -1862,7 +1863,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
                         + " LEFT JOIN HR360_DAYOFFAPPLICATION_DEPT_REFERENCE REF ON MV.MV004=REF.DEPT_MAIN AND REF.ACTIVE=1"
                         + " WHERE MV.MV001=@ID"
                         + " )"
-                        + " SELECT TOP 1 MV.MV001,MV.MV002,MV.MV004,MK.MK001,HIER.[RANK],HIER.MEMBEROF"
+                        + " SELECT TOP 1 MV.MV001,MV.MV002,MV.MV004,MK.MK001" +
+                        " ,COALESCE(HIER.[RANK], 1) 'RANK'" +
+                        " ,COALESCE(HIER.MEMBEROF,'產線') 'MEMBEROF'"
                         + " FROM NZ.dbo.CMSMV MV"
                         + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
                         + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
@@ -1908,7 +1911,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
                     {
                         conn.Open();
                         //簽核限制:產線 RANK 4-6
-                        string query = "SELECT TOP 1 MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
+                        string query = "SELECT TOP 1 MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002" +
+                            " ,COALESCE(HIER.[RANK],1) 'RANK'" +
+                            " ,COALESCE(HIER.MEMBEROF,'產線') 'MEMBEROF'"
                                     + " FROM NZ.dbo.CMSMV MV"
                                     + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
                                     + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
@@ -1943,7 +1948,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 {
                     conn.Open();
                     //簽核限制:人事主任 RANK 7 //HR(2018.10.08 HR:NONE)
-                    string query = "SELECT MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
+                    string query = "SELECT MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002" +
+                        " ,COALESCE(HIER.[RANK],1) 'RANK'" +
+                        " ,COALESCE(HIER.MEMBEROF,'產線') 'MEMBEROF'"
                                 + " FROM NZ.dbo.CMSMV MV"
                                 + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
                                 + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
@@ -1974,7 +1981,9 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 {
                     conn.Open();
                     //簽核限制:副總 RANK 8
-                    string query = "SELECT MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002,HIER.[RANK],HIER.MEMBEROF"
+                    string query = "SELECT MV.MV001,MV.MV002,MV.MV004,MK.MK001,MK.MK002" +
+                        " ,COALESCE(HIER.[RANK],1) 'RANK'" +
+                        " ,COALESCE(HIER.MEMBEROF,'產線') 'MEMBEROF'"
                                 + " FROM NZ.dbo.CMSMV MV"
                                 + " LEFT JOIN NZ.dbo.CMSMK MK ON MV.MV001=MK.MK002"
                                 + " LEFT JOIN HR360_DAYOFFAPPLICATION_APPROVAL_HIERARCHY HIER ON MK.MK001=HIER.JOB_ID"
