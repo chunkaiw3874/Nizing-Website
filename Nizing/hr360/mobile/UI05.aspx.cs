@@ -623,6 +623,8 @@ public partial class hr360_UI05 : System.Web.UI.Page
             ddlTarget.Items.Add(new ListItem(dtViewList.Rows[i][0].ToString(), dtViewList.Rows[i][1].ToString()));
         }
 
+        ddlTarget.Items.Add(new ListItem("0080 王君凱", "0080"));
+
     }
     protected void ddlViewYear_SelectedIndexChanged(object sender, EventArgs e)
     {
