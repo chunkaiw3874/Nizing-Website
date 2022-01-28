@@ -244,8 +244,8 @@ public partial class hr360_UI06 : System.Web.UI.Page
     {
         DateTime slipAvailableDate = DateTime.ParseExact(ddlYear.SelectedValue + ddlMonth.SelectedValue + "05170000", "yyyyMMddHHmmss", null);
 
-        //例外: 202201 薪資單於 2022/02/01 即可檢查
-        if(ddlYear.SelectedValue == "2022" && ddlMonth.SelectedValue== "01" && DateTime.Now >= DateTime.ParseExact("20220201000000", "yyyyMMddHHmmss", null))
+        //例外: 202201 薪資單於 2022/01/28 即可檢查
+        if(ddlYear.SelectedValue == "2022" && ddlMonth.SelectedValue== "01" && DateTime.Now >= DateTime.ParseExact("20220128150000", "yyyyMMddHHmmss", null))
         {
             return true;
         }
