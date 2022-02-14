@@ -65,28 +65,48 @@ public partial class nizing_intranet_PD04_KeyInFormAmount : System.Web.UI.Page
                 " ,tc.CREATOR '打單人員'" +
                 " ,COUNT(*) '單數'" +
                 " from PURTC tc" +
-                " where tc.TC024 between @start and @end" +
+                " where tc.TC014='Y'" +
+                " and tc.TC024 between @start and @end" +
                 " group by tc.CREATOR" +
                 " union" +
                 " select '進貨單'" +
                 " ,tg.CREATOR" +
                 " ,COUNT(*)" +
                 " from PURTG tg" +
-                " where tg.TG014 between @start and @end" +
+                " where tg.TG013='Y'" +
+                " and tg.TG014 between @start and @end" +
                 " group by tg.CREATOR" +
+                " union" +
+                " select '製令'" +
+                " ,ta.CREATOR" +
+                " ,COUNT(*)" +
+                " from MOCTA ta" +
+                " where ta.TA013='Y'" +
+                " and ta.TA003 between @start and @end" +
+                " group by ta.CREATOR" +
+                " union" +
+                " select '托外進貨單'" +
+                " ,th.CREATOR" +
+                " ,COUNT(*)" +
+                " from MOCTH th" +
+                " where th.TH023='Y'" +
+                " and th.TH029 between @start and @end" +
+                " group by th.CREATOR" +
                 " )" +
-                " select ROW_NUMBER() over(order by coalesce(採購單, 0) + coalesce(進貨單, 0) desc) '#'" +
+                " select ROW_NUMBER() over(order by coalesce(採購單, 0) + coalesce(進貨單, 0) + coalesce(製令, 0) + coalesce(托外進貨單, 0) desc) '#'" +
                 " ,ma.MA002 '人員姓名'" +
                 " ,coalesce(採購單, 0) '採購單'" +
                 " ,coalesce(進貨單, 0) '進貨單'" +
-                " ,coalesce(採購單, 0) + coalesce(進貨單, 0) '總數'" +
+                " ,coalesce(製令, 0) '製令'" +
+                " ,coalesce(托外進貨單, 0) '托外進貨單'" +
+                " ,coalesce(採購單, 0) + coalesce(進貨單, 0) + coalesce(製令, 0) + coalesce(托外進貨單, 0) '總數'" +
                 " from" +
                 " (" +
                 " select *" +
                 " from keyInTable" +
                 " ) src" +
                 " pivot" +
-                " (sum(單數) for 單別 in ([採購單],[進貨單])) pvt" +
+                " (sum(單數) for 單別 in ([採購單],[進貨單],[製令],[托外進貨單])) pvt" +
                 " left join SMARTDSCSYS.dbo.DSCMA ma on ma.MA001 = pvt.打單人員";
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@start", queryDateRange[0]);
@@ -152,17 +172,23 @@ public partial class nizing_intranet_PD04_KeyInFormAmount : System.Web.UI.Page
     {
         decimal sumPurchaseForm = 0;
         decimal sumReceiveMaterialForm = 0;
+        decimal sumProduceForm = 0;
+        decimal sumReceiveOutsourceForm = 0;
         decimal sumTotal = 0;
 
         for (int i = 0; i < gvResult.Rows.Count; i++)
         {
             sumPurchaseForm += Convert.ToDecimal(((Label)gvResult.Rows[i].FindControl("lblPurchaseForm")).Text);
             sumReceiveMaterialForm += Convert.ToDecimal(((Label)gvResult.Rows[i].FindControl("lblReceiveMaterialForm")).Text);
+            sumProduceForm += Convert.ToDecimal(((Label)gvResult.Rows[i].FindControl("lblProduceForm")).Text);
+            sumReceiveOutsourceForm += Convert.ToDecimal(((Label)gvResult.Rows[i].FindControl("lblReceiveOutsourceForm")).Text);
             sumTotal += Convert.ToDecimal(((Label)gvResult.Rows[i].FindControl("lblTotal")).Text);
         }
 
         ((Label)gvResult.FooterRow.FindControl("lblPurchaseFormTotal")).Text = sumPurchaseForm.ToString();
         ((Label)gvResult.FooterRow.FindControl("lblReceiveMaterialFormTotal")).Text = sumReceiveMaterialForm.ToString();
+        ((Label)gvResult.FooterRow.FindControl("lblProduceFormTotal")).Text = sumProduceForm.ToString();
+        ((Label)gvResult.FooterRow.FindControl("lblReceiveOutsourceFormTotal")).Text = sumReceiveOutsourceForm.ToString();
         ((Label)gvResult.FooterRow.FindControl("lblAllTotal")).Text = sumTotal.ToString();
     }
 }

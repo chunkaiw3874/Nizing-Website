@@ -127,6 +127,28 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <HeaderTemplate>
+                                        製令
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblProduceForm" runat="server" Text='<%#Eval("製令") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                        <asp:Label ID="lblProduceFormTotal" runat="server" Text="Label"></asp:Label>
+                                    </FooterTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField>
+                                    <HeaderTemplate>
+                                        托外進貨單
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblReceiveOutsourceForm" runat="server" Text='<%#Eval("托外進貨單") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                        <asp:Label ID="lblReceiveOutsourceFormTotal" runat="server" Text="Label"></asp:Label>
+                                    </FooterTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField>
+                                    <HeaderTemplate>
                                         總數
                                     </HeaderTemplate>
                                     <ItemTemplate>
