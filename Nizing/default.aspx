@@ -855,6 +855,41 @@
                         </div>
                         <div class="col">
                             <div class="newest-item">
+                                <a href="/<%=RouteData.Values["language"].ToString() %>/application/misc-app/military-spec-signal-control-cable">
+                                    <div class="image-section">
+                                        <picture>
+                                            <source srcset="/images/application/products/military-spec-signal-control-cable/menu/military-spec-signal-control-cable.webp" type="image/webp">
+                                            <img src="/images/application/products/military-spec-signal-control-cable/menu/military-spec-signal-control-cable.jpg"
+                                                alt="MIL軍規線無人機/無人載具訊號控制線 MIL Drone Signal Control Cable">
+                                        </picture>
+                                    </div>
+                                </a>
+                                <div class="text-section">
+                                    <div class="title text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
+                                                無人機/無人載具訊號控制線
+                                                <%}
+                    else
+                    {%>
+                                                Drone Signal Communication Cable
+                                            <%}%>
+                                    </div>
+                                    <div class="subtitle text-left">
+                                        <%if (RouteData.Values["language"].ToString() == "zh")
+                                            {%>
+                                                MIL認證軍規線
+                                                <%}
+                     else
+                     {%>
+                                                MIL Spec Cable
+                                            <%}%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                        <div class="col">
+                            <div class="newest-item">
                                 <a href="">
                                     <div class="image-section">
                                         <picture>
@@ -883,41 +918,6 @@
                                         else
                                         {%>
                                                 Communications Cable
-                                            <%}%>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="newest-item">
-                                <a href="">
-                                    <div class="image-section">
-                                        <picture>
-                                            <source srcset="https://via.placeholder.com/350x250?text=&nbsp" type="image/webp">
-                                            <img src="https://via.placeholder.com/350x250?text=&nbsp"
-                                                alt="MIL軍規線無人機/無人載具訊號控制線 MIL Drone Signal Control Cable">
-                                        </picture>
-                                    </div>
-                                </a>
-                                <div class="text-section">
-                                    <div class="title text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh")
-                                            {%>
-                                                無人機/無人載具訊號控制線
-                                                <%}
-                    else
-                    {%>
-                                                Drone Signal Communication Cable
-                                            <%}%>
-                                    </div>
-                                    <div class="subtitle text-left">
-                                        <%if (RouteData.Values["language"].ToString() == "zh")
-                                            {%>
-                                                MIL認證軍規線
-                                                <%}
-                     else
-                     {%>
-                                                MIL Spec Cable
                                             <%}%>
                                     </div>
                                 </div>

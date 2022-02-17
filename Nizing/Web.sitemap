@@ -230,6 +230,7 @@
 				<siteMapNode url="/zh/application/misc-app/military-spec-missile-control-cable" title="飛彈控制軍規線" description="飛彈控制軍規線"></siteMapNode>
 				<siteMapNode url="/zh/application/misc-app/military-spec-submarine-cable" title="軍規船舶複合電纜" description="軍規船舶複合電纜"></siteMapNode>
 				<siteMapNode url="/zh/application/misc-app/military-spec-high-frequency-transmission-control-cable" title="軍規高頻傳輸控制複合電纜" description="軍規高頻傳輸控制複合電纜"></siteMapNode>
+				<siteMapNode url="/zh/application/misc-app/military-spec-signal-control-cable" title="軍規訊號控制線" description="軍規訊號控制線"></siteMapNode>
 			</siteMapNode>
 		</siteMapNode>
 
@@ -484,6 +485,7 @@
 				<siteMapNode url="/en/application/misc-app/military-spec-missile-control-cable" title="Military Spec Missile Control Cable" description="Military Spec Missile Control Cable"></siteMapNode>
 				<siteMapNode url="/en/application/misc-app/military-spec-submarine-cable" title="Military Spec Submarine Cable" description="Military Spec Submarine Cable"></siteMapNode>
 				<siteMapNode url="/en/application/misc-app/military-spec-high-frequency-transmission-control-cable" title="Military Spec High Frequency Transmission Control Cable" description="Military Spec High Frequency Transmission Control Cable"></siteMapNode>
+				<siteMapNode url="/en/application/misc-app/military-spec-signal-control-cable" title="Military Spec Signal Control Cable" description="Military Spec Signal Control Cable"></siteMapNode>
 			</siteMapNode>
 		</siteMapNode>
 
