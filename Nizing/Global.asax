@@ -94,6 +94,7 @@
         routes.MapPageRoute("", "{language}/application/{application}/military-spec-submarine-cable", "~/application/military-spec-submarine-cable.aspx");
         routes.MapPageRoute("", "{language}/application/{application}/military-spec-high-frequency-transmission-control-cable", "~/application/military-spec-high-frequency-transmission-control-cable.aspx");
         routes.MapPageRoute("", "{language}/application/{application}/military-spec-signal-control-cable", "~/application/military-spec-signal-control-cable.aspx");
+        routes.MapPageRoute("", "{language}/application/{application}/dual-insulation-high-voltage-silicone-wire", "~/application/dual-insulation-high-voltage-silicone-wire.aspx");
 
 
         routes.MapPageRoute("", "{language}/material", "~/material.aspx");

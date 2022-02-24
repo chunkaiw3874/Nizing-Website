@@ -38,7 +38,7 @@
                                     "Real life application for drones is ever expanding. Drones possess the characteristics of high mobility, multi-purpose, heavy loading, and long air time, which requires stability, agility, and performance of the highest standard aria-invalid its components. The ideal cable for such an intricate machine needs to withstand high temperature, oil and chemical resistant, anti-aging, and highly flexible, in order to bring out the full capability of the drone."
                                             <%}%> />
     <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/military-spec-signal-control-cable/impression/military-spec-signal-control-cable-01-mobile.jpg" />
-    <meta property="og:url" content="https://www.nizing.com.tw/<%=RouteData.Values["language"].ToString() %>/application/automobile/military-spec-signal-control-cable" />
+    <meta property="og:url" content="https://www.nizing.com.tw/<%=RouteData.Values["language"].ToString() %>/application/misc-app/military-spec-signal-control-cable" />
     <meta property="og:site_name" content="Nizing Electric Wire and Cable" />
     <style type="text/css">
         .breadcrumb {

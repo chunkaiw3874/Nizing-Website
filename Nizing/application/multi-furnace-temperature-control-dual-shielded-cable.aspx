@@ -1,13 +1,27 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWDApplicationMaster.master" AutoEventWireup="true" CodeFile="multi-furnace-temperature-control-dual-shielded-cable.aspx.cs" Inherits="application_multi_furnace_temperature_control_dual_shielded_cable" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <title>多爐溫控系統雙層屏蔽線-日進電線 2021</title>
-    <meta name="description" content="為工業機器量身訂做的溫控線，可運用在大型高溫爐的多爐溫控，高溫爐對於溫度控制相對嚴格，如有差池對產品質量會有很大影響，機器設備本身的溫度也會間接影響其機器壽命長度，所以數據精準的回饋相當的重要，此線材特別針對每對電熱偶進行單獨包覆隔離網，並在整體外層增加多重防雜訊隔離，雙層屏蔽的保護之下，可更加有效的阻止外部電磁雜訊的干擾並保持傳輸網絡信號數據的精準回饋。" />
+    <title><%if (RouteData.Values["language"].ToString() == "zh")
+               {%>
+                                                多爐溫控系統雙層屏蔽線-日進電線
+                                                <%}
+                                                    else
+                                                    {%>
+                                                 Multi Furnace Temperature Control Dual Shielded Cable - Nizing Electric Wire & Cable
+                                            <%}%></title>
+    <meta name="description" content=<%if (RouteData.Values["language"].ToString() == "zh")
+               {%>
+                                                "為工業機器量身訂做的溫控線，可運用在大型高溫爐的多爐溫控，高溫爐對於溫度控制相對嚴格，如有差池對產品質量會有很大影響，機器設備本身的溫度也會間接影響其機器壽命長度，所以數據精準的回饋相當的重要，此線材特別針對每對電熱偶進行單獨包覆隔離網，並在整體外層增加多重防雜訊隔離，雙層屏蔽的保護之下，可更加有效的阻止外部電磁雜訊的干擾並保持傳輸網絡信號數據的精準回饋。"
+                                                <%}
+                                                    else
+                                                    {%>
+                                                 ""
+                                            <%}%> />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="多爐溫控系統雙層屏蔽線-日進電線 2021" />
+    <meta property="og:title" content="多爐溫控系統雙層屏蔽線-日進電線" />
     <meta property="og:description" content="為工業機器量身訂做的溫控線，可運用在大型高溫爐的多爐溫控，高溫爐對於溫度控制相對嚴格，如有差池對產品質量會有很大影響，機器設備本身的溫度也會間接影響其機器壽命長度，所以數據精準的回饋相當的重要，此線材特別針對每對電熱偶進行單獨包覆隔離網，並在整體外層增加多重防雜訊隔離，雙層屏蔽的保護之下，可更加有效的阻止外部電磁雜訊的干擾並保持傳輸網絡信號數據的精準回饋。" />
     <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-dual-shielded-cable-02-mobile.jpg" />
-    <meta property="og:url" content="https://www.nizing.com.tw/zh/application/temperature-control-system/multi-furnace-temperature-control-dual-shielded-cable" />
+    <meta property="og:url" content="https://www.nizing.com.tw/<%=RouteData.Values["language"].ToString() %>/application/temperature-control-system/multi-furnace-temperature-control-dual-shielded-cable" />
     <meta property="og:site_name" content="Nizing Electric Wire and Cable" />
     <style type="text/css">
         .breadcrumb {

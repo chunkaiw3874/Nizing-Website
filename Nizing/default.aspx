@@ -890,11 +890,11 @@
                         </div>                        
                         <div class="col">
                             <div class="newest-item">
-                                <a href="">
+                                <a href="/<%=RouteData.Values["language"].ToString() %>/application/misc-app/dual-insulation-high-voltage-silicone-wire">
                                     <div class="image-section">
                                         <picture>
-                                            <source srcset="https://via.placeholder.com/350x250?text=&nbsp" type="image/webp">
-                                            <img src="https://via.placeholder.com/350x250?text=&nbsp"
+                                            <source srcset="/images/application/products/dual-insulation-high-voltage-silicone-wire/menu/dual-insulation-high-voltage-silicone-wire.webp" type="image/webp">
+                                            <img src="/images/application/products/dual-insulation-high-voltage-silicone-wire/menu/dual-insulation-high-voltage-silicone-wire.jpg"
                                                 alt="高鐵/捷運光纖電纜 Optic Fiber Cable for High Speed Rail and Massive Transit System">
                                         </picture>
                                     </div>
@@ -903,21 +903,21 @@
                                     <div class="title text-left">
                                         <%if (RouteData.Values["language"].ToString() == "zh")
                                             {%>
-                                                高鐵/捷運光纖電纜
+                                                耐壓測試儀
                                                 <%}
                                         else
                                         {%>
-                                                High Speed Rail Optic Fiber Cable
+                                                Voltage Testing Kit
                                             <%}%>
                                     </div>
                                     <div class="subtitle text-left">
                                         <%if (RouteData.Values["language"].ToString() == "zh")
                                             {%>
-                                                通訊配線
+                                                雙層絕緣高壓測試線
                                                 <%}
                                         else
                                         {%>
-                                                Communications Cable
+                                                Dual Insulation High Voltage Silicone Wire
                                             <%}%>
                                     </div>
                                 </div>
