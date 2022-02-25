@@ -150,8 +150,8 @@
                 font-size: 14px;
             }
 
-        .image-vertical-center {
-            margin: auto 0;
+        .image-positioning {
+            padding-top: 43.5px;
         }
 
         @media all and (max-width:1423px) {
@@ -287,7 +287,7 @@
 
             .zh .text-section .text-title {
                 font-size: 55px;
-            }            
+            }
 
             .en .text-section .text-title {
                 font-size: 49px;
@@ -445,7 +445,7 @@
                             </div>
                     </div>
                 </div>
-                <div class="d-none d-md-flex col-md-6 image-vertical-center">
+                <div class="d-none d-md-flex col-md-6 image-positioning">
                     <picture>
                         <source srcset="/images/application/products/dual-insulation-high-voltage-silicone-wire/impression/dual-insulation-high-voltage-silicone-wire-01.webp"
                             type="image/webp" />
