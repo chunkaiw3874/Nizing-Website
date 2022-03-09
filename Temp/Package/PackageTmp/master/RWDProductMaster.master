@@ -1,0 +1,149 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/master/RWD.master" AutoEventWireup="true" CodeFile="RWDProductMaster.master.cs" Inherits="master_RWDProductMaster" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        /*start:Custom mini-menu slider*/
+        .mini-menu > .container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .mini-menu .mini-menu-items {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            overflow-x: auto;
+            margin: 0 0.5rem;
+            -ms-overflow-style: scroll; /*IE 10+*/
+            scrollbar-width: none; /*Firefox*/
+        }
+
+            .mini-menu .mini-menu-items::-webkit-scrollbar {
+                display: none; /*Safari and Chrome*/
+            }
+
+        .arrow-container {
+            display: flex;
+            vertical-align: middle;
+        }
+
+            .arrow-container.left-arrow {
+                padding-right: 0.5rem;
+                border-right: solid 1px #000000;
+            }
+
+            .arrow-container.right-arrow {
+                padding-left: 0.5rem;
+                border-left: solid 1px #000000;
+            }
+
+                .arrow-container.left-arrow .btn,
+                .arrow-container.right-arrow .btn {
+                    padding: 0;
+                    border: 0;
+                    color: #000000 !important;
+                }
+
+                    .arrow-container.left-arrow .btn:focus,
+                    .arrow-container.right-arrow .btn:focus {
+                        box-shadow: none;
+                    }
+
+        @media all and (min-width: 1200px) {
+
+            .mini-menu .mini-menu-items {
+                width: 100%;
+                justify-content: space-between;
+                margin-left: -20px;
+                margin-right: -20px;
+            }
+        }
+        /*end:Custom mini-menu slider*/
+        .product .mini-menu {
+            background-color: #f1f1f1;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+            .product .mini-menu span {
+                font-size: 1rem;
+            }
+
+            .product .mini-menu img {
+                background-color: inherit;
+                border: none;
+                width: 80px;
+            }
+
+            .product .mini-menu .card-link {
+                color: inherit;
+            }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /*mini-menu slider */
+            var $miniMenu = $('.mini-menu .mini-menu-items');
+
+            var $right = $('.mini-menu .arrow-container.right-arrow .btn');
+            var $left = $('.mini-menu .arrow-container.left-arrow .btn');
+
+            $right[0].onclick = function () {
+                sideScroll($miniMenu, 'right', 25, 100, 10);
+            };
+
+            $left[0].onclick = function () {
+                sideScroll($miniMenu, 'left', 25, 100, 10);
+            };
+
+            toggleNavigationArrow($miniMenu);
+
+            detectScrolling($miniMenu);
+        });
+
+        $(window).resize(function () {
+            /*mini-menu slider*/
+            var $miniMenu = $('.mini-menu .mini-menu-items');
+            toggleNavigationArrow($miniMenu);
+        });
+
+        $(window).on('orientationchange', function () {
+            /*mini-menu slider*/
+            var $miniMenu = $('.mini-menu .mini-menu-items');
+            toggleNavigationArrow($miniMenu);
+        });
+
+        function handleImageNotFoundError() {
+            alert('<%=ResolveUrl("/images/placeholder/product-image-placeholder.png")%>');
+            this.onerror = null;
+            this.src = '/images/placeholder/product-image-placeholder.png';
+        }
+
+
+    </script>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="banner" runat="server">
+    <asp:ContentPlaceHolder ID="banner" runat="server"></asp:ContentPlaceHolder>
+    <div class="container-fluid product">
+        <nav class="mini-menu">
+            <div class="container">
+                <div class="arrow-container left-arrow">
+                    <button type="button" class="btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                </div>
+                <div id="divMenuItemList" runat="server" class="mini-menu-items">                    
+                </div>
+                <div class="arrow-container right-arrow">
+                    <button type="button" class="btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="body" runat="Server">
+    <asp:ContentPlaceHolder ID="body" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+

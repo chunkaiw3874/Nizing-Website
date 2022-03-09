@@ -1,0 +1,45 @@
+﻿.gridview
+{
+    width:100%;
+    text-align:center;
+}
+.gridview th
+{
+    font-size:14px;
+    background-color:#7ff8f8;
+    font:#4d36e8;
+}
+.gridview td
+{
+    min-height:50px;
+}
+
+.gridview .alternating
+{
+    background-color: #8ef2f8;
+    font: #ffffff;
+}
+
+.subgridview
+{
+    border: none;
+    border-bottom: solid 1px #CCCCCC;
+    padding:0;
+    margin:5px 0px 10px 0px;
+    text-align:center;
+}
+.subgridview th
+{
+    font-size:12px;
+    background: #CCCCCC;
+    color: #ffffff;
+}
+.subgridview td
+{
+    min-height:20px;
+}
+.subgridview .alternating
+{
+    background-color: #cccccc;
+    font: #ffffff;
+}

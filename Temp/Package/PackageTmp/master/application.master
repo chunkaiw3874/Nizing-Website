@@ -1,0 +1,33 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/master/index.master" AutoEventWireup="true" CodeFile="application.master.cs" Inherits="master_application" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="DocTitleKeywords" Runat="Server">
+    <asp:ContentPlaceHolder ID="DocTitleKeywords" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="JavaScriptCode" Runat="Server">
+    <asp:ContentPlaceHolder ID="JavaScriptCode" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <div id="side-menu">
+        <div class="border-lined">
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                    <asp:TreeView ID="SideMenu" runat="server" DataSourceID="sideMenuSource" ShowExpandCollapse="False" ExpandDepth="0" OnTreeNodeExpanded="SideMenu_TreeNodeExpanded" NodeWrap="True">
+                        <DataBindings>
+                            <asp:TreeNodeBinding DataMember="menuitem" TextField="cnTitle" SelectAction="Expand" />
+                            <asp:TreeNodeBinding DataMember="submenuitem" TextField="cnTitle" NavigateUrlField="url" />
+                        </DataBindings>
+                        <LeafNodeStyle CssClass="side-menu-leaf" ImageUrl="../images/icon/double-arrow-side-menu.png" />
+                        <RootNodeStyle CssClass="side-menu-root" />
+                    </asp:TreeView>
+                    <asp:XmlDataSource ID="sideMenuSource" runat="server" DataFile="~/menu/SideMenuApp.xml" XPath="/menu/mainmenuitem/menuitem"></asp:XmlDataSource>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+        <div class="button">
+            <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/images/button/customize_icon-180x104.jpg" NavigateUrl="~/customize_page.aspx"></asp:HyperLink>
+        </div>
+    </div>
+    <div id="product-content">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+    </div>
+</asp:Content>

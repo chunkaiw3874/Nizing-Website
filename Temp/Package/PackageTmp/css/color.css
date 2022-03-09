@@ -1,0 +1,109 @@
+<<<<<<< HEAD
+﻿:root {
+    --nizing-white: #ffffff;
+    --nizing-black: #000000;
+    --nizing-lightgray: #bfbfbf;
+    --nizing-red: #ff0000;
+    --nizing-yellow: #fffa00;
+    --nizing-blue: #2174e8;
+    --nizing-skyblue: #65ccf6;
+    --nizing-green: #4cff00;
+    --nizing-brown: #de7400;
+    --nizing-transparent: rgba(255,255,255,0.5);
+    --nizing-yellowgreen: -webkit-linear-gradient(135deg, #4cff00 0 50%, #fffa00 50% 100%);
+    --nizing-whitered: linear-gradient(135deg, #ffffff 0 50%, #ff0000 50% 100%);
+    --nizing-whiteblue: linear-gradient(135deg, #ffffff 0 50%, #2174e8 50% 100%);
+    --nizing-whiteblack: linear-gradient(135deg, #ffffff 0 50%, #000000 50% 100%);
+}
+
+
+/*background color*/
+.bg-white {
+    background-color: var(--nizing-white) !important;
+}
+
+.bg-black {
+    background-color: var(--nizing-black) !important;
+}
+
+.bg-lightgray {
+    background-color: var(--nizing-lightgray) !important;
+}
+
+.bg-red {
+    background-color: var(--nizing-red) !important;
+}
+
+.bg-yellow {
+    background-color: var(--nizing-yellow) !important;
+}
+
+.bg-blue {
+    background-color: var(--nizing-blue) !important;
+}
+
+.bg-skyblue {
+    background-color: var(--nizing-skyblue) !important;
+}
+
+.bg-green {
+    background-color: var(--nizing-green) !important;
+}
+
+.bg-brown {
+    background-color: var(--nizing-brown) !important;
+}
+
+.bg-yellowgreen {
+    background: var(--nizing-yellowgreen) !important;
+}
+
+.bg-whitered {
+    background: var(--nizing-whitered) !important;
+}
+
+.bg-whiteblue {
+    background: var(--nizing-whiteblue) !important;
+}
+
+.bg-whiteblack {
+    background: var(--nizing-whiteblack) !important;
+=======
+﻿/*background color*/
+.bg-black {
+    background-color: #000000;
+}
+
+.bg-red {
+    background-color: #ff0000;
+}
+
+.bg-yellow {
+    background-color: #fffa00;
+}
+
+.bg-blue {
+    background-color: #00ffff;
+}
+
+.bg-green {
+    background-color: #4cff00;
+}
+
+.bg-brown {
+    background-color: #de7400;
+}
+
+.bg-yellowgreen {
+    background: linear-gradient(135deg, #fffa00 0 50%, #4cff00 50% 100%);
+>>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
+}
+
+/*custom color*/
+.nizing-blue {
+<<<<<<< HEAD
+    color: #1da3d9 !important;
+=======
+    color: #1da3d9;
+>>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
+}

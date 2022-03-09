@@ -1,0 +1,49 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/master/HR360_Master.master" AutoEventWireup="true" CodeFile="HR360_Child_user.master.cs" Inherits="masterPage_HR360_Child_user" %>
+<%@ MasterType TypeName="masterPage_HR360_Master" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <link href="../css/hr360/tabcontainer.css" rel="stylesheet" type="text/css" />
+    <link href="../css/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="../css/bootstrap/bootstrap-mod.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="javascript_section" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <div id="main">
+        <div id="banner">
+            <div class="float-right" style="">
+                <asp:ImageButton ID="btnHome" runat="server" ImageUrl="~/hr360/image/icon/top_menu/home1.png" Height="80" ToolTip="首頁" OnClick="btnHome_Click" onmouseover="this.src='/hr360/image/icon/top_menu/home2.png'" onmouseout="this.src='/hr360/image/icon/top_menu/home1.png'" />
+                <%--<asp:ImageButton ID="btnAdminPage" runat="server" ImageUrl="~/hr360/image/icon/top_menu/management_page1.png" Height="80" ToolTip="首頁" OnClick="btnAdminPage_Click" onmouseover="this.src='/hr360/image/icon/top_menu/management_page2.png'" onmouseout="this.src='/hr360/image/icon/top_menu/management_page1.png'" />--%>
+                <asp:ImageButton ID="btnLogout" runat="server" ImageUrl="~/hr360/image/icon/top_menu/logout1.png" Height="80" ToolTip="登出" OnClick="btnLogout_Click" onmouseover="this.src='/hr360/image/icon/top_menu/logout2.png'" onmouseout="this.src='/hr360/image/icon/top_menu/logout1.png'" />
+            </div>
+        </div>
+        <div id="user_menu">
+            <div class="left">
+                <div class="title">
+                </div>
+                <div class="menu">
+                    <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/hr360/image/icon/button_menu/UI01-1.png" PostBackUrl="~/hr360/UI01.aspx" />
+                    <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/hr360/image/icon/button_menu/UI02-1.png" PostBackUrl="~/hr360/UI02.aspx" />
+                    <asp:ImageButton ID="ImageButton3" runat="server" ImageUrl="~/hr360/image/icon/button_menu/UI03-1.png" PostBackUrl="~/hr360/UI03.aspx" />
+                    <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/hr360/image/icon/button_menu/UI04-1.png" PostBackUrl="~/hr360/UI04.aspx" />
+                    <asp:ImageButton ID="imgbtnUI05" runat="server" ImageUrl="~/hr360/image/icon/button_menu/UI05-1.png" PostBackUrl="~/hr360/UI05.aspx" />
+                    <asp:ImageButton ID="ImageButton6" runat="server" ImageUrl="~/hr360/image/icon/button_menu/UI06-1.png" PostBackUrl="~/hr360/UI06.aspx" />
+                    <asp:Button ID="Button1" runat="server" Width="187.5" Height="50" Text="外出預約單" PostBackUrl="~/hr360/mobile/GoOutForm.aspx" />
+                </div>
+            </div>
+            <div class="right">
+                <div class="fixed-top">
+                    <asp:ContentPlaceHolder ID="page_title" runat="server"></asp:ContentPlaceHolder>                    
+                    <asp:ContentPlaceHolder ID="top_menu" runat="server"></asp:ContentPlaceHolder>
+                </div>
+                <div id="page-content">
+                    <asp:ContentPlaceHolder ID="page_content" runat="server"></asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+    </div>
+<%--    <div id="PrintView">
+        <asp:ContentPlaceHolder ID="PrintArea" runat="server"></asp:ContentPlaceHolder>
+    </div>--%>
+</asp:Content>
+

@@ -1,0 +1,28 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/master/indexMaster2021.master" AutoEventWireup="true" CodeFile="certificateMaster2021.master.cs" Inherits="master_certificateMaster2021" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+    <style>
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
+    <div class="container-fluid p-0">
+        <div class="banner">
+            <img src="/images/banner/banner-certificate-en-1920x500.png" class="w-100 img" />
+        </div>
+        <div class="breadcrumb">
+            <div class="container">
+                <asp:SiteMapPath ID="SiteMapPath1" runat="server">
+                    <RootNodeTemplate>
+                        <a href="default.aspx">
+                            <img src="/images/home_black-48x48.png" class="img" />
+                        </a>
+                    </RootNodeTemplate>
+                </asp:SiteMapPath>
+            </div>
+        </div>
+    </div>
+    <asp:ContentPlaceHolder ID="body" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+

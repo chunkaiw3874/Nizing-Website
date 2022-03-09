@@ -1,0 +1,91 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="bsMaster.master.cs" Inherits="master_bsMaster" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <script src="../Scripts/jquery-2.1.4.js"></script>
+    <script src="../Scripts/bootstrap.js"></script>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style>
+        body{
+            padding-top:60px;
+        }
+        #search-engine{
+            max-width:300px;
+        }
+        @media (min-width: 768px) {
+            .navbar .navbar-nav
+             {
+                display: inline-block;
+                float: none;
+                vertical-align: top;
+            }
+
+            .navbar .navbar-collapse {
+                text-align: center;
+            }
+        }
+    </style>
+    <script type="text/javascript">
+        (function() {
+            var cx = '010054550380540391242:bbpyczxrrro';
+            var gcse = document.createElement('script');
+            gcse.type = 'text/javascript';
+            gcse.async = true;
+            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                '//cse.google.com/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(gcse, s);
+        })();
+    </script>
+        
+
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="navbar navbar-inverse navbar-fixed-top ">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img src="/images/icon/nizing.ico.gif" /> <!--need new image nizing logo-->
+                    </a>
+                </div>
+                <div class="navbar-collapse collapse">
+                                        
+                    <ul class="nav navbar-nav">
+                        <li><a href="\product.aspx">產品資訊</a></li>
+                        <li><a href="#">應用產業</a></li>
+                        <li><a href="#">材料特性</a></li>
+                        <li><a href="#">合金導體</a></li>
+                        <li><a href="#">安規認證</a></li>
+                        <li><a href="#">UL編號</a></li>
+                        <li><a href="#">關於日進</a></li>
+                        <li><a href="#">聯絡我們</a></li>
+                        <li><div id="search-engine">  
+                        <gcse:searchbox-only></gcse:searchbox-only>
+                    </div>     </li>
+                    </ul>
+               
+
+                </div>
+            </div>
+        </div>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>

@@ -26,7 +26,7 @@
         })
     </script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
     <div class="container">
         <div id="formTitle" class="form-group">
             <div class="row">

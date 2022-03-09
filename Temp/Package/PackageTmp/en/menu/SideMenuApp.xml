@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu>  
+  <mainmenuitem url="~/en/application.aspx" enTitle="Application" cnTitle="應用產業">
+    <menuitem url="~/en/car.aspx" enTitle="Car" cnTitle="車用元件">
+      <submenuitem url="~/en/engine-power-cable.aspx" enTitle="Engine Power Cable" cnTitle="引擎動力線" />
+      <submenuitem url="~/en/temperature-sensor.aspx" enTitle="Temperature Sensor" cnTitle="車用感溫線" />
+      <submenuitem url="~/en/ul3512.aspx" enTitle="UL3512 Silicone Fiberglass Wire" cnTitle="UL3512" />
+      <submenuitem url="~/en/tef-sili-multi-core-cable.aspx" enTitle="Teflon Silicone Multi-Core Cable" cnTitle="鐵氟龍矽膠多芯複合線" />
+      <submenuitem url="~/en/ultra-flexible-sili-fiber-wire.aspx" enTitle="Ultra Flexible Fiberglass Silicone Wire" cnTitle="超軟矽膠編織線" />
+      <submenuitem url="~/en/double-shield-tef-sili-cable.aspx" enTitle="Double Shield Teflon Silicone Cable" cnTitle="雙隔離矽膠鐵氟龍多芯線" />
+    </menuitem>
+    <menuitem url="~/en/cloud.aspx" enTitle="Cloud System" cnTitle="雲端系統">
+      <submenuitem url="~/en/fb750.aspx" enTitle="FB750 Optic Fiber" cnTitle="FB750 水晶級高傳輸光纖" />
+      <submenuitem url="~/en/cat5e100mhzutp.aspx" enTitle="CAT5E 100MHz UTP" cnTitle="CAT5E 100MHz UTP" />
+      <submenuitem url="~/en/cat5e350mhzftp.aspx" enTitle="CAT5E 350MHz FTP" cnTitle="CAT5E 350MHz FTP" />
+      <submenuitem url="~/en/cat5e350mhzutp.aspx" enTitle="CAT5E 350MHz UTP" cnTitle="CAT5E 350MHz UTP" />
+      <submenuitem url="~/en/cat6400mhzftp.aspx" enTitle="CAT6 400MHz FTP" cnTitle="CAT6 400MHz FTP" />
+      <submenuitem url="~/en/cat6400mhzutp.aspx" enTitle="CAT6 400MHz UTP" cnTitle="CAT6 400MHz UTP" />
+      <submenuitem url="~/en/cat6e600mhzutp.aspx" enTitle="CAT6E 600MHz UTP" cnTitle="CAT6E 600MHz UTP" />
+      <submenuitem url="~/en/cat6a10gsftp.aspx" enTitle="CAT6A 10GS FTP" cnTitle="CAT6A 10GS FTP" />
+      <submenuitem url="~/en/cat6a10gsutp.aspx" enTitle="CAT6A 10GS UTP" cnTitle="CAT6A 10GS UTP" />
+      <submenuitem url="~/en/cat6a10gssftp.aspx" enTitle="CAT6A 10GS S/FTP" cnTitle="CAT6A 10GS S/FTP" />
+      <submenuitem url="~/en/cat710gplussftp.aspx" enTitle="CAT7 10G-PLUS S/FTP" cnTitle="CAT7 10G-PLUS S/FTP" />
+    </menuitem>
+    <menuitem url="~/en/roboarm.aspx" enTitle="Robotic Arm" cnTitle="機器手臂">
+      <submenuitem url="" enTitle="" cnTitle="" />
+    </menuitem>
+    <menuitem url="~/en/heating.aspx" enTitle="Heating System" cnTitle="加熱系統">
+      <submenuitem url="~/en/ul3589.aspx" enTitle="UL3589 Heating Wire" cnTitle="UL3589發熱線" />
+      <submenuitem url="~/en/phc.aspx" enTitle="Parallel Heating Cable" cnTitle="並聯式電熱帶" />
+      <submenuitem url="~/en/silicone-heating-pad.aspx" enTitle="Silicone Rubber Heating Pad" cnTitle="軟質矽膠電熱片" />
+    </menuitem>
+    <menuitem url="~/en/medical.aspx" enTitle="Medical" cnTitle="醫療科技">
+      <submenuitem url="~/en/dentist-drill-control-wire.aspx" enTitle="Dentist's Drill Control Wire" cnTitle="多功能牙鑽控制線" />
+      <submenuitem url="~/en/defibrillator-signal-wire.aspx" enTitle="Defibrillator Signal Wire" cnTitle="去顫電擊器訊號傳輸線" />
+      <submenuitem url="~/en/respiration-pipe-heating-wire.aspx" enTitle="Respiration Pipe Heating Wire" cnTitle="醫療用呼吸管加熱線" />
+      <submenuitem url="~/en/disposable-electro-surgical-hand-controlled-pencil.aspx" enTitle="Disposable Electro Surgical Hand Controlled Pencil" cnTitle="一次性手控電刀筆" />
+    </menuitem>
+    <menuitem url="~/en/led.aspx" enTitle="LED" cnTitle="LED">
+      <submenuitem url="~/en/fb750.aspx" enTitle="FB750 Optic Fiber" cnTitle="FB750 水晶級高傳輸光纖" />
+      <submenuitem url="~/en/double-shield-fep-sili-cable" enTitle="Double Shield Teflon Silicone Cable" cnTitle="雙隔離矽膠鐵氟龍多芯線" />
+      <submenuitem url="~/en/xlpo-flat-cable-2c.aspx" enTitle="XLPO Flat Cable 2C" cnTitle="XLPO雙芯扁線" />
+    </menuitem>
+    <menuitem url="~/en/temperature-control.aspx" enTitle="Temperature Control" cnTitle="溫控系統">
+      <submenuitem url="~/en/thermocouple-series.aspx" enTitle="Thermocouple" cnTitle="補償導線" />
+    </menuitem>
+    <menuitem url="~/en/construction.aspx" enTitle="Contruction" cnTitle="建築材料">
+      <submenuitem url="~/en/iv-wire.aspx" enTitle="IV Control Wire" cnTitle="IV 粗蕊控制線-建築用" />
+    </menuitem>
+    <menuitem url="~/en/solar.aspx" enTitle="Solar" cnTitle="太陽能">
+      <submenuitem url="~/en/xlpe-series.aspx" enTitle="XLPE Series" cnTitle="交連照射線系列" />
+    </menuitem>
+    <menuitem url="~/en/steel.aspx" enTitle="Steel Industry" cnTitle="鋼鐵工業">
+      <submenuitem url="~/en/ul10344.aspx" enTitle="UL10344 PTFE Teflon Wire" cnTitle="UL10344 PTFE" />
+      <submenuitem url="~/en/ultra-flexible-control-wire.aspx" enTitle="Ultra Flexible Control Wire" cnTitle="超軟抗張力多芯控制線" />
+      <submenuitem url="~/en/12pair-jtype.aspx" enTitle="12P J-TYPE Thermocouple" cnTitle="12P J-TYPE補償導線" />
+    </menuitem>
+    <menuitem url="~/en/misc-application.aspx" enTitle="Other Application" cnTitle="其他應用">
+      <submenuitem url="~/en/liquid-level-sensor.aspx" enTitle="Liquid Level Sensor" cnTitle="液位感應線" />
+    </menuitem>
+  </mainmenuitem>
+</menu>

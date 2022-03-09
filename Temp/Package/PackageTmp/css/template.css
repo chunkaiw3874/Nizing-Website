@@ -1,0 +1,222 @@
+﻿/*parent-master template*/
+#header{
+    width:1000px;
+}
+.header-wrapper{
+    position:fixed;
+    -webkit-overflow-scrolling: touch;
+    background-color:#FFFFFF;
+    top:0px;
+    padding-top:10px;
+    padding-bottom:0;
+    
+}
+#logo{
+    position:relative;
+    top:0;
+    width:384px;
+    margin-left:30px;
+}
+#header-top-right{
+    position:relative;
+    top:0;   
+    width:586px;
+    vertical-align:top;
+    text-align:right;
+}
+#language{
+    width:100%;
+    font-size:14px;
+}
+#search-engine{ 
+    width:100%; 
+    font-size:14px;
+}
+#top-menu{
+    width:800px;
+    margin-left:300px;
+    text-align:center;    
+}
+#top-menu .transparent-menu{
+    color:#FFFFFF;
+    background-color:#6bc1f5;
+    padding: 10px 50px 10px 50px;
+    border: 0px solid #CCCCCC;
+    width:100px;
+    font-size:12px;
+}
+
+#banner{
+    width:100%;
+    margin-top:125px;
+}
+
+#main{
+    margin-top:20px;
+    margin-bottom:70px;
+    vertical-align:top;
+}
+#directory{
+    display:block;
+    color: #4eb6f5;
+    margin-left:30px;
+    margin-bottom: 10px;
+    font-size:12px;
+}
+#directory a{
+    color:#AAD9F5;
+}
+#directory a:hover{
+    color:#ff9933;
+}
+
+#footer{
+    position:fixed;
+    width:100%;
+    margin: auto;
+    border-top:solid 1px #CCCCCC;
+    background-color:#AAD9F5;
+    padding-top:3px;
+    right:0px;
+    bottom:0px;
+}
+.footer1{
+    width:100%;
+    font-size: 11px;
+    text-align:center;
+}
+.footer1 img{
+    margin:1px;
+}
+#top{
+    position:fixed;
+    right:0;
+    bottom:75px;
+}
+@media only screen and (max-device-width : 480px) {
+    .header-wrapper{
+        position:relative;
+    }
+    #banner{
+        margin-top:0px;
+    }
+    #top{
+        visibility:hidden;
+    }
+}
+/*child-master no side-menu page css template*/
+.main-content .title{
+    width:965px;
+    border-left:solid 5px #AAD9F5;
+    border-bottom:solid 1px #AAD9F5;
+    margin-bottom:20px;
+}
+.main-content .title .textbase{
+    width:370px;
+    font-size:30px;
+    font-weight:bold;
+    color:#FF9933;
+}
+.main-content .title .link{
+    width:592px;
+    text-align:right;
+    vertical-align:bottom;
+}
+.main-content .title .link .active{
+    color:#FF9933;
+}
+.main-content .content{
+    width:97%;
+}
+
+/*product-master with side-menu*/
+#side-menu{    
+    width:175px;
+    margin-left:30px;
+    margin-right:5px;
+    margin-bottom:10px;
+}
+#side-menu .border-lined{    
+    border:solid 1px #CCCCCC;
+}
+.side-menu-root{
+    width:170px;
+    font-size:14px;
+    padding-top:10px;
+    padding-left:10px;
+    padding-bottom:10px;
+}
+.side-menu-leaf {
+    width: 180px;
+    padding-top:3px;
+    padding-left:3px;
+    padding-bottom:3px;
+    font-size: 12px;
+}
+.side-menu-root:hover{
+    color:#ffffff;
+    background-color:#ff9933;
+}
+.side-menu-leaf:hover{
+    color:#ffffff;
+    background-color:#ff9933;
+}
+.side-menu-root:hover a{
+    color:#ffffff;
+    background-color:#FF9933;
+}
+.side-menu-leaf:hover a{
+    color:#ffffff;
+    background-color:#FF9933;
+}
+#product-content{
+    width:783px;
+    font-size:12px;
+}
+
+/*product-detail master for product pages with detail*/
+#product-content .left{
+    width:312px;    
+    margin-right:8px;
+    margin-bottom:20px;
+}
+#product-content .left .large-pic{
+    display:block;
+    margin-bottom:5px;
+}
+#product-content .left .large-pic img{
+    width:310px;
+    border:solid 1px #CCCCCC;
+}
+#product-content .left .small-pic{
+    display:inline;
+    margin-bottom:5px;
+}
+#product-content .left .small-pic img{
+    width:150px;
+    margin-left:4px;
+    border:solid 1px #CCCCCC;
+}
+#product-content .left .small-pic .content-row img:first-child{
+    margin-left:0px;
+}
+#product-content .right{
+    width:459px;
+    margin-bottom:20px;
+}
+#product-content .right .title{
+    width:266px;
+    font-size:16px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+#product-content .right .link{
+    width:190px;
+}
+#product-content .right .content{
+    width:100%;
+}
+#product-content .detail{
+    width:100%;
+}
+

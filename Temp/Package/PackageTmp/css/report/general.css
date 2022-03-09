@@ -1,0 +1,288 @@
+﻿body {
+    width:100%;
+    /*font-size:12px;*/
+    color:#000000;
+    margin:auto;
+}
+
+ul{
+    list-style-type:none;
+}
+
+#banner{
+    width:100%;
+    height:300px;
+    background:url(/employee_section/report/image/banner/banner.png) no-repeat center;
+    background-color:#ff9595;
+    margin-bottom:20px;
+}
+#banner .banner-button{
+    float:right;
+    margin-top:250px;
+    margin-right:50px;
+}
+#content{
+    /*width:1100px;
+    margin:auto;    
+    margin-bottom:20px;*/
+}
+.dept-block{
+    display:inline-block;
+    margin-right:20px;
+    min-height:100px;
+    vertical-align:top;
+}
+.search-result{
+    max-height:350px;
+}
+.grdResult{
+    min-width:100%;
+}
+.grdResult tr th{
+    padding:4px;
+    background-color:#29ABE2;
+    color:#FFFFFF;
+    border:solid 1px #ffffff;
+    text-align:center;
+}
+.grdResult tr td{
+    padding:4px;
+    background-color:#ffffff;
+    color:#000000;
+    text-align:center;
+    border:solid 1px #ffffff;
+}
+.grdResult tr:nth-child(2n) td{
+    padding:4px;
+    background-color:#c3e8f4;
+    color:#000000;    
+    text-align:center;
+    border:solid 1px #ffffff;
+}
+.grdResultWithFooter{
+    min-width:100%;
+}
+.grdResultWithFooter tr th{
+    padding:4px;
+    background-color:#29ABE2;
+    color:#FFFFFF;
+    border:solid 1px #ffffff;
+    text-align:center;
+}
+.grdResultWithFooter tr td{
+    padding:4px;
+    background-color:#ffffff;
+    color:#000000;
+    text-align:center;
+    border:solid 1px #ffffff;
+}
+.grdResultWithFooter tr:nth-child(2n) td{
+    padding:4px;
+    background-color:#c3e8f4;
+    color:#000000;    
+    text-align:center;
+    border:solid 1px #ffffff;
+}
+.grdResultWithFooter tr:last-child td{
+    padding:4px;
+    background-color:#29ABE2;
+    color:#FFFFFF;    
+    text-align:center;
+    font-weight:bold;
+    border:solid 1px #ffffff;
+}
+/*popup*/
+/*pop up window for search*/
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+#search_window .popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 400px;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: orange;
+}
+.popup .content {
+
+}
+.popup .content .search-condition-button{
+    margin-right:10px;
+}
+.popup .content .search-condition-window{    
+    margin-top:20px;
+}
+.popup .content .search-condition-window textarea{    
+    width:100%;
+    max-width:100%;
+    height:150px;
+    max-height:150px;
+    resize:none;
+}
+.popup .content .search-condition-window input{    
+    position:relative;
+    left:358px;
+
+}
+
+/*inventorysearch*/
+/*#inventory{
+    max-width:1200px;
+}*/
+#inventory #search-field{
+    margin-bottom:10px;
+    border-bottom:solid 1px #cccccc;
+}
+#inventory #search-field #search-table{
+    width:100%;
+}
+#inventory #search-field #search-table tr td{
+    padding:5px;
+}
+#inventory #search-field{
+    width:100%;
+}
+#inventory #search-result .grdResult{
+    width:100%;
+    table-layout:fixed;
+}
+#inventory #search-result .grdResult tr th{
+    text-align:center;
+    font-size:14px;
+}
+#inventory #search-result .grdResult tr td{
+    padding:10px 5px 10px 5px;
+    text-align:center;
+    word-wrap:break-word;
+}
+#acct_search_window .popup{
+  margin: 70px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 5px;
+  max-width: 700px;
+  max-height:500px;
+  overflow:scroll;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+#raw_search_window .popup{
+  margin: 70px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 5px;
+  max-width: 700px;
+  max-height:500px;
+  overflow:scroll;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+#small_search_window .popup{
+  margin: 70px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 5px;
+  max-width: 700px;
+  max-height:500px;
+  overflow:scroll;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+#large_search_window .popup{
+  margin: 70px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 5px;
+  max-width: 700px;
+  max-height:500px;
+  overflow:scroll;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+/*ProductionProgress*/
+#ProductionProgress .title input{
+    margin-right:25px;
+}
+
+/*ProductionProgress_Dept*/
+#ProductionProgress_Dept .title input{
+    margin-right:4px;
+}
+/*NetSale*/
+#NetSale #search-result .inline-top{
+    width:48%;
+    display:inline-block;
+    vertical-align:top;
+    min-height:300px;
+    margin-bottom:20px;
+}
+#NetSale #parameterSelection tr td{
+    vertical-align:top;
+    padding:5px 5px 5px 0px;
+    padding-left:100px;
+}
+#NetSale #parameterSelection tr td:first-child{
+    padding-left:0px;
+}
+
+
+/*EmployeeDayOffReport*/
+#EmployeeDayOffReport .grdDoubleHeader .grdResult tr:first-child td{
+    border:solid 1px #ffffff;
+    background-color:#29ABE2;
+    color:#ffffff;
+}
+
+/*WorkDuration*/
+#WorkDuration .grdResult tr th{
+    /*background-color:#FF9595;*/
+    padding:5px;
+    font-size:14px;
+    font-weight:bold;
+}
+#WorkDuration .grdResult tr td{
+    padding:5px;
+}
+
+/*QC01*/
+#QC01 #search-result .inline-top{
+    width:48%;
+    display:inline-block;
+    vertical-align:top;
+    min-height:300px;
+    margin-bottom:20px;
+}

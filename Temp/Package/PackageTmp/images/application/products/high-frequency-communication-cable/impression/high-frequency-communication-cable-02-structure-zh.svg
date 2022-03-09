@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="800px" height="291px" viewBox="0 0 800 291" enable-background="new 0 0 800 291" xml:space="preserve">
+<g>
+	<circle fill="#013047" stroke="#FFFFFF" stroke-width="6" stroke-miterlimit="10" cx="149.789" cy="143.899" r="121.779"/>
+	<path fill="#DBDCDC" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M250.267,143.899
+		c0,55.488-44.985,100.479-100.477,100.479c-55.496,0-100.479-44.991-100.479-100.479c0-55.496,44.982-100.482,100.479-100.482
+		C205.281,43.417,250.267,88.404,250.267,143.899z"/>
+	<path fill="#013047" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M239.924,143.899
+		c0,49.785-40.353,90.142-90.135,90.142c-49.786,0-90.138-40.357-90.138-90.142c0-49.782,40.352-90.144,90.138-90.144
+		C199.571,53.755,239.924,94.118,239.924,143.899z"/>
+	<path fill="#EFEEEF" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M167.555,163.083
+		c-9.95,9.95-26.082,9.95-36.032,0c-9.948-9.946-9.948-26.078,0.002-36.028c9.948-9.949,26.08-9.949,36.029,0
+		C177.502,137.004,177.502,153.136,167.555,163.083z"/>
+	<path fill="#EFEEEF" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M167.555,107.057
+		c-9.95,9.949-26.082,9.949-36.032,0c-9.948-9.946-9.948-26.079,0.002-36.028c9.948-9.949,26.08-9.949,36.029,0
+		C177.502,80.978,177.502,97.111,167.555,107.057z"/>
+	<path fill="#EFEEEF" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M220.759,163.083
+		c-9.948,9.95-26.081,9.95-36.028,0c-9.95-9.946-9.95-26.082,0-36.031c9.948-9.946,26.081-9.946,36.028,0
+		C230.709,137.004,230.709,153.136,220.759,163.083z"/>
+	<path fill="#717071" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M205.077,108.199
+		c-5.618,5.62-14.729,5.62-20.347,0c-5.62-5.619-5.62-14.731,0-20.351c5.618-5.617,14.729-5.617,20.347,0
+		C210.698,93.471,210.698,102.58,205.077,108.199z"/>
+	<path fill="#EFEEEF" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M111.04,163.081
+		c-9.95,9.952-26.083,9.952-36.031,0.003c-9.947-9.949-9.947-26.085,0.003-36.031c9.947-9.949,26.081-9.949,36.028,0
+		C120.992,136.999,120.989,153.135,111.04,163.081z"/>
+	<circle fill="#717071" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" cx="149.539" cy="200.555" r="25.478"/>
+	<circle fill="#EFEEEF" cx="149.54" cy="200.555" r="17.651"/>
+	<circle fill="#717071" cx="149.54" cy="200.555" r="11.781"/>
+	
+		<line fill="none" stroke="#339CD1" stroke-width="2" stroke-miterlimit="10" x1="213.054" y1="215.583" x2="325.065" y2="215.583"/>
+	<g>
+		
+			<text transform="matrix(1 0 0 1 338.7529 133.4814)" fill="#FFFFFF" font-family="'AdobeFanHeitiStd-Bold-B5pc-H'" font-size="37.6848" letter-spacing="1">Silicone 通訊結合電力線</text>
+	</g>
+	<g>
+		
+			<text transform="matrix(1 0 0 1 344.2876 226.0039)" fill="#FFFFFF" font-family="'AdobeFanHeitiStd-Bold-B5pc-H'" font-size="37.6848" letter-spacing="1">防雜訊隔離層</text>
+	</g>
+	<polyline fill="none" stroke="#339CD1" stroke-width="2" stroke-miterlimit="10" points="145.949,153.105 304.632,153.105 
+		309.215,153.105 309.215,97.761 301.865,97.761 251.041,97.761 	"/>
+	
+		<line fill="none" stroke="#339CD1" stroke-width="2" stroke-miterlimit="10" x1="309.734" y1="124.741" x2="331.699" y2="124.741"/>
+</g>
+</svg>

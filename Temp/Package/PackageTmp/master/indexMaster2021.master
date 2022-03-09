@@ -1,0 +1,323 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="indexMaster2021.master.cs" Inherits="master_indexMaster2021" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="msvalidate.01" content="9FD2A31229BA452ABDBB1C004A175F57" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <%--<meta name="viewport" content="width=device-width, initial-scale=1" />--%>
+    <%--<meta name="keywords" content="日進電線,專業製造,矽膠電線,鐵氟龍線,XLPE電線,PVC線,PE線材,PU線材,補償導線,耐高溫電線,耐高溫電纜,耐高壓電線,耐高壓電纜,電線規格,安規認證,UL產品,套管,客製化,配線,電動車,溫控,雲端,3D列印,醫療,LED照明,加熱系統,鋼鐵工業用線" />--%>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <%--<meta name="viewport" content="width=device-width, initial-scale=1" />--%>
+    <link rel="shortcut icon" href="/images/icon/nizing-icon.png" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<<<<<<< HEAD
+    <link rel="stylesheet" href="/css/style.css" />
+=======
+>>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
+    <link rel="stylesheet" href="/css/table.css" />
+    <link rel="stylesheet" href="/css/color.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/slick/slick.css" />
+    <link rel="stylesheet" href="/Content/slick/slick-theme.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/32e9a84b4a.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/Content/slick/slick.min.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+    <script type="text/javascript">
+        (function () {
+            var cx = '010054550380540391242:bbpyczxrrro';
+            var gcse = document.createElement('script');
+            gcse.type = 'text/javascript';
+            gcse.async = true;
+            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                '//cse.google.com/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(gcse, s);
+        })();
+    </script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-61636827-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <style>
+<<<<<<< HEAD
+=======
+        body {
+            font-family: "Adobe Fan Heiti Std";
+        }
+
+>>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
+        .navigation-wrapper {
+            box-shadow: 0 3px 5px -2px #8f8f8f;
+        }
+
+        .link {
+            color: inherit;
+        }
+
+            .link:hover {
+                text-decoration: none;
+                color: inherit;
+            }
+
+        .container {
+            width: 1200px;
+            max-width: none !important;
+        }
+
+        .footer {
+            padding-top: 30px;
+        }
+
+            .footer > .container {
+                padding: 0px 150px;
+            }
+
+            .footer .list div {
+                margin-bottom: 20px;
+            }
+
+        .display-block {
+            padding: 48px 0;
+        }
+
+            .display-block:first-child {
+                padding-top: 0px;
+            }
+
+            .display-block:nth-child(2n+1) {
+                background-color: #ffffff;
+            }
+
+            .display-block:nth-child(2n) {
+                background-color: #f1f1f1;
+            }
+
+            .display-block .block.header {
+                margin-bottom: 30px;
+            }
+
+                .display-block .block.header .block.title {
+                    margin-bottom: 0px;
+                }
+
+                .display-block .block.header .block.title,
+                .display-block .block.header .block.subtitle {
+                    text-align: center;
+                    color: #404040;
+                }
+
+
+        .bg-gray {
+            background-color: #f1f1f1 !important;
+        }
+
+        .mini-menu .card-link {
+            text-decoration: none;
+            color: black;
+            padding: 20px 0;
+        }
+
+        .language-link {
+            z-index: 10000;
+        }
+
+        .breadcrumb {
+            background-color: white;
+            margin: 15px 100px;
+        }
+
+            .breadcrumb .img {
+                width: 24px;
+            }
+
+        /*makes navbar hover*/
+        .navbar .nav-item .dropdown-menu {
+            display: block;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s linear;
+<<<<<<< HEAD
+=======
+        }
+
+        .navbar .nav-item:hover .dropdown-menu {
+            visibility: visible;
+            opacity: 1;
+            transition-delay: 0;
+        }
+
+        /*makes hovered item move*/
+        .move {
+            transition: transform 0.3s ease;
+            transform: translateX(0px);
+        }
+
+            .move:hover {
+                transform: translateX(-5px) translateY(-5px);
+            }
+
+        /*makes image zoom in on hover*/
+        .zoom {
+            overflow: hidden;
+        }
+
+            .zoom .img {
+                transition: transform 0.2s;
+            }
+
+            .zoom:hover .img {
+                transform: scale(1.2);
+            }
+
+        /*color code*/
+        .color-code {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: solid 1px #000000;
+            margin-left: 5px;
+>>>>>>> 92aa7e2a76567558931eaa2d6e25a676875dc4bc
+        }
+        
+
+        .navbar .nav-item:hover .dropdown-menu {
+            visibility: visible;
+            opacity: 1;
+            transition-delay: 0;
+        }
+
+        /*makes hovered item move*/
+        .move {
+            transition: transform 0.3s ease;
+            transform: translateX(0px);
+        }
+
+            .move:hover {
+                transform: translateX(-5px) translateY(-5px);
+            }
+
+        /*makes image zoom in on hover*/
+        .zoom {
+            overflow: hidden;
+        }
+
+            .zoom .img {
+                transition: transform 0.2s;
+            }
+
+            .zoom:hover .img {
+                transform: scale(1.2);
+            }
+
+        /*color code*/
+        .color-code {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: solid 1px #000000;
+            margin-left: 5px;
+        }
+        
+
+        @media screen and (max-width:1400px) {
+            body {
+                width: 1400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container py-1">
+            <div class="header d-flex justify-content-between align-items-center">
+                <div>
+                    <asp:ImageButton ID="imgLogo" runat="server" ImageUrl="~/images/logo.jpg" PostBackUrl="~/default.aspx" />
+                </div>
+                <div>
+                    <div class="d-inline mr-3">
+                        <a href="portal.aspx">
+                            <img src="images/account_box_black-48x48.png" /></a>
+                    </div>
+                    <div class="dropdown d-inline">
+                        <a data-toggle="dropdown" aria-expanded="false" title="變更語言"
+                            style="cursor: pointer;">
+                            <img src="images/language_black-48x48.png" />
+                        </a>
+                        <div class="dropdown-menu language-link">
+                            <asp:LinkButton ID="lnkToMandarin" CssClass="dropdown-item" runat="server" OnClick="ChangeLanguage">中文</asp:LinkButton>
+                            <asp:LinkButton ID="lnkToEnglish" CssClass="dropdown-item" runat="server" OnClick="ChangeLanguage">English</asp:LinkButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-wrapper container-fluid p-0 bg-dark sticky-top">
+            <header runat="server" id="navigation" class="container">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-around" id="NavContent">
+                        <ul runat="server" id="divNavContentList"
+                            class="navbar-nav">
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+        </div>
+        <asp:ContentPlaceHolder ID="body" runat="server">
+        </asp:ContentPlaceHolder>
+        <div class="footer container-fluid px-0 bg-dark text-white">
+            <div class="container">
+                <div class="row row-cols-4">
+                    <div class="col d-flex flex-column list">
+                        <div>
+                            About Nizing
+                        </div>
+                        <div>
+                            <a class="link" href="company-culture.aspx">企業核心價值與經營理念
+                            </a>
+                        </div>
+                        <div>
+                            經營團隊
+                        </div>
+                        <div>
+                            人權政策
+                        </div>
+                        <div>
+                            品質政策
+                        </div>
+                        <div>
+                            <a class="link" href="conflict-free-mineral-declaration.aspx">無衝突金屬聲明
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col">
+                        Product Center
+                    </div>
+                    <div class="col">
+                        Contact List
+                    </div>
+                    <div class="col">
+                        Recruitment
+                    </div>
+                </div>
+            </div>
+            <div class="disclaimer pt-5 pb-1">
+                <div class="row row-cols-1 w-100 text-center">
+                    <span>©2021 Nizing Electric Wire & Cable Co., Ltd
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="OQSConnectionString-Web.config Connection String" description="OQSConnectionString 應用程式在 web.config 中用來存取資料庫的連接字串。" defaultValue="Data Source=SMARTERP;Initial Catalog=OQS;Persist Security Info=True;User ID=everyone;Password=123456" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\hr360\\mobile\\Web\.config$" match="/configuration/connectionStrings/add[@name='OQSConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='OQSConnectionString']/@connectionString" />
+  </parameter>
+  <parameter name="NZConnectionString-Web.config Connection String" description="NZConnectionString 應用程式在 web.config 中用來存取資料庫的連接字串。" defaultValue="Data Source=SMARTERP;Initial Catalog=NZ;Persist Security Info=True;User ID=everyone;Password=123456" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\hr360\\mobile\\Web\.config$" match="/configuration/connectionStrings/add[@name='NZConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='NZConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\employee_section\\Web\.config$" match="/configuration/connectionStrings/add[@name='NZConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\neo_employee_section\\Web\.config$" match="/configuration/connectionStrings/add[@name='NZConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\revivify_employee_section\\Web\.config$" match="/configuration/connectionStrings/add[@name='NZConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\sunrise_employee_section\\Web\.config$" match="/configuration/connectionStrings/add[@name='NZConnectionString']/@connectionString" />
+  </parameter>
+  <parameter name="ERP2ConnectionString-Web.config Connection String" description="ERP2ConnectionString 應用程式在 web.config 中用來存取資料庫的連接字串。" defaultValue="Data Source=SMARTERP;Initial Catalog=NZ_ERP2;Persist Security Info=True;User ID=everyone;Password=123456" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\hr360\\mobile\\Web\.config$" match="/configuration/connectionStrings/add[@name='ERP2ConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ERP2ConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\employee_section\\Web\.config$" match="/configuration/connectionStrings/add[@name='ERP2ConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\neo_employee_section\\Web\.config$" match="/configuration/connectionStrings/add[@name='ERP2ConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\revivify_employee_section\\Web\.config$" match="/configuration/connectionStrings/add[@name='ERP2ConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\sunrise_employee_section\\Web\.config$" match="/configuration/connectionStrings/add[@name='ERP2ConnectionString']/@connectionString" />
+  </parameter>
+  <parameter name="SunrizeConnectionString-Web.config Connection String" description="SunrizeConnectionString 應用程式在 web.config 中用來存取資料庫的連接字串。" defaultValue="Data Source=SMARTERP;Initial Catalog=SUNRIZE;Persist Security Info=True;User ID=everyone;Password=123456" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\hr360\\mobile\\Web\.config$" match="/configuration/connectionStrings/add[@name='SunrizeConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='SunrizeConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\sunrise_employee_section\\Web\.config$" match="/configuration/connectionStrings/add[@name='SunrizeConnectionString']/@connectionString" />
+  </parameter>
+  <parameter name="SunriseConnectionString-Web.config Connection String" description="SunriseConnectionString 應用程式在 web.config 中用來存取資料庫的連接字串。" defaultValue="Data Source=SMARTERP;Initial Catalog=SUNRISE;Persist Security Info=True;User ID=everyone;Password=123456" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\hr360\\mobile\\Web\.config$" match="/configuration/connectionStrings/add[@name='SunriseConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\sunrise_employee_section\\Web\.config$" match="/configuration/connectionStrings/add[@name='SunriseConnectionString']/@connectionString" />
+  </parameter>
+  <parameter name="AdminWebsiteConnectionString-Web.config Connection String" description="AdminWebsiteConnectionString 應用程式在 web.config 中用來存取資料庫的連接字串。" defaultValue="Data Source=SMARTERP;Initial Catalog=Website;User ID=NizAdmin20210824;Password=20210825Encryption" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='AdminWebsiteConnectionString']/@connectionString" />
+  </parameter>
+  <parameter name="WebsiteConnectionString-Web.config Connection String" description="WebsiteConnectionString 應用程式在 web.config 中用來存取資料庫的連接字串。" defaultValue="Data Source=SMARTERP;Initial Catalog=Website;Persist Security Info=True;User ID=everyone;Password=123456" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='WebsiteConnectionString']/@connectionString" />
+  </parameter>
+  <parameter name="HR360ConnectionString-Web.config Connection String" description="HR360ConnectionString 應用程式在 web.config 中用來存取資料庫的連接字串。" defaultValue="Data Source=SMARTERP;Initial Catalog=NZ_ERP2;Persist Security Info=True;User ID=everyone;Password=123456" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\employee_section\\Web\.config$" match="/configuration/connectionStrings/add[@name='HR360ConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\neo_employee_section\\Web\.config$" match="/configuration/connectionStrings/add[@name='HR360ConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\revivify_employee_section\\Web\.config$" match="/configuration/connectionStrings/add[@name='HR360ConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\sunrise_employee_section\\Web\.config$" match="/configuration/connectionStrings/add[@name='HR360ConnectionString']/@connectionString" />
+  </parameter>
+  <parameter name="NEOConnectionString-Web.config Connection String" description="NEOConnectionString 應用程式在 web.config 中用來存取資料庫的連接字串。" defaultValue="Data Source=SMARTERP;Initial Catalog=NEO;Persist Security Info=True;User ID=everyone;Password=123456" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\neo_employee_section\\Web\.config$" match="/configuration/connectionStrings/add[@name='NEOConnectionString']/@connectionString" />
+  </parameter>
+  <parameter name="RVIConnectionString-Web.config Connection String" description="RVIConnectionString 應用程式在 web.config 中用來存取資料庫的連接字串。" defaultValue="Data Source=SMARTERP;Initial Catalog=RVI;Persist Security Info=True;User ID=everyone;Password=123456" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\revivify_employee_section\\Web\.config$" match="/configuration/connectionStrings/add[@name='RVIConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\Nizing\ Website\ CC\\Temp\\Package\\PackageTmp\\sunrise_employee_section\\Web\.config$" match="/configuration/connectionStrings/add[@name='RVIConnectionString']/@connectionString" />
+  </parameter>
+</parameters>

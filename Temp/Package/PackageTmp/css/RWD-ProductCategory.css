@@ -1,0 +1,82 @@
+﻿.sticky-top {
+    padding-top: 55px;
+    margin-top: -55px;
+}
+
+.title {
+    font-size: 2.5rem;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+}
+
+.jumbotron {
+    height: 50vh;    
+    background-size: cover;
+}
+
+    .jumbotron .title, .jumbotron .subtitle {
+        color: #ffffff;
+        mix-blend-mode: difference;
+    }
+
+.main-block {
+    padding-top: 112px;
+    margin-top: -112px;
+}
+
+
+    .main-block .title, .main-block .subtitle {
+        color: #575757;
+    }
+
+.sub-block {
+    background-color: #ffffff;
+    padding-top: 48px;
+    padding-bottom: 48px;
+}
+
+    .sub-block .card {
+        margin-bottom: 8px;
+    }
+
+.main-block:nth-child(2n) .sub-block {
+    background-color: #a7a7a7;
+}
+
+.product-category.main-block .img{
+   width:100%;
+}
+
+.product-category .navigation-row {
+    cursor: pointer;
+}
+
+.table-responsive {
+    white-space: nowrap;
+}
+
+th {
+    background-color: #989898;
+    color: #ffffff;
+    text-align:center;
+}
+
+@media all and (min-width:768px) and (max-width: 992px) {
+    .sticky-top {
+        padding-top: 63px;
+        margin-top: -63px;
+    }
+
+    .main-block {
+        padding-top: 120px;
+        margin-top: -120px;
+    }
+}
+
+@media all and (max-width:768px) {
+    .sub-block .title, .sub-block .subtitle {
+        text-align: center;
+    }
+}

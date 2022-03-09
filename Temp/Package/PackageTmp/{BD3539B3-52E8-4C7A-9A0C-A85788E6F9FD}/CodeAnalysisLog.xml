@@ -1,0 +1,644 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio 12.0\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="12.0">
+ <Targets>
+  <Target Name="C:\Users\kevin\AppData\Local\Temp\tmpA80C.tmp.cadir\bin\App_Web_0xqeslfa.dll">
+   <Modules>
+    <Module Name="app_web_0xqeslfa.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="hr360_mobile_login" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Decrypt(System.String)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360\mobile" File="login.aspx.cs" Line="102">Object 'cs' can be disposed more than once in method 'hr360_mobile_login.Decrypt(string)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 102</Issue>
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360\mobile" File="login.aspx.cs" Line="102">Object 'ms' can be disposed more than once in method 'hr360_mobile_login.Decrypt(string)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 102, 104</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="hr360_mobile_main" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Page_Load(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360\mobile" File="main.aspx.cs" Line="80">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_mobile_main.Page_Load(object, EventArgs)' could contain the following variables 'dtUserInfo.Rows[0]["START_MONTH"]'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\kevin\AppData\Local\Temp\tmpA80C.tmp.cadir\bin\App_Web_4wp4lznh.dll">
+   <Modules>
+    <Module Name="app_web_4wp4lznh.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="SD01" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Export_Excel()" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\revivify_employee_section\report" File="SD01.aspx.cs" Line="627">Object 'ms' can be disposed more than once in method 'SD01.Export_Excel()'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 627</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#SqlSearch(System.String[])" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\revivify_employee_section\report" File="SD01.aspx.cs" Line="366">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'SD01.SqlSearch(string[])' could contain the following variables 'query[0]'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\revivify_employee_section\report" File="SD01.aspx.cs" Line="417">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'SD01.SqlSearch(string[])' could contain the following variables 'query[1]'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\revivify_employee_section\report" File="SD01.aspx.cs" Line="398">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'SD01.SqlSearch(string[])' could contain the following variables 'query[2]'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\kevin\AppData\Local\Temp\tmpA80C.tmp.cadir\bin\App_Web_dzclxupn.dll">
+   <Modules>
+    <Module Name="app_web_dzclxupn.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="masterPage_HR360_Master" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Decrypt(System.String)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\master" File="HR360_Master.master.cs" Line="60">Object 'cs' can be disposed more than once in method 'masterPage_HR360_Master.Decrypt(string)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 60</Issue>
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\master" File="HR360_Master.master.cs" Line="60">Object 'ms' can be disposed more than once in method 'masterPage_HR360_Master.Decrypt(string)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 60, 62</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Encrypt(System.String)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\master" File="HR360_Master.master.cs" Line="39">Object 'cs' can be disposed more than once in method 'masterPage_HR360_Master.Encrypt(string)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 39</Issue>
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\master" File="HR360_Master.master.cs" Line="39">Object 'ms' can be disposed more than once in method 'masterPage_HR360_Master.Encrypt(string)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 39, 41</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\kevin\AppData\Local\Temp\tmpA80C.tmp.cadir\bin\App_Web_k2gji4l2.dll">
+   <Modules>
+    <Module Name="app_web_k2gji4l2.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="EmployeeDayOffReport" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Export_Excel()" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\employee_section\report" File="EmployeeDayOffReport.aspx.cs" Line="258">Object 'ms' can be disposed more than once in method 'EmployeeDayOffReport.Export_Excel()'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 258</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="InventorySearch" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#SqlSearch()" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\employee_section\report" File="InventorySearch.aspx.cs" Line="334">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'InventorySearch.SqlSearch()' could contain the following variables 'this.GetQueryString()'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="WorkDuration" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Export_Excel()" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\employee_section\report" File="WorkDuration.aspx.cs" Line="172">Object 'ms' can be disposed more than once in method 'WorkDuration.Export_Excel()'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 172</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#SqlSearch(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\employee_section\report" File="WorkDuration.aspx.cs" Line="54">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'WorkDuration.SqlSearch(string)' could contain the following variables 'query'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\kevin\AppData\Local\Temp\tmpA80C.tmp.cadir\bin\App_Web_ktds23vo.dll">
+   <Modules>
+    <Module Name="app_web_ktds23vo.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="SaleRecord" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Export_Excel()" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\employee_section\report" File="SaleRecord.aspx.cs" Line="198">Object 'ms' can be disposed more than once in method 'SaleRecord.Export_Excel()'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 198</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#SqlSearch(System.String)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\employee_section\report" File="SaleRecord.aspx.cs" Line="60">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'SaleRecord.SqlSearch(string)' could contain the following variables 'query'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="SD01" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Export_Excel()" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\employee_section\report" File="SD01.aspx.cs" Line="580">Object 'ms' can be disposed more than once in method 'SD01.Export_Excel()'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 580</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#SqlSearch(System.String[])" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\employee_section\report" File="SD01.aspx.cs" Line="359">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'SD01.SqlSearch(string[])' could contain the following variables 'query[0]'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\employee_section\report" File="SD01.aspx.cs" Line="380">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'SD01.SqlSearch(string[])' could contain the following variables 'query[1]'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\kevin\AppData\Local\Temp\tmpA80C.tmp.cadir\bin\App_Web_lewkme5j.dll">
+   <Modules>
+    <Module Name="app_web_lewkme5j.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="hr360_PR02" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#btnSearch_Search_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="PR02.aspx.cs" Line="793">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_PR02.btnSearch_Search_Click(object, EventArgs)' could contain the following variables 'this.txtSearchCondition.Text'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="hr360_PR05" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#btnSearch_Search_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="PR05.aspx.cs" Line="143">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_PR05.btnSearch_Search_Click(object, EventArgs)' could contain the following variables 'this.txtSearchCondition.Text'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="hr360_PR08" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#btnSearch_Search_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="PR08.aspx.cs" Line="947">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_PR08.btnSearch_Search_Click(object, EventArgs)' could contain the following variables 'this.txtSearchCondition.Text'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Load_Assessor_Gridview(System.Collections.Generic.List`1&lt;System.String[]&gt;)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="PR08.aspx.cs" Line="1616">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_PR08.Load_Assessor_Gridview(List&lt;string[]&gt;)' could contain the following variables 'str[0]', 'str[1]'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#txtForm_Assessment_Year_TextChanged(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="PR08.aspx.cs" Line="1270">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_PR08.txtForm_Assessment_Year_TextChanged(object, EventArgs)' could contain the following variables 'this.fastSearchString(this.txtForm_Assessment_Year.Text.Trim(), this.txtForm_Type_Id.Text.Trim())'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#txtForm_Type_Id_TextChanged(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="PR08.aspx.cs" Line="1331">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_PR08.txtForm_Type_Id_TextChanged(object, EventArgs)' could contain the following variables 'this.fastSearchString(this.txtForm_Assessment_Year.Text.Trim(), this.txtForm_Type_Id.Text.Trim())'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="hr360_PR10" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#btnForm_Id_Select_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="PR10.aspx.cs" Line="1364">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_PR10.btnForm_Id_Select_Click(object, EventArgs)' could contain the following variables 'this.txtForm_Type_Id.Text'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#btnSearch_Search_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="PR10.aspx.cs" Line="823">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_PR10.btnSearch_Search_Click(object, EventArgs)' could contain the following variables 'this.txtSearchCondition.Text'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\kevin\AppData\Local\Temp\tmpA80C.tmp.cadir\bin\App_Web_lhvfwyaf.dll">
+   <Modules>
+    <Module Name="app_web_lhvfwyaf.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="hr360_BI03" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#btnSearch_Search_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="BI03.aspx.cs" Line="129">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_BI03.btnSearch_Search_Click(object, EventArgs)' could contain the following variables 'this.txtSearchCondition.Text'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="hr360_UI04" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#btnApprove_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="UI04.aspx.cs" Line="1997">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_UI04.btnApprove_Click(object, EventArgs)' could contain the following variables 'this.currentHREmployeeID'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#btnDayOffAdd_Click(System.Object,System.Web.UI.ImageClickEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="UI04.aspx.cs" Line="291">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_UI04.btnDayOffAdd_Click(object, ImageClickEventArgs)' could contain the following variables 'new string[5][1]', 'new string[5][3]'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\kevin\AppData\Local\Temp\tmpA80C.tmp.cadir\bin\App_Web_mu12ehqu.dll">
+   <Modules>
+    <Module Name="app_web_mu12ehqu.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="hr360_PR03" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#btnSearch_Search_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="PR03.aspx.cs" Line="840">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_PR03.btnSearch_Search_Click(object, EventArgs)' could contain the following variables 'this.txtSearchCondition.Text'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="hr360_PR07" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#btnSearch_Search_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="PR07.aspx.cs" Line="850">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_PR07.btnSearch_Search_Click(object, EventArgs)' could contain the following variables 'this.txtSearchCondition.Text'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Load_KPI_Gridview(System.Collections.Generic.List`1&lt;System.String[]&gt;)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="PR07.aspx.cs" Line="1559">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_PR07.Load_KPI_Gridview(List&lt;string[]&gt;)' could contain the following variables 'list1[i][0]', 'list1[i][0]', 'list1[i][0]', 'list1[i][0]'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\kevin\AppData\Local\Temp\tmpA80C.tmp.cadir\bin\App_Web_nssutq1r.dll">
+   <Modules>
+    <Module Name="app_web_nssutq1r.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="SD01" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Export_Excel()" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\neo_employee_section\report" File="SD01.aspx.cs" Line="627">Object 'ms' can be disposed more than once in method 'SD01.Export_Excel()'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 627</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#SqlSearch(System.String[])" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\neo_employee_section\report" File="SD01.aspx.cs" Line="366">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'SD01.SqlSearch(string[])' could contain the following variables 'query[0]'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\neo_employee_section\report" File="SD01.aspx.cs" Line="417">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'SD01.SqlSearch(string[])' could contain the following variables 'query[1]'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\neo_employee_section\report" File="SD01.aspx.cs" Line="398">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'SD01.SqlSearch(string[])' could contain the following variables 'query[2]'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\kevin\AppData\Local\Temp\tmpA80C.tmp.cadir\bin\App_Web_p2diu53x.dll">
+   <Modules>
+    <Module Name="app_web_p2diu53x.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="masterPage_HR360_Child" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#GetUserName(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\master" File="HR360_Child.master.cs" Line="157">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'masterPage_HR360_Child.GetUserName(string)' could contain the following variables 'strIn'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="masterPage_HR360_Child_user" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#GetUserName(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\master" File="HR360_Child_user.master.cs" Line="42">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'masterPage_HR360_Child_user.GetUserName(string)' could contain the following variables 'strIn'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\kevin\AppData\Local\Temp\tmpA80C.tmp.cadir\bin\App_Web_ur0fz2x3.dll">
+   <Modules>
+    <Module Name="app_web_ur0fz2x3.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="hr360_BI01" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#btnSearch_Search_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="BI01.aspx.cs" Line="173">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_BI01.btnSearch_Search_Click(object, EventArgs)' could contain the following variables 'this.txtSearchCondition.Text'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="hr360_evaluationFormView" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#btnSaveComment_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="evaluationFormView.aspx.cs" Line="953">Object 'dr' can be disposed more than once in method 'hr360_evaluationFormView.btnSaveComment_Click(object, EventArgs)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 953</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="hr360_PR04" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#btnSearch_Search_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="PR04.aspx.cs" Line="132">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_PR04.btnSearch_Search_Click(object, EventArgs)' could contain the following variables 'this.txtSearchCondition.Text'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="main" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Page_Load(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="main.aspx.cs" Line="102">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'main.Page_Load(object, EventArgs)' could contain the following variables 'dtUserInfo.Rows[0]["START_MONTH"]'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+  <Target Name="C:\Users\kevin\AppData\Local\Temp\tmpA80C.tmp.cadir\bin\App_Web_yoxagqbw.dll">
+   <Modules>
+    <Module Name="app_web_yoxagqbw.dll">
+     <Namespaces>
+      <Namespace Name="">
+       <Types>
+        <Type Name="hr360_evaluationForm" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#assignSpecialAssessment(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="evaluationForm.aspx.cs" Line="2074">Object 'dr' can be disposed more than once in method 'hr360_evaluationForm.assignSpecialAssessment(string)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 2074</Issue>
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="evaluationForm.aspx.cs" Line="2071">Object 'dr2' can be disposed more than once in method 'hr360_evaluationForm.assignSpecialAssessment(string)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 2071</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#loadAssessedForm(System.String,System.String,System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="evaluationForm.aspx.cs" Line="1177">Object 'dr' can be disposed more than once in method 'hr360_evaluationForm.loadAssessedForm(string, string, string)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 1177</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#loadCleanForm(System.String,System.String,System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="evaluationForm.aspx.cs" Line="1022">Object 'dr' can be disposed more than once in method 'hr360_evaluationForm.loadCleanForm(string, string, string)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 1022</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#removeSpecialAssessment(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="evaluationForm.aspx.cs" Line="2130">Object 'dr' can be disposed more than once in method 'hr360_evaluationForm.removeSpecialAssessment(string)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 2130</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#saveSurveyData(System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="evaluationForm.aspx.cs" Line="1984">Object 'dr' can be disposed more than once in method 'hr360_evaluationForm.saveSurveyData(string)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 1984</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="hr360_PR01" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#btnSearch_Search_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="PR01.aspx.cs" Line="802">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_PR01.btnSearch_Search_Click(object, EventArgs)' could contain the following variables 'this.txtSearchCondition.Text'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="hr360_PR06" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#btnSearch_Search_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="PR06.aspx.cs" Line="813">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_PR06.btnSearch_Search_Click(object, EventArgs)' could contain the following variables 'this.txtSearchCondition.Text'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Load_KPI_Gridview(System.Collections.Generic.List`1&lt;System.String&gt;,System.Collections.Generic.List`1&lt;System.String&gt;)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="PR06.aspx.cs" Line="1358">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_PR06.Load_KPI_Gridview(List&lt;string&gt;, List&lt;string&gt;)' could contain the following variables 'KPI_inGroup[i]', 'KPI_inGroup[i]', 'KPI_inGroup[i]', 'KPI_inGroup[i]', 'KPI_notInGroup[i]', 'KPI_notInGroup[i]', 'KPI_notInGroup[i]', 'KPI_notInGroup[i]'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="PR06.aspx.cs" Line="1318">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'hr360_PR06.Load_KPI_Gridview(List&lt;string&gt;, List&lt;string&gt;)' could contain the following variables 'KPI_notInGroup[i]', 'KPI_notInGroup[i]', 'KPI_notInGroup[i]', 'KPI_notInGroup[i]'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#toplink_save_Click(System.Object,System.Web.UI.ImageClickEventArgs)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="PR06.aspx.cs" Line="1077">Object 'reader' can be disposed more than once in method 'hr360_PR06.toplink_save_Click(object, ImageClickEventArgs)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 1077</Issue>
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="PR06.aspx.cs" Line="1101">Object 'reader' can be disposed more than once in method 'hr360_PR06.toplink_save_Click(object, ImageClickEventArgs)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 1101</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="login" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Login_Validation(System.String,System.String)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="login.aspx.cs" Line="70">Object 'reader' can be disposed more than once in method 'login.Login_Validation(string, string)'. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 70, 87, 106</Issue>
+            </Message>
+            <Message TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-10-22 07:26:22Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="d:\Nizing Website CC\Nizing\hr360" File="login.aspx.cs" Line="60">The query string passed to 'SqlCommand.SqlCommand(string, SqlConnection)' in 'login.Login_Validation(string, string)' could contain the following variables 'username'. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="Do not dispose objects multiple times" Category="Microsoft.Usage" CheckId="CA2202">
+   <Name>Do not dispose objects multiple times</Name>
+   <Description>A correctly implemented Dispose method can be called multiple times without throwing an exception. However, this is not guaranteed and to avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.</Description>
+   <Resolution Name="Default">Object {0} can be disposed more than once in method {1}. To avoid generating a System.ObjectDisposedException you should not call Dispose more than one time on an object.: Lines: 1101</Resolution>
+   <Owner>RuleOwner</Owner>
+   <Url>http://msdn.microsoft.com/library/ms182334.aspx</Url>
+   <Email />
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="dataflowrules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="Review SQL queries for security vulnerabilities" Category="Microsoft.Security" CheckId="CA2100">
+   <Name>Review SQL queries for security vulnerabilities</Name>
+   <Description>A SQL command string built from user input is vulnerable to SQL injection attacks. Microsoft SQL Server and other database servers support stored procedures and parameterized SQL queries, which reduce the risk of injection attacks.</Description>
+   <Resolution Name="WithNonLiterals">The query string passed to {0} in {1} could contain the following variables {2}. If any of these variables could come from user input, consider using a stored procedure or a parameterized SQL query instead of building the query with string concatenations.</Resolution>
+   <Owner>RuleOwner</Owner>
+   <Url>http://msdn.microsoft.com/library/ms182310.aspx</Url>
+   <Email />
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="dataflowrules.dll" Version="12.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">Category</String>
+  <String Key="Certainty">Certainty</String>
+  <String Key="CollapseAll">Collapse All</String>
+  <String Key="CheckId">Check Id</String>
+  <String Key="Error">Error</String>
+  <String Key="Errors">error(s)</String>
+  <String Key="ExpandAll">Expand All</String>
+  <String Key="Help">Help</String>
+  <String Key="Line">Line</String>
+  <String Key="Messages">message(s)</String>
+  <String Key="LocationNotStoredInPdb">[Location not stored in Pdb]</String>
+  <String Key="Project">Project</String>
+  <String Key="Resolution">Resolution</String>
+  <String Key="Rule">Rule</String>
+  <String Key="RuleFile">Rule File</String>
+  <String Key="RuleDescription">Rule Description</String>
+  <String Key="Source">Source</String>
+  <String Key="Status">Status</String>
+  <String Key="Target">Target</String>
+  <String Key="Warning">Warning</String>
+  <String Key="Warnings">warning(s)</String>
+  <String Key="ReportTitle">Code Analysis Report</String>
+ </Localized>
+</FxCopReport>

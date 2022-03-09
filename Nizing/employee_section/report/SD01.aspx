@@ -12,7 +12,7 @@
             /*color:#00CC00;*/ /* green */
         }
 
-        .grdResultWithFooter .stackedHeader-1 {
+        .table.table-striped-blue .stackedHeader-1 {
             background-color: #29ABE2;
             color: #ffffff;
             font-weight: bold;
@@ -41,9 +41,9 @@
         });
     </script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <div id="NetSale" class="container-fluid">
+    <div id="NetSale" class="container">
         <div id="Admin" runat="server" visible="false">
             <div id="SetTarget" runat="server">
                 <div id="SetTargetTrigger" runat="server">
@@ -179,7 +179,7 @@
                             OnDataBound="grdReport_DataBound"
                             OnRowCreated="grdReport_RowCreated"
                             AutoGenerateColumns="false"
-                            ShowFooter="True" CssClass="grdResultWithFooter" HorizontalAlign="Center">
+                            ShowFooter="True" CssClass="table table-striped-blue" HorizontalAlign="Center">
                             <Columns>
                                 <asp:TemplateField HeaderText="排名">
                                     <ItemTemplate>

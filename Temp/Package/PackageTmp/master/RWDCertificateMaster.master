@@ -1,0 +1,12 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/master/RWD.master" AutoEventWireup="true" CodeFile="RWDCertificateMaster.master.cs" Inherits="master_RWDCertificateMaster" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="banner" Runat="Server">
+    <asp:ContentPlaceHolder ID="banner" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="body" Runat="Server">
+    <asp:ContentPlaceHolder ID="body" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+

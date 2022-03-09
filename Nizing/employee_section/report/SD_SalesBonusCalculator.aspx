@@ -32,7 +32,7 @@
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
     <!--2021.01.29 This Calculator is no longer in use; Sales Bonus calculation method has been changed-->
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div>

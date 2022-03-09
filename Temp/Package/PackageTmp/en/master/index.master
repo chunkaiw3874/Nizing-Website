@@ -1,0 +1,112 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="index.master.cs" Inherits="index" %>
+<%@ Register Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" tagPrefix="ajax" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta name="msvalidate.01" content="9FD2A31229BA452ABDBB1C004A175F57" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=8" />
+    <meta name="keywords" content="nizing, manufacture, wire, silicone, fluoropolymer, xlpe, pvc, pe, thermocouple, pu, temp resistant, high voltage, spec, certificate, ul, tube, customize, wiring, electic car, temperature control, cloud, 3d print, medical, led, heating, steel" />
+    <link rel="shortcut icon" href="~/en/images/icon/nizing.ico.gif" />
+    <link href="~/css/normalize.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/base.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/template.css?version=1" rel="stylesheet" type="text/css" />
+    <link href="~/css/tabcontainer.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/general.css?version=1" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder id="DocTitleKeywords" runat="server"></asp:ContentPlaceHolder>
+    <script type="text/javascript">
+        (function () {
+            var cx = '010054550380540391242:bbpyczxrrro';
+            var gcse = document.createElement('script');
+            gcse.type = 'text/javascript';
+            gcse.async = true;
+            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                '//cse.google.com/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(gcse, s);
+        })();
+    </script>
+    <asp:ContentPlaceHolder ID="JavaScriptCode" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <div id="header">
+            <div class="header-wrapper">
+                <asp:ImageButton ID="logo" runat="server" ImageUrl="~/images/logo.jpg" PostBackUrl="~/en/default.aspx" />
+                <div id="header-top-right">
+                    <div id="language">
+                        <asp:HyperLink ID="linkHome" runat="server" NavigateUrl="~/en/default.aspx">Home </asp:HyperLink>| 
+                        <asp:HyperLink ID="linkChinese" runat="server"> 中文 </asp:HyperLink>| 
+                        <asp:HyperLink ID="linkEnglish" runat="server"> English</asp:HyperLink>
+                    </div>                  
+                    <%--Google Search Engine Here--%>              
+                    <div id="search-engine">  
+                        <gcse:searchbox-only></gcse:searchbox-only>
+                    </div>                    
+                </div>
+                <div id="top-menu">
+                    <asp:Menu ID="MainMenu" runat="server" Orientation="Horizontal" DataSourceID="XmlMainMenu" StaticSubMenuIndent="20px" BorderStyle="None" StaticEnableDefaultPopOutImage="False" ItemWrap="True" CssClass="main-menu-main" StaticDisplayLevels="1">
+                        <DataBindings>
+                            <asp:MenuItemBinding DataMember="menuitem" TextField="enTitle" NavigateUrlField="url" />
+                            <asp:MenuItemBinding DataMember="submenuitem" NavigateUrlField="url" TextField="enTitle" />
+                        </DataBindings>
+                        <DynamicHoverStyle BackColor="#FF9933" ForeColor="White" BorderStyle="Solid" BorderColor="#CCCCCC" />
+                        <DynamicMenuItemStyle CssClass="transparent-menu" />
+                        <DynamicMenuStyle BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" />
+                        <DynamicSelectedStyle BackColor="#FFCC66" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" />
+                        <StaticHoverStyle BackColor="#FF9933" ForeColor="White" />
+                        <StaticMenuItemStyle HorizontalPadding="20px" VerticalPadding="10px" BorderStyle="None" Font-Size="12px" />
+                        <StaticMenuStyle BorderStyle="None" />
+                    </asp:Menu>
+                    <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
+                    <asp:XmlDataSource ID="XmlMainMenu" runat="server" DataFile="~/en/menu/MainMenu.xml" XPath="/menu/menuitem"></asp:XmlDataSource>                  
+                </div>
+            </div>
+            <div id="banner">
+                <asp:Image ID="Image1" runat="server" ImageUrl="~/en/images/banner/bannerEN.gif" />
+            </div>
+        </div>
+        <div id="main">
+            <div id="directory" runat="server">
+                <asp:SiteMapPath ID="SiteMapPath1" runat="server"></asp:SiteMapPath>
+            </div>       
+            <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+            </asp:ContentPlaceHolder>
+        </div>
+        <div id="top">
+            <a href="#"><img src="../en/images/button/top.png" title="Back to Top" /></a>
+        </div>
+        <div id="footer">
+            <div class="footer1">                
+<%--            <asp:HyperLink ID="HyperLink2" runat="server" ImageUrl="~/en/images/icon/contact_us.png" ToolTip="Contact Us" NavigateUrl="~/contact_us.aspx" />
+                <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/en/images/icon/navigation.png" NavigateUrl="~/navigation.aspx" ToolTip="Site Navigation" />
+                <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/en/images/icon/facebook.png" NavigateUrl="https://www.facebook.com/pages/%E6%97%A5%E9%80%B2%E9%9B%BB%E7%B7%9A%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8/367173643345648" Target="_blank" ToolTip="facebook" />--%>
+                <div style="display: block;">
+                    <a href="/contact_us.aspx" title="Contact Us">
+                        <img src="/images/icon/contact_us.png" width="30" />
+                    </a>
+                    <a href="/navigation.aspx" title="Site Navigation">
+                        <img src="/images/icon/navigation.png" width="30" />
+                    </a>
+                    <a href="https://www.facebook.com/NIZING.ELECTRIC/" target="_blank" title="facebook">
+                        <img src="/images/icon/facebook.png" width="30" />
+                    </a>
+                    <a href="https://line.me/R/ti/p/%40nizing" target="_blank">
+                        <img src="/images/icon/line.png" width="30" />
+                    </a>
+            </div>
+                <div style="display: block;">
+                    Office Hour: 08:30 ~ 18:00
+                </div>
+                <div style="display: block;">
+                    Powered by Nizing Electric Wire & Cable Co. Ltd. <a href="tel:+886229999181">(T)+886-2-2999-9181</a> <a href="tel:+886933272455">(M)+886-933-272-455</a> (F)+886-2-2999-9771 Copyright© 2015 All Rights Reserved
+                </div>
+            </div>
+        </div>                
+    </form>
+</body>
+</html>

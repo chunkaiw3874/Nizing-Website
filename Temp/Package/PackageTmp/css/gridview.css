@@ -1,0 +1,23 @@
+﻿.grdResult{
+    min-width:100%;
+}
+.grdResult tr th{
+    padding:4px;
+    background-color:#29ABE2;
+    color:#FFFFFF;
+    border:solid 1px #ffffff;
+}
+.grdResult tr td{
+    padding:4px;
+    background-color:#ffffff;
+    color:#000000;
+    text-align:center;
+    border:solid 1px #ffffff;
+}
+.grdResult tr:nth-child(2n) td{
+    padding:4px;
+    background-color:#c3e8f4;
+    color:#000000;    
+    text-align:center;
+    border:solid 1px #ffffff;
+}
