@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWDMaterialMaster.master" AutoEventWireup="true" CodeFile="thermoplastic-elastomer.aspx.cs" Inherits="thermoplastic_elastomer" %>
 
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="Server">
-    <title>日進電線-熱可塑性彈性體特性</title>
+    <title>熱可塑性彈性體特性-日進電線 <%=DateTime.Now.Year.ToString() %></title>
     <meta name="keywords" content="電線,外被,熱可塑性彈性體,Wire,Insulation Material,TPE" />
 
     <style type="text/css">
@@ -22,18 +22,22 @@
             margin-bottom: 10px;
         }
 
+        .zh .content .content-body {
+            text-align: justify;
+        }
+
         @media all and (max-width:767px) {
             .display-block .content {
                 padding-bottom: 0;
             }
 
-                .content .content-title {
-                    font-size: 16px;
-                }
+            .content .content-title {
+                font-size: 16px;
+            }
 
-                .content .content-body {
-                    font-size: 14px;
-                }
+            .content .content-body {
+                font-size: 14px;
+            }
         }
     </style>
 </asp:Content>
@@ -50,7 +54,7 @@
     </div>
 </asp:Content>
 <asp:Content ID="body" ContentPlaceHolderID="body" runat="Server">
-    <div class="display-block-wrapper material-item">
+    <div class="display-block-wrapper material-item <%=RouteData.Values["language"].ToString() %>">
         <div class="container">
             <div class="display-block">
                 <div class="title">
