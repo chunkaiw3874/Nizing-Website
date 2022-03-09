@@ -1132,6 +1132,26 @@
 		<changefreq>monthly</changefreq>
 		<priority>0.70</priority>
 	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/zh/product/military-grade-wire/m22758</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/en/product/military-grade-wire/m22758</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/zh/material/thermoplastic-elastomer</loc>
+		<changefreq>yearly</changefreq>
+		<priority>0.40</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/en/material/thermoplastic-elastomer</loc>
+		<changefreq>yearly</changefreq>
+		<priority>0.40</priority>
+	</url>
 
 
 

@@ -33,6 +33,7 @@ public partial class material : System.Web.UI.Page
         AddMenuItem(language, "teflon", "鐵氟龍材料", "Teflon");
         AddMenuItem(language, "plastic", "塑膠原料", "Plastic");
         AddMenuItem(language, "twinning", "編織纏繞材料", "Twinning");
+        AddMenuItem(language, "thermoplastic-elastomer", "熱可塑性彈性體", "TPE");
     }
 
     protected void AddMenuItem(string language, string id, string zhText, string enText)

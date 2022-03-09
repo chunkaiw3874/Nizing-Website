@@ -108,6 +108,7 @@
         routes.MapPageRoute("", "{language}/material/teflon", "~/teflon.aspx");
         routes.MapPageRoute("", "{language}/material/plastic", "~/plastic.aspx");
         routes.MapPageRoute("", "{language}/material/twinning", "~/twinning.aspx");
+        routes.MapPageRoute("", "{language}/material/thermoplastic-elastomer", "~/thermoplastic-elastomer.aspx");
 
         routes.MapPageRoute("", "{language}/ulnumber", "~/ulnumber.aspx");
 

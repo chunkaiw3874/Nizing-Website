@@ -247,6 +247,7 @@
 			<siteMapNode url="/zh/material/teflon" title="鐵氟龍" description="鐵氟龍"></siteMapNode>
 			<siteMapNode url="/zh/material/plastic" title="塑料" description="塑料"></siteMapNode>
 			<siteMapNode url="/zh/material/twinning" title="纏繞編織" description="纏繞編織"></siteMapNode>
+			<siteMapNode url="/zh/material/thermoplastic-elastomer" title="熱可塑性彈性體" description="熱可塑性彈性體"></siteMapNode>
 		</siteMapNode>
 
 		<siteMapNode url="/zh/certificate" title="認證" description="認證">
@@ -503,6 +504,7 @@
 			<siteMapNode url="/en/material/teflon" title="Teflon" description="Teflon"></siteMapNode>
 			<siteMapNode url="/en/material/plastic" title="Plastic" description="Plastic"></siteMapNode>
 			<siteMapNode url="/en/material/twinning" title="Twinning" description="Twinning"></siteMapNode>
+			<siteMapNode url="/en/material/thermoplastic-elastomer" title="Thermoplastic Elastomer" description="Thermoplastic Elastomer"></siteMapNode>
 		</siteMapNode>
 
 		<siteMapNode url="/en/certificate" title="Certificate" description="Certificate">
