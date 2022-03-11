@@ -257,6 +257,8 @@
 
 		<siteMapNode url="/zh/ulnumber" title="UL編號" description="UL編號"></siteMapNode>
 		<siteMapNode url="/zh/contact_us" title="聯絡我們" description="聯絡我們"></siteMapNode>
+		
+		<siteMapNode url="/zh/associates" title="合作夥伴" description="合作夥伴"></siteMapNode>
 
 		<!--en-->
 		<siteMapNode url="/en/company-intro" title="Nizing" description="Nizing">
@@ -514,6 +516,8 @@
 
 		<siteMapNode url="/en/ulnumber" title="UL Number" description="UL Number"></siteMapNode>
 		<siteMapNode url="/en/contact_us" title="Contact Us" description="Contact Us"></siteMapNode>
+
+		<siteMapNode url="/en/associates" title="Associates" description="Associates"></siteMapNode>
 	</siteMapNode>
 
 

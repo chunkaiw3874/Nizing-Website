@@ -118,8 +118,9 @@
 
         routes.MapPageRoute("", "{language}/contact-us", "~/contact_us.aspx");
         routes.MapPageRoute("", "{language}/contact-us/job-listing", "~/job-listing.aspx");
-
+        
         routes.MapPageRoute("", "{language}/declaration/conflict-free-mineral-declaration", "~/conflict-free-mineral-declaration.aspx");
+        routes.MapPageRoute("", "{language}/associates", "~/associates.aspx");
 
         routes.MapPageRoute("", "{language}/portal", "~/portal.aspx");
 

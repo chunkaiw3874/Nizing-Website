@@ -1152,6 +1152,16 @@
 		<changefreq>yearly</changefreq>
 		<priority>0.40</priority>
 	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/zh/associates</loc>
+		<changefreq>yearly</changefreq>
+		<priority>0.40</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/en/associates</loc>
+		<changefreq>yearly</changefreq>
+		<priority>0.40</priority>
+	</url>
 
 
 

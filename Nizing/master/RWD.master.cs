@@ -158,6 +158,7 @@ public partial class master_RWD : System.Web.UI.MasterPage
         AddFooterMenuSubItem(ulListGroup, language, "企業社會責任: SA8000", "SA8000", "/" + language + "#");
         AddFooterMenuSubItem(ulListGroup, language, "品質政策", "Quality Policy", "/" + language + "#");
         AddFooterMenuSubItem(ulListGroup, language, "無衝突金屬聲明", "Non-Conflict Metal Declaration", "/" + language + "/declaration/conflict-free-mineral-declaration");
+        AddFooterMenuSubItem(ulListGroup, language, "合作廠商", "Associates", "/" + language + "/associates");
         ulListGroup = AddFooterMenuItem(language, "產品中心", "Product Center");
         AddFooterMenuSubItem(ulListGroup, language, "產品總攬", "Product Category", "/" + language + "/product");
         AddFooterMenuSubItem(ulListGroup, language, "應用產業", "Application Category", "/" + language + "/application");
