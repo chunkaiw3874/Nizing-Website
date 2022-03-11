@@ -34,7 +34,7 @@
         {%>
                                                 "Missile launcher needs to complete complex tasks such as target recognition, tracking, and contact, in order make accurate calculation for a successful missile launch, which requires fast and clean signal transmission. The Military Spec High Frequency Transmission Control Cable added multiple layers of anti-interference layers to ensure the data is being transferred clean and unaltered."
                                             <%}%> />
-    <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/military-spec-high-frequency-transmission-control-cable-01-mobile.jpg" />
+    <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/high-frequency-transmission-control-cable-01-m.jpg" />
     <meta property="og:url" content="https://www.nizing.com.tw/<%=RouteData.Values["language"].ToString() %>/application/temperature-control-system/military-spec-high-frequency-transmission-control-cable" />
     <meta property="og:site_name" content="Nizing Electric Wire and Cable" />
     <style type="text/css">
@@ -55,11 +55,11 @@
         }
 
         .webp .bg-wrapper {
-            background: url("/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/military-spec-high-frequency-transmission-control-cable-bg.webp") no-repeat top / cover;
+            background: url("/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/high-frequency-transmission-control-cable-bg.webp") no-repeat top / cover;
         }
 
         .no-webp .bg-wrapper {
-            background: url("/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/military-spec-high-frequency-transmission-control-cable-bg.jpg") no-repeat top / cover;
+            background: url("/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/high-frequency-transmission-control-cable-bg.jpg") no-repeat top / cover;
         }
 
         .bg-color-gradient {
@@ -381,9 +381,9 @@
         <div class="content-wrapper">
             <div class="d-md-none">
                 <picture>
-                    <source srcset="/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/military-spec-high-frequency-transmission-control-cable-01-mobile.webp"
+                    <source srcset="/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/high-frequency-transmission-control-cable-01-m.webp"
                         type="image/webp" />
-                    <img src="/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/military-spec-high-frequency-transmission-control-cable-01-mobile.jpg"
+                    <img src="/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/high-frequency-transmission-control-cable-01-m.jpg"
                         alt="軍規高頻傳輸控制複合電纜 Military Spec High Frequency Transmission Control Cable" />
                 </picture>
             </div>
@@ -391,9 +391,9 @@
                 <div class="row">
                     <div class="col-md-4 d-none d-md-flex align-items-end image-section">
                         <picture>
-                            <source srcset="/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/military-spec-high-frequency-transmission-control-cable-01.webp"
+                            <source srcset="/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/high-frequency-transmission-control-cable-01.webp"
                                 type="image/webp" />
-                            <img src="/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/military-spec-high-frequency-transmission-control-cable-01.png"
+                            <img src="/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/high-frequency-transmission-control-cable-01.png"
                                 alt="軍規高頻傳輸控制複合電纜 Military Spec High Frequency Transmission Control Cable" />
                         </picture>
                     </div>
@@ -433,7 +433,7 @@
                             </div>
                             <div class="text-image">
                                 <picture>
-                                    <img src="/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/military-spec-high-frequency-transmission-control-cable-03-<%=RouteData.Values["language"].ToString() %>.svg"
+                                    <img src="/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/high-frequency-transmission-control-cable-03-<%=RouteData.Values["language"].ToString() %>.svg"
                                         alt="軍規高頻傳輸控制複合電纜結構 Military Spec High Frequency Transmission Control Cable Structure" class="mx-auto" />
                                 </picture>
                             </div>
@@ -457,9 +457,9 @@
             </div>            
             <div class="d-md-none bottom-image">
                 <picture>
-                    <source srcset="/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/military-spec-high-frequency-transmission-control-cable-04-mobile.webp"
+                    <source srcset="/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/high-frequency-transmission-control-cable-04-m.webp"
                         type="image/webp" />
-                    <img src="/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/military-spec-high-frequency-transmission-control-cable-04-mobile.png" />
+                    <img src="/images/application/products/military-spec-high-frequency-transmission-control-cable/impression/high-frequency-transmission-control-cable-04-m.png" />
                 </picture>
             </div>
         </div>

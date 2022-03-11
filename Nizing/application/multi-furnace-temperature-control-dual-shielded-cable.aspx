@@ -34,7 +34,7 @@
         {%>
                                                  "Designed specifically for industrial machines, this temperature control cable is extremely sensitive to temperature, making it ideal for monitoring large industrial furnaces, whose product quality depends largely on the micro-management of its temperature output. This cable provides individual insulation for each thermocouple pair, along with extra noise cancellation insulations over the entire cable, making it extremely resistant to noise, and allows precise data feedback in a timely manner."
                                             <%}%> />
-    <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-dual-shielded-cable-02-mobile.jpg" />
+    <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-cable-02-mobile.jpg" />
     <meta property="og:url" content="https://www.nizing.com.tw/<%=RouteData.Values["language"].ToString() %>/application/temperature-control-system/multi-furnace-temperature-control-dual-shielded-cable" />
     <meta property="og:site_name" content="Nizing Electric Wire and Cable" />
     <style type="text/css">
@@ -55,11 +55,11 @@
         }
 
         .webp .bg-wrapper {
-            background: url("/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-dual-shielded-cable-bg.webp") no-repeat top / cover;
+            background: url("/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-cable-bg.webp") no-repeat top / cover;
         }
 
         .no-webp .bg-wrapper {
-            background: url("/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-dual-shielded-cable-bg.jpg") no-repeat top / cover;
+            background: url("/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-cable-bg.jpg") no-repeat top / cover;
         }
 
         .bg-color {
@@ -287,9 +287,9 @@
         <div class="content-wrapper">
             <div class="d-md-none">
                 <picture>
-                    <source srcset="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-dual-shielded-cable-01-mobile.webp"
+                    <source srcset="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-cable-01-mobile.webp"
                         type="image/webp" />
-                    <img src="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-dual-shielded-cable-01-mobile.jpg"
+                    <img src="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-cable-01-mobile.jpg"
                         alt="多爐溫控系統雙層屏蔽線 Multi-Furnace Temperature Control Dual Shielded Cable" />
                 </picture>
             </div>
@@ -331,7 +331,7 @@
                             </div>
                             <div class="d-none d-md-flex justify-content-center text-image">
                                 <picture>
-                                    <img src="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-dual-shielded-cable-02-<%=RouteData.Values["language"].ToString() %>.svg"
+                                    <img src="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-cable-02-<%=RouteData.Values["language"].ToString() %>.svg"
                                         alt="多爐溫控系統雙層屏蔽線結構 Multi-Furnace Temperature Control Dual Shielded Cable Structure" class="mx-auto" />
                                 </picture>
                             </div>
@@ -339,9 +339,9 @@
                     </div>
                     <div class="col-md-4 d-none d-md-flex align-items-end">
                         <picture>
-                            <source srcset="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-dual-shielded-cable-01.webp"
+                            <source srcset="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-cable-01.webp"
                                 type="image/webp" />
-                            <img src="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-dual-shielded-cable-01.png"
+                            <img src="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-cable-01.png"
                                 alt="多爐溫控系統雙層屏蔽線 Multi-Furnace Temperature Control Dual Shielded Cable" />
                         </picture>
                     </div>
@@ -350,16 +350,16 @@
 
             <div class="d-block d-md-none">
                 <picture>
-                    <source srcset="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-dual-shielded-cable-02-mobile.webp"
+                    <source srcset="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-cable-02-mobile.webp"
                         type="image/webp" />
-                    <img src="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-dual-shielded-cable-02-mobile.png"
+                    <img src="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-cable-02-mobile.png"
                         alt="多爐溫控系統雙層屏蔽線 Multi-Furnace Temperature Control Dual Shielded Cable" />
                 </picture>
             </div>
             <div class="container d-md-none">
                 <div class="d-flex justify-content-center text-image">
                     <picture>
-                        <img src="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-dual-shielded-cable-02-<%=RouteData.Values["language"].ToString() %>.svg"
+                        <img src="/images/application/products/multi-furnace-temperature-control-dual-shielded-cable/impression/multi-furnace-temperature-control-cable-02-<%=RouteData.Values["language"].ToString() %>.svg"
                             alt="多爐溫控系統雙層屏蔽線結構 Multi-Furnace Temperature Control Dual Shielded Cable Structure" class="mx-auto" />
                     </picture>
                 </div>
