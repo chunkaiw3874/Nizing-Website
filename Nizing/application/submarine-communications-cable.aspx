@@ -3,18 +3,41 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <title><%if (RouteData.Values["language"].ToString() == "zh")
                {%>
-                                                水下不鏽鋼鎧裝海底網路通訊線-日進電線
-                                                <%}
-                                                    else
-                                                    {%>
+                                                水下不鏽鋼鎧裝海底網路通訊線-日進電線 <%=DateTime.Today.Year.ToString() %>
+        <%}
+            else
+            {%>
                                                 Submarine Connumications Cable - Nizing Electric Wire & Cable
                                             <%}%></title>
-    <meta name="description" content="使用90A高硬度絕緣外被，先進的線材結構，可長時間浸泡於高密度及高深水壓的海水環境也不易腐蝕變質，堅固耐用且耐魚咬。不鏽鋼鎧裝及多重防雜訊隔離，可阻止外部的電磁干擾進入，保持傳輸網絡信號的穩定快速，品質優越，非常適合安裝於水底或其它嚴苛環境之網路通訊使用。" />
+    <meta name="description" content=
+        <%if (RouteData.Values["language"].ToString() == "zh")
+        {%>
+                                                "使用90A高硬度絕緣外被，先進的線材結構，可長時間浸泡於高密度及高深水壓的海水環境也不易腐蝕變質，堅固耐用且耐魚咬。不鏽鋼鎧裝及多重防雜訊隔離，可阻止外部的電磁干擾進入，保持傳輸網絡信號的穩定快速，品質優越，非常適合安裝於水底或其它嚴苛環境之網路通訊使用。"
+                            <%}
+        else
+        {%>
+                                                "Uses 90A high density insulation, with advance composition, this cable can withstand the massive pressure of the deep sea, and strong enough to endure the wear and tear of underwater creatures. The multiple layers of noise cancellation insulations can keep the signals stable, making it ideal for the extreme conditions of the sea."
+                                            <%}%>/>
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="水下不鏽鋼鎧裝海底網路通訊線-日進電線 2021" />
-    <meta property="og:description" content="使用90A高硬度絕緣外被，先進的線材結構，可長時間浸泡於高密度及高深水壓的海水環境也不易腐蝕變質，堅固耐用且耐魚咬。不鏽鋼鎧裝及多重防雜訊隔離，可阻止外部的電磁干擾進入，保持傳輸網絡信號的穩定快速，品質優越，非常適合安裝於水底或其它嚴苛環境之網路通訊使用。" />
+    <meta property="og:title" content=<%if (RouteData.Values["language"].ToString() == "zh")
+        {%>
+                                                "水下不鏽鋼鎧裝海底網路通訊線-日進電線 <%=DateTime.Now.Year.ToString() %>"
+        <%}
+        else
+        {%>
+                                                "Submarine Connumications Cable - Nizing Electric Wire & Cable"
+                                            <%}%> />
+    <meta property="og:description" content=
+        <%if (RouteData.Values["language"].ToString() == "zh")
+        {%>
+                                                "使用90A高硬度絕緣外被，先進的線材結構，可長時間浸泡於高密度及高深水壓的海水環境也不易腐蝕變質，堅固耐用且耐魚咬。不鏽鋼鎧裝及多重防雜訊隔離，可阻止外部的電磁干擾進入，保持傳輸網絡信號的穩定快速，品質優越，非常適合安裝於水底或其它嚴苛環境之網路通訊使用。"
+                            <%}
+        else
+        {%>
+                                                "Uses 90A high density insulation, with advance composition, this cable can withstand the massive pressure of the deep sea, and strong enough to endure the wear and tear of underwater creatures. The multiple layers of noise cancellation insulations can keep the signals stable, making it ideal for the extreme conditions of the sea."
+                                            <%}%>/> />
     <meta property="og:image" content="https://www.nizing.com.tw/images/application/products/submarine-communications-cable/impression/submarine-communications-cable-01-mobile.jpg" />
-    <meta property="og:url" content="https://www.nizing.com.tw/zh/application/cloud-system/submarine-communications-cable" />
+    <meta property="og:url" content="https://www.nizing.com.tw/<%=RouteData.Values["language"].ToString() %>/application/cloud-system/submarine-communications-cable" />
     <meta property="og:site_name" content="Nizing Electric Wire and Cable" />
     <style type="text/css">
         .breadcrumb {
@@ -81,8 +104,8 @@
 
                 .text-section .text-subtitle .subtitle-indent {
                     background-color: #fff000;
+                    aspect-ratio: 1/3;
                     height: 24px;
-                    width: 10px;
                     margin: auto 5px auto 0;
                 }
 
@@ -115,13 +138,24 @@
             }
 
             .text-section .text-subtitle {
-                font-size: 26px;
                 padding-bottom: 16px;
             }
 
-                .text-section .text-subtitle .subtitle-indent {
-                    height: 22px;
-                }
+            .zh .text-section .text-subtitle {
+                font-size: 26px;
+            }
+
+            .en .text-section .text-subtitle {
+                font-size: 23px;
+            }
+
+            .zh .text-section .text-subtitle .subtitle-indent {
+                height: 22px;
+            }
+
+            .en .text-section .text-subtitle .subtitle-indent {
+                height: 20px;
+            }
 
             .text-section .text-content {
                 font-size: 16px;
@@ -152,13 +186,21 @@
                 font-size: 30px;
             }
 
-            .text-section .text-subtitle {
+            .zh .text-section .text-subtitle {
                 font-size: 20px;
             }
 
-                .text-section .text-subtitle .subtitle-indent {
-                    height: 18px;
-                }
+            .en .text-section .text-subtitle {
+                font-size: 16px;
+            }
+
+            .zh .text-section .text-subtitle .subtitle-indent {
+                height: 18px;
+            }
+
+            .en .text-section .text-subtitle .subtitle-indent {
+                height: 15px;
+            }
 
             .text-section .text-content {
                 font-size: 16px;
@@ -188,30 +230,46 @@
                     font-size: 56px;
                 }
 
-                .text-section .text-subtitle {
-                    font-size: 26px;
-                }
+            .zh .text-section .text-subtitle {
+                font-size: 26px;
+            }
 
-                    .text-section .text-subtitle .subtitle-indent {
-                        height: 24px;
-                    }
+            .en .text-section .text-subtitle {
+                font-size: 26px;
+            }
 
-                .text-section .text-content {
-                    font-size: 16px;
-                }
+            .zh .text-section .text-subtitle .subtitle-indent {
+                height: 24px;
+            }
+
+            .en .text-section .text-subtitle .subtitle-indent {
+                height: 24px;
+            }
+
+            .text-section .text-content {
+                font-size: 16px;
+            }
         }
 
         @media all and (max-width:575px) {
             .text-section .text-title {
                 font-size: 36px;
             }
+
+            .en .text-section .text-subtitle {
+                font-size: 18px;
+            }
+
+                .en .text-section .text-subtitle .subtitle-indent {
+                    height: 16px;
+                }
         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="banner" runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="body" runat="Server">
-    <div class="container-fluid bg-wrapper bg-color">
+    <div class="container-fluid bg-wrapper bg-color <%=RouteData.Values["language"].ToString() %>">
         <div class="content-wrapper">
             <div class="d-md-none">
                 <picture>
@@ -226,20 +284,40 @@
                     <div class="text-section">
                         <div class="text-subtitle">
                             <div class="subtitle-indent"></div>
-                            水下不鏽鋼鎧裝網路線
+                            <%if (RouteData.Values["language"].ToString() == "zh")
+                                {%>
+                                                水下不鏽鋼鎧裝網路線
+                            <%}
+                                else
+                                {%>
+                                                Submarine Connumications Cable
+                                            <%}%>
                         </div>
                         <div class="text-title">
-                            90A高硬度 防水解<br />
-                            不鏽鋼鎧裝多重防護
+                            <%if (RouteData.Values["language"].ToString() == "zh")
+                                {%>
+                                                90A高硬度 防水解<br />
+                                                不鏽鋼鎧裝多重防護
+                            <%}
+                                else
+                                {%>
+                                                90A High Density<br />
+                                                Noise-Cancellation
+                                            <%}%>                            
                         </div>
                         <div class="text-content">
-                            使用90A高硬度絕緣外被，先進的線材結構，可長時間浸泡於高密度及高深水壓的海水環境也不易腐蝕變質，堅固耐用且耐魚咬。不鏽鋼鎧裝及多重防雜訊隔離，可阻止外部的電磁干擾進入，保持傳輸網絡信號的穩定快速，品質優越，非常適合安裝於水底或其它嚴苛環境之網路通訊使用。
+                            <%if (RouteData.Values["language"].ToString() == "zh")
+                                {%>
+                                                使用90A高硬度絕緣外被，先進的線材結構，可長時間浸泡於高密度及高深水壓的海水環境也不易腐蝕變質，堅固耐用且耐魚咬。不鏽鋼鎧裝及多重防雜訊隔離，可阻止外部的電磁干擾進入，保持傳輸網絡信號的穩定快速，品質優越，非常適合安裝於水底或其它嚴苛環境之網路通訊使用。
+                            <%}
+                                else
+                                {%>
+                                                Uses 90A high density insulation, with advance composition, this cable can withstand the massive pressure of the deep sea, and strong enough to endure the wear and tear of underwater creatures. The multiple layers of noise cancellation insulations can keep the signals stable, making it ideal for the extreme conditions of the sea.
+                                            <%}%>
                         </div>
                         <div class="d-flex justify-content-center text-image">
                             <picture>
-                                <source srcset="/images/application/products/submarine-communications-cable/impression/submarine-communications-cable-03.webp"
-                                    type="image/webp" />
-                                <img src="/images/application/products/submarine-communications-cable/impression/submarine-communications-cable-03.png"
+                                <img src="/images/application/products/submarine-communications-cable/impression/submarine-communications-cable-03-<%=RouteData.Values["language"].ToString() %>.svg"
                                     alt="水下不鏽鋼鎧裝海底網路通訊線結構 Submarine Communications Cable Structure" class="mx-auto" />
                             </picture>
                         </div>
