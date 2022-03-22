@@ -11,7 +11,7 @@
         <div class="content-row">
             <div class="content-column">
                 <div class="button">
-                    <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/en/images/service_pic/thermocouple-menu.jpg" alt="Thermocouple" NavigateUrl="thermocoupole-series.aspx"></asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="~/en/images/service_pic/thermocouple-menu.jpg" alt="Thermocouple" NavigateUrl="thermocouple-series.aspx"></asp:HyperLink>
                 </div>
                 <div class="title">
                     Thermocouple<br />
