@@ -972,7 +972,7 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     <div>
-                        <a class="btn btn-dark text-light mt-2 more-button" href="news.aspx">+ More
+                        <a class="btn btn-dark text-light mt-2 more-button" href="/<%=RouteData.Values["language"].ToString() %>/news">+ More
                         </a>
                     </div>
                 </div>

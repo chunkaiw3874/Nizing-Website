@@ -123,6 +123,8 @@
         routes.MapPageRoute("", "{language}/declaration/conflict-free-mineral-declaration", "~/conflict-free-mineral-declaration.aspx");
         routes.MapPageRoute("", "{language}/associates", "~/associates.aspx");
 
+        routes.MapPageRoute("", "{language}/news", "~/news.aspx");
+
         routes.MapPageRoute("", "{language}/portal", "~/portal.aspx");
 
         routes.MapPageRoute("", "{language}/sitemap", "~/sitemap.aspx");

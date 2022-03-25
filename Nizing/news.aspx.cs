@@ -16,6 +16,16 @@ public partial class news : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            if (RouteData.Values["language"] != null)
+            {
+                string language = RouteData.Values["language"].ToString();
+                Session["language"] = language;
+            }
+
+            if (Session["language"] == null)
+            {
+                Session["language"] = "zh";
+            }
             PopulateNewsItem();
         }
     }
@@ -24,7 +34,22 @@ public partial class news : System.Web.UI.Page
     {
         DataTable dt = new DataTable();
         dt = GetNewsItem();
-
+        foreach (DataRow row in dt.Rows)
+        {
+            HtmlGenericControl li = new HtmlGenericControl("li");
+            newslist.Controls.Add(li);
+            HtmlAnchor a = new HtmlAnchor();
+            a.Attributes["class"] = "d-flex";
+            a.HRef = row["newsLink"].ToString();
+            a.Target = "_blank";
+            li.Controls.Add(a);
+            HtmlGenericControl div = new HtmlGenericControl("div");
+            div.InnerText = row["newsDate"].ToString();
+            a.Controls.Add(div);
+            div = new HtmlGenericControl("div");
+            div.InnerText = row["newsContent"].ToString();
+            a.Controls.Add(div);
+        }
     }
 
     protected DataTable GetNewsItem()
@@ -34,11 +59,13 @@ public partial class news : System.Web.UI.Page
         {
             conn.Open();
             string query = "select newsId" +
-                " ,newsDate" +
+                " ,cast(year(newsDate) as nvarchar(4))+'/'+cast(month(newsDate) as nvarchar(4))+'/'+cast(day(newsDate) as nvarchar(4)) 'newsDate'" +
                 " ,newsContent" +
                 " ,newsLink" +
                 " from News" +
-                " order by newsDate desc";
+                " where visible=1" +
+                " order by News.newsDate desc" +
+                " ,newsId";
             SqlCommand cmd = new SqlCommand(query, conn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
