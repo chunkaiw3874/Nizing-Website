@@ -253,6 +253,7 @@
 		<siteMapNode url="/zh/certificate" title="認證" description="認證">
 			<siteMapNode url="/zh/certificate/ul" title="UL" description="UL"></siteMapNode>
 			<siteMapNode url="/zh/certificate/vde" title="VDE" description="VDE"></siteMapNode>
+			<siteMapNode url="/zh/certificate/ccc" title="CCC" description="CCC"></siteMapNode>
 		</siteMapNode>
 
 		<siteMapNode url="/zh/ulnumber" title="UL編號" description="UL編號"></siteMapNode>
@@ -512,6 +513,7 @@
 		<siteMapNode url="/en/certificate" title="Certificate" description="Certificate">
 			<siteMapNode url="/en/certificate/ul" title="UL" description="UL"></siteMapNode>
 			<siteMapNode url="/en/certificate/vde" title="VDE" description="VDE"></siteMapNode>
+			<siteMapNode url="/en/certificate/ccc" title="CCC" description="CCC"></siteMapNode>
 		</siteMapNode>
 
 		<siteMapNode url="/en/ulnumber" title="UL Number" description="UL Number"></siteMapNode>

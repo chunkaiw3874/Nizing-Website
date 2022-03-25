@@ -309,7 +309,7 @@
                     </div>
                     <div class="col">
                         <div class="certification-body">
-                            <a class="link" href="/zh/certificate/ul">
+                            <a class="link" href="/<%=RouteData.Values["language"].ToString() %>/certificate/ul">
                                 <div class="card">
                                     <picture>
                                         <source srcset="/images/certificate/ul/ul.webp" type="image/webp" />
@@ -326,7 +326,7 @@
                     </div>
                     <div class="col">
                         <div class="certification-body">
-                            <a class="link" href="/zh/certificate/vde">
+                            <a class="link" href="/<%=RouteData.Values["language"].ToString() %>/certificate/vde">
                                 <div class="card">
                                     <picture>
                                         <source srcset="/images/certificate/vde/vde.webp" type="image/webp" />
@@ -343,7 +343,7 @@
                     </div>
                     <div class="col">
                         <div class="certification-body">
-                            <a class="link">
+                            <a class="link"  href="/<%=RouteData.Values["language"].ToString() %>/certificate/ccc">
                                 <div class="card">
                                     <picture>
                                         <source srcset="/images/certificate/ccc/ccc.webp" type="image/webp" />

@@ -115,6 +115,7 @@
         routes.MapPageRoute("", "{language}/certificate", "~/certificate.aspx");
         routes.MapPageRoute("", "{language}/certificate/ul", "~/ul.aspx");
         routes.MapPageRoute("", "{language}/certificate/vde", "~/vde.aspx");
+        routes.MapPageRoute("", "{language}/certificate/ccc", "~/ccc.aspx");
 
         routes.MapPageRoute("", "{language}/contact-us", "~/contact_us.aspx");
         routes.MapPageRoute("", "{language}/contact-us/job-listing", "~/job-listing.aspx");
@@ -1597,6 +1598,18 @@
         routes.MapPageRoute("", "en/flr2x-a.aspx", "~/product-profile.aspx", true,
             new RouteValueDictionary { }, new RouteValueDictionary { },
             new RouteValueDictionary { { "language", "en" }, { "productID", "iso-flr2x-a" } });
+        routes.MapPageRoute("", "flr2xa", "~/product-profile.aspx", true,
+            new RouteValueDictionary { }, new RouteValueDictionary { },
+            new RouteValueDictionary { { "language", "zh" }, { "productID", "iso-flr2x-a" } });
+        routes.MapPageRoute("", "en/flr2xa", "~/product-profile.aspx", true,
+            new RouteValueDictionary { }, new RouteValueDictionary { },
+            new RouteValueDictionary { { "language", "en" }, { "productID", "iso-flr2x-a" } });
+        routes.MapPageRoute("", "flr2xa.aspx", "~/product-profile.aspx", true,
+            new RouteValueDictionary { }, new RouteValueDictionary { },
+            new RouteValueDictionary { { "language", "zh" }, { "productID", "iso-flr2x-a" } });
+        routes.MapPageRoute("", "en/flr2xa.aspx", "~/product-profile.aspx", true,
+            new RouteValueDictionary { }, new RouteValueDictionary { },
+            new RouteValueDictionary { { "language", "en" }, { "productID", "iso-flr2x-a" } });
         routes.MapPageRoute("", "flr2x-b", "~/product-profile.aspx", true,
             new RouteValueDictionary { }, new RouteValueDictionary { },
             new RouteValueDictionary { { "language", "zh" }, { "productID", "iso-flr2x-b" } });
@@ -1645,6 +1658,18 @@
         routes.MapPageRoute("", "en/flry-b.aspx", "~/product-profile.aspx", true,
             new RouteValueDictionary { }, new RouteValueDictionary { },
             new RouteValueDictionary { { "language", "en" }, { "productID", "iso-flry-b" } });
+        routes.MapPageRoute("", "flryb", "~/product-profile.aspx", true,
+            new RouteValueDictionary { }, new RouteValueDictionary { },
+            new RouteValueDictionary { { "language", "zh" }, { "productID", "iso-flry-b" } });
+        routes.MapPageRoute("", "en/flryb", "~/product-profile.aspx", true,
+            new RouteValueDictionary { }, new RouteValueDictionary { },
+            new RouteValueDictionary { { "language", "en" }, { "productID", "iso-flry-b" } });
+        routes.MapPageRoute("", "flryb.aspx", "~/product-profile.aspx", true,
+            new RouteValueDictionary { }, new RouteValueDictionary { },
+            new RouteValueDictionary { { "language", "zh" }, { "productID", "iso-flry-b" } });
+        routes.MapPageRoute("", "en/flryb.aspx", "~/product-profile.aspx", true,
+            new RouteValueDictionary { }, new RouteValueDictionary { },
+            new RouteValueDictionary { { "language", "en" }, { "productID", "iso-flry-b" } });
         routes.MapPageRoute("", "flrynx", "~/product-profile.aspx", true,
             new RouteValueDictionary { }, new RouteValueDictionary { },
             new RouteValueDictionary { { "language", "zh" }, { "productID", "iso-flrynx" } });
@@ -1667,6 +1692,18 @@
             new RouteValueDictionary { }, new RouteValueDictionary { },
             new RouteValueDictionary { { "language", "zh" }, { "productID", "iso-flryw-a" } });
         routes.MapPageRoute("", "en/flryw-a.aspx", "~/product-profile.aspx", true,
+            new RouteValueDictionary { }, new RouteValueDictionary { },
+            new RouteValueDictionary { { "language", "en" }, { "productID", "iso-flryw-a" } });
+        routes.MapPageRoute("", "flrywa", "~/product-profile.aspx", true,
+            new RouteValueDictionary { }, new RouteValueDictionary { },
+            new RouteValueDictionary { { "language", "zh" }, { "productID", "iso-flryw-a" } });
+        routes.MapPageRoute("", "en/flrywa", "~/product-profile.aspx", true,
+            new RouteValueDictionary { }, new RouteValueDictionary { },
+            new RouteValueDictionary { { "language", "en" }, { "productID", "iso-flryw-a" } });
+        routes.MapPageRoute("", "flrywa.aspx", "~/product-profile.aspx", true,
+            new RouteValueDictionary { }, new RouteValueDictionary { },
+            new RouteValueDictionary { { "language", "zh" }, { "productID", "iso-flryw-a" } });
+        routes.MapPageRoute("", "en/flrywa.aspx", "~/product-profile.aspx", true,
             new RouteValueDictionary { }, new RouteValueDictionary { },
             new RouteValueDictionary { { "language", "en" }, { "productID", "iso-flryw-a" } });
         routes.MapPageRoute("", "flryw-b", "~/product-profile.aspx", true,
@@ -2089,11 +2126,16 @@
         routes.MapPageRoute("", "en/cat6a10gsftp", "~/pvc-wire.aspx");
         routes.MapPageRoute("", "cat6a10gsftp.aspx", "~/pvc-wire.aspx");
         routes.MapPageRoute("", "en/cat6a10gsftp.aspx", "~/pvc-wire.aspx");
-
+        
         routes.MapPageRoute("", "cat710gplussftp", "~/pvc-wire.aspx");
         routes.MapPageRoute("", "en/cat710gplussftp", "~/pvc-wire.aspx");
         routes.MapPageRoute("", "cat710gplussftp.aspx", "~/pvc-wire.aspx");
         routes.MapPageRoute("", "en/cat710gplussftp.aspx", "~/pvc-wire.aspx");
+        
+        routes.MapPageRoute("", "kiv-wire", "~/pvc-wire.aspx");
+        routes.MapPageRoute("", "en/kiv-wire", "~/pvc-wire.aspx");
+        routes.MapPageRoute("", "kiv-wire.aspx", "~/pvc-wire.aspx");
+        routes.MapPageRoute("", "en/kiv-wire.aspx", "~/pvc-wire.aspx");
 
         routes.MapPageRoute("", "mil-c-24643-23-08", "~/military-grade-wire.aspx");
         routes.MapPageRoute("", "en/mil-c-24643-23-08", "~/military-grade-wire.aspx");
@@ -2109,6 +2151,21 @@
         routes.MapPageRoute("", "en/defibrillator-signal-wire", "~/pvc-wire.aspx");
         routes.MapPageRoute("", "defibrillator-signal-wire.aspx", "~/pvc-wire.aspx");
         routes.MapPageRoute("", "en/defibrillator-signal-wire.aspx", "~/pvc-wire.aspx");
+
+        routes.MapPageRoute("", "tef-sili-multi-core-cable", "~/composite-cable.aspx");
+        routes.MapPageRoute("", "en/tef-sili-multi-core-cable", "~/composite-cable.aspx");
+        routes.MapPageRoute("", "tef-sili-multi-core-cable.aspx", "~/composite-cable.aspx");
+        routes.MapPageRoute("", "en/tef-sili-multi-core-cable.aspx", "~/composite-cable.aspx");
+
+        routes.MapPageRoute("", "ultra-flexible-sili-fiber-wire", "~/silicone-fiberglass-wire.aspx");
+        routes.MapPageRoute("", "en/ultra-flexible-sili-fiber-wire", "~/silicone-fiberglass-wire.aspx");
+        routes.MapPageRoute("", "ultra-flexible-sili-fiber-wire.aspx", "~/silicone-fiberglass-wire.aspx");
+        routes.MapPageRoute("", "en/ultra-flexible-sili-fiber-wire.aspx", "~/silicone-fiberglass-wire.aspx");
+        
+        routes.MapPageRoute("", "xlpo-flat-cable-2c", "~/xlpe-wire.aspx");
+        routes.MapPageRoute("", "en/xlpo-flat-cable-2c", "~/xlpe-wire.aspx");
+        routes.MapPageRoute("", "xlpo-flat-cable-2c.aspx", "~/xlpe-wire.aspx");
+        routes.MapPageRoute("", "en/xlpo-flat-cable-2c.aspx", "~/xlpe-wire.aspx");        
 
         routes.MapPageRoute("", "{language}/silicone-fiberglass-wire", "~/silicone-fiberglass-wire.aspx");
 
@@ -2127,6 +2184,16 @@
         routes.MapPageRoute("", "en/contact_us", "~/contact_us.aspx");
 
         routes.MapPageRoute("", "navigation", "~/sitemap.aspx");
+        
+        routes.MapPageRoute("", "company", "~/company-intro.aspx");
+        routes.MapPageRoute("", "en/company", "~/company-intro.aspx");
+        routes.MapPageRoute("", "company.aspx", "~/company-intro.aspx");
+        routes.MapPageRoute("", "en/company.aspx", "~/company-intro.aspx");
+        
+        routes.MapPageRoute("", "customize_page", "~/");
+        routes.MapPageRoute("", "en/customize_page", "~/");
+        routes.MapPageRoute("", "customize_page.aspx", "~/");
+        routes.MapPageRoute("", "en/customize_page.aspx", "~/");
 
         var settings = new FriendlyUrlSettings();
         settings.AutoRedirectMode = RedirectMode.Permanent;

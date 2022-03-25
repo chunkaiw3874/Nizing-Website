@@ -5,6 +5,7 @@
     <title>高品質電線電纜製造-日進電線-國際安規認證通過</title>
     <meta name="keywords" content="電線,電纜,電線電纜,矽膠電線,鐵氟龍電線,照射電線,發熱電線,PVC電線,PE電線,PU電線,補償導線,耐高溫電線,耐高溫電纜,耐高壓電線,耐高壓電纜,UL電線,矽膠編織電線,軍規線,汽車花線" />
     <meta name="description" content="日進電線為國內一流電線及電纜製造商，專門製造特殊材質及用途電線及電纜，如耐高溫的矽膠電線、矽膠編織電線，抗酸鹼的聚合氟化線電線，抗UV的照射電線等，旗下電線電纜產品眾多，歡迎聯繫洽詢" />
+    <meta property="og:image" content="https://www.nizing.com.tw/images/banner/banner-home-mobile.jpg" />
     <link rel="stylesheet" type="text/css" href="/Content/slick/slick.css" />
     <link href="/Content/slick/slick-theme.css" rel="stylesheet" />
     <script type="text/javascript" src="/Content/slick/slick.min.js"></script>

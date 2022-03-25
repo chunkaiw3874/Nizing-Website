@@ -46,7 +46,6 @@ public partial class ul : System.Web.UI.Page
                 div.Controls.Add(anchorFullProductInfoImage);
                 HtmlImage imgFullProductInfo = new HtmlImage();
                 imgFullProductInfo.Src = specWebFilePath + image;
-                //imgFullProductInfo.Alt = p.Name + " full spec";
                 anchorFullProductInfoImage.Controls.Add(imgFullProductInfo);
             }
         }
