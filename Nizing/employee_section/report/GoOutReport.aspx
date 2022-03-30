@@ -158,14 +158,14 @@
                     OnClick="btnSearchGoOutData_Click" />
             </div>
         </div>
-<%--        <div class="input-group mb-2">
+        <div class="input-group mb-2">
             <div class="input-group-prepend">
                 <div class="input-group-text">
                     <i class="fas fa-search"></i>
                 </div>
             </div>
             <asp:TextBox ID="txtSearchbox" runat="server" CssClass="form-control"></asp:TextBox>
-        </div>--%>
+        </div>
         <div id="ChartArea">
             總外出時間:
         <span id="totalOutTime">0</span>
