@@ -51,9 +51,9 @@ public partial class employee_section_report_GoOutReport : System.Web.UI.Page
                 " left join SUNRIZE.dbo.CMSMV szMV on form.UserId = szMV.MV001 and form.UserCompany = 'SUNRIZE'" +
                 " where form.ActualStartTime>=@bom" +
                 " and form.ActualStartTime<=@eom" +
-                " order by form.[Status] desc" +
-                " ,form.ActualStartTime" +
-                " ,form.EstimateStartTime";
+                " order by form.ActualStartTime desc" +
+                " ,form.EstimateStartTime" +
+                " ,form.[Status] desc";
 
             SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@bom", new DateTime(date.Year, date.Month, 1));
