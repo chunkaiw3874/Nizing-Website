@@ -2181,6 +2181,9 @@
         routes.MapPageRoute("", "en/quality-certificate", "~/certificate.aspx");
         routes.MapPageRoute("", "vde", "~/certificate.aspx");
         routes.MapPageRoute("", "en/vde", "~/certificate.aspx");
+        
+        routes.MapPageRoute("", "ccc", "~/certificate.aspx");
+        routes.MapPageRoute("", "ccc.aspx", "~/certificate.aspx");
 
         routes.MapPageRoute("", "en/contact_us", "~/contact_us.aspx");
 
