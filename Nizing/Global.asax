@@ -45,9 +45,7 @@
         //current page routes
         routes.MapPageRoute("", "{language}/product/product-not-found", "~/product-not-found.aspx");
         routes.MapPageRoute("", "page-not-found", "~/page-not-found.aspx");
-
-        //routes.MapPageRoute("", "", "~/default.aspx");
-        //routes.MapPageRoute("", "default", "~/default.aspx");
+        
         routes.MapPageRoute("", "{language}", "~/default.aspx", true,
             new RouteValueDictionary { { "language", "" } },
             new RouteValueDictionary { { "language", "^zh$|^en$" } }
@@ -95,6 +93,7 @@
         routes.MapPageRoute("", "{language}/application/{application}/military-spec-high-frequency-transmission-control-cable", "~/application/military-spec-high-frequency-transmission-control-cable.aspx");
         routes.MapPageRoute("", "{language}/application/{application}/military-spec-signal-control-cable", "~/application/military-spec-signal-control-cable.aspx");
         routes.MapPageRoute("", "{language}/application/{application}/dual-insulation-high-voltage-silicone-wire", "~/application/dual-insulation-high-voltage-silicone-wire.aspx");
+        routes.MapPageRoute("", "{language}/application/{application}/ev-emi-shielded-power-cable", "~/application/ev-emi-shielded-power-cable.aspx");
 
 
         routes.MapPageRoute("", "{language}/material", "~/material.aspx");

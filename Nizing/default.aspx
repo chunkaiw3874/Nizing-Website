@@ -474,30 +474,30 @@
                         </div>
                         <div class="col">
                             <div class="hottest-item">
-                                <a href="/<%=RouteData.Values["language"].ToString() %>/application/cloud-system/submarine-communications-cable">
+                                <a href="/<%=RouteData.Values["language"].ToString() %>/application/automobile/ev-emi-shielded-power-cable">
                                     <div class="image-section">
                                         <picture>
-                                            <source srcset="/images/application/products/submarine-communications-cable/menu/submarine-communications-cable.webp" type="image/webp">
-                                            <img src="/images/application/products/submarine-communications-cable/menu/submarine-communications-cable.jpg"
-                                                alt="水下不鏽鋼鎧裝海底網路通訊線 Submarine Communications Cable">
+                                            <source srcset="/images/application/products/ev-emi-shielded-power-cable/menu/ev-emi-shielded-power-cable.webp" type="image/webp">
+                                            <img src="/images/application/products/ev-emi-shielded-power-cable/menu/ev-emi-shielded-power-cable.jpg"
+                                                alt="EV 高溫高壓隔離型電纜 Electric Vehicle EMI Shielded Power Cable">
                                         </picture>
                                     </div>
                                 </a>
                                 <div class="text-section">
                                     <div class="title text-left">
                                         <%if (RouteData.Values["language"].ToString() == "zh") {%>
-                                                高硬度防鼠咬CAT5E/CAT6A
+                                                新能源汽車高壓電纜
                                                 <%}
                                             else {%>
-                                                High Density CAT5E/CAT6A
+                                                Electric Vehicle EMI Shielded Power Cable
                                             <%}%>
                                     </div>
                                     <div class="subtitle text-left">
                                         <%if (RouteData.Values["language"].ToString() == "zh") {%>
-                                                水下不鏽鋼鎧裝海底網路通訊線
+                                                電動車適配電線/電纜最佳方案
                                                 <%}
                                             else {%>
-                                                Submarine Communications Cable
+                                                Best EV Wire/Cable Solution
                                             <%}%>
                                     </div>
                                 </div>

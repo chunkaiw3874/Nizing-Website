@@ -209,6 +209,7 @@
 				<siteMapNode url="/zh/application/automobile/motor-power-cable" title="電動機車馬達動力線" description="電動機車馬達動力線"></siteMapNode>
 				<siteMapNode url="/zh/application/automobile/high-voltage-ignition-wire" title="高壓點火線" description="高壓點火線"></siteMapNode>
 				<siteMapNode url="/zh/application/automobile/high-frequency-communication-cable" title="高頻無線通訊電纜" description="高頻無線通訊電纜"></siteMapNode>
+				<siteMapNode url="/zh/application/automobile/ev-emi-shielded-power-cable" title="EV高溫高壓隔離型電纜" description="EV高溫高壓隔離型電纜"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/zh/application/medical" title="醫療配線" description="醫療配線">
 				<siteMapNode url="/zh/application/medical/electrosurgical-unit-cable" title="醫療級止血線" description="醫療級止血線"></siteMapNode>
@@ -469,6 +470,7 @@
 				<siteMapNode url="/en/application/automobile/motor-power-cable" title="Electric Motorcycle Power Cable" description="Electric Motorcycle Power Cable"></siteMapNode>
 				<siteMapNode url="/en/application/automobile/high-voltage-ignition-wire" title="High Voltage Ignition Wire" description="High Voltage Ignition Wire"></siteMapNode>
 				<siteMapNode url="/en/application/automobile/high-frequency-communication-cable" title="High Frequency Communication Cable" description="High Frequency Communication Cable"></siteMapNode>
+				<siteMapNode url="/en/application/automobile/ev-emi-shielded-power-cable" title="Electric Vehicle EMI Shielded Power Cable" description="Electric Vehicle EMI Shielded Power Cable"></siteMapNode>
 			</siteMapNode>
 			<siteMapNode url="/en/application/medical" title="Medical Cable" description="Medical Cable">
 				<siteMapNode url="/en/application/medical/electrosurgical-unit-cable" title="Electrosurgical Unit Cable" description="Electrosurgical Unit Cable"></siteMapNode>

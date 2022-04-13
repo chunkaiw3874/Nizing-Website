@@ -1162,6 +1162,16 @@
 		<changefreq>yearly</changefreq>
 		<priority>0.40</priority>
 	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/zh/application/automobile/ev-emi-shielded-power-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
+	<url>
+		<loc>https://www.nizing.com.tw/en/application/automobile/ev-emi-shielded-power-cable</loc>
+		<changefreq>monthly</changefreq>
+		<priority>0.70</priority>
+	</url>
 
 
 
