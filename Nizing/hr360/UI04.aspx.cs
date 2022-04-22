@@ -30,6 +30,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
     List<string> exceptionList111 = new List<string>(); //三天內請假錯誤例外清單
     List<string> exceptionList202designated = new List<string>(); //剩餘假期不足錯誤例外清單(特休)
     List<string> exceptionList202makeup = new List<string>(); //剩餘假期不足錯誤例外清單(補休)
+    List<string> exceptionList203 = new List<string>(); //請假時數不符規定例外清單
     List<string> exceptionList107 = new List<string>(); //已當其他人代理人錯誤例外清單
     List<string> exceptionList110 = new List<string>(); //請假年分限本年度例外清單
     List<string> exceptionListHourForProduction = new List<string>();   //例外清單:可用小時計假的線廠人員(阿豪0160)
@@ -49,16 +50,11 @@ public partial class hr360_UI04 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //Session["user_id"] = "0174";    //test only to avoid error on loading, delete after trial            
-        //Session["erp_id"] = "0174";
+        //Session["user_id"] = "0166";    //test only to avoid error on loading, delete after trial            
+        //Session["erp_id"] = "0166";
         //Session["company"] = "NIZING";
 
         //only use when opening check exception for certain persion
-        exceptionList111.Add("0067");
-        //exceptionList202designated.Add("0112");
-        //exceptionList107.Add("0162");
-        exceptionList110.Add("0067");
-        //exceptionList202makeup.Add("0067");
         exceptionListHourForProduction.Add("0160"); //阿豪
 
 
@@ -564,7 +560,7 @@ public partial class hr360_UI04 : System.Web.UI.Page
             if (hdnDayOffTypeUnit.Value == "天")  //需要考慮一天工作時數非整數的人 (ie. 小倩8.5hr)
             {
                 hdnTotalDayOffTime.Value = (totalDayOffAmount / Convert.ToDecimal(hdnNormalWorkHour.Value)).ToString();
-                if (Convert.ToDecimal(hdnTotalDayOffTime.Value) * 100 % 50 != 0)  //測試錯誤 203.請假單位與限制不符
+                if (Convert.ToDecimal(hdnTotalDayOffTime.Value) * 100 % 50 != 0 && !exceptionList203.Contains(Session["erp_id"].ToString().Trim()))  //測試錯誤 203.請假單位與限制不符
                 {
                     errorList.Add(errorCode(203));
                 }
@@ -574,19 +570,20 @@ public partial class hr360_UI04 : System.Web.UI.Page
                 hdnTotalDayOffTime.Value = Convert.ToDecimal(totalDayOffAmount).ToString();
                 if (typhoonDay)    //颱風假則任何人都可以0.5小時請假
                 {
-                    if (Convert.ToDecimal(hdnTotalDayOffTime.Value) * 10 % Convert.ToInt16((Convert.ToDecimal(0.5) * 10)) != 0)  //測試錯誤 203.請假單位與限制不符
+                    if (Convert.ToDecimal(hdnTotalDayOffTime.Value) * 10 % Convert.ToInt16((Convert.ToDecimal(0.5) * 10)) != 0 && !exceptionList203.Contains(Session["erp_id"].ToString().Trim()))  //測試錯誤 203.請假單位與限制不符
                     {
                         errorList.Add(errorCode(203));
                     }
                 }
                 else
                 {
-                    if (Convert.ToDecimal(hdnTotalDayOffTime.Value) * 10 % Convert.ToInt16((Convert.ToDecimal(hdnDayOffTimeRestraint.Value) * 10)) != 0)  //測試錯誤 203.請假單位與限制不符
+                    if (Convert.ToDecimal(hdnTotalDayOffTime.Value) * 10 % Convert.ToInt16((Convert.ToDecimal(hdnDayOffTimeRestraint.Value) * 10)) != 0 && !exceptionList203.Contains(Session["erp_id"].ToString().Trim()))  //測試錯誤 203.請假單位與限制不符
                     {
                         errorList.Add(errorCode(203));
                     }
                 }
             }
+
             if (totalDayOffAmount <= 0)  //測試錯誤 201.請假時數為0，請確認
             {
                 errorList.Add(errorCode(201));
