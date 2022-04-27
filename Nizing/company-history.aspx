@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master/RWDCompanyMaster.master" AutoEventWireup="true" CodeFile="company-history.aspx.cs" Inherits="company_history" %>
 
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="Server">
-    <title>日進電線-歷史紀錄</title>
+    <title>日進電線-企業沿革</title>
     <link rel="stylesheet" href="/css/timeline/style-albe-timeline.css" />
     <script src="/Scripts/timeline/jquery-albe-timeline.min.js"></script>
     <style type="text/css">
@@ -373,7 +373,7 @@
         <div class="display-block">
             <div class="container">
                 <div class="title">
-                    歷史歷程
+                    企業沿革
                 </div>
                 <div class="subtitle">
                     Nizing History

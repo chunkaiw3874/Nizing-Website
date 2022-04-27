@@ -5,7 +5,7 @@
 		<siteMapNode url="/zh/company-intro" title="日進" description="日進">
 			<siteMapNode url="/zh/company/intro" title="日進簡介" description="日進簡介">	</siteMapNode>
 			<siteMapNode url="/zh/company/culture" title="企業核心價值與經營理念" description="企業核心價值與經營理念"></siteMapNode>
-			<siteMapNode url="/zh/company/history" title="歷史歷程" description="歷史歷程"></siteMapNode>
+			<siteMapNode url="/zh/company/history" title="企業沿革" description="企業沿革"></siteMapNode>
 			<siteMapNode url="/zh/company/capability" title="生產設備與製程能力" description="生產設備與製程能力"></siteMapNode>
 			<siteMapNode url="/zh/company/lab" title="實驗室" description="實驗室"></siteMapNode>
 		</siteMapNode>

@@ -28,7 +28,7 @@ public partial class sitemap : System.Web.UI.Page
         ul = AddSubLevel(li);
         AddItem(language, "日進簡介", "Intro", "/company/intro", ul);
         AddItem(language, "企業核心與經營理念", "Culture", "/company/culture", ul);
-        AddItem(language, "歷史歷程", "History", "/company/history", ul);
+        AddItem(language, "企業沿革", "History", "/company/history", ul);
         AddItem(language, "實驗室", "Lab", "/company/lab", ul);
 
         //產品資訊
