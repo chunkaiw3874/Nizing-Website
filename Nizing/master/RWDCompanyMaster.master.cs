@@ -24,7 +24,7 @@ public partial class master_RWDCompanyMaster : System.Web.UI.MasterPage
     {
         AddMenuItem(language, "intro", "日進簡介", "Company");
         AddMenuItem(language, "culture", "企業核心價值與經營理念", "Culture");
-        AddMenuItem(language, "history", "歷史歷程", "History");
+        AddMenuItem(language, "history", "企業沿革", "History");
         AddMenuItem(language, "capability", "生產設備", "Capability");
         AddMenuItem(language, "lab", "實驗室", "Lab");
     }
